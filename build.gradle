@@ -1,0 +1,51 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+    }
+}
+
+apply plugin: 'forge'
+
+version = "4.0.0-ALPHA"
+group= "com.arisux"
+archivesBaseName = "avp"
+
+tasks.withType(JavaCompile) {
+	sourceCompatibility = "1.7"
+	targetCompatibility = "1.7"
+	options.encoding = 'UTF-8'
+}
+
+minecraft {
+    version = "1.7.10-10.13.1.1217"
+    runDir = "eclipse"
+}
+
+dependencies {
+	// Define dependencies here or place them in "./libs/"
+}
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+        
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
