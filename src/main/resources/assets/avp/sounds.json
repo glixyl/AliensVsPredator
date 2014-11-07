@@ -1,0 +1,144 @@
+{
+  "xeno.attack": {
+    "sounds": [
+      "alien_attack"
+    ]
+  },
+  "xeno.death": {
+    "sounds": [
+      "alien_hiss_death0",
+	  "alien_hiss_death1"
+    ]
+  },
+  "xeno.living": {
+    "sounds": [
+      "alien_hiss_living0",
+	  "alien_hiss_living1"
+    ]
+  },
+  "xeno.hurt": {
+    "sounds": [
+      "alien_hurt0",
+	  "alien_hurt1"
+    ]
+  },
+  "facehugger.death": {
+    "sounds": [
+      "facehugger_death"
+    ]
+  },
+  "chestburster.death": {
+    "sounds": [
+      "chestburster_death"
+    ]
+  },
+  "marine.death": {
+    "sounds": [
+      "marine_death"
+    ]
+  },
+  "marine.hurt": {
+    "sounds": [
+      "marine_hurt"
+    ]
+  },
+  "praetorian.living": {
+    "sounds": [
+      "praetorian_hiss_living"
+    ]
+  },
+  "praetorian.hurt": {
+    "sounds": [
+      "praetorian_hurt"
+    ]
+  },
+  "predator.death": {
+    "sounds": [
+      "predator_death"
+    ]
+  },
+  "predator.hurt": {
+    "sounds": [
+      "predator_hurt0",
+	  "predator_hurt1"
+    ]
+  },
+  "predator.living": {
+    "sounds": [
+      "predator_living0",
+	  "predator_living1"
+    ]
+  },
+  "queen.death": {
+    "sounds": [
+      "queen_death"
+    ]
+  },
+  "queen.hurt": {
+    "sounds": [
+      "queen_hurt0",
+	  "queen_hurt1"
+    ]
+  },
+  "queen.living": {
+    "sounds": [
+      "queen_living0",
+	  "queen_living1"
+    ]
+  },
+  "weapon.blades": {
+    "sounds": [
+      "weapon_blades"
+    ]
+  },
+  "weapon.flamethrower": {
+    "sounds": [
+      "weapon_flamethrower"
+    ]
+  },
+  "weapon.gauntlet": {
+    "sounds": [
+      "weapon_gauntlet"
+    ]
+  },
+  "weapon.gunshot": {
+    "sounds": [
+      "weapon_gunshot"
+    ]
+  },
+  "weapon.plasmacaster": {
+    "sounds": [
+      "weapon_plasmacaster"
+    ]
+  },
+  "weapon.pulserifle": {
+    "sounds": [
+      "weapon_pulserifle"
+    ]
+  },
+  "weapon.sniper": {
+    "sounds": [
+      "weapon_sniper"
+    ]
+  },
+  "weapon.cooldown": {
+    "sounds": [
+      "weapon_cooldown"
+    ]
+  },
+  "weapon.m56sg": {
+    "sounds": [
+      "weapon_m56sg"
+    ]
+  },
+  "motiontracker.ping": {
+    "sounds": [
+      "motiontracker_ping"
+    ]
+  },
+  "motiontracker.pong": {
+    "sounds": [
+      "motiontracker_pong"
+    ]
+  }
+}
