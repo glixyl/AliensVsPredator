@@ -23,7 +23,6 @@ import com.arisux.avp.items.model.ModelM41A;
 public class RenderM41A extends ItemRenderer3D
 {
 	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_PULSERIFLE);
-	//TODO: Temporary Only
 	public MotionTrackerDisplay motionTracker = new MotionTrackerDisplay();
 	
 	public RenderM41A()
@@ -129,7 +128,7 @@ public class RenderM41A extends ItemRenderer3D
 					GL11.glColor4f(1F, 1F, 1F, 1F);
 				}
 				
-				//TODO: Some testing with rendering the motion tracker on an item.
+				if (Minecraft.getMinecraft().thePlayer.inventory.hasItem(AliensVsPredator.INSTANCE.items.itemMotionTracker))
 				{
 					GL11.glTranslatef(-50F, -20F, -50F);
 					GL11.glRotatef(-90F, 0F, 1F, 0F);
