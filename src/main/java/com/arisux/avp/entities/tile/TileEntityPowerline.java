@@ -1,5 +1,7 @@
 package com.arisux.avp.entities.tile;
 
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
@@ -73,5 +75,12 @@ public class TileEntityPowerline extends PoweredTileEntity
 	public boolean canOutputPower()
 	{
 		return true;
+	}
+	
+
+	@Override
+	public Block getBlockType()
+	{
+		return Blocks.beacon;
 	}
 }

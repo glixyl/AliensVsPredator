@@ -66,8 +66,6 @@ public class BlockHandler implements IInitializable, IBHandler
 		blockVerticalMetal = (new HookedBlock(Material.iron)).setHardness(3.5F).setResistance(2.0F),
 		blockColumnMetal1 = (new HookedBlock(Material.iron)).setHardness(3.5F).setResistance(2.0F),
 		blockColumnMetal2 = (new HookedBlock(Material.iron)).setHardness(3.5F).setResistance(2.0F),
-		blockLampPowered = (new BlockLamp(new BlockIconVector(getDomain() + "industrialbricks", getDomain() + "industriallamp", getDomain() + "industriallamp", getDomain() + "industrialbricks", getDomain() + "industriallamp", getDomain() + "industriallamp", getDomain() + "industriallamp"), Material.iron, true)).setHardness(3.5F).setResistance(2.0F),
-		blockLampIdle = (new BlockLamp(new BlockIconVector(getDomain() + "industrialbricks", getDomain() + "industriallamp", getDomain() + "industriallamp", getDomain() + "industrialbricks", getDomain() + "industriallamp", getDomain() + "industriallamp", getDomain() + "industriallamp"), Material.iron, false)).setHardness(3.5F).setResistance(2.0F),
 		blockIronBricksStairs = (new HookedBlockStairs(blockIronBricks)).setHardness(3.0F).setResistance(4.0F),
 		blockWallStairs = (new HookedBlockStairs(blockWall)).setHardness(3.5F).setResistance(2.0F),
 		blockCeilingGrillStairs = (new HookedBlockStairs(blockCeilingGrill)).setHardness(3.5F).setResistance(2.0F),
@@ -89,7 +87,8 @@ public class BlockHandler implements IInitializable, IBHandler
 		blockStasisMechanism = (new BlockStasisMechanism(Material.iron)),
 		blockGenerator = (new BlockGenerator(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockPowerline = (new BlockPowerline(Material.iron)).setHardness(3.2F).setResistance(2.6F),
-		blockBlastdoor = (new BlockBlastdoor(Material.iron)).setHardness(5F).setResistance(5F);
+		blockBlastdoor = (new BlockBlastdoor(Material.iron)).setHardness(5F).setResistance(5F),
+		blockWorklight = (new BlockWorklight(Material.iron)).setHardness(3.2F).setResistance(2.6F);
 
 	public void initialize()
 	{
@@ -119,8 +118,6 @@ public class BlockHandler implements IInitializable, IBHandler
 		registerBlock(blockIronBricks, "industrialbricks", this);
 		registerBlock(blockIronBricksStairs, "industrialbrickstairs", blockIronBricks, this);
 		registerBlock(blockIronBricksSlab, "industrialbrickslab", blockIronBricks, this);
-		registerBlock(blockLampIdle, "industriallamp", this);
-		registerBlock(blockLampPowered, "industriallamppowered", "avp:industriallamp", this);
 		registerBlock(blockIndustrialGlass, "industrialglass", this);
 		registerBlock(blockIndustrialGlassStairs, "industrialglassstairs", blockIndustrialGlass, this);
 		registerBlock(blockIndustrialGlassSlab, "industrialglassslab", blockIndustrialGlass, this);
@@ -162,6 +159,7 @@ public class BlockHandler implements IInitializable, IBHandler
 		registerBlock(blockGenerator, "generator", this, true);
 		registerBlock(blockPowerline, "powerline", this, true);
 		registerBlock(blockBlastdoor, "blastdoor", this, true);
+		registerBlock(blockWorklight, "worklight", this, true);
 	}
 
 	@Override

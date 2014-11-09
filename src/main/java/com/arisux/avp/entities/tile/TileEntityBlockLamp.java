@@ -1,5 +1,7 @@
 package com.arisux.avp.entities.tile;
 
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityBlockLamp extends TileEntity
@@ -12,5 +14,12 @@ public class TileEntityBlockLamp extends TileEntity
 	public void updateEntity()
 	{
 		super.updateEntity();
+	}
+	
+
+	@Override
+	public Block getBlockType()
+	{
+		return Blocks.beacon;
 	}
 }

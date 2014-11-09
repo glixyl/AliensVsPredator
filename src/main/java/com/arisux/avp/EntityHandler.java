@@ -33,6 +33,7 @@ public class EntityHandler implements IInitializable
 		GameRegistry.registerTileEntity(TileEntityGenerator.class, "tileEntityGenerator");
 		GameRegistry.registerTileEntity(TileEntityPowerline.class, "tileEntityPowerline");
 		GameRegistry.registerTileEntity(TileEntityBlastdoor.class, "tileEntityBlastdoor");
+		GameRegistry.registerTileEntity(TileEntityWorklight.class, "tileEntityWorklight");
 	}
 
 	private void registerEntities()
