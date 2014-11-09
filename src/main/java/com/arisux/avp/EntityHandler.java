@@ -92,6 +92,10 @@ public class EntityHandler implements IInitializable
 		}
 	}
 
+	@SuppressWarnings("deprecation")
+	/*
+	 * TODO: Fix deprecation
+	 */
 	private void registerDeathMessages()
 	{
 		LanguageRegistry.instance().addStringLocalization("death.attack.bullet", "en_US", "%1$s was shot by %2$s.");

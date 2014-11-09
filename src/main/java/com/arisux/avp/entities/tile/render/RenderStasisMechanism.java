@@ -16,6 +16,7 @@ import com.arisux.avp.entities.tile.model.ModelStasisMechanism;
 public class RenderStasisMechanism extends TileEntitySpecialRenderer
 {
 	private ModelStasisMechanism model = new ModelStasisMechanism();
+	@SuppressWarnings("unused")
 	private static final ResourceLocation resource = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_WORKSTATION);
 
 	@Override

@@ -33,6 +33,7 @@ public class CommandWorldSelectorExport extends CommandBase
 		return "Export the current WorldSelector selection to NBT format.";
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public void processCommand(ICommandSender commandSender, String[] args)
 	{
