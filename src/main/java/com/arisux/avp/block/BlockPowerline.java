@@ -15,7 +15,7 @@ public class BlockPowerline extends BlockContainer
 	public BlockPowerline(Material material)
 	{
 		super(material);
-		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+		this.setBlockBounds(0.375F, 0.375F, 0.375F, 0.625F, 0.625F, 0.625F);
 		this.setTickRandomly(true);
 	}
 
