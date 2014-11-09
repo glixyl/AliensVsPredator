@@ -6,7 +6,7 @@ import com.arisux.airi.lib.interfaces.IProperties;
 public class Properties implements IProperties
 {
 	public static final String NAME = "AliensVsPredator";
-	public static final String VERSION = "3.9.15";
+	public static final String VERSION = "4.0.0";
 	public static final String ID = "avp";
 	public static final String DOMAIN = ID + ":";
 	public final String CHANNEL = "CHANNEL_" + ID.toUpperCase();
