@@ -88,7 +88,8 @@ public class BlockHandler implements IInitializable, IBHandler
 		blockWorkstation = (new BlockWorkstation(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockStasisMechanism = (new BlockStasisMechanism(Material.iron)),
 		blockGenerator = (new BlockGenerator(Material.iron)).setHardness(3.2F).setResistance(2.6F),
-		blockPowerline = (new BlockPowerline(Material.iron)).setHardness(3.2F).setResistance(2.6F);
+		blockPowerline = (new BlockPowerline(Material.iron)).setHardness(3.2F).setResistance(2.6F),
+		blockBlastdoor = (new BlockBlastdoor(Material.iron)).setHardness(5F).setResistance(5F);
 
 	public void initialize()
 	{
@@ -160,6 +161,7 @@ public class BlockHandler implements IInitializable, IBHandler
 		registerBlock(blockStasisMechanism, "stasismechanism", this, true);
 		registerBlock(blockGenerator, "generator", this, true);
 		registerBlock(blockPowerline, "powerline", this, true);
+		registerBlock(blockBlastdoor, "blastdoor", this, true);
 	}
 
 	@Override

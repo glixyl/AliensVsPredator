@@ -67,6 +67,7 @@ public class Properties implements IProperties
 	public final String TEXTURE_PATH_WORKSTATION_ON = DOMAIN + "textures/tile/workstation-on.png";
 	public final String TEXTURE_PATH_GENERATOR = DOMAIN + "textures/tile/generator.png";
 	public final String TEXTURE_PATH_CABLE = DOMAIN + "textures/tile/cable.png";
+	public final String TEXTURE_PATH_BLASTDOOR = DOMAIN + "textures/tile/blastdoor.png";
 	public final String TEXTURE_PATH_CHESTBUSTER = DOMAIN + "textures/mob/chestbuster.png";
 	public final String TEXTURE_PATH_FACEHUGGER = DOMAIN + "textures/mob/facehugger.png";
 	public final String TEXTURE_PATH_ROYALFACEHUGGER = DOMAIN + "textures/mob/royalfacehugger.png";
