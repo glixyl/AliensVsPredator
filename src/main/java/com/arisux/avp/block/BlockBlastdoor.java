@@ -1,12 +1,13 @@
 package com.arisux.avp.block;
 
-import com.arisux.avp.entities.tile.TileEntityBlastdoor;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class BlockBlastdoor extends BlockContainer
+import com.arisux.airi.lib.BlockTypeLib.HookedBlockContainer;
+import com.arisux.avp.entities.tile.TileEntityBlastdoor;
+
+public class BlockBlastdoor extends HookedBlockContainer
 {
 	public BlockBlastdoor(Material par3)
 	{

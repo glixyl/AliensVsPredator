@@ -2,7 +2,6 @@ package com.arisux.avp.block;
 
 import java.util.Random;
 
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -13,11 +12,12 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+import com.arisux.airi.lib.BlockTypeLib.HookedBlockContainer;
 import com.arisux.airi.lib.PlayerLib;
 import com.arisux.avp.entities.tile.TileEntityStasisMechanism;
 import com.arisux.avp.items.ItemEntitySummoner;
 
-public class BlockStasisMechanism extends BlockContainer
+public class BlockStasisMechanism extends HookedBlockContainer
 {
 	public BlockStasisMechanism(Material material)
 	{

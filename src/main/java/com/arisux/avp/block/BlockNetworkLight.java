@@ -2,19 +2,18 @@ package com.arisux.avp.block;
 
 import java.util.Random;
 
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+import com.arisux.airi.lib.BlockTypeLib.HookedBlockContainer;
 import com.arisux.avp.entities.tile.TileEntityNetworkLight;
 
-public class BlockNetworkLight extends BlockContainer
+public class BlockNetworkLight extends HookedBlockContainer
 {
 	public BlockNetworkLight(Material material)
 	{

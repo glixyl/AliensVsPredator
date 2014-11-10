@@ -5,7 +5,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
-import com.arisux.airi.lib.BlockLib.BlockIconVector;
+import com.arisux.airi.lib.BlockLib.IconSet;
 import com.arisux.airi.lib.BlockTypeLib.HookedBlockMultiSided;
 import com.arisux.avp.entities.mob.EntityOvamorph;
 import com.arisux.avp.entities.mob.EntityQueen;
@@ -16,7 +16,7 @@ public class BlockTempleSpawner extends HookedBlockMultiSided
 
 	public BlockTempleSpawner(Material par2, boolean creativeOnly)
 	{
-		super(new BlockIconVector("avp:spawner_side", "avp:spawner_top", "avp:spawner_bottom", "avp:spawner_side", "avp:spawner_side", "avp:spawner_side", "avp:spawner_side"), par2);
+		super(new IconSet("avp:spawner_side", "avp:spawner_top", "avp:spawner_bottom", "avp:spawner_side", "avp:spawner_side", "avp:spawner_side", "avp:spawner_side"), par2);
 		this.creativeOnly = creativeOnly;
 	}
 

@@ -3,7 +3,6 @@ package com.arisux.avp.block;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityItem;
@@ -13,9 +12,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
+import com.arisux.airi.lib.BlockTypeLib.HookedBlockContainer;
 import com.arisux.avp.entities.tile.TileEntityAssembler;
 
-public class BlockAssembler extends BlockContainer
+public class BlockAssembler extends HookedBlockContainer
 {
 	public BlockAssembler(Material par3)
 	{

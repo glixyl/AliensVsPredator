@@ -8,7 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 
-import com.arisux.airi.lib.BlockLib.BlockIconVector;
+import com.arisux.airi.lib.BlockLib.IconSet;
 import com.arisux.airi.lib.BlockTypeLib.HookedBlock;
 import com.arisux.airi.lib.BlockTypeLib.HookedBlockMultiSided;
 import com.arisux.airi.lib.BlockTypeLib.HookedBlockSlab;
@@ -52,7 +52,7 @@ public class BlockHandler implements IInitializable, IBHandler
 		blockAssembler = (new BlockAssembler(Material.iron).setHardness(1.5F).setResistance(10.0F)),
 		blockFloorGrill = ((HookedBlock) (new HookedBlock(Material.iron)).setHardness(3.5F).setResistance(2.0F)).setOpaque(false),
 		blockWall = (new HookedBlock(Material.iron)).setHardness(3.5F).setResistance(2.0F),
-		blockWallW = (new HookedBlockMultiSided(new BlockIconVector(getDomain() + "wall_top", getDomain() + "wall_top", getDomain() + "wall_top", getDomain() + "wall_side", getDomain() + "wall_side", getDomain() + "wall_side", getDomain() + "wall_side"), Material.iron)).setHardness(3.5F).setResistance(2.0F),
+		blockWallW = (new HookedBlockMultiSided(new IconSet(getDomain() + "wall_top", getDomain() + "wall_top", getDomain() + "wall_top", getDomain() + "wall_side", getDomain() + "wall_side", getDomain() + "wall_side", getDomain() + "wall_side"), Material.iron)).setHardness(3.5F).setResistance(2.0F),
 		blockCeiling = (new HookedBlock(Material.iron)).setHardness(3.5F).setResistance(2.0F).setLightOpacity(100),
 		blockCeiliingVent = (new HookedBlock(Material.iron)).setHardness(3.5F).setResistance(2.0F),
 		blockCeilingGrill = ((HookedBlock) (new HookedBlock(Material.iron)).setHardness(3.5F).setResistance(2.0F)).setOpaque(false),

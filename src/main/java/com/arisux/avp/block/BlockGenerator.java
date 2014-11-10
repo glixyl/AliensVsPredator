@@ -2,16 +2,16 @@ package com.arisux.avp.block;
 
 import java.util.Random;
 
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
+import com.arisux.airi.lib.BlockTypeLib.HookedBlockContainer;
 import com.arisux.avp.entities.tile.TileEntityGenerator;
 
-public class BlockGenerator extends BlockContainer
+public class BlockGenerator extends HookedBlockContainer
 {
 	public BlockGenerator(Material material)
 	{
