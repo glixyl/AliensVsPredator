@@ -13,20 +13,9 @@ public class BlockBlastdoor extends HookedBlockContainer
 	{
 		super(par3);
 		this.setBlockBounds(0F, 0F, 0F, 4F, 3F, 1F);
+		this.disableIcon();
 	}
-
-	@Override
-	public boolean renderAsNormalBlock()
-	{
-		return false;
-	}
-
-	@Override
-	public boolean isOpaqueCube()
-	{
-		return false;
-	}
-
+	
 	@Override
 	public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_)
 	{

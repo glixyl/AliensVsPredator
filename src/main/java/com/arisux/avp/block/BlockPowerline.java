@@ -36,18 +36,6 @@ public class BlockPowerline extends HookedBlockContainer
 	{
 		return new TileEntityPowerline();
 	}
-
-	@Override
-	public boolean renderAsNormalBlock()
-	{
-		return false;
-	}
-
-	@Override
-	public boolean isOpaqueCube()
-	{
-		return false;
-	}
 	
 	@Override
 	public int getRenderType()

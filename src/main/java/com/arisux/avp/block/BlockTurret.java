@@ -136,16 +136,4 @@ public class BlockTurret extends HookedBlockContainer
 		super.onBlockDestroyedByExplosion(world, posX, posY, posZ, sourceExplosion);
 		this.onBlockDestroyedByPlayer(world, posX, posY, posZ, 0);
 	}
-
-	@Override
-	public boolean renderAsNormalBlock()
-	{
-		return false;
-	}
-
-	@Override
-	public boolean isOpaqueCube()
-	{
-		return false;
-	}
 }

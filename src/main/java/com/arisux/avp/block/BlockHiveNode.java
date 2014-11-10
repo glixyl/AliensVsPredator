@@ -20,18 +20,6 @@ public class BlockHiveNode extends HookedBlockContainer
 	}
 
 	@Override
-	public boolean renderAsNormalBlock()
-	{
-		return false;
-	}
-
-	@Override
-	public boolean isOpaqueCube()
-	{
-		return false;
-	}
-
-	@Override
 	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
 	{
 		super.updateTick(par1World, par2, par3, par4, par5Random);

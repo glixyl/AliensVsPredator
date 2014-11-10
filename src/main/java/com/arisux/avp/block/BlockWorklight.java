@@ -18,18 +18,6 @@ public class BlockWorklight extends HookedBlockContainer
 	}
 
 	@Override
-	public boolean renderAsNormalBlock()
-	{
-		return false;
-	}
-
-	@Override
-	public boolean isOpaqueCube()
-	{
-		return false;
-	}
-
-	@Override
 	public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_)
 	{
 		return new TileEntityWorklight();

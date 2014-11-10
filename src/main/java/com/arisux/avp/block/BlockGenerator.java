@@ -43,18 +43,6 @@ public class BlockGenerator extends HookedBlockContainer
 	{
 		return true;
 	}
-
-	@Override
-	public boolean renderAsNormalBlock()
-	{
-		return false;
-	}
-
-	@Override
-	public boolean isOpaqueCube()
-	{
-		return false;
-	}
 	
 	@Override
 	public int getRenderType()
