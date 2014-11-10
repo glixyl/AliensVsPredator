@@ -74,12 +74,6 @@ public class TileEntityWorkstation extends PoweredTileEntity implements INetwork
 	@Override
 	public NetworkHolder getNetwork()
 	{
-		// TODO Auto-generated method stub
-		if(this.nwH != null) {
-			return this.nwH;
-		} else {
-			this.nwH = new NetworkHolder(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord));
-			return this.nwH;
-		}
+		return this.nwH != null ? this.nwH : (this.nwH = new NetworkHolder(this));
 	}
 }
