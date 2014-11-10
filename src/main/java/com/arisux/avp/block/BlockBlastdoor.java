@@ -21,4 +21,9 @@ public class BlockBlastdoor extends HookedBlockContainer
 	{
 		return new TileEntityBlastdoor();
 	}
+	
+	@Override
+	public int getRenderType() {
+		return -1;
+	}
 }
