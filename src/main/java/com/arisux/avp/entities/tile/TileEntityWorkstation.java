@@ -11,7 +11,6 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 public class TileEntityWorkstation extends PoweredTileEntity implements INetworkDevice
 {
 	public int rotation;
-	public boolean isPowered;
 	public NetworkHolder nwH;
 
 	public TileEntityWorkstation()
@@ -22,11 +21,6 @@ public class TileEntityWorkstation extends PoweredTileEntity implements INetwork
 	public void setDirection(byte direction)
 	{
 		this.rotation = direction;
-	}
-	
-	public void setPowered(boolean isPowered)
-	{
-		this.isPowered = isPowered;
 	}
 	
 	@Override
