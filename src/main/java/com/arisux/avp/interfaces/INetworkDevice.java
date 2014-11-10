@@ -4,5 +4,5 @@ public interface INetworkDevice
 {
 	public void sendData();
 	public void receiveData();
-	public void getController();
+	public NetworkHolder getNetwork();
 }
