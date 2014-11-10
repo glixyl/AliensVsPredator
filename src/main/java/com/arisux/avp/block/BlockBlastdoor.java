@@ -11,9 +11,7 @@ public class BlockBlastdoor extends BlockContainer
 	public BlockBlastdoor(Material par3)
 	{
 		super(par3);
-		this.setLightOpacity(2);
-		float var5 = 0.38F;
-		this.setBlockBounds(var5, 0.0F, var5, 1.0F - var5, 0.9F, 1.0F - var5);
+		this.setBlockBounds(0F, 0F, 0F, 4F, 3F, 1F);
 	}
 
 	@Override
@@ -33,5 +31,4 @@ public class BlockBlastdoor extends BlockContainer
 	{
 		return new TileEntityBlastdoor();
 	}
-
 }

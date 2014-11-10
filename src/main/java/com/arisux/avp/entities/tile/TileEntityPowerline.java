@@ -77,7 +77,6 @@ public class TileEntityPowerline extends PoweredTileEntity
 		return true;
 	}
 	
-
 	@Override
 	public Block getBlockType()
 	{

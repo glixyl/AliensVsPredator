@@ -63,7 +63,6 @@ public class ModelCable extends ModelBase
 	{
 		this.setRotationAngles(f, f1, f2, f3, f4, f5, tile);
 		node.render(f5);
-		
 		down.setRotationPoint(1F, 17F, -1F);
 		up.setRotationPoint(1F, 15F, 1F);
 		front.setRotationPoint(1F, 15F, -1F);
