@@ -88,7 +88,9 @@ public class BlockHandler implements IInitializable, IBHandler
 		blockGenerator = (new BlockGenerator(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockPowerline = (new BlockPowerline(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockBlastdoor = (new BlockBlastdoor(Material.iron)).setHardness(5F).setResistance(5F),
-		blockWorklight = (new BlockWorklight(Material.iron)).setHardness(3.2F).setResistance(2.6F);
+		blockWorklight = (new BlockWorklight(Material.iron)).setHardness(3.2F).setResistance(2.6F),
+		blockNetworkCable = (new BlockNetworkCable(Material.iron)).setHardness(3.2F).setResistance(2.6F),
+		blockNetworkLight = (new BlockNetworkLight(Material.iron)).setHardness(3.2F).setResistance(2.6F);
 
 	public void initialize()
 	{
@@ -154,10 +156,12 @@ public class BlockHandler implements IInitializable, IBHandler
 		registerBlock(blockDerelict5, "engineershipwall2", this);
 		registerBlock(blockAssembler, "assembler", this, false);
 		registerBlock(blockTurret, "turret", this, true);
-		registerBlock(blockWorkstation, "workstation", this, true);
+		registerBlock(blockWorkstation, "terminal", this, true);
 		registerBlock(blockStasisMechanism, "stasismechanism", this, true);
 		registerBlock(blockGenerator, "generator", this, true);
 		registerBlock(blockPowerline, "powerline", this, true);
+		registerBlock(blockNetworkCable, "networkCable", this, true);
+		registerBlock(blockNetworkLight, "networkLight", this, true);
 		registerBlock(blockBlastdoor, "blastdoor", this, true);
 		registerBlock(blockWorklight, "worklight", this, true);
 	}

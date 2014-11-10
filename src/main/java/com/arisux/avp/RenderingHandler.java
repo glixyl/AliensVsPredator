@@ -99,5 +99,7 @@ public class RenderingHandler implements IInitializable
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPowerline.class, new RenderPowerline());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlastdoor.class, new RenderBlastdoor());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWorklight.class, new RenderWorklight());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityNetworkCable.class, new RenderNetworkCable());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityNetworkLight.class, new RenderNetworkLight());
 	}
 }

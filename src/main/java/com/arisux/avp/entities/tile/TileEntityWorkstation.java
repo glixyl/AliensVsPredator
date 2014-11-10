@@ -1,14 +1,18 @@
 package com.arisux.avp.entities.tile;
 
+import com.arisux.avp.interfaces.INetworkDevice;
+import com.arisux.avp.interfaces.NetworkHolder;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 
-public class TileEntityWorkstation extends PoweredTileEntity
+public class TileEntityWorkstation extends PoweredTileEntity implements INetworkDevice
 {
 	public int rotation;
 	public boolean isPowered;
+	public NetworkHolder nwH;
 
 	public TileEntityWorkstation()
 	{
@@ -51,5 +55,31 @@ public class TileEntityWorkstation extends PoweredTileEntity
 	{
 		super.readFromNBT(nbt);
 		this.rotation = nbt.getInteger("Rotation");
+	}
+
+	@Override
+	public void sendData()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void receiveData()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public NetworkHolder getNetwork()
+	{
+		// TODO Auto-generated method stub
+		if(this.nwH != null) {
+			return this.nwH;
+		} else {
+			this.nwH = new NetworkHolder(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord));
+			return this.nwH;
+		}
 	}
 }
