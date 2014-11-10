@@ -154,7 +154,7 @@ public class BlockHandler implements IInitializable, IBHandler
 		registerBlock(blockDerelict5, "engineershipwall2", this);
 		registerBlock(blockAssembler, "assembler", this, false);
 		registerBlock(blockTurret, "turret", this, true);
-		registerBlock(blockWorkstation, "workstation", this, true);
+		registerBlock(blockWorkstation, "terminal", this, true);
 		registerBlock(blockStasisMechanism, "stasismechanism", this, true);
 		registerBlock(blockGenerator, "generator", this, true);
 		registerBlock(blockPowerline, "powerline", this, true);
