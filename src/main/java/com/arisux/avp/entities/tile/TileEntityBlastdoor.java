@@ -11,10 +11,20 @@ import net.minecraft.util.AxisAlignedBB;
 
 public class TileEntityBlastdoor extends PoweredTileEntity
 {
+	public float doorOpenProgress;
+	
 	@Override
 	public void onVoltageTick()
 	{
 		super.onVoltageTick();
+		doorOpenProgress = doorOpenProgress < 1.0F ? doorOpenProgress + 0.01F : doorOpenProgress;
+	}
+	
+	@Override
+	public void onUnderloadTick()
+	{
+		super.onUnderloadTick();
+		doorOpenProgress = doorOpenProgress > 0.0F ? doorOpenProgress - 0.01F : doorOpenProgress;
 	}
 	
 	@Override
@@ -84,5 +94,4 @@ public class TileEntityBlastdoor extends PoweredTileEntity
 	{
 		return Blocks.beacon;
 	}
-	
 }

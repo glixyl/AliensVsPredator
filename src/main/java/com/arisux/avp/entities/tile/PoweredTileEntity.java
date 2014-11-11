@@ -21,11 +21,13 @@ public class PoweredTileEntity extends TileEntity implements IPowerDevice
 		{
 			this.onVoltageTick();
 		}
-		else if (this.voltage > this.getMaxOperatingVoltage())
+		
+		if (this.voltage > this.getMaxOperatingVoltage())
 		{
 			this.onOverloadTick();
 		}
-		else if (this.voltage < this.getMinOperatingVoltage())
+		
+		if (this.voltage <= this.getMinOperatingVoltage())
 		{
 			this.onUnderloadTick();
 		}

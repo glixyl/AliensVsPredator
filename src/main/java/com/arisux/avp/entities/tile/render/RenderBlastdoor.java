@@ -38,7 +38,7 @@ public class RenderBlastdoor extends TileEntitySpecialRenderer
 			float scale = 0.02F;
 			glScalef(scale, scale, scale);
 			RenderLib.glDisableLight();
-			RenderLib.drawString(tile.getVoltage() + "V", -20, 30, 0xFF00FF00);
+			RenderLib.drawString(tile.getVoltage() + "V", -20, 30, 0xFFBBAA00);
 			RenderLib.glEnableLight();
 		}
 		glPopMatrix();

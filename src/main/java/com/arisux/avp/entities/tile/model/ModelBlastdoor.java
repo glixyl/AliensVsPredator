@@ -137,6 +137,19 @@ public class ModelBlastdoor extends ModelBase
 		FrameRight.render(f5);
 		Bar_1.render(f5);
 		Bar_4.render(f5);
+		
+		float doorProgress = entity.doorOpenProgress * 2;
+		float doorRight = doorProgress;
+		float doorLeft = -doorProgress;
+		
+		DoorRightMain.offsetX = doorRight;
+		DoorRightArrow.offsetX = doorRight;
+		
+		DoorLeftMain.offsetX = doorLeft;
+		DoorLeftCorner1.offsetX = doorLeft;
+		DoorLeftCorner2.offsetX = doorLeft;
+		DoorLeftDiagonal1.offsetX = doorLeft;
+		DoorLeftDiagonal2.offsetX = doorLeft;
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z)

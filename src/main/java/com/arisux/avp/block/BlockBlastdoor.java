@@ -9,21 +9,21 @@ import com.arisux.avp.entities.tile.TileEntityBlastdoor;
 
 public class BlockBlastdoor extends HookedBlockContainer
 {
-	public BlockBlastdoor(Material par3)
+	public BlockBlastdoor(Material material)
 	{
-		super(par3);
-		this.setBlockBounds(0F, 0F, 0F, 4F, 3F, 1F);
+		super(material);
 		this.disableIcon();
 	}
-	
+
 	@Override
 	public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_)
 	{
 		return new TileEntityBlastdoor();
 	}
-	
+
 	@Override
-	public int getRenderType() {
+	public int getRenderType()
+	{
 		return -1;
 	}
 }
