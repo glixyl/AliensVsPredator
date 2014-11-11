@@ -18,7 +18,6 @@ public class TileEntityNetworkLight extends PoweredTileEntity implements INetwor
 	@Override
 	public void onVoltageTick()
 	{
-		super.onVoltageTick();
 		if(this.nwh == null) {
 			TileEntity above = this.getWorldObj().getTileEntity(this.xCoord, this.yCoord + 1, this.zCoord);
 			TileEntity below = this.getWorldObj().getTileEntity(this.xCoord, this.yCoord -1, this.zCoord);
@@ -125,22 +124,30 @@ public class TileEntityNetworkLight extends PoweredTileEntity implements INetwor
 	@Override
 	public void sendData()
 	{
-		// TODO Auto-generated method stub
-		
+		;
 	}
 
 	@Override
 	public void receiveData()
 	{
-		// TODO Auto-generated method stub
-		
+		;
 	}
 
 	@Override
 	public NetworkHolder getNetwork()
 	{
-		// TODO Auto-generated method stub
 		return this.nwh;
 	}
-	
+
+	@Override
+	public void onOverloadTick()
+	{
+		;
+	}
+
+	@Override
+	public void onUnderloadTick()
+	{
+		;
+	}
 }

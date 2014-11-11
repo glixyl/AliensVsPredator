@@ -8,7 +8,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-public class PoweredTileEntity extends TileEntity implements IPowerDevice
+public abstract class PoweredTileEntity extends TileEntity implements IPowerDevice
 {
 	public double voltage, amps;
 
@@ -80,22 +80,13 @@ public class PoweredTileEntity extends TileEntity implements IPowerDevice
 	}
 
 	@Override
-	public void onVoltageTick()
-	{
-		;
-	}
+	public abstract void onVoltageTick();
 
 	@Override
-	public void onOverloadTick()
-	{
-		;
-	}
+	public abstract void onOverloadTick();
 
 	@Override
-	public void onUnderloadTick()
-	{
-		;
-	}
+	public abstract void onUnderloadTick();
 
 	@Override
 	public Packet getDescriptionPacket()

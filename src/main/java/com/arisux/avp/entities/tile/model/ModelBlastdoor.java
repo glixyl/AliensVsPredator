@@ -121,7 +121,9 @@ public class ModelBlastdoor extends ModelBase
 
 	public void render(TileEntityBlastdoor entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
-		setRotationAngles(f, f1, f2, f3, f4, f5);
+		super.render(null, f, f1, f2, f3, f4, f5);
+		this.setRotationAngles(f, f1, f2, f3, f4, f5);
+		
 		DoorLeftCorner1.render(f5);
 		DoorLeftCorner2.render(f5);
 		DoorLeftMain.render(f5);
@@ -138,7 +140,7 @@ public class ModelBlastdoor extends ModelBase
 		Bar_1.render(f5);
 		Bar_4.render(f5);
 		
-		float doorProgress = entity.doorOpenProgress * 2;
+		float doorProgress = entity.getDoorProgress() * 2;
 		float doorRight = doorProgress;
 		float doorLeft = -doorProgress;
 		

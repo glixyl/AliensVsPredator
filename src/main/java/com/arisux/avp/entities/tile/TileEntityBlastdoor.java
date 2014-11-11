@@ -6,25 +6,37 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
 
 public class TileEntityBlastdoor extends PoweredTileEntity
 {
-	public float doorOpenProgress;
+	private float doorProgress;
+	private boolean doorOpen;
+	
+	public TileEntityBlastdoor()
+	{
+		;
+	}
 	
 	@Override
 	public void onVoltageTick()
 	{
-		super.onVoltageTick();
-		doorOpenProgress = doorOpenProgress < 1.0F ? doorOpenProgress + 0.01F : doorOpenProgress;
+		this.doorProgress = this.doorProgress < 1.0F ? this.doorProgress + 0.02F : this.doorProgress;
+		
+		if (this.doorProgress >= 1.0F)
+		{
+			this.doorOpen = true;
+		}
 	}
 	
 	@Override
 	public void onUnderloadTick()
 	{
-		super.onUnderloadTick();
-		doorOpenProgress = doorOpenProgress > 0.0F ? doorOpenProgress - 0.01F : doorOpenProgress;
+		doorProgress = doorProgress > 0.0F ? doorProgress - 0.02F : doorProgress;
+		
+		if (this.doorProgress <= 0.0F)
+		{
+			this.doorOpen = false;
+		}
 	}
 	
 	@Override
@@ -93,5 +105,21 @@ public class TileEntityBlastdoor extends PoweredTileEntity
 	public Block getBlockType()
 	{
 		return Blocks.beacon;
+	}
+
+	@Override
+	public void onOverloadTick()
+	{
+		;
+	}
+	
+	public boolean isDoorOpen()
+	{
+		return doorOpen;
+	}
+	
+	public float getDoorProgress()
+	{
+		return doorProgress;
 	}
 }

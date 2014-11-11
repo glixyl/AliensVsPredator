@@ -12,7 +12,7 @@ public class TileEntityWorklight extends PoweredTileEntity
 	@Override
 	public void onVoltageTick()
 	{
-		super.onVoltageTick();
+		;
 	}
 	
 	@Override
@@ -81,5 +81,17 @@ public class TileEntityWorklight extends PoweredTileEntity
 	public Block getBlockType()
 	{
 		return Blocks.beacon;
+	}
+
+	@Override
+	public void onOverloadTick()
+	{
+		;
+	}
+
+	@Override
+	public void onUnderloadTick()
+	{
+		;
 	}
 }

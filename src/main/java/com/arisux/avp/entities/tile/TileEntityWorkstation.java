@@ -54,20 +54,36 @@ public class TileEntityWorkstation extends PoweredTileEntity implements INetwork
 	@Override
 	public void sendData()
 	{
-		// TODO Auto-generated method stub
-		
+		;
 	}
 
 	@Override
 	public void receiveData()
 	{
-		// TODO Auto-generated method stub
-		
+		;
 	}
 
 	@Override
 	public NetworkHolder getNetwork()
 	{
 		return this.nwH != null ? this.nwH : (this.nwH = new NetworkHolder(this));
+	}
+
+	@Override
+	public void onVoltageTick()
+	{
+		;
+	}
+
+	@Override
+	public void onOverloadTick()
+	{
+		;
+	}
+
+	@Override
+	public void onUnderloadTick()
+	{
+		;
 	}
 }
