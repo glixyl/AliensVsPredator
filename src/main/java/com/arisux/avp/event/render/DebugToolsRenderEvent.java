@@ -9,9 +9,11 @@ import net.minecraft.entity.item.EntityItemFrame;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import com.arisux.airi.lib.*;
 import com.arisux.airi.lib.BlockLib.CoordData;
+import com.arisux.airi.lib.enums.BlockSides;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntityMarine;
 import com.arisux.avp.entities.mob.EntityXenomorph;
@@ -107,6 +109,7 @@ public class DebugToolsRenderEvent
 
 							CoordData coord = new CoordData(mc.objectMouseOver.blockX, mc.objectMouseOver.blockY, mc.objectMouseOver.blockZ);
 							Block block = mc.theWorld.getBlock((int) coord.posX, (int) coord.posY, (int) coord.posZ);
+							BlockSides side = BlockSides.getSide(mc.objectMouseOver.sideHit);
 							TileEntity tile = coord.getTileEntity(Minecraft.getMinecraft().thePlayer.worldObj);
 
 							Gui.drawRect(0, 0, 1, 1, 0xFFFFFFFF);
@@ -120,6 +123,11 @@ public class DebugToolsRenderEvent
 							} else
 							{
 								info = block.getLocalizedName() + " from " + ModLib.getModContainerForId(BlockLib.getDomain(block).replace(":", "")).getName();
+							}
+							
+							if (side != null)
+							{
+								info = info + " (" + ForgeDirection.getOrientation(side.getId()) + ")";
 							}
 							
 							if (tile instanceof TileEntity)

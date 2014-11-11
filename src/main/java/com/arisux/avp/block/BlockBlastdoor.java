@@ -30,7 +30,7 @@ public class BlockBlastdoor extends HookedBlockContainer
 	public int onBlockPlaced(World world, int posX, int posY, int posZ, int side, float subX, float subY, float subZ, int meta)
 	{
 		TileEntityBlastdoor tile = (TileEntityBlastdoor) world.getTileEntity(posX, posY, posZ);
-		
+
 		return super.onBlockPlaced(world, posX, posY, posZ, side, subX, subY, subZ, meta);
 	}
 
