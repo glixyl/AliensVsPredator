@@ -28,9 +28,7 @@ public class RenderTurret extends TileEntitySpecialRenderer
 			GL11.glDisable(GL11.GL_CULL_FACE);
 			this.bindTexture(resource);
 			GL11.glTranslated(posX + 0.5F, posY + 3.0F, posZ - 0.0F);
-			GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 			GL11.glScalef(2F, -2F, 2F);
-			GL11.glEnable(GL11.GL_ALPHA_TEST);
 			this.model.render(tile, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0625F);
 
 			if (tile.isVoltageInOperatingRange())

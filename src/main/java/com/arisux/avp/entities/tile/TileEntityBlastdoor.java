@@ -11,40 +11,38 @@ public class TileEntityBlastdoor extends PoweredTileEntity
 {
 	private float doorProgress;
 	private boolean doorOpen;
-	
+
 	public TileEntityBlastdoor()
 	{
 		;
 	}
-	
+
 	@Override
 	public void updateEntity()
 	{
 		super.updateEntity();
 	}
-	
+
 	@Override
 	public void onVoltageTick()
 	{
-		this.doorProgress = this.doorProgress < 1.0F ? this.doorProgress + 0.02F : this.doorProgress;
-		
-		if (this.doorProgress >= 1.0F)
+		if (this.doorOpen)
 		{
-			this.doorOpen = true;
+			this.doorProgress = this.doorProgress < 1.0F ? this.doorProgress + 0.02F : this.doorProgress;
+		}
+		
+		if (!this.doorOpen)
+		{
+			this.doorProgress = this.doorProgress > 0.0F ? this.doorProgress - 0.02F : this.doorProgress;
 		}
 	}
-	
+
 	@Override
 	public void onUnderloadTick()
 	{
-		doorProgress = doorProgress > 0.0F ? doorProgress - 0.02F : doorProgress;
-		
-		if (this.doorProgress <= 0.0F)
-		{
-			this.doorOpen = false;
-		}
+		;
 	}
-	
+
 	@Override
 	public Packet getDescriptionPacket()
 	{
@@ -58,55 +56,55 @@ public class TileEntityBlastdoor extends PoweredTileEntity
 	{
 		this.readFromNBT(packet.func_148857_g());
 	}
-	
+
 	@Override
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
 	}
-	
+
 	@Override
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
 	}
-	
+
 	@Override
 	public double getMinOperatingVoltage()
 	{
 		return 0;
 	}
-	
+
 	@Override
 	public double getMaxOperatingVoltage()
 	{
 		return 10000;
 	}
-	
+
 	@Override
 	public double getMinOperatingAmps()
 	{
 		return 0;
 	}
-	
+
 	@Override
 	public double getMaxOperatingAmps()
 	{
 		return 1000;
 	}
-	
+
 	@Override
 	public double getResistance()
 	{
 		return 0.1;
 	}
-	
+
 	@Override
 	public boolean canOutputPower()
 	{
 		return false;
 	}
-	
+
 	@Override
 	public Block getBlockType()
 	{
@@ -118,12 +116,17 @@ public class TileEntityBlastdoor extends PoweredTileEntity
 	{
 		;
 	}
-	
+
 	public boolean isDoorOpen()
 	{
 		return doorOpen;
 	}
-	
+
+	public void setDoorOpen(boolean doorOpen)
+	{
+		this.doorOpen = doorOpen;
+	}
+
 	public float getDoorProgress()
 	{
 		return doorProgress;
