@@ -142,27 +142,27 @@ public abstract class PoweredTileEntity extends TileEntity implements IPowerDevi
 
 	public PoweredTileEntity getPowerSourceTile()
 	{
-		if (getTop() != null && getTop().isOutputVoltageHigherThan(this))
+		if (getTop() != null && getTop().isOutputVoltageHigherThan(this) && getTop().canOutputPower())
 		{
 			return getTop();
 		}
-		if (getBottom() != null && getBottom().isOutputVoltageHigherThan(this))
+		if (getBottom() != null && getBottom().isOutputVoltageHigherThan(this) && getBottom().canOutputPower())
 		{
 			return getBottom();
 		}
-		if (getFront() != null && getFront().isOutputVoltageHigherThan(this))
+		if (getFront() != null && getFront().isOutputVoltageHigherThan(this) && getFront().canOutputPower())
 		{
 			return getFront();
 		}
-		if (getBack() != null && getBack().isOutputVoltageHigherThan(this))
+		if (getBack() != null && getBack().isOutputVoltageHigherThan(this) && getBack().canOutputPower())
 		{
 			return getBack();
 		}
-		if (getLeft() != null && getLeft().isOutputVoltageHigherThan(this))
+		if (getLeft() != null && getLeft().isOutputVoltageHigherThan(this) && getLeft().canOutputPower())
 		{
 			return getLeft();
 		}
-		if (getRight() != null && getRight().isOutputVoltageHigherThan(this))
+		if (getRight() != null && getRight().isOutputVoltageHigherThan(this) && getRight().canOutputPower())
 		{
 			return getRight();
 		}

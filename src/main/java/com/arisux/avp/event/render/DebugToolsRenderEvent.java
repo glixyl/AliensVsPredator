@@ -122,6 +122,11 @@ public class DebugToolsRenderEvent
 								info = block.getLocalizedName() + " from " + ModLib.getModContainerForId(BlockLib.getDomain(block).replace(":", "")).getName();
 							}
 							
+							if (tile instanceof TileEntity)
+							{
+								info = info + " (" + tile.getClass().getSimpleName() + tile.toString().replace(tile.getClass().getName(), "") + ")";
+							}
+							
 							if (tile instanceof PoweredTileEntity)
 							{
 								PoweredTileEntity poweredTile = (PoweredTileEntity) tile;

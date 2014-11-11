@@ -18,6 +18,12 @@ public class TileEntityBlastdoor extends PoweredTileEntity
 	}
 	
 	@Override
+	public void updateEntity()
+	{
+		super.updateEntity();
+	}
+	
+	@Override
 	public void onVoltageTick()
 	{
 		this.doorProgress = this.doorProgress < 1.0F ? this.doorProgress + 0.02F : this.doorProgress;
@@ -92,7 +98,7 @@ public class TileEntityBlastdoor extends PoweredTileEntity
 	@Override
 	public double getResistance()
 	{
-		return 5;
+		return 0.1;
 	}
 	
 	@Override

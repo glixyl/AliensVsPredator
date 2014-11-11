@@ -13,7 +13,6 @@ public class BlockBlastdoor extends HookedBlockContainer
 	{
 		super(material);
 		this.disableIcon();
-		this.setTickRandomly(true);
 	}
 
 	@Override
