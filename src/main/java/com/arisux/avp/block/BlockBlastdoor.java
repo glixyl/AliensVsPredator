@@ -1,5 +1,6 @@
 package com.arisux.avp.block;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -22,7 +23,23 @@ public class BlockBlastdoor extends HookedBlockContainer
 		TileEntityBlastdoor tile = (TileEntityBlastdoor) world.getTileEntity(posX, posY, posZ);
 		tile.setDoorOpen(!tile.isDoorOpen());
 		
-		return super.onBlockActivated(world, posX, posY, posZ, player, side, subX, subY, subZ);
+		return true;
+	}
+	
+	@Override
+	public int onBlockPlaced(World world, int posX, int posY, int posZ, int side, float subX, float subY, float subZ, int meta)
+	{
+		TileEntityBlastdoor tile = (TileEntityBlastdoor) world.getTileEntity(posX, posY, posZ);
+		
+		return super.onBlockPlaced(world, posX, posY, posZ, side, subX, subY, subZ, meta);
+	}
+
+	@Override
+	public void breakBlock(World world, int posX, int posY, int posZ, Block blockBroken, int meta)
+	{
+		TileEntityBlastdoor tile = (TileEntityBlastdoor) world.getTileEntity(posX, posY, posZ);
+		
+		super.breakBlock(world, posX, posY, posZ, blockBroken, meta);
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 
 import com.arisux.airi.lib.BlockLib.IconSet;
+import com.arisux.airi.lib.BlockTypeLib.GhostBlock;
 import com.arisux.airi.lib.BlockTypeLib.HookedBlock;
 import com.arisux.airi.lib.BlockTypeLib.HookedBlockMultiSided;
 import com.arisux.airi.lib.BlockTypeLib.HookedBlockSlab;
@@ -88,6 +89,7 @@ public class BlockHandler implements IInitializable, IBHandler
 		blockGenerator = (new BlockGenerator(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockPowerline = (new BlockPowerline(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockBlastdoor = (new BlockBlastdoor(Material.iron)).setHardness(5F).setResistance(5F),
+		ghostBlockBlastdoor = (new GhostBlock(blockBlastdoor)).setAttributesFrom((HookedBlock) blockBlastdoor),
 		blockWorklight = (new BlockWorklight(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockNetworkCable = (new BlockNetworkCable(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockNetworkLight = (new BlockNetworkLight(Material.iron)).setHardness(3.2F).setResistance(2.6F);

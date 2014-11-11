@@ -1,5 +1,7 @@
 package com.arisux.avp.entities.tile;
 
+import java.util.ArrayList;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
@@ -7,10 +9,13 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 
+import com.arisux.airi.lib.BlockLib.CoordData;
+
 public class TileEntityBlastdoor extends PoweredTileEntity
 {
 	private float doorProgress;
 	private boolean doorOpen;
+	private ArrayList<CoordData> managedCoords = new ArrayList<CoordData>();
 
 	public TileEntityBlastdoor()
 	{
@@ -30,7 +35,7 @@ public class TileEntityBlastdoor extends PoweredTileEntity
 		{
 			this.doorProgress = this.doorProgress < 1.0F ? this.doorProgress + 0.02F : this.doorProgress;
 		}
-		
+
 		if (!this.doorOpen)
 		{
 			this.doorProgress = this.doorProgress > 0.0F ? this.doorProgress - 0.02F : this.doorProgress;
@@ -130,5 +135,13 @@ public class TileEntityBlastdoor extends PoweredTileEntity
 	public float getDoorProgress()
 	{
 		return doorProgress;
+	}
+
+	public void assignCoord(CoordData data)
+	{
+		if (!this.managedCoords.contains(data))
+		{
+			this.managedCoords.add(data);
+		}
 	}
 }
