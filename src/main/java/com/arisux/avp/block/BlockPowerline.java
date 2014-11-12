@@ -8,6 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.arisux.airi.lib.BlockTypeLib.HookedBlockContainer;
+import com.arisux.avp.entities.tile.PoweredTileEntity;
 import com.arisux.avp.entities.tile.TileEntityPowerline;
 
 public class BlockPowerline extends HookedBlockContainer
@@ -15,14 +16,14 @@ public class BlockPowerline extends HookedBlockContainer
 	public BlockPowerline(Material material)
 	{
 		super(material);
-		this.setBlockBounds(0.375F, 0.375F, 0.375F, 0.625F, 0.625F, 0.625F);
+		this.setBlockBounds(0F, 0F, 0F, 1F, 1F, 1F);
 		this.setTickRandomly(true);
 	}
 
 	@Override
-	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
+	public void updateTick(World world, int posX, int posY, int posZ, Random rand)
 	{
-		super.updateTick(par1World, par2, par3, par4, par5Random);
+		super.updateTick(world, posX, posY, posZ, rand);
 	}
 	
 	@Override

@@ -113,7 +113,7 @@ public class DebugToolsRenderEvent
 							TileEntity tile = coord.getTileEntity(Minecraft.getMinecraft().thePlayer.worldObj);
 
 							Gui.drawRect(0, 0, 1, 1, 0xFFFFFFFF);
-							RenderLib.drawBlockSide(block, 0, 5, 5, 10, 10);
+							RenderLib.drawBlockSide(block, side.getId(), 5, 5, 10, 10);
 
 							String info = "";
 
