@@ -18,6 +18,8 @@ import com.arisux.airi.lib.RegistryLib.IBHandler;
 import com.arisux.airi.lib.interfaces.IInitializable;
 import com.arisux.avp.block.*;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+
 public class BlockHandler implements IInitializable, IBHandler
 {
 	private ArrayList<Object> blockList = new ArrayList<Object>();
@@ -165,6 +167,7 @@ public class BlockHandler implements IInitializable, IBHandler
 		registerBlock(blockNetworkCable, "networkCable", this, true);
 		registerBlock(blockNetworkLight, "networkLight", this, true);
 		registerBlock(blockBlastdoor, "blastdoor", this, true);
+		registerBlock(ghostBlockBlastdoor, "blastdoorghost", this, false);
 		registerBlock(blockWorklight, "worklight", this, true);
 	}
 
