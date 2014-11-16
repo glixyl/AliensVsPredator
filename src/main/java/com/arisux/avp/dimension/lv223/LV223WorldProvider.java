@@ -1,8 +1,6 @@
 package com.arisux.avp.dimension.lv223;
 
-import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.*;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.client.IRenderHandler;
@@ -18,6 +16,7 @@ public class LV223WorldProvider extends WorldProvider
 	@SideOnly(Side.CLIENT)
 	private IRenderHandler skyProvider;
 
+	@Override
 	public void registerWorldChunkManager()
 	{
 		this.worldChunkMgr = new LV223WorldChunkManager(LV223BiomeBase.prometheusBiome);
@@ -41,19 +40,19 @@ public class LV223WorldProvider extends WorldProvider
 	@Override
 	public String getSaveFolder()
 	{
-		return AliensVsPredator.INSTANCE.properties.DIMENSION_GLOBAL_LV223;
+		return AliensVsPredator.properties().DIMENSION_GLOBAL_LV223;
 	}
 
 	@Override
 	public String getWelcomeMessage()
 	{
-		return "Enterring " + AliensVsPredator.INSTANCE.properties.DIMENSION_NAME_LV223;
+		return "Enterring " + AliensVsPredator.properties().DIMENSION_NAME_LV223;
 	}
 
 	@Override
 	public String getDepartMessage()
 	{
-		return "Leaving" + AliensVsPredator.INSTANCE.properties.DIMENSION_NAME_LV223;
+		return "Leaving" + AliensVsPredator.properties().DIMENSION_NAME_LV223;
 	}
 
 	@Override
@@ -97,7 +96,7 @@ public class LV223WorldProvider extends WorldProvider
 	@Override
 	public String getDimensionName()
 	{
-		return AliensVsPredator.INSTANCE.properties.DIMENSION_NAME_LV223;
+		return AliensVsPredator.properties().DIMENSION_NAME_LV223;
 	}
 
 	@Override

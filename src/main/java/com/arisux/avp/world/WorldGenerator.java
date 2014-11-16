@@ -33,7 +33,7 @@ public class WorldGenerator implements IWorldGenerator
 			int randPosX = blockX + random.nextInt(16);
 			int randPosY = random.nextInt(128);
 			int randPosZ = blockZ + random.nextInt(16);
-			(new WorldGenMinable(AliensVsPredator.INSTANCE.blocks.oreCopper, 4)).generate(world, random, randPosX, randPosY, randPosZ);
+			(new WorldGenMinable(AliensVsPredator.instance.blocks.oreCopper, 4)).generate(world, random, randPosX, randPosY, randPosZ);
 		}
 
 		for (int i = 0; i < 9; ++i)
@@ -44,7 +44,7 @@ public class WorldGenerator implements IWorldGenerator
 
 			if (world.provider.getBiomeGenForCoords(randPosX, randPosZ) instanceof BiomeGenSwamp)
 			{
-				(new WorldGenMinable(AliensVsPredator.INSTANCE.blocks.oreSilicon, 4)).generate(world, random, randPosX, randPosY, randPosZ);
+				(new WorldGenMinable(AliensVsPredator.instance.blocks.oreSilicon, 4)).generate(world, random, randPosX, randPosY, randPosZ);
 			}
 		}
 
@@ -55,7 +55,7 @@ public class WorldGenerator implements IWorldGenerator
 			int randPosZ = blockZ + random.nextInt(16);
 			if (world.provider.getBiomeGenForCoords(randPosX, randPosZ) instanceof BiomeGenOcean)
 			{
-				(new WorldGenMinable(AliensVsPredator.INSTANCE.blocks.oreLithium, 5)).generate(world, random, randPosX, randPosY, randPosZ);
+				(new WorldGenMinable(AliensVsPredator.instance.blocks.oreLithium, 5)).generate(world, random, randPosX, randPosY, randPosZ);
 			}
 		}
 
@@ -64,7 +64,7 @@ public class WorldGenerator implements IWorldGenerator
 			int randPosX = blockX + random.nextInt(16);
 			int randPosY = random.nextInt(128);
 			int randPosZ = blockZ + random.nextInt(16);
-			(new WorldGenMinable(AliensVsPredator.INSTANCE.blocks.terrainHiveResin, 4)).generate(world, random, randPosX, randPosY, randPosZ);
+			(new WorldGenMinable(AliensVsPredator.instance.blocks.terrainHiveResin, 4)).generate(world, random, randPosX, randPosY, randPosZ);
 		}
 
 		for (int i = 0; i < 10; ++i)
@@ -72,7 +72,7 @@ public class WorldGenerator implements IWorldGenerator
 			int randPosX = blockX + random.nextInt(16);
 			int randPosY = random.nextInt(128);
 			int randPosZ = blockZ + random.nextInt(16);
-			(new WorldGenMinable(AliensVsPredator.INSTANCE.blocks.oreBauxite, 9)).generate(world, random, randPosX, randPosY, randPosZ);
+			(new WorldGenMinable(AliensVsPredator.instance.blocks.oreBauxite, 9)).generate(world, random, randPosX, randPosY, randPosZ);
 		}
 	}
 }

@@ -5,9 +5,7 @@ import io.netty.buffer.ByteBuf;
 import com.arisux.avp.AliensVsPredator;
 
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import cpw.mods.fml.common.network.simpleimpl.*;
 
 public class PacketOpenWristbracerGUIServerUpdate implements IMessage, IMessageHandler<PacketOpenWristbracerGUIServerUpdate, PacketOpenWristbracerGUIServerUpdate>
 {
@@ -31,7 +29,7 @@ public class PacketOpenWristbracerGUIServerUpdate implements IMessage, IMessageH
 	@Override
 	public PacketOpenWristbracerGUIServerUpdate onMessage(PacketOpenWristbracerGUIServerUpdate packet, MessageContext ctx)
 	{
-		FMLNetworkHandler.openGui(ctx.getServerHandler().playerEntity, AliensVsPredator.INSTANCE, AliensVsPredator.INSTANCE.properties.GUI_WRISTBRACER, ctx.getServerHandler().playerEntity.worldObj, (int) ctx.getServerHandler().playerEntity.posX, (int) ctx.getServerHandler().playerEntity.posY, (int) ctx.getServerHandler().playerEntity.posZ);
+		FMLNetworkHandler.openGui(ctx.getServerHandler().playerEntity, AliensVsPredator.instance, AliensVsPredator.properties().GUI_WRISTBRACER, ctx.getServerHandler().playerEntity.worldObj, (int) ctx.getServerHandler().playerEntity.posX, (int) ctx.getServerHandler().playerEntity.posY, (int) ctx.getServerHandler().playerEntity.posZ);
 		return null;
 	}
 }

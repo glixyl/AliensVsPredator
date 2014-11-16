@@ -4,9 +4,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiMainMenu;
 
 import com.arisux.airi.AIRI;
-import com.arisux.airi.lib.GuiTypeLib.GuiCustomButton;
-import com.arisux.airi.lib.RenderLib;
-import com.arisux.airi.lib.interfaces.IActionPerformed;
+import com.arisux.airi.engine.RenderEngine;
+import com.arisux.airi.engine.GuiTypeLib.GuiCustomButton;
+import com.arisux.airi.lib.util.interfaces.IActionPerformed;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.windows.WindowSubmitFeedback;
 
@@ -22,10 +22,10 @@ public class FeedbackRenderEvent
 	@SubscribeEvent
 	public void renderTick(RenderTickEvent event)
 	{
-		if (AliensVsPredator.INSTANCE.isBetaRelease())
+		if (AliensVsPredator.instance.isBetaRelease())
 		{
-			buttonFeedback.xPosition = RenderLib.scaledDisplayResolution().getScaledWidth() - buttonFeedback.width;
-			buttonFeedback.yPosition = mc.currentScreen instanceof GuiMainMenu ? 0 : RenderLib.scaledDisplayResolution().getScaledHeight() - buttonFeedback.height;
+			buttonFeedback.xPosition = RenderEngine.scaledDisplayResolution().getScaledWidth() - buttonFeedback.width;
+			buttonFeedback.yPosition = mc.currentScreen instanceof GuiMainMenu ? 0 : RenderEngine.scaledDisplayResolution().getScaledHeight() - buttonFeedback.height;
 			buttonFeedback.baseColor = 0x55000000;
 			buttonFeedback.drawButton();
 			buttonFeedback.setAction(new IActionPerformed()

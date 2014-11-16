@@ -12,20 +12,12 @@ import org.lwjgl.opengl.GL11;
 
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntityMarine;
-import com.arisux.avp.items.model.ModelAK47;
-import com.arisux.avp.items.model.ModelM4;
-import com.arisux.avp.items.model.ModelM41A;
-import com.arisux.avp.items.model.ModelM56SG;
-import com.arisux.avp.items.model.ModelSniper;
-import com.arisux.avp.items.render.RenderAK47;
-import com.arisux.avp.items.render.RenderM4;
-import com.arisux.avp.items.render.RenderM41A;
-import com.arisux.avp.items.render.RenderM56SG;
-import com.arisux.avp.items.render.RenderSniper;
+import com.arisux.avp.items.model.*;
+import com.arisux.avp.items.render.*;
 
 public class RenderMarine extends RenderLiving
 {
-	private final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_MARINE);
+	private final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_MARINE);
 	protected ModelBiped modelBipedMain;
 	private final ModelBase m4 = new ModelM4();
 	private final ModelBase ak47 = new ModelAK47();

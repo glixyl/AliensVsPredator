@@ -4,12 +4,8 @@ import java.util.Random;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
-import net.minecraft.client.renderer.GLAllocation;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Vec3;
+import net.minecraft.client.renderer.*;
+import net.minecraft.util.*;
 import net.minecraftforge.client.IRenderHandler;
 
 import org.lwjgl.opengl.GL11;
@@ -23,7 +19,7 @@ public class LV223SkyProvider extends IRenderHandler
 	public int starGLCallList = GLAllocation.generateDisplayLists(3);
 	public int glSkyList;
 	public int glSkyList2;
-	protected static final ResourceLocation resLocationLV223 = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_LV223_GAS_PLANET);
+	protected static final ResourceLocation resLocationLV223 = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_LV223_GAS_PLANET);
 	protected static final ResourceLocation resLocationSun = new ResourceLocation("textures/environment/sun.png");
 
 	public LV223SkyProvider()

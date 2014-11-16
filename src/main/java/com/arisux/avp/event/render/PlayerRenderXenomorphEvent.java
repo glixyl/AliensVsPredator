@@ -27,16 +27,16 @@ public class PlayerRenderXenomorphEvent
 			
 			if (helmSlot != null && chestplateSlot != null && leggingsSlot != null && bootsSlot != null)
 			{
-				if (!mc.thePlayer.isInvisible() && helmSlot.getItem() == AliensVsPredator.INSTANCE.items.helmXeno && chestplateSlot.getItem() == AliensVsPredator.INSTANCE.items.plateXeno && leggingsSlot.getItem() == AliensVsPredator.INSTANCE.items.legsXeno && bootsSlot.getItem() == AliensVsPredator.INSTANCE.items.bootsXeno)
+				if (!mc.thePlayer.isInvisible() && helmSlot.getItem() == AliensVsPredator.instance.items.helmXeno && chestplateSlot.getItem() == AliensVsPredator.instance.items.plateXeno && leggingsSlot.getItem() == AliensVsPredator.instance.items.legsXeno && bootsSlot.getItem() == AliensVsPredator.instance.items.bootsXeno)
 				{
-					AliensVsPredator.INSTANCE.network.sendToServer(new PacketInvisiblePlayerServerUpdate(true));
+					AliensVsPredator.instance.network.sendToServer(new PacketInvisiblePlayerServerUpdate(true));
 				} else if (mc.thePlayer.isInvisible() && mc.thePlayer.getActivePotionEffects().contains(Potion.invisibility))
 				{
-					AliensVsPredator.INSTANCE.network.sendToServer(new PacketInvisiblePlayerServerUpdate(false));
+					AliensVsPredator.instance.network.sendToServer(new PacketInvisiblePlayerServerUpdate(false));
 				}
 			} else if (mc.thePlayer.isInvisible())
 			{
-				AliensVsPredator.INSTANCE.network.sendToServer(new PacketInvisiblePlayerServerUpdate(false));
+				AliensVsPredator.instance.network.sendToServer(new PacketInvisiblePlayerServerUpdate(false));
 			}
 		}
 	}

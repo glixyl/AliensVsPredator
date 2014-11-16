@@ -12,8 +12,8 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
-import com.arisux.airi.lib.RenderLib;
-import com.arisux.airi.lib.RenderLib.PlayerResourceManager.PlayerResource;
+import com.arisux.airi.engine.RenderEngine;
+import com.arisux.airi.engine.RenderEngine.PlayerResourceManager.PlayerResource;
 import com.arisux.airi.lib.render.ItemRenderer3D;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.event.render.MotionTrackerDisplay;
@@ -22,7 +22,7 @@ import com.arisux.avp.items.model.ModelM41A;
 
 public class RenderM41A extends ItemRenderer3D
 {
-	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_PULSERIFLE);
+	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_PULSERIFLE);
 	public MotionTrackerDisplay motionTracker = new MotionTrackerDisplay();
 	
 	public RenderM41A()
@@ -42,7 +42,7 @@ public class RenderM41A extends ItemRenderer3D
 		GL11.glPushMatrix();
 
 		PlayerResource player = resourceManager.createPlayerResource(((EntityPlayer) data[1]).getCommandSenderName());
-		this.resource = RenderLib.downloadResource(String.format(AliensVsPredator.INSTANCE.properties.URL_SKIN_M41A, player.getUUID()), resourceLocation);
+		this.resource = RenderEngine.downloadResource(String.format(AliensVsPredator.properties().URL_SKIN_M41A, player.getUUID()), resourceLocation);
 		
 		if (player != null)
 		{
@@ -84,7 +84,7 @@ public class RenderM41A extends ItemRenderer3D
 		{
 			if (entity == Minecraft.getMinecraft().renderViewEntity && Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && (!(Minecraft.getMinecraft().currentScreen instanceof GuiInventory) && !(Minecraft.getMinecraft().currentScreen instanceof GuiContainerCreative) || RenderManager.instance.playerViewY != 180.0F))
 			{
-				this.resource = RenderLib.downloadResource(String.format(AliensVsPredator.INSTANCE.properties.URL_SKIN_M41A, Minecraft.getMinecraft().session.getPlayerID()), resourceLocation);
+				this.resource = RenderEngine.downloadResource(String.format(AliensVsPredator.properties().URL_SKIN_M41A, Minecraft.getMinecraft().session.getPlayerID()), resourceLocation);
 				Minecraft.getMinecraft().renderEngine.bindTexture(getResourceLocation());
 
 				/**
@@ -120,22 +120,22 @@ public class RenderM41A extends ItemRenderer3D
 					GL11.glTranslatef(-0.3439F, 0.6F, 0.04F);
 					GL11.glScalef(displayScale, displayScale, displayScale);
 					GL11.glRotatef(90F, 0F, 1F, 0F);
-					RenderLib.drawRect(-2, -2, 16, 11, 0xFF000000);
+					RenderEngine.drawRect(-2, -2, 16, 11, 0xFF000000);
 					GL11.glTranslatef(0F, 0F, -0.01F);
-					RenderLib.glDisableLightMapping();
-					RenderLib.drawString(displayText, 0, 0, 0xFFFF0000);
+					RenderEngine.glDisableLightMapping();
+					RenderEngine.drawString(displayText, 0, 0, 0xFFFF0000);
 					GL11.glEnable(GL11.GL_LIGHTING);
 					GL11.glColor4f(1F, 1F, 1F, 1F);
 				}
 				
-				if (Minecraft.getMinecraft().thePlayer.inventory.hasItem(AliensVsPredator.INSTANCE.items.itemMotionTracker))
+				if (Minecraft.getMinecraft().thePlayer.inventory.hasItem(AliensVsPredator.instance.items.itemMotionTracker))
 				{
 					GL11.glTranslatef(-50F, -20F, -50F);
 					GL11.glRotatef(-90F, 0F, 1F, 0F);
 					GL11.glScalef(0.4F, 0.4F, 0.4F);
-					RenderLib.glDisableLight();
+					RenderEngine.glDisableLight();
 					motionTracker.draw(0, 0, 128, 96);
-					RenderLib.glEnableLight();
+					RenderEngine.glEnableLight();
 				}
 			}
 		}
@@ -147,7 +147,7 @@ public class RenderM41A extends ItemRenderer3D
 	{
 		GL11.glPushMatrix();
 		{
-			this.resource = RenderLib.downloadResource(String.format(AliensVsPredator.INSTANCE.properties.URL_SKIN_M41A, Minecraft.getMinecraft().session.getPlayerID()), resourceLocation);
+			this.resource = RenderEngine.downloadResource(String.format(AliensVsPredator.properties().URL_SKIN_M41A, Minecraft.getMinecraft().session.getPlayerID()), resourceLocation);
 			Minecraft.getMinecraft().renderEngine.bindTexture(getResourceLocation());
 			GL11.glDisable(GL11.GL_CULL_FACE);
 			GL11.glRotatef(0F, 1.0F, 0.0F, 0.0F);

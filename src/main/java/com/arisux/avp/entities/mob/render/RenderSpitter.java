@@ -14,8 +14,8 @@ import com.arisux.avp.entities.mob.model.ModelSpitter;
 
 public class RenderSpitter extends RenderXenomorph
 {
-	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_SPITTER);
-	public static final ResourceLocation resourceLocationMask = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_SPITTER_GLOW);
+	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_SPITTER);
+	public static final ResourceLocation resourceLocationMask = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_SPITTER_GLOW);
 
 	public RenderSpitter(ModelBase modelbase, float shadowSize)
 	{
@@ -70,7 +70,7 @@ public class RenderSpitter extends RenderXenomorph
 			char c0 = 61680;
 			int j = c0 % 65536;
 			int k = c0 / 65536;
-			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) j / 1.0F, (float) k / 1.0F);
+			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, j / 1.0F, k / 1.0F);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, f1);
 			return 1;

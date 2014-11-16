@@ -7,8 +7,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-import com.arisux.airi.lib.BlockLib.CoordData;
-import com.arisux.airi.lib.ItemTypeLib.HookedItem;
+import com.arisux.airi.engine.BlockLib.CoordData;
+import com.arisux.airi.engine.ItemTypeLib.HookedItem;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

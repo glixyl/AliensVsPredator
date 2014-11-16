@@ -7,8 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.arisux.airi.lib.ItemStacksLib;
-import com.arisux.airi.lib.PlayerLib;
+import com.arisux.airi.engine.WorldEngine;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.EntityPlasma;
 
@@ -35,14 +34,14 @@ public class ItemPlasmaCaster extends Item
 	{
 		if (!world.isRemote)
 		{
-			if (entityplayer.capabilities.isCreativeMode || !entityplayer.capabilities.isCreativeMode && entityplayer.inventory.hasItemStack(ItemStacksLib.newStack(AliensVsPredator.INSTANCE.items.itemEnergy)))
+			if (entityplayer.capabilities.isCreativeMode || !entityplayer.capabilities.isCreativeMode && entityplayer.inventory.hasItemStack(WorldEngine.Entities.Players.Inventories.newStack(AliensVsPredator.instance.items.itemEnergy)))
 			{
 				world.spawnEntityInWorld(new EntityPlasma(world, entityplayer));
-				world.playSoundEffect(entityplayer.posX, entityplayer.posY, entityplayer.posZ, AliensVsPredator.INSTANCE.properties.SOUND_WEAPON_PLASMACASTER, 0.5F, 0.5F);
+				world.playSoundEffect(entityplayer.posX, entityplayer.posY, entityplayer.posZ, AliensVsPredator.properties().SOUND_WEAPON_PLASMACASTER, 0.5F, 0.5F);
 
 				if (!entityplayer.capabilities.isCreativeMode)
 				{
-					PlayerLib.consumeItem(entityplayer, AliensVsPredator.INSTANCE.items.itemEnergy);
+					WorldEngine.Entities.Players.Inventories.consumeItem(entityplayer, AliensVsPredator.instance.items.itemEnergy);
 				}
 			}
 		}

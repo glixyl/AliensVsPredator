@@ -1,6 +1,6 @@
 package com.arisux.avp.event.render;
 
-import static com.arisux.airi.lib.RenderLib.*;
+import static com.arisux.airi.engine.RenderEngine.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.util.ResourceLocation;
@@ -9,9 +9,9 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent.Pre;
 
 import org.lwjgl.input.Keyboard;
 
-import com.arisux.airi.lib.GuiTypeLib.GuiCustomButton;
-import com.arisux.airi.lib.PlayerLib;
-import com.arisux.airi.lib.interfaces.IActionPerformed;
+import com.arisux.airi.engine.GuiTypeLib.GuiCustomButton;
+import com.arisux.airi.engine.WorldEngine;
+import com.arisux.airi.lib.util.interfaces.IActionPerformed;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.enums.VisionMode;
 
@@ -20,7 +20,7 @@ import cpw.mods.fml.common.gameevent.TickEvent;
 
 public class VisionModeRenderEvent
 {
-	public static final ResourceLocation resOverlayCeltic = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_BLUR_CELTIC_HUD);
+	public static final ResourceLocation resOverlayCeltic = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_BLUR_CELTIC_HUD);
 	private Minecraft mc = Minecraft.getMinecraft();
 	private IActionPerformed actionSwitchVisionMode;
 	public VisionMode currentVisionMode = VisionMode.NORMAL;
@@ -41,7 +41,7 @@ public class VisionModeRenderEvent
 		{
 			if (event.type == RenderGameOverlayEvent.ElementType.HOTBAR && mc.gameSettings.thirdPersonView == 0)
 			{
-				if (PlayerLib.getHelmSlotItemStack(mc.thePlayer) != null && PlayerLib.getHelmSlotItemStack(mc.thePlayer).getItem() == AliensVsPredator.INSTANCE.items.helmTitanium)
+				if (WorldEngine.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer) != null && WorldEngine.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer).getItem() == AliensVsPredator.instance.items.helmTitanium)
 				{
 					this.currentVisionMode.render();
 
@@ -50,7 +50,7 @@ public class VisionModeRenderEvent
 
 					if (mc.currentScreen instanceof GuiChat)
 					{
-						buttonToggleVisionMode.tooltip = String.format("Click or Press '%s' to toggle.", Keyboard.getKeyName(AliensVsPredator.INSTANCE.keybinds.KEYBIND_VISION_MODE.getKeyCode()));
+						buttonToggleVisionMode.tooltip = String.format("Click or Press '%s' to toggle.", Keyboard.getKeyName(AliensVsPredator.instance.keybinds.KEYBIND_VISION_MODE.getKeyCode()));
 						buttonToggleVisionMode.xPosition = scaledDisplayResolution().getScaledWidth() - buttonToggleVisionMode.getButtonWidth() - 10;
 						buttonToggleVisionMode.yPosition = 10;
 						buttonToggleVisionMode.width = 70;
@@ -69,7 +69,7 @@ public class VisionModeRenderEvent
 	{
 		if (mc.thePlayer != null)
 		{
-			if (AliensVsPredator.INSTANCE.keybinds.KEYBIND_VISION_MODE.isPressed() && mc.inGameHasFocus && Keyboard.getEventKeyState())
+			if (AliensVsPredator.instance.keybinds.KEYBIND_VISION_MODE.isPressed() && mc.inGameHasFocus && Keyboard.getEventKeyState())
 			{
 				this.actionSwitchVisionMode.actionPerformed(null);
 			}

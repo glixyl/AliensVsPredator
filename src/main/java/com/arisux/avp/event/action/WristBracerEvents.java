@@ -17,9 +17,9 @@ public class WristBracerEvents
 	{
 		if (mc.thePlayer != null && mc.thePlayer.getCurrentEquippedItem() != null)
 		{
-			if (mc.thePlayer.getCurrentEquippedItem().getItem() == AliensVsPredator.INSTANCE.items.itemWristBlade && AliensVsPredator.INSTANCE.keybinds.KEYBIND_ITEM_ACTION.isPressed())
+			if (mc.thePlayer.getCurrentEquippedItem().getItem() == AliensVsPredator.instance.items.itemWristBlade && AliensVsPredator.instance.keybinds.KEYBIND_ITEM_ACTION.isPressed())
 			{
-				AliensVsPredator.INSTANCE.network.sendToServer(new PacketOpenWristbracerGUIServerUpdate());
+				AliensVsPredator.instance.network.sendToServer(new PacketOpenWristbracerGUIServerUpdate());
 			}
 		}
 	}

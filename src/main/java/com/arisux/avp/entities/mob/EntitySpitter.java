@@ -2,18 +2,8 @@ package com.arisux.avp.entities.mob;
 
 import java.util.Random;
 
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IRangedAttackMob;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIArrowAttack;
-import net.minecraft.entity.ai.EntityAIFleeSun;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILeapAtTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -25,7 +15,7 @@ import com.arisux.avp.entities.EntityAcidSpit;
 
 public class EntitySpitter extends EntityXenomorph implements IRangedAttackMob
 {
-	private ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_SPITTER);
+	private ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_SPITTER);
 
 	public EntitySpitter(World par1World)
 	{
@@ -57,6 +47,7 @@ public class EntitySpitter extends EntityXenomorph implements IRangedAttackMob
 
 	}
 
+	@Override
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
@@ -66,26 +57,31 @@ public class EntitySpitter extends EntityXenomorph implements IRangedAttackMob
 		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
 	}
 
+	@Override
 	protected boolean isAIEnabled()
 	{
 		return true;
 	}
 
+	@Override
 	protected String getHurtSound()
 	{
-		return AliensVsPredator.INSTANCE.properties.SOUND_SPITTER_HURT;
+		return AliensVsPredator.properties().SOUND_SPITTER_HURT;
 	}
 
+	@Override
 	protected String getLivingSound()
 	{
-		return AliensVsPredator.INSTANCE.properties.SOUND_SPITTER_LIVING;
+		return AliensVsPredator.properties().SOUND_SPITTER_LIVING;
 	}
 
+	@Override
 	protected String getDeathSound()
 	{
-		return AliensVsPredator.INSTANCE.properties.SOUND_SPITTER_DEATH;
+		return AliensVsPredator.properties().SOUND_SPITTER_DEATH;
 	}
 
+	@Override
 	public int getTotalArmorValue()
 	{
 		return 2;
@@ -96,14 +92,14 @@ public class EntitySpitter extends EntityXenomorph implements IRangedAttackMob
 	{
 		if (!par1EntityLivingBase.isDead)
 		{
-			this.getLookHelper().setLookPosition(par1EntityLivingBase.posX, par1EntityLivingBase.posY + (double) par1EntityLivingBase.getEyeHeight(), par1EntityLivingBase.posZ, 10.0F, (float) this.getVerticalFaceSpeed());
+			this.getLookHelper().setLookPosition(par1EntityLivingBase.posX, par1EntityLivingBase.posY + par1EntityLivingBase.getEyeHeight(), par1EntityLivingBase.posZ, 10.0F, this.getVerticalFaceSpeed());
 
 			if (this.canEntityBeSeen(par1EntityLivingBase))
 			{
 				int attackDamage = 2;
 
-				EntityAcidSpit entityacid = new EntityAcidSpit(this.worldObj, this, par1EntityLivingBase, 1.6F, (float) (14 - attackDamage * 4));
-				entityacid.setDamage((double) (f * 2.0F) + this.rand.nextGaussian() * 0.25D + (double) ((float) attackDamage * 0.11F));
+				EntityAcidSpit entityacid = new EntityAcidSpit(this.worldObj, this, par1EntityLivingBase, 1.6F, 14 - attackDamage * 4);
+				entityacid.setDamage(f * 2.0F + this.rand.nextGaussian() * 0.25D + attackDamage * 0.11F);
 				this.worldObj.spawnEntityInWorld(entityacid);
 			}
 		}
@@ -113,13 +109,13 @@ public class EntitySpitter extends EntityXenomorph implements IRangedAttackMob
 	protected void dropRareDrop(int par1)
 	{
 		if (new Random().nextInt(4) == 1)
-			this.entityDropItem(new ItemStack(AliensVsPredator.INSTANCE.items.helmXeno), 1);
+			this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.helmXeno), 1);
 		if (new Random().nextInt(4) == 1)
-			this.entityDropItem(new ItemStack(AliensVsPredator.INSTANCE.items.plateXeno), 1);
+			this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.plateXeno), 1);
 		if (new Random().nextInt(4) == 1)
-			this.entityDropItem(new ItemStack(AliensVsPredator.INSTANCE.items.legsXeno), 1);
+			this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.legsXeno), 1);
 		if (new Random().nextInt(4) == 1)
-			this.entityDropItem(new ItemStack(AliensVsPredator.INSTANCE.items.bootsXeno), 1);
+			this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.bootsXeno), 1);
 
 		super.dropRareDrop(par1);
 	}

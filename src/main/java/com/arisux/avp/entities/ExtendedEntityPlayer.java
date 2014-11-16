@@ -60,8 +60,8 @@ public class ExtendedEntityPlayer implements IExtendedEntityProperties
 		broadcastChannel = nbt.getString(ID_STRING_BROADCAST_CHANNEL);
 		broadcastRadius = nbt.getInteger(ID_INT_BROADCAST_RADIUS);
 
-		AliensVsPredator.INSTANCE.network.sendToAll(new PacketBroadcastRadiusClientUpdate(this.broadcastRadius, this.thePlayer.getCommandSenderName()));
-		AliensVsPredator.INSTANCE.network.sendToAll(new PacketChannelClientUpdate(this.broadcastChannel, this.thePlayer.getCommandSenderName()));
+		AliensVsPredator.instance.network.sendToAll(new PacketBroadcastRadiusClientUpdate(this.broadcastRadius, this.thePlayer.getCommandSenderName()));
+		AliensVsPredator.instance.network.sendToAll(new PacketChannelClientUpdate(this.broadcastChannel, this.thePlayer.getCommandSenderName()));
 	}
 
 	public int getImpregnatedTime()

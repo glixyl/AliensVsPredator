@@ -14,8 +14,8 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
-import com.arisux.airi.lib.BlockTypeLib.HookedBlockContainer;
-import com.arisux.airi.lib.WorldLib;
+import com.arisux.airi.engine.BlockTypeLib.HookedBlockContainer;
+import com.arisux.airi.engine.WorldEngine;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.TileEntityTurret;
 import com.arisux.avp.packets.server.PacketTurretAddTargetUpdate;
@@ -80,12 +80,12 @@ public class BlockTurret extends HookedBlockContainer
 				for (int i = 0; i < tile.getDangerousTargets().size(); i++)
 				{
 					if (tile.getDangerousTargets().get(i) != null)
-						AliensVsPredator.INSTANCE.network.sendToAll(new PacketTurretAddTargetUpdate(xCoord, yCoord, zCoord, EntityList.getEntityID(WorldLib.getEntityFromClass(worldObj, tile.getDangerousTargets().get(i)))));
+						AliensVsPredator.instance.network.sendToAll(new PacketTurretAddTargetUpdate(xCoord, yCoord, zCoord, EntityList.getEntityID(WorldEngine.Entities.constructEntity(worldObj, tile.getDangerousTargets().get(i)))));
 				}
 			}
 		}
 
-		FMLNetworkHandler.openGui(player, AliensVsPredator.INSTANCE, AliensVsPredator.INSTANCE.properties.GUI_TURRET, worldObj, xCoord, yCoord, zCoord);
+		FMLNetworkHandler.openGui(player, AliensVsPredator.instance, AliensVsPredator.properties().GUI_TURRET, worldObj, xCoord, yCoord, zCoord);
 
 		return true;
 	}
@@ -107,7 +107,7 @@ public class BlockTurret extends HookedBlockContainer
 
 					if (stack != null)
 					{
-						EntityItem entityitem = new EntityItem(worldObj, (double) posX, (double) posY, (double) posZ, stack);
+						EntityItem entityitem = new EntityItem(worldObj, posX, posY, posZ, stack);
 						entityitem.delayBeforeCanPickup = 10;
 						worldObj.spawnEntityInWorld(entityitem);
 					}
@@ -119,7 +119,7 @@ public class BlockTurret extends HookedBlockContainer
 
 					if (stack != null)
 					{
-						EntityItem entityitem = new EntityItem(worldObj, (double) posX, (double) posY, (double) posZ, stack);
+						EntityItem entityitem = new EntityItem(worldObj, posX, posY, posZ, stack);
 						entityitem.delayBeforeCanPickup = 10;
 						worldObj.spawnEntityInWorld(entityitem);
 					}

@@ -3,14 +3,7 @@ package com.arisux.avp.entities.mob;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILeapAtTarget;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
@@ -46,6 +39,7 @@ public class EntityChestburster extends EntitySpeciesAlien implements IMob
 		this.tasks.addTask(14, new EntityAISwimming(this));
 	}
 
+	@Override
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
@@ -55,6 +49,7 @@ public class EntityChestburster extends EntitySpeciesAlien implements IMob
 		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
 	}
 
+	@Override
 	protected void entityInit()
 	{
 		super.entityInit();
@@ -64,6 +59,7 @@ public class EntityChestburster extends EntitySpeciesAlien implements IMob
 	/**
 	 * Returns true if the newer Entity AI code should be run
 	 */
+	@Override
 	protected boolean isAIEnabled()
 	{
 		return true;
@@ -109,21 +105,25 @@ public class EntityChestburster extends EntitySpeciesAlien implements IMob
 		}
 	}
 
+	@Override
 	protected String getDeathSound()
 	{
-		return AliensVsPredator.INSTANCE.properties.SOUND_CHESTBURSTER_DEATH;
+		return AliensVsPredator.properties().SOUND_CHESTBURSTER_DEATH;
 	}
 
+	@Override
 	protected boolean canTriggerWalking()
 	{
 		return false;
 	}
 
+	@Override
 	protected boolean canDespawn()
 	{
 		return false;
 	}
 
+	@Override
 	public boolean isOnLadder()
 	{
 		return this.isCollidedHorizontally;
@@ -134,6 +134,7 @@ public class EntityChestburster extends EntitySpeciesAlien implements IMob
 		return this.isOnLadder() && this.motionY > 1.0099999997764826D;
 	}
 
+	@Override
 	protected void attackEntity(Entity entity, float f)
 	{
 		if (f > 2.0F && f < 6.0F && this.rand.nextInt(50) == 0)
@@ -143,8 +144,8 @@ public class EntityChestburster extends EntitySpeciesAlien implements IMob
 				double var4 = entity.posX - this.posX;
 				double var6 = entity.posZ - this.posZ;
 				float var8 = MathHelper.sqrt_double(var4 * var4 + var6 * var6);
-				this.motionX = var4 / (double) var8 * 0.5D * 0.800000011920929D + this.motionX * 0.20000000298023224D;
-				this.motionZ = var6 / (double) var8 * 0.5D * 0.800000011920929D + this.motionZ * 0.20000000298023224D;
+				this.motionX = var4 / var8 * 0.5D * 0.800000011920929D + this.motionX * 0.20000000298023224D;
+				this.motionZ = var6 / var8 * 0.5D * 0.800000011920929D + this.motionZ * 0.20000000298023224D;
 				this.motionY = 0.4000000059604645D;
 			}
 		} else
@@ -153,6 +154,7 @@ public class EntityChestburster extends EntitySpeciesAlien implements IMob
 		}
 	}
 
+	@Override
 	public boolean isPotionApplicable(PotionEffect par1PotionEffect)
 	{
 		return par1PotionEffect.getPotionID() == Potion.poison.id ? false : super.isPotionApplicable(par1PotionEffect);

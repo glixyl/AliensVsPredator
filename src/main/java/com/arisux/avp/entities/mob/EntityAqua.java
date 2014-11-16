@@ -2,17 +2,7 @@ package com.arisux.avp.entities.mob;
 
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIBreakDoor;
-import net.minecraft.entity.ai.EntityAIFleeSun;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILeapAtTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMoveThroughVillage;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -22,7 +12,7 @@ import com.arisux.avp.AliensVsPredator;
 
 public class EntityAqua extends EntityXenomorph
 {
-	private ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_AQUA_XENOMORPH);
+	private ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_AQUA_XENOMORPH);
 
 	public EntityAqua(World var1)
 	{
@@ -70,19 +60,19 @@ public class EntityAqua extends EntityXenomorph
 	@Override
 	protected String getHurtSound()
 	{
-		return AliensVsPredator.INSTANCE.properties.SOUND_ALIEN_HURT;
+		return AliensVsPredator.properties().SOUND_ALIEN_HURT;
 	}
 
 	@Override
 	protected String getLivingSound()
 	{
-		return AliensVsPredator.INSTANCE.properties.SOUND_ALIEN_LIVING;
+		return AliensVsPredator.properties().SOUND_ALIEN_LIVING;
 	}
 
 	@Override
 	protected String getDeathSound()
 	{
-		return AliensVsPredator.INSTANCE.properties.SOUND_ALIEN_DEATH;
+		return AliensVsPredator.properties().SOUND_ALIEN_DEATH;
 	}
 	@Override
 	public ResourceLocation getResource()

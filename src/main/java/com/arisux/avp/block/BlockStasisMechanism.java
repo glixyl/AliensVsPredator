@@ -12,8 +12,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import com.arisux.airi.lib.BlockTypeLib.HookedBlockContainer;
-import com.arisux.airi.lib.PlayerLib;
+import com.arisux.airi.engine.BlockTypeLib.HookedBlockContainer;
+import com.arisux.airi.engine.WorldEngine;
 import com.arisux.avp.entities.tile.TileEntityStasisMechanism;
 import com.arisux.avp.items.ItemEntitySummoner;
 
@@ -57,7 +57,7 @@ public class BlockStasisMechanism extends HookedBlockContainer
 
 				tile.stasisItemstack = new ItemStack(item, 1);
 				tile.stasisEntity = item.createNewEntity(worldObj);
-				PlayerLib.consumeItem(player, item);
+				WorldEngine.Entities.Players.Inventories.consumeItem(player, item);
 			}
 			else if (player.getCurrentEquippedItem() == null)
 			{
@@ -79,7 +79,7 @@ public class BlockStasisMechanism extends HookedBlockContainer
 
 		if (tile != null && tile.stasisItemstack != null)
 		{
-			EntityItem entityitem = new EntityItem(world, (double) posX, (double) posY, (double) posZ, tile.stasisItemstack);
+			EntityItem entityitem = new EntityItem(world, posX, posY, posZ, tile.stasisItemstack);
 			entityitem.delayBeforeCanPickup = 10;
 			world.spawnEntityInWorld(entityitem);
 		}

@@ -8,7 +8,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import com.arisux.airi.lib.RenderLib;
+import com.arisux.airi.engine.RenderEngine;
 import com.arisux.airi.lib.render.ItemRenderer3D;
 import com.arisux.avp.entities.mob.*;
 
@@ -20,7 +20,7 @@ public class RenderItemSummoner extends ItemRenderer3D
 
 	public RenderItemSummoner(Class<? extends Entity> entityClass, Class<? extends ModelBase> modelClass, ResourceLocation resourceLocation)
 	{
-		super(RenderLib.createModel(modelClass), resourceLocation);
+		super(RenderEngine.createModel(modelClass), resourceLocation);
 		this.resourceLocation = resourceLocation;
 		this.entityClass = entityClass;
 	}

@@ -2,17 +2,7 @@ package com.arisux.avp.entities.mob;
 
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIBreakDoor;
-import net.minecraft.entity.ai.EntityAIFleeSun;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILeapAtTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMoveThroughVillage;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,7 +16,7 @@ import com.arisux.avp.entities.EntityAcidPool;
 
 public class EntityPredalien extends EntityXenomorph implements IMob
 {
-	private ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_PREDALIEN);
+	private ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_PREDALIEN);
 
 	public EntityPredalien(World var1)
 	{
@@ -58,6 +48,7 @@ public class EntityPredalien extends EntityXenomorph implements IMob
 		this.targetTasks.addTask(6, new EntityAINearestAttackableTarget(this, EntityAgeable.class, 0, false));
 	}
 
+	@Override
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
@@ -67,34 +58,40 @@ public class EntityPredalien extends EntityXenomorph implements IMob
 		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
 	}
 
+	@Override
 	protected boolean canDespawn()
 	{
 		return false;
 	}
 
+	@Override
 	protected boolean isAIEnabled()
 	{
 		return true;
 	}
 
+	@Override
 	protected String getHurtSound()
 	{
-		return AliensVsPredator.INSTANCE.properties.SOUND_PRAETORIAN_HURT;
+		return AliensVsPredator.properties().SOUND_PRAETORIAN_HURT;
 	}
 
+	@Override
 	protected String getLivingSound()
 	{
-		return AliensVsPredator.INSTANCE.properties.SOUND_PRAETORIAN_LIVING;
+		return AliensVsPredator.properties().SOUND_PRAETORIAN_LIVING;
 	}
 
+	@Override
 	protected String getDeathSound()
 	{
-		return AliensVsPredator.INSTANCE.properties.SOUND_PRAETORIAN_DEATH;
+		return AliensVsPredator.properties().SOUND_PRAETORIAN_DEATH;
 	}
 
+	@Override
 	protected void dropRareDrop(int par1)
 	{
-		this.entityDropItem(new ItemStack(AliensVsPredator.INSTANCE.items.plateXeno), 1);
+		this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.plateXeno), 1);
 	}
 
 	@Override

@@ -5,8 +5,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
-import com.arisux.airi.lib.BlockLib.IconSet;
-import com.arisux.airi.lib.BlockTypeLib.HookedBlockMultiSided;
+import com.arisux.airi.engine.BlockLib.IconSet;
+import com.arisux.airi.engine.BlockTypeLib.HookedBlockMultiSided;
 import com.arisux.avp.entities.mob.EntityOvamorph;
 import com.arisux.avp.entities.mob.EntityQueen;
 

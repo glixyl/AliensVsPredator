@@ -4,13 +4,11 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 
-import com.arisux.airi.lib.PlayerLib;
+import com.arisux.airi.engine.WorldEngine;
 import com.arisux.avp.entities.ExtendedEntityPlayer;
 
 import cpw.mods.fml.common.network.ByteBufUtils;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import cpw.mods.fml.common.network.simpleimpl.*;
 
 public class PacketChannelClientUpdate implements IMessage, IMessageHandler<PacketChannelClientUpdate, PacketChannelClientUpdate>
 {
@@ -41,7 +39,7 @@ public class PacketChannelClientUpdate implements IMessage, IMessageHandler<Pack
 
 	@Override public PacketChannelClientUpdate onMessage(PacketChannelClientUpdate packet, MessageContext ctx)
 	{
-		EntityPlayer targetPlayer = PlayerLib.getPlayerForUsername(Minecraft.getMinecraft().thePlayer.worldObj, packet.username);
+		EntityPlayer targetPlayer = WorldEngine.Entities.Players.getPlayerForUsername(Minecraft.getMinecraft().thePlayer.worldObj, packet.username);
 		
 		if (targetPlayer != null)
 		{

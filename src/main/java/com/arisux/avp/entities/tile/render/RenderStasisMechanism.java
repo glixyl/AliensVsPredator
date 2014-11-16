@@ -1,6 +1,6 @@
 package com.arisux.avp.entities.tile.render;
 
-import static com.arisux.airi.lib.RenderLib.drawEntity;
+import static com.arisux.airi.engine.RenderEngine.drawEntity;
 import static org.lwjgl.opengl.GL11.*;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
@@ -17,7 +17,7 @@ public class RenderStasisMechanism extends TileEntitySpecialRenderer
 {
 	private ModelStasisMechanism model = new ModelStasisMechanism();
 	@SuppressWarnings("unused")
-	private static final ResourceLocation resource = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_WORKSTATION);
+	private static final ResourceLocation resource = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_WORKSTATION);
 
 	@Override
 	public void renderTileEntityAt(TileEntity var1, double posX, double posY, double posZ, float var8)

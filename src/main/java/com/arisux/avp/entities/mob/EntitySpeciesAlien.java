@@ -58,7 +58,7 @@ public class EntitySpeciesAlien extends EntityMob implements IMob
 		super.onKillEntity(par1EntityLivingBase);
 
 		this.killedEntities++;
-		AliensVsPredator.INSTANCE.network.sendToAll(new PacketKillCountClientUpdate(this.getKilledEntities(), Integer.valueOf(this.getEntityId())));
+		AliensVsPredator.instance.network.sendToAll(new PacketKillCountClientUpdate(this.getKilledEntities(), Integer.valueOf(this.getEntityId())));
 
 		if (!this.worldObj.isRemote && entityEvolveTo != null && minKillsToEvolve != 0 && this.killedEntities >= minKillsToEvolve)
 		{

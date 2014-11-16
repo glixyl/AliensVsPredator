@@ -28,17 +28,17 @@ public class ItemArmorXeno extends ItemArmor
 	{
 		if (isPlayerWearingXenoArmorSet((EntityPlayer) entity))
 		{
-			return AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_DRONE_ADVANCED;
+			return AliensVsPredator.properties().TEXTURE_PATH_DRONE_ADVANCED;
 		}
 
 		switch (slot)
 		{
 			case 0:
-				return AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_XENO1;
+				return AliensVsPredator.properties().TEXTURE_PATH_XENO1;
 			case 1:
-				return AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_XENO1;
+				return AliensVsPredator.properties().TEXTURE_PATH_XENO1;
 			default:
-				return AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_XENO2;
+				return AliensVsPredator.properties().TEXTURE_PATH_XENO2;
 		}
 	}
 
@@ -59,7 +59,7 @@ public class ItemArmorXeno extends ItemArmor
 		if (player != null)
 		{
 			ItemStack helm = player.inventory.armorItemInSlot(3), chest = player.inventory.armorItemInSlot(2), legs = player.inventory.armorItemInSlot(1), boots = player.inventory.armorItemInSlot(0);
-			return (helm != null && chest != null && legs != null && boots != null && (helm.getItem() == AliensVsPredator.INSTANCE.items.helmXeno && chest.getItem() == AliensVsPredator.INSTANCE.items.plateXeno && legs.getItem() == AliensVsPredator.INSTANCE.items.legsXeno && boots.getItem() == AliensVsPredator.INSTANCE.items.bootsXeno));
+			return (helm != null && chest != null && legs != null && boots != null && (helm.getItem() == AliensVsPredator.instance.items.helmXeno && chest.getItem() == AliensVsPredator.instance.items.plateXeno && legs.getItem() == AliensVsPredator.instance.items.legsXeno && boots.getItem() == AliensVsPredator.instance.items.bootsXeno));
 		}
 
 		return false;

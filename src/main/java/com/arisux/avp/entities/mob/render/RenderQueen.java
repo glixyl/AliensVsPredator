@@ -11,7 +11,7 @@ import com.arisux.avp.entities.mob.model.ModelQueen;
 
 public class RenderQueen extends RenderXenomorph
 {
-	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_XENOQUEEN);
+	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_XENOQUEEN);
 
 	public RenderQueen(ModelQueen modelxenoqueen, float f)
 	{

@@ -8,7 +8,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import com.arisux.airi.lib.RenderLib;
+import com.arisux.airi.engine.RenderEngine;
 import com.arisux.avp.entities.EntityBulletTile;
 
 public class RenderBulletTile extends Render
@@ -23,7 +23,7 @@ public class RenderBulletTile extends Render
 			GL11.glTranslatef((float) d, (float) d1, (float) d2);
 			float scale = 0.05F;
 			GL11.glScalef(scale, scale, scale);
-			RenderLib.drawString("<BULLET>", 0, 0, 0xFFFFFFFF);
+			RenderEngine.drawString("<BULLET>", 0, 0, 0xFFFFFFFF);
 		}
 		GL11.glPopMatrix();
 	}

@@ -12,16 +12,17 @@ import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-import com.arisux.airi.lib.RenderLib;
+import com.arisux.airi.engine.RenderEngine;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.items.model.ModelWristBlade;
 
 public class RenderWristBlade implements IItemRenderer
 {
 	protected ModelWristBlade model = new ModelWristBlade();
-	protected static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_WRISTBLADES);
+	protected static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_WRISTBLADES);
 	private float rotation;
 	
+	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type)
 	{
 		switch (type)
@@ -40,11 +41,13 @@ public class RenderWristBlade implements IItemRenderer
 		}
 	}
 
+	@Override
 	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper)
 	{
 		return false;
 	}
 
+	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data)
 	{
 		this.rotation = rotation > 360F ? rotation = 0F : (rotation = rotation + 0.6F);
@@ -109,7 +112,7 @@ public class RenderWristBlade implements IItemRenderer
 			case INVENTORY:
 				GL11.glPushMatrix();
 				{
-					RenderLib.bindTexture(resourceLocation);
+					RenderEngine.bindTexture(resourceLocation);
 					GL11.glDisable(GL11.GL_CULL_FACE);
 					GL11.glEnable(GL11.GL_BLEND);
 					GL11.glTranslatef(8.5F, 0F, 0F);

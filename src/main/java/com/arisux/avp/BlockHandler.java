@@ -1,29 +1,22 @@
 package com.arisux.avp;
 
-import static com.arisux.airi.lib.RegistryLib.registerBlock;
-
-import java.util.ArrayList;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 
-import com.arisux.airi.lib.BlockLib.IconSet;
-import com.arisux.airi.lib.BlockTypeLib.GhostBlock;
-import com.arisux.airi.lib.BlockTypeLib.HookedBlock;
-import com.arisux.airi.lib.BlockTypeLib.HookedBlockMultiSided;
-import com.arisux.airi.lib.BlockTypeLib.HookedBlockSlab;
-import com.arisux.airi.lib.BlockTypeLib.HookedBlockStairs;
-import com.arisux.airi.lib.RegistryLib.IBHandler;
-import com.arisux.airi.lib.interfaces.IInitializable;
+import com.arisux.airi.engine.BlockLib.IconSet;
+import com.arisux.airi.engine.BlockTypeLib.GhostBlock;
+import com.arisux.airi.engine.BlockTypeLib.HookedBlock;
+import com.arisux.airi.engine.BlockTypeLib.HookedBlockMultiSided;
+import com.arisux.airi.engine.BlockTypeLib.HookedBlockSlab;
+import com.arisux.airi.engine.BlockTypeLib.HookedBlockStairs;
+import com.arisux.airi.engine.ModEngine.IBHandler;
+import com.arisux.airi.lib.util.interfaces.IInitializable;
 import com.arisux.avp.block.*;
 
-import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
 
-public class BlockHandler implements IInitializable, IBHandler
+public class BlockHandler extends IBHandler implements IInitializable
 {
-	private ArrayList<Object> blockList = new ArrayList<Object>();
-
 	public Block terrainHiveResin = (new BlockHiveResin(Material.plants)).setHardness(0.1F).setResistance(2.0F),
 		terrainHiveResinDead = (new HookedBlock(Material.ground)).setHardness(0.1F).setResistance(2.0F),
 		blockOvamorph = (new HookedBlock(Material.rock)),
@@ -55,7 +48,8 @@ public class BlockHandler implements IInitializable, IBHandler
 		blockAssembler = (new BlockAssembler(Material.iron).setHardness(1.5F).setResistance(10.0F)),
 		blockFloorGrill = ((HookedBlock) (new HookedBlock(Material.iron)).setHardness(3.5F).setResistance(2.0F)).setOpaque(false),
 		blockWall = (new HookedBlock(Material.iron)).setHardness(3.5F).setResistance(2.0F),
-		blockWallW = (new HookedBlockMultiSided(new IconSet(getDomain() + "wall_top", getDomain() + "wall_top", getDomain() + "wall_top", getDomain() + "wall_side", getDomain() + "wall_side", getDomain() + "wall_side", getDomain() + "wall_side"), Material.iron)).setHardness(3.5F).setResistance(2.0F),
+		blockWallAngled = (new HookedBlock(Material.iron).setRenderType(AliensVsPredator.instance.renderer.renderTypeAngled)).setHardness(3.5F).setResistance(2.0F),
+		blockWallW = (new HookedBlockMultiSided(new IconSet(AliensVsPredator.properties().getDomain() + "wall_top", AliensVsPredator.properties().getDomain() + "wall_top", AliensVsPredator.properties().getDomain() + "wall_top", AliensVsPredator.properties().getDomain() + "wall_side", AliensVsPredator.properties().getDomain() + "wall_side", AliensVsPredator.properties().getDomain() + "wall_side", AliensVsPredator.properties().getDomain() + "wall_side"), Material.iron)).setHardness(3.5F).setResistance(2.0F),
 		blockCeiling = (new HookedBlock(Material.iron)).setHardness(3.5F).setResistance(2.0F).setLightOpacity(100),
 		blockCeiliingVent = (new HookedBlock(Material.iron)).setHardness(3.5F).setResistance(2.0F),
 		blockCeilingGrill = ((HookedBlock) (new HookedBlock(Material.iron)).setHardness(3.5F).setResistance(2.0F)).setOpaque(false),
@@ -96,96 +90,85 @@ public class BlockHandler implements IInitializable, IBHandler
 		blockNetworkCable = (new BlockNetworkCable(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockNetworkLight = (new BlockNetworkLight(Material.iron)).setHardness(3.2F).setResistance(2.6F);
 
-	public void initialize()
+	public BlockHandler()
 	{
-		registerBlock(terrainUniDirt, "unidirt", this);
-		registerBlock(terrainUniStone, "unistone", this);
-		registerBlock(terrainUniSand, "unisand", this);
-		registerBlock(terrainUniGravel, "unigravel", this);
-		registerBlock(terrainStalagmite, "stalagmite", this);
-		registerBlock(oreSilicon, "oresilicon", this);
-		registerBlock(oreCopper, "orecopper", this);
-		registerBlock(oreLithium, "orelithium", this);
-		registerBlock(oreBauxite, "orebauxite", this);
-		registerBlock(blockCeiling, "ceilingpanel", this);
-		registerBlock(blockCeilingFan, "ceilingfan", this);
-		registerBlock(blockCeiliingVent, "ceilingvent", this);
-		registerBlock(blockCeilingGrill, "ceilinggrill", this);
-		registerBlock(blockCeilingGrillStairs, "ceilinggrillstairs", blockCeilingGrill, this);
-		registerBlock(blockCeilingGrillSlab, "ceilinggrillslab", blockCeilingGrill, this);
-		registerBlock(blockFloorGrill, "floorgrill", this);
-		registerBlock(blockGrillStairs, "floorgrillstairs", blockFloorGrill, this);
-		registerBlock(blockFloorGrillSlab, "floorgrillslab", blockFloorGrill, this);
-		registerBlock(blockWall, "industrialwall", this);
-		registerBlock(blockWallW, "industrialwall2", blockWall, this);
-		registerBlock(blockWallStairs, "industrialwallstairs", blockWall, this);
-		registerBlock(blockWallSlab, "industrialslab", blockWall, this);
-		registerBlock(blockWallVent, "industrialvent", this);
-		registerBlock(blockIronBricks, "industrialbricks", this);
-		registerBlock(blockIronBricksStairs, "industrialbrickstairs", blockIronBricks, this);
-		registerBlock(blockIronBricksSlab, "industrialbrickslab", blockIronBricks, this);
-		registerBlock(blockIndustrialGlass, "industrialglass", this);
-		registerBlock(blockIndustrialGlassStairs, "industrialglassstairs", blockIndustrialGlass, this);
-		registerBlock(blockIndustrialGlassSlab, "industrialglassslab", blockIndustrialGlass, this);
-		registerBlock(blockVerticalMetal, "metalpanel1", this);
-		registerBlock(blockColumnMetal1, "metalpanel2", this);
-		registerBlock(blockColumnMetal2, "metalpanel3", this);
-		registerBlock(terrainHiveResin, "hiveresin", this);
-		registerBlock(terrainHiveResinDead, "deadhiveresin", "avp:hiveresin", this);
-		registerBlock(blockHiveNode, "hivenode", "avp:hiveresin", this);
-		registerBlock(blockShipMetal1, "shippanel", this);
-		registerBlock(blockShipMetal2, "shippannelyautja", this);
-		registerBlock(blockOvamorph, "tileovamorphdesign", this);
-		registerBlock(blockFacehuggerRelic, "tilefacehuggerdesign", this);
-		registerBlock(blockAlienRelic, "tilealiendesign", this);
-		registerBlock(blockShipDecor1, "shipwallbase", this);
-		registerBlock(blockShipDecor2, "shipsupportpillar", this);
-		registerBlock(blockShipDecor3, "shipdecor1", this);
-		registerBlock(blockShipDecor5, "shipdecor2", this);
-		registerBlock(blockShipDecor6, "shipdecor3", this);
-		registerBlock(blockShipDecor4, "shipbrick", this);
-		registerBlock(blockSacrificialSpawner, "spawner", this);
-		registerBlock(blockSpawnerCreative, "spawnerc", blockSacrificialSpawner, this);
-		registerBlock(blockRelicTile, "templebricksingle", blockSacrificialSpawner, this);// TODO: bottom of spawner
-		registerBlock(blockTempleBrick, "templebrick", this);
-		registerBlock(blockTempleTile, "templetile", this);
-		registerBlock(blockTempleWall1, "templewallbase", this);
-		registerBlock(blockTempleWall2, "templefloor", this);
-		registerBlock(blockSkulls, "skulls", this);
-		registerBlock(blockPortal, "lv223portal", this);
-		registerBlock(blockDerelict1, "engineershipwall", this);
-		registerBlock(blockDerelict2, "engineershipfloor", this);
-		registerBlock(blockDerelict3, "engineershiprock", this);
-		registerBlock(blockDerelict4, "engineershipbrick", this);
-		registerBlock(blockDerelict5, "engineershipwall2", this);
-		registerBlock(blockAssembler, "assembler", this, false);
-		registerBlock(blockTurret, "turret", this, true);
-		registerBlock(blockWorkstation, "terminal", this, true);
-		registerBlock(blockStasisMechanism, "stasismechanism", this, true);
-		registerBlock(blockGenerator, "generator", this, true);
-		registerBlock(blockPowerline, "powerline", this, true);
-		registerBlock(blockNetworkCable, "networkCable", this, true);
-		registerBlock(blockNetworkLight, "networkLight", this, true);
-		registerBlock(blockBlastdoor, "blastdoor", this, true);
-		registerBlock(ghostBlockBlastdoor, "blastdoorghost", this, false);
-		registerBlock(blockWorklight, "worklight", this, true);
+		super(AliensVsPredator.instance);
 	}
-
+	
 	@Override
-	public String getDomain()
+	public void initialize(FMLInitializationEvent event)
 	{
-		return Properties.DOMAIN;
-	}
-
-	@Override
-	public CreativeTabs getCreativeTab()
-	{
-		return AliensVsPredator.INSTANCE.tab;
-	}
-
-	@Override
-	public ArrayList<Object> getHandledObjects()
-	{
-		return blockList;
+		registerBlock(terrainUniDirt, "unidirt");
+		registerBlock(terrainUniStone, "unistone");
+		registerBlock(terrainUniSand, "unisand");
+		registerBlock(terrainUniGravel, "unigravel");
+		registerBlock(terrainStalagmite, "stalagmite");
+		registerBlock(oreSilicon, "oresilicon");
+		registerBlock(oreCopper, "orecopper");
+		registerBlock(oreLithium, "orelithium");
+		registerBlock(oreBauxite, "orebauxite");
+		registerBlock(blockCeiling, "ceilingpanel");
+		registerBlock(blockCeilingFan, "ceilingfan");
+		registerBlock(blockCeiliingVent, "ceilingvent");
+		registerBlock(blockCeilingGrill, "ceilinggrill");
+		registerBlock(blockCeilingGrillStairs, "ceilinggrillstairs", blockCeilingGrill);
+		registerBlock(blockCeilingGrillSlab, "ceilinggrillslab", blockCeilingGrill);
+		registerBlock(blockFloorGrill, "floorgrill");
+		registerBlock(blockGrillStairs, "floorgrillstairs", blockFloorGrill);
+		registerBlock(blockFloorGrillSlab, "floorgrillslab", blockFloorGrill);
+		registerBlock(blockWall, "industrialwall");
+		registerBlock(blockWallAngled, "industrialwallangled", blockWall);
+		registerBlock(blockWallW, "industrialwall2", blockWall);
+		registerBlock(blockWallStairs, "industrialwallstairs", blockWall);
+		registerBlock(blockWallSlab, "industrialslab", blockWall);
+		registerBlock(blockWallVent, "industrialvent");
+		registerBlock(blockIronBricks, "industrialbricks");
+		registerBlock(blockIronBricksStairs, "industrialbrickstairs", blockIronBricks);
+		registerBlock(blockIronBricksSlab, "industrialbrickslab", blockIronBricks);
+		registerBlock(blockIndustrialGlass, "industrialglass");
+		registerBlock(blockIndustrialGlassStairs, "industrialglassstairs", blockIndustrialGlass);
+		registerBlock(blockIndustrialGlassSlab, "industrialglassslab", blockIndustrialGlass);
+		registerBlock(blockVerticalMetal, "metalpanel1");
+		registerBlock(blockColumnMetal1, "metalpanel2");
+		registerBlock(blockColumnMetal2, "metalpanel3");
+		registerBlock(terrainHiveResin, "hiveresin");
+		registerBlock(terrainHiveResinDead, "deadhiveresin", "avp:hiveresin");
+		registerBlock(blockHiveNode, "hivenode", "avp:hiveresin");
+		registerBlock(blockShipMetal1, "shippanel");
+		registerBlock(blockShipMetal2, "shippannelyautja");
+		registerBlock(blockOvamorph, "tileovamorphdesign");
+		registerBlock(blockFacehuggerRelic, "tilefacehuggerdesign");
+		registerBlock(blockAlienRelic, "tilealiendesign");
+		registerBlock(blockShipDecor1, "shipwallbase");
+		registerBlock(blockShipDecor2, "shipsupportpillar");
+		registerBlock(blockShipDecor3, "shipdecor1");
+		registerBlock(blockShipDecor5, "shipdecor2");
+		registerBlock(blockShipDecor6, "shipdecor3");
+		registerBlock(blockShipDecor4, "shipbrick");
+		registerBlock(blockSacrificialSpawner, "spawner");
+		registerBlock(blockSpawnerCreative, "spawnerc", blockSacrificialSpawner);
+		registerBlock(blockRelicTile, "templebricksingle", blockSacrificialSpawner);
+		registerBlock(blockTempleBrick, "templebrick");
+		registerBlock(blockTempleTile, "templetile");
+		registerBlock(blockTempleWall1, "templewallbase");
+		registerBlock(blockTempleWall2, "templefloor");
+		registerBlock(blockSkulls, "skulls");
+		registerBlock(blockPortal, "lv223portal");
+		registerBlock(blockDerelict1, "engineershipwall");
+		registerBlock(blockDerelict2, "engineershipfloor");
+		registerBlock(blockDerelict3, "engineershiprock");
+		registerBlock(blockDerelict4, "engineershipbrick");
+		registerBlock(blockDerelict5, "engineershipwall2");
+		registerBlock(blockAssembler, "assembler", true);
+		registerBlock(blockTurret, "turret", true);
+		registerBlock(blockWorkstation, "terminal", true);
+		registerBlock(blockStasisMechanism, "stasismechanism", true);
+		registerBlock(blockGenerator, "generator", true);
+		registerBlock(blockPowerline, "powerline", true);
+		registerBlock(blockNetworkCable, "networkCable", true);
+		registerBlock(blockNetworkLight, "networkLight", true);
+		registerBlock(blockBlastdoor, "blastdoor", true);
+		registerBlock(ghostBlockBlastdoor, "blastdoorghost", false);
+		registerBlock(blockWorklight, "worklight", true);
 	}
 }

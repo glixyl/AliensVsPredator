@@ -9,10 +9,10 @@ import net.minecraft.client.resources.I18n;
 import com.arisux.airi.AIRI;
 import com.arisux.airi.api.window.IWindow;
 import com.arisux.airi.api.window.Window;
-import com.arisux.airi.lib.GuiTypeLib.GuiCustomButton;
-import com.arisux.airi.lib.GuiTypeLib.GuiCustomTextbox;
-import com.arisux.airi.lib.NetworkLib;
-import com.arisux.airi.lib.interfaces.IActionPerformed;
+import com.arisux.airi.engine.GuiTypeLib.GuiCustomButton;
+import com.arisux.airi.engine.GuiTypeLib.GuiCustomTextbox;
+import com.arisux.airi.lib.util.NetworkUtil;
+import com.arisux.airi.lib.util.interfaces.IActionPerformed;
 import com.arisux.avp.AliensVsPredator;
 
 public class WindowSubmitFeedback extends Window implements IWindow
@@ -24,8 +24,8 @@ public class WindowSubmitFeedback extends Window implements IWindow
 
 	public WindowSubmitFeedback()
 	{
-		super("BETA_PROGRAM_AVP", I18n.format(AliensVsPredator.INSTANCE.properties.LANG_BETA_FEEDBACK_SUBMIT_TITLE), 100, 100, 110, 40);
-		this.buttonSubmit = new GuiCustomButton(0, xPos + 100, yPos + 100, 180, 20, AliensVsPredator.INSTANCE.properties.LANG_BETA_FEEDBACK_SUBMIT_BUTTON, null);
+		super("BETA_PROGRAM_AVP", I18n.format(AliensVsPredator.properties().LANG_BETA_FEEDBACK_SUBMIT_TITLE), 100, 100, 110, 40);
+		this.buttonSubmit = new GuiCustomButton(0, xPos + 100, yPos + 100, 180, 20, AliensVsPredator.properties().LANG_BETA_FEEDBACK_SUBMIT_BUTTON, null);
 		this.textbox = new GuiCustomTextbox(0, 0, 0, 0);
 		this.width = 300;
 		this.height = 80;
@@ -52,8 +52,8 @@ public class WindowSubmitFeedback extends Window implements IWindow
 				{
 					if (!textbox.getText().equals("") && textbox.getText().length() > 12)
 					{
-						String request = String.format(AliensVsPredator.INSTANCE.properties.URL_SUBMIT_FEEDBACK, Minecraft.getMinecraft().session.getUsername(), Minecraft.getMinecraft().session.getPlayerID(), URLEncoder.encode(textbox.getText(), "UTF-8"));
-						feedback = NetworkLib.getURLContents(request);
+						String request = String.format(AliensVsPredator.properties().URL_SUBMIT_FEEDBACK, Minecraft.getMinecraft().session.getUsername(), Minecraft.getMinecraft().session.getPlayerID(), URLEncoder.encode(textbox.getText(), "UTF-8"));
+						feedback = NetworkUtil.getURLContents(request);
 						AIRI.logger.info("Submitted feedback: %s", feedback);
 					}
 					submitted = true;
@@ -79,8 +79,8 @@ public class WindowSubmitFeedback extends Window implements IWindow
 
 			textbox.drawTextBox();
 			textbox.handleInput();
-			this.setTitle(I18n.format(AliensVsPredator.INSTANCE.properties.LANG_BETA_FEEDBACK_CHARSLEFT_TITLE, charsLeft), false);
-			this.setDefaultText(AliensVsPredator.INSTANCE.properties.LANG_BETA_FEEDBACK_INFO, true);
+			this.setTitle(I18n.format(AliensVsPredator.properties().LANG_BETA_FEEDBACK_CHARSLEFT_TITLE, charsLeft), false);
+			this.setDefaultText(AliensVsPredator.properties().LANG_BETA_FEEDBACK_INFO, true);
 		}
 		else
 		{
@@ -88,18 +88,18 @@ public class WindowSubmitFeedback extends Window implements IWindow
 			{
 				String[] stringReturn = feedback.split(":feedback_split:");
 				
-				setTitle(AliensVsPredator.INSTANCE.properties.LANG_BETA_FEEDBACK_SUBMIT_THANKS_TITLE, true);
-				setDefaultText(String.format(I18n.format(AliensVsPredator.INSTANCE.properties.LANG_BETA_FEEDBACK_SUBMIT_THANKS), stringReturn[0], stringReturn[1], stringReturn[2]));
+				setTitle(AliensVsPredator.properties().LANG_BETA_FEEDBACK_SUBMIT_THANKS_TITLE, true);
+				setDefaultText(String.format(I18n.format(AliensVsPredator.properties().LANG_BETA_FEEDBACK_SUBMIT_THANKS), stringReturn[0], stringReturn[1], stringReturn[2]));
 			}
 			else if (textbox.getText().equals("") && textbox.getText().length() < 12)
 			{
-				setTitle(AliensVsPredator.INSTANCE.properties.LANG_BETA_FEEDBACK_NOTIFY_SPAM_PREVENTION_TITLE, true);
-				setDefaultText(AliensVsPredator.INSTANCE.properties.LANG_BETA_FEEDBACK_NOTIFY_SPAM_PREVENTION, true);
+				setTitle(AliensVsPredator.properties().LANG_BETA_FEEDBACK_NOTIFY_SPAM_PREVENTION_TITLE, true);
+				setDefaultText(AliensVsPredator.properties().LANG_BETA_FEEDBACK_NOTIFY_SPAM_PREVENTION, true);
 			}
 			else
 			{
-				setTitle(AliensVsPredator.INSTANCE.properties.LANG_BETA_FEEDBACK_SUBMIT_ERROR_TITLE, true);
-				setDefaultText(AliensVsPredator.INSTANCE.properties.LANG_BETA_FEEDBACK_SUBMIT_ERROR, true);
+				setTitle(AliensVsPredator.properties().LANG_BETA_FEEDBACK_SUBMIT_ERROR_TITLE, true);
+				setDefaultText(AliensVsPredator.properties().LANG_BETA_FEEDBACK_SUBMIT_ERROR, true);
 			}
 		}
 	}

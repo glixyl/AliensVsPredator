@@ -1,17 +1,11 @@
 package com.arisux.avp.entities.tile.render;
 
-import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
-import static org.lwjgl.opengl.GL11.glDisable;
-import static org.lwjgl.opengl.GL11.glPopMatrix;
-import static org.lwjgl.opengl.GL11.glPushMatrix;
-import static org.lwjgl.opengl.GL11.glRotatef;
-import static org.lwjgl.opengl.GL11.glScalef;
-import static org.lwjgl.opengl.GL11.glTranslated;
+import static org.lwjgl.opengl.GL11.*;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
-import com.arisux.airi.lib.RenderLib;
+import com.arisux.airi.engine.RenderEngine;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.TileEntityWorklight;
 import com.arisux.avp.entities.tile.model.ModelWorklight;
@@ -19,7 +13,7 @@ import com.arisux.avp.entities.tile.model.ModelWorklight;
 public class RenderWorklight extends TileEntitySpecialRenderer
 {
 	private ModelWorklight model = new ModelWorklight();
-	private static final ResourceLocation resource = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_WORKLIGHT);
+	private static final ResourceLocation resource = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_WORKLIGHT);
 
 	@Override
 	public void renderTileEntityAt(TileEntity var1, double posX, double posY, double posZ, float var8)
@@ -37,9 +31,9 @@ public class RenderWorklight extends TileEntitySpecialRenderer
 			
 			float scale = 0.02F;
 			glScalef(scale, scale, scale);
-			RenderLib.glDisableLight();
-			RenderLib.drawString(tile.getVoltage() + "V", -20, 30, 0xFF00FF00);
-			RenderLib.glEnableLight();
+			RenderEngine.glDisableLight();
+			RenderEngine.drawString(tile.getVoltage() + "V", -20, 30, 0xFF00FF00);
+			RenderEngine.glEnableLight();
 		}
 		glPopMatrix();
 	}

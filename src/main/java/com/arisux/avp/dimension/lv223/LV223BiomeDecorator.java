@@ -31,8 +31,8 @@ public class LV223BiomeDecorator extends BiomeDecorator
 		this.biomeGenBase = biomeGenBase;
 		this.lakeGeneration = new WorldGenLakes(Blocks.water);
 		this.caveWaterGen = new WorldGenLiquids(Blocks.flowing_water);
-		this.MDirtGen = new LV223GenMinable(AliensVsPredator.INSTANCE.blocks.terrainUniDirt, 32);
-		this.StalagmiteGen = new WorldGenFlowers(AliensVsPredator.INSTANCE.blocks.terrainStalagmite);
+		this.MDirtGen = new LV223GenMinable(AliensVsPredator.instance.blocks.terrainUniDirt, 32);
+		this.StalagmiteGen = new WorldGenFlowers(AliensVsPredator.instance.blocks.terrainStalagmite);
 		this.LandSpikeGen = new LV223GenLandSpike(true);
 		this.lakesPerChunk = 0;
 		this.treesPerChunk = 0;

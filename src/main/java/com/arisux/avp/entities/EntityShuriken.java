@@ -370,7 +370,7 @@ public class EntityShuriken extends Entity
 		{
 			if (this.inGround && this.doesArrowBelongToPlayer && this.arrowShake <= 0)
 			{
-				if (entityplayer.inventory.addItemStackToInventory(new ItemStack(AliensVsPredator.INSTANCE.items.itemShuriken, 1)))
+				if (entityplayer.inventory.addItemStackToInventory(new ItemStack(AliensVsPredator.instance.items.itemShuriken, 1)))
 				{
 					this.worldObj.playSoundAtEntity(this, "random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
 					entityplayer.onItemPickup(this, 1);

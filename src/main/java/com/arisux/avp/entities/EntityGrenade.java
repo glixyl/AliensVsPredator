@@ -11,8 +11,8 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
-import com.arisux.airi.lib.WorldLib;
-import com.arisux.airi.lib.BlockLib.CoordData;
+import com.arisux.airi.engine.WorldEngine;
+import com.arisux.airi.engine.BlockLib.CoordData;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntityXenomorph;
 
@@ -80,7 +80,7 @@ public class EntityGrenade extends EntityThrowable
 	{
 		if (!this.worldObj.isRemote)
 		{
-			Explosion explosion = WorldLib.createExplosion(null, worldObj, new CoordData(this), 2F, isFlaming, true, AliensVsPredator.INSTANCE.settings.areExplosionsEnabled());
+			Explosion explosion = WorldEngine.createExplosion(null, worldObj, new CoordData(this), 2F, isFlaming, true, AliensVsPredator.instance.settings.areExplosionsEnabled());
 
 			List<Entity> list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(8, 8, 8));
 

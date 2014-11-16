@@ -8,7 +8,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
-import com.arisux.airi.lib.BlockTypeLib.HookedBlock;
+import com.arisux.airi.engine.BlockTypeLib.HookedBlock;
 import com.arisux.avp.AliensVsPredator;
 
 public class BlockStalagmite extends HookedBlock
@@ -29,7 +29,7 @@ public class BlockStalagmite extends HookedBlock
 
 	protected boolean canThisPlantGrowOnThisBlockID(Block var1)
 	{
-		return var1 == AliensVsPredator.INSTANCE.blocks.terrainUniDirt || var1 == AliensVsPredator.INSTANCE.blocks.terrainUniStone || var1 == Blocks.nether_brick || var1 == Blocks.netherrack || var1 == Blocks.farmland;
+		return var1 == AliensVsPredator.instance.blocks.terrainUniDirt || var1 == AliensVsPredator.instance.blocks.terrainUniStone || var1 == Blocks.nether_brick || var1 == Blocks.netherrack || var1 == Blocks.farmland;
 	}
 
 	@Override

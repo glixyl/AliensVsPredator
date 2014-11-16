@@ -19,15 +19,15 @@ public class ItemArmorPressureSuit extends ItemArmor
 		switch (slot)
 		{
 			case 0:
-				return AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_PRESSURESUIT1;
+				return AliensVsPredator.properties().TEXTURE_PATH_PRESSURESUIT1;
 			case 1:
-				return AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_PRESSURESUIT1;
+				return AliensVsPredator.properties().TEXTURE_PATH_PRESSURESUIT1;
 			case 2:
-				return AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_PRESSURESUIT2;
+				return AliensVsPredator.properties().TEXTURE_PATH_PRESSURESUIT2;
 			case 3:
-				return AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_PRESSURESUIT2;
+				return AliensVsPredator.properties().TEXTURE_PATH_PRESSURESUIT2;
 			default:
-				return AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_PRESSURESUIT2;
+				return AliensVsPredator.properties().TEXTURE_PATH_PRESSURESUIT2;
 		}
 	}
 }

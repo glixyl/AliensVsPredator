@@ -4,7 +4,7 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 
-import com.arisux.airi.lib.WorldLib;
+import com.arisux.airi.engine.WorldEngine;
 
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
@@ -50,7 +50,7 @@ public class PacketSpawnEntityServerUpdate implements IMessage, IMessageHandler<
 	{
 		if (ctx.getServerHandler().playerEntity != null && ctx.getServerHandler().playerEntity.worldObj != null)
 		{
-			Entity entity = WorldLib.getEntityFromClass(ctx.getServerHandler().playerEntity.worldObj, EntityList.getClassFromID(message.globalID));
+			Entity entity = WorldEngine.Entities.constructEntity(ctx.getServerHandler().playerEntity.worldObj, EntityList.getClassFromID(message.globalID));
 
 			if (entity != null)
 			{

@@ -12,7 +12,7 @@ import com.arisux.avp.entities.tile.model.ModelBlastdoor;
 public class RenderBlastdoor extends TileEntitySpecialRenderer
 {
 	private ModelBlastdoor model = new ModelBlastdoor();
-	private static final ResourceLocation resource = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_BLASTDOOR);
+	private static final ResourceLocation resource = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_BLASTDOOR);
 
 	@Override
 	public void renderTileEntityAt(TileEntity var1, double posX, double posY, double posZ, float var8)

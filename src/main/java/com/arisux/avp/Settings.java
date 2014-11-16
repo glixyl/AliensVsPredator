@@ -15,9 +15,9 @@ public class Settings
 	private Configuration config;
 
 	public HashMap<String, Integer> spawnList = new HashMap<String, Integer>(), entityList = new HashMap<String, Integer>();
-	public String CATEGORY_OTHER = "ETC", CATEGORY_IDS = "IDS", CATEGORY_SPAWNING = "SPAWNING";
+	public String CATEGORY_OTHER = "ETC", CATEGORY_IDS = "IDS";
 
-	public boolean explosions, hiveTick, usesVanillaSpawnSystem, hiveSpawnsMobs, updaterEnabled, debugToolsEnabled;
+	public boolean explosions, hiveTick, hiveSpawnsMobs, updaterEnabled, debugToolsEnabled;
 	public String updateStringUrl;
 
 	@EventHandler
@@ -35,7 +35,6 @@ public class Settings
 			config.addCustomCategoryComment(CATEGORY_IDS, "WARNING: ONLY MODIFY THIS IF YOU KNOW WHAT YOU ARE DOING, YOU CAN BREAK WORLD SAVES AND/OR SERVERS.");
 			config.addCustomCategoryComment(CATEGORY_OTHER, "Other mod configuration options");
 			config.addCustomCategoryComment(CATEGORY_OTHER, "WARNING: WHEN THE VANILLA SPAWN SYSTEM IS IN USE, THE SPAWN RATES ARE NOT CONFIGURABLE VIA CONFIG!");
-			config.addCustomCategoryComment(CATEGORY_SPAWNING, "NOTICE: THESE VALUES ONLY APPLY WHEN THE VANILLA SPAWN SYSTEM IS DISABLED.");
 			config.load();
 
 			entityList.put("DRONE", config.get(CATEGORY_IDS, "DRONE", 102).getInt());
@@ -64,21 +63,11 @@ public class Settings
 			entityList.put("SHURIKEN", config.get(CATEGORY_IDS, "SHURIKEN", 1520).getInt());
 			entityList.put("TURRETENTITY", config.get(CATEGORY_IDS, "TURRETENTITY", 1521).getInt());
 
-			spawnList.put("MARINE", config.get(CATEGORY_SPAWNING, "MARINE", 3).getInt());
-			spawnList.put("YAUTJA", config.get(CATEGORY_SPAWNING, "YAUTJA", 3).getInt());
-			spawnList.put("DRONE", config.get(CATEGORY_SPAWNING, "DRONE", 20).getInt());
-			spawnList.put("WARRIOR", config.get(CATEGORY_SPAWNING, "WARRIOR", 15).getInt());
-			spawnList.put("SPITTER", config.get(CATEGORY_SPAWNING, "SPITTER", 3).getInt());
-			spawnList.put("CRUSHER", config.get(CATEGORY_SPAWNING, "CRUSHER", 4).getInt());
-			spawnList.put("FACEHUGGER", config.get(CATEGORY_SPAWNING, "FACEHUGGER", 10).getInt());
-			spawnList.put("CHESTBURSTER", config.get(CATEGORY_SPAWNING, "CHESTBURSTER", 4).getInt());
-
 			explosions = config.get(CATEGORY_OTHER, "EXPLOSION_BLOCK_DAMAGE", true).getBoolean(true);
 			hiveTick = config.get(CATEGORY_OTHER, "HIVE_TICK", true, "Toggle spreading of hive resin.").getBoolean(true);
 			hiveSpawnsMobs = config.get(CATEGORY_OTHER, "HIVE_SPAWNS_MOBS", true, "Toggle spawning of xenomorphs from hive nodes").getBoolean(true);
-			usesVanillaSpawnSystem = config.get(CATEGORY_OTHER, "USE_VANILLA_SPAWN_SYSTEM", false, "Toggle the type of spawn system to use. AIRI's spawn system is much more efficient than vanilla's.").getBoolean(true);
 			updaterEnabled = config.get(CATEGORY_OTHER, "UPDATER_ENABLED", true, "Toggle the mod's updater.").getBoolean(true);
-			updateStringUrl = config.get(CATEGORY_OTHER, "UPDATE_STRING_URL", AliensVsPredator.INSTANCE.properties.URL_LATEST, "The URL that the updater uses to check for mod updates. If it changes in the future, this can be changed to the new URL to fix any problems.").getString();
+			updateStringUrl = config.get(CATEGORY_OTHER, "UPDATE_STRING_URL", AliensVsPredator.properties().getUpdateStringUrl(), "The URL that the updater uses to check for mod updates. If it changes in the future, this can be changed to the new URL to fix any problems.").getString();
 			debugToolsEnabled = config.get(CATEGORY_OTHER, "DEBUG_TOOLS", false, "Toggle the debugging tools.").getBoolean(false);
 		} finally
 		{
@@ -99,10 +88,5 @@ public class Settings
 	public boolean doesHiveSpawnMobs()
 	{
 		return this.hiveSpawnsMobs;
-	}
-
-	public boolean doesModUseVanillaSpawnSystem()
-	{
-		return this.usesVanillaSpawnSystem;
 	}
 }

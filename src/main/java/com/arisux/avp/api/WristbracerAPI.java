@@ -5,7 +5,7 @@ import java.util.HashMap;
 import net.minecraft.client.Minecraft;
 
 import com.arisux.airi.AIRI;
-import com.arisux.airi.lib.RenderLib;
+import com.arisux.airi.engine.RenderEngine;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.gui.GuiWristbracer;
 
@@ -29,8 +29,8 @@ public class WristbracerAPI
 			@Override
 			public void actionPerformed(String combonation, Object... args)
 			{
-				RenderLib.drawString(AliensVsPredator.INSTANCE.properties.LANG_WRISTBRACER_DETMODENOTIFY, 10, 10, 0xFFFF0000);
-				RenderLib.drawString(AliensVsPredator.INSTANCE.properties.LANG_WRISTBRACER_ITEMSLOSTWARNING, 10, 20, 0xFFFF0000);
+				RenderEngine.drawString(AliensVsPredator.properties().LANG_WRISTBRACER_DETMODENOTIFY, 10, 10, 0xFFFF0000);
+				RenderEngine.drawString(AliensVsPredator.properties().LANG_WRISTBRACER_ITEMSLOSTWARNING, 10, 20, 0xFFFF0000);
 			}
 		});
 

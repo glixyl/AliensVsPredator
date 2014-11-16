@@ -22,7 +22,7 @@ public class SniperRenderEvent
 		{
 			if (mc.gameSettings.thirdPersonView == 0 && mc.thePlayer.getHeldItem() != null)
 			{
-				if (mc.thePlayer.getHeldItem().getItem() == AliensVsPredator.INSTANCE.items.itemSniper)
+				if (mc.thePlayer.getHeldItem().getItem() == AliensVsPredator.instance.items.itemSniper)
 				{
 					if (Mouse.isButtonDown(0) && mc.inGameHasFocus)
 					{

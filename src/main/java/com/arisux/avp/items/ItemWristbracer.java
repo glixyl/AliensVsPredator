@@ -18,7 +18,7 @@ public class ItemWristbracer extends ItemSword
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity)
 	{
-		player.playSound(AliensVsPredator.INSTANCE.properties.SOUND_WEAPON_WRISTBLADES, 1F, 1F);
+		player.playSound(AliensVsPredator.properties().SOUND_WEAPON_WRISTBLADES, 1F, 1F);
 		return super.onLeftClickEntity(stack, player, entity);
 	}
 

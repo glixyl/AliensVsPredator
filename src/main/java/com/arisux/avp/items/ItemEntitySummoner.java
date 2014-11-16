@@ -8,9 +8,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-import com.arisux.airi.lib.ItemTypeLib.HookedItem;
-import com.arisux.airi.lib.PlayerLib;
-import com.arisux.airi.lib.WorldLib;
+import com.arisux.airi.engine.ItemTypeLib.HookedItem;
+import com.arisux.airi.engine.WorldEngine;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.packets.server.PacketSpawnEntityServerUpdate;
 
@@ -30,12 +29,12 @@ public class ItemEntitySummoner extends HookedItem
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
 	{
 		Entity entity = createNewEntity(par2World);
-		PlayerLib.consumeItem(par3EntityPlayer, this);
+		WorldEngine.Entities.Players.Inventories.consumeItem(par3EntityPlayer, this);
 
 		if (par2World.isRemote && entity != null)
 		{
 			MovingObjectPosition ray = par3EntityPlayer.rayTrace(50D, 1F);
-			AliensVsPredator.INSTANCE.network.sendToServer(new PacketSpawnEntityServerUpdate(ray.blockX, ray.blockY, ray.blockZ, EntityList.getEntityID(entity)));
+			AliensVsPredator.instance.network.sendToServer(new PacketSpawnEntityServerUpdate(ray.blockX, ray.blockY, ray.blockZ, EntityList.getEntityID(entity)));
 		}
 
 		return super.onItemRightClick(par1ItemStack, par2World, par3EntityPlayer);
@@ -48,7 +47,7 @@ public class ItemEntitySummoner extends HookedItem
 	
 	public Entity createNewEntity(World worldObj)
 	{
-		return WorldLib.getEntityFromClass(worldObj, c);
+		return WorldEngine.Entities.constructEntity(worldObj, c);
 	}
 	
 	@Override

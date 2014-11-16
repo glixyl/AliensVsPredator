@@ -17,7 +17,7 @@ public class TileEntityHiveNode extends TileEntity
 	@Override
 	public void updateEntity()
 	{
-		if (this.tick-- <= 1 && AliensVsPredator.INSTANCE.settings.doesHiveSpawnMobs())
+		if (this.tick-- <= 1 && AliensVsPredator.instance.settings.doesHiveSpawnMobs())
 		{
 			double d = (double) this.xCoord;
 			double d1 = (double) this.yCoord;

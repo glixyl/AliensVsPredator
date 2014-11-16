@@ -7,8 +7,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import com.arisux.airi.lib.BlockTypeLib.HookedBlockContainer;
-import com.arisux.avp.entities.tile.PoweredTileEntity;
+import com.arisux.airi.engine.BlockTypeLib.HookedBlockContainer;
 import com.arisux.avp.entities.tile.TileEntityPowerline;
 
 public class BlockPowerline extends HookedBlockContainer

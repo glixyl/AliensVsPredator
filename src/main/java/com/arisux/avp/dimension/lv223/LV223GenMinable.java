@@ -65,7 +65,7 @@ public class LV223GenMinable extends WorldGenerator
 					{
 						double var45 = (var44 + 0.5D - var24) / (var28 / 2.0D);
 
-						if ((var39 * var39 + var42 * var42 + var45 * var45 >= 1.0D) || (var1.getBlock(var38, var41, var44) != AliensVsPredator.INSTANCE.blocks.terrainUniStone))
+						if ((var39 * var39 + var42 * var42 + var45 * var45 >= 1.0D) || (var1.getBlock(var38, var41, var44) != AliensVsPredator.instance.blocks.terrainUniStone))
 							continue;
 						var1.setBlock(var38, var41, var44, this.minableBlockId);
 					}

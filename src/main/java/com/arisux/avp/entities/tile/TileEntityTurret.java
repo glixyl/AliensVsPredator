@@ -21,8 +21,8 @@ import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.Constants.NBT;
 
-import com.arisux.airi.lib.BlockLib.CoordData;
-import com.arisux.airi.lib.WorldLib;
+import com.arisux.airi.engine.BlockLib.CoordData;
+import com.arisux.airi.engine.WorldEngine;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.EntityBullet;
 import com.arisux.avp.entities.EntityTurret;
@@ -72,7 +72,7 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 		this.focusYaw = 0F;
 		this.ammoDisplayEnabled = false;
 		this.maxFiringTimeout = 60;
-		this.itemAmmo = AliensVsPredator.INSTANCE.items.itemAmmoSMG;
+		this.itemAmmo = AliensVsPredator.instance.items.itemAmmoSMG;
 	}
 
 	public Entity getEntity()
@@ -105,9 +105,9 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 
 	public Entity findNewTarget()
 	{
-		Entity newTarget = WorldLib.getRandomEntityInCoordsRange(this.worldObj, EntityLiving.class, new CoordData(this), range, 12);
+		Entity newTarget = WorldEngine.Entities.getRandomEntityInCoordsRange(this.worldObj, EntityLiving.class, new CoordData(this), range, 12);
 
-		if (newTarget != null && this.getEntity().getDistanceToEntity(newTarget) < range && !newTarget.isDead && WorldLib.canEntityBeSeenBy(newTarget, this.getEntity()) && !isSafe(newTarget))
+		if (newTarget != null && this.getEntity().getDistanceToEntity(newTarget) < range && !newTarget.isDead && WorldEngine.Entities.canEntityBeSeenBy(newTarget, this.getEntity()) && !isSafe(newTarget))
 		{
 			return targetEntity = newTarget;
 		}
@@ -124,13 +124,13 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 
 		if (targetEntity != null)
 		{
-			if (this.getEntity().getDistanceToEntity(targetEntity) < range && !targetEntity.isDead && WorldLib.canEntityBeSeenBy(targetEntity, this.getEntity()))
+			if (this.getEntity().getDistanceToEntity(targetEntity) < range && !targetEntity.isDead && WorldEngine.Entities.canEntityBeSeenBy(targetEntity, this.getEntity()))
 			{
 				turnTurretToPoint(new CoordData(targetEntity.posX, targetEntity.posY, targetEntity.posZ));
 
 				if (worldObj.getWorldInfo().getWorldTime() % fireRate == 0L && this.getEntity().rotationYaw != 0)
 				{
-					if (curAmmo-- > 0 && WorldLib.canEntityBeSeenBy(targetEntity, this.getEntity()))
+					if (curAmmo-- > 0 && WorldEngine.Entities.canEntityBeSeenBy(targetEntity, this.getEntity()))
 					{
 						this.fire();
 					}
@@ -151,7 +151,7 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 
 			if (newTarget != null)
 			{
-				AliensVsPredator.INSTANCE.network.sendToServer(new PacketTurretTargetUpdate(xCoord, yCoord, zCoord, newTarget.getEntityId()));
+				AliensVsPredator.instance.network.sendToServer(new PacketTurretTargetUpdate(xCoord, yCoord, zCoord, newTarget.getEntityId()));
 			}
 		}
 	}
@@ -225,7 +225,7 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 	{
 		if (this.worldObj != null && this.inventoryAmmo != null)
 		{
-			ArrayList<EntityItem> entityItemList = (ArrayList<EntityItem>) WorldLib.getEntitiesInCoordsRange(worldObj, EntityItem.class, new CoordData(this), 1);
+			ArrayList<EntityItem> entityItemList = (ArrayList<EntityItem>) WorldEngine.Entities.getEntitiesInCoordsRange(worldObj, EntityItem.class, new CoordData(this), 1);
 
 			for (EntityItem entityItem : entityItemList)
 			{
@@ -284,7 +284,7 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 		entity.setLocationAndAngles(entity.posX, entity.posY + 0.0, entity.posZ, entity.rotationYaw, entity.rotationPitch);
 		this.worldObj.spawnEntityInWorld(entity);
 		this.worldObj.spawnParticle("largesmoke", xCoord, yCoord, zCoord, 1, 1, 1);
-		this.getEntity().playSound(AliensVsPredator.INSTANCE.properties.SOUND_WEAPON_M56SG, 1F, 1F);
+		this.getEntity().playSound(AliensVsPredator.properties().SOUND_WEAPON_M56SG, 1F, 1F);
 	}
 
 	public void turnTurretToPoint(CoordData coord)
@@ -294,7 +294,7 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 		double d0 = coord.posX - getEntity().posX;
 		double d1 = coord.posY - getEntity().posY;
 		double d2 = coord.posZ - getEntity().posZ;
-		double d3 = (double) MathHelper.sqrt_double(d0 * d0 + d2 * d2);
+		double d3 = MathHelper.sqrt_double(d0 * d0 + d2 * d2);
 
 		float f = (float) (Math.atan2(d2, d0) * 180.0D / Math.PI) - 90.0F;
 		float f1 = (float) (-(Math.atan2(d1, d3) * 180.0D / Math.PI));
@@ -389,14 +389,13 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 		for (int i = 0; i < 3; i++)
 		{
 			ItemStack pciSlot = this.inventoryExpansion.getStackInSlot(i);
-			System.out.println("pls yeh " + pciSlot);
 			
-			if (pciSlot != null && pciSlot.getItem() == AliensVsPredator.INSTANCE.items.itemProcessor)
+			if (pciSlot != null && pciSlot.getItem() == AliensVsPredator.instance.items.itemProcessor)
 			{
 				runCyclesUpgrade += 1 * pciSlot.stackSize;
 			}
 
-			if (pciSlot != null && pciSlot.getItem() == AliensVsPredator.INSTANCE.items.itemLedDisplay)
+			if (pciSlot != null && pciSlot.getItem() == AliensVsPredator.instance.items.itemLedDisplay)
 			{
 				this.setAmmoDisplayEnabled(true);
 			}
@@ -451,10 +450,10 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 
 		for (Class<? extends Entity> c : this.getDangerousTargets())
 		{
-			entityIDs.add(String.valueOf(EntityList.getEntityID(WorldLib.getEntityFromClass(worldObj, c))));
+			entityIDs.add(String.valueOf(EntityList.getEntityID(WorldEngine.Entities.constructEntity(worldObj, c))));
 		}
 
-		nbt.setTag("Targets", WorldLib.newStringNBTList(entityIDs));
+		nbt.setTag("Targets", WorldEngine.NBT.newStringNBTList(entityIDs));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -487,7 +486,7 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 			builder.append(id + "-");
 		}
 
-		AliensVsPredator.INSTANCE.network.sendToAll(new PacketTurretInit(this.xCoord, this.yCoord, this.zCoord, builder.toString()));
+		AliensVsPredator.instance.network.sendToAll(new PacketTurretInit(this.xCoord, this.yCoord, this.zCoord, builder.toString()));
 	}
 
 	private void saveInventoryToNBT(NBTTagCompound nbt, IInventory inventory)
@@ -737,7 +736,7 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 			}
 		}
 
-		AliensVsPredator.INSTANCE.network.sendToAll(new PacketTurretInit(xCoord, yCoord, zCoord, builder.toString()));
+		AliensVsPredator.instance.network.sendToAll(new PacketTurretInit(xCoord, yCoord, zCoord, builder.toString()));
 	}
 
 	@Override
@@ -754,10 +753,10 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 
 				for (Class<? extends Entity> c : this.getDangerousTargets())
 				{
-					entityIDs.add(String.valueOf(EntityList.getEntityID(WorldLib.getEntityFromClass(worldObj, c))));
+					entityIDs.add(String.valueOf(EntityList.getEntityID(WorldEngine.Entities.constructEntity(worldObj, c))));
 				}
 
-				nbt.setTag("Targets", WorldLib.newStringNBTList(entityIDs));
+				nbt.setTag("Targets", WorldEngine.NBT.newStringNBTList(entityIDs));
 
 				devicePort.setTagCompound(nbt);
 				devicePort.setStackDisplayName("NBT Drive - " + this.getEntity().getUniqueID());

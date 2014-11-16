@@ -8,20 +8,20 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import com.arisux.airi.lib.RenderLib;
+import com.arisux.airi.engine.RenderEngine;
 import com.arisux.avp.AliensVsPredator;
 
 public class MotionTrackerDisplay
 {
-	public static final ResourceLocation resourceBackground = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_MOTIONTRACKER_BG);
-	public static final ResourceLocation resourceForeground = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_MOTIONTRACKER_FG);
-	public static final ResourceLocation resourcePing = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_MOTIONTRACKER_PING);
-	public static final ResourceLocation resourceSweep6 = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_MOTIONTRACKER_S6);
-	public static final ResourceLocation resourceSweep5 = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_MOTIONTRACKER_S5);
-	public static final ResourceLocation resourceSweep4 = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_MOTIONTRACKER_S4);
-	public static final ResourceLocation resourceSweep3 = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_MOTIONTRACKER_S3);
-	public static final ResourceLocation resourceSweep2 = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_MOTIONTRACKER_S2);
-	public static final ResourceLocation resourceSweep1 = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_MOTIONTRACKER_S1);
+	public static final ResourceLocation resourceBackground = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_MOTIONTRACKER_BG);
+	public static final ResourceLocation resourceForeground = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_MOTIONTRACKER_FG);
+	public static final ResourceLocation resourcePing = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_MOTIONTRACKER_PING);
+	public static final ResourceLocation resourceSweep6 = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_MOTIONTRACKER_S6);
+	public static final ResourceLocation resourceSweep5 = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_MOTIONTRACKER_S5);
+	public static final ResourceLocation resourceSweep4 = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_MOTIONTRACKER_S4);
+	public static final ResourceLocation resourceSweep3 = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_MOTIONTRACKER_S3);
+	public static final ResourceLocation resourceSweep2 = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_MOTIONTRACKER_S2);
+	public static final ResourceLocation resourceSweep1 = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_MOTIONTRACKER_S1);
 	private ArrayList<Float> contactsAngle = new ArrayList<Float>();
 	private ArrayList<Double> contactsDistance = new ArrayList<Double>();
 	private String displayString;
@@ -57,7 +57,7 @@ public class MotionTrackerDisplay
 		GL11.glTranslatef(64F, 0F, 0F);
 		this.drawPings(x, y);
 		GL11.glDisable(GL11.GL_BLEND);
-		RenderLib.drawString(displayString, x - 9, y + 64, 0xFF005599, false);
+		RenderEngine.drawString(displayString, x - 9, y + 64, 0xFF005599, false);
 	}
 
 	private void drawPings(int x, int y)
@@ -88,9 +88,9 @@ public class MotionTrackerDisplay
 					GL11.glTranslated(0.0D, hypot, 0.0D);
 					GL11.glTranslatef(-32.0F, -37.0F, 0.0F);
 					GL11.glTranslated(0.0D, -hypot, 0.0D);
-					RenderLib.bindTexture(resourcePing);
-					RenderLib.glAntiAlias2D();
-					RenderLib.drawQuad(x * 2, y * 2, 128, 128);
+					RenderEngine.bindTexture(resourcePing);
+					RenderEngine.glAntiAlias2D();
+					RenderEngine.drawQuad(x * 2, y * 2, 128, 128);
 				}
 				GL11.glPopMatrix();
 			}
@@ -110,23 +110,23 @@ public class MotionTrackerDisplay
 			GL11.glTranslatef(0.5F, 0.5F, 0.0F);
 			GL11.glRotatef(-this.direction, 0.0F, 0.0F, 1.0F);
 			GL11.glTranslatef(-0.5F, -0.5F, 0.0F);
-			RenderLib.bindTexture(resourceBackground);
-			RenderLib.glAntiAlias2D();
-			RenderLib.drawQuad(x, y, 128, 76, 64, 64);
+			RenderEngine.bindTexture(resourceBackground);
+			RenderEngine.glAntiAlias2D();
+			RenderEngine.drawQuad(x, y, 128, 76, 64, 64);
 
 			if (resource != null && shouldPing)
 			{
-				RenderLib.bindTexture(resource);
-				RenderLib.glAntiAlias2D();
-				RenderLib.drawQuad(x, y, 128, 76, 64, 64);
+				RenderEngine.bindTexture(resource);
+				RenderEngine.glAntiAlias2D();
+				RenderEngine.drawQuad(x, y, 128, 76, 64, 64);
 			}
 		}
 		GL11.glPopMatrix();
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 
-		RenderLib.bindTexture(resourceForeground);
-		RenderLib.glAntiAlias2D();
-		RenderLib.drawQuad(x, y, 128, 128, 64, 64);
+		RenderEngine.bindTexture(resourceForeground);
+		RenderEngine.glAntiAlias2D();
+		RenderEngine.drawQuad(x, y, 128, 128, 64, 64);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -139,7 +139,7 @@ public class MotionTrackerDisplay
 		else if (this.shouldPing)
 		{
 			this.shouldPing = false;
-			this.mc.thePlayer.playSound(AliensVsPredator.INSTANCE.properties.SOUND_MOTIONTRACKER_PING, 1F, 1F);
+			this.mc.thePlayer.playSound(AliensVsPredator.properties().SOUND_MOTIONTRACKER_PING, 1F, 1F);
 		}
 
 		if (pingTime != 0)
@@ -179,7 +179,7 @@ public class MotionTrackerDisplay
 
 			if (this.pingCount > 0)
 			{
-				this.mc.thePlayer.playSound(AliensVsPredator.INSTANCE.properties.SOUND_MOTIONTRACKER_PONG, 1F, this.pitch[this.minDistance]);
+				this.mc.thePlayer.playSound(AliensVsPredator.properties().SOUND_MOTIONTRACKER_PONG, 1F, this.pitch[this.minDistance]);
 			}
 		}
 	}

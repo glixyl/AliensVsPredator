@@ -11,14 +11,14 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import com.arisux.airi.AIRI;
-import com.arisux.airi.lib.WorldLib;
-import com.arisux.airi.lib.BlockLib.CoordData;
+import com.arisux.airi.engine.BlockLib.CoordData;
+import com.arisux.airi.engine.WorldEngine;
 import com.arisux.avp.AliensVsPredator;
 
 public class EntityDrone extends EntityXenomorph
 {
-	private static final ResourceLocation texBasic = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_DRONE_BASIC);
-	private static final ResourceLocation texAdv = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_DRONE_ADVANCED);
+	private static final ResourceLocation texBasic = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_DRONE_BASIC);
+	private static final ResourceLocation texAdv = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_DRONE_ADVANCED);
 	public int mobType;
 	public EntityQueen targetQueen;
 
@@ -80,13 +80,13 @@ public class EntityDrone extends EntityXenomorph
 	protected void dropRareDrop(int par1)
 	{
 		if (new Random().nextInt(4) == 1)
-			this.entityDropItem(new ItemStack(AliensVsPredator.INSTANCE.items.helmXeno), 1);
+			this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.helmXeno), 1);
 		if (new Random().nextInt(4) == 1)
-			this.entityDropItem(new ItemStack(AliensVsPredator.INSTANCE.items.plateXeno), 1);
+			this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.plateXeno), 1);
 		if (new Random().nextInt(4) == 1)
-			this.entityDropItem(new ItemStack(AliensVsPredator.INSTANCE.items.legsXeno), 1);
+			this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.legsXeno), 1);
 		if (new Random().nextInt(4) == 1)
-			this.entityDropItem(new ItemStack(AliensVsPredator.INSTANCE.items.bootsXeno), 1);
+			this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.bootsXeno), 1);
 
 		super.dropRareDrop(par1);
 	}
@@ -94,52 +94,64 @@ public class EntityDrone extends EntityXenomorph
 	@Override
 	protected String getHurtSound()
 	{
-		return AliensVsPredator.INSTANCE.properties.SOUND_ALIEN_HURT;
+		return AliensVsPredator.properties().SOUND_ALIEN_HURT;
 	}
 
 	@Override
 	protected String getLivingSound()
 	{
-		return AliensVsPredator.INSTANCE.properties.SOUND_ALIEN_LIVING;
+		return AliensVsPredator.properties().SOUND_ALIEN_LIVING;
 	}
 
 	@Override
 	protected String getDeathSound()
 	{
-		return AliensVsPredator.INSTANCE.properties.SOUND_ALIEN_DEATH;
+		return AliensVsPredator.properties().SOUND_ALIEN_DEATH;
 	}
 
 	@Override
-	public void onUpdate() {
+	public void onUpdate()
+	{
 		super.onUpdate();
 
-		if(this.targetQueen != null && !this.targetQueen.isDead) {
+		if (this.targetQueen != null && !this.targetQueen.isDead)
+		{
 			this.pathToQueen(this.targetQueen);
-		} else {
+		}
+		else
+		{
 			this.targetQueen = findQueen();
 		}
 
 	}
 
-	public EntityQueen findQueen() {
+	public EntityQueen findQueen()
+	{
 		EntityQueen queen;
-		Entity ent = WorldLib.getEntityInCoordsRange(this.worldObj, EntityQueen.class, new CoordData(this), 50);
-		if(ent instanceof EntityQueen) {
+		Entity ent = WorldEngine.Entities.getEntityInCoordsRange(this.worldObj, EntityQueen.class, new CoordData(this), 50);
+		if (ent instanceof EntityQueen)
+		{
 			queen = (EntityQueen) ent;
-			AIRI.logger.info("Queen found at " + queen.posX +", "+ queen.posY + ", "+ queen.posZ);
-		} else {
+			AIRI.logger.info("Queen found at " + queen.posX + ", " + queen.posY + ", " + queen.posZ);
+		}
+		else
+		{
 			queen = null;
 		}
 		return queen;
 	}
 
-	public void pathToQueen(EntityQueen q) {
-		if(!q.isDead) {
+	public void pathToQueen(EntityQueen q)
+	{
+		if (!q.isDead)
+		{
 			this.getNavigator().tryMoveToEntityLiving(q, this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue() * 2.5D);
-		} else {
+		}
+		else
+		{
 			this.targetQueen = null;
 		}
-		//this.getNavigator().tryMoveToXYZ(q.posX, q.posY, q.posZ, 0.6);
-		AIRI.logger.info("Pathing to queen at " + q.posX +", "+ q.posY + ", "+ q.posZ);
+		// this.getNavigator().tryMoveToXYZ(q.posX, q.posY, q.posZ, 0.6);
+		AIRI.logger.info("Pathing to queen at " + q.posX + ", " + q.posY + ", " + q.posZ);
 	}
 }

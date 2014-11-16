@@ -4,15 +4,7 @@ import java.util.Random;
 
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIBreakDoor;
-import net.minecraft.entity.ai.EntityAIFleeSun;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILeapAtTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,7 +16,7 @@ import com.arisux.avp.AliensVsPredator;
 
 public class EntityWarrior extends EntityXenomorph implements IMob
 {
-	private ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_WARRIOR);
+	private ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_WARRIOR);
 
 	public EntityWarrior(World var1)
 	{
@@ -51,6 +43,7 @@ public class EntityWarrior extends EntityXenomorph implements IMob
 		this.setEvolveTo(EntityPraetorian.class, 32);
 	}
 
+	@Override
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
@@ -64,35 +57,39 @@ public class EntityWarrior extends EntityXenomorph implements IMob
 	protected void dropRareDrop(int par1)
 	{
 		if (new Random().nextInt(4) == 1)
-			this.entityDropItem(new ItemStack(AliensVsPredator.INSTANCE.items.helmXeno), 1);
+			this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.helmXeno), 1);
 		if (new Random().nextInt(4) == 1)
-			this.entityDropItem(new ItemStack(AliensVsPredator.INSTANCE.items.plateXeno), 1);
+			this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.plateXeno), 1);
 		if (new Random().nextInt(4) == 1)
-			this.entityDropItem(new ItemStack(AliensVsPredator.INSTANCE.items.legsXeno), 1);
+			this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.legsXeno), 1);
 		if (new Random().nextInt(4) == 1)
-			this.entityDropItem(new ItemStack(AliensVsPredator.INSTANCE.items.bootsXeno), 1);
+			this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.bootsXeno), 1);
 
 		super.dropRareDrop(par1);
 	}
 
+	@Override
 	protected boolean isAIEnabled()
 	{
 		return true;
 	}
 
+	@Override
 	protected String getHurtSound()
 	{
-		return AliensVsPredator.INSTANCE.properties.SOUND_WARRIOR_HURT;
+		return AliensVsPredator.properties().SOUND_WARRIOR_HURT;
 	}
 
+	@Override
 	protected String getLivingSound()
 	{
-		return AliensVsPredator.INSTANCE.properties.SOUND_WARRIOR_LIVING;
+		return AliensVsPredator.properties().SOUND_WARRIOR_LIVING;
 	}
 
+	@Override
 	protected String getDeathSound()
 	{
-		return AliensVsPredator.INSTANCE.properties.SOUND_WARRIOR_DEATH;
+		return AliensVsPredator.properties().SOUND_WARRIOR_DEATH;
 	}
 
 	@Override

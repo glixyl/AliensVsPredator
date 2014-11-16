@@ -89,10 +89,10 @@ public class BlockPortalLV223 extends BlockBreakable
 			if (var6.timeUntilPortal > 0)
 			{
 				var6.timeUntilPortal = 10;
-			} else if (var6.dimension != AliensVsPredator.INSTANCE.properties.DIMENSION_ID_LV223)
+			} else if (var6.dimension != AliensVsPredator.properties().DIMENSION_ID_LV223)
 			{
 				var6.timeUntilPortal = 10;
-				var6.mcServer.getConfigurationManager().transferPlayerToDimension(var6, AliensVsPredator.INSTANCE.properties.DIMENSION_ID_LV223, new LV223Teleporter(var7.worldServerForDimension(AliensVsPredator.INSTANCE.properties.DIMENSION_ID_LV223)));
+				var6.mcServer.getConfigurationManager().transferPlayerToDimension(var6, AliensVsPredator.properties().DIMENSION_ID_LV223, new LV223Teleporter(var7.worldServerForDimension(AliensVsPredator.properties().DIMENSION_ID_LV223)));
 			} else
 			{
 				var6.timeUntilPortal = 10;

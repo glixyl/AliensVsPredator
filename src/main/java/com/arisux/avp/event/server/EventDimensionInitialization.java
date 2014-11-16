@@ -22,11 +22,11 @@ public class EventDimensionInitialization
 		if (FMLCommonHandler.instance() != null && FMLCommonHandler.instance().getMinecraftServerInstance() != null)
 		{
 			MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
-			WorldServer worldServer = server.worldServerForDimension(AliensVsPredator.INSTANCE.properties.DIMENSION_ID_LV223);
+			WorldServer worldServer = server.worldServerForDimension(AliensVsPredator.properties().DIMENSION_ID_LV223);
 
 			if (worldServer != null && worldServer instanceof WorldServer && this.initializeDimension)
 			{
-				AliensVsPredator.INSTANCE.dimensions.initialWorldChunkLoad(worldServer);
+				AliensVsPredator.instance.dimensions.initialWorldChunkLoad(worldServer);
 				this.initializeDimension = false;
 			}
 		}

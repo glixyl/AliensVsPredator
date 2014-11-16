@@ -1,17 +1,7 @@
 package com.arisux.avp.entities.mob;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILeapAtTarget;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
@@ -98,8 +88,8 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 		double var1 = leapTarget.posX - leaper.posX;
 		double var3 = leapTarget.posZ - leaper.posZ;
 		float var5 = MathHelper.sqrt_double(var1 * var1 + var3 * var3);
-		leaper.motionX += var1 / (double) var5 * 0.5D * 0.800000011920929D + leaper.motionX * 0.20000000298023224D;
-		leaper.motionZ += var3 / (double) var5 * 0.5D * 0.800000011920929D + leaper.motionZ * 0.20000000298023224D;
+		leaper.motionX += var1 / var5 * 0.5D * 0.800000011920929D + leaper.motionX * 0.20000000298023224D;
+		leaper.motionZ += var3 / var5 * 0.5D * 0.800000011920929D + leaper.motionZ * 0.20000000298023224D;
 		leaper.motionY = leapMotionY;
 	}
 
@@ -167,7 +157,7 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 	@Override
 	protected String getDeathSound()
 	{
-		return AliensVsPredator.INSTANCE.properties.SOUND_FACEHUGGER_DEATH;
+		return AliensVsPredator.properties().SOUND_FACEHUGGER_DEATH;
 	}
 
 	@Override
@@ -187,8 +177,8 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 				double var4 = entity.posX - this.posX;
 				double var6 = entity.posZ - this.posZ;
 				float var8 = MathHelper.sqrt_double(var4 * var4 + var6 * var6);
-				this.motionX = var4 / (double) var8 * 0.5D * 0.800000011920929D + this.motionX * 0.20000000298023224D;
-				this.motionZ = var6 / (double) var8 * 0.5D * 0.800000011920929D + this.motionZ * 0.20000000298023224D;
+				this.motionX = var4 / var8 * 0.5D * 0.800000011920929D + this.motionX * 0.20000000298023224D;
+				this.motionZ = var6 / var8 * 0.5D * 0.800000011920929D + this.motionZ * 0.20000000298023224D;
 				this.motionY = 0.4000000059604645D;
 			}
 		}

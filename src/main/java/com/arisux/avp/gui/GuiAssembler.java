@@ -9,7 +9,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-import com.arisux.airi.lib.RenderLib;
+import com.arisux.airi.engine.RenderEngine;
 import com.arisux.avp.entities.tile.TileEntityAssembler;
 
 import cpw.mods.fml.relauncher.Side;
@@ -41,7 +41,7 @@ public class GuiAssembler extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
-		RenderLib.drawString("Assembler", 7, 6, 0x777777);
+		RenderEngine.drawString("Assembler", 7, 6, 0x777777);
 	}
 
 	@SideOnly(Side.CLIENT)

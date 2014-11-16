@@ -12,15 +12,15 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
-import com.arisux.airi.lib.RenderLib;
-import com.arisux.airi.lib.RenderLib.PlayerResourceManager.PlayerResource;
+import com.arisux.airi.engine.RenderEngine;
+import com.arisux.airi.engine.RenderEngine.PlayerResourceManager.PlayerResource;
 import com.arisux.airi.lib.render.ItemRenderer3D;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.items.model.ModelAK47;
 
 public class RenderAK47 extends ItemRenderer3D
 {
-	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_AK47);
+	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_AK47);
 
 	public RenderAK47()
 	{
@@ -39,11 +39,11 @@ public class RenderAK47 extends ItemRenderer3D
 		GL11.glPushMatrix();
 
 		PlayerResource player = resourceManager.createPlayerResource(((EntityPlayer) data[1]).getCommandSenderName());
-		this.resource = RenderLib.downloadResource(String.format(AliensVsPredator.INSTANCE.properties.URL_SKIN_AK47, player.getUUID()), resourceLocation);
+		this.resource = RenderEngine.downloadResource(String.format(AliensVsPredator.properties().URL_SKIN_AK47, player.getUUID()), resourceLocation);
 
 		if (player != null)
 		{
-			Minecraft.getMinecraft().renderEngine.bindTexture(RenderLib.downloadResource(String.format(AliensVsPredator.INSTANCE.properties.URL_SKIN_AK47, player.getUUID()), resourceLocation, false));
+			Minecraft.getMinecraft().renderEngine.bindTexture(RenderEngine.downloadResource(String.format(AliensVsPredator.properties().URL_SKIN_AK47, player.getUUID()), resourceLocation, false));
 			GL11.glTranslatef(0.2F, 0.3F, -0.17F);
 			GL11.glRotatef(97.0F, 1.0F, 0.0F, 0.0F);
 			GL11.glRotatef(130.0F, 0.0F, 1.0F, 0.0F);
@@ -62,7 +62,7 @@ public class RenderAK47 extends ItemRenderer3D
 	{
 		GL11.glPushMatrix();
 
-		this.resource = RenderLib.downloadResource(String.format(AliensVsPredator.INSTANCE.properties.URL_SKIN_AK47, Minecraft.getMinecraft().session.getPlayerID()), resourceLocation);
+		this.resource = RenderEngine.downloadResource(String.format(AliensVsPredator.properties().URL_SKIN_AK47, Minecraft.getMinecraft().session.getPlayerID()), resourceLocation);
 
 		Minecraft.getMinecraft().renderEngine.bindTexture(getResourceLocation());
 
@@ -97,7 +97,7 @@ public class RenderAK47 extends ItemRenderer3D
 	{
 		GL11.glPushMatrix();
 
-		this.resource = RenderLib.downloadResource(String.format(AliensVsPredator.INSTANCE.properties.URL_SKIN_AK47, Minecraft.getMinecraft().session.getPlayerID()), resourceLocation);
+		this.resource = RenderEngine.downloadResource(String.format(AliensVsPredator.properties().URL_SKIN_AK47, Minecraft.getMinecraft().session.getPlayerID()), resourceLocation);
 		Minecraft.getMinecraft().renderEngine.bindTexture(getResourceLocation());
 
 		GL11.glDisable(GL11.GL_CULL_FACE);

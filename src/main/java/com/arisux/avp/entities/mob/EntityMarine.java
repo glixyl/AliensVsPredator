@@ -1,18 +1,7 @@
 package com.arisux.avp.entities.mob;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IRangedAttackMob;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIArrowAttack;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -76,6 +65,7 @@ public class EntityMarine extends EntityCreature implements IMob, IRangedAttackM
 		return marineTypes;
 	}
 
+	@Override
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
@@ -93,52 +83,55 @@ public class EntityMarine extends EntityCreature implements IMob, IRangedAttackM
 			case M4:
 				if (rand.nextInt(3) == 1)
 				{
-					this.entityDropItem(new ItemStack(AliensVsPredator.INSTANCE.items.itemAmmoAC), 1);
+					this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.itemAmmoAC), 1);
 				}
 				break;
 			case AK47:
 				if (rand.nextInt(3) == 1)
 				{
-					this.entityDropItem(new ItemStack(AliensVsPredator.INSTANCE.items.itemAmmoAR), 1);
+					this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.itemAmmoAR), 1);
 				}
 				break;
 			case M4A1:
 				if (rand.nextInt(3) == 1)
 				{
-					this.entityDropItem(new ItemStack(AliensVsPredator.INSTANCE.items.itemAmmoPistol), 1);
+					this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.itemAmmoPistol), 1);
 				}
 				break;
 			case SNIPER:
 				if (rand.nextInt(3) == 1)
 				{
-					this.entityDropItem(new ItemStack(AliensVsPredator.INSTANCE.items.itemAmmoSMG), 1);
+					this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.itemAmmoSMG), 1);
 				}
 				break;
 			case M56SG:
 				if (rand.nextInt(3) == 1)
 				{
-					this.entityDropItem(new ItemStack(AliensVsPredator.INSTANCE.items.itemAmmoSniper), 1);
+					this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.itemAmmoSniper), 1);
 				}
 				break;
 		}
 
 	}
 
+	@Override
 	protected String getHurtSound()
 	{
-		return AliensVsPredator.INSTANCE.properties.SOUND_MARINE_HURT;
+		return AliensVsPredator.properties().SOUND_MARINE_HURT;
 	}
 
+	@Override
 	protected String getDeathSound()
 	{
-		return AliensVsPredator.INSTANCE.properties.SOUND_MARINE_DEATH;
+		return AliensVsPredator.properties().SOUND_MARINE_DEATH;
 	}
 
 	public ItemStack getCurrentItemOrArmor(int par1)
 	{
-		return new ItemStack(AliensVsPredator.INSTANCE.items.itemM41A);
+		return new ItemStack(AliensVsPredator.instance.items.itemM41A);
 	}
 
+	@Override
 	protected boolean isAIEnabled()
 	{
 		return true;
@@ -150,6 +143,7 @@ public class EntityMarine extends EntityCreature implements IMob, IRangedAttackM
 		super.onLivingUpdate();
 	}
 
+	@Override
 	public int getTotalArmorValue()
 	{
 		return 7;
@@ -161,7 +155,7 @@ public class EntityMarine extends EntityCreature implements IMob, IRangedAttackM
 		super.onUpdate();
 
 		double range = 20D;
-		EntityLivingBase targetEntity = (EntityLivingBase) (this.worldObj.findNearestEntityWithinAABB(EntityLiving.class, this.boundingBox.expand((double) (range * 2), 64.0D, (double) (range * 2)), this));
+		EntityLivingBase targetEntity = (EntityLivingBase) (this.worldObj.findNearestEntityWithinAABB(EntityLiving.class, this.boundingBox.expand(range * 2, 64.0D, range * 2), this));
 
 		if (targetEntity instanceof EntityMob && !worldObj.isRemote)
 		{
@@ -173,6 +167,7 @@ public class EntityMarine extends EntityCreature implements IMob, IRangedAttackM
 		}
 	}
 
+	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
 	{
 		if (super.attackEntityFrom(par1DamageSource, par2))
@@ -197,6 +192,7 @@ public class EntityMarine extends EntityCreature implements IMob, IRangedAttackM
 		}
 	}
 
+	@Override
 	protected void attackEntity(Entity entity, float f)
 	{
 		if (this.attackTime <= 0 && f < 2.0F && entity.boundingBox.maxY > this.boundingBox.minY && entity.boundingBox.minY < this.boundingBox.maxY)
@@ -219,8 +215,8 @@ public class EntityMarine extends EntityCreature implements IMob, IRangedAttackM
 					double d = entity.posX - this.posX;
 					double d1 = entity.posZ - this.posZ;
 					float f2 = MathHelper.sqrt_double(d * d + d1 * d1);
-					this.motionX = d / (double) f2 * 0.5D * 0.800000011920929D + this.motionX * 0.20000000298023224D;
-					this.motionZ = d1 / (double) f2 * 0.5D * 0.800000011920929D + this.motionZ * 0.20000000298023224D;
+					this.motionX = d / f2 * 0.5D * 0.800000011920929D + this.motionX * 0.20000000298023224D;
+					this.motionZ = d1 / f2 * 0.5D * 0.800000011920929D + this.motionZ * 0.20000000298023224D;
 					this.motionY = 0.4000000059604645D;
 				}
 			} else
@@ -230,6 +226,7 @@ public class EntityMarine extends EntityCreature implements IMob, IRangedAttackM
 		}
 	}
 
+	@Override
 	public boolean attackEntityAsMob(Entity par1Entity)
 	{
 		int var2 = 4;
@@ -244,19 +241,21 @@ public class EntityMarine extends EntityCreature implements IMob, IRangedAttackM
 			var2 -= 2 << this.getActivePotionEffect(Potion.weakness).getAmplifier();
 		}
 
-		return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) var2);
+		return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), var2);
 	}
 
+	@Override
 	public float getBlockPathWeight(int par1, int par2, int par3)
 	{
 		return 0.5F - this.worldObj.getLightBrightness(par1, par2, par3);
 	}
 
+	@Override
 	public void attackEntityWithRangedAttack(EntityLivingBase par1EntityLivingBase, float f)
 	{
 		if (par1EntityLivingBase instanceof EntityMob && !par1EntityLivingBase.isDead)
 		{
-			this.getLookHelper().setLookPosition(par1EntityLivingBase.posX, par1EntityLivingBase.posY + (double) par1EntityLivingBase.getEyeHeight(), par1EntityLivingBase.posZ, 10.0F, (float) this.getVerticalFaceSpeed());
+			this.getLookHelper().setLookPosition(par1EntityLivingBase.posX, par1EntityLivingBase.posY + par1EntityLivingBase.getEyeHeight(), par1EntityLivingBase.posZ, 10.0F, this.getVerticalFaceSpeed());
 
 			if (this.canEntityBeSeen(par1EntityLivingBase))
 			{
@@ -265,6 +264,7 @@ public class EntityMarine extends EntityCreature implements IMob, IRangedAttackM
 		}
 	}
 
+	@Override
 	protected void updateAITick()
 	{
 		this.dataWatcher.updateObject(18, Integer.valueOf(15));

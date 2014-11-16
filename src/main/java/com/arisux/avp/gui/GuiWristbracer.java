@@ -1,11 +1,9 @@
 package com.arisux.avp.gui;
 
-import static com.arisux.airi.lib.RenderLib.bindTexture;
-import static com.arisux.airi.lib.RenderLib.drawQuad;
+import static com.arisux.airi.engine.RenderEngine.bindTexture;
+import static com.arisux.airi.engine.RenderEngine.drawQuad;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -15,9 +13,9 @@ import net.minecraft.world.EnumDifficulty;
 
 import org.lwjgl.opengl.GL11;
 
-import com.arisux.airi.lib.GuiTypeLib.GuiCustomButton;
-import com.arisux.airi.lib.RenderLib;
-import com.arisux.airi.lib.interfaces.IActionPerformed;
+import com.arisux.airi.engine.GuiTypeLib.GuiCustomButton;
+import com.arisux.airi.engine.RenderEngine;
+import com.arisux.airi.lib.util.interfaces.IActionPerformed;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.api.WristbracerAPI;
 import com.arisux.avp.inventory.container.ContainerWristbracer;
@@ -27,10 +25,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class GuiWristbracer extends GuiContainer
 {
-	private static final ResourceLocation texture = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_GUI_WRISTBRACER);
+	private static final ResourceLocation texture = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_GUI_WRISTBRACER);
 	private HashMap<GuiButton, Integer> displays = new HashMap<GuiButton, Integer>();
 	protected List<GuiButton> buttonList = new ArrayList<GuiButton>();
-	private WristbracerAPI api = AliensVsPredator.INSTANCE.apis.wristbracerApi;
+	private WristbracerAPI api = AliensVsPredator.instance.apis.wristbracerApi;
 	public ContainerWristbracer container;
 
 	public GuiWristbracer(EntityPlayer player, ContainerWristbracer container)
@@ -77,7 +75,7 @@ public class GuiWristbracer extends GuiContainer
 		
 		for (byte s = 0; s < 9; s++)
 		{
-			RenderLib.drawRect(guiLeft + 15 + (18 * s), guiTop + 136, 16, 16, 0xAA000000);
+			RenderEngine.drawRect(guiLeft + 15 + (18 * s), guiTop + 136, 16, 16, 0xAA000000);
 		}
 		
 		for (int x1 = 1; x1 <= 6; x1++)

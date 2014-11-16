@@ -11,7 +11,7 @@ import com.arisux.avp.AliensVsPredator;
 
 public class RenderChestburster extends RenderXenomorph
 {
-	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_CHESTBUSTER);
+	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_CHESTBUSTER);
 
 	public RenderChestburster(ModelBase modelbase, float shadowSize)
 	{

@@ -9,8 +9,8 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-import com.arisux.airi.lib.WorldLib;
-import com.arisux.airi.lib.BlockLib.CoordData;
+import com.arisux.airi.engine.WorldEngine;
+import com.arisux.airi.engine.BlockLib.CoordData;
 import com.arisux.avp.AliensVsPredator;
 
 public class EntityPlasma extends EntityThrowable
@@ -96,7 +96,7 @@ public class EntityPlasma extends EntityThrowable
 
 			if (!this.belongsToPlayer)
 			{
-				WorldLib.createExplosion(null, worldObj, new CoordData(this), 3F, false, true, AliensVsPredator.INSTANCE.settings.areExplosionsEnabled());
+				WorldEngine.createExplosion(null, worldObj, new CoordData(this), 3F, false, true, AliensVsPredator.instance.settings.areExplosionsEnabled());
 				this.worldObj.playSoundAtEntity(this, "random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
 				this.setDead();
 			}
@@ -108,7 +108,7 @@ public class EntityPlasma extends EntityThrowable
 	{
 		if (!this.worldObj.isRemote)
 		{
-			WorldLib.createExplosion(null, worldObj, new CoordData(this), 3F, false, true, AliensVsPredator.INSTANCE.settings.areExplosionsEnabled());
+			WorldEngine.createExplosion(null, worldObj, new CoordData(this), 3F, false, true, AliensVsPredator.instance.settings.areExplosionsEnabled());
 			this.worldObj.playSoundAtEntity(this, "random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
 
 			this.setDead();

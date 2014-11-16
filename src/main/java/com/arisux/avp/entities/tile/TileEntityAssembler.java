@@ -196,7 +196,7 @@ public class TileEntityAssembler extends TileEntity implements IInventory
 
 		for (byte x = 0; x < items.tagCount(); x++)
 		{
-			NBTTagCompound item = (NBTTagCompound) items.getCompoundTagAt(x);
+			NBTTagCompound item = items.getCompoundTagAt(x);
 
 			byte slot = item.getByte("Slot");
 
@@ -229,6 +229,6 @@ public class TileEntityAssembler extends TileEntity implements IInventory
 		this.player = player;
 
 		if (!player.worldObj.isRemote)
-			FMLNetworkHandler.openGui(player, AliensVsPredator.INSTANCE, AliensVsPredator.INSTANCE.properties.GUI_ASSEMBLER, player.worldObj, xCoord, yCoord, zCoord);
+			FMLNetworkHandler.openGui(player, AliensVsPredator.instance, AliensVsPredator.properties().GUI_ASSEMBLER, player.worldObj, xCoord, yCoord, zCoord);
 	}
 }

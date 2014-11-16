@@ -371,7 +371,7 @@ public class EntitySpear extends Entity
 		{
 			if (this.inGround && this.doesArrowBelongToPlayer && this.arrowShake <= 0)
 			{
-				if (entityplayer.inventory.addItemStackToInventory(new ItemStack(AliensVsPredator.INSTANCE.items.itemSpear, 1, (int) lastDamage + 5)))
+				if (entityplayer.inventory.addItemStackToInventory(new ItemStack(AliensVsPredator.instance.items.itemSpear, 1, (int) lastDamage + 5)))
 				{
 					this.worldObj.playSoundAtEntity(this, "random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
 					entityplayer.onItemPickup(this, 1);

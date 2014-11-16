@@ -70,7 +70,7 @@ public class ContainerTurret extends Container
 	{
 		return super.transferStackInSlot(player, slotId);
 	}
-
+	
 	@Override
 	public boolean canInteractWith(EntityPlayer player)
 	{

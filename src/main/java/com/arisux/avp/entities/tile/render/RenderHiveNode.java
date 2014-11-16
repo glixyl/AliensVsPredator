@@ -14,7 +14,7 @@ import com.arisux.avp.entities.model.ModelHiveNode;
 public class RenderHiveNode extends TileEntitySpecialRenderer
 {
 	private ModelHiveNode mainModel = new ModelHiveNode();
-	private static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_HIVE_NODE);
+	private static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_HIVE_NODE);
 
 	public void doRender(float par1, float par2, float par3, float par5)
 	{

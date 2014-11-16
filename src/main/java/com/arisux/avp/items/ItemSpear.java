@@ -1,12 +1,10 @@
 package com.arisux.avp.items;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumAction;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
+import net.minecraft.item.*;
 import net.minecraft.world.World;
 
-import com.arisux.airi.lib.PlayerLib;
+import com.arisux.airi.engine.WorldEngine;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.EntitySpear;
 
@@ -22,13 +20,13 @@ public class ItemSpear extends ItemSword
 	@Override
 	public void onPlayerStoppedUsing(ItemStack itemstack, World world, EntityPlayer entityplayer, int itemInUseCount)
 	{
-		if (entityplayer.inventory.hasItemStack(new ItemStack(AliensVsPredator.INSTANCE.items.itemSpear)))
+		if (entityplayer.inventory.hasItemStack(new ItemStack(AliensVsPredator.instance.items.itemSpear)))
 		{
 			int j = this.getMaxItemUseDuration(itemstack) - itemInUseCount;
-			float f = (float) j / 20.0F;
+			float f = j / 20.0F;
 			f = (f * f + f * 2.0F) / 3.0F;
 
-			if ((double) f < 0.1D)
+			if (f < 0.1D)
 			{
 				return;
 			}
@@ -40,7 +38,7 @@ public class ItemSpear extends ItemSword
 				world.playSoundAtEntity(entityplayer, "random.pop", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 				world.spawnEntityInWorld(entityspear);
 
-				PlayerLib.consumeItem(entityplayer, this);
+				WorldEngine.Entities.Players.Inventories.consumeItem(entityplayer, this);
 			}
 		}
 	}
@@ -60,7 +58,7 @@ public class ItemSpear extends ItemSword
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer)
 	{
-		if (entityplayer.inventory.hasItemStack(new ItemStack(AliensVsPredator.INSTANCE.items.itemSpear)))
+		if (entityplayer.inventory.hasItemStack(new ItemStack(AliensVsPredator.instance.items.itemSpear)))
 		{
 			entityplayer.setItemInUse(itemstack, this.getMaxItemUseDuration(itemstack));
 		}

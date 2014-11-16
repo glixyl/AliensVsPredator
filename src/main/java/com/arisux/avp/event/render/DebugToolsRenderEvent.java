@@ -11,9 +11,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import com.arisux.airi.lib.*;
-import com.arisux.airi.lib.BlockLib.CoordData;
-import com.arisux.airi.lib.enums.BlockSides;
+import com.arisux.airi.engine.*;
+import com.arisux.airi.engine.BlockLib.CoordData;
+import com.arisux.airi.lib.util.enums.BlockSides;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntityMarine;
 import com.arisux.avp.entities.mob.EntityXenomorph;
@@ -33,7 +33,7 @@ public class DebugToolsRenderEvent
 		{
 			if (mc.objectMouseOver != null)
 			{
-				if (ModLib.isDevelopmentEnvironment() || AliensVsPredator.INSTANCE.settings.debugToolsEnabled)
+				if (ModEngine.isDevelopmentEnvironment() || AliensVsPredator.instance.settings.debugToolsEnabled)
 				{
 					if (mc.inGameHasFocus || mc.currentScreen instanceof GuiChat)
 					{
@@ -41,30 +41,30 @@ public class DebugToolsRenderEvent
 
 						if (mc.objectMouseOver.typeOfHit == MovingObjectType.ENTITY)
 						{
-							Gui.drawRect(0, 0, RenderLib.scaledDisplayResolution().getScaledWidth(), 50, 0xBB000000);
+							Gui.drawRect(0, 0, RenderEngine.scaledDisplayResolution().getScaledWidth(), 50, 0xBB000000);
 
 							Entity entity = mc.objectMouseOver.entityHit;
 
 							if (entity instanceof EntityLivingBase)
 							{
-								RenderLib.drawProgressBar((int) ((EntityLivingBase) entity).getHealth() + "/" + (int) ((EntityLivingBase) entity).getMaxHealth(), (int) ((EntityLivingBase) entity).getMaxHealth(), (int) ((EntityLivingBase) entity).getHealth(), 10, 7, RenderLib.scaledDisplayResolution().getScaledWidth() - 20, 1, 0, 0xFF00AAFF, false);
+								RenderEngine.drawProgressBar((int) ((EntityLivingBase) entity).getHealth() + "/" + (int) ((EntityLivingBase) entity).getMaxHealth(), (int) ((EntityLivingBase) entity).getMaxHealth(), (int) ((EntityLivingBase) entity).getHealth(), 10, 7, RenderEngine.scaledDisplayResolution().getScaledWidth() - 20, 1, 0, 0xFF00AAFF, false);
 							} else
 							{
-								RenderLib.drawProgressBar("NULL / NULL", 1, 1, 10, 7, RenderLib.scaledDisplayResolution().getScaledWidth() - 20, 1, 0, 0xFF777777, false);
+								RenderEngine.drawProgressBar("NULL / NULL", 1, 1, 10, 7, RenderEngine.scaledDisplayResolution().getScaledWidth() - 20, 1, 0, 0xFF777777, false);
 							}
 
-							fontrenderer.drawSplitString(entity.toString(), 10, 20, RenderLib.scaledDisplayResolution().getScaledWidth() - 20, 0xFFFFFFFF);
+							fontrenderer.drawSplitString(entity.toString(), 10, 20, RenderEngine.scaledDisplayResolution().getScaledWidth() - 20, 0xFFFFFFFF);
 							fontrenderer.drawStringWithShadow("ID: " + entity.getEntityId(), 265, 35, 0xFFFFFF);
 							fontrenderer.drawStringWithShadow("UUID: " + entity.getUniqueID(), 10, 35, 0xFFFFFF);
 
-							fontrenderer.drawStringWithShadow("...", RenderLib.scaledDisplayResolution().getScaledWidth() - 10, 35, 0xFFFFFF);
+							fontrenderer.drawStringWithShadow("...", RenderEngine.scaledDisplayResolution().getScaledWidth() - 10, 35, 0xFFFFFF);
 
-							int subMenuX = RenderLib.scaledDisplayResolution().getScaledWidth() - 200;
+							int subMenuX = RenderEngine.scaledDisplayResolution().getScaledWidth() - 200;
 							int subMenuY = 50;
 							int subMenuPadding = 10;
 
 							{
-								Gui.drawRect(subMenuX, 50, RenderLib.scaledDisplayResolution().getScaledWidth(), RenderLib.scaledDisplayResolution().getScaledHeight(), 0xBB000000);
+								Gui.drawRect(subMenuX, 50, RenderEngine.scaledDisplayResolution().getScaledWidth(), RenderEngine.scaledDisplayResolution().getScaledHeight(), 0xBB000000);
 
 								int subMenuStartY = subMenuY + subMenuPadding / 2;
 								int subEntrySpacing = 10;
@@ -87,7 +87,7 @@ public class DebugToolsRenderEvent
 								if (entity instanceof EntityLivingBase)
 								{
 									fontrenderer.drawStringWithShadow("Age: " + ((EntityLivingBase) entity).getAge(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
-									RenderLib.drawEntity(RenderLib.scaledDisplayResolution().getScaledWidth() - 75, RenderLib.scaledDisplayResolution().getScaledHeight() - 25, 30, 90, -90, (EntityLivingBase) entity);
+									RenderEngine.drawEntity(RenderEngine.scaledDisplayResolution().getScaledWidth() - 75, RenderEngine.scaledDisplayResolution().getScaledHeight() - 25, 30, 90, -90, (EntityLivingBase) entity);
 								}
 
 								if (entity instanceof EntityItemFrame)
@@ -95,17 +95,17 @@ public class DebugToolsRenderEvent
 									ItemStack stack = ((EntityItemFrame) entity).getDisplayedItem();
 
 									fontrenderer.drawStringWithShadow("Contains: " + (stack != null ? stack.getDisplayName() : "null"), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
-									fontrenderer.drawStringWithShadow("Recipe: " + (stack != null ? RegistryLib.getRecipe(stack.getItem()) != null ? RegistryLib.getRecipe(stack.getItem()).getClass().getSimpleName() : "None" : "null"), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
+									fontrenderer.drawStringWithShadow("Recipe: " + (stack != null ? ModEngine.getRecipe(stack.getItem()) != null ? ModEngine.getRecipe(stack.getItem()).getClass().getSimpleName() : "None" : "null"), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
 
 									if (stack != null)
-										RenderLib.drawRecipe(stack.getItem(), subMenuX + subMenuPadding / 2, subMenuStartY + (curEntry++ * subEntrySpacing), 16, 3, 0x33EEEEEE);
+										RenderEngine.drawRecipe(stack.getItem(), subMenuX + subMenuPadding / 2, subMenuStartY + (curEntry++ * subEntrySpacing), 16, 3, 0x33EEEEEE);
 								}
 							}
 						}
 
 						if (mc.objectMouseOver.typeOfHit == MovingObjectType.BLOCK)
 						{
-							Gui.drawRect(0, 0, RenderLib.scaledDisplayResolution().getScaledWidth(), 20, 0xBB000000);
+							Gui.drawRect(0, 0, RenderEngine.scaledDisplayResolution().getScaledWidth(), 20, 0xBB000000);
 
 							CoordData coord = new CoordData(mc.objectMouseOver.blockX, mc.objectMouseOver.blockY, mc.objectMouseOver.blockZ);
 							Block block = mc.theWorld.getBlock((int) coord.posX, (int) coord.posY, (int) coord.posZ);
@@ -113,7 +113,7 @@ public class DebugToolsRenderEvent
 							TileEntity tile = coord.getTileEntity(Minecraft.getMinecraft().thePlayer.worldObj);
 
 							Gui.drawRect(0, 0, 1, 1, 0xFFFFFFFF);
-							RenderLib.drawBlockSide(block, side.getId(), 5, 5, 10, 10);
+							RenderEngine.drawBlockSide(block, side.getId(), 5, 5, 10, 10);
 
 							String info = "";
 
@@ -122,12 +122,17 @@ public class DebugToolsRenderEvent
 								info = block.getLocalizedName();
 							} else
 							{
-								info = block.getLocalizedName() + " from " + ModLib.getModContainerForId(BlockLib.getDomain(block).replace(":", "")).getName();
+								info = block.getLocalizedName() + " from " + ModEngine.getModContainerForId(BlockLib.getDomain(block).replace(":", "")).getName();
+							}
+							
+							if (block.getRenderType() != 0)
+							{
+								info = info + " (Render Type: " + block.getRenderType() + ")";
 							}
 							
 							if (side != null)
 							{
-								info = info + " (" + ForgeDirection.getOrientation(side.getId()) + ")";
+								info = info + " (Direction: " + ForgeDirection.getOrientation(side.getId()) + ")";
 							}
 							
 							if (tile instanceof TileEntity)

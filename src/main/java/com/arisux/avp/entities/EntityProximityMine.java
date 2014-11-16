@@ -11,8 +11,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
 
-import com.arisux.airi.lib.BlockLib.CoordData;
-import com.arisux.airi.lib.WorldLib;
+import com.arisux.airi.engine.WorldEngine;
+import com.arisux.airi.engine.BlockLib.CoordData;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntityYautja;
 
@@ -157,7 +157,7 @@ public class EntityProximityMine extends Entity
 			if (!this.canStay())
 			{
 				this.setDead();
-				this.worldObj.spawnEntityInWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(AliensVsPredator.INSTANCE.items.itemProximityMine)));
+				this.worldObj.spawnEntityInWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(AliensVsPredator.instance.items.itemProximityMine)));
 			}
 		}
 
@@ -165,7 +165,7 @@ public class EntityProximityMine extends Entity
 	
 	public void explode()
 	{
-		WorldLib.createExplosion(null, worldObj, new CoordData(this), 2F, false, true, AliensVsPredator.INSTANCE.settings.areExplosionsEnabled());
+		WorldEngine.createExplosion(null, worldObj, new CoordData(this), 2F, false, true, AliensVsPredator.instance.settings.areExplosionsEnabled());
 		this.setDead();
 	}
 

@@ -15,11 +15,9 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent.Pre;
 
 import org.lwjgl.opengl.GL11;
 
-import com.arisux.airi.AIRI;
-import com.arisux.airi.lib.GuiTypeLib.GuiCustomButton;
-import com.arisux.airi.lib.PlayerLib;
-import com.arisux.airi.lib.RenderLib;
-import com.arisux.airi.lib.interfaces.IActionPerformed;
+import com.arisux.airi.engine.GuiTypeLib.GuiCustomButton;
+import com.arisux.airi.engine.*;
+import com.arisux.airi.lib.util.interfaces.IActionPerformed;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.ExtendedEntityPlayer;
 import com.arisux.avp.gui.GuiTacticalHUDSettings;
@@ -31,7 +29,7 @@ public class TacticalHUDRenderEvent
 {
 	private Minecraft mc = Minecraft.getMinecraft();
 	private ArrayList<EntityPlayer> playersInHUD = new ArrayList<EntityPlayer>();
-	private ResourceLocation resOverlayMarine = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_BLUR_MARINE_HUD);
+	private ResourceLocation resOverlayMarine = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_BLUR_MARINE_HUD);
 	private ExtendedEntityPlayer clientPlayerProperties = getProperties();
 	private GuiCustomButton buttonMarineHelmConfig = new GuiCustomButton(0, 0, 0, 50, 20, "", null);
 	private boolean gammaRestored = true;
@@ -44,12 +42,12 @@ public class TacticalHUDRenderEvent
 		{
 			if (event.type == RenderGameOverlayEvent.ElementType.HOTBAR)
 			{
-				if (PlayerLib.getHelmSlotItemStack(mc.thePlayer) != null && mc.gameSettings.thirdPersonView == 0 && PlayerLib.getHelmSlotItemStack(mc.thePlayer).getItem() == AliensVsPredator.INSTANCE.items.helmMarine)
+				if (WorldEngine.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer) != null && mc.gameSettings.thirdPersonView == 0 && WorldEngine.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer).getItem() == AliensVsPredator.instance.items.helmMarine)
 				{
 					this.gammaRestored = false;
-					AIRI.instance().global.gammaValue = 8F;
+					AliensVsPredator.instance.localEvents.getLightmapUpdateEvent().gammaValue = 8F;
 					this.scanForNearbyPlayers();
-					RenderLib.renderOverlay(resOverlayMarine, 0.4F);
+					RenderEngine.renderOverlay(resOverlayMarine, 0.4F);
 					this.drawInfoBar();
 					this.drawImpregnationIndicator(clientPlayerProperties);
 					this.drawPlayerScanner();
@@ -57,7 +55,7 @@ public class TacticalHUDRenderEvent
 				else if (!gammaRestored)
 				{
 					this.gammaRestored = true;
-					AIRI.instance().global.gammaValue = 0F;
+					AliensVsPredator.instance.localEvents.getLightmapUpdateEvent().gammaValue = 0F;
 				}
 			}
 		}
@@ -74,7 +72,7 @@ public class TacticalHUDRenderEvent
 
 	public void renderInventoryElements()
 	{
-		if (PlayerLib.getHelmSlotItemStack(mc.thePlayer) != null && PlayerLib.getHelmSlotItemStack(mc.thePlayer).getItem() == AliensVsPredator.INSTANCE.items.helmMarine)
+		if (WorldEngine.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer) != null && WorldEngine.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer).getItem() == AliensVsPredator.instance.items.helmMarine)
 		{
 			if (mc.currentScreen instanceof GuiInventory || mc.currentScreen instanceof GuiContainerCreative)
 			{
@@ -82,8 +80,8 @@ public class TacticalHUDRenderEvent
 				buttonMarineHelmConfig.tooltip = "Click to configure Tactical HUD settings.";
 				buttonMarineHelmConfig.width = 80;
 				buttonMarineHelmConfig.baseColor = 0x44000000;
-				buttonMarineHelmConfig.xPosition = RenderLib.scaledDisplayResolution().getScaledWidth() / 2 - (!mc.thePlayer.capabilities.isCreativeMode ? 175 : 185);
-				buttonMarineHelmConfig.yPosition = RenderLib.scaledDisplayResolution().getScaledHeight() / 2 - 80;
+				buttonMarineHelmConfig.xPosition = RenderEngine.scaledDisplayResolution().getScaledWidth() / 2 - (!mc.thePlayer.capabilities.isCreativeMode ? 175 : 185);
+				buttonMarineHelmConfig.yPosition = RenderEngine.scaledDisplayResolution().getScaledHeight() / 2 - 80;
 				buttonMarineHelmConfig.drawButton();
 				buttonMarineHelmConfig.handleInput();
 				buttonMarineHelmConfig.setAction(new IActionPerformed()
@@ -114,9 +112,9 @@ public class TacticalHUDRenderEvent
 		String fpsString = mc.debug.substring(0, mc.debug.indexOf(" fps")) + " FPS";
 		String date = new SimpleDateFormat("[MM/dd/yyyy] [HH:mm:ss]").format(new Date());
 
-		RenderLib.drawString(fpsString, RenderLib.scaledDisplayResolution().getScaledWidth() - RenderLib.getStringRenderWidth(fpsString) - 10, 10, 0x44EEEEEE);
-		RenderLib.drawRect(xStartHeadBar, 10, RenderLib.scaledDisplayResolution().getScaledWidth() - xStartHeadBar - RenderLib.getStringRenderWidth(fpsString) - 15, 8, 0x66EEEEEE);
-		RenderLib.drawStringAlignCenter("[" + mc.thePlayer.getCommandSenderName() + "] " + date + " [" + viewportThreshold + "/" + playersInHUD.size() + " players R->" + this.getProperties().getBroadcastRadius() + "@" + this.getProperties().getBroadcastChannel() + "]", RenderLib.scaledDisplayResolution().getScaledWidth() / 2, 10, 0xFFFFFFFF);
+		RenderEngine.drawString(fpsString, RenderEngine.scaledDisplayResolution().getScaledWidth() - RenderEngine.getStringRenderWidth(fpsString) - 10, 10, 0x44EEEEEE);
+		RenderEngine.drawRect(xStartHeadBar, 10, RenderEngine.scaledDisplayResolution().getScaledWidth() - xStartHeadBar - RenderEngine.getStringRenderWidth(fpsString) - 15, 8, 0x66EEEEEE);
+		RenderEngine.drawStringAlignCenter("[" + mc.thePlayer.getCommandSenderName() + "] " + date + " [" + viewportThreshold + "/" + playersInHUD.size() + " players R->" + this.getProperties().getBroadcastRadius() + "@" + this.getProperties().getBroadcastChannel() + "]", RenderEngine.scaledDisplayResolution().getScaledWidth() / 2, 10, 0xFFFFFFFF);
 	}
 
 	public void drawImpregnationIndicator(ExtendedEntityPlayer clientPlayerProperties)
@@ -127,8 +125,8 @@ public class TacticalHUDRenderEvent
 			int lifeTimeSeconds = lifeTimeTicks / (20 * 4);
 
 			// TODO: Infection notification
-			RenderLib.drawString("Remaining Life Time: " + lifeTimeTicks, 10, 40, 0xFFFF0000);
-			RenderLib.drawString("Remaining Life Time: " + lifeTimeSeconds, 10, 50, 0xFFFF0000);
+			RenderEngine.drawString("Remaining Life Time: " + lifeTimeTicks, 10, 40, 0xFFFF0000);
+			RenderEngine.drawString("Remaining Life Time: " + lifeTimeSeconds, 10, 50, 0xFFFF0000);
 		}
 	}
 
@@ -166,22 +164,22 @@ public class TacticalHUDRenderEvent
 				int maxSignal = extendedPlayer.getBroadcastRadius() <= this.clientPlayerProperties.getBroadcastRadius() ? extendedPlayer.getBroadcastRadius() : this.clientPlayerProperties.getBroadcastRadius();
 				int pxMultiplier = signal >= maxSignal / 1.3 ? 5 : signal >= maxSignal / 2 ? 4 : signal >= maxSignal / 3 ? 3 : signal >= maxSignal / 4 ? 2 : signal >= maxSignal / 5 ? 1 : signal >= maxSignal / 6 ? 0 : 0;
 
-				RenderLib.drawRect(RenderLib.scaledDisplayResolution().getScaledWidth() - 111, 30 + barSpace * x - 5, 120, 2, 0x66EEEEEE);
-				RenderLib.drawRect(RenderLib.scaledDisplayResolution().getScaledWidth() - 111, 32 + barSpace * x - 5, 2, 9, 0x66EEEEEE);
+				RenderEngine.drawRect(RenderEngine.scaledDisplayResolution().getScaledWidth() - 111, 30 + barSpace * x - 5, 120, 2, 0x66EEEEEE);
+				RenderEngine.drawRect(RenderEngine.scaledDisplayResolution().getScaledWidth() - 111, 32 + barSpace * x - 5, 2, 9, 0x66EEEEEE);
 
 				if (mc.thePlayer.getDistanceToEntity(player) <= this.clientPlayerProperties.getBroadcastRadius() && signal <= maxSignal / 1.3)
 				{
 					GL11.glColor4f(1F, 1F, 1F, 1F);
 					Minecraft.getMinecraft().renderEngine.bindTexture(Gui.icons);
-					RenderLib.drawQuad(RenderLib.scaledDisplayResolution().getScaledWidth() - 135, 26 + barSpace * x, 10, 8, 0, (176 + pxMultiplier * 8));
+					RenderEngine.drawQuad(RenderEngine.scaledDisplayResolution().getScaledWidth() - 135, 26 + barSpace * x, 10, 8, 0, (176 + pxMultiplier * 8));
 
-					RenderLib.drawProgressBar(player.getCommandSenderName(), (int) player.getMaxHealth(), (int) player.getHealth(), RenderLib.scaledDisplayResolution().getScaledWidth() - 105, 30 + barSpace * x, 100, 1, 0, 0xFF00AAFF, false);
-					RenderLib.drawPlayerFace(player.getCommandSenderName(), RenderLib.scaledDisplayResolution().getScaledWidth() - 122, 25 + barSpace * x, 11, 11);
+					RenderEngine.drawProgressBar(player.getCommandSenderName(), (int) player.getMaxHealth(), (int) player.getHealth(), RenderEngine.scaledDisplayResolution().getScaledWidth() - 105, 30 + barSpace * x, 100, 1, 0, 0xFF00AAFF, false);
+					RenderEngine.drawPlayerFace(player.getCommandSenderName(), RenderEngine.scaledDisplayResolution().getScaledWidth() - 122, 25 + barSpace * x, 11, 11);
 				}
 				else
 				{
-					RenderLib.drawRect(RenderLib.scaledDisplayResolution().getScaledWidth() - 105, 30 + barSpace * x, 100, 5, 0x66EEEEEE);
-					RenderLib.drawString("Connection lost...", RenderLib.scaledDisplayResolution().getScaledWidth() - 100, 29 + barSpace * x, 0xFFFFFFFF, true);
+					RenderEngine.drawRect(RenderEngine.scaledDisplayResolution().getScaledWidth() - 105, 30 + barSpace * x, 100, 5, 0x66EEEEEE);
+					RenderEngine.drawString("Connection lost...", RenderEngine.scaledDisplayResolution().getScaledWidth() - 100, 29 + barSpace * x, 0xFFFFFFFF, true);
 				}
 			}
 		}

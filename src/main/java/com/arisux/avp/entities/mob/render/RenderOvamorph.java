@@ -11,7 +11,7 @@ import com.arisux.avp.AliensVsPredator;
 
 public class RenderOvamorph extends RenderXenomorph
 {
-	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_OVAMORPH);
+	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_OVAMORPH);
 
 	public RenderOvamorph(ModelBase mainModel, float shadowSize)
 	{

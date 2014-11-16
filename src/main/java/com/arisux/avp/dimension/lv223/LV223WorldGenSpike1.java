@@ -12,7 +12,7 @@ public class LV223WorldGenSpike1 extends LV223WorldGenerator
 {
 	protected Block[] GetValidSpawnBlocks()
 	{
-		return new Block[] { AliensVsPredator.INSTANCE.blocks.terrainUniDirt };
+		return new Block[] { AliensVsPredator.instance.blocks.terrainUniDirt };
 	}
 
 	public boolean LocationIsValidSpawn(World world, int i, int j, int k)
@@ -43,7 +43,7 @@ public class LV223WorldGenSpike1 extends LV223WorldGenerator
 			}
 			if (blockID == x)
 				return true;
-			if ((blockID == AliensVsPredator.INSTANCE.blocks.terrainStalagmite) && (blockIDBelow == x))
+			if ((blockID == AliensVsPredator.instance.blocks.terrainStalagmite) && (blockIDBelow == x))
 			{
 				return true;
 			}
@@ -58,33 +58,33 @@ public class LV223WorldGenSpike1 extends LV223WorldGenerator
 			return false;
 		}
 
-		world.setBlock(i + 0, j + 0, k + 1, AliensVsPredator.INSTANCE.blocks.terrainUniDirt);
-		world.setBlock(i + 0, j + 1, k + 1, AliensVsPredator.INSTANCE.blocks.terrainUniDirt);
-		world.setBlock(i + 0, j + 2, k + 1, AliensVsPredator.INSTANCE.blocks.terrainUniDirt);
-		world.setBlock(i + 0, j + 3, k + 1, AliensVsPredator.INSTANCE.blocks.terrainUniDirt);
-		world.setBlock(i + 0, j + 4, k + 1, AliensVsPredator.INSTANCE.blocks.terrainUniDirt);
-		world.setBlock(i + 1, j + 0, k + 0, AliensVsPredator.INSTANCE.blocks.terrainUniDirt);
-		world.setBlock(i + 1, j + 0, k + 1, AliensVsPredator.INSTANCE.blocks.terrainUniDirt);
-		world.setBlock(i + 1, j + 0, k + 2, AliensVsPredator.INSTANCE.blocks.terrainUniDirt);
-		world.setBlock(i + 1, j + 1, k + 0, AliensVsPredator.INSTANCE.blocks.terrainUniDirt);
-		world.setBlock(i + 1, j + 1, k + 1, AliensVsPredator.INSTANCE.blocks.terrainUniDirt);
-		world.setBlock(i + 1, j + 1, k + 2, AliensVsPredator.INSTANCE.blocks.terrainUniDirt);
-		world.setBlock(i + 1, j + 2, k + 0, AliensVsPredator.INSTANCE.blocks.terrainUniDirt);
-		world.setBlock(i + 1, j + 2, k + 1, AliensVsPredator.INSTANCE.blocks.terrainUniDirt);
-		world.setBlock(i + 1, j + 2, k + 2, AliensVsPredator.INSTANCE.blocks.terrainUniDirt);
-		world.setBlock(i + 1, j + 3, k + 0, AliensVsPredator.INSTANCE.blocks.terrainUniDirt);
-		world.setBlock(i + 1, j + 3, k + 1, AliensVsPredator.INSTANCE.blocks.terrainUniDirt);
-		world.setBlock(i + 1, j + 3, k + 2, AliensVsPredator.INSTANCE.blocks.terrainUniDirt);
-		world.setBlock(i + 1, j + 4, k + 0, AliensVsPredator.INSTANCE.blocks.terrainUniDirt);
-		world.setBlock(i + 1, j + 4, k + 1, AliensVsPredator.INSTANCE.blocks.terrainUniDirt);
-		world.setBlock(i + 1, j + 5, k + 0, AliensVsPredator.INSTANCE.blocks.terrainUniDirt);
-		world.setBlock(i + 1, j + 5, k + 1, AliensVsPredator.INSTANCE.blocks.terrainUniDirt);
-		world.setBlock(i + 1, j + 6, k + 1, AliensVsPredator.INSTANCE.blocks.terrainUniDirt);
-		world.setBlock(i + 1, j + 7, k + 1, AliensVsPredator.INSTANCE.blocks.terrainUniDirt);
-		world.setBlock(i + 1, j + 8, k + 1, AliensVsPredator.INSTANCE.blocks.terrainUniDirt);
-		world.setBlock(i + 2, j + 0, k + 1, AliensVsPredator.INSTANCE.blocks.terrainUniDirt);
-		world.setBlock(i + 2, j + 1, k + 1, AliensVsPredator.INSTANCE.blocks.terrainUniDirt);
-		world.setBlock(i + 2, j + 2, k + 1, AliensVsPredator.INSTANCE.blocks.terrainUniDirt);
+		world.setBlock(i + 0, j + 0, k + 1, AliensVsPredator.instance.blocks.terrainUniDirt);
+		world.setBlock(i + 0, j + 1, k + 1, AliensVsPredator.instance.blocks.terrainUniDirt);
+		world.setBlock(i + 0, j + 2, k + 1, AliensVsPredator.instance.blocks.terrainUniDirt);
+		world.setBlock(i + 0, j + 3, k + 1, AliensVsPredator.instance.blocks.terrainUniDirt);
+		world.setBlock(i + 0, j + 4, k + 1, AliensVsPredator.instance.blocks.terrainUniDirt);
+		world.setBlock(i + 1, j + 0, k + 0, AliensVsPredator.instance.blocks.terrainUniDirt);
+		world.setBlock(i + 1, j + 0, k + 1, AliensVsPredator.instance.blocks.terrainUniDirt);
+		world.setBlock(i + 1, j + 0, k + 2, AliensVsPredator.instance.blocks.terrainUniDirt);
+		world.setBlock(i + 1, j + 1, k + 0, AliensVsPredator.instance.blocks.terrainUniDirt);
+		world.setBlock(i + 1, j + 1, k + 1, AliensVsPredator.instance.blocks.terrainUniDirt);
+		world.setBlock(i + 1, j + 1, k + 2, AliensVsPredator.instance.blocks.terrainUniDirt);
+		world.setBlock(i + 1, j + 2, k + 0, AliensVsPredator.instance.blocks.terrainUniDirt);
+		world.setBlock(i + 1, j + 2, k + 1, AliensVsPredator.instance.blocks.terrainUniDirt);
+		world.setBlock(i + 1, j + 2, k + 2, AliensVsPredator.instance.blocks.terrainUniDirt);
+		world.setBlock(i + 1, j + 3, k + 0, AliensVsPredator.instance.blocks.terrainUniDirt);
+		world.setBlock(i + 1, j + 3, k + 1, AliensVsPredator.instance.blocks.terrainUniDirt);
+		world.setBlock(i + 1, j + 3, k + 2, AliensVsPredator.instance.blocks.terrainUniDirt);
+		world.setBlock(i + 1, j + 4, k + 0, AliensVsPredator.instance.blocks.terrainUniDirt);
+		world.setBlock(i + 1, j + 4, k + 1, AliensVsPredator.instance.blocks.terrainUniDirt);
+		world.setBlock(i + 1, j + 5, k + 0, AliensVsPredator.instance.blocks.terrainUniDirt);
+		world.setBlock(i + 1, j + 5, k + 1, AliensVsPredator.instance.blocks.terrainUniDirt);
+		world.setBlock(i + 1, j + 6, k + 1, AliensVsPredator.instance.blocks.terrainUniDirt);
+		world.setBlock(i + 1, j + 7, k + 1, AliensVsPredator.instance.blocks.terrainUniDirt);
+		world.setBlock(i + 1, j + 8, k + 1, AliensVsPredator.instance.blocks.terrainUniDirt);
+		world.setBlock(i + 2, j + 0, k + 1, AliensVsPredator.instance.blocks.terrainUniDirt);
+		world.setBlock(i + 2, j + 1, k + 1, AliensVsPredator.instance.blocks.terrainUniDirt);
+		world.setBlock(i + 2, j + 2, k + 1, AliensVsPredator.instance.blocks.terrainUniDirt);
 
 		return true;
 	}

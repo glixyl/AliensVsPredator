@@ -14,12 +14,12 @@ public class LV223Biome extends LV223BiomeBase
 	public LV223Biome(int var1)
 	{
 		super(var1);
-		this.topBlock = AliensVsPredator.INSTANCE.blocks.terrainUniDirt;
-		this.fillerBlock = AliensVsPredator.INSTANCE.blocks.terrainUniStone;
+		this.topBlock = AliensVsPredator.instance.blocks.terrainUniDirt;
+		this.fillerBlock = AliensVsPredator.instance.blocks.terrainUniStone;
 		this.setHeight(height);
 		this.temperature = 4.0F;
 		this.rainfall = 0.1F;
-		this.biomeName = AliensVsPredator.INSTANCE.properties.DIMENSION_NAME_LV223;
+		this.biomeName = AliensVsPredator.properties().DIMENSION_NAME_LV223;
 		((LV223BiomeDecorator) this.theBiomeDecorator).stalagtitesPerChunk = 10;
 	}
 
@@ -28,6 +28,7 @@ public class LV223Biome extends LV223BiomeBase
 		return var1.nextInt(5) == 0 ? this.worldGeneratorBigTree : var1.nextInt(2) == 0 ? this.worldGeneratorTrees : this.worldGeneratorTrees;
 	}
 
+	@Override
 	public LV223Biome setColor(int par1)
 	{
 		this.func_150557_a(par1, false);

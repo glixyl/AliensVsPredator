@@ -6,20 +6,20 @@ import net.minecraft.server.management.ServerConfigurationManager;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
 
-import com.arisux.airi.lib.interfaces.IInitializable;
-import com.arisux.avp.dimension.lv223.LV223Teleporter;
-import com.arisux.avp.dimension.lv223.LV223WorldGenerator;
-import com.arisux.avp.dimension.lv223.LV223WorldProvider;
+import com.arisux.airi.lib.util.interfaces.IInitializable;
+import com.arisux.avp.dimension.lv223.*;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class DimensionHandler implements IInitializable
 {
-	public void initialize()
+	@Override
+	public void initialize(FMLInitializationEvent event)
 	{
-		DimensionManager.registerProviderType(AliensVsPredator.INSTANCE.properties.DIMENSION_ID_LV223, LV223WorldProvider.class, true);
-		DimensionManager.registerDimension(AliensVsPredator.INSTANCE.properties.DIMENSION_ID_LV223, AliensVsPredator.INSTANCE.properties.DIMENSION_ID_LV223);
+		DimensionManager.registerProviderType(AliensVsPredator.properties().DIMENSION_ID_LV223, LV223WorldProvider.class, true);
+		DimensionManager.registerDimension(AliensVsPredator.properties().DIMENSION_ID_LV223, AliensVsPredator.properties().DIMENSION_ID_LV223);
 		GameRegistry.registerWorldGenerator(new LV223WorldGenerator(), 1);
 	}
 
@@ -28,7 +28,7 @@ public class DimensionHandler implements IInitializable
 		MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
 		long startTime = System.currentTimeMillis();
 		short var3 = 196;
-		server.logInfo("Preparing start region for level " + AliensVsPredator.INSTANCE.properties.DIMENSION_GLOBAL_LV223);
+		server.logInfo("Preparing start region for level " + AliensVsPredator.properties().DIMENSION_GLOBAL_LV223);
 
 		for (int chunkX = -var3; (chunkX <= var3) && (server.isServerRunning()); chunkX += 16)
 		{
@@ -57,16 +57,16 @@ public class DimensionHandler implements IInitializable
 
 		if (player.dimension == 0)
 		{
-			LV223Teleporter teleporter = new LV223Teleporter(MinecraftServer.getServer().worldServerForDimension(AliensVsPredator.INSTANCE.properties.DIMENSION_ID_LV223));
-			serverManager.transferPlayerToDimension(player, AliensVsPredator.INSTANCE.properties.DIMENSION_ID_LV223, teleporter);
-		} else if (player.dimension == AliensVsPredator.INSTANCE.properties.DIMENSION_ID_LV223)
+			LV223Teleporter teleporter = new LV223Teleporter(MinecraftServer.getServer().worldServerForDimension(AliensVsPredator.properties().DIMENSION_ID_LV223));
+			serverManager.transferPlayerToDimension(player, AliensVsPredator.properties().DIMENSION_ID_LV223, teleporter);
+		} else if (player.dimension == AliensVsPredator.properties().DIMENSION_ID_LV223)
 		{
 			LV223Teleporter teleporter = new LV223Teleporter(MinecraftServer.getServer().worldServerForDimension(0));
 			serverManager.transferPlayerToDimension(player, 0, teleporter);
 		} else
 		{
 			LV223Teleporter teleporter = new LV223Teleporter(MinecraftServer.getServer().worldServerForDimension(player.dimension));
-			serverManager.transferPlayerToDimension(player, AliensVsPredator.INSTANCE.properties.DIMENSION_ID_LV223, teleporter);
+			serverManager.transferPlayerToDimension(player, AliensVsPredator.properties().DIMENSION_ID_LV223, teleporter);
 		}
 	}
 }

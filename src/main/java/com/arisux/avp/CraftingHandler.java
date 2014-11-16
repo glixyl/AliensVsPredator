@@ -2,13 +2,15 @@ package com.arisux.avp;
 
 import net.minecraft.item.ItemStack;
 
-import com.arisux.airi.lib.interfaces.IInitializable;
+import com.arisux.airi.lib.util.interfaces.IInitializable;
 
+import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class CraftingHandler implements IInitializable
 {
-	public void initialize()
+	@Override
+	public void initialize(FMLInitializationEvent event)
 	{
 		addRecipes();
 		addShapelessRecipes();
@@ -64,9 +66,9 @@ public class CraftingHandler implements IInitializable
 
 	public void addSmelting()
 	{
-		GameRegistry.addSmelting(AliensVsPredator.INSTANCE.blocks.oreCopper, new ItemStack(AliensVsPredator.INSTANCE.items.itemIngotCopper), 1.0F);
-		GameRegistry.addSmelting(AliensVsPredator.INSTANCE.blocks.oreLithium, new ItemStack(AliensVsPredator.INSTANCE.items.itemIngotLithium), 1.0F);
-		GameRegistry.addSmelting(AliensVsPredator.INSTANCE.blocks.oreBauxite, new ItemStack(AliensVsPredator.INSTANCE.items.itemIngotAluminum), 1.0F);
+		GameRegistry.addSmelting(AliensVsPredator.instance.blocks.oreCopper, new ItemStack(AliensVsPredator.instance.items.itemIngotCopper), 1.0F);
+		GameRegistry.addSmelting(AliensVsPredator.instance.blocks.oreLithium, new ItemStack(AliensVsPredator.instance.items.itemIngotLithium), 1.0F);
+		GameRegistry.addSmelting(AliensVsPredator.instance.blocks.oreBauxite, new ItemStack(AliensVsPredator.instance.items.itemIngotAluminum), 1.0F);
 //		GameRegistry.addSmelting(AliensVsPredator.INSTANCE.items.itemSilicon, new ItemStack(AliensVsPredator.INSTANCE.items.itemSiliconPlate), 1.0F);
 	}
 }

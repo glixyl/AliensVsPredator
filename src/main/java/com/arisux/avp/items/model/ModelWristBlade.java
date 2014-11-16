@@ -131,7 +131,7 @@ public class ModelWristBlade extends ModelBase
 		this.b10.render(f5);
 		this.b11.render(f5);
 
-		if (entity instanceof EntityPlayer && ((EntityPlayer) entity).inventory.hasItem(AliensVsPredator.INSTANCE.items.swordTitanium))
+		if (entity instanceof EntityPlayer && ((EntityPlayer) entity).inventory.hasItem(AliensVsPredator.instance.items.swordTitanium))
 		{
 			this.b6.render(f5);
 			this.bladeLeft.render(f5);

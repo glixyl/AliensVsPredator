@@ -19,7 +19,7 @@ public class TileEntityHiveResin extends TileEntity
 
 		this.deathCount++;
 
-		if (rand.nextInt(64) <= 1 && !this.worldObj.isRemote && AliensVsPredator.INSTANCE.settings.doesHiveTick())
+		if (rand.nextInt(64) <= 1 && !this.worldObj.isRemote && AliensVsPredator.instance.settings.doesHiveTick())
 		{
 			int lightLevel = 4;
 			int var7 = this.xCoord + rand.nextInt(3) - 1;
@@ -33,12 +33,12 @@ public class TileEntityHiveResin extends TileEntity
 
 				if (block == Blocks.stone || block == Blocks.dirt || block == Blocks.cobblestone || block == Blocks.leaves)
 				{
-					this.worldObj.setBlock(var7, var8, var9, AliensVsPredator.INSTANCE.blocks.terrainHiveResin);
+					this.worldObj.setBlock(var7, var8, var9, AliensVsPredator.instance.blocks.terrainHiveResin);
 				}
 
 				if (this.deathCount >= 20)
 				{
-					this.worldObj.setBlock(this.xCoord, this.yCoord, this.zCoord, AliensVsPredator.INSTANCE.blocks.terrainHiveResinDead);
+					this.worldObj.setBlock(this.xCoord, this.yCoord, this.zCoord, AliensVsPredator.instance.blocks.terrainHiveResinDead);
 				}
 			}
 		}

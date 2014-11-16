@@ -3,13 +3,11 @@ package com.arisux.avp.packets.server;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 
-import com.arisux.airi.lib.PlayerLib;
+import com.arisux.airi.engine.WorldEngine;
 import com.arisux.avp.entities.ExtendedEntityPlayer;
 
 import cpw.mods.fml.common.network.ByteBufUtils;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import cpw.mods.fml.common.network.simpleimpl.*;
 
 public class PacketInfectPlayerServerUpdate implements IMessage, IMessageHandler<PacketInfectPlayerServerUpdate, PacketInfectPlayerServerUpdate>
 {
@@ -41,7 +39,7 @@ public class PacketInfectPlayerServerUpdate implements IMessage, IMessageHandler
 
 	@Override public PacketInfectPlayerServerUpdate onMessage(PacketInfectPlayerServerUpdate packet, MessageContext ctx)
 	{
-		EntityPlayer targetPlayer = PlayerLib.getPlayerForUsername(ctx.getServerHandler().playerEntity.worldObj, packet.username);
+		EntityPlayer targetPlayer = WorldEngine.Entities.Players.getPlayerForUsername(ctx.getServerHandler().playerEntity.worldObj, packet.username);
 		ExtendedEntityPlayer extendedTargetPlayer = (ExtendedEntityPlayer) targetPlayer.getExtendedProperties(ExtendedEntityPlayer.ID_PROPERTIES);
 		
 		extendedTargetPlayer.setImpregnatedTime(extendedTargetPlayer.maxImpregnatedTime);

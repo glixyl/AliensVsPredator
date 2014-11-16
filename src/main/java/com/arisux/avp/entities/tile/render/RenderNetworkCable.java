@@ -1,21 +1,18 @@
 package com.arisux.avp.entities.tile.render;
 
 import static org.lwjgl.opengl.GL11.*;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
-import com.arisux.airi.lib.RenderLib;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.TileEntityNetworkCable;
-import com.arisux.avp.entities.tile.model.ModelCable;
 import com.arisux.avp.entities.tile.model.ModelNetworkCable;
 
 public class RenderNetworkCable extends TileEntitySpecialRenderer
 {
 	private ModelNetworkCable model = new ModelNetworkCable();
-	private static final ResourceLocation resource = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_CABLE);
+	private static final ResourceLocation resource = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_CABLE);
 
 	@Override
 	public void renderTileEntityAt(TileEntity var1, double posX, double posY, double posZ, float var8)

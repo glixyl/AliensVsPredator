@@ -19,15 +19,15 @@ public class ItemArmorTitanium extends ItemArmor
 		switch (slot)
 		{
 			case 0:
-				return AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_TITANIUM1;
+				return AliensVsPredator.properties().TEXTURE_PATH_TITANIUM1;
 			case 1:
-				return AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_TITANIUM1;
+				return AliensVsPredator.properties().TEXTURE_PATH_TITANIUM1;
 			case 2:
-				return AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_TITANIUM2;
+				return AliensVsPredator.properties().TEXTURE_PATH_TITANIUM2;
 			case 3:
-				return AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_TITANIUM2;
+				return AliensVsPredator.properties().TEXTURE_PATH_TITANIUM2;
 			default:
-				return AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_TITANIUM1;
+				return AliensVsPredator.properties().TEXTURE_PATH_TITANIUM1;
 		}
 	}
 }

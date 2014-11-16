@@ -5,7 +5,6 @@ import net.minecraft.client.model.ModelRenderer;
 
 import com.arisux.avp.entities.tile.PoweredTileEntity;
 import com.arisux.avp.entities.tile.TileEntityNetworkCable;
-import com.arisux.avp.entities.tile.TileEntityPowerline;
 
 public class ModelNetworkCable extends ModelBase
 {

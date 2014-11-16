@@ -12,7 +12,7 @@ import com.arisux.avp.AliensVsPredator;
 
 public class RenderYautja extends RenderLiving
 {
-	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_YAUTJA);
+	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_YAUTJA);
 
 	public RenderYautja(ModelBase mainModel, float shadowSize)
 	{

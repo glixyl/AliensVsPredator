@@ -1,29 +1,11 @@
 package com.arisux.avp;
 
-import com.arisux.airi.lib.interfaces.IInitializable;
-import com.arisux.avp.packets.client.PacketAmmoClientUpdate;
-import com.arisux.avp.packets.client.PacketBroadcastRadiusClientUpdate;
-import com.arisux.avp.packets.client.PacketChannelClientUpdate;
-import com.arisux.avp.packets.client.PacketKillCountClientUpdate;
-import com.arisux.avp.packets.client.PacketTurretInit;
-import com.arisux.avp.packets.server.PacketBroadcastRadiusServerUpdate;
-import com.arisux.avp.packets.server.PacketChannelServerUpdate;
-import com.arisux.avp.packets.server.PacketGrenadeLaunchServerUpdate;
-import com.arisux.avp.packets.server.PacketInfectPlayerServerUpdate;
-import com.arisux.avp.packets.server.PacketInvisiblePlayerServerUpdate;
-import com.arisux.avp.packets.server.PacketOpenWristbracerGUIServerUpdate;
-import com.arisux.avp.packets.server.PacketReadFromDataDevice;
-import com.arisux.avp.packets.server.PacketReloadFirearmServerUpdate;
-import com.arisux.avp.packets.server.PacketShootBulletServerUpdate;
-import com.arisux.avp.packets.server.PacketSpawnEntityServerUpdate;
-import com.arisux.avp.packets.server.PacketTurretAddTargetUpdate;
-import com.arisux.avp.packets.server.PacketTurretRemoveTargetUpdate;
-import com.arisux.avp.packets.server.PacketTurretTargetUpdate;
-import com.arisux.avp.packets.server.PacketWriteToDataDevice;
+import com.arisux.airi.lib.util.interfaces.IInitializable;
+import com.arisux.avp.packets.client.*;
+import com.arisux.avp.packets.server.*;
 
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.network.simpleimpl.*;
 import cpw.mods.fml.relauncher.Side;
 
 public class NetworkHandler extends SimpleNetworkWrapper implements IInitializable
@@ -32,11 +14,11 @@ public class NetworkHandler extends SimpleNetworkWrapper implements IInitializab
 
 	public NetworkHandler()
 	{
-		super(AliensVsPredator.INSTANCE.properties.CHANNEL);
+		super(AliensVsPredator.properties().getChannel());
 	}
 
 	@Override
-	public void initialize()
+	public void initialize(FMLInitializationEvent event)
 	{
 		this.registerMessage(Side.SERVER, PacketOpenWristbracerGUIServerUpdate.class);
 		this.registerMessage(Side.SERVER, PacketInvisiblePlayerServerUpdate.class);

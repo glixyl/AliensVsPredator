@@ -3,17 +3,8 @@ package com.arisux.avp.entities.mob;
 import java.util.Random;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILeapAtTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIPanic;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.item.ItemStack;
@@ -59,6 +50,7 @@ public class EntityYautja extends EntityMob implements IMob
 		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityChestburster.class, 0, true));
 	}
 
+	@Override
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
@@ -73,6 +65,7 @@ public class EntityYautja extends EntityMob implements IMob
 	 * Basic mob attack. Default to touch of death in EntityCreature.
 	 * Overridden by each mob to define their attack.
 	 */
+	@Override
 	protected void attackEntity(Entity entity, float f)
 	{
 		if (this.attackTime <= 0 && f < 2.0F && entity.boundingBox.maxY > this.boundingBox.minY && entity.boundingBox.minY < this.boundingBox.maxY)
@@ -95,8 +88,8 @@ public class EntityYautja extends EntityMob implements IMob
 					double d = entity.posX - this.posX;
 					double d1 = entity.posZ - this.posZ;
 					float f2 = MathHelper.sqrt_double(d * d + d1 * d1);
-					this.motionX = d / (double) f2 * 0.5D * 0.800000011920929D + this.motionX * 0.20000000298023224D;
-					this.motionZ = d1 / (double) f2 * 0.5D * 0.800000011920929D + this.motionZ * 0.20000000298023224D;
+					this.motionX = d / f2 * 0.5D * 0.800000011920929D + this.motionX * 0.20000000298023224D;
+					this.motionZ = d1 / f2 * 0.5D * 0.800000011920929D + this.motionZ * 0.20000000298023224D;
 					this.motionY = 0.4000000059604645D;
 				}
 			} else
@@ -106,6 +99,7 @@ public class EntityYautja extends EntityMob implements IMob
 		}
 	}
 
+	@Override
 	public boolean attackEntityAsMob(Entity par1Entity)
 	{
 		int var2 = 5;
@@ -120,12 +114,13 @@ public class EntityYautja extends EntityMob implements IMob
 			var2 -= 2 << this.getActivePotionEffect(Potion.weakness).getAmplifier();
 		}
 
-		return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) var2);
+		return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), var2);
 	}
 
 	/**
 	 * Returns true if the newer Entity AI code should be run
 	 */
+	@Override
 	protected boolean isAIEnabled()
 	{
 		return true;
@@ -135,11 +130,13 @@ public class EntityYautja extends EntityMob implements IMob
 	 * Returns the current armor value as determined by a call to
 	 * InventoryPlayer.getTotalArmorValue
 	 */
+	@Override
 	public int getTotalArmorValue()
 	{
 		return 7;
 	}
 
+	@Override
 	protected void collideWithEntity(Entity par1Entity)
 	{
 		if (par1Entity instanceof IMob && this.getRNG().nextInt(20) == 0 && !(par1Entity instanceof EntityYautja))
@@ -155,6 +152,7 @@ public class EntityYautja extends EntityMob implements IMob
 	 * Checks if this entity is inside water (if inWater field is true as a
 	 * result of handleWaterMovement() returning true)
 	 */
+	@Override
 	public boolean isInWater()
 	{
 		return this.worldObj.handleMaterialAcceleration(this.boundingBox.expand(0.0D, -0.900000023841858D, 0.0D), Material.water, this);
@@ -163,25 +161,28 @@ public class EntityYautja extends EntityMob implements IMob
 	/**
 	 * Returns the sound this mob makes while it's alive.
 	 */
+	@Override
 	protected String getLivingSound()
 	{
-		return AliensVsPredator.INSTANCE.properties.SOUND_YAUTJA_LIVING;
+		return AliensVsPredator.properties().SOUND_YAUTJA_LIVING;
 	}
 
 	/**
 	 * Returns the sound this mob makes when it is hurt.
 	 */
+	@Override
 	protected String getHurtSound()
 	{
-		return AliensVsPredator.INSTANCE.properties.SOUND_YAUTJA_HURT;
+		return AliensVsPredator.properties().SOUND_YAUTJA_HURT;
 	}
 
 	/**
 	 * Returns the sound this mob makes on death.
 	 */
+	@Override
 	protected String getDeathSound()
 	{
-		return AliensVsPredator.INSTANCE.properties.SOUND_YAUTJA_DEATH;
+		return AliensVsPredator.properties().SOUND_YAUTJA_DEATH;
 	}
 
 	/**
@@ -189,27 +190,30 @@ public class EntityYautja extends EntityMob implements IMob
 	 * entity has recently been hit by a player. @param par2 - Level of
 	 * Looting used to kill this mob.
 	 */
+	@Override
 	protected void dropFewItems(boolean flag, int i)
 	{
 		if ((new Random()).nextInt(6) == 1)
-			this.entityDropItem(new ItemStack(AliensVsPredator.INSTANCE.items.itemEnergy), 1);
+			this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.itemEnergy), 1);
 
 		if ((new Random()).nextInt(6) == 1)
-			this.entityDropItem(new ItemStack(AliensVsPredator.INSTANCE.items.itemSpear), 1);
+			this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.itemSpear), 1);
 	}
 
+	@Override
 	protected void dropRareDrop(int par1)
 	{
-		this.entityDropItem(new ItemStack(AliensVsPredator.INSTANCE.items.helmTitanium), 1);
-		this.entityDropItem(new ItemStack(AliensVsPredator.INSTANCE.items.plateTitanium), 1);
-		this.entityDropItem(new ItemStack(AliensVsPredator.INSTANCE.items.legsTitanium), 1);
-		this.entityDropItem(new ItemStack(AliensVsPredator.INSTANCE.items.bootsTitanium), 1);
+		this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.helmTitanium), 1);
+		this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.plateTitanium), 1);
+		this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.legsTitanium), 1);
+		this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.bootsTitanium), 1);
 	}
 
 	/**
 	 * Determines if an entity can be despawned, used on idle far away
 	 * entities
 	 */
+	@Override
 	public boolean canDespawn()
 	{
 		return false;

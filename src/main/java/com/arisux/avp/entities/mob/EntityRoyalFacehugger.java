@@ -1,17 +1,7 @@
 package com.arisux.avp.entities.mob;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILeapAtTarget;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
@@ -54,6 +44,7 @@ public class EntityRoyalFacehugger extends EntityFacehugger implements IMob
 		this.targetTasks.addTask(5, new EntityAINearestAttackableTarget(this, EntityYautja.class, 0, true));
 	}
 
+	@Override
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
@@ -65,6 +56,7 @@ public class EntityRoyalFacehugger extends EntityFacehugger implements IMob
 	/**
 	 * Called to update the entity's position/logic.
 	 */
+	@Override
 	public void onUpdate()
 	{
 		super.onUpdate();
@@ -75,11 +67,13 @@ public class EntityRoyalFacehugger extends EntityFacehugger implements IMob
 	 * required. For example, zombies and skeletons use this to react to
 	 * sunlight and start to burn.
 	 */
+	@Override
 	public void onLivingUpdate()
 	{
 		super.onLivingUpdate();
 	}
 
+	@Override
 	public void collideWithEntity(Entity par1Entity)
 	{
 		if (!this.worldObj.isRemote && par1Entity.riddenByEntity == null && par1Entity instanceof EntityMarine)
@@ -91,6 +85,7 @@ public class EntityRoyalFacehugger extends EntityFacehugger implements IMob
 	/**
 	 * Called by a player entity when they collide with an entity
 	 */
+	@Override
 	public void onCollideWithPlayer(EntityPlayer par1Entity)
 	{
 		if (!this.worldObj.isRemote && par1Entity.riddenByEntity == null && !par1Entity.capabilities.isCreativeMode)
@@ -102,6 +97,7 @@ public class EntityRoyalFacehugger extends EntityFacehugger implements IMob
 	/**
 	 * Called when the mob's health reaches 0.
 	 */
+	@Override
 	public void onDeath(DamageSource par1DamageSource)
 	{
 		super.onDeath(par1DamageSource);
@@ -117,6 +113,7 @@ public class EntityRoyalFacehugger extends EntityFacehugger implements IMob
 		}
 	}
 
+	@Override
 	public float facehuggerScaleAmount()
 	{
 		return 1.15F;
@@ -125,11 +122,13 @@ public class EntityRoyalFacehugger extends EntityFacehugger implements IMob
 	/**
 	 * Returns true if the newer Entity AI code should be run
 	 */
+	@Override
 	protected boolean isAIEnabled()
 	{
 		return true;
 	}
 
+	@Override
 	@SideOnly(Side.SERVER)
 	public void updateRiderPosition()
 	{
@@ -139,6 +138,7 @@ public class EntityRoyalFacehugger extends EntityFacehugger implements IMob
 	/**
 	 * Returns the Y Offset of this entity.
 	 */
+	@Override
 	public double getYOffset()
 	{
 		return -1.2D;
@@ -148,6 +148,7 @@ public class EntityRoyalFacehugger extends EntityFacehugger implements IMob
 	 * Returns the current armor value as determined by a call to
 	 * InventoryPlayer.getTotalArmorValue
 	 */
+	@Override
 	public int getTotalArmorValue()
 	{
 		return 4;
@@ -158,6 +159,7 @@ public class EntityRoyalFacehugger extends EntityFacehugger implements IMob
 	 * they walk on. used for spiders and wolves to prevent them from
 	 * trampling crops
 	 */
+	@Override
 	protected boolean canTriggerWalking()
 	{
 		return false;
@@ -180,15 +182,17 @@ public class EntityRoyalFacehugger extends EntityFacehugger implements IMob
 	/**
 	 * Returns the sound this mob makes on death.
 	 */
+	@Override
 	protected String getDeathSound()
 	{
-		return AliensVsPredator.INSTANCE.properties.SOUND_FACEHUGGER_DEATH;
+		return AliensVsPredator.properties().SOUND_FACEHUGGER_DEATH;
 	}
 
 	/**
 	 * Determines if an entity can be despawned, used on idle far away
 	 * entities
 	 */
+	@Override
 	protected boolean canDespawn()
 	{
 		return false;
@@ -197,6 +201,7 @@ public class EntityRoyalFacehugger extends EntityFacehugger implements IMob
 	/**
 	 * returns true if this entity is by a ladder, false otherwise
 	 */
+	@Override
 	public boolean isOnLadder()
 	{
 		return this.isCollidedHorizontally;
@@ -211,6 +216,7 @@ public class EntityRoyalFacehugger extends EntityFacehugger implements IMob
 	 * Basic mob attack. Default to touch of death in EntityCreature.
 	 * Overridden by each mob to define their attack.
 	 */
+	@Override
 	protected void attackEntity(Entity entity, float f)
 	{
 		if (f > 2.0F && f < 6.0F && this.rand.nextInt(50) == 0)
@@ -221,8 +227,8 @@ public class EntityRoyalFacehugger extends EntityFacehugger implements IMob
 				double var4 = entity.posX - this.posX;
 				double var6 = entity.posZ - this.posZ;
 				float var8 = MathHelper.sqrt_double(var4 * var4 + var6 * var6);
-				this.motionX = var4 / (double) var8 * 0.5D * 0.800000011920929D + this.motionX * 0.20000000298023224D;
-				this.motionZ = var6 / (double) var8 * 0.5D * 0.800000011920929D + this.motionZ * 0.20000000298023224D;
+				this.motionX = var4 / var8 * 0.5D * 0.800000011920929D + this.motionX * 0.20000000298023224D;
+				this.motionZ = var6 / var8 * 0.5D * 0.800000011920929D + this.motionZ * 0.20000000298023224D;
 				this.motionY = 0.4000000059604645D;
 			}
 		} else
@@ -235,6 +241,7 @@ public class EntityRoyalFacehugger extends EntityFacehugger implements IMob
 	 * (abstract) Protected helper method to write subclass entity data to
 	 * NBT.
 	 */
+	@Override
 	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.writeEntityToNBT(par1NBTTagCompound);
@@ -244,6 +251,7 @@ public class EntityRoyalFacehugger extends EntityFacehugger implements IMob
 	 * (abstract) Protected helper method to read subclass entity data from
 	 * NBT.
 	 */
+	@Override
 	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.readEntityFromNBT(par1NBTTagCompound);
@@ -252,11 +260,13 @@ public class EntityRoyalFacehugger extends EntityFacehugger implements IMob
 	/**
 	 * Get this Entity's EnumCreatureAttribute
 	 */
+	@Override
 	public EnumCreatureAttribute getCreatureAttribute()
 	{
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
 
+	@Override
 	public boolean isPotionApplicable(PotionEffect par1PotionEffect)
 	{
 		return par1PotionEffect.getPotionID() == Potion.poison.id ? false : super.isPotionApplicable(par1PotionEffect);
@@ -265,6 +275,7 @@ public class EntityRoyalFacehugger extends EntityFacehugger implements IMob
 	/**
 	 * This method gets called when the entity kills another one.
 	 */
+	@Override
 	public void onKillEntity(EntityLivingBase par1EntityLivingBase)
 	{
 		super.onKillEntity(par1EntityLivingBase);

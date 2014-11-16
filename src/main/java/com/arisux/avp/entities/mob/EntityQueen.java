@@ -8,7 +8,7 @@ import com.arisux.avp.AliensVsPredator;
 
 public class EntityQueen extends EntityXenomorph
 {
-	private ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_XENOQUEEN);
+	private ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_XENOQUEEN);
 	public boolean isInStasis;
 	public float ovipositorSize;
 
@@ -39,6 +39,7 @@ public class EntityQueen extends EntityXenomorph
 		// this.targetTasks.addTask(6, new EntityAINearestAttackableTarget(this, EntityAgeable.class, 0, false));
 	}
 
+	@Override
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
@@ -68,19 +69,22 @@ public class EntityQueen extends EntityXenomorph
 		return true;
 	}
 
+	@Override
 	protected String getHurtSound()
 	{
-		return AliensVsPredator.INSTANCE.properties.SOUND_QUEEN_HURT;
+		return AliensVsPredator.properties().SOUND_QUEEN_HURT;
 	}
 
+	@Override
 	protected String getLivingSound()
 	{
-		return AliensVsPredator.INSTANCE.properties.SOUND_QUEEN_LIVING;
+		return AliensVsPredator.properties().SOUND_QUEEN_LIVING;
 	}
 
+	@Override
 	protected String getDeathSound()
 	{
-		return AliensVsPredator.INSTANCE.properties.SOUND_QUEEN_DEATH;
+		return AliensVsPredator.properties().SOUND_QUEEN_DEATH;
 	}
 
 	@Override

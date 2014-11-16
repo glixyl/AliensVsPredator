@@ -3,7 +3,7 @@ package com.arisux.avp.event.render;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiChat;
 
-import com.arisux.airi.lib.RenderLib;
+import com.arisux.airi.engine.RenderEngine;
 import com.arisux.avp.entities.mob.EntityQueen;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -22,7 +22,7 @@ public class BossHealthIndicatorRenderEvent
 
 			if (mc.inGameHasFocus && target != null && mc.thePlayer.canEntityBeSeen(target) || target != null && mc.currentScreen instanceof GuiChat && mc.thePlayer.canEntityBeSeen(target))
 			{
-				RenderLib.drawProgressBar(target.getCommandSenderName() + " " + (int) target.getHealth() + "/" + (int) target.getMaxHealth(), (int) target.getMaxHealth(), (int) target.getHealth(), 0, 0, (int) RenderLib.scaledDisplayResolution().getScaledWidth(), 4, 2, 0xFFFF0000, false);
+				RenderEngine.drawProgressBar(target.getCommandSenderName() + " " + (int) target.getHealth() + "/" + (int) target.getMaxHealth(), (int) target.getMaxHealth(), (int) target.getHealth(), 0, 0, (int) RenderEngine.scaledDisplayResolution().getScaledWidth(), 4, 2, 0xFFFF0000, false);
 			}
 		}
 	}

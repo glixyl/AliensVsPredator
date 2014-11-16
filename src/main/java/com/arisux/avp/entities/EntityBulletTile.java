@@ -3,21 +3,15 @@ package com.arisux.avp.entities;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 
-import com.arisux.airi.lib.SyncedTileEntity;
+import com.arisux.avp.entities.tile.TileEntityTurret;
 
 public class EntityBulletTile extends Entity
 {
@@ -31,7 +25,7 @@ public class EntityBulletTile extends Entity
 	private int ticksInAir;
 	private boolean inGround;
 	private boolean arrowCritical;
-	public SyncedTileEntity tile;
+	public TileEntityTurret tile;
 	public EntityArrow entityarrow;
 	public static double damage;
 
@@ -67,7 +61,7 @@ public class EntityBulletTile extends Entity
 		this.yOffset = 0.0F;
 	}
 
-	public EntityBulletTile(World world, SyncedTileEntity tile, float f, double damage1)
+	public EntityBulletTile(World world, TileEntityTurret tile, float f, double damage1)
 	{
 		super(world);
 		damage = damage1;
@@ -81,19 +75,20 @@ public class EntityBulletTile extends Entity
 		this.ticksInAir = 0;
 		this.arrowCritical = true;
 		this.tile = tile;
-		this.setSize(0.5F, 0.5F);
+		this.setSize(0.1F, 0.1F);
 		this.setLocationAndAngles(tile.xCoord + 0.5, tile.yCoord + 1.5, tile.zCoord + 0.5, tile.getRotationYaw(), tile.getRotationPitch());
-		this.posX -= (double) (MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F);
+		this.posX -= MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F;
 		this.posY -= 0.10000000149011612D;
-		this.posZ -= (double) (MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F);
+		this.posZ -= MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F;
 		this.setPosition(this.posX, this.posY, this.posZ);
 		this.yOffset = 0.0F;
-		this.motionX = (double) (-MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI));
-		this.motionZ = (double) (MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI));
-		this.motionY = (double) (-MathHelper.sin(this.rotationPitch / 180.0F * (float) Math.PI));
+		this.motionX = -MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI);
+		this.motionZ = MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI);
+		this.motionY = (-MathHelper.sin(this.rotationPitch / 180.0F * (float) Math.PI));
 		this.setArrowHeading(this.motionX, this.motionY, this.motionZ, f * 1.5F, 1.0F);
 	}
 
+	@Override
 	protected void entityInit()
 	{
 
@@ -102,21 +97,21 @@ public class EntityBulletTile extends Entity
 	public void setArrowHeading(double d, double d1, double d2, float f, float f1)
 	{
 		float f2 = MathHelper.sqrt_double(d * d + d1 * d1 + d2 * d2);
-		d /= (double) f2;
-		d1 /= (double) f2;
-		d2 /= (double) f2;
-		d += this.rand.nextGaussian() * 0.007499999832361937D * (double) f1;
-		d1 += this.rand.nextGaussian() * 0.007499999832361937D * (double) f1;
-		d2 += this.rand.nextGaussian() * 0.007499999832361937D * (double) f1;
-		d *= (double) f;
-		d1 *= (double) f;
-		d2 *= (double) f;
+		d /= f2;
+		d1 /= f2;
+		d2 /= f2;
+		d += this.rand.nextGaussian() * 0.007499999832361937D * f1;
+		d1 += this.rand.nextGaussian() * 0.007499999832361937D * f1;
+		d2 += this.rand.nextGaussian() * 0.007499999832361937D * f1;
+		d *= f;
+		d1 *= f;
+		d2 *= f;
 		this.motionX = d;
 		this.motionY = d1;
 		this.motionZ = d2;
 		float f3 = MathHelper.sqrt_double(d * d + d2 * d2);
 		this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(d, d2) * 180.0D / Math.PI);
-		this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(d1, (double) f3) * 180.0D / Math.PI);
+		this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(d1, f3) * 180.0D / Math.PI);
 		this.ticksInGround = 0;
 	}
 
@@ -131,7 +126,7 @@ public class EntityBulletTile extends Entity
 		{
 			float f = MathHelper.sqrt_double(d * d + d2 * d2);
 			this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(d, d2) * 180.0D / Math.PI);
-			this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(d1, (double) f) * 180.0D / Math.PI);
+			this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(d1, f) * 180.0D / Math.PI);
 			this.prevRotationPitch = this.rotationPitch;
 			this.prevRotationYaw = this.rotationYaw;
 			this.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
@@ -152,7 +147,7 @@ public class EntityBulletTile extends Entity
 		{
 			float i = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
 			this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(this.motionX, this.motionZ) * 180.0D / Math.PI);
-			this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(this.motionY, (double) i) * 180.0D / Math.PI);
+			this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(this.motionY, i) * 180.0D / Math.PI);
 		}
 
 		Block var16 = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
@@ -186,7 +181,7 @@ public class EntityBulletTile extends Entity
 			if (var18 == Blocks.glass_pane)
 			{
 				this.worldObj.setBlockToAir(this.xTile, this.yTile, this.zTile);
-				this.worldObj.playSoundEffect((double) this.xTile + 0.5D, (double) this.yTile + 0.5D, (double) this.zTile + 0.5D, "random.glass3", 1.0F, 1.0F);
+				this.worldObj.playSoundEffect(this.xTile + 0.5D, this.yTile + 0.5D, this.zTile + 0.5D, "random.glass3", 1.0F, 1.0F);
 				this.worldObj.playSound(xTile, yTile, zTile, "", 1F, 1F, true);
 			}
 
@@ -202,9 +197,9 @@ public class EntityBulletTile extends Entity
 			else
 			{
 				this.inGround = false;
-				this.motionX *= (double) (this.rand.nextFloat() * 0.2F);
-				this.motionY *= (double) (this.rand.nextFloat() * 0.2F);
-				this.motionZ *= (double) (this.rand.nextFloat() * 0.2F);
+				this.motionX *= this.rand.nextFloat() * 0.2F;
+				this.motionY *= this.rand.nextFloat() * 0.2F;
+				this.motionZ *= this.rand.nextFloat() * 0.2F;
 				this.ticksInGround = 0;
 				this.ticksInAir = 0;
 			}
@@ -228,13 +223,13 @@ public class EntityBulletTile extends Entity
 
 			for (int f3 = 0; f3 < list.size(); f3++)
 			{
-				Entity f4 = (Entity) list.get(f3);
+				Entity f4 = list.get(f3);
 				Vec3 vec3e = Vec3.createVectorHelper(f4.posX, f4.posY, f4.posZ);
 
 				if ((this.ticksInAir > 1))
 				{
 					f6 = 1F;
-					MovingObjectPosition f7 = f4.boundingBox.expand((double) f6, (double) f6, (double) f6).calculateIntercept(vec3e, vec3d1);
+					MovingObjectPosition f7 = f4.boundingBox.expand(f6, f6, f6).calculateIntercept(vec3e, vec3d1);
 
 					if (f7 != null)
 					{
@@ -261,7 +256,7 @@ public class EntityBulletTile extends Entity
 				if (movingobjectposition.entityHit != null)
 				{
 					var20 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
-					int var23 = (int) Math.ceil((double) var20 * damage);
+					int var23 = (int) Math.ceil(var20 * damage);
 
 					if (this.arrowCritical)
 					{
@@ -275,7 +270,7 @@ public class EntityBulletTile extends Entity
 					if (movingobjectposition.entityHit instanceof EntityLivingBase)
 						((EntityLivingBase) movingobjectposition.entityHit).getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.9);
 
-					if (movingobjectposition.entityHit instanceof EntityLivingBase && movingobjectposition.entityHit.attackEntityFrom(source, (float) var23))
+					if (movingobjectposition.entityHit instanceof EntityLivingBase && movingobjectposition.entityHit.attackEntityFrom(source, var23))
 					{
 						this.setDead();
 					}
@@ -296,13 +291,13 @@ public class EntityBulletTile extends Entity
 					this.zTile = movingobjectposition.blockZ;
 					this.inTile = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
 					this.inData = this.worldObj.getBlockMetadata(this.xTile, this.yTile, this.zTile);
-					this.motionX = (double) ((float) (movingobjectposition.hitVec.xCoord - this.posX));
-					this.motionY = (double) ((float) (movingobjectposition.hitVec.yCoord - this.posY));
-					this.motionZ = (double) ((float) (movingobjectposition.hitVec.zCoord - this.posZ));
+					this.motionX = ((float) (movingobjectposition.hitVec.xCoord - this.posX));
+					this.motionY = ((float) (movingobjectposition.hitVec.yCoord - this.posY));
+					this.motionZ = ((float) (movingobjectposition.hitVec.zCoord - this.posZ));
 					var20 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
-					this.posX -= this.motionX / (double) var20 * 0.05000000074505806D;
-					this.posY -= this.motionY / (double) var20 * 0.05000000074505806D;
-					this.posZ -= this.motionZ / (double) var20 * 0.05000000074505806D;
+					this.posX -= this.motionX / var20 * 0.05000000074505806D;
+					this.posY -= this.motionY / var20 * 0.05000000074505806D;
+					this.posZ -= this.motionZ / var20 * 0.05000000074505806D;
 					this.inGround = true;
 					this.arrowShake = 7;
 					this.arrowCritical = false;

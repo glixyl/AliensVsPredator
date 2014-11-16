@@ -1,18 +1,13 @@
 package com.arisux.avp.inventory.container;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryBasic;
-import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.Constants;
 
-import com.arisux.airi.lib.interfaces.IInitializable;
-
-public class ContainerWristbracer extends Container implements IInitializable
+public class ContainerWristbracer extends Container
 {
 	public IInventory inventory;
 	public ItemStack stack;

@@ -5,7 +5,7 @@ import java.util.Random;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 
-import com.arisux.airi.lib.BlockTypeLib.HookedBlock;
+import com.arisux.airi.engine.BlockTypeLib.HookedBlock;
 import com.arisux.avp.AliensVsPredator;
 
 public class BlockOreSilicon extends HookedBlock
@@ -18,6 +18,6 @@ public class BlockOreSilicon extends HookedBlock
 	@Override
 	public Item getItemDropped(int par1, Random par2Random, int par3)
 	{
-		return AliensVsPredator.INSTANCE.items.itemSilicon;
+		return AliensVsPredator.instance.items.itemSilicon;
 	}
 }

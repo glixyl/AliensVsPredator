@@ -13,7 +13,7 @@ import com.arisux.avp.entities.mob.EntityRoyalFacehugger;
 
 public class RenderRoyalFacehugger extends RenderLiving
 {
-	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_ROYALFACEHUGGER);
+	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_ROYALFACEHUGGER);
 
 	public RenderRoyalFacehugger(ModelBase mainModel, float shadowSize)
 	{

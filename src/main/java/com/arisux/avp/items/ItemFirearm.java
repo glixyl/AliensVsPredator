@@ -9,13 +9,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.arisux.airi.lib.ItemTypeLib.HookedItem;
-import com.arisux.airi.lib.PlayerLib;
+import com.arisux.airi.coremod.AccessHandler;
+import com.arisux.airi.engine.ItemTypeLib.HookedItem;
+import com.arisux.airi.engine.WorldEngine;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.packets.server.PacketShootBulletServerUpdate;
 
 import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -59,9 +59,9 @@ public class ItemFirearm extends HookedItem
 			this.cancelRightClick = false;
 			return par1ItemStack;
 		}
-		
-		//if (!par2World.isRemote) AliensVsPredator.INSTANCE.network.sendToServer(new PacketAmmoClientUpdate(curAmmo));
-		
+
+		// if (!par2World.isRemote) AliensVsPredator.INSTANCE.network.sendToServer(new PacketAmmoClientUpdate(curAmmo));
+
 		if (par2World.isRemote && this.curAmmo > 0 && this.curCooldown <= 0 && this.curReload <= 0 || par2World.isRemote && par3EntityPlayer.capabilities.isCreativeMode)
 		{
 			this.renderRecoil();
@@ -70,17 +70,20 @@ public class ItemFirearm extends HookedItem
 
 		if (par3EntityPlayer.inventory.hasItemStack(new ItemStack(this.itemAmmo)) && this.curAmmo <= 0 && this.curReload <= 0)
 		{
-			//AliensVsPredator.INSTANCE.network.sendToServer(new PacketReloadFirearmServerUpdate());
+			// AliensVsPredator.INSTANCE.network.sendToServer(new PacketReloadFirearmServerUpdate());
 			this.reload(par3EntityPlayer);
 		}
 
 		if (this.curAmmo > 0 && this.curCooldown <= 0 && this.curReload <= 0 || par3EntityPlayer.capabilities.isCreativeMode)
 		{
 			par2World.playSoundAtEntity(par3EntityPlayer, this.sound, 0.5F, 1.0F);
-			if(par3EntityPlayer.capabilities.isCreativeMode) {
-				AliensVsPredator.INSTANCE.network.sendToServer(new PacketShootBulletServerUpdate(this.itemAmmo.getInflictionDamage() * 15));
-			} else {
-				AliensVsPredator.INSTANCE.network.sendToServer(new PacketShootBulletServerUpdate(this.itemAmmo.getInflictionDamage()));
+			if (par3EntityPlayer.capabilities.isCreativeMode)
+			{
+				AliensVsPredator.instance.network.sendToServer(new PacketShootBulletServerUpdate(this.itemAmmo.getInflictionDamage() * 15));
+			}
+			else
+			{
+				AliensVsPredator.instance.network.sendToServer(new PacketShootBulletServerUpdate(this.itemAmmo.getInflictionDamage()));
 			}
 			this.curCooldown = this.maxCooldown;
 
@@ -97,7 +100,7 @@ public class ItemFirearm extends HookedItem
 	{
 		if (player.inventory.hasItemStack(new ItemStack(this.itemAmmo)) && this.curAmmo < this.maxAmmo && this.curReload <= 0)
 		{
-			PlayerLib.consumeItem(player, this.itemAmmo);
+			WorldEngine.Entities.Players.Inventories.consumeItem(player, this.itemAmmo);
 
 			this.curAmmo = this.maxAmmo;
 			this.curReload = this.maxReload;
@@ -121,17 +124,8 @@ public class ItemFirearm extends HookedItem
 	@SideOnly(Side.CLIENT)
 	public void fixDelay()
 	{
-		Minecraft mc = Minecraft.getMinecraft();
-
-		try
-		{
-			mc.entityRenderer.itemRenderer.equippedProgress = 0.85F;
-			mc.rightClickDelayTimer = (int) this.maxCooldown;
-		}
-		catch (Exception e)
-		{
-			FMLLog.warning("WARNING: AliensVsPredator attempted to access fields that are not visible.");
-		}
+		AccessHandler.setEquippedProgress(0.85F);
+		AccessHandler.setRightClickDelayTimer((int) this.maxCooldown);
 	}
 
 	public boolean getCanFire(EntityPlayer player)

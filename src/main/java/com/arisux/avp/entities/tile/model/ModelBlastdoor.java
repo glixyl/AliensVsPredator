@@ -3,9 +3,6 @@ package com.arisux.avp.entities.tile.model;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-import org.lwjgl.opengl.GL11;
-
-import com.arisux.airi.lib.RenderLib;
 import com.arisux.avp.entities.tile.TileEntityBlastdoor;
 
 public class ModelBlastdoor extends ModelBase

@@ -4,19 +4,22 @@ import java.util.ArrayList;
 
 import net.minecraftforge.common.MinecraftForge;
 
-import com.arisux.airi.lib.interfaces.IInitializable;
+import com.arisux.airi.lib.util.interfaces.IInitializable;
 import com.arisux.avp.event.action.*;
 import com.arisux.avp.event.render.*;
 import com.arisux.avp.event.server.EventDimensionInitialization;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class LocalEventHandler implements IInitializable
 {
 	public ArrayList<Object> events = new ArrayList<Object>();
 
-	public void initialize()
+	@Override
+	public void initialize(FMLInitializationEvent event)
 	{
 		if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
 		{
@@ -62,5 +65,11 @@ public class LocalEventHandler implements IInitializable
 		}
 
 		return event;
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public LightmapUpdateEvent getLightmapUpdateEvent()
+	{
+		return (LightmapUpdateEvent) AliensVsPredator.instance.localEvents.getEvent(LightmapUpdateEvent.class);
 	}
 }

@@ -1,6 +1,6 @@
 package com.arisux.avp.enums;
 
-import static com.arisux.airi.lib.RenderLib.*;
+import static com.arisux.airi.engine.RenderEngine.*;
 import static org.lwjgl.opengl.GL11.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -8,7 +8,7 @@ import net.minecraftforge.client.event.RenderLivingEvent;
 
 import org.lwjgl.opengl.GL11;
 
-import com.arisux.airi.AIRI;
+import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.render.RenderXenomorph;
 import com.arisux.avp.event.render.VisionModeRenderEvent;
 
@@ -19,7 +19,7 @@ public enum VisionMode
 		@Override
 		public void render(Object... data)
 		{
-			AIRI.instance().global.gammaValue = 0F;
+			AliensVsPredator.instance.localEvents.getLightmapUpdateEvent().gammaValue = 0F;
 			renderOverlay(VisionModeRenderEvent.resOverlayCeltic, 1F, 0F, 0F, 1F);
 		}
 
@@ -41,7 +41,7 @@ public enum VisionMode
 		public void render(Object... data)
 		{
 			boolean isDay = (Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 24000L) / 1000L < 11L;
-			AIRI.instance().global.gammaValue = isDay ? -60F : 0F;
+			AliensVsPredator.instance.localEvents.getLightmapUpdateEvent().gammaValue = isDay ? -60F : 0F;
 
 			GL11.glPushMatrix();
 			{
@@ -60,7 +60,7 @@ public enum VisionMode
 			}
 			GL11.glPopMatrix();
 
-			AIRI.INSTANCE.global.gammaValue = AIRI.INSTANCE.global.gammaValue < 0F ? AIRI.INSTANCE.global.gammaValue + 0.03F : AIRI.INSTANCE.global.gammaValue;
+			AliensVsPredator.instance.localEvents.getLightmapUpdateEvent().gammaValue = AliensVsPredator.instance.localEvents.getLightmapUpdateEvent().gammaValue < 0F ? AliensVsPredator.instance.localEvents.getLightmapUpdateEvent().gammaValue + 0.03F : AliensVsPredator.instance.localEvents.getLightmapUpdateEvent().gammaValue;
 			renderOverlay(VisionModeRenderEvent.resOverlayCeltic, 1F, 1F, 1F, 1F);
 		}
 
@@ -91,7 +91,7 @@ public enum VisionMode
 		public void render(Object... data)
 		{
 			boolean isDay = (Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 24000L) / 1000L < 11L;
-			AIRI.instance().global.gammaValue = isDay ? -60F : 0F;
+			AliensVsPredator.instance.localEvents.getLightmapUpdateEvent().gammaValue = isDay ? -60F : 0F;
 
 			GL11.glPushMatrix();
 			{
@@ -110,7 +110,7 @@ public enum VisionMode
 			}
 			GL11.glPopMatrix();
 
-			AIRI.INSTANCE.global.gammaValue = AIRI.INSTANCE.global.gammaValue < 0F ? AIRI.INSTANCE.global.gammaValue + 0.03F : AIRI.INSTANCE.global.gammaValue;
+			AliensVsPredator.instance.localEvents.getLightmapUpdateEvent().gammaValue = AliensVsPredator.instance.localEvents.getLightmapUpdateEvent().gammaValue < 0F ? AliensVsPredator.instance.localEvents.getLightmapUpdateEvent().gammaValue + 0.03F : AliensVsPredator.instance.localEvents.getLightmapUpdateEvent().gammaValue;
 			renderOverlay(VisionModeRenderEvent.resOverlayCeltic, 0F, 0.8F, 0.1F, 1F);
 		}
 
@@ -148,7 +148,7 @@ public enum VisionMode
 
 	public static VisionMode get(int id)
 	{
-		return (VisionMode) VisionMode.values()[id];
+		return VisionMode.values()[id];
 	}
 
 	public abstract void render(Object... data);

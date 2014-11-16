@@ -7,7 +7,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import com.arisux.airi.lib.BlockTypeLib.HookedBlockContainer;
+import com.arisux.airi.engine.BlockTypeLib.HookedBlockContainer;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.TileEntityHiveResin;
 
@@ -16,8 +16,7 @@ public class BlockHiveResin extends HookedBlockContainer
 	public BlockHiveResin(Material material)
 	{
 		super(material);
-		this.setTickRandomly(AliensVsPredator.INSTANCE.settings.doesHiveTick());
-		this.setCreativeTab(AliensVsPredator.INSTANCE.tab);
+		this.setTickRandomly(AliensVsPredator.instance.settings.doesHiveTick());
 	}
 
 	@Override
@@ -31,7 +30,7 @@ public class BlockHiveResin extends HookedBlockContainer
 	{
 		super.updateTick(worldObj, posX, posY, posZ, rand);
 
-		if (!worldObj.isRemote && AliensVsPredator.INSTANCE.settings.doesHiveTick())
+		if (!worldObj.isRemote && AliensVsPredator.instance.settings.doesHiveTick())
 		{
 			for (int l = posX - 3; l <= posX + 3; ++l)
 			{
@@ -48,7 +47,7 @@ public class BlockHiveResin extends HookedBlockContainer
 						{
 							if (worldObj.getBlock(posX, posY + 1, posZ) == Blocks.air)
 							{
-								worldObj.setBlock(posX, posY + 1, posZ, AliensVsPredator.INSTANCE.blocks.blockHiveNode);
+								worldObj.setBlock(posX, posY + 1, posZ, AliensVsPredator.instance.blocks.blockHiveNode);
 							}
 						}
 					}

@@ -12,7 +12,7 @@ import com.arisux.avp.entities.mob.model.ModelPredalien;
 
 public class RenderPredalien extends RenderLiving
 {
-	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_PREDALIEN);
+	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_PREDALIEN);
 
 	public RenderPredalien(ModelPredalien mainModel, float shadowSize)
 	{

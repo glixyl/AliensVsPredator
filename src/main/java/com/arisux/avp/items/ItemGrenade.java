@@ -7,8 +7,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.arisux.airi.lib.ItemTypeLib.HookedItem;
-import com.arisux.airi.lib.PlayerLib;
+import com.arisux.airi.engine.ItemTypeLib.HookedItem;
+import com.arisux.airi.engine.WorldEngine;
 import com.arisux.avp.entities.EntityGrenade;
 
 import cpw.mods.fml.relauncher.Side;
@@ -24,6 +24,7 @@ public class ItemGrenade extends HookedItem
 		this.maxStackSize = 16;
 	}
 
+	@Override
 	public ItemStack onItemRightClick(ItemStack itemstack, World worldObj, EntityPlayer entityplayer)
 	{
 		if (!worldObj.isRemote)
@@ -31,7 +32,7 @@ public class ItemGrenade extends HookedItem
 			EntityGrenade grenade = new EntityGrenade(worldObj, entityplayer);
 			grenade.isFlaming = isFlaming;
 			worldObj.spawnEntityInWorld(grenade);
-			PlayerLib.consumeItem(entityplayer, this);
+			WorldEngine.Entities.Players.Inventories.consumeItem(entityplayer, this);
 		}
 		
 		return itemstack;

@@ -15,7 +15,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderShuriken extends Render
 {
-	private static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.INSTANCE.properties.TEXTURE_PATH_SHURIKEN);
+	private static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_SHURIKEN);
 
 	private void renderBoomerang(Entity var1, double var2, double var4, double var6, float var8, float var9)
 	{
@@ -40,34 +40,34 @@ public class RenderShuriken extends Render
 		GL11.glNormal3f(0.0F, 1.0F, 0.0F);
 		var10.startDrawingQuads();
 		var10.setColorOpaque_F(1.0F, 1.0F, 1.0F);
-		var10.addVertexWithUV(0.0D, 0.0D, 1.0D, (double) var14, (double) var13);
-		var10.addVertexWithUV(1.0D, 0.0D, 1.0D, (double) var13, (double) var13);
-		var10.addVertexWithUV(1.0D, 0.0D, 0.0D, (double) var13, (double) var14);
-		var10.addVertexWithUV(0.0D, 0.0D, 0.0D, (double) var14, (double) var14);
+		var10.addVertexWithUV(0.0D, 0.0D, 1.0D, var14, var13);
+		var10.addVertexWithUV(1.0D, 0.0D, 1.0D, var13, var13);
+		var10.addVertexWithUV(1.0D, 0.0D, 0.0D, var13, var14);
+		var10.addVertexWithUV(0.0D, 0.0D, 0.0D, var14, var14);
 
 		if (var11)
 		{
-			var10.addVertexWithUV(0.0D, 0.0D, 1.0D, (double) var15, (double) var13);
-			var10.addVertexWithUV(1.0D, 0.0D, 1.0D, (double) var14, (double) var13);
-			var10.addVertexWithUV(1.0D, 0.0D, 0.0D, (double) var14, (double) var14);
-			var10.addVertexWithUV(0.0D, 0.0D, 0.0D, (double) var15, (double) var14);
+			var10.addVertexWithUV(0.0D, 0.0D, 1.0D, var15, var13);
+			var10.addVertexWithUV(1.0D, 0.0D, 1.0D, var14, var13);
+			var10.addVertexWithUV(1.0D, 0.0D, 0.0D, var14, var14);
+			var10.addVertexWithUV(0.0D, 0.0D, 0.0D, var15, var14);
 		}
 
 		var10.draw();
 		GL11.glNormal3f(0.0F, -1.0F, 0.0F);
 		var10.startDrawingQuads();
 		var10.setColorOpaque_F(1.0F, 1.0F, 1.0F);
-		var10.addVertexWithUV(1.0D, 0.0D, 0.0D, (double) var13, (double) var14);
-		var10.addVertexWithUV(1.0D, 0.0D, 1.0D, (double) var14, (double) var14);
-		var10.addVertexWithUV(0.0D, 0.0D, 1.0D, (double) var14, (double) var13);
-		var10.addVertexWithUV(0.0D, 0.0D, 0.0D, (double) var13, (double) var13);
+		var10.addVertexWithUV(1.0D, 0.0D, 0.0D, var13, var14);
+		var10.addVertexWithUV(1.0D, 0.0D, 1.0D, var14, var14);
+		var10.addVertexWithUV(0.0D, 0.0D, 1.0D, var14, var13);
+		var10.addVertexWithUV(0.0D, 0.0D, 0.0D, var13, var13);
 
 		if (var11)
 		{
-			var10.addVertexWithUV(1.0D, 0.0D, 0.0D, (double) var14, (double) var14);
-			var10.addVertexWithUV(1.0D, 0.0D, 1.0D, (double) var15, (double) var14);
-			var10.addVertexWithUV(0.0D, 0.0D, 1.0D, (double) var15, (double) var13);
-			var10.addVertexWithUV(0.0D, 0.0D, 0.0D, (double) var14, (double) var13);
+			var10.addVertexWithUV(1.0D, 0.0D, 0.0D, var14, var14);
+			var10.addVertexWithUV(1.0D, 0.0D, 1.0D, var15, var14);
+			var10.addVertexWithUV(0.0D, 0.0D, 1.0D, var15, var13);
+			var10.addVertexWithUV(0.0D, 0.0D, 0.0D, var14, var13);
 		}
 
 		var10.draw();
@@ -76,31 +76,31 @@ public class RenderShuriken extends Render
 		GL11.glNormal3f(-var22, 0.0F, var22);
 		var10.startDrawingQuads();
 		var10.setColorOpaque_F(1.0F, 1.0F, 1.0F);
-		var10.addVertexWithUV((double) var17, (double) (-var16), (double) var19, (double) var14, (double) var20);
-		var10.addVertexWithUV((double) var17, (double) var16, (double) var19, (double) var14, (double) var21);
-		var10.addVertexWithUV((double) var18, (double) var16, (double) var19, (double) var13, (double) var21);
-		var10.addVertexWithUV((double) var18, (double) (-var16), (double) var19, (double) var13, (double) var20);
+		var10.addVertexWithUV(var17, (-var16), var19, var14, var20);
+		var10.addVertexWithUV(var17, var16, var19, var14, var21);
+		var10.addVertexWithUV(var18, var16, var19, var13, var21);
+		var10.addVertexWithUV(var18, (-var16), var19, var13, var20);
 
 		if (var11)
 		{
-			var10.addVertexWithUV((double) var17, (double) (-var16), (double) var19, (double) var15, (double) var20);
-			var10.addVertexWithUV((double) var17, (double) var16, (double) var19, (double) var15, (double) var21);
-			var10.addVertexWithUV((double) var18, (double) var16, (double) var19, (double) var14, (double) var21);
-			var10.addVertexWithUV((double) var18, (double) (-var16), (double) var19, (double) var14, (double) var20);
+			var10.addVertexWithUV(var17, (-var16), var19, var15, var20);
+			var10.addVertexWithUV(var17, var16, var19, var15, var21);
+			var10.addVertexWithUV(var18, var16, var19, var14, var21);
+			var10.addVertexWithUV(var18, (-var16), var19, var14, var20);
 		}
 
 		var10.setColorOpaque_F(1.0F, 1.0F, 1.0F);
-		var10.addVertexWithUV((double) var17, (double) (-var16), (double) var19, (double) var14, (double) var20);
-		var10.addVertexWithUV((double) var17, (double) var16, (double) var19, (double) var14, (double) var21);
-		var10.addVertexWithUV((double) var17, (double) var16, (double) var17, (double) var13, (double) var21);
-		var10.addVertexWithUV((double) var17, (double) (-var16), (double) var17, (double) var13, (double) var20);
+		var10.addVertexWithUV(var17, (-var16), var19, var14, var20);
+		var10.addVertexWithUV(var17, var16, var19, var14, var21);
+		var10.addVertexWithUV(var17, var16, var17, var13, var21);
+		var10.addVertexWithUV(var17, (-var16), var17, var13, var20);
 
 		if (var11)
 		{
-			var10.addVertexWithUV((double) var17, (double) (-var16), (double) var19, (double) var15, (double) var20);
-			var10.addVertexWithUV((double) var17, (double) var16, (double) var19, (double) var15, (double) var21);
-			var10.addVertexWithUV((double) var17, (double) var16, (double) var17, (double) var14, (double) var21);
-			var10.addVertexWithUV((double) var17, (double) (-var16), (double) var17, (double) var14, (double) var20);
+			var10.addVertexWithUV(var17, (-var16), var19, var15, var20);
+			var10.addVertexWithUV(var17, var16, var19, var15, var21);
+			var10.addVertexWithUV(var17, var16, var17, var14, var21);
+			var10.addVertexWithUV(var17, (-var16), var17, var14, var20);
 		}
 
 		var10.draw();
@@ -116,6 +116,7 @@ public class RenderShuriken extends Render
 	 * signature public void doRender(T entity, double d, double d1, double
 	 * d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
 	 */
+	@Override
 	public void doRender(Entity var1, double var2, double var4, double var6, float var8, float var9)
 	{
 		this.renderBoomerang(var1, var2, var4, var6, var8, var9);
@@ -125,6 +126,7 @@ public class RenderShuriken extends Render
 	 * Returns the location of an entity's texture. Doesn't seem to be
 	 * called unless you call Render.bindEntityTexture.
 	 */
+	@Override
 	protected ResourceLocation getEntityTexture(Entity entity)
 	{
 		return resourceLocation;
