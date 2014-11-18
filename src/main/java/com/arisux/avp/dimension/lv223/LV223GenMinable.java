@@ -24,6 +24,7 @@ public class LV223GenMinable extends WorldGenerator
 		this(var1, var3);
 	}
 
+	@Override
 	public boolean generate(World var1, Random var2, int var3, int var4, int var5)
 	{
 		float var6 = var2.nextFloat() * 3.141593F;
@@ -65,7 +66,7 @@ public class LV223GenMinable extends WorldGenerator
 					{
 						double var45 = (var44 + 0.5D - var24) / (var28 / 2.0D);
 
-						if ((var39 * var39 + var42 * var42 + var45 * var45 >= 1.0D) || (var1.getBlock(var38, var41, var44) != AliensVsPredator.instance.blocks.terrainUniStone))
+						if ((var39 * var39 + var42 * var42 + var45 * var45 >= 1.0D) || (var1.getBlock(var38, var41, var44) != AliensVsPredator.instance().blocks.terrainUniStone))
 							continue;
 						var1.setBlock(var38, var41, var44, this.minableBlockId);
 					}

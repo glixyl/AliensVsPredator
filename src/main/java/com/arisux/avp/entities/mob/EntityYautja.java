@@ -194,19 +194,19 @@ public class EntityYautja extends EntityMob implements IMob
 	protected void dropFewItems(boolean flag, int i)
 	{
 		if ((new Random()).nextInt(6) == 1)
-			this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.itemEnergy), 1);
+			this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.itemEnergy), 1);
 
 		if ((new Random()).nextInt(6) == 1)
-			this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.itemSpear), 1);
+			this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.itemSpear), 1);
 	}
 
 	@Override
 	protected void dropRareDrop(int par1)
 	{
-		this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.helmTitanium), 1);
-		this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.plateTitanium), 1);
-		this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.legsTitanium), 1);
-		this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.bootsTitanium), 1);
+		this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.helmTitanium), 1);
+		this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.plateTitanium), 1);
+		this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.legsTitanium), 1);
+		this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.bootsTitanium), 1);
 	}
 
 	/**

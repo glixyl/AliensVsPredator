@@ -15,6 +15,6 @@ public class BlockAngled extends HookedBlock
 	@Override
 	public int getRenderType()
 	{
-		return AliensVsPredator.instance.renderer.renderTypeAngled.getRenderId();
+		return AliensVsPredator.instance().renderer.renderTypeAngled.getRenderId();
 	}
 }

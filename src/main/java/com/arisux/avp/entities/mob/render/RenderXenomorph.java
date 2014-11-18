@@ -15,19 +15,9 @@ public class RenderXenomorph extends RenderLiving
 	}
 
 	@Override
-	public void doRender(Entity entity, double posX, double posY, double posZ, float yaw, float pitch)
+	public void doRender(Entity entity, double posX, double posY, double posZ, float yaw, float renderPartialTicks)
 	{
-		super.doRender(entity, posX, posY, posZ, yaw, pitch);
-	}
-
-	public void superRender(Entity entity, double posX, double posY, double posZ, float yaw, float pitch)
-	{
-		super.doRender(entity, posX, posY, posZ, yaw, pitch);
-	}
-
-	public ModelBase getModel()
-	{
-		return this.mainModel;
+		super.doRender(entity, posX, posY, posZ, yaw, renderPartialTicks);
 	}
 
 	@Override

@@ -88,24 +88,24 @@ public class ItemHandler extends IBHandler implements IInitializable
 			itemMotionTracker = ((HookedItem) (new HookedItem()).disableIcon()).setDescription("F.E.M.S. 5.547.60 - Tracks movement by detecting changes in air density."),
 			itemWorldSelector = ((new ItemWorldSelectionExporter()));
 
-	public ItemEntitySummoner itemSummonerDrone = (new ItemEntitySummoner(this.mod.getModProperties().getDomain(), EntityDrone.class)),
-			itemSummonerAqua = (new ItemEntitySummoner(this.mod.getModProperties().getDomain(), EntityAqua.class)),
-			itemSummonerWarrior = (new ItemEntitySummoner(this.mod.getModProperties().getDomain(), EntityWarrior.class)),
-			itemSummonerCrusher = (new ItemEntitySummoner(this.mod.getModProperties().getDomain(), EntityCrusher.class)),
-			itemSummonerSpitter = (new ItemEntitySummoner(this.mod.getModProperties().getDomain(), EntitySpitter.class)),
-			itemSummonerPraetorian = (new ItemEntitySummoner(this.mod.getModProperties().getDomain(), EntityPraetorian.class)),
-			itemSummonerQueen = (new ItemEntitySummoner(this.mod.getModProperties().getDomain(), EntityQueen.class)),
-			itemSummonerChestburster = (new ItemEntitySummoner(this.mod.getModProperties().getDomain(), EntityChestburster.class)),
-			itemSummonerFacehugger = (new ItemEntitySummoner(this.mod.getModProperties().getDomain(), EntityFacehugger.class)),
-			itemSummonerMarine = (new ItemEntitySummoner(this.mod.getModProperties().getDomain(), EntityMarine.class)),
-			itemSummonerOvamorph = (new ItemEntitySummoner(this.mod.getModProperties().getDomain(), EntityOvamorph.class)),
-			itemSummonerRoyalFacehugger = (new ItemEntitySummoner(this.mod.getModProperties().getDomain(), EntityRoyalFacehugger.class)),
-			itemSummonerYautja = (new ItemEntitySummoner(this.mod.getModProperties().getDomain(), EntityYautja.class)),
-			itemSummonerPredalien = (new ItemEntitySummoner(this.mod.getModProperties().getDomain(), EntityPredalien.class));
+	public ItemEntitySummoner itemSummonerDrone = (new ItemEntitySummoner(this.getModController().domain(), EntityDrone.class)),
+			itemSummonerAqua = (new ItemEntitySummoner(this.getModController().domain(), EntityAqua.class)),
+			itemSummonerWarrior = (new ItemEntitySummoner(this.getModController().domain(), EntityWarrior.class)),
+			itemSummonerCrusher = (new ItemEntitySummoner(this.getModController().domain(), EntityCrusher.class)),
+			itemSummonerSpitter = (new ItemEntitySummoner(this.getModController().domain(), EntitySpitter.class)),
+			itemSummonerPraetorian = (new ItemEntitySummoner(this.getModController().domain(), EntityPraetorian.class)),
+			itemSummonerQueen = (new ItemEntitySummoner(this.getModController().domain(), EntityQueen.class)),
+			itemSummonerChestburster = (new ItemEntitySummoner(this.getModController().domain(), EntityChestburster.class)),
+			itemSummonerFacehugger = (new ItemEntitySummoner(this.getModController().domain(), EntityFacehugger.class)),
+			itemSummonerMarine = (new ItemEntitySummoner(this.getModController().domain(), EntityMarine.class)),
+			itemSummonerOvamorph = (new ItemEntitySummoner(this.getModController().domain(), EntityOvamorph.class)),
+			itemSummonerRoyalFacehugger = (new ItemEntitySummoner(this.getModController().domain(), EntityRoyalFacehugger.class)),
+			itemSummonerYautja = (new ItemEntitySummoner(this.getModController().domain(), EntityYautja.class)),
+			itemSummonerPredalien = (new ItemEntitySummoner(this.getModController().domain(), EntityPredalien.class));
 
 	public ItemHandler()
 	{
-		super(AliensVsPredator.instance);
+		super(AliensVsPredator.instance());
 	}
 	
 	@Override

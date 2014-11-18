@@ -2,6 +2,7 @@ package com.arisux.avp.event.action;
 
 import net.minecraft.client.Minecraft;
 
+import com.arisux.airi.coremod.AccessHandler;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.items.ItemFirearm;
 import com.arisux.avp.packets.server.PacketGrenadeLaunchServerUpdate;
@@ -18,13 +19,13 @@ public class PulseRifleEvents
 	{
 		if (mc.thePlayer != null)
 		{
-			if (mc.thePlayer.getCurrentEquippedItem() != null && mc.thePlayer.getCurrentEquippedItem().getItem() == AliensVsPredator.instance.items.itemM41A)
+			if (mc.thePlayer.getCurrentEquippedItem() != null && mc.thePlayer.getCurrentEquippedItem().getItem() == AliensVsPredator.instance().items.itemM41A)
 			{
-				if (AliensVsPredator.instance.keybinds.KEYBIND_ITEM_ACTION.isPressed())
+				if (AliensVsPredator.instance().keybinds.KEYBIND_ITEM_ACTION.isPressed())
 				{
 					((ItemFirearm) mc.thePlayer.getCurrentEquippedItem().getItem()).cancelRightClick = true;
-					Minecraft.getMinecraft().rightClickDelayTimer = 20;
-					AliensVsPredator.instance.network.sendToServer(new PacketGrenadeLaunchServerUpdate());
+					AccessHandler.setRightClickDelayTimer(20);
+					AliensVsPredator.instance().network.sendToServer(new PacketGrenadeLaunchServerUpdate());
 				}
 			}
 		}

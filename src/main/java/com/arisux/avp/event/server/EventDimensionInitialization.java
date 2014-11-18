@@ -26,7 +26,7 @@ public class EventDimensionInitialization
 
 			if (worldServer != null && worldServer instanceof WorldServer && this.initializeDimension)
 			{
-				AliensVsPredator.instance.dimensions.initialWorldChunkLoad(worldServer);
+				AliensVsPredator.instance().dimensions.initialWorldChunkLoad(worldServer);
 				this.initializeDimension = false;
 			}
 		}

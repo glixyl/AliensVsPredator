@@ -2,13 +2,13 @@ package com.arisux.avp.windows;
 
 import java.net.URLEncoder;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;
 
 import com.arisux.airi.AIRI;
 import com.arisux.airi.api.window.IWindow;
 import com.arisux.airi.api.window.Window;
+import com.arisux.airi.coremod.AccessHandler;
 import com.arisux.airi.engine.GuiTypeLib.GuiCustomButton;
 import com.arisux.airi.engine.GuiTypeLib.GuiCustomTextbox;
 import com.arisux.airi.lib.util.NetworkUtil;
@@ -52,7 +52,7 @@ public class WindowSubmitFeedback extends Window implements IWindow
 				{
 					if (!textbox.getText().equals("") && textbox.getText().length() > 12)
 					{
-						String request = String.format(AliensVsPredator.properties().URL_SUBMIT_FEEDBACK, Minecraft.getMinecraft().session.getUsername(), Minecraft.getMinecraft().session.getPlayerID(), URLEncoder.encode(textbox.getText(), "UTF-8"));
+						String request = String.format(AliensVsPredator.properties().URL_SUBMIT_FEEDBACK, AccessHandler.getSession().getUsername(), AccessHandler.getSession().getPlayerID(), URLEncoder.encode(textbox.getText(), "UTF-8"));
 						feedback = NetworkUtil.getURLContents(request);
 						AIRI.logger.info("Submitted feedback: %s", feedback);
 					}

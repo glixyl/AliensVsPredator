@@ -14,7 +14,7 @@ public class NetworkHandler extends SimpleNetworkWrapper implements IInitializab
 
 	public NetworkHandler()
 	{
-		super(AliensVsPredator.properties().getChannel());
+		super(AliensVsPredator.instance().channel());
 	}
 
 	@Override

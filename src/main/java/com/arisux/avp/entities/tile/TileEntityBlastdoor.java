@@ -9,13 +9,11 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 
-import com.arisux.airi.engine.BlockLib.CoordData;
-
 public class TileEntityBlastdoor extends PoweredTileEntity
 {
 	private float doorProgress;
 	private boolean doorOpen;
-	private ArrayList<CoordData> managedCoords = new ArrayList<CoordData>();
+	private ArrayList<com.arisux.airi.engine.WorldEngine.Blocks.CoordData> managedCoords = new ArrayList<com.arisux.airi.engine.WorldEngine.Blocks.CoordData>();
 
 	public TileEntityBlastdoor()
 	{
@@ -137,7 +135,7 @@ public class TileEntityBlastdoor extends PoweredTileEntity
 		return doorProgress;
 	}
 
-	public void assignCoord(CoordData data)
+	public void assignCoord(com.arisux.airi.engine.WorldEngine.Blocks.CoordData data)
 	{
 		if (!this.managedCoords.contains(data))
 		{

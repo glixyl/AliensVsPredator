@@ -29,7 +29,7 @@ public class BlockStalagmite extends HookedBlock
 
 	protected boolean canThisPlantGrowOnThisBlockID(Block var1)
 	{
-		return var1 == AliensVsPredator.instance.blocks.terrainUniDirt || var1 == AliensVsPredator.instance.blocks.terrainUniStone || var1 == Blocks.nether_brick || var1 == Blocks.netherrack || var1 == Blocks.farmland;
+		return var1 == AliensVsPredator.instance().blocks.terrainUniDirt || var1 == AliensVsPredator.instance().blocks.terrainUniStone || var1 == Blocks.nether_brick || var1 == Blocks.netherrack || var1 == Blocks.farmland;
 	}
 
 	@Override
@@ -54,6 +54,7 @@ public class BlockStalagmite extends HookedBlock
 		}
 	}
 
+	@Override
 	public boolean canBlockStay(World var1, int var2, int var3, int var4)
 	{
 		return (var1.getFullBlockLightValue(var2, var3, var4) >= 8 || var1.canBlockSeeTheSky(var2, var3, var4)) && this.canThisPlantGrowOnThisBlockID(var1.getBlock(var2, var3 - 1, var4));

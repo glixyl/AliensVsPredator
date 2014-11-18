@@ -19,7 +19,7 @@ public class AlienArmorEvents
 		{
 			if (WorldEngine.Entities.Players.Inventories.getLegsSlotItemStack(mc.thePlayer) != null)
 			{
-				if (WorldEngine.Entities.Players.Inventories.getLegsSlotItemStack(mc.thePlayer).getItem() == AliensVsPredator.instance.items.legsXeno && mc.gameSettings.keyBindForward.isPressed() && AliensVsPredator.instance.keybinds.KEYBIND_XENO_ARMOR_CLIMB.isPressed() && mc.thePlayer.isCollidedHorizontally)
+				if (WorldEngine.Entities.Players.Inventories.getLegsSlotItemStack(mc.thePlayer).getItem() == AliensVsPredator.instance().items.legsXeno && mc.gameSettings.keyBindForward.isPressed() && AliensVsPredator.instance().keybinds.KEYBIND_XENO_ARMOR_CLIMB.isPressed() && mc.thePlayer.isCollidedHorizontally)
 				{
 					mc.thePlayer.motionY = 0.3D;
 					mc.thePlayer.setAIMoveSpeed(5.5F);

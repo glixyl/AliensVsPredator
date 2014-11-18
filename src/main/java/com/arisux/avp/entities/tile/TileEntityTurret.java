@@ -21,7 +21,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.Constants.NBT;
 
-import com.arisux.airi.engine.BlockLib.CoordData;
 import com.arisux.airi.engine.WorldEngine;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.EntityBullet;
@@ -46,7 +45,7 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 	public InventoryBasic inventoryAmmo, inventoryExpansion, inventoryDrive;
 	private Entity targetEntity, turretEnitty;
 	private ContainerTurret container;
-	private CoordData focusPoint;
+	private com.arisux.airi.engine.WorldEngine.Blocks.CoordData focusPoint;
 	private Item itemAmmo;
 
 	@SideOnly(Side.CLIENT)
@@ -72,7 +71,7 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 		this.focusYaw = 0F;
 		this.ammoDisplayEnabled = false;
 		this.maxFiringTimeout = 60;
-		this.itemAmmo = AliensVsPredator.instance.items.itemAmmoSMG;
+		this.itemAmmo = AliensVsPredator.instance().items.itemAmmoSMG;
 	}
 
 	public Entity getEntity()
@@ -105,7 +104,7 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 
 	public Entity findNewTarget()
 	{
-		Entity newTarget = WorldEngine.Entities.getRandomEntityInCoordsRange(this.worldObj, EntityLiving.class, new CoordData(this), range, 12);
+		Entity newTarget = WorldEngine.Entities.getRandomEntityInCoordsRange(this.worldObj, EntityLiving.class, new com.arisux.airi.engine.WorldEngine.Blocks.CoordData(this), range, 12);
 
 		if (newTarget != null && this.getEntity().getDistanceToEntity(newTarget) < range && !newTarget.isDead && WorldEngine.Entities.canEntityBeSeenBy(newTarget, this.getEntity()) && !isSafe(newTarget))
 		{
@@ -126,7 +125,7 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 		{
 			if (this.getEntity().getDistanceToEntity(targetEntity) < range && !targetEntity.isDead && WorldEngine.Entities.canEntityBeSeenBy(targetEntity, this.getEntity()))
 			{
-				turnTurretToPoint(new CoordData(targetEntity.posX, targetEntity.posY, targetEntity.posZ));
+				turnTurretToPoint(new com.arisux.airi.engine.WorldEngine.Blocks.CoordData(targetEntity.posX, targetEntity.posY, targetEntity.posZ));
 
 				if (worldObj.getWorldInfo().getWorldTime() % fireRate == 0L && this.getEntity().rotationYaw != 0)
 				{
@@ -151,7 +150,7 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 
 			if (newTarget != null)
 			{
-				AliensVsPredator.instance.network.sendToServer(new PacketTurretTargetUpdate(xCoord, yCoord, zCoord, newTarget.getEntityId()));
+				AliensVsPredator.instance().network.sendToServer(new PacketTurretTargetUpdate(xCoord, yCoord, zCoord, newTarget.getEntityId()));
 			}
 		}
 	}
@@ -225,7 +224,7 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 	{
 		if (this.worldObj != null && this.inventoryAmmo != null)
 		{
-			ArrayList<EntityItem> entityItemList = (ArrayList<EntityItem>) WorldEngine.Entities.getEntitiesInCoordsRange(worldObj, EntityItem.class, new CoordData(this), 1);
+			ArrayList<EntityItem> entityItemList = (ArrayList<EntityItem>) WorldEngine.Entities.getEntitiesInCoordsRange(worldObj, EntityItem.class, new com.arisux.airi.engine.WorldEngine.Blocks.CoordData(this), 1);
 
 			for (EntityItem entityItem : entityItemList)
 			{
@@ -287,7 +286,7 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 		this.getEntity().playSound(AliensVsPredator.properties().SOUND_WEAPON_M56SG, 1F, 1F);
 	}
 
-	public void turnTurretToPoint(CoordData coord)
+	public void turnTurretToPoint(com.arisux.airi.engine.WorldEngine.Blocks.CoordData coord)
 	{
 		this.focusPoint = coord;
 
@@ -390,12 +389,12 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 		{
 			ItemStack pciSlot = this.inventoryExpansion.getStackInSlot(i);
 			
-			if (pciSlot != null && pciSlot.getItem() == AliensVsPredator.instance.items.itemProcessor)
+			if (pciSlot != null && pciSlot.getItem() == AliensVsPredator.instance().items.itemProcessor)
 			{
 				runCyclesUpgrade += 1 * pciSlot.stackSize;
 			}
 
-			if (pciSlot != null && pciSlot.getItem() == AliensVsPredator.instance.items.itemLedDisplay)
+			if (pciSlot != null && pciSlot.getItem() == AliensVsPredator.instance().items.itemLedDisplay)
 			{
 				this.setAmmoDisplayEnabled(true);
 			}
@@ -486,7 +485,7 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 			builder.append(id + "-");
 		}
 
-		AliensVsPredator.instance.network.sendToAll(new PacketTurretInit(this.xCoord, this.yCoord, this.zCoord, builder.toString()));
+		AliensVsPredator.instance().network.sendToAll(new PacketTurretInit(this.xCoord, this.yCoord, this.zCoord, builder.toString()));
 	}
 
 	private void saveInventoryToNBT(NBTTagCompound nbt, IInventory inventory)
@@ -736,7 +735,7 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 			}
 		}
 
-		AliensVsPredator.instance.network.sendToAll(new PacketTurretInit(xCoord, yCoord, zCoord, builder.toString()));
+		AliensVsPredator.instance().network.sendToAll(new PacketTurretInit(xCoord, yCoord, zCoord, builder.toString()));
 	}
 
 	@Override

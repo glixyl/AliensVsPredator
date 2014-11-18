@@ -15,7 +15,7 @@ public class ItemShuriken extends HookedItem
 	@Override
 	public void onPlayerStoppedUsing(ItemStack itemstack, World world, EntityPlayer entityplayer, int itemInUseCount)
 	{
-		if (entityplayer.inventory.hasItemStack(new ItemStack(AliensVsPredator.instance.items.itemShuriken)))
+		if (entityplayer.inventory.hasItemStack(new ItemStack(AliensVsPredator.instance().items.itemShuriken)))
 		{
 			int remainingCount = this.getMaxItemUseDuration(itemstack) - itemInUseCount;
 			float f = remainingCount / 20.0F;
@@ -52,7 +52,7 @@ public class ItemShuriken extends HookedItem
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer)
 	{
-		if (entityplayer.inventory.hasItemStack(new ItemStack(AliensVsPredator.instance.items.itemShuriken)))
+		if (entityplayer.inventory.hasItemStack(new ItemStack(AliensVsPredator.instance().items.itemShuriken)))
 		{
 			entityplayer.setItemInUse(itemstack, this.getMaxItemUseDuration(itemstack));
 		}

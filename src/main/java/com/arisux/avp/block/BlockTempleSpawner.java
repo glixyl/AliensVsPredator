@@ -5,18 +5,19 @@ import net.minecraft.block.material.Material;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
-import com.arisux.airi.engine.BlockLib.IconSet;
-import com.arisux.airi.engine.BlockTypeLib.HookedBlockMultiSided;
+import com.arisux.airi.engine.BlockTypeLib.HookedBlock;
+import com.arisux.airi.engine.RenderEngine;
 import com.arisux.avp.entities.mob.EntityOvamorph;
 import com.arisux.avp.entities.mob.EntityQueen;
 
-public class BlockTempleSpawner extends HookedBlockMultiSided
+public class BlockTempleSpawner extends HookedBlock
 {
 	public boolean creativeOnly;
 
 	public BlockTempleSpawner(Material par2, boolean creativeOnly)
 	{
-		super(new IconSet("avp:spawner_side", "avp:spawner_top", "avp:spawner_bottom", "avp:spawner_side", "avp:spawner_side", "avp:spawner_side", "avp:spawner_side"), par2);
+		super(par2);
+		this.setIconSet(new RenderEngine.IconSet("avp:spawner_side", "avp:spawner_top", "avp:spawner_bottom", "avp:spawner_side", "avp:spawner_side", "avp:spawner_side", "avp:spawner_side"));
 		this.creativeOnly = creativeOnly;
 	}
 
@@ -26,7 +27,7 @@ public class BlockTempleSpawner extends HookedBlockMultiSided
 		super.onNeighborBlockChange(worldObj, posX, posY, posZ, block);
 
 		int range = 25;
-		boolean isQueenNear = worldObj.getEntitiesWithinAABB(EntityQueen.class, AxisAlignedBB.getBoundingBox((double) posX, (double) posY, (double) posZ, (double) (posX + 1), (double) (posY + 1), (double) (posZ + 1)).expand((double) (range * 2), 50.0D, (double) (range * 2))).size() >= 1;
+		boolean isQueenNear = worldObj.getEntitiesWithinAABB(EntityQueen.class, AxisAlignedBB.getBoundingBox(posX, posY, posZ, posX + 1, posY + 1, posZ + 1).expand(range * 2, 50.0D, range * 2)).size() >= 1;
 
 		if (!worldObj.isRemote)
 		{
@@ -36,7 +37,7 @@ public class BlockTempleSpawner extends HookedBlockMultiSided
 			} else if (worldObj.isBlockIndirectlyGettingPowered(posX, posY, posZ) && isQueenNear || worldObj.isBlockIndirectlyGettingPowered(posX, posY, posZ) && creativeOnly)
 			{
 				EntityOvamorph entityEgg = new EntityOvamorph(worldObj);
-				entityEgg.setLocationAndAngles((double) posX + 0.5D, (double) posY + 1.0D, (double) posZ + 0.5D, 0.0F, 0.0F);
+				entityEgg.setLocationAndAngles(posX + 0.5D, posY + 1.0D, posZ + 0.5D, 0.0F, 0.0F);
 				worldObj.spawnEntityInWorld(entityEgg);
 			}
 		}

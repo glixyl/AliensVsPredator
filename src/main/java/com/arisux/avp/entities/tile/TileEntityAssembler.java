@@ -229,6 +229,6 @@ public class TileEntityAssembler extends TileEntity implements IInventory
 		this.player = player;
 
 		if (!player.worldObj.isRemote)
-			FMLNetworkHandler.openGui(player, AliensVsPredator.instance, AliensVsPredator.properties().GUI_ASSEMBLER, player.worldObj, xCoord, yCoord, zCoord);
+			FMLNetworkHandler.openGui(player, AliensVsPredator.instance(), AliensVsPredator.properties().GUI_ASSEMBLER, player.worldObj, xCoord, yCoord, zCoord);
 	}
 }

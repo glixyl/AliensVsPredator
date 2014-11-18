@@ -1,46 +1,30 @@
 package com.arisux.avp.entities.tile;
 
-import java.util.Random;
+import java.util.UUID;
 
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 
-import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.interfaces.IHiveSignature;
 
-public class TileEntityHiveResin extends TileEntity
+public class TileEntityHiveResin extends TileEntity implements IHiveSignature
 {
-	private int deathCount;
-
+	private UUID signature;
+	
 	@Override
 	public void updateEntity()
 	{
-		Random rand = new Random();
+		;
+	}
 
-		this.deathCount++;
+	@Override
+	public UUID getHiveSignature()
+	{
+		return this.signature;
+	}
 
-		if (rand.nextInt(64) <= 1 && !this.worldObj.isRemote && AliensVsPredator.instance.settings.doesHiveTick())
-		{
-			int lightLevel = 4;
-			int var7 = this.xCoord + rand.nextInt(3) - 1;
-			int var8 = this.yCoord + rand.nextInt(3) - 1;
-			int var9 = this.zCoord + rand.nextInt(3) - 1;
-			this.worldObj.getBlock(var7, var8 + 1, var9);
-
-			if (this.worldObj.getBlockLightValue(var7, var8 + 1, var9) >= lightLevel || this.worldObj.getBlockLightValue(var7 + 1, var8, var9) >= lightLevel || this.worldObj.getBlockLightValue(var7 - 1, var8, var9) >= lightLevel || this.worldObj.getBlockLightValue(var7, var8, var9 + 1) >= lightLevel || this.worldObj.getBlockLightValue(var7, var8, var9 - 1) >= lightLevel)
-			{
-				Block block = this.worldObj.getBlock(var7, var8, var9);
-
-				if (block == Blocks.stone || block == Blocks.dirt || block == Blocks.cobblestone || block == Blocks.leaves)
-				{
-					this.worldObj.setBlock(var7, var8, var9, AliensVsPredator.instance.blocks.terrainHiveResin);
-				}
-
-				if (this.deathCount >= 20)
-				{
-					this.worldObj.setBlock(this.xCoord, this.yCoord, this.zCoord, AliensVsPredator.instance.blocks.terrainHiveResinDead);
-				}
-			}
-		}
+	@Override
+	public void setHiveSignature(UUID signature)
+	{
+		this.signature = signature;
 	}
 }

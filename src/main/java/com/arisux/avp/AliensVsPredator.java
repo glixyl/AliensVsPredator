@@ -1,28 +1,20 @@
 /** AliensVsPredator - Copyright (C) 2012-2015 Arisux (Ri5ux/Dustin Christensen) **/
 package com.arisux.avp;
 
-import net.minecraft.creativetab.CreativeTabs;
-
 import com.arisux.airi.AIRI;
 import com.arisux.airi.api.updater.Updater;
-import com.arisux.airi.engine.ModEngine;
-import com.arisux.airi.lib.util.ModProperties;
-import com.arisux.airi.lib.util.interfaces.IAdvancedMod;
-import com.arisux.avp.api.WristbracerAPI;
+import com.arisux.airi.lib.util.interfaces.ModController;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid = Properties.ID, name = Properties.NAME, version = Properties.VERSION, dependencies = "required-after:AIRI;")
-public class AliensVsPredator implements IAdvancedMod
+@Mod(modid="avp")
+public class AliensVsPredator extends ModController
 {
-	@Mod.Instance(Properties.ID)
-	public static AliensVsPredator instance;
-	
-	private Properties properties;
-
+	@Mod.Instance
+	private static AliensVsPredator instance;
 	public LocalEventHandler localEvents;
 	public NetworkHandler network;
 	public KeybindHandler keybinds;
@@ -38,34 +30,19 @@ public class AliensVsPredator implements IAdvancedMod
 	public CommandHandler commands;
 	public Settings settings;
 	public Updater updater;
-	public APIHandler apis = new APIHandler();
-
-	public class APIHandler
-	{
-		public WristbracerAPI wristbracerApi;
-
-		public APIHandler()
-		{
-			if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
-			{
-				this.wristbracerApi = new WristbracerAPI();
-			}
-		}
-	}
-
-	@Override
-	public ModProperties getModProperties()
-	{
-		return this.properties == null ? this.properties = new Properties(Properties.ID) : this.properties;
-	}
 	
 	public static Properties properties()
 	{
-		return (Properties) AliensVsPredator.instance.getModProperties();
+		return Properties.instance;
+	}
+	
+	public static AliensVsPredator instance()
+	{
+		return AliensVsPredator.instance;
 	}
 	
 	@Override
-	public CreativeTabs getCreativeTab()
+	public CreativeTab getCreativeTab()
 	{
 		return this.tab == null ? this.tab = new CreativeTab() : this.tab;
 	}
@@ -76,7 +53,6 @@ public class AliensVsPredator implements IAdvancedMod
 	{
 		AIRI.logger.info("[AliensVsPredator] Copyright(C) 2012-2015 Arisux");
 		AIRI.logger.info("[AliensVsPredator] Pre-Initialization");
-		ModEngine.setModMetadataFromProperties(event, this.getModProperties());
 		
 		(settings = new Settings()).preInitialize(event);
 
@@ -115,78 +91,16 @@ public class AliensVsPredator implements IAdvancedMod
 			(renderer).postInitialize(event);
 			(keybinds = new KeybindHandler()).postInitialize(event);
 
-			if (settings.updaterEnabled)
+			if (settings.isUpdaterEnabled())
 			{
-				(updater = AIRI.instance().updaterapi.createNewUpdater(getModProperties().getName(), getModProperties().getVersion(), settings.updateStringUrl, getModProperties().getUrl(), getModProperties().getChangelogUrl())).postInitialize(event);
+				(updater = AIRI.updaterApi().createNewUpdater(this)).postInitialize(event);
 			}
 		}
 	}
 
-	public boolean isBetaRelease()
-	{
-		return true;
-	}
-
-	@Override
-	@Mod.EventHandler
-	public void listenOnInterModComms(FMLInterModComms event)
-	{
-		;
-	}
-
-	@Override
-	@Mod.EventHandler
-	public void missingMappingEvent(FMLMissingMappingsEvent event)
-	{
-		;
-	}
-
-	@Override
-	@Mod.EventHandler
-	public void modDisabledEvent(FMLModDisabledEvent event)
-	{
-		;
-	}
-
-	@Override
-	@Mod.EventHandler
-	public void modIdMappingEvent(FMLModIdMappingEvent event)
-	{
-		;
-	}
-
-	@Override
-	@Mod.EventHandler
-	public void serverAboutToStart(FMLServerAboutToStartEvent event)
-	{
-		;
-	}
-
-	@Override
 	@Mod.EventHandler
 	public void serverStarting(FMLServerStartingEvent event)
 	{
 		this.commands.onServerStarting(event);
-	}
-
-	@Override
-	@Mod.EventHandler
-	public void serverStarted(FMLServerStartedEvent event)
-	{
-		;
-	}
-
-	@Override
-	@Mod.EventHandler
-	public void serverStopping(FMLServerStoppingEvent event)
-	{
-		;
-	}
-
-	@Override
-	@Mod.EventHandler
-	public void serverStopped(FMLServerStoppedEvent event)
-	{
-		;
 	}
 }

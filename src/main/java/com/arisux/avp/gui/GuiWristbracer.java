@@ -28,7 +28,7 @@ public class GuiWristbracer extends GuiContainer
 	private static final ResourceLocation texture = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_GUI_WRISTBRACER);
 	private HashMap<GuiButton, Integer> displays = new HashMap<GuiButton, Integer>();
 	protected List<GuiButton> buttonList = new ArrayList<GuiButton>();
-	private WristbracerAPI api = AliensVsPredator.instance.apis.wristbracerApi;
+	private WristbracerAPI api = new WristbracerAPI();
 	public ContainerWristbracer container;
 
 	public GuiWristbracer(EntityPlayer player, ContainerWristbracer container)

@@ -4,8 +4,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiMainMenu;
 
 import com.arisux.airi.AIRI;
-import com.arisux.airi.engine.RenderEngine;
 import com.arisux.airi.engine.GuiTypeLib.GuiCustomButton;
+import com.arisux.airi.engine.RenderEngine;
 import com.arisux.airi.lib.util.interfaces.IActionPerformed;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.windows.WindowSubmitFeedback;
@@ -22,7 +22,7 @@ public class FeedbackRenderEvent
 	@SubscribeEvent
 	public void renderTick(RenderTickEvent event)
 	{
-		if (AliensVsPredator.instance.isBetaRelease())
+		if (AliensVsPredator.instance().isBetaRelease())
 		{
 			buttonFeedback.xPosition = RenderEngine.scaledDisplayResolution().getScaledWidth() - buttonFeedback.width;
 			buttonFeedback.yPosition = mc.currentScreen instanceof GuiMainMenu ? 0 : RenderEngine.scaledDisplayResolution().getScaledHeight() - buttonFeedback.height;
@@ -33,8 +33,8 @@ public class FeedbackRenderEvent
 				@Override
 				public void actionPerformed(GuiCustomButton button)
 				{
-					AIRI.INSTANCE.windowapi.addWindow(window);
-					AIRI.INSTANCE.windowapi.showWindowManager();
+					AIRI.windowApi().addWindow(window);
+					AIRI.windowApi().showWindowManager();
 					window.setWindowCentered();
 					window.textbox.setText("");
 				}

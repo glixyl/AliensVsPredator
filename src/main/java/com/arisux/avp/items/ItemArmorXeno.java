@@ -26,9 +26,9 @@ public class ItemArmorXeno extends ItemArmor
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
 	{
-		if (isPlayerWearingXenoArmorSet((EntityPlayer) entity))
+//		if (isPlayerWearingXenoArmorSet((EntityPlayer) entity))
 		{
-			return AliensVsPredator.properties().TEXTURE_PATH_DRONE_ADVANCED;
+//			return AliensVsPredator.properties().TEXTURE_PATH_DRONE_ADVANCED;
 		}
 
 		switch (slot)
@@ -46,10 +46,10 @@ public class ItemArmorXeno extends ItemArmor
 	@SideOnly(Side.CLIENT)
 	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int armorSlot)
 	{
-		if (isPlayerWearingXenoArmorSet((EntityPlayer) entityLiving))
-		{
-			return this.mainModel == null ? this.mainModel = new ModelDrone() : this.mainModel;
-		}
+//		if (isPlayerWearingXenoArmorSet((EntityPlayer) entityLiving))
+//		{
+//			return this.mainModel == null ? this.mainModel = new ModelDrone() : this.mainModel;
+//		}
 
 		return null;
 	}
@@ -59,7 +59,7 @@ public class ItemArmorXeno extends ItemArmor
 		if (player != null)
 		{
 			ItemStack helm = player.inventory.armorItemInSlot(3), chest = player.inventory.armorItemInSlot(2), legs = player.inventory.armorItemInSlot(1), boots = player.inventory.armorItemInSlot(0);
-			return (helm != null && chest != null && legs != null && boots != null && (helm.getItem() == AliensVsPredator.instance.items.helmXeno && chest.getItem() == AliensVsPredator.instance.items.plateXeno && legs.getItem() == AliensVsPredator.instance.items.legsXeno && boots.getItem() == AliensVsPredator.instance.items.bootsXeno));
+			return (helm != null && chest != null && legs != null && boots != null && (helm.getItem() == AliensVsPredator.instance().items.helmXeno && chest.getItem() == AliensVsPredator.instance().items.plateXeno && legs.getItem() == AliensVsPredator.instance().items.legsXeno && boots.getItem() == AliensVsPredator.instance().items.bootsXeno));
 		}
 
 		return false;

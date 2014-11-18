@@ -12,7 +12,7 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
 import com.arisux.airi.engine.WorldEngine;
-import com.arisux.airi.engine.BlockLib.CoordData;
+import com.arisux.airi.engine.WorldEngine.Blocks;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntityXenomorph;
 
@@ -80,13 +80,13 @@ public class EntityGrenade extends EntityThrowable
 	{
 		if (!this.worldObj.isRemote)
 		{
-			Explosion explosion = WorldEngine.createExplosion(null, worldObj, new CoordData(this), 2F, isFlaming, true, AliensVsPredator.instance.settings.areExplosionsEnabled());
+			Explosion explosion = WorldEngine.createExplosion(null, worldObj, new Blocks.CoordData(this), 2F, isFlaming, true, AliensVsPredator.instance().settings.areExplosionsEnabled());
 
 			List<Entity> list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(8, 8, 8));
 
 			for (int i1 = 0; i1 < list.size(); ++i1)
 			{
-				Entity entity = (Entity) list.get(i1);
+				Entity entity = list.get(i1);
 				float targetDamage = entity instanceof EntityXenomorph ? 8F * 2 : 8F;
 				entity.attackEntityFrom(DamageSource.setExplosionSource(explosion), targetDamage);
 			}

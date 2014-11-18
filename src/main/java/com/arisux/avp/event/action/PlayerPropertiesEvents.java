@@ -56,8 +56,8 @@ public class PlayerPropertiesEvents
 
 				if (thePlayer != null && extendedEntityProperties != null && extendedEntityProperties.getBroadcastChannel() != null)
 				{
-					AliensVsPredator.instance.network.sendToAll(new PacketBroadcastRadiusClientUpdate(extendedEntityProperties.getBroadcastRadius(), thePlayer.getCommandSenderName()));
-					AliensVsPredator.instance.network.sendToAll(new PacketChannelClientUpdate(extendedEntityProperties.getBroadcastChannel(), thePlayer.getCommandSenderName()));
+					AliensVsPredator.instance().network.sendToAll(new PacketBroadcastRadiusClientUpdate(extendedEntityProperties.getBroadcastRadius(), thePlayer.getCommandSenderName()));
+					AliensVsPredator.instance().network.sendToAll(new PacketChannelClientUpdate(extendedEntityProperties.getBroadcastChannel(), thePlayer.getCommandSenderName()));
 				}
 			}
 		}

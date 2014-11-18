@@ -20,9 +20,9 @@ public class RenderPredalien extends RenderLiving
 	}
 
 	@Override
-	public void doRender(Entity entity, double posX, double posY, double posZ, float yaw, float pitch)
+	public void doRender(Entity entity, double posX, double posY, double posZ, float yaw, float renderPartialTicks)
 	{
-		super.doRender(entity, posX, posY, posZ, yaw, pitch);
+		super.doRender(entity, posX, posY, posZ, yaw, renderPartialTicks);
 	}
 
 	@Override

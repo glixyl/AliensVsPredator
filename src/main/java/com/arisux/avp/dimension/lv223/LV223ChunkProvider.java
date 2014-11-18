@@ -8,9 +8,7 @@ import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.IProgressUpdate;
 import net.minecraft.util.MathHelper;
-import net.minecraft.world.ChunkPosition;
-import net.minecraft.world.SpawnerAnimals;
-import net.minecraft.world.World;
+import net.minecraft.world.*;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -103,7 +101,7 @@ public class LV223ChunkProvider implements IChunkProvider
 								{
 									int tmp510_509 = (var43 + var44);
 									var43 = tmp510_509;
-									var3[tmp510_509] = AliensVsPredator.instance.blocks.terrainUniStone;
+									var3[tmp510_509] = AliensVsPredator.instance().blocks.terrainUniStone;
 								} else if (var12 * 8 + var31 < var6)
 								{
 									int tmp543_542 = (var43 + var44);
@@ -173,7 +171,7 @@ public class LV223ChunkProvider implements IChunkProvider
 								if (var12 <= 0)
 								{
 									var14 = Blocks.air;
-									var15 = AliensVsPredator.instance.blocks.terrainUniStone;
+									var15 = AliensVsPredator.instance().blocks.terrainUniStone;
 								} else if ((var16 >= var5 - 4) && (var16 <= var5 + 1))
 								{
 									var14 = var10.topBlock;

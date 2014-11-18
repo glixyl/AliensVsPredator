@@ -7,92 +7,85 @@ import org.lwjgl.opengl.GL11;
 
 public class ModelAcid extends ModelBase
 {
-	/**
-	 * This is a list of all the boxes (ModelRenderer.class) in the current
-	 * model.
-	 */
-	private float boxList;
-	private float g;
-	private float b;
-
-	/** A mapping for all texture offsets */
+	private Tessellator tessellator = Tessellator.instance;
 	private float modelTextureMap;
+	private float boxList;
 
-	public void renderModel(float var1, float var2, float var3, float var4, float var5)
+	public void renderModel(float scale, float var2, float var3, float var4, float var5)
 	{
 		this.boxList = 0.0F;
-		this.g = 1.0F;
-		this.b = 0.0F;
 		this.modelTextureMap = 1.0F;
 		GL11.glPushMatrix();
-		VerticeAcid var6 = new VerticeAcid(this, 1.0D, 0.0D, 0.0D);
-		VerticeAcid var7 = new VerticeAcid(this, 0.0D, 1.0D, 0.0D);
-		VerticeAcid var8 = new VerticeAcid(this, 0.0D, 0.0D, 1.0D);
-		VerticeAcid var9 = new VerticeAcid(this, 0.5D, 0.5D, 0.0D);
-		VerticeAcid var10 = new VerticeAcid(this, 0.0D, 0.5D, 0.5D);
-		VerticeAcid var11 = new VerticeAcid(this, 0.5D, 0.0D, 0.5D);
-		VerticeAcid var12 = new VerticeAcid(this, 0.75D, 0.25D, 0.0D);
-		VerticeAcid var13 = new VerticeAcid(this, 0.5D, 0.25D, 0.25D);
-		VerticeAcid var14 = new VerticeAcid(this, 0.75D, 0.0D, 0.25D);
-		VerticeAcid var15 = new VerticeAcid(this, 0.0D, 0.75D, 0.25D);
-		VerticeAcid var16 = new VerticeAcid(this, 0.25D, 0.5D, 0.25D);
-		VerticeAcid var17 = new VerticeAcid(this, 0.25D, 0.75D, 0.0D);
-		VerticeAcid var18 = new VerticeAcid(this, 0.25D, 0.0D, 0.75D);
-		VerticeAcid var19 = new VerticeAcid(this, 0.25D, 0.25D, 0.5D);
-		VerticeAcid var20 = new VerticeAcid(this, 0.0D, 0.25D, 0.75D);
-		GL11.glScalef(var1, var1, var1);
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
-
-		for (int var21 = 0; var21 < 2; ++var21)
 		{
-			GL11.glRotatef((float) (var21 * 180), 0.0F, 0.0F, 1.0F);
+			Vertex t1 = new Vertex(this, 1.0D, 0.0D, 0.0D);
+			Vertex t2 = new Vertex(this, 0.0D, 1.0D, 0.0D);
+			Vertex t3 = new Vertex(this, 0.0D, 0.0D, 1.0D);
+			Vertex t4 = new Vertex(this, 0.5D, 0.5D, 0.0D);
+			Vertex t5 = new Vertex(this, 0.0D, 0.5D, 0.5D);
+			Vertex t6 = new Vertex(this, 0.5D, 0.0D, 0.5D);
+			Vertex t7 = new Vertex(this, 0.75D, 0.25D, 0.0D);
+			Vertex t8 = new Vertex(this, 0.5D, 0.25D, 0.25D);
+			Vertex t9 = new Vertex(this, 0.75D, 0.0D, 0.25D);
+			Vertex t10 = new Vertex(this, 0.0D, 0.75D, 0.25D);
+			Vertex t11 = new Vertex(this, 0.25D, 0.5D, 0.25D);
+			Vertex t12 = new Vertex(this, 0.25D, 0.75D, 0.0D);
+			Vertex t13 = new Vertex(this, 0.25D, 0.0D, 0.75D);
+			Vertex t14 = new Vertex(this, 0.25D, 0.25D, 0.5D);
+			Vertex t15 = new Vertex(this, 0.0D, 0.25D, 0.75D);
+			GL11.glScalef(scale, scale, scale);
+			GL11.glDisable(GL11.GL_TEXTURE_2D);
+			GL11.glEnable(GL11.GL_BLEND);
+			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
 
-			for (int var22 = 0; var22 < 4; ++var22)
+			for (int rZ = 0; rZ < 2; ++rZ)
 			{
-				GL11.glPushMatrix();
-				GL11.glRotatef((float) (var22 * 90), 0.0F, 1.0F, 0.0F);
-				this.addTri(var7, var15, var17);
-				this.addTri(var15, var10, var16);
-				this.addTri(var17, var16, var9);
-				this.addTri(var15, var16, var17);
-				this.addTri(var6, var12, var14);
-				this.addTri(var12, var9, var13);
-				this.addTri(var14, var13, var11);
-				this.addTri(var12, var13, var14);
-				this.addTri(var8, var18, var20);
-				this.addTri(var18, var11, var19);
-				this.addTri(var20, var19, var10);
-				this.addTri(var18, var19, var20);
-				this.addTri(var10, var19, var16);
-				this.addTri(var9, var16, var13);
-				this.addTri(var11, var13, var19);
-				this.addTri(var13, var16, var19);
-				GL11.glPopMatrix();
-			}
-		}
+				GL11.glRotatef(rZ * 180, 0.0F, 0.0F, 1.0F);
 
-		GL11.glEnable(GL11.GL_LIGHTING);
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
-		GL11.glDisable(GL11.GL_BLEND);
+				for (int rY = 0; rY < 4; ++rY)
+				{
+					GL11.glPushMatrix();
+					{
+						GL11.glRotatef(rY * 90, 0.0F, 1.0F, 0.0F);
+						this.addTri(t2, t10, t12);
+						this.addTri(t10, t5, t11);
+						this.addTri(t12, t11, t4);
+						this.addTri(t10, t11, t12);
+						this.addTri(t1, t7, t9);
+						this.addTri(t7, t4, t8);
+						this.addTri(t9, t8, t6);
+						this.addTri(t7, t8, t9);
+						this.addTri(t3, t13, t15);
+						this.addTri(t13, t6, t14);
+						this.addTri(t15, t14, t5);
+						this.addTri(t13, t14, t15);
+						this.addTri(t5, t14, t11);
+						this.addTri(t4, t11, t8);
+						this.addTri(t6, t8, t14);
+						this.addTri(t8, t11, t14);
+					}
+					GL11.glPopMatrix();
+				}
+			}
+
+			GL11.glEnable(GL11.GL_LIGHTING);
+			GL11.glEnable(GL11.GL_TEXTURE_2D);
+			GL11.glDisable(GL11.GL_BLEND);
+		}
 		GL11.glPopMatrix();
 	}
 
-	private void addTri(VerticeAcid var1, VerticeAcid var2, VerticeAcid var3)
+	private void addTri(Vertex x, Vertex y, Vertex z)
 	{
-		Tessellator var4 = Tessellator.instance;
-		var4.startDrawing(6);
-		var4.setColorRGBA_F(this.boxList, this.g, this.b, this.modelTextureMap);
-		this.addVerticeAcid(var3);
-		this.addVerticeAcid(var1);
-		this.addVerticeAcid(var2);
-		var4.draw();
+		tessellator.startDrawing(6);
+		tessellator.setColorRGBA_F(this.boxList, 1F, 0F, this.modelTextureMap);
+		this.addVerticeAcid(x);
+		this.addVerticeAcid(y);
+		this.addVerticeAcid(z);
+		tessellator.draw();
 	}
 
-	private void addVerticeAcid(VerticeAcid var1)
+	private void addVerticeAcid(Vertex model)
 	{
-		Tessellator var2 = Tessellator.instance;
-		var2.addVertex(var1.x, var1.y, var1.z);
+		tessellator.addVertex(model.x, model.y, model.z);
 	}
 }

@@ -70,6 +70,6 @@ public class LocalEventHandler implements IInitializable
 	@SideOnly(Side.CLIENT)
 	public LightmapUpdateEvent getLightmapUpdateEvent()
 	{
-		return (LightmapUpdateEvent) AliensVsPredator.instance.localEvents.getEvent(LightmapUpdateEvent.class);
+		return (LightmapUpdateEvent) AliensVsPredator.instance().localEvents.getEvent(LightmapUpdateEvent.class);
 	}
 }

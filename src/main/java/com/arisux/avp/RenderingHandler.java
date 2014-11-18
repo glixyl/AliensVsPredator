@@ -60,8 +60,8 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		RenderingRegistry.registerEntityRenderingHandler(EntityChestburster.class, new RenderChestburster(new ModelChestburster(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityOvamorph.class, new RenderOvamorph(new ModelOvamorph(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpear.class, new RenderTitaniumSpear());
-		RenderingRegistry.registerEntityRenderingHandler(EntityProximityMine.class, new RenderSnowball(AliensVsPredator.instance.items.itemProximityMine));
-		RenderingRegistry.registerEntityRenderingHandler(EntityGrenade.class, new RenderSnowball(AliensVsPredator.instance.items.itemGrenade, 0));
+		RenderingRegistry.registerEntityRenderingHandler(EntityProximityMine.class, new RenderSnowball(AliensVsPredator.instance().items.itemProximityMine));
+		RenderingRegistry.registerEntityRenderingHandler(EntityGrenade.class, new RenderSnowball(AliensVsPredator.instance().items.itemGrenade, 0));
 		RenderingRegistry.registerEntityRenderingHandler(EntityFlame.class, new RenderFlame());
 		RenderingRegistry.registerEntityRenderingHandler(EntityAcidPool.class, new RenderFXAcid());
 		RenderingRegistry.registerEntityRenderingHandler(EntityPlasma.class, new RenderPlasmaBlast());
@@ -74,28 +74,28 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 
 	public void registerItemRenders()
 	{
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.instance.blocks.blockTurret), new RenderItemTurret(new ModelTurret(), new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_TURRET)));
-		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance.items.itemWristBlade, new RenderWristBlade());
-		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance.items.itemM41A, this.renderM41A = new RenderM41A());
-		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance.items.itemM56sg, this.renderM56SG = new RenderM56SG());
-		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance.items.itemAK47, this.renderAK47 = new RenderAK47());
-		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance.items.itemM4, this.renderM4 = new RenderM4());
-		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance.items.itemSniper, this.renderSniper = new RenderSniper());
-		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance.items.itemMotionTracker, new RenderMotionTracker());
-		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance.items.itemSummonerDrone, (new RenderItemSummoner(EntityDrone.class, ModelDrone.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_DRONE_ADVANCED))).setScale(7.5F).setY(6F));
-		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance.items.itemSummonerWarrior, (new RenderItemSummoner(EntityWarrior.class, ModelWarrior.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_WARRIOR))).setScale(7.5F).setY(9F));
-		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance.items.itemSummonerPraetorian, (new RenderItemSummoner(EntityPraetorian.class, ModelPraetorian.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_PRAETORIAN))).setScale(7.5F).setY(7.5F));
-		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance.items.itemSummonerSpitter, (new RenderItemSummoner(EntitySpitter.class, ModelSpitter.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_SPITTER))).setScale(2.5F).setY(9F));
-		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance.items.itemSummonerCrusher, (new RenderItemSummoner(EntityCrusher.class, ModelCrusher.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_CRUSHER))).setScale(7.5F).setY(9.5F));
-		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance.items.itemSummonerQueen, (new RenderItemSummoner(EntityQueen.class, ModelQueen.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_XENOQUEEN))).setScale(7.5F).setY(8F));
-		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance.items.itemSummonerOvamorph, (new RenderItemSummoner(EntityOvamorph.class, ModelOvamorph.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_OVAMORPH))).setScale(20F).setY(1F));
-		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance.items.itemSummonerChestburster, (new RenderItemSummoner(EntityChestburster.class, ModelChestburster.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_CHESTBUSTER))).setScale(20F).setY(1F));
-		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance.items.itemSummonerFacehugger, (new RenderItemSummoner(EntityFacehugger.class, ModelFacehugger.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_FACEHUGGER))).setScale(15F).setY(1F));
-		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance.items.itemSummonerRoyalFacehugger, (new RenderItemSummoner(EntityRoyalFacehugger.class, ModelFacehugger.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_ROYALFACEHUGGER))).setScale(15F).setY(1F));
-		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance.items.itemSummonerMarine, (new RenderItemSummoner(EntityMarine.class, ModelBiped.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_MARINE))).setScale(12F).setY(6F));
-		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance.items.itemSummonerYautja, (new RenderItemSummoner(EntityYautja.class, ModelYautja.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_YAUTJA))).setScale(7.5F).setY(8F));
-		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance.items.itemSummonerPredalien, (new RenderItemSummoner(EntityPredalien.class, ModelPredalien.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_PREDALIEN))).setScale(12F).setY(6F));
-		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance.items.itemSummonerAqua, (new RenderItemSummoner(EntityAqua.class, ModelAqua.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_AQUA_XENOMORPH))).setScale(7.5F).setY(8F));
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.instance().blocks.blockTurret), new RenderItemTurret(new ModelTurret(), new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_TURRET)));
+		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance().items.itemWristBlade, new RenderWristBlade());
+		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance().items.itemM41A, this.renderM41A = new RenderM41A());
+		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance().items.itemM56sg, this.renderM56SG = new RenderM56SG());
+		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance().items.itemAK47, this.renderAK47 = new RenderAK47());
+		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance().items.itemM4, this.renderM4 = new RenderM4());
+		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance().items.itemSniper, this.renderSniper = new RenderSniper());
+		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance().items.itemMotionTracker, new RenderMotionTracker());
+		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance().items.itemSummonerDrone, (new RenderItemSummoner(EntityDrone.class, ModelDrone.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_DRONE_ADVANCED))).setScale(7.5F).setY(6F));
+		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance().items.itemSummonerWarrior, (new RenderItemSummoner(EntityWarrior.class, ModelWarrior.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_WARRIOR))).setScale(7.5F).setY(9F));
+		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance().items.itemSummonerPraetorian, (new RenderItemSummoner(EntityPraetorian.class, ModelPraetorian.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_PRAETORIAN))).setScale(7.5F).setY(7.5F));
+		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance().items.itemSummonerSpitter, (new RenderItemSummoner(EntitySpitter.class, ModelSpitter.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_SPITTER))).setScale(2.5F).setY(9F));
+		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance().items.itemSummonerCrusher, (new RenderItemSummoner(EntityCrusher.class, ModelCrusher.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_CRUSHER))).setScale(7.5F).setY(9.5F));
+		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance().items.itemSummonerQueen, (new RenderItemSummoner(EntityQueen.class, ModelQueen.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_XENOQUEEN))).setScale(7.5F).setY(8F));
+		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance().items.itemSummonerOvamorph, (new RenderItemSummoner(EntityOvamorph.class, ModelOvamorph.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_OVAMORPH))).setScale(20F).setY(1F));
+		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance().items.itemSummonerChestburster, (new RenderItemSummoner(EntityChestburster.class, ModelChestburster.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_CHESTBUSTER))).setScale(20F).setY(1F));
+		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance().items.itemSummonerFacehugger, (new RenderItemSummoner(EntityFacehugger.class, ModelFacehugger.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_FACEHUGGER))).setScale(15F).setY(1F));
+		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance().items.itemSummonerRoyalFacehugger, (new RenderItemSummoner(EntityRoyalFacehugger.class, ModelFacehugger.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_ROYALFACEHUGGER))).setScale(15F).setY(1F));
+		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance().items.itemSummonerMarine, (new RenderItemSummoner(EntityMarine.class, ModelBiped.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_MARINE))).setScale(12F).setY(6F));
+		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance().items.itemSummonerYautja, (new RenderItemSummoner(EntityYautja.class, ModelYautja.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_YAUTJA))).setScale(7.5F).setY(8F));
+		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance().items.itemSummonerPredalien, (new RenderItemSummoner(EntityPredalien.class, ModelPredalien.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_PREDALIEN))).setScale(12F).setY(6F));
+		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance().items.itemSummonerAqua, (new RenderItemSummoner(EntityAqua.class, ModelAqua.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_AQUA_XENOMORPH))).setScale(7.5F).setY(8F));
 	}
 
 	public void registerSpecialRenders()

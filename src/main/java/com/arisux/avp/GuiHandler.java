@@ -20,7 +20,7 @@ public class GuiHandler implements IGuiHandler, IInitializable
 	@Override
 	public void initialize(FMLInitializationEvent event)
 	{
-		NetworkRegistry.INSTANCE.registerGuiHandler(AliensVsPredator.instance, this);
+		NetworkRegistry.INSTANCE.registerGuiHandler(AliensVsPredator.instance(), this);
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class GuiHandler implements IGuiHandler, IInitializable
 		{
 			Item item = player.getCurrentEquippedItem().getItem();
 
-			if (item == AliensVsPredator.instance.items.itemWristBlade)
+			if (item == AliensVsPredator.instance().items.itemWristBlade)
 			{
 				return new GuiWristbracer(player, (ContainerWristbracer) ((ItemWristbracer) item).getNewContainer(player));
 			}

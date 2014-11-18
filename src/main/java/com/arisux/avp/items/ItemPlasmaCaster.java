@@ -34,14 +34,14 @@ public class ItemPlasmaCaster extends Item
 	{
 		if (!world.isRemote)
 		{
-			if (entityplayer.capabilities.isCreativeMode || !entityplayer.capabilities.isCreativeMode && entityplayer.inventory.hasItemStack(WorldEngine.Entities.Players.Inventories.newStack(AliensVsPredator.instance.items.itemEnergy)))
+			if (entityplayer.capabilities.isCreativeMode || !entityplayer.capabilities.isCreativeMode && entityplayer.inventory.hasItemStack(WorldEngine.Entities.Players.Inventories.newStack(AliensVsPredator.instance().items.itemEnergy)))
 			{
 				world.spawnEntityInWorld(new EntityPlasma(world, entityplayer));
 				world.playSoundEffect(entityplayer.posX, entityplayer.posY, entityplayer.posZ, AliensVsPredator.properties().SOUND_WEAPON_PLASMACASTER, 0.5F, 0.5F);
 
 				if (!entityplayer.capabilities.isCreativeMode)
 				{
-					WorldEngine.Entities.Players.Inventories.consumeItem(entityplayer, AliensVsPredator.instance.items.itemEnergy);
+					WorldEngine.Entities.Players.Inventories.consumeItem(entityplayer, AliensVsPredator.instance().items.itemEnergy);
 				}
 			}
 		}

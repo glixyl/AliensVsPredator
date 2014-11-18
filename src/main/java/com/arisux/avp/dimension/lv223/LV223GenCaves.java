@@ -172,12 +172,12 @@ public class LV223GenCaves extends MapGenBase
 						{
 							Block var61 = var5[var56];
 
-							if (var61 == AliensVsPredator.instance.blocks.terrainUniDirt)
+							if (var61 == AliensVsPredator.instance().blocks.terrainUniDirt)
 							{
 								var57 = true;
 							}
 
-							if ((var61 != AliensVsPredator.instance.blocks.terrainUniStone) || (var61 != AliensVsPredator.instance.blocks.terrainUniDirt) || (var61 != AliensVsPredator.instance.blocks.terrainUniDirt))
+							if ((var61 != AliensVsPredator.instance().blocks.terrainUniStone) || (var61 != AliensVsPredator.instance().blocks.terrainUniDirt) || (var61 != AliensVsPredator.instance().blocks.terrainUniDirt))
 							{
 								if (var58 < 10)
 								{
@@ -186,7 +186,7 @@ public class LV223GenCaves extends MapGenBase
 								{
 									var5[var56] = Blocks.air;
 
-									if ((var57) && (var5[(var56 - 1)] == AliensVsPredator.instance.blocks.terrainUniDirt))
+									if ((var57) && (var5[(var56 - 1)] == AliensVsPredator.instance().blocks.terrainUniDirt))
 									{
 										var5[(var56 - 1)] = this.worldObj.getBiomeGenForCoords(var51 + var3 * 16, var50 + var4 * 16).topBlock;
 									}

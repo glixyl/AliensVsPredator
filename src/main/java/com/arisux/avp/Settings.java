@@ -14,17 +14,17 @@ public class Settings
 {
 	private Configuration config;
 
-	public HashMap<String, Integer> spawnList = new HashMap<String, Integer>(), entityList = new HashMap<String, Integer>();
+	public HashMap<String, Integer> entityList = new HashMap<String, Integer>();
 	public String CATEGORY_OTHER = "ETC", CATEGORY_IDS = "IDS";
 
-	public boolean explosions, hiveTick, hiveSpawnsMobs, updaterEnabled, debugToolsEnabled;
-	public String updateStringUrl;
+	private boolean explosions, updaterEnabled, debugToolsEnabled;
+	private String updateStringUrl;
 
 	@EventHandler
 	public void preInitialize(FMLPreInitializationEvent evt)
 	{
-		AIRI.instance().remappingApi.registerRemappedMod("AIRI", "avp", "com.arisux.avp.AliensVsPredator");
-		AIRI.instance().remappingApi.registerRemappedMod("AliensVsPredator", "avp", "com.arisux.avp.AliensVsPredator");
+		AIRI.remappingApi().registerRemappedMod("AIRI", "avp", "com.arisux.avp.AliensVsPredator");
+		AIRI.remappingApi().registerRemappedMod("AliensVsPredator", "avp", "com.arisux.avp.AliensVsPredator");
 		
 		config = new Configuration(new File(evt.getModConfigurationDirectory(), "AVP.cfg"));
 
@@ -64,10 +64,8 @@ public class Settings
 			entityList.put("TURRETENTITY", config.get(CATEGORY_IDS, "TURRETENTITY", 1521).getInt());
 
 			explosions = config.get(CATEGORY_OTHER, "EXPLOSION_BLOCK_DAMAGE", true).getBoolean(true);
-			hiveTick = config.get(CATEGORY_OTHER, "HIVE_TICK", true, "Toggle spreading of hive resin.").getBoolean(true);
-			hiveSpawnsMobs = config.get(CATEGORY_OTHER, "HIVE_SPAWNS_MOBS", true, "Toggle spawning of xenomorphs from hive nodes").getBoolean(true);
 			updaterEnabled = config.get(CATEGORY_OTHER, "UPDATER_ENABLED", true, "Toggle the mod's updater.").getBoolean(true);
-			updateStringUrl = config.get(CATEGORY_OTHER, "UPDATE_STRING_URL", AliensVsPredator.properties().getUpdateStringUrl(), "The URL that the updater uses to check for mod updates. If it changes in the future, this can be changed to the new URL to fix any problems.").getString();
+			updateStringUrl = config.get(CATEGORY_OTHER, "UPDATE_STRING_URL", AliensVsPredator.instance().container().getMetadata().updateUrl, "The URL that the updater uses to check for mod updates. If it changes in the future, this can be changed to the new URL to fix any problems.").getString();
 			debugToolsEnabled = config.get(CATEGORY_OTHER, "DEBUG_TOOLS", false, "Toggle the debugging tools.").getBoolean(false);
 		} finally
 		{
@@ -80,13 +78,18 @@ public class Settings
 		return this.explosions;
 	}
 
-	public boolean doesHiveTick()
+	public boolean isUpdaterEnabled()
 	{
-		return this.hiveTick;
+		return this.updaterEnabled;
 	}
-
-	public boolean doesHiveSpawnMobs()
+	
+	public boolean areDebugToolsEnabled()
 	{
-		return this.hiveSpawnsMobs;
+		return this.debugToolsEnabled;
+	}
+	
+	public String getUpdateStringUrl()
+	{
+		return updateStringUrl;
 	}
 }

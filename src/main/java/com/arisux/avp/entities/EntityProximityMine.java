@@ -12,7 +12,7 @@ import net.minecraft.util.*;
 import net.minecraft.world.World;
 
 import com.arisux.airi.engine.WorldEngine;
-import com.arisux.airi.engine.BlockLib.CoordData;
+import com.arisux.airi.engine.WorldEngine.Blocks;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntityYautja;
 
@@ -143,8 +143,8 @@ public class EntityProximityMine extends Entity
 
 		if (!this.worldObj.isRemote)
 		{
-			int entityAmount = this.worldObj.getEntitiesWithinAABB(EntityMob.class, AxisAlignedBB.getBoundingBox((double) this.posX, (double) this.posY, (double) this.posZ, (double) (this.posX + 1), (double) (this.posY + 1), (double) (this.posZ + 1)).expand((double) (2), 50.0D, (double) (2))).size();
-			int yautjaAmount = this.worldObj.getEntitiesWithinAABB(EntityYautja.class, AxisAlignedBB.getBoundingBox((double) this.posX, (double) this.posY, (double) this.posZ, (double) (this.posX + 1), (double) (this.posY + 1), (double) (this.posZ + 1)).expand((double) (3), 50.0D, (double) (3))).size();
+			int entityAmount = this.worldObj.getEntitiesWithinAABB(EntityMob.class, AxisAlignedBB.getBoundingBox(this.posX, this.posY, this.posZ, this.posX + 1, this.posY + 1, this.posZ + 1).expand((2), 50.0D, (2))).size();
+			int yautjaAmount = this.worldObj.getEntitiesWithinAABB(EntityYautja.class, AxisAlignedBB.getBoundingBox(this.posX, this.posY, this.posZ, this.posX + 1, this.posY + 1, this.posZ + 1).expand((3), 50.0D, (3))).size();
 
 			if (entityAmount >= 1 && yautjaAmount == 0)
 			{
@@ -157,7 +157,7 @@ public class EntityProximityMine extends Entity
 			if (!this.canStay())
 			{
 				this.setDead();
-				this.worldObj.spawnEntityInWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(AliensVsPredator.instance.items.itemProximityMine)));
+				this.worldObj.spawnEntityInWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(AliensVsPredator.instance().items.itemProximityMine)));
 			}
 		}
 
@@ -165,7 +165,7 @@ public class EntityProximityMine extends Entity
 	
 	public void explode()
 	{
-		WorldEngine.createExplosion(null, worldObj, new CoordData(this), 2F, false, true, AliensVsPredator.instance.settings.areExplosionsEnabled());
+		WorldEngine.createExplosion(null, worldObj, new Blocks.CoordData(this), 2F, false, true, AliensVsPredator.instance().settings.areExplosionsEnabled());
 		this.setDead();
 	}
 
@@ -183,7 +183,7 @@ public class EntityProximityMine extends Entity
 	public void setDirectionBasedBounds(int side)
 	{
 		this.direction = side;
-		this.prevRotationYaw = this.rotationYaw = (float) (side * 90);
+		this.prevRotationYaw = this.rotationYaw = side * 90;
 		float f = 16.0F;
 		float f1 = 16.0F;
 		float f2 = 16.0F;
@@ -199,9 +199,9 @@ public class EntityProximityMine extends Entity
 		f /= 32.0F;
 		f1 /= 32.0F;
 		f2 /= 32.0F;
-		float f3 = (float) this.xPosition + 0.5F;
-		float f4 = (float) this.yPosition + 0.5F;
-		float f5 = (float) this.zPosition + 0.5F;
+		float f3 = this.xPosition + 0.5F;
+		float f4 = this.yPosition + 0.5F;
+		float f5 = this.zPosition + 0.5F;
 		float f6 = 0.5625F;
 		
 		if (side == 0)
@@ -245,9 +245,9 @@ public class EntityProximityMine extends Entity
 		}
 
 		f4 += 0.0F;
-		this.setPosition((double) f3, (double) f4, (double) f5);
+		this.setPosition(f3, f4, f5);
 		float f7 = -0.00625F;
-		this.boundingBox.setBounds((double) (f3 - f - f7), (double) (f4 - f1 - f7), (double) (f5 - f2 - f7), (double) (f3 + f + f7), (double) (f4 + f1 + f7), (double) (f5 + f2 + f7));
+		this.boundingBox.setBounds(f3 - f - f7, f4 - f1 - f7, f5 - f2 - f7, f3 + f + f7, f4 + f1 + f7, f5 + f2 + f7);
 	}
 
 	@Override

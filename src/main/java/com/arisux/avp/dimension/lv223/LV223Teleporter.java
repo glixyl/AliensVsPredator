@@ -1,17 +1,12 @@
 package com.arisux.avp.dimension.lv223;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.LongHashMap;
 import net.minecraft.util.MathHelper;
-import net.minecraft.world.ChunkCoordIntPair;
-import net.minecraft.world.Teleporter;
-import net.minecraft.world.WorldServer;
+import net.minecraft.world.*;
 
 import com.arisux.avp.AliensVsPredator;
 
@@ -29,6 +24,7 @@ public class LV223Teleporter extends Teleporter
 		this.b = new Random(var1.getSeed());
 	}
 
+	@Override
 	public void placeInPortal(Entity var1, double xCoord, double yCoord, double zCoord, float var8)
 	{
 		if (this.worldServerInstance.provider.dimensionId != 1)
@@ -46,7 +42,7 @@ public class LV223Teleporter extends Teleporter
 			byte var12 = 1;
 			byte var13 = 0;
 
-			if (worldServerInstance.getBlock((int) var9, (int) var10, (int) var11) == Blocks.air)
+			if (worldServerInstance.getBlock(var9, var10, var11) == Blocks.air)
 			{
 				for (int var14 = -2; var14 <= 2; var14++)
 				{
@@ -58,7 +54,7 @@ public class LV223Teleporter extends Teleporter
 							int var18 = var10 + var16;
 							int var19 = var11 + var15 * var13 - var14 * var12;
 							boolean var20 = var16 < 0;
-							this.worldServerInstance.setBlock(var17, var18, var19, var20 ? AliensVsPredator.instance.blocks.blockDerelict2 : Blocks.air);
+							this.worldServerInstance.setBlock(var17, var18, var19, var20 ? AliensVsPredator.instance().blocks.blockDerelict2 : Blocks.air);
 						}
 					}
 				}
@@ -72,6 +68,7 @@ public class LV223Teleporter extends Teleporter
 		}
 	}
 
+	@Override
 	public boolean placeInExistingPortal(Entity var1, double var2, double var4, double var6, float var8)
 	{
 		short var9 = 128;
@@ -105,9 +102,9 @@ public class LV223Teleporter extends Teleporter
 
 					for (int var23 = this.worldServerInstance.getActualHeight() - 1; var23 >= 0; var23--)
 					{
-						if (this.worldServerInstance.getBlock(var22, var23, var46) != AliensVsPredator.instance.blocks.blockPortal)
+						if (this.worldServerInstance.getBlock(var22, var23, var46) != AliensVsPredator.instance().blocks.blockPortal)
 							continue;
-						while (this.worldServerInstance.getBlock(var22, var23 - 1, var46) == AliensVsPredator.instance.blocks.blockPortal)
+						while (this.worldServerInstance.getBlock(var22, var23 - 1, var46) == AliensVsPredator.instance().blocks.blockPortal)
 						{
 							var23--;
 						}
@@ -141,22 +138,22 @@ public class LV223Teleporter extends Teleporter
 			double var20 = var14 + 0.5D;
 			int var28 = -1;
 
-			if (this.worldServerInstance.getBlock(var12 - 1, var13, var14) == AliensVsPredator.instance.blocks.blockPortal)
+			if (this.worldServerInstance.getBlock(var12 - 1, var13, var14) == AliensVsPredator.instance().blocks.blockPortal)
 			{
 				var28 = 2;
 			}
 
-			if (this.worldServerInstance.getBlock(var12 + 1, var13, var14) == AliensVsPredator.instance.blocks.blockPortal)
+			if (this.worldServerInstance.getBlock(var12 + 1, var13, var14) == AliensVsPredator.instance().blocks.blockPortal)
 			{
 				var28 = 0;
 			}
 
-			if (this.worldServerInstance.getBlock(var12, var13, var14 - 1) == AliensVsPredator.instance.blocks.blockPortal)
+			if (this.worldServerInstance.getBlock(var12, var13, var14 - 1) == AliensVsPredator.instance().blocks.blockPortal)
 			{
 				var28 = 3;
 			}
 
-			if (this.worldServerInstance.getBlock(var12, var13, var14 + 1) == AliensVsPredator.instance.blocks.blockPortal)
+			if (this.worldServerInstance.getBlock(var12, var13, var14 + 1) == AliensVsPredator.instance().blocks.blockPortal)
 			{
 				var28 = 1;
 			}
@@ -245,6 +242,7 @@ public class LV223Teleporter extends Teleporter
 		return false;
 	}
 
+	@Override
 	public boolean makePortal(Entity var1)
 	{
 		byte var2 = 16;
@@ -412,7 +410,7 @@ public class LV223Teleporter extends Teleporter
 						int var23 = var33 + var21 + 70;
 						int var24 = var19 + (var20 - 1) * var35 - var18 * var34;
 						boolean var36 = var21 < 0;
-						this.worldServerInstance.setBlock(var22, var23, var24, var36 ? AliensVsPredator.instance.blocks.blockDerelict2 : Blocks.air);
+						this.worldServerInstance.setBlock(var22, var23, var24, var36 ? AliensVsPredator.instance().blocks.blockDerelict2 : Blocks.air);
 					}
 				}
 			}
@@ -429,9 +427,9 @@ public class LV223Teleporter extends Teleporter
 					int var24 = var19 + (var20 - 1) * var35;
 					boolean var36 = (var20 == 0) || (var20 == 3) || (var21 == -1) || (var21 == 3);
 					boolean var37 = var21 == -1;
-					this.worldServerInstance.setBlock(var22, var23, var24, var36 ? AliensVsPredator.instance.blocks.blockDerelict2 : AliensVsPredator.instance.blocks.blockPortal);
-					this.worldServerInstance.setBlock(var22, var23, var24 + 1, var37 ? AliensVsPredator.instance.blocks.blockDerelict2 : Blocks.air);
-					this.worldServerInstance.setBlock(var22, var23, var24 - 1, var37 ? AliensVsPredator.instance.blocks.blockDerelict2 : Blocks.air);
+					this.worldServerInstance.setBlock(var22, var23, var24, var36 ? AliensVsPredator.instance().blocks.blockDerelict2 : AliensVsPredator.instance().blocks.blockPortal);
+					this.worldServerInstance.setBlock(var22, var23, var24 + 1, var37 ? AliensVsPredator.instance().blocks.blockDerelict2 : Blocks.air);
+					this.worldServerInstance.setBlock(var22, var23, var24 - 1, var37 ? AliensVsPredator.instance().blocks.blockDerelict2 : Blocks.air);
 				}
 
 			}
@@ -451,6 +449,7 @@ public class LV223Teleporter extends Teleporter
 		return true;
 	}
 
+	@Override
 	public void removeStalePortalLocations(long var1)
 	{
 		if (var1 % 100L == 0L)
@@ -460,7 +459,7 @@ public class LV223Teleporter extends Teleporter
 
 			while (var3.hasNext())
 			{
-				Long var6 = (Long) var3.next();
+				Long var6 = var3.next();
 				PortalPosition var7 = (PortalPosition) this.destinationCoordinateCache.getValueByKey(var6.longValue());
 
 				if ((var7 == null) || (var7.lastUpdateTime < var4))

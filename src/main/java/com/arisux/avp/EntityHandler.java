@@ -41,34 +41,34 @@ public class EntityHandler implements IInitializable
 
 	private void registerEntities()
 	{
-		EntityRegistry.registerGlobalEntityID(EntityDrone.class, "Drone", AliensVsPredator.instance.settings.entityList.get("DRONE"), 0x333333, 0xFF0000);
-		EntityRegistry.registerGlobalEntityID(EntityWarrior.class, "Warrior", AliensVsPredator.instance.settings.entityList.get("WARRIOR"), 0x333333, 0xFF0000);
-		EntityRegistry.registerGlobalEntityID(EntitySpitter.class, "Spitter", AliensVsPredator.instance.settings.entityList.get("SPITTER"), 0x333333, 0xFF0000);
-		EntityRegistry.registerGlobalEntityID(EntityCrusher.class, "Crusher", AliensVsPredator.instance.settings.entityList.get("CRUSHER"), 0x333333, 0xFF0000);
-		EntityRegistry.registerGlobalEntityID(EntityPraetorian.class, "Praetorian", AliensVsPredator.instance.settings.entityList.get("PRAETORIAN"), 0x333333, 0xFF0000);
-		EntityRegistry.registerGlobalEntityID(EntityMarine.class, "Marine", AliensVsPredator.instance.settings.entityList.get("MARINE"), 0x333333, 0xFF0000);
-		EntityRegistry.registerGlobalEntityID(EntityYautja.class, "Yautja", AliensVsPredator.instance.settings.entityList.get("YAUTJA"), 0x333333, 0xFF0000);
-		EntityRegistry.registerGlobalEntityID(EntityQueen.class, "Queen", AliensVsPredator.instance.settings.entityList.get("QUEEN"), 0x333333, 0xFF0000);
-		EntityRegistry.registerGlobalEntityID(EntityFacehugger.class, "Facehugger", AliensVsPredator.instance.settings.entityList.get("FACEHUGGER"), 0x333333, 0xFF0000);
-		EntityRegistry.registerGlobalEntityID(EntityChestburster.class, "Chestbuster", AliensVsPredator.instance.settings.entityList.get("CHESTBUSTER"), 0x333333, 0xFF0000);
-		EntityRegistry.registerGlobalEntityID(EntityOvamorph.class, "Ovamorph", AliensVsPredator.instance.settings.entityList.get("OVAMORPH"), 0x333333, 0xFF0000);
-		EntityRegistry.registerGlobalEntityID(EntityRoyalFacehugger.class, "RoyalFacehugger", AliensVsPredator.instance.settings.entityList.get("ROYAL_FACEHUGGER"), 0x333333, 0xFF0000);
-		EntityRegistry.registerGlobalEntityID(EntityAqua.class, "AquaticAlien", AliensVsPredator.instance.settings.entityList.get("AQUA"));
-		EntityRegistry.registerGlobalEntityID(EntityPredalien.class, "Predalien", AliensVsPredator.instance.settings.entityList.get("PREDALIEN"));
+		EntityRegistry.registerGlobalEntityID(EntityDrone.class, "Drone", AliensVsPredator.instance().settings.entityList.get("DRONE"), 0x333333, 0xFF0000);
+		EntityRegistry.registerGlobalEntityID(EntityWarrior.class, "Warrior", AliensVsPredator.instance().settings.entityList.get("WARRIOR"), 0x333333, 0xFF0000);
+		EntityRegistry.registerGlobalEntityID(EntitySpitter.class, "Spitter", AliensVsPredator.instance().settings.entityList.get("SPITTER"), 0x333333, 0xFF0000);
+		EntityRegistry.registerGlobalEntityID(EntityCrusher.class, "Crusher", AliensVsPredator.instance().settings.entityList.get("CRUSHER"), 0x333333, 0xFF0000);
+		EntityRegistry.registerGlobalEntityID(EntityPraetorian.class, "Praetorian", AliensVsPredator.instance().settings.entityList.get("PRAETORIAN"), 0x333333, 0xFF0000);
+		EntityRegistry.registerGlobalEntityID(EntityMarine.class, "Marine", AliensVsPredator.instance().settings.entityList.get("MARINE"), 0x333333, 0xFF0000);
+		EntityRegistry.registerGlobalEntityID(EntityYautja.class, "Yautja", AliensVsPredator.instance().settings.entityList.get("YAUTJA"), 0x333333, 0xFF0000);
+		EntityRegistry.registerGlobalEntityID(EntityQueen.class, "Queen", AliensVsPredator.instance().settings.entityList.get("QUEEN"), 0x333333, 0xFF0000);
+		EntityRegistry.registerGlobalEntityID(EntityFacehugger.class, "Facehugger", AliensVsPredator.instance().settings.entityList.get("FACEHUGGER"), 0x333333, 0xFF0000);
+		EntityRegistry.registerGlobalEntityID(EntityChestburster.class, "Chestbuster", AliensVsPredator.instance().settings.entityList.get("CHESTBUSTER"), 0x333333, 0xFF0000);
+		EntityRegistry.registerGlobalEntityID(EntityOvamorph.class, "Ovamorph", AliensVsPredator.instance().settings.entityList.get("OVAMORPH"), 0x333333, 0xFF0000);
+		EntityRegistry.registerGlobalEntityID(EntityRoyalFacehugger.class, "RoyalFacehugger", AliensVsPredator.instance().settings.entityList.get("ROYAL_FACEHUGGER"), 0x333333, 0xFF0000);
+		EntityRegistry.registerGlobalEntityID(EntityAqua.class, "AquaticAlien", AliensVsPredator.instance().settings.entityList.get("AQUA"));
+		EntityRegistry.registerGlobalEntityID(EntityPredalien.class, "Predalien", AliensVsPredator.instance().settings.entityList.get("PREDALIEN"));
 	}
 
 	private void registerInstanceEntities()
 	{
-		EntityRegistry.registerModEntity(EntitySpear.class, "TitaniumSpear", AliensVsPredator.instance.settings.entityList.get("CELTIC_SPEAR"), AliensVsPredator.instance, 250, 1, true);
-		EntityRegistry.registerModEntity(EntityProximityMine.class, "ProximityMine", AliensVsPredator.instance.settings.entityList.get("PROXIMITY_MINE"), AliensVsPredator.instance, 250, 1, true);
-		EntityRegistry.registerModEntity(EntityPlasma.class, "Plasma", AliensVsPredator.instance.settings.entityList.get("PLASMA"), AliensVsPredator.instance, 250, 1, true);
-		EntityRegistry.registerModEntity(EntityGrenade.class, "Grenade", AliensVsPredator.instance.settings.entityList.get("GRENADE"), AliensVsPredator.instance, 250, 1, true);
-		EntityRegistry.registerModEntity(EntityFlame.class, "Flamethrower", AliensVsPredator.instance.settings.entityList.get("FLAME"), AliensVsPredator.instance, 250, 1, true);
-		EntityRegistry.registerModEntity(EntityAcidPool.class, "AcidPool", AliensVsPredator.instance.settings.entityList.get("FXACID"), AliensVsPredator.instance, 32, 1, true);
-		EntityRegistry.registerModEntity(EntityAcidSpit.class, "AcidSpit", AliensVsPredator.instance.settings.entityList.get("AIACID"), AliensVsPredator.instance, 32, 1, true);
-		EntityRegistry.registerModEntity(EntitySmartDisc.class, "EntityDisc", AliensVsPredator.instance.settings.entityList.get("DISC"), AliensVsPredator.instance, 250, 1, true);
-		EntityRegistry.registerModEntity(EntityShuriken.class, "EntityShuriken", AliensVsPredator.instance.settings.entityList.get("SHURIKEN"), AliensVsPredator.instance, 250, 1, true);
-		EntityRegistry.registerModEntity(EntityTurret.class, "EntityTurret", AliensVsPredator.instance.settings.entityList.get("TURRETENTITY"), AliensVsPredator.instance, 32, 1, true);
+		EntityRegistry.registerModEntity(EntitySpear.class, "TitaniumSpear", AliensVsPredator.instance().settings.entityList.get("CELTIC_SPEAR"), AliensVsPredator.instance(), 250, 1, true);
+		EntityRegistry.registerModEntity(EntityProximityMine.class, "ProximityMine", AliensVsPredator.instance().settings.entityList.get("PROXIMITY_MINE"), AliensVsPredator.instance(), 250, 1, true);
+		EntityRegistry.registerModEntity(EntityPlasma.class, "Plasma", AliensVsPredator.instance().settings.entityList.get("PLASMA"), AliensVsPredator.instance(), 250, 1, true);
+		EntityRegistry.registerModEntity(EntityGrenade.class, "Grenade", AliensVsPredator.instance().settings.entityList.get("GRENADE"), AliensVsPredator.instance(), 250, 1, true);
+		EntityRegistry.registerModEntity(EntityFlame.class, "Flamethrower", AliensVsPredator.instance().settings.entityList.get("FLAME"), AliensVsPredator.instance(), 250, 1, true);
+		EntityRegistry.registerModEntity(EntityAcidPool.class, "AcidPool", AliensVsPredator.instance().settings.entityList.get("FXACID"), AliensVsPredator.instance(), 32, 1, true);
+		EntityRegistry.registerModEntity(EntityAcidSpit.class, "AcidSpit", AliensVsPredator.instance().settings.entityList.get("AIACID"), AliensVsPredator.instance(), 32, 1, true);
+		EntityRegistry.registerModEntity(EntitySmartDisc.class, "EntityDisc", AliensVsPredator.instance().settings.entityList.get("DISC"), AliensVsPredator.instance(), 250, 1, true);
+		EntityRegistry.registerModEntity(EntityShuriken.class, "EntityShuriken", AliensVsPredator.instance().settings.entityList.get("SHURIKEN"), AliensVsPredator.instance(), 250, 1, true);
+		EntityRegistry.registerModEntity(EntityTurret.class, "EntityTurret", AliensVsPredator.instance().settings.entityList.get("TURRETENTITY"), AliensVsPredator.instance(), 32, 1, true);
 	}
 
 	private void registerSpawns()

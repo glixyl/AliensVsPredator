@@ -2,8 +2,11 @@ package com.arisux.avp.gui;
 
 import net.minecraft.client.gui.GuiScreen;
 
-import com.arisux.airi.engine.RenderEngine;
-import com.arisux.airi.engine.GuiTypeLib.*;
+import com.arisux.airi.engine.GuiTypeLib.GuiCustomButton;
+import com.arisux.airi.engine.GuiTypeLib.GuiCustomScreen;
+import com.arisux.airi.engine.GuiTypeLib.GuiCustomSlider;
+import com.arisux.airi.engine.GuiTypeLib.GuiCustomTextbox;
+import com.arisux.airi.engine.*;
 import com.arisux.airi.lib.util.interfaces.IActionPerformed;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.ExtendedEntityPlayer;
@@ -27,7 +30,7 @@ public class GuiTacticalHUDSettings extends GuiCustomScreen
 	public void initGui()
 	{
 		super.initGui();
-		TacticalHUDRenderEvent event = ((TacticalHUDRenderEvent) AliensVsPredator.instance.localEvents.getEvent(TacticalHUDRenderEvent.class));
+		TacticalHUDRenderEvent event = ((TacticalHUDRenderEvent) AliensVsPredator.instance().localEvents.getEvent(TacticalHUDRenderEvent.class));
 		
 		textBox1.setText("Default");
 		slider1.sliderValue = ((ExtendedEntityPlayer) mc.thePlayer.getExtendedProperties(ExtendedEntityPlayer.ID_PROPERTIES)).getBroadcastRadius() / slider1.sliderMaxValue;
@@ -96,20 +99,20 @@ public class GuiTacticalHUDSettings extends GuiCustomScreen
 				public void actionPerformed(GuiCustomButton button)
 				{
 					ExtendedEntityPlayer properties = (ExtendedEntityPlayer) mc.thePlayer.getExtendedProperties(ExtendedEntityPlayer.ID_PROPERTIES);
-					TacticalHUDRenderEvent event = ((TacticalHUDRenderEvent) AliensVsPredator.instance.localEvents.getEvent(TacticalHUDRenderEvent.class));
+					TacticalHUDRenderEvent event = ((TacticalHUDRenderEvent) AliensVsPredator.instance().localEvents.getEvent(TacticalHUDRenderEvent.class));
 
 					String newChannel = textBox1.getText();
 					if (properties.getBroadcastChannel() != newChannel)
 					{
 						properties.setBroadcastChannel(newChannel);
-						AliensVsPredator.instance.network.sendToServer(new PacketChannelServerUpdate(newChannel, mc.thePlayer.getCommandSenderName()));
+						AliensVsPredator.instance().network.sendToServer(new PacketChannelServerUpdate(newChannel, mc.thePlayer.getCommandSenderName()));
 					}
 					
 					int newRadius = (int) (slider1.sliderValue * slider1.sliderMaxValue);
 					if (properties.getBroadcastRadius() != newRadius)
 					{
 						properties.setBroadcastRadius(newRadius);
-						AliensVsPredator.instance.network.sendToServer(new PacketBroadcastRadiusServerUpdate(newRadius, mc.thePlayer.getCommandSenderName()));
+						AliensVsPredator.instance().network.sendToServer(new PacketBroadcastRadiusServerUpdate(newRadius, mc.thePlayer.getCommandSenderName()));
 					}
 					
 					int newThreshold = (int) (slider2.sliderValue * slider2.sliderMaxValue);

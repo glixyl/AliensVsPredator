@@ -20,7 +20,7 @@ public class ItemSpear extends ItemSword
 	@Override
 	public void onPlayerStoppedUsing(ItemStack itemstack, World world, EntityPlayer entityplayer, int itemInUseCount)
 	{
-		if (entityplayer.inventory.hasItemStack(new ItemStack(AliensVsPredator.instance.items.itemSpear)))
+		if (entityplayer.inventory.hasItemStack(new ItemStack(AliensVsPredator.instance().items.itemSpear)))
 		{
 			int j = this.getMaxItemUseDuration(itemstack) - itemInUseCount;
 			float f = j / 20.0F;
@@ -58,7 +58,7 @@ public class ItemSpear extends ItemSword
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer)
 	{
-		if (entityplayer.inventory.hasItemStack(new ItemStack(AliensVsPredator.instance.items.itemSpear)))
+		if (entityplayer.inventory.hasItemStack(new ItemStack(AliensVsPredator.instance().items.itemSpear)))
 		{
 			entityplayer.setItemInUse(itemstack, this.getMaxItemUseDuration(itemstack));
 		}

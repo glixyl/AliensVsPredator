@@ -14,8 +14,8 @@ public class LV223Biome extends LV223BiomeBase
 	public LV223Biome(int var1)
 	{
 		super(var1);
-		this.topBlock = AliensVsPredator.instance.blocks.terrainUniDirt;
-		this.fillerBlock = AliensVsPredator.instance.blocks.terrainUniStone;
+		this.topBlock = AliensVsPredator.instance().blocks.terrainUniDirt;
+		this.fillerBlock = AliensVsPredator.instance().blocks.terrainUniStone;
 		this.setHeight(height);
 		this.temperature = 4.0F;
 		this.rainfall = 0.1F;

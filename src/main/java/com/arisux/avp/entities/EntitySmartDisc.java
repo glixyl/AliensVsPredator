@@ -5,9 +5,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 
 import com.arisux.avp.AliensVsPredator;
@@ -24,7 +22,7 @@ public class EntitySmartDisc extends EntityProjectile
 	public EntitySmartDisc(World world)
 	{
 		super(world);
-		this.thrownItem = AliensVsPredator.instance.items.itemDisc;
+		this.thrownItem = AliensVsPredator.instance().items.itemDisc;
 	}
 
 	public EntitySmartDisc(World world, double x, double y, double z)
@@ -38,15 +36,15 @@ public class EntitySmartDisc extends EntityProjectile
 		this(world);
 		this.shootingEntity = entityliving;
 		this.setPickupModeFromEntity(entityliving);
-		this.setLocationAndAngles(entityliving.posX, entityliving.posY + (double) entityliving.getEyeHeight(), entityliving.posZ, entityliving.rotationYaw, entityliving.rotationPitch);
-		this.posX -= (double) (MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F);
+		this.setLocationAndAngles(entityliving.posX, entityliving.posY + entityliving.getEyeHeight(), entityliving.posZ, entityliving.rotationYaw, entityliving.rotationPitch);
+		this.posX -= MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F;
 		this.posY -= 0.1D;
-		this.posZ -= (double) (MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F);
+		this.posZ -= MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F;
 		this.setPosition(this.posX, this.posY, this.posZ);
 		this.yOffset = 0.0F;
-		this.motionX = (double) (-MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI));
-		this.motionZ = (double) (MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI));
-		this.motionY = (double) (-MathHelper.sin(this.rotationPitch / 180.0F * (float) Math.PI));
+		this.motionX = -MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI);
+		this.motionZ = MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI);
+		this.motionY = (-MathHelper.sin(this.rotationPitch / 180.0F * (float) Math.PI));
 		this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, f, 5.0F);
 		this.soundTimer = 0.0F;
 		this.floatStrength = Math.min(1.5F, f);
@@ -90,7 +88,7 @@ public class EntitySmartDisc extends EntityProjectile
 			if (!this.beenInGround && this.shootingEntity != null && this.floatStrength > 0.0F)
 			{
 				double dx = this.posX - this.shootingEntity.posX;
-				double dy = this.posY - this.shootingEntity.posY - (double) this.shootingEntity.getEyeHeight();
+				double dy = this.posY - this.shootingEntity.posY - this.shootingEntity.getEyeHeight();
 				double dz = this.posZ - this.shootingEntity.posZ;
 				double d = Math.sqrt(dx * dx + dy * dy + dz * dz);
 				dx /= d;
@@ -175,16 +173,16 @@ public class EntitySmartDisc extends EntityProjectile
 		this.yTile = mop.blockY;
 		this.zTile = mop.blockZ;
 		this.inTile = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
-		this.motionX = (double) ((float) (mop.hitVec.xCoord - this.posX));
-		this.motionY = (double) ((float) (mop.hitVec.yCoord - this.posY));
-		this.motionZ = (double) ((float) (mop.hitVec.zCoord - this.posZ));
+		this.motionX = ((float) (mop.hitVec.xCoord - this.posX));
+		this.motionY = ((float) (mop.hitVec.yCoord - this.posY));
+		this.motionZ = ((float) (mop.hitVec.zCoord - this.posZ));
 		float f1 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
-		this.posX -= this.motionX / (double) f1 * 0.05D;
-		this.posY -= this.motionY / (double) f1 * 0.05D;
-		this.posZ -= this.motionZ / (double) f1 * 0.05D;
-		this.motionX *= (double) (-this.rand.nextFloat() * 0.5F);
-		this.motionZ *= (double) (-this.rand.nextFloat() * 0.5F);
-		this.motionY = (double) (this.rand.nextFloat() * 0.1F);
+		this.posX -= this.motionX / f1 * 0.05D;
+		this.posY -= this.motionY / f1 * 0.05D;
+		this.posZ -= this.motionZ / f1 * 0.05D;
+		this.motionX *= -this.rand.nextFloat() * 0.5F;
+		this.motionZ *= -this.rand.nextFloat() * 0.5F;
+		this.motionY = this.rand.nextFloat() * 0.1F;
 
 		if (mop.sideHit == 1)
 		{
@@ -248,7 +246,7 @@ public class EntitySmartDisc extends EntityProjectile
 		{
 			if (this.inGround && entityplayer == this.shootingEntity && this.arrowShake <= 0)
 			{
-				if (entityplayer.inventory.addItemStackToInventory(new ItemStack(AliensVsPredator.instance.items.itemDisc, 1)))
+				if (entityplayer.inventory.addItemStackToInventory(new ItemStack(AliensVsPredator.instance().items.itemDisc, 1)))
 				{
 					this.worldObj.playSoundAtEntity(this, "random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
 					entityplayer.onItemPickup(this, 1);

@@ -335,13 +335,21 @@ public class ModelDrone extends ModelBiped
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 	
 		float newangle = MathHelper.cos(f2 * 4.0F * 0.1F) * (float) Math.PI * 0.5F * f1;
-		this.doTail(newangle);
-		this.head1.rotateAngleY = (float) Math.toRadians((double) f3) * 0.75F;
-		this.head2.rotateAngleY = (float) Math.toRadians((double) f3) * 0.75F;
-		this.head3.rotateAngleY = (float) Math.toRadians((double) f3) * 0.75F;
-		this.head4.rotateAngleY = (float) Math.toRadians((double) f3) * 0.75F;
-		this.head5.rotateAngleY = (float) Math.toRadians((double) f3) * 0.75F;
-		this.head6.rotateAngleY = (float) Math.toRadians((double) f3) * 0.75F;
+		float distMult = 0.25F;
+		
+		if (entity != null && entity.prevPosX == entity.posX && entity.prevPosY == entity.posY && entity.prevPosZ == entity.posZ)
+		{
+			newangle = MathHelper.cos(f2 * 0.07F);
+			distMult = 0.95F;
+		}
+		
+		this.doTail(newangle, distMult);
+		this.head1.rotateAngleY = (float) Math.toRadians(f3) * 0.75F;
+		this.head2.rotateAngleY = (float) Math.toRadians(f3) * 0.75F;
+		this.head3.rotateAngleY = (float) Math.toRadians(f3) * 0.75F;
+		this.head4.rotateAngleY = (float) Math.toRadians(f3) * 0.75F;
+		this.head5.rotateAngleY = (float) Math.toRadians(f3) * 0.75F;
+		this.head6.rotateAngleY = (float) Math.toRadians(f3) * 0.75F;
 		this.leftleg1.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1 - 0.8028515F;
 		this.leftleg2.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1 - 0.4014257F;
 		this.leftleg3.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1 - 0.8028515F;
@@ -360,49 +368,41 @@ public class ModelDrone extends ModelBiped
 		this.leftarm4.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1 + 0.3665191F;
 	}
 	
-	private void doTail(float angle)
+	private void doTail(float angle, float distMult)
 	{
-		this.tail1.rotateAngleY = angle;
-		this.tailSpikes1.rotateAngleY = angle;
-//		this.tailspines1.rotateAngleY = angle;
-		this.tail2.rotateAngleY = angle * 0.5F;
-		this.tail2.rotationPointZ = this.tail1.rotationPointZ + (float) Math.cos((double) this.tail1.rotateAngleY) * 10.0F;
-		this.tail2.rotationPointX = this.tail1.rotationPointX + (float) Math.sin((double) this.tail1.rotateAngleY) * 10.0F;
-		this.tailSpikes2.rotateAngleY = angle;
-		this.tailSpikes2.rotationPointZ = this.tail1.rotationPointZ + (float) Math.cos((double) this.tail1.rotateAngleY) * 10.0F;
-		this.tailSpikes2.rotationPointX = this.tail1.rotationPointX + (float) Math.sin((double) this.tail1.rotateAngleY) * 10.0F;
-//		this.tailspines2.rotateAngleY = angle;
-//		this.tailspines2.rotationPointZ = this.tail1.rotationPointZ + (float) Math.cos((double) this.tail1.rotateAngleY) * 10.0F;
-//		this.tailspines2.rotationPointX = this.tail1.rotationPointX + (float) Math.sin((double) this.tail1.rotateAngleY) * 10.0F;
-		this.tail3.rotateAngleY = angle * 0.8F;
-		this.tail3.rotationPointZ = this.tail2.rotationPointZ + (float) Math.cos((double) this.tail2.rotateAngleY) * 10.0F;
-		this.tail3.rotationPointX = this.tail2.rotationPointX + (float) Math.sin((double) this.tail2.rotateAngleY) * 10.0F;
-		this.tailSpikes3.rotateAngleY = angle;
-		this.tailSpikes3.rotationPointZ = this.tail2.rotationPointZ + (float) Math.cos((double) this.tail2.rotateAngleY) * 10.0F;
-		this.tailSpikes3.rotationPointX = this.tail2.rotationPointX + (float) Math.sin((double) this.tail2.rotateAngleY) * 10.0F;
-//		this.tailspines3.rotateAngleY = angle;
-//		this.tailspines3.rotationPointZ = this.tail2.rotationPointZ + (float) Math.cos((double) this.tail2.rotateAngleY) * 10.0F;
-//		this.tailspines3.rotationPointX = this.tail2.rotationPointX + (float) Math.sin((double) this.tail2.rotateAngleY) * 10.0F;
-		this.tail4.rotateAngleY = angle * 1.25F;
-		this.tail4.rotationPointZ = this.tail3.rotationPointZ + (float) Math.cos((double) this.tail3.rotateAngleY) * 10.0F;
-		this.tail4.rotationPointX = this.tail3.rotationPointX + (float) Math.sin((double) this.tail3.rotateAngleY) * 10.0F;
-		this.tailSpikes4.rotateAngleY = angle;
-		this.tailSpikes4.rotationPointZ = this.tail3.rotationPointZ + (float) Math.cos((double) this.tail3.rotateAngleY) * 10.0F;
-		this.tailSpikes4.rotationPointX = this.tail3.rotationPointX + (float) Math.sin((double) this.tail3.rotateAngleY) * 10.0F;
-//		this.tailspines4.rotateAngleY = angle;
-//		this.tailspines4.rotationPointZ = this.tail3.rotationPointZ + (float) Math.cos((double) this.tail3.rotateAngleY) * 10.0F;
-//		this.tailspines4.rotationPointX = this.tail3.rotationPointX + (float) Math.sin((double) this.tail3.rotateAngleY) * 10.0F;
-		this.tail5.rotateAngleY = angle * 1.5F;
-		this.tail5.rotationPointZ = this.tail4.rotationPointZ + (float) Math.cos((double) this.tail4.rotateAngleY) * 10.0F;
-		this.tail5.rotationPointX = this.tail4.rotationPointX + (float) Math.sin((double) this.tail4.rotateAngleY) * 10.0F;
-		this.tailSpikes5.rotateAngleY = angle;
-		this.tailSpikes5.rotationPointZ = this.tail4.rotationPointZ + (float) Math.cos((double) this.tail4.rotateAngleY) * 10.0F;
-		this.tailSpikes5.rotationPointX = this.tail4.rotationPointX + (float) Math.sin((double) this.tail4.rotateAngleY) * 10.0F;
-//		this.tailspines5.rotateAngleY = angle;
-//		this.tailspines5.rotationPointZ = this.stabber.rotationPointZ + (float) Math.cos((double) this.stabber.rotateAngleY) * 10.0F;
-//		this.tailspines5.rotationPointX = this.stabber.rotationPointX + (float) Math.sin((double) this.stabber.rotateAngleY) * 10.0F;
-		this.stabber.rotateAngleY = angle * 2.0F;
-		this.stabber.rotationPointZ = this.tail5.rotationPointZ + (float) Math.cos((double) this.tail5.rotateAngleY) * 10.0F;
-		this.stabber.rotationPointX = this.tail5.rotationPointX + (float) Math.sin((double) this.tail5.rotateAngleY) * 10.0F;
+		float multiplier = 0.25F;
+		this.tail1.rotateAngleY = angle / 1.5F;
+		this.tailSpikes1.rotateAngleY = angle / 1.5F;
+		this.tail2.rotateAngleY = angle * multiplier;
+		this.tail2.rotationPointZ = this.tail1.rotationPointZ + (float) Math.cos(this.tail1.rotateAngleY) * 10.0F;
+		this.tail2.rotationPointX = this.tail1.rotationPointX + (float) Math.sin(this.tail1.rotateAngleY) * 10.0F;
+		this.tailSpikes2.rotateAngleY = angle * multiplier;
+		this.tailSpikes2.rotationPointZ = this.tail1.rotationPointZ + (float) Math.cos(this.tail1.rotateAngleY) * 10.0F;
+		this.tailSpikes2.rotationPointX = this.tail1.rotationPointX + (float) Math.sin(this.tail1.rotateAngleY) * 10.0F;
+		multiplier = multiplier + distMult;
+		this.tail3.rotateAngleY = angle * multiplier;
+		this.tail3.rotationPointZ = this.tail2.rotationPointZ + (float) Math.cos(this.tail2.rotateAngleY) * 10.0F;
+		this.tail3.rotationPointX = this.tail2.rotationPointX + (float) Math.sin(this.tail2.rotateAngleY) * 10.0F;
+		this.tailSpikes3.rotateAngleY = angle * multiplier;
+		this.tailSpikes3.rotationPointZ = this.tail2.rotationPointZ + (float) Math.cos(this.tail2.rotateAngleY) * 10.0F;
+		this.tailSpikes3.rotationPointX = this.tail2.rotationPointX + (float) Math.sin(this.tail2.rotateAngleY) * 10.0F;
+		multiplier = multiplier + distMult;
+		this.tail4.rotateAngleY = angle * multiplier;
+		this.tail4.rotationPointZ = this.tail3.rotationPointZ + (float) Math.cos(this.tail3.rotateAngleY) * 10.0F;
+		this.tail4.rotationPointX = this.tail3.rotationPointX + (float) Math.sin(this.tail3.rotateAngleY) * 10.0F;
+		this.tailSpikes4.rotateAngleY = angle * multiplier;
+		this.tailSpikes4.rotationPointZ = this.tail3.rotationPointZ + (float) Math.cos(this.tail3.rotateAngleY) * 10.0F;
+		this.tailSpikes4.rotationPointX = this.tail3.rotationPointX + (float) Math.sin(this.tail3.rotateAngleY) * 10.0F;
+		multiplier = multiplier + distMult;
+		this.tail5.rotateAngleY = angle * multiplier;
+		this.tail5.rotationPointZ = this.tail4.rotationPointZ + (float) Math.cos(this.tail4.rotateAngleY) * 10.0F;
+		this.tail5.rotationPointX = this.tail4.rotationPointX + (float) Math.sin(this.tail4.rotateAngleY) * 10.0F;
+		this.tailSpikes5.rotateAngleY = angle * multiplier;
+		this.tailSpikes5.rotationPointZ = this.tail4.rotationPointZ + (float) Math.cos(this.tail4.rotateAngleY) * 10.0F;
+		this.tailSpikes5.rotationPointX = this.tail4.rotationPointX + (float) Math.sin(this.tail4.rotateAngleY) * 10.0F;
+		multiplier = multiplier + distMult;
+		this.stabber.rotateAngleY = angle * multiplier;
+		this.stabber.rotationPointZ = this.tail5.rotationPointZ + (float) Math.cos(this.tail5.rotateAngleY) * 10.0F;
+		this.stabber.rotationPointX = this.tail5.rotationPointX + (float) Math.sin(this.tail5.rotateAngleY) * 10.0F;
 	}
 }

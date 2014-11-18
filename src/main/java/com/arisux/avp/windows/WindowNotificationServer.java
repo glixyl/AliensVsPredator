@@ -86,8 +86,7 @@ public class WindowNotificationServer extends Window implements IWindow
 		}
 		case 1: {
 			Minecraft.getMinecraft().currentScreen = new GuiMultiplayer(Minecraft.getMinecraft().currentScreen);
-			// Minecraft.getMinecraft().currentScreen = AIRI.instance().windowapi.getWindowManager().getParentScreen();
-			FMLClientHandler.instance().connectToServer(AIRI.instance().windowapi.getWindowManager().getParentScreen(), serverData);
+			FMLClientHandler.instance().connectToServer(AIRI.windowApi().getWindowManager().getParentScreen(), serverData);
 			break;
 		}
 		}

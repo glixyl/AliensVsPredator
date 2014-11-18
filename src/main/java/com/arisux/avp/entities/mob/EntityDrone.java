@@ -11,8 +11,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import com.arisux.airi.AIRI;
-import com.arisux.airi.engine.BlockLib.CoordData;
 import com.arisux.airi.engine.WorldEngine;
+import com.arisux.airi.engine.WorldEngine.Blocks;
 import com.arisux.avp.AliensVsPredator;
 
 public class EntityDrone extends EntityXenomorph
@@ -80,13 +80,13 @@ public class EntityDrone extends EntityXenomorph
 	protected void dropRareDrop(int par1)
 	{
 		if (new Random().nextInt(4) == 1)
-			this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.helmXeno), 1);
+			this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.helmXeno), 1);
 		if (new Random().nextInt(4) == 1)
-			this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.plateXeno), 1);
+			this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.plateXeno), 1);
 		if (new Random().nextInt(4) == 1)
-			this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.legsXeno), 1);
+			this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.legsXeno), 1);
 		if (new Random().nextInt(4) == 1)
-			this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.bootsXeno), 1);
+			this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.bootsXeno), 1);
 
 		super.dropRareDrop(par1);
 	}
@@ -128,7 +128,7 @@ public class EntityDrone extends EntityXenomorph
 	public EntityQueen findQueen()
 	{
 		EntityQueen queen;
-		Entity ent = WorldEngine.Entities.getEntityInCoordsRange(this.worldObj, EntityQueen.class, new CoordData(this), 50);
+		Entity ent = WorldEngine.Entities.getEntityInCoordsRange(this.worldObj, EntityQueen.class, new Blocks.CoordData(this), 50);
 		if (ent instanceof EntityQueen)
 		{
 			queen = (EntityQueen) ent;

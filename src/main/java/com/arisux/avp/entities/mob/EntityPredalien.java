@@ -91,7 +91,7 @@ public class EntityPredalien extends EntityXenomorph implements IMob
 	@Override
 	protected void dropRareDrop(int par1)
 	{
-		this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.plateXeno), 1);
+		this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.plateXeno), 1);
 	}
 
 	@Override

@@ -1,0 +1,18 @@
+[{
+  "modid": "avp",
+  "name": "AliensVsPredator",
+  "description": "Contains content from several movie series, including the Alien, Predator, Aliens Vs Predator, and Prometheus series. The mod adds countless blocks, items, and mobs to the world of Minecraft for you to start Building Better Worlds(TM). ",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "http://arisux.com/page/mods/aliensvspredator/",
+  "updateUrl": "http://arisux.com/page/mods/aliensvspredator/latest.txt",
+  "changelogUrl": "http://arisux.com/page/mods/aliensvspredator/changelog.txt",
+  "authorList": ["Ri5ux", "Ieuan"],
+  "credits": "The Minecraft Community",
+  "logoFile": "",
+  "screenshots": [],
+  "useDependencyInformation": true,
+  "requiredMods": ["AIRI"],
+  "dependencies": ["AIRI"],
+  "beta": true
+}]

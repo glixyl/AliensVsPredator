@@ -60,7 +60,7 @@ public class EntityNuke extends EntityThrowable
 
 		if (this.getCurFuse() >= this.getMaxFuse())
 		{
-			if (AliensVsPredator.instance.settings.areExplosionsEnabled())
+			if (AliensVsPredator.instance().settings.areExplosionsEnabled())
 			{
 				WorldEngine.createThreadedExplosion((Entity) null, worldObj, (int) this.posX, (int) this.posY, (int) this.posZ, 47F);
 			}
@@ -76,6 +76,7 @@ public class EntityNuke extends EntityThrowable
 	 * (abstract) Protected helper method to write subclass entity data to
 	 * NBT.
 	 */
+	@Override
 	public void writeEntityToNBT(NBTTagCompound var1)
 	{
 		super.writeEntityToNBT(var1);
@@ -86,6 +87,7 @@ public class EntityNuke extends EntityThrowable
 	 * (abstract) Protected helper method to read subclass entity data from
 	 * NBT.
 	 */
+	@Override
 	public void readEntityFromNBT(NBTTagCompound var1)
 	{
 		super.readEntityFromNBT(var1);
@@ -95,6 +97,7 @@ public class EntityNuke extends EntityThrowable
 	/**
 	 * Called by a player entity when they collide with an entity
 	 */
+	@Override
 	public void onCollideWithPlayer(EntityPlayer var1)
 	{
 	}
@@ -102,6 +105,7 @@ public class EntityNuke extends EntityThrowable
 	/**
 	 * Called when this EntityThrowable hits a block or entity.
 	 */
+	@Override
 	protected void onImpact(MovingObjectPosition var1)
 	{
 	}

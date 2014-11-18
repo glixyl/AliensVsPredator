@@ -29,7 +29,7 @@ public class PacketOpenWristbracerGUIServerUpdate implements IMessage, IMessageH
 	@Override
 	public PacketOpenWristbracerGUIServerUpdate onMessage(PacketOpenWristbracerGUIServerUpdate packet, MessageContext ctx)
 	{
-		FMLNetworkHandler.openGui(ctx.getServerHandler().playerEntity, AliensVsPredator.instance, AliensVsPredator.properties().GUI_WRISTBRACER, ctx.getServerHandler().playerEntity.worldObj, (int) ctx.getServerHandler().playerEntity.posX, (int) ctx.getServerHandler().playerEntity.posY, (int) ctx.getServerHandler().playerEntity.posZ);
+		FMLNetworkHandler.openGui(ctx.getServerHandler().playerEntity, AliensVsPredator.instance(), AliensVsPredator.properties().GUI_WRISTBRACER, ctx.getServerHandler().playerEntity.worldObj, (int) ctx.getServerHandler().playerEntity.posX, (int) ctx.getServerHandler().playerEntity.posY, (int) ctx.getServerHandler().playerEntity.posZ);
 		return null;
 	}
 }

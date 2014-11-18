@@ -34,7 +34,7 @@ public class ItemEntitySummoner extends HookedItem
 		if (par2World.isRemote && entity != null)
 		{
 			MovingObjectPosition ray = par3EntityPlayer.rayTrace(50D, 1F);
-			AliensVsPredator.instance.network.sendToServer(new PacketSpawnEntityServerUpdate(ray.blockX, ray.blockY, ray.blockZ, EntityList.getEntityID(entity)));
+			AliensVsPredator.instance().network.sendToServer(new PacketSpawnEntityServerUpdate(ray.blockX, ray.blockY, ray.blockZ, EntityList.getEntityID(entity)));
 		}
 
 		return super.onItemRightClick(par1ItemStack, par2World, par3EntityPlayer);

@@ -20,6 +20,7 @@ public class LV223GenLakes extends WorldGenerator
 		this.blockIndex = var1;
 	}
 
+	@Override
 	public boolean generate(World var1, Random var2, int var3, int var4, int var5)
 	{
 		var3 -= 8;
@@ -100,7 +101,7 @@ public class LV223GenLakes extends WorldGenerator
 				{
 					if (var6[((var8 * 16 + var32) * 8 + var10)] == false)
 						continue;
-					var1.setBlock(var3 + var8, var4 + var10, var5 + var32, (Block) (var10 >= 4 ? Blocks.air : this.blockIndex));
+					var1.setBlock(var3 + var8, var4 + var10, var5 + var32, var10 >= 4 ? Blocks.air : this.blockIndex);
 				}
 			}
 
@@ -114,7 +115,7 @@ public class LV223GenLakes extends WorldGenerator
 				{
 					if ((var6[((var8 * 16 + var32) * 8 + var10)] == false) || (var1.getBlock(var3 + var8, var4 + var10 - 1, var5 + var32) != Blocks.dirt) || (var1.getSavedLightValue(EnumSkyBlock.Sky, var3 + var8, var4 + var10, var5 + var32) <= 0))
 						continue;
-					var1.setBlock(var3 + var8, var4 + var10 - 1, var5 + var32, AliensVsPredator.instance.blocks.terrainUniDirt);
+					var1.setBlock(var3 + var8, var4 + var10 - 1, var5 + var32, AliensVsPredator.instance().blocks.terrainUniDirt);
 				}
 			}
 
@@ -132,7 +133,7 @@ public class LV223GenLakes extends WorldGenerator
 
 						if ((!var33) || ((var10 >= 4) && (var2.nextInt(2) == 0)) || (!var1.getBlock(var3 + var8, var4 + var10, var5 + var32).getMaterial().isSolid()))
 							continue;
-						var1.setBlock(var3 + var8, var4 + var10, var5 + var32, AliensVsPredator.instance.blocks.terrainUniStone);
+						var1.setBlock(var3 + var8, var4 + var10, var5 + var32, AliensVsPredator.instance().blocks.terrainUniStone);
 					}
 				}
 			}

@@ -41,7 +41,7 @@ public class VisionModeRenderEvent
 		{
 			if (event.type == RenderGameOverlayEvent.ElementType.HOTBAR && mc.gameSettings.thirdPersonView == 0)
 			{
-				if (WorldEngine.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer) != null && WorldEngine.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer).getItem() == AliensVsPredator.instance.items.helmTitanium)
+				if (WorldEngine.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer) != null && WorldEngine.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer).getItem() == AliensVsPredator.instance().items.helmTitanium)
 				{
 					this.currentVisionMode.render();
 
@@ -50,7 +50,7 @@ public class VisionModeRenderEvent
 
 					if (mc.currentScreen instanceof GuiChat)
 					{
-						buttonToggleVisionMode.tooltip = String.format("Click or Press '%s' to toggle.", Keyboard.getKeyName(AliensVsPredator.instance.keybinds.KEYBIND_VISION_MODE.getKeyCode()));
+						buttonToggleVisionMode.tooltip = String.format("Click or Press '%s' to toggle.", Keyboard.getKeyName(AliensVsPredator.instance().keybinds.KEYBIND_VISION_MODE.getKeyCode()));
 						buttonToggleVisionMode.xPosition = scaledDisplayResolution().getScaledWidth() - buttonToggleVisionMode.getButtonWidth() - 10;
 						buttonToggleVisionMode.yPosition = 10;
 						buttonToggleVisionMode.width = 70;
@@ -69,7 +69,7 @@ public class VisionModeRenderEvent
 	{
 		if (mc.thePlayer != null)
 		{
-			if (AliensVsPredator.instance.keybinds.KEYBIND_VISION_MODE.isPressed() && mc.inGameHasFocus && Keyboard.getEventKeyState())
+			if (AliensVsPredator.instance().keybinds.KEYBIND_VISION_MODE.isPressed() && mc.inGameHasFocus && Keyboard.getEventKeyState())
 			{
 				this.actionSwitchVisionMode.actionPerformed(null);
 			}

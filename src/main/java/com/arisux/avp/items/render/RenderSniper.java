@@ -12,6 +12,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.coremod.AccessHandler;
 import com.arisux.airi.engine.RenderEngine;
 import com.arisux.airi.engine.RenderEngine.PlayerResourceManager.PlayerResource;
 import com.arisux.airi.lib.render.ItemRenderer3D;
@@ -67,8 +68,8 @@ public class RenderSniper extends ItemRenderer3D
 	{
 		GL11.glPushMatrix();
 
-		this.resource = RenderEngine.downloadResource(String.format(AliensVsPredator.properties().URL_SKIN_SNIPER, Minecraft.getMinecraft().session.getPlayerID()), resourceLocation);
-		this.resourceScope = RenderEngine.downloadResource(String.format(AliensVsPredator.properties().URL_SKIN_SNIPER_SCOPE, Minecraft.getMinecraft().session.getPlayerID()), resourceLocationScope);
+		this.resource = RenderEngine.downloadResource(String.format(AliensVsPredator.properties().URL_SKIN_SNIPER, AccessHandler.getSession().getPlayerID()), resourceLocation);
+		this.resourceScope = RenderEngine.downloadResource(String.format(AliensVsPredator.properties().URL_SKIN_SNIPER_SCOPE, AccessHandler.getSession().getPlayerID()), resourceLocationScope);
 
 		if (Mouse.isButtonDown(0) && Minecraft.getMinecraft().inGameHasFocus)
 		{
@@ -106,7 +107,7 @@ public class RenderSniper extends ItemRenderer3D
 	{
 		GL11.glPushMatrix();
 
-		this.resource = RenderEngine.downloadResource(String.format(AliensVsPredator.properties().URL_SKIN_SNIPER, Minecraft.getMinecraft().session.getPlayerID()), resourceLocation);
+		this.resource = RenderEngine.downloadResource(String.format(AliensVsPredator.properties().URL_SKIN_SNIPER, AccessHandler.getSession().getPlayerID()), resourceLocation);
 		Minecraft.getMinecraft().renderEngine.bindTexture(getResourceLocation());
 		GL11.glDisable(GL11.GL_CULL_FACE);
 		GL11.glRotatef(0F, 1.0F, 0.0F, 0.0F);

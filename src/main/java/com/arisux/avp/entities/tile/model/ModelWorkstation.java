@@ -155,13 +155,13 @@ public class ModelWorkstation extends ModelBase
 		ArmRight.render(f5);
 		ScreenCenter.render(f5);
 		
-		if (left != AliensVsPredator.instance.blocks.blockWorkstation && leftUp == Blocks.air && left.getBlockBoundsMaxY() <= 1.5)
+		if (left != AliensVsPredator.instance().blocks.blockWorkstation && leftUp == Blocks.air && left.getBlockBoundsMaxY() <= 1.5)
 		{
 			LeftArm.render(f5);
 			ScreenLeft.render(f5);
 		}
 		
-		if (right != AliensVsPredator.instance.blocks.blockWorkstation && rightUp == Blocks.air  && right.getBlockBoundsMaxY() <= 1.5)
+		if (right != AliensVsPredator.instance().blocks.blockWorkstation && rightUp == Blocks.air  && right.getBlockBoundsMaxY() <= 1.5)
 		{
 			RightArm.render(f5);
 			ScreenRight.render(f5);

@@ -60,7 +60,7 @@ public class ItemFirearm extends HookedItem
 			return par1ItemStack;
 		}
 
-		// if (!par2World.isRemote) AliensVsPredator.INSTANCE.network.sendToServer(new PacketAmmoClientUpdate(curAmmo));
+		// if (!par2World.isRemote) AliensVsPredator.instance().network.sendToServer(new PacketAmmoClientUpdate(curAmmo));
 
 		if (par2World.isRemote && this.curAmmo > 0 && this.curCooldown <= 0 && this.curReload <= 0 || par2World.isRemote && par3EntityPlayer.capabilities.isCreativeMode)
 		{
@@ -70,7 +70,7 @@ public class ItemFirearm extends HookedItem
 
 		if (par3EntityPlayer.inventory.hasItemStack(new ItemStack(this.itemAmmo)) && this.curAmmo <= 0 && this.curReload <= 0)
 		{
-			// AliensVsPredator.INSTANCE.network.sendToServer(new PacketReloadFirearmServerUpdate());
+			// AliensVsPredator.instance().network.sendToServer(new PacketReloadFirearmServerUpdate());
 			this.reload(par3EntityPlayer);
 		}
 
@@ -79,11 +79,11 @@ public class ItemFirearm extends HookedItem
 			par2World.playSoundAtEntity(par3EntityPlayer, this.sound, 0.5F, 1.0F);
 			if (par3EntityPlayer.capabilities.isCreativeMode)
 			{
-				AliensVsPredator.instance.network.sendToServer(new PacketShootBulletServerUpdate(this.itemAmmo.getInflictionDamage() * 15));
+				AliensVsPredator.instance().network.sendToServer(new PacketShootBulletServerUpdate(this.itemAmmo.getInflictionDamage() * 15));
 			}
 			else
 			{
-				AliensVsPredator.instance.network.sendToServer(new PacketShootBulletServerUpdate(this.itemAmmo.getInflictionDamage()));
+				AliensVsPredator.instance().network.sendToServer(new PacketShootBulletServerUpdate(this.itemAmmo.getInflictionDamage()));
 			}
 			this.curCooldown = this.maxCooldown;
 

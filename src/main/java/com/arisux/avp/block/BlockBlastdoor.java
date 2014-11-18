@@ -32,7 +32,7 @@ public class BlockBlastdoor extends HookedBlockContainer
 	public int onBlockPlaced(World world, int posX, int posY, int posZ, int side, float subX, float subY, float subZ, int meta)
 	{
 		TileEntityBlastdoor tile = (TileEntityBlastdoor) world.getTileEntity(posX, posY, posZ);
-		GhostBlock ghostBlock = (GhostBlock) AliensVsPredator.instance.blocks.ghostBlockBlastdoor;
+		GhostBlock ghostBlock = (GhostBlock) AliensVsPredator.instance().blocks.ghostBlockBlastdoor;
 		
 		world.setBlock(posX, posY + 1, posZ, ghostBlock);
 		world.setBlock(posX, posY + 2, posZ, ghostBlock);

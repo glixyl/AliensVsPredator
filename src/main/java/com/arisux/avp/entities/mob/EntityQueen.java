@@ -1,12 +1,14 @@
 package com.arisux.avp.entities.mob;
 
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.interfaces.IHiveSignature;
 
-public class EntityQueen extends EntityXenomorph
+public class EntityQueen extends EntityXenomorph implements IHiveSignature
 {
 	private ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_XENOQUEEN);
 	public boolean isInStasis;
@@ -22,6 +24,7 @@ public class EntityQueen extends EntityXenomorph
 		this.hurtResistantTime = 0;
 		this.ignoreFrustumCheck = true;
 		this.ovipositorSize = 0.0F;
+		this.setHiveSignature(this.getUniqueID());
 		// this.tasks.addTask(0, new EntityAISwimming(this));
 		// this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
 		// this.tasks.addTask(4, new EntityAILeapAtTarget(this, 1F));
@@ -91,5 +94,19 @@ public class EntityQueen extends EntityXenomorph
 	public ResourceLocation getResource()
 	{
 		return resourceLocation;
+	}
+	
+	@Override
+	public void readEntityFromNBT(NBTTagCompound nbt)
+	{
+		super.readEntityFromNBT(nbt);
+		this.ovipositorSize = nbt.getFloat("ovipositorSize");
+	}
+	
+	@Override
+	public void writeEntityToNBT(NBTTagCompound nbt)
+	{
+		super.writeEntityToNBT(nbt);
+		nbt.setFloat("ovipositorSize", this.ovipositorSize);
 	}
 }

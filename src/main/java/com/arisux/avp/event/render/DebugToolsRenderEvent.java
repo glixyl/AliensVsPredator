@@ -12,7 +12,7 @@ import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.arisux.airi.engine.*;
-import com.arisux.airi.engine.BlockLib.CoordData;
+import com.arisux.airi.engine.WorldEngine.Blocks;
 import com.arisux.airi.lib.util.enums.BlockSides;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntityMarine;
@@ -33,7 +33,7 @@ public class DebugToolsRenderEvent
 		{
 			if (mc.objectMouseOver != null)
 			{
-				if (ModEngine.isDevelopmentEnvironment() || AliensVsPredator.instance.settings.debugToolsEnabled)
+				if (ModEngine.isDevelopmentEnvironment() || AliensVsPredator.instance().settings.areDebugToolsEnabled())
 				{
 					if (mc.inGameHasFocus || mc.currentScreen instanceof GuiChat)
 					{
@@ -87,7 +87,7 @@ public class DebugToolsRenderEvent
 								if (entity instanceof EntityLivingBase)
 								{
 									fontrenderer.drawStringWithShadow("Age: " + ((EntityLivingBase) entity).getAge(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
-									RenderEngine.drawEntity(RenderEngine.scaledDisplayResolution().getScaledWidth() - 75, RenderEngine.scaledDisplayResolution().getScaledHeight() - 25, 30, 90, -90, (EntityLivingBase) entity);
+									RenderEngine.drawEntity(RenderEngine.scaledDisplayResolution().getScaledWidth() - 75, RenderEngine.scaledDisplayResolution().getScaledHeight() - 25, 30, 90, -90, entity);
 								}
 
 								if (entity instanceof EntityItemFrame)
@@ -107,8 +107,8 @@ public class DebugToolsRenderEvent
 						{
 							Gui.drawRect(0, 0, RenderEngine.scaledDisplayResolution().getScaledWidth(), 20, 0xBB000000);
 
-							CoordData coord = new CoordData(mc.objectMouseOver.blockX, mc.objectMouseOver.blockY, mc.objectMouseOver.blockZ);
-							Block block = mc.theWorld.getBlock((int) coord.posX, (int) coord.posY, (int) coord.posZ);
+							Blocks.CoordData coord = new Blocks.CoordData(mc.objectMouseOver.blockX, mc.objectMouseOver.blockY, mc.objectMouseOver.blockZ);
+							Block block = mc.theWorld.getBlock(coord.posX, coord.posY, coord.posZ);
 							BlockSides side = BlockSides.getSide(mc.objectMouseOver.sideHit);
 							TileEntity tile = coord.getTileEntity(Minecraft.getMinecraft().thePlayer.worldObj);
 
@@ -117,12 +117,12 @@ public class DebugToolsRenderEvent
 
 							String info = "";
 
-							if (BlockLib.getDomain(block).equals("minecraft:"))
+							if (Blocks.getDomain(block).equals("minecraft:"))
 							{
 								info = block.getLocalizedName();
 							} else
 							{
-								info = block.getLocalizedName() + " from " + ModEngine.getModContainerForId(BlockLib.getDomain(block).replace(":", "")).getName();
+								info = block.getLocalizedName() + " from " + ModEngine.getModContainerForId(Blocks.getDomain(block).replace(":", "")).getName();
 							}
 							
 							if (block.getRenderType() != 0)

@@ -6,10 +6,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.gen.feature.WorldGenFlowers;
-import net.minecraft.world.gen.feature.WorldGenLakes;
-import net.minecraft.world.gen.feature.WorldGenLiquids;
-import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraft.world.gen.feature.*;
 
 import com.arisux.avp.AliensVsPredator;
 
@@ -31,8 +28,8 @@ public class LV223BiomeDecorator extends BiomeDecorator
 		this.biomeGenBase = biomeGenBase;
 		this.lakeGeneration = new WorldGenLakes(Blocks.water);
 		this.caveWaterGen = new WorldGenLiquids(Blocks.flowing_water);
-		this.MDirtGen = new LV223GenMinable(AliensVsPredator.instance.blocks.terrainUniDirt, 32);
-		this.StalagmiteGen = new WorldGenFlowers(AliensVsPredator.instance.blocks.terrainStalagmite);
+		this.MDirtGen = new LV223GenMinable(AliensVsPredator.instance().blocks.terrainUniDirt, 32);
+		this.StalagmiteGen = new WorldGenFlowers(AliensVsPredator.instance().blocks.terrainStalagmite);
 		this.LandSpikeGen = new LV223GenLandSpike(true);
 		this.lakesPerChunk = 0;
 		this.treesPerChunk = 0;

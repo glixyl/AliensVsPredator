@@ -83,31 +83,31 @@ public class EntityMarine extends EntityCreature implements IMob, IRangedAttackM
 			case M4:
 				if (rand.nextInt(3) == 1)
 				{
-					this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.itemAmmoAC), 1);
+					this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.itemAmmoAC), 1);
 				}
 				break;
 			case AK47:
 				if (rand.nextInt(3) == 1)
 				{
-					this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.itemAmmoAR), 1);
+					this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.itemAmmoAR), 1);
 				}
 				break;
 			case M4A1:
 				if (rand.nextInt(3) == 1)
 				{
-					this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.itemAmmoPistol), 1);
+					this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.itemAmmoPistol), 1);
 				}
 				break;
 			case SNIPER:
 				if (rand.nextInt(3) == 1)
 				{
-					this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.itemAmmoSMG), 1);
+					this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.itemAmmoSMG), 1);
 				}
 				break;
 			case M56SG:
 				if (rand.nextInt(3) == 1)
 				{
-					this.entityDropItem(new ItemStack(AliensVsPredator.instance.items.itemAmmoSniper), 1);
+					this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.itemAmmoSniper), 1);
 				}
 				break;
 		}
@@ -128,7 +128,7 @@ public class EntityMarine extends EntityCreature implements IMob, IRangedAttackM
 
 	public ItemStack getCurrentItemOrArmor(int par1)
 	{
-		return new ItemStack(AliensVsPredator.instance.items.itemM41A);
+		return new ItemStack(AliensVsPredator.instance().items.itemM41A);
 	}
 
 	@Override

@@ -11,6 +11,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.coremod.AccessHandler;
 import com.arisux.airi.engine.RenderEngine;
 import com.arisux.airi.engine.RenderEngine.PlayerResourceManager.PlayerResource;
 import com.arisux.airi.lib.render.ItemRenderer3D;
@@ -37,7 +38,7 @@ public class RenderM56SG extends ItemRenderer3D
 	{
 		GL11.glPushMatrix();
 
-		this.resource = RenderEngine.downloadResource(String.format(AliensVsPredator.properties().URL_SKIN_M56SG, Minecraft.getMinecraft().session.getPlayerID()), resourceLocation);
+		this.resource = RenderEngine.downloadResource(String.format(AliensVsPredator.properties().URL_SKIN_M56SG, AccessHandler.getSession().getPlayerID()), resourceLocation);
 		Minecraft.getMinecraft().renderEngine.bindTexture(getResourceLocation());
 
 		if ((EntityPlayer) data[1] == Minecraft.getMinecraft().renderViewEntity && Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && (!(Minecraft.getMinecraft().currentScreen instanceof GuiInventory) && !(Minecraft.getMinecraft().currentScreen instanceof GuiContainerCreative) || RenderManager.instance.playerViewY != 180.0F))
@@ -86,7 +87,7 @@ public class RenderM56SG extends ItemRenderer3D
 	{
 		GL11.glPushMatrix();
 
-		this.resource = RenderEngine.downloadResource(String.format(AliensVsPredator.properties().URL_SKIN_M56SG, Minecraft.getMinecraft().session.getPlayerID()), resourceLocation);
+		this.resource = RenderEngine.downloadResource(String.format(AliensVsPredator.properties().URL_SKIN_M56SG, AccessHandler.getSession().getPlayerID()), resourceLocation);
 		Minecraft.getMinecraft().renderEngine.bindTexture(getResourceLocation());
 		GL11.glDisable(GL11.GL_CULL_FACE);
 		GL11.glRotatef(0F, 1.0F, 0.0F, 0.0F);

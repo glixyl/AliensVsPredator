@@ -19,7 +19,7 @@ public enum VisionMode
 		@Override
 		public void render(Object... data)
 		{
-			AliensVsPredator.instance.localEvents.getLightmapUpdateEvent().gammaValue = 0F;
+			AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue = 0F;
 			renderOverlay(VisionModeRenderEvent.resOverlayCeltic, 1F, 0F, 0F, 1F);
 		}
 
@@ -41,7 +41,7 @@ public enum VisionMode
 		public void render(Object... data)
 		{
 			boolean isDay = (Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 24000L) / 1000L < 11L;
-			AliensVsPredator.instance.localEvents.getLightmapUpdateEvent().gammaValue = isDay ? -60F : 0F;
+			AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue = isDay ? -60F : 0F;
 
 			GL11.glPushMatrix();
 			{
@@ -60,7 +60,7 @@ public enum VisionMode
 			}
 			GL11.glPopMatrix();
 
-			AliensVsPredator.instance.localEvents.getLightmapUpdateEvent().gammaValue = AliensVsPredator.instance.localEvents.getLightmapUpdateEvent().gammaValue < 0F ? AliensVsPredator.instance.localEvents.getLightmapUpdateEvent().gammaValue + 0.03F : AliensVsPredator.instance.localEvents.getLightmapUpdateEvent().gammaValue;
+			AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue = AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue < 0F ? AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue + 0.03F : AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue;
 			renderOverlay(VisionModeRenderEvent.resOverlayCeltic, 1F, 1F, 1F, 1F);
 		}
 
@@ -91,7 +91,7 @@ public enum VisionMode
 		public void render(Object... data)
 		{
 			boolean isDay = (Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 24000L) / 1000L < 11L;
-			AliensVsPredator.instance.localEvents.getLightmapUpdateEvent().gammaValue = isDay ? -60F : 0F;
+			AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue = isDay ? -60F : 0F;
 
 			GL11.glPushMatrix();
 			{
@@ -110,7 +110,7 @@ public enum VisionMode
 			}
 			GL11.glPopMatrix();
 
-			AliensVsPredator.instance.localEvents.getLightmapUpdateEvent().gammaValue = AliensVsPredator.instance.localEvents.getLightmapUpdateEvent().gammaValue < 0F ? AliensVsPredator.instance.localEvents.getLightmapUpdateEvent().gammaValue + 0.03F : AliensVsPredator.instance.localEvents.getLightmapUpdateEvent().gammaValue;
+			AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue = AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue < 0F ? AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue + 0.03F : AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue;
 			renderOverlay(VisionModeRenderEvent.resOverlayCeltic, 0F, 0.8F, 0.1F, 1F);
 		}
 

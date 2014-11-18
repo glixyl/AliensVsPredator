@@ -1,11 +1,11 @@
 package com.arisux.avp.items.model;
 
-import com.arisux.avp.AliensVsPredator;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+
+import com.arisux.avp.AliensVsPredator;
 
 public class ModelWristBlade extends ModelBase
 {
@@ -114,6 +114,7 @@ public class ModelWristBlade extends ModelBase
 		this.setRotation(this.bladeRight, 0.0F, -((float) Math.PI / 4F), 0.0F);
 	}
 
+	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
 		super.render(entity, f, f1, f2, f3, f4, f5);
@@ -131,7 +132,7 @@ public class ModelWristBlade extends ModelBase
 		this.b10.render(f5);
 		this.b11.render(f5);
 
-		if (entity instanceof EntityPlayer && ((EntityPlayer) entity).inventory.hasItem(AliensVsPredator.instance.items.swordTitanium))
+		if (entity instanceof EntityPlayer && ((EntityPlayer) entity).inventory.hasItem(AliensVsPredator.instance().items.swordTitanium))
 		{
 			this.b6.render(f5);
 			this.bladeLeft.render(f5);
@@ -150,6 +151,7 @@ public class ModelWristBlade extends ModelBase
 	 * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
 	 * "far" arms and legs can swing at most.
 	 */
+	@Override
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity f6)
 	{
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, f6);

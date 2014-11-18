@@ -12,6 +12,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.coremod.AccessHandler;
 import com.arisux.airi.engine.RenderEngine;
 import com.arisux.airi.engine.RenderEngine.PlayerResourceManager.PlayerResource;
 import com.arisux.airi.lib.render.ItemRenderer3D;
@@ -62,7 +63,7 @@ public class RenderAK47 extends ItemRenderer3D
 	{
 		GL11.glPushMatrix();
 
-		this.resource = RenderEngine.downloadResource(String.format(AliensVsPredator.properties().URL_SKIN_AK47, Minecraft.getMinecraft().session.getPlayerID()), resourceLocation);
+		this.resource = RenderEngine.downloadResource(String.format(AliensVsPredator.properties().URL_SKIN_AK47, AccessHandler.getSession().getPlayerID()), resourceLocation);
 
 		Minecraft.getMinecraft().renderEngine.bindTexture(getResourceLocation());
 
@@ -97,7 +98,7 @@ public class RenderAK47 extends ItemRenderer3D
 	{
 		GL11.glPushMatrix();
 
-		this.resource = RenderEngine.downloadResource(String.format(AliensVsPredator.properties().URL_SKIN_AK47, Minecraft.getMinecraft().session.getPlayerID()), resourceLocation);
+		this.resource = RenderEngine.downloadResource(String.format(AliensVsPredator.properties().URL_SKIN_AK47, AccessHandler.getSession().getPlayerID()), resourceLocation);
 		Minecraft.getMinecraft().renderEngine.bindTexture(getResourceLocation());
 
 		GL11.glDisable(GL11.GL_CULL_FACE);
