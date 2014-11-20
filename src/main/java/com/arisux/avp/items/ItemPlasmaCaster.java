@@ -10,6 +10,7 @@ import net.minecraft.world.World;
 import com.arisux.airi.engine.WorldEngine;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.EntityPlasma;
+import com.arisux.avp.entities.ExtendedEntityPlayer;
 
 public class ItemPlasmaCaster extends Item
 {
@@ -47,5 +48,51 @@ public class ItemPlasmaCaster extends Item
 		}
 
 		return itemstack;
+	}
+
+	@Override
+	public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, int posX, int posY, int posZ, int side, float hitX, float hitY, float hitZ)
+	{
+		ExtendedEntityPlayer extendedPlayer = (ExtendedEntityPlayer) player.getExtendedProperties(ExtendedEntityPlayer.ID_PROPERTIES);
+		EntityPlasma plasma;
+
+		if (extendedPlayer.getPlasmaEntityId() == 0)
+		{
+			plasma = new EntityPlasma(world, player);
+			extendedPlayer.setPlasmaEntityId(plasma.getEntityId());
+			world.spawnEntityInWorld(plasma);
+		}
+
+		plasma = (EntityPlasma) world.getEntityByID(extendedPlayer.getPlasmaEntityId());
+
+		if (plasma != null)
+		{
+			plasma.setLocationAndAngles(player.posX, player.posY + player.getEyeHeight(), player.posZ, player.rotationYaw, player.rotationPitch);
+			plasma.increaseSize();
+		}
+
+		return true;
+	}
+
+	@Override
+	public void onPlayerStoppedUsing(ItemStack itemStack, World world, EntityPlayer player, int itemUseCount)
+	{
+		ExtendedEntityPlayer extendedPlayer = (ExtendedEntityPlayer) player.getExtendedProperties(ExtendedEntityPlayer.ID_PROPERTIES);
+		EntityPlasma plasma = (EntityPlasma) world.getEntityByID(extendedPlayer.getPlasmaEntityId());
+
+		if (plasma != null)
+		{
+			plasma.release();
+		}
+
+		extendedPlayer.setPlasmaEntityId(0);
+
+		super.onPlayerStoppedUsing(itemStack, world, player, itemUseCount);
+	}
+
+	@Override
+	public int getMaxItemUseDuration(ItemStack itemstack)
+	{
+		return 20 * 5;
 	}
 }

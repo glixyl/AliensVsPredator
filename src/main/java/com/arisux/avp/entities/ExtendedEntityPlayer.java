@@ -12,6 +12,7 @@ import com.arisux.avp.packets.client.PacketChannelClientUpdate;
 
 public class ExtendedEntityPlayer implements IExtendedEntityProperties
 {
+	private int plasmaEntityId;
 	private boolean isPlayerImpregnated;
 	public int impregnatedTime, maxImpregnatedTime, broadcastRadius;
 	private String broadcastChannel;
@@ -107,5 +108,15 @@ public class ExtendedEntityPlayer implements IExtendedEntityProperties
 	public void setBroadcastRadius(int broadcastRadius)
 	{
 		this.broadcastRadius = broadcastRadius;
+	}
+	
+	public int setPlasmaEntityId(int plasmaEntity)
+	{
+		return this.plasmaEntityId = plasmaEntity;
+	}
+	
+	public int getPlasmaEntityId()
+	{
+		return this.plasmaEntityId;
 	}
 }

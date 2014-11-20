@@ -16,7 +16,6 @@ public class BlockBlastdoor extends HookedBlockContainer
 	public BlockBlastdoor(Material material)
 	{
 		super(material);
-		this.disableIcon();
 	}
 	
 	@Override
@@ -56,11 +55,5 @@ public class BlockBlastdoor extends HookedBlockContainer
 	public TileEntity createNewTileEntity(World world, int meta)
 	{
 		return new TileEntityBlastdoor();
-	}
-
-	@Override
-	public int getRenderType()
-	{
-		return -1;
 	}
 }

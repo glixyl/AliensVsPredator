@@ -5,95 +5,93 @@ import net.minecraft.client.renderer.Tessellator;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.engine.*;
+import com.arisux.airi.engine.RenderEngine.Color;
+import com.arisux.airi.engine.RenderEngine.Vertex;
+
 public class ModelPlasma extends ModelBase
 {
-	/**
-	 * This is a list of all the boxes (ModelRenderer.class) in the current
-	 * model.
-	 */
-	private float boxList;
-	private float g;
-	private float b;
+	private Tessellator tessellator = Tessellator.instance;
+	private Color color;
 
-	/** A mapping for all texture offsets */
-	private float modelTextureMap;
-
-	public void renderModel(float var1, float var2, float var3, float var4, float var5)
+	public void render(float scale, Color color)
 	{
-		this.boxList = var2 + 0.06F;
-		this.g = var3;
-		this.b = var4 + 0.3F;
-		this.modelTextureMap = var5;
+		this.color = color;
+		this.render(scale, color.r, color.g, color.b, color.a);
+	}
+	
+	public void render(float scale, float r, float g, float b, float a)
+	{
+		this.color = new Color(r, g, b, a);
+		
 		GL11.glPushMatrix();
-		Plasma var6 = new Plasma(this, 1.0D, 0.0D, 0.0D);
-		Plasma var7 = new Plasma(this, 0.0D, 1.0D, 0.0D);
-		Plasma var8 = new Plasma(this, 0.0D, 0.0D, 1.0D);
-		Plasma var9 = new Plasma(this, 0.5D, 0.5D, 0.0D);
-		Plasma var10 = new Plasma(this, 0.0D, 0.5D, 0.5D);
-		Plasma var11 = new Plasma(this, 0.5D, 0.0D, 0.5D);
-		Plasma var12 = new Plasma(this, 0.75D, 0.25D, 0.0D);
-		Plasma var13 = new Plasma(this, 0.5D, 0.25D, 0.25D);
-		Plasma var14 = new Plasma(this, 0.75D, 0.0D, 0.25D);
-		Plasma var15 = new Plasma(this, 0.0D, 0.75D, 0.25D);
-		Plasma var16 = new Plasma(this, 0.25D, 0.5D, 0.25D);
-		Plasma var17 = new Plasma(this, 0.25D, 0.75D, 0.0D);
-		Plasma var18 = new Plasma(this, 0.25D, 0.0D, 0.75D);
-		Plasma var19 = new Plasma(this, 0.25D, 0.25D, 0.5D);
-		Plasma var20 = new Plasma(this, 0.0D, 0.25D, 0.75D);
-		GL11.glScalef(var1, var1, var1);
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		GL11.glDisable(GL11.GL_LIGHTING);
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
-
-		for (int var21 = 0; var21 < 2; ++var21)
 		{
-			GL11.glRotatef((float) (var21 * 180), 0.0F, 0.0F, 1.0F);
+			Vertex t1 = new Vertex(1.0F, 0.0F, 0.0F).smooth();
+			Vertex t2 = new Vertex(0.0F, 1.0F, 0.0F).smooth();
+			Vertex t3 = new Vertex(0.0F, 0.0F, 1.0F).smooth();
+			Vertex t4 = new Vertex(0.5F, 0.5F, 0.0F).smooth();
+			Vertex t5 = new Vertex(0.0F, 0.5F, 0.5F).smooth();
+			Vertex t6 = new Vertex(0.5F, 0.0F, 0.5F).smooth();
+			Vertex t7 = new Vertex(0.75F, 0.25F, 0.0F).smooth();
+			Vertex t8 = new Vertex(0.5F, 0.25F, 0.25F).smooth();
+			Vertex t9 = new Vertex(0.75F, 0.0F, 0.25F).smooth();
+			Vertex t10 = new Vertex(0.0F, 0.75F, 0.25F).smooth();
+			Vertex t11 = new Vertex(0.25F, 0.5F, 0.25F).smooth();
+			Vertex t12 = new Vertex(0.25F, 0.75F, 0.0F).smooth();
+			Vertex t13 = new Vertex(0.25F, 0.0F, 0.75F).smooth();
+			Vertex t14 = new Vertex(0.25F, 0.25F, 0.5F).smooth();
+			Vertex t15 = new Vertex(0.0F, 0.25F, 0.75F).smooth();
+			GL11.glScalef(scale, scale, scale);
+			GL11.glDisable(GL11.GL_TEXTURE_2D);
+			RenderEngine.glDisableLightMapping();
+			RenderEngine.glDisableLight();
+			GL11.glEnable(GL11.GL_BLEND);
+			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
 
-			for (int var22 = 0; var22 < 4; ++var22)
+			for (int rZ = 0; rZ < 2; ++rZ)
 			{
-				GL11.glPushMatrix();
-				GL11.glRotatef((float) (var22 * 90), 0.0F, 1.0F, 0.0F);
-				this.addTri(var7, var15, var17);
-				this.addTri(var15, var10, var16);
-				this.addTri(var17, var16, var9);
-				this.addTri(var15, var16, var17);
-				this.addTri(var6, var12, var14);
-				this.addTri(var12, var9, var13);
-				this.addTri(var14, var13, var11);
-				this.addTri(var12, var13, var14);
-				this.addTri(var8, var18, var20);
-				this.addTri(var18, var11, var19);
-				this.addTri(var20, var19, var10);
-				this.addTri(var18, var19, var20);
-				this.addTri(var10, var19, var16);
-				this.addTri(var9, var16, var13);
-				this.addTri(var11, var13, var19);
-				this.addTri(var13, var16, var19);
-				GL11.glPopMatrix();
-			}
-		}
+				GL11.glRotatef(rZ * 180, 0.0F, 0.0F, 1.0F);
 
-		GL11.glEnable(GL11.GL_LIGHTING);
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
-		GL11.glDisable(GL11.GL_BLEND);
+				for (int rY = 0; rY < 4; ++rY)
+				{
+					GL11.glPushMatrix();
+					{
+						GL11.glRotatef(rY * 90, 0.0F, 1.0F, 0.0F);
+						this.addTri(t2, t10, t12);
+						this.addTri(t10, t5, t11);
+						this.addTri(t12, t11, t4);
+						this.addTri(t10, t11, t12);
+						this.addTri(t1, t7, t9);
+						this.addTri(t7, t4, t8);
+						this.addTri(t9, t8, t6);
+						this.addTri(t7, t8, t9);
+						this.addTri(t3, t13, t15);
+						this.addTri(t13, t6, t14);
+						this.addTri(t15, t14, t5);
+						this.addTri(t13, t14, t15);
+						this.addTri(t5, t14, t11);
+						this.addTri(t4, t11, t8);
+						this.addTri(t6, t8, t14);
+						this.addTri(t8, t11, t14);
+					}
+					GL11.glPopMatrix();
+				}
+			}
+			RenderEngine.glEnableLight();
+			RenderEngine.glEnableLightMapping();
+			GL11.glEnable(GL11.GL_TEXTURE_2D);
+			GL11.glDisable(GL11.GL_BLEND);
+		}
 		GL11.glPopMatrix();
 	}
 
-	private void addTri(Plasma var1, Plasma var2, Plasma var3)
+	private void addTri(Vertex vertex1, Vertex vertex2, Vertex vertex3)
 	{
-		Tessellator var4 = Tessellator.instance;
-		var4.startDrawing(6);
-		var4.setColorRGBA_F(this.boxList, this.g, this.b, this.modelTextureMap);
-		this.addVerticePlasma(var3);
-		this.addVerticePlasma(var1);
-		this.addVerticePlasma(var2);
-		var4.draw();
-	}
-
-	private void addVerticePlasma(Plasma var1)
-	{
-		Tessellator var2 = Tessellator.instance;
-		var2.addVertex(var1.x, var1.y, var1.z);
+		tessellator.startDrawing(6);
+		tessellator.setColorRGBA_F(this.color.r, this.color.g, this.color.b, this.color.a);
+		tessellator.addVertex(vertex1.x, vertex1.y, vertex1.z);
+		tessellator.addVertex(vertex2.x, vertex2.y, vertex2.z);
+		tessellator.addVertex(vertex3.x, vertex3.y, vertex3.z);
+		tessellator.draw();
 	}
 }
