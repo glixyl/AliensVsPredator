@@ -1,4 +1,4 @@
-package com.arisux.avp.enums;
+package com.arisux.avp.util;
 
 import static com.arisux.airi.engine.RenderEngine.*;
 import static org.lwjgl.opengl.GL11.*;
