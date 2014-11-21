@@ -25,7 +25,7 @@ public class PlayerPropertiesEvents
 			if (thePlayer != null)
 			{
 				ExtendedEntityPlayer extendedEntityProperties = new ExtendedEntityPlayer(thePlayer);
-				thePlayer.registerExtendedProperties(ExtendedEntityPlayer.ID_PROPERTIES, extendedEntityProperties);
+				thePlayer.registerExtendedProperties(ExtendedEntityPlayer.IDENTIFIER, extendedEntityProperties);
 			}
 		}
 	}
@@ -52,7 +52,7 @@ public class PlayerPropertiesEvents
 			if (o instanceof EntityPlayer)
 			{
 				EntityPlayer thePlayer = (EntityPlayer) o;
-				ExtendedEntityPlayer extendedEntityProperties = (ExtendedEntityPlayer) thePlayer.getExtendedProperties(ExtendedEntityPlayer.ID_PROPERTIES);
+				ExtendedEntityPlayer extendedEntityProperties = (ExtendedEntityPlayer) thePlayer.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER);
 
 				if (thePlayer != null && extendedEntityProperties != null && extendedEntityProperties.getBroadcastChannel() != null)
 				{

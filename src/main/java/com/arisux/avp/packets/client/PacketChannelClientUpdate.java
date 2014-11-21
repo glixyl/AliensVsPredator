@@ -43,7 +43,7 @@ public class PacketChannelClientUpdate implements IMessage, IMessageHandler<Pack
 		
 		if (targetPlayer != null)
 		{
-			ExtendedEntityPlayer extendedTargetPlayer = (ExtendedEntityPlayer) targetPlayer.getExtendedProperties(ExtendedEntityPlayer.ID_PROPERTIES);
+			ExtendedEntityPlayer extendedTargetPlayer = (ExtendedEntityPlayer) targetPlayer.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER);
 			extendedTargetPlayer.setBroadcastChannel(packet.channel);
 		}
 		

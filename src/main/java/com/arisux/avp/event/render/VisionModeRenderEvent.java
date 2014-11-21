@@ -13,7 +13,7 @@ import com.arisux.airi.engine.GuiTypeLib.GuiCustomButton;
 import com.arisux.airi.engine.WorldEngine;
 import com.arisux.airi.lib.util.interfaces.IActionPerformed;
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.enums.VisionMode;
+import com.arisux.avp.util.VisionMode;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;

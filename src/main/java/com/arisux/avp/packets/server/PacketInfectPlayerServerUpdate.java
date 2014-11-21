@@ -40,7 +40,7 @@ public class PacketInfectPlayerServerUpdate implements IMessage, IMessageHandler
 	@Override public PacketInfectPlayerServerUpdate onMessage(PacketInfectPlayerServerUpdate packet, MessageContext ctx)
 	{
 		EntityPlayer targetPlayer = WorldEngine.Entities.Players.getPlayerForUsername(ctx.getServerHandler().playerEntity.worldObj, packet.username);
-		ExtendedEntityPlayer extendedTargetPlayer = (ExtendedEntityPlayer) targetPlayer.getExtendedProperties(ExtendedEntityPlayer.ID_PROPERTIES);
+		ExtendedEntityPlayer extendedTargetPlayer = (ExtendedEntityPlayer) targetPlayer.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER);
 		
 		extendedTargetPlayer.setImpregnatedTime(extendedTargetPlayer.maxImpregnatedTime);
 		extendedTargetPlayer.setPlayerImpregnated(packet.infected);

@@ -98,7 +98,7 @@ public class TacticalHUDRenderEvent
 
 	public ExtendedEntityPlayer getProperties()
 	{
-		return this.mc != null ? this.mc.thePlayer != null ? this.clientPlayerProperties = (ExtendedEntityPlayer) mc.thePlayer.getExtendedProperties(ExtendedEntityPlayer.ID_PROPERTIES) : null : null;
+		return this.mc != null ? this.mc.thePlayer != null ? this.clientPlayerProperties = (ExtendedEntityPlayer) mc.thePlayer.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER) : null : null;
 	}
 
 	public void changeChannel(String channel)
@@ -136,7 +136,7 @@ public class TacticalHUDRenderEvent
 
 		if (playerFound != null)
 		{
-			ExtendedEntityPlayer extendedPlayer = (ExtendedEntityPlayer) playerFound.getExtendedProperties(ExtendedEntityPlayer.ID_PROPERTIES);
+			ExtendedEntityPlayer extendedPlayer = (ExtendedEntityPlayer) playerFound.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER);
 
 			if (!isPlayerInHUD(playerFound) && extendedPlayer.getBroadcastChannel().equalsIgnoreCase(this.clientPlayerProperties.getBroadcastChannel()))
 			{
@@ -150,7 +150,7 @@ public class TacticalHUDRenderEvent
 		for (int x = 0; x < playersInHUD.size(); x++)
 		{
 			EntityPlayer player = playersInHUD.get(x);
-			ExtendedEntityPlayer extendedPlayer = (ExtendedEntityPlayer) player.getExtendedProperties(ExtendedEntityPlayer.ID_PROPERTIES);
+			ExtendedEntityPlayer extendedPlayer = (ExtendedEntityPlayer) player.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER);
 
 			if (player != null || player != null && !extendedPlayer.getBroadcastChannel().equalsIgnoreCase(this.clientPlayerProperties.getBroadcastChannel()))
 			{

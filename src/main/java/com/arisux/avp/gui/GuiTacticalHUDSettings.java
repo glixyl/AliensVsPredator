@@ -33,7 +33,7 @@ public class GuiTacticalHUDSettings extends GuiCustomScreen
 		TacticalHUDRenderEvent event = ((TacticalHUDRenderEvent) AliensVsPredator.instance().localEvents.getEvent(TacticalHUDRenderEvent.class));
 		
 		textBox1.setText("Default");
-		slider1.sliderValue = ((ExtendedEntityPlayer) mc.thePlayer.getExtendedProperties(ExtendedEntityPlayer.ID_PROPERTIES)).getBroadcastRadius() / slider1.sliderMaxValue;
+		slider1.sliderValue = ((ExtendedEntityPlayer) mc.thePlayer.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER)).getBroadcastRadius() / slider1.sliderMaxValue;
 		slider1.displayString = "Transmit Power: " + (int) (slider1.sliderValue * slider1.sliderMaxValue);
 		
 		slider2.sliderValue = event.viewportThreshold / slider2.sliderMaxValue;
@@ -98,7 +98,7 @@ public class GuiTacticalHUDSettings extends GuiCustomScreen
 				@Override
 				public void actionPerformed(GuiCustomButton button)
 				{
-					ExtendedEntityPlayer properties = (ExtendedEntityPlayer) mc.thePlayer.getExtendedProperties(ExtendedEntityPlayer.ID_PROPERTIES);
+					ExtendedEntityPlayer properties = (ExtendedEntityPlayer) mc.thePlayer.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER);
 					TacticalHUDRenderEvent event = ((TacticalHUDRenderEvent) AliensVsPredator.instance().localEvents.getEvent(TacticalHUDRenderEvent.class));
 
 					String newChannel = textBox1.getText();

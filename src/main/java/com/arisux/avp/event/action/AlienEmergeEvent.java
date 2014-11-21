@@ -24,7 +24,7 @@ public class AlienEmergeEvent
 	{
 		if (mc.thePlayer != null)
 		{
-			ExtendedEntityPlayer playerProperties = (ExtendedEntityPlayer) mc.thePlayer.getExtendedProperties(ExtendedEntityPlayer.ID_PROPERTIES);
+			ExtendedEntityPlayer playerProperties = (ExtendedEntityPlayer) mc.thePlayer.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER);
 
 			if (playerProperties.isPlayerImpregnated() && !mc.thePlayer.capabilities.isCreativeMode)
 			{
@@ -54,7 +54,7 @@ public class AlienEmergeEvent
 		{
 			if (event.type == RenderGameOverlayEvent.ElementType.HOTBAR)
 			{
-				ExtendedEntityPlayer playerProperties = (ExtendedEntityPlayer) mc.thePlayer.getExtendedProperties(ExtendedEntityPlayer.ID_PROPERTIES);
+				ExtendedEntityPlayer playerProperties = (ExtendedEntityPlayer) mc.thePlayer.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER);
 
 				if (playerProperties.isPlayerImpregnated() && !mc.thePlayer.capabilities.isCreativeMode)
 				{

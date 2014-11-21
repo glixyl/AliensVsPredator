@@ -69,7 +69,7 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 			System.out.println("server");
 		}
 
-		ExtendedEntityPlayer playerProperties = (ExtendedEntityPlayer) p_70100_1_.getExtendedProperties(ExtendedEntityPlayer.ID_PROPERTIES);
+		ExtendedEntityPlayer playerProperties = (ExtendedEntityPlayer) p_70100_1_.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER);
 
 		if (!playerProperties.isPlayerImpregnated() && !p_70100_1_.capabilities.isCreativeMode)
 		{

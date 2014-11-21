@@ -45,7 +45,7 @@ public class PacketBroadcastRadiusServerUpdate implements IMessage, IMessageHand
 		
 		if (targetPlayer != null)
 		{
-			ExtendedEntityPlayer extendedTargetPlayer = (ExtendedEntityPlayer) targetPlayer.getExtendedProperties(ExtendedEntityPlayer.ID_PROPERTIES);
+			ExtendedEntityPlayer extendedTargetPlayer = (ExtendedEntityPlayer) targetPlayer.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER);
 			extendedTargetPlayer.setBroadcastRadius(packet.broadcastRadius);
 			AliensVsPredator.instance().network.sendToAll(new PacketBroadcastRadiusClientUpdate(packet.broadcastRadius, packet.username));
 		}
