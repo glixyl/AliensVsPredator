@@ -50,7 +50,7 @@ public class RenderAcidPool extends Render
 
 						if (block != Blocks.air && Minecraft.getMinecraft().thePlayer.worldObj.getBlockLightValue(blockX, blockY, blockZ) > 3)
 						{
-							this.renderImageOnBlock(block, posX, posY + entity.getShadowSize(), posZ, blockX, blockY, blockZ, yaw, offset, partialX, partialY + entity.getShadowSize(), partialZ, entity.ticksExisted / (entity.ticksExisted / 20));
+							this.renderImageOnBlock(block, posX, posY + entity.getShadowSize(), posZ, blockX, blockY, blockZ, yaw, offset, partialX, partialY + entity.getShadowSize(), partialZ, entity.ticksExisted);
 						}
 					}
 				}

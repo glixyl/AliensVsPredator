@@ -27,7 +27,7 @@ public class RenderPlasmaBlast extends Render
 			GL11.glRotatef(entity.rotationYaw - 90.0F, 0.0F, 1.0F, 0.0F);
 			GL11.glRotatef(entity.rotationPitch - 90.0F, 0.0F, 0.0F, 1.0F);
 			float baseSize = 0F;
-			GL11.glScalef(baseSize + plasma.getSize(), baseSize + plasma.getSize(), baseSize + plasma.getSize());
+			GL11.glScalef(baseSize + plasma.getSize(), (float) (baseSize + plasma.getSize() + (((plasma.lastTickPosX - plasma.posX) + (plasma.lastTickPosY - plasma.posY) + (plasma.lastTickPosZ - plasma.posZ)) /3)), baseSize + plasma.getSize());
 
 			GL11.glPushMatrix();
 			{

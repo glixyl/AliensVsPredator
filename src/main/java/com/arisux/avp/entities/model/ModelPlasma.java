@@ -93,6 +93,10 @@ public class ModelPlasma extends ModelBase
 		tessellator.addVertex(vertex1.x, vertex1.y, vertex1.z);
 		tessellator.addVertex(vertex2.x, vertex2.y, vertex2.z);
 		tessellator.addVertex(vertex3.x, vertex3.y, vertex3.z);
+		
+		tessellator.addVertex(vertex3.x, vertex3.y, vertex3.z);
+		tessellator.addVertex(vertex2.x, vertex2.y, vertex2.z);
+		tessellator.addVertex(vertex1.x, vertex1.y, vertex1.z);
 		tessellator.draw();
 	}
 }
