@@ -17,22 +17,25 @@ public class BlockBlastdoor extends HookedBlockContainer
 	{
 		super(material);
 	}
-	
+
 	@Override
 	public boolean onBlockActivated(World world, int posX, int posY, int posZ, EntityPlayer player, int side, float subX, float subY, float subZ)
 	{
 		TileEntityBlastdoor tile = (TileEntityBlastdoor) world.getTileEntity(posX, posY, posZ);
-		tile.setDoorOpen(!tile.isDoorOpen());
-		
+
+		if (tile != null)
+		{
+			tile.setDoorOpen(!tile.isDoorOpen());
+		}
+
 		return true;
 	}
-	
+
 	@Override
 	public int onBlockPlaced(World world, int posX, int posY, int posZ, int side, float subX, float subY, float subZ, int meta)
 	{
-		TileEntityBlastdoor tile = (TileEntityBlastdoor) world.getTileEntity(posX, posY, posZ);
 		GhostBlock ghostBlock = (GhostBlock) AliensVsPredator.instance().blocks.ghostBlockBlastdoor;
-		
+
 		world.setBlock(posX, posY + 1, posZ, ghostBlock);
 		world.setBlock(posX, posY + 2, posZ, ghostBlock);
 
@@ -42,12 +45,10 @@ public class BlockBlastdoor extends HookedBlockContainer
 	@Override
 	public void breakBlock(World world, int posX, int posY, int posZ, Block blockBroken, int meta)
 	{
-		TileEntityBlastdoor tile = (TileEntityBlastdoor) world.getTileEntity(posX, posY, posZ);
-		
 		world.setBlockToAir(posX, posY + 0, posZ);
 		world.setBlockToAir(posX, posY + 1, posZ);
 		world.setBlockToAir(posX, posY + 2, posZ);
-		
+
 		super.breakBlock(world, posX, posY, posZ, blockBroken, meta);
 	}
 
