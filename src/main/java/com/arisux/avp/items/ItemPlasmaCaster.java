@@ -52,7 +52,7 @@ public class ItemPlasmaCaster extends Item
 
 	public void onItemUse(ItemStack itemstack, EntityPlayer player, World world, int posX, int posY, int posZ, int itemUseCount)
 	{
-		ExtendedEntityPlayer extendedPlayer = (ExtendedEntityPlayer) player.getExtendedProperties(ExtendedEntityPlayer.ID_PROPERTIES);
+		ExtendedEntityPlayer extendedPlayer = (ExtendedEntityPlayer) player.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER);
 		EntityPlasma plasma;
 
 		if (extendedPlayer.getPlasmaEntityId() == 0)
@@ -80,25 +80,17 @@ public class ItemPlasmaCaster extends Item
 	@Override
 	public void onPlayerStoppedUsing(ItemStack itemStack, World world, EntityPlayer player, int itemUseCount)
 	{
-		ExtendedEntityPlayer extendedPlayer = (ExtendedEntityPlayer) player.getExtendedProperties(ExtendedEntityPlayer.ID_PROPERTIES);
+		ExtendedEntityPlayer extendedPlayer = (ExtendedEntityPlayer) player.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER);
 		EntityPlasma plasma = (EntityPlasma) world.getEntityByID(extendedPlayer.getPlasmaEntityId());
 
 		if (plasma != null)
 		{
-			if (plasma.getSize() > 0.5F)
-			{
-				float speed = 4F * plasma.getSize();
-				plasma.setLocationAndAngles(player.posX, player.posY + player.getEyeHeight(), player.posZ, player.rotationYaw, player.rotationPitch);
-				plasma.motionX = -MathHelper.sin(plasma.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(plasma.rotationPitch / 180.0F * (float) Math.PI) * speed;
-				plasma.motionZ = MathHelper.cos(plasma.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(plasma.rotationPitch / 180.0F * (float) Math.PI) * speed;
-				plasma.motionY = -MathHelper.sin((plasma.rotationPitch) / 180.0F * (float) Math.PI) * speed;
-				plasma.release();
-				world.playSoundEffect(player.posX, player.posY, player.posZ, AliensVsPredator.properties().SOUND_WEAPON_PLASMACASTER, 0.5F, 0.5F);
-			}
-			else
-			{
-				plasma.setDead();
-			}
+			float speed = 4F * plasma.getSize();
+			plasma.motionX = -MathHelper.sin(plasma.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(plasma.rotationPitch / 180.0F * (float) Math.PI) * speed;
+			plasma.motionZ = MathHelper.cos(plasma.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(plasma.rotationPitch / 180.0F * (float) Math.PI) * speed;
+			plasma.motionY = -MathHelper.sin((plasma.rotationPitch) / 180.0F * (float) Math.PI) * speed;
+			plasma.release();
+			world.playSoundEffect(player.posX, player.posY, player.posZ, AliensVsPredator.properties().SOUND_WEAPON_PLASMACASTER, 0.5F, 0.5F);
 		}
 
 		extendedPlayer.setPlasmaEntityId(0);
