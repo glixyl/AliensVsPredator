@@ -28,6 +28,7 @@ public class AliensVsPredator extends ModController
 	public RenderingHandler renderer;
 	public DimensionHandler dimensions;
 	public CommandHandler commands;
+	public PlayerModeHandler playerModeHandler;
 	public Settings settings;
 	public Updater updater;
 	
@@ -78,6 +79,7 @@ public class AliensVsPredator extends ModController
 		(guis = new GuiHandler()).initialize(event);
 		(localEvents = new LocalEventHandler()).initialize(event);
 		(commands = new CommandHandler()).initialize(event);
+		(playerModeHandler = new PlayerModeHandler()).initialize(event);
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.packets.client.PacketBroadcastRadiusClientUpdate;
 import com.arisux.avp.packets.client.PacketChannelClientUpdate;
+import com.arisux.avp.util.PlayerMode;
 
 public class ExtendedEntityPlayer implements IExtendedEntityProperties
 {
@@ -17,8 +18,9 @@ public class ExtendedEntityPlayer implements IExtendedEntityProperties
 	public int impregnatedTime, maxImpregnatedTime, broadcastRadius;
 	private String broadcastChannel;
 	private EntityPlayer thePlayer;
+	private PlayerMode playerMode = PlayerMode.NORMAL;
 
-	public static final String ID_PROPERTIES = "ExtendedEntityPlayer";
+	public static final String IDENTIFIER = "ExtendedEntityPlayer";
 	public static final String ID_BOOL_IMPREGNATED = "impregnated";
 	public static final String ID_INT_IMPREGNATED_TIME = "impregnatedTime";
 	public static final String ID_INT_BROADCAST_RADIUS = "broadcastRadius";
@@ -32,7 +34,7 @@ public class ExtendedEntityPlayer implements IExtendedEntityProperties
 
 	public static final ExtendedEntityPlayer get(EntityPlayer player)
 	{
-		return (ExtendedEntityPlayer) player.getExtendedProperties(ID_PROPERTIES);
+		return (ExtendedEntityPlayer) player.getExtendedProperties(IDENTIFIER);
 	}
 
 	@Override
@@ -118,5 +120,10 @@ public class ExtendedEntityPlayer implements IExtendedEntityProperties
 	public int getPlasmaEntityId()
 	{
 		return this.plasmaEntityId;
+	}
+
+	public void setPlayerMode(PlayerMode playerMode)
+	{
+		this.playerMode  = playerMode;
 	}
 }
