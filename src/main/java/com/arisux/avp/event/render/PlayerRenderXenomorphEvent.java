@@ -34,6 +34,8 @@ public class PlayerRenderXenomorphEvent
 		public void doRender(Entity entity, double posX, double posY, double posZ, float yaw, float renderPartialTicks)
 		{
 			super.doRender(entity, posX, posY, posZ, yaw, renderPartialTicks);
+			
+			this.setModel(new ModelDrone());
 
 			EntityLivingBase entityLiving = (EntityLivingBase) entity;
 
@@ -50,6 +52,8 @@ public class PlayerRenderXenomorphEvent
 			{
 				GL11.glRotatef(-yaw, 0F, 1F, 0F);
 				GL11.glRotatef(180F, 1F, 0F, 0F);
+				GL11.glDisable(GL11.GL_CULL_FACE);
+				this.bindTexture(this.getEntityTexture(entityLiving));
 				this.mainModel.render(entity, swingProgress, swingProgressPrevious, idleProgress, headRotateAngleY, headRotationPitch, boxTranslationMultiplier);
 			}
 			GL11.glPopMatrix();
