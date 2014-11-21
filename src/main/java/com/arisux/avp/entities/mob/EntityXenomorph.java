@@ -8,9 +8,9 @@ import net.minecraft.world.World;
 
 public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 {
-	public EntityXenomorph(World var1)
+	public EntityXenomorph(World world)
 	{
-		super(var1);
+		super(world);
 		this.jumpMovementFactor = 0.1F;
 	}
 
@@ -31,20 +31,13 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 	@Override
 	protected boolean canDespawn()
 	{
-		if (this.getKilledEntities() > 1)
-		{
-			return false;
-		}
-		else
-		{
-			return true;
-		}
+		return super.canDespawn();
 	}
 
 	@Override
 	protected boolean isAIEnabled()
 	{
-		return true;
+		return super.isAIEnabled();
 	}
 
 	@Override

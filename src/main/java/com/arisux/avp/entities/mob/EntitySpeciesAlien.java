@@ -48,7 +48,11 @@ public abstract class EntitySpeciesAlien extends EntityMob implements IMob, IHiv
 		super.writeEntityToNBT(nbt);
 
 		nbt.setInteger("killedEntities", this.killedEntities);
-		nbt.setString("hiveSignature", this.signature.toString());
+
+		if (signature != null)
+		{
+			nbt.setString("hiveSignature", this.signature.toString());
+		}
 	}
 
 	@Override
@@ -97,7 +101,7 @@ public abstract class EntitySpeciesAlien extends EntityMob implements IMob, IHiv
 		if (!this.worldObj.isRemote)
 		{
 			EntityAcidPool entity = new EntityAcidPool(this.worldObj);
-			entity.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
+			entity.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
 			this.worldObj.spawnEntityInWorld(entity);
 		}
 	}
