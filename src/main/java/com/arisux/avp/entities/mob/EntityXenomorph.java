@@ -1,9 +1,6 @@
 package com.arisux.avp.entities.mob;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -24,6 +21,7 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.8F);
 	}
 
+	@Override
 	protected void entityInit()
 	{
 		super.entityInit();
@@ -33,10 +31,14 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 	@Override
 	protected boolean canDespawn()
 	{
-		if (this.getKilledEntities() > 5)
+		if (this.getKilledEntities() > 1)
+		{
 			return false;
+		}
 		else
+		{
 			return true;
+		}
 	}
 
 	@Override
@@ -45,6 +47,7 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 		return true;
 	}
 
+	@Override
 	public boolean isOnLadder()
 	{
 		return this.isBesideClimbableBlock();
@@ -73,8 +76,8 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 		if (worldObj.getWorldInfo().getWorldTime() % 70L == 0L)
 		{
 			double range = this.getEntityAttribute(SharedMonsterAttributes.followRange).getAttributeValue();
-			Entity targetEntity = (this.worldObj.findNearestEntityWithinAABB(EntityLiving.class, this.boundingBox.expand((double) (range * 2), 64.0D, (double) (range * 2)), this));
-			Entity targetPlayer = (this.worldObj.findNearestEntityWithinAABB(EntityPlayer.class, this.boundingBox.expand((double) (range * 2), 64.0D, (double) (range * 2)), this));
+			Entity targetEntity = (this.worldObj.findNearestEntityWithinAABB(EntityLiving.class, this.boundingBox.expand(range * 2, 64.0D, range * 2), this));
+			Entity targetPlayer = (this.worldObj.findNearestEntityWithinAABB(EntityPlayer.class, this.boundingBox.expand(range * 2, 64.0D, range * 2), this));
 
 			if (targetPlayer != null && !((EntityPlayer) targetPlayer).capabilities.isCreativeMode)
 			{
