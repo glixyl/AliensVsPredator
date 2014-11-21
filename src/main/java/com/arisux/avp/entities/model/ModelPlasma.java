@@ -14,33 +14,34 @@ public class ModelPlasma extends ModelBase
 	private Tessellator tessellator = Tessellator.instance;
 	private Color color;
 
+	private Vertex t1 = new Vertex(1.0F, 0.0F, 0.0F).smooth(),
+		t2 = new Vertex(0.0F, 1.0F, 0.0F).smooth(),
+		t3 = new Vertex(0.0F, 0.0F, 1.0F).smooth(),
+		t4 = new Vertex(0.5F, 0.5F, 0.0F).smooth(),
+		t5 = new Vertex(0.0F, 0.5F, 0.5F).smooth(),
+		t6 = new Vertex(0.5F, 0.0F, 0.5F).smooth(),
+		t7 = new Vertex(0.75F, 0.25F, 0.0F).smooth(),
+		t8 = new Vertex(0.5F, 0.25F, 0.25F).smooth(),
+		t9 = new Vertex(0.75F, 0.0F, 0.25F).smooth(),
+		t10 = new Vertex(0.0F, 0.75F, 0.25F).smooth(),
+		t11 = new Vertex(0.25F, 0.5F, 0.25F).smooth(),
+		t12 = new Vertex(0.25F, 0.75F, 0.0F).smooth(),
+		t13 = new Vertex(0.25F, 0.0F, 0.75F).smooth(),
+		t14 = new Vertex(0.25F, 0.25F, 0.5F).smooth(),
+		t15 = new Vertex(0.0F, 0.25F, 0.75F).smooth();
+
 	public void render(float scale, Color color)
 	{
 		this.color = color;
 		this.render(scale, color.r, color.g, color.b, color.a);
 	}
-	
+
 	public void render(float scale, float r, float g, float b, float a)
 	{
 		this.color = new Color(r, g, b, a);
-		
+
 		GL11.glPushMatrix();
 		{
-			Vertex t1 = new Vertex(1.0F, 0.0F, 0.0F).smooth();
-			Vertex t2 = new Vertex(0.0F, 1.0F, 0.0F).smooth();
-			Vertex t3 = new Vertex(0.0F, 0.0F, 1.0F).smooth();
-			Vertex t4 = new Vertex(0.5F, 0.5F, 0.0F).smooth();
-			Vertex t5 = new Vertex(0.0F, 0.5F, 0.5F).smooth();
-			Vertex t6 = new Vertex(0.5F, 0.0F, 0.5F).smooth();
-			Vertex t7 = new Vertex(0.75F, 0.25F, 0.0F).smooth();
-			Vertex t8 = new Vertex(0.5F, 0.25F, 0.25F).smooth();
-			Vertex t9 = new Vertex(0.75F, 0.0F, 0.25F).smooth();
-			Vertex t10 = new Vertex(0.0F, 0.75F, 0.25F).smooth();
-			Vertex t11 = new Vertex(0.25F, 0.5F, 0.25F).smooth();
-			Vertex t12 = new Vertex(0.25F, 0.75F, 0.0F).smooth();
-			Vertex t13 = new Vertex(0.25F, 0.0F, 0.75F).smooth();
-			Vertex t14 = new Vertex(0.25F, 0.25F, 0.5F).smooth();
-			Vertex t15 = new Vertex(0.0F, 0.25F, 0.75F).smooth();
 			GL11.glScalef(scale, scale, scale);
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
 			RenderEngine.glDisableLightMapping();

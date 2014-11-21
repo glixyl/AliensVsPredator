@@ -13,40 +13,41 @@ import com.arisux.avp.entities.model.ModelPlasma;
 public class RenderPlasmaBlast extends Render
 {
 	private ModelPlasma model = new ModelPlasma();
-	private Color color = new Color(0.3F, 0.75F, 1F, 0.2F);
+	private Color color = new Color(0.3F, 0.75F, 1F, 0.4F);
 
 	@Override
 	public void doRender(Entity entity, double posX, double posY, double posZ, float yaw, float renderPartialTicks)
 	{
 		EntityPlasma plasma = (EntityPlasma) entity;
-		float rotation = 20;
-
+		float rotation = plasma.ticksExisted % 360;
+		color = new Color(0.3F, 0.75F, 1F, 0.5F);
 		GL11.glPushMatrix();
 		{
 			GL11.glTranslated(posX, posY, posZ);
 			GL11.glRotatef(entity.rotationYaw - 90.0F, 0.0F, 1.0F, 0.0F);
 			GL11.glRotatef(entity.rotationPitch - 90.0F, 0.0F, 0.0F, 1.0F);
-//			GL11.glScalef(plasma.getSize(), plasma.getSize(), plasma.getSize());
+			float baseSize = 0F;
+			GL11.glScalef(baseSize + plasma.getSize(), baseSize + plasma.getSize(), baseSize + plasma.getSize());
 
 			GL11.glPushMatrix();
 			{
 				GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
-				this.model.render(0.7F, color);
-				
+				this.model.render(0.1F, color);
+
 				GL11.glPushMatrix();
 				{
 					GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
-					this.model.render(0.8F, color);
-					
+					this.model.render(0.2F, color);
+
 					GL11.glPushMatrix();
 					{
 						GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
-						this.model.render(0.9F, color);
-						
+						this.model.render(0.3F, color);
+
 						GL11.glPushMatrix();
 						{
 							GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
-							this.model.render(1F, color);
+							this.model.render(0.35F, color);
 						}
 						GL11.glPopMatrix();
 					}
@@ -58,7 +59,7 @@ public class RenderPlasmaBlast extends Render
 		}
 		GL11.glPopMatrix();
 	}
-	
+
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity)
 	{

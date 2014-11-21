@@ -5,29 +5,23 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
 import com.arisux.avp.damagesource.DamageSourceAcid;
-import com.google.common.io.ByteArrayDataOutput;
 
 public class EntityAcidPool extends EntityMob implements IMob
 {
-	public int strength;
-	public int age;
-
 	public EntityAcidPool(World var1)
 	{
 		super(var1);
 		this.isImmuneToFire = false;
 		this.ignoreFrustumCheck = true;
 		this.setSize(0.1F, 0.1F);
-		this.strength = 100;
-		this.age = 0;
 	}
 
+	@Override
 	protected void entityInit()
 	{
 		super.entityInit();
@@ -72,12 +66,6 @@ public class EntityAcidPool extends EntityMob implements IMob
 		return true;
 	}
 
-	public void setStrength(int var1)
-	{
-		this.age = (100 - var1) * 10;
-		this.strength = 100 - this.age / 10;
-	}
-
 	@Override
 	public void onUpdate()
 	{
@@ -86,7 +74,7 @@ public class EntityAcidPool extends EntityMob implements IMob
 		if (!this.worldObj.isRemote)
 		{
 			double range = 0.7;
-			EntityPlayer targetPlayer = (EntityPlayer) (this.worldObj.findNearestEntityWithinAABB(EntityPlayer.class, this.boundingBox.expand((double) (range * 2), 0.1D, (double) (range * 2)), this));
+			EntityPlayer targetPlayer = (EntityPlayer) (this.worldObj.findNearestEntityWithinAABB(EntityPlayer.class, this.boundingBox.expand(range * 2, 0.1D, range * 2), this));
 
 			if (targetPlayer != null)
 			{
@@ -95,15 +83,12 @@ public class EntityAcidPool extends EntityMob implements IMob
 			}
 		}
 
-		++this.age;
-		this.strength = 100 - this.age / 10;
-
 		if (!this.worldObj.isRemote)
 		{
-			if (this.strength <= 0 || this.age > 600)
-			{
-				this.setDead();
-			}
+//			if (this.ticksExisted > 600)
+//			{
+//				this.setDead();
+//			}
 		}
 	}
 
@@ -121,22 +106,5 @@ public class EntityAcidPool extends EntityMob implements IMob
 	protected void attackEntity(Entity entity, float f)
 	{
 		super.attackEntity(entity, f);
-	}
-
-	@Override
-	public void writeEntityToNBT(NBTTagCompound nbt)
-	{
-		nbt.setShort("age", (short) this.age);
-	}
-
-	@Override
-	public void readEntityFromNBT(NBTTagCompound nbt)
-	{
-		this.age = nbt.getShort("age");
-	}
-
-	public void writeSpawnData(ByteArrayDataOutput var1)
-	{
-		var1.writeInt(this.age);
 	}
 }

@@ -63,7 +63,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		RenderingRegistry.registerEntityRenderingHandler(EntityProximityMine.class, new RenderSnowball(AliensVsPredator.instance().items.itemProximityMine));
 		RenderingRegistry.registerEntityRenderingHandler(EntityGrenade.class, new RenderSnowball(AliensVsPredator.instance().items.itemGrenade, 0));
 		RenderingRegistry.registerEntityRenderingHandler(EntityFlame.class, new RenderFlame());
-		RenderingRegistry.registerEntityRenderingHandler(EntityAcidPool.class, new RenderFXAcid());
+		RenderingRegistry.registerEntityRenderingHandler(EntityAcidPool.class, new RenderAcidPool());
 		RenderingRegistry.registerEntityRenderingHandler(EntityPlasma.class, new RenderPlasmaBlast());
 		RenderingRegistry.registerEntityRenderingHandler(EntityAcidSpit.class, new RenderAIAcid());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySmartDisc.class, new RenderDisc());
