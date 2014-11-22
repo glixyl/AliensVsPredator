@@ -83,12 +83,14 @@ public class EntityAcidPool extends EntityMob implements IMob
 			}
 		}
 
+		this.worldObj.spawnParticle("smoke", this.posX + this.rand.nextDouble(), this.posY + this.rand.nextDouble(), this.posZ + this.rand.nextDouble(), 0.0D, 0.0D, 0.0D);
+
 		if (!this.worldObj.isRemote)
 		{
-//			if (this.ticksExisted > 600)
-//			{
-//				this.setDead();
-//			}
+			// if (this.ticksExisted > 600)
+			// {
+			// this.setDead();
+			// }
 		}
 	}
 
