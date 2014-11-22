@@ -30,11 +30,44 @@ public class PlayerModeHandler implements IInitializable
 			ExtendedEntityPlayer playerExtension = (ExtendedEntityPlayer) player.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER);
 		
 			playerExtension.setPlayerMode(PlayerMode.NORMAL);
+			{
+				//Query the player to choose their PlayerMode type.
+			}
 		}
 	}
 	
 	public static final PlayerModeHandler instance()
 	{
 		return AliensVsPredator.instance().playerModeHandler;
+	}
+	
+	public static boolean isPlayerInMode(EntityPlayer player, PlayerMode playerMode)
+	{
+		return ((ExtendedEntityPlayer) player.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER)).getPlayerMode() == playerMode;
+	}
+	
+	public static boolean isNormal(EntityPlayer player)
+	{
+		return isPlayerInMode(player, PlayerMode.NORMAL);
+	}
+	
+	public static boolean isMarine(EntityPlayer player)
+	{
+		return isPlayerInMode(player, PlayerMode.MARINE);
+	}
+	
+	public static boolean isPredator(EntityPlayer player)
+	{
+		return isPlayerInMode(player, PlayerMode.PREDATOR);
+	}
+	
+	public static boolean isXenomorph(EntityPlayer player)
+	{
+		return isPlayerInMode(player, PlayerMode.XENOMORPH);
+	}
+	
+	public static boolean isMatriarch(EntityPlayer player)
+	{
+		return isPlayerInMode(player, PlayerMode.MATRIARCH);
 	}
 }

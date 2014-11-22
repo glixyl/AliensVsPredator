@@ -126,4 +126,9 @@ public class ExtendedEntityPlayer implements IExtendedEntityProperties
 	{
 		this.playerMode  = playerMode;
 	}
+
+	public PlayerMode getPlayerMode()
+	{
+		return this.playerMode;
+	}
 }
