@@ -48,11 +48,11 @@ public class EntityPlasma extends EntityThrowable
 			// this.setDead();
 		}
 
-		// for (int p = 12; p > 0; --p)
-		// {
-		// this.worldObj.spawnParticle("enchantmenttable", this.posX + this.rand.nextDouble(), this.posY + this.rand.nextDouble(), this.posZ + this.rand.nextDouble(), 0.0D, 0.0D, 0.0D);
-		// this.worldObj.spawnParticle("reddust", this.posX + this.rand.nextDouble(), this.posY + this.rand.nextDouble(), this.posZ + this.rand.nextDouble(), 0.0D, 3.0D, 9.0D);
-		// }
+//		 for (int p = 12; p > 0; --p)
+//		 {
+//		 this.worldObj.spawnParticle("enchantmenttable", this.posX + this.rand.nextDouble(), this.posY + this.rand.nextDouble(), this.posZ + this.rand.nextDouble(), 0.0D, 0.0D, 0.0D);
+//		 this.worldObj.spawnParticle("reddust", this.posX + this.rand.nextDouble(), this.posY + this.rand.nextDouble(), this.posZ + this.rand.nextDouble(), 0.0D, 3.0D, 9.0D);
+//		 }
 
 		Vec3 vec1 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
 		Vec3 vec2 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
