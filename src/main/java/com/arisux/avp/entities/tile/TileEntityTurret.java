@@ -49,7 +49,7 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 	private Item itemAmmo;
 
 	@SideOnly(Side.CLIENT)
-	public int beamColor = 0xFF0066FF;
+	public int beamColor = 0xFFFF0000;
 
 	public TileEntityTurret()
 	{
