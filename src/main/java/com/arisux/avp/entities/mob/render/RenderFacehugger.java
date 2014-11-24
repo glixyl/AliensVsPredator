@@ -14,7 +14,7 @@ import com.arisux.avp.entities.mob.EntityMarine;
 
 public class RenderFacehugger extends RenderXenomorph
 {
-	private static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_FACEHUGGER);
+	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_FACEHUGGER);
 
 	public RenderFacehugger(ModelBase modelbase, float shadowSize)
 	{

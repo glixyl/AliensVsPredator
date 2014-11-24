@@ -26,7 +26,7 @@ public class LocalEventHandler implements IInitializable
 			this.registerEvent(new AlienArmorEvents());
 			this.registerEvent(new AlienEmergeEvent());
 			this.registerEvent(new CommonFirearmEvents());
-			this.registerEvent(new PlayerRenderXenomorphEvent());
+			this.registerEvent(new PlayerModeRenderEvent());
 			this.registerEvent(new BossHealthIndicatorRenderEvent());
 			this.registerEvent(new AmmoIndicatorRenderEvent());
 			this.registerEvent(new SniperRenderEvent());

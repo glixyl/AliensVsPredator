@@ -1,12 +1,11 @@
 package com.arisux.avp.entities.mob.model;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
-
-import com.arisux.avp.entities.mob.EntityFacehugger;
 
 public class ModelFacehugger extends ModelBase
 {
@@ -121,7 +120,8 @@ public class ModelFacehugger extends ModelBase
 			if (j == 0)
 			{
 				this.tailMain.addChild(this.tailChild[j]);
-			} else
+			}
+			else
 			{
 				this.tailChild[j - 1].addChild(this.tailChild[j]);
 			}
@@ -156,10 +156,7 @@ public class ModelFacehugger extends ModelBase
 		this.LegArch4.render(f5);
 		this.tailMain.render(f5);
 
-		if (par1Entity != null)
-		{
-			this.progress = (float) par1Entity.worldObj.getWorldTime() / 3.978873F;
-		}
+		this.progress = Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() / (!par1Entity.isSprinting() ? 4.978873F : 0.978873F);
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z)
@@ -173,6 +170,7 @@ public class ModelFacehugger extends ModelBase
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
 	{
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+		this.setLivingAnimations((EntityLivingBase) entity, 0F, 0F, 0F);
 		float var7 = ((float) Math.PI / 4F);
 		this.Leg1.rotateAngleZ = -var7;
 		this.Leg2.rotateAngleZ = var7;
@@ -221,17 +219,13 @@ public class ModelFacehugger extends ModelBase
 	@Override
 	public void setLivingAnimations(EntityLivingBase par1Entity, float var2, float var3, float var4)
 	{
-		EntityFacehugger var5 = (EntityFacehugger) par1Entity;
 		this.tailMain.rotationPointY = 15.0F;
 		this.tailMain.rotationPointZ = 8.0F;
 		this.tailMain.rotateAngleX = 0.9F;
 
-		if (var5.isSneaking())
+		if (par1Entity.isSneaking())
 		{
 			++this.tailMain.rotationPointY;
-			this.tailMain.rotateAngleX = ((float) Math.PI / 2F);
-		} else if (var5.isSprinting())
-		{
 			this.tailMain.rotateAngleX = ((float) Math.PI / 2F);
 		}
 
@@ -244,7 +238,7 @@ public class ModelFacehugger extends ModelBase
 		{
 			this.tailChild[j].rotateAngleZ = 0.0F;
 			this.tailChild[j].rotateAngleX = 0.05F;
-			this.tailChild[j].rotateAngleX += MathHelper.sin(f1 - (float) (j + 1) * 0.35F) * f;
+			this.tailChild[j].rotateAngleX += MathHelper.sin(f1 - (j + 1) * 0.35F) * f;
 		}
 	}
 }

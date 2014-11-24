@@ -83,7 +83,9 @@ public class VisionModeRenderEvent
 	@SubscribeEvent
 	public void entityRenderEvent(RenderLivingEvent.Pre event)
 	{
-		if (mc.gameSettings.thirdPersonView == 0 && Players.Inventories.getHelmSlotItemStack(mc.thePlayer).getItem() == AliensVsPredator.instance().items.helmTitanium)
+		ItemStack helmSlot = Players.Inventories.getHelmSlotItemStack(mc.thePlayer);
+		
+		if (mc.gameSettings.thirdPersonView == 0 && helmSlot != null && helmSlot.getItem() == AliensVsPredator.instance().items.helmTitanium)
 		{
 			this.currentVisionMode.renderEntityPre(event);
 		}
@@ -92,7 +94,9 @@ public class VisionModeRenderEvent
 	@SubscribeEvent
 	public void entityRenderEvent(RenderLivingEvent.Post event)
 	{
-		if (mc.gameSettings.thirdPersonView == 0 && Players.Inventories.getHelmSlotItemStack(mc.thePlayer).getItem() == AliensVsPredator.instance().items.helmTitanium)
+		ItemStack helmSlot = Players.Inventories.getHelmSlotItemStack(mc.thePlayer);
+		
+		if (mc.gameSettings.thirdPersonView == 0 && helmSlot != null && helmSlot.getItem() == AliensVsPredator.instance().items.helmTitanium)
 		{
 			this.currentVisionMode.renderEntityPost(event);
 		}

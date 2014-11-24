@@ -1,24 +1,25 @@
 package com.arisux.avp.util;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.stats.Achievement;
+
+import com.arisux.airi.lib.util.ModelTexMap;
 
 public class PlayerModeLevelMapping
 {
 	private int level;
-	private ModelBase playerModel;
+	private ModelTexMap modelTexMap;
 	private Achievement achievement;
 	
-	public PlayerModeLevelMapping(int level, ModelBase playerModel)
+	public PlayerModeLevelMapping(int level, ModelTexMap mappedModelTexture)
 	{
-		this(level, playerModel, null);
+		this(level, mappedModelTexture, null);
 	}
 	
-	public PlayerModeLevelMapping(int level, ModelBase playerModel, Achievement achievement)
+	public PlayerModeLevelMapping(int level, ModelTexMap mappedModelTexture, Achievement achievement)
 	{
 		this.level = level;
-		this.playerModel = playerModel;
+		this.modelTexMap = mappedModelTexture;
 		this.achievement = achievement;
 	}
 	
@@ -29,7 +30,7 @@ public class PlayerModeLevelMapping
 	
 	public boolean isLevelReached(int level)
 	{
-		return level >= this.level;
+		return this.level >= level;
 	}
 	
 	public int getLevel()
@@ -37,9 +38,9 @@ public class PlayerModeLevelMapping
 		return level;
 	}
 	
-	public ModelBase getPlayerModel()
+	public ModelTexMap getModelTexMap()
 	{
-		return playerModel;
+		return modelTexMap;
 	}
 	
 	public Achievement getAchievement()

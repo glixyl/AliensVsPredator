@@ -1,6 +1,8 @@
 package com.arisux.avp;
 
+import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerPickupXpEvent;
@@ -82,5 +84,15 @@ public class PlayerModeHandler implements IInitializable
 	public static boolean isXenomorph(EntityPlayer player)
 	{
 		return isPlayerInMode(player, PlayerMode.XENOMORPH);
+	}
+
+	public ModelBase getModelForPlayer(EntityPlayer player)
+	{
+		return ((ExtendedEntityPlayer) player.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER)).getPlayerMode().getLevelMappingForLevel((int) Players.getXPLevel(player)).getModelTexMap().modelBase;
+	}
+	
+	public ResourceLocation getResourceForPlayer(EntityPlayer player)
+	{
+		return ((ExtendedEntityPlayer) player.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER)).getPlayerMode().getLevelMappingForLevel((int) Players.getXPLevel(player)).getModelTexMap().resourceLocation;
 	}
 }

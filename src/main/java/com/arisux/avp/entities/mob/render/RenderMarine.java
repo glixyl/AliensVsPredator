@@ -17,7 +17,7 @@ import com.arisux.avp.items.render.*;
 
 public class RenderMarine extends RenderLiving
 {
-	private final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_MARINE);
+	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_MARINE);
 	protected ModelBiped modelBipedMain;
 	private final ModelBase m4 = new ModelM4();
 	private final ModelBase ak47 = new ModelAK47();
