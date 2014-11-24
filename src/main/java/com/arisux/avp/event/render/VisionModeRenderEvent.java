@@ -3,6 +3,7 @@ package com.arisux.avp.event.render;
 import static com.arisux.airi.engine.RenderEngine.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiChat;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.Pre;
@@ -17,7 +18,7 @@ import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.util.VisionMode;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
 
 public class VisionModeRenderEvent
 {
@@ -66,11 +67,13 @@ public class VisionModeRenderEvent
 	}
 
 	@SubscribeEvent
-	public void tick(TickEvent event)
+	public void tick(ClientTickEvent event)
 	{
 		if (mc.thePlayer != null)
 		{
-			if (Players.Inventories.getHelmSlotItemStack(mc.thePlayer).getItem() == AliensVsPredator.instance().items.helmTitanium && AliensVsPredator.instance().keybinds.KEYBIND_VISION_MODE.isPressed() && mc.inGameHasFocus && Keyboard.getEventKeyState())
+			ItemStack helmSlot = Players.Inventories.getHelmSlotItemStack(mc.thePlayer);
+			
+			if (helmSlot != null && helmSlot.getItem() == AliensVsPredator.instance().items.helmTitanium && AliensVsPredator.instance().keybinds.KEYBIND_VISION_MODE.isPressed() && mc.inGameHasFocus && Keyboard.getEventKeyState())
 			{
 				this.actionSwitchVisionMode.actionPerformed(null);
 			}
