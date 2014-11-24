@@ -10,15 +10,17 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
 import com.arisux.avp.damagesource.DamageSourceAcid;
+import com.arisux.avp.entities.ai.EntityAIMeltBlock;
 
 public class EntityAcidPool extends EntityMob implements IMob
 {
-	public EntityAcidPool(World var1)
+	public EntityAcidPool(World world)
 	{
-		super(var1);
+		super(world);
 		this.isImmuneToFire = false;
 		this.ignoreFrustumCheck = true;
-		this.setSize(0.1F, 0.1F);
+		this.setSize(0.08F, 0.08F);
+		this.tasks.addTask(0, new EntityAIMeltBlock(this, -1));
 	}
 
 	@Override
@@ -83,14 +85,17 @@ public class EntityAcidPool extends EntityMob implements IMob
 			}
 		}
 
-		this.worldObj.spawnParticle("smoke", this.posX + this.rand.nextDouble(), this.posY + this.rand.nextDouble(), this.posZ + this.rand.nextDouble(), 0.0D, 0.0D, 0.0D);
+		if (worldObj.isRemote && worldObj.getWorldTime() % 4 <= 0)
+		{
+			this.worldObj.spawnParticle("smoke", this.posX + this.rand.nextDouble(), this.posY + this.rand.nextDouble(), this.posZ + this.rand.nextDouble(), 0.0D, 0.0D, 0.0D);
+		}
 
 		if (!this.worldObj.isRemote)
 		{
-			// if (this.ticksExisted > 600)
-			// {
-			// this.setDead();
-			// }
+			if (this.ticksExisted > 600)
+			{
+				// this.setDead();
+			}
 		}
 	}
 
