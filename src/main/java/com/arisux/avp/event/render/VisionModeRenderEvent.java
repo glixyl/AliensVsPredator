@@ -10,7 +10,8 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent.Pre;
 import org.lwjgl.input.Keyboard;
 
 import com.arisux.airi.engine.GuiTypeLib.GuiCustomButton;
-import com.arisux.airi.engine.WorldEngine;
+import com.arisux.airi.engine.*;
+import com.arisux.airi.engine.WorldEngine.Entities.Players;
 import com.arisux.airi.lib.util.interfaces.IActionPerformed;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.util.VisionMode;
@@ -69,7 +70,7 @@ public class VisionModeRenderEvent
 	{
 		if (mc.thePlayer != null)
 		{
-			if (AliensVsPredator.instance().keybinds.KEYBIND_VISION_MODE.isPressed() && mc.inGameHasFocus && Keyboard.getEventKeyState())
+			if (Players.Inventories.getHelmSlotItemStack(mc.thePlayer).getItem() == AliensVsPredator.instance().items.helmTitanium && AliensVsPredator.instance().keybinds.KEYBIND_VISION_MODE.isPressed() && mc.inGameHasFocus && Keyboard.getEventKeyState())
 			{
 				this.actionSwitchVisionMode.actionPerformed(null);
 			}
@@ -79,7 +80,7 @@ public class VisionModeRenderEvent
 	@SubscribeEvent
 	public void entityRenderEvent(RenderLivingEvent.Pre event)
 	{
-		if (mc.gameSettings.thirdPersonView == 0)
+		if (mc.gameSettings.thirdPersonView == 0 && Players.Inventories.getHelmSlotItemStack(mc.thePlayer).getItem() == AliensVsPredator.instance().items.helmTitanium)
 		{
 			this.currentVisionMode.renderEntityPre(event);
 		}
@@ -88,7 +89,7 @@ public class VisionModeRenderEvent
 	@SubscribeEvent
 	public void entityRenderEvent(RenderLivingEvent.Post event)
 	{
-		if (mc.gameSettings.thirdPersonView == 0)
+		if (mc.gameSettings.thirdPersonView == 0 && Players.Inventories.getHelmSlotItemStack(mc.thePlayer).getItem() == AliensVsPredator.instance().items.helmTitanium)
 		{
 			this.currentVisionMode.renderEntityPost(event);
 		}
