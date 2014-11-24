@@ -9,7 +9,7 @@ import org.lwjgl.opengl.GL11;
 import com.arisux.avp.entities.EntityAcidSpit;
 import com.arisux.avp.entities.model.ModelPlasma;
 
-public class RenderAIAcid extends Render
+public class RenderAcidSpit extends Render
 {
 	ModelPlasma model = new ModelPlasma();
 

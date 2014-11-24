@@ -65,7 +65,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		RenderingRegistry.registerEntityRenderingHandler(EntityFlame.class, new RenderFlame());
 		RenderingRegistry.registerEntityRenderingHandler(EntityAcidPool.class, new RenderAcidPool());
 		RenderingRegistry.registerEntityRenderingHandler(EntityPlasma.class, new RenderPlasmaBlast());
-		RenderingRegistry.registerEntityRenderingHandler(EntityAcidSpit.class, new RenderAIAcid());
+		RenderingRegistry.registerEntityRenderingHandler(EntityAcidSpit.class, new RenderAcidSpit());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySmartDisc.class, new RenderDisc());
 		RenderingRegistry.registerEntityRenderingHandler(EntityShuriken.class, new RenderShuriken());
 		RenderingRegistry.registerEntityRenderingHandler(EntityBullet.class, new RenderBullet());
