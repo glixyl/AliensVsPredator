@@ -56,39 +56,39 @@ public class WindowNotificationServer extends Window implements IWindow
 	{
 		switch (button.id)
 		{
-		case 0: {
-			ServerList serverList = new ServerList(Minecraft.getMinecraft());
+			case 0: {
+				ServerList serverList = new ServerList(Minecraft.getMinecraft());
 
-			if (serverList.countServers() <= 0)
-			{
-				this.serverInList = false;
-			}
-			
-			for (int x = 0; x < serverList.countServers(); x++)
-			{
-				if (serverList.getServerData(x).serverIP.equalsIgnoreCase(this.serverData.serverIP))
-				{
-					this.serverInList = true;
-				}
-				else
+				if (serverList.countServers() <= 0)
 				{
 					this.serverInList = false;
 				}
-				
-			}
 
-			if (!serverInList)
-			{
-				serverList.addServerData(this.serverData);
-				serverList.saveServerList();
+				for (int x = 0; x < serverList.countServers(); x++)
+				{
+					if (serverList.getServerData(x).serverIP.equalsIgnoreCase(this.serverData.serverIP))
+					{
+						this.serverInList = true;
+					}
+					else
+					{
+						this.serverInList = false;
+					}
+
+				}
+
+				if (!serverInList)
+				{
+					serverList.addServerData(this.serverData);
+					serverList.saveServerList();
+				}
+				break;
 			}
-			break;
-		}
-		case 1: {
-			Minecraft.getMinecraft().currentScreen = new GuiMultiplayer(Minecraft.getMinecraft().currentScreen);
-			FMLClientHandler.instance().connectToServer(AIRI.windowApi().getWindowManager().getParentScreen(), serverData);
-			break;
-		}
+			case 1: {
+				Minecraft.getMinecraft().currentScreen = new GuiMultiplayer(Minecraft.getMinecraft().currentScreen);
+				FMLClientHandler.instance().connectToServer(AIRI.windowApi().getWindowManager().getParentScreen(), serverData);
+				break;
+			}
 		}
 	}
 
