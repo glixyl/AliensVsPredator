@@ -3,21 +3,14 @@ package com.arisux.avp.entities;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IProjectile;
+import net.minecraft.entity.*;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 
 import com.arisux.avp.damagesource.DamageSourceAcidShot;
@@ -68,11 +61,11 @@ public class EntityAcidSpit extends Entity implements IProjectile
 			this.canBePickedUp = 1;
 		}
 
-		this.posY = par2EntityLivingBase.posY + (double) par2EntityLivingBase.getEyeHeight() - 0.10000000149011612D;
+		this.posY = par2EntityLivingBase.posY + par2EntityLivingBase.getEyeHeight() - 0.10000000149011612D;
 		double d0 = par3EntityLivingBase.posX - par2EntityLivingBase.posX;
-		double d1 = par3EntityLivingBase.boundingBox.minY + (double) (par3EntityLivingBase.height / 3.0F) - this.posY;
+		double d1 = par3EntityLivingBase.boundingBox.minY + par3EntityLivingBase.height / 3.0F - this.posY;
 		double d2 = par3EntityLivingBase.posZ - par2EntityLivingBase.posZ;
-		double d3 = (double) MathHelper.sqrt_double(d0 * d0 + d2 * d2);
+		double d3 = MathHelper.sqrt_double(d0 * d0 + d2 * d2);
 
 		if (d3 >= 1.0E-7D)
 		{
@@ -83,7 +76,7 @@ public class EntityAcidSpit extends Entity implements IProjectile
 			this.setLocationAndAngles(par2EntityLivingBase.posX + d4, this.posY, par2EntityLivingBase.posZ + d5, f2, f3);
 			this.yOffset = 0.0F;
 			float f4 = (float) d3 * 0.2F;
-			this.setThrowableHeading(d0, d1 + (double) f4, d2, par4, par5);
+			this.setThrowableHeading(d0, d1 + f4, d2, par4, par5);
 		}
 	}
 
@@ -99,18 +92,19 @@ public class EntityAcidSpit extends Entity implements IProjectile
 		}
 
 		this.setSize(0.5F, 0.5F);
-		this.setLocationAndAngles(par2EntityLivingBase.posX, par2EntityLivingBase.posY + (double) par2EntityLivingBase.getEyeHeight(), par2EntityLivingBase.posZ, par2EntityLivingBase.rotationYaw, par2EntityLivingBase.rotationPitch);
-		this.posX -= (double) (MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F);
+		this.setLocationAndAngles(par2EntityLivingBase.posX, par2EntityLivingBase.posY + par2EntityLivingBase.getEyeHeight(), par2EntityLivingBase.posZ, par2EntityLivingBase.rotationYaw, par2EntityLivingBase.rotationPitch);
+		this.posX -= MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F;
 		this.posY -= 0.10000000149011612D;
-		this.posZ -= (double) (MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F);
+		this.posZ -= MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F;
 		this.setPosition(this.posX, this.posY, this.posZ);
 		this.yOffset = 0.0F;
-		this.motionX = (double) (-MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI));
-		this.motionZ = (double) (MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI));
-		this.motionY = (double) (-MathHelper.sin(this.rotationPitch / 180.0F * (float) Math.PI));
+		this.motionX = -MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI);
+		this.motionZ = MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI);
+		this.motionY = (-MathHelper.sin(this.rotationPitch / 180.0F * (float) Math.PI));
 		this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, par3 * 1.5F, 1.0F);
 	}
 
+	@Override
 	protected void entityInit()
 	{
 		this.dataWatcher.addObject(16, Byte.valueOf((byte) 0));
@@ -119,27 +113,29 @@ public class EntityAcidSpit extends Entity implements IProjectile
 	/**
 	 * Similar to setArrowHeading, it's point the throwable entity to a x, y, z direction.
 	 */
+	@Override
 	public void setThrowableHeading(double par1, double par3, double par5, float par7, float par8)
 	{
 		float f2 = MathHelper.sqrt_double(par1 * par1 + par3 * par3 + par5 * par5);
-		par1 /= (double) f2;
-		par3 /= (double) f2;
-		par5 /= (double) f2;
-		par1 += this.rand.nextGaussian() * (double) (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * (double) par8;
-		par3 += this.rand.nextGaussian() * (double) (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * (double) par8;
-		par5 += this.rand.nextGaussian() * (double) (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * (double) par8;
-		par1 *= (double) par7;
-		par3 *= (double) par7;
-		par5 *= (double) par7;
+		par1 /= f2;
+		par3 /= f2;
+		par5 /= f2;
+		par1 += this.rand.nextGaussian() * (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * par8;
+		par3 += this.rand.nextGaussian() * (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * par8;
+		par5 += this.rand.nextGaussian() * (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * par8;
+		par1 *= par7;
+		par3 *= par7;
+		par5 *= par7;
 		this.motionX = par1;
 		this.motionY = par3;
 		this.motionZ = par5;
 		float f3 = MathHelper.sqrt_double(par1 * par1 + par5 * par5);
 		this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(par1, par5) * 180.0D / Math.PI);
-		this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(par3, (double) f3) * 180.0D / Math.PI);
+		this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(par3, f3) * 180.0D / Math.PI);
 		this.ticksInGround = 0;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	/**
 	 * Sets the position and rotation. Only difference from the other one is no bounding on the rotation. Args: posX,
@@ -151,6 +147,7 @@ public class EntityAcidSpit extends Entity implements IProjectile
 		this.setRotation(par7, par8);
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	/**
 	 * Sets the velocity to the args. Args: x, y, z
@@ -165,7 +162,7 @@ public class EntityAcidSpit extends Entity implements IProjectile
 		{
 			float f = MathHelper.sqrt_double(par1 * par1 + par5 * par5);
 			this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(par1, par5) * 180.0D / Math.PI);
-			this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(par3, (double) f) * 180.0D / Math.PI);
+			this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(par3, f) * 180.0D / Math.PI);
 			this.prevRotationPitch = this.rotationPitch;
 			this.prevRotationYaw = this.rotationYaw;
 			this.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
@@ -176,6 +173,7 @@ public class EntityAcidSpit extends Entity implements IProjectile
 	/**
 	 * Called to update the entity's position/logic.
 	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public void onUpdate()
 	{
@@ -185,7 +183,18 @@ public class EntityAcidSpit extends Entity implements IProjectile
 
 		if (this.ticksInGround >= 200)
 		{
-			this.setDead();
+			// this.setDead();
+		}
+
+		if (((this.prevPosX - this.posX) + (this.prevPosY - this.posY) + (this.prevPosZ - this.prevPosZ)) == 0)
+		{
+			if (!worldObj.isRemote)
+			{
+				Entity entity = new EntityAcidPool(worldObj);
+				entity.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
+				worldObj.spawnEntityInWorld(entity);
+				this.setDead();
+			}
 		}
 
 		Block block;
@@ -194,7 +203,7 @@ public class EntityAcidSpit extends Entity implements IProjectile
 		{
 			float var16 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
 			this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(this.motionX, this.motionZ) * 180.0D / Math.PI);
-			this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(this.motionY, (double) var16) * 180.0D / Math.PI);
+			this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(this.motionY, var16) * 180.0D / Math.PI);
 		}
 
 		block = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
@@ -229,9 +238,9 @@ public class EntityAcidSpit extends Entity implements IProjectile
 			else
 			{
 				this.inGround = false;
-				this.motionX *= (double) (this.rand.nextFloat() * 0.2F);
-				this.motionY *= (double) (this.rand.nextFloat() * 0.2F);
-				this.motionZ *= (double) (this.rand.nextFloat() * 0.2F);
+				this.motionX *= this.rand.nextFloat() * 0.2F;
+				this.motionY *= this.rand.nextFloat() * 0.2F;
+				this.motionZ *= this.rand.nextFloat() * 0.2F;
 				this.ticksInGround = 0;
 				this.ticksInAir = 0;
 			}
@@ -259,12 +268,12 @@ public class EntityAcidSpit extends Entity implements IProjectile
 
 			for (l = 0; l < list.size(); ++l)
 			{
-				Entity f2 = (Entity) list.get(l);
+				Entity f2 = list.get(l);
 
 				if (f2.canBeCollidedWith() && (f2 != this.shootingEntity || this.ticksInAir >= 5))
 				{
 					f1 = 0.3F;
-					AxisAlignedBB f3 = f2.boundingBox.expand((double) f1, (double) f1, (double) f1);
+					AxisAlignedBB f3 = f2.boundingBox.expand(f1, f1, f1);
 					MovingObjectPosition f4 = f3.calculateIntercept(var18, var19);
 
 					if (f4 != null)
@@ -303,7 +312,7 @@ public class EntityAcidSpit extends Entity implements IProjectile
 				if (movingobjectposition.entityHit != null)
 				{
 					var22 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
-					int var23 = MathHelper.ceiling_double_int((double) var22 * this.damage);
+					int var23 = MathHelper.ceiling_double_int(var22 * this.damage);
 
 					if (this.getIsCritical())
 					{
@@ -326,7 +335,7 @@ public class EntityAcidSpit extends Entity implements IProjectile
 						movingobjectposition.entityHit.setFire(5);
 					}
 
-					if (movingobjectposition.entityHit.attackEntityFrom(var25, (float) var23))
+					if (movingobjectposition.entityHit.attackEntityFrom(var25, var23))
 					{
 						if (movingobjectposition.entityHit instanceof EntityLivingBase)
 						{
@@ -343,7 +352,7 @@ public class EntityAcidSpit extends Entity implements IProjectile
 
 								if (var21 > 0.0F)
 								{
-									movingobjectposition.entityHit.addVelocity(this.motionX * (double) this.knockbackStrength * 0.6000000238418579D / (double) var21, 0.1D, this.motionZ * (double) this.knockbackStrength * 0.6000000238418579D / (double) var21);
+									movingobjectposition.entityHit.addVelocity(this.motionX * this.knockbackStrength * 0.6000000238418579D / var21, 0.1D, this.motionZ * this.knockbackStrength * 0.6000000238418579D / var21);
 								}
 							}
 
@@ -384,13 +393,13 @@ public class EntityAcidSpit extends Entity implements IProjectile
 					this.zTile = movingobjectposition.blockZ;
 					this.inTile = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
 					this.inData = this.worldObj.getBlockMetadata(this.xTile, this.yTile, this.zTile);
-					this.motionX = (double) ((float) (movingobjectposition.hitVec.xCoord - this.posX));
-					this.motionY = (double) ((float) (movingobjectposition.hitVec.yCoord - this.posY));
-					this.motionZ = (double) ((float) (movingobjectposition.hitVec.zCoord - this.posZ));
+					this.motionX = ((float) (movingobjectposition.hitVec.xCoord - this.posX));
+					this.motionY = ((float) (movingobjectposition.hitVec.yCoord - this.posY));
+					this.motionZ = ((float) (movingobjectposition.hitVec.zCoord - this.posZ));
 					var22 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
-					this.posX -= this.motionX / (double) var22 * 0.05000000074505806D;
-					this.posY -= this.motionY / (double) var22 * 0.05000000074505806D;
-					this.posZ -= this.motionZ / (double) var22 * 0.05000000074505806D;
+					this.posX -= this.motionX / var22 * 0.05000000074505806D;
+					this.posY -= this.motionY / var22 * 0.05000000074505806D;
+					this.posZ -= this.motionZ / var22 * 0.05000000074505806D;
 					this.inGround = true;
 					this.AcidShake = 7;
 					this.setIsCritical(false);
@@ -406,7 +415,7 @@ public class EntityAcidSpit extends Entity implements IProjectile
 			{
 				for (l = 0; l < 4; ++l)
 				{
-					this.worldObj.spawnParticle("crit", this.posX + this.motionX * (double) l / 4.0D, this.posY + this.motionY * (double) l / 4.0D, this.posZ + this.motionZ * (double) l / 4.0D, -this.motionX, -this.motionY + 0.2D, -this.motionZ);
+					this.worldObj.spawnParticle("crit", this.posX + this.motionX * l / 4.0D, this.posY + this.motionY * l / 4.0D, this.posZ + this.motionZ * l / 4.0D, -this.motionX, -this.motionY + 0.2D, -this.motionZ);
 				}
 			}
 
@@ -416,7 +425,7 @@ public class EntityAcidSpit extends Entity implements IProjectile
 			var22 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
 			this.rotationYaw = (float) (Math.atan2(this.motionX, this.motionZ) * 180.0D / Math.PI);
 
-			for (this.rotationPitch = (float) (Math.atan2(this.motionY, (double) var22) * 180.0D / Math.PI); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F)
+			for (this.rotationPitch = (float) (Math.atan2(this.motionY, var22) * 180.0D / Math.PI); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F)
 			{
 				;
 			}
@@ -446,16 +455,16 @@ public class EntityAcidSpit extends Entity implements IProjectile
 				for (int var26 = 0; var26 < 4; ++var26)
 				{
 					var21 = 0.25F;
-					this.worldObj.spawnParticle("bubble", this.posX - this.motionX * (double) var21, this.posY - this.motionY * (double) var21, this.posZ - this.motionZ * (double) var21, this.motionX, this.motionY, this.motionZ);
+					this.worldObj.spawnParticle("bubble", this.posX - this.motionX * var21, this.posY - this.motionY * var21, this.posZ - this.motionZ * var21, this.motionX, this.motionY, this.motionZ);
 				}
 
 				var24 = 0.8F;
 			}
 
-			this.motionX *= (double) var24;
-			this.motionY *= (double) var24;
-			this.motionZ *= (double) var24;
-			this.motionY -= (double) f1;
+			this.motionX *= var24;
+			this.motionY *= var24;
+			this.motionZ *= var24;
+			this.motionY -= f1;
 			this.setPosition(this.posX, this.posY, this.posZ);
 			// this.doBlockCollisions();
 		}
@@ -464,6 +473,7 @@ public class EntityAcidSpit extends Entity implements IProjectile
 	/**
 	 * (abstract) Protected helper method to write subclass entity data to NBT.
 	 */
+	@Override
 	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		par1NBTTagCompound.setShort("xTile", (short) this.xTile);
@@ -480,6 +490,7 @@ public class EntityAcidSpit extends Entity implements IProjectile
 	/**
 	 * (abstract) Protected helper method to read subclass entity data from NBT.
 	 */
+	@Override
 	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		this.xTile = par1NBTTagCompound.getShort("xTile");
@@ -509,11 +520,13 @@ public class EntityAcidSpit extends Entity implements IProjectile
 	 * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
 	 * prevent them from trampling crops
 	 */
+	@Override
 	protected boolean canTriggerWalking()
 	{
 		return false;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public float getShadowSize()
 	{
@@ -538,6 +551,7 @@ public class EntityAcidSpit extends Entity implements IProjectile
 	/**
 	 * If returns false, the item will not inflict any damage against entities.
 	 */
+	@Override
 	public boolean canAttackWithItem()
 	{
 		return false;
