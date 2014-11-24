@@ -6,6 +6,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
+import com.arisux.avp.entities.EntityAcidPool;
+
 public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 {
 	public EntityXenomorph(World world)
@@ -82,7 +84,7 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 					this.addVelocity(0, 0.6D, 0);
 				}
 
-			} else if (targetEntity != null && !(targetEntity.getClass().getSuperclass().getSuperclass() == EntitySpeciesAlien.class) && !(targetEntity.getClass().getSuperclass() == EntitySpeciesAlien.class))
+			} else if (targetEntity != null && !(targetEntity instanceof EntityAcidPool) && !(targetEntity.getClass().getSuperclass().getSuperclass() == EntitySpeciesAlien.class) && !(targetEntity.getClass().getSuperclass() == EntitySpeciesAlien.class))
 			{
 				this.setAttackTarget((EntityLivingBase) targetEntity);
 			}
