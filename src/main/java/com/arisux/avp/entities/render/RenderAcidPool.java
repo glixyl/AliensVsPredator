@@ -11,9 +11,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import com.arisux.airi.engine.*;
-import com.arisux.airi.engine.RenderEngine.UV;
-import com.arisux.airi.engine.RenderEngine.Vertex;
+import com.arisux.airi.engine.RenderEngine;
 import com.arisux.avp.AliensVsPredator;
 
 public class RenderAcidPool extends Render
@@ -39,7 +37,7 @@ public class RenderAcidPool extends Render
 			double partialY = posY - renderY;
 			double partialZ = posZ - renderZ;
 			tessellator.startDrawingQuads();
-
+			
 			for (int blockX = MathHelper.floor_double(renderX - offset); blockX <= MathHelper.floor_double(renderX + offset); ++blockX)
 			{
 				for (int blockY = MathHelper.floor_double(renderY - offset); blockY <= MathHelper.floor_double(renderY); ++blockY)
@@ -69,23 +67,24 @@ public class RenderAcidPool extends Render
 	{
 		if (block.renderAsNormalBlock())
 		{
+			double x1 = blockX + block.getBlockBoundsMinX() + partialX;
+			double x2 = blockX + block.getBlockBoundsMaxX() + partialX;
+			double y = blockY + block.getBlockBoundsMinY() + partialY + 0.015625D;
+			double z1 = blockZ + block.getBlockBoundsMinZ() + partialZ;
+			double z2 = blockZ + block.getBlockBoundsMaxZ() + partialZ;
+			float u1 = (float) ((posX - x1) / 2.0D / offset + 0.5D);
+			float u2 = (float) ((posX - x2) / 2.0D / offset + 0.5D);
+			float v1 = (float) ((posZ - z1) / 2.0D / offset + 0.5D);
+			float v2 = (float) ((posZ - z2) / 2.0D / offset + 0.5D);
+			
 			GL11.glPushMatrix();
 			{
-				GL11.glRotatef(yaw, 0, 1F, 0F);
+				GL11.glRotatef(yaw, 0F, 1F, 0F);
 				tessellator.setColorRGBA_F(0.8F, 1.0F, 0.0F, opacity);
-				double x1 = blockX + block.getBlockBoundsMinX() + partialX;
-				double x2 = blockX + block.getBlockBoundsMaxX() + partialX;
-				double y = blockY + block.getBlockBoundsMinY() + partialY + 0.015625D;
-				double z1 = blockZ + block.getBlockBoundsMinZ() + partialZ;
-				double z2 = blockZ + block.getBlockBoundsMaxZ() + partialZ;
-				float u1 = (float) ((posX - x1) / 2.0D / offset + 0.5D);
-				float v1 = (float) ((posX - x2) / 2.0D / offset + 0.5D);
-				float u2 = (float) ((posZ - z1) / 2.0D / offset + 0.5D);
-				float v2 = (float) ((posZ - z2) / 2.0D / offset + 0.5D);
-				new Vertex(x1, y, z1).tessellateWithUV(tessellator, new UV(u1, u2));
-				new Vertex(x1, y, z2).tessellateWithUV(tessellator, new UV(u1, v2));
-				new Vertex(x2, y, z2).tessellateWithUV(tessellator, new UV(v1, v2));
-				new Vertex(x2, y, z1).tessellateWithUV(tessellator, new UV(v1, u2));
+			    tessellator.addVertexWithUV(x1, y, z1, u1, v1);
+			    tessellator.addVertexWithUV(x1, y, z2, u1, v2);
+			    tessellator.addVertexWithUV(x2, y, z2, u2, v2);
+			    tessellator.addVertexWithUV(x2, y, z1, u2, v1);
 			}
 			GL11.glPopMatrix();
 		}

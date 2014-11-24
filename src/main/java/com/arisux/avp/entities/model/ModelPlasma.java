@@ -13,6 +13,7 @@ public class ModelPlasma extends ModelBase
 {
 	private Tessellator tessellator = Tessellator.instance;
 	private Color color;
+	public boolean drawInternalVertices = true;
 
 	private Vertex t1 = new Vertex(1.0F, 0.0F, 0.0F).smooth(),
 		t2 = new Vertex(0.0F, 1.0F, 0.0F).smooth(),
@@ -93,10 +94,13 @@ public class ModelPlasma extends ModelBase
 		tessellator.addVertex(vertex1.x, vertex1.y, vertex1.z);
 		tessellator.addVertex(vertex2.x, vertex2.y, vertex2.z);
 		tessellator.addVertex(vertex3.x, vertex3.y, vertex3.z);
-		
-		tessellator.addVertex(vertex3.x, vertex3.y, vertex3.z);
-		tessellator.addVertex(vertex2.x, vertex2.y, vertex2.z);
-		tessellator.addVertex(vertex1.x, vertex1.y, vertex1.z);
+
+		if (drawInternalVertices)
+		{
+			tessellator.addVertex(vertex3.x, vertex3.y, vertex3.z);
+			tessellator.addVertex(vertex2.x, vertex2.y, vertex2.z);
+			tessellator.addVertex(vertex1.x, vertex1.y, vertex1.z);
+		}
 		tessellator.draw();
 	}
 }
