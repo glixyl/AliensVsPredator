@@ -7,11 +7,13 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 
+import org.lwjgl.opengl.GL11;
+
 public class ModelFacehugger extends ModelBase
 {
-	public ModelRenderer body, Leg8, Leg6, Leg4, Leg2, Leg7, Leg5, Leg3, Leg1, Tail1, Tail2, LegArch1, LegArch2, LegArch3, LegArch4, tailMain;
-	public ModelRenderer[] tailChild;
-	private float progress;
+	public ModelRenderer body, leg8, leg6, leg4, leg2, leg7, leg5, leg3, leg1, legArch1, legArch2, legArch3, legArch4, tailMain;
+	public ModelRenderer[] tailBoxes;
+	public float rotationToGround;
 
 	public ModelFacehugger()
 	{
@@ -21,142 +23,128 @@ public class ModelFacehugger extends ModelBase
 		this.body.setTextureSize(64, 32);
 		this.body.mirror = true;
 		this.setRotation(this.body, 0.0F, 0.0F, 0.0F);
-		this.Leg8 = new ModelRenderer(this, 46, 2);
-		this.Leg8.addBox(-1.0F, -1.0F, -1.0F, 8, 1, 1);
-		this.Leg8.setRotationPoint(4.4F, 20.0F, -0.9F);
-		this.Leg8.setTextureSize(64, 32);
-		this.Leg8.mirror = true;
-		this.setRotation(this.Leg8, 0.0F, 0.5759587F, 0.5410521F);
-		this.Leg6 = new ModelRenderer(this, 46, 2);
-		this.Leg6.addBox(-0.5F, -1.0F, -0.8F, 8, 1, 1);
-		this.Leg6.setRotationPoint(4.1F, 19.5F, 0.8F);
-		this.Leg6.setTextureSize(64, 32);
-		this.Leg6.mirror = true;
-		this.setRotation(this.Leg6, 0.0F, 0.2792527F, 0.5410521F);
-		this.Leg4 = new ModelRenderer(this, 46, 2);
-		this.Leg4.addBox(-1.0F, -1.0F, -1.0F, 8, 1, 1);
-		this.Leg4.setRotationPoint(4.3F, 20.0F, 2.8F);
-		this.Leg4.setTextureSize(64, 32);
-		this.Leg4.mirror = true;
-		this.setRotation(this.Leg4, 0.0F, -0.2792527F, 0.5410521F);
-		this.Leg2 = new ModelRenderer(this, 46, 2);
-		this.Leg2.addBox(-1.0F, -1.0F, -1.0F, 8, 1, 1);
-		this.Leg2.setRotationPoint(4.0F, 20.0F, 4.0F);
-		this.Leg2.setTextureSize(64, 32);
-		this.Leg2.mirror = true;
-		this.setRotation(this.Leg2, 0.0F, -0.5759587F, 0.5410521F);
-		this.Leg7 = new ModelRenderer(this, 46, 2);
-		this.Leg7.addBox(-7.0F, -1.0F, -1.0F, 8, 1, 1);
-		this.Leg7.setRotationPoint(-4.4F, 20.0F, -0.9F);
-		this.Leg7.setTextureSize(64, 32);
-		this.Leg7.mirror = true;
-		this.setRotation(this.Leg7, 0.0F, -0.5759587F, -0.5410521F);
-		this.Leg5 = new ModelRenderer(this, 46, 2);
-		this.Leg5.addBox(-7.5F, -1.0F, -0.8F, 8, 1, 1);
-		this.Leg5.setRotationPoint(-4.1F, 19.5F, 0.8F);
-		this.Leg5.setTextureSize(64, 32);
-		this.Leg5.mirror = true;
-		this.setRotation(this.Leg5, 0.0F, -0.2792527F, -0.5410521F);
-		this.Leg3 = new ModelRenderer(this, 46, 2);
-		this.Leg3.addBox(-7.0F, -1.0F, -1.0F, 8, 1, 1);
-		this.Leg3.setRotationPoint(-4.3F, 20.0F, 2.8F);
-		this.Leg3.setTextureSize(64, 32);
-		this.Leg3.mirror = true;
-		this.setRotation(this.Leg3, 0.0F, 0.2792527F, -0.5410521F);
-		this.Leg1 = new ModelRenderer(this, 46, 2);
-		this.Leg1.addBox(-7.0F, -1.0F, -1.0F, 8, 1, 1);
-		this.Leg1.setRotationPoint(-4.0F, 20.0F, 4.0F);
-		this.Leg1.setTextureSize(64, 32);
-		this.Leg1.mirror = true;
-		this.setRotation(this.Leg1, 0.0F, 0.5759587F, -0.5410521F);
-		this.Tail1 = new ModelRenderer(this, 0, 21);
-		this.Tail1.addBox(-1.0F, -3.0F, -1.0F, 2, 1, 10);
-		this.Tail1.setRotationPoint(0.0F, 22.0F, 5.0F);
-		this.Tail1.setTextureSize(64, 32);
-		this.Tail1.mirror = true;
-		this.setRotation(this.Tail1, 0.0F, 0.0F, 0.0F);
-		this.Tail2 = new ModelRenderer(this, 24, 21);
-		this.Tail2.addBox(-1.0F, -3.0F, -1.0F, 1, 1, 10);
-		this.Tail2.setRotationPoint(0.5F, 22.0F, 15.0F);
-		this.Tail2.setTextureSize(64, 32);
-		this.Tail2.mirror = true;
-		this.setRotation(this.Tail2, 0.0F, 0.0F, 0.0F);
-		this.LegArch1 = new ModelRenderer(this, 46, 0);
-		this.LegArch1.addBox(-3.0F, -3.0F, -3.0F, 8, 1, 1);
-		this.LegArch1.setRotationPoint(-1.0F, 21.5F, 6.0F);
-		this.LegArch1.setTextureSize(64, 32);
-		this.LegArch1.mirror = true;
-		this.setRotation(this.LegArch1, 0.0F, 0.0F, 0.0F);
-		this.LegArch2 = new ModelRenderer(this, 46, 0);
-		this.LegArch2.addBox(-3.0F, -3.0F, -3.0F, 8, 1, 1);
-		this.LegArch2.setRotationPoint(-1.0F, 21.5F, 4.65F);
-		this.LegArch2.setTextureSize(64, 32);
-		this.LegArch2.mirror = true;
-		this.setRotation(this.LegArch2, 0.0F, 0.0F, 0.0F);
-		this.LegArch3 = new ModelRenderer(this, 46, 0);
-		this.LegArch3.addBox(-3.0F, -3.0F, -3.0F, 8, 1, 1);
-		this.LegArch3.setRotationPoint(-1.0F, 21.5F, 3.0F);
-		this.LegArch3.setTextureSize(64, 32);
-		this.LegArch3.mirror = true;
-		this.setRotation(this.LegArch3, 0.0F, 0.0F, 0.0F);
-		this.LegArch4 = new ModelRenderer(this, 46, 0);
-		this.LegArch4.addBox(-3.0F, -3.0F, -3.0F, 8, 1, 1);
-		this.LegArch4.setRotationPoint(-1.0F, 21.5F, 1.5F);
-		this.LegArch4.setTextureSize(64, 32);
-		this.LegArch4.mirror = true;
-		this.setRotation(this.LegArch4, 0.0F, 0.0F, 0.0F);
+		this.leg8 = new ModelRenderer(this, 46, 2);
+		this.leg8.addBox(-1.0F, -1.0F, -1.0F, 8, 1, 1);
+		this.leg8.setRotationPoint(4.4F, 20.0F, -0.9F);
+		this.leg8.setTextureSize(64, 32);
+		this.leg8.mirror = true;
+		this.setRotation(this.leg8, 0.0F, 0.5759587F, 0.5410521F);
+		this.leg6 = new ModelRenderer(this, 46, 2);
+		this.leg6.addBox(-0.5F, -1.0F, -0.8F, 8, 1, 1);
+		this.leg6.setRotationPoint(4.1F, 19.5F, 0.8F);
+		this.leg6.setTextureSize(64, 32);
+		this.leg6.mirror = true;
+		this.setRotation(this.leg6, 0.0F, 0.2792527F, 0.5410521F);
+		this.leg4 = new ModelRenderer(this, 46, 2);
+		this.leg4.addBox(-1.0F, -1.0F, -1.0F, 8, 1, 1);
+		this.leg4.setRotationPoint(4.3F, 20.0F, 2.8F);
+		this.leg4.setTextureSize(64, 32);
+		this.leg4.mirror = true;
+		this.setRotation(this.leg4, 0.0F, -0.2792527F, 0.5410521F);
+		this.leg2 = new ModelRenderer(this, 46, 2);
+		this.leg2.addBox(-1.0F, -1.0F, -1.0F, 8, 1, 1);
+		this.leg2.setRotationPoint(4.0F, 20.0F, 4.0F);
+		this.leg2.setTextureSize(64, 32);
+		this.leg2.mirror = true;
+		this.setRotation(this.leg2, 0.0F, -0.5759587F, 0.5410521F);
+		this.leg7 = new ModelRenderer(this, 46, 2);
+		this.leg7.addBox(-7.0F, -1.0F, -1.0F, 8, 1, 1);
+		this.leg7.setRotationPoint(-4.4F, 20.0F, -0.9F);
+		this.leg7.setTextureSize(64, 32);
+		this.leg7.mirror = true;
+		this.setRotation(this.leg7, 0.0F, -0.5759587F, -0.5410521F);
+		this.leg5 = new ModelRenderer(this, 46, 2);
+		this.leg5.addBox(-7.5F, -1.0F, -0.8F, 8, 1, 1);
+		this.leg5.setRotationPoint(-4.1F, 19.5F, 0.8F);
+		this.leg5.setTextureSize(64, 32);
+		this.leg5.mirror = true;
+		this.setRotation(this.leg5, 0.0F, -0.2792527F, -0.5410521F);
+		this.leg3 = new ModelRenderer(this, 46, 2);
+		this.leg3.addBox(-7.0F, -1.0F, -1.0F, 8, 1, 1);
+		this.leg3.setRotationPoint(-4.3F, 20.0F, 2.8F);
+		this.leg3.setTextureSize(64, 32);
+		this.leg3.mirror = true;
+		this.setRotation(this.leg3, 0.0F, 0.2792527F, -0.5410521F);
+		this.leg1 = new ModelRenderer(this, 46, 2);
+		this.leg1.addBox(-7.0F, -1.0F, -1.0F, 8, 1, 1);
+		this.leg1.setRotationPoint(-4.0F, 20.0F, 4.0F);
+		this.leg1.setTextureSize(64, 32);
+		this.leg1.mirror = true;
+		this.setRotation(this.leg1, 0.0F, 0.5759587F, -0.5410521F);
+		this.legArch1 = new ModelRenderer(this, 46, 0);
+		this.legArch1.addBox(-3.0F, -3.0F, -3.0F, 8, 1, 1);
+		this.legArch1.setRotationPoint(-1.0F, 21.5F, 6.0F);
+		this.legArch1.setTextureSize(64, 32);
+		this.legArch1.mirror = true;
+		this.setRotation(this.legArch1, 0.0F, 0.0F, 0.0F);
+		this.legArch2 = new ModelRenderer(this, 46, 0);
+		this.legArch2.addBox(-3.0F, -3.0F, -3.0F, 8, 1, 1);
+		this.legArch2.setRotationPoint(-1.0F, 21.5F, 4.65F);
+		this.legArch2.setTextureSize(64, 32);
+		this.legArch2.mirror = true;
+		this.setRotation(this.legArch2, 0.0F, 0.0F, 0.0F);
+		this.legArch3 = new ModelRenderer(this, 46, 0);
+		this.legArch3.addBox(-3.0F, -3.0F, -3.0F, 8, 1, 1);
+		this.legArch3.setRotationPoint(-1.0F, 21.5F, 3.0F);
+		this.legArch3.setTextureSize(64, 32);
+		this.legArch3.mirror = true;
+		this.setRotation(this.legArch3, 0.0F, 0.0F, 0.0F);
+		this.legArch4 = new ModelRenderer(this, 46, 0);
+		this.legArch4.addBox(-3.0F, -3.0F, -3.0F, 8, 1, 1);
+		this.legArch4.setRotationPoint(-1.0F, 21.5F, 1.5F);
+		this.legArch4.setTextureSize(64, 32);
+		this.legArch4.mirror = true;
+		this.setRotation(this.legArch4, 0.0F, 0.0F, 0.0F);
 		this.tailMain = new ModelRenderer(this, 29, 0);
 		this.tailMain.addBox(-0.5F, 0.0F, -6.3F, 1, 2, 1);
 		this.tailMain.rotateAngleX = 0.9F;
 		this.tailMain.setRotationPoint(0.0F, 22.0F, 5.0F);
-		this.tailChild = new ModelRenderer[15];
+		this.tailBoxes = new ModelRenderer[15];
 
-		for (int j = 0; j < 7; ++j)
+		for (int x = 0; x < 7; ++x)
 		{
-			this.tailChild[j] = new ModelRenderer(this, 29, 0);
-			this.tailChild[j].addBox(-0.5F, 0.0F, -6.3F, 1, 2, 1);
-			this.tailChild[j].setRotationPoint(0.0F, 1.0F, 0.0F);
+			this.tailBoxes[x] = new ModelRenderer(this, 29, 0);
+			this.tailBoxes[x].addBox(-0.5F, 0.0F, -6.3F, 1, 2, 1);
+			this.tailBoxes[x].setRotationPoint(0.0F, 1.0F, 0.0F);
 
-			if (j == 0)
+			if (x == 0)
 			{
-				this.tailMain.addChild(this.tailChild[j]);
+				this.tailMain.addChild(this.tailBoxes[x]);
 			}
 			else
 			{
-				this.tailChild[j - 1].addChild(this.tailChild[j]);
+				this.tailBoxes[x - 1].addChild(this.tailBoxes[x]);
 			}
 		}
 
-		for (int j = 7; j < 15; ++j)
+		for (int x = 7; x < 15; ++x)
 		{
-			this.tailChild[j] = new ModelRenderer(this, 29, 0);
-			this.tailChild[j].addBox(-0.5F, 0.0F, -6.3F, 1, 2, 1);
-			this.tailChild[j].setRotationPoint(0.0F, 1.0F, 0.0F);
-			this.tailChild[j - 1].addChild(this.tailChild[j]);
+			this.tailBoxes[x] = new ModelRenderer(this, 29, 0);
+			this.tailBoxes[x].addBox(-0.5F, 0.0F, -6.3F, 1, 2, 1);
+			this.tailBoxes[x].setRotationPoint(0.0F, 1.0F, 0.0F);
+			this.tailBoxes[x - 1].addChild(this.tailBoxes[x]);
 		}
 	}
 
 	@Override
-	public void render(Entity par1Entity, float f, float f1, float f2, float f3, float f4, float f5)
+	public void render(Entity entity, float swingProgress, float swingProgressPrevious, float idleProgress, float headRotateAngle, float headRotationPitch, float boxTranslationMultiplier)
 	{
-		super.render(par1Entity, f, f1, f2, f3, f4, f5);
-		this.setRotationAngles(f, f1, f2, f3, f4, f5, par1Entity);
-		this.body.render(f5);
-		this.Leg8.render(f5);
-		this.Leg6.render(f5);
-		this.Leg4.render(f5);
-		this.Leg2.render(f5);
-		this.Leg7.render(f5);
-		this.Leg5.render(f5);
-		this.Leg3.render(f5);
-		this.Leg1.render(f5);
-		this.LegArch1.render(f5);
-		this.LegArch2.render(f5);
-		this.LegArch3.render(f5);
-		this.LegArch4.render(f5);
-		this.tailMain.render(f5);
-
-		this.progress = Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() / (!par1Entity.isSprinting() ? 4.978873F : 0.978873F);
+		super.render(entity, swingProgress, swingProgressPrevious, idleProgress, headRotateAngle, headRotationPitch, boxTranslationMultiplier);
+		this.setRotationAngles(swingProgress, swingProgressPrevious, idleProgress, headRotateAngle, headRotationPitch, boxTranslationMultiplier, entity);
+		this.body.render(boxTranslationMultiplier);
+		this.leg8.render(boxTranslationMultiplier);
+		this.leg6.render(boxTranslationMultiplier);
+		this.leg4.render(boxTranslationMultiplier);
+		this.leg2.render(boxTranslationMultiplier);
+		this.leg7.render(boxTranslationMultiplier);
+		this.leg5.render(boxTranslationMultiplier);
+		this.leg3.render(boxTranslationMultiplier);
+		this.leg1.render(boxTranslationMultiplier);
+		this.legArch1.render(boxTranslationMultiplier);
+		this.legArch2.render(boxTranslationMultiplier);
+		this.legArch3.render(boxTranslationMultiplier);
+		this.legArch4.render(boxTranslationMultiplier);
+		this.tailMain.render(boxTranslationMultiplier);
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z)
@@ -167,78 +155,96 @@ public class ModelFacehugger extends ModelBase
 	}
 
 	@Override
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
+	public void setRotationAngles(float swingProgress, float swingProgressPrevious, float idleProgress, float headRotateAngle, float headRotationPitch, float boxTranslationMultiplier, Entity entity)
 	{
-		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+		super.setRotationAngles(swingProgress, swingProgressPrevious, idleProgress, headRotateAngle, headRotationPitch, boxTranslationMultiplier, entity);
 		this.setLivingAnimations((EntityLivingBase) entity, 0F, 0F, 0F);
-		float var7 = ((float) Math.PI / 4F);
-		this.Leg1.rotateAngleZ = -var7;
-		this.Leg2.rotateAngleZ = var7;
-		this.Leg3.rotateAngleZ = -var7 * 0.74F;
-		this.Leg4.rotateAngleZ = var7 * 0.74F;
-		this.Leg5.rotateAngleZ = -var7 * 0.74F;
-		this.Leg6.rotateAngleZ = var7 * 0.74F;
-		this.Leg7.rotateAngleZ = -var7;
-		this.Leg8.rotateAngleZ = var7;
-		float var8 = -0.0F;
-		float var9 = 0.3926991F;
-		this.Leg1.rotateAngleX = var9 * 2.0F + var8;
-		this.Leg2.rotateAngleY = -var9 * 2.0F - var8;
-		this.Leg3.rotateAngleY = var9 * 1.0F + var8;
-		this.Leg4.rotateAngleY = -var9 * 1.0F - var8;
-		this.Leg5.rotateAngleY = -var9 * 1.0F + var8;
-		this.Leg6.rotateAngleY = var9 * 1.0F - var8;
-		this.Leg7.rotateAngleY = -var9 * 2.0F + var8;
-		this.Leg8.rotateAngleY = var9 * 2.0F - var8;
-		float var10 = -(MathHelper.cos(f * 0.6662F * 2.0F + 0.0F) * 0.4F) * f1;
-		float var11 = -(MathHelper.cos(f * 0.6662F * 2.0F + (float) Math.PI) * 0.4F) * f1;
-		float var12 = -(MathHelper.cos(f * 0.6662F * 2.0F + ((float) Math.PI / 2F)) * 0.4F) * f1;
-		float var13 = -(MathHelper.cos(f * 0.6662F * 2.0F + ((float) Math.PI * 3F / 2F)) * 0.4F) * f1;
-		float var14 = Math.abs(MathHelper.sin(f * 0.6662F + 0.0F) * 0.4F) * f1;
-		float var15 = Math.abs(MathHelper.sin(f * 0.6662F + (float) Math.PI) * 0.4F) * f1;
-		float var16 = Math.abs(MathHelper.sin(f * 0.6662F + ((float) Math.PI / 2F)) * 0.4F) * f1;
-		float var17 = Math.abs(MathHelper.sin(f * 0.6662F + ((float) Math.PI * 3F / 2F)) * 0.4F) * f1;
-		this.Leg1.rotateAngleX += var10;
-		this.Leg2.rotateAngleY += -var10;
-		this.Leg3.rotateAngleY += var11;
-		this.Leg4.rotateAngleY += -var11;
-		this.Leg5.rotateAngleY += var12;
-		this.Leg6.rotateAngleY += -var12;
-		this.Leg7.rotateAngleY += var13;
-		this.Leg8.rotateAngleY += -var13;
-		this.Leg1.rotateAngleZ += var14;
-		this.Leg2.rotateAngleZ += -var14;
-		this.Leg3.rotateAngleZ += var15;
-		this.Leg4.rotateAngleZ += -var15;
-		this.Leg5.rotateAngleZ += var16;
-		this.Leg6.rotateAngleZ += -var16;
-		this.Leg7.rotateAngleZ += var17;
-		this.Leg8.rotateAngleZ += -var17;
+
+		float angleZ = ((float) Math.PI / 4F);
+		this.leg1.rotateAngleZ = -angleZ;
+		this.leg2.rotateAngleZ = angleZ;
+		this.leg3.rotateAngleZ = -angleZ * 0.74F;
+		this.leg4.rotateAngleZ = angleZ * 0.74F;
+		this.leg5.rotateAngleZ = -angleZ * 0.74F;
+		this.leg6.rotateAngleZ = angleZ * 0.74F;
+		this.leg7.rotateAngleZ = -angleZ;
+		this.leg8.rotateAngleZ = angleZ;
+
+		float angleYOffset = 0.0F;
+		float angleY = 0.3926991F;
+		this.leg1.rotateAngleX = angleY * 2.0F + angleYOffset;
+		this.leg2.rotateAngleY = -angleY * 2.0F - angleYOffset;
+		this.leg3.rotateAngleY = angleY * 1.0F + angleYOffset;
+		this.leg4.rotateAngleY = -angleY * 1.0F - angleYOffset;
+		this.leg5.rotateAngleY = -angleY * 1.0F + angleYOffset;
+		this.leg6.rotateAngleY = angleY * 1.0F - angleYOffset;
+		this.leg7.rotateAngleY = -angleY * 2.0F + angleYOffset;
+		this.leg8.rotateAngleY = angleY * 2.0F - angleYOffset;
+
+		float frontSetXY = -(MathHelper.cos(swingProgress * 0.6662F * 2.0F + 0.0F) * 0.4F) * swingProgressPrevious;
+		float frontSetZ = Math.abs(MathHelper.sin(swingProgress * 0.6662F + 0.0F) * 0.4F) * swingProgressPrevious;
+		this.leg1.rotateAngleX += frontSetXY;
+		this.leg2.rotateAngleY += -frontSetXY;
+		this.leg1.rotateAngleZ += frontSetZ;
+		this.leg2.rotateAngleZ += -frontSetZ;
+
+		float midFrontSetXY = -(MathHelper.cos(swingProgress * 0.6662F * 2.0F + (float) Math.PI) * 0.4F) * swingProgressPrevious;
+		float midFrontSetZ = Math.abs(MathHelper.sin(swingProgress * 0.6662F + (float) Math.PI) * 0.4F) * swingProgressPrevious;
+		this.leg3.rotateAngleY += midFrontSetXY;
+		this.leg4.rotateAngleY += -midFrontSetXY;
+		this.leg3.rotateAngleZ += midFrontSetZ;
+		this.leg4.rotateAngleZ += -midFrontSetZ;
+
+		float midBackSetXY = -(MathHelper.cos(swingProgress * 0.6662F * 2.0F + ((float) Math.PI / 2F)) * 0.4F) * swingProgressPrevious;
+		float midBackSetZ = Math.abs(MathHelper.sin(swingProgress * 0.6662F + ((float) Math.PI / 2F)) * 0.4F) * swingProgressPrevious;
+		this.leg5.rotateAngleY += midBackSetXY;
+		this.leg6.rotateAngleY += -midBackSetXY;
+		this.leg5.rotateAngleZ += midBackSetZ;
+		this.leg6.rotateAngleZ += -midBackSetZ;
+
+		float backSetXY = -(MathHelper.cos(swingProgress * 0.6662F * 2.0F + ((float) Math.PI * 3F / 2F)) * 0.4F) * swingProgressPrevious;
+		float backSetZ = Math.abs(MathHelper.sin(swingProgress * 0.6662F + ((float) Math.PI * 3F / 2F)) * 0.4F) * swingProgressPrevious;
+		this.leg7.rotateAngleY += backSetXY;
+		this.leg8.rotateAngleY += -backSetXY;
+		this.leg7.rotateAngleZ += backSetZ;
+		this.leg8.rotateAngleZ += -backSetZ;
+
+		if (!entity.isCollidedVertically)
+		{
+			rotationToGround = headRotationPitch;
+		}
+		else if (rotationToGround > 0 && rotationToGround < 180F)
+		{
+			rotationToGround -= 10F;
+		}
+		else if (rotationToGround < 0)
+		{
+			rotationToGround += 10F;
+		}
+
+		if (!(rotationToGround >= -10F && rotationToGround <= 10F))
+		{
+			GL11.glRotatef(rotationToGround, 1F, 0F, 0F);
+		}
 	}
 
 	@Override
-	public void setLivingAnimations(EntityLivingBase par1Entity, float var2, float var3, float var4)
+	public void setLivingAnimations(EntityLivingBase entity, float var2, float var3, float var4)
 	{
 		this.tailMain.rotationPointY = 15.0F;
 		this.tailMain.rotationPointZ = 8.0F;
-		this.tailMain.rotateAngleX = 0.9F;
-
-		if (par1Entity.isSneaking())
-		{
-			++this.tailMain.rotationPointY;
-			this.tailMain.rotateAngleX = ((float) Math.PI / 2F);
-		}
+		this.tailMain.rotateAngleX = 1.1F;
 
 		float f = (0.5F + var3) * 0.125F;
-		float f1 = var2 * 0.6662F + this.progress * 0.6662F;
+		float f1 = var2 * 0.6662F + (Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() / (entity != null && !entity.isSprinting() ? 4.978873F : 0.978873F)) * 0.6662F;
 		this.tailMain.rotateAngleY = 0.0F;
 		this.tailMain.rotateAngleX += MathHelper.sin(f1) * f;
 
-		for (int j = 0; j < this.tailChild.length; ++j)
+		for (int x = 0; x < this.tailBoxes.length; ++x)
 		{
-			this.tailChild[j].rotateAngleZ = 0.0F;
-			this.tailChild[j].rotateAngleX = 0.05F;
-			this.tailChild[j].rotateAngleX += MathHelper.sin(f1 - (j + 1) * 0.35F) * f;
+			this.tailBoxes[x].rotateAngleZ = 0.0F;
+			this.tailBoxes[x].rotateAngleX = 0.05F;
+			this.tailBoxes[x].rotateAngleX += MathHelper.sin(f1 - (x + 1) * 0.35F) * f;
 		}
 	}
 }
