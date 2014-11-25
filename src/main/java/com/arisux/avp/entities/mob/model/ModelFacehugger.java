@@ -209,17 +209,20 @@ public class ModelFacehugger extends ModelBase
 		this.leg7.rotateAngleZ += backSetZ;
 		this.leg8.rotateAngleZ += -backSetZ;
 
-		if (!entity.isCollidedVertically)
+		if (entity != null)
 		{
-			rotationToGround = headRotationPitch;
-		}
-		else if (rotationToGround > 0 && rotationToGround < 180F)
-		{
-			rotationToGround -= 10F;
-		}
-		else if (rotationToGround < 0)
-		{
-			rotationToGround += 10F;
+			if (!entity.isCollidedVertically)
+			{
+				rotationToGround = headRotationPitch;
+			}
+			else if (rotationToGround > 0 && rotationToGround < 180F)
+			{
+				rotationToGround -= 10F;
+			}
+			else if (rotationToGround < 0)
+			{
+				rotationToGround += 10F;
+			}
 		}
 
 		if (!(rotationToGround >= -10F && rotationToGround <= 10F))
