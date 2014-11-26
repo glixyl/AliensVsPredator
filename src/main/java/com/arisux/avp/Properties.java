@@ -66,6 +66,7 @@ public class Properties
 	public final String TEXTURE_PATH_GENERATOR = DOMAIN + "textures/tile/generator.png";
 	public final String TEXTURE_PATH_CABLE = DOMAIN + "textures/tile/cable.png";
 	public final String TEXTURE_PATH_NETWORKLIGHT = DOMAIN + "textures/tile/networklight.png";
+	public final String TEXTURE_PATH_SERVER = DOMAIN + "textures/tile/server.png";
 	public final String TEXTURE_PATH_BLASTDOOR = DOMAIN + "textures/tile/blastdoor.png";
 	public final String TEXTURE_PATH_WORKLIGHT = DOMAIN + "textures/tile/worklight.png";
 	public final String TEXTURE_PATH_CHESTBUSTER = DOMAIN + "textures/mob/chestbuster.png";

@@ -110,6 +110,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWorklight.class, new RenderWorklight());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityNetworkCable.class, new RenderNetworkCable());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityNetworkLight.class, new RenderNetworkLight());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityServer.class, new RenderServer());
 	}
 	
 	public void registerSpecialBlockRenderers()
