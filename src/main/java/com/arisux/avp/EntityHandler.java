@@ -84,6 +84,7 @@ public class EntityHandler implements IInitializable
 		EntityRegistry.addSpawn(EntityChestburster.class, 6, 1, 2, EnumCreatureType.creature, new BiomeGenBase[] { BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.plains, BiomeGenBase.jungle, BiomeGenBase.jungleHills });
 	}
 
+	@SuppressWarnings("deprecation")
 	private void registerDeathMessages()
 	{
 		LanguageRegistry.instance().addStringLocalization("death.attack.bullet", "en_US", "%1$s was shot by %2$s.");
