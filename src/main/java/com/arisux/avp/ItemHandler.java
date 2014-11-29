@@ -124,6 +124,7 @@ public class ItemHandler extends IBHandler implements IInitializable
 		registerItem(itemSummonerChestburster, "summon.chestburster");
 		registerItem(itemSummonerYautja, "summon.yautja");
 		registerItem(itemSummonerMarine, "summon.marine");
+		registerItem(itemSummonerCombatSynthetic, "summon.synthetic.combat");
 		registerItem(itemSummonerAqua, "summon.aqua");
 		registerItem(itemSummonerPredalien, "summon.predalien");
 		registerItem(pressureMask, "helm.pressure");
