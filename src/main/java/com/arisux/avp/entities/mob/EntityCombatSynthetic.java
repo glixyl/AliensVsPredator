@@ -5,42 +5,26 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+import com.arisux.airi.engine.WorldEngine.Entities.Players.Inventories;
 import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.ItemHandler;
 import com.arisux.avp.entities.EntityBullet;
 
-public class EntityMarine extends EntityCreature implements IMob, IRangedAttackMob
+public class EntityCombatSynthetic extends EntityCreature implements IMob, IRangedAttackMob
 {
 	private EntityAIArrowAttack aiArrowAttack = new EntityAIArrowAttack(this, 0.8D, 20, 60, 15.0F);
 
-	public enum MarineTypes
-	{
-		M4(0), AK47(1), M4A1(2), SNIPER(3), M56SG(4);
-
-		private int value;
-
-		private MarineTypes(int value)
-		{
-			this.value = value;
-		}
-
-		public int getValue()
-		{
-			return value;
-		}
-	}
-
-	private MarineTypes marineType;
-
-	public EntityMarine(World par1World)
+	public EntityCombatSynthetic(World par1World)
 	{
 		super(par1World);
-		this.experienceValue = 5;
+		this.experienceValue = 40;
 		this.dataWatcher.addObject(18, new Integer(15));
 		this.dataWatcher.addObject(17, "");
 		this.dataWatcher.addObject(16, Byte.valueOf((byte) 0));
@@ -54,19 +38,13 @@ public class EntityMarine extends EntityCreature implements IMob, IRangedAttackM
 		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityMob.class, 0, true));
 		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityYautja.class, 0, true));
 		this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
-		this.marineType = MarineTypes.values()[this.rand.nextInt(5)];
-	}
-	
-	public MarineTypes getMarineType()
-	{
-		return marineType;
 	}
 
 	@Override
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(80.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.4499999761581421D);
 	}
 
@@ -75,40 +53,8 @@ public class EntityMarine extends EntityCreature implements IMob, IRangedAttackM
 	{
 		super.dropFewItems(par1, par2);
 
-		switch (getMarineType())
-		{
-			case M4:
-				if (rand.nextInt(3) == 1)
-				{
-					this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.itemAmmoAC), 1);
-				}
-				break;
-			case AK47:
-				if (rand.nextInt(3) == 1)
-				{
-					this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.itemAmmoAR), 1);
-				}
-				break;
-			case M4A1:
-				if (rand.nextInt(3) == 1)
-				{
-					this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.itemAmmoPistol), 1);
-				}
-				break;
-			case SNIPER:
-				if (rand.nextInt(3) == 1)
-				{
-					this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.itemAmmoSMG), 1);
-				}
-				break;
-			case M56SG:
-				if (rand.nextInt(3) == 1)
-				{
-					this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.itemAmmoSniper), 1);
-				}
-				break;
-		}
-
+		ItemHandler items = AliensVsPredator.instance().items;
+		this.entityDropItem(Inventories.randomItemStackFromArray(new Item[]{items.itemAmmoAC, items.itemAmmoAR, items.itemAmmoPistol, items.itemAmmoSMG}, rand), rand.nextInt(6));
 	}
 
 	@Override
@@ -144,7 +90,7 @@ public class EntityMarine extends EntityCreature implements IMob, IRangedAttackM
 	@Override
 	public int getTotalArmorValue()
 	{
-		return 10;
+		return 20;
 	}
 
 	@Override
@@ -158,7 +104,9 @@ public class EntityMarine extends EntityCreature implements IMob, IRangedAttackM
 		if (targetEntity instanceof EntityMob && !worldObj.isRemote)
 		{
 			if (targetEntity instanceof EntityXenomorph)
+			{
 				targetEntity.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(1F);
+			}
 
 			this.attackEntityWithRangedAttack(targetEntity, 1F);
 			this.setAttackTarget(targetEntity);
@@ -166,11 +114,11 @@ public class EntityMarine extends EntityCreature implements IMob, IRangedAttackM
 	}
 
 	@Override
-	public boolean attackEntityFrom(DamageSource damageSource, float damage)
+	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
 	{
-		if (super.attackEntityFrom(damageSource, damage))
+		if (super.attackEntityFrom(par1DamageSource, par2))
 		{
-			Entity damageSourceEntity = damageSource.getEntity();
+			Entity damageSourceEntity = par1DamageSource.getEntity();
 
 			if (this.riddenByEntity != damageSourceEntity && this.ridingEntity != damageSourceEntity)
 			{
@@ -193,47 +141,49 @@ public class EntityMarine extends EntityCreature implements IMob, IRangedAttackM
 	}
 
 	@Override
-	protected void attackEntity(Entity entity, float damage)
+	protected void attackEntity(Entity entity, float f)
 	{
-		if (this.attackTime <= 0 && damage < 2.0F && entity.boundingBox.maxY > this.boundingBox.minY && entity.boundingBox.minY < this.boundingBox.maxY)
+		if (this.attackTime <= 0 && f < 2.0F && entity.boundingBox.maxY > this.boundingBox.minY && entity.boundingBox.minY < this.boundingBox.maxY)
 		{
 			this.attackTime = 20;
 			this.attackEntityAsMob(entity);
 		}
 
-		if (this.getBrightness(1.0F) > 0.5F && this.rand.nextInt(100) == 0)
+		float f1 = this.getBrightness(1.0F);
+
+		if (f1 > 0.5F && this.rand.nextInt(100) == 0)
 		{
 			this.entityToAttack = null;
 		}
 		else
 		{
-			if (damage > 2.0F && damage < 6.0F && this.rand.nextInt(10) == 0)
+			if (f > 2.0F && f < 6.0F && this.rand.nextInt(10) == 0)
 			{
 				if (this.onGround)
 				{
-					double d = entity.posX - this.posX;
-					double d1 = entity.posZ - this.posZ;
-					float f2 = MathHelper.sqrt_double(d * d + d1 * d1);
-					this.motionX = d / f2 * 0.5D * 0.800000011920929D + this.motionX * 0.20000000298023224D;
-					this.motionZ = d1 / f2 * 0.5D * 0.800000011920929D + this.motionZ * 0.20000000298023224D;
+					double rX = entity.posX - this.posX;
+					double rZ = entity.posZ - this.posZ;
+					float sq = MathHelper.sqrt_double(rX * rX + rZ * rZ);
+					this.motionX = rX / sq * 0.5D * 0.800000011920929D + this.motionX * 0.20000000298023224D;
+					this.motionZ = rZ / sq * 0.5D * 0.800000011920929D + this.motionZ * 0.20000000298023224D;
 					this.motionY = 0.4000000059604645D;
 				}
 			}
 			else
 			{
-				super.attackEntity(entity, damage);
+				super.attackEntity(entity, f);
 			}
 		}
 	}
 
 	@Override
-	public boolean attackEntityAsMob(Entity targetEntity)
+	public boolean attackEntityAsMob(Entity entity)
 	{
-		int damage = 4;
+		int damage = 6;
 
 		if (this.isPotionActive(Potion.damageBoost))
 		{
-			damage += 3 << this.getActivePotionEffect(Potion.damageBoost).getAmplifier();
+			damage += 10 << this.getActivePotionEffect(Potion.damageBoost).getAmplifier();
 		}
 
 		if (this.isPotionActive(Potion.weakness))
@@ -241,7 +191,7 @@ public class EntityMarine extends EntityCreature implements IMob, IRangedAttackM
 			damage -= 2 << this.getActivePotionEffect(Potion.weakness).getAmplifier();
 		}
 
-		return targetEntity.attackEntityFrom(DamageSource.causeMobDamage(this), damage);
+		return entity.attackEntityFrom(DamageSource.causeMobDamage(this), damage);
 	}
 
 	@Override
@@ -251,13 +201,13 @@ public class EntityMarine extends EntityCreature implements IMob, IRangedAttackM
 	}
 
 	@Override
-	public void attackEntityWithRangedAttack(EntityLivingBase targetEntity, float f)
+	public void attackEntityWithRangedAttack(EntityLivingBase entitytoAttack, float f)
 	{
-		if (targetEntity instanceof EntityMob && !targetEntity.isDead)
+		if (entitytoAttack instanceof EntityMob && !entitytoAttack.isDead)
 		{
-			this.getLookHelper().setLookPosition(targetEntity.posX, targetEntity.posY + targetEntity.getEyeHeight(), targetEntity.posZ, 10.0F, this.getVerticalFaceSpeed());
+			this.getLookHelper().setLookPosition(entitytoAttack.posX, entitytoAttack.posY + entitytoAttack.getEyeHeight(), entitytoAttack.posZ, 10.0F, this.getVerticalFaceSpeed());
 
-			if (this.canEntityBeSeen(targetEntity))
+			if (this.canEntityBeSeen(entitytoAttack))
 			{
 				this.worldObj.spawnEntityInWorld(new EntityBullet(this.worldObj, this, 1.6F, 0.25D));
 			}

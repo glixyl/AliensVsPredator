@@ -89,8 +89,9 @@ public class Properties
 	public final String TEXTURE_PATH_YAUTJA = DOMAIN + "textures/mob/yautja.png";
 	public final String TEXTURE_PATH_SPITTER = DOMAIN + "textures/mob/spitter.png";
 	public final String TEXTURE_PATH_SPITTER_GLOW = DOMAIN + "textures/mob/spitter_glow.png";
-	public final String TEXTURE_PATH_HIVE_NODE = DOMAIN + "textures/tile/node.png";
 	public final String TEXTURE_PATH_CRUSHER = DOMAIN + "textures/mob/crusher.png";
+	public final String TEXTURE_PATH_COMBAT_SYNTHETIC = DOMAIN + "textures/mob/combat_synthetic.png";
+	public final String TEXTURE_PATH_HIVE_NODE = DOMAIN + "textures/tile/node.png";
 	public final String TEXTURE_PATH_GUI_BASIC = DOMAIN + "textures/gui/background.png";
 	public final String TEXTURE_PATH_GUI_TURRET = DOMAIN + "textures/gui/turret.png";
 	public final String TEXTURE_PATH_GUI_WRISTBRACER = DOMAIN + "textures/gui/wristbracer.png";

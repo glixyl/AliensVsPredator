@@ -56,6 +56,7 @@ public class EntityHandler implements IInitializable
 		EntityRegistry.registerGlobalEntityID(EntityRoyalFacehugger.class, "RoyalFacehugger", AliensVsPredator.instance().settings.entityList.get("ROYAL_FACEHUGGER"), 0x333333, 0xFF0000);
 		EntityRegistry.registerGlobalEntityID(EntityAqua.class, "AquaticAlien", AliensVsPredator.instance().settings.entityList.get("AQUA"));
 		EntityRegistry.registerGlobalEntityID(EntityPredalien.class, "Predalien", AliensVsPredator.instance().settings.entityList.get("PREDALIEN"));
+		EntityRegistry.registerGlobalEntityID(EntityCombatSynthetic.class, "CombatSynthetic", AliensVsPredator.instance().settings.entityList.get("COMBAT_SYNTHETIC"), 0x333333, 0xFF0000);
 	}
 
 	private void registerInstanceEntities()

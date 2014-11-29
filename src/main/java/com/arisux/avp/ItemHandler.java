@@ -101,7 +101,8 @@ public class ItemHandler extends IBHandler implements IInitializable
 			itemSummonerOvamorph = (new ItemEntitySummoner(this.getModController().domain(), EntityOvamorph.class)),
 			itemSummonerRoyalFacehugger = (new ItemEntitySummoner(this.getModController().domain(), EntityRoyalFacehugger.class)),
 			itemSummonerYautja = (new ItemEntitySummoner(this.getModController().domain(), EntityYautja.class)),
-			itemSummonerPredalien = (new ItemEntitySummoner(this.getModController().domain(), EntityPredalien.class));
+			itemSummonerPredalien = (new ItemEntitySummoner(this.getModController().domain(), EntityPredalien.class)),
+			itemSummonerCombatSynthetic = (new ItemEntitySummoner(this.getModController().domain(), EntityCombatSynthetic.class));
 
 	public ItemHandler()
 	{
