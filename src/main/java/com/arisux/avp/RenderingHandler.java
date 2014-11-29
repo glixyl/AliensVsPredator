@@ -1,7 +1,6 @@
 package com.arisux.avp;
 
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -54,7 +53,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpitter.class, new RenderSpitter(new ModelSpitter(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityCrusher.class, new RenderXenomorph(new ModelCrusher(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityMarine.class, new RenderMarine(new ModelBiped(), 0.5F));
-		RenderingRegistry.registerEntityRenderingHandler(EntityCombatSynthetic.class, new RenderBiped(new ModelBiped(), 0.5F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityCombatSynthetic.class, new RenderCombatSynthetic(new ModelBiped(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityYautja.class, new RenderYautja(new ModelYautja(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityQueen.class, new RenderQueen(new ModelQueen(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityFacehugger.class, new RenderFacehugger(new ModelFacehugger(), 0.5F));
