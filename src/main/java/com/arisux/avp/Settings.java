@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.HashMap;
 
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.config.Property;
 
 import com.arisux.airi.AIRI;
 
@@ -19,6 +20,7 @@ public class Settings
 
 	private boolean explosions, updaterEnabled, debugToolsEnabled;
 	private String updateStringUrl;
+	private int entityListIDs = 101;
 
 	@EventHandler
 	public void preInitialize(FMLPreInitializationEvent evt)
@@ -26,31 +28,51 @@ public class Settings
 		AIRI.remappingApi().registerRemappedMod("AIRI", "avp", "com.arisux.avp.AliensVsPredator");
 		AIRI.remappingApi().registerRemappedMod("AliensVsPredator", "avp", "com.arisux.avp.AliensVsPredator");
 		
-		config = new Configuration(new File(evt.getModConfigurationDirectory(), "AVP.cfg"));
+		File configFile = new File(evt.getModConfigurationDirectory(), "AliensVsPredator.cfg");
+		config = new Configuration(configFile);
 
 		try
 		{
-			config.addCustomCategoryComment(CATEGORY_OTHER, "Configuration for spawn rates of the mod's mobs");
+			Property versionProperty = config.get(CATEGORY_OTHER, "VERSION", AliensVsPredator.instance().container().getVersion());
+			
+			if (!versionProperty.getString().equalsIgnoreCase(AliensVsPredator.instance().container().getVersion()))
+			{
+				if (configFile.exists())
+				{
+					configFile.renameTo(new File(configFile.getName().replace(".cfg", ".cfg.bak")));
+					this.preInitialize(evt);
+//					try
+//					{
+//						config = Configuration.class.getConstructor(File.class).newInstance(new Object[] { configFile });
+//					}
+//					catch (Exception e)
+//					{
+//						AIRI.logger.bug("Could not construct a new configuration file.");
+//						e.printStackTrace();
+//					}
+				}
+			}
+			
 			config.addCustomCategoryComment(CATEGORY_IDS, "Configuration for the mod's entity IDs");
 			config.addCustomCategoryComment(CATEGORY_IDS, "WARNING: ONLY MODIFY THIS IF YOU KNOW WHAT YOU ARE DOING, YOU CAN BREAK WORLD SAVES AND/OR SERVERS.");
 			config.addCustomCategoryComment(CATEGORY_OTHER, "Other mod configuration options");
-			config.addCustomCategoryComment(CATEGORY_OTHER, "WARNING: WHEN THE VANILLA SPAWN SYSTEM IS IN USE, THE SPAWN RATES ARE NOT CONFIGURABLE VIA CONFIG!");
 			config.load();
 
-			entityList.put("DRONE", config.get(CATEGORY_IDS, "DRONE", 102).getInt());
-			entityList.put("WARRIOR", config.get(CATEGORY_IDS, "WARRIOR", 103).getInt());
-			entityList.put("SPITTER", config.get(CATEGORY_IDS, "SPITTER", 104).getInt());
-			entityList.put("CRUSHER", config.get(CATEGORY_IDS, "CRUSHER", 105).getInt());
-			entityList.put("PRAETORIAN", config.get(CATEGORY_IDS, "PRAETORIAN", 106).getInt());
-			entityList.put("QUEEN", config.get(CATEGORY_IDS, "QUEEN", 107).getInt());
-			entityList.put("OVAMORPH", config.get(CATEGORY_IDS, "OVAMORPH", 108).getInt());
-			entityList.put("FACEHUGGER", config.get(CATEGORY_IDS, "FACEHUGGER", 109).getInt());
-			entityList.put("CHESTBUSTER", config.get(CATEGORY_IDS, "CHESTBUSTER", 110).getInt());
-			entityList.put("ROYAL_FACEHUGGER", config.get(CATEGORY_IDS, "ROYAL_FACEHUGGER", 111).getInt());
-			entityList.put("MARINE", config.get(CATEGORY_IDS, "MARINE", 112).getInt());
-			entityList.put("YAUTJA", config.get(CATEGORY_IDS, "YAUTJA", 113).getInt());
-			entityList.put("PREDALIEN", config.get(CATEGORY_IDS, "PREDALIEN", 114).getInt());
-			entityList.put("AQUA", config.get(CATEGORY_IDS, "AQUA", 115).getInt());
+			entityList.put("DRONE", config.get(CATEGORY_IDS, "DRONE", entityListIDs++).getInt());
+			entityList.put("WARRIOR", config.get(CATEGORY_IDS, "WARRIOR", entityListIDs++).getInt());
+			entityList.put("SPITTER", config.get(CATEGORY_IDS, "SPITTER", entityListIDs++).getInt());
+			entityList.put("CRUSHER", config.get(CATEGORY_IDS, "CRUSHER", entityListIDs++).getInt());
+			entityList.put("PRAETORIAN", config.get(CATEGORY_IDS, "PRAETORIAN", entityListIDs++).getInt());
+			entityList.put("QUEEN", config.get(CATEGORY_IDS, "QUEEN", entityListIDs++).getInt());
+			entityList.put("OVAMORPH", config.get(CATEGORY_IDS, "OVAMORPH", entityListIDs++).getInt());
+			entityList.put("FACEHUGGER", config.get(CATEGORY_IDS, "FACEHUGGER", entityListIDs++).getInt());
+			entityList.put("CHESTBUSTER", config.get(CATEGORY_IDS, "CHESTBUSTER", entityListIDs++).getInt());
+			entityList.put("ROYAL_FACEHUGGER", config.get(CATEGORY_IDS, "ROYAL_FACEHUGGER", entityListIDs++).getInt());
+			entityList.put("MARINE", config.get(CATEGORY_IDS, "MARINE", entityListIDs++).getInt());
+			entityList.put("YAUTJA", config.get(CATEGORY_IDS, "YAUTJA", entityListIDs++).getInt());
+			entityList.put("PREDALIEN", config.get(CATEGORY_IDS, "PREDALIEN", entityListIDs++).getInt());
+			entityList.put("AQUA", config.get(CATEGORY_IDS, "AQUA", entityListIDs++).getInt());
+			entityList.put("COMBAT_SYNTHETIC", config.get(CATEGORY_IDS, "COMBAT_SYNTHETIC", entityListIDs++).getInt());
 
 			entityList.put("CELTIC_SPEAR", config.get(CATEGORY_IDS, "CELTIC_SPEAR", 1512).getInt());
 			entityList.put("PROXIMITY_MINE", config.get(CATEGORY_IDS, "PROXIMITY_MINE", 1513).getInt());
