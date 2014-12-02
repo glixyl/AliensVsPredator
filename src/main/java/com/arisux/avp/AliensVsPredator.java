@@ -45,7 +45,7 @@ public class AliensVsPredator extends ModController
 	@Override
 	public CreativeTab getCreativeTab()
 	{
-		return this.tab == null ? this.tab = new CreativeTab() : this.tab;
+		return CreativeTab.instance;
 	}
 
 	@Override
