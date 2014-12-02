@@ -185,19 +185,13 @@ public class EntityYautja extends EntityMob implements IMob
 		return AliensVsPredator.properties().SOUND_YAUTJA_DEATH;
 	}
 
-	/**
-	 * Drop 0-2 items of this living's type. @param par1 - Whether this
-	 * entity has recently been hit by a player. @param par2 - Level of
-	 * Looting used to kill this mob.
-	 */
 	@Override
 	protected void dropFewItems(boolean flag, int i)
 	{
 		if ((new Random()).nextInt(6) == 1)
-			this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.itemEnergy), 1);
-
-		if ((new Random()).nextInt(6) == 1)
+		{
 			this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.itemSpear), 1);
+		}
 	}
 
 	@Override
@@ -207,12 +201,10 @@ public class EntityYautja extends EntityMob implements IMob
 		this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.plateTitanium), 1);
 		this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.legsTitanium), 1);
 		this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.bootsTitanium), 1);
+		this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.itemWristBlade), 1);
+		this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.itemPlasmaCaster), 1);
 	}
 
-	/**
-	 * Determines if an entity can be despawned, used on idle far away
-	 * entities
-	 */
 	@Override
 	public boolean canDespawn()
 	{
