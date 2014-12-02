@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 
 import com.arisux.avp.AliensVsPredator;
 
-public class EntityYautja extends EntityMob implements IMob
+public class EntityYautja extends EntityMob
 {
 	public EntityYautja(World world)
 	{
