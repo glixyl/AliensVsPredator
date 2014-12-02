@@ -11,7 +11,7 @@ public class Properties
 	public final ModContainer CONTAINER = AliensVsPredator.instance().container();
 	public final ModMetadata METADATA = CONTAINER.getMetadata();
 	public final String DOMAIN = METADATA.modId + ":";
-	public final String PUBLIC_SERVER_ADDRESS = "http://arisux.com";
+	public final String PUBLIC_SERVER_ADDRESS = "http://arisux.x10.mx";
 	public final String LOCAL_SERVER_ADDRESS = "http://localhost:8080";
 	public final String SERVER_ADDRESS = ModEngine.isDevelopmentEnvironment() ? LOCAL_SERVER_ADDRESS : PUBLIC_SERVER_ADDRESS;
 	public final String URL_SUBMIT_FEEDBACK = SERVER_ADDRESS + "/page/beta/submit.php?user=%s&uuid=%s&info=%s";
