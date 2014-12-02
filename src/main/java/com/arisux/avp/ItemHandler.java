@@ -68,7 +68,6 @@ public class ItemHandler extends IBHandler implements IInitializable
 			itemAK47 = (new ItemFirearm(32, 0.6F, 3, 110, (ItemAmmo) itemAmmoAR, AliensVsPredator.properties().SOUND_WEAPON_GUNSHOT).disableIcon()).setFull3D(),
 			itemDoritos = (new ItemFood(8, true)).setAlwaysEdible(),
 			itemDoritosCoolRanch = (new ItemFood(8, true)).setAlwaysEdible(),
-			itemEnergy = (new HookedItem()).setDescription("A capsule full of plasma. For use with plasma casters."),
 			itemArtifactTech = (new HookedItem()).setDescription("An unknown piece of technology aquired from the yautja species."),
 			healthProbe = new HookedItem().disableIcon(),
 			itemProcessor = ((new HookedItem())),
@@ -168,7 +167,6 @@ public class ItemHandler extends IBHandler implements IInitializable
 		registerItem(hoeTitanium, "tool.celtic.hoe");
 		registerItem(axeTitanium, "tool.celtic.axe");
 		registerItem(pickaxeTitanium, "tool.celtic.pick");
-		registerItem(itemEnergy, "plasma.capsule");
 		registerItem(itemArtifactTech, "artifact.tech");
 		registerItem(itemDoritos, "food.doritos");
 		registerItem(itemDoritosCoolRanch, "food.doritos.coolranch");
