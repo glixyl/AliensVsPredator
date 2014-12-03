@@ -26,7 +26,7 @@ public class SniperRenderEvent
 				{
 					if (Mouse.isButtonDown(0) && mc.inGameHasFocus)
 					{
-						mc.gameSettings.setOptionFloatValue(GameSettings.Options.FOV, -1.0F);
+						mc.gameSettings.setOptionFloatValue(GameSettings.Options.FOV, 9F);
 					} else if (!Mouse.isButtonDown(0) && mc.inGameHasFocus)
 					{
 						mc.gameSettings.setOptionFloatValue(GameSettings.Options.FOV, defaultFOV);
