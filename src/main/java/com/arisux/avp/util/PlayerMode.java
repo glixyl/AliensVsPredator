@@ -12,13 +12,13 @@ import com.arisux.avp.entities.mob.render.*;
 public enum PlayerMode
 {
 	NORMAL(0, new PlayerModeLevelMapping[]{ 
-		new PlayerModeLevelMapping(0, null) 
+		new PlayerModeLevelMapping(1, new ModelTexMap(new ModelBiped(), RenderMarine.resourceLocation)) 
 	}),
 	MARINE(1, new PlayerModeLevelMapping[]{
-		new PlayerModeLevelMapping(0, new ModelTexMap(new ModelBiped(), RenderMarine.resourceLocation))
+		new PlayerModeLevelMapping(1, new ModelTexMap(new ModelBiped(), RenderMarine.resourceLocation))
 	}), 
 	PREDATOR(2, new PlayerModeLevelMapping[]{
-		new PlayerModeLevelMapping(0, new ModelTexMap(new ModelYautja(), RenderYautja.resourceLocation))
+		new PlayerModeLevelMapping(1, new ModelTexMap(new ModelYautja(), RenderYautja.resourceLocation))
 	}), 
 	XENOMORPH(3, new PlayerModeLevelMapping[]{
 		new PlayerModeLevelMapping(1, new ModelTexMap(new ModelOvamorph(), RenderOvamorph.resourceLocation)),
@@ -41,15 +41,29 @@ public enum PlayerMode
 	
 	public PlayerModeLevelMapping getLevelMappingForLevel(int level)
 	{
-		for (int x = 0; x < assignedLevels.length; x++)
+		for (int x = assignedLevels.length; x > 0; x--)
 		{
-			PlayerModeLevelMapping mapping = assignedLevels[x];
+			PlayerModeLevelMapping mapping = assignedLevels[x - 1];
 
 			if (mapping.isLevelReached(level))
 			{
+				System.out.println(level + "-" + assignedLevels.length + "-" + mapping);
 				return mapping;
 			}
 		}
+		return null;
+	}
+
+	public static PlayerMode get(int id)
+	{
+		for(PlayerMode mode : values())
+		{
+			if (mode.id == id)
+			{
+				return mode;
+			}
+		}
+		
 		return null;
 	}
 }

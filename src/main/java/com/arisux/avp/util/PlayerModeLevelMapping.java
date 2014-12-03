@@ -30,7 +30,7 @@ public class PlayerModeLevelMapping
 	
 	public boolean isLevelReached(int level)
 	{
-		return this.level >= level;
+		return level >= this.level;
 	}
 	
 	public int getLevel()

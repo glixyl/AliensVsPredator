@@ -39,6 +39,7 @@ public class NetworkHandler extends SimpleNetworkWrapper implements IInitializab
 		this.registerMessage(Side.CLIENT, PacketChannelClientUpdate.class);
 		this.registerMessage(Side.CLIENT, PacketAmmoClientUpdate.class);
 		this.registerMessage(Side.CLIENT, PacketTurretInit.class);
+		this.registerMessage(Side.CLIENT, PacketPlayerModeUpdate.class);
 	}
 
 	@SuppressWarnings("unchecked")

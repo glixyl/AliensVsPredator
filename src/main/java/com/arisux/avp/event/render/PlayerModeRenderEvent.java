@@ -1,6 +1,5 @@
 package com.arisux.avp.event.render;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RendererLivingEntity;
@@ -68,26 +67,12 @@ public class PlayerModeRenderEvent
 	@SubscribeEvent
 	public void renderEntityTick(RenderPlayerEvent.Pre event)
 	{
-		try
-		{
-			ExtendedEntityPlayer extendedPlayer = (ExtendedEntityPlayer) event.entityPlayer.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER);
-			
-			extendedPlayer.setPlayerMode(PlayerMode.XENOMORPH);
-			
-			if (event.entity != null && extendedPlayer.getPlayerMode() != PlayerMode.NORMAL)
-			{
-				renderLiving.doRender(event.entity, event.entity.posX, event.entity.posY, event.entity.posZ, event.entity.rotationYaw, event.partialRenderTick);
-				event.setCanceled(true);
-			}
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
+		ExtendedEntityPlayer extendedPlayer = (ExtendedEntityPlayer) event.entityPlayer.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER);
 
-	protected boolean func_110813_b(EntityLivingBase livingbase)
-	{
-		return Minecraft.isGuiEnabled() && livingbase != RenderManager.instance.livingPlayer && !livingbase.isInvisibleToPlayer(Minecraft.getMinecraft().thePlayer) && livingbase.riddenByEntity == null;
+		if (event.entity != null && extendedPlayer.getPlayerMode() != PlayerMode.NORMAL)
+		{
+			renderLiving.doRender(event.entity, event.entity.posX, event.entity.posY, event.entity.posZ, event.entity.rotationYaw, event.partialRenderTick);
+			event.setCanceled(true);
+		}
 	}
 }

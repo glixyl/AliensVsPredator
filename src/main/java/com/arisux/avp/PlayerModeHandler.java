@@ -8,9 +8,11 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerPickupXpEvent;
 
 import com.arisux.airi.engine.WorldEngine.Entities.Players;
+import com.arisux.airi.lib.util.ModelTexMap;
 import com.arisux.airi.lib.util.interfaces.IInitializable;
 import com.arisux.avp.entities.ExtendedEntityPlayer;
 import com.arisux.avp.util.PlayerMode;
+import com.arisux.avp.util.PlayerModeLevelMapping;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -85,14 +87,29 @@ public class PlayerModeHandler implements IInitializable
 	{
 		return isPlayerInMode(player, PlayerMode.XENOMORPH);
 	}
+	
+	public PlayerMode getPlayerModeForPlayer(EntityPlayer player)
+	{
+		return ((ExtendedEntityPlayer) player.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER)).getPlayerMode();
+	}
+	
+	public PlayerModeLevelMapping getLevelMappingForPlayer(EntityPlayer player)
+	{
+		return getPlayerModeForPlayer(player).getLevelMappingForLevel((int) Players.getXPLevel(player));
+	}
+	
+	public ModelTexMap getModelTexMapForPlayer(EntityPlayer player)
+	{
+		return getLevelMappingForPlayer(player).getModelTexMap();
+	}
 
 	public ModelBase getModelForPlayer(EntityPlayer player)
 	{
-		return ((ExtendedEntityPlayer) player.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER)).getPlayerMode().getLevelMappingForLevel((int) Players.getXPLevel(player)).getModelTexMap().modelBase;
+		return getModelTexMapForPlayer(player).modelBase;
 	}
 	
 	public ResourceLocation getResourceForPlayer(EntityPlayer player)
 	{
-		return ((ExtendedEntityPlayer) player.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER)).getPlayerMode().getLevelMappingForLevel((int) Players.getXPLevel(player)).getModelTexMap().resourceLocation;
+		return getModelTexMapForPlayer(player).resourceLocation;
 	}
 }
