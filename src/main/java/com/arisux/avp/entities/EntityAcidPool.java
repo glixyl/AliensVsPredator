@@ -94,7 +94,7 @@ public class EntityAcidPool extends EntityMob implements IMob
 		{
 			if (this.ticksExisted > 600)
 			{
-				// this.setDead();
+				 this.setDead();
 			}
 		}
 	}

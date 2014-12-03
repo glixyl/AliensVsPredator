@@ -181,9 +181,9 @@ public class EntityAcidSpit extends Entity implements IProjectile
 
 		++this.ticksInGround;
 
-		if (this.ticksInGround >= 200)
+		if (this.ticksInGround >= 400)
 		{
-			// this.setDead();
+			 this.setDead();
 		}
 
 		if (((this.prevPosX - this.posX) + (this.prevPosY - this.posY) + (this.prevPosZ - this.prevPosZ)) == 0)
