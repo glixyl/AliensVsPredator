@@ -1,8 +1,6 @@
 package com.arisux.avp.entities;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.*;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
@@ -12,7 +10,7 @@ import net.minecraft.world.World;
 import com.arisux.avp.damagesource.DamageSourceAcid;
 import com.arisux.avp.entities.ai.EntityAIMeltBlock;
 
-public class EntityAcidPool extends EntityMob implements IMob
+public class EntityAcidPool extends EntityCreature implements IMob
 {
 	public EntityAcidPool(World world)
 	{
@@ -41,7 +39,6 @@ public class EntityAcidPool extends EntityMob implements IMob
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0D);
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(2.0D);
 	}
 
 	@Override
