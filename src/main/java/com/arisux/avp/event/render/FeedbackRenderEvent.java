@@ -3,6 +3,8 @@ package com.arisux.avp.event.render;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiMainMenu;
 
+import org.lwjgl.opengl.GL11;
+
 import com.arisux.airi.AIRI;
 import com.arisux.airi.engine.GuiTypeLib.GuiCustomButton;
 import com.arisux.airi.engine.RenderEngine;
@@ -18,7 +20,7 @@ public class FeedbackRenderEvent
 	private Minecraft mc = Minecraft.getMinecraft();
 	public WindowSubmitFeedback window = new WindowSubmitFeedback();
 	public GuiCustomButton buttonFeedback = new GuiCustomButton(0, 0, 0, 60, 20, "Feedback", null);
-	
+
 	@SubscribeEvent
 	public void renderTick(RenderTickEvent event)
 	{
@@ -40,6 +42,18 @@ public class FeedbackRenderEvent
 				}
 			});
 			buttonFeedback.handleInput();
+
+			GL11.glPushMatrix();
+			{
+				String displayString = "AliensVsPredator BETA Build - Do not redistribute.";
+				GL11.glScalef(0.5F, 0.5F, 0.5F);
+				RenderEngine.drawString(displayString, 5, 5, 0xFFFF0000, false);
+				RenderEngine.drawString(displayString, 5, RenderEngine.scaledDisplayResolution().getScaledHeight() * 2 - 10, 0xFFFF0000, false);
+				RenderEngine.drawString(displayString, RenderEngine.scaledDisplayResolution().getScaledWidth() * 2 - RenderEngine.getStringRenderWidth(displayString) - 5, RenderEngine.scaledDisplayResolution().getScaledHeight() * 2 - 10, 0xFFFF0000, false);
+				RenderEngine.drawString(displayString, RenderEngine.scaledDisplayResolution().getScaledWidth() * 2 - RenderEngine.getStringRenderWidth(displayString) - 5, 5, 0xFFFF0000, false);
+				RenderEngine.drawString(displayString, RenderEngine.scaledDisplayResolution().getScaledWidth() - (RenderEngine.getStringRenderWidth(displayString) - 5) / 2, RenderEngine.scaledDisplayResolution().getScaledHeight() - 2, 0xFFFF0000, false);
+			}
+			GL11.glPopMatrix();
 		}
 	}
 }
