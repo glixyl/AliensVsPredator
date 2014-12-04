@@ -3,7 +3,7 @@ package com.arisux.avp.packets.server;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 
-import com.arisux.airi.engine.WorldEngine;
+import com.arisux.airi.lib.WorldUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.ExtendedEntityPlayer;
 import com.arisux.avp.packets.client.PacketChannelClientUpdate;
@@ -40,7 +40,7 @@ public class PacketChannelServerUpdate implements IMessage, IMessageHandler<Pack
 
 	@Override public PacketChannelServerUpdate onMessage(PacketChannelServerUpdate packet, MessageContext ctx)
 	{
-		EntityPlayer targetPlayer = WorldEngine.Entities.Players.getPlayerForUsername(ctx.getServerHandler().playerEntity.worldObj, packet.username);
+		EntityPlayer targetPlayer = WorldUtil.Entities.Players.getPlayerForUsername(ctx.getServerHandler().playerEntity.worldObj, packet.username);
 		
 		if (targetPlayer != null)
 		{

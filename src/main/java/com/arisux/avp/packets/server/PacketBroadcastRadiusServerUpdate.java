@@ -3,7 +3,7 @@ package com.arisux.avp.packets.server;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 
-import com.arisux.airi.engine.WorldEngine;
+import com.arisux.airi.lib.WorldUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.ExtendedEntityPlayer;
 import com.arisux.avp.packets.client.PacketBroadcastRadiusClientUpdate;
@@ -41,7 +41,7 @@ public class PacketBroadcastRadiusServerUpdate implements IMessage, IMessageHand
 
 	@Override public PacketBroadcastRadiusServerUpdate onMessage(PacketBroadcastRadiusServerUpdate packet, MessageContext ctx)
 	{
-		EntityPlayer targetPlayer = WorldEngine.Entities.Players.getPlayerForUsername(ctx.getServerHandler().playerEntity.worldObj, packet.username);
+		EntityPlayer targetPlayer = WorldUtil.Entities.Players.getPlayerForUsername(ctx.getServerHandler().playerEntity.worldObj, packet.username);
 		
 		if (targetPlayer != null)
 		{

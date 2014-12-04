@@ -6,8 +6,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentText;
 
-import com.arisux.airi.engine.WorldEngine;
-import com.arisux.airi.engine.WorldEngine.Entities.Players;
+import com.arisux.airi.lib.WorldUtil;
+import com.arisux.airi.lib.WorldUtil.Entities.Players;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.ExtendedEntityPlayer;
 import com.arisux.avp.packets.client.PacketPlayerModeUpdate;
@@ -30,7 +30,7 @@ public class CommandPlayerMode extends CommandBase
 	@Override
 	public void processCommand(ICommandSender commandSender, String[] args)
 	{
-		EntityPlayer player = WorldEngine.Entities.Players.getPlayerForCommandSender(commandSender);
+		EntityPlayer player = WorldUtil.Entities.Players.getPlayerForCommandSender(commandSender);
 		ExtendedEntityPlayer playerExtension = (ExtendedEntityPlayer) player.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER);
 		PlayerMode playerMode = PlayerMode.get(Integer.valueOf(args[0]));
 		

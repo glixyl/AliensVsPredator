@@ -8,7 +8,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import com.arisux.airi.engine.RenderEngine;
+import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 
 public class MotionTrackerDisplay
@@ -57,7 +57,7 @@ public class MotionTrackerDisplay
 		GL11.glTranslatef(64F, 0F, 0F);
 		this.drawPings(x, y);
 		GL11.glDisable(GL11.GL_BLEND);
-		RenderEngine.drawString(displayString, x - 9, y + 64, 0xFF005599, false);
+		RenderUtil.drawString(displayString, x - 9, y + 64, 0xFF005599, false);
 	}
 
 	private void drawPings(int x, int y)
@@ -88,9 +88,9 @@ public class MotionTrackerDisplay
 					GL11.glTranslated(0.0D, hypot, 0.0D);
 					GL11.glTranslatef(-32.0F, -37.0F, 0.0F);
 					GL11.glTranslated(0.0D, -hypot, 0.0D);
-					RenderEngine.bindTexture(resourcePing);
-					RenderEngine.glAntiAlias2D();
-					RenderEngine.drawQuad(x * 2, y * 2, 128, 128);
+					RenderUtil.bindTexture(resourcePing);
+					RenderUtil.glAntiAlias2D();
+					RenderUtil.drawQuad(x * 2, y * 2, 128, 128);
 				}
 				GL11.glPopMatrix();
 			}
@@ -110,23 +110,23 @@ public class MotionTrackerDisplay
 			GL11.glTranslatef(0.5F, 0.5F, 0.0F);
 			GL11.glRotatef(-this.direction, 0.0F, 0.0F, 1.0F);
 			GL11.glTranslatef(-0.5F, -0.5F, 0.0F);
-			RenderEngine.bindTexture(resourceBackground);
-			RenderEngine.glAntiAlias2D();
-			RenderEngine.drawQuad(x, y, 128, 76, 64, 64);
+			RenderUtil.bindTexture(resourceBackground);
+			RenderUtil.glAntiAlias2D();
+			RenderUtil.drawQuad(x, y, 128, 76, 64, 64);
 
 			if (resource != null && shouldPing)
 			{
-				RenderEngine.bindTexture(resource);
-				RenderEngine.glAntiAlias2D();
-				RenderEngine.drawQuad(x, y, 128, 76, 64, 64);
+				RenderUtil.bindTexture(resource);
+				RenderUtil.glAntiAlias2D();
+				RenderUtil.drawQuad(x, y, 128, 76, 64, 64);
 			}
 		}
 		GL11.glPopMatrix();
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 
-		RenderEngine.bindTexture(resourceForeground);
-		RenderEngine.glAntiAlias2D();
-		RenderEngine.drawQuad(x, y, 128, 128, 64, 64);
+		RenderUtil.bindTexture(resourceForeground);
+		RenderUtil.glAntiAlias2D();
+		RenderUtil.drawQuad(x, y, 128, 128, 64, 64);
 	}
 
 	@SuppressWarnings("unchecked")

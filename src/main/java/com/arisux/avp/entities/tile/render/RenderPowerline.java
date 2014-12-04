@@ -6,7 +6,7 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
-import com.arisux.airi.engine.RenderEngine;
+import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.TileEntityPowerline;
 import com.arisux.avp.entities.tile.model.ModelCable;
@@ -39,12 +39,12 @@ public class RenderPowerline extends TileEntitySpecialRenderer
 				{
 					float scale = 0.02F;
 					glScalef(scale, scale, scale);
-					RenderEngine.glDisableLight();
-					RenderEngine.drawString(((float) tile.getVoltage()) + "V", -20, 30, tile.getVoltage() <= 0 ? 0xFFFF0000 : 0xFF00FF00);
+					RenderUtil.glDisableLight();
+					RenderUtil.drawString(((float) tile.getVoltage()) + "V", -20, 30, tile.getVoltage() <= 0 ? 0xFFFF0000 : 0xFF00FF00);
 					scale = 0.5F;
 					glScalef(scale, scale, scale);
-					RenderEngine.drawString((tile + "").replace(tile.getClass().getName(), ""), -20, 80, 0xFF00AAFF);
-					RenderEngine.glEnableLight();
+					RenderUtil.drawString((tile + "").replace(tile.getClass().getName(), ""), -20, 80, 0xFF00AAFF);
+					RenderUtil.glEnableLight();
 				}
 			}
 		}

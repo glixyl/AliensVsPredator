@@ -8,7 +8,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import com.arisux.airi.engine.RenderEngine;
+import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.entities.EntityBulletTile;
 
 public class RenderBulletTile extends Render
@@ -23,7 +23,7 @@ public class RenderBulletTile extends Render
 			GL11.glTranslatef((float) d, (float) d1, (float) d2);
 			float scale = 0.05F;
 			GL11.glScalef(scale, scale, scale);
-			RenderEngine.drawString("<BULLET>", 0, 0, 0xFFFFFFFF);
+			RenderUtil.drawString("<BULLET>", 0, 0, 0xFFFFFFFF);
 		}
 		GL11.glPopMatrix();
 	}
@@ -43,16 +43,17 @@ public class RenderBulletTile extends Render
 	private void lightingHelper(EntityBulletTile entity, float f, float f1)
 	{
 		int i = MathHelper.floor_double(entity.posX);
-		int j = MathHelper.floor_double(entity.posY + (double) (f1 / 16.0F));
+		int j = MathHelper.floor_double(entity.posY + f1 / 16.0F);
 		int k = MathHelper.floor_double(entity.posZ);
 		this.renderManager.worldObj.getLightBrightnessForSkyBlocks(i, j, k, 0);
 		int k1 = this.renderManager.worldObj.getLightBrightnessForSkyBlocks(i, j, k, 0);
 		int l1 = k1 % 65536;
 		int i2 = k1 / 65536;
-		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) l1, (float) i2);
+		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, l1, i2);
 		GL11.glColor3f(1.0F, 1.0F, 1.0F);
 	}
 
+	@Override
 	protected ResourceLocation getEntityTexture(Entity entity)
 	{
 		return null;

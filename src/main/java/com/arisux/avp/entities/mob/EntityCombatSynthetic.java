@@ -12,7 +12,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import com.arisux.airi.engine.WorldEngine.Entities.Players.Inventories;
+import com.arisux.airi.lib.WorldUtil.Entities.Players.Inventories;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.ItemHandler;
 import com.arisux.avp.entities.EntityBullet;

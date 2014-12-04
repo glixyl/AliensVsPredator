@@ -5,7 +5,7 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
-import com.arisux.airi.engine.RenderEngine;
+import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.TileEntityServer;
 import com.arisux.avp.entities.tile.model.ModelServer;
@@ -31,9 +31,9 @@ public class RenderServer extends TileEntitySpecialRenderer
 
 			float scale = 0.02F;
 			glScalef(scale, scale, scale);
-			RenderEngine.glDisableLight();
-			RenderEngine.drawString(tile.getVoltage() + "V", -20, 30, 0xFF00FF00);
-			RenderEngine.glEnableLight();
+			RenderUtil.glDisableLight();
+			RenderUtil.drawString(tile.getVoltage() + "V", -20, 30, 0xFF00FF00);
+			RenderUtil.glEnableLight();
 		}
 		glPopMatrix();
 	}

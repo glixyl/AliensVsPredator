@@ -12,8 +12,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 
-import com.arisux.airi.engine.WorldEngine;
-import com.arisux.airi.engine.WorldEngine.Blocks;
+import com.arisux.airi.lib.WorldUtil;
+import com.arisux.airi.lib.WorldUtil.Blocks;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.items.ItemWorldSelectionExporter;
 
@@ -37,7 +37,7 @@ public class CommandWorldSelectorExport extends CommandBase
 	@Override
 	public void processCommand(ICommandSender commandSender, String[] args)
 	{
-		EntityPlayer player = WorldEngine.Entities.Players.getPlayerForCommandSender(commandSender);
+		EntityPlayer player = WorldUtil.Entities.Players.getPlayerForCommandSender(commandSender);
 
 		if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == AliensVsPredator.instance().items.itemWorldSelector)
 		{
@@ -67,7 +67,7 @@ public class CommandWorldSelectorExport extends CommandBase
 							structure.setTag(String.format("BlockData-%s-%s-%s", (int) (Math.max(player.posX, data.posX) - Math.min(player.posX, data.posX)), (int) (Math.max(player.posY, data.posY) - Math.min(player.posY, data.posY)), (int) (Math.max(player.posZ, data.posZ) - Math.min(player.posZ, data.posZ))), relativeData.writeToNBT());
 						}
 
-						WorldEngine.NBT.write(structure, saveLocation);
+						WorldUtil.NBT.write(structure, saveLocation);
 					}
 					Long endTime = System.currentTimeMillis();
 					commandSender.addChatMessage(new ChatComponentText(String.format("Export completed after %s seconds. Exported to: %s", (endTime - startTime) / 1000D, saveLocation.getAbsoluteFile().toString())));

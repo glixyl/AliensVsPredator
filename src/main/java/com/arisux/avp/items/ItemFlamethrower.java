@@ -6,7 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.arisux.airi.engine.ItemTypeLib.HookedItem;
+import com.arisux.airi.lib.ItemTypes.HookedItem;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.EntityFlame;
 

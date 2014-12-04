@@ -3,7 +3,7 @@ package com.arisux.avp.event.render;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 
-import com.arisux.airi.engine.RenderEngine;
+import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.items.ItemFirearm;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -31,11 +31,11 @@ public class AmmoIndicatorRenderEvent
 				if (mc.thePlayer.getHeldItem().getItem() == itemFireArm)
 				{
 					if (!mc.thePlayer.capabilities.isCreativeMode && isWearingArmor())
-						RenderEngine.drawProgressBar("Ammo - " + itemFireArm.getCurrentAmmo() + "/" + itemFireArm.getMaxAmmo(), itemFireArm.getMaxAmmo(), itemFireArm.getCurrentAmmo(), ((int) RenderEngine.scaledDisplayResolution().getScaledWidth() / 2), (int) RenderEngine.scaledDisplayResolution().getScaledHeight() - 48, 90, 1, 0, 0xFF00DDFF, false);
+						RenderUtil.drawProgressBar("Ammo - " + itemFireArm.getCurrentAmmo() + "/" + itemFireArm.getMaxAmmo(), itemFireArm.getMaxAmmo(), itemFireArm.getCurrentAmmo(), (RenderUtil.scaledDisplayResolution().getScaledWidth() / 2), RenderUtil.scaledDisplayResolution().getScaledHeight() - 48, 90, 1, 0, 0xFF00DDFF, false);
 					else if (!mc.thePlayer.capabilities.isCreativeMode && !isWearingArmor())
-						RenderEngine.drawProgressBar("Ammo - " + itemFireArm.getCurrentAmmo() + "/" + itemFireArm.getMaxAmmo(), itemFireArm.getMaxAmmo(), itemFireArm.getCurrentAmmo(), ((int) RenderEngine.scaledDisplayResolution().getScaledWidth() / 2) - (182 / 2), (int) RenderEngine.scaledDisplayResolution().getScaledHeight() - 48, 182, 1, 0, 0xFF00DDFF, false);
+						RenderUtil.drawProgressBar("Ammo - " + itemFireArm.getCurrentAmmo() + "/" + itemFireArm.getMaxAmmo(), itemFireArm.getMaxAmmo(), itemFireArm.getCurrentAmmo(), (RenderUtil.scaledDisplayResolution().getScaledWidth() / 2) - (182 / 2), RenderUtil.scaledDisplayResolution().getScaledHeight() - 48, 182, 1, 0, 0xFF00DDFF, false);
 					else
-						RenderEngine.drawProgressBar("\u221e", 1, 1, ((int) RenderEngine.scaledDisplayResolution().getScaledWidth() / 2) - (182 / 2), (int) RenderEngine.scaledDisplayResolution().getScaledHeight() - 35, 182, 1, 0, 0xFF00DDFF, false);
+						RenderUtil.drawProgressBar("\u221e", 1, 1, (RenderUtil.scaledDisplayResolution().getScaledWidth() / 2) - (182 / 2), RenderUtil.scaledDisplayResolution().getScaledHeight() - 35, 182, 1, 0, 0xFF00DDFF, false);
 				}
 			}
 		}

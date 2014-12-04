@@ -11,7 +11,7 @@ import net.minecraftforge.client.event.RenderPlayerEvent;
 
 import org.lwjgl.opengl.GL11;
 
-import com.arisux.airi.engine.RenderEngine;
+import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.PlayerModeHandler;
 import com.arisux.avp.entities.ExtendedEntityPlayer;
 import com.arisux.avp.util.PlayerMode;
@@ -38,8 +38,8 @@ public class PlayerModeRenderEvent
 			EntityLivingBase entityLiving = (EntityLivingBase) entity;
 
 			float boxTranslationMultiplier = 0.0625F;
-			float yawOffset = RenderEngine.interpolateRotation(entityLiving.prevRenderYawOffset, entityLiving.renderYawOffset, renderPartialTicks);
-			float yawHead = RenderEngine.interpolateRotation(entityLiving.prevRotationYawHead, entityLiving.rotationYawHead, renderPartialTicks);
+			float yawOffset = RenderUtil.interpolateRotation(entityLiving.prevRenderYawOffset, entityLiving.renderYawOffset, renderPartialTicks);
+			float yawHead = RenderUtil.interpolateRotation(entityLiving.prevRotationYawHead, entityLiving.rotationYawHead, renderPartialTicks);
 			float swingProgress = (entityLiving.limbSwing - entityLiving.limbSwingAmount * (1.0F - renderPartialTicks));
 			float swingProgressPrevious = (entityLiving.prevLimbSwingAmount + (entityLiving.limbSwingAmount - entityLiving.prevLimbSwingAmount) * renderPartialTicks);
 			float idleProgress = (entityLiving.ticksExisted + renderPartialTicks);

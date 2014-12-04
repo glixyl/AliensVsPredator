@@ -8,7 +8,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
-import com.arisux.airi.engine.BlockTypeLib.HookedBlock;
+import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.avp.AliensVsPredator;
 
 public class BlockStalagmite extends HookedBlock

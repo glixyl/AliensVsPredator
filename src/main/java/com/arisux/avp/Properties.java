@@ -1,7 +1,5 @@
 package com.arisux.avp;
 
-import com.arisux.airi.engine.ModEngine;
-
 import cpw.mods.fml.common.ModContainer;
 import cpw.mods.fml.common.ModMetadata;
 
@@ -11,19 +9,7 @@ public class Properties
 	public final ModContainer CONTAINER = AliensVsPredator.instance().container();
 	public final ModMetadata METADATA = CONTAINER.getMetadata();
 	public final String DOMAIN = METADATA.modId + ":";
-	public final String PUBLIC_SERVER_ADDRESS = "http://arisux.x10.mx";
-	public final String LOCAL_SERVER_ADDRESS = "http://localhost:8080";
-	public final String SERVER_ADDRESS = ModEngine.isDevelopmentEnvironment() ? LOCAL_SERVER_ADDRESS : PUBLIC_SERVER_ADDRESS;
-	public final String URL_SUBMIT_FEEDBACK = SERVER_ADDRESS + "/page/beta/submit.php?user=%s&uuid=%s&info=%s";
-	public final String URL_VALIDATE_BETA_TESTER = SERVER_ADDRESS + "/page/beta/validate.php?uuid=%s";
-	public final String URL_SKIN_BASE = METADATA.url + "/skins/";
-	public final String URL_SKIN_AK47 = URL_SKIN_BASE + "ak47/%s.png";
-	public final String URL_SKIN_M4 = URL_SKIN_BASE + "m4/%s.png";
-	public final String URL_SKIN_M41A = URL_SKIN_BASE + "m4a1/%s.png";
-	public final String URL_SKIN_M56SG = URL_SKIN_BASE + "m56sg/%s.png";
-	public final String URL_SKIN_SNIPER = URL_SKIN_BASE + "sniper/%s.png";
-	public final String URL_SKIN_SNIPER_SCOPE = URL_SKIN_BASE + "sniper-zoom/%s.png";
-
+	
 	public final int GUI_ASSEMBLER = 0;
 	public final int GUI_TURRET = 1;
 	public final int GUI_WRISTBRACER = 2;
@@ -142,18 +128,18 @@ public class Properties
 	public final String SOUND_MOTIONTRACKER_PING = DOMAIN + "motiontracker.ping";
 	public final String SOUND_MOTIONTRACKER_PONG = DOMAIN + "motiontracker.pong";
 	
-	public final String LANG_WRISTBRACER_DETMODENOTIFY = "gui.wristbracer.notify.detmode";
-	public final String LANG_WRISTBRACER_ITEMSLOSTWARNING = "gui.wristbracer.warning.itemslost";
-	public final String LANG_BETA_FEEDBACK_CHARSLEFT_TITLE = "gui.beta.feedback.charsleft.title";
-	public final String LANG_BETA_FEEDBACK_INFO = "gui.beta.feedback.info";
-	public final String LANG_BETA_FEEDBACK_SUBMIT_ERROR_TITLE = "gui.beta.feedback.info.submit.error.title";
-	public final String LANG_BETA_FEEDBACK_SUBMIT_ERROR = "gui.beta.feedback.info.submit.error";
-	public final String LANG_BETA_FEEDBACK_NOTIFY_SPAM_PREVENTION_TITLE = "gui.beta.feedback.info.spamprevention.title";
-	public final String LANG_BETA_FEEDBACK_NOTIFY_SPAM_PREVENTION = "gui.beta.feedback.info.spamprevention";
-	public final String LANG_BETA_FEEDBACK_NOTIFY_INVALID_BETA_TESTER_TITLE = "gui.beta.feedback.info.invalidbetatester.title";
-	public final String LANG_BETA_FEEDBACK_NOTIFY_INVALID_BETA_TESTER = "gui.beta.feedback.info.invalidbetatester";
-	public final String LANG_BETA_FEEDBACK_SUBMIT_THANKS_TITLE = "gui.beta.feedback.info.submit.thanks";
-	public final String LANG_BETA_FEEDBACK_SUBMIT_THANKS = "gui.beta.feedback.info.submit.thanks";
-	public final String LANG_BETA_FEEDBACK_SUBMIT_TITLE = "gui.beta.feedback.submit.title";
-	public final String LANG_BETA_FEEDBACK_SUBMIT_BUTTON = "gui.beta.feedback.info.submit.button";
+	public final String LANG_WRISTBRACER_DETMODENOTIFY = "gui.avp.wristbracer.notify.detmode";
+	public final String LANG_WRISTBRACER_ITEMSLOSTWARNING = "gui.avp.wristbracer.warning.itemslost";
+	public final String LANG_BETA_FEEDBACK_CHARSLEFT_TITLE = "gui.avp.beta.feedback.charsleft.title";
+	public final String LANG_BETA_FEEDBACK_INFO = "gui.avp.beta.feedback.info";
+	public final String LANG_BETA_FEEDBACK_SUBMIT_ERROR_TITLE = "gui.avp.beta.feedback.info.submit.error.title";
+	public final String LANG_BETA_FEEDBACK_SUBMIT_ERROR = "gui.avp.beta.feedback.info.submit.error";
+	public final String LANG_BETA_FEEDBACK_NOTIFY_SPAM_PREVENTION_TITLE = "gui.avp.beta.feedback.info.spamprevention.title";
+	public final String LANG_BETA_FEEDBACK_NOTIFY_SPAM_PREVENTION = "gui.avp.beta.feedback.info.spamprevention";
+	public final String LANG_BETA_FEEDBACK_NOTIFY_INVALID_BETA_TESTER_TITLE = "gui.avp.beta.feedback.info.invalidbetatester.title";
+	public final String LANG_BETA_FEEDBACK_NOTIFY_INVALID_BETA_TESTER = "gui.avp.beta.feedback.info.invalidbetatester";
+	public final String LANG_BETA_FEEDBACK_SUBMIT_THANKS_TITLE = "gui.avp.beta.feedback.info.submit.thanks";
+	public final String LANG_BETA_FEEDBACK_SUBMIT_THANKS = "gui.avp.beta.feedback.info.submit.thanks";
+	public final String LANG_BETA_FEEDBACK_SUBMIT_TITLE = "gui.avp.beta.feedback.submit.title";
+	public final String LANG_BETA_FEEDBACK_SUBMIT_BUTTON = "gui.avp.beta.feedback.info.submit.button";
 }

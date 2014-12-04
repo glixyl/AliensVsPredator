@@ -6,8 +6,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import com.arisux.airi.engine.BlockTypeLib.GhostBlock;
-import com.arisux.airi.engine.BlockTypeLib.HookedBlockContainer;
+import com.arisux.airi.lib.BlockTypes.GhostBlock;
+import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.TileEntityBlastdoor;
 

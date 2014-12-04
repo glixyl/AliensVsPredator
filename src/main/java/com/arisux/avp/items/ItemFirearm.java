@@ -9,9 +9,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.arisux.airi.coremod.AccessHandler;
-import com.arisux.airi.engine.ItemTypeLib.HookedItem;
-import com.arisux.airi.engine.WorldEngine;
+import com.arisux.airi.lib.*;
+import com.arisux.airi.lib.ItemTypes.HookedItem;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.packets.server.PacketShootBulletServerUpdate;
 
@@ -100,7 +99,7 @@ public class ItemFirearm extends HookedItem
 	{
 		if (player.inventory.hasItemStack(new ItemStack(this.itemAmmo)) && this.curAmmo < this.maxAmmo && this.curReload <= 0)
 		{
-			WorldEngine.Entities.Players.Inventories.consumeItem(player, this.itemAmmo);
+			WorldUtil.Entities.Players.Inventories.consumeItem(player, this.itemAmmo);
 
 			this.curAmmo = this.maxAmmo;
 			this.curReload = this.maxReload;
@@ -124,8 +123,8 @@ public class ItemFirearm extends HookedItem
 	@SideOnly(Side.CLIENT)
 	public void fixDelay()
 	{
-		AccessHandler.setEquippedProgress(0.85F);
-		AccessHandler.setRightClickDelayTimer((int) this.maxCooldown);
+		AccessWrapper.setEquippedProgress(0.85F);
+		AccessWrapper.setRightClickDelayTimer((int) this.maxCooldown);
 	}
 
 	public boolean getCanFire(EntityPlayer player)

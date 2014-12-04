@@ -12,7 +12,7 @@ import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-import com.arisux.airi.engine.RenderEngine;
+import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.items.model.ModelWristBlade;
 
@@ -112,7 +112,7 @@ public class RenderWristBlade implements IItemRenderer
 			case INVENTORY:
 				GL11.glPushMatrix();
 				{
-					RenderEngine.bindTexture(resourceLocation);
+					RenderUtil.bindTexture(resourceLocation);
 					GL11.glDisable(GL11.GL_CULL_FACE);
 					GL11.glEnable(GL11.GL_BLEND);
 					GL11.glTranslatef(8.5F, 0F, 0F);

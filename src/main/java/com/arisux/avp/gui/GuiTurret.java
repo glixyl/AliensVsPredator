@@ -13,10 +13,10 @@ import net.minecraft.world.World;
 
 import org.lwjgl.input.Mouse;
 
-import com.arisux.airi.engine.GuiTypeLib.GuiCustomButton;
-import com.arisux.airi.engine.GuiTypeLib.GuiCustomSlider;
-import com.arisux.airi.engine.*;
-import com.arisux.airi.lib.util.interfaces.IActionPerformed;
+import com.arisux.airi.lib.GuiElements.GuiCustomButton;
+import com.arisux.airi.lib.GuiElements.GuiCustomSlider;
+import com.arisux.airi.lib.*;
+import com.arisux.airi.lib.interfaces.IActionPerformed;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.TileEntityTurret;
 import com.arisux.avp.packets.server.*;
@@ -101,7 +101,7 @@ public class GuiTurret extends GuiContainer
 
 		for (Class<? extends Entity> c : this.tile.getDangerousTargets())
 		{
-			AliensVsPredator.instance().network.sendToServer(new PacketTurretAddTargetUpdate(this.tile.xCoord, this.tile.yCoord, this.tile.zCoord, EntityList.getEntityID(WorldEngine.Entities.constructEntity(this.tile.getWorldObj(), c))));
+			AliensVsPredator.instance().network.sendToServer(new PacketTurretAddTargetUpdate(this.tile.xCoord, this.tile.yCoord, this.tile.zCoord, EntityList.getEntityID(WorldUtil.Entities.constructEntity(this.tile.getWorldObj(), c))));
 		}
 	}
 
@@ -124,8 +124,8 @@ public class GuiTurret extends GuiContainer
 			stacksCurrent += stack.stackSize;
 		}
 
-		RenderEngine.drawProgressBar("Magazine " + (this.tile.getCurAmmo() <= 0 ? 0 : this.tile.getCurAmmo()) + "/" + this.tile.getMaxAmmo(), this.tile.getMaxAmmo(), this.tile.getCurAmmo() < 0 ? 1 : this.tile.getCurAmmo(), this.guiLeft + 7, this.guiTop + 20, this.xSize - 100, 3, 1, this.tile.getCurAmmo() < this.tile.getMaxAmmo() / 2 ? -22016 : this.tile.getCurAmmo() < this.tile.getMaxAmmo() / 6 ? -65536 : -16733441, false);
-		RenderEngine.drawProgressBar("Total " + stacksCurrent + "/" + stacksTotal, stacksTotal, stacksCurrent, this.guiLeft + 7, this.guiTop + 30, this.xSize - 100, 3, 1, stacksCurrent < stacksTotal / 2 ? -22016 : stacksCurrent < stacksTotal / 6 ? -65536 : -16733441, false);
+		RenderUtil.drawProgressBar("Magazine " + (this.tile.getCurAmmo() <= 0 ? 0 : this.tile.getCurAmmo()) + "/" + this.tile.getMaxAmmo(), this.tile.getMaxAmmo(), this.tile.getCurAmmo() < 0 ? 1 : this.tile.getCurAmmo(), this.guiLeft + 7, this.guiTop + 20, this.xSize - 100, 3, 1, this.tile.getCurAmmo() < this.tile.getMaxAmmo() / 2 ? -22016 : this.tile.getCurAmmo() < this.tile.getMaxAmmo() / 6 ? -65536 : -16733441, false);
+		RenderUtil.drawProgressBar("Total " + stacksCurrent + "/" + stacksTotal, stacksTotal, stacksCurrent, this.guiLeft + 7, this.guiTop + 30, this.xSize - 100, 3, 1, stacksCurrent < stacksTotal / 2 ? -22016 : stacksCurrent < stacksTotal / 6 ? -65536 : -16733441, false);
 	}
 
 	@Override
@@ -134,7 +134,7 @@ public class GuiTurret extends GuiContainer
 		if ((getCurrentSelectedEntity() instanceof EntityLivingBase))
 		{
 			int modelScale = 25;
-			RenderEngine.drawEntity(-40, 100, getCurrentSelectedEntity().height >= 4.0F ? modelScale / 2 : getCurrentSelectedEntity().height >= 8.0F ? modelScale / 4 : modelScale, this.modelRotation += 1F, 0.0F, getCurrentSelectedEntity());
+			RenderUtil.drawEntity(-40, 100, getCurrentSelectedEntity().height >= 4.0F ? modelScale / 2 : getCurrentSelectedEntity().height >= 8.0F ? modelScale / 4 : modelScale, this.modelRotation += 1F, 0.0F, getCurrentSelectedEntity());
 		}
 
 		for (int x = 0; x < this.entityLivingList.size(); x++)
@@ -146,8 +146,8 @@ public class GuiTurret extends GuiContainer
 
 			if (entity != null && yEntryPos <= yPos + 50)
 			{
-				RenderEngine.drawRectWithOutline(3, yEntryPos - 4, 134, 12, 1, 16777215, -8427264);
-				RenderEngine.drawString(entity.getCommandSenderName(), 6, yEntryPos - 2, !this.tile.isSafe(entity) ? -65536 : -8427264, false);
+				RenderUtil.drawRectWithOutline(3, yEntryPos - 4, 134, 12, 1, 16777215, -8427264);
+				RenderUtil.drawString(entity.getCommandSenderName(), 6, yEntryPos - 2, !this.tile.isSafe(entity) ? -65536 : -8427264, false);
 			}
 		}
 
@@ -187,7 +187,7 @@ public class GuiTurret extends GuiContainer
 		this.sliderColorB.drawButton();
 		this.sliderColorB.handleInput();
 
-		this.tile.beamColor = RenderEngine.createHexRGBA((int) (sliderColorA.sliderValue * sliderColorA.sliderMaxValue), (int) (sliderColorR.sliderValue * sliderColorR.sliderMaxValue), (int) (sliderColorG.sliderValue * sliderColorG.sliderMaxValue), (int) (sliderColorB.sliderValue * sliderColorB.sliderMaxValue));
+		this.tile.beamColor = RenderUtil.createHexRGBA((int) (sliderColorA.sliderValue * sliderColorA.sliderMaxValue), (int) (sliderColorR.sliderValue * sliderColorR.sliderMaxValue), (int) (sliderColorG.sliderValue * sliderColorG.sliderMaxValue), (int) (sliderColorB.sliderValue * sliderColorB.sliderMaxValue));
 
 		this.buttonScrollUp.xPosition = this.guiLeft + xSize + 5;
 		this.buttonScrollUp.yPosition = this.guiTop + 42;

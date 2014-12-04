@@ -5,9 +5,9 @@ import net.minecraft.client.renderer.Tessellator;
 
 import org.lwjgl.opengl.GL11;
 
-import com.arisux.airi.engine.*;
-import com.arisux.airi.engine.RenderEngine.Color;
-import com.arisux.airi.engine.RenderEngine.Vertex;
+import com.arisux.airi.lib.*;
+import com.arisux.airi.lib.RenderUtil.Color;
+import com.arisux.airi.lib.RenderUtil.Vertex;
 
 public class ModelPlasma extends ModelBase
 {
@@ -45,8 +45,8 @@ public class ModelPlasma extends ModelBase
 		{
 			GL11.glScalef(scale, scale, scale);
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
-			RenderEngine.glDisableLightMapping();
-			RenderEngine.glDisableLight();
+			RenderUtil.glDisableLightMapping();
+			RenderUtil.glDisableLight();
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
 
@@ -79,8 +79,8 @@ public class ModelPlasma extends ModelBase
 					GL11.glPopMatrix();
 				}
 			}
-			RenderEngine.glEnableLight();
-			RenderEngine.glEnableLightMapping();
+			RenderUtil.glEnableLight();
+			RenderUtil.glEnableLightMapping();
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
 			GL11.glDisable(GL11.GL_BLEND);
 		}

@@ -13,14 +13,24 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 public class Settings
 {
-	private Configuration config;
-
 	public HashMap<String, Integer> entityList = new HashMap<String, Integer>();
-	public String CATEGORY_OTHER = "ETC", CATEGORY_IDS = "IDS";
-
-	private boolean explosions, updaterEnabled, debugToolsEnabled;
-	private String updateStringUrl;
-	private int entityListIDs = 101;
+	private final String CATEGORY_OTHER = "ETC";
+	private final String CATEGORY_IDS = "IDS";
+	private final String CATEGORY_URLS = "URLS";
+	private String urlUpdater;
+	private String urlChangelog;
+	private String urlFeedbackSubmit;
+	private String urlFeedbackValidation;
+	private String urlSkins;
+	private String urlSkinAk47;
+	private String urlSkinM4;
+	private String urlSkinM41a;
+	private String urlSkinM56sg;
+	private String urlSkinSniper;
+	private boolean explosions;
+	private boolean updater;
+	private boolean debugTools;
+	private int idStart = 101;
 
 	@EventHandler
 	public void preInitialize(FMLPreInitializationEvent evt)
@@ -29,50 +39,46 @@ public class Settings
 		AIRI.remappingApi().registerRemappedMod("AliensVsPredator", "avp", "com.arisux.avp.AliensVsPredator");
 		
 		File configFile = new File(evt.getModConfigurationDirectory(), "AliensVsPredator.cfg");
-		config = new Configuration(configFile);
+		Configuration config = new Configuration(configFile);
+		verifyConfigVersion(evt, configFile, config);
 
 		try
 		{
-			Property versionProperty = config.get(CATEGORY_OTHER, "VERSION", AliensVsPredator.instance().container().getVersion());
-			
-			if (!versionProperty.getString().equalsIgnoreCase(AliensVsPredator.instance().container().getVersion()))
-			{
-				if (configFile.exists())
-				{
-					configFile.renameTo(new File(configFile.getName().replace(".cfg", ".cfg.bak")));
-					this.preInitialize(evt);
-//					try
-//					{
-//						config = Configuration.class.getConstructor(File.class).newInstance(new Object[] { configFile });
-//					}
-//					catch (Exception e)
-//					{
-//						AIRI.logger.bug("Could not construct a new configuration file.");
-//						e.printStackTrace();
-//					}
-				}
-			}
-			
 			config.addCustomCategoryComment(CATEGORY_IDS, "Configuration for the mod's entity IDs");
 			config.addCustomCategoryComment(CATEGORY_IDS, "WARNING: ONLY MODIFY THIS IF YOU KNOW WHAT YOU ARE DOING, YOU CAN BREAK WORLD SAVES AND/OR SERVERS.");
-			config.addCustomCategoryComment(CATEGORY_OTHER, "Other mod configuration options");
+			config.addCustomCategoryComment(CATEGORY_OTHER, "Other configuration options");
 			config.load();
+			
+			urlUpdater = config.get(CATEGORY_URLS, "UPDATE_STRING_URL", "/page/mods/aliensvspredator/latest.txt", "").getString();
+			urlChangelog = config.get(CATEGORY_URLS, "URL_CHANGELOG", "/page/mods/aliensvspredator/changelog.txt", "").getString();
+			urlFeedbackSubmit = config.get(CATEGORY_URLS, "URL_AVP_FEEDBACK_SUBMIT", "/page/beta/submit.php?user=%s&uuid=%s&info=%s", "").getString();
+			urlFeedbackValidation = config.get(CATEGORY_URLS, "URL_FEEDBACK_VALIDATION", "/page/beta/validate.php?uuid=%s", "").getString();
+			urlSkins = config.get(CATEGORY_URLS, "URL_SKINS", "/page/mods/aliensvspredator/skins", "").getString();
+			urlSkinAk47 = config.get(CATEGORY_URLS, "URL_SKIN_AK47", "/ak47/%s.png", "").getString();
+			urlSkinM4 = config.get(CATEGORY_URLS, "URL_SKIN_M4", "/m4/%s.png", "").getString();
+			urlSkinM41a = config.get(CATEGORY_URLS, "URL_SKIN_M41A", "/m4a1/%s.png", "").getString();
+			urlSkinM56sg = config.get(CATEGORY_URLS, "URL_SKIN_M56SG", "/m56sg/%s.png", "").getString();
+			urlSkinSniper = config.get(CATEGORY_URLS, "URL_SKIN_SNIPER", "/sniper/%s.png", "").getString();
+			
+			explosions = config.get(CATEGORY_OTHER, "EXPLOSION_BLOCK_DAMAGE", true).getBoolean(true);
+			updater = config.get(CATEGORY_OTHER, "UPDATER_ENABLED", true, "Toggle the mod's updater.").getBoolean(true);
+			debugTools = config.get(CATEGORY_OTHER, "DEBUG_TOOLS", false, "Toggle the debugging tools.").getBoolean(false);
 
-			entityList.put("DRONE", config.get(CATEGORY_IDS, "DRONE", entityListIDs++).getInt());
-			entityList.put("WARRIOR", config.get(CATEGORY_IDS, "WARRIOR", entityListIDs++).getInt());
-			entityList.put("SPITTER", config.get(CATEGORY_IDS, "SPITTER", entityListIDs++).getInt());
-			entityList.put("CRUSHER", config.get(CATEGORY_IDS, "CRUSHER", entityListIDs++).getInt());
-			entityList.put("PRAETORIAN", config.get(CATEGORY_IDS, "PRAETORIAN", entityListIDs++).getInt());
-			entityList.put("QUEEN", config.get(CATEGORY_IDS, "QUEEN", entityListIDs++).getInt());
-			entityList.put("OVAMORPH", config.get(CATEGORY_IDS, "OVAMORPH", entityListIDs++).getInt());
-			entityList.put("FACEHUGGER", config.get(CATEGORY_IDS, "FACEHUGGER", entityListIDs++).getInt());
-			entityList.put("CHESTBUSTER", config.get(CATEGORY_IDS, "CHESTBUSTER", entityListIDs++).getInt());
-			entityList.put("ROYAL_FACEHUGGER", config.get(CATEGORY_IDS, "ROYAL_FACEHUGGER", entityListIDs++).getInt());
-			entityList.put("MARINE", config.get(CATEGORY_IDS, "MARINE", entityListIDs++).getInt());
-			entityList.put("YAUTJA", config.get(CATEGORY_IDS, "YAUTJA", entityListIDs++).getInt());
-			entityList.put("PREDALIEN", config.get(CATEGORY_IDS, "PREDALIEN", entityListIDs++).getInt());
-			entityList.put("AQUA", config.get(CATEGORY_IDS, "AQUA", entityListIDs++).getInt());
-			entityList.put("COMBAT_SYNTHETIC", config.get(CATEGORY_IDS, "COMBAT_SYNTHETIC", entityListIDs++).getInt());
+			entityList.put("DRONE", config.get(CATEGORY_IDS, "DRONE", idStart++).getInt());
+			entityList.put("WARRIOR", config.get(CATEGORY_IDS, "WARRIOR", idStart++).getInt());
+			entityList.put("SPITTER", config.get(CATEGORY_IDS, "SPITTER", idStart++).getInt());
+			entityList.put("CRUSHER", config.get(CATEGORY_IDS, "CRUSHER", idStart++).getInt());
+			entityList.put("PRAETORIAN", config.get(CATEGORY_IDS, "PRAETORIAN", idStart++).getInt());
+			entityList.put("QUEEN", config.get(CATEGORY_IDS, "QUEEN", idStart++).getInt());
+			entityList.put("OVAMORPH", config.get(CATEGORY_IDS, "OVAMORPH", idStart++).getInt());
+			entityList.put("FACEHUGGER", config.get(CATEGORY_IDS, "FACEHUGGER", idStart++).getInt());
+			entityList.put("CHESTBUSTER", config.get(CATEGORY_IDS, "CHESTBUSTER", idStart++).getInt());
+			entityList.put("ROYAL_FACEHUGGER", config.get(CATEGORY_IDS, "ROYAL_FACEHUGGER", idStart++).getInt());
+			entityList.put("MARINE", config.get(CATEGORY_IDS, "MARINE", idStart++).getInt());
+			entityList.put("YAUTJA", config.get(CATEGORY_IDS, "YAUTJA", idStart++).getInt());
+			entityList.put("PREDALIEN", config.get(CATEGORY_IDS, "PREDALIEN", idStart++).getInt());
+			entityList.put("AQUA", config.get(CATEGORY_IDS, "AQUA", idStart++).getInt());
+			entityList.put("COMBAT_SYNTHETIC", config.get(CATEGORY_IDS, "COMBAT_SYNTHETIC", idStart++).getInt());
 
 			entityList.put("CELTIC_SPEAR", config.get(CATEGORY_IDS, "CELTIC_SPEAR", 1512).getInt());
 			entityList.put("PROXIMITY_MINE", config.get(CATEGORY_IDS, "PROXIMITY_MINE", 1513).getInt());
@@ -84,14 +90,23 @@ public class Settings
 			entityList.put("DISC", config.get(CATEGORY_IDS, "DISC", 1519).getInt());
 			entityList.put("SHURIKEN", config.get(CATEGORY_IDS, "SHURIKEN", 1520).getInt());
 			entityList.put("TURRETENTITY", config.get(CATEGORY_IDS, "TURRETENTITY", 1521).getInt());
-
-			explosions = config.get(CATEGORY_OTHER, "EXPLOSION_BLOCK_DAMAGE", true).getBoolean(true);
-			updaterEnabled = config.get(CATEGORY_OTHER, "UPDATER_ENABLED", true, "Toggle the mod's updater.").getBoolean(true);
-			updateStringUrl = config.get(CATEGORY_OTHER, "UPDATE_STRING_URL", AliensVsPredator.instance().container().getMetadata().updateUrl, "The URL that the updater uses to check for mod updates. If it changes in the future, this can be changed to the new URL to fix any problems.").getString();
-			debugToolsEnabled = config.get(CATEGORY_OTHER, "DEBUG_TOOLS", false, "Toggle the debugging tools.").getBoolean(false);
 		} finally
 		{
 			config.save();
+		}
+	}
+	
+	private void verifyConfigVersion(FMLPreInitializationEvent evt, File configFile, Configuration config)
+	{
+		Property versionProperty = config.get(CATEGORY_OTHER, "VERSION", AliensVsPredator.instance().container().getVersion());
+		
+		if (!versionProperty.getString().equalsIgnoreCase(AliensVsPredator.instance().container().getVersion()))
+		{
+			if (configFile.exists())
+			{
+				configFile.renameTo(new File(configFile.getName().replace(".cfg", ".cfg.bak")));
+				this.preInitialize(evt);
+			}
 		}
 	}
 
@@ -102,16 +117,71 @@ public class Settings
 
 	public boolean isUpdaterEnabled()
 	{
-		return this.updaterEnabled;
+		return this.updater;
 	}
 	
 	public boolean areDebugToolsEnabled()
 	{
-		return this.debugToolsEnabled;
+		return this.debugTools;
 	}
 	
 	public String getUpdateStringUrl()
 	{
-		return updateStringUrl;
+		return urlUpdater;
+	}
+	
+	public String getServer()
+	{
+		return AIRI.settings().getServer();
+	}
+	
+	public String getUrlUpdater()
+	{
+		return getServer() + urlUpdater;
+	}
+	
+	public String getUrlChangelog()
+	{
+		return getServer() + urlChangelog;
+	}
+	
+	public String getUrlFeedbackSubmit()
+	{
+		return getServer() + urlFeedbackSubmit;
+	}
+	
+	public String getUrlFeedbackValidation()
+	{
+		return getServer() + urlFeedbackValidation;
+	}
+	
+	public String getUrlSkins()
+	{
+		return getServer() + urlSkins;
+	}
+	
+	public String getUrlSkinAk47()
+	{
+		return getServer() + getUrlSkins() + urlSkinAk47;
+	}
+	
+	public String getUrlSkinM4()
+	{
+		return getServer() + getUrlSkins() + urlSkinM4;
+	}
+	
+	public String getUrlSkinM41a()
+	{
+		return getServer() + getUrlSkins() + urlSkinM41a;
+	}
+	
+	public String getUrlSkinM56sg()
+	{
+		return getServer() + getUrlSkins() + urlSkinM56sg;
+	}
+	
+	public String getUrlSkinSniper()
+	{
+		return getServer() + getUrlSkins() + urlSkinSniper;
 	}
 }

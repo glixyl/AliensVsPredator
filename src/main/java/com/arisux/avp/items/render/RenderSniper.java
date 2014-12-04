@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -12,20 +13,21 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
-import com.arisux.airi.coremod.AccessHandler;
-import com.arisux.airi.engine.RenderEngine;
-import com.arisux.airi.engine.RenderEngine.PlayerResourceManager.PlayerResource;
-import com.arisux.airi.lib.render.ItemRenderer3D;
+import com.arisux.airi.lib.*;
+import com.arisux.airi.lib.RenderUtil.PlayerResourceManager.PlayerResource;
+import com.arisux.airi.lib.render.ItemRenderer;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.items.model.ModelSniper;
 import com.arisux.avp.items.model.ModelSniperScoped;
 
-public class RenderSniper extends ItemRenderer3D
+public class RenderSniper extends ItemRenderer
 {
 	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_SNIPER);
 	public static final ResourceLocation resourceLocationScope = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_SNIPER_SCOPED);
 	protected ModelSniperScoped modelScope = new ModelSniperScoped();
 	public ResourceLocation resourceScope = resourceLocationScope;
+	private Minecraft mc = Minecraft.getMinecraft();
+	private float defaultFOV = mc.gameSettings.getOptionFloatValue(GameSettings.Options.FOV);
 
 	public RenderSniper()
 	{
@@ -36,6 +38,30 @@ public class RenderSniper extends ItemRenderer3D
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data)
 	{
 		super.renderItem(type, item, data);
+		this.renderZoom();
+	}
+	
+	public void renderZoom()
+	{
+		if (mc.gameSettings.thirdPersonView == 0 && mc.thePlayer.getHeldItem() != null)
+		{
+			if (mc.thePlayer.getHeldItem().getItem() == AliensVsPredator.instance().items.itemSniper)
+			{
+				if (!mc.inGameHasFocus)
+				{
+					this.defaultFOV = mc.gameSettings.getOptionFloatValue(GameSettings.Options.FOV);
+				}
+
+				if (Mouse.isButtonDown(0) && mc.inGameHasFocus)
+				{
+					mc.gameSettings.setOptionFloatValue(GameSettings.Options.FOV, 9F);
+				}
+				else if (mc.inGameHasFocus)
+				{
+					mc.gameSettings.setOptionFloatValue(GameSettings.Options.FOV, defaultFOV);
+				}
+			}
+		}
 	}
 
 	@Override
@@ -44,11 +70,11 @@ public class RenderSniper extends ItemRenderer3D
 		GL11.glPushMatrix();
 
 		PlayerResource player = resourceManager.createPlayerResource(((EntityPlayer) data[1]).getCommandSenderName());
-		this.resource = RenderEngine.downloadResource(String.format(AliensVsPredator.properties().URL_SKIN_SNIPER, player.getUUID()), resourceLocation);
+		this.resource = RenderUtil.downloadResource(String.format(AliensVsPredator.settings().getUrlSkinSniper(), player.getUUID()), resourceLocation);
 
 		if (player != null)
 		{
-			Minecraft.getMinecraft().renderEngine.bindTexture(RenderEngine.downloadResource(String.format(AliensVsPredator.properties().URL_SKIN_SNIPER, player.getUUID()), resourceLocation, false));
+			Minecraft.getMinecraft().renderEngine.bindTexture(RenderUtil.downloadResource(String.format(AliensVsPredator.settings().getUrlSkinSniper(), player.getUUID()), resourceLocation, false));
 			GL11.glTranslatef(0.2F, 0.3F, -0.17F);
 			GL11.glRotatef(195.0F, 1.0F, 0.0F, 0.0F);
 			GL11.glRotatef(170.0F, 0.0F, 1.0F, 0.0F);
@@ -68,8 +94,10 @@ public class RenderSniper extends ItemRenderer3D
 	{
 		GL11.glPushMatrix();
 
-		this.resource = RenderEngine.downloadResource(String.format(AliensVsPredator.properties().URL_SKIN_SNIPER, AccessHandler.getSession().getPlayerID()), resourceLocation);
-		this.resourceScope = RenderEngine.downloadResource(String.format(AliensVsPredator.properties().URL_SKIN_SNIPER_SCOPE, AccessHandler.getSession().getPlayerID()), resourceLocationScope);
+		this.resource = RenderUtil.downloadResource(String.format(AliensVsPredator.settings().getUrlSkinSniper(), AccessWrapper.getSession().getPlayerID()), resourceLocation);
+
+		// TODO: Merge the two sniper models into one and use a single universal texture.
+		this.resourceScope = RenderUtil.downloadResource(String.format(AliensVsPredator.settings().getUrlSkinSniper(), AccessWrapper.getSession().getPlayerID()), resourceLocationScope);
 
 		if (Mouse.isButtonDown(0) && Minecraft.getMinecraft().inGameHasFocus)
 		{
@@ -86,7 +114,8 @@ public class RenderSniper extends ItemRenderer3D
 				GL11.glScalef(glScale, glScale, glScale);
 				this.modelScope.render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 			}
-		} else if ((EntityPlayer) data[1] == Minecraft.getMinecraft().renderViewEntity && Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && (!(Minecraft.getMinecraft().currentScreen instanceof GuiInventory) && !(Minecraft.getMinecraft().currentScreen instanceof GuiContainerCreative) || RenderManager.instance.playerViewY != 180.0F))
+		}
+		else if ((EntityPlayer) data[1] == Minecraft.getMinecraft().renderViewEntity && Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && (!(Minecraft.getMinecraft().currentScreen instanceof GuiInventory) && !(Minecraft.getMinecraft().currentScreen instanceof GuiContainerCreative) || RenderManager.instance.playerViewY != 180.0F))
 		{
 			Minecraft.getMinecraft().renderEngine.bindTexture(getResourceLocation());
 			GL11.glTranslatef(1.5F, 0.95F, 0.35F);
@@ -107,7 +136,7 @@ public class RenderSniper extends ItemRenderer3D
 	{
 		GL11.glPushMatrix();
 
-		this.resource = RenderEngine.downloadResource(String.format(AliensVsPredator.properties().URL_SKIN_SNIPER, AccessHandler.getSession().getPlayerID()), resourceLocation);
+		this.resource = RenderUtil.downloadResource(String.format(AliensVsPredator.settings().getUrlSkinSniper(), AccessWrapper.getSession().getPlayerID()), resourceLocation);
 		Minecraft.getMinecraft().renderEngine.bindTexture(getResourceLocation());
 		GL11.glDisable(GL11.GL_CULL_FACE);
 		GL11.glRotatef(0F, 1.0F, 0.0F, 0.0F);

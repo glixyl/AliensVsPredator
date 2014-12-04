@@ -7,9 +7,9 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerPickupXpEvent;
 
-import com.arisux.airi.engine.WorldEngine.Entities.Players;
-import com.arisux.airi.lib.util.ModelTexMap;
-import com.arisux.airi.lib.util.interfaces.IInitializable;
+import com.arisux.airi.lib.WorldUtil.Entities.Players;
+import com.arisux.airi.lib.interfaces.IInitializable;
+import com.arisux.airi.lib.render.ModelTexMap;
 import com.arisux.avp.entities.ExtendedEntityPlayer;
 import com.arisux.avp.util.PlayerMode;
 import com.arisux.avp.util.PlayerModeLevelMapping;

@@ -6,7 +6,6 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import com.arisux.avp.entities.EntityAcidSpit;
 import com.arisux.avp.entities.model.ModelPlasma;
 
 public class RenderAcidSpit extends Render
@@ -16,7 +15,6 @@ public class RenderAcidSpit extends Render
 	@Override
 	public void doRender(Entity entity, double posX, double posY, double posZ, float yaw, float renderPartialTicks)
 	{
-		EntityAcidSpit entityAcid = (EntityAcidSpit) entity;
 		float rotation = 20;
 		model.drawInternalVertices = false;
 		GL11.glPushMatrix();

@@ -11,7 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import com.arisux.airi.engine.BlockTypeLib.HookedBlockContainer;
+import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
 import com.arisux.avp.entities.tile.TileEntityWorkstation;
 
 public class BlockWorkstation extends HookedBlockContainer

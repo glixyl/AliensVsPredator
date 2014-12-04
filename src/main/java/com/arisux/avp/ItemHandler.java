@@ -5,11 +5,11 @@ import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraftforge.common.util.EnumHelper;
 
-import com.arisux.airi.engine.ItemTypeLib.HookedItem;
-import com.arisux.airi.engine.ItemTypeLib.HookedItemAxe;
-import com.arisux.airi.engine.ItemTypeLib.HookedItemPickaxe;
-import com.arisux.airi.engine.ModEngine.IBHandler;
-import com.arisux.airi.lib.util.interfaces.IInitializable;
+import com.arisux.airi.lib.ItemTypes.HookedItem;
+import com.arisux.airi.lib.ItemTypes.HookedItemAxe;
+import com.arisux.airi.lib.ItemTypes.HookedItemPickaxe;
+import com.arisux.airi.lib.ModUtil.IBHandler;
+import com.arisux.airi.lib.interfaces.IInitializable;
 import com.arisux.avp.entities.mob.*;
 import com.arisux.avp.items.*;
 import com.arisux.avp.items.ItemFirearm.ItemAmmo;
@@ -84,24 +84,24 @@ public class ItemHandler extends IBHandler implements IInitializable
 			itemIngotAluminum = new HookedItem().setDescription("An ingot melted down from bauxite ore, for use with guns."),
 			itemIngotCopper = new HookedItem().setDescription("An ingot melted down from copper ore, for use with electronics."),
 			itemIngotLithium = ((HookedItem) new ItemIngotLithium()).setDescription("An ingot of lithium. Depletes quicly after mining."),
-			itemMotionTracker = ((HookedItem) (new HookedItem()).disableIcon()).setDescription("F.E.M.S. 5.547.60 - Tracks movement by detecting changes in air density."),
+			itemMotionTracker = ((HookedItem) (new HookedItem()).disableIcon()).setDescription("Tracks movement by detecting changes in air density."),
 			itemWorldSelector = ((new ItemWorldSelectionExporter()));
 
-	public ItemEntitySummoner itemSummonerDrone = (new ItemEntitySummoner(this.getModController().domain(), EntityDrone.class)),
-			itemSummonerAqua = (new ItemEntitySummoner(this.getModController().domain(), EntityAqua.class)),
-			itemSummonerWarrior = (new ItemEntitySummoner(this.getModController().domain(), EntityWarrior.class)),
-			itemSummonerCrusher = (new ItemEntitySummoner(this.getModController().domain(), EntityCrusher.class)),
-			itemSummonerSpitter = (new ItemEntitySummoner(this.getModController().domain(), EntitySpitter.class)),
-			itemSummonerPraetorian = (new ItemEntitySummoner(this.getModController().domain(), EntityPraetorian.class)),
-			itemSummonerQueen = (new ItemEntitySummoner(this.getModController().domain(), EntityQueen.class)),
-			itemSummonerChestburster = (new ItemEntitySummoner(this.getModController().domain(), EntityChestburster.class)),
-			itemSummonerFacehugger = (new ItemEntitySummoner(this.getModController().domain(), EntityFacehugger.class)),
-			itemSummonerMarine = (new ItemEntitySummoner(this.getModController().domain(), EntityMarine.class)),
-			itemSummonerOvamorph = (new ItemEntitySummoner(this.getModController().domain(), EntityOvamorph.class)),
-			itemSummonerRoyalFacehugger = (new ItemEntitySummoner(this.getModController().domain(), EntityRoyalFacehugger.class)),
-			itemSummonerYautja = (new ItemEntitySummoner(this.getModController().domain(), EntityYautja.class)),
-			itemSummonerPredalien = (new ItemEntitySummoner(this.getModController().domain(), EntityPredalien.class)),
-			itemSummonerCombatSynthetic = (new ItemEntitySummoner(this.getModController().domain(), EntityCombatSynthetic.class));
+	public ItemEntitySummoner itemSummonerDrone = (new ItemEntitySummoner(this.getMod().domain(), EntityDrone.class)),
+			itemSummonerAqua = (new ItemEntitySummoner(this.getMod().domain(), EntityAqua.class)),
+			itemSummonerWarrior = (new ItemEntitySummoner(this.getMod().domain(), EntityWarrior.class)),
+			itemSummonerCrusher = (new ItemEntitySummoner(this.getMod().domain(), EntityCrusher.class)),
+			itemSummonerSpitter = (new ItemEntitySummoner(this.getMod().domain(), EntitySpitter.class)),
+			itemSummonerPraetorian = (new ItemEntitySummoner(this.getMod().domain(), EntityPraetorian.class)),
+			itemSummonerQueen = (new ItemEntitySummoner(this.getMod().domain(), EntityQueen.class)),
+			itemSummonerChestburster = (new ItemEntitySummoner(this.getMod().domain(), EntityChestburster.class)),
+			itemSummonerFacehugger = (new ItemEntitySummoner(this.getMod().domain(), EntityFacehugger.class)),
+			itemSummonerMarine = (new ItemEntitySummoner(this.getMod().domain(), EntityMarine.class)),
+			itemSummonerOvamorph = (new ItemEntitySummoner(this.getMod().domain(), EntityOvamorph.class)),
+			itemSummonerRoyalFacehugger = (new ItemEntitySummoner(this.getMod().domain(), EntityRoyalFacehugger.class)),
+			itemSummonerYautja = (new ItemEntitySummoner(this.getMod().domain(), EntityYautja.class)),
+			itemSummonerPredalien = (new ItemEntitySummoner(this.getMod().domain(), EntityPredalien.class)),
+			itemSummonerCombatSynthetic = (new ItemEntitySummoner(this.getMod().domain(), EntityCombatSynthetic.class));
 
 	public ItemHandler()
 	{

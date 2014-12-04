@@ -8,8 +8,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-import com.arisux.airi.engine.ItemTypeLib.HookedItem;
-import com.arisux.airi.engine.WorldEngine;
+import com.arisux.airi.lib.ItemTypes.HookedItem;
+import com.arisux.airi.lib.WorldUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.packets.server.PacketSpawnEntityServerUpdate;
 
@@ -29,7 +29,7 @@ public class ItemEntitySummoner extends HookedItem
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
 	{
 		Entity entity = createNewEntity(par2World);
-		WorldEngine.Entities.Players.Inventories.consumeItem(par3EntityPlayer, this);
+		WorldUtil.Entities.Players.Inventories.consumeItem(par3EntityPlayer, this);
 
 		if (par2World.isRemote && entity != null)
 		{
@@ -47,7 +47,7 @@ public class ItemEntitySummoner extends HookedItem
 	
 	public Entity createNewEntity(World worldObj)
 	{
-		return WorldEngine.Entities.constructEntity(worldObj, c);
+		return WorldUtil.Entities.constructEntity(worldObj, c);
 	}
 	
 	@Override

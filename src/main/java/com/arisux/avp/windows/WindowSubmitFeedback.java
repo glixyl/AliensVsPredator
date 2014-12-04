@@ -8,12 +8,11 @@ import net.minecraft.client.resources.I18n;
 import com.arisux.airi.AIRI;
 import com.arisux.airi.api.window.IWindow;
 import com.arisux.airi.api.window.Window;
-import com.arisux.airi.coremod.AccessHandler;
-import com.arisux.airi.engine.GuiTypeLib.GuiCustomButton;
-import com.arisux.airi.engine.GuiTypeLib.GuiCustomTextbox;
-import com.arisux.airi.engine.WorldEngine.Entities.Players;
-import com.arisux.airi.lib.util.NetworkUtil;
-import com.arisux.airi.lib.util.interfaces.IActionPerformed;
+import com.arisux.airi.lib.*;
+import com.arisux.airi.lib.GuiElements.GuiCustomButton;
+import com.arisux.airi.lib.GuiElements.GuiCustomTextbox;
+import com.arisux.airi.lib.WorldUtil.Entities.Players;
+import com.arisux.airi.lib.interfaces.IActionPerformed;
 import com.arisux.avp.AliensVsPredator;
 
 public class WindowSubmitFeedback extends Window implements IWindow
@@ -51,11 +50,11 @@ public class WindowSubmitFeedback extends Window implements IWindow
 			{
 				try
 				{
-					if (isValidatedBetaTeseterUUID(AccessHandler.getSession().getPlayerID()))
+					if (isValidatedBetaTeseterUUID(AccessWrapper.getSession().getPlayerID()) || ModUtil.isDevEnvironment())
 					{
 						if (!textbox.getText().equals("") && textbox.getText().length() > 12)
 						{
-							String request = String.format(AliensVsPredator.properties().URL_SUBMIT_FEEDBACK, AccessHandler.getSession().getUsername(), AccessHandler.getSession().getPlayerID(), URLEncoder.encode(textbox.getText(), "UTF-8"));
+							String request = String.format(AliensVsPredator.settings().getUrlFeedbackSubmit(), AccessWrapper.getSession().getUsername(), AccessWrapper.getSession().getPlayerID(), URLEncoder.encode(textbox.getText(), "UTF-8"));
 							feedback = NetworkUtil.getURLContents(request);
 							AIRI.logger.info("Submitted feedback: %s", feedback);
 						}
@@ -130,7 +129,7 @@ public class WindowSubmitFeedback extends Window implements IWindow
 
 	public static boolean isValidatedBetaTeseterUUID(String uuid)
 	{
-		return Boolean.parseBoolean(NetworkUtil.getURLContents(String.format(AliensVsPredator.properties().URL_VALIDATE_BETA_TESTER, AliensVsPredator.properties().SERVER_ADDRESS, uuid)));
+		return Boolean.parseBoolean(NetworkUtil.getURLContents(String.format(AliensVsPredator.settings().getUrlFeedbackValidation(), uuid)));
 	}
 
 	@Override

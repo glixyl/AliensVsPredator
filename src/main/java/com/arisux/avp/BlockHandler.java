@@ -3,13 +3,13 @@ package com.arisux.avp;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
-import com.arisux.airi.engine.BlockTypeLib.GhostBlock;
-import com.arisux.airi.engine.BlockTypeLib.HookedBlock;
-import com.arisux.airi.engine.BlockTypeLib.HookedBlockSlab;
-import com.arisux.airi.engine.BlockTypeLib.HookedBlockStairs;
-import com.arisux.airi.engine.ModEngine.IBHandler;
-import com.arisux.airi.engine.*;
-import com.arisux.airi.lib.util.interfaces.IInitializable;
+import com.arisux.airi.lib.BlockTypes.GhostBlock;
+import com.arisux.airi.lib.BlockTypes.HookedBlock;
+import com.arisux.airi.lib.BlockTypes.HookedBlockSlab;
+import com.arisux.airi.lib.BlockTypes.HookedBlockStairs;
+import com.arisux.airi.lib.ModUtil.IBHandler;
+import com.arisux.airi.lib.*;
+import com.arisux.airi.lib.interfaces.IInitializable;
 import com.arisux.avp.block.*;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -48,7 +48,7 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockFloorGrill = ((HookedBlock) (new HookedBlock(Material.iron)).setHardness(3.5F).setResistance(2.0F)).setOpaque(false),
 		blockWall = (new HookedBlock(Material.iron)).setHardness(3.5F).setResistance(2.0F),
 		blockWallAngled = (new HookedBlock(Material.iron).setRenderType(AliensVsPredator.instance().renderer.renderTypeAngled)).setHardness(3.5F).setResistance(2.0F),
-		blockWallW = (new HookedBlock(Material.iron).setIconSet(new RenderEngine.IconSet(this.getModController().domain() + "wall_top", this.getModController().domain() + "wall_top", this.getModController().domain() + "wall_top", this.getModController().domain() + "wall_side", this.getModController().domain() + "wall_side", this.getModController().domain() + "wall_side", this.getModController().domain() + "wall_side"))).setHardness(3.5F).setResistance(2.0F),
+		blockWallW = (new HookedBlock(Material.iron).setIconSet(new RenderUtil.IconSet(this.getMod().domain() + "wall_top", this.getMod().domain() + "wall_top", this.getMod().domain() + "wall_top", this.getMod().domain() + "wall_side", this.getMod().domain() + "wall_side", this.getMod().domain() + "wall_side", this.getMod().domain() + "wall_side"))).setHardness(3.5F).setResistance(2.0F),
 		blockCeiling = (new HookedBlock(Material.iron)).setHardness(3.5F).setResistance(2.0F).setLightOpacity(100),
 		blockCeiliingVent = (new HookedBlock(Material.iron)).setHardness(3.5F).setResistance(2.0F),
 		blockCeilingGrill = ((HookedBlock) (new HookedBlock(Material.iron)).setHardness(3.5F).setResistance(2.0F)).setOpaque(false),

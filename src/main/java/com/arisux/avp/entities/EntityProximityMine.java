@@ -11,8 +11,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
 
-import com.arisux.airi.engine.WorldEngine;
-import com.arisux.airi.engine.WorldEngine.Blocks;
+import com.arisux.airi.lib.WorldUtil;
+import com.arisux.airi.lib.WorldUtil.Blocks;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntityYautja;
 
@@ -165,7 +165,7 @@ public class EntityProximityMine extends Entity
 	
 	public void explode()
 	{
-		WorldEngine.createExplosion(null, worldObj, new Blocks.CoordData(this), 2F, false, true, AliensVsPredator.instance().settings.areExplosionsEnabled());
+		WorldUtil.createExplosion(null, worldObj, new Blocks.CoordData(this), 2F, false, true, AliensVsPredator.instance().settings.areExplosionsEnabled());
 		this.setDead();
 	}
 

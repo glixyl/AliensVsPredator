@@ -2,7 +2,7 @@ package com.arisux.avp;
 
 import net.minecraft.item.ItemStack;
 
-import com.arisux.airi.lib.util.interfaces.IInitializable;
+import com.arisux.airi.lib.interfaces.IInitializable;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;

@@ -4,7 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.*;
 import net.minecraft.world.World;
 
-import com.arisux.airi.engine.WorldEngine;
+import com.arisux.airi.lib.WorldUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.EntitySpear;
 
@@ -38,7 +38,7 @@ public class ItemSpear extends ItemSword
 				world.playSoundAtEntity(entityplayer, "random.pop", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 				world.spawnEntityInWorld(entityspear);
 
-				WorldEngine.Entities.Players.Inventories.consumeItem(entityplayer, this);
+				WorldUtil.Entities.Players.Inventories.consumeItem(entityplayer, this);
 			}
 		}
 	}

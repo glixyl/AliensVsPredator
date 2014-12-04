@@ -1,6 +1,6 @@
 package com.arisux.avp.entities.tile.render;
 
-import static com.arisux.airi.engine.RenderEngine.drawEntity;
+import static com.arisux.airi.lib.RenderUtil.drawEntity;
 import static org.lwjgl.opengl.GL11.*;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;

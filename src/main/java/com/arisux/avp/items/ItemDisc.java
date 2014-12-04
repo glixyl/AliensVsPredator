@@ -5,8 +5,8 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.arisux.airi.engine.ItemTypeLib.HookedItem;
-import com.arisux.airi.engine.WorldEngine;
+import com.arisux.airi.lib.ItemTypes.HookedItem;
+import com.arisux.airi.lib.WorldUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.EntitySmartDisc;
 
@@ -33,7 +33,7 @@ public class ItemDisc extends HookedItem
 				}
 
 				world.playSoundAtEntity(entityplayer, "random.bow", 0.6F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.0F));
-				WorldEngine.Entities.Players.Inventories.consumeItem(entityplayer, this);
+				WorldUtil.Entities.Players.Inventories.consumeItem(entityplayer, this);
 			}
 		}
 	}

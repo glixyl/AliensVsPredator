@@ -10,13 +10,13 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import com.arisux.airi.engine.RenderEngine;
-import com.arisux.airi.lib.render.ItemRenderer3D;
+import com.arisux.airi.lib.RenderUtil;
+import com.arisux.airi.lib.render.ItemRenderer;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.event.render.MotionTrackerDisplay;
 import com.arisux.avp.items.model.ModelMotionTracker;
 
-public class RenderMotionTracker extends ItemRenderer3D
+public class RenderMotionTracker extends ItemRenderer
 {
 	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_MOTIONTRACKER);
 	public MotionTrackerDisplay motionTracker = new MotionTrackerDisplay();
@@ -72,9 +72,9 @@ public class RenderMotionTracker extends ItemRenderer3D
 					GL11.glTranslatef(-78.4999F, -32F, 12F);
 					GL11.glRotatef(-90F, 0F, 1F, 0F);
 					GL11.glScalef(0.4F, 0.4F, 0.4F);
-					RenderEngine.glDisableLight();
+					RenderUtil.glDisableLight();
 					motionTracker.draw(0, 0, 128, 96);
-					RenderEngine.glEnableLight();
+					RenderUtil.glEnableLight();
 				}
 			}
 		}

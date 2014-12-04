@@ -7,7 +7,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.Pre;
 
-import com.arisux.airi.engine.RenderEngine;
+import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.ExtendedEntityPlayer;
 
@@ -60,7 +60,7 @@ public class AlienEmergeEvent
 				{
 					if (playerProperties.getImpregnatedTime() <= 0)
 					{
-						RenderEngine.renderOverlay(resChestbursterEmerge);
+						RenderUtil.renderOverlay(resChestbursterEmerge);
 					}
 				}
 			}

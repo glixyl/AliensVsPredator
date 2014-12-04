@@ -1,6 +1,6 @@
 package com.arisux.avp.event.render;
 
-import static com.arisux.airi.engine.RenderEngine.*;
+import static com.arisux.airi.lib.RenderUtil.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.item.ItemStack;
@@ -10,10 +10,10 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent.Pre;
 
 import org.lwjgl.input.Keyboard;
 
-import com.arisux.airi.engine.GuiTypeLib.GuiCustomButton;
-import com.arisux.airi.engine.*;
-import com.arisux.airi.engine.WorldEngine.Entities.Players;
-import com.arisux.airi.lib.util.interfaces.IActionPerformed;
+import com.arisux.airi.lib.GuiElements.GuiCustomButton;
+import com.arisux.airi.lib.*;
+import com.arisux.airi.lib.WorldUtil.Entities.Players;
+import com.arisux.airi.lib.interfaces.IActionPerformed;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.util.VisionMode;
 
@@ -43,7 +43,7 @@ public class VisionModeRenderEvent
 		{
 			if (event.type == RenderGameOverlayEvent.ElementType.HOTBAR && mc.gameSettings.thirdPersonView == 0)
 			{
-				if (WorldEngine.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer) != null && WorldEngine.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer).getItem() == AliensVsPredator.instance().items.helmTitanium)
+				if (WorldUtil.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer) != null && WorldUtil.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer).getItem() == AliensVsPredator.instance().items.helmTitanium)
 				{
 					this.currentVisionMode.render();
 

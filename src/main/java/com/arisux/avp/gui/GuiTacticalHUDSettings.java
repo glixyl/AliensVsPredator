@@ -2,12 +2,12 @@ package com.arisux.avp.gui;
 
 import net.minecraft.client.gui.GuiScreen;
 
-import com.arisux.airi.engine.GuiTypeLib.GuiCustomButton;
-import com.arisux.airi.engine.GuiTypeLib.GuiCustomScreen;
-import com.arisux.airi.engine.GuiTypeLib.GuiCustomSlider;
-import com.arisux.airi.engine.GuiTypeLib.GuiCustomTextbox;
-import com.arisux.airi.engine.*;
-import com.arisux.airi.lib.util.interfaces.IActionPerformed;
+import com.arisux.airi.lib.GuiElements.GuiCustomButton;
+import com.arisux.airi.lib.GuiElements.GuiCustomScreen;
+import com.arisux.airi.lib.GuiElements.GuiCustomSlider;
+import com.arisux.airi.lib.GuiElements.GuiCustomTextbox;
+import com.arisux.airi.lib.*;
+import com.arisux.airi.lib.interfaces.IActionPerformed;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.ExtendedEntityPlayer;
 import com.arisux.avp.event.render.TacticalHUDRenderEvent;
@@ -43,9 +43,9 @@ public class GuiTacticalHUDSettings extends GuiCustomScreen
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks)
 	{
-		RenderEngine.drawRect(0, 0, width, height, 0xCC111111);
-		RenderEngine.drawRect(0, 0, width, 20, 0x66000000);
-		RenderEngine.drawString("Tactical HUD Interface Configuration", 10, 6, 0xFF00AAFF);
+		RenderUtil.drawRect(0, 0, width, height, 0xCC111111);
+		RenderUtil.drawRect(0, 0, width, 20, 0x66000000);
+		RenderUtil.drawString("Tactical HUD Interface Configuration", 10, 6, 0xFF00AAFF);
 
 		{
 			textBox1.setMaxStringLength(18);
@@ -53,7 +53,7 @@ public class GuiTacticalHUDSettings extends GuiCustomScreen
 			textBox1.yPosition = 30;
 			textBox1.height = 15;
 			textBox1.width = 120;
-			RenderEngine.drawString("Broadcast Channel", textBox1.xPosition + textBox1.width + 10, textBox1.yPosition + 3, 0xFF00AAFF);
+			RenderUtil.drawString("Broadcast Channel", textBox1.xPosition + textBox1.width + 10, textBox1.yPosition + 3, 0xFF00AAFF);
 			textBox1.drawTextBox();
 			textBox1.handleInput();
 		}
@@ -67,7 +67,7 @@ public class GuiTacticalHUDSettings extends GuiCustomScreen
 			slider1.baseColor = 0x55000000;
 			slider1.sliderButtonColor = 0x9900AAFF;
 			slider1.tooltip = "The distance this tactical HUD will connect to other tactical HUDs.";
-			RenderEngine.drawString("Broadcast Transmission Power (mW)", slider1.xPosition + slider1.width + 10, slider1.yPosition + 3, 0xFF00AAFF);
+			RenderUtil.drawString("Broadcast Transmission Power (mW)", slider1.xPosition + slider1.width + 10, slider1.yPosition + 3, 0xFF00AAFF);
 			slider1.drawButton();
 			slider1.handleInput();
 		}
@@ -81,14 +81,14 @@ public class GuiTacticalHUDSettings extends GuiCustomScreen
 			slider2.baseColor = 0x55000000;
 			slider2.sliderButtonColor = 0x9900AAFF;
 			slider2.tooltip = "The amount of users with tactical HUDs to display in the viewport.";
-			RenderEngine.drawString("# of users to display on-screen.", slider2.xPosition + slider2.width + 10, slider2.yPosition + 3, 0xFF00AAFF);
+			RenderUtil.drawString("# of users to display on-screen.", slider2.xPosition + slider2.width + 10, slider2.yPosition + 3, 0xFF00AAFF);
 			slider2.drawButton();
 			slider2.handleInput();
 		}
 		{
 			buttonApply.displayString = "Apply";
-			buttonApply.xPosition = (RenderEngine.scaledDisplayResolution().getScaledWidth() / 2) - (buttonApply.width / 2);
-			buttonApply.yPosition = RenderEngine.scaledDisplayResolution().getScaledHeight() - 40;
+			buttonApply.xPosition = (RenderUtil.scaledDisplayResolution().getScaledWidth() / 2) - (buttonApply.width / 2);
+			buttonApply.yPosition = RenderUtil.scaledDisplayResolution().getScaledHeight() - 40;
 			buttonApply.width = 50;
 			buttonApply.height = 20;
 			buttonApply.baseColor = 0xAA00AAFF;

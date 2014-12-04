@@ -4,7 +4,7 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 
-import com.arisux.airi.engine.WorldEngine;
+import com.arisux.airi.lib.WorldUtil;
 import com.arisux.avp.entities.ExtendedEntityPlayer;
 
 import cpw.mods.fml.common.network.ByteBufUtils;
@@ -40,7 +40,7 @@ public class PacketBroadcastRadiusClientUpdate implements IMessage, IMessageHand
 
 	@Override public PacketBroadcastRadiusClientUpdate onMessage(PacketBroadcastRadiusClientUpdate packet, MessageContext ctx)
 	{
-		EntityPlayer targetPlayer = WorldEngine.Entities.Players.getPlayerForUsername(Minecraft.getMinecraft().thePlayer.worldObj, packet.username);
+		EntityPlayer targetPlayer = WorldUtil.Entities.Players.getPlayerForUsername(Minecraft.getMinecraft().thePlayer.worldObj, packet.username);
 		
 		if (targetPlayer != null)
 		{

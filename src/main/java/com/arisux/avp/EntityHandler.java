@@ -3,13 +3,14 @@ package com.arisux.avp;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
 
-import com.arisux.airi.lib.util.interfaces.IInitializable;
+import com.arisux.airi.lib.interfaces.IInitializable;
 import com.arisux.avp.entities.*;
 import com.arisux.avp.entities.mob.*;
 import com.arisux.avp.entities.tile.*;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.registry.*;
+import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class EntityHandler implements IInitializable
 {
@@ -20,7 +21,6 @@ public class EntityHandler implements IInitializable
 		this.registerInstanceEntities();
 		this.registerEntities();
 		this.registerSpawns();
-		this.registerDeathMessages();
 	}
 
 	public void registerTileEntities()
@@ -84,13 +84,5 @@ public class EntityHandler implements IInitializable
 		EntityRegistry.addSpawn(EntityCrusher.class, 6, 1, 2, EnumCreatureType.creature, new BiomeGenBase[] { BiomeGenBase.plains, BiomeGenBase.swampland, BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.taiga, BiomeGenBase.taigaHills, BiomeGenBase.jungle, BiomeGenBase.jungleHills });
 		EntityRegistry.addSpawn(EntityFacehugger.class, 20, 2, 8, EnumCreatureType.creature, new BiomeGenBase[] { BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.plains, BiomeGenBase.jungle, BiomeGenBase.jungleHills });
 		EntityRegistry.addSpawn(EntityChestburster.class, 6, 1, 2, EnumCreatureType.creature, new BiomeGenBase[] { BiomeGenBase.forest, BiomeGenBase.forestHills, BiomeGenBase.plains, BiomeGenBase.jungle, BiomeGenBase.jungleHills });
-	}
-
-	@SuppressWarnings("deprecation")
-	private void registerDeathMessages()
-	{
-		LanguageRegistry.instance().addStringLocalization("death.attack.bullet", "en_US", "%1$s was shot by %2$s.");
-		LanguageRegistry.instance().addStringLocalization("death.attack.spear", "en_US", "%1$s was speared by %2$s.");
-		LanguageRegistry.instance().addStringLocalization("death.attack.acidshot", "en_US", "%1$s melted away in acid.");
 	}
 }

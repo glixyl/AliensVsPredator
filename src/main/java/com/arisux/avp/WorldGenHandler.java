@@ -1,6 +1,6 @@
 package com.arisux.avp;
 
-import com.arisux.airi.lib.util.interfaces.IInitializable;
+import com.arisux.airi.lib.interfaces.IInitializable;
 import com.arisux.avp.world.WorldGenerator;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;

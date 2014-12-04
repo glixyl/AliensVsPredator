@@ -1,6 +1,6 @@
 package com.arisux.avp;
 
-import com.arisux.airi.lib.util.interfaces.IInitializable;
+import com.arisux.airi.lib.interfaces.IInitializable;
 import com.arisux.avp.packets.client.*;
 import com.arisux.avp.packets.server.*;
 
@@ -14,7 +14,7 @@ public class NetworkHandler extends SimpleNetworkWrapper implements IInitializab
 
 	public NetworkHandler()
 	{
-		super(AliensVsPredator.instance().channel());
+		super(AliensVsPredator.ID.toUpperCase());
 	}
 
 	@Override

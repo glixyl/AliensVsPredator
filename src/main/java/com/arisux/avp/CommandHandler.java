@@ -1,6 +1,6 @@
 package com.arisux.avp;
 
-import com.arisux.airi.lib.util.interfaces.IInitializable;
+import com.arisux.airi.lib.interfaces.IInitializable;
 import com.arisux.avp.command.CommandPlayerMode;
 import com.arisux.avp.command.CommandWorldSelectorExport;
 

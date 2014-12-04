@@ -7,7 +7,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL12;
 
-import com.arisux.airi.engine.RenderEngine;
+import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.TileEntityWorkstation;
 import com.arisux.avp.entities.tile.model.ModelWorkstation;
@@ -38,15 +38,15 @@ public class RenderWorkstation extends TileEntitySpecialRenderer
 
 			if (tile.isPowered())
 			{
-				RenderEngine.glDisableLightMapping();
-				RenderEngine.glDisableLight();
+				RenderUtil.glDisableLightMapping();
+				RenderUtil.glDisableLight();
 				glEnable(GL_BLEND);
 				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 				this.bindTexture(resourceLight);
 				this.model.render(tile, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0625F);
 				glDisable(GL_BLEND);
-				RenderEngine.glEnableLight();
-				RenderEngine.glEnableLightMapping();
+				RenderUtil.glEnableLight();
+				RenderUtil.glEnableLightMapping();
 			}
 		}
 		glPopMatrix();

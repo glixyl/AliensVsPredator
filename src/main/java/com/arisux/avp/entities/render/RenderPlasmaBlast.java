@@ -6,7 +6,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import com.arisux.airi.engine.RenderEngine.Color;
+import com.arisux.airi.lib.RenderUtil.Color;
 import com.arisux.avp.entities.EntityPlasma;
 import com.arisux.avp.entities.model.ModelPlasma;
 

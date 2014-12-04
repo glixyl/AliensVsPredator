@@ -5,7 +5,7 @@ import java.util.Random;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 
-import com.arisux.airi.engine.BlockTypeLib.HookedBlock;
+import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.avp.AliensVsPredator;
 
 public class BlockOreSilicon extends HookedBlock

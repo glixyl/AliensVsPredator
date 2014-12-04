@@ -1,6 +1,6 @@
 package com.arisux.avp.util;
 
-import static com.arisux.airi.engine.RenderEngine.*;
+import static com.arisux.airi.lib.RenderUtil.*;
 import static org.lwjgl.opengl.GL11.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EnumCreatureAttribute;

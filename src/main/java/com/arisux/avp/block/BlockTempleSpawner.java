@@ -5,8 +5,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
-import com.arisux.airi.engine.BlockTypeLib.HookedBlock;
-import com.arisux.airi.engine.RenderEngine;
+import com.arisux.airi.lib.BlockTypes.HookedBlock;
+import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.entities.mob.EntityOvamorph;
 import com.arisux.avp.entities.mob.EntityQueen;
 
@@ -17,7 +17,7 @@ public class BlockTempleSpawner extends HookedBlock
 	public BlockTempleSpawner(Material par2, boolean creativeOnly)
 	{
 		super(par2);
-		this.setIconSet(new RenderEngine.IconSet("avp:spawner_side", "avp:spawner_top", "avp:spawner_bottom", "avp:spawner_side", "avp:spawner_side", "avp:spawner_side", "avp:spawner_side"));
+		this.setIconSet(new RenderUtil.IconSet("avp:spawner_side", "avp:spawner_top", "avp:spawner_bottom", "avp:spawner_side", "avp:spawner_side", "avp:spawner_side", "avp:spawner_side"));
 		this.creativeOnly = creativeOnly;
 	}
 

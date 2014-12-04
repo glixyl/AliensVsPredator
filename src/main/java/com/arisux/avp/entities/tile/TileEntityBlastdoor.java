@@ -13,7 +13,7 @@ public class TileEntityBlastdoor extends PoweredTileEntity
 {
 	private float doorProgress;
 	private boolean doorOpen;
-	private ArrayList<com.arisux.airi.engine.WorldEngine.Blocks.CoordData> managedCoords = new ArrayList<com.arisux.airi.engine.WorldEngine.Blocks.CoordData>();
+	private ArrayList<com.arisux.airi.lib.WorldUtil.Blocks.CoordData> managedCoords = new ArrayList<com.arisux.airi.lib.WorldUtil.Blocks.CoordData>();
 
 	public TileEntityBlastdoor()
 	{
@@ -135,7 +135,7 @@ public class TileEntityBlastdoor extends PoweredTileEntity
 		return doorProgress;
 	}
 
-	public void assignCoord(com.arisux.airi.engine.WorldEngine.Blocks.CoordData data)
+	public void assignCoord(com.arisux.airi.lib.WorldUtil.Blocks.CoordData data)
 	{
 		if (!this.managedCoords.contains(data))
 		{

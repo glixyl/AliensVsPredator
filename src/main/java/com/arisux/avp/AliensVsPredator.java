@@ -3,18 +3,21 @@ package com.arisux.avp;
 
 import com.arisux.airi.AIRI;
 import com.arisux.airi.api.updater.Updater;
-import com.arisux.airi.lib.util.interfaces.ModController;
+import com.arisux.airi.lib.ModUtil;
+import com.arisux.airi.lib.interfaces.IMod;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.*;
 import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid="avp")
-public class AliensVsPredator extends ModController
+@Mod(modid=AliensVsPredator.ID)
+public class AliensVsPredator implements IMod
 {
+	protected static final String ID = "avp";
+	
 	@Mod.Instance
 	private static AliensVsPredator instance;
+	private ModContainer container;
 	public LocalEventHandler localEvents;
 	public NetworkHandler network;
 	public KeybindHandler keybinds;
@@ -32,18 +35,35 @@ public class AliensVsPredator extends ModController
 	public Settings settings;
 	public Updater updater;
 	
-	public static Properties properties()
-	{
-		return Properties.instance;
-	}
-	
 	public static AliensVsPredator instance()
 	{
 		return AliensVsPredator.instance;
 	}
 	
+	public static Properties properties()
+	{
+		return Properties.instance;
+	}
+	
+	public static Settings settings()
+	{
+		return instance().settings;
+	}
+	
 	@Override
-	public CreativeTab getCreativeTab()
+	public ModContainer container()
+	{
+		return this.container == null ? this.container = ModUtil.getModContainerForId(AliensVsPredator.ID) : this.container;
+	}
+	
+	@Override
+	public String domain()
+	{
+		return container().getModId() + ":";
+	}
+	
+	@Override
+	public CreativeTab tab()
 	{
 		return CreativeTab.instance;
 	}
@@ -95,7 +115,7 @@ public class AliensVsPredator extends ModController
 
 			if (settings.isUpdaterEnabled())
 			{
-				(updater = AIRI.updaterApi().createNewUpdater(this)).postInitialize(event);
+				(updater = AIRI.updaterApi().createNewUpdater(this, settings().getUrlChangelog())).postInitialize(event);
 			}
 		}
 	}
@@ -104,5 +124,10 @@ public class AliensVsPredator extends ModController
 	public void serverStarting(FMLServerStartingEvent event)
 	{
 		this.commands.onServerStarting(event);
+	}
+
+	public boolean isBetaRelease()
+	{
+		return true;
 	}
 }

@@ -5,9 +5,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.arisux.airi.engine.ItemTypeLib.HookedItem;
-import com.arisux.airi.engine.*;
-import com.arisux.airi.engine.WorldEngine.Blocks;
+import com.arisux.airi.lib.ItemTypes.HookedItem;
+import com.arisux.airi.lib.*;
+import com.arisux.airi.lib.WorldUtil.Blocks;
 
 public class ItemIngotLithium extends HookedItem
 {
@@ -28,8 +28,8 @@ public class ItemIngotLithium extends HookedItem
 
 		if (par1ItemStack.getItemDamage() >= par1ItemStack.getMaxDamage())
 		{
-			WorldEngine.createExplosion(par3Entity, par2World, new Blocks.CoordData(par3Entity), 1F, true, true, true);
-			WorldEngine.Entities.Players.Inventories.consumeItem((EntityPlayer) par3Entity, this, true);
+			WorldUtil.createExplosion(par3Entity, par2World, new Blocks.CoordData(par3Entity), 1F, true, true, true);
+			WorldUtil.Entities.Players.Inventories.consumeItem((EntityPlayer) par3Entity, this, true);
 		}
 	}
 }

@@ -6,9 +6,9 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.MinecraftForgeClient;
 
-import com.arisux.airi.lib.render.ItemRenderer3D;
-import com.arisux.airi.lib.util.interfaces.IInitializablePost;
-import com.arisux.airi.lib.util.interfaces.IInitializablePre;
+import com.arisux.airi.lib.interfaces.IInitializablePost;
+import com.arisux.airi.lib.interfaces.IInitializablePre;
+import com.arisux.airi.lib.render.ItemRenderer;
 import com.arisux.avp.block.render.RenderTypeAngled;
 import com.arisux.avp.entities.*;
 import com.arisux.avp.entities.mob.*;
@@ -26,7 +26,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 public class RenderingHandler implements IInitializablePre, IInitializablePost
 {
-	public ItemRenderer3D renderM41A, renderAK47, renderM56SG, renderM4, renderSniper;
+	public ItemRenderer renderM41A, renderAK47, renderM56SG, renderM4, renderSniper;
 	public ISimpleBlockRenderingHandler renderTypeAngled;
 	
 	@Override

@@ -1,7 +1,7 @@
 package com.arisux.avp.gui;
 
-import static com.arisux.airi.engine.RenderEngine.bindTexture;
-import static com.arisux.airi.engine.RenderEngine.drawQuad;
+import static com.arisux.airi.lib.RenderUtil.bindTexture;
+import static com.arisux.airi.lib.RenderUtil.drawQuad;
 
 import java.util.*;
 
@@ -13,9 +13,9 @@ import net.minecraft.world.EnumDifficulty;
 
 import org.lwjgl.opengl.GL11;
 
-import com.arisux.airi.engine.GuiTypeLib.GuiCustomButton;
-import com.arisux.airi.engine.RenderEngine;
-import com.arisux.airi.lib.util.interfaces.IActionPerformed;
+import com.arisux.airi.lib.GuiElements.GuiCustomButton;
+import com.arisux.airi.lib.RenderUtil;
+import com.arisux.airi.lib.interfaces.IActionPerformed;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.api.WristbracerAPI;
 import com.arisux.avp.inventory.container.ContainerWristbracer;
@@ -75,7 +75,7 @@ public class GuiWristbracer extends GuiContainer
 		
 		for (byte s = 0; s < 9; s++)
 		{
-			RenderEngine.drawRect(guiLeft + 15 + (18 * s), guiTop + 136, 16, 16, 0xAA000000);
+			RenderUtil.drawRect(guiLeft + 15 + (18 * s), guiTop + 136, 16, 16, 0xAA000000);
 		}
 		
 		for (int x1 = 1; x1 <= 6; x1++)

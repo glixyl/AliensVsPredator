@@ -11,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import com.arisux.airi.engine.RenderEngine;
+import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 
 public class RenderAcidPool extends Render
@@ -27,7 +27,7 @@ public class RenderAcidPool extends Render
 			GL11.glDisable(GL11.GL_LIGHTING);
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
-			RenderEngine.glDisableLightMapping();
+			RenderUtil.glDisableLightMapping();
 			this.bindTexture(resourceLocation);
 			float offset = 1.4F;
 			double renderX = entity.lastTickPosX + (entity.posX - entity.lastTickPosX) * renderPartialTicks;
@@ -58,7 +58,7 @@ public class RenderAcidPool extends Render
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			GL11.glDisable(GL11.GL_BLEND);
 			GL11.glDisable(GL11.GL_LIGHTING);
-			RenderEngine.glEnableLightMapping();
+			RenderUtil.glEnableLightMapping();
 		}
 		GL11.glPopMatrix();
 	}

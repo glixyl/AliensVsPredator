@@ -6,7 +6,7 @@ import net.minecraft.server.management.ServerConfigurationManager;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
 
-import com.arisux.airi.lib.util.interfaces.IInitializable;
+import com.arisux.airi.lib.interfaces.IInitializable;
 import com.arisux.avp.dimension.lv223.*;
 
 import cpw.mods.fml.common.FMLCommonHandler;

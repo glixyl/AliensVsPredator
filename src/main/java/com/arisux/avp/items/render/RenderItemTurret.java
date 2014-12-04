@@ -7,10 +7,10 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import com.arisux.airi.lib.render.ItemRenderer3D;
+import com.arisux.airi.lib.render.ItemRenderer;
 import com.arisux.avp.entities.tile.model.ModelTurret;
 
-public class RenderItemTurret extends ItemRenderer3D
+public class RenderItemTurret extends ItemRenderer
 {
 	private float rotation;
 	

@@ -8,8 +8,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import com.arisux.airi.engine.WorldEngine;
-import com.arisux.airi.engine.WorldEngine.Blocks.CoordData;
+import com.arisux.airi.lib.WorldUtil;
+import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.EntityPlasma;
 import com.arisux.avp.entities.ExtendedEntityPlayer;
@@ -67,7 +67,7 @@ public class ItemPlasmaCaster extends Item
 		}
 		else
 		{
-			plasma = (EntityPlasma) WorldEngine.Entities.getEntityInCoordsRange(world, EntityPlasma.class, new CoordData(posX, posY, posZ), 1);
+			plasma = (EntityPlasma) WorldUtil.Entities.getEntityInCoordsRange(world, EntityPlasma.class, new CoordData(posX, posY, posZ), 1);
 		}
 
 		if (plasma != null)

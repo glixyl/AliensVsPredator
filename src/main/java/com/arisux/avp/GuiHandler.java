@@ -4,7 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
-import com.arisux.airi.lib.util.interfaces.IInitializable;
+import com.arisux.airi.lib.interfaces.IInitializable;
 import com.arisux.avp.entities.tile.TileEntityAssembler;
 import com.arisux.avp.entities.tile.TileEntityTurret;
 import com.arisux.avp.gui.*;

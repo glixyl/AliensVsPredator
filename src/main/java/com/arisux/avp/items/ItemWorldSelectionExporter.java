@@ -7,8 +7,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-import com.arisux.airi.engine.ItemTypeLib.HookedItem;
-import com.arisux.airi.engine.WorldEngine.Blocks;
+import com.arisux.airi.lib.ItemTypes.HookedItem;
+import com.arisux.airi.lib.WorldUtil.Blocks;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -37,7 +38,7 @@ public class ItemWorldSelectionExporter extends HookedItem
 	{
 		if (!player.worldObj.isRemote)
 		{
-			this.writeSelectionDataToStack(null, new Blocks.CoordData((int) x, (int) y, (int) z, player.worldObj.getBlock((int) x, (int) y, (int) z)), stack);
+			this.writeSelectionDataToStack(null, new Blocks.CoordData(x, y, z, player.worldObj.getBlock(x, y, z)), stack);
 		}
 
 		return super.onItemUseFirst(stack, player, world, x, y, z, side, hitX, hitY, hitZ);

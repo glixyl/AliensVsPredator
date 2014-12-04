@@ -8,7 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-import com.arisux.airi.engine.WorldEngine;
+import com.arisux.airi.lib.WorldUtil;
 import com.arisux.avp.AliensVsPredator;
 
 public class EntityNuke extends EntityThrowable
@@ -62,7 +62,7 @@ public class EntityNuke extends EntityThrowable
 		{
 			if (AliensVsPredator.instance().settings.areExplosionsEnabled())
 			{
-				WorldEngine.createThreadedExplosion((Entity) null, worldObj, (int) this.posX, (int) this.posY, (int) this.posZ, 47F);
+				WorldUtil.createThreadedExplosion((Entity) null, worldObj, (int) this.posX, (int) this.posY, (int) this.posZ, 47F);
 			}
 
 			this.setDead();

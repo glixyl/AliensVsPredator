@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 
-import com.arisux.airi.engine.ItemTypeLib.HookedItem;
+import com.arisux.airi.lib.ItemTypes.HookedItem;
 
 public class ItemStorageDevice extends HookedItem
 {

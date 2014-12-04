@@ -6,8 +6,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-import com.arisux.airi.engine.WorldEngine;
-import com.arisux.airi.engine.WorldEngine.Blocks;
+import com.arisux.airi.lib.WorldUtil;
+import com.arisux.airi.lib.WorldUtil.Blocks;
 import com.arisux.avp.entities.EntityAcidPool;
 
 import cpw.mods.fml.relauncher.Side;
@@ -124,7 +124,7 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 			}
 			else
 			{
-				this.targetQueen = (EntityQueen) WorldEngine.Entities.getEntityInCoordsRange(this.worldObj, EntityQueen.class, new Blocks.CoordData(this), 50);
+				this.targetQueen = (EntityQueen) WorldUtil.Entities.getEntityInCoordsRange(this.worldObj, EntityQueen.class, new Blocks.CoordData(this), 50);
 			}
 		}
 	}

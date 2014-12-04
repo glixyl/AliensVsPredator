@@ -7,8 +7,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.arisux.airi.engine.ItemTypeLib.HookedItem;
-import com.arisux.airi.engine.WorldEngine;
+import com.arisux.airi.lib.ItemTypes.HookedItem;
+import com.arisux.airi.lib.WorldUtil;
 import com.arisux.avp.entities.EntityGrenade;
 
 import cpw.mods.fml.relauncher.Side;
@@ -32,7 +32,7 @@ public class ItemGrenade extends HookedItem
 			EntityGrenade grenade = new EntityGrenade(worldObj, entityplayer);
 			grenade.isFlaming = isFlaming;
 			worldObj.spawnEntityInWorld(grenade);
-			WorldEngine.Entities.Players.Inventories.consumeItem(entityplayer, this);
+			WorldUtil.Entities.Players.Inventories.consumeItem(entityplayer, this);
 		}
 		
 		return itemstack;

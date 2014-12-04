@@ -10,9 +10,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
 
-import com.arisux.airi.engine.*;
-import com.arisux.airi.engine.WorldEngine.Blocks;
-import com.arisux.airi.engine.WorldEngine.Blocks.CoordData;
+import com.arisux.airi.lib.*;
+import com.arisux.airi.lib.WorldUtil.Blocks;
+import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
 import com.arisux.avp.AliensVsPredator;
 
 public class EntityPlasma extends EntityThrowable
@@ -84,11 +84,11 @@ public class EntityPlasma extends EntityThrowable
 	{
 		if (!this.worldObj.isRemote)
 		{
-			WorldEngine.createExplosion(null, worldObj, new Blocks.CoordData(this), 1.5F * size, false, true, AliensVsPredator.instance().settings.areExplosionsEnabled());
+			WorldUtil.createExplosion(null, worldObj, new Blocks.CoordData(this), 1.5F * size, false, true, AliensVsPredator.instance().settings.areExplosionsEnabled());
 			this.worldObj.playSoundAtEntity(this, "random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
 
 			@SuppressWarnings("unchecked")
-			List<Entity> entitiesInRange = (List<Entity>) WorldEngine.Entities.getEntitiesInCoordsRange(worldObj, EntityLivingBase.class, new CoordData(this.posX, this.posY, this.posZ), (int)Math.ceil(1.5F * size));
+			List<Entity> entitiesInRange = (List<Entity>) WorldUtil.Entities.getEntitiesInCoordsRange(worldObj, EntityLivingBase.class, new CoordData(this.posX, this.posY, this.posZ), (int)Math.ceil(1.5F * size));
 			
 			for (Entity entity : entitiesInRange)
 			{

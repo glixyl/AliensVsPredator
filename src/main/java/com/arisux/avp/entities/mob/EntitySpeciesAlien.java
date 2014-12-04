@@ -9,7 +9,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-import com.arisux.airi.engine.WorldEngine;
+import com.arisux.airi.lib.WorldUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.EntityAcidPool;
 import com.arisux.avp.interfaces.IHiveSignature;
@@ -74,7 +74,7 @@ public abstract class EntitySpeciesAlien extends EntityMob implements IMob, IHiv
 
 		if (!this.worldObj.isRemote && entityEvolveTo != null && minKillsToEvolve != 0 && this.killedEntities >= minKillsToEvolve)
 		{
-			EntitySpeciesAlien entity = (EntitySpeciesAlien) WorldEngine.Entities.constructEntity(this.worldObj, this.entityEvolveTo);
+			EntitySpeciesAlien entity = (EntitySpeciesAlien) WorldUtil.Entities.constructEntity(this.worldObj, this.entityEvolveTo);
 			entity.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
 			this.worldObj.spawnEntityInWorld(entity);
 			this.setDead();
