@@ -13,8 +13,12 @@ import net.minecraft.world.World;
 
 import com.arisux.avp.AliensVsPredator;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class EntityCrusher extends EntityXenomorph
 {
+	@SideOnly(Side.CLIENT)
 	private ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_CRUSHER);
 
 	public EntityCrusher(World var1)
@@ -99,6 +103,7 @@ public class EntityCrusher extends EntityXenomorph
 		return 5;
 	}
 
+	@SideOnly(Side.CLIENT)
 	@Override
 	public ResourceLocation getResource()
 	{

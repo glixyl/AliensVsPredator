@@ -10,8 +10,12 @@ import net.minecraft.world.World;
 
 import com.arisux.avp.AliensVsPredator;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class EntityAqua extends EntityXenomorph
 {
+	@SideOnly(Side.CLIENT)
 	private ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_AQUA_XENOMORPH);
 
 	public EntityAqua(World var1)
@@ -74,6 +78,8 @@ public class EntityAqua extends EntityXenomorph
 	{
 		return AliensVsPredator.properties().SOUND_ALIEN_DEATH;
 	}
+	
+	@SideOnly(Side.CLIENT)
 	@Override
 	public ResourceLocation getResource()
 	{

@@ -13,8 +13,12 @@ import net.minecraft.world.World;
 
 import com.arisux.avp.AliensVsPredator;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class EntityPraetorian extends EntityXenomorph
 {
+	@SideOnly(Side.CLIENT)
 	private ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_PRAETORIAN);
 
 	public EntityPraetorian(World var1)
@@ -95,6 +99,7 @@ public class EntityPraetorian extends EntityXenomorph
 		super.onUpdate();
 	}
 
+	@SideOnly(Side.CLIENT)
 	@Override
 	public ResourceLocation getResource()
 	{

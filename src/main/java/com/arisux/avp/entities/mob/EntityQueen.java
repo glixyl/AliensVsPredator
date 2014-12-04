@@ -1,6 +1,9 @@
 package com.arisux.avp.entities.mob;
 
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -25,21 +28,19 @@ public class EntityQueen extends EntityXenomorph implements IHiveSignature
 		this.ignoreFrustumCheck = true;
 		this.ovipositorSize = 0.0F;
 		this.setHiveSignature(this.getUniqueID());
-		// this.tasks.addTask(0, new EntityAISwimming(this));
-		// this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
-		// this.tasks.addTask(4, new EntityAILeapAtTarget(this, 1F));
-		// this.tasks.addTask(1, new EntityAIWander(this, 1.0D));
-		// this.tasks.addTask(5, new EntityAIAttackOnCollide(this, EntityYautja.class, 1.0D, false));
-		// this.tasks.addTask(6, new EntityAIAttackOnCollide(this, EntityAgeable.class, 1.0D, false));
-		// this.tasks.addTask(7, new EntityAIAttackOnCollide(this, EntityAnimal.class, 1.0D, false));
-		// this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-		// this.tasks.addTask(2, new EntityAILookIdle(this));
-		// this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
-		// this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, false));
-		// this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityYautja.class, 0, false));
-		// this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityAnimal.class, 0, false));
-		// this.targetTasks.addTask(5, new EntityAINearestAttackableTarget(this, EntityMarine.class, 0, false));
-		// this.targetTasks.addTask(6, new EntityAINearestAttackableTarget(this, EntityAgeable.class, 0, false));
+		this.tasks.addTask(0, new EntityAISwimming(this));
+		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
+		this.tasks.addTask(2, new EntityAILeapAtTarget(this, 1F));
+		this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityYautja.class, 1.0D, false));
+		this.tasks.addTask(4, new EntityAIAttackOnCollide(this, EntityAnimal.class, 1.0D, false));
+		this.tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+		this.tasks.addTask(6, new EntityAIWander(this, 1.0D));
+		this.tasks.addTask(7, new EntityAILookIdle(this));
+		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
+		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, false));
+		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityYautja.class, 0, false));
+		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityAnimal.class, 0, false));
+		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityMarine.class, 0, false));
 	}
 
 	@Override
@@ -95,14 +96,14 @@ public class EntityQueen extends EntityXenomorph implements IHiveSignature
 	{
 		return resourceLocation;
 	}
-	
+
 	@Override
 	public void readEntityFromNBT(NBTTagCompound nbt)
 	{
 		super.readEntityFromNBT(nbt);
 		this.ovipositorSize = nbt.getFloat("ovipositorSize");
 	}
-	
+
 	@Override
 	public void writeEntityToNBT(NBTTagCompound nbt)
 	{

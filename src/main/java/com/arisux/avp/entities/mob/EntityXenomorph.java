@@ -6,10 +6,17 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
+import com.arisux.airi.engine.WorldEngine;
+import com.arisux.airi.engine.WorldEngine.Blocks;
 import com.arisux.avp.entities.EntityAcidPool;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 {
+	protected EntityQueen targetQueen;
+
 	public EntityXenomorph(World world)
 	{
 		super(world);
@@ -55,7 +62,8 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 		if (par1)
 		{
 			b0 = (byte) (b0 | 1);
-		} else
+		}
+		else
 		{
 			b0 &= -2;
 		}
@@ -84,9 +92,39 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 					this.addVelocity(0, 0.6D, 0);
 				}
 
-			} else if (targetEntity != null && !(targetEntity instanceof EntityAcidPool) && !(targetEntity.getClass().getSuperclass().getSuperclass() == EntitySpeciesAlien.class) && !(targetEntity.getClass().getSuperclass() == EntitySpeciesAlien.class))
+			}
+			else if (targetEntity != null && !(targetEntity instanceof EntityAcidPool) && !(targetEntity.getClass().getSuperclass().getSuperclass() == EntitySpeciesAlien.class) && !(targetEntity.getClass().getSuperclass() == EntitySpeciesAlien.class))
 			{
 				this.setAttackTarget((EntityLivingBase) targetEntity);
+			}
+		}
+
+		this.acquireHiveSignature();
+	}
+
+	public void acquireHiveSignature()
+	{
+		if (this.getHiveSignature() == null)
+		{
+			if (this.targetQueen != null)
+			{
+				if (!this.targetQueen.isDead)
+				{
+					this.getNavigator().tryMoveToEntityLiving(this.targetQueen, this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue() * 2.5D);
+
+					if (this.getDistanceSqToEntity(this.targetQueen) < 10)
+					{
+						this.setHiveSignature(this.targetQueen.getUniqueID());
+					}
+				}
+				else
+				{
+					this.targetQueen = null;
+				}
+			}
+			else
+			{
+				this.targetQueen = (EntityQueen) WorldEngine.Entities.getEntityInCoordsRange(this.worldObj, EntityQueen.class, new Blocks.CoordData(this), 50);
 			}
 		}
 	}
@@ -96,5 +134,6 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 		return (this.dataWatcher.getWatchableObjectByte(16) & 1) != 0;
 	}
 
+	@SideOnly(Side.CLIENT)
 	public abstract ResourceLocation getResource();
 }

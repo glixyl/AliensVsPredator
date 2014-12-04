@@ -2,7 +2,8 @@ package com.arisux.avp.entities.mob;
 
 import java.util.Random;
 
-import net.minecraft.entity.*;
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,18 +11,20 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-import com.arisux.airi.AIRI;
-import com.arisux.airi.engine.WorldEngine;
-import com.arisux.airi.engine.WorldEngine.Blocks;
 import com.arisux.avp.AliensVsPredator;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityDrone extends EntityXenomorph
 {
-	private static final ResourceLocation texBasic = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_DRONE_BASIC);
-	private static final ResourceLocation texAdv = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_DRONE_ADVANCED);
-	public int mobType;
-	public EntityQueen targetQueen;
+	@SideOnly(Side.CLIENT)
+	public static final ResourceLocation texBasic = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_DRONE_BASIC);
+	@SideOnly(Side.CLIENT)
+	public static final ResourceLocation texAdv = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_DRONE_ADVANCED);
 
+	public int mobType;
+	
 	public EntityDrone(World world)
 	{
 		super(world);
@@ -50,6 +53,7 @@ public class EntityDrone extends EntityXenomorph
 		this.setEvolveTo(EntityWarrior.class, 12);
 	}
 
+	@SideOnly(Side.CLIENT)
 	@Override
 	public ResourceLocation getResource()
 	{
@@ -57,10 +61,8 @@ public class EntityDrone extends EntityXenomorph
 		{
 			case 0:
 				return texBasic;
-
 			case 1:
 				return texAdv;
-
 			default:
 				return null;
 		}
@@ -113,45 +115,5 @@ public class EntityDrone extends EntityXenomorph
 	public void onUpdate()
 	{
 		super.onUpdate();
-
-		if (this.targetQueen != null && !this.targetQueen.isDead)
-		{
-			this.pathToQueen(this.targetQueen);
-		}
-		else
-		{
-			this.targetQueen = findQueen();
-		}
-
-	}
-
-	public EntityQueen findQueen()
-	{
-		EntityQueen queen;
-		Entity ent = WorldEngine.Entities.getEntityInCoordsRange(this.worldObj, EntityQueen.class, new Blocks.CoordData(this), 50);
-		if (ent instanceof EntityQueen)
-		{
-			queen = (EntityQueen) ent;
-			AIRI.logger.info("Queen found at " + queen.posX + ", " + queen.posY + ", " + queen.posZ);
-		}
-		else
-		{
-			queen = null;
-		}
-		return queen;
-	}
-
-	public void pathToQueen(EntityQueen q)
-	{
-		if (!q.isDead)
-		{
-			this.getNavigator().tryMoveToEntityLiving(q, this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue() * 2.5D);
-		}
-		else
-		{
-			this.targetQueen = null;
-		}
-		// this.getNavigator().tryMoveToXYZ(q.posX, q.posY, q.posZ, 0.6);
-		AIRI.logger.info("Pathing to queen at " + q.posX + ", " + q.posY + ", " + q.posZ);
 	}
 }
