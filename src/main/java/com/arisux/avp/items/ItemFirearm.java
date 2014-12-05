@@ -76,14 +76,7 @@ public class ItemFirearm extends HookedItem
 		if (this.curAmmo > 0 && this.curCooldown <= 0 && this.curReload <= 0 || par3EntityPlayer.capabilities.isCreativeMode)
 		{
 			par2World.playSoundAtEntity(par3EntityPlayer, this.sound, 0.5F, 1.0F);
-			if (par3EntityPlayer.capabilities.isCreativeMode)
-			{
-				AliensVsPredator.instance().network.sendToServer(new PacketShootBulletServerUpdate(this.itemAmmo.getInflictionDamage() * 15));
-			}
-			else
-			{
-				AliensVsPredator.instance().network.sendToServer(new PacketShootBulletServerUpdate(this.itemAmmo.getInflictionDamage()));
-			}
+			AliensVsPredator.instance().network.sendToServer(new PacketShootBulletServerUpdate(this.itemAmmo.getInflictionDamage()));
 			this.curCooldown = this.maxCooldown;
 
 			if (!par3EntityPlayer.capabilities.isCreativeMode)
