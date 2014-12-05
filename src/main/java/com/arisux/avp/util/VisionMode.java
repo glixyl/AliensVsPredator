@@ -4,6 +4,7 @@ import static com.arisux.airi.lib.RenderUtil.*;
 import static org.lwjgl.opengl.GL11.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.RenderLivingEvent;
 
 import org.lwjgl.opengl.GL11;
@@ -40,8 +41,10 @@ public enum VisionMode
 		@Override
 		public void render(Object... data)
 		{
-			boolean isDay = (Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 24000L) / 1000L < 11L;
-			AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue = isDay ? -60F : 0F;
+			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+			boolean isDay = (player.worldObj.getWorldTime() % 24000L) / 1000L < 11L;
+			boolean canSeeSky = player.worldObj.canBlockSeeTheSky((int) player.posX, (int) player.posY, (int) player.posZ);
+			AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue = isDay && canSeeSky && !player.worldObj.isRaining() ? -60F : 0F;
 
 			GL11.glPushMatrix();
 			{
@@ -90,8 +93,10 @@ public enum VisionMode
 		@Override
 		public void render(Object... data)
 		{
-			boolean isDay = (Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 24000L) / 1000L < 11L;
-			AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue = isDay ? -60F : 0F;
+			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+			boolean isDay = (player.worldObj.getWorldTime() % 24000L) / 1000L < 11L;
+			boolean canSeeSky = player.worldObj.canBlockSeeTheSky((int) player.posX, (int) player.posY, (int) player.posZ);
+			AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue = isDay && canSeeSky && !player.worldObj.isRaining() ? -60F : 0F;
 
 			GL11.glPushMatrix();
 			{
