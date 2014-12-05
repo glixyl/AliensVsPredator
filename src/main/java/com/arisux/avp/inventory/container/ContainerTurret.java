@@ -14,7 +14,7 @@ public class ContainerTurret extends Container
 	public ContainerTurret(EntityPlayer player, TileEntityTurret turret, World world, int posX, int posY, int posZ)
 	{
 		this.tile = turret;
-		
+
 		for (byte x = 0; x < 9; x++)
 		{
 			this.addSlotToContainer(new Slot(player.inventory, x, 33 + 18 * x, 141));
@@ -25,7 +25,7 @@ public class ContainerTurret extends Container
 		for (byte x = 0; x < this.tile.inventoryExpansion.getSizeInventory(); x++)
 		{
 			this.addSlotToContainer(new Slot(tile.inventoryExpansion, x, 146 + 25 * x, 62));
-			
+
 			ItemStack stack = this.tile.inventoryExpansion.getStackInSlot(x);
 
 			if (stack != null)
@@ -37,7 +37,7 @@ public class ContainerTurret extends Container
 		for (byte x = 0; x < this.tile.inventoryAmmo.getSizeInventory(); x++)
 		{
 			this.addSlotToContainer(new Slot(tile.inventoryAmmo, x, 33 + 18 * x, 114));
-			
+
 			ItemStack stack = this.tile.inventoryAmmo.getStackInSlot(x);
 
 			if (stack != null)
@@ -68,9 +68,42 @@ public class ContainerTurret extends Container
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotId)
 	{
-		return super.transferStackInSlot(player, slotId);
+		Slot slot = (Slot) this.inventorySlots.get(slotId);
+
+		if (slot != null)
+		{
+			ItemStack itemstack = slot.getStack();
+
+			if (itemstack != null && itemstack.getItem() == this.tile.getItemAmmo())
+			{
+				if (!this.mergeItemStack(itemstack, 13, 22, true))
+				{
+					return null;
+				}
+
+				if (itemstack.stackSize == 0)
+				{
+					slot.putStack((ItemStack) null);
+				}
+				else
+				{
+					slot.onSlotChanged();
+				}
+
+				if (itemstack.stackSize == itemstack.stackSize)
+				{
+					return null;
+				}
+
+				slot.onPickupFromSlot(player, itemstack);
+			}
+			
+			return itemstack;
+		}
+
+		return null;
 	}
-	
+
 	@Override
 	public boolean canInteractWith(EntityPlayer player)
 	{

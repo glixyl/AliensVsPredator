@@ -22,6 +22,7 @@ import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.Constants.NBT;
 
 import com.arisux.airi.lib.WorldUtil;
+import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.EntityBullet;
 import com.arisux.avp.entities.EntityTurret;
@@ -45,7 +46,7 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 	public InventoryBasic inventoryAmmo, inventoryExpansion, inventoryDrive;
 	private Entity targetEntity, turretEnitty;
 	private ContainerTurret container;
-	private com.arisux.airi.lib.WorldUtil.Blocks.CoordData focusPoint;
+	private CoordData focusPoint;
 	private Item itemAmmo;
 
 	@SideOnly(Side.CLIENT)
