@@ -1,7 +1,6 @@
 package com.arisux.avp.items;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -26,18 +25,16 @@ public class ItemPlasmaCaster extends Item
 	@Override
 	public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean flag)
 	{
-		if (itemstack.getItemDamage() > 0)
-		{
-			itemstack.damageItem(1, (EntityLiving) entity);
-		}
-
 		if (entity instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer) entity;
 
-			if (player.isUsingItem())
+			if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == AliensVsPredator.instance().items.itemPlasmaCaster)
 			{
-				this.onItemUse(itemstack, player, world, (int) player.posX, (int) player.posY, (int) player.posZ, player.getItemInUseCount());
+				if (player.isUsingItem())
+				{
+					this.onItemUse(itemstack, player, world, (int) player.posX, (int) player.posY, (int) player.posZ, player.getItemInUseCount());
+				}
 			}
 		}
 	}
@@ -46,7 +43,6 @@ public class ItemPlasmaCaster extends Item
 	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer)
 	{
 		entityplayer.setItemInUse(itemstack, this.getMaxItemUseDuration(itemstack));
-
 		return itemstack;
 	}
 
@@ -91,6 +87,7 @@ public class ItemPlasmaCaster extends Item
 			plasma.motionY = -MathHelper.sin((plasma.rotationPitch) / 180.0F * (float) Math.PI) * speed;
 			plasma.release();
 			world.playSoundEffect(player.posX, player.posY, player.posZ, AliensVsPredator.properties().SOUND_WEAPON_PLASMACASTER, 0.5F, 0.5F);
+			player.setItemInUse(itemStack, 0);
 		}
 
 		extendedPlayer.setPlasmaEntityId(0);
