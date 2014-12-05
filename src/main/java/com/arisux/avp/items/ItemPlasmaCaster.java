@@ -70,6 +70,14 @@ public class ItemPlasmaCaster extends Item
 		{
 			plasma.setLocationAndAngles(player.posX, player.posY + player.getEyeHeight(), player.posZ, player.rotationYaw, player.rotationPitch);
 			plasma.increaseSize();
+			
+			if (player.capabilities.isCreativeMode)
+			{
+				for (int i = 10; i > 0; i--)
+				{
+					plasma.increaseSize();
+				}
+			}
 		}
 	}
 
