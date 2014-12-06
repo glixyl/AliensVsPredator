@@ -1,9 +1,8 @@
 package com.arisux.avp.items.model;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 
 import com.arisux.avp.AliensVsPredator;
 
@@ -114,28 +113,25 @@ public class ModelWristBlade extends ModelBase
 		this.setRotation(this.bladeRight, 0.0F, -((float) Math.PI / 4F), 0.0F);
 	}
 
-	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+	public void render(float boxTranslation)
 	{
-		super.render(entity, f, f1, f2, f3, f4, f5);
-		this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		this.bBase.render(f5);
-		this.b1.render(f5);
-		this.b2.render(f5);
-		this.b3.render(f5);
-		this.b4.render(f5);
-		this.b5.render(f5);
-		this.b7.render(f5);
-		this.b8.render(f5);
-		this.b9.render(f5);
-		this.bladeRight.render(f5);
-		this.b10.render(f5);
-		this.b11.render(f5);
+		this.bBase.render(boxTranslation);
+		this.b1.render(boxTranslation);
+		this.b2.render(boxTranslation);
+		this.b3.render(boxTranslation);
+		this.b4.render(boxTranslation);
+		this.b5.render(boxTranslation);
+		this.b7.render(boxTranslation);
+		this.b8.render(boxTranslation);
+		this.b9.render(boxTranslation);
+		this.bladeRight.render(boxTranslation);
+		this.b10.render(boxTranslation);
+		this.b11.render(boxTranslation);
 
-		if (entity instanceof EntityPlayer && ((EntityPlayer) entity).inventory.hasItem(AliensVsPredator.instance().items.swordTitanium))
+		if (Minecraft.getMinecraft().thePlayer.inventory.hasItem(AliensVsPredator.instance().items.swordTitanium))
 		{
-			this.b6.render(f5);
-			this.bladeLeft.render(f5);
+			this.b6.render(boxTranslation);
+			this.bladeLeft.render(boxTranslation);
 		}
 	}
 
@@ -144,16 +140,5 @@ public class ModelWristBlade extends ModelBase
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
-	}
-
-	/**
-	 * Sets the model's various rotation angles. For bipeds, par1 and par2 are used for animating the movement of arms
-	 * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
-	 * "far" arms and legs can swing at most.
-	 */
-	@Override
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity f6)
-	{
-		super.setRotationAngles(f, f1, f2, f3, f4, f5, f6);
 	}
 }
