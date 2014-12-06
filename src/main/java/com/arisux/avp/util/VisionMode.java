@@ -36,7 +36,7 @@ public enum VisionMode
 			;
 		}
 	},
-	XENO(1, "Xenomorph", 0xFF00FF00)
+	ELECTROMAGNETIC(1, "Electromagnetic", 0xFF00FF00)
 	{
 		@Override
 		public void render(Object... data)

@@ -83,7 +83,6 @@ public class TacticalHUDRenderEvent
 				buttonMarineHelmConfig.xPosition = RenderUtil.scaledDisplayResolution().getScaledWidth() / 2 - (!mc.thePlayer.capabilities.isCreativeMode ? 175 : 185);
 				buttonMarineHelmConfig.yPosition = RenderUtil.scaledDisplayResolution().getScaledHeight() / 2 - 80;
 				buttonMarineHelmConfig.drawButton();
-				buttonMarineHelmConfig.handleInput();
 				buttonMarineHelmConfig.setAction(new IActionPerformed()
 				{
 					@Override

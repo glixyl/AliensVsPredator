@@ -55,7 +55,6 @@ public class GuiTacticalHUDSettings extends GuiCustomScreen
 			textBox1.width = 120;
 			RenderUtil.drawString("Broadcast Channel", textBox1.xPosition + textBox1.width + 10, textBox1.yPosition + 3, 0xFF00AAFF);
 			textBox1.drawTextBox();
-			textBox1.handleInput();
 		}
 		{
 			slider1.label = "Transmit Power";
@@ -69,7 +68,6 @@ public class GuiTacticalHUDSettings extends GuiCustomScreen
 			slider1.tooltip = "The distance this tactical HUD will connect to other tactical HUDs.";
 			RenderUtil.drawString("Broadcast Transmission Power (mW)", slider1.xPosition + slider1.width + 10, slider1.yPosition + 3, 0xFF00AAFF);
 			slider1.drawButton();
-			slider1.handleInput();
 		}
 		{
 			slider2.label = "Viewport Threshold";
@@ -83,7 +81,6 @@ public class GuiTacticalHUDSettings extends GuiCustomScreen
 			slider2.tooltip = "The amount of users with tactical HUDs to display in the viewport.";
 			RenderUtil.drawString("# of users to display on-screen.", slider2.xPosition + slider2.width + 10, slider2.yPosition + 3, 0xFF00AAFF);
 			slider2.drawButton();
-			slider2.handleInput();
 		}
 		{
 			buttonApply.displayString = "Apply";
@@ -125,7 +122,6 @@ public class GuiTacticalHUDSettings extends GuiCustomScreen
 					mc.displayGuiScreen(null);
 				}
 			});
-			buttonApply.handleInput();
 		}
 	}
 

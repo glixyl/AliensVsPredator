@@ -85,10 +85,8 @@ public class WindowSubmitFeedback extends Window implements IWindow
 		if (!submitted)
 		{
 			buttonSubmit.drawButton();
-			buttonSubmit.handleInput();
 
 			textbox.drawTextBox();
-			textbox.handleInput();
 			this.setTitle(I18n.format(AliensVsPredator.properties().LANG_BETA_FEEDBACK_CHARSLEFT_TITLE, charsLeft), false);
 			this.setDefaultText(AliensVsPredator.properties().LANG_BETA_FEEDBACK_INFO, true);
 		}

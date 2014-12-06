@@ -100,7 +100,6 @@ public class GuiWristbracer extends GuiContainer
 					updateScreenDigit(button.id, displays.get(button) < 9 ? displays.get(button) + 1 : 0);
 				}
 			});
-			button.handleInput();
 
 			drawYautjaDigit(this.displays.get(button), guiLeft + 13 + 27 * (x1 - 1), guiTop + 49);
 		}

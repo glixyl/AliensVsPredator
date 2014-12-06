@@ -41,7 +41,6 @@ public class BetaProgramEvent
 					window.textbox.setText("");
 				}
 			});
-			buttonFeedback.handleInput();
 
 			if (!ModUtil.isDevEnvironment())
 			{

@@ -164,28 +164,24 @@ public class GuiTurret extends GuiContainer
 		this.sliderColorA.width = 219;
 		this.sliderColorA.sliderButtonColor = 0xFFFFFFFF;
 		this.sliderColorA.drawButton();
-		this.sliderColorA.handleInput();
 
 		this.sliderColorR.yPosition = guiTop + 170 + 25;
 		this.sliderColorR.sliderButtonColor = 0xFFFF0000;
 		this.sliderColorR.xPosition = guiLeft + 3;
 		this.sliderColorR.width = 219;
 		this.sliderColorR.drawButton();
-		this.sliderColorR.handleInput();
 
 		this.sliderColorG.yPosition = guiTop + 170 + 50;
 		this.sliderColorG.sliderButtonColor = 0xFF00FF00;
 		this.sliderColorG.xPosition = guiLeft + 3;
 		this.sliderColorG.width = 219;
 		this.sliderColorG.drawButton();
-		this.sliderColorG.handleInput();
 
 		this.sliderColorB.yPosition = guiTop + 170 + 75;
 		this.sliderColorB.sliderButtonColor = 0xFF0000FF;
 		this.sliderColorB.xPosition = guiLeft + 3;
 		this.sliderColorB.width = 219;
 		this.sliderColorB.drawButton();
-		this.sliderColorB.handleInput();
 
 		this.tile.beamColor = RenderUtil.createHexRGBA((int) (sliderColorA.sliderValue * sliderColorA.sliderMaxValue), (int) (sliderColorR.sliderValue * sliderColorR.sliderMaxValue), (int) (sliderColorG.sliderValue * sliderColorG.sliderMaxValue), (int) (sliderColorB.sliderValue * sliderColorB.sliderMaxValue));
 
@@ -201,7 +197,6 @@ public class GuiTurret extends GuiContainer
 				scrollDown();
 			}
 		});
-		this.buttonScrollUp.handleInput();
 
 		this.buttonScrollDown.xPosition = this.guiLeft + this.xSize + 5;
 		this.buttonScrollDown.yPosition = this.guiTop + 88;
@@ -215,7 +210,6 @@ public class GuiTurret extends GuiContainer
 				scrollUp();
 			}
 		});
-		this.buttonScrollDown.handleInput();
 
 		this.buttonAddAsTarget.xPosition = (this.guiLeft + this.xSize + 5);
 		this.buttonAddAsTarget.yPosition = this.guiTop + 65;
@@ -240,7 +234,6 @@ public class GuiTurret extends GuiContainer
 				}
 			}
 		});
-		this.buttonAddAsTarget.handleInput();
 
 		this.buttonSave.xPosition = (this.guiLeft + this.xSize - 38);
 		this.buttonSave.yPosition = (this.guiTop + 19);
@@ -256,7 +249,6 @@ public class GuiTurret extends GuiContainer
 				tile.writeToOtherDevice(0);
 			}
 		});
-		this.buttonSave.handleInput();
 
 		this.buttonLoad.xPosition = (this.guiLeft + this.xSize - 21);
 		this.buttonLoad.yPosition = (this.guiTop + 19);
@@ -273,7 +265,6 @@ public class GuiTurret extends GuiContainer
 				tile.readFromOtherDevice(0);
 			}
 		});
-		this.buttonLoad.handleInput();
 
 		if (this.tile.isSafe(getCurrentSelectedEntity()))
 		{
