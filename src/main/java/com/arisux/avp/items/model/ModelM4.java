@@ -2,7 +2,6 @@ package com.arisux.avp.items.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 
 public class ModelM4 extends ModelBase
 {
@@ -125,29 +124,24 @@ public class ModelM4 extends ModelBase
 		this.setRotation(this.sight2, 0.0F, 0.0F, 0.0F);
 	}
 
-	/**
-	 * Sets the models various rotation angles then renders the model.
-	 */
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+	public void render(float boxTranslation)
 	{
-		super.render(entity, f, f1, f2, f3, f4, f5);
-		this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		this.barrel.render(f5);
-		this.clip.render(f5);
-		this.stock1.render(f5);
-		this.stock2.render(f5);
-		this.stock3.render(f5);
-		this.handle.render(f5);
-		this.mainBody1.render(f5);
-		this.mainBody2.render(f5);
-		this.mainBody3.render(f5);
-		this.triggerGuard.render(f5);
-		this.barrelGuard.render(f5);
-		this.sightBase1.render(f5);
-		this.sightBase2.render(f5);
-		this.sightBase3.render(f5);
-		this.sight1.render(f5);
-		this.sight2.render(f5);
+		this.barrel.render(boxTranslation);
+		this.clip.render(boxTranslation);
+		this.stock1.render(boxTranslation);
+		this.stock2.render(boxTranslation);
+		this.stock3.render(boxTranslation);
+		this.handle.render(boxTranslation);
+		this.mainBody1.render(boxTranslation);
+		this.mainBody2.render(boxTranslation);
+		this.mainBody3.render(boxTranslation);
+		this.triggerGuard.render(boxTranslation);
+		this.barrelGuard.render(boxTranslation);
+		this.sightBase1.render(boxTranslation);
+		this.sightBase2.render(boxTranslation);
+		this.sightBase3.render(boxTranslation);
+		this.sight1.render(boxTranslation);
+		this.sight2.render(boxTranslation);
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z)
@@ -155,10 +149,5 @@ public class ModelM4 extends ModelBase
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
-	}
-
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
-	{
-		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 	}
 }

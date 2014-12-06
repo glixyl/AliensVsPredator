@@ -2,7 +2,6 @@ package com.arisux.avp.items.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 
 public class ModelAK47 extends ModelBase
 {
@@ -132,30 +131,25 @@ public class ModelAK47 extends ModelBase
 		this.setRotation(this.stockBase, 0.0F, 0.0F, 0.0F);
 	}
 
-	/**
-	 * Sets the models various rotation angles then renders the model.
-	 */
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+	public void render(float boxTranslation)
 	{
-		super.render(entity, f, f1, f2, f3, f4, f5);
-		this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		this.handle.render(f5);
-		this.clip.render(f5);
-		this.barrel.render(f5);
-		this.sight1.render(f5);
-		this.sightBase.render(f5);
-		this.rbody1.render(f5);
-		this.lbody1.render(f5);
-		this.stockEnd.render(f5);
-		this.barrelBase.render(f5);
-		this.rBarrelGrip.render(f5);
-		this.lBarrelGrip.render(f5);
-		this.stockAngle.render(f5);
-		this.trigger.render(f5);
-		this.triggerGuard.render(f5);
-		this.sightBase1.render(f5);
-		this.sight2.render(f5);
-		this.stockBase.render(f5);
+		this.handle.render(boxTranslation);
+		this.clip.render(boxTranslation);
+		this.barrel.render(boxTranslation);
+		this.sight1.render(boxTranslation);
+		this.sightBase.render(boxTranslation);
+		this.rbody1.render(boxTranslation);
+		this.lbody1.render(boxTranslation);
+		this.stockEnd.render(boxTranslation);
+		this.barrelBase.render(boxTranslation);
+		this.rBarrelGrip.render(boxTranslation);
+		this.lBarrelGrip.render(boxTranslation);
+		this.stockAngle.render(boxTranslation);
+		this.trigger.render(boxTranslation);
+		this.triggerGuard.render(boxTranslation);
+		this.sightBase1.render(boxTranslation);
+		this.sight2.render(boxTranslation);
+		this.stockBase.render(boxTranslation);
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z)
@@ -163,16 +157,5 @@ public class ModelAK47 extends ModelBase
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
-	}
-
-	/**
-	 * Sets the model's various rotation angles. For bipeds, par1 and par2
-	 * are used for animating the movement of arms and legs, where par1
-	 * represents the time(so that arms and legs swing back and forth) and
-	 * par2 represents how "far" arms and legs can swing at most.
-	 */
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
-	{
-		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 	}
 }
