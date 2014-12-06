@@ -59,7 +59,6 @@ public class VisionModeRenderEvent
 						buttonToggleVisionMode.baseColor = 0x00000000;
 						buttonToggleVisionMode.overlayColorHover = 0x77FF0000;
 						buttonToggleVisionMode.drawButton();
-						buttonToggleVisionMode.handleInput();
 					}
 				}
 			}
