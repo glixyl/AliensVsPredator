@@ -2,26 +2,28 @@ package com.arisux.avp.items.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 
 public class ModelSniper extends ModelBase
 {
-	ModelRenderer barrel;
-	ModelRenderer clipHolder1;
-	ModelRenderer clipHolder2;
-	ModelRenderer base1;
-	ModelRenderer base2;
-	ModelRenderer clip;
-	ModelRenderer handle;
-	ModelRenderer triggerGuard;
-	ModelRenderer trigger;
-	ModelRenderer stock1;
-	ModelRenderer stock2;
-	ModelRenderer stockEnd;
-	ModelRenderer barrelSupport;
-	ModelRenderer scopeSupport;
-	ModelRenderer scopeBase;
-	ModelRenderer scope;
+	private boolean firstPerson;
+	
+	public ModelRenderer barrel;
+	public ModelRenderer clipHolder1;
+	public ModelRenderer clipHolder2;
+	public ModelRenderer base1;
+	public ModelRenderer base2;
+	public ModelRenderer clip;
+	public ModelRenderer handle;
+	public ModelRenderer triggerGuard;
+	public ModelRenderer trigger;
+	public ModelRenderer stock1;
+	public ModelRenderer stock2;
+	public ModelRenderer stockEnd;
+	public ModelRenderer barrelSupport;
+	public ModelRenderer scopeSupport;
+	public ModelRenderer scopeBase;
+	public ModelRenderer scope;
+	public ModelRenderer scopeFirstPerson;
 
 	public ModelSniper()
 	{
@@ -123,29 +125,40 @@ public class ModelSniper extends ModelBase
 		this.scope.setTextureSize(64, 32);
 		this.scope.mirror = true;
 		this.setRotation(this.scope, 0.0F, 0.0F, 0.0F);
+		this.scopeFirstPerson = new ModelRenderer(this, 28, 29);
+		this.scopeFirstPerson.addBox(0.0F, -1.3F, -5.5F, 1, 1, 2);
+		this.scopeFirstPerson.setRotationPoint(0.0F, 0.0F, 0.0F);
+		this.scopeFirstPerson.setTextureSize(64, 32);
+		this.scopeFirstPerson.mirror = true;
+		this.setRotation(this.scopeFirstPerson, 0.0F, 0.0F, 0.0F);
 	}
 
-	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+	public void render(float boxTranslation)
 	{
-		super.render(entity, f, f1, f2, f3, f4, f5);
-		this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		this.barrel.render(f5);
-		this.clipHolder1.render(f5);
-		this.clipHolder2.render(f5);
-		this.base1.render(f5);
-		this.base2.render(f5);
-		this.clip.render(f5);
-		this.handle.render(f5);
-		this.triggerGuard.render(f5);
-		this.trigger.render(f5);
-		this.stock1.render(f5);
-		this.stock2.render(f5);
-		this.stockEnd.render(f5);
-		this.barrelSupport.render(f5);
-		this.scopeSupport.render(f5);
-		this.scopeBase.render(f5);
-		this.scope.render(f5);
+		this.barrel.render(boxTranslation);
+		this.clipHolder1.render(boxTranslation);
+		this.clipHolder2.render(boxTranslation);
+		this.base1.render(boxTranslation);
+		this.base2.render(boxTranslation);
+		this.clip.render(boxTranslation);
+		this.handle.render(boxTranslation);
+		this.triggerGuard.render(boxTranslation);
+		this.trigger.render(boxTranslation);
+		this.stock1.render(boxTranslation);
+		this.stock2.render(boxTranslation);
+		this.stockEnd.render(boxTranslation);
+		this.barrelSupport.render(boxTranslation);
+		this.scopeSupport.render(boxTranslation);
+		this.scopeBase.render(boxTranslation);
+		
+		if (firstPerson)
+		{
+			this.scopeFirstPerson.render(boxTranslation);
+		}
+		else
+		{
+			this.scope.render(boxTranslation);
+		}
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z)
@@ -154,10 +167,9 @@ public class ModelSniper extends ModelBase
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
-
-	@Override
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
+	
+	public void setFirstPerson(boolean firstPerson)
 	{
-		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+		this.firstPerson = firstPerson;
 	}
 }
