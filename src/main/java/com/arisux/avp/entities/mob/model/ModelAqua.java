@@ -346,66 +346,66 @@ public class ModelAqua extends ModelBase
 	}
 
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+	public void render(Entity entity, float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation)
 	{
-		super.render(entity, f, f1, f2, f3, f4, f5);
-		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+		super.render(entity, swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation);
+		this.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
 
-		chest.render(f5);
-		abdomen.render(f5);
-		rThigh.render(f5);
-		lThigh.render(f5);
-		lShinSpike.render(f5);
-		rShinSpike.render(f5);
-		lShin2.render(f5);
-		rShin2.render(f5);
-		lFootFlipper.render(f5);
-		rFootFlipper.render(f5);
-		lArm1.render(f5);
-		rArm1.render(f5);
-		lClaw1.render(f5);
-		rArm2.render(f5);
-		neck.render(f5);
-		headBase.render(f5);
-		headSideHorns.render(f5);
-		jaw.render(f5);
-		jaw2.render(f5);
-		headTopSpikesL.render(f5);
-		lArm2.render(f5);
-		rClaw1.render(f5);
-		lClaw2.render(f5);
-		rClaw2.render(f5);
-		spine1.render(f5);
-		spine2.render(f5);
-		spine3.render(f5);
-		tail1.render(f5);
-		tail2.render(f5);
-		tail3.render(f5);
-		tail4.render(f5);
-		lHead.render(f5);
-		spine4.render(f5);
-		tailFin.render(f5);
-		spine6.render(f5);
-		spine7.render(f5);
-		spine8.render(f5);
-		spine9.render(f5);
-		spine10.render(f5);
-		spine11.render(f5);
-		tail5.render(f5);
-		spine12.render(f5);
-		part1.render(f5);
-		part2.render(f5);
-		part3.render(f5);
-		part4.render(f5);
-		spine5.render(f5);
-		rHead.render(f5);
-		rShin1.render(f5);
-		lShin1.render(f5);
-		headTop.render(f5);
-		lFoot.render(f5);
-		rFoot.render(f5);
-		headTopSpikes.render(f5);
-		headTopSpikesR.render(f5);
+		chest.render(boxTranslation);
+		abdomen.render(boxTranslation);
+		rThigh.render(boxTranslation);
+		lThigh.render(boxTranslation);
+		lShinSpike.render(boxTranslation);
+		rShinSpike.render(boxTranslation);
+		lShin2.render(boxTranslation);
+		rShin2.render(boxTranslation);
+		lFootFlipper.render(boxTranslation);
+		rFootFlipper.render(boxTranslation);
+		lArm1.render(boxTranslation);
+		rArm1.render(boxTranslation);
+		lClaw1.render(boxTranslation);
+		rArm2.render(boxTranslation);
+		neck.render(boxTranslation);
+		headBase.render(boxTranslation);
+		headSideHorns.render(boxTranslation);
+		jaw.render(boxTranslation);
+		jaw2.render(boxTranslation);
+		headTopSpikesL.render(boxTranslation);
+		lArm2.render(boxTranslation);
+		rClaw1.render(boxTranslation);
+		lClaw2.render(boxTranslation);
+		rClaw2.render(boxTranslation);
+		spine1.render(boxTranslation);
+		spine2.render(boxTranslation);
+		spine3.render(boxTranslation);
+		tail1.render(boxTranslation);
+		tail2.render(boxTranslation);
+		tail3.render(boxTranslation);
+		tail4.render(boxTranslation);
+		lHead.render(boxTranslation);
+		spine4.render(boxTranslation);
+		tailFin.render(boxTranslation);
+		spine6.render(boxTranslation);
+		spine7.render(boxTranslation);
+		spine8.render(boxTranslation);
+		spine9.render(boxTranslation);
+		spine10.render(boxTranslation);
+		spine11.render(boxTranslation);
+		tail5.render(boxTranslation);
+		spine12.render(boxTranslation);
+		part1.render(boxTranslation);
+		part2.render(boxTranslation);
+		part3.render(boxTranslation);
+		part4.render(boxTranslation);
+		spine5.render(boxTranslation);
+		rHead.render(boxTranslation);
+		rShin1.render(boxTranslation);
+		lShin1.render(boxTranslation);
+		headTop.render(boxTranslation);
+		lFoot.render(boxTranslation);
+		rFoot.render(boxTranslation);
+		headTopSpikes.render(boxTranslation);
+		headTopSpikesR.render(boxTranslation);
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z)
@@ -416,8 +416,8 @@ public class ModelAqua extends ModelBase
 	}
 
 	@Override
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
+	public void setRotationAngles(float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation, Entity entity)
 	{
-		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+		super.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
 	}
 }

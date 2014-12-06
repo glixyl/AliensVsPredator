@@ -15,7 +15,7 @@ public class RenderBlastdoor extends TileEntitySpecialRenderer
 	private static final ResourceLocation resource = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_BLASTDOOR);
 
 	@Override
-	public void renderTileEntityAt(TileEntity var1, double posX, double posY, double posZ, float var8)
+	public void renderTileEntityAt(TileEntity var1, double posX, double posY, double posZ, float renderPartialTicks)
 	{
 		TileEntityBlastdoor tile = (TileEntityBlastdoor) var1;
 
@@ -25,7 +25,7 @@ public class RenderBlastdoor extends TileEntitySpecialRenderer
 			bindTexture(resource);
 			glTranslated(posX + 0.5F, posY + 1.5F, posZ + 0.5F);
 			glScalef(1.0F, -1.0F, 1.0F);
-			this.model.render(tile, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+			this.model.render(tile, 0.0625F);
 		}
 		glPopMatrix();
 	}

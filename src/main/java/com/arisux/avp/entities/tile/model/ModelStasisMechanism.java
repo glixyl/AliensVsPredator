@@ -70,18 +70,18 @@ public class ModelStasisMechanism extends ModelBase
 		setRotation(south, 0.7853982F, 3.141593F, 0F);
 	}
 
-	public void render(TileEntityStasisMechanism tile, float f, float f1, float f2, float f3, float f4, float f5)
+	public void render(TileEntityStasisMechanism tile, float boxTranslation)
 	{
-		setRotationAngles(f, f1, f2, f3, f4, f5, tile);
-		core.render(f5);
-		west.render(f5);
-		north.render(f5);
-		northwest.render(f5);
-		northeast.render(f5);
-		east.render(f5);
-		southeast.render(f5);
-		southwest.render(f5);
-		south.render(f5);
+		setRotationAngles(tile);
+		core.render(boxTranslation);
+		west.render(boxTranslation);
+		north.render(boxTranslation);
+		northwest.render(boxTranslation);
+		northeast.render(boxTranslation);
+		east.render(boxTranslation);
+		southeast.render(boxTranslation);
+		southwest.render(boxTranslation);
+		south.render(boxTranslation);
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z)
@@ -91,8 +91,8 @@ public class ModelStasisMechanism extends ModelBase
 		model.rotateAngleZ = z;
 	}
 
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, TileEntityStasisMechanism tile)
+	public void setRotationAngles(TileEntityStasisMechanism tile)
 	{
-		super.setRotationAngles(f, f1, f2, f3, f4, f5, null);
+		;
 	}
 }

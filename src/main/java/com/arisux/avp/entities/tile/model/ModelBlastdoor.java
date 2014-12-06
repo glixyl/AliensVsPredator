@@ -120,12 +120,37 @@ public class ModelBlastdoor extends ModelBase
 		setRotation(bar4, 0F, 0F, 2.414419F);
 	}
 
-	public void render(TileEntityBlastdoor entity, float f, float f1, float f2, float f3, float f4, float f5)
+	public void render(TileEntityBlastdoor tile, float boxTranslation)
 	{
-		super.render(null, f, f1, f2, f3, f4, f5);
-		this.setRotationAngles(f, f1, f2, f3, f4, f5);
+		this.setRotationAngles(tile);
 		
-		float doorProgress = entity.getDoorProgress() * 2;
+		doorLeftCorner1.render(boxTranslation);
+		doorLeftCorner2.render(boxTranslation);
+		doorLeftMain.render(boxTranslation);
+		doorLeftDiagonal2.render(boxTranslation);
+		doorLeftDiagonal1.render(boxTranslation);
+		doorRightMain.render(boxTranslation);
+		doorRightArrow.render(boxTranslation);
+		frameLeft.render(boxTranslation);
+		frameBaseCenterTop.render(boxTranslation);
+		bar3.render(boxTranslation);
+		frameBaseCenter.render(boxTranslation);
+		bar2.render(boxTranslation);
+		frameRight.render(boxTranslation);
+		bar1.render(boxTranslation);
+		bar4.render(boxTranslation);
+	}
+
+	private void setRotation(ModelRenderer model, float x, float y, float z)
+	{
+		model.rotateAngleX = x;
+		model.rotateAngleY = y;
+		model.rotateAngleZ = z;
+	}
+
+	public void setRotationAngles(TileEntityBlastdoor tile)
+	{
+		float doorProgress = tile.getDoorProgress() * 2;
 		float doorRight = doorProgress;
 		float doorLeft = -doorProgress;
 		
@@ -137,34 +162,5 @@ public class ModelBlastdoor extends ModelBase
 		doorLeftCorner2.offsetX = doorLeft;
 		doorLeftDiagonal1.offsetX = doorLeft;
 		doorLeftDiagonal2.offsetX = doorLeft;
-		
-		doorLeftCorner1.render(f5);
-		doorLeftCorner2.render(f5);
-		doorLeftMain.render(f5);
-		doorLeftDiagonal2.render(f5);
-		doorLeftDiagonal1.render(f5);
-		doorRightMain.render(f5);
-		doorRightArrow.render(f5);
-		frameLeft.render(f5);
-		frameBaseCenterTop.render(f5);
-		bar3.render(f5);
-		frameBaseCenter.render(f5);
-		bar2.render(f5);
-		frameRight.render(f5);
-		bar1.render(f5);
-		bar4.render(f5);
 	}
-
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
-	}
-
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5)
-	{
-		super.setRotationAngles(f, f1, f2, f3, f4, f5, null);
-	}
-
 }

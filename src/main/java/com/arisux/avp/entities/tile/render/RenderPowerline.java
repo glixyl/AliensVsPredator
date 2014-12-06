@@ -29,7 +29,7 @@ public class RenderPowerline extends TileEntitySpecialRenderer
 			glRotatef(0F, 0F, 1F, 0F);
 			glScalef(1.0F, -1.0F, 1.0F);
 			glEnable(GL_ALPHA_TEST);
-			this.model.render(tile, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0625F);
+			this.model.render(tile, 0.0625F);
 
 			if (Minecraft.getMinecraft().objectMouseOver != null)
 			{

@@ -28,7 +28,7 @@ public class RenderTurret extends TileEntitySpecialRenderer
 			this.bindTexture(resource);
 			GL11.glTranslated(posX + 0.5F, posY + 3.0F, posZ - 0.0F);
 			GL11.glScalef(2F, -2F, 2F);
-			this.model.render(tile, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0625F);
+			this.model.render(tile, 0.0625F);
 
 			if (tile.isVoltageInOperatingRange())
 			{
@@ -37,11 +37,6 @@ public class RenderTurret extends TileEntitySpecialRenderer
 				if (!tile.isFiring())
 				{
 					this.renderBeam(0, 0, tile.getRange(), -1, 0, 50, tile.beamColor, 0x00000000, tile.getRotationYaw(), tile.getRotationPitch(), -1);
-				}
-
-				if (tile.getFiringTimeout() <= 0)
-				{
-//					this.renderBeam(0, 0, tile.getRange(), 60, 0, 50, tile.beamColor, 0x00000000, tile.getRotationYaw(), tile.getRotationPitch(), 1);
 				}
 			}
 		}

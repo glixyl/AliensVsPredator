@@ -13,21 +13,20 @@ import com.arisux.avp.entities.model.ModelPlasma;
 public class RenderPlasmaBlast extends Render
 {
 	private ModelPlasma model = new ModelPlasma();
-	private Color color = new Color(0.3F, 0.75F, 1F, 0.4F);
+	private Color color = new Color(0.3F, 0.75F, 1F, 0.5F);
 
 	@Override
 	public void doRender(Entity entity, double posX, double posY, double posZ, float yaw, float renderPartialTicks)
 	{
 		EntityPlasma plasma = (EntityPlasma) entity;
 		float rotation = plasma.ticksExisted % 360;
-		color = new Color(0.3F, 0.75F, 1F, 0.5F);
+		
 		GL11.glPushMatrix();
 		{
 			GL11.glTranslated(posX, posY, posZ);
 			GL11.glRotatef(entity.rotationYaw - 90.0F, 0.0F, 1.0F, 0.0F);
 			GL11.glRotatef(entity.rotationPitch - 90.0F, 0.0F, 0.0F, 1.0F);
-			float baseSize = 0F;
-			GL11.glScalef(baseSize + plasma.getSize(), (float) (baseSize + plasma.getSize() + (((plasma.lastTickPosX - plasma.posX) + (plasma.lastTickPosY - plasma.posY) + (plasma.lastTickPosZ - plasma.posZ)) /3)), baseSize + plasma.getSize());
+			GL11.glScalef(plasma.getSize(), (float) (plasma.getSize() + (((plasma.lastTickPosX - plasma.posX) + (plasma.lastTickPosY - plasma.posY) + (plasma.lastTickPosZ - plasma.posZ)) /3)), plasma.getSize());
 
 			GL11.glPushMatrix();
 			{

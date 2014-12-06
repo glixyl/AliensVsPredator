@@ -2,30 +2,29 @@ package com.arisux.avp.entities.tile.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 
 import com.arisux.avp.entities.tile.TileEntityTurret;
 
 public class ModelTurret extends ModelBase
 {
-	ModelRenderer barrel;
-	ModelRenderer supportLeft;
-	ModelRenderer headBase2;
-	ModelRenderer neckBase;
-	ModelRenderer headBase3;
-	ModelRenderer headBase;
-	ModelRenderer barrelGuard;
-	ModelRenderer sightBase3;
-	ModelRenderer rightFoot;
-	ModelRenderer supportRight;
-	ModelRenderer supportCenter;
-	ModelRenderer centerFoot;
-	ModelRenderer legHub;
-	ModelRenderer LeftFoot;
-	ModelRenderer neck;
-	ModelRenderer leftLeg;
-	ModelRenderer rightLeg;
-	ModelRenderer centerLeg;
+	private ModelRenderer barrel,
+		supportLeft,
+		headBase2,
+		neckBase,
+		headBase3,
+		headBase,
+		barrelGuard,
+		sightBase3,
+		rightFoot,
+		supportRight,
+		supportCenter,
+		centerFoot,
+		legHub,
+		LeftFoot,
+		neck,
+		leftLeg,
+		rightLeg,
+		centerLeg;
 
 	public ModelTurret()
 	{
@@ -142,32 +141,27 @@ public class ModelTurret extends ModelBase
 		setRotation(centerLeg, 0.4712389F, 0F, 0F);
 	}
 
-	public void render(Object o, float f, float f1, float f2, float f3, float f4, float f5)
+	public void render(TileEntityTurret tile, float boxTranslation)
 	{
-		if (o instanceof Entity)
-		{
-			super.render((Entity) o, f, f1, f2, f3, f4, f5);
-		}
-
-		this.setRotationAngles(f, f1, f2, f3, f4, f5, o);
-		barrel.render(f5);
-		supportLeft.render(f5);
-		headBase2.render(f5);
-		neckBase.render(f5);
-		headBase3.render(f5);
-		headBase.render(f5);
-		barrelGuard.render(f5);
-		sightBase3.render(f5);
-		rightFoot.render(f5);
-		supportRight.render(f5);
-		supportCenter.render(f5);
-		centerFoot.render(f5);
-		legHub.render(f5);
-		LeftFoot.render(f5);
-		neck.render(f5);
-		leftLeg.render(f5);
-		rightLeg.render(f5);
-		centerLeg.render(f5);
+		this.setRotationAngles(tile);
+		barrel.render(boxTranslation);
+		supportLeft.render(boxTranslation);
+		headBase2.render(boxTranslation);
+		neckBase.render(boxTranslation);
+		headBase3.render(boxTranslation);
+		headBase.render(boxTranslation);
+		barrelGuard.render(boxTranslation);
+		sightBase3.render(boxTranslation);
+		rightFoot.render(boxTranslation);
+		supportRight.render(boxTranslation);
+		supportCenter.render(boxTranslation);
+		centerFoot.render(boxTranslation);
+		legHub.render(boxTranslation);
+		LeftFoot.render(boxTranslation);
+		neck.render(boxTranslation);
+		leftLeg.render(boxTranslation);
+		rightLeg.render(boxTranslation);
+		centerLeg.render(boxTranslation);
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z)
@@ -177,35 +171,25 @@ public class ModelTurret extends ModelBase
 		model.rotateAngleZ = z;
 	}
 
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Object o)
+	public void setRotationAngles(TileEntityTurret tile)
 	{
-		if (o instanceof Entity)
+		if (tile != null && tile.getEntity() != null)
 		{
-			super.setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) o);
-		}
+			float rotationYaw = tile.getRotationYaw();
+			float rotationPitch = -tile.getRotationPitch() / (180F / (float) Math.PI);
 
-		if (o instanceof TileEntityTurret)
-		{
-			TileEntityTurret tile = (TileEntityTurret) o;
-
-			if (tile != null && tile.getEntity() != null)
-			{
-				float rotationYaw = -(float) tile.getRotationYaw() / (180F / (float) Math.PI);
-				float rotationPitch = -(float) tile.getRotationPitch() / (180F / (float) Math.PI);
-
-				barrel.rotateAngleY = rotationYaw;
-				barrel.rotateAngleX = rotationPitch;
-				headBase.rotateAngleY = rotationYaw;
-				headBase.rotateAngleX = rotationPitch;
-				headBase3.rotateAngleY = rotationYaw;
-				headBase3.rotateAngleX = rotationPitch;
-				barrelGuard.rotateAngleY = rotationYaw;
-				barrelGuard.rotateAngleX = rotationPitch;
-				sightBase3.rotateAngleY = rotationYaw;
-				sightBase3.rotateAngleX = rotationPitch;
-				headBase2.rotateAngleY = rotationYaw;
-				headBase2.rotateAngleX = rotationPitch;
-			}
+			barrel.rotateAngleY = rotationYaw;
+			barrel.rotateAngleX = rotationPitch;
+			headBase.rotateAngleY = rotationYaw;
+			headBase.rotateAngleX = rotationPitch;
+			headBase3.rotateAngleY = rotationYaw;
+			headBase3.rotateAngleX = rotationPitch;
+			barrelGuard.rotateAngleY = rotationYaw;
+			barrelGuard.rotateAngleX = rotationPitch;
+			sightBase3.rotateAngleY = rotationYaw;
+			sightBase3.rotateAngleX = rotationPitch;
+			headBase2.rotateAngleY = rotationYaw;
+			headBase2.rotateAngleX = rotationPitch;
 		}
 	}
 }

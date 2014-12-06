@@ -39,7 +39,7 @@ public class RenderItemTurret extends ItemRenderer
 		{
 			Minecraft.getMinecraft().renderEngine.bindTexture(getResourceLocation());
 			GL11.glDisable(GL11.GL_CULL_FACE);
-			((ModelTurret) this.getModel()).render(data[0], 0.0F, 0.0F, 1.0F, 0.0F, 0.0F, 0.0625F);
+			((ModelTurret) this.getModel()).render(null, 0.0625F);
 		}
 		GL11.glPopMatrix();
 	}
@@ -56,7 +56,7 @@ public class RenderItemTurret extends ItemRenderer
 			GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
 			float glScale = 15F;
 			GL11.glScalef(glScale, glScale, glScale);
-			((ModelTurret) this.getModel()).render(data[0], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+			((ModelTurret) this.getModel()).render(null, 0.0625F);
 		}
 		GL11.glPopMatrix();
 	}

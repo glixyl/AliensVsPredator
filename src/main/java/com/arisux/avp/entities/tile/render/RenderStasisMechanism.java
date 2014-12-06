@@ -33,7 +33,7 @@ public class RenderStasisMechanism extends TileEntitySpecialRenderer
 			glScalef(1.0F, -1.0F, 1.0F);
 			glEnable(GL_ALPHA_TEST);
 			bindTexture(RenderQueen.resourceLocation);
-			this.model.render(tile, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0625F);
+			this.model.render(tile, 0.0625F);
 
 			if (tile.stasisEntity != null)
 			{

@@ -276,53 +276,54 @@ public class ModelCrusher extends ModelBase
 	}
 
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+	public void render(Entity entity, float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation)
 	{
-		super.render(entity, f, f1, f2, f3, f4, f5);
-		this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		this.sTorso.render(f5);
-		this.sTorso2.render(f5);
-		this.sRightThigh.render(f5);
-		this.sLeftThigh.render(f5);
-		this.sLeftShin.render(f5);
-		this.sRightShin.render(f5);
-		this.sLeftShin2.render(f5);
-		this.sRightShin2.render(f5);
-		this.sLeftFoot.render(f5);
-		this.sRightFoot.render(f5);
-		this.sLeftArm.render(f5);
-		this.sRightArm.render(f5);
-		this.sLeftClaw.render(f5);
-		this.sRightArm2.render(f5);
-		this.sNeck.render(f5);
-		this.sHead.render(f5);
-		this.sHead2.render(f5);
-		this.sJaw1.render(f5);
-		this.sLeftArm2.render(f5);
-		this.sRightClaw.render(f5);
-		this.sLeftClaw2.render(f5);
-		this.sRightClaw2.render(f5);
-		this.sVertibrae1.render(f5);
-		this.sTail1.render(f5);
-		this.sTail2.render(f5);
-		this.sTail3.render(f5);
-		this.sStabber.render(f5);
-		this.sTail4.render(f5);
-		this.sTail5.render(f5);
-		this.sVertibrae2.render(f5);
-		this.sSpike3.render(f5);
-		this.sSpike4.render(f5);
-		this.sSpike2.render(f5);
-		this.sSpike5.render(f5);
-		this.sHead4.render(f5);
-		this.crest0.render(f5);
-		this.crest1.render(f5);
-		this.crest2.render(f5);
-		this.crest3.render(f5);
-		this.crest4.render(f5);
-		this.crest5.render(f5);
-		this.sArmCrusher1.render(f5);
-		this.sArmCrusher.render(f5);
+		super.render(entity, swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation);
+		this.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
+
+		this.sTorso.render(boxTranslation);
+		this.sTorso2.render(boxTranslation);
+		this.sRightThigh.render(boxTranslation);
+		this.sLeftThigh.render(boxTranslation);
+		this.sLeftShin.render(boxTranslation);
+		this.sRightShin.render(boxTranslation);
+		this.sLeftShin2.render(boxTranslation);
+		this.sRightShin2.render(boxTranslation);
+		this.sLeftFoot.render(boxTranslation);
+		this.sRightFoot.render(boxTranslation);
+		this.sLeftArm.render(boxTranslation);
+		this.sRightArm.render(boxTranslation);
+		this.sLeftClaw.render(boxTranslation);
+		this.sRightArm2.render(boxTranslation);
+		this.sNeck.render(boxTranslation);
+		this.sHead.render(boxTranslation);
+		this.sHead2.render(boxTranslation);
+		this.sJaw1.render(boxTranslation);
+		this.sLeftArm2.render(boxTranslation);
+		this.sRightClaw.render(boxTranslation);
+		this.sLeftClaw2.render(boxTranslation);
+		this.sRightClaw2.render(boxTranslation);
+		this.sVertibrae1.render(boxTranslation);
+		this.sTail1.render(boxTranslation);
+		this.sTail2.render(boxTranslation);
+		this.sTail3.render(boxTranslation);
+		this.sStabber.render(boxTranslation);
+		this.sTail4.render(boxTranslation);
+		this.sTail5.render(boxTranslation);
+		this.sVertibrae2.render(boxTranslation);
+		this.sSpike3.render(boxTranslation);
+		this.sSpike4.render(boxTranslation);
+		this.sSpike2.render(boxTranslation);
+		this.sSpike5.render(boxTranslation);
+		this.sHead4.render(boxTranslation);
+		this.crest0.render(boxTranslation);
+		this.crest1.render(boxTranslation);
+		this.crest2.render(boxTranslation);
+		this.crest3.render(boxTranslation);
+		this.crest4.render(boxTranslation);
+		this.crest5.render(boxTranslation);
+		this.sArmCrusher1.render(boxTranslation);
+		this.sArmCrusher.render(boxTranslation);
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z)
@@ -333,39 +334,39 @@ public class ModelCrusher extends ModelBase
 	}
 
 	@Override
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
+	public void setRotationAngles(float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation, Entity entity)
 	{
-		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+		super.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
 		this.sSpike3.rotateAngleX = 0.52F + Math.abs(0.0F);
 		this.sSpike4.rotateAngleX = -0.8F - Math.abs(0.0F);
 		this.sSpike2.rotateAngleX = 0.35F + Math.abs(0.2F);
 		this.sSpike5.rotateAngleX = -1.3F - Math.abs(0.0F);
-		this.sJaw1.rotateAngleY = (float) Math.toRadians(f3) * 0.75F;
-		this.sHead.rotateAngleY = (float) Math.toRadians(f3) * 0.75F;
-		this.sHead2.rotateAngleY = (float) Math.toRadians(f3) * 0.75F;
-		this.sHead2.rotateAngleY = (float) Math.toRadians(f3) * 0.75F;
-		this.sHead4.rotateAngleY = (float) Math.toRadians(f3) * 0.75F;
-		this.crest5.rotateAngleY = (float) Math.toRadians(f3) * 0.75F;
-		this.crest0.rotateAngleY = (float) Math.toRadians(f3) * 0.75F;
-		this.crest1.rotateAngleY = (float) Math.toRadians(f3) * 0.75F;
-		this.crest2.rotateAngleY = (float) Math.toRadians(f3) * 0.75F;
-		this.crest3.rotateAngleY = (float) Math.toRadians(f3) * 0.75F;
-		this.crest4.rotateAngleY = (float) Math.toRadians(f3) * 0.75F;
-		this.sLeftThigh.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1 - 0.8028515F;
-		this.sLeftShin.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1 - 0.4014257F;
-		this.sLeftShin2.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1 - 0.8028515F;
-		this.sLeftFoot.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
-		this.sRightThigh.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1 - 0.8028515F;
-		this.sRightShin.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1 - 0.4014257F;
-		this.sRightShin2.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1 - 0.8028515F;
-		this.sRightFoot.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.sRightArm.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1 + 0.3665191F;
-		this.sRightArm2.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1 + 0.3665191F;
-		this.sRightClaw.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1 + 0.3665191F;
-		this.sRightClaw2.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1 + 0.3665191F;
-		this.sLeftArm.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1 + 0.3665191F;
-		this.sLeftArm2.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1 + 0.3665191F;
-		this.sLeftClaw.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1 + 0.3665191F;
-		this.sLeftClaw2.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1 + 0.3665191F;
+		this.sJaw1.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
+		this.sHead.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
+		this.sHead2.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
+		this.sHead2.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
+		this.sHead4.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
+		this.crest5.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
+		this.crest0.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
+		this.crest1.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
+		this.crest2.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
+		this.crest3.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
+		this.crest4.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
+		this.sLeftThigh.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev - 0.8028515F;
+		this.sLeftShin.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev - 0.4014257F;
+		this.sLeftShin2.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev - 0.8028515F;
+		this.sLeftFoot.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev;
+		this.sRightThigh.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev - 0.8028515F;
+		this.sRightShin.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev - 0.4014257F;
+		this.sRightShin2.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev - 0.8028515F;
+		this.sRightFoot.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev;
+		this.sRightArm.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev + 0.3665191F;
+		this.sRightArm2.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev + 0.3665191F;
+		this.sRightClaw.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev + 0.3665191F;
+		this.sRightClaw2.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev + 0.3665191F;
+		this.sLeftArm.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev + 0.3665191F;
+		this.sLeftArm2.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev + 0.3665191F;
+		this.sLeftClaw.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev + 0.3665191F;
+		this.sLeftClaw2.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev + 0.3665191F;
 	}
 }

@@ -34,7 +34,7 @@ public class RenderWorkstation extends TileEntitySpecialRenderer
 			glEnable(GL12.GL_RESCALE_NORMAL);
 			glScalef(1.0F, -1.0F, 1.0F);
 			glEnable(GL_ALPHA_TEST);
-			this.model.render(tile, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0625F);
+			this.model.render(tile, 0.0625F);
 
 			if (tile.isPowered())
 			{
@@ -43,7 +43,7 @@ public class RenderWorkstation extends TileEntitySpecialRenderer
 				glEnable(GL_BLEND);
 				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 				this.bindTexture(resourceLight);
-				this.model.render(tile, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0625F);
+				this.model.render(tile, 0.0625F);
 				glDisable(GL_BLEND);
 				RenderUtil.glEnableLight();
 				RenderUtil.glEnableLightMapping();

@@ -127,24 +127,24 @@ public class ModelFacehugger extends ModelBase
 	}
 
 	@Override
-	public void render(Entity entity, float swingProgress, float swingProgressPrevious, float idleProgress, float headRotateAngle, float headRotationPitch, float boxTranslationMultiplier)
+	public void render(Entity entity, float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation)
 	{
-		super.render(entity, swingProgress, swingProgressPrevious, idleProgress, headRotateAngle, headRotationPitch, boxTranslationMultiplier);
-		this.setRotationAngles(swingProgress, swingProgressPrevious, idleProgress, headRotateAngle, headRotationPitch, boxTranslationMultiplier, entity);
-		this.body.render(boxTranslationMultiplier);
-		this.leg8.render(boxTranslationMultiplier);
-		this.leg6.render(boxTranslationMultiplier);
-		this.leg4.render(boxTranslationMultiplier);
-		this.leg2.render(boxTranslationMultiplier);
-		this.leg7.render(boxTranslationMultiplier);
-		this.leg5.render(boxTranslationMultiplier);
-		this.leg3.render(boxTranslationMultiplier);
-		this.leg1.render(boxTranslationMultiplier);
-		this.legArch1.render(boxTranslationMultiplier);
-		this.legArch2.render(boxTranslationMultiplier);
-		this.legArch3.render(boxTranslationMultiplier);
-		this.legArch4.render(boxTranslationMultiplier);
-		this.tailMain.render(boxTranslationMultiplier);
+		super.render(entity, swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation);
+		this.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
+		this.body.render(boxTranslation);
+		this.leg8.render(boxTranslation);
+		this.leg6.render(boxTranslation);
+		this.leg4.render(boxTranslation);
+		this.leg2.render(boxTranslation);
+		this.leg7.render(boxTranslation);
+		this.leg5.render(boxTranslation);
+		this.leg3.render(boxTranslation);
+		this.leg1.render(boxTranslation);
+		this.legArch1.render(boxTranslation);
+		this.legArch2.render(boxTranslation);
+		this.legArch3.render(boxTranslation);
+		this.legArch4.render(boxTranslation);
+		this.tailMain.render(boxTranslation);
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z)
@@ -155,9 +155,9 @@ public class ModelFacehugger extends ModelBase
 	}
 
 	@Override
-	public void setRotationAngles(float swingProgress, float swingProgressPrevious, float idleProgress, float headRotateAngle, float headRotationPitch, float boxTranslationMultiplier, Entity entity)
+	public void setRotationAngles(float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation, Entity entity)
 	{
-		super.setRotationAngles(swingProgress, swingProgressPrevious, idleProgress, headRotateAngle, headRotationPitch, boxTranslationMultiplier, entity);
+		super.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
 		this.setLivingAnimations((EntityLivingBase) entity, 0F, 0F, 0F);
 
 		float angleZ = ((float) Math.PI / 4F);
@@ -181,29 +181,29 @@ public class ModelFacehugger extends ModelBase
 		this.leg7.rotateAngleY = -angleY * 2.0F + angleYOffset;
 		this.leg8.rotateAngleY = angleY * 2.0F - angleYOffset;
 
-		float frontSetXY = -(MathHelper.cos(swingProgress * 0.6662F * 2.0F + 0.0F) * 0.4F) * swingProgressPrevious;
-		float frontSetZ = Math.abs(MathHelper.sin(swingProgress * 0.6662F + 0.0F) * 0.4F) * swingProgressPrevious;
+		float frontSetXY = -(MathHelper.cos(swingProgress * 0.6662F * 2.0F + 0.0F) * 0.4F) * swingProgressPrev;
+		float frontSetZ = Math.abs(MathHelper.sin(swingProgress * 0.6662F + 0.0F) * 0.4F) * swingProgressPrev;
 		this.leg1.rotateAngleX += frontSetXY;
 		this.leg2.rotateAngleY += -frontSetXY;
 		this.leg1.rotateAngleZ += frontSetZ;
 		this.leg2.rotateAngleZ += -frontSetZ;
 
-		float midFrontSetXY = -(MathHelper.cos(swingProgress * 0.6662F * 2.0F + (float) Math.PI) * 0.4F) * swingProgressPrevious;
-		float midFrontSetZ = Math.abs(MathHelper.sin(swingProgress * 0.6662F + (float) Math.PI) * 0.4F) * swingProgressPrevious;
+		float midFrontSetXY = -(MathHelper.cos(swingProgress * 0.6662F * 2.0F + (float) Math.PI) * 0.4F) * swingProgressPrev;
+		float midFrontSetZ = Math.abs(MathHelper.sin(swingProgress * 0.6662F + (float) Math.PI) * 0.4F) * swingProgressPrev;
 		this.leg3.rotateAngleY += midFrontSetXY;
 		this.leg4.rotateAngleY += -midFrontSetXY;
 		this.leg3.rotateAngleZ += midFrontSetZ;
 		this.leg4.rotateAngleZ += -midFrontSetZ;
 
-		float midBackSetXY = -(MathHelper.cos(swingProgress * 0.6662F * 2.0F + ((float) Math.PI / 2F)) * 0.4F) * swingProgressPrevious;
-		float midBackSetZ = Math.abs(MathHelper.sin(swingProgress * 0.6662F + ((float) Math.PI / 2F)) * 0.4F) * swingProgressPrevious;
+		float midBackSetXY = -(MathHelper.cos(swingProgress * 0.6662F * 2.0F + ((float) Math.PI / 2F)) * 0.4F) * swingProgressPrev;
+		float midBackSetZ = Math.abs(MathHelper.sin(swingProgress * 0.6662F + ((float) Math.PI / 2F)) * 0.4F) * swingProgressPrev;
 		this.leg5.rotateAngleY += midBackSetXY;
 		this.leg6.rotateAngleY += -midBackSetXY;
 		this.leg5.rotateAngleZ += midBackSetZ;
 		this.leg6.rotateAngleZ += -midBackSetZ;
 
-		float backSetXY = -(MathHelper.cos(swingProgress * 0.6662F * 2.0F + ((float) Math.PI * 3F / 2F)) * 0.4F) * swingProgressPrevious;
-		float backSetZ = Math.abs(MathHelper.sin(swingProgress * 0.6662F + ((float) Math.PI * 3F / 2F)) * 0.4F) * swingProgressPrevious;
+		float backSetXY = -(MathHelper.cos(swingProgress * 0.6662F * 2.0F + ((float) Math.PI * 3F / 2F)) * 0.4F) * swingProgressPrev;
+		float backSetZ = Math.abs(MathHelper.sin(swingProgress * 0.6662F + ((float) Math.PI * 3F / 2F)) * 0.4F) * swingProgressPrev;
 		this.leg7.rotateAngleY += backSetXY;
 		this.leg8.rotateAngleY += -backSetXY;
 		this.leg7.rotateAngleZ += backSetZ;
@@ -213,7 +213,7 @@ public class ModelFacehugger extends ModelBase
 		{
 			if (!entity.isCollidedVertically)
 			{
-				rotationToGround = headRotationPitch;
+				rotationToGround = headPitch;
 			}
 			else if (rotationToGround > 0 && rotationToGround < 180F)
 			{

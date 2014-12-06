@@ -70,7 +70,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		RenderingRegistry.registerEntityRenderingHandler(EntitySmartDisc.class, new RenderDisc());
 		RenderingRegistry.registerEntityRenderingHandler(EntityShuriken.class, new RenderShuriken());
 		RenderingRegistry.registerEntityRenderingHandler(EntityBullet.class, new RenderBullet());
-		RenderingRegistry.registerEntityRenderingHandler(EntityBulletTile.class, new RenderBulletTile());
+		RenderingRegistry.registerEntityRenderingHandler(EntityBulletTile.class, new RenderBullet());
 	}
 
 	public void registerItemRenders()

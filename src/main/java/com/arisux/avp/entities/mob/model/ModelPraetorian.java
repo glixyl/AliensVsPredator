@@ -324,61 +324,61 @@ public class ModelPraetorian extends ModelBase
 	}
 
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+	public void render(Entity entity, float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation)
 	{
-		super.render(entity, f, f1, f2, f3, f4, f5);
-		this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		this.torso.render(f5);
-		this.stomache.render(f5);
-		this.rThigh.render(f5);
-		this.lThigh.render(f5);
-		this.lShin.render(f5);
-		this.rShin.render(f5);
-		this.lShin1.render(f5);
-		this.rShin1.render(f5);
-		this.lFoot.render(f5);
-		this.rFoot.render(f5);
-		this.lArm.render(f5);
-		this.rArm.render(f5);
-		this.lClaw.render(f5);
-		this.rArm2.render(f5);
-		this.neck.render(f5);
-		this.headBase.render(f5);
-		this.face1.render(f5);
-		this.jaw1.render(f5);
-		this.jaw2.render(f5);
-		this.head2.render(f5);
-		this.lArm2.render(f5);
-		this.rClaw.render(f5);
-		this.lClaw2.render(f5);
-		this.rClaw2.render(f5);
-		this.vertibrae1.render(f5);
-		this.vertibrae2.render(f5);
-		this.tailspines1.render(f5);
-		this.tail2.render(f5);
-		this.tail3.render(f5);
-		this.stabber.render(f5);
-		this.tail4.render(f5);
-		this.tail5.render(f5);
-		this.face2.render(f5);
-		this.tailspines5.render(f5);
-		this.tailspikes5.render(f5);
-		this.tailspikes4.render(f5);
-		this.tailspines4.render(f5);
-		this.tailspines3.render(f5);
-		this.tailspikes3.render(f5);
-		this.tailspines2.render(f5);
-		this.tailspikes2.render(f5);
-		this.tail1.render(f5);
-		this.tailspikes1.render(f5);
-		this.backStabber1.render(f5);
-		this.backStabber2.render(f5);
-		this.backStabber3.render(f5);
-		this.backStabber4.render(f5);
-		this.headSide1.render(f5);
-		this.headSide2.render(f5);
-		this.backStabber5.render(f5);
-		this.backStabber6.render(f5);
+		super.render(entity, swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation);
+		this.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
+		this.torso.render(boxTranslation);
+		this.stomache.render(boxTranslation);
+		this.rThigh.render(boxTranslation);
+		this.lThigh.render(boxTranslation);
+		this.lShin.render(boxTranslation);
+		this.rShin.render(boxTranslation);
+		this.lShin1.render(boxTranslation);
+		this.rShin1.render(boxTranslation);
+		this.lFoot.render(boxTranslation);
+		this.rFoot.render(boxTranslation);
+		this.lArm.render(boxTranslation);
+		this.rArm.render(boxTranslation);
+		this.lClaw.render(boxTranslation);
+		this.rArm2.render(boxTranslation);
+		this.neck.render(boxTranslation);
+		this.headBase.render(boxTranslation);
+		this.face1.render(boxTranslation);
+		this.jaw1.render(boxTranslation);
+		this.jaw2.render(boxTranslation);
+		this.head2.render(boxTranslation);
+		this.lArm2.render(boxTranslation);
+		this.rClaw.render(boxTranslation);
+		this.lClaw2.render(boxTranslation);
+		this.rClaw2.render(boxTranslation);
+		this.vertibrae1.render(boxTranslation);
+		this.vertibrae2.render(boxTranslation);
+		this.tailspines1.render(boxTranslation);
+		this.tail2.render(boxTranslation);
+		this.tail3.render(boxTranslation);
+		this.stabber.render(boxTranslation);
+		this.tail4.render(boxTranslation);
+		this.tail5.render(boxTranslation);
+		this.face2.render(boxTranslation);
+		this.tailspines5.render(boxTranslation);
+		this.tailspikes5.render(boxTranslation);
+		this.tailspikes4.render(boxTranslation);
+		this.tailspines4.render(boxTranslation);
+		this.tailspines3.render(boxTranslation);
+		this.tailspikes3.render(boxTranslation);
+		this.tailspines2.render(boxTranslation);
+		this.tailspikes2.render(boxTranslation);
+		this.tail1.render(boxTranslation);
+		this.tailspikes1.render(boxTranslation);
+		this.backStabber1.render(boxTranslation);
+		this.backStabber2.render(boxTranslation);
+		this.backStabber3.render(boxTranslation);
+		this.backStabber4.render(boxTranslation);
+		this.headSide1.render(boxTranslation);
+		this.headSide2.render(boxTranslation);
+		this.backStabber5.render(boxTranslation);
+		this.backStabber6.render(boxTranslation);
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z)
@@ -389,36 +389,36 @@ public class ModelPraetorian extends ModelBase
 	}
 
 	@Override
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
+	public void setRotationAngles(float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation, Entity entity)
 	{
-		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+		super.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
 		
-		float newangle = MathHelper.cos(f2 * 4.0F * this.wingspeed) * (float) Math.PI * 0.5F * f1;
+		float newangle = MathHelper.cos(idleProgress * 4.0F * this.wingspeed) * (float) Math.PI * 0.5F * swingProgressPrev;
 		this.doTail(newangle);
-		this.lThigh.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1 - 0.8028515F;
-		this.lShin.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1 - 0.4014257F;
-		this.lShin1.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1 - 0.8028515F;
-		this.lFoot.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
-		this.rThigh.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1 - 0.8028515F;
-		this.rShin.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1 - 0.4014257F;
-		this.rShin1.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1 - 0.8028515F;
-		this.rFoot.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
-		this.rArm.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1 + 0.3665191F;
-		this.rClaw.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1 + 0.3665191F;
-		this.rArm2.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1 + 0.3665191F;
-		this.rClaw2.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1 + 0.3665191F;
-		this.lArm.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1 + 0.3665191F;
-		this.lClaw.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1 + 0.3665191F;
-		this.lArm2.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1 + 0.3665191F;
-		this.lClaw2.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1 + 0.3665191F;
-		this.headSide1.rotateAngleY = 0.36F + (float) Math.toRadians((double) f3) * 0.75F;
-		this.headSide2.rotateAngleY = -0.36F + (float) Math.toRadians((double) f3) * 0.75F;
-		this.head2.rotateAngleY = (float) Math.toRadians((double) f3) * 0.75F;
-		this.headBase.rotateAngleY = (float) Math.toRadians((double) f3) * 0.75F;
-		this.jaw1.rotateAngleY = (float) Math.toRadians((double) f3) * 0.75F;
-		this.face1.rotateAngleY = (float) Math.toRadians((double) f3) * 0.75F;
-		this.face2.rotateAngleY = (float) Math.toRadians((double) f3) * 0.75F;
-		this.jaw2.rotateAngleY = (float) Math.toRadians((double) f3) * 0.75F;
+		this.lThigh.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev - 0.8028515F;
+		this.lShin.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev - 0.4014257F;
+		this.lShin1.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev - 0.8028515F;
+		this.lFoot.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev;
+		this.rThigh.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev - 0.8028515F;
+		this.rShin.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev - 0.4014257F;
+		this.rShin1.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev - 0.8028515F;
+		this.rFoot.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev;
+		this.rArm.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev + 0.3665191F;
+		this.rClaw.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev + 0.3665191F;
+		this.rArm2.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev + 0.3665191F;
+		this.rClaw2.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev + 0.3665191F;
+		this.lArm.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev + 0.3665191F;
+		this.lClaw.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev + 0.3665191F;
+		this.lArm2.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev + 0.3665191F;
+		this.lClaw2.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev + 0.3665191F;
+		this.headSide1.rotateAngleY = 0.36F + (float) Math.toRadians(headYaw) * 0.75F;
+		this.headSide2.rotateAngleY = -0.36F + (float) Math.toRadians(headYaw) * 0.75F;
+		this.head2.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
+		this.headBase.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
+		this.jaw1.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
+		this.face1.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
+		this.face2.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
+		this.jaw2.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
 		this.jaw2.rotateAngleX = 0.122F + Math.abs(newangle);
 		this.backStabber2.rotateAngleX = 0.69F + Math.abs(newangle);
 		this.backStabber5.rotateAngleX = -0.69F - Math.abs(newangle);
@@ -426,7 +426,7 @@ public class ModelPraetorian extends ModelBase
 		this.backStabber1.rotateAngleX = -1.1F - Math.abs(newangle * 0.75F);
 		this.backStabber6.rotateAngleX = 0.35F + Math.abs(newangle * 0.5F);
 		this.backStabber3.rotateAngleX = -1.5F - Math.abs(newangle * 0.5F);
-		newangle = MathHelper.cos(f2 * 3.5F * this.wingspeed) * (float) Math.PI * 0.4F;
+		newangle = MathHelper.cos(idleProgress * 3.5F * this.wingspeed) * (float) Math.PI * 0.4F;
 	}
 
 	private void doTail(float angle)
@@ -435,43 +435,43 @@ public class ModelPraetorian extends ModelBase
 		this.tailspikes1.rotateAngleY = angle;
 		this.tailspines1.rotateAngleY = angle;
 		this.tail2.rotateAngleY = angle * 0.5F;
-		this.tail2.rotationPointZ = this.tail1.rotationPointZ + (float) Math.cos((double) this.tail1.rotateAngleY) * 10.0F;
-		this.tail2.rotationPointX = this.tail1.rotationPointX + (float) Math.sin((double) this.tail1.rotateAngleY) * 10.0F;
+		this.tail2.rotationPointZ = this.tail1.rotationPointZ + (float) Math.cos(this.tail1.rotateAngleY) * 10.0F;
+		this.tail2.rotationPointX = this.tail1.rotationPointX + (float) Math.sin(this.tail1.rotateAngleY) * 10.0F;
 		this.tailspikes2.rotateAngleY = angle;
-		this.tailspikes2.rotationPointZ = this.tail1.rotationPointZ + (float) Math.cos((double) this.tail1.rotateAngleY) * 10.0F;
-		this.tailspikes2.rotationPointX = this.tail1.rotationPointX + (float) Math.sin((double) this.tail1.rotateAngleY) * 10.0F;
+		this.tailspikes2.rotationPointZ = this.tail1.rotationPointZ + (float) Math.cos(this.tail1.rotateAngleY) * 10.0F;
+		this.tailspikes2.rotationPointX = this.tail1.rotationPointX + (float) Math.sin(this.tail1.rotateAngleY) * 10.0F;
 		this.tailspines2.rotateAngleY = angle;
-		this.tailspines2.rotationPointZ = this.tail1.rotationPointZ + (float) Math.cos((double) this.tail1.rotateAngleY) * 10.0F;
-		this.tailspines2.rotationPointX = this.tail1.rotationPointX + (float) Math.sin((double) this.tail1.rotateAngleY) * 10.0F;
+		this.tailspines2.rotationPointZ = this.tail1.rotationPointZ + (float) Math.cos(this.tail1.rotateAngleY) * 10.0F;
+		this.tailspines2.rotationPointX = this.tail1.rotationPointX + (float) Math.sin(this.tail1.rotateAngleY) * 10.0F;
 		this.tail3.rotateAngleY = angle * 0.8F;
-		this.tail3.rotationPointZ = this.tail2.rotationPointZ + (float) Math.cos((double) this.tail2.rotateAngleY) * 10.0F;
-		this.tail3.rotationPointX = this.tail2.rotationPointX + (float) Math.sin((double) this.tail2.rotateAngleY) * 10.0F;
+		this.tail3.rotationPointZ = this.tail2.rotationPointZ + (float) Math.cos(this.tail2.rotateAngleY) * 10.0F;
+		this.tail3.rotationPointX = this.tail2.rotationPointX + (float) Math.sin(this.tail2.rotateAngleY) * 10.0F;
 		this.tailspikes3.rotateAngleY = angle;
-		this.tailspikes3.rotationPointZ = this.tail2.rotationPointZ + (float) Math.cos((double) this.tail2.rotateAngleY) * 10.0F;
-		this.tailspikes3.rotationPointX = this.tail2.rotationPointX + (float) Math.sin((double) this.tail2.rotateAngleY) * 10.0F;
+		this.tailspikes3.rotationPointZ = this.tail2.rotationPointZ + (float) Math.cos(this.tail2.rotateAngleY) * 10.0F;
+		this.tailspikes3.rotationPointX = this.tail2.rotationPointX + (float) Math.sin(this.tail2.rotateAngleY) * 10.0F;
 		this.tailspines3.rotateAngleY = angle;
-		this.tailspines3.rotationPointZ = this.tail2.rotationPointZ + (float) Math.cos((double) this.tail2.rotateAngleY) * 10.0F;
-		this.tailspines3.rotationPointX = this.tail2.rotationPointX + (float) Math.sin((double) this.tail2.rotateAngleY) * 10.0F;
+		this.tailspines3.rotationPointZ = this.tail2.rotationPointZ + (float) Math.cos(this.tail2.rotateAngleY) * 10.0F;
+		this.tailspines3.rotationPointX = this.tail2.rotationPointX + (float) Math.sin(this.tail2.rotateAngleY) * 10.0F;
 		this.tail4.rotateAngleY = angle * 1.25F;
-		this.tail4.rotationPointZ = this.tail3.rotationPointZ + (float) Math.cos((double) this.tail3.rotateAngleY) * 10.0F;
-		this.tail4.rotationPointX = this.tail3.rotationPointX + (float) Math.sin((double) this.tail3.rotateAngleY) * 10.0F;
+		this.tail4.rotationPointZ = this.tail3.rotationPointZ + (float) Math.cos(this.tail3.rotateAngleY) * 10.0F;
+		this.tail4.rotationPointX = this.tail3.rotationPointX + (float) Math.sin(this.tail3.rotateAngleY) * 10.0F;
 		this.tailspikes4.rotateAngleY = angle;
-		this.tailspikes4.rotationPointZ = this.tail3.rotationPointZ + (float) Math.cos((double) this.tail3.rotateAngleY) * 10.0F;
-		this.tailspikes4.rotationPointX = this.tail3.rotationPointX + (float) Math.sin((double) this.tail3.rotateAngleY) * 10.0F;
+		this.tailspikes4.rotationPointZ = this.tail3.rotationPointZ + (float) Math.cos(this.tail3.rotateAngleY) * 10.0F;
+		this.tailspikes4.rotationPointX = this.tail3.rotationPointX + (float) Math.sin(this.tail3.rotateAngleY) * 10.0F;
 		this.tailspines4.rotateAngleY = angle;
-		this.tailspines4.rotationPointZ = this.tail3.rotationPointZ + (float) Math.cos((double) this.tail3.rotateAngleY) * 10.0F;
-		this.tailspines4.rotationPointX = this.tail3.rotationPointX + (float) Math.sin((double) this.tail3.rotateAngleY) * 10.0F;
+		this.tailspines4.rotationPointZ = this.tail3.rotationPointZ + (float) Math.cos(this.tail3.rotateAngleY) * 10.0F;
+		this.tailspines4.rotationPointX = this.tail3.rotationPointX + (float) Math.sin(this.tail3.rotateAngleY) * 10.0F;
 		this.tail5.rotateAngleY = angle * 1.5F;
-		this.tail5.rotationPointZ = this.tail4.rotationPointZ + (float) Math.cos((double) this.tail4.rotateAngleY) * 10.0F;
-		this.tail5.rotationPointX = this.tail4.rotationPointX + (float) Math.sin((double) this.tail4.rotateAngleY) * 10.0F;
+		this.tail5.rotationPointZ = this.tail4.rotationPointZ + (float) Math.cos(this.tail4.rotateAngleY) * 10.0F;
+		this.tail5.rotationPointX = this.tail4.rotationPointX + (float) Math.sin(this.tail4.rotateAngleY) * 10.0F;
 		this.tailspikes5.rotateAngleY = angle;
-		this.tailspikes5.rotationPointZ = this.tail4.rotationPointZ + (float) Math.cos((double) this.tail4.rotateAngleY) * 10.0F;
-		this.tailspikes5.rotationPointX = this.tail4.rotationPointX + (float) Math.sin((double) this.tail4.rotateAngleY) * 10.0F;
+		this.tailspikes5.rotationPointZ = this.tail4.rotationPointZ + (float) Math.cos(this.tail4.rotateAngleY) * 10.0F;
+		this.tailspikes5.rotationPointX = this.tail4.rotationPointX + (float) Math.sin(this.tail4.rotateAngleY) * 10.0F;
 		this.tailspines5.rotateAngleY = angle;
-		this.tailspines5.rotationPointZ = this.tail4.rotationPointZ + (float) Math.cos((double) this.tail4.rotateAngleY) * 10.0F;
-		this.tailspines5.rotationPointX = this.tail4.rotationPointX + (float) Math.sin((double) this.tail4.rotateAngleY) * 10.0F;
+		this.tailspines5.rotationPointZ = this.tail4.rotationPointZ + (float) Math.cos(this.tail4.rotateAngleY) * 10.0F;
+		this.tailspines5.rotationPointX = this.tail4.rotationPointX + (float) Math.sin(this.tail4.rotateAngleY) * 10.0F;
 		this.stabber.rotateAngleY = angle * 2.0F;
-		this.stabber.rotationPointZ = this.tail5.rotationPointZ + (float) Math.cos((double) this.tail5.rotateAngleY) * 10.0F;
-		this.stabber.rotationPointX = this.tail5.rotationPointX + (float) Math.sin((double) this.tail5.rotateAngleY) * 10.0F;
+		this.stabber.rotationPointZ = this.tail5.rotationPointZ + (float) Math.cos(this.tail5.rotateAngleY) * 10.0F;
+		this.stabber.rotationPointX = this.tail5.rotationPointX + (float) Math.sin(this.tail5.rotateAngleY) * 10.0F;
 	}
 }

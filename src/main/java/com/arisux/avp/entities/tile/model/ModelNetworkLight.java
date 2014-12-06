@@ -1,40 +1,42 @@
 package com.arisux.avp.entities.tile.model;
 
-import com.arisux.avp.entities.tile.TileEntityNetworkLight;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
+import com.arisux.avp.entities.tile.TileEntityNetworkLight;
+
 public class ModelNetworkLight extends ModelBase
 {
-	ModelRenderer Shape1;
-	ModelRenderer Shape2;
+	ModelRenderer box0;
+	ModelRenderer box1;
 
 	public ModelNetworkLight()
 	{
 		textureWidth = 64;
 		textureHeight = 32;
 
-		Shape1 = new ModelRenderer(this, 0, 0);
-		Shape1.addBox(0F, 0F, 0F, 16, 8, 16);
-		Shape1.setRotationPoint(-8F, 16F, -8F);
-		Shape1.setTextureSize(64, 32);
-		Shape1.mirror = true;
-		setRotation(Shape1, 0F, 0F, 0F);
-		Shape2 = new ModelRenderer(this, 0, 25);
-		Shape2.addBox(0F, 0F, 0F, 4, 7, 4);
-		Shape2.setRotationPoint(-2F, 9F, -2F);
-		Shape2.setTextureSize(64, 32);
-		Shape2.mirror = true;
-		setRotation(Shape2, 0F, 0F, 0F);
+		box0 = new ModelRenderer(this, 0, 0);
+		box0.addBox(0F, 0F, 0F, 16, 8, 16);
+		box0.setRotationPoint(-8F, 16F, -8F);
+		box0.setTextureSize(64, 32);
+		box0.mirror = true;
+		setRotation(box0, 0F, 0F, 0F);
+		box1 = new ModelRenderer(this, 0, 25);
+		box1.addBox(0F, 0F, 0F, 4, 7, 4);
+		box1.setRotationPoint(-2F, 9F, -2F);
+		box1.setTextureSize(64, 32);
+		box1.mirror = true;
+		setRotation(box1, 0F, 0F, 0F);
 	}
 
-	public void render(TileEntityNetworkLight tile, float f, float f1, float f2, float f3, float f4, float f5)
+	public void render(TileEntityNetworkLight tile, float boxTranslation)
 	{
-		setRotationAngles(f, f1, f2, f3, f4, f5);
-		Shape1.render(f5);
-		if(tile.getNetwork() != null) {
-			Shape2.render(f5);
+		this.setRotationAngles(tile);
+		box0.render(boxTranslation);
+		
+		if (tile.getNetwork() != null)
+		{
+			box1.render(boxTranslation);
 		}
 	}
 
@@ -45,9 +47,8 @@ public class ModelNetworkLight extends ModelBase
 		model.rotateAngleZ = z;
 	}
 
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5)
+	public void setRotationAngles(TileEntityNetworkLight tile)
 	{
-		super.setRotationAngles(f, f1, f2, f3, f4, f5, null);
+		;
 	}
-
 }

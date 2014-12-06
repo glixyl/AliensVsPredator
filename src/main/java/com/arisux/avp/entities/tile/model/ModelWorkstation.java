@@ -10,105 +10,104 @@ import com.arisux.avp.entities.tile.TileEntityWorkstation;
 
 public class ModelWorkstation extends ModelBase
 {
-	ModelRenderer Pillar;
-	ModelRenderer Pillarbase1;
-	ModelRenderer Desk;
-	ModelRenderer MainArm;
-	ModelRenderer LeftArm;
-	ModelRenderer ArmLeft;
-	ModelRenderer ArmCenter;
-	ModelRenderer ArmRight;
-	ModelRenderer RightArm;
-	ModelRenderer ScreenLeft;
-	ModelRenderer ScreenCenter;
-	ModelRenderer ScreenRight;
+	ModelRenderer stand;
+	ModelRenderer standBase;
+	ModelRenderer desk;
+	ModelRenderer mainArm;
+	ModelRenderer leftArm;
+	ModelRenderer supportLeft;
+	ModelRenderer supportCenter;
+	ModelRenderer supportRight;
+	ModelRenderer rightArm;
+	ModelRenderer screenLeft;
+	ModelRenderer screenCenter;
+	ModelRenderer screenRight;
 
 	public ModelWorkstation()
 	{
 		textureWidth = 128;
 		textureHeight = 64;
 
-		Pillar = new ModelRenderer(this, 42, 21);
-		Pillar.addBox(0F, 0F, 0F, 10, 18, 4);
-		Pillar.setRotationPoint(-5F, 4F, 2F);
-		Pillar.setTextureSize(128, 64);
-		Pillar.mirror = true;
-		setRotation(Pillar, 0F, 0F, 0F);
-		Pillarbase1 = new ModelRenderer(this, 1, 17);
-		Pillarbase1.addBox(0F, 0F, 0F, 16, 2, 4);
-		Pillarbase1.setRotationPoint(-8F, 22F, 2F);
-		Pillarbase1.setTextureSize(128, 64);
-		Pillarbase1.mirror = true;
-		setRotation(Pillarbase1, 0F, 0F, 0F);
-		Desk = new ModelRenderer(this, 42, 1);
-		Desk.addBox(0F, 0F, 0F, 16, 2, 16);
-		Desk.setRotationPoint(-8F, 6F, -10.6F);
-		Desk.setTextureSize(128, 64);
-		Desk.mirror = true;
-		setRotation(Desk, 0.1115358F, 0F, 0F);
-		MainArm = new ModelRenderer(this, 1, 7);
-		MainArm.addBox(0F, 0F, 0F, 4, 8, 1);
-		MainArm.setRotationPoint(-2F, -4F, 5F);
-		MainArm.setTextureSize(128, 64);
-		MainArm.mirror = true;
-		setRotation(MainArm, 0F, 0F, 0F);
-		LeftArm = new ModelRenderer(this, 1, 1);
-		LeftArm.addBox(-6F, 0F, 0F, 6, 4, 1);
-		LeftArm.setRotationPoint(-8F, -4F, 6F);
-		LeftArm.setTextureSize(128, 64);
-		LeftArm.mirror = true;
-		setRotation(LeftArm, 3.141593F, -0.3346145F, 0F);
-		ArmLeft = new ModelRenderer(this, 1, 1);
-		ArmLeft.addBox(0F, 0F, 0F, 6, 4, 1);
-		ArmLeft.setRotationPoint(-8F, -4F, 6F);
-		ArmLeft.setTextureSize(128, 64);
-		ArmLeft.mirror = true;
-		setRotation(ArmLeft, 3.141593F, 0F, 0F);
-		ArmCenter = new ModelRenderer(this, 16, 1);
-		ArmCenter.addBox(0F, 0F, 0F, 4, 4, 1);
-		ArmCenter.setRotationPoint(-2F, -4F, 6F);
-		ArmCenter.setTextureSize(128, 64);
-		ArmCenter.mirror = true;
-		setRotation(ArmCenter, 3.141593F, 0F, 0F);
-		ArmRight = new ModelRenderer(this, 1, 1);
-		ArmRight.addBox(0F, 0F, 0F, 6, 4, 1);
-		ArmRight.setRotationPoint(2F, -4F, 6F);
-		ArmRight.setTextureSize(128, 64);
-		ArmRight.mirror = true;
-		setRotation(ArmRight, 3.141593F, 0F, 0F);
-		RightArm = new ModelRenderer(this, 1, 1);
-		RightArm.addBox(0F, 0F, 0F, 6, 4, 1);
-		RightArm.setRotationPoint(8F, -4F, 6F);
-		RightArm.setTextureSize(128, 64);
-		RightArm.mirror = true;
-		setRotation(RightArm, 3.141593F, 0.3346075F, 0F);
-		ScreenLeft = new ModelRenderer(this, 1, 24);
-		ScreenLeft.addBox(-16F, 0F, 0F, 16, 9, 1);
-		ScreenLeft.setRotationPoint(-8F, -10F, 4F);
-		ScreenLeft.setTextureSize(128, 64);
-		ScreenLeft.mirror = true;
-		setRotation(ScreenLeft, 0.1115358F, -0.3346075F, 0F);
-		ScreenCenter = new ModelRenderer(this, 1, 24);
-		ScreenCenter.addBox(0F, 0F, 0F, 16, 9, 1);
-		ScreenCenter.setRotationPoint(-8F, -10F, 4F);
-		ScreenCenter.setTextureSize(128, 64);
-		ScreenCenter.mirror = true;
-		setRotation(ScreenCenter, 0.1115358F, 0F, 0F);
-		ScreenRight = new ModelRenderer(this, 1, 24);
-		ScreenRight.addBox(0F, 0F, 0F, 16, 9, 1);
-		ScreenRight.setRotationPoint(8F, -10F, 4F);
-		ScreenRight.setTextureSize(128, 64);
-		ScreenRight.mirror = true;
-		setRotation(ScreenRight, 0.111544F, 0.3346145F, 0F);
+		stand = new ModelRenderer(this, 42, 21);
+		stand.addBox(0F, 0F, 0F, 10, 18, 4);
+		stand.setRotationPoint(-5F, 4F, 2F);
+		stand.setTextureSize(128, 64);
+		stand.mirror = true;
+		setRotation(stand, 0F, 0F, 0F);
+		standBase = new ModelRenderer(this, 1, 17);
+		standBase.addBox(0F, 0F, 0F, 16, 2, 4);
+		standBase.setRotationPoint(-8F, 22F, 2F);
+		standBase.setTextureSize(128, 64);
+		standBase.mirror = true;
+		setRotation(standBase, 0F, 0F, 0F);
+		desk = new ModelRenderer(this, 42, 1);
+		desk.addBox(0F, 0F, 0F, 16, 2, 16);
+		desk.setRotationPoint(-8F, 6F, -10.6F);
+		desk.setTextureSize(128, 64);
+		desk.mirror = true;
+		setRotation(desk, 0.1115358F, 0F, 0F);
+		mainArm = new ModelRenderer(this, 1, 7);
+		mainArm.addBox(0F, 0F, 0F, 4, 8, 1);
+		mainArm.setRotationPoint(-2F, -4F, 5F);
+		mainArm.setTextureSize(128, 64);
+		mainArm.mirror = true;
+		setRotation(mainArm, 0F, 0F, 0F);
+		leftArm = new ModelRenderer(this, 1, 1);
+		leftArm.addBox(-6F, 0F, 0F, 6, 4, 1);
+		leftArm.setRotationPoint(-8F, -4F, 6F);
+		leftArm.setTextureSize(128, 64);
+		leftArm.mirror = true;
+		setRotation(leftArm, 3.141593F, -0.3346145F, 0F);
+		supportLeft = new ModelRenderer(this, 1, 1);
+		supportLeft.addBox(0F, 0F, 0F, 6, 4, 1);
+		supportLeft.setRotationPoint(-8F, -4F, 6F);
+		supportLeft.setTextureSize(128, 64);
+		supportLeft.mirror = true;
+		setRotation(supportLeft, 3.141593F, 0F, 0F);
+		supportCenter = new ModelRenderer(this, 16, 1);
+		supportCenter.addBox(0F, 0F, 0F, 4, 4, 1);
+		supportCenter.setRotationPoint(-2F, -4F, 6F);
+		supportCenter.setTextureSize(128, 64);
+		supportCenter.mirror = true;
+		setRotation(supportCenter, 3.141593F, 0F, 0F);
+		supportRight = new ModelRenderer(this, 1, 1);
+		supportRight.addBox(0F, 0F, 0F, 6, 4, 1);
+		supportRight.setRotationPoint(2F, -4F, 6F);
+		supportRight.setTextureSize(128, 64);
+		supportRight.mirror = true;
+		setRotation(supportRight, 3.141593F, 0F, 0F);
+		rightArm = new ModelRenderer(this, 1, 1);
+		rightArm.addBox(0F, 0F, 0F, 6, 4, 1);
+		rightArm.setRotationPoint(8F, -4F, 6F);
+		rightArm.setTextureSize(128, 64);
+		rightArm.mirror = true;
+		setRotation(rightArm, 3.141593F, 0.3346075F, 0F);
+		screenLeft = new ModelRenderer(this, 1, 24);
+		screenLeft.addBox(-16F, 0F, 0F, 16, 9, 1);
+		screenLeft.setRotationPoint(-8F, -10F, 4F);
+		screenLeft.setTextureSize(128, 64);
+		screenLeft.mirror = true;
+		setRotation(screenLeft, 0.1115358F, -0.3346075F, 0F);
+		screenCenter = new ModelRenderer(this, 1, 24);
+		screenCenter.addBox(0F, 0F, 0F, 16, 9, 1);
+		screenCenter.setRotationPoint(-8F, -10F, 4F);
+		screenCenter.setTextureSize(128, 64);
+		screenCenter.mirror = true;
+		setRotation(screenCenter, 0.1115358F, 0F, 0F);
+		screenRight = new ModelRenderer(this, 1, 24);
+		screenRight.addBox(0F, 0F, 0F, 16, 9, 1);
+		screenRight.setRotationPoint(8F, -10F, 4F);
+		screenRight.setTextureSize(128, 64);
+		screenRight.mirror = true;
+		setRotation(screenRight, 0.111544F, 0.3346145F, 0F);
 	}
 
-	public void render(TileEntityWorkstation tile, float f, float f1, float f2, float f3, float f4, float f5)
+	public void render(TileEntityWorkstation tile, float boxTranslation)
 	{
-		setRotationAngles(f, f1, f2, f3, f4, f5, tile);
-		Block b = tile.getWorldObj().getBlock(tile.xCoord, tile.yCoord, tile.zCoord);
-		Block left, leftUp;
-		Block right, rightUp;
-		
+		setRotationAngles(tile);
+		Block block = tile.getWorldObj().getBlock(tile.xCoord, tile.yCoord, tile.zCoord);
+		Block left, leftUp, right, rightUp;
+
 		switch (tile.rotation)
 		{
 			case 3:
@@ -140,31 +139,31 @@ public class ModelWorkstation extends ModelBase
 				right = tile.getWorldObj().getBlock(tile.xCoord + 1, tile.yCoord, tile.zCoord);
 				break;
 			default:
-				left = b;
-				right = b;
-				leftUp = b;
-				rightUp = b;
+				left = block;
+				right = block;
+				leftUp = block;
+				rightUp = block;
 				break;
 		}
-		Pillar.render(f5);
-		Pillarbase1.render(f5);
-		Desk.render(f5);
-		MainArm.render(f5);
-		ArmLeft.render(f5);
-		ArmCenter.render(f5);
-		ArmRight.render(f5);
-		ScreenCenter.render(f5);
-		
+		stand.render(boxTranslation);
+		standBase.render(boxTranslation);
+		desk.render(boxTranslation);
+		mainArm.render(boxTranslation);
+		supportLeft.render(boxTranslation);
+		supportCenter.render(boxTranslation);
+		supportRight.render(boxTranslation);
+		screenCenter.render(boxTranslation);
+
 		if (left != AliensVsPredator.instance().blocks.blockWorkstation && leftUp == Blocks.air && left.getBlockBoundsMaxY() <= 1.5)
 		{
-			LeftArm.render(f5);
-			ScreenLeft.render(f5);
+			leftArm.render(boxTranslation);
+			screenLeft.render(boxTranslation);
 		}
-		
-		if (right != AliensVsPredator.instance().blocks.blockWorkstation && rightUp == Blocks.air  && right.getBlockBoundsMaxY() <= 1.5)
+
+		if (right != AliensVsPredator.instance().blocks.blockWorkstation && rightUp == Blocks.air && right.getBlockBoundsMaxY() <= 1.5)
 		{
-			RightArm.render(f5);
-			ScreenRight.render(f5);
+			rightArm.render(boxTranslation);
+			screenRight.render(boxTranslation);
 		}
 	}
 
@@ -175,8 +174,8 @@ public class ModelWorkstation extends ModelBase
 		model.rotateAngleZ = z;
 	}
 
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, TileEntityWorkstation tile)
+	public void setRotationAngles(TileEntityWorkstation tile)
 	{
-		super.setRotationAngles(f, f1, f2, f3, f4, f5, null);
+		;
 	}
 }

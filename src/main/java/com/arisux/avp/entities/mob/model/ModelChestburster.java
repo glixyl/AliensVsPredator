@@ -159,34 +159,35 @@ public class ModelChestburster extends ModelBase
 	}
 
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+	public void render(Entity entity, float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation)
 	{
-		super.render(entity, f, f1, f2, f3, f4, f5);
-		this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		this.body1.render(f5);
-		this.body2.render(f5);
-		this.body3.render(f5);
-		this.body4.render(f5);
-		this.body5.render(f5);
-		this.body7.render(f5);
-		this.mouth.render(f5);
-		this.body8.render(f5);
-		this.body9.render(f5);
-		this.body10.render(f5);
-		this.body11.render(f5);
-		this.body12.render(f5);
-		this.body13.render(f5);
-		this.body14.render(f5);
-		this.body15.render(f5);
-		this.body16.render(f5);
-		this.tail1.render(f5);
-		this.tail2.render(f5);
-		this.tail3.render(f5);
-		this.tail4.render(f5);
-		this.tail5.render(f5);
-		this.tail6.render(f5);
-		this.tail7.render(f5);
-		this.body17.render(f5);
+		super.render(entity, swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation);
+		this.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
+
+		this.body1.render(boxTranslation);
+		this.body2.render(boxTranslation);
+		this.body3.render(boxTranslation);
+		this.body4.render(boxTranslation);
+		this.body5.render(boxTranslation);
+		this.body7.render(boxTranslation);
+		this.mouth.render(boxTranslation);
+		this.body8.render(boxTranslation);
+		this.body9.render(boxTranslation);
+		this.body10.render(boxTranslation);
+		this.body11.render(boxTranslation);
+		this.body12.render(boxTranslation);
+		this.body13.render(boxTranslation);
+		this.body14.render(boxTranslation);
+		this.body15.render(boxTranslation);
+		this.body16.render(boxTranslation);
+		this.tail1.render(boxTranslation);
+		this.tail2.render(boxTranslation);
+		this.tail3.render(boxTranslation);
+		this.tail4.render(boxTranslation);
+		this.tail5.render(boxTranslation);
+		this.tail6.render(boxTranslation);
+		this.tail7.render(boxTranslation);
+		this.body17.render(boxTranslation);
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z)
@@ -197,8 +198,8 @@ public class ModelChestburster extends ModelBase
 	}
 
 	@Override
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
+	public void setRotationAngles(float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation, Entity entity)
 	{
-		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+		super.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
 	}
 }

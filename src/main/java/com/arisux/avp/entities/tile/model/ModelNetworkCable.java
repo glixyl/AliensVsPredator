@@ -59,10 +59,11 @@ public class ModelNetworkCable extends ModelBase
 		setRotation(right, 0F, -1.570796F, 0F);
 	}
 
-	public void render(TileEntityNetworkCable tile, float f, float f1, float f2, float f3, float f4, float f5)
+	public void render(TileEntityNetworkCable tile, float boxTranslation)
 	{
-		this.setRotationAngles(f, f1, f2, f3, f4, f5, tile);
-		node.render(f5);
+		this.setRotationAngles(tile);
+		
+		node.render(boxTranslation);
 		
 		down.setRotationPoint(1F, 17F, -1F);
 		up.setRotationPoint(1F, 15F, 1F);
@@ -70,35 +71,35 @@ public class ModelNetworkCable extends ModelBase
 		back.setRotationPoint(-1F, 15F, 1F);
 		left.setRotationPoint(1F, 15F, 1F);
 		right.setRotationPoint(-1F, 15F, -1F);
-		
+
 		if (tile.getBottom() instanceof PoweredTileEntity)
 		{
-			down.render(f5);
+			down.render(boxTranslation);
 		}
 
 		if (tile.getTop() instanceof PoweredTileEntity)
 		{
-			up.render(f5);
+			up.render(boxTranslation);
 		}
 
 		if (tile.getFront() instanceof PoweredTileEntity)
 		{
-			front.render(f5);
+			front.render(boxTranslation);
 		}
 
 		if (tile.getBack() instanceof PoweredTileEntity)
 		{
-			back.render(f5);
+			back.render(boxTranslation);
 		}
 
 		if (tile.getLeft() instanceof PoweredTileEntity)
 		{
-			left.render(f5);
+			left.render(boxTranslation);
 		}
 
 		if (tile.getRight() instanceof PoweredTileEntity)
 		{
-			right.render(f5);
+			right.render(boxTranslation);
 		}
 	}
 
@@ -109,8 +110,8 @@ public class ModelNetworkCable extends ModelBase
 		model.rotateAngleZ = z;
 	}
 
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, TileEntityNetworkCable tile)
+	public void setRotationAngles(TileEntityNetworkCable tile)
 	{
-		super.setRotationAngles(f, f1, f2, f3, f4, f5, null);
+		;
 	}
 }

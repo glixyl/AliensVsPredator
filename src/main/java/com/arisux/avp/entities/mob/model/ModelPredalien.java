@@ -448,82 +448,82 @@ public class ModelPredalien extends ModelBase
 	}
 
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+	public void render(Entity entity, float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation)
 	{
-		super.render(entity, f, f1, f2, f3, f4, f5);
-		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		leftFootToe2.render(f5);
-		leftFootBackToe.render(f5);
-		LeftThigh.render(f5);
-		leftFootToe1.render(f5);
-		leftFoot.render(f5);
-		leftFootToe3.render(f5);
-		leftShin.render(f5);
-		topTorso.render(f5);
-		abdomin.render(f5);
-		backSpikes.render(f5);
-		rightLowerSpike.render(f5);
-		rightTopSpike.render(f5);
-		leftTopSpike.render(f5);
-		leftLowerSpike.render(f5);
-		neck.render(f5);
-		rightFootToe3.render(f5);
-		rightFootToe2.render(f5);
-		rightFootBackToe.render(f5);
-		rightShin.render(f5);
-		RightThigh.render(f5);
-		rightFootToe1.render(f5);
-		rightFoot.render(f5);
-		leftForearm.render(f5);
-		leftBicep.render(f5);
-		leftFinger4.render(f5);
-		leftFinger3.render(f5);
-		leftFinger2.render(f5);
-		leftFinger1.render(f5);
-		leftShoulder.render(f5);
-		rightShoulder.render(f5);
-		rightBicep.render(f5);
-		rightForearm.render(f5);
-		rightFinger1.render(f5);
-		rightFinger2.render(f5);
-		rightFinger3.render(f5);
-		rightFinger4.render(f5);
-		tailBase.render(f5);
-		tail1.render(f5);
-		tail2.render(f5);
-		tail3.render(f5);
-		tail4.render(f5);
-		tailStabber.render(f5);
-		headTop.render(f5);
-		dread7.render(f5);
-		midHeadSpike.render(f5);
-		dread8.render(f5);
-		dread6.render(f5);
-		dread5.render(f5);
-		dread4.render(f5);
-		faceMid.render(f5);
-		dread3.render(f5);
-		rightLowerMandible.render(f5);
-		dread2.render(f5);
-		leftLowerMandible.render(f5);
-		dread1.render(f5);
-		rightLowerMandible2.render(f5);
-		headTopRidge.render(f5);
-		leftLowerMandible2.render(f5);
-		rightInnerJawWebbing.render(f5);
-		faceTop.render(f5);
-		rightJawWebbing.render(f5);
-		rightUpperTooth.render(f5);
-		leftLowerTooth.render(f5);
-		leftUpperTooth.render(f5);
-		rightLowerTooth.render(f5);
-		leftUpperMandible.render(f5);
-		leftJawWebbing.render(f5);
-		bottomTeeth.render(f5);
-		leftInnerJawWebbing.render(f5);
-		midJaw.render(f5);
-		rightUpperMandible.render(f5);
-		topTeeth.render(f5);
+		super.render(entity, swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation);
+		this.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
+		leftFootToe2.render(boxTranslation);
+		leftFootBackToe.render(boxTranslation);
+		LeftThigh.render(boxTranslation);
+		leftFootToe1.render(boxTranslation);
+		leftFoot.render(boxTranslation);
+		leftFootToe3.render(boxTranslation);
+		leftShin.render(boxTranslation);
+		topTorso.render(boxTranslation);
+		abdomin.render(boxTranslation);
+		backSpikes.render(boxTranslation);
+		rightLowerSpike.render(boxTranslation);
+		rightTopSpike.render(boxTranslation);
+		leftTopSpike.render(boxTranslation);
+		leftLowerSpike.render(boxTranslation);
+		neck.render(boxTranslation);
+		rightFootToe3.render(boxTranslation);
+		rightFootToe2.render(boxTranslation);
+		rightFootBackToe.render(boxTranslation);
+		rightShin.render(boxTranslation);
+		RightThigh.render(boxTranslation);
+		rightFootToe1.render(boxTranslation);
+		rightFoot.render(boxTranslation);
+		leftForearm.render(boxTranslation);
+		leftBicep.render(boxTranslation);
+		leftFinger4.render(boxTranslation);
+		leftFinger3.render(boxTranslation);
+		leftFinger2.render(boxTranslation);
+		leftFinger1.render(boxTranslation);
+		leftShoulder.render(boxTranslation);
+		rightShoulder.render(boxTranslation);
+		rightBicep.render(boxTranslation);
+		rightForearm.render(boxTranslation);
+		rightFinger1.render(boxTranslation);
+		rightFinger2.render(boxTranslation);
+		rightFinger3.render(boxTranslation);
+		rightFinger4.render(boxTranslation);
+		tailBase.render(boxTranslation);
+		tail1.render(boxTranslation);
+		tail2.render(boxTranslation);
+		tail3.render(boxTranslation);
+		tail4.render(boxTranslation);
+		tailStabber.render(boxTranslation);
+		headTop.render(boxTranslation);
+		dread7.render(boxTranslation);
+		midHeadSpike.render(boxTranslation);
+		dread8.render(boxTranslation);
+		dread6.render(boxTranslation);
+		dread5.render(boxTranslation);
+		dread4.render(boxTranslation);
+		faceMid.render(boxTranslation);
+		dread3.render(boxTranslation);
+		rightLowerMandible.render(boxTranslation);
+		dread2.render(boxTranslation);
+		leftLowerMandible.render(boxTranslation);
+		dread1.render(boxTranslation);
+		rightLowerMandible2.render(boxTranslation);
+		headTopRidge.render(boxTranslation);
+		leftLowerMandible2.render(boxTranslation);
+		rightInnerJawWebbing.render(boxTranslation);
+		faceTop.render(boxTranslation);
+		rightJawWebbing.render(boxTranslation);
+		rightUpperTooth.render(boxTranslation);
+		leftLowerTooth.render(boxTranslation);
+		leftUpperTooth.render(boxTranslation);
+		rightLowerTooth.render(boxTranslation);
+		leftUpperMandible.render(boxTranslation);
+		leftJawWebbing.render(boxTranslation);
+		bottomTeeth.render(boxTranslation);
+		leftInnerJawWebbing.render(boxTranslation);
+		midJaw.render(boxTranslation);
+		rightUpperMandible.render(boxTranslation);
+		topTeeth.render(boxTranslation);
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z)
@@ -534,8 +534,8 @@ public class ModelPredalien extends ModelBase
 	}
 
 	@Override
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
+	public void setRotationAngles(float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation, Entity entity)
 	{
-		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+		super.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
 	}
 }

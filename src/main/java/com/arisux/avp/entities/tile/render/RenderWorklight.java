@@ -27,7 +27,7 @@ public class RenderWorklight extends TileEntitySpecialRenderer
 			glTranslated(posX + 0.5F, posY + 1.5F, posZ + 0.5F);
 			glRotatef(0F, 0F, 1F, 0F);
 			glScalef(1.0F, -1.0F, 1.0F);
-			this.model.render(tile, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0625F);
+			this.model.render(tile, 0.0625F);
 			
 			float scale = 0.02F;
 			glScalef(scale, scale, scale);

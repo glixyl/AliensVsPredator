@@ -458,75 +458,75 @@ public class ModelQueen extends ModelBase
 	}
 
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+	public void render(Entity entity, float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation)
 	{
-		super.render(entity, f, f1, f2, f3, f4, f5);
-		this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		this.torso0.render(f5);
-		this.torso1.render(f5);
-		this.rThigh.render(f5);
-		this.lThigh.render(f5);
-		this.lShin0.render(f5);
-		this.lShin1.render(f5);
-		this.lFoot.render(f5);
-		this.rShin0.render(f5);
-		this.rShin1.render(f5);
-		this.rFoot.render(f5);
-		this.lArm0.render(f5);
-		this.lArm1.render(f5);
-		this.lHand.render(f5);
-		this.lClaw.render(f5);
-		this.rArm0.render(f5);
-		this.rArm1.render(f5);
-		this.rHand.render(f5);
-		this.rClaw.render(f5);
-		this.tail0.render(f5);
-		this.tail1.render(f5);
-		this.tail2.render(f5);
-		this.tail3.render(f5);
-		this.tail4.render(f5);
-		this.tailStabber.render(f5);
-		this.bStabber0.render(f5);
-		this.bStabber1.render(f5);
-		this.bStabber2.render(f5);
-		this.bStabber3.render(f5);
-		this.bStabber4.render(f5);
-		this.bStabber5.render(f5);
-		this.bSpines0.render(f5);
-		this.bSpines1.render(f5);
-		this.bSpines2.render(f5);
-		this.bSpines3.render(f5);
-		this.bSpines4.render(f5);
-		this.bSpines5.render(f5);
-		this.bSpines6.render(f5);
-		this.lArmMini0.render(f5);
-		this.lArmMini1.render(f5);
-		this.rArmMini0.render(f5);
-		this.rArmMini1.render(f5);
-		this.lHandMini.render(f5);
-		this.rHandMini.render(f5);
-		this.lClawMini.render(f5);
-		this.rClawMini.render(f5);
-		this.neck.render(f5);
-		this.Jaw1.render(f5);
-		this.head0.render(f5);
-		this.head1.render(f5);
-		this.headBase0.render(f5);
-		this.headFinL0.render(f5);
-		this.headFinL1.render(f5);
-		this.headFinL2.render(f5);
-		this.headFinR0.render(f5);
-		this.headFinR1.render(f5);
-		this.headFinR2.render(f5);
-		this.headWebL.render(f5);
-		this.headSpinesL.render(f5);
-		this.headSpinesM.render(f5);
-		this.headSpinesR.render(f5);
-		this.headWebR.render(f5);
-		this.rHip.render(f5);
-		this.lHip.render(f5);
-		this.lShinSpike.render(f5);
-		this.rShinSpike.render(f5);
+		super.render(entity, swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation);
+		this.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
+		this.torso0.render(boxTranslation);
+		this.torso1.render(boxTranslation);
+		this.rThigh.render(boxTranslation);
+		this.lThigh.render(boxTranslation);
+		this.lShin0.render(boxTranslation);
+		this.lShin1.render(boxTranslation);
+		this.lFoot.render(boxTranslation);
+		this.rShin0.render(boxTranslation);
+		this.rShin1.render(boxTranslation);
+		this.rFoot.render(boxTranslation);
+		this.lArm0.render(boxTranslation);
+		this.lArm1.render(boxTranslation);
+		this.lHand.render(boxTranslation);
+		this.lClaw.render(boxTranslation);
+		this.rArm0.render(boxTranslation);
+		this.rArm1.render(boxTranslation);
+		this.rHand.render(boxTranslation);
+		this.rClaw.render(boxTranslation);
+		this.tail0.render(boxTranslation);
+		this.tail1.render(boxTranslation);
+		this.tail2.render(boxTranslation);
+		this.tail3.render(boxTranslation);
+		this.tail4.render(boxTranslation);
+		this.tailStabber.render(boxTranslation);
+		this.bStabber0.render(boxTranslation);
+		this.bStabber1.render(boxTranslation);
+		this.bStabber2.render(boxTranslation);
+		this.bStabber3.render(boxTranslation);
+		this.bStabber4.render(boxTranslation);
+		this.bStabber5.render(boxTranslation);
+		this.bSpines0.render(boxTranslation);
+		this.bSpines1.render(boxTranslation);
+		this.bSpines2.render(boxTranslation);
+		this.bSpines3.render(boxTranslation);
+		this.bSpines4.render(boxTranslation);
+		this.bSpines5.render(boxTranslation);
+		this.bSpines6.render(boxTranslation);
+		this.lArmMini0.render(boxTranslation);
+		this.lArmMini1.render(boxTranslation);
+		this.rArmMini0.render(boxTranslation);
+		this.rArmMini1.render(boxTranslation);
+		this.lHandMini.render(boxTranslation);
+		this.rHandMini.render(boxTranslation);
+		this.lClawMini.render(boxTranslation);
+		this.rClawMini.render(boxTranslation);
+		this.neck.render(boxTranslation);
+		this.Jaw1.render(boxTranslation);
+		this.head0.render(boxTranslation);
+		this.head1.render(boxTranslation);
+		this.headBase0.render(boxTranslation);
+		this.headFinL0.render(boxTranslation);
+		this.headFinL1.render(boxTranslation);
+		this.headFinL2.render(boxTranslation);
+		this.headFinR0.render(boxTranslation);
+		this.headFinR1.render(boxTranslation);
+		this.headFinR2.render(boxTranslation);
+		this.headWebL.render(boxTranslation);
+		this.headSpinesL.render(boxTranslation);
+		this.headSpinesM.render(boxTranslation);
+		this.headSpinesR.render(boxTranslation);
+		this.headWebR.render(boxTranslation);
+		this.rHip.render(boxTranslation);
+		this.lHip.render(boxTranslation);
+		this.lShinSpike.render(boxTranslation);
+		this.rShinSpike.render(boxTranslation);
 
 		if (entity instanceof EntityQueen)
 		{
@@ -536,14 +536,14 @@ public class ModelQueen extends ModelBase
 			{
 				GL11.glTranslatef(0, -0.05F, 1F - queen.ovipositorSize);
 				GL11.glScalef(queen.ovipositorSize, queen.ovipositorSize, queen.ovipositorSize);
-				sack0.render(f5);
-				sack7.render(f5);
-				sack1.render(f5);
-				sack2.render(f5);
-				sack3.render(f5);
-				sack4.render(f5);
-				sack5.render(f5);
-				sack6.render(f5);
+				sack0.render(boxTranslation);
+				sack7.render(boxTranslation);
+				sack1.render(boxTranslation);
+				sack2.render(boxTranslation);
+				sack3.render(boxTranslation);
+				sack4.render(boxTranslation);
+				sack5.render(boxTranslation);
+				sack6.render(boxTranslation);
 			}
 		}
 	}
@@ -556,8 +556,8 @@ public class ModelQueen extends ModelBase
 	}
 
 	@Override
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
+	public void setRotationAngles(float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation, Entity entity)
 	{
-		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+		super.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
 	}
 }
