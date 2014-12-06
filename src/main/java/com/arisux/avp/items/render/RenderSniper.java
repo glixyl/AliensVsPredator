@@ -68,12 +68,12 @@ public class RenderSniper extends ItemRenderer
 		{
 			mc.renderEngine.bindTexture(RenderUtil.downloadResource(String.format(AliensVsPredator.settings().getUrlSkinSniper(), player.getUUID()), resourceLocation, false));
 			GL11.glTranslatef(0.2F, 0.3F, -0.17F);
-			GL11.glRotatef(195.0F, 1.0F, 0.0F, 0.0F);
-			GL11.glRotatef(170.0F, 0.0F, 1.0F, 0.0F);
-			GL11.glRotatef(20.0F, 0.0F, 0.0F, 1.0F);
+			GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
+			GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
+			GL11.glRotatef(40.0F, 1.0F, 0.0F, 0.0F);
 			GL11.glDisable(GL11.GL_CULL_FACE);
-			GL11.glTranslatef(-0.19F, -0.3F, 0.77F);
-			float glScale = 2.1F;
+			GL11.glTranslatef(0.1F, -0.0F, 0.8F);
+			float glScale = 1.2F;
 			GL11.glScalef(glScale, glScale, glScale);
 			this.getModel().render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 		}
@@ -83,26 +83,31 @@ public class RenderSniper extends ItemRenderer
 	public void renderFirstPerson(ItemStack item, Object... data)
 	{
 		this.resource = RenderUtil.downloadResource(String.format(AliensVsPredator.settings().getUrlSkinSniper(), AccessWrapper.getSession().getPlayerID()), resourceLocation);
+		float glScale = 2.2F;
 
 		if (Mouse.isButtonDown(0) && mc.inGameHasFocus)
 		{
 			if ((EntityPlayer) data[1] == mc.renderViewEntity && mc.gameSettings.thirdPersonView == 0 && (!(mc.currentScreen instanceof GuiInventory) && !(mc.currentScreen instanceof GuiContainerCreative) || RenderManager.instance.playerViewY != 180.0F))
 			{
-				// Scope view
+				GL11.glTranslatef(1.26F, 1.985F, -0.375F);
+				GL11.glRotatef(102.4F, 1.0F, 0.0F, 0.0F);
+				GL11.glRotatef(115F, 0.0F, 1.0F, 0.0F);
+				GL11.glRotatef(78.0F, 0.0F, 0.0F, 1.0F);
+				GL11.glTranslatef(-0.495F, 0.60F, -1.835F);
+				GL11.glDisable(GL11.GL_CULL_FACE);
 			}
 		}
 		else if ((EntityPlayer) data[1] == mc.renderViewEntity && mc.gameSettings.thirdPersonView == 0 && (!(mc.currentScreen instanceof GuiInventory) && !(mc.currentScreen instanceof GuiContainerCreative) || RenderManager.instance.playerViewY != 180.0F))
 		{
-			mc.renderEngine.bindTexture(getResourceLocation());
 			GL11.glTranslatef(1.5F, 0.95F, 0.35F);
 			GL11.glRotatef(95.0F, 1.0F, 0.0F, 0.0F);
 			GL11.glRotatef(120.0F, 0.0F, 1.0F, 0.0F);
 			GL11.glRotatef(80.0F, 0.0F, 0.0F, 1.0F);
 			GL11.glDisable(GL11.GL_CULL_FACE);
-			float glScale = 2.2F;
 			GL11.glScalef(glScale, glScale, glScale);
-			this.getModel().render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 		}
+		mc.renderEngine.bindTexture(getResourceLocation());
+		this.getModel().render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 	}
 
 	@Override
