@@ -42,8 +42,7 @@ public enum VisionMode
 		public void render(Object... data)
 		{
 			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-			boolean isDay = (player.worldObj.getWorldTime() % 24000L) / 1000L < 11L;
-			boolean canSeeSky = player.worldObj.canBlockSeeTheSky((int) player.posX, (int) player.posY, (int) player.posZ);
+			boolean isDay = (player.worldObj.getWorldTime() % 24000L) / 1000L < 11L && (player.worldObj.getWorldTime() % 24000L) / 1000L > 1L;			boolean canSeeSky = player.worldObj.canBlockSeeTheSky((int) player.posX, (int) player.posY, (int) player.posZ);
 			AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue = isDay && canSeeSky && !player.worldObj.isRaining() ? -60F : 0F;
 
 			GL11.glPushMatrix();
@@ -94,7 +93,7 @@ public enum VisionMode
 		public void render(Object... data)
 		{
 			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-			boolean isDay = (player.worldObj.getWorldTime() % 24000L) / 1000L < 11L;
+			boolean isDay = (player.worldObj.getWorldTime() % 24000L) / 1000L < 11L && (player.worldObj.getWorldTime() % 24000L) / 1000L > 1L;
 			boolean canSeeSky = player.worldObj.canBlockSeeTheSky((int) player.posX, (int) player.posY, (int) player.posZ);
 			AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue = isDay && canSeeSky && !player.worldObj.isRaining() ? -60F : 0F;
 
