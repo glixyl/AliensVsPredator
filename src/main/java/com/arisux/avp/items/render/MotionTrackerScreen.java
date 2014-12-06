@@ -1,4 +1,4 @@
-package com.arisux.avp.event.render;
+package com.arisux.avp.items.render;
 
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL11;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 
-public class MotionTrackerDisplay
+public class MotionTrackerScreen
 {
 	public static final ResourceLocation resourceBackground = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_MOTIONTRACKER_BG);
 	public static final ResourceLocation resourceForeground = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_MOTIONTRACKER_FG);
@@ -33,7 +33,7 @@ public class MotionTrackerDisplay
 	private boolean shouldPing = false;
 	private Minecraft mc = Minecraft.getMinecraft();
 
-	public MotionTrackerDisplay()
+	public MotionTrackerScreen()
 	{
 		for (int x = 0; x <= 30; x++)
 		{

@@ -1,6 +1,5 @@
 package com.arisux.avp.items.render;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -38,9 +37,9 @@ public class RenderM56SG extends ItemRenderer
 		GL11.glPushMatrix();
 
 		this.resource = RenderUtil.downloadResource(String.format(AliensVsPredator.settings().getUrlSkinM56sg(), AccessWrapper.getSession().getPlayerID()), resourceLocation);
-		Minecraft.getMinecraft().renderEngine.bindTexture(getResourceLocation());
+		mc.renderEngine.bindTexture(getResourceLocation());
 
-		if ((EntityPlayer) data[1] == Minecraft.getMinecraft().renderViewEntity && Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && (!(Minecraft.getMinecraft().currentScreen instanceof GuiInventory) && !(Minecraft.getMinecraft().currentScreen instanceof GuiContainerCreative) || RenderManager.instance.playerViewY != 180.0F))
+		if ((EntityPlayer) data[1] == mc.renderViewEntity && mc.gameSettings.thirdPersonView == 0 && (!(mc.currentScreen instanceof GuiInventory) && !(mc.currentScreen instanceof GuiContainerCreative) || RenderManager.instance.playerViewY != 180.0F))
 		{
 			GL11.glTranslatef(0.1F, 0.15F, 0.2F);
 			GL11.glRotatef(95.0F, 1.0F, 0.0F, 0.0F);
@@ -69,7 +68,7 @@ public class RenderM56SG extends ItemRenderer
 
 		if (player != null)
 		{
-			Minecraft.getMinecraft().renderEngine.bindTexture(RenderUtil.downloadResource(String.format(AliensVsPredator.settings().getUrlSkinM56sg(), player.getUUID()), resourceLocation, false));
+			mc.renderEngine.bindTexture(RenderUtil.downloadResource(String.format(AliensVsPredator.settings().getUrlSkinM56sg(), player.getUUID()), resourceLocation, false));
 			GL11.glTranslatef(0.25F, -0.3F, -0.1F);
 			GL11.glRotatef(280.0F, 1.0F, 0.0F, 0.0F);
 			GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
@@ -87,7 +86,7 @@ public class RenderM56SG extends ItemRenderer
 		GL11.glPushMatrix();
 
 		this.resource = RenderUtil.downloadResource(String.format(AliensVsPredator.settings().getUrlSkinM56sg(), AccessWrapper.getSession().getPlayerID()), resourceLocation);
-		Minecraft.getMinecraft().renderEngine.bindTexture(getResourceLocation());
+		mc.renderEngine.bindTexture(getResourceLocation());
 		GL11.glDisable(GL11.GL_CULL_FACE);
 		GL11.glRotatef(0F, 1.0F, 0.0F, 0.0F);
 		GL11.glRotatef(-40F, 0.0F, 1.0F, 0.0F);

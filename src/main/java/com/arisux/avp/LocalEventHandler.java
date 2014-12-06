@@ -8,6 +8,7 @@ import com.arisux.airi.lib.interfaces.IInitializable;
 import com.arisux.avp.event.action.*;
 import com.arisux.avp.event.render.*;
 import com.arisux.avp.event.server.EventDimensionInitialization;
+import com.arisux.avp.items.render.MotionTrackerScreen;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -33,9 +34,9 @@ public class LocalEventHandler implements IInitializable
 			this.registerEvent(new TacticalHUDRenderEvent());
 			this.registerEvent(new FacehuggerRenderEvent());
 			this.registerEvent(new VisionModeRenderEvent());
-			this.registerEvent(new MotionTrackerDisplay());
+			this.registerEvent(new MotionTrackerScreen());
 			this.registerEvent(new LightmapUpdateEvent());
-			this.registerEvent(new BetaProgramEvent());
+			this.registerEvent(new BetaReleaseEvents());
 			this.registerEvent(new PulseRifleEvents());
 			this.registerEvent(new WristBracerEvents());
 		}

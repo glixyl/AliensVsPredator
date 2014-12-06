@@ -1,6 +1,5 @@
 package com.arisux.avp.items.render;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -43,7 +42,7 @@ public class RenderM4 extends ItemRenderer
 
 		if (player != null)
 		{
-			Minecraft.getMinecraft().renderEngine.bindTexture(RenderUtil.downloadResource(String.format(AliensVsPredator.settings().getUrlSkinM4(), player.getUUID()), resourceLocation, false));
+			mc.renderEngine.bindTexture(RenderUtil.downloadResource(String.format(AliensVsPredator.settings().getUrlSkinM4(), player.getUUID()), resourceLocation, false));
 			GL11.glTranslatef(0.2F, 1.15F, 0.25F);
 			GL11.glRotatef(97.0F, 1.0F, 0.0F, 0.0F);
 			GL11.glRotatef(130.0F, 0.0F, 1.0F, 0.0F);
@@ -62,11 +61,11 @@ public class RenderM4 extends ItemRenderer
 		GL11.glPushMatrix();
 
 		this.resource = RenderUtil.downloadResource(String.format(AliensVsPredator.settings().getUrlSkinM4(), AccessWrapper.getSession().getPlayerID()), resourceLocation);
-		Minecraft.getMinecraft().renderEngine.bindTexture(getResourceLocation());
+		mc.renderEngine.bindTexture(getResourceLocation());
 
-		if (Mouse.isButtonDown(0) && Minecraft.getMinecraft().inGameHasFocus)
+		if (Mouse.isButtonDown(0) && mc.inGameHasFocus)
 		{
-			if ((EntityPlayer) data[1] == Minecraft.getMinecraft().renderViewEntity && Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && (!(Minecraft.getMinecraft().currentScreen instanceof GuiInventory) && !(Minecraft.getMinecraft().currentScreen instanceof GuiContainerCreative) || RenderManager.instance.playerViewY != 180.0F))
+			if ((EntityPlayer) data[1] == mc.renderViewEntity && mc.gameSettings.thirdPersonView == 0 && (!(mc.currentScreen instanceof GuiInventory) && !(mc.currentScreen instanceof GuiContainerCreative) || RenderManager.instance.playerViewY != 180.0F))
 			{
 				GL11.glTranslatef(0.3F, 2.0F, -0.409F);
 				GL11.glRotatef(103.0F, 1.0F, 0.0F, 0.0F);
@@ -75,7 +74,7 @@ public class RenderM4 extends ItemRenderer
 				GL11.glDisable(GL11.GL_CULL_FACE);
 				GL11.glTranslatef(0.0F, 0.0F, -0.46F);
 			}
-		} else if ((EntityPlayer) data[1] == Minecraft.getMinecraft().renderViewEntity && Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && (!(Minecraft.getMinecraft().currentScreen instanceof GuiInventory) && !(Minecraft.getMinecraft().currentScreen instanceof GuiContainerCreative) || RenderManager.instance.playerViewY != 180.0F))
+		} else if ((EntityPlayer) data[1] == mc.renderViewEntity && mc.gameSettings.thirdPersonView == 0 && (!(mc.currentScreen instanceof GuiInventory) && !(mc.currentScreen instanceof GuiContainerCreative) || RenderManager.instance.playerViewY != 180.0F))
 		{
 			GL11.glTranslatef(0.6F, 1.85F, 0.9F);
 			GL11.glRotatef(95.0F, 1.0F, 0.0F, 0.0F);
@@ -96,7 +95,7 @@ public class RenderM4 extends ItemRenderer
 		GL11.glPushMatrix();
 
 		this.resource = RenderUtil.downloadResource(String.format(AliensVsPredator.settings().getUrlSkinM4(), AccessWrapper.getSession().getPlayerID()), resourceLocation);
-		Minecraft.getMinecraft().renderEngine.bindTexture(getResourceLocation());
+		mc.renderEngine.bindTexture(getResourceLocation());
 		GL11.glDisable(GL11.GL_CULL_FACE);
 		GL11.glRotatef(0F, 1.0F, 0.0F, 0.0F);
 		GL11.glRotatef(-40F, 0.0F, 1.0F, 0.0F);

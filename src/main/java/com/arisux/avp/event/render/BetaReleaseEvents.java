@@ -15,7 +15,7 @@ import com.arisux.avp.windows.WindowSubmitFeedback;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.RenderTickEvent;
 
-public class BetaProgramEvent
+public class BetaReleaseEvents
 {
 	private Minecraft mc = Minecraft.getMinecraft();
 	public WindowSubmitFeedback window = new WindowSubmitFeedback();

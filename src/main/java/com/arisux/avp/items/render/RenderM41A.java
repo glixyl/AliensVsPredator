@@ -16,14 +16,13 @@ import com.arisux.airi.lib.*;
 import com.arisux.airi.lib.RenderUtil.PlayerResourceManager.PlayerResource;
 import com.arisux.airi.lib.render.ItemRenderer;
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.event.render.MotionTrackerDisplay;
 import com.arisux.avp.items.ItemFirearm;
 import com.arisux.avp.items.model.ModelM41A;
 
 public class RenderM41A extends ItemRenderer
 {
 	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_PULSERIFLE);
-	public MotionTrackerDisplay motionTracker = new MotionTrackerDisplay();
+	public MotionTrackerScreen motionTracker = new MotionTrackerScreen();
 	
 	public RenderM41A()
 	{

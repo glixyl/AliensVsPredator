@@ -13,13 +13,12 @@ import org.lwjgl.opengl.GL11;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.render.ItemRenderer;
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.event.render.MotionTrackerDisplay;
 import com.arisux.avp.items.model.ModelMotionTracker;
 
 public class RenderMotionTracker extends ItemRenderer
 {
 	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_MOTIONTRACKER);
-	public MotionTrackerDisplay motionTracker = new MotionTrackerDisplay();
+	public MotionTrackerScreen motionTracker = new MotionTrackerScreen();
 
 	public RenderMotionTracker()
 	{
