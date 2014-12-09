@@ -84,10 +84,10 @@ public class DebugToolsRenderEvent
 									fontrenderer.drawStringWithShadow("Enum: " + ((EntityMarine) entity).getMarineType(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
 								}
 
-								if (entity instanceof EntityLivingBase)
+								if (entity instanceof Entity)
 								{
 									fontrenderer.drawStringWithShadow("Age: " + ((EntityLivingBase) entity).getAge(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
-									RenderUtil.drawEntity(RenderUtil.scaledDisplayResolution().getScaledWidth() - 75, RenderUtil.scaledDisplayResolution().getScaledHeight() - 25, 30, 90, -90, entity);
+									RenderUtil.drawEntity(RenderUtil.scaledDisplayResolution().getScaledWidth() - 75, RenderUtil.scaledDisplayResolution().getScaledHeight() - 25, 30, -45, 0, entity);
 								}
 
 								if (entity instanceof EntityItemFrame)
