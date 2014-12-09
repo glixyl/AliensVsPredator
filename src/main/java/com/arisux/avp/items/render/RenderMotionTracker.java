@@ -24,6 +24,12 @@ public class RenderMotionTracker extends ItemRenderer
 	{
 		super(new ModelMotionTracker(), resourceLocation);
 	}
+	
+	@Override
+	public ModelMotionTracker getModel()
+	{
+		return (ModelMotionTracker) super.getModel();
+	}
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data)

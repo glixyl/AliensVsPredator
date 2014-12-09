@@ -110,9 +110,11 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 			{
 				if (!this.targetQueen.isDead)
 				{
-					this.getNavigator().tryMoveToEntityLiving(this.targetQueen, this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue() * 2.5D);
-
-					if (this.getDistanceSqToEntity(this.targetQueen) < 10)
+					if (this.worldObj.getWorldTime() % 20 <= 0)
+					{
+						this.getNavigator().tryMoveToEntityLiving(this.targetQueen, this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue() * 2.5D);
+					}
+					if (this.getDistanceToEntity(this.targetQueen) <= 15)
 					{
 						this.setHiveSignature(this.targetQueen.getUniqueID());
 					}
@@ -124,7 +126,7 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 			}
 			else
 			{
-				this.targetQueen = (EntityQueen) WorldUtil.Entities.getEntityInCoordsRange(this.worldObj, EntityQueen.class, new Blocks.CoordData(this), 50);
+				this.targetQueen = (EntityQueen) WorldUtil.Entities.getEntityInCoordsRange(this.worldObj, EntityQueen.class, new Blocks.CoordData(this), 128, 128);
 			}
 		}
 	}

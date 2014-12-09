@@ -53,7 +53,7 @@ public class RenderM41A extends ItemRenderer
 			float glScale = 1.3F;
 			GL11.glScalef(glScale, glScale, glScale);
 			Minecraft.getMinecraft().renderEngine.bindTexture(getResourceLocation());
-			this.getModel().render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+			this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 		}
 	}
 
@@ -102,7 +102,7 @@ public class RenderM41A extends ItemRenderer
 			GL11.glDisable(GL11.GL_CULL_FACE);
 			GL11.glScalef(glScale, glScale, glScale);
 			Minecraft.getMinecraft().renderEngine.bindTexture(getResourceLocation());
-			this.getModel().render(entity, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+			this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 
 			GL11.glDisable(GL11.GL_LIGHTING);
 			GL11.glTranslatef(-0.3439F, 0.6F, 0.04F);
@@ -138,6 +138,6 @@ public class RenderM41A extends ItemRenderer
 			GL11.glScalef(20F, 20F, 20F);
 			GL11.glDisable(GL11.GL_CULL_FACE);
 			Minecraft.getMinecraft().renderEngine.bindTexture(getResourceLocation());
-			this.getModel().render(0.0625F);
+			this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 	}
 }

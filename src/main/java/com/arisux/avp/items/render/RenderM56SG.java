@@ -1,6 +1,5 @@
 package com.arisux.avp.items.render;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -20,6 +19,12 @@ public class RenderM56SG extends ItemRenderer
 	public RenderM56SG()
 	{
 		super(new ModelM56SG(), resourceLocation);
+	}
+	
+	@Override
+	public ModelM56SG getModel()
+	{
+		return (ModelM56SG) super.getModel();
 	}
 
 	@Override
@@ -43,7 +48,7 @@ public class RenderM56SG extends ItemRenderer
 
 			GL11.glDisable(GL11.GL_CULL_FACE);
 			GL11.glScalef(2.0F, 2.0F, 2.0F);
-			this.getModel().render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+			this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 		}
 	}
 
@@ -61,7 +66,7 @@ public class RenderM56SG extends ItemRenderer
 			GL11.glRotatef(-93.0F, 0.0F, 0.0F, 1.0F);
 			GL11.glScalef(1.3F, 1.3F, 1.3F);
 			mc.renderEngine.bindTexture(RenderUtil.downloadResource(String.format(AliensVsPredator.settings().getUrlSkinM56sg(), player.getUUID()), resourceLocation, false));
-			this.getModel().render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+			this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 		}
 	}
 
@@ -76,6 +81,6 @@ public class RenderM56SG extends ItemRenderer
 		GL11.glTranslatef(0F, 5.77F, -20.85F);
 		GL11.glScalef(20F, 20F, 20F);
 		mc.renderEngine.bindTexture(getResourceLocation());
-		this.getModel().render(null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+		this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 	}
 }

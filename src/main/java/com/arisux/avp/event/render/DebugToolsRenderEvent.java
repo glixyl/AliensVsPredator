@@ -79,6 +79,7 @@ public class DebugToolsRenderEvent
 								if (entity instanceof EntityXenomorph)
 								{
 									fontrenderer.drawStringWithShadow("Kills: " + ((EntityXenomorph) entity).getKilledEntities(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
+									fontrenderer.drawStringWithShadow("HiveSignature: " + ((EntityXenomorph) entity).getHiveSignature(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
 								} else if (entity instanceof EntityMarine)
 								{
 									fontrenderer.drawStringWithShadow("Enum: " + ((EntityMarine) entity).getMarineType(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
