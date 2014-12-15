@@ -1,17 +1,17 @@
 package com.arisux.avp.entities.mob.model;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelAqua extends ModelBase
+import com.arisux.airi.lib.render.ModelBaseExtension;
+
+public class ModelAqua extends ModelBaseExtension
 {
 	public ModelRenderer chest, abdomen, rThigh, lThigh, lShinSpike, rShinSpike, lShin2, rShin2, lFootFlipper, rFootFlipper, lArm1, rArm1, lClaw1, rArm2, neck, headBase, headSideHorns, jaw, jaw2, headTopSpikesL, lArm2, rClaw1, lClaw2, rClaw2, spine1, spine2, spine3, tail1, tail2, tail3, tail4, lHead, spine4, tailFin, spine6, spine7, spine8, spine9, spine10, spine11, tail5, spine12, part1, part2, part3, part4, spine5, rHead, rShin1, lShin1, lFoot, rFoot, headTop, headTopSpikes, headTopSpikesR;
 
 	public ModelAqua()
 	{
-		textureWidth = 256;
-		textureHeight = 128;
+		this.setTextureDimensions(256, 128);
 
 		chest = new ModelRenderer(this, 0, 46);
 		chest.addBox(-4.5F, -2F, 0F, 9, 8, 10);
@@ -406,13 +406,6 @@ public class ModelAqua extends ModelBase
 		rFoot.render(boxTranslation);
 		headTopSpikes.render(boxTranslation);
 		headTopSpikesR.render(boxTranslation);
-	}
-
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
 	}
 
 	@Override

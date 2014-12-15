@@ -1,7 +1,6 @@
 package com.arisux.avp.entities.mob.render;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
@@ -10,6 +9,8 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.RenderUtil;
+import com.arisux.airi.lib.render.ModelBaseExtension;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntityMarine;
 import com.arisux.avp.items.model.*;
@@ -19,11 +20,11 @@ public class RenderMarine extends RenderLiving
 {
 	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_MARINE);
 	protected ModelBiped modelBipedMain;
-	private final ModelBase m4 = new ModelM4();
-	private final ModelBase ak47 = new ModelAK47();
-	private final ModelBase m41a = new ModelM41A();
-	private final ModelBase m56sg = new ModelM56SG();
-	private final ModelBase sniper = new ModelSniper();
+	private final ModelBaseExtension m4 = new ModelM4();
+	private final ModelBaseExtension ak47 = new ModelAK47();
+	private final ModelBaseExtension m41a = new ModelM41A();
+	private final ModelBaseExtension m56sg = new ModelM56SG();
+	private final ModelBaseExtension sniper = new ModelSniper();
 
 	public RenderMarine(ModelBiped mainModel, float par2)
 	{
@@ -50,7 +51,7 @@ public class RenderMarine extends RenderLiving
 
 		EntityMarine entity = (EntityMarine) entityLiving;
 		ResourceLocation resource = null;
-		ModelBase model = null;
+		ModelBaseExtension model = null;
 		float glScale = 1.2F;
 
 		GL11.glPushMatrix();
@@ -98,7 +99,7 @@ public class RenderMarine extends RenderLiving
 			if (model != null)
 			{
 				Minecraft.getMinecraft().renderEngine.bindTexture(resource);
-				model.render(entity, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+				model.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 			}
 		}
 		GL11.glPopMatrix();

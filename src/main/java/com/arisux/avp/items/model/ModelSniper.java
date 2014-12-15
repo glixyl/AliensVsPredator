@@ -1,9 +1,10 @@
 package com.arisux.avp.items.model;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelSniper extends ModelBase
+import com.arisux.airi.lib.render.ModelBaseExtension;
+
+public class ModelSniper extends ModelBaseExtension
 {
 	private boolean firstPerson;
 	
@@ -133,6 +134,7 @@ public class ModelSniper extends ModelBase
 		this.setRotation(this.scopeFirstPerson, 0.0F, 0.0F, 0.0F);
 	}
 
+	@Override
 	public void render(float boxTranslation)
 	{
 		this.barrel.render(boxTranslation);
@@ -159,13 +161,6 @@ public class ModelSniper extends ModelBase
 		{
 			this.scope.render(boxTranslation);
 		}
-	}
-
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
 	}
 	
 	public void setFirstPerson(boolean firstPerson)

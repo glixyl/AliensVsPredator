@@ -1,9 +1,10 @@
 package com.arisux.avp.items.model;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelAK47 extends ModelBase
+import com.arisux.airi.lib.render.ModelBaseExtension;
+
+public class ModelAK47 extends ModelBaseExtension
 {
 	ModelRenderer handle;
 	ModelRenderer clip;
@@ -131,6 +132,7 @@ public class ModelAK47 extends ModelBase
 		this.setRotation(this.stockBase, 0.0F, 0.0F, 0.0F);
 	}
 
+	@Override
 	public void render(float boxTranslation)
 	{
 		this.handle.render(boxTranslation);
@@ -150,12 +152,5 @@ public class ModelAK47 extends ModelBase
 		this.sightBase1.render(boxTranslation);
 		this.sight2.render(boxTranslation);
 		this.stockBase.render(boxTranslation);
-	}
-
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
 	}
 }

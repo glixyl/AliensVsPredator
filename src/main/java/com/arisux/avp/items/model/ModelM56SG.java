@@ -1,9 +1,10 @@
 package com.arisux.avp.items.model;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelM56SG extends ModelBase
+import com.arisux.airi.lib.render.ModelBaseExtension;
+
+public class ModelM56SG extends ModelBaseExtension
 {
 	ModelRenderer handleBase;
 	ModelRenderer base;
@@ -145,6 +146,7 @@ public class ModelM56SG extends ModelBase
 		this.setRotation(this.topHandleBase2, 0.0F, 0.0F, 0.0F);
 	}
 
+	@Override
 	public void render(float boxTranslation)
 	{
 		this.handleBase.render(boxTranslation);
@@ -166,12 +168,5 @@ public class ModelM56SG extends ModelBase
 		this.baseUnder2.render(boxTranslation);
 		this.handleTop.render(boxTranslation);
 		this.topHandleBase2.render(boxTranslation);
-	}
-
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
 	}
 }
