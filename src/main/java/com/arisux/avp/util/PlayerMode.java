@@ -12,17 +12,17 @@ import com.arisux.avp.entities.mob.render.*;
 public enum PlayerMode
 {
 	NORMAL(0, new PlayerModeLevelMapping[]{ 
-		new PlayerModeLevelMapping(1, new ModelTexMap(new ModelBiped(), RenderMarine.resourceLocation)) 
+		new PlayerModeLevelMapping(0, new ModelTexMap(new ModelBiped(), RenderMarine.resourceLocation)) 
 	}),
 	MARINE(1, new PlayerModeLevelMapping[]{
-		new PlayerModeLevelMapping(1, new ModelTexMap(new ModelBiped(), RenderMarine.resourceLocation))
+		new PlayerModeLevelMapping(0, new ModelTexMap(new ModelBiped(), RenderMarine.resourceLocation))
 	}), 
 	PREDATOR(2, new PlayerModeLevelMapping[]{
-		new PlayerModeLevelMapping(1, new ModelTexMap(new ModelYautja(), RenderYautja.resourceLocation))
+		new PlayerModeLevelMapping(0, new ModelTexMap(new ModelYautja(), RenderYautja.resourceLocation))
 	}), 
 	XENOMORPH(3, new PlayerModeLevelMapping[]{
-		new PlayerModeLevelMapping(1, new ModelTexMap(new ModelOvamorph(), RenderOvamorph.resourceLocation)),
-		new PlayerModeLevelMapping(2, new ModelTexMap(new ModelFacehugger(), RenderFacehugger.resourceLocation)),
+		new PlayerModeLevelMapping(0, new ModelTexMap(new ModelOvamorph(), RenderOvamorph.resourceLocation)),
+		new PlayerModeLevelMapping(1, new ModelTexMap(new ModelFacehugger(), RenderFacehugger.resourceLocation)),
 		new PlayerModeLevelMapping(10, new ModelTexMap(new ModelChestburster(), RenderChestburster.resourceLocation)),
 		new PlayerModeLevelMapping(20, new ModelTexMap(new ModelDrone(), new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_DRONE_ADVANCED_BLOOD))),
 		new PlayerModeLevelMapping(45, new ModelTexMap(new ModelWarrior(), new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_WARRIOR_BLOOD))),
@@ -47,7 +47,6 @@ public enum PlayerMode
 
 			if (mapping.isLevelReached(level))
 			{
-				System.out.println(level + "-" + assignedLevels.length + "-" + mapping);
 				return mapping;
 			}
 		}
