@@ -155,33 +155,28 @@ public class Settings
 		return getServer() + urlFeedbackValidation;
 	}
 	
-	public String getUrlSkins()
-	{
-		return getServer() + urlSkins;
-	}
-	
 	public String getUrlSkinAk47()
 	{
-		return getServer() + getUrlSkins() + urlSkinAk47;
+		return getServer() + urlSkins + urlSkinAk47;
 	}
 	
 	public String getUrlSkinM4()
 	{
-		return getServer() + getUrlSkins() + urlSkinM4;
+		return getServer() + urlSkins + urlSkinM4;
 	}
 	
 	public String getUrlSkinM41a()
 	{
-		return getServer() + getUrlSkins() + urlSkinM41a;
+		return getServer() + urlSkins + urlSkinM41a;
 	}
 	
 	public String getUrlSkinM56sg()
 	{
-		return getServer() + getUrlSkins() + urlSkinM56sg;
+		return getServer() + urlSkins + urlSkinM56sg;
 	}
 	
 	public String getUrlSkinSniper()
 	{
-		return getServer() + getUrlSkins() + urlSkinSniper;
+		return getServer() + urlSkins + urlSkinSniper;
 	}
 }
