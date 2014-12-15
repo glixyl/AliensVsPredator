@@ -66,7 +66,7 @@ public class RenderMotionTracker extends ItemRenderer
 				GL11.glDisable(GL11.GL_CULL_FACE);
 
 				GL11.glScalef(glScale, glScale, glScale);
-				this.getModel().render(entity, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+				this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 
 				/** Render the display **/
 				{
@@ -94,12 +94,12 @@ public class RenderMotionTracker extends ItemRenderer
 			Minecraft.getMinecraft().renderEngine.bindTexture(resourceLocation);
 			GL11.glDisable(GL11.GL_CULL_FACE);
 			GL11.glRotatef(0F, 1.0F, 0.0F, 0.0F);
-			GL11.glRotatef(-40F, 0.0F, 1.0F, 0.0F);
+			GL11.glRotatef(-25F, 0.0F, 1.0F, 0.0F);
 			GL11.glRotatef(0F, 0.0F, 0.0F, 1.0F);
-			GL11.glTranslatef(0F, -5.77F, -20.85F);
+			GL11.glTranslatef(0F, 8.77F, -20.85F);
 			float glScale = 20F;
 			GL11.glScalef(glScale, glScale, glScale);
-			this.getModel().render(null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+			this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 		}
 		GL11.glPopMatrix();
 	}
