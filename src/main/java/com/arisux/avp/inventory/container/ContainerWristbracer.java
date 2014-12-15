@@ -38,7 +38,7 @@ public class ContainerWristbracer extends Container
 
 	public NBTTagCompound saveToNBT()
 	{
-		NBTTagCompound nbt = stack.getTagCompound();
+		NBTTagCompound nbt = player.getCurrentEquippedItem().getTagCompound();
 		NBTTagList items = new NBTTagList();
 		
 		if (nbt == null)
@@ -60,7 +60,7 @@ public class ContainerWristbracer extends Container
 		}
 
 		nbt.setTag("Items", items);
-		stack.setTagCompound(nbt);
+		player.getCurrentEquippedItem().setTagCompound(nbt);
 		return nbt;
 	}
 

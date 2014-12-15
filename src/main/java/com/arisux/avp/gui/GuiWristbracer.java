@@ -72,18 +72,20 @@ public class GuiWristbracer extends GuiContainer
 		this.guiTop = this.height / 2 - ySize / 2;
 		bindTexture(texture);
 		drawQuad(guiLeft, guiTop, xSize, ySize - 30, 0, 0, 0);
-		
+
+		RenderUtil.drawRect(guiLeft + 31, guiTop + 16, 16, 16, 0x33FF0000);
+
 		for (byte s = 0; s < 9; s++)
 		{
 			RenderUtil.drawRect(guiLeft + 15 + (18 * s), guiTop + 136, 16, 16, 0xAA000000);
 		}
-		
+
 		for (int x1 = 1; x1 <= 6; x1++)
 		{
 			GuiCustomButton button = (GuiCustomButton) this.buttonList.get(x1 - 1);
-			
+
 			button.displayString = "";
-			button.tooltip = mc.gameSettings.difficulty == EnumDifficulty.EASY || mc.gameSettings.difficulty == EnumDifficulty.PEACEFUL ? String.valueOf(this.displays.get(button)) : "";
+			button.tooltip = mc.gameSettings.difficulty == EnumDifficulty.EASY || mc.gameSettings.difficulty == EnumDifficulty.PEACEFUL ? String.valueOf(this.displays.get(button)) : "?";
 			button.xPosition = guiLeft + 15 + 27 * (x1 - 1);
 			button.yPosition = guiTop + 49;
 			button.width = 25;
@@ -111,20 +113,20 @@ public class GuiWristbracer extends GuiContainer
 			api.getActionForCombo(combonation).actionPerformed(combonation, container);
 		}
 	}
-	
+
 	public void updateScreenDigit(int displayId, int digit)
 	{
 		GuiCustomButton button = (GuiCustomButton) this.buttonList.get(displayId - 1);
 		displays.remove(button);
 		displays.put(button, digit);
 	}
-	
+
 	/** Display a hex number (not hexadecimal) spanned across all 6 displays **/
 	public void displaySpannedHex(int hex)
 	{
 		String spannedInt = String.valueOf(hex);
 		char[] splitSpannedInt = spannedInt.toCharArray();
-		
+
 		for (int x = 1; x <= 6; x++)
 		{
 			if (spannedInt.length() == 6)
@@ -133,7 +135,7 @@ public class GuiWristbracer extends GuiContainer
 			}
 		}
 	}
-	
+
 	public static void drawYautjaDigit(int number, int xPos, int yPos)
 	{
 		for (int x = 1; x <= 9; x++)
