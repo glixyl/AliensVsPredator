@@ -8,6 +8,7 @@ import net.minecraftforge.common.util.EnumHelper;
 import com.arisux.airi.lib.ItemTypes.HookedItem;
 import com.arisux.airi.lib.ItemTypes.HookedItemAxe;
 import com.arisux.airi.lib.ItemTypes.HookedItemPickaxe;
+import com.arisux.airi.lib.*;
 import com.arisux.airi.lib.ModUtil.IBHandler;
 import com.arisux.airi.lib.interfaces.IInitializable;
 import com.arisux.avp.entities.mob.*;
@@ -26,88 +27,90 @@ public class ItemHandler extends IBHandler implements IInitializable
 	public ToolMaterial XENO_TOOLS = EnumHelper.addToolMaterial("XENO", 7, 630, 9.0F, 6.0F, 14);
 
 	public Item helmXeno = (new ItemArmorXeno(XENO, 4, 0)),
-			plateXeno = (new ItemArmorXeno(XENO, 4, 1)),
-			legsXeno = (new ItemArmorXeno(XENO, 4, 2)),
-			bootsXeno = (new ItemArmorXeno(XENO, 4, 3)),
-			pressureMask = new ItemArmorPressureSuit(PRESSURESUIT, 4, 0),
-			pressureChest = new ItemArmorPressureSuit(PRESSURESUIT, 4, 1),
-			pressurePants = new ItemArmorPressureSuit(PRESSURESUIT, 4, 2),
-			pressureBoots = new ItemArmorPressureSuit(PRESSURESUIT, 4, 3),
-			helmMarine = (new ItemArmorMarine(TACTICAL, 4, 0)),
-			plateMarine = (new ItemArmorMarine(TACTICAL, 4, 1)),
-			legsMarine = (new ItemArmorMarine(TACTICAL, 4, 2)),
-			bootsMarine = (new ItemArmorMarine(TACTICAL, 4, 3)),
-			helmTitanium = (new ItemArmorTitanium(YAUTJA, 4, 0)),
-			legsTitanium = (new ItemArmorTitanium(YAUTJA, 4, 2)),
-			plateTitanium = (new ItemArmorTitanium(YAUTJA, 4, 1)),
-			bootsTitanium = (new ItemArmorTitanium(YAUTJA, 4, 3)),
-			shovelTitanium = (new ItemSpade(YAUTJA_TOOLS)),
-			pickaxeTitanium = (new HookedItemPickaxe(YAUTJA_TOOLS)),
-			axeTitanium = (new HookedItemAxe(YAUTJA_TOOLS)),
-			swordTitanium = (new ItemSword(YAUTJA_TOOLS)),
-			hoeTitanium = (new ItemHoe(YAUTJA_TOOLS)),
-			itemSpear = (new ItemSpear(YAUTJA_TOOLS)),
-			itemWristBlade = (new ItemWristbracer(YAUTJA_TOOLS)),
-			itemPlasmaCaster = (new ItemPlasmaCaster()).setFull3D(),
-			itemProximityMine = (new ItemProximityMine()),
-			itemDisc = (new ItemDisc()),
-			itemShuriken = (new ItemShuriken()),
-			itemGrenade = (new ItemGrenade()).setFlaming(false),
-			itemFireGrenade = (new ItemGrenade()).setFlaming(true),
-			itemFlamethrower = (new ItemFlamethrower()),
-			itemAmmoPistol = ((HookedItem) (new ItemAmmo(0.05F))).setDescription("A magazine classified for use with pistols."),
-			itemAmmoAR = ((HookedItem) (new ItemAmmo(0.09F))).setDescription("A magazine classified for use with assault rifles."),
-			itemAmmoAC = ((HookedItem) (new ItemAmmo(0.09F))).setDescription("A magazine classified for use with assault carbines."),
-			itemAmmoSMG = ((HookedItem) (new ItemAmmo(0.5F))).setDescription("A magazine classified for use with sub machine-guns."),
-			itemAmmoSniper = ((HookedItem) (new ItemAmmo(0.1F))).setDescription("A magazine classified for use with sniper rifles."),
-			itemPistol = (new ItemFirearm(12, 2.0F, 15, 120, (ItemAmmo) itemAmmoPistol, AliensVsPredator.properties().SOUND_WEAPON_GUNSHOT)),
-			itemM4 = (new ItemFirearm(24, 0.5F, 3, 120, (ItemAmmo) itemAmmoAR, AliensVsPredator.properties().SOUND_WEAPON_GUNSHOT).disableIcon()).setFull3D(),
-			itemSniper = (new ItemFirearm(6, 1.8F, 40, 150, (ItemAmmo) itemAmmoSniper, AliensVsPredator.properties().SOUND_WEAPON_SNIPER).disableIcon()).setFull3D(),
-			itemM41A = (new ItemFirearm(99, 0.5F, 2, 120, (ItemAmmo) itemAmmoAC, AliensVsPredator.properties().SOUND_WEAPON_PULSERIFLE).disableIcon()).setFull3D(),
-			itemM56sg = (new ItemFirearm(128, 0.2F, 1, 120, (ItemAmmo) itemAmmoSMG, AliensVsPredator.properties().SOUND_WEAPON_M56SG).disableIcon()).setFull3D(),
-			itemAK47 = (new ItemFirearm(32, 0.6F, 3, 110, (ItemAmmo) itemAmmoAR, AliensVsPredator.properties().SOUND_WEAPON_GUNSHOT).disableIcon()).setFull3D(),
-			itemDoritos = (new ItemFood(8, true)).setAlwaysEdible(),
-			itemDoritosCoolRanch = (new ItemFood(8, true)).setAlwaysEdible(),
-			itemArtifactTech = (new HookedItem()).setDescription("An unknown piece of technology aquired from the yautja species."),
-			healthProbe = new HookedItem().disableIcon(),
-			itemProcessor = ((new HookedItem())),
-			itemFlashDrive = (new ItemStorageDevice()),
-			itemCapacitor = ((new HookedItem())),
-			itemDiode = ((new HookedItem())),
-			itemLed = ((new HookedItem())),
-			itemLedDisplay = ((new HookedItem())),
-			itemIntegratedCircuit = ((new HookedItem())),
-			itemRegulator = ((new HookedItem())),
-			itemResistor = ((new HookedItem())),
-			itemTransistor = ((new HookedItem())),
-			itemSilicon = new HookedItem().setDescription("A few chunks of silicon, for use with electronics."),
-			itemIngotAluminum = new HookedItem().setDescription("An ingot melted down from bauxite ore, for use with guns."),
-			itemIngotCopper = new HookedItem().setDescription("An ingot melted down from copper ore, for use with electronics."),
-			itemIngotLithium = ((HookedItem) new ItemIngotLithium()).setDescription("An ingot of lithium. Depletes quicly after mining."),
-			itemMotionTracker = ((HookedItem) (new HookedItem()).disableIcon()).setDescription("Tracks movement by detecting changes in air density."),
-			itemWorldSelector = ((new ItemWorldSelectionExporter()));
+		plateXeno = (new ItemArmorXeno(XENO, 4, 1)),
+		legsXeno = (new ItemArmorXeno(XENO, 4, 2)),
+		bootsXeno = (new ItemArmorXeno(XENO, 4, 3)),
+		pressureMask = new ItemArmorPressureSuit(PRESSURESUIT, 4, 0),
+		pressureChest = new ItemArmorPressureSuit(PRESSURESUIT, 4, 1),
+		pressurePants = new ItemArmorPressureSuit(PRESSURESUIT, 4, 2),
+		pressureBoots = new ItemArmorPressureSuit(PRESSURESUIT, 4, 3),
+		helmMarine = (new ItemArmorMarine(TACTICAL, 4, 0)),
+		plateMarine = (new ItemArmorMarine(TACTICAL, 4, 1)),
+		legsMarine = (new ItemArmorMarine(TACTICAL, 4, 2)),
+		bootsMarine = (new ItemArmorMarine(TACTICAL, 4, 3)),
+		helmTitanium = (new ItemArmorTitanium(YAUTJA, 4, 0)),
+		legsTitanium = (new ItemArmorTitanium(YAUTJA, 4, 2)),
+		plateTitanium = (new ItemArmorTitanium(YAUTJA, 4, 1)),
+		bootsTitanium = (new ItemArmorTitanium(YAUTJA, 4, 3)),
+		shovelTitanium = (new ItemSpade(YAUTJA_TOOLS)),
+		pickaxeTitanium = (new HookedItemPickaxe(YAUTJA_TOOLS)),
+		axeTitanium = (new HookedItemAxe(YAUTJA_TOOLS)),
+		swordTitanium = (new ItemSword(YAUTJA_TOOLS)),
+		hoeTitanium = (new ItemHoe(YAUTJA_TOOLS)),
+		itemSpear = (new ItemSpear(YAUTJA_TOOLS)),
+		itemWristBlade = (new ItemWristbracer()).setDescription("Applies 8 damage to any entity, regardless of their armor, while blades are inserted.").setMaxStackSize(1),
+		itemWristbracerBlades = (new HookedItem()).setDescription("Place these in the first slot of your wristbracer").setMaxStackSize(1).setMaxDamage(YAUTJA_TOOLS.getMaxUses()),
+		itemPlasmaCaster = (new ItemPlasmaCaster()).setFull3D(),
+		itemProximityMine = (new ItemProximityMine()),
+		itemDisc = (new ItemDisc()),
+		itemShuriken = (new ItemShuriken()),
+		itemGrenade = (new ItemGrenade()).setFlaming(false),
+		itemFireGrenade = (new ItemGrenade()).setFlaming(true),
+		itemFlamethrower = (new ItemFlamethrower()),
+		itemAmmoPistol = ((HookedItem) (new ItemAmmo(0.05F))).setDescription("A magazine classified for use with pistols."),
+		itemAmmoAR = ((HookedItem) (new ItemAmmo(0.09F))).setDescription("A magazine classified for use with assault rifles."),
+		itemAmmoAC = ((HookedItem) (new ItemAmmo(0.09F))).setDescription("A magazine classified for use with assault carbines."),
+		itemAmmoSMG = ((HookedItem) (new ItemAmmo(0.5F))).setDescription("A magazine classified for use with sub machine-guns."),
+		itemAmmoSniper = ((HookedItem) (new ItemAmmo(0.1F))).setDescription("A magazine classified for use with sniper rifles."),
+		itemPistol = (new ItemFirearm(12, 2.0F, 15, 120, (ItemAmmo) itemAmmoPistol, AliensVsPredator.properties().SOUND_WEAPON_GUNSHOT)),
+		itemM4 = (new ItemFirearm(24, 0.5F, 3, 120, (ItemAmmo) itemAmmoAR, AliensVsPredator.properties().SOUND_WEAPON_GUNSHOT).disableIcon()).setFull3D(),
+		itemSniper = (new ItemFirearm(6, 1.8F, 40, 150, (ItemAmmo) itemAmmoSniper, AliensVsPredator.properties().SOUND_WEAPON_SNIPER).disableIcon()).setFull3D(),
+		itemM41A = (new ItemFirearm(99, 0.5F, 2, 120, (ItemAmmo) itemAmmoAC, AliensVsPredator.properties().SOUND_WEAPON_PULSERIFLE).disableIcon()).setFull3D(),
+		itemM56sg = (new ItemFirearm(128, 0.2F, 1, 120, (ItemAmmo) itemAmmoSMG, AliensVsPredator.properties().SOUND_WEAPON_M56SG).disableIcon()).setFull3D(),
+		itemAK47 = (new ItemFirearm(32, 0.6F, 3, 110, (ItemAmmo) itemAmmoAR, AliensVsPredator.properties().SOUND_WEAPON_GUNSHOT).disableIcon()).setFull3D(),
+		itemDoritos = (new ItemFood(8, true)).setAlwaysEdible(),
+		itemDoritosCoolRanch = (new ItemFood(8, true)).setAlwaysEdible(),
+		itemArtifactTech = (new HookedItem()).setDescription("An unknown piece of technology aquired from the yautja species."),
+		healthProbe = new HookedItem().disableIcon(),
+		itemProcessor = ((new HookedItem())),
+		itemFlashDrive = (new ItemStorageDevice()),
+		itemCapacitor = ((new HookedItem())),
+		itemDiode = ((new HookedItem())),
+		itemLed = ((new HookedItem())),
+		itemLedDisplay = ((new HookedItem())),
+		itemIntegratedCircuit = ((new HookedItem())),
+		itemRegulator = ((new HookedItem())),
+		itemResistor = ((new HookedItem())),
+		itemTransistor = ((new HookedItem())),
+		itemSilicon = new HookedItem().setDescription("A few chunks of silicon, for use with electronics."),
+		itemIngotAluminum = new HookedItem().setDescription("An ingot melted down from bauxite ore, for use with guns."),
+		itemIngotCopper = new HookedItem().setDescription("An ingot melted down from copper ore, for use with electronics."),
+		itemIngotLithium = ((HookedItem) new ItemIngotLithium()).setDescription("An ingot of lithium. Depletes quicly after mining."),
+		itemMotionTracker = ((HookedItem) (new HookedItem()).disableIcon()).setDescription("Tracks movement by detecting changes in air density."),
+		itemWorldSelector = ((new ItemWorldSelectionExporter())),
+		itemPolycarbonate = (new HookedItem()).setDescription("Polycarbonate (A hard plastic used in the crafting of many items/blocks)");
 
 	public ItemEntitySummoner itemSummonerDrone = (new ItemEntitySummoner(this.getMod().domain(), EntityDrone.class)),
-			itemSummonerAqua = (new ItemEntitySummoner(this.getMod().domain(), EntityAqua.class)),
-			itemSummonerWarrior = (new ItemEntitySummoner(this.getMod().domain(), EntityWarrior.class)),
-			itemSummonerCrusher = (new ItemEntitySummoner(this.getMod().domain(), EntityCrusher.class)),
-			itemSummonerSpitter = (new ItemEntitySummoner(this.getMod().domain(), EntitySpitter.class)),
-			itemSummonerPraetorian = (new ItemEntitySummoner(this.getMod().domain(), EntityPraetorian.class)),
-			itemSummonerQueen = (new ItemEntitySummoner(this.getMod().domain(), EntityQueen.class)),
-			itemSummonerChestburster = (new ItemEntitySummoner(this.getMod().domain(), EntityChestburster.class)),
-			itemSummonerFacehugger = (new ItemEntitySummoner(this.getMod().domain(), EntityFacehugger.class)),
-			itemSummonerMarine = (new ItemEntitySummoner(this.getMod().domain(), EntityMarine.class)),
-			itemSummonerOvamorph = (new ItemEntitySummoner(this.getMod().domain(), EntityOvamorph.class)),
-			itemSummonerRoyalFacehugger = (new ItemEntitySummoner(this.getMod().domain(), EntityRoyalFacehugger.class)),
-			itemSummonerYautja = (new ItemEntitySummoner(this.getMod().domain(), EntityYautja.class)),
-			itemSummonerPredalien = (new ItemEntitySummoner(this.getMod().domain(), EntityPredalien.class)),
-			itemSummonerCombatSynthetic = (new ItemEntitySummoner(this.getMod().domain(), EntityCombatSynthetic.class));
+		itemSummonerAqua = (new ItemEntitySummoner(this.getMod().domain(), EntityAqua.class)),
+		itemSummonerWarrior = (new ItemEntitySummoner(this.getMod().domain(), EntityWarrior.class)),
+		itemSummonerCrusher = (new ItemEntitySummoner(this.getMod().domain(), EntityCrusher.class)),
+		itemSummonerSpitter = (new ItemEntitySummoner(this.getMod().domain(), EntitySpitter.class)),
+		itemSummonerPraetorian = (new ItemEntitySummoner(this.getMod().domain(), EntityPraetorian.class)),
+		itemSummonerQueen = (new ItemEntitySummoner(this.getMod().domain(), EntityQueen.class)),
+		itemSummonerChestburster = (new ItemEntitySummoner(this.getMod().domain(), EntityChestburster.class)),
+		itemSummonerFacehugger = (new ItemEntitySummoner(this.getMod().domain(), EntityFacehugger.class)),
+		itemSummonerMarine = (new ItemEntitySummoner(this.getMod().domain(), EntityMarine.class)),
+		itemSummonerOvamorph = (new ItemEntitySummoner(this.getMod().domain(), EntityOvamorph.class)),
+		itemSummonerRoyalFacehugger = (new ItemEntitySummoner(this.getMod().domain(), EntityRoyalFacehugger.class)),
+		itemSummonerYautja = (new ItemEntitySummoner(this.getMod().domain(), EntityYautja.class)),
+		itemSummonerPredalien = (new ItemEntitySummoner(this.getMod().domain(), EntityPredalien.class)),
+		itemSummonerCombatSynthetic = (new ItemEntitySummoner(this.getMod().domain(), EntityCombatSynthetic.class));
 
 	public ItemHandler()
 	{
 		super(AliensVsPredator.instance());
 	}
-	
+
 	@Override
 	public void initialize(FMLInitializationEvent event)
 	{
@@ -170,22 +173,29 @@ public class ItemHandler extends IBHandler implements IInitializable
 		registerItem(itemArtifactTech, "artifact.tech");
 		registerItem(itemDoritos, "food.doritos");
 		registerItem(itemDoritosCoolRanch, "food.doritos.coolranch");
-		registerItem(healthProbe, "healthprobe");
 		registerItem(itemFlashDrive, "device.nbtdrive");
 		registerItem(itemProcessor, "part.processor");
-		registerItem(itemCapacitor, "part.capacitor");
-		registerItem(itemDiode, "part.diode");
 		registerItem(itemLed, "part.led");
 		registerItem(itemLedDisplay, "part.led.display");
 		registerItem(itemIntegratedCircuit, "part.ic");
-		registerItem(itemRegulator, "part.regulator");
-		registerItem(itemResistor, "part.resistor");
-		registerItem(itemTransistor, "part.transistor");
 		registerItem(itemIngotCopper, "ingot.copper");
 		registerItem(itemIngotLithium, "ingot.lithium");
 		registerItem(itemIngotAluminum, "ingot.aluminum");
 		registerItem(itemSilicon, "silicon");
 		registerItem(itemMotionTracker, "motiontracker");
-		registerItem(itemWorldSelector, "worldselector");
+		registerItem(itemWristbracerBlades, "wristbracer.blades");
+		registerItem(itemPolycarbonate, "polycarbonate");
+
+		// registerItem(healthProbe, "healthprobe");
+		// registerItem(itemCapacitor, "part.capacitor");
+		// registerItem(itemDiode, "part.diode");
+		// registerItem(itemRegulator, "part.regulator");
+		// registerItem(itemResistor, "part.resistor");
+		// registerItem(itemTransistor, "part.transistor");
+
+		if (ModUtil.isDevEnvironment())
+		{
+			registerItem(itemWorldSelector, "worldselector");
+		}
 	}
 }
