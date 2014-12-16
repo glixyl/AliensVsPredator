@@ -55,17 +55,25 @@ public class RenderWristBlade implements IItemRenderer
 		switch (type)
 		{
 			case EQUIPPED:
-				GL11.glRotatef(186.0F, 1.0F, 0.0F, 0.0F);
-				GL11.glRotatef(3.0F, 0.0F, 1.0F, 0.0F);
-				GL11.glRotatef(-35.0F, 0.0F, 0.0F, 1.0F);
-				GL11.glTranslatef(0.45F, 0.0F, 0.0F);
-				GL11.glScalef(1.6F, 1.6F, 1.6F);
+				EntityPlayer playerToRender = (EntityPlayer) data[1];
+
+				GL11.glRotatef(-78.0F, 0.0F, 1.0F, 0.0F);
+				GL11.glRotatef(-165.0F, 1.0F, 0.0F, 0.0F);
+				GL11.glRotatef(13.0F, 0.0F, 0.0F, 1.0F);
+				GL11.glTranslatef(-0.25F, -0.15F, 0.3F);
+				GL11.glScalef(2F, 2F, 2F);
 				RenderUtil.bindTexture(resourceLocation);
 				this.model.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+				
+				if (playerToRender != null && ItemWristbracer.playersWristbracerContainsBlades(playerToRender))
+				{
+					this.model.b6.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+					this.model.bladeLeft.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+				}
 				break;
 
 			case EQUIPPED_FIRST_PERSON:
-				EntityPlayer playerToRender = (EntityPlayer) data[1];
+				playerToRender = (EntityPlayer) data[1];
 				GL11.glRotatef(186.0F, 1.0F, 0.0F, 0.0F);
 				GL11.glRotatef(3.0F, 0.0F, 1.0F, 0.0F);
 				GL11.glRotatef(-35.0F, 0.0F, 0.0F, 1.0F);
@@ -109,6 +117,7 @@ public class RenderWristBlade implements IItemRenderer
 				break;
 
 			default:
+				break;
 		}
 	}
 }

@@ -21,7 +21,7 @@ public class ItemWristbracer extends HookedItem
 
 		if (playersWristbracerContainsBlades(player))
 		{
-			entity.attackEntityFrom(DamageSource.causePlayerDamage(player), 8F);
+			entity.attackEntityFrom(DamageSource.causePlayerDamage(player), AliensVsPredator.instance().items.YAUTJA_TOOLS.getDamageVsEntity());
 
 			if (!player.worldObj.isRemote)
 			{
@@ -72,7 +72,7 @@ public class ItemWristbracer extends HookedItem
 				{
 					ItemStack stack = ItemStack.loadItemStackFromNBT(items.getCompoundTagAt(x));
 
-					if (stack != null)
+					if (stack != null && items.getCompoundTagAt(x) != null && items.getCompoundTagAt(x).getByte("Slot") == 0)
 					{
 						return stack;
 					}
