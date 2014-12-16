@@ -23,7 +23,7 @@ public class ItemWristbracer extends HookedItem
 		{
 			entity.attackEntityFrom(DamageSource.causePlayerDamage(player), AliensVsPredator.instance().items.YAUTJA_TOOLS.getDamageVsEntity());
 
-			if (!player.worldObj.isRemote)
+			if (!player.worldObj.isRemote && !player.capabilities.isCreativeMode)
 			{
 				ItemStack bladesStack = getBladesStack(player.getCurrentEquippedItem());
 				NBTTagCompound nbt = player.getCurrentEquippedItem().getTagCompound();
