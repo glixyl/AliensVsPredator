@@ -66,7 +66,7 @@ public class ItemHandler extends IBHandler implements IInitializable
 		itemM4 = (new ItemFirearm(24, 0.5F, 3, 120, (ItemAmmo) itemAmmoAR, AliensVsPredator.properties().SOUND_WEAPON_GUNSHOT).disableIcon()).setFull3D(),
 		itemSniper = (new ItemFirearm(6, 1.8F, 40, 150, (ItemAmmo) itemAmmoSniper, AliensVsPredator.properties().SOUND_WEAPON_SNIPER).disableIcon()).setFull3D(),
 		itemM41A = (new ItemFirearm(99, 0.5F, 2, 120, (ItemAmmo) itemAmmoAC, AliensVsPredator.properties().SOUND_WEAPON_PULSERIFLE).disableIcon()).setFull3D(),
-		itemM56sg = (new ItemFirearm(128, 0.2F, 1, 120, (ItemAmmo) itemAmmoSMG, AliensVsPredator.properties().SOUND_WEAPON_M56SG).disableIcon()).setFull3D(),
+		itemM56SG = (new ItemFirearm(128, 0.2F, 1, 120, (ItemAmmo) itemAmmoSMG, AliensVsPredator.properties().SOUND_WEAPON_M56SG).disableIcon()).setFull3D(),
 		itemAK47 = (new ItemFirearm(32, 0.6F, 3, 110, (ItemAmmo) itemAmmoAR, AliensVsPredator.properties().SOUND_WEAPON_GUNSHOT).disableIcon()).setFull3D(),
 		itemDoritos = (new ItemFood(8, true)).setAlwaysEdible(),
 		itemDoritosCoolRanch = (new ItemFood(8, true)).setAlwaysEdible(),
@@ -149,7 +149,7 @@ public class ItemHandler extends IBHandler implements IInitializable
 		registerItem(itemM4, "gun.m4");
 		registerItem(itemSniper, "gun.sniper");
 		registerItem(itemM41A, "gun.m41a");
-		registerItem(itemM56sg, "gun.m56sg");
+		registerItem(itemM56SG, "gun.m56sg");
 		registerItem(itemAK47, "gun.ak47");
 		registerItem(itemFlamethrower, "gun.flamethrower");
 		registerItem(itemAmmoAR, "ammo.ar");
