@@ -48,7 +48,7 @@ public class ItemHandler extends IBHandler implements IInitializable
 		swordTitanium = (new ItemSword(YAUTJA_TOOLS)),
 		hoeTitanium = (new ItemHoe(YAUTJA_TOOLS)),
 		itemSpear = (new ItemSpear(YAUTJA_TOOLS)),
-		itemWristBlade = (new ItemWristbracer()).setDescription("Applies 8 damage to any entity, regardless of their armor, while blades are inserted.").setMaxStackSize(1),
+		itemWristBlade = (new ItemWristbracer()).setDescription("Applies " + ItemWristbracer.getDamageToApply() + " damage to any entity, regardless of their armor, while blades are inserted.").setMaxStackSize(1),
 		itemWristbracerBlades = (new HookedItem()).setDescription("Place these in the first slot of your wristbracer").setMaxStackSize(1).setMaxDamage(YAUTJA_TOOLS.getMaxUses()),
 		itemPlasmaCaster = (new ItemPlasmaCaster()).setFull3D(),
 		itemProximityMine = (new ItemProximityMine()),

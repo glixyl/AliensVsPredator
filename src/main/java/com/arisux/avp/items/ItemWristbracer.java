@@ -21,7 +21,7 @@ public class ItemWristbracer extends HookedItem
 
 		if (playersWristbracerContainsBlades(player))
 		{
-			entity.attackEntityFrom(DamageSource.causePlayerDamage(player), AliensVsPredator.instance().items.YAUTJA_TOOLS.getDamageVsEntity() * 1.5F);
+			entity.attackEntityFrom(DamageSource.causePlayerDamage(player), getDamageToApply());
 
 			if (!player.worldObj.isRemote && !player.capabilities.isCreativeMode)
 			{
@@ -58,6 +58,11 @@ public class ItemWristbracer extends HookedItem
 	public Object getNewContainer(EntityPlayer player)
 	{
 		return new ContainerWristbracer(player);
+	}
+	
+	public static float getDamageToApply()
+	{
+		return AliensVsPredator.instance().items.YAUTJA_TOOLS.getDamageVsEntity() * 1.5F;
 	}
 
 	public static ItemStack getBladesStack(ItemStack itemstack)
