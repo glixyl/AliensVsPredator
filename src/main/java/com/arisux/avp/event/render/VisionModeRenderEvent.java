@@ -27,7 +27,7 @@ public class VisionModeRenderEvent
 	private IActionPerformed actionSwitchVisionMode;
 	public VisionMode currentVisionMode = VisionMode.NORMAL;
 
-	private GuiCustomButton buttonToggleVisionMode = new GuiCustomButton(0, 0, 0, 50, 20, "Vision Mode", null).setAction(actionSwitchVisionMode = new IActionPerformed()
+	private GuiCustomButton buttonToggleVisionMode = (GuiCustomButton) new GuiCustomButton(0, 0, 0, 50, 20, "Vision Mode", null).setAction(actionSwitchVisionMode = new IActionPerformed()
 	{
 		@Override
 		public void actionPerformed(GuiCustomButton button)

@@ -31,11 +31,11 @@ public class GuiTacticalHUDSettings extends GuiCustomScreen
 	{
 		super.initGui();
 		TacticalHUDRenderEvent event = ((TacticalHUDRenderEvent) AliensVsPredator.instance().localEvents.getEvent(TacticalHUDRenderEvent.class));
-		
+
 		textBox1.setText("Default");
 		slider1.sliderValue = ((ExtendedEntityPlayer) mc.thePlayer.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER)).getBroadcastRadius() / slider1.sliderMaxValue;
 		slider1.displayString = "Transmit Power: " + (int) (slider1.sliderValue * slider1.sliderMaxValue);
-		
+
 		slider2.sliderValue = event.viewportThreshold / slider2.sliderMaxValue;
 		slider2.displayString = "Threshold: " + (int) (slider2.sliderValue * slider2.sliderMaxValue);
 	}
@@ -104,21 +104,21 @@ public class GuiTacticalHUDSettings extends GuiCustomScreen
 						properties.setBroadcastChannel(newChannel);
 						AliensVsPredator.instance().network.sendToServer(new PacketChannelServerUpdate(newChannel, mc.thePlayer.getCommandSenderName()));
 					}
-					
+
 					int newRadius = (int) (slider1.sliderValue * slider1.sliderMaxValue);
 					if (properties.getBroadcastRadius() != newRadius)
 					{
 						properties.setBroadcastRadius(newRadius);
 						AliensVsPredator.instance().network.sendToServer(new PacketBroadcastRadiusServerUpdate(newRadius, mc.thePlayer.getCommandSenderName()));
 					}
-					
+
 					int newThreshold = (int) (slider2.sliderValue * slider2.sliderMaxValue);
 					if (event.viewportThreshold != newThreshold)
 					{
 						event.viewportThreshold = newThreshold;
 
 					}
-					
+
 					mc.displayGuiScreen(null);
 				}
 			});
@@ -148,5 +148,16 @@ public class GuiTacticalHUDSettings extends GuiCustomScreen
 	public boolean doesGuiPauseGame()
 	{
 		return false;
+	}
+	
+	@Override
+	public void onGuiClosed()
+	{
+		super.onGuiClosed();
+		
+		textBox1.remove();
+		buttonApply.remove();
+		slider1.remove();
+		slider2.remove();
 	}
 }

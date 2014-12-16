@@ -89,6 +89,7 @@ public class TacticalHUDRenderEvent
 					public void actionPerformed(GuiCustomButton button)
 					{
 						Minecraft.getMinecraft().displayGuiScreen(new GuiTacticalHUDSettings(mc.currentScreen));
+//						Minecraft.getMinecraft().thePlayer.addChatComponentMessage(new ChatComponentText("It's not the button"));
 					}
 				});
 			}
