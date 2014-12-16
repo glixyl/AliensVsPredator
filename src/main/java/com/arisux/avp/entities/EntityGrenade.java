@@ -82,7 +82,7 @@ public class EntityGrenade extends EntityThrowable
 		{
 			Explosion explosion = WorldUtil.createExplosion(null, worldObj, new Blocks.CoordData(this), 2F, isFlaming, true, AliensVsPredator.instance().settings.areExplosionsEnabled());
 
-			List<Entity> list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(8, 8, 8));
+			List<Entity> list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(4, 4, 4));
 
 			for (int i1 = 0; i1 < list.size(); ++i1)
 			{
