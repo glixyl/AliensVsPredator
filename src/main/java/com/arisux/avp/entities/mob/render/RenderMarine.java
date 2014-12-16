@@ -1,6 +1,5 @@
 package com.arisux.avp.entities.mob.render;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
@@ -10,26 +9,19 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.RenderUtil;
-import com.arisux.airi.lib.render.ModelBaseExtension;
+import com.arisux.airi.lib.render.ModelTexMap;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntityMarine;
-import com.arisux.avp.items.model.*;
-import com.arisux.avp.items.render.*;
 
 public class RenderMarine extends RenderLiving
 {
 	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_MARINE);
-	protected ModelBiped modelBipedMain;
-	private final ModelBaseExtension m4 = new ModelM4();
-	private final ModelBaseExtension ak47 = new ModelAK47();
-	private final ModelBaseExtension m41a = new ModelM41A();
-	private final ModelBaseExtension m56sg = new ModelM56SG();
-	private final ModelBaseExtension sniper = new ModelSniper();
+	protected ModelBiped model;
 
-	public RenderMarine(ModelBiped mainModel, float par2)
+	public RenderMarine(ModelBiped mainModel, float shadowSize)
 	{
-		super(mainModel, par2);
-		this.modelBipedMain = mainModel;
+		super(mainModel, shadowSize);
+		this.model = mainModel;
 	}
 
 	@Override
@@ -50,57 +42,37 @@ public class RenderMarine extends RenderLiving
 		super.renderEquippedItems(entityLiving, partialTicks);
 
 		EntityMarine entity = (EntityMarine) entityLiving;
-		ResourceLocation resource = null;
-		ModelBaseExtension model = null;
-		float glScale = 1.2F;
+		ModelTexMap map = entity.getMarineType().getFirearmModelTexMap();
 
 		GL11.glPushMatrix();
 		{
-			this.modelBipedMain.bipedRightArm.postRender(0.0625F);
+			this.model.bipedRightArm.postRender(RenderUtil.DEFAULT_BOX_TRANSLATION);
+			this.model.aimedBow = true;
 			GL11.glTranslatef(-0.35F, 0.8F, -0.85F);
 			GL11.glRotatef(270.0F, 1.0F, 0.0F, 0.0F);
 			GL11.glRotatef(0.0F, 0.0F, 1.0F, 0.0F);
 			GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
+			GL11.glScalef(1.2F, 1.2F, 1.2F);
 			GL11.glDisable(GL11.GL_CULL_FACE);
-			GL11.glScalef(glScale, glScale, glScale);
 
 			switch (entity.getMarineType())
 			{
-				case M4:
-					resource = RenderM4.resourceLocation;
-					model = m4;
-					this.modelBipedMain.aimedBow = true;
-					break;
 				case AK47:
 					GL11.glTranslatef(-0.35F, 0.45F, -0.55F);
-					resource = RenderAK47.resourceLocation;
-					model = ak47;
-					this.modelBipedMain.aimedBow = true;
-					break;
-				case M4A1:
-					resource = RenderM41A.resourceLocation;
-					model = m41a;
-					this.modelBipedMain.aimedBow = true;
 					break;
 				case SNIPER:
 					GL11.glTranslatef(-0.25F, 0.45F, 0.05F);
-					resource = RenderSniper.resourceLocation;
-					model = sniper;
-					this.modelBipedMain.aimedBow = true;
 					break;
 				case M56SG:
 					GL11.glTranslatef(-0.15F, 0.7F, -0.73F);
-					resource = RenderM56SG.resourceLocation;
-					model = m56sg;
-					this.modelBipedMain.aimedBow = false;
+					this.model.aimedBow = false;
+					break;
+				default:
 					break;
 			}
 
-			if (model != null)
-			{
-				Minecraft.getMinecraft().renderEngine.bindTexture(resource);
-				model.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
-			}
+			bindTexture(map.asResourceLocation());
+			map.asModelBaseExtension().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 		}
 		GL11.glPopMatrix();
 	}

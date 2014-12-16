@@ -78,7 +78,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.instance().blocks.blockTurret), new RenderItemTurret(new ModelTurret(), new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_TURRET)));
 		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance().items.itemWristBlade, new RenderWristBlade());
 		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance().items.itemM41A, this.renderM41A = new RenderM41A());
-		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance().items.itemM56sg, this.renderM56SG = new RenderM56SG());
+		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance().items.itemM56SG, this.renderM56SG = new RenderM56SG());
 		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance().items.itemAK47, this.renderAK47 = new RenderAK47());
 		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance().items.itemM4, this.renderM4 = new RenderM4());
 		MinecraftForgeClient.registerItemRenderer(AliensVsPredator.instance().items.itemSniper, this.renderSniper = new RenderSniper());

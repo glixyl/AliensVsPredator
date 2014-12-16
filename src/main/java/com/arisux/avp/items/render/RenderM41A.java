@@ -1,7 +1,7 @@
 package com.arisux.avp.items.render;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
+import static com.arisux.airi.lib.RenderUtil.bindTexture;
+import static com.arisux.airi.lib.RenderUtil.downloadResource;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -12,6 +12,7 @@ import org.lwjgl.opengl.GL11;
 import com.arisux.airi.lib.*;
 import com.arisux.airi.lib.RenderUtil.PlayerResourceManager.PlayerResource;
 import com.arisux.airi.lib.render.ItemRenderer;
+import com.arisux.airi.lib.render.ModelBaseExtension;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.items.ItemFirearm;
 import com.arisux.avp.items.model.ModelM41A;
@@ -19,17 +20,18 @@ import com.arisux.avp.items.model.ModelM41A;
 public class RenderM41A extends ItemRenderer
 {
 	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_PULSERIFLE);
-	public MotionTrackerScreen motionTracker = new MotionTrackerScreen();
+	public static final ModelBaseExtension model = new ModelM41A();
+	private MotionTrackerScreen motionTracker = new MotionTrackerScreen();
 
 	public RenderM41A()
 	{
-		super(new ModelM41A(), resourceLocation);
+		super(model, resourceLocation);
 	}
-	
+
 	@Override
 	public ModelM41A getModel()
 	{
-		return (ModelM41A)super.getModel();
+		return (ModelM41A) super.getModel();
 	}
 
 	@Override
@@ -42,7 +44,7 @@ public class RenderM41A extends ItemRenderer
 	public void renderThirdPerson(ItemStack item, Object... data)
 	{
 		PlayerResource player = resourceManager.createPlayerResource(((EntityPlayer) data[1]).getCommandSenderName());
-		this.resource = RenderUtil.downloadResource(String.format(AliensVsPredator.settings().getUrlSkinM41a(), player.getUUID()), resourceLocation);
+		this.resource = downloadResource(String.format(AliensVsPredator.settings().getUrlSkinM41a(), player.getUUID()), resourceLocation);
 
 		if (player != null)
 		{
@@ -52,7 +54,7 @@ public class RenderM41A extends ItemRenderer
 			GL11.glTranslatef(0.28F, -0.77F, 0.85F);
 			float glScale = 1.3F;
 			GL11.glScalef(glScale, glScale, glScale);
-			Minecraft.getMinecraft().renderEngine.bindTexture(getResourceLocation());
+			bindTexture(getResourceLocation());
 			this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 		}
 	}
@@ -60,30 +62,14 @@ public class RenderM41A extends ItemRenderer
 	@Override
 	public void renderFirstPerson(ItemStack item, Object... data)
 	{
-		Entity entity = (Entity) data[1];
-		ItemStack currentItemstack = Minecraft.getMinecraft().thePlayer.inventory.getCurrentItem();
-
-		String displayText = "00";
 		float displayScale = 0.005F;
 		float glScale = 1.6F;
 
-		if (currentItemstack != null && currentItemstack.getItem() instanceof ItemFirearm)
-		{
-			if (((ItemFirearm) currentItemstack.getItem()).getCurrentAmmo() < 10)
-			{
-				displayText = "0" + ((ItemFirearm) currentItemstack.getItem()).getCurrentAmmo();
-			}
-			else
-			{
-				displayText = String.valueOf(((ItemFirearm) currentItemstack.getItem()).getCurrentAmmo());
-			}
-		}
-
 		if (firstPersonRenderCheck(data[1]))
 		{
-			this.resource = RenderUtil.downloadResource(String.format(AliensVsPredator.settings().getUrlSkinM41a(), AccessWrapper.getSession().getPlayerID()), resourceLocation);
+			this.resource = downloadResource(String.format(AliensVsPredator.settings().getUrlSkinM41a(), AccessWrapper.getSession().getPlayerID()), resourceLocation);
 
-			if (Mouse.isButtonDown(0) && Minecraft.getMinecraft().inGameHasFocus)
+			if (Mouse.isButtonDown(0) && mc.inGameHasFocus)
 			{
 				GL11.glTranslatef(-0.1F, 1.44F, -0.595F);
 				GL11.glRotatef(102F, 1.0F, 0.0F, 0.0F);
@@ -101,7 +87,7 @@ public class RenderM41A extends ItemRenderer
 
 			GL11.glDisable(GL11.GL_CULL_FACE);
 			GL11.glScalef(glScale, glScale, glScale);
-			Minecraft.getMinecraft().renderEngine.bindTexture(getResourceLocation());
+			bindTexture(getResourceLocation());
 			this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 
 			GL11.glDisable(GL11.GL_LIGHTING);
@@ -111,11 +97,11 @@ public class RenderM41A extends ItemRenderer
 			RenderUtil.drawRect(-2, -2, 16, 11, 0xFF000000);
 			GL11.glTranslatef(0F, 0F, -0.01F);
 			RenderUtil.glDisableLightMapping();
-			RenderUtil.drawString(displayText, 0, 0, 0xFFFF0000);
+			RenderUtil.drawString(getAmmoCountDisplayString(), 0, 0, 0xFFFF0000);
 			GL11.glEnable(GL11.GL_LIGHTING);
 			GL11.glColor4f(1F, 1F, 1F, 1F);
 
-			if (Minecraft.getMinecraft().thePlayer.inventory.hasItem(AliensVsPredator.instance().items.itemMotionTracker))
+			if (mc.thePlayer.inventory.hasItem(AliensVsPredator.instance().items.itemMotionTracker))
 			{
 				GL11.glTranslatef(-50F, -20F, -50F);
 				GL11.glRotatef(-90F, 0F, 1F, 0F);
@@ -130,14 +116,20 @@ public class RenderM41A extends ItemRenderer
 	@Override
 	public void renderInInventory(ItemStack item, Object... data)
 	{
-			this.resource = RenderUtil.downloadResource(String.format(AliensVsPredator.settings().getUrlSkinM41a(), AccessWrapper.getSession().getPlayerID()), resourceLocation);
-			GL11.glRotatef(0F, 1.0F, 0.0F, 0.0F);
-			GL11.glRotatef(-40F, 0.0F, 1.0F, 0.0F);
-			GL11.glRotatef(0F, 0.0F, 0.0F, 1.0F);
-			GL11.glTranslatef(0F, -5.77F, -20.85F);
-			GL11.glScalef(20F, 20F, 20F);
-			GL11.glDisable(GL11.GL_CULL_FACE);
-			Minecraft.getMinecraft().renderEngine.bindTexture(getResourceLocation());
-			this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+		this.resource = downloadResource(String.format(AliensVsPredator.settings().getUrlSkinM41a(), AccessWrapper.getSession().getPlayerID()), resourceLocation);
+		GL11.glRotatef(0F, 1.0F, 0.0F, 0.0F);
+		GL11.glRotatef(-40F, 0.0F, 1.0F, 0.0F);
+		GL11.glRotatef(0F, 0.0F, 0.0F, 1.0F);
+		GL11.glTranslatef(0F, -5.77F, -20.85F);
+		GL11.glScalef(20F, 20F, 20F);
+		GL11.glDisable(GL11.GL_CULL_FACE);
+		bindTexture(getResourceLocation());
+		this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+	}
+
+	public String getAmmoCountDisplayString()
+	{
+		int ammoCount = ((ItemFirearm) mc.thePlayer.inventory.getCurrentItem().getItem()).getCurrentAmmo();
+		return (ammoCount < 10 ? "0" + ammoCount : String.valueOf(ammoCount));
 	}
 }

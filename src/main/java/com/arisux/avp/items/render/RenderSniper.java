@@ -11,17 +11,19 @@ import org.lwjgl.opengl.GL11;
 import com.arisux.airi.lib.*;
 import com.arisux.airi.lib.RenderUtil.PlayerResourceManager.PlayerResource;
 import com.arisux.airi.lib.render.ItemRenderer;
+import com.arisux.airi.lib.render.ModelBaseExtension;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.items.model.ModelSniper;
 
 public class RenderSniper extends ItemRenderer
 {
 	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_SNIPER);
+	public static final ModelBaseExtension model = new ModelSniper();
 	private float defaultFOV = mc.gameSettings.getOptionFloatValue(GameSettings.Options.FOV);
 
 	public RenderSniper()
 	{
-		super(new ModelSniper(), resourceLocation);
+		super(model, resourceLocation);
 	}
 
 	@Override

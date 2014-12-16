@@ -55,7 +55,7 @@ public class PlayerModeHandler implements IInitializable
 
 	public void onPlayerLevelUp(EntityPlayer player, int newLevel)
 	{
-		
+		;
 	}
 
 	public static final PlayerModeHandler instance()
@@ -105,11 +105,11 @@ public class PlayerModeHandler implements IInitializable
 
 	public ModelBase getModelForPlayer(EntityPlayer player)
 	{
-		return getModelTexMapForPlayer(player).modelBase;
+		return getModelTexMapForPlayer(player).asModelBase();
 	}
 	
 	public ResourceLocation getResourceForPlayer(EntityPlayer player)
 	{
-		return getModelTexMapForPlayer(player).resourceLocation;
+		return getModelTexMapForPlayer(player).asResourceLocation();
 	}
 }

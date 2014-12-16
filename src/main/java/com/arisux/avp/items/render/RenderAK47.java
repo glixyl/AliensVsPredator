@@ -1,5 +1,7 @@
 package com.arisux.avp.items.render;
 
+import static com.arisux.airi.lib.RenderUtil.bindTexture;
+import static com.arisux.airi.lib.RenderUtil.downloadResource;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -7,19 +9,21 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
-import com.arisux.airi.lib.*;
+import com.arisux.airi.lib.AccessWrapper;
 import com.arisux.airi.lib.RenderUtil.PlayerResourceManager.PlayerResource;
 import com.arisux.airi.lib.render.ItemRenderer;
+import com.arisux.airi.lib.render.ModelBaseExtension;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.items.model.ModelAK47;
 
 public class RenderAK47 extends ItemRenderer
 {
 	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_AK47);
+	public static final ModelBaseExtension model = new ModelAK47();
 
 	public RenderAK47()
 	{
-		super(new ModelAK47(), resourceLocation);
+		super(model, resourceLocation);
 	}
 	
 	@Override
@@ -38,17 +42,17 @@ public class RenderAK47 extends ItemRenderer
 	public void renderThirdPerson(ItemStack item, Object... data)
 	{
 		PlayerResource player = resourceManager.createPlayerResource(((EntityPlayer) data[1]).getCommandSenderName());
-		this.resource = RenderUtil.downloadResource(String.format(AliensVsPredator.settings().getUrlSkinAk47(), player.getUUID()), resourceLocation);
+		this.resource = downloadResource(String.format(AliensVsPredator.settings().getUrlSkinAk47(), player.getUUID()), resourceLocation);
 
 		if (player != null)
 		{
-			mc.renderEngine.bindTexture(RenderUtil.downloadResource(String.format(AliensVsPredator.settings().getUrlSkinAk47(), player.getUUID()), resourceLocation, false));
 			GL11.glTranslatef(0.2F, 0.3F, -0.17F);
 			GL11.glRotatef(97.0F, 1.0F, 0.0F, 0.0F);
 			GL11.glRotatef(130.0F, 0.0F, 1.0F, 0.0F);
 			GL11.glRotatef(80.0F, 0.0F, 0.0F, 1.0F);
 			GL11.glDisable(GL11.GL_CULL_FACE);
 			GL11.glScalef(1.3F, 1.3F, 1.3F);
+			bindTexture(getResourceLocation());
 			this.getModel().render(0.0625F);
 		}
 	}
@@ -56,7 +60,7 @@ public class RenderAK47 extends ItemRenderer
 	@Override
 	public void renderFirstPerson(ItemStack item, Object... data)
 	{
-		this.resource = RenderUtil.downloadResource(String.format(AliensVsPredator.settings().getUrlSkinAk47(), AccessWrapper.getSession().getPlayerID()), resourceLocation);
+		this.resource = downloadResource(String.format(AliensVsPredator.settings().getUrlSkinAk47(), AccessWrapper.getSession().getPlayerID()), resourceLocation);
 
 		if (firstPersonRenderCheck(data[1]))
 		{
@@ -79,7 +83,7 @@ public class RenderAK47 extends ItemRenderer
 
 			float glScale = 2.0F;
 			GL11.glScalef(glScale, glScale, glScale);
-			mc.renderEngine.bindTexture(getResourceLocation());
+			bindTexture(getResourceLocation());
 			this.getModel().render(0.0625F);
 		}
 	}
@@ -87,8 +91,7 @@ public class RenderAK47 extends ItemRenderer
 	@Override
 	public void renderInInventory(ItemStack item, Object... data)
 	{
-		this.resource = RenderUtil.downloadResource(String.format(AliensVsPredator.settings().getUrlSkinAk47(), AccessWrapper.getSession().getPlayerID()), resourceLocation);
-		mc.renderEngine.bindTexture(getResourceLocation());
+		this.resource = downloadResource(String.format(AliensVsPredator.settings().getUrlSkinAk47(), AccessWrapper.getSession().getPlayerID()), resourceLocation);
 
 		GL11.glDisable(GL11.GL_CULL_FACE);
 		GL11.glRotatef(0F, 1.0F, 0.0F, 0.0F);
@@ -97,6 +100,7 @@ public class RenderAK47 extends ItemRenderer
 		GL11.glTranslatef(0F, 5.77F, -20.85F);
 		float glScale = 20F;
 		GL11.glScalef(glScale, glScale, glScale);
+		bindTexture(getResourceLocation());
 		this.getModel().render(0.0625F);
 	}
 }

@@ -9,16 +9,18 @@ import org.lwjgl.opengl.GL11;
 import com.arisux.airi.lib.*;
 import com.arisux.airi.lib.RenderUtil.PlayerResourceManager.PlayerResource;
 import com.arisux.airi.lib.render.ItemRenderer;
+import com.arisux.airi.lib.render.ModelBaseExtension;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.items.model.ModelM56SG;
 
 public class RenderM56SG extends ItemRenderer
 {
 	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_M56SG);
+	public static final ModelBaseExtension model = new ModelM56SG();
 
 	public RenderM56SG()
 	{
-		super(new ModelM56SG(), resourceLocation);
+		super(model, resourceLocation);
 	}
 	
 	@Override
@@ -45,7 +47,6 @@ public class RenderM56SG extends ItemRenderer
 			GL11.glRotatef(95.0F, 1.0F, 0.0F, 0.0F);
 			GL11.glRotatef(120.0F, 0.0F, 1.0F, 0.0F);
 			GL11.glRotatef(80.0F, 0.0F, 0.0F, 1.0F);
-
 			GL11.glDisable(GL11.GL_CULL_FACE);
 			GL11.glScalef(2.0F, 2.0F, 2.0F);
 			this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
