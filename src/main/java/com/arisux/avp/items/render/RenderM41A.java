@@ -11,8 +11,8 @@ import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.*;
 import com.arisux.airi.lib.RenderUtil.PlayerResourceManager.PlayerResource;
-import com.arisux.airi.lib.render.ItemRenderer;
-import com.arisux.airi.lib.render.ModelBaseExtension;
+import com.arisux.airi.lib.client.ItemRenderer;
+import com.arisux.airi.lib.client.ModelBaseExtension;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.items.ItemFirearm;
 import com.arisux.avp.items.model.ModelM41A;
@@ -90,16 +90,19 @@ public class RenderM41A extends ItemRenderer
 			bindTexture(getResourceLocation());
 			this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 
-			GL11.glDisable(GL11.GL_LIGHTING);
-			GL11.glTranslatef(-0.3439F, 0.6F, 0.04F);
-			GL11.glScalef(displayScale, displayScale, displayScale);
-			GL11.glRotatef(90F, 0F, 1F, 0F);
-			RenderUtil.drawRect(-2, -2, 16, 11, 0xFF000000);
-			GL11.glTranslatef(0F, 0F, -0.01F);
-			RenderUtil.glDisableLightMapping();
-			RenderUtil.drawString(getAmmoCountDisplayString(), 0, 0, 0xFFFF0000);
-			GL11.glEnable(GL11.GL_LIGHTING);
-			GL11.glColor4f(1F, 1F, 1F, 1F);
+			if (mc.thePlayer.getCurrentEquippedItem() != null && mc.thePlayer.getCurrentEquippedItem().getItem() instanceof ItemFirearm)
+			{
+				GL11.glDisable(GL11.GL_LIGHTING);
+				GL11.glTranslatef(-0.3439F, 0.6F, 0.04F);
+				GL11.glScalef(displayScale, displayScale, displayScale);
+				GL11.glRotatef(90F, 0F, 1F, 0F);
+				RenderUtil.drawRect(-2, -2, 16, 11, 0xFF000000);
+				GL11.glTranslatef(0F, 0F, -0.01F);
+				RenderUtil.glDisableLightMapping();
+				RenderUtil.drawString(getAmmoCountDisplayString(), 0, 0, 0xFFFF0000);
+				GL11.glEnable(GL11.GL_LIGHTING);
+				GL11.glColor4f(1F, 1F, 1F, 1F);
+			}
 
 			if (mc.thePlayer.inventory.hasItem(AliensVsPredator.instance().items.itemMotionTracker))
 			{
