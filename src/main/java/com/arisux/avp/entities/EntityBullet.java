@@ -3,18 +3,12 @@ package com.arisux.avp.entities;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 
 public class EntityBullet extends Entity
@@ -33,7 +27,7 @@ public class EntityBullet extends Entity
 	private boolean physics;
 	public Entity shootingEntity;
 	public EntityArrow entityarrow;
-	public static double damage;
+	public double damage;
 
 	public EntityBullet(World world)
 	{
@@ -68,11 +62,11 @@ public class EntityBullet extends Entity
 		this.setPosition(d, d1, d2);
 		this.yOffset = 0.0F;
 	}
-
-	public EntityBullet(World world, Entity entity, float f, double damage1)
+	
+	public EntityBullet(World world, Entity entity, float velocity, double damage)
 	{
 		super(world);
-		damage = damage1;
+		this.damage = damage;
 		this.xTile = -1;
 		this.yTile = -1;
 		this.zTile = -1;
@@ -87,18 +81,86 @@ public class EntityBullet extends Entity
 		this.shootingEntity = entity;
 		this.doesArrowBelongToPlayer = entity instanceof EntityPlayer;
 		this.setSize(0.5F, 0.5F);
-		this.setLocationAndAngles(entity.posX, entity.posY + (double) entity.getEyeHeight(), entity.posZ, entity.rotationYaw, entity.rotationPitch);
-		this.posX -= (double) (MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F);
+		this.setLocationAndAngles(entity.posX, entity.posY + entity.getEyeHeight(), entity.posZ, entity.rotationYaw, entity.rotationPitch);
+		this.posX -= MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F;
 		this.posY -= 0.10000000149011612D;
-		this.posZ -= (double) (MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F);
+		this.posZ -= MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F;
 		this.setPosition(this.posX, this.posY, this.posZ);
 		this.yOffset = 0.0F;
-		this.motionX = (double) (-MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI));
-		this.motionZ = (double) (MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI));
-		this.motionY = (double) (-MathHelper.sin(this.rotationPitch / 180.0F * (float) Math.PI));
-		this.setArrowHeading(this.motionX, this.motionY, this.motionZ, f * 1.5F, 1.0F);
+		this.motionX = -MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI);
+		this.motionZ = MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI);
+		this.motionY = (-MathHelper.sin(this.rotationPitch / 180.0F * (float) Math.PI));
+        this.setArrowHeading(this.motionX, this.motionY, this.motionZ, velocity * 1.5F, 1.0F);
 	}
 
+	public EntityBullet(World world, Entity entity, Entity targetEntity, float velocity, double damage)
+	{
+		super(world);
+		this.damage = damage;
+		this.xTile = -1;
+		this.yTile = -1;
+		this.zTile = -1;
+		this.inTile = Blocks.air;
+		this.inData = 0;
+		this.inGround = false;
+		this.physics = true;
+		this.doesArrowBelongToPlayer = false;
+		this.arrowShake = 0;
+		this.ticksInAir = 0;
+		this.arrowCritical = true;
+		this.shootingEntity = entity;
+		this.doesArrowBelongToPlayer = entity instanceof EntityPlayer;
+		this.setSize(0.5F, 0.5F);
+		this.setLocationAndAngles(entity.posX, entity.posY + entity.getEyeHeight(), entity.posZ, entity.rotationYaw, entity.rotationPitch);
+		this.posX -= MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F;
+		this.posY -= 0.10000000149011612D;
+		this.posZ -= MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F;
+		this.setPosition(this.posX, this.posY, this.posZ);
+		this.yOffset = 0.0F;
+		this.motionX = -MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI);
+		this.motionZ = MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI);
+		this.motionY = (-MathHelper.sin(this.rotationPitch / 180.0F * (float) Math.PI));
+		
+        double d0 = targetEntity.posX - entity.posX;
+        double d1 = targetEntity.boundingBox.minY + targetEntity.height / 3.0F - this.posY;
+        double d2 = targetEntity.posZ - entity.posZ;
+        double d3 = MathHelper.sqrt_double(d0 * d0 + d2 * d2);
+
+        if (d3 >= 1.0E-7D)
+        {
+            float f2 = (float)(Math.atan2(d2, d0) * 180.0D / Math.PI) - 90.0F;
+            float f3 = (float)(-(Math.atan2(d1, d3) * 180.0D / Math.PI));
+            double d4 = d0 / d3;
+            double d5 = d2 / d3;
+            this.setLocationAndAngles(entity.posX + d4, this.posY, entity.posZ + d5, f2, f3);
+            this.yOffset = 0.0F;
+            float f4 = (float)d3 * 0.2F;
+            this.setThrowableHeading(d0, d1 + f4, d2, velocity, damage);
+        }
+	}
+	
+    public void setThrowableHeading(double posX, double posY, double posZ, float velocity, double damage)
+    {
+        float f2 = MathHelper.sqrt_double(posX * posX + posY * posY + posZ * posZ);
+        posX /= f2;
+        posY /= f2;
+        posZ /= f2;
+        posX += this.rand.nextGaussian() * (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * damage;
+        posY += this.rand.nextGaussian() * (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * damage;
+        posZ += this.rand.nextGaussian() * (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * damage;
+        posX *= velocity;
+        posY *= velocity;
+        posZ *= velocity;
+        this.motionX = posX;
+        this.motionY = posY;
+        this.motionZ = posZ;
+        float f3 = MathHelper.sqrt_double(posX * posX + posZ * posZ);
+        this.prevRotationYaw = this.rotationYaw = (float)(Math.atan2(posX, posZ) * 180.0D / Math.PI);
+        this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(posY, f3) * 180.0D / Math.PI);
+        this.ticksInGround = 0;
+    }
+
+	@Override
 	protected void entityInit()
 	{
 		;
@@ -107,21 +169,21 @@ public class EntityBullet extends Entity
 	public void setArrowHeading(double d, double d1, double d2, float f, float f1)
 	{
 		float f2 = MathHelper.sqrt_double(d * d + d1 * d1 + d2 * d2);
-		d /= (double) f2;
-		d1 /= (double) f2;
-		d2 /= (double) f2;
-		d += this.rand.nextGaussian() * 0.007499999832361937D * (double) f1;
-		d1 += this.rand.nextGaussian() * 0.007499999832361937D * (double) f1;
-		d2 += this.rand.nextGaussian() * 0.007499999832361937D * (double) f1;
-		d *= (double) f;
-		d1 *= (double) f;
-		d2 *= (double) f;
+		d /= f2;
+		d1 /= f2;
+		d2 /= f2;
+		d += this.rand.nextGaussian() * 0.007499999832361937D * f1;
+		d1 += this.rand.nextGaussian() * 0.007499999832361937D * f1;
+		d2 += this.rand.nextGaussian() * 0.007499999832361937D * f1;
+		d *= f;
+		d1 *= f;
+		d2 *= f;
 		this.motionX = d;
 		this.motionY = d1;
 		this.motionZ = d2;
 		float f3 = MathHelper.sqrt_double(d * d + d2 * d2);
 		this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(d, d2) * 180.0D / Math.PI);
-		this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(d1, (double) f3) * 180.0D / Math.PI);
+		this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(d1, f3) * 180.0D / Math.PI);
 		this.ticksInGround = 0;
 	}
 
@@ -136,7 +198,7 @@ public class EntityBullet extends Entity
 		{
 			float f = MathHelper.sqrt_double(d * d + d2 * d2);
 			this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(d, d2) * 180.0D / Math.PI);
-			this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(d1, (double) f) * 180.0D / Math.PI);
+			this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(d1, f) * 180.0D / Math.PI);
 			this.prevRotationPitch = this.rotationPitch;
 			this.prevRotationYaw = this.rotationYaw;
 			this.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
@@ -157,7 +219,7 @@ public class EntityBullet extends Entity
 		{
 			float i = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
 			this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(this.motionX, this.motionZ) * 180.0D / Math.PI);
-			this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(this.motionY, (double) i) * 180.0D / Math.PI);
+			this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(this.motionY, i) * 180.0D / Math.PI);
 		}
 
 		Block var16 = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
@@ -191,7 +253,7 @@ public class EntityBullet extends Entity
 			if (var18 == Blocks.glass_pane)
 			{
 				this.worldObj.setBlockToAir(this.xTile, this.yTile, this.zTile);
-				this.worldObj.playSoundEffect((double) this.xTile + 0.5D, (double) this.yTile + 0.5D, (double) this.zTile + 0.5D, "random.glass3", 1.0F, 1.0F);
+				this.worldObj.playSoundEffect(this.xTile + 0.5D, this.yTile + 0.5D, this.zTile + 0.5D, "random.glass3", 1.0F, 1.0F);
 				this.shootingEntity.playSound("random.glass1", 1.0F, 1.0F);
 			}
 
@@ -212,9 +274,9 @@ public class EntityBullet extends Entity
 			else
 			{
 				this.inGround = false;
-				this.motionX *= (double) (this.rand.nextFloat() * 0.2F);
-				this.motionY *= (double) (this.rand.nextFloat() * 0.2F);
-				this.motionZ *= (double) (this.rand.nextFloat() * 0.2F);
+				this.motionX *= this.rand.nextFloat() * 0.2F;
+				this.motionY *= this.rand.nextFloat() * 0.2F;
+				this.motionZ *= this.rand.nextFloat() * 0.2F;
 				this.ticksInGround = 0;
 				this.ticksInAir = 0;
 			}
@@ -240,12 +302,12 @@ public class EntityBullet extends Entity
 
 			for (int f3 = 0; f3 < list.size(); ++f3)
 			{
-				Entity f4 = (Entity) list.get(f3);
+				Entity f4 = list.get(f3);
 
 				if (f4.canBeCollidedWith() && (f4 != this.shootingEntity || this.ticksInAir >= 5))
 				{
 					f6 = 0.3F;
-					AxisAlignedBB k1 = f4.boundingBox.expand((double) f6, (double) f6, (double) f6);
+					AxisAlignedBB k1 = f4.boundingBox.expand(f6, f6, f6);
 					MovingObjectPosition f7 = k1.calculateIntercept(var17, vec3d1);
 
 					if (f7 != null)
@@ -283,7 +345,7 @@ public class EntityBullet extends Entity
 					}
 
 					var20 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
-					int var23 = (int) Math.ceil((double) var20 * damage);
+					int var23 = (int) Math.ceil(var20 * damage);
 
 					if (this.arrowCritical)
 					{
@@ -306,7 +368,7 @@ public class EntityBullet extends Entity
 					if (movingobjectposition.entityHit instanceof EntityLivingBase)
 						((EntityLivingBase) movingobjectposition.entityHit).getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.9);
 
-					if (movingobjectposition.entityHit instanceof EntityLivingBase && movingobjectposition.entityHit.attackEntityFrom(var21, (float) var23))
+					if (movingobjectposition.entityHit instanceof EntityLivingBase && movingobjectposition.entityHit.attackEntityFrom(var21, var23))
 					{
 						this.setDead();
 					}
@@ -327,13 +389,13 @@ public class EntityBullet extends Entity
 					this.zTile = movingobjectposition.blockZ;
 					this.inTile = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
 					this.inData = this.worldObj.getBlockMetadata(this.xTile, this.yTile, this.zTile);
-					this.motionX = (double) ((float) (movingobjectposition.hitVec.xCoord - this.posX));
-					this.motionY = (double) ((float) (movingobjectposition.hitVec.yCoord - this.posY));
-					this.motionZ = (double) ((float) (movingobjectposition.hitVec.zCoord - this.posZ));
+					this.motionX = ((float) (movingobjectposition.hitVec.xCoord - this.posX));
+					this.motionY = ((float) (movingobjectposition.hitVec.yCoord - this.posY));
+					this.motionZ = ((float) (movingobjectposition.hitVec.zCoord - this.posZ));
 					var20 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
-					this.posX -= this.motionX / (double) var20 * 0.05000000074505806D;
-					this.posY -= this.motionY / (double) var20 * 0.05000000074505806D;
-					this.posZ -= this.motionZ / (double) var20 * 0.05000000074505806D;
+					this.posX -= this.motionX / var20 * 0.05000000074505806D;
+					this.posY -= this.motionY / var20 * 0.05000000074505806D;
+					this.posZ -= this.motionZ / var20 * 0.05000000074505806D;
 					this.inGround = true;
 					this.arrowShake = 7;
 					this.arrowCritical = false;
@@ -346,7 +408,7 @@ public class EntityBullet extends Entity
 			var20 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
 			this.rotationYaw = (float) (Math.atan2(this.motionX, this.motionZ) * 180.0D / Math.PI);
 
-			for (this.rotationPitch = (float) (Math.atan2(this.motionY, (double) var20) * 180.0D / Math.PI); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F)
+			for (this.rotationPitch = (float) (Math.atan2(this.motionY, var20) * 180.0D / Math.PI); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F)
 			{
 				;
 			}
@@ -393,10 +455,10 @@ public class EntityBullet extends Entity
 
 			if (this.physics)
 			{
-				this.motionX *= (double) var22;
-				this.motionY *= (double) var22;
-				this.motionZ *= (double) var22;
-				this.motionY -= (double) 0.05F;
+				this.motionX *= var22;
+				this.motionY *= var22;
+				this.motionZ *= var22;
+				this.motionY -= 0.05F;
 			}
 			this.setPosition(this.posX, this.posY, this.posZ);
 		}

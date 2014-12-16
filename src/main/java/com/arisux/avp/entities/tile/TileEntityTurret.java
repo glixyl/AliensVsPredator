@@ -279,7 +279,7 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 	{
 		this.isFiring = true;
 		this.firingTimeout = this.maxFiringTimeout;
-		EntityBullet entity = new EntityBullet(this.worldObj, this.getEntity(), 2F, 0.55D);
+		EntityBullet entity = new EntityBullet(this.worldObj, this.getEntity(), this.targetEntity, 2F, 0.55D);
 		entity.setPhysics(false);
 		entity.setLocationAndAngles(entity.posX, entity.posY + 0.0, entity.posZ, entity.rotationYaw, entity.rotationPitch);
 		this.worldObj.spawnEntityInWorld(entity);

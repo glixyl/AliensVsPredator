@@ -201,15 +201,15 @@ public class EntityCombatSynthetic extends EntityCreature implements IMob, IRang
 	}
 
 	@Override
-	public void attackEntityWithRangedAttack(EntityLivingBase entitytoAttack, float f)
+	public void attackEntityWithRangedAttack(EntityLivingBase entityToAttack, float f)
 	{
-		if (entitytoAttack instanceof EntityMob && !entitytoAttack.isDead)
+		if (entityToAttack instanceof EntityMob && !entityToAttack.isDead)
 		{
-			this.getLookHelper().setLookPosition(entitytoAttack.posX, entitytoAttack.posY + entitytoAttack.getEyeHeight(), entitytoAttack.posZ, 10.0F, this.getVerticalFaceSpeed());
+			this.getLookHelper().setLookPosition(entityToAttack.posX, entityToAttack.posY + entityToAttack.getEyeHeight(), entityToAttack.posZ, 10.0F, this.getVerticalFaceSpeed());
 
-			if (this.canEntityBeSeen(entitytoAttack))
+			if (this.canEntityBeSeen(entityToAttack))
 			{
-				this.worldObj.spawnEntityInWorld(new EntityBullet(this.worldObj, this, 1.6F, 0.25D));
+				this.worldObj.spawnEntityInWorld(new EntityBullet(this.worldObj, this, entityToAttack, 1.6F, 0.25D));
 			}
 		}
 	}
