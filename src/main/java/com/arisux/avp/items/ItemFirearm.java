@@ -20,18 +20,18 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemFirearm extends HookedItem
 {
-	public ItemAmmo itemAmmo;
-	public float recoil;
-	public double curCooldown, maxCooldown;
-	public int curAmmo, maxAmmo, maxReload, curReload;
-	public String sound;
+	private ItemAmmo itemAmmo;
+	private float recoil;
+	private double curCooldown, maxCooldown;
+	private int curAmmo, maxAmmo, maxReload, curReload;
+	private String gunfireSound;
 	public boolean cancelRightClick = false;
 
 	public ItemFirearm(int maxAmmo, float recoil, double fireRate, int reloadSpeed, ItemAmmo item, String snd)
 	{
 		super();
 		this.maxStackSize = 1;
-		this.sound = snd;
+		this.gunfireSound = snd;
 		this.recoil = recoil;
 		this.itemAmmo = item;
 		this.maxAmmo = maxAmmo;
@@ -75,7 +75,7 @@ public class ItemFirearm extends HookedItem
 
 		if (this.curAmmo > 0 && this.curCooldown <= 0 && this.curReload <= 0 || par3EntityPlayer.capabilities.isCreativeMode)
 		{
-			par2World.playSoundAtEntity(par3EntityPlayer, this.sound, 0.5F, 1.0F);
+			par2World.playSoundAtEntity(par3EntityPlayer, this.gunfireSound, 0.5F, 1.0F);
 			AliensVsPredator.instance().network.sendToServer(new PacketShootBulletServerUpdate(this.itemAmmo.getInflictionDamage()));
 			this.curCooldown = this.maxCooldown;
 
@@ -134,6 +134,16 @@ public class ItemFirearm extends HookedItem
 	{
 		return curAmmo;
 	}
+	
+	public String getGunfireSound()
+	{
+		return this.gunfireSound;
+	}
+	
+	public double getFirerate()
+	{
+		return this.maxCooldown;
+	}
 
 	@Override
 	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack)
@@ -174,5 +184,10 @@ public class ItemFirearm extends HookedItem
 		{
 			return damage;
 		}
+	}
+
+	public ItemAmmo getAmmoItem()
+	{
+		return itemAmmo;
 	}
 }
