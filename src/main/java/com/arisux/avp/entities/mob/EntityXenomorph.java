@@ -27,7 +27,7 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.8F);
+		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(1F);
 	}
 
 	@Override
