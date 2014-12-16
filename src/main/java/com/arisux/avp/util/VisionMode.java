@@ -3,13 +3,17 @@ package com.arisux.avp.util;
 import static com.arisux.airi.lib.RenderUtil.*;
 import static org.lwjgl.opengl.GL11.*;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.boss.EntityDragon;
+import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.RenderLivingEvent;
 
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.entities.mob.EntitySpeciesAlien;
 import com.arisux.avp.entities.mob.render.RenderXenomorph;
 import com.arisux.avp.event.render.VisionModeRenderEvent;
 
@@ -69,7 +73,7 @@ public enum VisionMode
 		@Override
 		public void renderEntityPre(RenderLivingEvent.Pre event)
 		{
-			if (event.renderer instanceof RenderXenomorph)
+			if (isEntityTypeAllowed(event.entity))
 			{
 				glDisableLight();
 				glDisableLightMapping();
@@ -80,11 +84,26 @@ public enum VisionMode
 		@Override
 		public void renderEntityPost(RenderLivingEvent.Post event)
 		{
-			if (event.renderer instanceof RenderXenomorph)
+			if (isEntityTypeAllowed(event.entity))
 			{
 				glEnableLight();
 				glEnableLightMapping();
 			}
+		}
+		
+		public boolean isEntityTypeAllowed(Entity entity)
+		{
+			Class<?>[] allowedEntityTypes = new Class<?>[]{ EntitySpeciesAlien.class, EntityEnderman.class, EntityDragon.class };
+			
+			for (Class<?> cls : allowedEntityTypes)
+			{
+				if (cls.isInstance(entity))
+				{
+					return true;
+				}
+			}
+			
+			return false;
 		}
 	},
 	THERMAL(2, "Thermal", 0xFFFF0000)
