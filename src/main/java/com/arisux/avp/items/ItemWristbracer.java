@@ -21,7 +21,7 @@ public class ItemWristbracer extends HookedItem
 
 		if (playersWristbracerContainsBlades(player))
 		{
-			entity.attackEntityFrom(DamageSource.causePlayerDamage(player), AliensVsPredator.instance().items.YAUTJA_TOOLS.getDamageVsEntity());
+			entity.attackEntityFrom(DamageSource.causePlayerDamage(player), AliensVsPredator.instance().items.YAUTJA_TOOLS.getDamageVsEntity() * 1.5F);
 
 			if (!player.worldObj.isRemote && !player.capabilities.isCreativeMode)
 			{
