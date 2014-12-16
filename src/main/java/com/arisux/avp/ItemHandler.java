@@ -19,12 +19,12 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 
 public class ItemHandler extends IBHandler implements IInitializable
 {
-	public ArmorMaterial YAUTJA = EnumHelper.addArmorMaterial("YAUTJA", 32, new int[] { 4, 7, 5, 3 }, 9);
-	public ArmorMaterial XENO = EnumHelper.addArmorMaterial("XENO", 30, new int[] { 2, 7, 5, 3 }, 7);
-	public ArmorMaterial TACTICAL = EnumHelper.addArmorMaterial("TACTICAL", 25, new int[] { 2, 6, 3, 2 }, 5);
-	public ArmorMaterial PRESSURESUIT = EnumHelper.addArmorMaterial("PRESSURESUIT", 24, new int[] { 2, 4, 3, 2 }, 6);
-	public ToolMaterial YAUTJA_TOOLS = EnumHelper.addToolMaterial("CELTIC", 12, 1430, 9.0F, 8.0F, 9);
-	public ToolMaterial XENO_TOOLS = EnumHelper.addToolMaterial("XENO", 7, 730, 10.0F, 7.0F, 14);
+	public static final  ArmorMaterial YAUTJA = EnumHelper.addArmorMaterial("YAUTJA", 32, new int[] { 4, 7, 5, 3 }, 9);
+	public static final  ArmorMaterial XENO = EnumHelper.addArmorMaterial("XENO", 30, new int[] { 2, 7, 5, 3 }, 7);
+	public static final  ArmorMaterial TACTICAL = EnumHelper.addArmorMaterial("TACTICAL", 25, new int[] { 2, 6, 3, 2 }, 5);
+	public static final  ArmorMaterial PRESSURESUIT = EnumHelper.addArmorMaterial("PRESSURESUIT", 24, new int[] { 2, 4, 3, 2 }, 6);
+	public static final ToolMaterial YAUTJA_TOOLS = EnumHelper.addToolMaterial("CELTIC", 12, 1430, 9.0F, 8.0F, 9);
+	public static final  ToolMaterial XENO_TOOLS = EnumHelper.addToolMaterial("XENO", 7, 730, 10.0F, 7.0F, 14);
 
 	public Item helmXeno = (new ItemArmorXeno(XENO, 4, 0)),
 		plateXeno = (new ItemArmorXeno(XENO, 4, 1)),
