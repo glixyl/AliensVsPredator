@@ -88,11 +88,8 @@ public class RenderItemSummoner extends ItemRenderer
 		GL11.glEnable(GL11.GL_ALPHA_TEST);
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GL11.glEnable(GL11.GL_CULL_FACE);
-		GL11.glCullFace(GL11.GL_FRONT);
 		RenderUtil.bindTexture(resourceLocation);
 		this.model.render(null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, RenderUtil.DEFAULT_BOX_TRANSLATION);
-		GL11.glCullFace(GL11.GL_BACK);
 	}
 
 	@Override
