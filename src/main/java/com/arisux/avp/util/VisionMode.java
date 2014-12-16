@@ -14,7 +14,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntitySpeciesAlien;
-import com.arisux.avp.entities.mob.render.RenderXenomorph;
+import com.arisux.avp.entities.mob.EntityXenomorph;
 import com.arisux.avp.event.render.VisionModeRenderEvent;
 
 public enum VisionMode
@@ -140,7 +140,7 @@ public enum VisionMode
 		@Override
 		public void renderEntityPre(RenderLivingEvent.Pre event)
 		{
-			if (event.entity.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD && !(event.renderer instanceof RenderXenomorph))
+			if (event.entity.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD && !(event.entity instanceof EntityXenomorph))
 			{
 				glDisableLight();
 				glDisableLightMapping();
