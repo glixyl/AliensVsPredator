@@ -27,7 +27,7 @@ public class ContainerWristbracer extends Container
 		{
 			addSlotToContainer(new Slot(inventory, x, 31 + (28 * x), 16));
 		}
-		
+
 		for (byte x = 0; x < 9; x++)
 		{
 			addSlotToContainer(new Slot(player.inventory, x, 15 + (18 * x), 136));
@@ -38,30 +38,35 @@ public class ContainerWristbracer extends Container
 
 	public NBTTagCompound saveToNBT()
 	{
-		NBTTagCompound nbt = player.getCurrentEquippedItem().getTagCompound();
-		NBTTagList items = new NBTTagList();
-		
-		if (nbt == null)
+		if (player.getCurrentEquippedItem() != null)
 		{
-			nbt = new NBTTagCompound();
-		}
+			NBTTagCompound nbt = player.getCurrentEquippedItem().getTagCompound();
+			NBTTagList items = new NBTTagList();
 
-		for (byte x = 0; x < this.inventory.getSizeInventory(); x++)
-		{
-			ItemStack stackSlot = this.inventory.getStackInSlot(x);
-
-			if (stackSlot != null)
+			if (nbt == null)
 			{
-				NBTTagCompound item = new NBTTagCompound();
-				item.setByte("Slot", x);
-				stackSlot.writeToNBT(item);
-				items.appendTag(item);
+				nbt = new NBTTagCompound();
 			}
-		}
 
-		nbt.setTag("Items", items);
-		player.getCurrentEquippedItem().setTagCompound(nbt);
-		return nbt;
+			for (byte x = 0; x < this.inventory.getSizeInventory(); x++)
+			{
+				ItemStack stackSlot = this.inventory.getStackInSlot(x);
+
+				if (stackSlot != null)
+				{
+					NBTTagCompound item = new NBTTagCompound();
+					item.setByte("Slot", x);
+					stackSlot.writeToNBT(item);
+					items.appendTag(item);
+				}
+			}
+
+			nbt.setTag("Items", items);
+			player.getCurrentEquippedItem().setTagCompound(nbt);
+			return nbt;
+		}
+		
+		return null;
 	}
 
 	public NBTTagCompound loadFromNBT()
@@ -91,7 +96,7 @@ public class ContainerWristbracer extends Container
 	{
 		return true;
 	}
-	
+
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int i)
 	{
@@ -110,11 +115,13 @@ public class ContainerWristbracer extends Container
 					return null;
 
 				}
-			} else if (i != 36 || !this.mergeItemStack(stack, 36, 36 + (this.inventory.getSizeInventory() - 1), false))
+			}
+			else if (i != 36 || !this.mergeItemStack(stack, 36, 36 + (this.inventory.getSizeInventory() - 1), false))
 			{
 				return null;
 
-			} else
+			}
+			else
 			{
 				return null;
 			}
@@ -122,7 +129,8 @@ public class ContainerWristbracer extends Container
 			if (stack.stackSize == 0)
 			{
 				slot.putStack(null);
-			} else
+			}
+			else
 			{
 				slot.onSlotChanged();
 			}
@@ -134,7 +142,7 @@ public class ContainerWristbracer extends Container
 
 		return null;
 	}
-	
+
 	@Override
 	public void onContainerClosed(EntityPlayer player)
 	{
