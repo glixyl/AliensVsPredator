@@ -26,9 +26,9 @@ public class RenderAcidPool extends Render
 		{
 			GL11.glDisable(GL11.GL_LIGHTING);
 			GL11.glEnable(GL11.GL_BLEND);
-			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
-			RenderUtil.glDisableLightMapping();
-			this.bindTexture(resourceLocation);
+	        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
+	        RenderUtil.glDisableLightMapping();
+			bindTexture(resourceLocation);
 			float offset = 1.4F;
 			double renderX = entity.lastTickPosX + (entity.posX - entity.lastTickPosX) * renderPartialTicks;
 			double renderY = entity.lastTickPosY + (entity.posY - entity.lastTickPosY) * renderPartialTicks + entity.getShadowSize();
@@ -37,7 +37,8 @@ public class RenderAcidPool extends Render
 			double partialY = posY - renderY;
 			double partialZ = posZ - renderZ;
 			tessellator.startDrawingQuads();
-			
+			tessellator.setColorRGBA_F(0.5F, 1.0F, 0F, 1F);
+
 			for (int blockX = MathHelper.floor_double(renderX - offset); blockX <= MathHelper.floor_double(renderX + offset); ++blockX)
 			{
 				for (int blockY = MathHelper.floor_double(renderY - offset); blockY <= MathHelper.floor_double(renderY); ++blockY)
@@ -45,8 +46,8 @@ public class RenderAcidPool extends Render
 					for (int blockZ = MathHelper.floor_double(renderZ - offset); blockZ <= MathHelper.floor_double(renderZ + offset); ++blockZ)
 					{
 						Block block = Minecraft.getMinecraft().thePlayer.worldObj.getBlock(blockX, blockY - 1, blockZ);
-
-						if (block != Blocks.air && Minecraft.getMinecraft().thePlayer.worldObj.getBlockLightValue(blockX, blockY, blockZ) > 3)
+						
+						if (block != Blocks.air)
 						{
 							this.renderImageOnBlock(block, posX, posY + entity.getShadowSize(), posZ, blockX, blockY, blockZ, yaw, offset, partialX, partialY + entity.getShadowSize(), partialZ, entity.ticksExisted);
 						}
@@ -57,8 +58,7 @@ public class RenderAcidPool extends Render
 			tessellator.draw();
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			GL11.glDisable(GL11.GL_BLEND);
-			GL11.glDisable(GL11.GL_LIGHTING);
-			RenderUtil.glEnableLightMapping();
+			GL11.glEnable(GL11.GL_LIGHTING);
 		}
 		GL11.glPopMatrix();
 	}
@@ -76,15 +76,14 @@ public class RenderAcidPool extends Render
 			float u2 = (float) ((posX - x2) / 2.0D / offset + 0.5D);
 			float v1 = (float) ((posZ - z1) / 2.0D / offset + 0.5D);
 			float v2 = (float) ((posZ - z2) / 2.0D / offset + 0.5D);
-			
+
 			GL11.glPushMatrix();
 			{
 				GL11.glRotatef(yaw, 0F, 1F, 0F);
-				tessellator.setColorRGBA_F(0.8F, 1.0F, 0.0F, opacity);
-			    tessellator.addVertexWithUV(x1, y, z1, u1, v1);
-			    tessellator.addVertexWithUV(x1, y, z2, u1, v2);
-			    tessellator.addVertexWithUV(x2, y, z2, u2, v2);
-			    tessellator.addVertexWithUV(x2, y, z1, u2, v1);
+				tessellator.addVertexWithUV(x1, y, z1, u1, v1);
+				tessellator.addVertexWithUV(x1, y, z2, u1, v2);
+				tessellator.addVertexWithUV(x2, y, z2, u2, v2);
+				tessellator.addVertexWithUV(x2, y, z1, u2, v1);
 			}
 			GL11.glPopMatrix();
 		}

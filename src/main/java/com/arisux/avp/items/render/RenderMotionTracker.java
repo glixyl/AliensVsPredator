@@ -11,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.RenderUtil;
-import com.arisux.airi.lib.render.ItemRenderer;
+import com.arisux.airi.lib.client.ItemRenderer;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.items.model.ModelMotionTracker;
 

@@ -3,7 +3,7 @@ package com.arisux.avp.entities.mob.model;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-import com.arisux.airi.lib.render.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseExtension;
 
 public class ModelAqua extends ModelBaseExtension
 {

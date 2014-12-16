@@ -3,7 +3,7 @@ package com.arisux.avp.util;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.stats.Achievement;
 
-import com.arisux.airi.lib.render.ModelTexMap;
+import com.arisux.airi.lib.client.ModelTexMap;
 
 public class PlayerModeLevelMapping
 {

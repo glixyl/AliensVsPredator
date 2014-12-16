@@ -3,7 +3,7 @@ package com.arisux.avp.util;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.util.ResourceLocation;
 
-import com.arisux.airi.lib.render.ModelTexMap;
+import com.arisux.airi.lib.client.ModelTexMap;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.model.*;
 import com.arisux.avp.entities.mob.render.*;

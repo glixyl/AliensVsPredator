@@ -1,6 +1,6 @@
 package com.arisux.avp.util;
 
-import com.arisux.airi.lib.render.ModelTexMap;
+import com.arisux.airi.lib.client.ModelTexMap;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.items.ItemFirearm;
 import com.arisux.avp.items.render.*;
@@ -16,18 +16,18 @@ public enum MarineTypes
 	SNIPER(3, (ItemFirearm) AliensVsPredator.instance().items.itemSniper),
 	M56SG(4, (ItemFirearm) AliensVsPredator.instance().items.itemM56SG);
 
-	private int value;
+	private int id;
 	private ItemFirearm itemFirearm;
 
-	private MarineTypes(int value, ItemFirearm itemFirearm)
+	private MarineTypes(int id, ItemFirearm itemFirearm)
 	{
-		this.value = value;
+		this.id = id;
 		this.itemFirearm = itemFirearm;
 	}
 
 	public int getValue()
 	{
-		return value;
+		return id;
 	}
 
 	public String getGunfireSound()
@@ -38,6 +38,19 @@ public enum MarineTypes
 	public ItemFirearm getFirearmItem()
 	{
 		return itemFirearm;
+	}
+	
+	public static MarineTypes getTypeForId(int id)
+	{
+		for (MarineTypes type : values())
+		{
+			if (type.id == id)
+			{
+				return type;
+			}
+		}
+		
+		return null;
 	}
 	
 	@SideOnly(Side.CLIENT)

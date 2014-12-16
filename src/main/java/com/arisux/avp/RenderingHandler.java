@@ -6,9 +6,9 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.MinecraftForgeClient;
 
+import com.arisux.airi.lib.client.ItemRenderer;
 import com.arisux.airi.lib.interfaces.IInitializablePost;
 import com.arisux.airi.lib.interfaces.IInitializablePre;
-import com.arisux.airi.lib.render.ItemRenderer;
 import com.arisux.avp.block.render.RenderTypeAngled;
 import com.arisux.avp.entities.*;
 import com.arisux.avp.entities.mob.*;

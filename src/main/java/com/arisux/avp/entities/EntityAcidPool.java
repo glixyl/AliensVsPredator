@@ -1,5 +1,7 @@
 package com.arisux.avp.entities;
 
+import java.util.ArrayList;
+
 import net.minecraft.entity.*;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,9 +11,14 @@ import net.minecraft.world.World;
 
 import com.arisux.avp.damagesource.DamageSourceAcid;
 import com.arisux.avp.entities.ai.EntityAIMeltBlock;
+import com.arisux.avp.entities.mob.EntitySpeciesAlien;
 
 public class EntityAcidPool extends EntityCreature implements IMob
 {
+	private int lifetime = 600;
+	private ArrayList<Class<? extends Entity>> targetList = new ArrayList<Class<? extends Entity>>();
+	private ArrayList<Class<? extends Entity>> safeList = new ArrayList<Class<? extends Entity>>();
+	
 	public EntityAcidPool(World world)
 	{
 		super(world);
@@ -19,7 +26,36 @@ public class EntityAcidPool extends EntityCreature implements IMob
 		this.ignoreFrustumCheck = true;
 		this.setSize(0.08F, 0.08F);
 		this.tasks.addTask(0, new EntityAIMeltBlock(this, -1));
+		this.applyTargets();
 	}
+	
+	private void applyTargets()
+	{
+		safeList.add(EntitySpeciesAlien.class);
+		safeList.add(EntityAcidPool.class);
+	}
+
+	public boolean isAcceptableTarget(Entity entity)
+	{
+		for (Class<? extends Entity> entityClass : safeList)
+		{
+			if (entityClass.isInstance(entity))
+			{
+				return false;
+			}
+		}
+
+		for (Class<? extends Entity> entityClass : targetList)
+		{
+			if (entityClass.isInstance(entity))
+			{
+				return true;
+			}
+		}
+
+		return true;
+	}
+
 
 	@Override
 	protected void entityInit()
@@ -64,6 +100,11 @@ public class EntityAcidPool extends EntityCreature implements IMob
 	{
 		return true;
 	}
+	
+	public float getAcidIntensity()
+	{
+		return 1F - (1F / this.getLifetime() / (1F / this.ticksExisted));
+	}
 
 	@Override
 	public void onUpdate()
@@ -72,13 +113,13 @@ public class EntityAcidPool extends EntityCreature implements IMob
 
 		if (!this.worldObj.isRemote)
 		{
-			double range = 0.7;
-			EntityPlayer targetPlayer = (EntityPlayer) (this.worldObj.findNearestEntityWithinAABB(EntityPlayer.class, this.boundingBox.expand(range * 2, 0.1D, range * 2), this));
+			double range = 1.2;
+			EntityLivingBase target = (EntityLivingBase) (this.worldObj.findNearestEntityWithinAABB(EntityLivingBase.class, this.boundingBox.expand(range, 0.1D, range), this));
 
-			if (targetPlayer != null)
+			if (target != null && isAcceptableTarget(target))
 			{
-				this.setAttackTarget(targetPlayer);
-				targetPlayer.attackEntityFrom(DamageSourceAcid.causeAcidicDamage(this, targetPlayer), 4F);
+				this.setAttackTarget(target);
+				target.attackEntityFrom(DamageSourceAcid.causeAcidicDamage(this, target), 4F);
 			}
 		}
 
@@ -89,7 +130,7 @@ public class EntityAcidPool extends EntityCreature implements IMob
 
 		if (!this.worldObj.isRemote)
 		{
-			if (this.ticksExisted > 600)
+			if (this.ticksExisted > this.lifetime)
 			{
 				 this.setDead();
 			}
@@ -110,5 +151,10 @@ public class EntityAcidPool extends EntityCreature implements IMob
 	protected void attackEntity(Entity entity, float f)
 	{
 		super.attackEntity(entity, f);
+	}
+	
+	public int getLifetime()
+	{
+		return lifetime;
 	}
 }
