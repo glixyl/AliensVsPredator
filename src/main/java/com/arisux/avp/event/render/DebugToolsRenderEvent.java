@@ -3,8 +3,7 @@ package com.arisux.avp.event.render;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.*;
 import net.minecraft.entity.item.EntityItemFrame;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -25,7 +24,7 @@ import cpw.mods.fml.common.gameevent.TickEvent.RenderTickEvent;
 public class DebugToolsRenderEvent
 {
 	private Minecraft mc = Minecraft.getMinecraft();
-	
+
 	@SubscribeEvent
 	public void renderTick(RenderTickEvent event)
 	{
@@ -48,7 +47,8 @@ public class DebugToolsRenderEvent
 							if (entity instanceof EntityLivingBase)
 							{
 								RenderUtil.drawProgressBar((int) ((EntityLivingBase) entity).getHealth() + "/" + (int) ((EntityLivingBase) entity).getMaxHealth(), (int) ((EntityLivingBase) entity).getMaxHealth(), (int) ((EntityLivingBase) entity).getHealth(), 10, 7, RenderUtil.scaledDisplayResolution().getScaledWidth() - 20, 1, 0, 0xFF00AAFF, false);
-							} else
+							}
+							else
 							{
 								RenderUtil.drawProgressBar("NULL / NULL", 1, 1, 10, 7, RenderUtil.scaledDisplayResolution().getScaledWidth() - 20, 1, 0, 0xFF777777, false);
 							}
@@ -63,6 +63,7 @@ public class DebugToolsRenderEvent
 							int subMenuY = 50;
 							int subMenuPadding = 10;
 
+							if (entity != null)
 							{
 								Gui.drawRect(subMenuX, 50, RenderUtil.scaledDisplayResolution().getScaledWidth(), RenderUtil.scaledDisplayResolution().getScaledHeight(), 0xBB000000);
 
@@ -76,13 +77,26 @@ public class DebugToolsRenderEvent
 								fontrenderer.drawStringWithShadow("Width: " + entity.width, subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
 								fontrenderer.drawStringWithShadow("Height: " + entity.height, subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
 
+								if (entity instanceof EntityLiving)
+								{
+									fontrenderer.drawStringWithShadow("AttackTarget: " + ((EntityLiving) entity).getAttackTarget(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
+									fontrenderer.drawStringWithShadow("AttackTarget(Distance): " + (((EntityLiving) entity).getAttackTarget() != null ? entity.getDistanceToEntity(((EntityLiving) entity).getAttackTarget()) : 0), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
+									fontrenderer.drawStringWithShadow("LastAttacked: " + ((EntityLiving) entity).getLastAttackerTime(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
+									fontrenderer.drawStringWithShadow("LastAttacker: " + ((EntityLiving) entity).getLastAttacker(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
+									fontrenderer.drawStringWithShadow("Armor: " + ((EntityLiving) entity).getTotalArmorValue(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
+									fontrenderer.drawStringWithShadow("FireImmunity: " + ((EntityLiving) entity).isImmuneToFire, subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
+								}
+								
 								if (entity instanceof EntityXenomorph)
 								{
 									fontrenderer.drawStringWithShadow("Kills: " + ((EntityXenomorph) entity).getKilledEntities(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
 									fontrenderer.drawStringWithShadow("HiveSignature: " + ((EntityXenomorph) entity).getHiveSignature(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
-								} else if (entity instanceof EntityMarine)
+									fontrenderer.drawStringWithShadow("BesideClimbableBlock: " + ((EntityXenomorph) entity).isBesideClimbableBlock(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
+								}
+								else if (entity instanceof EntityMarine)
 								{
-									fontrenderer.drawStringWithShadow("Enum: " + ((EntityMarine) entity).getMarineType(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
+									fontrenderer.drawStringWithShadow("Type: " + ((EntityMarine) entity).getMarineType(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
+									fontrenderer.drawStringWithShadow("IsFiring: " + ((EntityMarine) entity).isFiring(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
 								}
 
 								if (entity instanceof Entity)
@@ -121,32 +135,33 @@ public class DebugToolsRenderEvent
 							if (Blocks.getDomain(block).equals("minecraft:"))
 							{
 								info = block.getLocalizedName();
-							} else
+							}
+							else
 							{
 								info = block.getLocalizedName() + " from " + ModUtil.getModContainerForId(Blocks.getDomain(block).replace(":", "")).getName();
 							}
-							
+
 							if (block.getRenderType() != 0)
 							{
 								info = info + " (Render Type: " + block.getRenderType() + ")";
 							}
-							
+
 							if (side != null)
 							{
 								info = info + " (Direction: " + ForgeDirection.getOrientation(side.getId()) + ")";
 							}
-							
+
 							if (tile instanceof TileEntity)
 							{
 								info = info + " (" + tile.getClass().getSimpleName() + tile.toString().replace(tile.getClass().getName(), "") + ")";
 							}
-							
+
 							if (tile instanceof PoweredTileEntity)
 							{
 								PoweredTileEntity poweredTile = (PoweredTileEntity) tile;
-								info = info + " (" + ((float)poweredTile.getVoltage()) + "V & " + poweredTile.getAmperage() + "A)";
+								info = info + " (" + ((float) poweredTile.getVoltage()) + "V & " + poweredTile.getAmperage() + "A)";
 							}
-							
+
 							fontrenderer.drawString(info, 20, 6, 0xFFFFFFFF);
 						}
 					}

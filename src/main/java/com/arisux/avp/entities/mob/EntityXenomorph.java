@@ -55,20 +55,20 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 		return this.isBesideClimbableBlock();
 	}
 
-	public void setBesideClimbableBlock(boolean par1)
+	public void setBesideClimbableBlock(boolean climbable)
 	{
-		byte b0 = this.dataWatcher.getWatchableObjectByte(16);
+		byte byteClimbing = this.dataWatcher.getWatchableObjectByte(16);
 
-		if (par1)
+		if (climbable)
 		{
-			b0 = (byte) (b0 | 1);
+			byteClimbing = (byte) (byteClimbing | 1);
 		}
 		else
 		{
-			b0 &= -2;
+			byteClimbing &= -2;
 		}
 
-		this.dataWatcher.updateObject(16, Byte.valueOf(b0));
+		this.dataWatcher.updateObject(16, Byte.valueOf(byteClimbing));
 	}
 
 	@Override
