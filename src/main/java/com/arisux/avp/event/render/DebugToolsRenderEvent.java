@@ -84,7 +84,7 @@ public class DebugToolsRenderEvent
 									fontrenderer.drawStringWithShadow("LastAttacked: " + ((EntityLiving) entity).getLastAttackerTime(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
 									fontrenderer.drawStringWithShadow("LastAttacker: " + ((EntityLiving) entity).getLastAttacker(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
 									fontrenderer.drawStringWithShadow("Armor: " + ((EntityLiving) entity).getTotalArmorValue(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
-									fontrenderer.drawStringWithShadow("FireImmunity: " + ((EntityLiving) entity).isImmuneToFire, subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
+									fontrenderer.drawStringWithShadow("FireImmunity: " + ((EntityLiving) entity).isImmuneToFire(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
 								}
 								
 								if (entity instanceof EntityXenomorph)
