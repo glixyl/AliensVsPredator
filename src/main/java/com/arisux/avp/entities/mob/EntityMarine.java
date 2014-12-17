@@ -12,6 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
 import com.arisux.airi.lib.WorldUtil.Entities;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.EntityAcidPool;
@@ -24,6 +25,8 @@ public class EntityMarine extends EntityCreature implements IMob, IRangedAttackM
 	private ArrayList<Class<? extends Entity>> targetList = new ArrayList<Class<? extends Entity>>();
 	private ArrayList<Class<? extends Entity>> safeList = new ArrayList<Class<? extends Entity>>();
 	private EntityAIBase aiRangedAttack;
+	private boolean isFiring;
+	private long lastShotFired;
 
 	public EntityMarine(World world)
 	{
@@ -32,7 +35,7 @@ public class EntityMarine extends EntityCreature implements IMob, IRangedAttackM
 		this.aiRangedAttack = new EntityAIArrowAttack(this, 0.4D, (int) getMarineType().getFirearmItem().getFirerate(), 24);
 		this.experienceValue = 5;
 		this.dataWatcher.addObject(18, new Integer(15));
-		this.dataWatcher.addObject(17, "");
+		this.dataWatcher.addObject(17, "false");
 		this.dataWatcher.addObject(16, Byte.valueOf((byte) 0));
 		this.tasks.addTask(1, this.aiRangedAttack);
 		this.tasks.addTask(2, new EntityAIWander(this, this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue()));
@@ -152,33 +155,43 @@ public class EntityMarine extends EntityCreature implements IMob, IRangedAttackM
 	public void onUpdate()
 	{
 		super.onUpdate();
+		this.isFiring = !(System.currentTimeMillis() - getLastShotFired() >= 1000 * 3);
 
-		if (this.getAttackTarget() != null && this.getAttackTarget().isDead)
+		if (!this.worldObj.isRemote)
+		{
+			this.getDataWatcher().updateObject(17, String.valueOf(this.isFiring));
+		}
+
+		if (this.worldObj.isRemote)
+		{
+			this.isFiring = Boolean.parseBoolean(getDataWatcher().getWatchableObjectString(17));
+		}
+
+		if (this.getAttackTarget() != null && (this.getAttackTarget().isDead || !isAcceptableTarget(this.getAttackTarget()) || this.getNavigator().tryMoveToEntityLiving(this.getAttackTarget(), this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue()) || !Entities.canEntityBeSeenBy(this.getAttackTarget(), this)))
 		{
 			this.setAttackTarget(null);
 		}
 
-		if (this.getAttackTarget() == null || this.getAttackTarget().isDead || this.getAttackTarget() != null && !Entities.canEntityBeSeenBy(this.getAttackTarget(), this))
+		if (this.getAttackTarget() == null)
 		{
-			for (Class<? extends Entity> cls : this.targetList)
-			{
-				EntityLivingBase foundEntity = (EntityLivingBase) (this.worldObj.findNearestEntityWithinAABB(cls, this.boundingBox.expand(32D * 2, 64.0D, 32D * 2), this));
+			@SuppressWarnings("all")
+			ArrayList<EntityLivingBase> possibleTargets = (ArrayList<EntityLivingBase>) Entities.getEntitiesInCoordsRange(this.worldObj, EntityLivingBase.class, new CoordData(this), 32, 32);
+			EntityLivingBase target = null;
 
-				if (foundEntity != null)
+			for (EntityLivingBase possibleTarget : possibleTargets)
+			{
+				if (possibleTarget != null && isAcceptableTarget(possibleTarget) && this.getNavigator().tryMoveToEntityLiving(possibleTarget, 0.65D))
 				{
-					if (isAcceptableTarget(foundEntity))
+					if (this.getEntitySenses().canSee(possibleTarget))
 					{
-						this.setAttackTarget(foundEntity);
+						target = possibleTarget;
 					}
 				}
 			}
-		}
 
-		if (this.getAttackTarget() != null)
-		{
-			if (this.getAttackTarget().getDistanceToEntity(this) > 20 || Entities.canEntityBeSeenBy(this.getAttackTarget(), this))
+			if (target != null)
 			{
-				this.getNavigator().tryMoveToEntityLiving(this.getAttackTarget(), this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue());
+				this.setAttackTarget(target);
 			}
 		}
 	}
@@ -188,13 +201,21 @@ public class EntityMarine extends EntityCreature implements IMob, IRangedAttackM
 	{
 		if (this.getAttackTarget() != null)
 		{
-			if (this.getEntitySenses().canSee(this.getAttackTarget()))
-			{
-				EntityBullet entityBullet = new EntityBullet(this.worldObj, this, targetEntity, 10F, 0.0000001F);
-				this.worldObj.spawnEntityInWorld(entityBullet);
-				this.playSound(getMarineType().getGunfireSound(), 0.7F, 1F);
-				this.worldObj.spawnParticle("largesmoke", this.posX, this.posY + this.getEyeHeight(), this.posZ, 1, 1, 1);
-			}
+			this.lastShotFired = System.currentTimeMillis();
+			EntityBullet entityBullet = new EntityBullet(this.worldObj, this, targetEntity, 10F, 0.0000001F);
+			this.worldObj.spawnEntityInWorld(entityBullet);
+			this.playSound(getMarineType().getGunfireSound(), 0.7F, 1F);
+			this.worldObj.spawnParticle("largesmoke", this.posX, this.posY + this.getEyeHeight(), this.posZ, 1, 1, 1);
 		}
+	}
+
+	public boolean isFiring()
+	{
+		return isFiring;
+	}
+
+	public long getLastShotFired()
+	{
+		return lastShotFired;
 	}
 }
