@@ -47,7 +47,14 @@ public class RenderMarine extends RenderLiving
 		GL11.glPushMatrix();
 		{
 			this.model.bipedRightArm.postRender(RenderUtil.DEFAULT_BOX_TRANSLATION);
-			this.model.aimedBow = true;
+			if (entity.isFiring())
+			{
+				this.model.aimedBow = true;
+			}
+			else
+			{
+				this.model.aimedBow = false;
+			}
 			GL11.glTranslatef(-0.35F, 0.8F, -0.85F);
 			GL11.glRotatef(270.0F, 1.0F, 0.0F, 0.0F);
 			GL11.glRotatef(0.0F, 0.0F, 1.0F, 0.0F);
