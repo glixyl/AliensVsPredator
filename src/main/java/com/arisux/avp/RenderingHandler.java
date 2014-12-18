@@ -60,7 +60,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		RenderingRegistry.registerEntityRenderingHandler(EntityRoyalFacehugger.class, new RenderRoyalFacehugger(new ModelFacehugger(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityChestburster.class, new RenderChestburster(new ModelChestburster(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityOvamorph.class, new RenderOvamorph(new ModelOvamorph(), 0.5F));
-		RenderingRegistry.registerEntityRenderingHandler(EntitySpear.class, new RenderTitaniumSpear());
+		RenderingRegistry.registerEntityRenderingHandler(EntitySpear.class, new RenderSpear());
 		RenderingRegistry.registerEntityRenderingHandler(EntityProximityMine.class, new RenderSnowball(AliensVsPredator.instance().items.itemProximityMine));
 		RenderingRegistry.registerEntityRenderingHandler(EntityGrenade.class, new RenderSnowball(AliensVsPredator.instance().items.itemGrenade, 0));
 		RenderingRegistry.registerEntityRenderingHandler(EntityFlame.class, new RenderFlame());

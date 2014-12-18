@@ -20,16 +20,15 @@ public class EntitySpear extends Entity
 	private int xTile = -1;
 	private int yTile = -1;
 	private int zTile = -1;
-	private Block inTile = Blocks.air;
 	private int inData = 0;
+	private int ticksInAir = 0;
+	public int spearShake = 0;
+	private float lastDamage;
 	private boolean inGround = false;
 	public boolean doesArrowBelongToPlayer = false;
-	public int arrowShake = 0;
-	public Entity shootingEntity;
-	private int ticksInGround;
-	private int ticksInAir = 0;
-	private float lastDamage;
 	public boolean arrowCritical = false;
+	private Block inTile = Blocks.air;
+	public Entity shootingEntity;
 
 	public EntitySpear(World world)
 	{
@@ -37,21 +36,21 @@ public class EntitySpear extends Entity
 		this.setSize(0.5F, 0.5F);
 	}
 
-	public EntitySpear(World world, double d, double d1, double d2)
+	public EntitySpear(World world, double posX, double posY, double posZ)
 	{
 		super(world);
 		this.setSize(0.5F, 0.5F);
-		this.setPosition(d, d1, d2);
+		this.setPosition(posX, posY, posZ);
 		this.yOffset = 0.0F;
 	}
 
-	public EntitySpear(World world, EntityLivingBase entityliving, float f, float lastDamage)
+	public EntitySpear(World world, EntityLivingBase target, float velocity, float lastDamage)
 	{
 		super(world);
-		this.shootingEntity = entityliving;
-		this.doesArrowBelongToPlayer = entityliving instanceof EntityPlayer;
+		this.shootingEntity = target;
+		this.doesArrowBelongToPlayer = target instanceof EntityPlayer;
 		this.setSize(0.5F, 0.5F);
-		this.setLocationAndAngles(entityliving.posX, entityliving.posY + entityliving.getEyeHeight(), entityliving.posZ, entityliving.rotationYaw, entityliving.rotationPitch);
+		this.setLocationAndAngles(target.posX, target.posY + target.getEyeHeight(), target.posZ, target.rotationYaw, target.rotationPitch);
 		this.posX -= MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F;
 		this.posY -= 0.10000000149011612D;
 		this.posZ -= MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F;
@@ -60,7 +59,7 @@ public class EntitySpear extends Entity
 		this.motionX = -MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI);
 		this.motionZ = MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI);
 		this.motionY = (-MathHelper.sin(this.rotationPitch / 180.0F * (float) Math.PI));
-		this.setArrowHeading(this.motionX, this.motionY, this.motionZ, f * 1.5F, 1.0F);
+		this.setHeading(this.motionX, this.motionY, this.motionZ, velocity * 1.5F, 1.0F);
 		this.lastDamage = lastDamage;
 	}
 
@@ -70,43 +69,40 @@ public class EntitySpear extends Entity
 		;
 	}
 
-	public void setArrowHeading(double d, double d1, double d2, float f, float f1)
+	public void setHeading(double motionX, double motionY, double motionZ, float velocity, float gravity)
 	{
-		float f2 = MathHelper.sqrt_double(d * d + d1 * d1 + d2 * d2);
-		d /= f2;
-		d1 /= f2;
-		d2 /= f2;
-		d += this.rand.nextGaussian() * 0.007499999832361937D * f1;
-		d1 += this.rand.nextGaussian() * 0.007499999832361937D * f1;
-		d2 += this.rand.nextGaussian() * 0.007499999832361937D * f1;
-		d *= f;
-		d1 *= f;
-		d2 *= f;
-		this.motionX = d * 1.1D;
-		this.motionY = d1 * 1.1D;
-		this.motionZ = d2 * 1.1D;
-		float f3 = MathHelper.sqrt_double(d * d + d2 * d2);
-		this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(d, d2) * 180.0D / Math.PI);
-		this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(d1, f3) * 180.0D / Math.PI);
-		this.ticksInGround = 0;
+		float divider = MathHelper.sqrt_double(motionX * motionX + motionY * motionY + motionZ * motionZ);
+		motionX /= divider;
+		motionY /= divider;
+		motionZ /= divider;
+		motionX += this.rand.nextGaussian() * 0.007499999832361937D * gravity;
+		motionY += this.rand.nextGaussian() * 0.007499999832361937D * gravity;
+		motionZ += this.rand.nextGaussian() * 0.007499999832361937D * gravity;
+		motionX *= velocity;
+		motionY *= velocity;
+		motionZ *= velocity;
+		this.motionX = motionX * 1.1D;
+		this.motionY = motionY * 1.1D;
+		this.motionZ = motionZ * 1.1D;
+		this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(motionX, motionZ) * 180.0D / Math.PI);
+		this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(motionY, MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ)) * 180.0D / Math.PI);
 	}
 
 	@Override
-	public void setVelocity(double d, double d1, double d2)
+	public void setVelocity(double motionX, double motionY, double motionZ)
 	{
-		this.motionX = d;
-		this.motionY = d1;
-		this.motionZ = d2;
+		this.motionX = motionX;
+		this.motionY = motionY;
+		this.motionZ = motionZ;
 
 		if (this.prevRotationPitch == 0.0F && this.prevRotationYaw == 0.0F)
 		{
-			float f = MathHelper.sqrt_double(d * d + d2 * d2);
-			this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(d, d2) * 180.0D / Math.PI);
-			this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(d1, f) * 180.0D / Math.PI);
+			float f = MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ);
+			this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(motionX, motionZ) * 180.0D / Math.PI);
+			this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(motionY, f) * 180.0D / Math.PI);
 			this.prevRotationPitch = this.rotationPitch;
 			this.prevRotationYaw = this.rotationYaw;
 			this.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
-			this.ticksInGround = 0;
 		}
 	}
 
@@ -118,17 +114,16 @@ public class EntitySpear extends Entity
 
 		if (this.prevRotationPitch == 0.0F && this.prevRotationYaw == 0.0F)
 		{
-			float i = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
 			this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(this.motionX, this.motionZ) * 180.0D / Math.PI);
-			this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(this.motionY, i) * 180.0D / Math.PI);
+			this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(this.motionY, MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ)) * 180.0D / Math.PI);
 		}
 
-		Block var16 = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
+		Block block = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
 
-		if (var16 != Blocks.air)
+		if (block != Blocks.air)
 		{
-			var16.setBlockBoundsBasedOnState(this.worldObj, this.xTile, this.yTile, this.zTile);
-			AxisAlignedBB vec3d = var16.getCollisionBoundingBoxFromPool(this.worldObj, this.xTile, this.yTile, this.zTile);
+			block.setBlockBoundsBasedOnState(this.worldObj, this.xTile, this.yTile, this.zTile);
+			AxisAlignedBB vec3d = block.getCollisionBoundingBoxFromPool(this.worldObj, this.xTile, this.yTile, this.zTile);
 
 			if (vec3d != null && vec3d.isVecInside(Vec3.createVectorHelper(this.posX, this.posY, this.posZ)))
 			{
@@ -136,113 +131,96 @@ public class EntitySpear extends Entity
 			}
 		}
 
-		if (this.arrowShake > 0)
+		if (this.spearShake > 0)
 		{
-			--this.arrowShake;
+			--this.spearShake;
 		}
 
 		if (this.inGround)
 		{
-			Block var18 = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
-			int var19 = this.worldObj.getBlockMetadata(this.xTile, this.yTile, this.zTile);
-
-			if (var18 == this.inTile && var19 == this.inData)
-			{
-				++this.ticksInGround;
-
-				if (this.ticksInGround == 1200)
-				{
-					this.setDead();
-				}
-			}
-			else
+			if (this.worldObj.getBlock(this.xTile, this.yTile, this.zTile) != this.inTile && this.worldObj.getBlockMetadata(this.xTile, this.yTile, this.zTile) != this.inData)
 			{
 				this.inGround = false;
 				this.motionX *= this.rand.nextFloat() * 0.2F;
 				this.motionY *= this.rand.nextFloat() * 0.2F;
 				this.motionZ *= this.rand.nextFloat() * 0.2F;
-				this.ticksInGround = 0;
 				this.ticksInAir = 0;
 			}
 		}
 		else
 		{
 			++this.ticksInAir;
-			Vec3 var17 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
-			Vec3 vec3d1 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
-			MovingObjectPosition movingobjectposition = this.worldObj.func_147447_a(var17, vec3d1, false, true, false);
-			var17 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
-			vec3d1 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+			Vec3 vecPos = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
+			Vec3 vecNextPos = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+			MovingObjectPosition hit = this.worldObj.func_147447_a(vecPos, vecNextPos, false, true, false);
 
-			if (movingobjectposition != null)
+			if (hit != null)
 			{
-				vec3d1 = Vec3.createVectorHelper(movingobjectposition.hitVec.xCoord, movingobjectposition.hitVec.yCoord, movingobjectposition.hitVec.zCoord);
+				vecNextPos = Vec3.createVectorHelper(hit.hitVec.xCoord, hit.hitVec.yCoord, hit.hitVec.zCoord);
 			}
 
-			Entity entity = null;
-			List<Entity> list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
-			double d = 0.0D;
-			int f3;
-			float f6;
+			Entity targetEntity = null;
+			List<Entity> entities = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
+			double dist = 0.0D;
+			float radius;
 
-			for (f3 = 0; f3 < list.size(); ++f3)
+			for (int x = 0; x < entities.size(); ++x)
 			{
-				Entity f4 = list.get(f3);
+				Entity entity = entities.get(x);
 
-				if (f4.canBeCollidedWith() && (f4 != this.shootingEntity || this.ticksInAir >= 5))
+				if (entity.canBeCollidedWith() && (entity != this.shootingEntity || this.ticksInAir >= 5))
 				{
-					f6 = 0.3F;
-					AxisAlignedBB k1 = f4.boundingBox.expand(f6, f6, f6);
-					MovingObjectPosition f7 = k1.calculateIntercept(var17, vec3d1);
+					radius = 0.3F;
+					MovingObjectPosition intercept = entity.boundingBox.expand(radius, radius, radius).calculateIntercept(vecPos, vecNextPos);
 
-					if (f7 != null)
+					if (intercept != null)
 					{
-						double d1 = var17.distanceTo(f7.hitVec);
+						double distance = vecPos.distanceTo(intercept.hitVec);
 
-						if (d1 < d || d == 0.0D)
+						if (distance < dist || dist == 0.0D)
 						{
-							entity = f4;
-							d = d1;
+							targetEntity = entity;
+							dist = distance;
 						}
 					}
 				}
 			}
 
-			if (entity != null)
+			if (targetEntity != null)
 			{
-				movingobjectposition = new MovingObjectPosition(entity);
+				hit = new MovingObjectPosition(targetEntity);
 			}
 
-			float var20;
+			float velocity;
 
-			if (movingobjectposition != null)
+			if (hit != null)
 			{
-				if (movingobjectposition.entityHit != null)
+				if (hit.entityHit != null)
 				{
-					var20 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
-					int var23 = (int) Math.ceil(var20 * 2.0D);
+					velocity = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
+					int damage = (int) Math.ceil(velocity * 2.0D);
 
 					if (this.arrowCritical)
 					{
-						var23 += this.rand.nextInt(var23 / 2 + 2);
+						damage += this.rand.nextInt(damage / 2 + 2);
 					}
 
-					DamageSource var21 = null;
+					DamageSource damageSource = null;
 
 					if (this.shootingEntity == null)
 					{
-						var21 = DamageSourceSpear.causeSpearDamage(this, this);
+						damageSource = DamageSourceSpear.causeSpearDamage(this, this);
 					}
 					else
 					{
-						var21 = DamageSourceSpear.causeSpearDamage(this, this.shootingEntity);
+						damageSource = DamageSourceSpear.causeSpearDamage(this, this.shootingEntity);
 					}
 
-					if (movingobjectposition.entityHit.attackEntityFrom(var21, var23))
+					if (hit.entityHit.attackEntityFrom(damageSource, damage))
 					{
-						if (movingobjectposition.entityHit instanceof EntityLivingBase)
+						if (hit.entityHit instanceof EntityLivingBase)
 						{
-							++((EntityLivingBase) movingobjectposition.entityHit).arrowHitTimer;
+							++((EntityLivingBase) hit.entityHit).arrowHitTimer;
 						}
 
 						this.worldObj.playSoundAtEntity(this, "random.bowhit", 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
@@ -259,40 +237,40 @@ public class EntitySpear extends Entity
 				}
 				else
 				{
-					this.xTile = movingobjectposition.blockX;
-					this.yTile = movingobjectposition.blockY;
-					this.zTile = movingobjectposition.blockZ;
+					this.xTile = hit.blockX;
+					this.yTile = hit.blockY;
+					this.zTile = hit.blockZ;
 					this.inTile = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
 					this.inData = this.worldObj.getBlockMetadata(this.xTile, this.yTile, this.zTile);
-					this.motionX = ((float) (movingobjectposition.hitVec.xCoord - this.posX));
-					this.motionY = ((float) (movingobjectposition.hitVec.yCoord - this.posY));
-					this.motionZ = ((float) (movingobjectposition.hitVec.zCoord - this.posZ));
-					var20 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
-					this.posX -= this.motionX / var20 * 0.05000000074505806D;
-					this.posY -= this.motionY / var20 * 0.05000000074505806D;
-					this.posZ -= this.motionZ / var20 * 0.05000000074505806D;
+					this.motionX = ((float) (hit.hitVec.xCoord - this.posX));
+					this.motionY = ((float) (hit.hitVec.yCoord - this.posY));
+					this.motionZ = ((float) (hit.hitVec.zCoord - this.posZ));
+					velocity = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
+					this.posX -= this.motionX / velocity * 0.05000000074505806D;
+					this.posY -= this.motionY / velocity * 0.05000000074505806D;
+					this.posZ -= this.motionZ / velocity * 0.05000000074505806D;
 					this.worldObj.playSoundAtEntity(this, "random.bowhit", 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
 					this.inGround = true;
-					this.arrowShake = 7;
+					this.spearShake = 7;
 					this.arrowCritical = false;
 				}
 			}
 
 			if (this.arrowCritical)
 			{
-				for (f3 = 0; f3 < 4; ++f3)
+				for (int x = 0; x < 4; ++x)
 				{
-					this.worldObj.spawnParticle("crit", this.posX + this.motionX * f3 / 4.0D, this.posY + this.motionY * f3 / 4.0D, this.posZ + this.motionZ * f3 / 4.0D, -this.motionX, -this.motionY + 0.2D, -this.motionZ);
+					this.worldObj.spawnParticle("crit", this.posX + this.motionX * x / 4.0D, this.posY + this.motionY * x / 4.0D, this.posZ + this.motionZ * x / 4.0D, -this.motionX, -this.motionY + 0.2D, -this.motionZ);
 				}
 			}
 
 			this.posX += this.motionX;
 			this.posY += this.motionY;
 			this.posZ += this.motionZ;
-			var20 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
+			velocity = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
 			this.rotationYaw = (float) (Math.atan2(this.motionX, this.motionZ) * 180.0D / Math.PI);
 
-			for (this.rotationPitch = (float) (Math.atan2(this.motionY, var20) * 180.0D / Math.PI); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F)
+			for (this.rotationPitch = (float) (Math.atan2(this.motionY, velocity) * 180.0D / Math.PI); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F)
 			{
 				;
 			}
@@ -314,63 +292,63 @@ public class EntitySpear extends Entity
 
 			this.rotationPitch = this.prevRotationPitch + (this.rotationPitch - this.prevRotationPitch) * 0.2F;
 			this.rotationYaw = this.prevRotationYaw + (this.rotationYaw - this.prevRotationYaw) * 0.2F;
-			float var22 = 0.99F;
-			f6 = 0.05F;
+			float velocityMultiplier = 0.99F;
+			radius = 0.05F;
 
 			if (this.isInWater())
 			{
-				for (int var24 = 0; var24 < 4; ++var24)
+				for (int x = 0; x < 4; ++x)
 				{
-					float var25 = 0.25F;
-					this.worldObj.spawnParticle("bubble", this.posX - this.motionX * var25, this.posY - this.motionY * var25, this.posZ - this.motionZ * var25, this.motionX, this.motionY, this.motionZ);
+					float multiplier = 0.25F;
+					this.worldObj.spawnParticle("bubble", this.posX - this.motionX * multiplier, this.posY - this.motionY * multiplier, this.posZ - this.motionZ * multiplier, this.motionX, this.motionY, this.motionZ);
 				}
 
-				var22 = 0.8F;
+				velocityMultiplier = 0.8F;
 			}
 
-			this.motionX *= var22;
-			this.motionY *= var22;
-			this.motionZ *= var22;
-			this.motionY -= f6;
+			this.motionX *= velocityMultiplier;
+			this.motionY *= velocityMultiplier;
+			this.motionZ *= velocityMultiplier;
+			this.motionY -= radius;
 			this.setPosition(this.posX, this.posY, this.posZ);
 		}
 	}
 
 	@Override
-	public void writeEntityToNBT(NBTTagCompound nbttagcompound)
+	public void writeEntityToNBT(NBTTagCompound tag)
 	{
-		nbttagcompound.setShort("xTile", (short) this.xTile);
-		nbttagcompound.setShort("yTile", (short) this.yTile);
-		nbttagcompound.setShort("zTile", (short) this.zTile);
-		nbttagcompound.setByte("inData", (byte) this.inData);
-		nbttagcompound.setByte("shake", (byte) this.arrowShake);
-		nbttagcompound.setByte("inGround", (byte) (this.inGround ? 1 : 0));
-		nbttagcompound.setBoolean("player", this.doesArrowBelongToPlayer);
+		tag.setShort("xTile", (short) this.xTile);
+		tag.setShort("yTile", (short) this.yTile);
+		tag.setShort("zTile", (short) this.zTile);
+		tag.setByte("inData", (byte) this.inData);
+		tag.setByte("shake", (byte) this.spearShake);
+		tag.setByte("inGround", (byte) (this.inGround ? 1 : 0));
+		tag.setBoolean("player", this.doesArrowBelongToPlayer);
 	}
 
 	@Override
-	public void readEntityFromNBT(NBTTagCompound nbttagcompound)
+	public void readEntityFromNBT(NBTTagCompound tag)
 	{
-		this.xTile = nbttagcompound.getShort("xTile");
-		this.yTile = nbttagcompound.getShort("yTile");
-		this.zTile = nbttagcompound.getShort("zTile");
-		this.inData = nbttagcompound.getByte("inData") & 255;
-		this.arrowShake = nbttagcompound.getByte("shake") & 255;
-		this.inGround = nbttagcompound.getByte("inGround") == 1;
-		this.doesArrowBelongToPlayer = nbttagcompound.getBoolean("player");
+		this.xTile = tag.getShort("xTile");
+		this.yTile = tag.getShort("yTile");
+		this.zTile = tag.getShort("zTile");
+		this.inData = tag.getByte("inData") & 255;
+		this.spearShake = tag.getByte("shake") & 255;
+		this.inGround = tag.getByte("inGround") == 1;
+		this.doesArrowBelongToPlayer = tag.getBoolean("player");
 	}
 
 	@Override
-	public void onCollideWithPlayer(EntityPlayer entityplayer)
+	public void onCollideWithPlayer(EntityPlayer player)
 	{
 		if (!this.worldObj.isRemote)
 		{
-			if (this.inGround && this.doesArrowBelongToPlayer && this.arrowShake <= 0)
+			if (this.inGround && this.doesArrowBelongToPlayer && this.spearShake <= 0)
 			{
-				if (entityplayer.inventory.addItemStackToInventory(new ItemStack(AliensVsPredator.instance().items.itemSpear, 1, (int) lastDamage + 5)))
+				if (player.inventory.addItemStackToInventory(new ItemStack(AliensVsPredator.instance().items.itemSpear, 1, (int) lastDamage + 5)))
 				{
 					this.worldObj.playSoundAtEntity(this, "random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
-					entityplayer.onItemPickup(this, 1);
+					player.onItemPickup(this, 1);
 					this.setDead();
 				}
 			}
