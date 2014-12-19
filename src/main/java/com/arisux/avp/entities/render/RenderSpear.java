@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.items.model.ModelSpear;
+import com.arisux.avp.entities.model.ModelSpear;
 
 public class RenderSpear extends Render
 {
