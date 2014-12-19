@@ -13,7 +13,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.entities.EntityAcidPool;
 import com.arisux.avp.entities.ExtendedEntityPlayer;
 
 public class EntityFacehugger extends EntitySpeciesAlien implements IMob
@@ -59,15 +58,6 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 	public void onCollideWithPlayer(EntityPlayer p_70100_1_)
 	{
 		super.onCollideWithPlayer(p_70100_1_);
-
-		if (worldObj.isRemote)
-		{
-			System.out.println("client");
-		}
-		else
-		{
-			System.out.println("server");
-		}
 
 		ExtendedEntityPlayer playerProperties = (ExtendedEntityPlayer) p_70100_1_.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER);
 
@@ -117,13 +107,6 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 	public void onDeath(DamageSource par1DamageSource)
 	{
 		super.onDeath(par1DamageSource);
-
-		if (this.worldObj.isRemote)
-		{
-			EntityAcidPool entity = new EntityAcidPool(this.worldObj);
-			entity.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
-			this.worldObj.spawnEntityInWorld(entity);
-		}
 	}
 
 	public float facehuggerScaleAmount()
