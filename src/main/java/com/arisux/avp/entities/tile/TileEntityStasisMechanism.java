@@ -1,6 +1,8 @@
 package com.arisux.avp.entities.tile;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -36,6 +38,13 @@ public class TileEntityStasisMechanism extends TileEntity
 			stasisEntity.onUpdate();
 		}
 	}
+	
+	@Override
+	public Block getBlockType()
+	{
+		return Blocks.beacon;
+	}
+
 
 	@Override
 	public Packet getDescriptionPacket()

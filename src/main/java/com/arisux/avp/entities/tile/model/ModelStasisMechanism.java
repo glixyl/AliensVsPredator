@@ -73,7 +73,7 @@ public class ModelStasisMechanism extends ModelBase
 	public void render(TileEntityStasisMechanism tile, float boxTranslation)
 	{
 		setRotationAngles(tile);
-		core.render(boxTranslation);
+		//core.render(boxTranslation);
 		west.render(boxTranslation);
 		north.render(boxTranslation);
 		northwest.render(boxTranslation);
