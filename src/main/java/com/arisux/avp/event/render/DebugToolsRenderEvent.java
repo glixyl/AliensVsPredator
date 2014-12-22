@@ -17,6 +17,7 @@ import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntityMarine;
 import com.arisux.avp.entities.mob.EntityXenomorph;
 import com.arisux.avp.entities.tile.PoweredTileEntity;
+import com.arisux.avp.entities.tile.TileEntityStasisMechanism;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.RenderTickEvent;
@@ -87,6 +88,11 @@ public class DebugToolsRenderEvent
 									fontrenderer.drawStringWithShadow("FireImmunity: " + ((EntityLiving) entity).isImmuneToFire(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
 								}
 								
+								if (entity instanceof EntityLivingBase)
+								{
+									fontrenderer.drawStringWithShadow("Age: " + ((EntityLivingBase) entity).getAge(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
+								}
+
 								if (entity instanceof EntityXenomorph)
 								{
 									fontrenderer.drawStringWithShadow("Kills: " + ((EntityXenomorph) entity).getKilledEntities(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
@@ -101,7 +107,6 @@ public class DebugToolsRenderEvent
 
 								if (entity instanceof Entity)
 								{
-									fontrenderer.drawStringWithShadow("Age: " + ((EntityLivingBase) entity).getAge(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
 									RenderUtil.drawEntity(RenderUtil.scaledDisplayResolution().getScaledWidth() - 75, RenderUtil.scaledDisplayResolution().getScaledHeight() - 25, 30, -45, 0, entity);
 								}
 
@@ -160,6 +165,12 @@ public class DebugToolsRenderEvent
 							{
 								PoweredTileEntity poweredTile = (PoweredTileEntity) tile;
 								info = info + " (" + ((float) poweredTile.getVoltage()) + "V & " + poweredTile.getAmperage() + "A)";
+							}
+
+							if (tile instanceof TileEntityStasisMechanism)
+							{
+								TileEntityStasisMechanism stasisMechanism = (TileEntityStasisMechanism) tile;
+								info = info + " (" + stasisMechanism.stasisEntity + ")";
 							}
 
 							fontrenderer.drawString(info, 20, 6, 0xFFFFFFFF);
