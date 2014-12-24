@@ -9,7 +9,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.entities.model.ModelHiveNode;
+import com.arisux.avp.entities.tile.model.ModelHiveNode;
 
 public class RenderHiveNode extends TileEntitySpecialRenderer
 {

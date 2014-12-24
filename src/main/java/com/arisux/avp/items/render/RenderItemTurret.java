@@ -1,22 +1,24 @@
 package com.arisux.avp.items.render;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.client.ItemRenderer;
+import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.model.ModelTurret;
 
 public class RenderItemTurret extends ItemRenderer
 {
+	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_TURRET);
+	public static final ModelTurret model = new ModelTurret();
 	private float rotation;
 	
-	public RenderItemTurret(ModelBase model, ResourceLocation resource)
+	public RenderItemTurret()
 	{
-		super(model, resource);
+		super(model, resourceLocation);
 	}
 	
 	@Override
@@ -29,7 +31,7 @@ public class RenderItemTurret extends ItemRenderer
 	@Override
 	public void renderThirdPerson(ItemStack item, Object... data)
 	{
-
+		;
 	}
 
 	@Override

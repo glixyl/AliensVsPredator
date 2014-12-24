@@ -1,11 +1,12 @@
 package com.arisux.avp.entities.mob.model;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
-public class ModelCrusher extends ModelBase
+import com.arisux.airi.lib.client.ModelBaseExtension;
+
+public class ModelCrusher extends ModelBaseExtension
 {
 	public ModelRenderer sTorso, sTorso2, sRightThigh, sLeftThigh, sLeftShin, sRightShin, sLeftShin2, sRightShin2, sLeftFoot, sRightFoot, sLeftArm, sRightArm, sLeftClaw, sRightArm2, sNeck, sHead, sHead2, sJaw1, sLeftArm2, sRightClaw, sLeftClaw2, sRightClaw2, sVertibrae1, sTail1, sTail2, sTail3, sStabber, sTail4, sTail5, sVertibrae2, sSpike3, sSpike4, sSpike2, sSpike5, sHead4, crest0, crest1, crest2, crest3, crest4, crest5, sArmCrusher1, sArmCrusher;
 
@@ -324,13 +325,6 @@ public class ModelCrusher extends ModelBase
 		this.crest5.render(boxTranslation);
 		this.sArmCrusher1.render(boxTranslation);
 		this.sArmCrusher.render(boxTranslation);
-	}
-
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
 	}
 
 	@Override

@@ -21,12 +21,6 @@ public class RenderItemMotionTracker extends ItemRenderer
 	}
 
 	@Override
-	public ModelMotionTracker getModel()
-	{
-		return (ModelMotionTracker) super.getModel();
-	}
-
-	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data)
 	{
 		super.renderItem(type, item, data);
@@ -71,12 +65,11 @@ public class RenderItemMotionTracker extends ItemRenderer
 	public void renderInInventory(ItemStack item, Object... data)
 	{
 		float glScale = 20F;
-		GL11.glRotatef(0F, 1.0F, 0.0F, 0.0F);
-		GL11.glRotatef(-25F, 0.0F, 1.0F, 0.0F);
-		GL11.glRotatef(0F, 0.0F, 0.0F, 1.0F);
-		GL11.glTranslatef(0F, 8.77F, -20.85F);
-		GL11.glDisable(GL11.GL_CULL_FACE);
+		GL11.glTranslatef(8F, 8F, 0F);
+		GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
+		GL11.glTranslatef(0F, 0F, -5F);
 		GL11.glScalef(glScale, glScale, glScale);
+		GL11.glDisable(GL11.GL_CULL_FACE);
 		RenderUtil.bindTexture(resourceLocation);
 		this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 	}

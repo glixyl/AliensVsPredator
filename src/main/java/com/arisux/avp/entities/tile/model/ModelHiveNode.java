@@ -1,4 +1,4 @@
-package com.arisux.avp.entities.model;
+package com.arisux.avp.entities.tile.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;

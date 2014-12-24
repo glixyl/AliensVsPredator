@@ -13,10 +13,9 @@ import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.items.ItemWristbracer;
 import com.arisux.avp.items.model.ModelWristBlade;
 
-public class RenderWristBlade implements IItemRenderer
+public class RenderItemWristbracerBlades implements IItemRenderer
 {
 	protected ModelWristBlade model = new ModelWristBlade();
 	protected static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_WRISTBLADES);
@@ -55,25 +54,17 @@ public class RenderWristBlade implements IItemRenderer
 		switch (type)
 		{
 			case EQUIPPED:
-				EntityPlayer playerToRender = (EntityPlayer) data[1];
-
 				GL11.glRotatef(-78.0F, 0.0F, 1.0F, 0.0F);
 				GL11.glRotatef(-165.0F, 1.0F, 0.0F, 0.0F);
 				GL11.glRotatef(13.0F, 0.0F, 0.0F, 1.0F);
 				GL11.glTranslatef(-0.25F, -0.15F, 0.3F);
 				GL11.glScalef(2F, 2F, 2F);
 				RenderUtil.bindTexture(resourceLocation);
-				this.model.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
-				
-				if (playerToRender != null && ItemWristbracer.playersWristbracerContainsBlades(playerToRender))
-				{
-					this.model.b6.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
-					this.model.bladeLeft.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
-				}
+				this.model.b6.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+				this.model.bladeLeft.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 				break;
 
 			case EQUIPPED_FIRST_PERSON:
-				playerToRender = (EntityPlayer) data[1];
 				GL11.glRotatef(186.0F, 1.0F, 0.0F, 0.0F);
 				GL11.glRotatef(3.0F, 0.0F, 1.0F, 0.0F);
 				GL11.glRotatef(-35.0F, 0.0F, 0.0F, 1.0F);
@@ -93,14 +84,9 @@ public class RenderWristBlade implements IItemRenderer
 
 				GL11.glScalef(1.6F, 1.6F, 1.6F);
 				RenderUtil.bindTexture(resourceLocation);
-				this.model.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
-				
-				if (playerToRender != null && ItemWristbracer.playersWristbracerContainsBlades(playerToRender))
-				{
-					this.model.b6.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
-					this.model.bladeLeft.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
-				}
-				
+				this.model.b6.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+				this.model.bladeLeft.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+
 				break;
 
 			case INVENTORY:
@@ -108,10 +94,9 @@ public class RenderWristBlade implements IItemRenderer
 				GL11.glEnable(GL11.GL_BLEND);
 				GL11.glTranslatef(8.5F, 0F, 0F);
 				GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
-				GL11.glTranslatef(-10F, 6F, 0F);
+				GL11.glTranslatef(-16F, 6F, -3F);
 				GL11.glScalef(33F, 33F, 33F);
 				RenderUtil.bindTexture(resourceLocation);
-				this.model.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 				this.model.b6.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 				this.model.bladeLeft.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 				break;

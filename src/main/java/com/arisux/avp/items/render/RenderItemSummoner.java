@@ -1,6 +1,5 @@
 package com.arisux.avp.items.render;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -9,6 +8,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
+import com.arisux.airi.lib.client.ModelBaseExtension;
 import com.arisux.avp.entities.mob.*;
 
 public class RenderItemSummoner extends ItemRenderer
@@ -17,9 +17,9 @@ public class RenderItemSummoner extends ItemRenderer
 	private Class<?> entityClass;
 	private float scale, x, y, rotation;
 
-	public RenderItemSummoner(Class<? extends Entity> entityClass, Class<? extends ModelBase> modelClass, ResourceLocation resourceLocation)
+	public RenderItemSummoner(Class<? extends Entity> entityClass, Class<? extends ModelBaseExtension> modelClass, ResourceLocation resourceLocation)
 	{
-		super(RenderUtil.createModel(modelClass), resourceLocation);
+		super(RenderUtil.createModelBaseExtended(modelClass), resourceLocation);
 		this.resourceLocation = resourceLocation;
 		this.entityClass = entityClass;
 	}

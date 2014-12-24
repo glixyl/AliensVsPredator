@@ -1,11 +1,11 @@
 package com.arisux.avp.entities.tile.model;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
+import com.arisux.airi.lib.client.ModelBaseExtension;
 import com.arisux.avp.entities.tile.TileEntityStasisMechanism;
 
-public class ModelStasisMechanism extends ModelBase
+public class ModelStasisMechanism extends ModelBaseExtension
 {
 	ModelRenderer core, west, north, northwest, northeast, east, southeast, southwest, south;
 
@@ -72,8 +72,6 @@ public class ModelStasisMechanism extends ModelBase
 
 	public void render(TileEntityStasisMechanism tile, float boxTranslation)
 	{
-		setRotationAngles(tile);
-		//core.render(boxTranslation);
 		west.render(boxTranslation);
 		north.render(boxTranslation);
 		northwest.render(boxTranslation);
@@ -82,17 +80,5 @@ public class ModelStasisMechanism extends ModelBase
 		southeast.render(boxTranslation);
 		southwest.render(boxTranslation);
 		south.render(boxTranslation);
-	}
-
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
-	}
-
-	public void setRotationAngles(TileEntityStasisMechanism tile)
-	{
-		;
 	}
 }

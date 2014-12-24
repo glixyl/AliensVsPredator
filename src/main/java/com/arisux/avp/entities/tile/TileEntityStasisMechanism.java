@@ -45,7 +45,6 @@ public class TileEntityStasisMechanism extends TileEntity
 		return Blocks.beacon;
 	}
 
-
 	@Override
 	public Packet getDescriptionPacket()
 	{

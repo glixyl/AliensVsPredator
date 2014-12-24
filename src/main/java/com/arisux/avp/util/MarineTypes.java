@@ -59,15 +59,15 @@ public enum MarineTypes
 		switch (this)
 		{
 			case M4:
-				return new ModelTexMap(RenderM4.model, RenderM4.resourceLocation);
+				return new ModelTexMap(RenderItemM4.model, RenderItemM4.resourceLocation);
 			case AK47:
-				return new ModelTexMap(RenderAK47.model, RenderAK47.resourceLocation);
+				return new ModelTexMap(RenderItemAK47.model, RenderItemAK47.resourceLocation);
 			case M41A:
-				return new ModelTexMap(RenderM41A.model, RenderM41A.resourceLocation);
+				return new ModelTexMap(RenderItemM41A.model, RenderItemM41A.resourceLocation);
 			case SNIPER:
-				return new ModelTexMap(RenderSniper.model, RenderSniper.resourceLocation);
+				return new ModelTexMap(RenderItemSniper.model, RenderItemSniper.resourceLocation);
 			case M56SG:
-				return new ModelTexMap(RenderM56SG.model, RenderM56SG.resourceLocation);
+				return new ModelTexMap(RenderItemM56SG.model, RenderItemM56SG.resourceLocation);
 		}
 		
 		return null;

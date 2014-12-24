@@ -18,18 +18,20 @@ public class ItemDisc extends HookedItem
 		if (entityplayer.inventory.hasItemStack(new ItemStack(AliensVsPredator.instance().items.itemDisc)))
 		{
 			int remainingCount = this.getMaxItemUseDuration(itemstack) - itemInUseCount;
-			float f = remainingCount / 20.0F;
-			f = (f * f + f * 2.0F) / 3.0F;
+			float charge = remainingCount / 20.0F;
+			charge = (charge * charge + charge * 2.0F) / 3.0F;
 
-			if (f >= 0.1F)
+			if (charge >= 0.1F)
 			{
-				boolean crit = f > 1.5F ? true : false;
-				f = f > 1.5F ? 1.5F : f;
-				f *= 1.5F;
+				boolean crit = charge > 1.5F ? true : false;
+				charge = charge > 1.5F ? 1.5F : charge;
+				charge *= 1.5F;
 
 				if (!world.isRemote)
 				{
-					world.spawnEntityInWorld((new EntitySmartDisc(world, entityplayer, itemstack, f)).setCritical(crit));
+					EntitySmartDisc entity = new EntitySmartDisc(world, entityplayer, itemstack, charge);
+					entity.setIsCritical(crit);
+					world.spawnEntityInWorld(entity);
 				}
 
 				world.playSoundAtEntity(entityplayer, "random.bow", 0.6F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.0F));

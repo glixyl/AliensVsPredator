@@ -1,10 +1,11 @@
 package com.arisux.avp.entities.mob.model;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelOvamorph extends ModelBase
+import com.arisux.airi.lib.client.ModelBaseExtension;
+
+public class ModelOvamorph extends ModelBaseExtension
 {
 	public ModelRenderer ovamorph;
 
@@ -30,13 +31,6 @@ public class ModelOvamorph extends ModelBase
 		super.render(entity, swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation);
 		this.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
 		this.ovamorph.render(boxTranslation);
-	}
-
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
 	}
 
 	@Override

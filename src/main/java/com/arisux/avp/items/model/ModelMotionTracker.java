@@ -1,9 +1,10 @@
 package com.arisux.avp.items.model;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelMotionTracker extends ModelBase
+import com.arisux.airi.lib.client.ModelBaseExtension;
+
+public class ModelMotionTracker extends ModelBaseExtension
 {
 	ModelRenderer handleBottom;
 	ModelRenderer handle;
@@ -68,6 +69,7 @@ public class ModelMotionTracker extends ModelBase
 		setRotation(sensor, 0F, 0F, 0F);
 	}
 
+	@Override
 	public void render(float boxTranslation)
 	{
 		handleBottom.render(boxTranslation);
@@ -78,12 +80,5 @@ public class ModelMotionTracker extends ModelBase
 		base.render(boxTranslation);
 		sensorSupport.render(boxTranslation);
 		sensor.render(boxTranslation);
-	}
-
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
 	}
 }

@@ -87,7 +87,7 @@ public class DebugToolsRenderEvent
 									fontrenderer.drawStringWithShadow("Armor: " + ((EntityLiving) entity).getTotalArmorValue(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
 									fontrenderer.drawStringWithShadow("FireImmunity: " + ((EntityLiving) entity).isImmuneToFire(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
 								}
-								
+
 								if (entity instanceof EntityLivingBase)
 								{
 									fontrenderer.drawStringWithShadow("Age: " + ((EntityLivingBase) entity).getAge(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
@@ -118,7 +118,10 @@ public class DebugToolsRenderEvent
 									fontrenderer.drawStringWithShadow("Recipe: " + (stack != null ? ModUtil.getRecipe(stack.getItem()) != null ? ModUtil.getRecipe(stack.getItem()).getClass().getSimpleName() : "None" : "null"), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
 
 									if (stack != null)
-										RenderUtil.drawRecipe(stack.getItem(), subMenuX + subMenuPadding / 2, subMenuStartY + (curEntry++ * subEntrySpacing), 16, 3, 0x33EEEEEE);
+									{
+										RenderUtil.drawItemIcon(stack.getItem(), 0, 0, 16, 16);
+										RenderUtil.drawRecipe(stack.getItem(), 4 + subMenuX + subMenuPadding / 2, 4 + subMenuStartY + (curEntry++ * subEntrySpacing), 16, 1, 0x77FFFFFF);
+									}
 								}
 							}
 						}

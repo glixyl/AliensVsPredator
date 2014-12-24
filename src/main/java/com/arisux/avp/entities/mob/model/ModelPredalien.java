@@ -1,10 +1,11 @@
 package com.arisux.avp.entities.mob.model;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelPredalien extends ModelBase
+import com.arisux.airi.lib.client.ModelBaseExtension;
+
+public class ModelPredalien extends ModelBaseExtension
 {
 	public ModelRenderer leftFootToe2, leftFootBackToe, LeftThigh, leftFootToe1, leftFoot, leftFootToe3, leftShin, topTorso, abdomin, backSpikes, rightLowerSpike, rightTopSpike, leftTopSpike, leftLowerSpike, neck, rightFootToe3, rightFootToe2, rightFootBackToe, rightShin, RightThigh, rightFootToe1, rightFoot, leftFinger4, leftForearm, leftBicep, leftFinger3, leftFinger2, leftFinger1, leftShoulder, rightFinger4, rightShoulder, rightBicep, rightForearm, rightFinger2, rightFinger3, rightFinger1, tailBase, tail1, tail2, tail3, tail4, tailStabber, headTop, dread7, midHeadSpike, dread8, dread6, dread5, dread4, faceMid, dread3, rightLowerMandible, dread2, leftLowerMandible, dread1, rightLowerMandible2, headTopRidge, leftLowerMandible2, rightInnerJawWebbing, faceTop, rightJawWebbing, rightUpperTooth, leftLowerTooth, leftUpperTooth, rightLowerTooth, leftUpperMandible, leftJawWebbing, bottomTeeth, leftInnerJawWebbing, midJaw, rightUpperMandible, topTeeth;
 
@@ -524,13 +525,6 @@ public class ModelPredalien extends ModelBase
 		midJaw.render(boxTranslation);
 		rightUpperMandible.render(boxTranslation);
 		topTeeth.render(boxTranslation);
-	}
-
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
 	}
 
 	@Override

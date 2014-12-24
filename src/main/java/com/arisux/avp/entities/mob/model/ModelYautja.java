@@ -1,11 +1,12 @@
 package com.arisux.avp.entities.mob.model;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
-public class ModelYautja extends ModelBase
+import com.arisux.airi.lib.client.ModelBaseExtension;
+
+public class ModelYautja extends ModelBaseExtension
 {
 	public ModelRenderer head, head55, body, rightarm, leftarm, rightleg, leftleg, body1, head1, head2, head3, head4, head5, head6, head7, head8, head9, head10, head11, head12, head13, head14, head15, head16, head17, head18, head19, head20, head21, head22, head23, head24, head25, head26, head27, head28, head29, head30, head31, head32, head33, head34, head35, head36, head37, head38, head39, head40, head41, head42, head43, head44, head45, head46, head47, head48, head49, head50, head51, head52, rightarm2, body2, blade1, blade2, leftarm2, leftleg2, rightleg2, leftleg3, rightleg3, leftarm3, rightarm3;
 
@@ -517,13 +518,6 @@ public class ModelYautja extends ModelBase
 		this.rightleg3.render(boxTranslation);
 		this.leftarm3.render(boxTranslation);
 		this.rightarm3.render(boxTranslation);
-	}
-
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
 	}
 
 	@Override

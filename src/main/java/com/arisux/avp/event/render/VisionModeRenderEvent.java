@@ -9,6 +9,7 @@ import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.Pre;
 
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GuiElements.GuiCustomButton;
 import com.arisux.airi.lib.*;
@@ -45,6 +46,7 @@ public class VisionModeRenderEvent
 			{
 				if (WorldUtil.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer) != null && WorldUtil.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer).getItem() == AliensVsPredator.instance().items.helmTitanium)
 				{
+					GL11.glPushMatrix();
 					this.currentVisionMode.render();
 
 					drawStringAlignCenter(currentVisionMode.modeName, scaledDisplayResolution().getScaledWidth() / 2, 5, currentVisionMode.color, false);
@@ -60,6 +62,7 @@ public class VisionModeRenderEvent
 						buttonToggleVisionMode.overlayColorHover = 0x77FF0000;
 						buttonToggleVisionMode.drawButton();
 					}
+					GL11.glPopMatrix();
 				}
 			}
 		}

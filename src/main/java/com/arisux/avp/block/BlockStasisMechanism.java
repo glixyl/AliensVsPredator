@@ -54,7 +54,6 @@ public class BlockStasisMechanism extends HookedBlockContainer
 			if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof ItemEntitySummoner)
 			{
 				ItemEntitySummoner item = (ItemEntitySummoner) player.getCurrentEquippedItem().getItem();
-
 				tile.stasisItemstack = new ItemStack(item, 1);
 				tile.stasisEntity = item.createNewEntity(worldObj);
 				WorldUtil.Entities.Players.Inventories.consumeItem(player, item);
@@ -67,7 +66,7 @@ public class BlockStasisMechanism extends HookedBlockContainer
 			}
 		}
 
-		return super.onBlockActivated(worldObj, xCoord, yCoord, zCoord, player, side, hitX, hitY, hitZ);
+		return true;
 	}
 
 	@Override

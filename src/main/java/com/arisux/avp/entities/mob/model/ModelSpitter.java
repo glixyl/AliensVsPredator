@@ -1,11 +1,12 @@
 package com.arisux.avp.entities.mob.model;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
-public class ModelSpitter extends ModelBase
+import com.arisux.airi.lib.client.ModelBaseExtension;
+
+public class ModelSpitter extends ModelBaseExtension
 {
 	public ModelRenderer chest, abdomen, rThigh, lThigh, lShin1, rShin1, lShin2, rShin2, lFoot, rFoot, lArm1, rArm1, lClaw1, rArm2, neck, headSpine1, rHead, jaw, jaw2, headSpine2, lArm2, rClaw1, lClaw2, rClaw2, spine1, spine2, spine3, tail1, tail2, tailStabber, tail3, tail4, lHead, spine4, spine5, spine6, spine7, spine8, spine9, spine10, spine11, tail5, spine12, part1, part2, part3, part4, headHornLeft, headPouches, headTop, headBase, headHornRight;
 
@@ -384,13 +385,6 @@ public class ModelSpitter extends ModelBase
 		this.headTop.render(boxTranslation);
 		this.headBase.render(boxTranslation);
 		this.headHornRight.render(boxTranslation);
-	}
-
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
 	}
 
 	@Override

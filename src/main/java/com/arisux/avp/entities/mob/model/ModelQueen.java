@@ -1,14 +1,14 @@
 package com.arisux.avp.entities.mob.model;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.client.ModelBaseExtension;
 import com.arisux.avp.entities.mob.EntityQueen;
 
-public class ModelQueen extends ModelBase
+public class ModelQueen extends ModelBaseExtension
 {
 	public ModelRenderer torso0, torso1, rThigh, lThigh, lShin0, lShin1, lFoot, rShin0, rShin1, rFoot, lArm0, lArm1, lHand, lClaw, rArm0, rArm1, rHand, rClaw, tail0, tail1, tail2, tail3, tail4, tailStabber, bStabber0, bStabber1, bStabber2, bStabber3, bStabber4, bStabber5, bSpines0, bSpines1, bSpines2, bSpines3, bSpines4, bSpines5, bSpines6, lArmMini0, lArmMini1, rArmMini0, rArmMini1, lHandMini, rHandMini, lClawMini, rClawMini, neck, Jaw1, head0, head1, headBase0, headFinL0, headFinL1, headFinL2, headFinR0, headFinR1, headFinR2, headWebL, headSpinesL, headSpinesM, headSpinesR, headWebR, rHip, lHip, lShinSpike, rShinSpike, sack0, sack7, sack1, sack2, sack3, sack4, sack5, sack6;
 
@@ -546,13 +546,6 @@ public class ModelQueen extends ModelBase
 				sack6.render(boxTranslation);
 			}
 		}
-	}
-
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
 	}
 
 	@Override

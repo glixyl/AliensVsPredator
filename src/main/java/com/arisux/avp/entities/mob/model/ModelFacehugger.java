@@ -1,7 +1,6 @@
 package com.arisux.avp.entities.mob.model;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -9,7 +8,9 @@ import net.minecraft.util.MathHelper;
 
 import org.lwjgl.opengl.GL11;
 
-public class ModelFacehugger extends ModelBase
+import com.arisux.airi.lib.client.ModelBaseExtension;
+
+public class ModelFacehugger extends ModelBaseExtension
 {
 	public ModelRenderer body, leg8, leg6, leg4, leg2, leg7, leg5, leg3, leg1, legArch1, legArch2, legArch3, legArch4, tailMain;
 	public ModelRenderer[] tailBoxes;
@@ -145,13 +146,6 @@ public class ModelFacehugger extends ModelBase
 		this.legArch3.render(boxTranslation);
 		this.legArch4.render(boxTranslation);
 		this.tailMain.render(boxTranslation);
-	}
-
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
 	}
 
 	@Override

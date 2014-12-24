@@ -35,7 +35,6 @@ public class EntitySmartDisc extends EntityProjectile
 	{
 		this(world);
 		this.shootingEntity = entityliving;
-		this.setPickupModeFromEntity(entityliving);
 		this.setLocationAndAngles(entityliving.posX, entityliving.posY + entityliving.getEyeHeight(), entityliving.posZ, entityliving.rotationYaw, entityliving.rotationPitch);
 		this.posX -= MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F;
 		this.posY -= 0.1D;
@@ -70,9 +69,9 @@ public class EntitySmartDisc extends EntityProjectile
 
 			if (this.floatStrength < 0.7F)
 			{
-				if (this.isCritical())
+				if (this.getIsCritical())
 				{
-					this.setCritical(false);
+					this.setIsCritical(false);
 				}
 
 				this.floatStrength = 0.0F;
@@ -140,14 +139,14 @@ public class EntitySmartDisc extends EntityProjectile
 					}
 				} else
 				{
-					this.bounceBack();
+					this.bounce();
 				}
 			} else
 			{
 				if (entity instanceof EntityPlayer)
 				{
 					damagesource = (EntityPlayer) entity;
-					ItemStack item = this.getPickupItem();
+					ItemStack item = this.getItemstack();
 
 					if (item == null)
 					{
@@ -192,7 +191,7 @@ public class EntitySmartDisc extends EntityProjectile
 			this.inGround = false;
 		}
 
-		this.setCritical(false);
+		this.setIsCritical(false);
 		this.beenInGround = true;
 		this.floatStrength = 0.0F;
 	}
@@ -210,9 +209,9 @@ public class EntitySmartDisc extends EntityProjectile
 	}
 	
 	@Override
-	public int getMaxLifetime()
+	public int getLifetime()
 	{
-		return this.pickupMode != 1 && this.pickupMode != 3 ? 1200 : 0;
+		return 0;
 	}
 
 	@Override

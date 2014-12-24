@@ -1,5 +1,6 @@
 package com.arisux.avp.items.render;
 
+import static com.arisux.airi.lib.RenderUtil.bindTexture;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -15,13 +16,13 @@ import com.arisux.airi.lib.client.ModelBaseExtension;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.items.model.ModelSniper;
 
-public class RenderSniper extends ItemRenderer
+public class RenderItemSniper extends ItemRenderer
 {
 	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_SNIPER);
 	public static final ModelBaseExtension model = new ModelSniper();
 	private float defaultFOV = mc.gameSettings.getOptionFloatValue(GameSettings.Options.FOV);
 
-	public RenderSniper()
+	public RenderItemSniper()
 	{
 		super(model, resourceLocation);
 	}
@@ -37,6 +38,18 @@ public class RenderSniper extends ItemRenderer
 	{
 		super.renderItem(type, item, data);
 		this.renderZoom();
+	}
+	
+	@Override
+	public void renderInWorld(ItemStack item, Object... data)
+	{
+		super.renderInWorld(item, data);
+		GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
+		GL11.glTranslatef(-0.1F, 0.5F, 0F);
+		GL11.glScalef(1F, -1F, 1F);
+		GL11.glDisable(GL11.GL_CULL_FACE);
+		bindTexture(getResourceLocation());
+		this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 	}
 
 	public void renderZoom()

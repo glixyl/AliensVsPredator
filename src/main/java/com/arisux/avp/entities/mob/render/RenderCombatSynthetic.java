@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL11;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.items.model.ModelM41A;
-import com.arisux.avp.items.render.RenderM41A;
+import com.arisux.avp.items.render.RenderItemM41A;
 
 public class RenderCombatSynthetic extends RenderLiving
 {
@@ -58,7 +58,7 @@ public class RenderCombatSynthetic extends RenderLiving
 				GL11.glScalef(glScale, glScale, glScale);
 
 				model.aimedBow = true;
-				Minecraft.getMinecraft().renderEngine.bindTexture(RenderM41A.resourceLocation);
+				Minecraft.getMinecraft().renderEngine.bindTexture(RenderItemM41A.resourceLocation);
 				modelM41a.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 			}
 			GL11.glPopMatrix();

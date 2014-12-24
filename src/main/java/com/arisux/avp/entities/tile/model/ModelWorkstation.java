@@ -1,14 +1,14 @@
 package com.arisux.avp.entities.tile.model;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.init.Blocks;
 
+import com.arisux.airi.lib.client.ModelBaseExtension;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.TileEntityWorkstation;
 
-public class ModelWorkstation extends ModelBase
+public class ModelWorkstation extends ModelBaseExtension
 {
 	ModelRenderer stand;
 	ModelRenderer standBase;
@@ -104,47 +104,6 @@ public class ModelWorkstation extends ModelBase
 
 	public void render(TileEntityWorkstation tile, float boxTranslation)
 	{
-		setRotationAngles(tile);
-		Block block = tile.getWorldObj().getBlock(tile.xCoord, tile.yCoord, tile.zCoord);
-		Block left, leftUp, right, rightUp;
-
-		switch (tile.rotation)
-		{
-			case 3:
-				/* Left is plus z, right is minus z */
-				leftUp = tile.getWorldObj().getBlock(tile.xCoord, tile.yCoord + 1, tile.zCoord + 1);
-				rightUp = tile.getWorldObj().getBlock(tile.xCoord, tile.yCoord + 1, tile.zCoord - 1);
-				left = tile.getWorldObj().getBlock(tile.xCoord, tile.yCoord, tile.zCoord + 1);
-				right = tile.getWorldObj().getBlock(tile.xCoord, tile.yCoord, tile.zCoord - 1);
-				break;
-			case 2:
-				/* Left is minus x, right is plus x */
-				leftUp = tile.getWorldObj().getBlock(tile.xCoord + 1, tile.yCoord + 1, tile.zCoord);
-				rightUp = tile.getWorldObj().getBlock(tile.xCoord - 1, tile.yCoord + 1, tile.zCoord);
-				left = tile.getWorldObj().getBlock(tile.xCoord + 1, tile.yCoord, tile.zCoord);
-				right = tile.getWorldObj().getBlock(tile.xCoord - 1, tile.yCoord, tile.zCoord);
-				break;
-			case 1:
-				/* Left is minus z, right is plus z */
-				leftUp = tile.getWorldObj().getBlock(tile.xCoord, tile.yCoord + 1, tile.zCoord - 1);
-				rightUp = tile.getWorldObj().getBlock(tile.xCoord, tile.yCoord + 1, tile.zCoord + 1);
-				left = tile.getWorldObj().getBlock(tile.xCoord, tile.yCoord, tile.zCoord - 1);
-				right = tile.getWorldObj().getBlock(tile.xCoord, tile.yCoord, tile.zCoord + 1);
-				break;
-			case 0:
-				/* Left is plus x, right is minus x, case 4 */
-				leftUp = tile.getWorldObj().getBlock(tile.xCoord - 1, tile.yCoord + 1, tile.zCoord);
-				rightUp = tile.getWorldObj().getBlock(tile.xCoord + 1, tile.yCoord + 1, tile.zCoord);
-				left = tile.getWorldObj().getBlock(tile.xCoord - 1, tile.yCoord, tile.zCoord);
-				right = tile.getWorldObj().getBlock(tile.xCoord + 1, tile.yCoord, tile.zCoord);
-				break;
-			default:
-				left = block;
-				right = block;
-				leftUp = block;
-				rightUp = block;
-				break;
-		}
 		stand.render(boxTranslation);
 		standBase.render(boxTranslation);
 		desk.render(boxTranslation);
@@ -153,29 +112,68 @@ public class ModelWorkstation extends ModelBase
 		supportCenter.render(boxTranslation);
 		supportRight.render(boxTranslation);
 		screenCenter.render(boxTranslation);
+		
+		if (tile != null)
+		{
+			Block block = tile.getWorldObj().getBlock(tile.xCoord, tile.yCoord, tile.zCoord);
+			Block left, leftUp, right, rightUp;
 
-		if (left != AliensVsPredator.instance().blocks.blockWorkstation && leftUp == Blocks.air && left.getBlockBoundsMaxY() <= 1.5)
+			switch (tile.rotation)
+			{
+				case 3:
+					/* Left is plus z, right is minus z */
+					leftUp = tile.getWorldObj().getBlock(tile.xCoord, tile.yCoord + 1, tile.zCoord + 1);
+					rightUp = tile.getWorldObj().getBlock(tile.xCoord, tile.yCoord + 1, tile.zCoord - 1);
+					left = tile.getWorldObj().getBlock(tile.xCoord, tile.yCoord, tile.zCoord + 1);
+					right = tile.getWorldObj().getBlock(tile.xCoord, tile.yCoord, tile.zCoord - 1);
+					break;
+				case 2:
+					/* Left is minus x, right is plus x */
+					leftUp = tile.getWorldObj().getBlock(tile.xCoord + 1, tile.yCoord + 1, tile.zCoord);
+					rightUp = tile.getWorldObj().getBlock(tile.xCoord - 1, tile.yCoord + 1, tile.zCoord);
+					left = tile.getWorldObj().getBlock(tile.xCoord + 1, tile.yCoord, tile.zCoord);
+					right = tile.getWorldObj().getBlock(tile.xCoord - 1, tile.yCoord, tile.zCoord);
+					break;
+				case 1:
+					/* Left is minus z, right is plus z */
+					leftUp = tile.getWorldObj().getBlock(tile.xCoord, tile.yCoord + 1, tile.zCoord - 1);
+					rightUp = tile.getWorldObj().getBlock(tile.xCoord, tile.yCoord + 1, tile.zCoord + 1);
+					left = tile.getWorldObj().getBlock(tile.xCoord, tile.yCoord, tile.zCoord - 1);
+					right = tile.getWorldObj().getBlock(tile.xCoord, tile.yCoord, tile.zCoord + 1);
+					break;
+				case 0:
+					/* Left is plus x, right is minus x, case 4 */
+					leftUp = tile.getWorldObj().getBlock(tile.xCoord - 1, tile.yCoord + 1, tile.zCoord);
+					rightUp = tile.getWorldObj().getBlock(tile.xCoord + 1, tile.yCoord + 1, tile.zCoord);
+					left = tile.getWorldObj().getBlock(tile.xCoord - 1, tile.yCoord, tile.zCoord);
+					right = tile.getWorldObj().getBlock(tile.xCoord + 1, tile.yCoord, tile.zCoord);
+					break;
+				default:
+					left = block;
+					right = block;
+					leftUp = block;
+					rightUp = block;
+					break;
+			}
+
+			if (left != AliensVsPredator.instance().blocks.blockWorkstation && leftUp == Blocks.air && left.getBlockBoundsMaxY() <= 1.5)
+			{
+				leftArm.render(boxTranslation);
+				screenLeft.render(boxTranslation);
+			}
+
+			if (right != AliensVsPredator.instance().blocks.blockWorkstation && rightUp == Blocks.air && right.getBlockBoundsMaxY() <= 1.5)
+			{
+				rightArm.render(boxTranslation);
+				screenRight.render(boxTranslation);
+			}
+		}
+		else
 		{
 			leftArm.render(boxTranslation);
 			screenLeft.render(boxTranslation);
-		}
-
-		if (right != AliensVsPredator.instance().blocks.blockWorkstation && rightUp == Blocks.air && right.getBlockBoundsMaxY() <= 1.5)
-		{
 			rightArm.render(boxTranslation);
 			screenRight.render(boxTranslation);
 		}
-	}
-
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
-	}
-
-	public void setRotationAngles(TileEntityWorkstation tile)
-	{
-		;
 	}
 }

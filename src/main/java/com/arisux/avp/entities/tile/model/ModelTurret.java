@@ -1,11 +1,11 @@
 package com.arisux.avp.entities.tile.model;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
+import com.arisux.airi.lib.client.ModelBaseExtension;
 import com.arisux.avp.entities.tile.TileEntityTurret;
 
-public class ModelTurret extends ModelBase
+public class ModelTurret extends ModelBaseExtension
 {
 	private ModelRenderer barrel,
 		supportLeft,
@@ -162,13 +162,6 @@ public class ModelTurret extends ModelBase
 		leftLeg.render(boxTranslation);
 		rightLeg.render(boxTranslation);
 		centerLeg.render(boxTranslation);
-	}
-
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
 	}
 
 	public void setRotationAngles(TileEntityTurret tile)

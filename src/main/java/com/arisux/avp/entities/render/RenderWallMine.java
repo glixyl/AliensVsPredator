@@ -1,4 +1,4 @@
-package com.arisux.avp.items.render;
+package com.arisux.avp.entities.render;
 
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.Render;

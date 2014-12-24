@@ -1,10 +1,11 @@
 package com.arisux.avp.entities.mob.model;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelChestburster extends ModelBase
+import com.arisux.airi.lib.client.ModelBaseExtension;
+
+public class ModelChestburster extends ModelBaseExtension
 {
 	public ModelRenderer body1, body2, body3, body4, body5, body7, mouth, body8, body9, body10, body11, body12, body13, body14, body15, body16, tail1, tail2, tail3, tail4, tail5, tail6, tail7, body17;
 
@@ -188,13 +189,6 @@ public class ModelChestburster extends ModelBase
 		this.tail6.render(boxTranslation);
 		this.tail7.render(boxTranslation);
 		this.body17.render(boxTranslation);
-	}
-
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
 	}
 
 	@Override

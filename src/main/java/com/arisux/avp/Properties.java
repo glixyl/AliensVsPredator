@@ -50,6 +50,7 @@ public class Properties
 	public final String TEXTURE_PATH_TURRET = DOMAIN + "textures/tile/turret.png";
 	public final String TEXTURE_PATH_WORKSTATION = DOMAIN + "textures/tile/workstation.png";
 	public final String TEXTURE_PATH_WORKSTATION_ON = DOMAIN + "textures/tile/workstation-on.png";
+	public final String TEXTURE_PATH_STASIS_MECHANISM = DOMAIN + "textures/tile/stasis-mechanism.png";
 	public final String TEXTURE_PATH_GENERATOR = DOMAIN + "textures/tile/generator.png";
 	public final String TEXTURE_PATH_CABLE = DOMAIN + "textures/tile/cable.png";
 	public final String TEXTURE_PATH_NETWORKLIGHT = DOMAIN + "textures/tile/networklight.png";
