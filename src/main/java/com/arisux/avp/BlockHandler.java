@@ -47,7 +47,7 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockAssembler = (new BlockAssembler(Material.iron).setHardness(1.5F).setResistance(10.0F)),
 		blockFloorGrill = ((HookedBlock) (new HookedBlock(Material.iron)).setHardness(3.5F).setResistance(2.0F)).setOpaque(false),
 		blockWall = (new HookedBlock(Material.iron)).setHardness(3.5F).setResistance(2.0F),
-		blockWallAngled = (new HookedBlock(Material.iron).setRenderType(AliensVsPredator.instance().renderer.renderTypeAngled)).setHardness(3.5F).setResistance(2.0F),
+//		blockWallAngled = (new HookedBlock(Material.iron).setRenderType(AliensVsPredator.instance().renderer.renderTypeAngled)).setHardness(3.5F).setResistance(2.0F),
 		blockWallW = (new HookedBlock(Material.iron).setIconSet(new RenderUtil.IconSet(this.getMod().domain() + "wall_top", this.getMod().domain() + "wall_top", this.getMod().domain() + "wall_top", this.getMod().domain() + "wall_side", this.getMod().domain() + "wall_side", this.getMod().domain() + "wall_side", this.getMod().domain() + "wall_side"))).setHardness(3.5F).setResistance(2.0F),
 		blockCeiling = (new HookedBlock(Material.iron)).setHardness(3.5F).setResistance(2.0F).setLightOpacity(100),
 		blockCeiliingVent = (new HookedBlock(Material.iron)).setHardness(3.5F).setResistance(2.0F),
@@ -117,7 +117,7 @@ public class BlockHandler extends IBHandler implements IInitializable
 		registerBlock(blockGrillStairs, "floorgrillstairs", blockFloorGrill);
 		registerBlock(blockFloorGrillSlab, "floorgrillslab", blockFloorGrill);
 		registerBlock(blockWall, "industrialwall");
-		registerBlock(blockWallAngled, "industrialwallangled", blockWall);
+//		registerBlock(blockWallAngled, "industrialwallangled", blockWall);
 		registerBlock(blockWallW, "industrialwall2", blockWall);
 		registerBlock(blockWallStairs, "industrialwallstairs", blockWall);
 		registerBlock(blockWallSlab, "industrialslab", blockWall);
