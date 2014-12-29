@@ -32,7 +32,7 @@ public class RenderAqua extends RenderXenomorph
 	@Override
 	protected void preRenderCallback(EntityLivingBase entityliving, float partialTicks)
 	{
-		GL11.glScalef(1.1F, 1.1F, 1.1F);
+		GL11.glScalef(0.8F, 0.8F, 0.8F);
 	}
 
 	@Override

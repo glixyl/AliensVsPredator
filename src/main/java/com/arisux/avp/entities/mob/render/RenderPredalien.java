@@ -28,7 +28,7 @@ public class RenderPredalien extends RenderLiving
 	@Override
 	protected void preRenderCallback(EntityLivingBase par1EntityLiving, float par2)
 	{
-		GL11.glScalef(1F, 1F, 1F);
+		GL11.glScalef(0.75F, 0.75F, 0.75F);
 	}
 
 	@Override
