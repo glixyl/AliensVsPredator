@@ -3,7 +3,6 @@ package com.arisux.avp.entities.tile.render;
 import static org.lwjgl.opengl.GL11.*;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL12;
 
@@ -15,8 +14,6 @@ import com.arisux.avp.entities.tile.model.ModelWorkstation;
 public class RenderWorkstation extends TileEntitySpecialRenderer
 {
 	private ModelWorkstation model = new ModelWorkstation();
-	private static final ResourceLocation resource = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_WORKSTATION);
-	private static final ResourceLocation resourceLight = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_WORKSTATION_ON);
 
 	@Override
 	public void renderTileEntityAt(TileEntity var1, double posX, double posY, double posZ, float var8)
@@ -28,7 +25,7 @@ public class RenderWorkstation extends TileEntitySpecialRenderer
 			glDisable(GL_CULL_FACE);
 			glEnable(GL_BLEND);
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-			this.bindTexture(resource);
+			this.bindTexture(AliensVsPredator.resources().WORKSTATION);
 			glTranslated(posX + 0.5F, posY + 1.5F, posZ + 0.5F);
 			glRotatef(tile.rotation * (-90F), 0F, 1F, 0F);
 			glEnable(GL12.GL_RESCALE_NORMAL);
@@ -42,7 +39,7 @@ public class RenderWorkstation extends TileEntitySpecialRenderer
 				RenderUtil.glDisableLight();
 				glEnable(GL_BLEND);
 				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-				this.bindTexture(resourceLight);
+				this.bindTexture(AliensVsPredator.resources().WORKSTATION_MASK);
 				this.model.render(tile, 0.0625F);
 				glDisable(GL_BLEND);
 				RenderUtil.glEnableLight();

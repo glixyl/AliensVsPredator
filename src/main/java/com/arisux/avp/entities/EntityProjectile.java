@@ -72,24 +72,24 @@ public abstract class EntityProjectile extends EntityArrow implements IThrowable
 	}
 
 	@Override
-	public void setThrowableHeading(double x, double y, double z, float velocity, float deviation)
+	public void setThrowableHeading(double posX, double posY, double posZ, float velocity, float deviation)
 	{
-		float sq = MathHelper.sqrt_double(x * x + y * y + z * z);
-		x /= sq;
-		y /= sq;
-		z /= sq;
-		x += rand.nextGaussian() * 0.0075F * deviation;
-		y += rand.nextGaussian() * 0.0075F * deviation;
-		z += rand.nextGaussian() * 0.0075F * deviation;
-		x *= velocity;
-		y *= velocity;
-		z *= velocity;
-		this.motionX = x;
-		this.motionY = y;
-		this.motionZ = z;
-		float f3 = MathHelper.sqrt_double(x * x + z * z);
-		this.prevRotationYaw = rotationYaw = (float) ((Math.atan2(x, z) * 180D) / Math.PI);
-		this.prevRotationPitch = rotationPitch = (float) ((Math.atan2(y, f3) * 180D) / Math.PI);
+		float sq = MathHelper.sqrt_double(posX * posX + posY * posY + posZ * posZ);
+		posX /= sq;
+		posY /= sq;
+		posZ /= sq;
+		posX += rand.nextGaussian() * 0.0075F * deviation;
+		posY += rand.nextGaussian() * 0.0075F * deviation;
+		posZ += rand.nextGaussian() * 0.0075F * deviation;
+		posX *= velocity;
+		posY *= velocity;
+		posZ *= velocity;
+		this.motionX = posX;
+		this.motionY = posY;
+		this.motionZ = posZ;
+		float f3 = MathHelper.sqrt_double(posX * posX + posZ * posZ);
+		this.prevRotationYaw = rotationYaw = (float) ((Math.atan2(posX, posZ) * 180D) / Math.PI);
+		this.prevRotationPitch = rotationPitch = (float) ((Math.atan2(posY, f3) * 180D) / Math.PI);
 		this.ticksInGround = 0;
 	}
 

@@ -8,21 +8,12 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import com.arisux.avp.AliensVsPredator;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class EntityDrone extends EntityXenomorph
 {
-	@SideOnly(Side.CLIENT)
-	public static final ResourceLocation texBasic = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_DRONE_BASIC);
-	@SideOnly(Side.CLIENT)
-	public static final ResourceLocation texAdv = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_DRONE_ADVANCED);
-
 	public int mobType;
 	
 	public EntityDrone(World world)
@@ -51,21 +42,6 @@ public class EntityDrone extends EntityXenomorph
 		this.targetTasks.addTask(5, new EntityAINearestAttackableTarget(this, EntityMarine.class, 0, false));
 		this.targetTasks.addTask(6, new EntityAINearestAttackableTarget(this, EntityAgeable.class, 0, false));
 		this.setEvolveTo(EntityWarrior.class, 12);
-	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public ResourceLocation getResource()
-	{
-		switch (this.mobType)
-		{
-			case 0:
-				return texBasic;
-			case 1:
-				return texAdv;
-			default:
-				return null;
-		}
 	}
 
 	@Override

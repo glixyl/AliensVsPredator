@@ -15,7 +15,6 @@ import com.arisux.avp.entities.mob.EntityMarine;
 
 public class RenderMarine extends RenderLiving
 {
-	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_MARINE);
 	protected ModelBiped model;
 
 	public RenderMarine(ModelBiped mainModel, float shadowSize)
@@ -87,6 +86,6 @@ public class RenderMarine extends RenderLiving
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity)
 	{
-		return resourceLocation;
+		return AliensVsPredator.resources().MARINE;
 	}
 }

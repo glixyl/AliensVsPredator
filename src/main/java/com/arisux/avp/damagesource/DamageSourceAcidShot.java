@@ -4,7 +4,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
 
-import com.arisux.avp.entities.EntityAcidSpit;
+import com.arisux.avp.entities.EntityAcidProjectile;
 
 public class DamageSourceAcidShot extends DamageSource
 {
@@ -19,7 +19,7 @@ public class DamageSourceAcidShot extends DamageSource
         return this;
     }
 
-    public static DamageSource causeAcidicDamage(EntityAcidSpit entityacid, Entity entity)
+    public static DamageSource causeAcidicDamage(EntityAcidProjectile entityacid, Entity entity)
     {
         return (new EntityDamageSourceIndirect("acidshot", entityacid, entity)).setProjectile();
     }

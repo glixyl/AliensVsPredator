@@ -8,19 +8,12 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import com.arisux.avp.AliensVsPredator;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class EntityCrusher extends EntityXenomorph
 {
-	@SideOnly(Side.CLIENT)
-	private ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_CRUSHER);
-
 	public EntityCrusher(World var1)
 	{
 		super(var1);
@@ -59,7 +52,7 @@ public class EntityCrusher extends EntityXenomorph
 	}
 
 	@Override
-	protected void dropRareDrop(int par1)
+	protected void dropRareDrop(int rate)
 	{
 		if (new Random().nextInt(4) == 1)
 			this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.helmXeno), 1);
@@ -70,7 +63,7 @@ public class EntityCrusher extends EntityXenomorph
 		if (new Random().nextInt(4) == 1)
 			this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.bootsXeno), 1);
 
-		super.dropRareDrop(par1);
+		super.dropRareDrop(rate);
 	}
 
 	@Override
@@ -101,12 +94,5 @@ public class EntityCrusher extends EntityXenomorph
 	public int getTotalArmorValue()
 	{
 		return 5;
-	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public ResourceLocation getResource()
-	{
-		return resourceLocation;
 	}
 }

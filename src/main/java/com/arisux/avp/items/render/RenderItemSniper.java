@@ -18,7 +18,7 @@ import com.arisux.avp.items.model.ModelSniper;
 
 public class RenderItemSniper extends ItemRenderer
 {
-	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_SNIPER);
+	public static final ResourceLocation resourceLocation = AliensVsPredator.resources().SNIPER;
 	public static final ModelBaseExtension model = new ModelSniper();
 	private float defaultFOV = mc.gameSettings.getOptionFloatValue(GameSettings.Options.FOV);
 

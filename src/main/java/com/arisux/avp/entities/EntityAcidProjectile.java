@@ -6,7 +6,6 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.*;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -18,7 +17,7 @@ import com.arisux.avp.damagesource.DamageSourceAcidShot;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class EntityAcidSpit extends Entity implements IProjectile
+public class EntityAcidProjectile extends Entity implements IProjectile
 {
 	private int xTile = -1;
 	private int yTile = -1;
@@ -27,72 +26,67 @@ public class EntityAcidSpit extends Entity implements IProjectile
 	private int inData;
 	private boolean inGround;
 	public int canBePickedUp;
-	public int AcidShake;
+	public int shake;
 	public Entity shootingEntity;
 	private int ticksInGround;
 	private int ticksInAir;
 	private double damage = 2.0D;
 	private int knockbackStrength;
 
-	public EntityAcidSpit(World par1World)
+	public EntityAcidProjectile(World world)
 	{
-		super(par1World);
+		super(world);
 		this.renderDistanceWeight = 10.0D;
 		this.setSize(0.5F, 0.5F);
 	}
 
-	public EntityAcidSpit(World par1World, double par2, double par4, double par6)
+	public EntityAcidProjectile(World world, double posX, double posY, double posZ)
 	{
-		super(par1World);
+		super(world);
 		this.renderDistanceWeight = 10.0D;
 		this.setSize(0.5F, 0.5F);
-		this.setPosition(par2, par4, par6);
+		this.setPosition(posX, posY, posZ);
 		this.yOffset = 0.0F;
 	}
 
-	public EntityAcidSpit(World par1World, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase, float par4, float par5)
+	public EntityAcidProjectile(World world, EntityLivingBase shooter, EntityLivingBase target, float velocity, float deviation)
 	{
-		super(par1World);
+		super(world);
 		this.renderDistanceWeight = 10.0D;
-		this.shootingEntity = par2EntityLivingBase;
+		this.shootingEntity = shooter;
 
-		if (par2EntityLivingBase instanceof EntityPlayer)
+		if (shooter instanceof EntityPlayer)
 		{
 			this.canBePickedUp = 1;
 		}
 
-		this.posY = par2EntityLivingBase.posY + par2EntityLivingBase.getEyeHeight() - 0.10000000149011612D;
-		double d0 = par3EntityLivingBase.posX - par2EntityLivingBase.posX;
-		double d1 = par3EntityLivingBase.boundingBox.minY + par3EntityLivingBase.height / 3.0F - this.posY;
-		double d2 = par3EntityLivingBase.posZ - par2EntityLivingBase.posZ;
-		double d3 = MathHelper.sqrt_double(d0 * d0 + d2 * d2);
+		this.posY = shooter.posY + shooter.getEyeHeight() - 0.10000000149011612D;
+		double distX = target.posX - shooter.posX;
+		double distY = target.boundingBox.minY + target.height / 3.0F - this.posY;
+		double distZ = target.posZ - shooter.posZ;
+		double distSq = MathHelper.sqrt_double(distX * distX + distZ * distZ);
 
-		if (d3 >= 1.0E-7D)
+		if (distSq >= 1.0E-7D)
 		{
-			float f2 = (float) (Math.atan2(d2, d0) * 180.0D / Math.PI) - 90.0F;
-			float f3 = (float) (-(Math.atan2(d1, d3) * 180.0D / Math.PI));
-			double d4 = d0 / d3;
-			double d5 = d2 / d3;
-			this.setLocationAndAngles(par2EntityLivingBase.posX + d4, this.posY, par2EntityLivingBase.posZ + d5, f2, f3);
 			this.yOffset = 0.0F;
-			float f4 = (float) d3 * 0.2F;
-			this.setThrowableHeading(d0, d1 + f4, d2, par4, par5);
+			this.setLocationAndAngles(shooter.posX + (distX / distSq), this.posY, shooter.posZ + (distZ / distSq), (float) (Math.atan2(distZ, distX) * 180.0D / Math.PI) - 90.0F,  (float) (-(Math.atan2(distY, distSq) * 180.0D / Math.PI)));
+			this.setThrowableHeading(distX, distY + ((float) distSq * 0.2F), distZ, velocity, deviation);
 		}
 	}
 
-	public EntityAcidSpit(World par1World, EntityLivingBase par2EntityLivingBase, float par3)
+	public EntityAcidProjectile(World world, EntityLivingBase shooter, float velocity)
 	{
-		super(par1World);
+		super(world);
 		this.renderDistanceWeight = 10.0D;
-		this.shootingEntity = par2EntityLivingBase;
+		this.shootingEntity = shooter;
 
-		if (par2EntityLivingBase instanceof EntityPlayer)
+		if (shooter instanceof EntityPlayer)
 		{
 			this.canBePickedUp = 1;
 		}
 
 		this.setSize(0.5F, 0.5F);
-		this.setLocationAndAngles(par2EntityLivingBase.posX, par2EntityLivingBase.posY + par2EntityLivingBase.getEyeHeight(), par2EntityLivingBase.posZ, par2EntityLivingBase.rotationYaw, par2EntityLivingBase.rotationPitch);
+		this.setLocationAndAngles(shooter.posX, shooter.posY + shooter.getEyeHeight(), shooter.posZ, shooter.rotationYaw, shooter.rotationPitch);
 		this.posX -= MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F;
 		this.posY -= 0.10000000149011612D;
 		this.posZ -= MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F;
@@ -101,7 +95,7 @@ public class EntityAcidSpit extends Entity implements IProjectile
 		this.motionX = -MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI);
 		this.motionZ = MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI);
 		this.motionY = (-MathHelper.sin(this.rotationPitch / 180.0F * (float) Math.PI));
-		this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, par3 * 1.5F, 1.0F);
+		this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, velocity * 1.5F, 1.0F);
 	}
 
 	@Override
@@ -110,22 +104,19 @@ public class EntityAcidSpit extends Entity implements IProjectile
 		this.dataWatcher.addObject(16, Byte.valueOf((byte) 0));
 	}
 
-	/**
-	 * Similar to setArrowHeading, it's point the throwable entity to a x, y, z direction.
-	 */
 	@Override
-	public void setThrowableHeading(double par1, double par3, double par5, float par7, float par8)
+	public void setThrowableHeading(double par1, double par3, double par5, float velocity, float deviation)
 	{
 		float f2 = MathHelper.sqrt_double(par1 * par1 + par3 * par3 + par5 * par5);
 		par1 /= f2;
 		par3 /= f2;
 		par5 /= f2;
-		par1 += this.rand.nextGaussian() * (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * par8;
-		par3 += this.rand.nextGaussian() * (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * par8;
-		par5 += this.rand.nextGaussian() * (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * par8;
-		par1 *= par7;
-		par3 *= par7;
-		par5 *= par7;
+		par1 += this.rand.nextGaussian() * (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * deviation;
+		par3 += this.rand.nextGaussian() * (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * deviation;
+		par5 += this.rand.nextGaussian() * (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * deviation;
+		par1 *= velocity;
+		par3 *= velocity;
+		par5 *= velocity;
 		this.motionX = par1;
 		this.motionY = par3;
 		this.motionZ = par5;
@@ -137,32 +128,25 @@ public class EntityAcidSpit extends Entity implements IProjectile
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	/**
-	 * Sets the position and rotation. Only difference from the other one is no bounding on the rotation. Args: posX,
-	 * posY, posZ, yaw, pitch
-	 */
-	public void setPositionAndRotation2(double par1, double par3, double par5, float par7, float par8, int par9)
+	public void setPositionAndRotation2(double posX, double posY, double posZ, float yaw, float pitch, int par9)
 	{
-		this.setPosition(par1, par3, par5);
-		this.setRotation(par7, par8);
+		this.setPosition(posX, posY, posZ);
+		this.setRotation(yaw, pitch);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	/**
-	 * Sets the velocity to the args. Args: x, y, z
-	 */
-	public void setVelocity(double par1, double par3, double par5)
+	public void setVelocity(double motionX, double motionY, double motionZ)
 	{
-		this.motionX = par1;
-		this.motionY = par3;
-		this.motionZ = par5;
+		this.motionX = motionX;
+		this.motionY = motionY;
+		this.motionZ = motionZ;
 
 		if (this.prevRotationPitch == 0.0F && this.prevRotationYaw == 0.0F)
 		{
-			float f = MathHelper.sqrt_double(par1 * par1 + par5 * par5);
-			this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(par1, par5) * 180.0D / Math.PI);
-			this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(par3, f) * 180.0D / Math.PI);
+			float f = MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ);
+			this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(motionX, motionZ) * 180.0D / Math.PI);
+			this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(motionY, f) * 180.0D / Math.PI);
 			this.prevRotationPitch = this.rotationPitch;
 			this.prevRotationYaw = this.rotationYaw;
 			this.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
@@ -170,11 +154,8 @@ public class EntityAcidSpit extends Entity implements IProjectile
 		}
 	}
 
-	/**
-	 * Called to update the entity's position/logic.
-	 */
 	@Override
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("all")
 	public void onUpdate()
 	{
 		super.onUpdate();
@@ -201,18 +182,15 @@ public class EntityAcidSpit extends Entity implements IProjectile
 
 		if (this.prevRotationPitch == 0.0F && this.prevRotationYaw == 0.0F)
 		{
-			float var16 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
 			this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(this.motionX, this.motionZ) * 180.0D / Math.PI);
-			this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(this.motionY, var16) * 180.0D / Math.PI);
+			this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(this.motionY, MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ)) * 180.0D / Math.PI);
 		}
 
 		block = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
 
 		if (block != null)
 		{
-			// setBlockBoundsBasedOnState
 			block.setBlockBoundsBasedOnState(this.worldObj, this.xTile, this.yTile, this.zTile);
-			// getCollisionBoundingBoxFromPool
 			AxisAlignedBB vec3 = block.getCollisionBoundingBoxFromPool(this.worldObj, this.xTile, this.yTile, this.zTile);
 
 			if (vec3 != null && vec3.isVecInside(Vec3.createVectorHelper(this.posX, this.posY, this.posZ)))
@@ -221,9 +199,9 @@ public class EntityAcidSpit extends Entity implements IProjectile
 			}
 		}
 
-		if (this.AcidShake > 0)
+		if (this.shake > 0)
 		{
-			--this.AcidShake;
+			--this.shake;
 		}
 
 		if (this.inGround)
@@ -250,7 +228,6 @@ public class EntityAcidSpit extends Entity implements IProjectile
 			++this.ticksInAir;
 			Vec3 var18 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
 			Vec3 var19 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
-			// rayTraceBlocks_do_do
 			MovingObjectPosition movingobjectposition = this.worldObj.func_147447_a(var18, var19, false, true, true);
 			var18 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
 			var19 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
@@ -355,20 +332,6 @@ public class EntityAcidSpit extends Entity implements IProjectile
 									movingobjectposition.entityHit.addVelocity(this.motionX * this.knockbackStrength * 0.6000000238418579D / var21, 0.1D, this.motionZ * this.knockbackStrength * 0.6000000238418579D / var21);
 								}
 							}
-
-							if (this.shootingEntity != null)
-							{
-								// EnchantmentThorns.func_92096_a(this.shootingEntity,
-								// entitylivingbase,
-								// this.rand);
-							}
-
-							if (this.shootingEntity != null && movingobjectposition.entityHit != this.shootingEntity && movingobjectposition.entityHit instanceof EntityPlayer && this.shootingEntity instanceof EntityPlayerMP)
-							{
-								// ((EntityPlayerMP)this.shootingEntity).playerNetServerHandler.sendPacketToPlayer(new
-								// Packet70GameEvent(6,
-								// 0));
-							}
 						}
 
 						if (!(movingobjectposition.entityHit instanceof EntityEnderman))
@@ -401,7 +364,7 @@ public class EntityAcidSpit extends Entity implements IProjectile
 					this.posY -= this.motionY / var22 * 0.05000000074505806D;
 					this.posZ -= this.motionZ / var22 * 0.05000000074505806D;
 					this.inGround = true;
-					this.AcidShake = 7;
+					this.shake = 7;
 					this.setIsCritical(false);
 
 					if (this.inTile != null)
@@ -466,39 +429,30 @@ public class EntityAcidSpit extends Entity implements IProjectile
 			this.motionZ *= var24;
 			this.motionY -= f1;
 			this.setPosition(this.posX, this.posY, this.posZ);
-			// this.doBlockCollisions();
 		}
 	}
 
-	/**
-	 * (abstract) Protected helper method to write subclass entity data to NBT.
-	 */
 	@Override
 	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		par1NBTTagCompound.setShort("xTile", (short) this.xTile);
 		par1NBTTagCompound.setShort("yTile", (short) this.yTile);
 		par1NBTTagCompound.setShort("zTile", (short) this.zTile);
-		// par1NBTTagCompound.setByte("inTile", (byte)this.inTile);
 		par1NBTTagCompound.setByte("inData", (byte) this.inData);
-		par1NBTTagCompound.setByte("shake", (byte) this.AcidShake);
+		par1NBTTagCompound.setByte("shake", (byte) this.shake);
 		par1NBTTagCompound.setByte("inGround", (byte) (this.inGround ? 1 : 0));
 		par1NBTTagCompound.setByte("pickup", (byte) this.canBePickedUp);
 		par1NBTTagCompound.setDouble("damage", this.damage);
 	}
 
-	/**
-	 * (abstract) Protected helper method to read subclass entity data from NBT.
-	 */
 	@Override
 	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		this.xTile = par1NBTTagCompound.getShort("xTile");
 		this.yTile = par1NBTTagCompound.getShort("yTile");
 		this.zTile = par1NBTTagCompound.getShort("zTile");
-		// this.inTile = par1NBTTagCompound.getByte("inTile") & 255;
 		this.inData = par1NBTTagCompound.getByte("inData") & 255;
-		this.AcidShake = par1NBTTagCompound.getByte("shake") & 255;
+		this.shake = par1NBTTagCompound.getByte("shake") & 255;
 		this.inGround = par1NBTTagCompound.getByte("inGround") == 1;
 
 		if (par1NBTTagCompound.hasKey("damage"))
@@ -516,10 +470,6 @@ public class EntityAcidSpit extends Entity implements IProjectile
 		}
 	}
 
-	/**
-	 * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
-	 * prevent them from trampling crops
-	 */
 	@Override
 	protected boolean canTriggerWalking()
 	{
@@ -548,9 +498,6 @@ public class EntityAcidSpit extends Entity implements IProjectile
 		this.knockbackStrength = par1;
 	}
 
-	/**
-	 * If returns false, the item will not inflict any damage against entities.
-	 */
 	@Override
 	public boolean canAttackWithItem()
 	{
@@ -593,8 +540,7 @@ public class EntityAcidSpit extends Entity implements IProjectile
 		{
 			if (var1.entityHit != null)
 			{
-				byte b0 = 7;
-				((EntityLiving) var1.entityHit).addPotionEffect(new PotionEffect(Potion.poison.id, b0 * 20, 0));
+				((EntityLiving) var1.entityHit).addPotionEffect(new PotionEffect(Potion.poison.id, 7 * 20, 0));
 			}
 
 			this.setDead();

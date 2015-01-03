@@ -46,7 +46,7 @@ public class ItemGrenade extends HookedItem
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings("all")
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{
 		par3List.add("Right click to throw (explodes)");

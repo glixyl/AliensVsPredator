@@ -9,18 +9,15 @@ import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import com.arisux.avp.AliensVsPredator;
 
 public class EntityWarrior extends EntityXenomorph implements IMob
 {
-	private ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_WARRIOR);
-
-	public EntityWarrior(World var1)
+	public EntityWarrior(World world)
 	{
-		super(var1);
+		super(world);
 		this.experienceValue = 175;
 		this.setSize(1.0F, 2.5F);
 		this.tasks.addTask(0, new EntityAILeapAtTarget(this, 0.6F));
@@ -90,11 +87,5 @@ public class EntityWarrior extends EntityXenomorph implements IMob
 	protected String getDeathSound()
 	{
 		return AliensVsPredator.properties().SOUND_WARRIOR_DEATH;
-	}
-
-	@Override
-	public ResourceLocation getResource()
-	{
-		return resourceLocation;
 	}
 }

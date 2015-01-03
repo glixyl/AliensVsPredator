@@ -7,9 +7,9 @@ import static net.minecraftforge.client.MinecraftForgeClient.registerItemRendere
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
 
 import com.arisux.airi.lib.client.ModelBipedExtension;
+import com.arisux.airi.lib.client.ModelTexMap;
 import com.arisux.airi.lib.interfaces.IInitializablePost;
 import com.arisux.airi.lib.interfaces.IInitializablePre;
 import com.arisux.avp.block.render.RenderTypeAngled;
@@ -46,13 +46,13 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 
 	public void registerEntityRenderers()
 	{
-		registerEntityRenderingHandler(EntityDrone.class, new RenderXenomorph(new ModelDrone(), 0.5F));
+		registerEntityRenderingHandler(EntityDrone.class, new RenderXenomorph(new ModelTexMap(new ModelDrone(), AliensVsPredator.resources().DRONE_BASIC), 0.5F));
+		registerEntityRenderingHandler(EntityWarrior.class, new RenderXenomorph(new ModelTexMap(new ModelWarrior(), AliensVsPredator.resources().WARRIOR), 0.5F));
+		registerEntityRenderingHandler(EntityPraetorian.class, new RenderXenomorph(new ModelTexMap(new ModelPraetorian(), AliensVsPredator.resources().PRAETORIAN), 0.35F));
+		registerEntityRenderingHandler(EntityCrusher.class, new RenderXenomorph(new ModelTexMap(new ModelCrusher(), AliensVsPredator.resources().CRUSHER), 0.5F));
 		registerEntityRenderingHandler(EntityAqua.class, new RenderAqua(new ModelAqua(), 0.5F));
-		registerEntityRenderingHandler(EntityPraetorian.class, new RenderXenomorph(new ModelPraetorian(), 0.35F));
 		registerEntityRenderingHandler(EntityPredalien.class, new RenderPredalien(new ModelPredalien(), 0.35F));
-		registerEntityRenderingHandler(EntityWarrior.class, new RenderXenomorph(new ModelWarrior(), 0.5F));
 		registerEntityRenderingHandler(EntitySpitter.class, new RenderSpitter(new ModelSpitter(), 0.5F));
-		registerEntityRenderingHandler(EntityCrusher.class, new RenderXenomorph(new ModelCrusher(), 0.5F));
 		registerEntityRenderingHandler(EntityMarine.class, new RenderMarine(new ModelBiped(), 0.5F));
 		registerEntityRenderingHandler(EntityCombatSynthetic.class, new RenderCombatSynthetic(new ModelBiped(), 0.5F));
 		registerEntityRenderingHandler(EntityYautja.class, new RenderYautja(new ModelYautja(), 0.5F));
@@ -67,7 +67,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		registerEntityRenderingHandler(EntityFlame.class, new RenderFlame());
 		registerEntityRenderingHandler(EntityAcidPool.class, new RenderAcidPool());
 		registerEntityRenderingHandler(EntityPlasma.class, new RenderPlasmaBlast());
-		registerEntityRenderingHandler(EntityAcidSpit.class, new RenderAcidSpit());
+		registerEntityRenderingHandler(EntityAcidProjectile.class, new RenderAcidSpit());
 		registerEntityRenderingHandler(EntitySmartDisc.class, new RenderDisc());
 		registerEntityRenderingHandler(EntityShuriken.class, new RenderShuriken());
 		registerEntityRenderingHandler(EntityBullet.class, new RenderBullet());
@@ -82,27 +82,28 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		registerItemRenderer(items.itemWristBlade, new RenderItemWristbracer());
 		registerItemRenderer(items.itemWristbracerBlades, new RenderItemWristbracerBlades());
 		registerItemRenderer(items.itemSpear, new RenderItemSpear());
+		registerItemRenderer(items.itemM240ICU, new RenderItemM240ICU());
 		registerItemRenderer(items.itemM41A, new RenderItemM41A());
 		registerItemRenderer(items.itemM56SG, new RenderItemM56SG());
 		registerItemRenderer(items.itemAK47, new RenderItemAK47());
 		registerItemRenderer(items.itemM4, new RenderItemM4());
 		registerItemRenderer(items.itemSniper, new RenderItemSniper());
 		registerItemRenderer(items.itemMotionTracker, new RenderItemMotionTracker());
-		registerItemRenderer(items.itemSummonerDrone, (new RenderItemSummoner(EntityDrone.class, ModelDrone.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_DRONE_ADVANCED))).setScale(7.5F).setY(6F));
-		registerItemRenderer(items.itemSummonerWarrior, (new RenderItemSummoner(EntityWarrior.class, ModelWarrior.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_WARRIOR))).setScale(7.5F).setY(9F));
-		registerItemRenderer(items.itemSummonerPraetorian, (new RenderItemSummoner(EntityPraetorian.class, ModelPraetorian.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_PRAETORIAN))).setScale(7.5F).setY(7.5F));
-		registerItemRenderer(items.itemSummonerSpitter, (new RenderItemSummoner(EntitySpitter.class, ModelSpitter.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_SPITTER))).setScale(2.5F).setY(9F));
-		registerItemRenderer(items.itemSummonerCrusher, (new RenderItemSummoner(EntityCrusher.class, ModelCrusher.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_CRUSHER))).setScale(7.5F).setY(9.5F));
-		registerItemRenderer(items.itemSummonerQueen, (new RenderItemSummoner(EntityQueen.class, ModelQueen.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_XENOQUEEN))).setScale(7.5F).setY(8F));
-		registerItemRenderer(items.itemSummonerOvamorph, (new RenderItemSummoner(EntityOvamorph.class, ModelOvamorph.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_OVAMORPH))).setScale(20F).setY(1F));
-		registerItemRenderer(items.itemSummonerChestburster, (new RenderItemSummoner(EntityChestburster.class, ModelChestburster.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_CHESTBUSTER))).setScale(20F).setY(1F));
-		registerItemRenderer(items.itemSummonerFacehugger, (new RenderItemSummoner(EntityFacehugger.class, ModelFacehugger.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_FACEHUGGER))).setScale(15F).setY(1F));
-		registerItemRenderer(items.itemSummonerRoyalFacehugger, (new RenderItemSummoner(EntityRoyalFacehugger.class, ModelFacehugger.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_ROYALFACEHUGGER))).setScale(15F).setY(1F));
-		registerItemRenderer(items.itemSummonerMarine, (new RenderItemSummoner(EntityMarine.class, ModelBipedExtension.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_MARINE))).setScale(12F).setY(6F));
-		registerItemRenderer(items.itemSummonerYautja, (new RenderItemSummoner(EntityYautja.class, ModelYautja.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_YAUTJA))).setScale(7.5F).setY(8F));
-		registerItemRenderer(items.itemSummonerPredalien, (new RenderItemSummoner(EntityPredalien.class, ModelPredalien.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_PREDALIEN))).setScale(12F).setY(6F));
-		registerItemRenderer(items.itemSummonerAqua, (new RenderItemSummoner(EntityAqua.class, ModelAqua.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_AQUA_XENOMORPH))).setScale(7.5F).setY(8F));
-		registerItemRenderer(items.itemSummonerCombatSynthetic, (new RenderItemSummoner(EntityCombatSynthetic.class, ModelBipedExtension.class, new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_COMBAT_SYNTHETIC))).setScale(7.5F).setY(8F));
+		registerItemRenderer(items.itemSummonerDrone, (new RenderItemSummoner(EntityDrone.class, ModelDrone.class, AliensVsPredator.resources().DRONE_ADVANCED)).setScale(7.5F).setY(6F));
+		registerItemRenderer(items.itemSummonerWarrior, (new RenderItemSummoner(EntityWarrior.class, ModelWarrior.class, AliensVsPredator.resources().WARRIOR)).setScale(7.5F).setY(9F));
+		registerItemRenderer(items.itemSummonerPraetorian, (new RenderItemSummoner(EntityPraetorian.class, ModelPraetorian.class,AliensVsPredator.resources().PRAETORIAN)).setScale(7.5F).setY(7.5F));
+		registerItemRenderer(items.itemSummonerSpitter, (new RenderItemSummoner(EntitySpitter.class, ModelSpitter.class, AliensVsPredator.resources().SPITTER)).setScale(2.5F).setY(9F));
+		registerItemRenderer(items.itemSummonerCrusher, (new RenderItemSummoner(EntityCrusher.class, ModelCrusher.class, AliensVsPredator.resources().CRUSHER)).setScale(7.5F).setY(9.5F));
+		registerItemRenderer(items.itemSummonerQueen, (new RenderItemSummoner(EntityQueen.class, ModelQueen.class, AliensVsPredator.resources().XENOQUEEN)).setScale(7.5F).setY(8F));
+		registerItemRenderer(items.itemSummonerOvamorph, (new RenderItemSummoner(EntityOvamorph.class, ModelOvamorph.class, AliensVsPredator.resources().OVAMORPH)).setScale(20F).setY(1F));
+		registerItemRenderer(items.itemSummonerChestburster, (new RenderItemSummoner(EntityChestburster.class, ModelChestburster.class, AliensVsPredator.resources().CHESTBUSTER)).setScale(20F).setY(1F));
+		registerItemRenderer(items.itemSummonerFacehugger, (new RenderItemSummoner(EntityFacehugger.class, ModelFacehugger.class, AliensVsPredator.resources().FACEHUGGER)).setScale(15F).setY(1F));
+		registerItemRenderer(items.itemSummonerRoyalFacehugger, (new RenderItemSummoner(EntityRoyalFacehugger.class, ModelFacehugger.class, AliensVsPredator.resources().ROYALFACEHUGGER)).setScale(15F).setY(1F));
+		registerItemRenderer(items.itemSummonerMarine, (new RenderItemSummoner(EntityMarine.class, ModelBipedExtension.class, AliensVsPredator.resources().MARINE)).setScale(12F).setY(6F));
+		registerItemRenderer(items.itemSummonerYautja, (new RenderItemSummoner(EntityYautja.class, ModelYautja.class, AliensVsPredator.resources().YAUTJA)).setScale(7.5F).setY(8F));
+		registerItemRenderer(items.itemSummonerPredalien, (new RenderItemSummoner(EntityPredalien.class, ModelPredalien.class, AliensVsPredator.resources().PREDALIEN)).setScale(12F).setY(6F));
+		registerItemRenderer(items.itemSummonerAqua, (new RenderItemSummoner(EntityAqua.class, ModelAqua.class, AliensVsPredator.resources().AQUA_XENOMORPH)).setScale(7.5F).setY(8F));
+		registerItemRenderer(items.itemSummonerCombatSynthetic, (new RenderItemSummoner(EntityCombatSynthetic.class, ModelBipedExtension.class, AliensVsPredator.resources().COMBAT_SYNTHETIC)).setScale(7.5F).setY(8F));
 	}
 
 	public void registerTileEntitySpecialRenderers()

@@ -12,7 +12,7 @@ import com.arisux.avp.entities.tile.model.ModelTurret;
 
 public class RenderItemTurret extends ItemRenderer
 {
-	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_TURRET);
+	public static final ResourceLocation resourceLocation = AliensVsPredator.resources().TURRET;
 	public static final ModelTurret model = new ModelTurret();
 	private float rotation;
 	

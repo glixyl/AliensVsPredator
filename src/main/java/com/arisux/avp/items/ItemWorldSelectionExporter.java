@@ -22,26 +22,26 @@ public class ItemWorldSelectionExporter extends HookedItem
 	}
 
 	@Override
-	public boolean onBlockStartBreak(ItemStack stack, int X, int Y, int Z, EntityPlayer player)
+	public boolean onBlockStartBreak(ItemStack stack, int posX, int posY, int posZ, EntityPlayer player)
 	{
 		if (!player.worldObj.isRemote)
 		{
-			player.worldObj.markBlockForUpdate(X, Y, Z);
-			this.writeSelectionDataToStack(new Blocks.CoordData(X, Y, Z, player.worldObj.getBlock(X, Y, Z)), null, stack);
+			player.worldObj.markBlockForUpdate(posX, posY, posZ);
+			this.writeSelectionDataToStack(new Blocks.CoordData(posX, posY, posZ, player.worldObj.getBlock(posX, posY, posZ)), null, stack);
 		}
 
 		return true;
 	}
 
 	@Override
-	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
+	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int posX, int posY, int posZ, int side, float hitX, float hitY, float hitZ)
 	{
 		if (!player.worldObj.isRemote)
 		{
-			this.writeSelectionDataToStack(null, new Blocks.CoordData(x, y, z, player.worldObj.getBlock(x, y, z)), stack);
+			this.writeSelectionDataToStack(null, new Blocks.CoordData(posX, posY, posZ, player.worldObj.getBlock(posX, posY, posZ)), stack);
 		}
 
-		return super.onItemUseFirst(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
+		return super.onItemUseFirst(stack, player, world, posX, posY, posZ, side, hitX, hitY, hitZ);
 	}
 
 	public void writeSelectionDataToStack(Blocks.CoordData pos1, Blocks.CoordData pos2, ItemStack stack)
@@ -71,10 +71,10 @@ public class ItemWorldSelectionExporter extends HookedItem
 	}
 	
 	@Override
+	@SuppressWarnings("all")
 	@SideOnly(Side.CLIENT)
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
+	public void addInformation(ItemStack itemstack, EntityPlayer entityPlayer, List list, boolean par4)
 	{
-		par3List.add("World Selection Exporter");
+		list.add("World Selection Exporter");
 	}
 }

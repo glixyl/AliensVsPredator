@@ -3,15 +3,11 @@ package com.arisux.avp.entities.mob;
 import net.minecraft.entity.*;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import com.arisux.airi.lib.WorldUtil;
 import com.arisux.airi.lib.WorldUtil.Blocks;
 import com.arisux.avp.entities.EntityAcidPool;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 {
@@ -135,7 +131,4 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 	{
 		return (this.dataWatcher.getWatchableObjectByte(16) & 1) != 0;
 	}
-
-	@SideOnly(Side.CLIENT)
-	public abstract ResourceLocation getResource();
 }

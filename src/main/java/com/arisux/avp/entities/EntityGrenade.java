@@ -23,22 +23,17 @@ public class EntityGrenade extends EntityThrowable
 	public boolean isFlaming, explodeOnImpact;
 	private int fuse;
 
-	public EntityGrenade(World var1)
+	public EntityGrenade(World world)
 	{
-		super(var1);
+		super(world);
 		this.setSize(0.5F, 0.5F);
 		this.yOffset = this.height / 2.0F;
 		this.fuse = 0;
 	}
-
-	public EntityGrenade(World var1, EntityLivingBase var2)
+	
+	public EntityGrenade(World world, EntityLivingBase shooter)
 	{
-		super(var1, var2);
-	}
-
-	public EntityGrenade(World var1, double var2, double var4, double var6)
-	{
-		super(var1, var2, var4, var6);
+		super(world, shooter);
 	}
 
 	@Override
@@ -97,21 +92,21 @@ public class EntityGrenade extends EntityThrowable
 	}
 
 	@Override
-	public void writeEntityToNBT(NBTTagCompound var1)
+	public void writeEntityToNBT(NBTTagCompound tag)
 	{
-		super.writeEntityToNBT(var1);
-		var1.setByte("Fuse", (byte) this.fuse);
+		super.writeEntityToNBT(tag);
+		tag.setByte("Fuse", (byte) this.fuse);
 	}
 
 	@Override
-	public void readEntityFromNBT(NBTTagCompound var1)
+	public void readEntityFromNBT(NBTTagCompound tag)
 	{
-		super.readEntityFromNBT(var1);
-		this.fuse = var1.getByte("Fuse");
+		super.readEntityFromNBT(tag);
+		this.fuse = tag.getByte("Fuse");
 	}
 
 	@Override
-	protected void onImpact(MovingObjectPosition var1)
+	protected void onImpact(MovingObjectPosition movingObjectPosition)
 	{
 		;
 	}

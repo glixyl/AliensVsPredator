@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 
+import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.model.ModelDrone;
 
@@ -26,19 +27,14 @@ public class ItemArmorXeno extends ItemArmor
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
 	{
-//		if (isPlayerWearingXenoArmorSet((EntityPlayer) entity))
-		{
-//			return AliensVsPredator.properties().TEXTURE_PATH_DRONE_ADVANCED;
-		}
-
 		switch (slot)
 		{
 			case 0:
-				return AliensVsPredator.properties().TEXTURE_PATH_XENO1;
+				return RenderUtil.getResourcePath(AliensVsPredator.resources().XENO1);
 			case 1:
-				return AliensVsPredator.properties().TEXTURE_PATH_XENO1;
+				return RenderUtil.getResourcePath(AliensVsPredator.resources().XENO1);
 			default:
-				return AliensVsPredator.properties().TEXTURE_PATH_XENO2;
+				return RenderUtil.getResourcePath(AliensVsPredator.resources().XENO2);
 		}
 	}
 
@@ -46,11 +42,6 @@ public class ItemArmorXeno extends ItemArmor
 	@SideOnly(Side.CLIENT)
 	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int armorSlot)
 	{
-//		if (isPlayerWearingXenoArmorSet((EntityPlayer) entityLiving))
-//		{
-//			return this.mainModel == null ? this.mainModel = new ModelDrone() : this.mainModel;
-//		}
-
 		return null;
 	}
 

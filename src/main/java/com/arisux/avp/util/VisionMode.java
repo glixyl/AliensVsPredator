@@ -15,7 +15,6 @@ import org.lwjgl.opengl.GL11;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntitySpeciesAlien;
 import com.arisux.avp.entities.mob.EntityXenomorph;
-import com.arisux.avp.event.render.VisionModeRenderEvent;
 
 public enum VisionMode
 {
@@ -25,7 +24,7 @@ public enum VisionMode
 		public void render(Object... data)
 		{
 			AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue = 0F;
-			renderOverlay(VisionModeRenderEvent.resOverlayCeltic, 1F, 0F, 0F, 1F);
+			renderOverlay(AliensVsPredator.resources().BLUR_CELTIC_HUD, 1F, 0F, 0F, 1F);
 		}
 
 		@Override
@@ -55,7 +54,7 @@ public enum VisionMode
 				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 				glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
 				glDisable(GL_ALPHA_TEST);
-				bindTexture(VisionModeRenderEvent.resOverlayCeltic);
+				bindTexture(AliensVsPredator.resources().BLUR_CELTIC_HUD);
 				glColor4f(0F, 1F, 0.1F, 0F);
 				drawQuad(0, 0, scaledDisplayResolution().getScaledWidth(), scaledDisplayResolution().getScaledHeight(), 0, 0, 0, 0);
 				glColor4f(0F, 1F, 0F, 1F);
@@ -67,7 +66,7 @@ public enum VisionMode
 			GL11.glPopMatrix();
 
 			AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue = AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue < 0F ? AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue + 0.03F : AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue;
-			renderOverlay(VisionModeRenderEvent.resOverlayCeltic, 1F, 1F, 1F, 1F);
+			renderOverlay(AliensVsPredator.resources().BLUR_CELTIC_HUD, 1F, 1F, 1F, 1F);
 		}
 
 		@Override
@@ -122,7 +121,7 @@ public enum VisionMode
 				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 				glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
 				glDisable(GL_ALPHA_TEST);
-				bindTexture(VisionModeRenderEvent.resOverlayCeltic);
+				bindTexture(AliensVsPredator.resources().BLUR_CELTIC_HUD);
 				glColor4f(1F, 1F, 0F, 0F);
 				drawQuad(0, 0, scaledDisplayResolution().getScaledWidth(), scaledDisplayResolution().getScaledHeight(), 0, 0, 0, 0);
 				glColor4f(1F, 1F, 0.45F, 0F);
@@ -134,7 +133,7 @@ public enum VisionMode
 			GL11.glPopMatrix();
 
 			AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue = AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue < 0F ? AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue + 0.03F : AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue;
-			renderOverlay(VisionModeRenderEvent.resOverlayCeltic, 0F, 0.8F, 0.1F, 1F);
+			renderOverlay(AliensVsPredator.resources().BLUR_CELTIC_HUD, 0F, 0.8F, 0.1F, 1F);
 		}
 
 		@Override

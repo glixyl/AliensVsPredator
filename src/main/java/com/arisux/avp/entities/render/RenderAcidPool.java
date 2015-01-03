@@ -16,7 +16,6 @@ import com.arisux.avp.AliensVsPredator;
 
 public class RenderAcidPool extends Render
 {
-	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_FX_ACID);
 	private Tessellator tessellator = Tessellator.instance;
 
 	@Override
@@ -28,7 +27,7 @@ public class RenderAcidPool extends Render
 			GL11.glEnable(GL11.GL_BLEND);
 	        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
 	        RenderUtil.glDisableLightMapping();
-			bindTexture(resourceLocation);
+			bindTexture(AliensVsPredator.resources().FX_ACID);
 			float offset = 1.4F;
 			double renderX = entity.lastTickPosX + (entity.posX - entity.lastTickPosX) * renderPartialTicks;
 			double renderY = entity.lastTickPosY + (entity.posY - entity.lastTickPosY) * renderPartialTicks + entity.getShadowSize();

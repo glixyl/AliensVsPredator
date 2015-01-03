@@ -12,8 +12,6 @@ import com.arisux.avp.AliensVsPredator;
 
 public class RenderYautja extends RenderLiving
 {
-	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_YAUTJA);
-
 	public RenderYautja(ModelBase mainModel, float shadowSize)
 	{
 		super(mainModel, shadowSize);
@@ -34,6 +32,6 @@ public class RenderYautja extends RenderLiving
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity)
 	{
-		return resourceLocation;
+		return AliensVsPredator.resources().YAUTJA;
 	}
 }

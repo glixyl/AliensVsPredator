@@ -152,14 +152,14 @@ public class ItemFirearm extends HookedItem
 	}
 
 	@Override
-	public boolean onBlockStartBreak(ItemStack itemstack, int X, int Y, int Z, EntityPlayer player)
+	public boolean onBlockStartBreak(ItemStack itemstack, int posX, int posY, int posZ, EntityPlayer player)
 	{
 		return false;
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
-	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, @SuppressWarnings("rawtypes") List par3List, boolean par4)
+	@SuppressWarnings("all")
+	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{
 		par3List.add("Left click to aim, Right click to fire");
 		par3List.add("Press R to reload");

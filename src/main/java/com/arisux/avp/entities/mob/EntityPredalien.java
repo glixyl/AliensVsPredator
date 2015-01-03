@@ -6,14 +6,10 @@ import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.EntityAcidPool;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityPredalien extends EntityXenomorph implements IMob
 {
@@ -100,12 +96,5 @@ public class EntityPredalien extends EntityXenomorph implements IMob
 			entity.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
 			this.worldObj.spawnEntityInWorld(entity);
 		}
-	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public ResourceLocation getResource()
-	{
-		return null;
 	}
 }

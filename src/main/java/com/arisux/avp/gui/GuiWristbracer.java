@@ -8,7 +8,6 @@ import java.util.*;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.EnumDifficulty;
 
 import org.lwjgl.opengl.GL11;
@@ -25,7 +24,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class GuiWristbracer extends GuiContainer
 {
-	private static final ResourceLocation texture = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_GUI_WRISTBRACER);
 	private HashMap<GuiButton, Integer> displays = new HashMap<GuiButton, Integer>();
 	protected List<GuiButton> buttonList = new ArrayList<GuiButton>();
 	private WristbracerAPI api = new WristbracerAPI();
@@ -70,7 +68,7 @@ public class GuiWristbracer extends GuiContainer
 	{
 		this.guiLeft = this.width / 2 - xSize / 2;
 		this.guiTop = this.height / 2 - ySize / 2;
-		bindTexture(texture);
+		bindTexture(AliensVsPredator.resources().GUI_WRISTBRACER);
 		drawQuad(guiLeft, guiTop, xSize, ySize - 30, 0, 0, 0);
 
 		RenderUtil.drawRect(guiLeft + 31, guiTop + 16, 16, 16, 0x33FF0000);
@@ -143,7 +141,7 @@ public class GuiWristbracer extends GuiContainer
 			if (x == number)
 			{
 				GL11.glEnable(GL11.GL_BLEND);
-				bindTexture(texture);
+				bindTexture(AliensVsPredator.resources().GUI_WRISTBRACER);
 				drawQuad(xPos, yPos, 28, 50, 0, (27 * (x - 1)), 126);
 			}
 		}

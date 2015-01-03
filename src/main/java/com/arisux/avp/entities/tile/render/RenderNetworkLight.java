@@ -3,7 +3,6 @@ package com.arisux.avp.entities.tile.render;
 import static org.lwjgl.opengl.GL11.*;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
 
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
@@ -13,17 +12,16 @@ import com.arisux.avp.entities.tile.model.ModelNetworkLight;
 public class RenderNetworkLight extends TileEntitySpecialRenderer
 {
 	private ModelNetworkLight model = new ModelNetworkLight();
-	private static final ResourceLocation resource = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_NETWORKLIGHT);
 
 	@Override
-	public void renderTileEntityAt(TileEntity var1, double posX, double posY, double posZ, float var8)
+	public void renderTileEntityAt(TileEntity tileEntity, double posX, double posY, double posZ, float var8)
 	{
-		TileEntityNetworkLight tile = (TileEntityNetworkLight) var1;
+		TileEntityNetworkLight tile = (TileEntityNetworkLight) tileEntity;
 
 		glPushMatrix();
 		{
 			glDisable(GL_CULL_FACE);
-			this.bindTexture(resource);
+			this.bindTexture(AliensVsPredator.resources().NETWORKLIGHT);
 			glTranslated(posX + 0.5F, posY + 1.5F, posZ + 0.5F);
 			glRotatef(0F, 0F, 1F, 0F);
 			glScalef(1.0F, -1.0F, 1.0F);

@@ -7,16 +7,13 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.entities.EntityAcidSpit;
+import com.arisux.avp.entities.EntityAcidProjectile;
 
 public class EntitySpitter extends EntityXenomorph implements IRangedAttackMob
 {
-	private ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_SPITTER);
-
 	public EntitySpitter(World par1World)
 	{
 		super(par1World);
@@ -24,17 +21,7 @@ public class EntitySpitter extends EntityXenomorph implements IRangedAttackMob
 		this.setSize(1.0F, 3.0F);
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAILeapAtTarget(this, 0.6F));
-		// this.tasks.addTask(2, new EntityAIAttackOnCollide(this,
-		// EntityPlayer.class, 1.0D, false));
 		this.tasks.addTask(2, new EntityAIArrowAttack(this, this.getAIMoveSpeed(), 30, 15F));
-		// this.tasks.addTask(3, new EntityAIAttackOnCollide(this,
-		// EntityMarine.class, 1.0D, true));
-		// this.tasks.addTask(4, new EntityAIAttackOnCollide(this,
-		// EntityYautja.class, 1.0D, false));
-		// this.tasks.addTask(5, new EntityAIAttackOnCollide(this,
-		// EntityAgeable.class, 1.0D, false));
-		// this.tasks.addTask(6, new EntityAIAttackOnCollide(this,
-		// EntityAnimal.class, 1.0D, false));
 		this.tasks.addTask(7, new EntityAIFleeSun(this, 1.0D));
 		this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		this.tasks.addTask(9, new EntityAILookIdle(this));
@@ -98,7 +85,7 @@ public class EntitySpitter extends EntityXenomorph implements IRangedAttackMob
 			{
 				int attackDamage = 2;
 
-				EntityAcidSpit entityacid = new EntityAcidSpit(this.worldObj, this, par1EntityLivingBase, 1.6F, 14 - attackDamage * 4);
+				EntityAcidProjectile entityacid = new EntityAcidProjectile(this.worldObj, this, par1EntityLivingBase, 1.6F, 14 - attackDamage * 4);
 				entityacid.setDamage(f * 2.0F + this.rand.nextGaussian() * 0.25D + attackDamage * 0.11F);
 				this.worldObj.spawnEntityInWorld(entityacid);
 			}
@@ -127,15 +114,7 @@ public class EntitySpitter extends EntityXenomorph implements IRangedAttackMob
 
 		if (this.getAttackTarget() != null && !(this.getAttackTarget() instanceof EntityXenomorph) && this.getDistanceToEntity(this.getAttackTarget()) < 30)
 		{
-			// this.attackEntityWithRangedAttack(this.getAttackTarget(),
-			// 1F);
 			this.getMoveHelper().setMoveTo(this.getAttackTarget().posX, this.getAttackTarget().posY, this.getAttackTarget().posZ, 1D);
 		}
-	}
-
-	@Override
-	public ResourceLocation getResource()
-	{
-		return resourceLocation;
 	}
 }

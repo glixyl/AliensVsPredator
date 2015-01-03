@@ -1,8 +1,5 @@
 package com.arisux.avp.entities.tile;
 
-import com.arisux.avp.interfaces.INetworkDevice;
-import com.arisux.avp.interfaces.NetworkHolder;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,47 +8,69 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
+import com.arisux.avp.interfaces.INetworkDevice;
+import com.arisux.avp.interfaces.NetworkHolder;
+
 public class TileEntityNetworkLight extends PoweredTileEntity implements INetworkDevice
 {
 	private NetworkHolder nwh = null;
+
 	@Override
 	public void onVoltageTick()
 	{
-		if(this.nwh == null) {
+		if (this.nwh == null)
+		{
 			TileEntity above = this.getWorldObj().getTileEntity(this.xCoord, this.yCoord + 1, this.zCoord);
-			TileEntity below = this.getWorldObj().getTileEntity(this.xCoord, this.yCoord -1, this.zCoord);
+			TileEntity below = this.getWorldObj().getTileEntity(this.xCoord, this.yCoord - 1, this.zCoord);
 			TileEntity left = this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
-			TileEntity right = this.getWorldObj().getTileEntity(this.xCoord -1, this.yCoord, this.zCoord);
+			TileEntity right = this.getWorldObj().getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord);
 			TileEntity front = this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1);
-			TileEntity behind = this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord -1);
-			if(above instanceof INetworkDevice) {
-				if(((INetworkDevice) above).getNetwork() != null) {
+			TileEntity behind = this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1);
+			if (above instanceof INetworkDevice)
+			{
+				if (((INetworkDevice) above).getNetwork() != null)
+				{
 					this.nwh = ((INetworkDevice) above).getNetwork();
 				}
-			} else if(below instanceof INetworkDevice) {
-				if(((INetworkDevice) below).getNetwork() != null) {
+			}
+			else if (below instanceof INetworkDevice)
+			{
+				if (((INetworkDevice) below).getNetwork() != null)
+				{
 					this.nwh = ((INetworkDevice) below).getNetwork();
 				}
-			} else if(left instanceof INetworkDevice) {
-				if(((INetworkDevice) left).getNetwork() != null) {
+			}
+			else if (left instanceof INetworkDevice)
+			{
+				if (((INetworkDevice) left).getNetwork() != null)
+				{
 					this.nwh = ((INetworkDevice) left).getNetwork();
 				}
-			} else if(right instanceof INetworkDevice) {
-				if(((INetworkDevice) right).getNetwork() != null) {
+			}
+			else if (right instanceof INetworkDevice)
+			{
+				if (((INetworkDevice) right).getNetwork() != null)
+				{
 					this.nwh = ((INetworkDevice) right).getNetwork();
 				}
-			} else if(front instanceof INetworkDevice) {
-				if(((INetworkDevice) front).getNetwork() != null) {
+			}
+			else if (front instanceof INetworkDevice)
+			{
+				if (((INetworkDevice) front).getNetwork() != null)
+				{
 					this.nwh = ((INetworkDevice) front).getNetwork();
 				}
-			} else if(behind instanceof INetworkDevice) {
-				if(((INetworkDevice) behind).getNetwork() != null) {
+			}
+			else if (behind instanceof INetworkDevice)
+			{
+				if (((INetworkDevice) behind).getNetwork() != null)
+				{
 					this.nwh = ((INetworkDevice) behind).getNetwork();
 				}
 			}
 		}
 	}
-	
+
 	@Override
 	public Packet getDescriptionPacket()
 	{
@@ -65,55 +84,55 @@ public class TileEntityNetworkLight extends PoweredTileEntity implements INetwor
 	{
 		this.readFromNBT(packet.func_148857_g());
 	}
-	
+
 	@Override
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
 	}
-	
+
 	@Override
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
 	}
-	
+
 	@Override
 	public double getMinOperatingVoltage()
 	{
 		return 0;
 	}
-	
+
 	@Override
 	public double getMaxOperatingVoltage()
 	{
 		return 10000;
 	}
-	
+
 	@Override
 	public double getMinOperatingAmps()
 	{
 		return 0;
 	}
-	
+
 	@Override
 	public double getMaxOperatingAmps()
 	{
 		return 1000;
 	}
-	
+
 	@Override
 	public double getResistance()
 	{
 		return 5;
 	}
-	
+
 	@Override
 	public boolean canOutputPower()
 	{
 		return false;
 	}
-	
+
 	@Override
 	public Block getBlockType()
 	{

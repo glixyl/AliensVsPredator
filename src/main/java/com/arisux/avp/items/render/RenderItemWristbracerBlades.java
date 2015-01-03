@@ -18,7 +18,7 @@ import com.arisux.avp.items.model.ModelWristBlade;
 public class RenderItemWristbracerBlades implements IItemRenderer
 {
 	protected ModelWristBlade model = new ModelWristBlade();
-	protected static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_WRISTBLADES);
+	protected static final ResourceLocation resourceLocation = AliensVsPredator.resources().WRISTBLADES;
 	private float rotation;
 
 	@Override

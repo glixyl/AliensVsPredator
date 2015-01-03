@@ -67,7 +67,7 @@ public class EntityHandler implements IInitializable
 		EntityRegistry.registerModEntity(EntityGrenade.class, "Grenade", AliensVsPredator.instance().settings.entityList.get("GRENADE"), AliensVsPredator.instance(), 250, 15, true);
 		EntityRegistry.registerModEntity(EntityFlame.class, "Flamethrower", AliensVsPredator.instance().settings.entityList.get("FLAME"), AliensVsPredator.instance(), 250, 15, true);
 		EntityRegistry.registerModEntity(EntityAcidPool.class, "AcidPool", AliensVsPredator.instance().settings.entityList.get("FXACID"), AliensVsPredator.instance(), 250, 5, true);
-		EntityRegistry.registerModEntity(EntityAcidSpit.class, "AcidSpit", AliensVsPredator.instance().settings.entityList.get("AIACID"), AliensVsPredator.instance(), 250, 5, true);
+		EntityRegistry.registerModEntity(EntityAcidProjectile.class, "AcidSpit", AliensVsPredator.instance().settings.entityList.get("AIACID"), AliensVsPredator.instance(), 250, 5, true);
 		EntityRegistry.registerModEntity(EntitySmartDisc.class, "EntityDisc", AliensVsPredator.instance().settings.entityList.get("DISC"), AliensVsPredator.instance(), 250, 15, true);
 		EntityRegistry.registerModEntity(EntityShuriken.class, "EntityShuriken", AliensVsPredator.instance().settings.entityList.get("SHURIKEN"), AliensVsPredator.instance(), 250, 15, true);
 		EntityRegistry.registerModEntity(EntityTurret.class, "EntityTurret", AliensVsPredator.instance().settings.entityList.get("TURRETENTITY"), AliensVsPredator.instance(), 250, 5, true);

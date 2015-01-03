@@ -1,6 +1,7 @@
 package com.arisux.avp.entities.mob.render;
 
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,10 +13,8 @@ import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntityFacehugger;
 import com.arisux.avp.entities.mob.EntityMarine;
 
-public class RenderFacehugger extends RenderXenomorph
+public class RenderFacehugger extends RenderLiving
 {
-	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_FACEHUGGER);
-
 	public RenderFacehugger(ModelBase modelbase, float shadowSize)
 	{
 		super(modelbase, shadowSize);
@@ -36,7 +35,7 @@ public class RenderFacehugger extends RenderXenomorph
 	@Override
 	public ResourceLocation getEntityTexture(Entity entity)
 	{
-		return resourceLocation;
+		return AliensVsPredator.resources().FACEHUGGER;
 	}
 	
 	public void scaleFacehugger(EntityFacehugger entityFacehugger)

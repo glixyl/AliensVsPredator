@@ -18,7 +18,7 @@ import com.arisux.avp.items.model.ModelM4;
 
 public class RenderItemM4 extends ItemRenderer
 {
-	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_M4);
+	public static final ResourceLocation resourceLocation = AliensVsPredator.resources().M4;
 	public static final ModelBaseExtension model = new ModelM4();
 
 	public RenderItemM4()

@@ -13,7 +13,6 @@ import com.arisux.avp.util.PlayerMode;
 
 public class ExtendedEntityPlayer implements IExtendedEntityProperties
 {
-	private int plasmaEntityId;
 	private boolean isPlayerImpregnated;
 	public int impregnatedTime, maxImpregnatedTime, broadcastRadius;
 	private String broadcastChannel;
@@ -112,16 +111,6 @@ public class ExtendedEntityPlayer implements IExtendedEntityProperties
 		this.broadcastRadius = broadcastRadius;
 	}
 	
-	public int setPlasmaEntityId(int plasmaEntity)
-	{
-		return this.plasmaEntityId = plasmaEntity;
-	}
-	
-	public int getPlasmaEntityId()
-	{
-		return this.plasmaEntityId;
-	}
-
 	public void setPlayerMode(PlayerMode playerMode)
 	{
 		this.playerMode  = playerMode;

@@ -5,11 +5,13 @@ import java.util.Random;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.*;
-import net.minecraft.util.*;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.Vec3;
 import net.minecraftforge.client.IRenderHandler;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 
 import cpw.mods.fml.client.FMLClientHandler;
@@ -19,8 +21,6 @@ public class LV223SkyProvider extends IRenderHandler
 	public int starGLCallList = GLAllocation.generateDisplayLists(3);
 	public int glSkyList;
 	public int glSkyList2;
-	protected static final ResourceLocation resLocationLV223 = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_LV223_GAS_PLANET);
-	protected static final ResourceLocation resLocationSun = new ResourceLocation("textures/environment/sun.png");
 
 	public LV223SkyProvider()
 	{
@@ -75,8 +75,6 @@ public class LV223SkyProvider extends IRenderHandler
 		tess.draw();
 		GL11.glEndList();
 
-		// /////////////
-
 		LV223WorldProvider provider = null;
 
 		if ((var2.provider instanceof LV223WorldProvider))
@@ -128,7 +126,7 @@ public class LV223SkyProvider extends IRenderHandler
 			GL11.glRotatef(calculateAngleFromPlanet(var2.getWorldTime(), var1) * 360.0F, 0.0F, 1.0F, 0.0F);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 5.0F);
 			GL11.glRotatef(calculateAngleFromPlanet(var2.getWorldTime(), var1) * 360.0F, 10.0F, -6.0F, -20.0F);
-			Minecraft.getMinecraft().renderEngine.bindTexture(resLocationLV223);
+			RenderUtil.bindTexture(AliensVsPredator.resources().LV223_GAS_PLANET);
 			var21.startDrawingQuads();
 			var21.addVertexWithUV(-var14, 150.0D, -var14, 0.0D, 0.0D);
 			var21.addVertexWithUV(var14, 150.0D, -var14, 1.0D, 0.0D);
@@ -143,7 +141,7 @@ public class LV223SkyProvider extends IRenderHandler
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 5.0F);
 		GL11.glRotatef(var2.getCelestialAngle(var1) * 360.0F, 1.0F, 0.0F, 0.0F);
 		float var14 = 30.0F;
-		Minecraft.getMinecraft().renderEngine.bindTexture(resLocationSun);
+		RenderUtil.bindTexture(AliensVsPredator.resources().SUN);
 		var21.startDrawingQuads();
 		var21.addVertexWithUV(-var14, 150.0D, -var14, 0.0D, 0.0D);
 		var21.addVertexWithUV(var14, 150.0D, -var14, 1.0D, 0.0D);

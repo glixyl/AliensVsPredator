@@ -4,7 +4,6 @@ import static com.arisux.airi.lib.RenderUtil.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.Pre;
 
@@ -23,7 +22,6 @@ import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
 
 public class VisionModeRenderEvent
 {
-	public static final ResourceLocation resOverlayCeltic = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_BLUR_CELTIC_HUD);
 	private Minecraft mc = Minecraft.getMinecraft();
 	private IActionPerformed actionSwitchVisionMode;
 	public VisionMode currentVisionMode = VisionMode.NORMAL;

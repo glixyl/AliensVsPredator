@@ -229,11 +229,10 @@ public class ModelFacehugger extends ModelBaseExtension
 	public void setLivingAnimations(EntityLivingBase entity, float var2, float var3, float var4)
 	{
 		this.tailMain.rotationPointY = 15.0F;
-		this.tailMain.rotationPointZ = 8.0F;
+		this.tailMain.rotationPointZ = 7.5F;
 		this.tailMain.rotateAngleX = 1.1F;
-
 		float f = (0.5F + var3) * 0.125F;
-		float f1 = var2 * 0.6662F + (Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() / (entity != null && !entity.isSprinting() ? 4.978873F : 0.978873F)) * 0.6662F;
+		float f1 = var2 * 0.6662F + ((Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 100) / (entity != null && !entity.isSprinting() ? 4.978873F : 0.9178873F)) * 0.6662F;
 		this.tailMain.rotateAngleY = 0.0F;
 		this.tailMain.rotateAngleX += MathHelper.sin(f1) * f;
 
@@ -241,7 +240,7 @@ public class ModelFacehugger extends ModelBaseExtension
 		{
 			this.tailBoxes[x].rotateAngleZ = 0.0F;
 			this.tailBoxes[x].rotateAngleX = 0.05F;
-			this.tailBoxes[x].rotateAngleX += MathHelper.sin(f1 - (x + 1) * 0.35F) * f;
+			this.tailBoxes[x].rotateAngleX += MathHelper.sin(f1 - (x + 1) * 0.25F) * f;
 		}
 	}
 }

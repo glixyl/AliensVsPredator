@@ -12,8 +12,6 @@ import com.arisux.avp.entities.mob.model.ModelPredalien;
 
 public class RenderPredalien extends RenderLiving
 {
-	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_PREDALIEN);
-
 	public RenderPredalien(ModelPredalien mainModel, float shadowSize)
 	{
 		super(mainModel, shadowSize);
@@ -34,6 +32,6 @@ public class RenderPredalien extends RenderLiving
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity)
 	{
-		return resourceLocation;
+		return AliensVsPredator.resources().PREDALIEN;
 	}
 }

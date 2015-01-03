@@ -5,22 +5,15 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import com.arisux.avp.AliensVsPredator;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class EntityAqua extends EntityXenomorph
 {
-	@SideOnly(Side.CLIENT)
-	private ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_AQUA_XENOMORPH);
-
-	public EntityAqua(World var1)
+	public EntityAqua(World world)
 	{
-		super(var1);
+		super(world);
 		this.jumpMovementFactor = 0.2F;
 		this.experienceValue = 100;
 		this.setSize(1F, 3F);
@@ -77,12 +70,5 @@ public class EntityAqua extends EntityXenomorph
 	protected String getDeathSound()
 	{
 		return AliensVsPredator.properties().SOUND_ALIEN_DEATH;
-	}
-	
-	@SideOnly(Side.CLIENT)
-	@Override
-	public ResourceLocation getResource()
-	{
-		return resourceLocation;
 	}
 }

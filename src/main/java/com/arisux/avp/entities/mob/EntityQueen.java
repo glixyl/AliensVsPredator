@@ -5,7 +5,6 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import com.arisux.avp.AliensVsPredator;
@@ -13,7 +12,6 @@ import com.arisux.avp.interfaces.IHiveSignature;
 
 public class EntityQueen extends EntityXenomorph implements IHiveSignature
 {
-	private ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_XENOQUEEN);
 	public boolean isInStasis;
 	public float ovipositorSize;
 
@@ -64,7 +62,7 @@ public class EntityQueen extends EntityXenomorph implements IHiveSignature
 		}
 
 		this.heal(0.2F);
-		this.ovipositorSize = this.ovipositorSize < 1.6F ? this.ovipositorSize += 0.0001F : this.ovipositorSize;
+		this.ovipositorSize = this.ovipositorSize < 1.2F ? this.ovipositorSize += 0.0001F : this.ovipositorSize;
 	}
 
 	@Override
@@ -89,12 +87,6 @@ public class EntityQueen extends EntityXenomorph implements IHiveSignature
 	protected String getDeathSound()
 	{
 		return AliensVsPredator.properties().SOUND_QUEEN_DEATH;
-	}
-
-	@Override
-	public ResourceLocation getResource()
-	{
-		return resourceLocation;
 	}
 
 	@Override

@@ -16,7 +16,6 @@ import com.arisux.avp.items.render.RenderItemM41A;
 
 public class RenderCombatSynthetic extends RenderLiving
 {
-	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_COMBAT_SYNTHETIC);
 	private ModelM41A modelM41a = new ModelM41A();
 	
 	public RenderCombatSynthetic(ModelBiped mainModel, float scale)
@@ -68,6 +67,6 @@ public class RenderCombatSynthetic extends RenderLiving
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity)
 	{
-		return resourceLocation;
+		return AliensVsPredator.resources().COMBAT_SYNTHETIC;
 	}
 }

@@ -9,6 +9,7 @@ import com.arisux.airi.lib.interfaces.IMod;
 import cpw.mods.fml.common.*;
 import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid=AliensVsPredator.ID)
 public class AliensVsPredator implements IMod
@@ -43,6 +44,12 @@ public class AliensVsPredator implements IMod
 	public static Properties properties()
 	{
 		return Properties.instance;
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public static Resources resources()
+	{
+		return Resources.instance;
 	}
 	
 	public static Settings settings()

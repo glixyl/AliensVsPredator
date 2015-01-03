@@ -36,15 +36,15 @@ public class EntityShuriken extends Entity
 		this.setSize(0.5F, 0.5F);
 	}
 
-	public EntityShuriken(World world, double d, double d1, double d2)
+	public EntityShuriken(World world, double posX, double posY, double posZ)
 	{
 		super(world);
 		this.setSize(0.5F, 0.5F);
-		this.setPosition(d, d1, d2);
+		this.setPosition(posX, posY, posZ);
 		this.yOffset = 0.0F;
 	}
 
-	public EntityShuriken(World world, EntityLivingBase entityliving, float f)
+	public EntityShuriken(World world, EntityLivingBase entityliving, float velocity)
 	{
 		super(world);
 		this.shootingEntity = entityliving;
@@ -59,7 +59,7 @@ public class EntityShuriken extends Entity
 		this.motionX = -MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI);
 		this.motionZ = MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI);
 		this.motionY = (-MathHelper.sin(this.rotationPitch / 180.0F * (float) Math.PI));
-		this.setArrowHeading(this.motionX, this.motionY, this.motionZ, f * 1.5F, 1.0F);
+		this.setArrowHeading(this.motionX, this.motionY, this.motionZ, velocity * 1.5F, 1.0F);
 	}
 
 	@Override
@@ -68,24 +68,24 @@ public class EntityShuriken extends Entity
 		;
 	}
 
-	public void setArrowHeading(double d, double d1, double d2, float f, float f1)
+	public void setArrowHeading(double motionX, double motionY, double motionZ, float velocity, float deviation)
 	{
-		float f2 = MathHelper.sqrt_double(d * d + d1 * d1 + d2 * d2);
-		d /= f2;
-		d1 /= f2;
-		d2 /= f2;
-		d += this.rand.nextGaussian() * 0.007499999832361937D * f1;
-		d1 += this.rand.nextGaussian() * 0.007499999832361937D * f1;
-		d2 += this.rand.nextGaussian() * 0.007499999832361937D * f1;
-		d *= f;
-		d1 *= f;
-		d2 *= f;
-		this.motionX = d * 1.1D;
-		this.motionY = d1 * 1.1D;
-		this.motionZ = d2 * 1.1D;
-		float f3 = MathHelper.sqrt_double(d * d + d2 * d2);
-		this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(d, d2) * 180.0D / Math.PI);
-		this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(d1, f3) * 180.0D / Math.PI);
+		float f2 = MathHelper.sqrt_double(motionX * motionX + motionY * motionY + motionZ * motionZ);
+		motionX /= f2;
+		motionY /= f2;
+		motionZ /= f2;
+		motionX += this.rand.nextGaussian() * 0.007499999832361937D * deviation;
+		motionY += this.rand.nextGaussian() * 0.007499999832361937D * deviation;
+		motionZ += this.rand.nextGaussian() * 0.007499999832361937D * deviation;
+		motionX *= velocity;
+		motionY *= velocity;
+		motionZ *= velocity;
+		this.motionX = motionX * 1.1D;
+		this.motionY = motionY * 1.1D;
+		this.motionZ = motionZ * 1.1D;
+		float f3 = MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ);
+		this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(motionX, motionZ) * 180.0D / Math.PI);
+		this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(motionY, f3) * 180.0D / Math.PI);
 		this.ticksInGround = 0;
 	}
 

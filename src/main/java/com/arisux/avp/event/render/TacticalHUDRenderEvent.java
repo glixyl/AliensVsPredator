@@ -9,7 +9,6 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.Pre;
 
@@ -29,7 +28,6 @@ public class TacticalHUDRenderEvent
 {
 	private Minecraft mc = Minecraft.getMinecraft();
 	private ArrayList<EntityPlayer> playersInHUD = new ArrayList<EntityPlayer>();
-	private ResourceLocation resOverlayMarine = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_BLUR_MARINE_HUD);
 	private ExtendedEntityPlayer clientPlayerProperties = getProperties();
 	private GuiCustomButton buttonMarineHelmConfig = new GuiCustomButton(0, 0, 0, 50, 20, "", null);
 	private boolean gammaRestored = true;
@@ -47,7 +45,7 @@ public class TacticalHUDRenderEvent
 					this.gammaRestored = false;
 					AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue = 8F;
 					this.scanForNearbyPlayers();
-					RenderUtil.renderOverlay(resOverlayMarine, 0.4F);
+					RenderUtil.renderOverlay(AliensVsPredator.resources().BLUR_TACTICAL_HUD, 0.4F);
 					this.drawInfoBar();
 					this.drawImpregnationIndicator(clientPlayerProperties);
 					this.drawPlayerScanner();

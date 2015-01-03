@@ -2,6 +2,7 @@ package com.arisux.avp.entities.mob.render;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
@@ -12,11 +13,8 @@ import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntitySpitter;
 import com.arisux.avp.entities.mob.model.ModelSpitter;
 
-public class RenderSpitter extends RenderXenomorph
+public class RenderSpitter extends RenderLiving
 {
-	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_SPITTER);
-	public static final ResourceLocation resourceLocationMask = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_SPITTER_GLOW);
-
 	public RenderSpitter(ModelBase modelbase, float shadowSize)
 	{
 		super(modelbase, shadowSize);
@@ -44,22 +42,21 @@ public class RenderSpitter extends RenderXenomorph
 	@Override
 	public ResourceLocation getEntityTexture(Entity entity)
 	{
-		return resourceLocation;
+		return AliensVsPredator.resources().SPITTER;
 	}
 
-	protected int setRenderPassModelBrightness(EntitySpitter par1EntitySpitter, int par2)
+	protected int setRenderPassModelBrightness(EntitySpitter entity, int brightness)
 	{
-		if (par2 != 0)
+		if (brightness != 0)
 		{
 			return -1;
 		} else
 		{
-			this.bindTexture(resourceLocationMask);
-			float f1 = 1.0F;
+			this.bindTexture(AliensVsPredator.resources().SPITTER_MASK);
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);
 
-			if (par1EntitySpitter.isInvisible())
+			if (entity.isInvisible())
 			{
 				GL11.glDepthMask(false);
 			} else
@@ -67,12 +64,9 @@ public class RenderSpitter extends RenderXenomorph
 				GL11.glDepthMask(true);
 			}
 
-			char c0 = 61680;
-			int j = c0 % 65536;
-			int k = c0 / 65536;
-			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, j / 1.0F, k / 1.0F);
+			char light = 61680;
+			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (light % 65536) / 1.0F, (light / 65536) / 1.0F);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, f1);
 			return 1;
 		}
 	}

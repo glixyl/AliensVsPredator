@@ -16,7 +16,7 @@ import com.arisux.avp.items.model.ModelM56SG;
 
 public class RenderItemM56SG extends ItemRenderer
 {
-	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_M56SG);
+	public static final ResourceLocation resourceLocation = AliensVsPredator.resources().M56SG;
 	public static final ModelBaseExtension model = new ModelM56SG();
 
 	public RenderItemM56SG()

@@ -36,21 +36,18 @@ public class TileEntityGenerator extends PoweredTileEntity
 	@Override
 	public void onVoltageTick()
 	{
-		// TODO Auto-generated method stub
-		
+		;
 	}
 
 	@Override
 	public void onOverloadTick()
 	{
-		// TODO Auto-generated method stub
-		
+		;
 	}
 
 	@Override
 	public void onUnderloadTick()
 	{
-		// TODO Auto-generated method stub
-		
+		;
 	}
 }

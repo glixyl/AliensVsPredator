@@ -18,7 +18,7 @@ import com.arisux.avp.items.model.ModelAK47;
 
 public class RenderItemAK47 extends ItemRenderer
 {
-	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_AK47);
+	public static final ResourceLocation resourceLocation = AliensVsPredator.resources().AK47;
 	public static final ModelBaseExtension model = new ModelAK47();
 
 	public RenderItemAK47()

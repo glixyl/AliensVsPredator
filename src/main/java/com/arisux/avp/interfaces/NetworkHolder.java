@@ -42,4 +42,9 @@ public class NetworkHolder
 			this.networkBlocks.add(b);
 		}
 	}
+	
+	public TileEntity getController()
+	{
+		return controller;
+	}
 }

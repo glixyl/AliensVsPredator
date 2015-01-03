@@ -12,7 +12,7 @@ import com.arisux.avp.items.model.ModelMotionTracker;
 
 public class RenderItemMotionTracker extends ItemRenderer
 {
-	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_MOTIONTRACKER);
+	public static final ResourceLocation resourceLocation = AliensVsPredator.resources().MOTIONTRACKER;
 	public RenderMotionTrackerScreen motionTracker = new RenderMotionTrackerScreen();
 
 	public RenderItemMotionTracker()

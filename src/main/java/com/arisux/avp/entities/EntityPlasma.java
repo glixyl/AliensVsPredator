@@ -45,23 +45,23 @@ public class EntityPlasma extends EntityThrowable
 
 		if (this.ticksExisted >= 20 * 20)
 		{
-			// this.setDead();
+			this.setDead();
 		}
 
-//		 for (int p = 12; p > 0; --p)
-//		 {
-//		 this.worldObj.spawnParticle("enchantmenttable", this.posX + this.rand.nextDouble(), this.posY + this.rand.nextDouble(), this.posZ + this.rand.nextDouble(), 0.0D, 0.0D, 0.0D);
-//		 this.worldObj.spawnParticle("reddust", this.posX + this.rand.nextDouble(), this.posY + this.rand.nextDouble(), this.posZ + this.rand.nextDouble(), 0.0D, 3.0D, 9.0D);
-//		 }
-
-		Vec3 vec1 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
-		Vec3 vec2 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
-		MovingObjectPosition movingObjectPosition = this.worldObj.rayTraceBlocks(vec1, vec2);
+		MovingObjectPosition movingObjectPosition = this.worldObj.rayTraceBlocks(Vec3.createVectorHelper(this.posX, this.posY, this.posZ), Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ));
 
 		if (movingObjectPosition != null)
 		{
 			this.onImpact(movingObjectPosition);
 			this.setDead();
+		}
+
+		Entity entity = this;
+		
+		for (int x = 0; x < 20; x++)
+		{
+			entity.worldObj.spawnParticle("enchantmenttable", entity.posX + rand.nextDouble(), entity.posY + rand.nextDouble(), entity.posZ + rand.nextDouble(), 0.0D - rand.nextDouble(), 0.0D - rand.nextDouble(), 0.0D - rand.nextDouble());
+			entity.worldObj.spawnParticle("reddust", entity.posX - rand.nextDouble() + rand.nextDouble(), entity.posY - rand.nextDouble() + rand.nextDouble(), entity.posZ - rand.nextDouble() + rand.nextDouble(), 0.5D, 1D, 5.0D);
 		}
 	}
 
@@ -69,14 +69,14 @@ public class EntityPlasma extends EntityThrowable
 	public void writeEntityToNBT(NBTTagCompound nbt)
 	{
 		super.writeEntityToNBT(nbt);
-		nbt.setBoolean("BelongsToPlayer", this.belongsToPlayer);
+		nbt.setBoolean("player", this.belongsToPlayer);
 	}
 
 	@Override
 	public void readEntityFromNBT(NBTTagCompound nbt)
 	{
 		super.readEntityFromNBT(nbt);
-		this.belongsToPlayer = nbt.getBoolean("BelongsToPlayer");
+		this.belongsToPlayer = nbt.getBoolean("player");
 	}
 
 	@Override
@@ -88,20 +88,26 @@ public class EntityPlasma extends EntityThrowable
 			this.worldObj.playSoundAtEntity(this, "random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
 
 			@SuppressWarnings("unchecked")
-			List<Entity> entitiesInRange = (List<Entity>) WorldUtil.Entities.getEntitiesInCoordsRange(worldObj, EntityLivingBase.class, new CoordData(this.posX, this.posY, this.posZ), (int)Math.ceil(1.5F * size));
-			
+			List<Entity> entitiesInRange = (List<Entity>) WorldUtil.Entities.getEntitiesInCoordsRange(worldObj, EntityLivingBase.class, new CoordData(this.posX, this.posY, this.posZ), (int) Math.ceil(1.5F * size));
+
 			for (Entity entity : entitiesInRange)
 			{
 				entity.attackEntityFrom(new DamageSource("Plasma"), 20F * size);
 			}
-			
+
 			this.setDead();
 		}
 	}
-	
-	public float getSize()
+
+	public float getPlasmaSize()
 	{
 		return size;
+	}
+	
+	public EntityPlasma setPlasmaSize(float size)
+	{
+		this.size = size;
+		return this;
 	}
 
 	public void increaseSize()
@@ -109,10 +115,9 @@ public class EntityPlasma extends EntityThrowable
 		if (size < 2.0F)
 		{
 			size += 0.02F;
-			System.out.println(size);
 		}
 	}
-	
+
 	public void release()
 	{
 		this.released = true;

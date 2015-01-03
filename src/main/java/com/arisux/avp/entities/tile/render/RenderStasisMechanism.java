@@ -4,7 +4,6 @@ import static org.lwjgl.opengl.GL11.*;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL12;
 
@@ -16,7 +15,6 @@ import com.arisux.avp.entities.tile.model.ModelStasisMechanism;
 public class RenderStasisMechanism extends TileEntitySpecialRenderer
 {
 	private ModelStasisMechanism model = new ModelStasisMechanism();
-	private static final ResourceLocation resource = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_STASIS_MECHANISM);
 
 	@Override
 	public void renderTileEntityAt(TileEntity var1, double posX, double posY, double posZ, float var8)
@@ -31,7 +29,7 @@ public class RenderStasisMechanism extends TileEntitySpecialRenderer
 			glEnable(GL12.GL_RESCALE_NORMAL);
 			glScalef(1.0F, -1.0F, 1.0F);
 			glEnable(GL_ALPHA_TEST);
-			bindTexture(resource);
+			bindTexture(AliensVsPredator.resources().STASIS_MECHANISM);
 			
 			if (tile.stasisEntity != null && tile.stasisEntity instanceof EntityQueen)
 			{

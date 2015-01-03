@@ -84,7 +84,6 @@ public class TileEntityStasisMechanism extends TileEntity
 
 		if (this.stasisEntity == null && this.stasisItemstack != null)
 		{
-			System.out.println("LOADED: " + stasisItemstack);
 			this.stasisEntity = ((ItemEntitySummoner) this.stasisItemstack.getItem()).createNewEntity(this.worldObj);
 		}
 	}

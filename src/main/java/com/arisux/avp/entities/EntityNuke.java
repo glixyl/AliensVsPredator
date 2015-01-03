@@ -1,10 +1,7 @@
 package com.arisux.avp.entities;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
@@ -13,35 +10,16 @@ import com.arisux.avp.AliensVsPredator;
 
 public class EntityNuke extends EntityThrowable
 {
-	double bounceFactor;
-	int fuse;
-	boolean exploded;
-
-	public EntityNuke(World var1)
+	public EntityNuke(World world)
 	{
-		super(var1);
+		super(world);
 		this.setSize(0.5F, 0.5F);
 		this.yOffset = this.height / 2.0F;
-		this.bounceFactor = 0.75D;
-		this.exploded = false;
-		this.fuse = 0;
-	}
-
-	public EntityNuke(World var1, EntityLivingBase var2)
-	{
-		super(var1, var2);
-	}
-
-	public EntityNuke(World var1, double var2, double var4, double var6)
-	{
-		super(var1, var2, var4, var6);
 	}
 
 	@Override
 	public void onUpdate()
 	{
-		this.fuse++;
-
 		this.prevPosX = this.posX;
 		this.prevPosY = this.posY;
 		this.prevPosZ = this.posZ;
@@ -58,7 +36,7 @@ public class EntityNuke extends EntityThrowable
 			this.motionY *= -0.5D;
 		}
 
-		if (this.getCurFuse() >= this.getMaxFuse())
+		if (this.ticksExisted >= this.getDetonationTicks())
 		{
 			if (AliensVsPredator.instance().settings.areExplosionsEnabled())
 			{
@@ -72,51 +50,14 @@ public class EntityNuke extends EntityThrowable
 		}
 	}
 
-	/**
-	 * (abstract) Protected helper method to write subclass entity data to
-	 * NBT.
-	 */
-	@Override
-	public void writeEntityToNBT(NBTTagCompound var1)
-	{
-		super.writeEntityToNBT(var1);
-		var1.setByte("Fuse", (byte) this.fuse);
-	}
-
-	/**
-	 * (abstract) Protected helper method to read subclass entity data from
-	 * NBT.
-	 */
-	@Override
-	public void readEntityFromNBT(NBTTagCompound var1)
-	{
-		super.readEntityFromNBT(var1);
-		this.fuse = var1.getByte("Fuse");
-	}
-
-	/**
-	 * Called by a player entity when they collide with an entity
-	 */
-	@Override
-	public void onCollideWithPlayer(EntityPlayer var1)
-	{
-	}
-
-	/**
-	 * Called when this EntityThrowable hits a block or entity.
-	 */
-	@Override
-	protected void onImpact(MovingObjectPosition var1)
-	{
-	}
-
-	public double getMaxFuse()
+	public double getDetonationTicks()
 	{
 		return 300;
 	}
 
-	public double getCurFuse()
+	@Override
+	protected void onImpact(MovingObjectPosition p_70184_1_)
 	{
-		return this.fuse;
+		;
 	}
 }

@@ -12,7 +12,7 @@ import com.arisux.avp.entities.tile.model.ModelWorkstation;
 
 public class RenderItemTerminal extends ItemRenderer
 {
-	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_WORKSTATION);
+	public static final ResourceLocation resourceLocation = AliensVsPredator.resources().WORKSTATION;
 
 	public RenderItemTerminal()
 	{

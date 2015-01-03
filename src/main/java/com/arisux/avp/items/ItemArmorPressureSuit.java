@@ -4,6 +4,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 
+import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 
 public class ItemArmorPressureSuit extends ItemArmor
@@ -19,15 +20,15 @@ public class ItemArmorPressureSuit extends ItemArmor
 		switch (slot)
 		{
 			case 0:
-				return AliensVsPredator.properties().TEXTURE_PATH_PRESSURESUIT1;
+				return RenderUtil.getResourcePath(AliensVsPredator.resources().PRESSURESUIT1);
 			case 1:
-				return AliensVsPredator.properties().TEXTURE_PATH_PRESSURESUIT1;
+				return RenderUtil.getResourcePath(AliensVsPredator.resources().PRESSURESUIT1);
 			case 2:
-				return AliensVsPredator.properties().TEXTURE_PATH_PRESSURESUIT2;
+				return RenderUtil.getResourcePath(AliensVsPredator.resources().PRESSURESUIT2);
 			case 3:
-				return AliensVsPredator.properties().TEXTURE_PATH_PRESSURESUIT2;
+				return RenderUtil.getResourcePath(AliensVsPredator.resources().PRESSURESUIT2);
 			default:
-				return AliensVsPredator.properties().TEXTURE_PATH_PRESSURESUIT2;
+				return RenderUtil.getResourcePath(AliensVsPredator.resources().PRESSURESUIT2);
 		}
 	}
 }

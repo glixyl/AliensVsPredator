@@ -11,7 +11,7 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 public class TileEntityWorkstation extends PoweredTileEntity implements INetworkDevice
 {
 	public int rotation;
-	public NetworkHolder nwH;
+	public NetworkHolder networkHolder;
 
 	public TileEntityWorkstation()
 	{
@@ -66,7 +66,7 @@ public class TileEntityWorkstation extends PoweredTileEntity implements INetwork
 	@Override
 	public NetworkHolder getNetwork()
 	{
-		return this.nwH != null ? this.nwH : (this.nwH = new NetworkHolder(this));
+		return this.networkHolder != null ? this.networkHolder : (this.networkHolder = new NetworkHolder(this));
 	}
 
 	@Override

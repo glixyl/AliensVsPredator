@@ -3,7 +3,6 @@ package com.arisux.avp.event.action;
 import net.minecraft.client.Minecraft;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.Pre;
 
@@ -17,7 +16,6 @@ import cpw.mods.fml.common.gameevent.TickEvent;
 public class AlienEmergeEvent
 {
 	private Minecraft mc = Minecraft.getMinecraft();
-	private ResourceLocation resChestbursterEmerge = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_BLUR_CHESTBURSTER_EMERGE);
 	
 	@SubscribeEvent
 	public void tick(TickEvent.ClientTickEvent event)
@@ -60,7 +58,7 @@ public class AlienEmergeEvent
 				{
 					if (playerProperties.getImpregnatedTime() <= 0)
 					{
-						RenderUtil.renderOverlay(resChestbursterEmerge);
+						RenderUtil.renderOverlay(AliensVsPredator.resources().BLUR_CHESTBURSTER_EMERGE);
 					}
 				}
 			}

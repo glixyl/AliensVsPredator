@@ -8,22 +8,15 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import com.arisux.avp.AliensVsPredator;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class EntityPraetorian extends EntityXenomorph
 {
-	@SideOnly(Side.CLIENT)
-	private ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_PRAETORIAN);
-
-	public EntityPraetorian(World var1)
+	public EntityPraetorian(World world)
 	{
-		super(var1);
+		super(world);
 		this.experienceValue = 300;
 		this.setSize(1.0F, 3.0F);
 		this.tasks.addTask(0, new EntityAIFleeSun(this, 1.0D));
@@ -97,12 +90,5 @@ public class EntityPraetorian extends EntityXenomorph
 	public void onUpdate()
 	{
 		super.onUpdate();
-	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public ResourceLocation getResource()
-	{
-		return this.resourceLocation;
 	}
 }

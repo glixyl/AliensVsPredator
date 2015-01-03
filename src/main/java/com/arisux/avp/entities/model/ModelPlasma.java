@@ -48,7 +48,7 @@ public class ModelPlasma extends ModelBase
 			RenderUtil.glDisableLightMapping();
 			RenderUtil.glDisableLight();
 			GL11.glEnable(GL11.GL_BLEND);
-			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
+			GL11.glBlendFunc(GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE);
 
 			for (int rZ = 0; rZ < 2; ++rZ)
 			{

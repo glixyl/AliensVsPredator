@@ -13,7 +13,7 @@ import com.arisux.avp.entities.tile.model.ModelStasisMechanism;
 
 public class RenderItemStasisMechanism extends ItemRenderer
 {
-	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_STASIS_MECHANISM);
+	public static final ResourceLocation resourceLocation = AliensVsPredator.resources().STASIS_MECHANISM;
 
 	public RenderItemStasisMechanism()
 	{

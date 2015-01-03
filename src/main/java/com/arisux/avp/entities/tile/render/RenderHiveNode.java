@@ -3,7 +3,6 @@ package com.arisux.avp.entities.tile.render;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -14,14 +13,13 @@ import com.arisux.avp.entities.tile.model.ModelHiveNode;
 public class RenderHiveNode extends TileEntitySpecialRenderer
 {
 	private ModelHiveNode mainModel = new ModelHiveNode();
-	private static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_HIVE_NODE);
 
 	public void doRender(float posX, float posY, float posZ, float renderPartialTicks)
 	{
 		GL11.glPushMatrix();
 		{
 			GL11.glDisable(GL11.GL_CULL_FACE);
-			this.bindTexture(resourceLocation);
+			this.bindTexture(AliensVsPredator.resources().HIVE_NODE);
 			GL11.glTranslatef(posX + 0.0F, posY + 1.2F, posZ + 0.0F);
 			GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 			GL11.glScalef(-1.0F, -1.0F, 1.0F);

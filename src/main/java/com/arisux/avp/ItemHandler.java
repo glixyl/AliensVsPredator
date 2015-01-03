@@ -56,12 +56,12 @@ public class ItemHandler extends IBHandler implements IInitializable
 		itemShuriken = (new ItemShuriken()),
 		itemGrenade = (new ItemGrenade()).setFlaming(false),
 		itemFireGrenade = (new ItemGrenade()).setFlaming(true),
-		itemFlamethrower = (new ItemFlamethrower()),
 		itemAmmoPistol = ((HookedItem) (new ItemAmmo(0.05F))).setDescription("A magazine classified for use with pistols."),
 		itemAmmoAR = ((HookedItem) (new ItemAmmo(0.09F))).setDescription("A magazine classified for use with assault rifles."),
 		itemAmmoAC = ((HookedItem) (new ItemAmmo(0.09F))).setDescription("A magazine classified for use with assault carbines."),
 		itemAmmoSMG = ((HookedItem) (new ItemAmmo(0.5F))).setDescription("A magazine classified for use with sub machine-guns."),
 		itemAmmoSniper = ((HookedItem) (new ItemAmmo(0.1F))).setDescription("A magazine classified for use with sniper rifles."),
+		itemM240ICU = (new ItemFlamethrower()).setDescription("M240 Incinerator Unit"),
 		itemPistol = (new ItemFirearm(12, 2.0F, 15, 120, (ItemAmmo) itemAmmoPistol, AliensVsPredator.properties().SOUND_WEAPON_GUNSHOT)),
 		itemM4 = (new ItemFirearm(24, 0.5F, 3, 120, (ItemAmmo) itemAmmoAR, AliensVsPredator.properties().SOUND_WEAPON_GUNSHOT).disableIcon()).setFull3D(),
 		itemSniper = (new ItemFirearm(6, 1.8F, 40, 150, (ItemAmmo) itemAmmoSniper, AliensVsPredator.properties().SOUND_WEAPON_SNIPER).disableIcon()).setFull3D(),
@@ -145,13 +145,13 @@ public class ItemHandler extends IBHandler implements IInitializable
 		registerItem(plateTitanium, "body.celtic");
 		registerItem(legsTitanium, "legwear.celtic");
 		registerItem(bootsTitanium, "boots.celtic");
+		registerItem(itemM240ICU, "gun.m240icu");
 		registerItem(itemPistol, "gun.pistol");
 		registerItem(itemM4, "gun.m4");
 		registerItem(itemSniper, "gun.sniper");
 		registerItem(itemM41A, "gun.m41a");
 		registerItem(itemM56SG, "gun.m56sg");
 		registerItem(itemAK47, "gun.ak47");
-		registerItem(itemFlamethrower, "gun.flamethrower");
 		registerItem(itemAmmoAR, "ammo.ar");
 		registerItem(itemAmmoAC, "ammo.ac");
 		registerItem(itemAmmoPistol, "ammo.pistol");

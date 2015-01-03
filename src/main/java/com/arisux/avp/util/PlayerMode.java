@@ -1,49 +1,42 @@
 package com.arisux.avp.util;
 
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.util.ResourceLocation;
-
-import com.arisux.airi.lib.client.ModelTexMap;
-import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.entities.mob.model.*;
-import com.arisux.avp.entities.mob.render.*;
 
 @SuppressWarnings("all")
 public enum PlayerMode
 {
-	NORMAL(0, new PlayerModeLevelMapping[]{ 
-		new PlayerModeLevelMapping(0, new ModelTexMap(new ModelBiped(), RenderMarine.resourceLocation)) 
+	NORMAL(0, new LevelData[] { 
+		new LevelData(0)
 	}),
-	MARINE(1, new PlayerModeLevelMapping[]{
-		new PlayerModeLevelMapping(0, new ModelTexMap(new ModelBiped(), RenderMarine.resourceLocation))
+	MARINE(1, new LevelData[] {
+		new LevelData(0)
 	}), 
-	PREDATOR(2, new PlayerModeLevelMapping[]{
-		new PlayerModeLevelMapping(0, new ModelTexMap(new ModelYautja(), RenderYautja.resourceLocation))
+	PREDATOR(2, new LevelData[] {
+		new LevelData(0)
 	}), 
-	XENOMORPH(3, new PlayerModeLevelMapping[]{
-		new PlayerModeLevelMapping(0, new ModelTexMap(new ModelOvamorph(), RenderOvamorph.resourceLocation)),
-		new PlayerModeLevelMapping(1, new ModelTexMap(new ModelFacehugger(), RenderFacehugger.resourceLocation)),
-		new PlayerModeLevelMapping(10, new ModelTexMap(new ModelChestburster(), RenderChestburster.resourceLocation)),
-		new PlayerModeLevelMapping(20, new ModelTexMap(new ModelDrone(), new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_DRONE_ADVANCED_BLOOD))),
-		new PlayerModeLevelMapping(45, new ModelTexMap(new ModelWarrior(), new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_WARRIOR_BLOOD))),
-		new PlayerModeLevelMapping(65, new ModelTexMap(new ModelPraetorian(), new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_PRAETORIAN))),
-		new PlayerModeLevelMapping(90, new ModelTexMap(new ModelQueen(), RenderQueen.resourceLocation))
+	XENOMORPH(3, new LevelData[] {
+		new LevelData(0),
+		new LevelData(1),
+		new LevelData(10),
+		new LevelData(20),
+		new LevelData(45),
+		new LevelData(65),
+		new LevelData(90)
 	});
 	
 	public int id;
-	public PlayerModeLevelMapping[] assignedLevels;
+	public LevelData[] assignedLevels;
 	
-	private PlayerMode(int id, PlayerModeLevelMapping[] assignedLevelModels)
+	PlayerMode(int id, LevelData[] assignedLevelModels)
 	{
 		this.id = id;
 		this.assignedLevels = assignedLevelModels;
 	}
 	
-	public PlayerModeLevelMapping getLevelMappingForLevel(int level)
+	public LevelData getLevelMappingForLevel(int level)
 	{
 		for (int x = assignedLevels.length; x > 0; x--)
 		{
-			PlayerModeLevelMapping mapping = assignedLevels[x - 1];
+			LevelData mapping = assignedLevels[x - 1];
 
 			if (mapping.isLevelReached(level))
 			{

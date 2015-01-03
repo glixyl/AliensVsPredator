@@ -25,13 +25,13 @@ public class EntitySmartDisc extends EntityProjectile
 		this.thrownItem = AliensVsPredator.instance().items.itemDisc;
 	}
 
-	public EntitySmartDisc(World world, double x, double y, double z)
+	public EntitySmartDisc(World world, double posX, double posY, double posZ)
 	{
 		this(world);
-		this.setPosition(x, y, z);
+		this.setPosition(posX, posY, posZ);
 	}
 
-	public EntitySmartDisc(World world, EntityLivingBase entityliving, ItemStack itemstack, float f)
+	public EntitySmartDisc(World world, EntityLivingBase entityliving, ItemStack itemstack, float velocity)
 	{
 		this(world);
 		this.shootingEntity = entityliving;
@@ -44,9 +44,9 @@ public class EntitySmartDisc extends EntityProjectile
 		this.motionX = -MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI);
 		this.motionZ = MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI);
 		this.motionY = (-MathHelper.sin(this.rotationPitch / 180.0F * (float) Math.PI));
-		this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, f, 5.0F);
+		this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, velocity, 5.0F);
 		this.soundTimer = 0.0F;
-		this.floatStrength = Math.min(1.5F, f);
+		this.floatStrength = Math.min(1.5F, velocity);
 		this.dataWatcher.updateObject(29, Integer.valueOf(Float.floatToRawIntBits(this.floatStrength)));
 	}
 

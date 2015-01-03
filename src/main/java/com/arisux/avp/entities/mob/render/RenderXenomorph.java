@@ -1,17 +1,19 @@
 package com.arisux.avp.entities.mob.render;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
-import com.arisux.avp.entities.mob.EntityXenomorph;
+import com.arisux.airi.lib.client.ModelTexMap;
 
 public class RenderXenomorph extends RenderLiving
 {
-	public RenderXenomorph(ModelBase mainModel, float shadowSize)
+	private ModelTexMap modelTexMap;
+	
+	public RenderXenomorph(ModelTexMap modelTexMap, float shadowSize)
 	{
-		super(mainModel, shadowSize);
+		super(modelTexMap.asModelBase(), shadowSize);
+		this.modelTexMap = modelTexMap;
 	}
 
 	@Override
@@ -23,6 +25,6 @@ public class RenderXenomorph extends RenderLiving
 	@Override
 	public ResourceLocation getEntityTexture(Entity entity)
 	{
-		return ((EntityXenomorph) entity).getResource();
+		return modelTexMap.asResourceLocation();
 	}
 }

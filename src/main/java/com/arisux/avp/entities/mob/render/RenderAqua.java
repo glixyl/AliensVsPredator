@@ -2,6 +2,7 @@ package com.arisux.avp.entities.mob.render;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
@@ -12,11 +13,8 @@ import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntityAqua;
 import com.arisux.avp.entities.mob.model.ModelAqua;
 
-public class RenderAqua extends RenderXenomorph
+public class RenderAqua extends RenderLiving
 {
-	public static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_AQUA_XENOMORPH);
-	public static final ResourceLocation resourceLocation2 = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_AQUA_XENOMORPH_GLOW);
-
 	public RenderAqua(ModelBase mainModel, float shadowSize)
 	{
 		super(mainModel, shadowSize);
@@ -44,7 +42,7 @@ public class RenderAqua extends RenderXenomorph
 	@Override
 	public ResourceLocation getEntityTexture(Entity par1Entity)
 	{
-		return resourceLocation;
+		return AliensVsPredator.resources().AQUA_XENOMORPH;
 	}
 	
 	protected int setRenderPassModelBrightness(EntityAqua par1EntityAqua, int par2)
@@ -54,7 +52,7 @@ public class RenderAqua extends RenderXenomorph
 			return -1;
 		} else
 		{
-			this.bindTexture(resourceLocation2);
+			this.bindTexture(AliensVsPredator.resources().AQUA_XENOMORPH_MASK);
 			float f1;
 
 			long l = par1EntityAqua.worldObj.getWorldTime();

@@ -19,7 +19,7 @@ import com.arisux.avp.entities.model.ModelSpear;
 public class RenderItemSpear implements IItemRenderer
 {
 	protected ModelSpear model = new ModelSpear();
-	protected static final ResourceLocation resourceLocation = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_SPEAR);
+	protected static final ResourceLocation resourceLocation = AliensVsPredator.resources().SPEAR;
 	private float rotation;
 
 	@Override

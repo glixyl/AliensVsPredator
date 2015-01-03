@@ -3,7 +3,6 @@ package com.arisux.avp.entities.tile.render;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
@@ -15,7 +14,6 @@ import com.arisux.avp.entities.tile.model.ModelTurret;
 public class RenderTurret extends TileEntitySpecialRenderer
 {
 	private ModelTurret model = new ModelTurret();
-	private static final ResourceLocation resource = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_TURRET);
 
 	@Override
 	public void renderTileEntityAt(TileEntity tileEntity, double posX, double posY, double posZ, float renderPartialTicks)
@@ -25,7 +23,7 @@ public class RenderTurret extends TileEntitySpecialRenderer
 		GL11.glPushMatrix();
 		{
 			GL11.glDisable(GL11.GL_CULL_FACE);
-			this.bindTexture(resource);
+			this.bindTexture(AliensVsPredator.resources().TURRET);
 			GL11.glTranslated(posX + 0.5F, posY + 3.0F, posZ - 0.0F);
 			GL11.glScalef(2F, -2F, 2F);
 			this.model.render(tile, 0.0625F);

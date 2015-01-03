@@ -4,6 +4,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 
+import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 
 public class ItemArmorMarine extends ItemArmor
@@ -19,15 +20,15 @@ public class ItemArmorMarine extends ItemArmor
 		switch (slot)
 		{
 			case 0:
-				return AliensVsPredator.properties().TEXTURE_PATH_MARINE1;
+				return RenderUtil.getResourcePath(AliensVsPredator.resources().MARINE1);
 			case 1:
-				return AliensVsPredator.properties().TEXTURE_PATH_MARINE1;
+				return RenderUtil.getResourcePath(AliensVsPredator.resources().MARINE1);
 			case 2:
-				return AliensVsPredator.properties().TEXTURE_PATH_MARINE2;
+				return RenderUtil.getResourcePath(AliensVsPredator.resources().MARINE1);
 			case 3:
-				return AliensVsPredator.properties().TEXTURE_PATH_MARINE2;
+				return RenderUtil.getResourcePath(AliensVsPredator.resources().MARINE1);
 			default:
-				return AliensVsPredator.properties().TEXTURE_PATH_MARINE2;
+				return RenderUtil.getResourcePath(AliensVsPredator.resources().MARINE1);
 		}
 	}
 }

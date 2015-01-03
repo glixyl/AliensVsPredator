@@ -1,9 +1,6 @@
 package com.arisux.avp.event.render;
 
-import static org.lwjgl.opengl.GL11.glRotatef;
-import static org.lwjgl.opengl.GL11.glTranslatef;
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.Pre;
 
@@ -18,7 +15,6 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 public class FacehuggerRenderEvent
 {
 	private Minecraft mc = Minecraft.getMinecraft();
-	private ResourceLocation resOverlayFacehugger = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_BLUR_FACEHUGGER);
 
 	@SubscribeEvent
 	public void renderTickOverlay(Pre event)
@@ -31,9 +27,7 @@ public class FacehuggerRenderEvent
 				{
 					GL11.glPushMatrix();
 					{
-						glRotatef(180F, 0, 0, 1);
-						glTranslatef(-RenderUtil.scaledDisplayResolution().getScaledWidth(), -RenderUtil.scaledDisplayResolution().getScaledHeight(), 0);
-						RenderUtil.renderOverlay(resOverlayFacehugger);
+						RenderUtil.renderOverlay(AliensVsPredator.resources().BLUR_FACEHUGGER);
 					}
 					GL11.glPopMatrix();
 				}
