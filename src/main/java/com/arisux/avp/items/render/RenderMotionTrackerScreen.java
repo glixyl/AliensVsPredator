@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
@@ -13,15 +14,6 @@ import com.arisux.avp.AliensVsPredator;
 
 public class RenderMotionTrackerScreen
 {
-	public static final ResourceLocation resourceBackground = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_MOTIONTRACKER_BG);
-	public static final ResourceLocation resourceForeground = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_MOTIONTRACKER_FG);
-	public static final ResourceLocation resourcePing = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_MOTIONTRACKER_PING);
-	public static final ResourceLocation resourceSweep6 = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_MOTIONTRACKER_S6);
-	public static final ResourceLocation resourceSweep5 = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_MOTIONTRACKER_S5);
-	public static final ResourceLocation resourceSweep4 = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_MOTIONTRACKER_S4);
-	public static final ResourceLocation resourceSweep3 = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_MOTIONTRACKER_S3);
-	public static final ResourceLocation resourceSweep2 = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_MOTIONTRACKER_S2);
-	public static final ResourceLocation resourceSweep1 = new ResourceLocation(AliensVsPredator.properties().TEXTURE_PATH_MOTIONTRACKER_S1);
 	private ArrayList<Float> contactsAngle = new ArrayList<Float>();
 	private ArrayList<Double> contactsDistance = new ArrayList<Double>();
 	private String displayString;
@@ -89,7 +81,7 @@ public class RenderMotionTrackerScreen
 					GL11.glTranslated(0.0D, hypot, 0.0D);
 					GL11.glTranslatef(-32.0F, -37.0F, 0.0F);
 					GL11.glTranslated(0.0D, -hypot, 0.0D);
-					RenderUtil.bindTexture(resourcePing);
+					RenderUtil.bindTexture(AliensVsPredator.resources().MOTIONTRACKER_PING);
 					RenderUtil.glAntiAlias2D();
 					RenderUtil.drawQuad(x * 2, y * 2, 128, 128);
 				}
@@ -102,7 +94,7 @@ public class RenderMotionTrackerScreen
 	private void drawScreen(int x, int y)
 	{
 		int time = (int) (System.currentTimeMillis() / 100L) % 15;
-		ResourceLocation resource = time >= 14 ? resourceSweep6 : time >= 13 ? resourceSweep5 : time >= 12 ? resourceSweep4 : time >= 11 ? resourceSweep3 : time >= 10 ? resourceSweep2 : time >= 9 ? resourceSweep1 : null;
+		ResourceLocation resource = time >= 14 ? AliensVsPredator.resources().MOTIONTRACKER_S6 : time >= 13 ? AliensVsPredator.resources().MOTIONTRACKER_S5 : time >= 12 ? AliensVsPredator.resources().MOTIONTRACKER_S4 : time >= 11 ? AliensVsPredator.resources().MOTIONTRACKER_S3 : time >= 10 ? AliensVsPredator.resources().MOTIONTRACKER_S2 : time >= 9 ? AliensVsPredator.resources().MOTIONTRACKER_S1 : null;
 
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glMatrixMode(GL11.GL_TEXTURE);
@@ -111,7 +103,7 @@ public class RenderMotionTrackerScreen
 			GL11.glTranslatef(0.5F, 0.5F, 0.0F);
 			GL11.glRotatef(-this.direction, 0.0F, 0.0F, 1.0F);
 			GL11.glTranslatef(-0.5F, -0.5F, 0.0F);
-			RenderUtil.bindTexture(resourceBackground);
+			RenderUtil.bindTexture(AliensVsPredator.resources().MOTIONTRACKER_BG);
 			RenderUtil.glAntiAlias2D();
 			RenderUtil.drawQuad(x, y, 128, 76, 64, 64);
 
@@ -125,7 +117,7 @@ public class RenderMotionTrackerScreen
 		GL11.glPopMatrix();
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 
-		RenderUtil.bindTexture(resourceForeground);
+		RenderUtil.bindTexture(AliensVsPredator.resources().MOTIONTRACKER_FG);
 		RenderUtil.glAntiAlias2D();
 		GL11.glTranslatef(0, 0, -0.0002F);
 		RenderUtil.drawQuad(x, y, 128, 128, 64, 64);
@@ -159,7 +151,7 @@ public class RenderMotionTrackerScreen
 
 			for (Entity entity : entities)
 			{
-				if (entity != mc.thePlayer && (isMoving(mc.thePlayer) || isMoving(entity) || entity.isInvisible()))
+				if (entity != mc.thePlayer && entity instanceof EntityLiving && (isMoving(mc.thePlayer) || isMoving(entity) || entity.isInvisible()))
 				{
 					int wayX = xCoord() - (int) entity.posX;
 					int wayY = zCoord() - (int) entity.posZ;
