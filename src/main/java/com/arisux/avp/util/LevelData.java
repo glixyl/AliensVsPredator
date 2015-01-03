@@ -5,21 +5,25 @@ import net.minecraft.stats.Achievement;
 
 import com.arisux.airi.lib.client.ModelTexMap;
 
-public class PlayerModeLevelMapping
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+public class LevelData
 {
 	private int level;
-	private ModelTexMap modelTexMap;
 	private Achievement achievement;
+
+	@SideOnly(Side.CLIENT)
+	private ModelTexMap modelTexMap;
 	
-	public PlayerModeLevelMapping(int level, ModelTexMap mappedModelTexture)
+	public LevelData(int level)
 	{
-		this(level, mappedModelTexture, null);
+		this(level, null);
 	}
 	
-	public PlayerModeLevelMapping(int level, ModelTexMap mappedModelTexture, Achievement achievement)
+	public LevelData(int level, Achievement achievement)
 	{
 		this.level = level;
-		this.modelTexMap = mappedModelTexture;
 		this.achievement = achievement;
 	}
 	
@@ -46,5 +50,12 @@ public class PlayerModeLevelMapping
 	public Achievement getAchievement()
 	{
 		return achievement;
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public LevelData setModelTexMap(ModelTexMap modelTexMap)
+	{
+		this.modelTexMap = modelTexMap;
+		return this;
 	}
 }
