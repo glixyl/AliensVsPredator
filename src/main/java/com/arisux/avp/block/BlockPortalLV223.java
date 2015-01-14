@@ -14,7 +14,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.dimension.lv223.LV223Teleporter;
+import com.arisux.avp.dimension.varda.TeleporterVarda;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -92,11 +92,11 @@ public class BlockPortalLV223 extends BlockBreakable
 			} else if (var6.dimension != AliensVsPredator.properties().DIMENSION_ID_LV223)
 			{
 				var6.timeUntilPortal = 10;
-				var6.mcServer.getConfigurationManager().transferPlayerToDimension(var6, AliensVsPredator.properties().DIMENSION_ID_LV223, new LV223Teleporter(var7.worldServerForDimension(AliensVsPredator.properties().DIMENSION_ID_LV223)));
+				var6.mcServer.getConfigurationManager().transferPlayerToDimension(var6, AliensVsPredator.properties().DIMENSION_ID_LV223, new TeleporterVarda(var7.worldServerForDimension(AliensVsPredator.properties().DIMENSION_ID_LV223)));
 			} else
 			{
 				var6.timeUntilPortal = 10;
-				var6.mcServer.getConfigurationManager().transferPlayerToDimension(var6, 0, new LV223Teleporter(var7.worldServerForDimension(1)));
+				var6.mcServer.getConfigurationManager().transferPlayerToDimension(var6, 0, new TeleporterVarda(var7.worldServerForDimension(1)));
 			}
 		}
 	}

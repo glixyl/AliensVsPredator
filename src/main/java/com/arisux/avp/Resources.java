@@ -8,11 +8,13 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class Resources
 {
 	public static final Resources instance = new Resources();
-	
-	public final ResourceLocation SUN = new ResourceLocation("textures/environment/sun.png");
+
+	public final ResourceLocation SKY_RAIN = new ResourceLocation("textures/environment/rain.png");
+	public final ResourceLocation SKY_SILICA = new ResourceLocation(AliensVsPredator.ID, "textures/misc/silica.png");
+	public final ResourceLocation SKY_SUN = new ResourceLocation("textures/environment/sun.png");
+	public final ResourceLocation SKY_CALPAMOS = new ResourceLocation(AliensVsPredator.ID, "textures/misc/calpamos.png");
 	public final ResourceLocation DRONE_BASIC = new ResourceLocation(AliensVsPredator.ID, "textures/mob/drone_basic.png");
 	public final ResourceLocation DRONE_ADVANCED = new ResourceLocation(AliensVsPredator.ID, "textures/mob/drone_advanced.png");
-	public final ResourceLocation LV223_GAS_PLANET = new ResourceLocation(AliensVsPredator.ID, "textures/misc/gas-planet-zeta-2-reticuli.png");
 	public final ResourceLocation TITANIUM1 = new ResourceLocation(AliensVsPredator.ID, "textures/armor/titanium_1.png");
 	public final ResourceLocation TITANIUM2 = new ResourceLocation(AliensVsPredator.ID, "textures/armor/titanium_2.png");
 	public final ResourceLocation PRESSURESUIT1 = new ResourceLocation(AliensVsPredator.ID, "textures/armor/suit_1.png");
@@ -23,7 +25,7 @@ public class Resources
 	public final ResourceLocation MARINE2 = new ResourceLocation(AliensVsPredator.ID, "textures/armor/marine_2.png");
 	public final ResourceLocation BULLET = new ResourceLocation(AliensVsPredator.ID, "textures/misc/renderbullet.png");
 	public final ResourceLocation SPEAR = new ResourceLocation(AliensVsPredator.ID, "textures/misc/renderspear.png");
-	public final ResourceLocation FX_ACID = new ResourceLocation(AliensVsPredator.ID, "textures/misc/renderacid.png");
+	public final ResourceLocation ACID_POOL = new ResourceLocation(AliensVsPredator.ID, "textures/misc/renderacid.png");
 	public final ResourceLocation DISC = new ResourceLocation(AliensVsPredator.ID, "textures/misc/disc.png");
 	public final ResourceLocation SHURIKEN = new ResourceLocation(AliensVsPredator.ID, "textures/misc/shuriken.png");
 	public final ResourceLocation BLUR_CELTIC_HUD = new ResourceLocation(AliensVsPredator.ID, "textures/misc/celtic-helm-overlay.png");
@@ -35,7 +37,7 @@ public class Resources
 	public final ResourceLocation PROXIMITY_MINE = new ResourceLocation(AliensVsPredator.ID, "textures/items/itemWallMine.png");
 	public final ResourceLocation WRISTBLADES = new ResourceLocation(AliensVsPredator.ID, "textures/items/models/wristblade.png");
 	public final ResourceLocation M240ICU = new ResourceLocation(AliensVsPredator.ID, "textures/items/models/m240icu.png");
-	public final ResourceLocation PULSERIFLE = new ResourceLocation(AliensVsPredator.ID, "textures/items/models/pulserifle.png");
+	public final ResourceLocation M41A = new ResourceLocation(AliensVsPredator.ID, "textures/items/models/pulserifle.png");
 	public final ResourceLocation M56SG = new ResourceLocation(AliensVsPredator.ID, "textures/items/models/m56sg.png");
 	public final ResourceLocation AK47 = new ResourceLocation(AliensVsPredator.ID, "textures/items/models/ak-47.png");
 	public final ResourceLocation M4 = new ResourceLocation(AliensVsPredator.ID, "textures/items/models/m4.png");

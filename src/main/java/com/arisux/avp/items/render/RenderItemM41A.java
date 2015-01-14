@@ -19,7 +19,7 @@ import com.arisux.avp.items.model.ModelM41A;
 
 public class RenderItemM41A extends ItemRenderer
 {
-	public static final ResourceLocation resourceLocation = AliensVsPredator.resources().PULSERIFLE;
+	public static final ResourceLocation resourceLocation = AliensVsPredator.resources().M41A;
 	public static final ModelBaseExtension model = new ModelM41A();
 	private RenderMotionTrackerScreen motionTracker = new RenderMotionTrackerScreen();
 

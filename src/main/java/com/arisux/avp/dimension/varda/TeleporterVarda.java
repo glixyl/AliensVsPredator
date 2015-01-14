@@ -1,4 +1,4 @@
-package com.arisux.avp.dimension.lv223;
+package com.arisux.avp.dimension.varda;
 
 import java.util.*;
 
@@ -10,14 +10,14 @@ import net.minecraft.world.*;
 
 import com.arisux.avp.AliensVsPredator;
 
-public class LV223Teleporter extends Teleporter
+public class TeleporterVarda extends Teleporter
 {
 	private final WorldServer worldServerInstance;
 	private final Random b;
 	private final LongHashMap destinationCoordinateCache = new LongHashMap();
 	private final List<Long> destinationCoordinateKeys = new ArrayList<Long>();
 
-	public LV223Teleporter(WorldServer var1)
+	public TeleporterVarda(WorldServer var1)
 	{
 		super(var1);
 		this.worldServerInstance = var1;
@@ -25,45 +25,45 @@ public class LV223Teleporter extends Teleporter
 	}
 
 	@Override
-	public void placeInPortal(Entity var1, double xCoord, double yCoord, double zCoord, float var8)
+	public void placeInPortal(Entity entity, double xCoord, double yCoord, double zCoord, float yaw)
 	{
 		if (this.worldServerInstance.provider.dimensionId != 1)
 		{
-			if (!placeInExistingPortal(var1, xCoord, yCoord, zCoord, var8))
+			if (!placeInExistingPortal(entity, xCoord, yCoord, zCoord, yaw))
 			{
-				makePortal(var1);
-				placeInExistingPortal(var1, xCoord, yCoord, zCoord, var8);
+				this.makePortal(entity);
+				this.placeInExistingPortal(entity, xCoord, yCoord, zCoord, yaw);
 			}
 		} else
 		{
-			int var9 = MathHelper.floor_double(var1.posX);
-			int var10 = MathHelper.floor_double(var1.posY) - 1;
-			int var11 = MathHelper.floor_double(var1.posZ);
+			int entityPosX = MathHelper.floor_double(entity.posX);
+			int entityPosY = MathHelper.floor_double(entity.posY) - 1;
+			int entityPosZ = MathHelper.floor_double(entity.posZ);
 			byte var12 = 1;
 			byte var13 = 0;
 
-			if (worldServerInstance.getBlock(var9, var10, var11) == Blocks.air)
+			if (worldServerInstance.getBlock(entityPosX, entityPosY, entityPosZ) == Blocks.air)
 			{
-				for (int var14 = -2; var14 <= 2; var14++)
+				for (int portalBlockX = -2; portalBlockX <= 2; portalBlockX++)
 				{
-					for (int var15 = -2; var15 <= 2; var15++)
+					for (int portalBlockZ = -2; portalBlockZ <= 2; portalBlockZ++)
 					{
-						for (int var16 = -1; var16 < 3; var16++)
+						for (int height = -1; height < 3; height++)
 						{
-							int var17 = var9 + var15 * var12 + var14 * var13;
-							int var18 = var10 + var16;
-							int var19 = var11 + var15 * var13 - var14 * var12;
-							boolean var20 = var16 < 0;
-							this.worldServerInstance.setBlock(var17, var18, var19, var20 ? AliensVsPredator.instance().blocks.blockDerelict2 : Blocks.air);
+							int blockX = entityPosX + portalBlockZ * var12 + portalBlockX * var13;
+							int blockY = entityPosY + height;
+							int blockZ = entityPosZ + portalBlockZ * var13 - portalBlockX * var12;
+							this.worldServerInstance.setBlock(blockX, blockY, blockZ, (height < 0) ? AliensVsPredator.instance().blocks.blockDerelict2 : Blocks.air);
 						}
 					}
 				}
 
-				var1.setLocationAndAngles(var9, var10, var11, var1.rotationYaw, 0.0F);
-				var1.motionX = (var1.motionY = var1.motionZ = 0.0D);
-			} else
+				entity.setLocationAndAngles(entityPosX, entityPosY, entityPosZ, entity.rotationYaw, 0F);
+				entity.setVelocity(0D, 0D, 0D);
+			} 
+			else
 			{
-				placeInPortal(var1, xCoord, yCoord, zCoord, var8);
+				this.placeInPortal(entity, xCoord, yCoord, zCoord, yaw);
 			}
 		}
 	}

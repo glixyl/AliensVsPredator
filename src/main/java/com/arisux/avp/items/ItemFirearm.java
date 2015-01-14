@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -49,6 +50,12 @@ public class ItemFirearm extends HookedItem
 		--this.curCooldown;
 		--this.curReload;
 	}
+	
+	@Override
+	public EnumAction getItemUseAction(ItemStack stack)
+	{
+		return EnumAction.bow;
+	}
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
@@ -58,6 +65,8 @@ public class ItemFirearm extends HookedItem
 			this.cancelRightClick = false;
 			return par1ItemStack;
 		}
+		
+//		par3EntityPlayer.setItemInUse(par1ItemStack, 72000);
 
 		// if (!par2World.isRemote) AliensVsPredator.instance().network.sendToServer(new PacketAmmoClientUpdate(curAmmo));
 

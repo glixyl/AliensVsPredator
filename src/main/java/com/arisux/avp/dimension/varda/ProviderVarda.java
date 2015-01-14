@@ -1,4 +1,4 @@
-package com.arisux.avp.dimension.lv223;
+package com.arisux.avp.dimension.varda;
 
 import net.minecraft.util.*;
 import net.minecraft.world.WorldProvider;
@@ -11,7 +11,7 @@ import com.arisux.avp.AliensVsPredator;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class LV223WorldProvider extends WorldProvider
+public class ProviderVarda extends WorldProvider
 {
 	@SideOnly(Side.CLIENT)
 	private IRenderHandler skyProvider;
@@ -19,7 +19,7 @@ public class LV223WorldProvider extends WorldProvider
 	@Override
 	public void registerWorldChunkManager()
 	{
-		this.worldChunkMgr = new LV223WorldChunkManager(LV223BiomeBase.prometheusBiome);
+		this.worldChunkMgr = new ChunkManagerVarda(BiomeVardaBase.varda);
 		// this.worldChunkMgr = new WorldChunkManager(this.worldObj);
 		this.hasNoSky = false;
 		this.isHellWorld = false;
@@ -34,25 +34,25 @@ public class LV223WorldProvider extends WorldProvider
 	@SideOnly(Side.CLIENT)
 	public IRenderHandler getSkyRenderer()
 	{
-		return skyProvider == null ? skyProvider = new LV223SkyProvider() : skyProvider;
+		return skyProvider == null ? skyProvider = new SkyProviderVarda() : skyProvider;
 	}
 
 	@Override
 	public String getSaveFolder()
 	{
-		return AliensVsPredator.properties().DIMENSION_GLOBAL_LV223;
+		return AliensVsPredator.properties().DIMENSION_ID_VARDA;
 	}
 
 	@Override
 	public String getWelcomeMessage()
 	{
-		return "Enterring " + AliensVsPredator.properties().DIMENSION_NAME_LV223;
+		return "Enterring " + AliensVsPredator.properties().DIMENSION_NAME_VARDA;
 	}
 
 	@Override
 	public String getDepartMessage()
 	{
-		return "Leaving" + AliensVsPredator.properties().DIMENSION_NAME_LV223;
+		return "Leaving" + AliensVsPredator.properties().DIMENSION_NAME_VARDA;
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class LV223WorldProvider extends WorldProvider
 	@Override
 	public IChunkProvider createChunkGenerator()
 	{
-		return new LV223ChunkProvider(this.worldObj, worldObj.getSeed());
+		return new ChunkProviderVarda(this.worldObj, worldObj.getSeed());
 		// return new ChunkProviderGenerate(worldObj,
 		// worldObj.getSeed(), true);
 	}
@@ -96,7 +96,7 @@ public class LV223WorldProvider extends WorldProvider
 	@Override
 	public String getDimensionName()
 	{
-		return AliensVsPredator.properties().DIMENSION_NAME_LV223;
+		return AliensVsPredator.properties().DIMENSION_NAME_VARDA;
 	}
 
 	@Override

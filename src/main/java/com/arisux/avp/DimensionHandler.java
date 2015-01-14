@@ -7,7 +7,7 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
 
 import com.arisux.airi.lib.interfaces.IInitializable;
-import com.arisux.avp.dimension.lv223.*;
+import com.arisux.avp.dimension.varda.*;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -18,9 +18,9 @@ public class DimensionHandler implements IInitializable
 	@Override
 	public void initialize(FMLInitializationEvent event)
 	{
-		DimensionManager.registerProviderType(AliensVsPredator.properties().DIMENSION_ID_LV223, LV223WorldProvider.class, true);
+		DimensionManager.registerProviderType(AliensVsPredator.properties().DIMENSION_ID_LV223, ProviderVarda.class, true);
 		DimensionManager.registerDimension(AliensVsPredator.properties().DIMENSION_ID_LV223, AliensVsPredator.properties().DIMENSION_ID_LV223);
-		GameRegistry.registerWorldGenerator(new LV223WorldGenerator(), 1);
+		GameRegistry.registerWorldGenerator(new GeneratorVarda(), 1);
 	}
 
 	public void initialWorldChunkLoad(WorldServer worldServerObj)
@@ -28,7 +28,7 @@ public class DimensionHandler implements IInitializable
 		MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
 		long startTime = System.currentTimeMillis();
 		short var3 = 196;
-		server.logInfo("Preparing start region for level " + AliensVsPredator.properties().DIMENSION_GLOBAL_LV223);
+		server.logInfo("Preparing start region for level " + AliensVsPredator.properties().DIMENSION_ID_VARDA);
 
 		for (int chunkX = -var3; (chunkX <= var3) && (server.isServerRunning()); chunkX += 16)
 		{
@@ -57,15 +57,15 @@ public class DimensionHandler implements IInitializable
 
 		if (player.dimension == 0)
 		{
-			LV223Teleporter teleporter = new LV223Teleporter(MinecraftServer.getServer().worldServerForDimension(AliensVsPredator.properties().DIMENSION_ID_LV223));
+			TeleporterVarda teleporter = new TeleporterVarda(MinecraftServer.getServer().worldServerForDimension(AliensVsPredator.properties().DIMENSION_ID_LV223));
 			serverManager.transferPlayerToDimension(player, AliensVsPredator.properties().DIMENSION_ID_LV223, teleporter);
 		} else if (player.dimension == AliensVsPredator.properties().DIMENSION_ID_LV223)
 		{
-			LV223Teleporter teleporter = new LV223Teleporter(MinecraftServer.getServer().worldServerForDimension(0));
+			TeleporterVarda teleporter = new TeleporterVarda(MinecraftServer.getServer().worldServerForDimension(0));
 			serverManager.transferPlayerToDimension(player, 0, teleporter);
 		} else
 		{
-			LV223Teleporter teleporter = new LV223Teleporter(MinecraftServer.getServer().worldServerForDimension(player.dimension));
+			TeleporterVarda teleporter = new TeleporterVarda(MinecraftServer.getServer().worldServerForDimension(player.dimension));
 			serverManager.transferPlayerToDimension(player, AliensVsPredator.properties().DIMENSION_ID_LV223, teleporter);
 		}
 	}

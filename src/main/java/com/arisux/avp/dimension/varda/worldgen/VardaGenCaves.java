@@ -1,4 +1,4 @@
-package com.arisux.avp.dimension.lv223;
+package com.arisux.avp.dimension.varda.worldgen;
 
 import java.util.Random;
 
@@ -10,7 +10,7 @@ import net.minecraft.world.gen.MapGenBase;
 
 import com.arisux.avp.AliensVsPredator;
 
-public class LV223GenCaves extends MapGenBase
+public class VardaGenCaves extends MapGenBase
 {
 	protected void generateLargeCaveNode(long var1, int var3, int var4, Block[] var5, double var6, double var8, double var10)
 	{

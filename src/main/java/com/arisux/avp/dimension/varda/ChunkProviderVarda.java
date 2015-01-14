@@ -1,9 +1,10 @@
-package com.arisux.avp.dimension.lv223;
+package com.arisux.avp.dimension.varda;
 
 import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockSand;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.IProgressUpdate;
@@ -15,42 +16,40 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.MapGenBase;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 
+import com.arisux.airi.lib.WorldUtil;
+import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
 import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.dimension.varda.worldgen.VardaGenCaves;
+import com.arisux.avp.dimension.varda.worldgen.VardaGenLakes;
 
-public class LV223ChunkProvider implements IChunkProvider
+public class ChunkProviderVarda implements IChunkProvider
 {
-	private Random rand;
-	private NoiseGeneratorOctaves noiseGen1;
-	private NoiseGeneratorOctaves noiseGen2;
-	private NoiseGeneratorOctaves noiseGen3;
-	private NoiseGeneratorOctaves noiseGen4;
-	private NoiseGeneratorOctaves noiseGen5;
-	private NoiseGeneratorOctaves noiseGen6;
-	private World worldObj;
+	private NoiseGeneratorOctaves[] noiseGenOctaves = new NoiseGeneratorOctaves[6];
+	private Random randomSeed;
+	private World world;
 	private double[] noiseArray;
 	private double[] stoneNoise = new double[256];
 
-	private MapGenBase caveGenerator = new LV223GenCaves();
+	private MapGenBase caveGenerator = new VardaGenCaves();
 	private BiomeGenBase[] biomesForGeneration;
-	double[] noise3;
-	double[] noise1;
-	double[] noise2;
-	double[] noise5;
-	double[] noise6;
-	float[] field_35388_l;
-	int[][] field_914_i = new int[32][32];
+	private double[] noise3;
+	private double[] noise1;
+	private double[] noise2;
+	private double[] noise5;
+	private double[] noise6;
+	private float[] field_35388_l;
 
-	public LV223ChunkProvider(World var1, long var2)
+	public ChunkProviderVarda(World world, long seed)
 	{
-		this.worldObj = var1;
-		this.rand = new Random(var2);
-		this.noiseGen1 = new NoiseGeneratorOctaves(this.rand, 16);
-		this.noiseGen2 = new NoiseGeneratorOctaves(this.rand, 16);
-		this.noiseGen3 = new NoiseGeneratorOctaves(this.rand, 8);
-		this.noiseGen4 = new NoiseGeneratorOctaves(this.rand, 4);
-		this.noiseGen5 = new NoiseGeneratorOctaves(this.rand, 10);
-		this.noiseGen6 = new NoiseGeneratorOctaves(this.rand, 16);
-		new NoiseGeneratorOctaves(this.rand, 8);
+		this.world = world;
+		this.randomSeed = new Random(seed);
+		this.noiseGenOctaves[0] = new NoiseGeneratorOctaves(this.randomSeed, 16);
+		this.noiseGenOctaves[1] = new NoiseGeneratorOctaves(this.randomSeed, 16);
+		this.noiseGenOctaves[2] = new NoiseGeneratorOctaves(this.randomSeed, 8);
+		this.noiseGenOctaves[3] = new NoiseGeneratorOctaves(this.randomSeed, 4);
+		this.noiseGenOctaves[4] = new NoiseGeneratorOctaves(this.randomSeed, 10);
+		this.noiseGenOctaves[5] = new NoiseGeneratorOctaves(this.randomSeed, 16);
+		new NoiseGeneratorOctaves(this.randomSeed, 8);
 	}
 
 	public void generateTerrain(int var1, int var2, Block[] var3)
@@ -61,7 +60,7 @@ public class LV223ChunkProvider implements IChunkProvider
 		int var7 = var4 + 1;
 		byte var8 = 17;
 		int var9 = var4 + 1;
-		this.biomesForGeneration = this.worldObj.getWorldChunkManager().getBiomesForGeneration(this.biomesForGeneration, var1 * 4 - 2, var2 * 4 - 2, var7 + 5, var9 + 5);
+		this.biomesForGeneration = this.world.getWorldChunkManager().getBiomesForGeneration(this.biomesForGeneration, var1 * 4 - 2, var2 * 4 - 2, var7 + 5, var9 + 5);
 		this.noiseArray = initializeNoiseField(this.noiseArray, var1 * var4, 0, var2 * var4, var7, var8, var9);
 
 		for (int var10 = 0; var10 < var4; var10++)
@@ -102,12 +101,14 @@ public class LV223ChunkProvider implements IChunkProvider
 									int tmp510_509 = (var43 + var44);
 									var43 = tmp510_509;
 									var3[tmp510_509] = AliensVsPredator.instance().blocks.terrainUniStone;
-								} else if (var12 * 8 + var31 < var6)
+								}
+								else if (var12 * 8 + var31 < var6)
 								{
 									int tmp543_542 = (var43 + var44);
 									var43 = tmp543_542;
 									var3[tmp543_542] = Blocks.water;
-								} else
+								}
+								else
 								{
 									int tmp563_562 = (var43 + var44);
 									var43 = tmp563_562;
@@ -133,7 +134,7 @@ public class LV223ChunkProvider implements IChunkProvider
 	{
 		byte var5 = 63;
 		double var6 = 0.03125D;
-		this.stoneNoise = this.noiseGen4.generateNoiseOctaves(this.stoneNoise, var1 * 16, var2 * 16, 0, 16, 16, 1, var6 * 2.0D, var6 * 2.0D, var6 * 2.0D);
+		this.stoneNoise = this.noiseGenOctaves[3].generateNoiseOctaves(this.stoneNoise, var1 * 16, var2 * 16, 0, 16, 16, 1, var6 * 2.0D, var6 * 2.0D, var6 * 2.0D);
 
 		for (int var8 = 0; var8 < 16; var8++)
 		{
@@ -143,7 +144,7 @@ public class LV223ChunkProvider implements IChunkProvider
 				// float var11 =
 				// var10.getFloatTemperature(p_150564_1_,
 				// p_150564_2_, p_150564_3_)
-				int var12 = (int) (this.stoneNoise[(var8 + var9 * 16)] / 3.0D + 3.0D + this.rand.nextDouble() * 0.25D);
+				int var12 = (int) (this.stoneNoise[(var8 + var9 * 16)] / 3.0D + 3.0D + this.randomSeed.nextDouble() * 0.25D);
 				int var13 = -1;
 				Block var14 = var10.topBlock;
 				Block var15 = var10.fillerBlock;
@@ -152,17 +153,19 @@ public class LV223ChunkProvider implements IChunkProvider
 				{
 					int var17 = (var9 * 16 + var8) * 128 + var16;
 
-					if (var16 <= 0 + this.rand.nextInt(5))
+					if (var16 <= 0 + this.randomSeed.nextInt(5))
 					{
 						var3[var17] = Blocks.bedrock;
-					} else
+					}
+					else
 					{
 						Block var18 = var3[var17];
 
 						if (var18 == Blocks.air)
 						{
 							var13 = -1;
-						} else
+						}
+						else
 						{
 							if (var18 == Blocks.stone)
 								continue;
@@ -172,7 +175,8 @@ public class LV223ChunkProvider implements IChunkProvider
 								{
 									var14 = Blocks.air;
 									var15 = AliensVsPredator.instance().blocks.terrainUniStone;
-								} else if ((var16 >= var5 - 4) && (var16 <= var5 + 1))
+								}
+								else if ((var16 >= var5 - 4) && (var16 <= var5 + 1))
 								{
 									var14 = var10.topBlock;
 									var15 = var10.fillerBlock;
@@ -188,11 +192,13 @@ public class LV223ChunkProvider implements IChunkProvider
 								if (var16 >= var5 - 1)
 								{
 									var3[var17] = var14;
-								} else
+								}
+								else
 								{
 									var3[var17] = var15;
 								}
-							} else
+							}
+							else
 							{
 								if (var13 <= 0)
 									continue;
@@ -201,7 +207,7 @@ public class LV223ChunkProvider implements IChunkProvider
 
 								if ((var13 != 0) || (var15 != Blocks.sand))
 									continue;
-								var13 = this.rand.nextInt(4);
+								var13 = this.randomSeed.nextInt(4);
 								var15 = Blocks.sandstone;
 							}
 						}
@@ -212,32 +218,31 @@ public class LV223ChunkProvider implements IChunkProvider
 	}
 
 	@Override
-	public Chunk loadChunk(int var1, int var2)
+	public Chunk loadChunk(int chunkX, int chunkZ)
 	{
-		return provideChunk(var1, var2);
+		return provideChunk(chunkX, chunkZ);
 	}
 
 	@Override
-	public Chunk provideChunk(int var1, int var2)
+	public Chunk provideChunk(int chunkX, int chunkZ)
 	{
-		this.rand.setSeed(var1 * 341873128712L + var2 * 132897987541L);
-		Block[] var3 = new Block[16 * 16 * 128];
-		generateTerrain(var1, var2, var3);
-		this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, var1 * 16, var2 * 16, 16, 16);
-		replaceBlocksForBiome(var1, var2, var3, this.biomesForGeneration);
-		this.caveGenerator.func_151539_a(this, this.worldObj, var1, var2, var3);// func_151539_a
-											// =
-											// generate
-		Chunk var4 = new Chunk(this.worldObj, var3, var1, var2);
-		byte[] var5 = var4.getBiomeArray();
+		Block[] blocks = new Block[16 * 16 * 128];
+		this.randomSeed.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
+		this.generateTerrain(chunkX, chunkZ, blocks);
+		this.biomesForGeneration = this.world.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, chunkX * 16, chunkZ * 16, 16, 16);
+		this.replaceBlocksForBiome(chunkX, chunkZ, blocks, this.biomesForGeneration);
+		this.caveGenerator.func_151539_a(this, this.world, chunkX, chunkZ, blocks);
 
-		for (int var6 = 0; var6 < var5.length; var6++)
+		Chunk chunk = new Chunk(this.world, blocks, chunkX, chunkZ);
+		byte[] biomes = chunk.getBiomeArray();
+
+		for (int x = 0; x < biomes.length; x++)
 		{
-			var5[var6] = (byte) this.biomesForGeneration[var6].biomeID;
+			biomes[x] = (byte) this.biomesForGeneration[x].biomeID;
 		}
 
-		var4.generateSkylightMap();
-		return var4;
+		chunk.generateSkylightMap();
+		return chunk;
 	}
 
 	private double[] initializeNoiseField(double[] var1, int var2, int var3, int var4, int var5, int var6, int var7)
@@ -263,11 +268,11 @@ public class LV223ChunkProvider implements IChunkProvider
 
 		double var44 = 684.41200000000003D;
 		double var45 = 684.41200000000003D;
-		this.noise5 = this.noiseGen5.generateNoiseOctaves(this.noise5, var2, var4, var5, var7, 1.121D, 1.121D, 0.5D);
-		this.noise6 = this.noiseGen6.generateNoiseOctaves(this.noise6, var2, var4, var5, var7, 200.0D, 200.0D, 0.5D);
-		this.noise3 = this.noiseGen3.generateNoiseOctaves(this.noise3, var2, var3, var4, var5, var6, var7, var44 / 80.0D, var45 / 160.0D, var44 / 80.0D);
-		this.noise1 = this.noiseGen1.generateNoiseOctaves(this.noise1, var2, var3, var4, var5, var6, var7, var44, var45, var44);
-		this.noise2 = this.noiseGen2.generateNoiseOctaves(this.noise2, var2, var3, var4, var5, var6, var7, var44, var45, var44);
+		this.noise5 = this.noiseGenOctaves[4].generateNoiseOctaves(this.noise5, var2, var4, var5, var7, 1.121D, 1.121D, 0.5D);
+		this.noise6 = this.noiseGenOctaves[5].generateNoiseOctaves(this.noise6, var2, var4, var5, var7, 200.0D, 200.0D, 0.5D);
+		this.noise3 = this.noiseGenOctaves[2].generateNoiseOctaves(this.noise3, var2, var3, var4, var5, var6, var7, var44 / 80.0D, var45 / 160.0D, var44 / 80.0D);
+		this.noise1 = this.noiseGenOctaves[0].generateNoiseOctaves(this.noise1, var2, var3, var4, var5, var6, var7, var44, var45, var44);
+		this.noise2 = this.noiseGenOctaves[1].generateNoiseOctaves(this.noise2, var2, var3, var4, var5, var6, var7, var44, var45, var44);
 		int var14 = 0;
 		int var15 = 0;
 
@@ -323,7 +328,8 @@ public class LV223ChunkProvider implements IChunkProvider
 
 					var47 /= 1.4D;
 					var47 /= 2.0D;
-				} else
+				}
+				else
 				{
 					if (var47 > 1.0D)
 					{
@@ -357,10 +363,12 @@ public class LV223ChunkProvider implements IChunkProvider
 					if (var40 < 0.0D)
 					{
 						var32 = var36;
-					} else if (var40 > 1.0D)
+					}
+					else if (var40 > 1.0D)
 					{
 						var32 = var38;
-					} else
+					}
+					else
 					{
 						var32 = var36 + (var38 - var36) * var40;
 					}
@@ -389,64 +397,47 @@ public class LV223ChunkProvider implements IChunkProvider
 	}
 
 	@Override
-	public void populate(IChunkProvider var1, int var2, int var3)
+	public void populate(IChunkProvider chunkProvider, int chunkX, int chunkZ)
 	{
-		net.minecraft.block.BlockSand.fallInstantly = true;
-		int var4 = var2 * 16;
-		int var5 = var3 * 16;
-		BiomeGenBase var6 = this.worldObj.getBiomeGenForCoords(var4 + 16, var5 + 16);
-		this.rand.setSeed(this.worldObj.getSeed());
-		long var7 = this.rand.nextLong() / 2L * 2L + 1L;
-		long var9 = this.rand.nextLong() / 2L * 2L + 1L;
-		this.rand.setSeed(var2 * var7 + var3 * var9 ^ this.worldObj.getSeed());
-		if (this.rand.nextInt(2) == 0)
-		{
-			int var12 = var4 + this.rand.nextInt(16) + 8;
-			int var13 = this.rand.nextInt(128);
-			int var14 = var5 + this.rand.nextInt(16) + 8;
-			new LV223GenLakes(Blocks.water).generate(this.worldObj, this.rand, var12, var13, var14);
-		}
+		CoordData chunkCoord = new CoordData(chunkX, 0, chunkZ);
+		BlockSand.fallInstantly = true;
+		int posX = chunkX * 16;
+		int posZ = chunkZ * 16;
+		BiomeGenBase biome = this.world.getBiomeGenForCoords(posX + 16, posZ + 16);
+		this.randomSeed.setSeed(this.world.getSeed());
+		this.randomSeed.setSeed(chunkX * (this.randomSeed.nextLong() / 2L * 2L + 1L) + chunkZ * (this.randomSeed.nextLong() / 2L * 2L + 1L) ^ this.world.getSeed());
 
-		if (this.rand.nextInt(4) == 0)
-		{
-			int var12 = var4 + this.rand.nextInt(16) + 8;
-			int var13 = this.rand.nextInt(this.rand.nextInt(120) + 8);
-			int var14 = var5 + this.rand.nextInt(16) + 8;
+		WorldUtil.generateWorldGenInChunk(world, new VardaGenLakes(Blocks.water), randomSeed, this.randomSeed.nextInt(2), 0, this.randomSeed.nextInt(128), chunkCoord);
+		WorldUtil.generateWorldGenInChunk(world, new VardaGenLakes(Blocks.lava), randomSeed, this.randomSeed.nextInt(14), 0, this.randomSeed.nextInt(this.randomSeed.nextInt(120) + 8), chunkCoord);
 
-			if ((var13 < 63) || (this.rand.nextInt(10) == 0))
+		biome.decorate(this.world, this.randomSeed, posX, posZ);
+		SpawnerAnimals.performWorldGenSpawning(this.world, biome, posX + 8, posZ + 8, 16, 16, this.randomSeed);
+		posX += 8;
+		posZ += 8;
+
+		for (int subX = 0; subX < 16; subX++)
+		{
+			for (int subZ = 0; subZ < 16; subZ++)
 			{
-				new LV223GenLakes(Blocks.lava).generate(this.worldObj, this.rand, var12, var13, var14);
-			}
-		}
+				int precipitationHeight = this.world.getPrecipitationHeight(posX + subX, posZ + subZ);
 
-		var6.decorate(this.worldObj, this.rand, var4, var5);
-		SpawnerAnimals.performWorldGenSpawning(this.worldObj, var6, var4 + 8, var5 + 8, 16, 16, this.rand);
-		var4 += 8;
-		var5 += 8;
-
-		for (int var12 = 0; var12 < 16; var12++)
-		{
-			for (int var13 = 0; var13 < 16; var13++)
-			{
-				int var14 = this.worldObj.getPrecipitationHeight(var4 + var12, var5 + var13);
-
-				if (this.worldObj.isBlockFreezable(var12 + var4, var14 - 1, var13 + var5))
+				if (this.world.isBlockFreezable(subX + posX, precipitationHeight - 1, subZ + posZ))
 				{
-					this.worldObj.setBlock(var12 + var4, var14 - 1, var13 + var5, Blocks.ice);
+					this.world.setBlock(subX + posX, precipitationHeight - 1, subZ + posZ, Blocks.ice);
 				}
 
-				if (!this.worldObj.canBlockFreeze(var12 + var4, var14, var13 + var5, true))
-					continue;
-				this.worldObj.setBlock(var12 + var4, var14, var13 + var5, Blocks.snow);
+				if (this.world.canBlockFreeze(subX + posX, precipitationHeight, subZ + posZ, true))
+				{
+					this.world.setBlock(subX + posX, precipitationHeight, subZ + posZ, Blocks.snow);
+				}
 			}
-
 		}
 
-		net.minecraft.block.BlockSand.fallInstantly = false;
+		BlockSand.fallInstantly = false;
 	}
 
 	@Override
-	public boolean saveChunks(boolean var1, IProgressUpdate var2)
+	public boolean saveChunks(boolean singlePass, IProgressUpdate progressUpdate)
 	{
 		return true;
 	}
@@ -464,10 +455,10 @@ public class LV223ChunkProvider implements IChunkProvider
 	}
 
 	@Override
-	public List<?> getPossibleCreatures(EnumCreatureType var1, int var2, int var3, int var4)
+	public List<?> getPossibleCreatures(EnumCreatureType creatureType, int posX, int posY, int posZ)
 	{
-		BiomeGenBase var5 = this.worldObj.getBiomeGenForCoords(var2, var4);
-		return var5 == null ? null : var5.getSpawnableList(var1);
+		BiomeGenBase biome = this.world.getBiomeGenForCoords(posX, posZ);
+		return biome == null ? null : biome.getSpawnableList(creatureType);
 	}
 
 	@Override
@@ -485,15 +476,17 @@ public class LV223ChunkProvider implements IChunkProvider
 	@Override
 	public void recreateStructures(int i, int j)
 	{
+		;
 	}
 
 	@Override
 	public void saveExtraData()
 	{
+		;
 	}
 
 	@Override
-	public ChunkPosition func_147416_a(World var1, String var2, int var3, int var4, int var5)
+	public ChunkPosition func_147416_a(World world, String var2, int posX, int posY, int posZ)
 	{
 		return null;
 	}

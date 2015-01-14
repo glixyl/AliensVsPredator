@@ -1,5 +1,6 @@
 package com.arisux.avp;
 
+import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,8 +40,11 @@ public class PlayerModeHandler implements IInitializable
 	@SideOnly(Side.CLIENT)
 	public void assignLevelModelMaps()
 	{
-		PlayerMode.NORMAL.getLevelMappingForLevel(0).setModelTexMap(new ModelTexMap(new ModelBiped(), AliensVsPredator.resources().MARINE));
-		PlayerMode.MARINE.getLevelMappingForLevel(0).setModelTexMap(new ModelTexMap(new ModelBiped(), AliensVsPredator.resources().MARINE));
+		ModelBiped modelBiped = new ModelBiped();
+		modelBiped.isChild = false;
+		
+		PlayerMode.NORMAL.getLevelMappingForLevel(0).setModelTexMap(new ModelTexMap(modelBiped, AbstractClientPlayer.locationStevePng));
+		PlayerMode.MARINE.getLevelMappingForLevel(0).setModelTexMap(new ModelTexMap(modelBiped, AliensVsPredator.resources().MARINE));
 		PlayerMode.PREDATOR.getLevelMappingForLevel(0).setModelTexMap(new ModelTexMap(new ModelYautja(), AliensVsPredator.resources().YAUTJA));
 		PlayerMode.XENOMORPH.getLevelMappingForLevel(0).setModelTexMap(new ModelTexMap(new ModelOvamorph(), AliensVsPredator.resources().OVAMORPH));
 		PlayerMode.XENOMORPH.getLevelMappingForLevel(1).setModelTexMap(new ModelTexMap(new ModelFacehugger(), AliensVsPredator.resources().FACEHUGGER));

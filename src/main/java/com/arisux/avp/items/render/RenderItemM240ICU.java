@@ -51,11 +51,11 @@ public class RenderItemM240ICU extends ItemRenderer
 	@Override
 	public void renderThirdPerson(ItemStack item, Object... data)
 	{
-		GL11.glRotatef(95.0F, 1.0F, 0.0F, 0.0F);
-		GL11.glRotatef(130.0F, 0.0F, 1.0F, 0.0F);
-		GL11.glRotatef(90.0F, 0.0F, 0.0F, 1.0F);
-		GL11.glTranslatef(0.28F, -0.77F, 0.85F);
-		float glScale = 1.3F;
+		GL11.glRotatef(15.0F, 1.0F, 0.0F, 0.0F);
+		GL11.glRotatef(15.0F, 0.0F, 1.0F, 0.0F);
+		GL11.glRotatef(190.0F, 0.0F, 0.0F, 1.0F);
+		GL11.glTranslatef(-0.35F, -0.27F, 0.7F);
+		float glScale = 1.9F;
 		GL11.glScalef(glScale, glScale, glScale);
 		bindTexture(getResourceLocation());
 		this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);

@@ -39,6 +39,7 @@ public class LocalEventHandler implements IInitializable
 			this.registerEvent(new BetaReleaseEvents());
 			this.registerEvent(new PulseRifleEvents());
 			this.registerEvent(new WristBracerEvents());
+			this.registerEvent(new SilicaStormUpdateEvent());
 		}
 
 		this.registerEvent(new EventDimensionInitialization());

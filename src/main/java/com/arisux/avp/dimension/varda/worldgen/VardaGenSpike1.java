@@ -1,15 +1,15 @@
-package com.arisux.avp.dimension.lv223;
+package com.arisux.avp.dimension.varda.worldgen;
 
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.dimension.varda.GeneratorVarda;
 
-public class LV223WorldGenSpike2 extends WorldGenerator
+public class VardaGenSpike1 extends GeneratorVarda
 {
 	protected Block[] GetValidSpawnBlocks()
 	{
@@ -36,7 +36,6 @@ public class LV223WorldGenSpike2 extends WorldGenerator
 		Block blockID = world.getBlock(i, j, k);
 		Block blockIDAbove = world.getBlock(i, j + 1, k);
 		Block blockIDBelow = world.getBlock(i, j - 1, k);
-
 		for (Block x : GetValidSpawnBlocks())
 		{
 			if (blockIDAbove != Blocks.air)
@@ -44,10 +43,8 @@ public class LV223WorldGenSpike2 extends WorldGenerator
 				return false;
 			}
 			if (blockID == x)
-			{
 				return true;
-			}
-			if ((blockID == Blocks.snow) && (blockIDBelow == x))
+			if ((blockID == AliensVsPredator.instance().blocks.terrainStalagmite) && (blockIDBelow == x))
 			{
 				return true;
 			}
@@ -55,7 +52,6 @@ public class LV223WorldGenSpike2 extends WorldGenerator
 		return false;
 	}
 
-	@Override
 	public boolean generate(World world, Random rand, int i, int j, int k)
 	{
 		if ((!LocationIsValidSpawn(world, i, j, k)) || (!LocationIsValidSpawn(world, i + 2, j, k)) || (!LocationIsValidSpawn(world, i + 2, j, k + 2)) || (!LocationIsValidSpawn(world, i, j, k + 2)))
@@ -66,17 +62,30 @@ public class LV223WorldGenSpike2 extends WorldGenerator
 		world.setBlock(i + 0, j + 0, k + 1, AliensVsPredator.instance().blocks.terrainUniDirt);
 		world.setBlock(i + 0, j + 1, k + 1, AliensVsPredator.instance().blocks.terrainUniDirt);
 		world.setBlock(i + 0, j + 2, k + 1, AliensVsPredator.instance().blocks.terrainUniDirt);
+		world.setBlock(i + 0, j + 3, k + 1, AliensVsPredator.instance().blocks.terrainUniDirt);
+		world.setBlock(i + 0, j + 4, k + 1, AliensVsPredator.instance().blocks.terrainUniDirt);
 		world.setBlock(i + 1, j + 0, k + 0, AliensVsPredator.instance().blocks.terrainUniDirt);
 		world.setBlock(i + 1, j + 0, k + 1, AliensVsPredator.instance().blocks.terrainUniDirt);
 		world.setBlock(i + 1, j + 0, k + 2, AliensVsPredator.instance().blocks.terrainUniDirt);
 		world.setBlock(i + 1, j + 1, k + 0, AliensVsPredator.instance().blocks.terrainUniDirt);
 		world.setBlock(i + 1, j + 1, k + 1, AliensVsPredator.instance().blocks.terrainUniDirt);
+		world.setBlock(i + 1, j + 1, k + 2, AliensVsPredator.instance().blocks.terrainUniDirt);
+		world.setBlock(i + 1, j + 2, k + 0, AliensVsPredator.instance().blocks.terrainUniDirt);
 		world.setBlock(i + 1, j + 2, k + 1, AliensVsPredator.instance().blocks.terrainUniDirt);
+		world.setBlock(i + 1, j + 2, k + 2, AliensVsPredator.instance().blocks.terrainUniDirt);
+		world.setBlock(i + 1, j + 3, k + 0, AliensVsPredator.instance().blocks.terrainUniDirt);
 		world.setBlock(i + 1, j + 3, k + 1, AliensVsPredator.instance().blocks.terrainUniDirt);
+		world.setBlock(i + 1, j + 3, k + 2, AliensVsPredator.instance().blocks.terrainUniDirt);
+		world.setBlock(i + 1, j + 4, k + 0, AliensVsPredator.instance().blocks.terrainUniDirt);
 		world.setBlock(i + 1, j + 4, k + 1, AliensVsPredator.instance().blocks.terrainUniDirt);
+		world.setBlock(i + 1, j + 5, k + 0, AliensVsPredator.instance().blocks.terrainUniDirt);
 		world.setBlock(i + 1, j + 5, k + 1, AliensVsPredator.instance().blocks.terrainUniDirt);
+		world.setBlock(i + 1, j + 6, k + 1, AliensVsPredator.instance().blocks.terrainUniDirt);
+		world.setBlock(i + 1, j + 7, k + 1, AliensVsPredator.instance().blocks.terrainUniDirt);
+		world.setBlock(i + 1, j + 8, k + 1, AliensVsPredator.instance().blocks.terrainUniDirt);
 		world.setBlock(i + 2, j + 0, k + 1, AliensVsPredator.instance().blocks.terrainUniDirt);
 		world.setBlock(i + 2, j + 1, k + 1, AliensVsPredator.instance().blocks.terrainUniDirt);
+		world.setBlock(i + 2, j + 2, k + 1, AliensVsPredator.instance().blocks.terrainUniDirt);
 
 		return true;
 	}

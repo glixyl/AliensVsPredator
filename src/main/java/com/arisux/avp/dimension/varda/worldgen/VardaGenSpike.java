@@ -1,4 +1,4 @@
-package com.arisux.avp.dimension.lv223;
+package com.arisux.avp.dimension.varda.worldgen;
 
 import java.util.Random;
 
@@ -10,7 +10,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.arisux.avp.AliensVsPredator;
 
-public class LV223GenLandSpike extends WorldGenerator
+public class VardaGenSpike extends WorldGenerator
 {
 	static final byte[] otherCoordPairs = { 2, 0, 0, 1, 2, 1 };
 	Random rand = new Random();
@@ -28,7 +28,7 @@ public class LV223GenLandSpike extends WorldGenerator
 	int leafDistanceLimit = 4;
 	int[][] leafNodes;
 
-	public LV223GenLandSpike(boolean var1)
+	public VardaGenSpike(boolean var1)
 	{
 		super(var1);
 	}

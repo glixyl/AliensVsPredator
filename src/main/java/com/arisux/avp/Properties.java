@@ -15,8 +15,8 @@ public class Properties
 	public final int GUI_WRISTBRACER = 2;
 	public final int DIMENSION_ID_LV223 = -7;
 
-	public final String DIMENSION_NAME_LV223 = "LV-223 (Varda)";
-	public final String DIMENSION_GLOBAL_LV223 = "DIM_LV223";
+	public final String DIMENSION_NAME_VARDA = "LV-223 (Varda)";
+	public final String DIMENSION_ID_VARDA = "DIM_LV223";
 
 	public final String SOUND_ALIEN_LIVING = DOMAIN + "xeno.living";
 	public final String SOUND_ALIEN_HURT = DOMAIN + "xeno.hurt";

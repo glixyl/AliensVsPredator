@@ -1,4 +1,4 @@
-package com.arisux.avp.dimension.lv223;
+package com.arisux.avp.dimension.varda.worldgen;
 
 import java.util.Random;
 
@@ -11,11 +11,11 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.arisux.avp.AliensVsPredator;
 
-public class LV223GenLakes extends WorldGenerator
+public class VardaGenLakes extends WorldGenerator
 {
 	private Block blockIndex;
 
-	public LV223GenLakes(Block var1)
+	public VardaGenLakes(Block var1)
 	{
 		this.blockIndex = var1;
 	}
