@@ -75,20 +75,15 @@ public class PlayerModeRenderEvent
 	public void renderEntityTick(RenderPlayerEvent.Pre event)
 	{
 		ExtendedEntityPlayer extendedPlayer = (ExtendedEntityPlayer) event.entityPlayer.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER);
-		ModelBase model = renderLiving.mainModel;
-		
-		if (model instanceof ModelBiped)
-		{
-			ItemStack itemstack = event.entityPlayer.inventory.getCurrentItem();
+		ItemStack itemstack = event.entityPlayer.inventory.getCurrentItem();
 
-			if (itemstack != null && (itemstack.getItem() instanceof ItemFirearm || itemstack.getItem() instanceof ItemFlamethrower))
-			{
-				event.renderer.modelArmor.aimedBow = event.renderer.modelArmorChestplate.aimedBow = event.renderer.modelBipedMain.aimedBow = true;
-			}
-			else
-			{
-				event.renderer.modelArmor.aimedBow = event.renderer.modelArmorChestplate.aimedBow = event.renderer.modelBipedMain.aimedBow = false;
-			}
+		if (itemstack != null && (itemstack.getItem() instanceof ItemFirearm || itemstack.getItem() instanceof ItemFlamethrower))
+		{
+			event.renderer.modelArmor.aimedBow = event.renderer.modelArmorChestplate.aimedBow = event.renderer.modelBipedMain.aimedBow = true;
+		}
+		else
+		{
+			event.renderer.modelArmor.aimedBow = event.renderer.modelArmorChestplate.aimedBow = event.renderer.modelBipedMain.aimedBow = false;
 		}
 
 		if (event.entity != null && extendedPlayer.getPlayerMode() != PlayerMode.NORMAL)
