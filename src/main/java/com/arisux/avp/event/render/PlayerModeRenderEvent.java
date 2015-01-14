@@ -75,8 +75,9 @@ public class PlayerModeRenderEvent
 	public void renderEntityTick(RenderPlayerEvent.Pre event)
 	{
 		ExtendedEntityPlayer extendedPlayer = (ExtendedEntityPlayer) event.entityPlayer.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER);
-
-		if (renderLiving.mainModel instanceof ModelBiped)
+		ModelBase model = renderLiving.mainModel;
+		
+		if (model instanceof ModelBiped)
 		{
 			ItemStack itemstack = event.entityPlayer.inventory.getCurrentItem();
 
