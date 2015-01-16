@@ -2,45 +2,57 @@ package com.arisux.avp.event.render;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.items.ItemFirearm;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.RenderTickEvent;
 
 public class AmmoIndicatorRenderEvent
 {
 	private Minecraft mc = Minecraft.getMinecraft();
 	public ItemStack helmSlot, chestplateSlot, leggingsSlot, bootsSlot;
-	
+
 	@SubscribeEvent
-	public void renderTick(RenderTickEvent event)
+	public void renderTick(RenderGameOverlayEvent.Pre event)
 	{
-		if (mc.thePlayer != null)
+		if (mc.thePlayer != null && event.type == RenderGameOverlayEvent.ElementType.HOTBAR)
 		{
 			helmSlot = mc.thePlayer.inventory.armorItemInSlot(3);
 			chestplateSlot = mc.thePlayer.inventory.armorItemInSlot(2);
 			leggingsSlot = mc.thePlayer.inventory.armorItemInSlot(1);
 			bootsSlot = mc.thePlayer.inventory.armorItemInSlot(0);
-			
-			if (mc.inGameHasFocus && mc.thePlayer.getHeldItem() != null && mc.thePlayer.getHeldItem().getItem() instanceof ItemFirearm)
+
+			if (mc.thePlayer.getHeldItem() != null && mc.thePlayer.getHeldItem().getItem() instanceof ItemFirearm)
 			{
 				ItemFirearm itemFireArm = (ItemFirearm) mc.thePlayer.getHeldItem().getItem();
+				String displayStatus = " " + itemFireArm.getCurrentAmmo() + "/" + itemFireArm.getMaxAmmo();
+				int barWidth = 0;
 
-				if (mc.thePlayer.getHeldItem().getItem() == itemFireArm)
+				if (!mc.thePlayer.capabilities.isCreativeMode && isWearingArmor())
 				{
-					if (!mc.thePlayer.capabilities.isCreativeMode && isWearingArmor())
-						RenderUtil.drawProgressBar("Ammo - " + itemFireArm.getCurrentAmmo() + "/" + itemFireArm.getMaxAmmo(), itemFireArm.getMaxAmmo(), itemFireArm.getCurrentAmmo(), (RenderUtil.scaledDisplayResolution().getScaledWidth() / 2), RenderUtil.scaledDisplayResolution().getScaledHeight() - 48, 90, 1, 0, 0xFF00DDFF, false);
-					else if (!mc.thePlayer.capabilities.isCreativeMode && !isWearingArmor())
-						RenderUtil.drawProgressBar("Ammo - " + itemFireArm.getCurrentAmmo() + "/" + itemFireArm.getMaxAmmo(), itemFireArm.getMaxAmmo(), itemFireArm.getCurrentAmmo(), (RenderUtil.scaledDisplayResolution().getScaledWidth() / 2) - (182 / 2), RenderUtil.scaledDisplayResolution().getScaledHeight() - 48, 182, 1, 0, 0xFF00DDFF, false);
-					else
-						RenderUtil.drawProgressBar("\u221e", 1, 1, (RenderUtil.scaledDisplayResolution().getScaledWidth() / 2) - (182 / 2), RenderUtil.scaledDisplayResolution().getScaledHeight() - 35, 182, 1, 0, 0xFF00DDFF, false);
+					barWidth = 90;
+					RenderUtil.drawProgressBar(displayStatus, itemFireArm.getMaxAmmo(), itemFireArm.getCurrentAmmo(), (RenderUtil.scaledDisplayResolution().getScaledWidth() / 2), RenderUtil.scaledDisplayResolution().getScaledHeight() - 48, barWidth, 1, 0, 0xFFFF0000, false);
+					RenderUtil.drawItemIcon(itemFireArm.getAmmoItem(), (RenderUtil.scaledDisplayResolution().getScaledWidth() / 2) + barWidth / 2 - RenderUtil.getStringRenderWidth(displayStatus) - 2, RenderUtil.scaledDisplayResolution().getScaledHeight() - 53, 16, 16);
+				}
+				else if (!mc.thePlayer.capabilities.isCreativeMode && !isWearingArmor())
+				{
+					barWidth = 182;
+					RenderUtil.drawProgressBar(displayStatus, itemFireArm.getMaxAmmo(), itemFireArm.getCurrentAmmo(), (RenderUtil.scaledDisplayResolution().getScaledWidth() / 2) - (182 / 2), RenderUtil.scaledDisplayResolution().getScaledHeight() - 48, barWidth, 1, 0, 0xFF00DDFF, false);
+					RenderUtil.drawItemIcon(itemFireArm.getAmmoItem(), (RenderUtil.scaledDisplayResolution().getScaledWidth() / 2) - (barWidth / 2) + barWidth / 2 - RenderUtil.getStringRenderWidth(displayStatus) - 2, RenderUtil.scaledDisplayResolution().getScaledHeight() - 53, 16, 16);
+				}
+				else
+				{
+					barWidth = 182;
+					displayStatus = "\u221e";
+					RenderUtil.drawProgressBar("", 1, 1, (RenderUtil.scaledDisplayResolution().getScaledWidth() / 2) - (barWidth / 2), RenderUtil.scaledDisplayResolution().getScaledHeight() - 35, barWidth, 1, 0, 0xFF00DDFF, false);
+					RenderUtil.drawItemIcon(itemFireArm.getAmmoItem(), (RenderUtil.scaledDisplayResolution().getScaledWidth() / 2) - (barWidth / 2) + barWidth / 2 - RenderUtil.getStringRenderWidth(displayStatus), RenderUtil.scaledDisplayResolution().getScaledHeight() - 40, 16, 16);
 				}
 			}
 		}
 	}
-	
+
 	public boolean isWearingArmor()
 	{
 		return helmSlot != null || chestplateSlot != null || leggingsSlot != null || bootsSlot != null;

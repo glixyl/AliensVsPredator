@@ -10,7 +10,6 @@ import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.client.event.RenderGameOverlayEvent.Pre;
 
 import org.lwjgl.opengl.GL11;
 
@@ -34,7 +33,7 @@ public class TacticalHUDRenderEvent
 	public int viewportThreshold = 20;
 
 	@SubscribeEvent
-	public void renderTickOverlay(Pre event)
+	public void renderTickOverlay(RenderGameOverlayEvent.Pre event)
 	{
 		if (mc.thePlayer != null)
 		{

@@ -2,7 +2,6 @@ package com.arisux.avp.event.render;
 
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.client.event.RenderGameOverlayEvent.Pre;
 
 import org.lwjgl.opengl.GL11;
 
@@ -17,7 +16,7 @@ public class FacehuggerRenderEvent
 	private Minecraft mc = Minecraft.getMinecraft();
 
 	@SubscribeEvent
-	public void renderTickOverlay(Pre event)
+	public void renderTickOverlay(RenderGameOverlayEvent.Pre event)
 	{
 		if (mc.thePlayer != null)
 		{
