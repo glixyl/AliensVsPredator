@@ -8,7 +8,6 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 
 import com.arisux.avp.interfaces.INetworkDevice;
-import com.arisux.avp.interfaces.NetworkHolder;
 
 public class TileEntityServer extends PoweredTileEntity implements INetworkDevice
 {
@@ -99,12 +98,6 @@ public class TileEntityServer extends PoweredTileEntity implements INetworkDevic
 	}
 
 	@Override
-	public NetworkHolder getNetwork()
-	{
-		return null;
-	}
-
-	@Override
 	public void onOverloadTick()
 	{
 		;
@@ -114,5 +107,17 @@ public class TileEntityServer extends PoweredTileEntity implements INetworkDevic
 	public void onUnderloadTick()
 	{
 		;
+	}
+
+	@Override
+	public INetworkDevice getHostDevice()
+	{
+		return this;
+	}
+
+	@Override
+	public String getChannel()
+	{
+		return "Default";
 	}
 }

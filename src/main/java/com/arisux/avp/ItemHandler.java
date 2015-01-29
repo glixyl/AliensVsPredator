@@ -8,7 +8,6 @@ import net.minecraftforge.common.util.EnumHelper;
 import com.arisux.airi.lib.ItemTypes.HookedItem;
 import com.arisux.airi.lib.ItemTypes.HookedItemAxe;
 import com.arisux.airi.lib.ItemTypes.HookedItemPickaxe;
-import com.arisux.airi.lib.*;
 import com.arisux.airi.lib.ModUtil.IBHandler;
 import com.arisux.airi.lib.interfaces.IInitializable;
 import com.arisux.avp.entities.mob.*;
@@ -87,7 +86,6 @@ public class ItemHandler extends IBHandler implements IInitializable
 		itemIngotCopper = new HookedItem().setDescription("An ingot melted down from copper ore, for use with electronics."),
 		itemIngotLithium = ((HookedItem) new ItemIngotLithium()).setDescription("An ingot of lithium. Depletes quicly after mining."),
 		itemMotionTracker = ((HookedItem) (new HookedItem()).disableIcon()).setDescription("Tracks movement by detecting changes in air density."),
-		itemWorldSelector = ((new ItemWorldSelectionExporter())),
 		itemPolycarbonate = (new HookedItem()).setDescription("Polycarbonate (A hard plastic used in the crafting of many items/blocks)");
 
 	public ItemEntitySummoner itemSummonerDrone = (new ItemEntitySummoner(this.getMod().domain(), EntityDrone.class)),
@@ -192,10 +190,5 @@ public class ItemHandler extends IBHandler implements IInitializable
 		// registerItem(itemRegulator, "part.regulator");
 		// registerItem(itemResistor, "part.resistor");
 		// registerItem(itemTransistor, "part.transistor");
-
-		if (ModUtil.isDevEnvironment())
-		{
-			registerItem(itemWorldSelector, "worldselector");
-		}
 	}
 }

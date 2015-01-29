@@ -14,6 +14,7 @@ public class BiomeVarda extends BiomeVardaBase
 		this.fillerBlock = AliensVsPredator.instance().blocks.terrainUniStone;
 		this.setHeight(new BiomeGenBase.Height(1.0F, 8.0F));
 		this.setTemperatureRainfall(0.7F, 0.1F);
+		this.setDisableRain();
 	}
 
 	@Override

@@ -1,17 +1,15 @@
 package com.arisux.avp.entities.tile;
 
-import com.arisux.avp.interfaces.INetworkDevice;
-import com.arisux.avp.interfaces.NetworkHolder;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 
+import com.arisux.avp.interfaces.INetworkDevice;
+
 public class TileEntityWorkstation extends PoweredTileEntity implements INetworkDevice
 {
 	public int rotation;
-	public NetworkHolder networkHolder;
 
 	public TileEntityWorkstation()
 	{
@@ -64,12 +62,6 @@ public class TileEntityWorkstation extends PoweredTileEntity implements INetwork
 	}
 
 	@Override
-	public NetworkHolder getNetwork()
-	{
-		return this.networkHolder != null ? this.networkHolder : (this.networkHolder = new NetworkHolder(this));
-	}
-
-	@Override
 	public void onVoltageTick()
 	{
 		;
@@ -85,5 +77,17 @@ public class TileEntityWorkstation extends PoweredTileEntity implements INetwork
 	public void onUnderloadTick()
 	{
 		;
+	}
+
+	@Override
+	public INetworkDevice getHostDevice()
+	{
+		return null;
+	}
+
+	@Override
+	public String getChannel()
+	{
+		return "Default";
 	}
 }

@@ -10,6 +10,8 @@ public class Resources
 	public static final Resources instance = new Resources();
 
 	public final ResourceLocation SKY_RAIN = new ResourceLocation("textures/environment/rain.png");
+	public final ResourceLocation SKY_CLOUDS = new ResourceLocation("textures/environment/clouds.png");
+	public final ResourceLocation SKY_VARDA_CLOUDS = new ResourceLocation(AliensVsPredator.ID, "textures/misc/varda-clouds.png");
 	public final ResourceLocation SKY_SILICA = new ResourceLocation(AliensVsPredator.ID, "textures/misc/silica.png");
 	public final ResourceLocation SKY_SUN = new ResourceLocation("textures/environment/sun.png");
 	public final ResourceLocation SKY_CALPAMOS = new ResourceLocation(AliensVsPredator.ID, "textures/misc/calpamos.png");

@@ -116,8 +116,6 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		bindTileEntitySpecialRenderer(TileEntityPowerline.class, new RenderPowerline());
 		bindTileEntitySpecialRenderer(TileEntityBlastdoor.class, new RenderBlastdoor());
 		bindTileEntitySpecialRenderer(TileEntityWorklight.class, new RenderWorklight());
-		bindTileEntitySpecialRenderer(TileEntityNetworkCable.class, new RenderNetworkCable());
-		bindTileEntitySpecialRenderer(TileEntityNetworkLight.class, new RenderNetworkLight());
 		bindTileEntitySpecialRenderer(TileEntityServer.class, new RenderServer());
 	}
 	

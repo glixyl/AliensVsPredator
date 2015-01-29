@@ -61,7 +61,13 @@ public abstract class EntitySpeciesAlien extends EntityMob implements IMob, IHiv
 		super.readEntityFromNBT(nbt);
 
 		this.killedEntities = nbt.getInteger("killedEntities");
-		this.signature = UUID.fromString(nbt.getString("hiveSignature"));
+
+		String signature = nbt.getString("hiveSignature");
+
+		if (signature != null && signature.matches("[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[34][0-9a-fA-F]{3}-[89ab][0-9a-fA-F]{3}-[0-9a-fA-F]{12}"))
+		{
+			this.signature = UUID.fromString(signature);
+		}
 	}
 
 	@Override

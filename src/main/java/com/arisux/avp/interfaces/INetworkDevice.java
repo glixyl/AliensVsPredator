@@ -4,5 +4,6 @@ public interface INetworkDevice
 {
 	public void sendData();
 	public void receiveData();
-	public NetworkHolder getNetwork();
+	public INetworkDevice getHostDevice();
+	public String getChannel();
 }

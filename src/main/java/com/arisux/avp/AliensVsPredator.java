@@ -52,6 +52,11 @@ public class AliensVsPredator implements IMod
 		return Resources.instance;
 	}
 	
+	public static Schematics schematics()
+	{
+		return Schematics.instance;
+	}
+	
 	public static Settings settings()
 	{
 		return instance().settings;
@@ -107,6 +112,7 @@ public class AliensVsPredator implements IMod
 		(localEvents = new LocalEventHandler()).initialize(event);
 		(commands = new CommandHandler()).initialize(event);
 		(playerModeHandler = new PlayerModeHandler()).initialize(event);
+		schematics().initialize();
 	}
 
 	@Override

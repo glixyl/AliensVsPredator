@@ -55,8 +55,7 @@ public class RenderAqua extends RenderLiving
 			this.bindTexture(AliensVsPredator.resources().AQUA_XENOMORPH_MASK);
 			float f1;
 
-			long l = par1EntityAqua.worldObj.getWorldTime();
-			boolean isDay = (l % 24000L) / 1000L < 14L;
+			boolean isDay = (par1EntityAqua.worldObj.getWorldTime() % 24000L) / 1000L < 14L;
 
 			if (!isDay)
 			{

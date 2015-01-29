@@ -16,7 +16,8 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 
 public class BlockHandler extends IBHandler implements IInitializable
 {
-	public Block terrainHiveResin = (new BlockHiveResin(Material.plants)).setHardness(0.1F).setResistance(2.0F),
+	public Block
+		terrainHiveResin = (new BlockHiveResin(Material.plants)).setHardness(0.1F).setResistance(2.0F),
 		terrainHiveResinDead = (new HookedBlock(Material.ground)).setHardness(0.1F).setResistance(2.0F),
 		blockOvamorph = (new HookedBlock(Material.rock)),
 		blockShipMetal1 = (new HookedBlock(Material.iron)),
@@ -47,7 +48,7 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockAssembler = (new BlockAssembler(Material.iron).setHardness(1.5F).setResistance(10.0F)),
 		blockFloorGrill = ((HookedBlock) (new HookedBlock(Material.iron)).setHardness(3.5F).setResistance(2.0F)).setOpaque(false),
 		blockWall = (new HookedBlock(Material.iron)).setHardness(3.5F).setResistance(2.0F),
-//		blockWallAngled = (new HookedBlock(Material.iron).setRenderType(AliensVsPredator.instance().renderer.renderTypeAngled)).setHardness(3.5F).setResistance(2.0F),
+		// blockWallAngled = (new HookedBlock(Material.iron).setRenderType(AliensVsPredator.instance().renderer.renderTypeAngled)).setHardness(3.5F).setResistance(2.0F),
 		blockWallW = (new HookedBlock(Material.iron).setIconSet(new RenderUtil.IconSet(this.getMod().domain() + "wall_top", this.getMod().domain() + "wall_top", this.getMod().domain() + "wall_top", this.getMod().domain() + "wall_side", this.getMod().domain() + "wall_side", this.getMod().domain() + "wall_side", this.getMod().domain() + "wall_side"))).setHardness(3.5F).setResistance(2.0F),
 		blockCeiling = (new HookedBlock(Material.iron)).setHardness(3.5F).setResistance(2.0F).setLightOpacity(100),
 		blockCeiliingVent = (new HookedBlock(Material.iron)).setHardness(3.5F).setResistance(2.0F),
@@ -86,15 +87,13 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockBlastdoor = (new BlockBlastdoor(Material.iron)).setHardness(5F).setResistance(5F),
 		ghostBlockBlastdoor = (new GhostBlock(blockBlastdoor)).setAttributesFrom((HookedBlock) blockBlastdoor),
 		blockWorklight = (new BlockWorklight(Material.iron)).setHardness(3.2F).setResistance(2.6F),
-		blockNetworkCable = (new BlockNetworkCable(Material.iron)).setHardness(3.2F).setResistance(2.6F),
-		blockNetworkLight = (new BlockNetworkLight(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockServer = (new BlockServer(Material.iron)).setHardness(3.2F).setResistance(2.6F);
 
 	public BlockHandler()
 	{
 		super(AliensVsPredator.instance());
 	}
-	
+
 	@Override
 	public void initialize(FMLInitializationEvent event)
 	{
@@ -117,7 +116,7 @@ public class BlockHandler extends IBHandler implements IInitializable
 		registerBlock(blockGrillStairs, "floorgrillstairs", blockFloorGrill);
 		registerBlock(blockFloorGrillSlab, "floorgrillslab", blockFloorGrill);
 		registerBlock(blockWall, "industrialwall");
-//		registerBlock(blockWallAngled, "industrialwallangled", blockWall);
+		// registerBlock(blockWallAngled, "industrialwallangled", blockWall);
 		registerBlock(blockWallW, "industrialwall2", blockWall);
 		registerBlock(blockWallStairs, "industrialwallstairs", blockWall);
 		registerBlock(blockWallSlab, "industrialslab", blockWall);
@@ -165,8 +164,6 @@ public class BlockHandler extends IBHandler implements IInitializable
 		registerBlock(blockStasisMechanism, "stasismechanism", true);
 		registerBlock(blockGenerator, "generator", true);
 		registerBlock(blockPowerline, "powerline", true);
-		registerBlock(blockNetworkCable, "networkCable", true);
-		registerBlock(blockNetworkLight, "networkLight", true);
 		registerBlock(blockBlastdoor, "blastdoor", true);
 		registerBlock(ghostBlockBlastdoor, "blastdoorghost", false);
 		registerBlock(blockWorklight, "worklight", true);
