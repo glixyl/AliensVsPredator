@@ -3,7 +3,6 @@ package com.arisux.avp.entities.mob;
 import java.util.UUID;
 
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
@@ -15,7 +14,7 @@ import com.arisux.avp.entities.EntityAcidPool;
 import com.arisux.avp.interfaces.IHiveSignature;
 import com.arisux.avp.packets.client.PacketKillCountClientUpdate;
 
-public abstract class EntitySpeciesAlien extends EntityMob implements IMob, IHiveSignature
+public abstract class EntitySpeciesAlien extends EntityHostileExtraterrestrial implements IMob, IHiveSignature
 {
 	private Class<? extends EntitySpeciesAlien> entityEvolveTo;
 	private UUID signature;
@@ -100,16 +99,33 @@ public abstract class EntitySpeciesAlien extends EntityMob implements IMob, IHiv
 	}
 
 	@Override
-	public void onDeath(DamageSource par1DamageSource)
+	public void onDeath(DamageSource damagesource)
 	{
-		super.onDeath(par1DamageSource);
+		super.onDeath(damagesource);
 
 		if (!this.worldObj.isRemote)
 		{
 			EntityAcidPool entity = new EntityAcidPool(this.worldObj);
 			entity.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
 			this.worldObj.spawnEntityInWorld(entity);
+			
+			if (this instanceof EntityQueen)
+			{
+				int randomJelly = this.rand.nextInt(196);
+				this.dropItem(AliensVsPredator.instance().items.itemRoyalJelly, 32 +(randomJelly / 2 + randomJelly));
+			}
+			
+			if (this.rand.nextInt(4) == 0)
+			{
+				this.dropItem(AliensVsPredator.instance().items.itemRoyalJelly, 1 + this.rand.nextInt(5));
+			}
 		}
+	}
+	
+	@Override
+	protected void dropRareDrop(int rate)
+	{
+		this.dropItem(AliensVsPredator.instance().items.itemRoyalJelly, 4);
 	}
 
 	@Override

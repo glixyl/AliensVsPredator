@@ -14,8 +14,7 @@ import com.arisux.airi.lib.*;
 import com.arisux.airi.lib.WorldUtil.Blocks;
 import com.arisux.airi.lib.enums.BlockSides;
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.entities.mob.EntityMarine;
-import com.arisux.avp.entities.mob.EntityXenomorph;
+import com.arisux.avp.entities.mob.*;
 import com.arisux.avp.entities.tile.PoweredTileEntity;
 import com.arisux.avp.entities.tile.TileEntityStasisMechanism;
 
@@ -93,13 +92,23 @@ public class DebugToolsRenderEvent
 									fontrenderer.drawStringWithShadow("Age: " + ((EntityLivingBase) entity).getAge(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
 								}
 
+								if (entity instanceof EntitySpeciesAlien)
+								{
+									fontrenderer.drawStringWithShadow("Kills: " + ((EntitySpeciesAlien) entity).getKilledEntities(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
+									fontrenderer.drawStringWithShadow("HiveSignature: " + ((EntitySpeciesAlien) entity).getHiveSignature(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
+								}
+								
 								if (entity instanceof EntityXenomorph)
 								{
-									fontrenderer.drawStringWithShadow("Kills: " + ((EntityXenomorph) entity).getKilledEntities(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
-									fontrenderer.drawStringWithShadow("HiveSignature: " + ((EntityXenomorph) entity).getHiveSignature(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
 									fontrenderer.drawStringWithShadow("BesideClimbableBlock: " + ((EntityXenomorph) entity).isBesideClimbableBlock(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
 								}
-								else if (entity instanceof EntityMarine)
+								
+								if (entity instanceof EntityChestburster)
+								{
+									fontrenderer.drawStringWithShadow("Parasite Age: " + ((EntityChestburster) entity).ticksExisted + "/" + ((EntityChestburster) entity).getMaxParasiteAge(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
+								}
+								
+								if (entity instanceof EntityMarine)
 								{
 									fontrenderer.drawStringWithShadow("Type: " + ((EntityMarine) entity).getMarineType(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
 									fontrenderer.drawStringWithShadow("IsFiring: " + ((EntityMarine) entity).isFiring(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);

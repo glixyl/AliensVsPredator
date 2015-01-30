@@ -7,16 +7,21 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+import com.arisux.airi.lib.WorldUtil.Entities;
 import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.util.HostParasiteTypes;
 
 public class EntityChestburster extends EntitySpeciesAlien implements IMob
 {
 	protected Minecraft mc;
+	private int parasiteType;
+	
 	public EntityChestburster(World par1World)
 	{
 		super(par1World);
@@ -69,12 +74,12 @@ public class EntityChestburster extends EntitySpeciesAlien implements IMob
 	public void onUpdate()
 	{
 		super.onUpdate();
-
-		if (((getAge() / 100) / 20) / 24 > 1)
+		
+		if (!this.worldObj.isRemote)
 		{
-			if (!this.worldObj.isRemote)
+			if (this.ticksExisted >= this.getMaxParasiteAge())
 			{
-				EntityDrone entityxeno = new EntityDrone(this.worldObj);
+				EntityXenomorph entityxeno = (EntityXenomorph) Entities.constructEntity(this.worldObj, this.getGrownParasiteType());
 				double d = this.posX;
 				double d1 = this.posY;
 				double d2 = this.posZ;
@@ -158,5 +163,46 @@ public class EntityChestburster extends EntitySpeciesAlien implements IMob
 	public boolean isPotionApplicable(PotionEffect par1PotionEffect)
 	{
 		return par1PotionEffect.getPotionID() == Potion.poison.id ? false : super.isPotionApplicable(par1PotionEffect);
+	}
+	
+	public void setHostParasiteType(HostParasiteTypes hostParasiteType)
+	{
+		this.parasiteType = hostParasiteType.id;
+	}
+	
+	public HostParasiteTypes getHostParasiteTypeMap()
+	{
+		HostParasiteTypes hostParasiteType = HostParasiteTypes.get(parasiteType);
+		
+		if (hostParasiteType == null)
+		{
+			return HostParasiteTypes.NORMAL;
+		}
+		
+		return hostParasiteType;
+	}
+	
+	public Class<? extends EntityXenomorph> getGrownParasiteType()
+	{
+		return this.getHostParasiteTypeMap().getParasiteType();
+	}
+	
+	@Override
+	public void readEntityFromNBT(NBTTagCompound nbt)
+	{
+		super.readEntityFromNBT(nbt);
+		this.parasiteType = nbt.getInteger("parasiteType");
+	}
+	
+	@Override
+	public void writeEntityToNBT(NBTTagCompound nbt)
+	{
+		super.writeEntityToNBT(nbt);
+		nbt.setInteger("parasiteType", this.parasiteType);
+	}
+	
+	public int getMaxParasiteAge()
+	{
+		return 18000;
 	}
 }

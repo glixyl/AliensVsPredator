@@ -86,7 +86,8 @@ public class ItemHandler extends IBHandler implements IInitializable
 		itemIngotCopper = new HookedItem().setDescription("An ingot melted down from copper ore, for use with electronics."),
 		itemIngotLithium = ((HookedItem) new ItemIngotLithium()).setDescription("An ingot of lithium. Depletes quicly after mining."),
 		itemMotionTracker = ((HookedItem) (new HookedItem()).disableIcon()).setDescription("Tracks movement by detecting changes in air density."),
-		itemPolycarbonate = (new HookedItem()).setDescription("Polycarbonate (A hard plastic used in the crafting of many items/blocks)");
+		itemPolycarbonate = (new HookedItem()).setDescription("Polycarbonate (A hard plastic used in the crafting of many items/blocks)"),
+		itemRoyalJelly = (new HookedItem()).setDescription("Royal Jelly (A potent, transformative substance produced by a Xenomorph Queen)");
 
 	public ItemEntitySummoner itemSummonerDrone = (new ItemEntitySummoner(this.getMod().domain(), EntityDrone.class)),
 		itemSummonerAqua = (new ItemEntitySummoner(this.getMod().domain(), EntityAqua.class)),
@@ -183,6 +184,7 @@ public class ItemHandler extends IBHandler implements IInitializable
 		registerItem(itemMotionTracker, "motiontracker");
 		registerItem(itemWristbracerBlades, "wristbracer.blades");
 		registerItem(itemPolycarbonate, "polycarbonate");
+		registerItem(itemRoyalJelly, "royaljelly");
 
 		// registerItem(healthProbe, "healthprobe");
 		// registerItem(itemCapacitor, "part.capacitor");

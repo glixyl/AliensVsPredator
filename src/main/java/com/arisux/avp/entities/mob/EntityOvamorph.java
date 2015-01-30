@@ -5,6 +5,8 @@ import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
+import com.arisux.avp.AliensVsPredator;
+
 public class EntityOvamorph extends EntitySpeciesAlien implements IMob
 {
 	public int hatchingTime;
@@ -17,6 +19,7 @@ public class EntityOvamorph extends EntitySpeciesAlien implements IMob
 		this.experienceValue = 10;
 	}
 
+	@Override
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
@@ -29,29 +32,40 @@ public class EntityOvamorph extends EntitySpeciesAlien implements IMob
 		super.entityInit();
 	}
 
+	@Override
 	public void onLivingUpdate()
 	{
 		super.onLivingUpdate();
 	}
 
+	@Override
 	protected boolean isAIEnabled()
 	{
 		return true;
 	}
 
+	@Override
 	public boolean canBreatheUnderwater()
 	{
 		return true;
 	}
 
+	@Override
 	protected boolean canDespawn()
 	{
 		return false;
+	}
+	
+	@Override
+	protected void dropRareDrop(int rate)
+	{
+		this.dropItem(AliensVsPredator.instance().items.itemRoyalJelly, 1);
 	}
 
 	/**
 	 * Called to update the entity's position/logic.
 	 */
+	@Override
 	public void onUpdate()
 	{
 		super.onUpdate();
