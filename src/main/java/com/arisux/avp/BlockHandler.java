@@ -67,7 +67,7 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockCeilingGrillStairs = (new HookedBlockStairs(blockCeilingGrill)).setHardness(3.5F).setResistance(2.0F),
 		blockWallSlab = (new HookedBlockSlab(Material.iron)).setHardness(3.5F).setResistance(2.0F),
 		blockIronBricksSlab = (new HookedBlockSlab(Material.iron)).setHardness(3.5F).setResistance(2.0F),
-		blockIndustrialGlass = (new HookedBlock(Material.iron)).setOpaque(false).setHardness(3.5F).setResistance(2.0F).setLightOpacity(0),
+		blockIndustrialGlass = (new HookedBlock(Material.iron)).setOpaque(false).setRenderNormal(false).setHardness(3.5F).setResistance(2.0F).setLightOpacity(0),
 		blockIndustrialGlassSlab = (new HookedBlockSlab(Material.iron)).setOpaque(false).setHardness(3.5F).setResistance(2.0F).setLightOpacity(0),
 		blockIndustrialGlassStairs = (new HookedBlockStairs(blockIndustrialGlass)).setOpaque(false).setHardness(3.5F).setResistance(2.0F).setLightOpacity(0),
 		terrainUniDirt = (new HookedBlock(Material.ground)).setOpaque(true).setHardness(0.5F).setResistance(2.0F),
