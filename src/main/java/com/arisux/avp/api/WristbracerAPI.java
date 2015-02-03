@@ -6,7 +6,6 @@ import net.minecraft.client.Minecraft;
 
 import com.arisux.airi.AIRI;
 import com.arisux.airi.lib.RenderUtil;
-import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.gui.GuiWristbracer;
 
 import cpw.mods.fml.relauncher.Side;
@@ -29,8 +28,8 @@ public class WristbracerAPI
 			@Override
 			public void actionPerformed(String combonation, Object... args)
 			{
-				RenderUtil.drawString(AliensVsPredator.properties().LANG_WRISTBRACER_DETMODENOTIFY, 10, 10, 0xFFFF0000);
-				RenderUtil.drawString(AliensVsPredator.properties().LANG_WRISTBRACER_ITEMSLOSTWARNING, 10, 20, 0xFFFF0000);
+				RenderUtil.drawString("gui.avp.wristbracer.notify.detmode", 10, 10, 0xFFFF0000);
+				RenderUtil.drawString("gui.avp.wristbracer.warning.itemslost", 10, 20, 0xFFFF0000);
 			}
 		});
 

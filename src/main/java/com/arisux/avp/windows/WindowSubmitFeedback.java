@@ -24,12 +24,18 @@ public class WindowSubmitFeedback extends Window implements IWindow
 
 	public WindowSubmitFeedback()
 	{
-		super("BETA_PROGRAM_AVP", I18n.format(AliensVsPredator.properties().LANG_BETA_FEEDBACK_SUBMIT_TITLE), 100, 100, 110, 40);
-		this.buttonSubmit = new GuiCustomButton(0, xPos + 100, yPos + 100, 180, 20, I18n.format(AliensVsPredator.properties().LANG_BETA_FEEDBACK_SUBMIT_BUTTON), null);
+		super("BETA_PROGRAM_AVP", I18n.format("gui.avp.beta.feedback.info.submit.title"), 100, 100, 110, 40);
+		this.buttonSubmit = new GuiCustomButton(0, xPos + 100, yPos + 100, 180, 20, I18n.format("gui.avp.beta.feedback.info.submit.button"), null);
 		this.textbox = new GuiCustomTextbox(0, 0, 0, 0);
 		this.width = 300;
 		this.height = 80;
 		this.setWindowCentered(true);
+	}
+
+	@Override
+	public void onActivated()
+	{
+		;
 	}
 
 	@Override
@@ -42,7 +48,7 @@ public class WindowSubmitFeedback extends Window implements IWindow
 		buttonSubmit.xPosition = xPos;
 		buttonSubmit.yPosition = yPos + this.height - buttonSubmit.height;
 		buttonSubmit.width = this.width;
-		buttonSubmit.baseColor = 0xFF0099FF;
+		buttonSubmit.baseColor = this.manager.getWindowAPI().getCurrentTheme().getButtonColor();
 		buttonSubmit.setAction(new IActionPerformed()
 		{
 			@Override
@@ -87,8 +93,8 @@ public class WindowSubmitFeedback extends Window implements IWindow
 			buttonSubmit.drawButton();
 
 			textbox.drawTextBox();
-			this.setTitle(I18n.format(AliensVsPredator.properties().LANG_BETA_FEEDBACK_CHARSLEFT_TITLE, charsLeft), false);
-			this.setDefaultText(AliensVsPredator.properties().LANG_BETA_FEEDBACK_INFO, true);
+			this.setTitle(I18n.format("gui.avp.beta.feedback.charsleft.title", charsLeft), false);
+			this.setDefaultText("gui.avp.beta.feedback.info", true);
 		}
 		else
 		{
@@ -98,24 +104,24 @@ public class WindowSubmitFeedback extends Window implements IWindow
 				{
 					String[] stringReturn = feedback.split(":feedback_split:");
 
-					setTitle(AliensVsPredator.properties().LANG_BETA_FEEDBACK_SUBMIT_THANKS_TITLE, true);
-					setDefaultText(String.format(I18n.format(AliensVsPredator.properties().LANG_BETA_FEEDBACK_SUBMIT_THANKS), stringReturn[0], stringReturn[1], stringReturn[2]));
+					setTitle("gui.avp.beta.feedback.info.submit.thanks.title", true);
+					setDefaultText(I18n.format("gui.avp.beta.feedback.info.submit.thanks", stringReturn[0], stringReturn[2]));
 				}
 				else
 				{
-					setTitle(AliensVsPredator.properties().LANG_BETA_FEEDBACK_NOTIFY_INVALID_BETA_TESTER_TITLE, true);
-					setDefaultText(AliensVsPredator.properties().LANG_BETA_FEEDBACK_NOTIFY_INVALID_BETA_TESTER, true);
+					setTitle("gui.avp.beta.feedback.info.invalidbetatester.title", true);
+					setDefaultText("gui.avp.beta.feedback.info.invalidbetatester", true);
 				}
 			}
 			else if (textbox.getText().equals("") && textbox.getText().length() < 12)
 			{
-				setTitle(AliensVsPredator.properties().LANG_BETA_FEEDBACK_NOTIFY_SPAM_PREVENTION_TITLE, true);
-				setDefaultText(AliensVsPredator.properties().LANG_BETA_FEEDBACK_NOTIFY_SPAM_PREVENTION, true);
+				setTitle("gui.avp.beta.feedback.info.spamprevention.title", true);
+				setDefaultText("gui.avp.beta.feedback.info.spamprevention", true);
 			}
 			else
 			{
-				setTitle(AliensVsPredator.properties().LANG_BETA_FEEDBACK_SUBMIT_ERROR_TITLE, true);
-				setDefaultText(AliensVsPredator.properties().LANG_BETA_FEEDBACK_SUBMIT_ERROR, true);
+				setTitle("gui.avp.beta.feedback.info.submit.error.title", true);
+				setDefaultText("gui.avp.beta.feedback.info.submit.error", true);
 			}
 		}
 	}

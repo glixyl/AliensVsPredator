@@ -154,16 +154,16 @@ death.attack.acidshot=%1$s was vaporized in acid by %2$s.
 death.attack.acid=%1$s vaporized in acid.
 death.attack.spear=%1$s was speared by %2$s.
 
+gui.avp.beta.feedback.info.submit.title=Submit Feedback
+gui.avp.beta.feedback.info.submit.button=Submit Feedback
 gui.avp.beta.feedback.info.submit.thanks.title=Thanks!
-gui.avp.beta.feedback.info.submit.thanks=Thanks for submitting your feedback!/n/n<color value='0x777777'></color>Username: %s/n<color value='0x777777'></color>UUID: %s/n<color value='0x777777'></color>Feedback: %s
+gui.avp.beta.feedback.info.submit.thanks=Thanks for submitting your feedback %s!/n/n%s
 gui.avp.beta.feedback.info.submit.error.title=Uh-oh
 gui.avp.beta.feedback.info.submit.error=Looks like there was a problem trying to submit your feedback! Make sure you are connected to the internet and try again!
 gui.avp.beta.feedback.info.spamprevention.title=Be more descriptive.
-gui.avp.beta.feedback.info.spamprevention=Your feedback must be longer than 12 characters! This is to prevent spam.
+gui.avp.beta.feedback.info.spamprevention=Your feedback must be longer than 12 characters. This restriction is set to prevent spam.
 gui.avp.beta.feedback.info=Type your feedback below. Do not include personal info. This information is available to the general public.
 gui.avp.beta.feedback.charsleft.title=Submit Feedback - %s characters left
-gui.avp.beta.feedback.submit.title=Submit Feedback
-gui.avp.beta.feedback.info.submit.button=Submit Feedback
 gui.avp.beta.feedback.info.invalidbetatester.title=Sorry!
 gui.avp.beta.feedback.info.invalidbetatester=We couldn't validate you as a valid beta tester, as a result you will be unable to submit your feedback. Sorry!
 gui.avp.wristbracer.warning.itemslost=WARNING: Once initiated, this wristbracer and its contents will be lost.

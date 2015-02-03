@@ -12,7 +12,7 @@ import com.arisux.airi.lib.client.ModelBipedExtension;
 import com.arisux.airi.lib.client.ModelTexMap;
 import com.arisux.airi.lib.interfaces.IInitializablePost;
 import com.arisux.airi.lib.interfaces.IInitializablePre;
-import com.arisux.avp.block.render.RenderTypeAngled;
+import com.arisux.avp.block.render.special.RenderShape;
 import com.arisux.avp.entities.*;
 import com.arisux.avp.entities.mob.*;
 import com.arisux.avp.entities.mob.model.*;
@@ -121,6 +121,6 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 	
 	public void registerSimpleBlockRenderingHandlers()
 	{
-		registerBlockHandler(this.renderTypeAngled = new RenderTypeAngled());
+		registerBlockHandler(this.renderTypeAngled = new RenderShape());
 	}
 }

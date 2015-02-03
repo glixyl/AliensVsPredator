@@ -7,6 +7,7 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
 import com.arisux.airi.AIRI;
+import com.arisux.airi.lib.ModUtil;
 
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -17,6 +18,8 @@ public class Settings
 	private final String CATEGORY_OTHER = "ETC";
 	private final String CATEGORY_IDS = "IDS";
 	private final String CATEGORY_URLS = "URLS";
+	private String mainDomain;
+	private String devDomain;
 	private String urlUpdater;
 	private String urlChangelog;
 	private String urlFeedbackSubmit;
@@ -48,12 +51,14 @@ public class Settings
 			config.addCustomCategoryComment(CATEGORY_IDS, "WARNING: ONLY MODIFY THIS IF YOU KNOW WHAT YOU ARE DOING, YOU CAN BREAK WORLD SAVES AND/OR SERVERS.");
 			config.addCustomCategoryComment(CATEGORY_OTHER, "Other configuration options");
 			config.load();
-			
-			urlUpdater = config.get(CATEGORY_URLS, "UPDATE_STRING_URL", "/page/mods/aliensvspredator/latest.txt", "").getString();
-			urlChangelog = config.get(CATEGORY_URLS, "URL_CHANGELOG", "/page/mods/aliensvspredator/changelog.txt", "").getString();
+
+			mainDomain = config.get(CATEGORY_URLS, "DOMAIN_MAIN", "http://avp.arisux.x10.mx", "").getString();
+			devDomain = config.get(CATEGORY_URLS, "DOMAIN_DEV", "http://localhost:10/avp", "").getString();
+			urlUpdater = config.get(CATEGORY_URLS, "UPDATE_STRING_URL", "/latest.txt", "").getString();
+			urlChangelog = config.get(CATEGORY_URLS, "URL_CHANGELOG", "/changelog.txt", "").getString();
 			urlFeedbackSubmit = config.get(CATEGORY_URLS, "URL_AVP_FEEDBACK_SUBMIT", "/page/beta/submit.php?user=%s&uuid=%s&info=%s", "").getString();
 			urlFeedbackValidation = config.get(CATEGORY_URLS, "URL_FEEDBACK_VALIDATION", "/page/beta/validate.php?uuid=%s", "").getString();
-			urlSkins = config.get(CATEGORY_URLS, "URL_SKINS", "/page/mods/aliensvspredator/skins", "").getString();
+			urlSkins = config.get(CATEGORY_URLS, "URL_SKINS", "/page/skins", "").getString();
 			urlSkinAk47 = config.get(CATEGORY_URLS, "URL_SKIN_AK47", "/ak47/%s.png", "").getString();
 			urlSkinM4 = config.get(CATEGORY_URLS, "URL_SKIN_M4", "/m4/%s.png", "").getString();
 			urlSkinM41a = config.get(CATEGORY_URLS, "URL_SKIN_M41A", "/m4a1/%s.png", "").getString();
@@ -127,12 +132,12 @@ public class Settings
 	
 	public String getUpdateStringUrl()
 	{
-		return urlUpdater;
+		return this.urlUpdater;
 	}
 	
 	public String getServer()
 	{
-		return AIRI.settings().getServer();
+		return ModUtil.isDevEnvironment() ? this.devDomain : this.mainDomain;
 	}
 	
 	public String getUrlUpdater()

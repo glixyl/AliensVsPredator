@@ -52,19 +52,4 @@ public class Properties
 	public final String SOUND_WEAPON_M56SG = DOMAIN + "weapon.m56sg";
 	public final String SOUND_MOTIONTRACKER_PING = DOMAIN + "motiontracker.ping";
 	public final String SOUND_MOTIONTRACKER_PONG = DOMAIN + "motiontracker.pong";
-	
-	public final String LANG_WRISTBRACER_DETMODENOTIFY = "gui.avp.wristbracer.notify.detmode";
-	public final String LANG_WRISTBRACER_ITEMSLOSTWARNING = "gui.avp.wristbracer.warning.itemslost";
-	public final String LANG_BETA_FEEDBACK_CHARSLEFT_TITLE = "gui.avp.beta.feedback.charsleft.title";
-	public final String LANG_BETA_FEEDBACK_INFO = "gui.avp.beta.feedback.info";
-	public final String LANG_BETA_FEEDBACK_SUBMIT_ERROR_TITLE = "gui.avp.beta.feedback.info.submit.error.title";
-	public final String LANG_BETA_FEEDBACK_SUBMIT_ERROR = "gui.avp.beta.feedback.info.submit.error";
-	public final String LANG_BETA_FEEDBACK_NOTIFY_SPAM_PREVENTION_TITLE = "gui.avp.beta.feedback.info.spamprevention.title";
-	public final String LANG_BETA_FEEDBACK_NOTIFY_SPAM_PREVENTION = "gui.avp.beta.feedback.info.spamprevention";
-	public final String LANG_BETA_FEEDBACK_NOTIFY_INVALID_BETA_TESTER_TITLE = "gui.avp.beta.feedback.info.invalidbetatester.title";
-	public final String LANG_BETA_FEEDBACK_NOTIFY_INVALID_BETA_TESTER = "gui.avp.beta.feedback.info.invalidbetatester";
-	public final String LANG_BETA_FEEDBACK_SUBMIT_THANKS_TITLE = "gui.avp.beta.feedback.info.submit.thanks";
-	public final String LANG_BETA_FEEDBACK_SUBMIT_THANKS = "gui.avp.beta.feedback.info.submit.thanks";
-	public final String LANG_BETA_FEEDBACK_SUBMIT_TITLE = "gui.avp.beta.feedback.submit.title";
-	public final String LANG_BETA_FEEDBACK_SUBMIT_BUTTON = "gui.avp.beta.feedback.info.submit.button";
 }
