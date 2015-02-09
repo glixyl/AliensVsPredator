@@ -25,7 +25,7 @@ public class CommonFirearmEvents
 			{
 				ItemFirearm fireArm = (ItemFirearm) mc.thePlayer.inventory.getCurrentItem().getItem();
 
-				if (AliensVsPredator.instance().keybinds.KEYBIND_FIREARM_RELOAD.isPressed() && this.lastReload > fireArm.getReloadSpeed())
+				if (AliensVsPredator.instance().keybinds.KEYBIND_FIREARM_RELOAD.isPressed() && this.lastReload > fireArm.getReloadRate())
 				{
 					this.lastReload = 0;
 					AliensVsPredator.instance().network.sendToServer(new PacketReloadFirearmServerUpdate());

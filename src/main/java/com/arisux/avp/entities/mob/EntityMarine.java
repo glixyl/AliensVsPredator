@@ -32,7 +32,7 @@ public class EntityMarine extends EntityCreature implements IMob, IRangedAttackM
 	{
 		super(world);
 		this.marineType = MarineTypes.getTypeForId(new Random(TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis())).nextInt(MarineTypes.values().length));
-		this.aiRangedAttack = new EntityAIArrowAttack(this, 0.4D, (int) getMarineType().getFirearmItem().getFirerate(), 24);
+		this.aiRangedAttack = new EntityAIArrowAttack(this, 0.4D, (int) getMarineType().getFirearmItem().getFireRate(), 24);
 		this.experienceValue = 5;
 		this.dataWatcher.addObject(18, new Integer(15));
 		this.dataWatcher.addObject(17, "false");
@@ -97,7 +97,7 @@ public class EntityMarine extends EntityCreature implements IMob, IRangedAttackM
 
 		if (hitByPlayer)
 		{
-			this.entityDropItem(new ItemStack(this.getMarineType().getFirearmItem().getAmmoItem()), this.rand.nextInt(3));
+			this.entityDropItem(new ItemStack(this.getMarineType().getFirearmItem().getAmmoType()), this.rand.nextInt(3));
 		}
 	}
 

@@ -8,150 +8,199 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
 import com.arisux.airi.lib.*;
 import com.arisux.airi.lib.ItemTypes.HookedItem;
+import com.arisux.airi.lib.WorldUtil.Entities.Players.Inventories;
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.packets.server.PacketShootBulletServerUpdate;
+import com.arisux.avp.packets.server.PacketReloadFirearmServerUpdate;
+import com.arisux.avp.packets.server.PacketShootEntityServerUpdate;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+@SuppressWarnings("unchecked")
 public class ItemFirearm extends HookedItem
 {
-	private ItemAmmo itemAmmo;
+	private ItemAmmo ammoType;
 	private float recoil;
-	private double curCooldown, maxCooldown;
-	private int curAmmo, maxAmmo, maxReload, curReload;
-	private String gunfireSound;
-	public boolean cancelRightClick = false;
+	private double fireRate;
+	private int maxAmmoCount;
+	private int ammoCount;
+	private int reloadRate;
+	private int reload;
+	private int ammoConsumptionRate;
+	private String sound;
+	private double soundLength;
+	private long lastSoundPlayed;
 
-	public ItemFirearm(int maxAmmo, float recoil, double fireRate, int reloadSpeed, ItemAmmo item, String snd)
+	public ItemFirearm(int maxAmmoCount, float recoil, double fireRate, int reloadRate, ItemAmmo item, String sound)
 	{
 		super();
-		this.maxStackSize = 1;
-		this.gunfireSound = snd;
+		this.setMaxStackSize(1);
+		this.ammoType = item;
+		this.maxAmmoCount = maxAmmoCount;
+		this.ammoCount = 0;
 		this.recoil = recoil;
-		this.itemAmmo = item;
-		this.maxAmmo = maxAmmo;
-		this.curAmmo = 0;
-		this.maxReload = reloadSpeed;
-		this.curReload = 0;
-		this.maxCooldown = fireRate;
+		this.fireRate = fireRate;
+		this.reloadRate = reloadRate;
+		this.reload = 0;
+		this.sound = sound;
+		this.soundLength = 0;
+		this.ammoConsumptionRate = 1;
+		this.lastSoundPlayed = 0;
+		this.soundLength = 0;
 	}
 
 	@Override
-	public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5)
+	public void onUpdate(ItemStack itemstack, World world, Entity entity, int slot, boolean selected)
 	{
-		super.onUpdate(par1ItemStack, par2World, par3Entity, par4, par5);
+		super.onUpdate(itemstack, world, entity, slot, selected);
 
-		--this.curCooldown;
-		--this.curReload;
-	}
-	
-	@Override
-	public EnumAction getItemUseAction(ItemStack stack)
-	{
-		return EnumAction.bow;
+		this.reload--;
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player)
 	{
-		if (cancelRightClick)
+		if (world.isRemote)
 		{
-			this.cancelRightClick = false;
-			return par1ItemStack;
-		}
-		
-//		par3EntityPlayer.setItemInUse(par1ItemStack, 72000);
-
-		// if (!par2World.isRemote) AliensVsPredator.instance().network.sendToServer(new PacketAmmoClientUpdate(curAmmo));
-
-		if (par2World.isRemote && this.curAmmo > 0 && this.curCooldown <= 0 && this.curReload <= 0 || par2World.isRemote && par3EntityPlayer.capabilities.isCreativeMode)
-		{
-			this.renderRecoil();
-			this.fixDelay();
-		}
-
-		if (par3EntityPlayer.inventory.hasItemStack(new ItemStack(this.itemAmmo)) && this.curAmmo <= 0 && this.curReload <= 0)
-		{
-			// AliensVsPredator.instance().network.sendToServer(new PacketReloadFirearmServerUpdate());
-			this.reload(par3EntityPlayer);
-		}
-
-		if (this.curAmmo > 0 && this.curCooldown <= 0 && this.curReload <= 0 || par3EntityPlayer.capabilities.isCreativeMode)
-		{
-			par2World.playSoundAtEntity(par3EntityPlayer, this.gunfireSound, 0.5F, 1.0F);
-			AliensVsPredator.instance().network.sendToServer(new PacketShootBulletServerUpdate(this.itemAmmo.getInflictionDamage()));
-			this.curCooldown = this.maxCooldown;
-
-			if (!par3EntityPlayer.capabilities.isCreativeMode)
+			if (this.ammoCount > 0)
 			{
-				this.curAmmo--;
+				MovingObjectPosition objMouseOver = WorldUtil.Entities.rayTrace(player, 128);
+
+				this.renderRecoil();
+				this.fixDelay();
+
+				AliensVsPredator.instance().network.sendToServer(new PacketShootEntityServerUpdate(objMouseOver.entityHit, this));
+
+				if (!player.capabilities.isCreativeMode)
+				{
+					this.ammoCount -= ammoConsumptionRate;
+				}
+			}
+			else if (player.inventory.hasItem(this.ammoType))
+			{
+				this.reload(player);
 			}
 		}
 
-		return par1ItemStack;
+		return itemstack;
+	}
+
+	public boolean canFire(EntityPlayer player)
+	{
+		return true;
 	}
 
 	public void reload(EntityPlayer player)
 	{
-		if (player.inventory.hasItemStack(new ItemStack(this.itemAmmo)) && this.curAmmo < this.maxAmmo && this.curReload <= 0)
+		if (!player.worldObj.isRemote)
 		{
-			WorldUtil.Entities.Players.Inventories.consumeItem(player, this.itemAmmo);
-
-			this.curAmmo = this.maxAmmo;
-			this.curReload = this.maxReload;
+			Inventories.consumeItem(player, this.ammoType);
 		}
+
+		if (player.worldObj.isRemote)
+		{
+			AliensVsPredator.instance().network.sendToServer(new PacketReloadFirearmServerUpdate());
+		}
+
+		this.ammoCount = this.maxAmmoCount;
 	}
 
-	public void setCurrentAmmo(int curAmmo)
+	public ItemAmmo getAmmoType()
 	{
-		this.curAmmo = curAmmo;
+		return ammoType;
+	}
+
+	public int getReload()
+	{
+		return reload;
+	}
+
+	public double getFireRate()
+	{
+		return this.fireRate;
+	}
+
+	public int getReloadRate()
+	{
+		return this.reloadRate;
+	}
+
+	public int getAmmoCount()
+	{
+		return this.ammoCount;
+	}
+
+	public int getMaxAmmoCount()
+	{
+		return this.maxAmmoCount;
+	}
+
+	public String getFireSound()
+	{
+		return this.sound;
+	}
+
+	public double getSoundLength()
+	{
+		return this.soundLength;
+	}
+
+	public ItemFirearm setSoundLength(double seconds)
+	{
+		this.soundLength = seconds;
+		return this;
+	}
+
+	public long getLastSoundPlayTime()
+	{
+		return this.lastSoundPlayed;
+	}
+
+	public void setLastSoundPlayed(long lastSoundPlayed)
+	{
+		this.lastSoundPlayed = lastSoundPlayed;
+	}
+
+	public boolean canSoundPlay()
+	{
+		long major = System.currentTimeMillis() / 1000 - this.getLastSoundPlayTime() / 1000;
+		long minor = Math.abs((System.currentTimeMillis() - this.getLastSoundPlayTime()) - (major * 1000));
+		double time = Double.valueOf(String.format("%s.%s", major, minor));
+		System.out.println(time);
+		return this.getLastSoundPlayTime() == 0 ? true : (time >= this.getSoundLength());
+	}
+
+	public void setAmmoCount(int ammoCount)
+	{
+		this.ammoCount = ammoCount;
+	}
+
+	public ItemFirearm setAmmoConsumptionRate(int rate)
+	{
+		this.ammoConsumptionRate = rate;
+		return this;
 	}
 
 	@SideOnly(Side.CLIENT)
 	public void renderRecoil()
 	{
-		Minecraft mc = FMLClientHandler.instance().getClient();
-		mc.thePlayer.renderArmPitch -= this.recoil * 40.0F;
-		mc.thePlayer.renderArmYaw += this.recoil * 5.0F;
-		mc.thePlayer.rotationPitch -= this.recoil * 1.4F;
+		Minecraft client = FMLClientHandler.instance().getClient();
+		client.thePlayer.renderArmPitch -= this.recoil * 40.0F;
+		client.thePlayer.renderArmYaw += this.recoil * 5.0F;
+		client.thePlayer.rotationPitch -= this.recoil * 1.4F;
 	}
 
 	@SideOnly(Side.CLIENT)
 	public void fixDelay()
 	{
 		AccessWrapper.setEquippedProgress(0.85F);
-		AccessWrapper.setRightClickDelayTimer((int) this.maxCooldown);
-	}
-
-	public boolean getCanFire(EntityPlayer player)
-	{
-		return this.curAmmo > 0 && this.curCooldown <= 0 && this.curReload <= 0 || player.capabilities.isCreativeMode;
-	}
-
-	public int getMaxAmmo()
-	{
-		return maxAmmo;
-	}
-
-	public int getCurrentAmmo()
-	{
-		return curAmmo;
-	}
-	
-	public String getGunfireSound()
-	{
-		return this.gunfireSound;
-	}
-	
-	public double getFirerate()
-	{
-		return this.maxCooldown;
+		AccessWrapper.setRightClickDelayTimer((int) this.fireRate);
 	}
 
 	@Override
@@ -174,9 +223,10 @@ public class ItemFirearm extends HookedItem
 		par3List.add("Press R to reload");
 	}
 
-	public int getReloadSpeed()
+	@Override
+	public EnumAction getItemUseAction(ItemStack stack)
 	{
-		return this.maxReload;
+		return EnumAction.bow;
 	}
 
 	public static class ItemAmmo extends HookedItem
@@ -193,10 +243,5 @@ public class ItemFirearm extends HookedItem
 		{
 			return damage;
 		}
-	}
-
-	public ItemAmmo getAmmoItem()
-	{
-		return itemAmmo;
 	}
 }

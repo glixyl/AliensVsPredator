@@ -4,7 +4,6 @@ import net.minecraft.client.Minecraft;
 
 import com.arisux.airi.lib.AccessWrapper;
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.items.ItemFirearm;
 import com.arisux.avp.packets.server.PacketGrenadeLaunchServerUpdate;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -23,7 +22,7 @@ public class PulseRifleEvents
 			{
 				if (AliensVsPredator.instance().keybinds.KEYBIND_ITEM_ACTION.isPressed())
 				{
-					((ItemFirearm) mc.thePlayer.getCurrentEquippedItem().getItem()).cancelRightClick = true;
+					//((ItemFirearm) mc.thePlayer.getCurrentEquippedItem().getItem()).cancelRightClick = true;
 					AccessWrapper.setRightClickDelayTimer(20);
 					AliensVsPredator.instance().network.sendToServer(new PacketGrenadeLaunchServerUpdate());
 				}

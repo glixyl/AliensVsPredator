@@ -35,7 +35,7 @@ public class PacketAmmoClientUpdate implements IMessage, IMessageHandler<PacketA
 
 	@Override public PacketAmmoClientUpdate onMessage(PacketAmmoClientUpdate packet, MessageContext ctx)
 	{
-		((ItemFirearm) Minecraft.getMinecraft().thePlayer.inventory.getCurrentItem().getItem()).setCurrentAmmo(packet.ammo);
+		((ItemFirearm) Minecraft.getMinecraft().thePlayer.inventory.getCurrentItem().getItem()).setAmmoCount(packet.ammo);
 		return null;
 	}
 }

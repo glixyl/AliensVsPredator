@@ -27,27 +27,27 @@ public class AmmoIndicatorRenderEvent
 			if (mc.thePlayer.getHeldItem() != null && mc.thePlayer.getHeldItem().getItem() instanceof ItemFirearm)
 			{
 				ItemFirearm itemFireArm = (ItemFirearm) mc.thePlayer.getHeldItem().getItem();
-				String displayStatus = " " + itemFireArm.getCurrentAmmo() + "/" + itemFireArm.getMaxAmmo();
+				String displayStatus = " " + itemFireArm.getAmmoCount() + "/" + itemFireArm.getMaxAmmoCount();
 				int barWidth = 0;
 
 				if (!mc.thePlayer.capabilities.isCreativeMode && isWearingArmor())
 				{
 					barWidth = 90;
-					RenderUtil.drawProgressBar(displayStatus, itemFireArm.getMaxAmmo(), itemFireArm.getCurrentAmmo(), (RenderUtil.scaledDisplayResolution().getScaledWidth() / 2), RenderUtil.scaledDisplayResolution().getScaledHeight() - 48, barWidth, 1, 0, 0xFFFF0000, false);
-					RenderUtil.drawItemIcon(itemFireArm.getAmmoItem(), (RenderUtil.scaledDisplayResolution().getScaledWidth() / 2) + barWidth / 2 - RenderUtil.getStringRenderWidth(displayStatus) - 2, RenderUtil.scaledDisplayResolution().getScaledHeight() - 53, 16, 16);
+					RenderUtil.drawProgressBar(displayStatus, itemFireArm.getMaxAmmoCount(), itemFireArm.getAmmoCount(), (RenderUtil.scaledDisplayResolution().getScaledWidth() / 2), RenderUtil.scaledDisplayResolution().getScaledHeight() - 48, barWidth, 1, 0, 0xFFFF0000, false);
+					RenderUtil.drawItemIcon(itemFireArm.getAmmoType(), (RenderUtil.scaledDisplayResolution().getScaledWidth() / 2) + barWidth / 2 - RenderUtil.getStringRenderWidth(displayStatus) - 2, RenderUtil.scaledDisplayResolution().getScaledHeight() - 53, 16, 16);
 				}
 				else if (!mc.thePlayer.capabilities.isCreativeMode && !isWearingArmor())
 				{
 					barWidth = 182;
-					RenderUtil.drawProgressBar(displayStatus, itemFireArm.getMaxAmmo(), itemFireArm.getCurrentAmmo(), (RenderUtil.scaledDisplayResolution().getScaledWidth() / 2) - (182 / 2), RenderUtil.scaledDisplayResolution().getScaledHeight() - 48, barWidth, 1, 0, 0xFF00DDFF, false);
-					RenderUtil.drawItemIcon(itemFireArm.getAmmoItem(), (RenderUtil.scaledDisplayResolution().getScaledWidth() / 2) - (barWidth / 2) + barWidth / 2 - RenderUtil.getStringRenderWidth(displayStatus) - 2, RenderUtil.scaledDisplayResolution().getScaledHeight() - 53, 16, 16);
+					RenderUtil.drawProgressBar(displayStatus, itemFireArm.getMaxAmmoCount(), itemFireArm.getAmmoCount(), (RenderUtil.scaledDisplayResolution().getScaledWidth() / 2) - (182 / 2), RenderUtil.scaledDisplayResolution().getScaledHeight() - 48, barWidth, 1, 0, 0xFF00DDFF, false);
+					RenderUtil.drawItemIcon(itemFireArm.getAmmoType(), (RenderUtil.scaledDisplayResolution().getScaledWidth() / 2) - (barWidth / 2) + barWidth / 2 - RenderUtil.getStringRenderWidth(displayStatus) - 2, RenderUtil.scaledDisplayResolution().getScaledHeight() - 53, 16, 16);
 				}
 				else
 				{
 					barWidth = 182;
 					displayStatus = "\u221e";
 					RenderUtil.drawProgressBar("", 1, 1, (RenderUtil.scaledDisplayResolution().getScaledWidth() / 2) - (barWidth / 2), RenderUtil.scaledDisplayResolution().getScaledHeight() - 35, barWidth, 1, 0, 0xFF00DDFF, false);
-					RenderUtil.drawItemIcon(itemFireArm.getAmmoItem(), (RenderUtil.scaledDisplayResolution().getScaledWidth() / 2) - (barWidth / 2) + barWidth / 2 - RenderUtil.getStringRenderWidth(displayStatus), RenderUtil.scaledDisplayResolution().getScaledHeight() - 40, 16, 16);
+					RenderUtil.drawItemIcon(itemFireArm.getAmmoType(), (RenderUtil.scaledDisplayResolution().getScaledWidth() / 2) - (barWidth / 2) + barWidth / 2 - RenderUtil.getStringRenderWidth(displayStatus), RenderUtil.scaledDisplayResolution().getScaledHeight() - 40, 16, 16);
 				}
 			}
 		}

@@ -1,144 +1,51 @@
 {
-  "xeno.attack": {
-    "sounds": [
-      "alien_attack"
-    ]
-  },
-  "xeno.death": {
-    "sounds": [
-      "alien_hiss_death0",
-	  "alien_hiss_death1"
-    ]
-  },
-  "xeno.living": {
-    "sounds": [
-      "alien_hiss_living0",
-	  "alien_hiss_living1"
-    ]
-  },
-  "xeno.hurt": {
-    "sounds": [
-      "alien_hurt0",
-	  "alien_hurt1"
-    ]
-  },
-  "facehugger.death": {
-    "sounds": [
-      "facehugger_death"
-    ]
-  },
-  "chestburster.death": {
-    "sounds": [
-      "chestburster_death"
-    ]
-  },
-  "marine.death": {
-    "sounds": [
-      "marine_death"
-    ]
-  },
-  "marine.hurt": {
-    "sounds": [
-      "marine_hurt"
-    ]
-  },
-  "praetorian.living": {
-    "sounds": [
-      "praetorian_hiss_living"
-    ]
-  },
-  "praetorian.hurt": {
-    "sounds": [
-      "praetorian_hurt"
-    ]
-  },
-  "predator.death": {
-    "sounds": [
-      "predator_death"
-    ]
-  },
-  "predator.hurt": {
-    "sounds": [
-      "predator_hurt0",
-	  "predator_hurt1"
-    ]
-  },
-  "predator.living": {
-    "sounds": [
-      "predator_living0",
-	  "predator_living1"
-    ]
-  },
-  "queen.death": {
-    "sounds": [
-      "queen_death"
-    ]
-  },
-  "queen.hurt": {
-    "sounds": [
-      "queen_hurt0",
-	  "queen_hurt1"
-    ]
-  },
-  "queen.living": {
-    "sounds": [
-      "queen_living0",
-	  "queen_living1"
-    ]
-  },
-  "weapon.blades": {
-    "sounds": [
-      "weapon_blades"
-    ]
-  },
-  "weapon.flamethrower": {
-    "sounds": [
-      "weapon_flamethrower"
-    ]
-  },
-  "weapon.gauntlet": {
-    "sounds": [
-      "weapon_gauntlet"
-    ]
-  },
-  "weapon.gunshot": {
-    "sounds": [
-      "weapon_gunshot"
-    ]
-  },
-  "weapon.plasmacaster": {
-    "sounds": [
-      "weapon_plasmacaster"
-    ]
-  },
-  "weapon.pulserifle": {
-    "sounds": [
-      "weapon_pulserifle"
-    ]
-  },
-  "weapon.sniper": {
-    "sounds": [
-      "weapon_sniper"
-    ]
-  },
-  "weapon.cooldown": {
-    "sounds": [
-      "weapon_cooldown"
-    ]
-  },
-  "weapon.m56sg": {
-    "sounds": [
-      "weapon_m56sg"
-    ]
-  },
-  "motiontracker.ping": {
-    "sounds": [
-      "motiontracker_ping"
-    ]
-  },
-  "motiontracker.pong": {
-    "sounds": [
-      "motiontracker_pong"
-    ]
-  }
+  "xeno.attack": 					{ "sounds": [ "mobs/alien/attack0", "mobs/alien/attack1", "mobs/alien/attack2", "mobs/alien/attack3" ] },
+  "xeno.death": 					{ "sounds": [ "mobs/alien/death0", "mobs/alien/death1" ] },
+  "xeno.living": 					{ "sounds": [ "mobs/alien/living0", "mobs/alien/living1", "mobs/alien/living2", "mobs/alien/living3" ] },
+  "xeno.hurt": 						{ "sounds": [ "mobs/alien/hurt0", "mobs/alien/hurt1" ] },
+  "facehugger.death": 				{ "sounds": [ "mobs/facehugger/death0", "mobs/facehugger/death1" ] },
+  "facehugger.hurt": 				{ "sounds": [ "mobs/facehugger/hurt0" ] },
+  "facehugger.implant": 			{ "sounds": [ "mobs/facehugger/implant0", "mobs/facehugger/implant1" ] },
+  "facehugger.living": 				{ "sounds": [ "mobs/facehugger/living0", "mobs/facehugger/living1", "mobs/facehugger/living2" ] },
+  "chestburster.death": 			{ "sounds": [ "mobs/chestburster/death" ] },
+  "chestburster.attack": 			{ "sounds": [ "mobs/chestburster/attack" ] },
+  "chestburster.burst": 			{ "sounds": [ "mobs/chestburster/burst" ] },
+  "chestburster.burst.predalien": 	{ "sounds": [ "mobs/chestburster/burst-predalien" ] },
+  "chestburster.grow": 				{ "sounds": [ "mobs/chestburster/grow" ] },
+  "chestburster.hurt": 				{ "sounds": [ "mobs/chestburster/hurt" ] },
+  "marine.death": 					{ "sounds": [ "mobs/marine/death" ] },
+  "marine.hurt": 					{ "sounds": [ "mobs/marine/hurt" ] },
+  "ovamorph.living": 				{ "sounds": [ "mobs/ovamorph/living0", "mobs/ovamorph/living1" ] },
+  "ovamorph.open": 					{ "sounds": [ "mobs/ovamorph/open" ] },
+  "predator.death": 				{ "sounds": [ "mobs/predator/death" ] },
+  "predator.hurt": 					{ "sounds": [ "mobs/predator/hurt0", "mobs/predator/hurt1" ] },
+  "predator.living": 				{ "sounds": [ "mobs/predator/living0", "mobs/predator/living1" ] },
+  "queen.death": 					{ "sounds": [ "mobs/queen/hurt0", "mobs/queen/hurt1", "mobs/queen/hurt2", "mobs/queen/hurt3" ] },
+  "queen.hurt": 					{ "sounds": [ "mobs/queen/hurt0", "mobs/queen/hurt1", "mobs/queen/hurt2", "mobs/queen/hurt3" ] },
+  "queen.living": 					{ "sounds": [ "mobs/queen/living0", "mobs/queen/living1", "mobs/queen/living2", "mobs/queen/living3" ] },
+  "queen.living.constant": 			{ "sounds": [ "mobs/queen/living-constant" ] },
+  "weapon.blades": 					{ "sounds": [ "items/weapons/wristbracer/hit" ] },
+  "weapon.blades.alarm": 			{ "sounds": [ "items/weapons/wristbracer/alarm" ] },
+  "weapon.gauntlet": 				{ "sounds": [ "items/weapons/gauntlet" ] },
+  "weapon.plasmacaster": 			{ "sounds": [ "items/weapons/plasmacaster/shoot0" ] },
+  "weapon.flamethrower": 			{ "sounds": [ "items/weapons/flamethrower/shoot0" ] },
+  "weapon.cooldown": 				{ "sounds": [ "items/weapons/cooldown" ] },
+  "weapon.gunshot": 				{ "sounds": [ "items/weapons/gunshot-manual" ] },
+  "weapon.gunshot.auto":			{ "sounds": [ "items/weapons/gunshot-auto" ] },
+  "weapon.pistol": 					{ "sounds": [ "items/weapons/pistol/shoot0", "items/weapons/pistol/shoot1" ] },
+  "weapon.sniper": 					{ "sounds": [ "items/weapons/sniper/shoot0" ] },
+  "weapon.ak47": 					{ "sounds": [ "items/weapons/ak47/shoot0" ] },
+  "weapon.m4": 						{ "sounds": [ "items/weapons/m4/shoot0" ] },
+  "weapon.pulserifle": 				{ "sounds": [ "items/weapons/pulserifle/shoot0", "items/weapons/pulserifle/shoot1", "items/weapons/pulserifle/shoot2", "items/weapons/pulserifle/shoot3" ] },
+  "weapon.pulserifle.old": 			{ "sounds": [ "items/weapons/pulserifle/original"] },
+  "weapon.m56sg": 					{ "sounds": [ "items/weapons/smartgun/shoot0", "items/weapons/smartgun/shoot1", "items/weapons/smartgun/shoot2" ] },
+  "weapon.m56sg.old": 				{ "sounds": [ "items/weapons/smartgun/original" ] },
+  "motiontracker.ping": 			{ "sounds": [ "items/motiontracker/ping" ] },
+  "motiontracker.pong": 			{ "sounds": [ "items/motiontracker/pong" ] },
+  "blocks.turret.shoot": 			{ "sounds": [ "blocks/turret/shoot" ] },
+  "blocks.blastdoor.open": 			{ "sounds": [ "blocks/blastdoor/open" ] },
+  "blocks.hive.step": 				{ "sounds": [ "blocks/hive/step0", "blocks/hive/step1", "blocks/hive/step2", "blocks/hive/step3" ] },
+  "blocks.newglass.step": 			{ "sounds": [ "blocks/newglass/step0", "blocks/newglass/step1", "blocks/newglass/step2", "blocks/newglass/step3" ] },
+  "blocks.alarm.access": 			{ "sounds": [ "blocks/alarm/access" ] },
+  "blocks.alarm.emergency":			{ "sounds": [ "blocks/alarm/emergency" ] }
 }

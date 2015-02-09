@@ -123,7 +123,7 @@ public class RenderItemM240ICU extends ItemRenderer
 
 	public String getAmmoCountDisplayString()
 	{
-		int ammoCount = ((ItemFirearm) mc.thePlayer.inventory.getCurrentItem().getItem()).getCurrentAmmo();
+		int ammoCount = ((ItemFirearm) mc.thePlayer.inventory.getCurrentItem().getItem()).getAmmoCount();
 		return (ammoCount < 10 ? "0" + ammoCount : String.valueOf(ammoCount));
 	}
 }
