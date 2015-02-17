@@ -33,9 +33,6 @@ import com.arisux.avp.inventory.container.ContainerTurret;
 import com.arisux.avp.packets.client.PacketTurretInit;
 import com.arisux.avp.packets.server.PacketTurretTargetUpdate;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, IPowerDevice
 {
 	private long fireRate;
@@ -48,8 +45,6 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 	private ContainerTurret container;
 	private CoordData focusPoint;
 	private Item itemAmmo;
-
-	@SideOnly(Side.CLIENT)
 	public int beamColor = 0xFFFF0000;
 
 	public TileEntityTurret()
@@ -128,7 +123,7 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 			{
 				turnTurretToPoint(new WorldUtil.Blocks.CoordData(targetEntity.posX, targetEntity.posY, targetEntity.posZ));
 
-				if (worldObj.getWorldInfo().getWorldTime() % fireRate == 0L && this.getEntity().rotationYaw != 0)
+				if (worldObj.getWorldInfo().getWorldTime() % fireRate == 0L && this.getEntity().rotationYaw != 0 && this.rotationYaw == this.focusYaw)
 				{
 					if (curAmmo-- > 0 && WorldUtil.Entities.canEntityBeSeenBy(targetEntity, this.getEntity()))
 					{
@@ -149,7 +144,7 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 		{
 			Entity newTarget = this.findNewTarget();
 
-			if (newTarget != null)
+			if (newTarget != null && this.worldObj.isRemote)
 			{
 				AliensVsPredator.instance().network.sendToServer(new PacketTurretTargetUpdate(xCoord, yCoord, zCoord, newTarget.getEntityId()));
 			}
@@ -281,7 +276,7 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 		this.firingTimeout = this.maxFiringTimeout;
 		EntityBullet entity = new EntityBullet(this.worldObj, this.getEntity(), this.targetEntity, 2F, 0.55D);
 		entity.setPhysics(false);
-		entity.setLocationAndAngles(entity.posX, entity.posY + 0.0, entity.posZ, entity.rotationYaw, entity.rotationPitch);
+		entity.setLocationAndAngles(entity.posX - 0.5, entity.posY + 0.0, entity.posZ - 0.5, entity.rotationYaw, entity.rotationPitch);
 		this.worldObj.spawnEntityInWorld(entity);
 		this.worldObj.spawnParticle("largesmoke", xCoord, yCoord, zCoord, 1, 1, 1);
 		this.getEntity().playSound(AliensVsPredator.properties().SOUND_WEAPON_M56SG, 1F, 1F);
@@ -726,7 +721,6 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 					for (int i = 0; i < list.tagCount(); i++)
 					{
 						int id = Integer.valueOf(list.getStringTagAt(i));
-						System.out.println("ohmyyes" + id);
 
 						Class<? extends Entity> c = EntityList.getClassFromID(id);
 						this.setDangerous(c);

@@ -124,7 +124,7 @@ public class EntityBullet extends Entity
 		this.motionY = (-MathHelper.sin(this.rotationPitch / 180.0F * (float) Math.PI));
 
 		double d0 = targetEntity.posX - entity.posX;
-		double d1 = targetEntity.boundingBox.minY + targetEntity.height / 3.0F - this.posY;
+		double d1 = targetEntity.boundingBox.maxY - 0.2F - this.posY;
 		double d2 = targetEntity.posZ - entity.posZ;
 		double d3 = MathHelper.sqrt_double(d0 * d0 + d2 * d2);
 
@@ -136,8 +136,7 @@ public class EntityBullet extends Entity
 			double d5 = d2 / d3;
 			this.setLocationAndAngles(entity.posX + d4, this.posY, entity.posZ + d5, f2, f3);
 			this.yOffset = 0.0F;
-			float f4 = (float) d3 * 0.2F;
-			this.setThrowableHeading(d0, d1 + f4, d2, velocity, damage);
+			this.setThrowableHeading(d0, d1, d2, velocity, damage);
 		}
 	}
 
@@ -353,41 +352,21 @@ public class EntityBullet extends Entity
 					}
 
 					var20 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
-					int var23 = (int) Math.ceil(var20 * damage);
+					int attackDamage = (int) Math.ceil(var20 * damage);
 
 					if (this.arrowCritical)
 					{
-						var23 += this.rand.nextInt(var23 / 2 + 2);
+						attackDamage += this.rand.nextInt(attackDamage / 2 + 2);
 					}
 
-					DamageSource var21 = null;
-
-					if (this.shootingEntity == null)
-					{
-						var21 = DamageSource.causeArrowDamage(this.entityarrow, this);
-					}
-					else
-					{
-						var21 = DamageSource.causeArrowDamage(this.entityarrow, this.shootingEntity);
-					}
-
+					DamageSource damagesource = this.shootingEntity == null ? DamageSource.causeArrowDamage(this.entityarrow, this) : DamageSource.causeArrowDamage(this.entityarrow, this.shootingEntity);
 					movingobjectposition.entityHit.hurtResistantTime = 0;
 
 					if (movingobjectposition.entityHit instanceof EntityLivingBase)
+					{
 						((EntityLivingBase) movingobjectposition.entityHit).getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.9);
-
-					if (movingobjectposition.entityHit instanceof EntityLivingBase && movingobjectposition.entityHit.attackEntityFrom(var21, var23))
-					{
+						movingobjectposition.entityHit.attackEntityFrom(damagesource, attackDamage);
 						this.setDead();
-					}
-					else
-					{
-						this.motionX *= -0.10000000149011612D;
-						this.motionY *= -0.10000000149011612D;
-						this.motionZ *= -0.10000000149011612D;
-						this.rotationYaw += 180.0F;
-						this.prevRotationYaw += 180.0F;
-						this.ticksInAir = 0;
 					}
 				}
 				else
@@ -441,7 +420,7 @@ public class EntityBullet extends Entity
 			float var22 = 0.99F;
 			f6 = 0.05F;
 
-			// if (this.isInWater())
+			if (!this.isDead)
 			{
 				for (int var24 = 0; var24 < 5; ++var24)
 				{

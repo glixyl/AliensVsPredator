@@ -12,7 +12,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
 
-import com.arisux.avp.damagesource.DamageSourceAcidShot;
+import com.arisux.avp.DamageSources;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -273,9 +273,9 @@ public class EntityAcidProjectile extends Entity implements IProjectile
 
 			if (movingobjectposition != null && movingobjectposition.entityHit != null && movingobjectposition.entityHit instanceof EntityPlayer)
 			{
-				EntityPlayer var20 = (EntityPlayer) movingobjectposition.entityHit;
+				EntityPlayer player = (EntityPlayer) movingobjectposition.entityHit;
 
-				if (var20.capabilities.disableDamage || this.shootingEntity instanceof EntityPlayer && !((EntityPlayer) this.shootingEntity).canAttackPlayer(var20))
+				if (player.capabilities.disableDamage || this.shootingEntity instanceof EntityPlayer && !((EntityPlayer) this.shootingEntity).canAttackPlayer(player))
 				{
 					movingobjectposition = null;
 				}
@@ -296,15 +296,15 @@ public class EntityAcidProjectile extends Entity implements IProjectile
 						var23 += this.rand.nextInt(var23 / 2 + 2);
 					}
 
-					DamageSource var25 = null;
+					DamageSource damagesource = null;
 
 					if (this.shootingEntity == null)
 					{
-						var25 = DamageSourceAcidShot.causeAcidicDamage(this, this);
+						damagesource = DamageSources.causeAcidicDamage(this, this);
 					}
 					else
 					{
-						var25 = DamageSourceAcidShot.causeAcidicDamage(this, this.shootingEntity);
+						damagesource = DamageSources.causeAcidicDamage(this, this.shootingEntity);
 					}
 
 					if (this.isBurning() && !(movingobjectposition.entityHit instanceof EntityEnderman))
@@ -312,7 +312,7 @@ public class EntityAcidProjectile extends Entity implements IProjectile
 						movingobjectposition.entityHit.setFire(5);
 					}
 
-					if (movingobjectposition.entityHit.attackEntityFrom(var25, var23))
+					if (movingobjectposition.entityHit.attackEntityFrom(damagesource, var23))
 					{
 						if (movingobjectposition.entityHit instanceof EntityLivingBase)
 						{

@@ -9,7 +9,7 @@ import net.minecraft.util.ChatComponentText;
 import com.arisux.airi.lib.WorldUtil;
 import com.arisux.airi.lib.WorldUtil.Entities.Players;
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.entities.ExtendedEntityPlayer;
+import com.arisux.avp.entities.extended.ExtendedEntityPlayer;
 import com.arisux.avp.packets.client.PacketPlayerModeUpdate;
 import com.arisux.avp.util.PlayerMode;
 

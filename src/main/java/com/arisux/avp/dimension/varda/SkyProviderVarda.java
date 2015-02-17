@@ -16,7 +16,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.event.action.StormUpdateEvent;
+import com.arisux.avp.event.StormUpdateEvent;
 
 import cpw.mods.fml.client.FMLClientHandler;
 
@@ -28,32 +28,16 @@ public class SkyProviderVarda extends IRenderHandler
 
 	public int starGLCallList = GLAllocation.generateDisplayLists(3);
 	public int glSkyList;
-	public int glSkyList2;
 
 	public SkyProviderVarda()
 	{
 		this.event = (StormUpdateEvent) AliensVsPredator.instance().localEvents.getEvent(StormUpdateEvent.class);
-	}
-
-	@Override
-	public void render(float renderPartialTicks, WorldClient world, Minecraft mc)
-	{
-		ProviderVarda provider = world.provider instanceof ProviderVarda ? (ProviderVarda) world.provider : null;
-
-		GL11.glPushMatrix();
-		{
-			GL11.glNewList(this.starGLCallList, GL11.GL_COMPILE);
-			this.renderStars();
-			GL11.glEndList();
-		}
-		GL11.glPopMatrix();
-
-		if (provider.isSilicaStormActive())
-		{
-			this.renderStorm(renderPartialTicks);
-		}
-
 		Tessellator tessellator = Tessellator.instance;
+
+		GL11.glNewList(this.starGLCallList, GL11.GL_COMPILE);
+		this.renderStars();
+		GL11.glEndList();
+
 		this.glSkyList = (this.starGLCallList + 1);
 		GL11.glNewList(this.glSkyList, GL11.GL_COMPILE);
 		byte var20 = 64;
@@ -74,51 +58,37 @@ public class SkyProviderVarda extends IRenderHandler
 		}
 
 		GL11.glEndList();
-		this.glSkyList2 = (this.starGLCallList + 2);
-		GL11.glNewList(this.glSkyList2, GL11.GL_COMPILE);
-		skylineHeight = -16.0F;
-		tessellator.startDrawingQuads();
+	}
 
-		for (int var5 = -var20 * var30; var5 <= var20 * var30; var5 += var20)
+	@Override
+	public void render(float renderPartialTicks, WorldClient world, Minecraft mc)
+	{
+		ProviderVarda provider = (ProviderVarda) world.provider;
+		Tessellator tessellator = Tessellator.instance;
+
+		if (provider.isSilicaStormActive())
 		{
-			for (int var6 = -var20 * var30; var6 <= var20 * var30; var6 += var20)
-			{
-				tessellator.addVertex(var5 + var20, skylineHeight, var6 + 0);
-				tessellator.addVertex(var5 + 0, skylineHeight, var6 + 0);
-				tessellator.addVertex(var5 + 0, skylineHeight, var6 + var20);
-				tessellator.addVertex(var5 + var20, skylineHeight, var6 + var20);
-			}
+			// this.renderStorm(renderPartialTicks);
 		}
 
-		tessellator.draw();
-		GL11.glEndList();
-
-
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		world.getStarBrightness(renderPartialTicks);
-		world.getStarBrightness(renderPartialTicks);
-		world.getStarBrightness(renderPartialTicks);
-
 		GL11.glColor3f(1.0F, 1.0F, 1.0F);
 		GL11.glDepthMask(false);
 		GL11.glEnable(GL11.GL_FOG);
-		GL11.glColor3f(0.0F, 0.0F, 0.0F);
+		GL11.glColor3f(0.01F, 0.025F, 0.065F);
 		GL11.glCallList(this.glSkyList);
 		GL11.glDisable(GL11.GL_FOG);
 		GL11.glDisable(GL11.GL_ALPHA_TEST);
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		RenderHelper.disableStandardItemLighting();
-
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, provider.getStarBrightness(renderPartialTicks) * 2);
 		GL11.glCallList(this.starGLCallList);
-
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, 1);
-		float scale = 30.0F;
 
 		GL11.glPushMatrix();
 		{
+			float scale = 30.0F;
 			GL11.glRotatef(-90.0F, 0.0F, 1.0F, 0.0F);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			GL11.glRotatef(world.getCelestialAngle(renderPartialTicks) * 360.0F, 1.0F, 0.0F, 0.0F);
@@ -134,8 +104,7 @@ public class SkyProviderVarda extends IRenderHandler
 
 		GL11.glPushMatrix();
 		{
-			scale = 275.0F;
-			world.getSpawnPoint();
+			float scale = 275.0F;
 			GL11.glTranslatef(30F, 0F, 0F);
 			GL11.glRotatef(calculateAngleFromPlanet(world.getWorldTime(), renderPartialTicks) * 360.0F, 0.0F, 1.0F, 0.0F);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -151,37 +120,11 @@ public class SkyProviderVarda extends IRenderHandler
 		}
 		GL11.glPopMatrix();
 
-		GL11.glPushMatrix();
-		{
-			GL11.glDisable(GL11.GL_BLEND);
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			GL11.glDisable(GL11.GL_BLEND);
-			GL11.glEnable(GL11.GL_ALPHA_TEST);
-			GL11.glEnable(GL11.GL_FOG);
-		}
-		GL11.glPopMatrix();
-
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		GL11.glColor3f(0.0F, 0.0F, 0.0F);
-		double var201 = mc.thePlayer.getPosition(renderPartialTicks).yCoord - world.getHorizon();
-
-		GL11.glColor3f(0.273438F, 0.273438F, 0.273438F);
-
-		GL11.glPushMatrix();
-		{
-			GL11.glTranslatef(0.0F, -(float) (var201 - 16.0D), 0.0F);
-			GL11.glCallList(this.glSkyList2);
-		}
-		GL11.glPopMatrix();
-
+		GL11.glDisable(GL11.GL_BLEND);
+		GL11.glEnable(GL11.GL_ALPHA_TEST);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glDepthMask(true);
-
-		GL11.glPushMatrix();
-		{
-			this.renderClouds(renderPartialTicks);
-		}
-		GL11.glPopMatrix();
+		this.renderClouds(renderPartialTicks);
 	}
 
 	private void renderStars()
@@ -365,8 +308,6 @@ public class SkyProviderVarda extends IRenderHandler
 					{
 						maxY = (int) worldclient.provider.getCloudHeight();
 					}
-
-					System.out.println(maxY);
 
 					if (minY != maxY)
 					{

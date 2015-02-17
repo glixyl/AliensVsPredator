@@ -9,7 +9,7 @@ import net.minecraft.util.*;
 import net.minecraft.world.World;
 
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.damagesource.DamageSourceDisc;
+import com.arisux.avp.DamageSources;
 
 public class EntitySmartDisc extends EntityProjectile
 {
@@ -114,22 +114,23 @@ public class EntitySmartDisc extends EntityProjectile
 	{
 		if (!this.worldObj.isRemote && this.floatStrength >= 0.7F)
 		{
-			EntityPlayer damagesource;
+			EntityPlayer player;
 
 			if (entity != this.shootingEntity)
 			{
-				damagesource = null;
-				DamageSource damagesource1;
+				player = null;
+				DamageSource damagesource;
 
 				if (this.shootingEntity == null)
 				{
-					damagesource1 = DamageSourceDisc.causeSpearDamage(this, this);
-				} else
+					damagesource = DamageSources.causeSmartDiscDamage(this, this);
+				}
+				else
 				{
-					damagesource1 = DamageSourceDisc.causeSpearDamage(this, this.shootingEntity);
+					damagesource = DamageSources.causeSmartDiscDamage(this, this.shootingEntity);
 				}
 
-				if (entity.attackEntityFrom(damagesource1, 5.0F))
+				if (entity.attackEntityFrom(damagesource, 5.0F))
 				{
 					this.playHitSound();
 
@@ -137,15 +138,17 @@ public class EntitySmartDisc extends EntityProjectile
 					{
 						this.setVelocity(0.2D * this.rand.nextDouble() - 0.1D, 0.2D * this.rand.nextDouble() - 0.1D, 0.2D * this.rand.nextDouble() - 0.1D);
 					}
-				} else
+				}
+				else
 				{
 					this.bounce();
 				}
-			} else
+			}
+			else
 			{
 				if (entity instanceof EntityPlayer)
 				{
-					damagesource = (EntityPlayer) entity;
+					player = (EntityPlayer) entity;
 					ItemStack item = this.getItemstack();
 
 					if (item == null)
@@ -153,10 +156,10 @@ public class EntitySmartDisc extends EntityProjectile
 						return;
 					}
 
-					if (damagesource.capabilities.isCreativeMode || damagesource.inventory.addItemStackToInventory(item))
+					if (player.capabilities.isCreativeMode || player.inventory.addItemStackToInventory(item))
 					{
 						this.worldObj.playSoundAtEntity(this, "random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
-						this.onItemPickup(damagesource);
+						this.onItemPickup(player);
 						this.setDead();
 						return;
 					}
@@ -186,7 +189,8 @@ public class EntitySmartDisc extends EntityProjectile
 		if (mop.sideHit == 1)
 		{
 			this.inGround = true;
-		} else
+		}
+		else
 		{
 			this.inGround = false;
 		}
@@ -207,7 +211,7 @@ public class EntitySmartDisc extends EntityProjectile
 	{
 		return this.beenInGround || this.floatStrength < 0.7F;
 	}
-	
+
 	@Override
 	public int getLifetime()
 	{
@@ -237,7 +241,7 @@ public class EntitySmartDisc extends EntityProjectile
 	{
 		return 0.98F;
 	}
-	
+
 	@Override
 	public void onCollideWithPlayer(EntityPlayer entityplayer)
 	{

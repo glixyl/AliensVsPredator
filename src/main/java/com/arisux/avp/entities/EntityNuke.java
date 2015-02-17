@@ -6,6 +6,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
 import com.arisux.airi.lib.WorldUtil;
+import com.arisux.airi.lib.client.Sound;
 import com.arisux.avp.AliensVsPredator;
 
 public class EntityNuke extends EntityThrowable
@@ -15,6 +16,7 @@ public class EntityNuke extends EntityThrowable
 		super(world);
 		this.setSize(0.5F, 0.5F);
 		this.yOffset = this.height / 2.0F;
+		this.ignoreFrustumCheck = true;
 	}
 
 	@Override
@@ -35,6 +37,11 @@ public class EntityNuke extends EntityThrowable
 			this.motionZ *= 0.699999988079071D;
 			this.motionY *= -0.5D;
 		}
+		
+		if (this.worldObj.getWorldTime() % 20 == 0)
+		{
+			new Sound("avp:weapon.blades.alarm").playSound(this, 10F, 1F);
+		}
 
 		if (this.ticksExisted >= this.getDetonationTicks())
 		{
@@ -44,7 +51,8 @@ public class EntityNuke extends EntityThrowable
 			}
 
 			this.setDead();
-		} else
+		}
+		else
 		{
 			this.worldObj.spawnParticle("smoke", this.posX, this.posY + 0.5D, this.posZ, 0.0D, 0.0D, 0.0D);
 		}
@@ -52,11 +60,11 @@ public class EntityNuke extends EntityThrowable
 
 	public double getDetonationTicks()
 	{
-		return 300;
+		return 20 * 30;
 	}
 
 	@Override
-	protected void onImpact(MovingObjectPosition p_70184_1_)
+	protected void onImpact(MovingObjectPosition movingObjectPosition)
 	{
 		;
 	}

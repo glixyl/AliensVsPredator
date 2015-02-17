@@ -172,7 +172,6 @@ public class ItemFirearm extends HookedItem
 		long major = System.currentTimeMillis() / 1000 - this.getLastSoundPlayTime() / 1000;
 		long minor = Math.abs((System.currentTimeMillis() - this.getLastSoundPlayTime()) - (major * 1000));
 		double time = Double.valueOf(String.format("%s.%s", major, minor));
-		System.out.println(time);
 		return this.getLastSoundPlayTime() == 0 ? true : (time >= this.getSoundLength());
 	}
 

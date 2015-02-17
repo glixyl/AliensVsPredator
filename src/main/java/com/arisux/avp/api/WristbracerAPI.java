@@ -6,7 +6,8 @@ import net.minecraft.client.Minecraft;
 
 import com.arisux.airi.AIRI;
 import com.arisux.airi.lib.RenderUtil;
-import com.arisux.avp.gui.GuiWristbracer;
+import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.packets.server.PacketSpawnNukeServerUpdate;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -38,18 +39,8 @@ public class WristbracerAPI
 			@Override
 			public void actionPerformed(String combonation, Object... args)
 			{
-				GuiWristbracer gui = null;
-
-				if (args.length > 1 && args[1] != null && args[1] instanceof GuiWristbracer)
-				{
-					gui = (GuiWristbracer) args[1];
-				}
-
-				if (gui != null)
-				{
-					gui.onGuiClosed();
-					gui.container.onContainerClosed(Minecraft.getMinecraft().thePlayer);
-				}
+				AliensVsPredator.instance().network.sendToServer(new PacketSpawnNukeServerUpdate());
+				Minecraft.getMinecraft().currentScreen = null;
 			}
 		});
 	}

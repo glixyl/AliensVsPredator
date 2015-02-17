@@ -139,7 +139,7 @@ public class AliensVsPredator implements IMod
 		this.commands.onServerStarting(event);
 	}
 
-	public boolean isBetaRelease()
+	public boolean isDevCopy()
 	{
 		return true;
 	}

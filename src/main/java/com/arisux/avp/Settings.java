@@ -95,6 +95,7 @@ public class Settings
 			entityList.put("DISC", config.get(CATEGORY_IDS, "DISC", 1519).getInt());
 			entityList.put("SHURIKEN", config.get(CATEGORY_IDS, "SHURIKEN", 1520).getInt());
 			entityList.put("TURRETENTITY", config.get(CATEGORY_IDS, "TURRETENTITY", 1521).getInt());
+			entityList.put("WRISTBRACERNUKE", config.get(CATEGORY_IDS, "WRISTBRACERNUKE", 1522).getInt());
 		} finally
 		{
 			config.save();

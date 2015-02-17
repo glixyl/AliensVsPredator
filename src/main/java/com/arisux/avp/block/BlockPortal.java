@@ -25,7 +25,6 @@ public class BlockPortal extends Block
 	{
 		super.randomDisplayTick(worldObj, posX, posY, posZ, rand);
 
-		System.out.println("Workin");
 		for (int p = 19; p > 0; --p)
 		{
 			worldObj.spawnParticle("flame", posX + rand.nextDouble(), posY + rand.nextDouble(), posZ + rand.nextDouble(), 0.0D, 0.0D, 0.0D);

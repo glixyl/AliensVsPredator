@@ -1,4 +1,4 @@
-package com.arisux.avp.block.render.special;
+package com.arisux.avp.block.render;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -9,7 +9,8 @@ import net.minecraft.world.IBlockAccess;
 
 import com.arisux.airi.lib.RenderUtil.Matrix3;
 import com.arisux.airi.lib.RenderUtil.Vertex;
-import com.arisux.avp.block.render.special.BlockShape.ShapeTypes;
+import com.arisux.avp.block.BlockShape;
+import com.arisux.avp.block.BlockShape.ShapeTypes;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;

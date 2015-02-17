@@ -11,8 +11,7 @@ import com.arisux.airi.lib.ModUtil.IBHandler;
 import com.arisux.airi.lib.*;
 import com.arisux.airi.lib.interfaces.IInitializable;
 import com.arisux.avp.block.*;
-import com.arisux.avp.block.render.special.BlockShape;
-import com.arisux.avp.block.render.special.BlockShape.ShapeTypes;
+import com.arisux.avp.block.BlockShape.ShapeTypes;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -21,7 +20,7 @@ import cpw.mods.fml.relauncher.Side;
 public class BlockHandler extends IBHandler implements IInitializable
 {
 	public Block
-		terrainHiveResin = (new BlockHiveResin(Material.plants)).setHardness(0.1F).setResistance(2.0F),
+		terrainHiveResin = (new BlockHiveResin(Material.wood)).setHardness(0.1F).setResistance(2.0F),
 		blockOvamorph = (new HookedBlock(Material.rock)),
 		blockShipMetal1 = (new HookedBlock(Material.iron)),
 		blockShipMetal2 = (new HookedBlock(Material.iron)),
@@ -79,8 +78,8 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockIndustrialGlass = (new HookedBlock(Material.iron)).setOpaque(false).setRenderNormal(false).setHardness(3.5F).setResistance(2.0F).setLightOpacity(0),
 		blockIndustrialGlassSlab = (new HookedBlockSlab(Material.iron)).setOpaque(false).setHardness(3.5F).setResistance(2.0F).setLightOpacity(0),
 		blockIndustrialGlassStairs = (new HookedBlockStairs(blockIndustrialGlass)).setOpaque(false).setHardness(3.5F).setResistance(2.0F).setLightOpacity(0),
-		terrainUniDirt = (new HookedBlock(Material.ground)).setOpaque(true).setHardness(0.5F).setResistance(2.0F),
-		terrainUniStone = (new HookedBlock(Material.rock)).setOpaque(true).setHardness(1.3F).setResistance(2.0F),
+		terrainUniDirt = (new HookedBlock(Material.ground)).setHardness(0.5F).setResistance(2.0F),
+		terrainUniStone = (new HookedBlock(Material.rock)).setHardness(1.3F).setResistance(2.0F),
 		terrainUniSand = (new HookedBlock(Material.sand)).setHardness(3.5F).setResistance(2.0F),
 		terrainUniGravel = (new HookedBlock(Material.sand)).setHardness(3.0F),
 		terrainStalagmite = (new BlockStalagmite(Material.plants)).setHardness(0.0F).setLightOpacity(0),
@@ -125,13 +124,13 @@ public class BlockHandler extends IBHandler implements IInitializable
 		{
 			HookedBlock blockParentHook = (HookedBlock) blockParent;
 			HookedBlock blockBaseHook = (HookedBlock) block;
-			HookedBlock blockSlope = ((HookedBlock) (new BlockShape(blockBaseHook.getMaterial(), ShapeTypes.SLOPE)).setIconSet(blockParentHook.getIconSet()).setResistance(blockBaseHook.getResistance()).setHardness(blockBaseHook.getHardness()).setLightOpacity(blockBaseHook.getLightOpacity())).setRenderNormal(blockBaseHook.renderAsNormalBlock()).setOpaque(blockBaseHook.isOpaqueCube());
-			HookedBlock blockCorner = ((HookedBlock) (new BlockShape(blockBaseHook.getMaterial(), ShapeTypes.CORNER)).setIconSet(blockParentHook.getIconSet()).setResistance(blockBaseHook.getResistance()).setHardness(blockBaseHook.getHardness()).setLightOpacity(blockBaseHook.getLightOpacity())).setRenderNormal(blockBaseHook.renderAsNormalBlock()).setOpaque(blockBaseHook.isOpaqueCube());
-			HookedBlock blockInvertedCorner = ((HookedBlock) (new BlockShape(blockBaseHook.getMaterial(), ShapeTypes.INVERTED_CORNER)).setIconSet(blockParentHook.getIconSet()).setResistance(blockBaseHook.getResistance()).setHardness(blockBaseHook.getHardness()).setLightOpacity(blockBaseHook.getLightOpacity())).setRenderNormal(blockBaseHook.renderAsNormalBlock()).setOpaque(blockBaseHook.isOpaqueCube());
-			HookedBlock blockRidge = ((HookedBlock) (new BlockShape(blockBaseHook.getMaterial(), ShapeTypes.RIDGE)).setIconSet(blockParentHook.getIconSet()).setResistance(blockBaseHook.getResistance()).setHardness(blockBaseHook.getHardness()).setLightOpacity(blockBaseHook.getLightOpacity())).setRenderNormal(blockBaseHook.renderAsNormalBlock()).setOpaque(blockBaseHook.isOpaqueCube());
-			HookedBlock blockInvertedRidge = ((HookedBlock) (new BlockShape(blockBaseHook.getMaterial(), ShapeTypes.INVERTED_RIDGE)).setIconSet(blockParentHook.getIconSet()).setResistance(blockBaseHook.getResistance()).setHardness(blockBaseHook.getHardness()).setLightOpacity(blockBaseHook.getLightOpacity())).setRenderNormal(blockBaseHook.renderAsNormalBlock()).setOpaque(blockBaseHook.isOpaqueCube());
-			HookedBlock blockSmartInvertedRidge = ((HookedBlock) (new BlockShape(blockBaseHook.getMaterial(), ShapeTypes.SMART_INVERTED_RIDGE)).setIconSet(blockParentHook.getIconSet()).setResistance(blockBaseHook.getResistance()).setHardness(blockBaseHook.getHardness()).setLightOpacity(blockBaseHook.getLightOpacity())).setRenderNormal(blockBaseHook.renderAsNormalBlock()).setOpaque(blockBaseHook.isOpaqueCube());
-			HookedBlock blockSmartRidge = ((HookedBlock) (new BlockShape(blockBaseHook.getMaterial(), ShapeTypes.SMART_RIDGE)).setIconSet(blockParentHook.getIconSet()).setResistance(blockBaseHook.getResistance()).setHardness(blockBaseHook.getHardness()).setLightOpacity(blockBaseHook.getLightOpacity())).setRenderNormal(blockBaseHook.renderAsNormalBlock()).setOpaque(blockBaseHook.isOpaqueCube());
+			HookedBlock blockSlope = ((HookedBlock) (new BlockShape(blockBaseHook.getMaterial(), ShapeTypes.SLOPE)).setIconSet(blockParentHook.getIconSet()).setResistance(blockBaseHook.getResistance()).setHardness(blockBaseHook.getHardness()).setLightOpacity(blockBaseHook.getLightOpacity()));
+			HookedBlock blockCorner = ((HookedBlock) (new BlockShape(blockBaseHook.getMaterial(), ShapeTypes.CORNER)).setIconSet(blockParentHook.getIconSet()).setResistance(blockBaseHook.getResistance()).setHardness(blockBaseHook.getHardness()).setLightOpacity(blockBaseHook.getLightOpacity()));
+			HookedBlock blockInvertedCorner = ((HookedBlock) (new BlockShape(blockBaseHook.getMaterial(), ShapeTypes.INVERTED_CORNER)).setIconSet(blockParentHook.getIconSet()).setResistance(blockBaseHook.getResistance()).setHardness(blockBaseHook.getHardness()).setLightOpacity(blockBaseHook.getLightOpacity()));
+			HookedBlock blockRidge = ((HookedBlock) (new BlockShape(blockBaseHook.getMaterial(), ShapeTypes.RIDGE)).setIconSet(blockParentHook.getIconSet()).setResistance(blockBaseHook.getResistance()).setHardness(blockBaseHook.getHardness()).setLightOpacity(blockBaseHook.getLightOpacity()));
+			HookedBlock blockInvertedRidge = ((HookedBlock) (new BlockShape(blockBaseHook.getMaterial(), ShapeTypes.INVERTED_RIDGE)).setIconSet(blockParentHook.getIconSet()).setResistance(blockBaseHook.getResistance()).setHardness(blockBaseHook.getHardness()).setLightOpacity(blockBaseHook.getLightOpacity()));
+			HookedBlock blockSmartInvertedRidge = ((HookedBlock) (new BlockShape(blockBaseHook.getMaterial(), ShapeTypes.SMART_INVERTED_RIDGE)).setIconSet(blockParentHook.getIconSet()).setResistance(blockBaseHook.getResistance()).setHardness(blockBaseHook.getHardness()).setLightOpacity(blockBaseHook.getLightOpacity()));
+			HookedBlock blockSmartRidge = ((HookedBlock) (new BlockShape(blockBaseHook.getMaterial(), ShapeTypes.SMART_RIDGE)).setIconSet(blockParentHook.getIconSet()).setResistance(blockBaseHook.getResistance()).setHardness(blockBaseHook.getHardness()).setLightOpacity(blockBaseHook.getLightOpacity()));
 			
 			registerBlock(blockBaseHook, reference, blockParent);
 			registerBlock(blockSlope, reference + ".slope", blockParent);

@@ -5,7 +5,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 
 import com.arisux.airi.lib.WorldUtil;
-import com.arisux.avp.entities.ExtendedEntityPlayer;
+import com.arisux.avp.entities.extended.ExtendedEntityPlayer;
 
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.*;

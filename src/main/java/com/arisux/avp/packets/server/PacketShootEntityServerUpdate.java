@@ -2,7 +2,6 @@ package com.arisux.avp.packets.server;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.DamageSource;
 
 import com.arisux.avp.items.ItemFirearm;
@@ -57,7 +56,7 @@ public class PacketShootEntityServerUpdate implements IMessage, IMessageHandler<
 
 		if (packet.entityId != -1)
 		{
-			EntityLivingBase entity = (EntityLivingBase) ctx.getServerHandler().playerEntity.worldObj.getEntityByID(packet.entityId);
+			Entity entity = ctx.getServerHandler().playerEntity.worldObj.getEntityByID(packet.entityId);
 
 			if (entity != null)
 			{

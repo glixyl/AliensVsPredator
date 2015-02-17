@@ -20,13 +20,13 @@ public class NetworkHandler extends SimpleNetworkWrapper implements IInitializab
 	@Override
 	public void initialize(FMLInitializationEvent event)
 	{
+		this.registerMessage(Side.SERVER, PacketSpawnNukeServerUpdate.class);
 		this.registerMessage(Side.SERVER, PacketOpenWristbracerGUIServerUpdate.class);
 		this.registerMessage(Side.SERVER, PacketInvisiblePlayerServerUpdate.class);
 		this.registerMessage(Side.SERVER, PacketBroadcastRadiusServerUpdate.class);
 		this.registerMessage(Side.SERVER, PacketReloadFirearmServerUpdate.class);
 		this.registerMessage(Side.SERVER, PacketGrenadeLaunchServerUpdate.class);
 		this.registerMessage(Side.SERVER, PacketTurretRemoveTargetUpdate.class);
-		this.registerMessage(Side.SERVER, PacketInfectPlayerServerUpdate.class);
 		this.registerMessage(Side.SERVER, PacketShootEntityServerUpdate.class);
 		this.registerMessage(Side.SERVER, PacketSpawnEntityServerUpdate.class);
 		this.registerMessage(Side.SERVER, PacketTurretAddTargetUpdate.class);

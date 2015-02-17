@@ -13,19 +13,20 @@ import com.arisux.avp.interfaces.IHiveSignature;
 public class EntityQueen extends EntityXenomorph implements IHiveSignature
 {
 	public boolean isInStasis;
-	public float ovipositorSize;
+	private float ovipositorSize;
 
 	public EntityQueen(World var1)
 	{
 		super(var1);
-		this.setSize(1.0F, 8.0F);
+		this.setSize(4.0F, 8.0F);
 		this.isInStasis = true;
 		this.experienceValue = 40000;
 		this.jumpMovementFactor = 0.1F;
 		this.hurtResistantTime = 0;
 		this.ignoreFrustumCheck = true;
-		this.ovipositorSize = 0.0F;
+		this.ovipositorSize = 0F;
 		this.setHiveSignature(this.getUniqueID());
+		this.dataWatcher.addObject(14, this.ovipositorSize);
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
 		this.tasks.addTask(2, new EntityAILeapAtTarget(this, 1F));
@@ -55,14 +56,35 @@ public class EntityQueen extends EntityXenomorph implements IHiveSignature
 	public void onUpdate()
 	{
 		super.onUpdate();
+		
+		this.motionY += -0.5F;
 
 		if (isJumping)
 		{
 			this.addVelocity(0, 0.25D, 0);
 		}
 
-		this.heal(0.2F);
-		this.ovipositorSize = this.ovipositorSize < 1.2F ? this.ovipositorSize += 0.0001F : this.ovipositorSize;
+		if (this.isInStasis)
+		{
+			this.tasks.taskEntries.clear();
+			this.targetTasks.taskEntries.clear();
+			this.ovipositorSize = this.ovipositorSize < 1.2F ? this.ovipositorSize += 0.0001F : this.ovipositorSize;
+		}
+
+		if (this.getHealth() > this.getMaxHealth() - (this.getMaxHealth() / 4))
+		{
+			this.heal(0.3F);
+		}
+
+		if (this.getHealth() > this.getMaxHealth() / 2)
+		{
+			this.heal(0.2F);
+		}
+
+		if (this.getHealth() > this.getMaxHealth() / 4)
+		{
+			this.heal(0.1F);
+		}
 	}
 
 	@Override
@@ -80,7 +102,7 @@ public class EntityQueen extends EntityXenomorph implements IHiveSignature
 	@Override
 	protected String getLivingSound()
 	{
-		return AliensVsPredator.properties().SOUND_QUEEN_LIVING;
+		return this.getHealth() > this.getMaxHealth() / 4 ? AliensVsPredator.properties().SOUND_QUEEN_LIVING + ".constant" : AliensVsPredator.properties().SOUND_QUEEN_LIVING;
 	}
 
 	@Override
@@ -93,13 +115,23 @@ public class EntityQueen extends EntityXenomorph implements IHiveSignature
 	public void readEntityFromNBT(NBTTagCompound nbt)
 	{
 		super.readEntityFromNBT(nbt);
-		this.ovipositorSize = nbt.getFloat("ovipositorSize");
+		this.setOvipositorSize(nbt.getFloat("ovipositorSize"));
 	}
 
 	@Override
 	public void writeEntityToNBT(NBTTagCompound nbt)
 	{
 		super.writeEntityToNBT(nbt);
-		nbt.setFloat("ovipositorSize", this.ovipositorSize);
+		nbt.setFloat("ovipositorSize", this.getOvipositorSize());
+	}
+	
+	public float getOvipositorSize()
+	{
+		return this.dataWatcher.getWatchableObjectFloat(14);
+	}
+	
+	public void setOvipositorSize(float size)
+	{
+		this.dataWatcher.updateObject(14, size);
 	}
 }

@@ -5,7 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 
 import com.arisux.airi.lib.WorldUtil;
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.entities.ExtendedEntityPlayer;
+import com.arisux.avp.entities.extended.ExtendedEntityPlayer;
 import com.arisux.avp.packets.client.PacketBroadcastRadiusClientUpdate;
 
 import cpw.mods.fml.common.network.ByteBufUtils;

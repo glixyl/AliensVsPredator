@@ -8,7 +8,7 @@ import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.common.DimensionManager;
 
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.event.action.StormUpdateEvent;
+import com.arisux.avp.event.StormUpdateEvent;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

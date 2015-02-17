@@ -1,4 +1,4 @@
-package com.arisux.avp.event.render;
+package com.arisux.avp.event.client;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -14,6 +14,7 @@ import com.arisux.airi.lib.*;
 import com.arisux.airi.lib.WorldUtil.Blocks;
 import com.arisux.airi.lib.enums.BlockSides;
 import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.entities.extended.ExtendedEntityLivingBase;
 import com.arisux.avp.entities.mob.*;
 import com.arisux.avp.entities.tile.PoweredTileEntity;
 import com.arisux.avp.entities.tile.TileEntityStasisMechanism;
@@ -79,6 +80,7 @@ public class DebugToolsRenderEvent
 
 								if (entity instanceof EntityLiving)
 								{
+
 									fontrenderer.drawStringWithShadow("AttackTarget: " + ((EntityLiving) entity).getAttackTarget(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
 									fontrenderer.drawStringWithShadow("AttackTarget(Distance): " + (((EntityLiving) entity).getAttackTarget() != null ? entity.getDistanceToEntity(((EntityLiving) entity).getAttackTarget()) : 0), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
 									fontrenderer.drawStringWithShadow("LastAttacked: " + ((EntityLiving) entity).getLastAttackerTime(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
@@ -89,7 +91,11 @@ public class DebugToolsRenderEvent
 
 								if (entity instanceof EntityLivingBase)
 								{
-									fontrenderer.drawStringWithShadow("Age: " + ((EntityLivingBase) entity).getAge(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
+									EntityLivingBase entityLiving = (EntityLivingBase) entity;
+									ExtendedEntityLivingBase extendedLiving = (ExtendedEntityLivingBase) entityLiving.getExtendedProperties(ExtendedEntityLivingBase.IDENTIFIER);
+
+									fontrenderer.drawStringWithShadow("Age: " + entityLiving.getAge(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
+									fontrenderer.drawStringWithShadow("HostParasiteType: " + extendedLiving.getHostParasiteType().getParasiteType().getSimpleName(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
 								}
 
 								if (entity instanceof EntitySpeciesAlien)
@@ -97,17 +103,22 @@ public class DebugToolsRenderEvent
 									fontrenderer.drawStringWithShadow("Kills: " + ((EntitySpeciesAlien) entity).getKilledEntities(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
 									fontrenderer.drawStringWithShadow("HiveSignature: " + ((EntitySpeciesAlien) entity).getHiveSignature(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
 								}
-								
+
 								if (entity instanceof EntityXenomorph)
 								{
-									fontrenderer.drawStringWithShadow("BesideClimbableBlock: " + ((EntityXenomorph) entity).isBesideClimbableBlock(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
+									;
 								}
-								
+
+								if (entity instanceof EntityDrone)
+								{
+									fontrenderer.drawStringWithShadow("ResinLevel: " + ((EntityDrone) entity).getResinLevel(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
+								}
+
 								if (entity instanceof EntityChestburster)
 								{
 									fontrenderer.drawStringWithShadow("Parasite Age: " + ((EntityChestburster) entity).ticksExisted + "/" + ((EntityChestburster) entity).getMaxParasiteAge(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
 								}
-								
+
 								if (entity instanceof EntityMarine)
 								{
 									fontrenderer.drawStringWithShadow("Type: " + ((EntityMarine) entity).getMarineType(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);

@@ -1,4 +1,4 @@
-package com.arisux.avp.event.render;
+package com.arisux.avp.event.client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;

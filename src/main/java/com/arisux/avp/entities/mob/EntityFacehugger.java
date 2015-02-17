@@ -1,11 +1,15 @@
 package com.arisux.avp.entities.mob;
 
+import java.util.ArrayList;
+
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -13,15 +17,18 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+import com.arisux.airi.lib.WorldUtil;
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.entities.ExtendedEntityPlayer;
-import com.arisux.avp.util.HostParasiteTypes;
+import com.arisux.avp.entities.extended.ExtendedEntityLivingBase;
 
 public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 {
+	private boolean isFertile;
+	
 	public EntityFacehugger(World world)
 	{
 		super(world);
+		this.isFertile = true;
 		this.setSize(0.9F, 0.9F);
 		this.experienceValue = 10;
 		this.tasks.addTask(0, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.8999999761581421D, false));
@@ -61,19 +68,34 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 	public void onUpdate()
 	{
 		super.onUpdate();
+		
+		ArrayList<EntityItem> entityItemList = (ArrayList<EntityItem>) WorldUtil.Entities.getEntitiesInCoordsRange(worldObj, EntityItem.class, new com.arisux.airi.lib.WorldUtil.Blocks.CoordData(this), 8);
+
+		for (EntityItem entityItem : entityItemList)
+		{
+			if (entityItem.delayBeforeCanPickup <= 0)
+			{
+				ItemStack stack = entityItem.getDataWatcher().getWatchableObjectItemStack(10);
+
+				if (stack.getItem() == AliensVsPredator.instance().items.itemRoyalJelly)
+				{
+					this.getNavigator().setPath(this.getNavigator().getPathToEntityLiving(entityItem), 1);
+
+					if (this.getDistanceToEntity(entityItem) < 1)
+					{
+						this.isFertile = true;
+						entityItem.setDead();
+					}
+					break;
+				}
+			}
+		}
 	}
 
 	@Override
 	public void onCollideWithPlayer(EntityPlayer p_70100_1_)
 	{
 		super.onCollideWithPlayer(p_70100_1_);
-
-		ExtendedEntityPlayer playerProperties = (ExtendedEntityPlayer) p_70100_1_.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER);
-
-		if (!playerProperties.isPlayerImpregnated() && !p_70100_1_.capabilities.isCreativeMode)
-		{
-			playerProperties.setPlayerImpregnated(true);
-		}
 	}
 
 	@Override
@@ -95,21 +117,39 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 	@Override
 	public void collideWithEntity(Entity entity)
 	{
-		if (!this.worldObj.isRemote && entity.riddenByEntity == null)
+		if (this.isFertile && entity instanceof EntityLivingBase)
 		{
-			if (entity instanceof EntityPlayer)
+			EntityLivingBase entityLiving = (EntityLivingBase) entity;
+			ExtendedEntityLivingBase extendedLiving = (ExtendedEntityLivingBase) entityLiving.getExtendedProperties(ExtendedEntityLivingBase.IDENTIFIER);
+
+			if (entityLiving instanceof EntityPlayer)
 			{
-				if (!((EntityPlayer) entity).capabilities.isCreativeMode)
+				if (!((EntityPlayer) entityLiving).capabilities.isCreativeMode)
 				{
-					this.mountEntity(entity);
+					this.mountEntity(entityLiving);
+					extendedLiving.setContainsEmbryo(true);
+					this.isFertile = false;
 				}
 			}
-
-			if (entity instanceof EntityMarine)
+			else
 			{
 				this.mountEntity(entity);
+				extendedLiving.setContainsEmbryo(true);
+				this.isFertile = false;
 			}
 		}
+	}
+	
+	@Override
+	public boolean attackEntityAsMob(Entity entity)
+	{
+		return false;
+	}
+	
+	@Override
+	public boolean attackEntityFrom(DamageSource damagesource, float damage)
+	{
+		return super.attackEntityFrom(damagesource, damage);
 	}
 
 	@Override
@@ -132,12 +172,12 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 	@Override
 	public double getYOffset()
 	{
-		if (this.ridingEntity instanceof EntityPlayer)
+		if (this.ridingEntity instanceof EntityPlayer || this.ridingEntity instanceof EntityMarine)
 		{
-			return -1.3D;
+			return 0.2D;
 		}
 
-		return 0.5D;
+		return 0.3D;
 	}
 
 	@Override
@@ -155,29 +195,13 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 	@Override
 	protected boolean canDespawn()
 	{
-		return true;
+		return false;
 	}
 
 	@Override
 	protected void attackEntity(Entity entity, float attackStrength)
 	{
-		if (attackStrength > 2.0F && attackStrength < 6.0F && this.rand.nextInt(50) == 0)
-		{
-			if (this.onGround)
-			{
-				this.jump();
-				double var4 = entity.posX - this.posX;
-				double var6 = entity.posZ - this.posZ;
-				float var8 = MathHelper.sqrt_double(var4 * var4 + var6 * var6);
-				this.motionX = var4 / var8 * 0.5D * 0.800000011920929D + this.motionX * 0.20000000298023224D;
-				this.motionZ = var6 / var8 * 0.5D * 0.800000011920929D + this.motionZ * 0.20000000298023224D;
-				this.motionY = 0.4000000059604645D;
-			}
-		}
-		else
-		{
-			super.attackEntity(entity, attackStrength);
-		}
+		;
 	}
 
 	@Override
@@ -208,15 +232,19 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 	public void onKillEntity(EntityLivingBase host)
 	{
 		super.onKillEntity(host);
-
-		if (!this.worldObj.isRemote)
-		{
-			EntityChestburster chestburster = new EntityChestburster(this.worldObj);
-			
-			chestburster.setHostParasiteType(HostParasiteTypes.getTypeForHost(host.getClass()));
-			chestburster.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
-			this.worldObj.spawnEntityInWorld(chestburster);
-			this.setDead();
-		}
+	}
+	
+	@Override
+	public void readFromNBT(NBTTagCompound nbt)
+	{
+		super.readFromNBT(nbt);
+		this.isFertile = nbt.getBoolean("fertile");
+	}
+	
+	@Override
+	public void writeToNBT(NBTTagCompound nbt)
+	{
+		super.writeToNBT(nbt);
+		nbt.setBoolean("fertile", this.isFertile);
 	}
 }

@@ -11,12 +11,12 @@ import com.arisux.avp.entities.EntityAcidPool;
 
 public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 {
-	protected EntityQueen targetQueen;
+	public int targetQueenId;
 
 	public EntityXenomorph(World world)
 	{
 		super(world);
-		this.jumpMovementFactor = 0.1F;
+		this.jumpMovementFactor = 0.03F;
 	}
 
 	@Override
@@ -30,41 +30,18 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 	protected void entityInit()
 	{
 		super.entityInit();
-		this.dataWatcher.addObject(16, new Byte((byte) 0));
 	}
 
 	@Override
 	protected boolean canDespawn()
 	{
-		return super.canDespawn();
+		return false;
 	}
 
 	@Override
 	protected boolean isAIEnabled()
 	{
-		return super.isAIEnabled();
-	}
-
-	@Override
-	public boolean isOnLadder()
-	{
-		return this.isBesideClimbableBlock();
-	}
-
-	public void setBesideClimbableBlock(boolean climbable)
-	{
-		byte byteClimbing = this.dataWatcher.getWatchableObjectByte(16);
-
-		if (climbable)
-		{
-			byteClimbing = (byte) (byteClimbing | 1);
-		}
-		else
-		{
-			byteClimbing &= -2;
-		}
-
-		this.dataWatcher.updateObject(16, Byte.valueOf(byteClimbing));
+		return true;
 	}
 
 	@Override
@@ -72,7 +49,46 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 	{
 		super.onUpdate();
 
-		if (worldObj.getWorldInfo().getWorldTime() % 70L == 0L)
+		this.fallDistance = 0F;
+
+		if (this.isCollidedHorizontally)
+		{
+			this.motionY += 0.2F;
+		}
+
+		EntityQueen targetQueen = (EntityQueen) this.worldObj.getEntityByID(this.targetQueenId);
+
+		if (targetQueen == null || targetQueen != null && targetQueen.isDead)
+		{
+			EntityQueen queen = (EntityQueen) WorldUtil.Entities.getEntityInCoordsRange(this.worldObj, EntityQueen.class, new Blocks.CoordData(this), 128, 64);
+			targetQueen = queen;
+		}
+
+		if (targetQueen == null || targetQueen != null && targetQueen.isDead)
+		{
+			this.targetQueenId = 0;
+			this.setHiveSignature(null);
+		}
+
+		if (targetQueen != null)
+		{
+			this.acquireHiveSignature(targetQueen);
+
+			if (!this.worldObj.isRemote)
+			{
+				if (this.getNavigator().getPath() == null)
+				{
+					this.getNavigator().setPath(this.worldObj.getPathEntityToEntity(this, targetQueen, 128, true, true, true, true), 0.8D);
+				}
+
+				if (targetQueen.getHealth() < targetQueen.getMaxHealth() / 4)
+				{
+					this.setAttackTarget(targetQueen.getLastAttacker());
+				}
+			}
+		}
+
+		if (worldObj.getWorldInfo().getWorldTime() % 70 == 0)
 		{
 			double range = this.getEntityAttribute(SharedMonsterAttributes.followRange).getAttributeValue();
 			Entity targetEntity = (this.worldObj.findNearestEntityWithinAABB(EntityLiving.class, this.boundingBox.expand(range * 2, 64.0D, range * 2), this));
@@ -93,42 +109,27 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 			{
 				this.setAttackTarget((EntityLivingBase) targetEntity);
 			}
-		}
-
-		this.acquireHiveSignature();
-	}
-
-	public void acquireHiveSignature()
-	{
-		if (this.getHiveSignature() == null)
-		{
-			if (this.targetQueen != null)
-			{
-				if (!this.targetQueen.isDead)
-				{
-					if (this.worldObj.getWorldTime() % 20 <= 0)
-					{
-						this.getNavigator().tryMoveToEntityLiving(this.targetQueen, this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue() * 2.5D);
-					}
-					if (this.getDistanceToEntity(this.targetQueen) <= 15)
-					{
-						this.setHiveSignature(this.targetQueen.getUniqueID());
-					}
-				}
-				else
-				{
-					this.targetQueen = null;
-				}
-			}
 			else
 			{
-				this.targetQueen = (EntityQueen) WorldUtil.Entities.getEntityInCoordsRange(this.worldObj, EntityQueen.class, new Blocks.CoordData(this), 128, 128);
+				this.setAttackTarget(null);
 			}
 		}
 	}
 
-	public boolean isBesideClimbableBlock()
+	public void acquireHiveSignature(EntityQueen targetQueen)
 	{
-		return (this.dataWatcher.getWatchableObjectByte(16) & 1) != 0;
+		this.targetQueenId = targetQueen.getEntityId();
+
+		if (this.getHiveSignature() == null)
+		{
+			if (this.worldObj.getWorldTime() % 40 == 0)
+			{
+				this.getNavigator().tryMoveToEntityLiving(targetQueen, 1.8D);
+			}
+			if (this.getDistanceToEntity(targetQueen) <= 16)
+			{
+				this.setHiveSignature(targetQueen.getUniqueID());
+			}
+		}
 	}
 }

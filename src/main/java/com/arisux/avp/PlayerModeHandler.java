@@ -12,7 +12,7 @@ import net.minecraftforge.event.entity.player.PlayerPickupXpEvent;
 import com.arisux.airi.lib.WorldUtil.Entities.Players;
 import com.arisux.airi.lib.client.ModelTexMap;
 import com.arisux.airi.lib.interfaces.IInitializable;
-import com.arisux.avp.entities.ExtendedEntityPlayer;
+import com.arisux.avp.entities.extended.ExtendedEntityPlayer;
 import com.arisux.avp.entities.mob.model.*;
 import com.arisux.avp.util.LevelData;
 import com.arisux.avp.util.PlayerMode;

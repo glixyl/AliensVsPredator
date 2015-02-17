@@ -13,7 +13,7 @@ import net.minecraft.util.*;
 import net.minecraft.world.World;
 
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.damagesource.DamageSourceShuriken;
+import com.arisux.avp.DamageSources;
 
 public class EntityShuriken extends Entity
 {
@@ -226,18 +226,18 @@ public class EntityShuriken extends Entity
 						var23 += this.rand.nextInt(var23 / 2 + 2);
 					}
 
-					DamageSource var21 = null;
+					DamageSource damagesource = null;
 
 					if (this.shootingEntity == null)
 					{
-						var21 = DamageSourceShuriken.causeSpearDamage(this, this);
+						damagesource = DamageSources.causeShurikenDamage(this, this);
 					}
 					else
 					{
-						var21 = DamageSourceShuriken.causeSpearDamage(this, this.shootingEntity);
+						damagesource = DamageSources.causeShurikenDamage(this, this.shootingEntity);
 					}
 
-					if (movingobjectposition.entityHit.attackEntityFrom(var21, var23))
+					if (movingobjectposition.entityHit.attackEntityFrom(damagesource, var23))
 					{
 						if (movingobjectposition.entityHit instanceof EntityLivingBase)
 						{

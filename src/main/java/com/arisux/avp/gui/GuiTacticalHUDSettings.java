@@ -9,8 +9,8 @@ import com.arisux.airi.lib.GuiElements.GuiCustomTextbox;
 import com.arisux.airi.lib.*;
 import com.arisux.airi.lib.interfaces.IActionPerformed;
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.entities.ExtendedEntityPlayer;
-import com.arisux.avp.event.render.TacticalHUDRenderEvent;
+import com.arisux.avp.entities.extended.ExtendedEntityPlayer;
+import com.arisux.avp.event.client.TacticalHUDRenderEvent;
 import com.arisux.avp.packets.server.PacketBroadcastRadiusServerUpdate;
 import com.arisux.avp.packets.server.PacketChannelServerUpdate;
 

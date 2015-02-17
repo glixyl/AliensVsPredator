@@ -1,18 +1,23 @@
 package com.arisux.avp.entities.mob;
 
+import java.util.ArrayList;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+import com.arisux.airi.lib.WorldUtil;
 import com.arisux.airi.lib.WorldUtil.Entities;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.util.HostParasiteTypes;
@@ -74,6 +79,28 @@ public class EntityChestburster extends EntitySpeciesAlien implements IMob
 	public void onUpdate()
 	{
 		super.onUpdate();
+		
+		ArrayList<EntityItem> entityItemList = (ArrayList<EntityItem>) WorldUtil.Entities.getEntitiesInCoordsRange(worldObj, EntityItem.class, new com.arisux.airi.lib.WorldUtil.Blocks.CoordData(this), 8);
+
+		for (EntityItem entityItem : entityItemList)
+		{
+			if (entityItem.delayBeforeCanPickup <= 0)
+			{
+				ItemStack stack = entityItem.getDataWatcher().getWatchableObjectItemStack(10);
+
+				if (stack.getItem() == AliensVsPredator.instance().items.itemRoyalJelly)
+				{
+					this.getNavigator().setPath(this.getNavigator().getPathToEntityLiving(entityItem), 1);
+
+					if (this.getDistanceToEntity(entityItem) < 1)
+					{
+						this.ticksExisted += 1000;
+						entityItem.setDead();
+					}
+					break;
+				}
+			}
+		}
 		
 		if (!this.worldObj.isRemote)
 		{

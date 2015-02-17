@@ -1,4 +1,4 @@
-package com.arisux.avp.event.action;
+package com.arisux.avp.event;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
@@ -13,7 +13,7 @@ public class StormUpdateEvent
 	private int cloudTickCounter = 0;
 
 	@SubscribeEvent
-	public void onClientTick(TickEvent.WorldTickEvent event)
+	public void onWorldTick(TickEvent.WorldTickEvent event)
 	{
 		this.updateStorm();
 		this.updateClouds(event.world);

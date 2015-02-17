@@ -1,4 +1,4 @@
-package com.arisux.avp.event.action;
+package com.arisux.avp.event.client;
 
 import net.minecraft.client.Minecraft;
 

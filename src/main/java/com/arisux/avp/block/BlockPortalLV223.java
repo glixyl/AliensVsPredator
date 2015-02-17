@@ -42,17 +42,7 @@ public class BlockPortalLV223 extends BlockBreakable
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess var1, int var2, int var3, int var4)
 	{
-		if ((var1.getBlock(var2 - 1, var3, var4) != this) && (var1.getBlock(var2 + 1, var3, var4) != this))
-		{
-			float var5 = 0.125F;
-			float var6 = 0.5F;
-			setBlockBounds(0.5F - var5, 0.0F, 0.5F - var6, 0.5F + var5, 1.0F, 0.5F + var6);
-		} else
-		{
-			float var5 = 0.5F;
-			float var6 = 0.125F;
-			setBlockBounds(0.5F - var5, 0.0F, 0.5F - var6, 0.5F + var5, 1.0F, 0.5F + var6);
-		}
+		super.setBlockBoundsBasedOnState(var1, var2, var3, var4);
 	}
 
 	@Override
@@ -79,31 +69,31 @@ public class BlockPortalLV223 extends BlockBreakable
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World var1, int var2, int var3, int var4, Entity var5)
+	public void onEntityCollidedWithBlock(World world, int posX, int posY, int posZ, Entity entity)
 	{
-		if ((var5.ridingEntity == null) && (var5.riddenByEntity == null) && ((var5 instanceof EntityPlayerMP)))
+		if ((entity.ridingEntity == null) && (entity.riddenByEntity == null) && ((entity instanceof EntityPlayerMP)))
 		{
-			EntityPlayerMP var6 = (EntityPlayerMP) var5;
-			MinecraftServer var7 = MinecraftServer.getServer();
+			EntityPlayerMP player = (EntityPlayerMP) entity;
+			MinecraftServer server = MinecraftServer.getServer();
 
-			if (var6.timeUntilPortal > 0)
+			if (player.timeUntilPortal > 0)
 			{
-				var6.timeUntilPortal = 10;
-			} else if (var6.dimension != AliensVsPredator.properties().DIMENSION_ID_LV223)
+				player.timeUntilPortal = 10;
+			} else if (player.dimension != AliensVsPredator.properties().DIMENSION_ID_LV223)
 			{
-				var6.timeUntilPortal = 10;
-				var6.mcServer.getConfigurationManager().transferPlayerToDimension(var6, AliensVsPredator.properties().DIMENSION_ID_LV223, new TeleporterVarda(var7.worldServerForDimension(AliensVsPredator.properties().DIMENSION_ID_LV223)));
+				player.timeUntilPortal = 10;
+				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, AliensVsPredator.properties().DIMENSION_ID_LV223, new TeleporterVarda(server.worldServerForDimension(AliensVsPredator.properties().DIMENSION_ID_LV223)));
 			} else
 			{
-				var6.timeUntilPortal = 10;
-				var6.mcServer.getConfigurationManager().transferPlayerToDimension(var6, 0, new TeleporterVarda(var7.worldServerForDimension(1)));
+				player.timeUntilPortal = 10;
+				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, 0, new TeleporterVarda(server.worldServerForDimension(1)));
 			}
 		}
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess var1, int var2, int var3, int var4, int var5)
+	public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int posX, int posY, int posZ, int side)
 	{
 		return true;
 	}
@@ -117,12 +107,9 @@ public class BlockPortalLV223 extends BlockBreakable
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(World var1, int var2, int var3, int var4, Random var5)
+	public void randomDisplayTick(World world, int posX, int posY, int posZ, Random rand)
 	{
-		if (var5.nextInt(100) == 0)
-		{
-			var1.playSoundEffect(var2 + 0.5D, var3 + 0.5D, var4 + 0.5D, "portal.portal", 0.5F, var5.nextFloat() * 0.4F + 0.8F);
-		}
+		;
 	}
 
 	@Override

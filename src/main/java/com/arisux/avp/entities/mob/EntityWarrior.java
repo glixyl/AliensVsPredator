@@ -45,7 +45,7 @@ public class EntityWarrior extends EntityXenomorph implements IMob
 	{
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(50.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.35D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
 	}

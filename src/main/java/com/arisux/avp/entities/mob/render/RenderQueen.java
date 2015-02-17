@@ -59,6 +59,7 @@ public class RenderQueen extends RenderLiving
 				}
 				GL11.glRotatef(180, 0, 1, 0);
 			}
+			RenderUtil.glEnableLight();
 		}
 		GL11.glPopMatrix();
 	}

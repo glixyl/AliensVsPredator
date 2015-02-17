@@ -9,7 +9,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-import com.arisux.avp.damagesource.DamageSourceAcid;
+import com.arisux.avp.DamageSources;
 import com.arisux.avp.entities.ai.EntityAIMeltBlock;
 import com.arisux.avp.entities.mob.EntitySpeciesAlien;
 
@@ -119,7 +119,7 @@ public class EntityAcidPool extends EntityCreature implements IMob
 			if (target != null && isAcceptableTarget(target))
 			{
 				this.setAttackTarget(target);
-				target.attackEntityFrom(DamageSourceAcid.causeAcidicDamage(this, target), 4F);
+				target.attackEntityFrom(DamageSources.causeAcidicDamage(this, target), 4F);
 			}
 		}
 

@@ -1,4 +1,4 @@
-package com.arisux.avp.event.render;
+package com.arisux.avp.event.client;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,7 +17,8 @@ import com.arisux.airi.lib.GuiElements.GuiCustomButton;
 import com.arisux.airi.lib.*;
 import com.arisux.airi.lib.interfaces.IActionPerformed;
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.entities.ExtendedEntityPlayer;
+import com.arisux.avp.entities.extended.ExtendedEntityLivingBase;
+import com.arisux.avp.entities.extended.ExtendedEntityPlayer;
 import com.arisux.avp.gui.GuiTacticalHUDSettings;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -114,16 +115,18 @@ public class TacticalHUDRenderEvent
 		RenderUtil.drawStringAlignCenter("[" + mc.thePlayer.getCommandSenderName() + "] " + date + " [" + viewportThreshold + "/" + playersInHUD.size() + " players R->" + this.getProperties().getBroadcastRadius() + "@" + this.getProperties().getBroadcastChannel() + "]", RenderUtil.scaledDisplayResolution().getScaledWidth() / 2, 10, 0xFFFFFFFF);
 	}
 
-	public void drawImpregnationIndicator(ExtendedEntityPlayer clientPlayerProperties)
+	public void drawImpregnationIndicator(ExtendedEntityPlayer playerProperties)
 	{
-		if (clientPlayerProperties.isPlayerImpregnated())
+		ExtendedEntityLivingBase livingProperties = ExtendedEntityLivingBase.get(playerProperties.getPlayer());
+		
+		if (livingProperties.doesEntityContainEmbryo())
 		{
-			int lifeTimeTicks = clientPlayerProperties.getImpregnatedTime();
-			int lifeTimeSeconds = lifeTimeTicks / (20 * 4);
+			int lifeTimeTicks = livingProperties.getMaxEmbryoAge() - livingProperties.getEmbryoAge();
+			int lifeTimeSeconds = lifeTimeTicks / 20;
 
 			// TODO: Infection notification
-			RenderUtil.drawString("Remaining Life Time: " + lifeTimeTicks, 10, 40, 0xFFFF0000);
-			RenderUtil.drawString("Remaining Life Time: " + lifeTimeSeconds, 10, 50, 0xFFFF0000);
+			RenderUtil.drawString("Life Expectancy: " + lifeTimeTicks + " (" + lifeTimeSeconds + " Seconds)", 10, 40, 0xFFFF0000);
+			RenderUtil.drawString("Life Expectancy: " + lifeTimeSeconds, 10, 50, 0xFFFF0000);
 		}
 	}
 

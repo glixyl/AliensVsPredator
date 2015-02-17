@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.arisux.airi.lib.interfaces.IInitializable;
-import com.arisux.avp.event.action.*;
-import com.arisux.avp.event.render.*;
+import com.arisux.avp.event.*;
+import com.arisux.avp.event.client.*;
 import com.arisux.avp.event.server.EventDimensionInitialization;
 import com.arisux.avp.items.render.RenderMotionTrackerScreen;
 
@@ -25,10 +25,9 @@ public class LocalEventHandler implements IInitializable
 		if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
 		{
 			this.registerEvent(new AlienArmorEvents());
-			this.registerEvent(new AlienEmergeEvent());
+			this.registerEvent(new ChestbursterOverlayEvent());
 			this.registerEvent(new CommonFirearmEvents());
 			this.registerEvent(new PlayerModeRenderEvent());
-			this.registerEvent(new BossHealthIndicatorRenderEvent());
 			this.registerEvent(new AmmoIndicatorRenderEvent());
 			this.registerEvent(new DebugToolsRenderEvent());
 			this.registerEvent(new TacticalHUDRenderEvent());
@@ -36,14 +35,19 @@ public class LocalEventHandler implements IInitializable
 			this.registerEvent(new VisionModeRenderEvent());
 			this.registerEvent(new RenderMotionTrackerScreen());
 			this.registerEvent(new LightmapUpdateEvent());
-			this.registerEvent(new BetaReleaseEvents());
+			this.registerEvent(new UserInterfaceEvents());
 			this.registerEvent(new PulseRifleEvents());
 			this.registerEvent(new WristBracerEvents());
-			this.registerEvent(new StormUpdateEvent());
 		}
 
-		this.registerEvent(new EventDimensionInitialization());
-		this.registerEvent(new PlayerPropertiesEvents());
+		if (FMLCommonHandler.instance().getSide() == Side.SERVER)
+		{
+			this.registerEvent(new EventDimensionInitialization());
+		}
+
+		this.registerEvent(new EmbryoTickEvent());
+		this.registerEvent(new StormUpdateEvent());
+		this.registerEvent(new ExtendedPropertiesEvents());
 	}
 
 	public void registerEvent(Object event)
@@ -67,7 +71,7 @@ public class LocalEventHandler implements IInitializable
 
 		return event;
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	public LightmapUpdateEvent getLightmapUpdateEvent()
 	{

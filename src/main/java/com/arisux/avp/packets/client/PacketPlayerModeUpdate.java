@@ -3,7 +3,7 @@ package com.arisux.avp.packets.client;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 
-import com.arisux.avp.entities.ExtendedEntityPlayer;
+import com.arisux.avp.entities.extended.ExtendedEntityPlayer;
 import com.arisux.avp.util.PlayerMode;
 
 import cpw.mods.fml.common.network.simpleimpl.*;

@@ -1,4 +1,4 @@
-package com.arisux.avp.block.render.special;
+package com.arisux.avp.block;
 
 import java.util.List;
 
@@ -76,9 +76,7 @@ public class BlockShape extends HookedBlock
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack stack)
 	{
-		int angle = placementRotation(player);
-		System.out.println(angle);
-		world.setBlockMetadataWithNotify(x, y, z, angle, 3);
+		world.setBlockMetadataWithNotify(x, y, z, placementRotation(player), 3);
 	}
 
 	@Override
