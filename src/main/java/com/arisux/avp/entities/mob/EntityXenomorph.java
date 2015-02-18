@@ -56,7 +56,8 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 			this.motionY += 0.2F;
 		}
 
-		EntityQueen targetQueen = (EntityQueen) this.worldObj.getEntityByID(this.targetQueenId);
+		Entity entity = this.worldObj.getEntityByID(this.targetQueenId);
+		EntityQueen targetQueen = entity instanceof EntityQueen ? (EntityQueen) this.worldObj.getEntityByID(this.targetQueenId) : null;
 
 		if (targetQueen == null || targetQueen != null && targetQueen.isDead)
 		{
