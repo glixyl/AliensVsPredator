@@ -26,7 +26,7 @@ public class RenderXenomorph extends RenderLiving
 	{
 		EntityXenomorph xenomorph = (EntityXenomorph) entity;
 
-		if (xenomorph instanceof EntityXenomorph && !ModUtil.isDevEnvironment())
+		if (xenomorph instanceof EntityXenomorph && ModUtil.isDevEnvironment())
 		{
 			GL11.glPushMatrix();
 			GL11.glTranslated(posX - 1, posY + 3, posZ);
