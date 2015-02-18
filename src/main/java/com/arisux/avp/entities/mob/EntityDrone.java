@@ -118,7 +118,7 @@ public class EntityDrone extends EntityXenomorph
 			{
 				ItemStack stack = entityItem.getDataWatcher().getWatchableObjectItemStack(10);
 
-				if (stack.getItem() == AliensVsPredator.instance().items.itemRoyalJelly)
+				if (stack != null && stack.getItem() == AliensVsPredator.instance().items.itemRoyalJelly)
 				{
 					this.getNavigator().setPath(this.getNavigator().getPathToEntityLiving(entityItem), 1);
 
