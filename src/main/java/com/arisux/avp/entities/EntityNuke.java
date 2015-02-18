@@ -47,7 +47,7 @@ public class EntityNuke extends EntityThrowable
 		{
 			if (AliensVsPredator.instance().settings.areExplosionsEnabled())
 			{
-				WorldUtil.createThreadedExplosion((Entity) null, worldObj, (int) this.posX, (int) this.posY, (int) this.posZ, 47F);
+				WorldUtil.createCustomExplosion((Entity) null, worldObj, (int) this.posX, (int) this.posY, (int) this.posZ, 47F);
 			}
 
 			this.setDead();

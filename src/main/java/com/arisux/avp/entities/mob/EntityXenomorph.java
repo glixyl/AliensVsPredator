@@ -56,35 +56,38 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 			this.motionY += 0.2F;
 		}
 
-		Entity entity = this.worldObj.getEntityByID(this.targetQueenId);
-		EntityQueen targetQueen = entity instanceof EntityQueen ? (EntityQueen) this.worldObj.getEntityByID(this.targetQueenId) : null;
-
-		if (targetQueen == null || targetQueen != null && targetQueen.isDead)
+		if (this.worldObj.getWorldTime() % 100 == 0 && rand.nextInt(6) == 0)
 		{
-			EntityQueen queen = (EntityQueen) WorldUtil.Entities.getEntityInCoordsRange(this.worldObj, EntityQueen.class, new Blocks.CoordData(this), 128, 64);
-			targetQueen = queen;
-		}
+			Entity entity = this.worldObj.getEntityByID(this.targetQueenId);
+			EntityQueen targetQueen = entity instanceof EntityQueen ? (EntityQueen) this.worldObj.getEntityByID(this.targetQueenId) : null;
 
-		if (targetQueen == null || targetQueen != null && targetQueen.isDead)
-		{
-			this.targetQueenId = 0;
-			this.setHiveSignature(null);
-		}
-
-		if (targetQueen != null)
-		{
-			this.acquireHiveSignature(targetQueen);
-
-			if (!this.worldObj.isRemote)
+			if (targetQueen == null || targetQueen != null && targetQueen.isDead)
 			{
-				if (this.getNavigator().getPath() == null)
-				{
-					this.getNavigator().setPath(this.worldObj.getPathEntityToEntity(this, targetQueen, 128, true, true, true, true), 0.8D);
-				}
+				EntityQueen queen = (EntityQueen) WorldUtil.Entities.getEntityInCoordsRange(this.worldObj, EntityQueen.class, new Blocks.CoordData(this), 64, 64);
+				targetQueen = queen;
+			}
 
-				if (targetQueen.getHealth() < targetQueen.getMaxHealth() / 4)
+			if (targetQueen == null || targetQueen != null && targetQueen.isDead)
+			{
+				this.targetQueenId = 0;
+				this.setHiveSignature(null);
+			}
+
+			if (targetQueen != null)
+			{
+				this.acquireHiveSignature(targetQueen);
+
+				if (!this.worldObj.isRemote)
 				{
-					this.setAttackTarget(targetQueen.getLastAttacker());
+					if (this.getNavigator().getPath() == null)
+					{
+						this.getNavigator().setPath(this.worldObj.getPathEntityToEntity(this, targetQueen, 128, true, true, true, true), 0.8D);
+					}
+
+					if (targetQueen.getHealth() < targetQueen.getMaxHealth() / 4)
+					{
+						this.setAttackTarget(targetQueen.getLastAttacker());
+					}
 				}
 			}
 		}
