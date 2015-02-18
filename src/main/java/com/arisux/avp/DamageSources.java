@@ -14,11 +14,17 @@ public class DamageSources extends DamageSource
     public static DamageSource shuriken = (new DamageSource("shuriken")).setProjectile();
     public static DamageSource spear = (new DamageSource("spear")).setProjectile();
     public static DamageSource plasmacaster = (new DamageSource("plasmacaster")).setProjectile().setMagicDamage().setDamageBypassesArmor();
+    public static DamageSource flamethrower = (new DamageSource("flamethrower")).setProjectile();
 
 	public DamageSources(String source)
 	{
 		super(source);
 	}
+	
+    public static DamageSource causeFlamethrowerDamage(Entity entityFlame, Entity entity)
+    {
+        return (new EntityDamageSourceIndirect(flamethrower.getDamageType(), entityFlame, entity)).setProjectile();
+    }
 	
     public static DamageSource causePlasmaCasterDamage(Entity entityBoomerang, Entity entity)
     {

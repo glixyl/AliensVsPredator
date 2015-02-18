@@ -105,6 +105,7 @@ public class EntityDrone extends EntityXenomorph
 		this.tickHiveBuildingAI();
 	}
 
+	@SuppressWarnings("unchecked")
 	public void tickResinLevelAI()
 	{
 		if (this.rand.nextInt(4) == 0)

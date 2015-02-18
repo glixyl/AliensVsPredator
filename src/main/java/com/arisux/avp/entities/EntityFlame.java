@@ -9,6 +9,7 @@ import net.minecraft.world.World;
 
 import com.arisux.airi.lib.WorldUtil;
 import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
+import com.arisux.avp.DamageSources;
 
 public class EntityFlame extends EntityThrowable
 {
@@ -32,11 +33,12 @@ public class EntityFlame extends EntityThrowable
 
 		if (!this.worldObj.isRemote)
 		{
-			Entity entityHit = WorldUtil.Entities.getEntityInCoordsRange(worldObj, EntityLiving.class, new CoordData(this), 1);
+			Entity entityHit = WorldUtil.Entities.getEntityInCoordsRange(worldObj, EntityLiving.class, new CoordData(this), 1, 1);
 			
 			if (entityHit != null && !entityHit.isImmuneToFire())
 			{
 				entityHit.setFire(10);
+				entityHit.attackEntityFrom(DamageSources.causeFlamethrowerDamage(this, entityHit), 4F);
 			}
 		}
 		
