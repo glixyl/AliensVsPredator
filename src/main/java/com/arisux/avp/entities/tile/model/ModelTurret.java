@@ -168,9 +168,9 @@ public class ModelTurret extends ModelBaseExtension
 	{
 		if (tile != null && tile.getEntity() != null)
 		{
-			float rotationYaw = -tile.getRotationYaw() / (180F / (float) Math.PI);
+			float rotationYaw = (-tile.getRotationYaw() + (tile.getDirection() * 90))/ (180F / (float) Math.PI);
 			float rotationPitch = -tile.getRotationPitch() / (180F / (float) Math.PI);
-
+			
 			barrel.rotateAngleY = rotationYaw;
 			barrel.rotateAngleX = rotationPitch;
 			headBase.rotateAngleY = rotationYaw;

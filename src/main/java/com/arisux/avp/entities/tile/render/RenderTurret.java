@@ -1,5 +1,6 @@
 package com.arisux.avp.entities.tile.render;
 
+import static org.lwjgl.opengl.GL11.glRotatef;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
@@ -25,11 +26,14 @@ public class RenderTurret extends TileEntitySpecialRenderer
 			GL11.glDisable(GL11.GL_CULL_FACE);
 			this.bindTexture(AliensVsPredator.resources().TURRET);
 			GL11.glTranslated(posX + 0.5F, posY + 3.0F, posZ - 0.0F);
+			glRotatef(tile.getDirection() * (-90F), 0F, 1F, 0F);
+
 			GL11.glScalef(2F, -2F, 2F);
-			this.model.render(tile, 0.0625F);
+			this.model.render(tile, RenderUtil.DEFAULT_BOX_TRANSLATION);
 
 			if (tile.isVoltageInOperatingRange())
 			{
+				glRotatef(tile.getDirection() * 90F, 0F, 1F, 0F);
 				this.renderAmmoDisplay(tile);
 
 				if (!tile.isFiring())
