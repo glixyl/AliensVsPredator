@@ -38,6 +38,7 @@ public class EntityHandler implements IInitializable
 		GameRegistry.registerTileEntity(TileEntityBlastdoor.class, "tileEntityBlastdoor");
 		GameRegistry.registerTileEntity(TileEntityWorklight.class, "tileEntityWorklight");
 		GameRegistry.registerTileEntity(TileEntityServer.class, "tileEntityServer");
+		GameRegistry.registerTileEntity(TileEntityCryostasisTube.class, "tileEntityCryostasisTube");
 	}
 
 	private void registerLivingEntities()

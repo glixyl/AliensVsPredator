@@ -117,6 +117,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		bindTileEntitySpecialRenderer(TileEntityBlastdoor.class, new RenderBlastdoor());
 		bindTileEntitySpecialRenderer(TileEntityWorklight.class, new RenderWorklight());
 		bindTileEntitySpecialRenderer(TileEntityServer.class, new RenderServer());
+		bindTileEntitySpecialRenderer(TileEntityCryostasisTube.class, new RenderCryostasisTube());
 	}
 	
 	public void registerSimpleBlockRenderingHandlers()

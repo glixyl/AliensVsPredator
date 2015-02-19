@@ -95,7 +95,8 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockBlastdoor = (new BlockBlastdoor(Material.iron)).setHardness(5F).setResistance(5F),
 		ghostBlockBlastdoor = (new GhostBlock(blockBlastdoor)).setAttributesFrom((HookedBlock) blockBlastdoor),
 		blockWorklight = (new BlockWorklight(Material.iron)).setHardness(3.2F).setResistance(2.6F),
-		blockServer = (new BlockServer(Material.iron)).setHardness(3.2F).setResistance(2.6F);
+		blockServer = (new BlockServer(Material.iron)).setHardness(3.2F).setResistance(2.6F),
+		blockCryostasisTube = (new BlockCryostasisTube(Material.iron)).setHardness(3.2F).setResistance(2.6F);
 
 	public BlockHandler()
 	{
@@ -231,5 +232,6 @@ public class BlockHandler extends IBHandler implements IInitializable
 		registerBlock(ghostBlockBlastdoor, "blastdoorghost", false);
 		registerBlock(blockWorklight, "worklight", true);
 		registerBlock(blockServer, "server", true);
+		registerBlock(blockCryostasisTube, "cryostasistube", true);
 	}
 }

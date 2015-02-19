@@ -117,7 +117,7 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 	@Override
 	public void collideWithEntity(Entity entity)
 	{
-		if (this.isFertile && entity instanceof EntityLivingBase)
+		if (this.isFertile && entity instanceof EntityLivingBase && !(entity instanceof EntitySpeciesAlien))
 		{
 			EntityLivingBase entityLiving = (EntityLivingBase) entity;
 			ExtendedEntityLivingBase extendedLiving = (ExtendedEntityLivingBase) entityLiving.getExtendedProperties(ExtendedEntityLivingBase.IDENTIFIER);

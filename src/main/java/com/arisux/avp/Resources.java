@@ -48,6 +48,10 @@ public class Resources
 	public final ResourceLocation TURRET = new ResourceLocation(AliensVsPredator.ID, "textures/tile/turret.png");
 	public final ResourceLocation WORKSTATION = new ResourceLocation(AliensVsPredator.ID, "textures/tile/workstation.png");
 	public final ResourceLocation WORKSTATION_MASK = new ResourceLocation(AliensVsPredator.ID, "textures/tile/workstation-on.png");
+	public final ResourceLocation CRYOSTASIS_TUBE = new ResourceLocation(AliensVsPredator.ID, "textures/tile/cryostasistube.png");
+	public final ResourceLocation CRYOSTASIS_TUBE_MASK = new ResourceLocation(AliensVsPredator.ID, "textures/tile/cryostasistube-mask.png");
+	public final ResourceLocation CRYOSTASIS_TUBE_MASK_CRACKED = new ResourceLocation(AliensVsPredator.ID, "textures/tile/cryostasistube-cracked-mask.png");
+	public final ResourceLocation CRYOSTASIS_TUBE_MASK_SHATTERED = new ResourceLocation(AliensVsPredator.ID, "textures/tile/cryostasistube-shattered-mask.png");
 	public final ResourceLocation STASIS_MECHANISM = new ResourceLocation(AliensVsPredator.ID, "textures/tile/stasis-mechanism.png");
 	public final ResourceLocation GENERATOR = new ResourceLocation(AliensVsPredator.ID, "textures/tile/generator.png");
 	public final ResourceLocation CABLE = new ResourceLocation(AliensVsPredator.ID, "textures/tile/cable.png");
@@ -89,4 +93,5 @@ public class Resources
 	public final ResourceLocation MOTIONTRACKER_S4 = new ResourceLocation(AliensVsPredator.ID, "textures/misc/motiontracker/sweep4.png");
 	public final ResourceLocation MOTIONTRACKER_S5 = new ResourceLocation(AliensVsPredator.ID, "textures/misc/motiontracker/sweep5.png");
 	public final ResourceLocation MOTIONTRACKER_S6 = new ResourceLocation(AliensVsPredator.ID, "textures/misc/motiontracker/sweep6.png");
+
 }
