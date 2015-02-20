@@ -77,8 +77,9 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 	public void registerItemRenderers(ItemHandler items)
 	{
 		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.instance().blocks.blockTurret), new RenderItemTurret());
-		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.instance().blocks.blockWorkstation), new RenderItemTerminal());
+		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.instance().blocks.blockWorkstation), new RenderItemWorkstation());
 		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.instance().blocks.blockStasisMechanism), new RenderItemStasisMechanism());
+		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.instance().blocks.blockCryostasisTube), new RenderItemCryostasisTube());
 		registerItemRenderer(items.itemWristBlade, new RenderItemWristbracer());
 		registerItemRenderer(items.itemWristbracerBlades, new RenderItemWristbracerBlades());
 		registerItemRenderer(items.itemSpear, new RenderItemSpear());

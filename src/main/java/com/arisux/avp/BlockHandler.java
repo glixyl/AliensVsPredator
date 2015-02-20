@@ -96,7 +96,9 @@ public class BlockHandler extends IBHandler implements IInitializable
 		ghostBlockBlastdoor = (new GhostBlock(blockBlastdoor)).setAttributesFrom((HookedBlock) blockBlastdoor),
 		blockWorklight = (new BlockWorklight(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockServer = (new BlockServer(Material.iron)).setHardness(3.2F).setResistance(2.6F),
-		blockCryostasisTube = (new BlockCryostasisTube(Material.iron)).setHardness(3.2F).setResistance(2.6F);
+		blockCryostasisTube = (new BlockCryostasisTube(Material.iron)).setHardness(3.2F).setResistance(2.6F),
+		blockPlastic = (new HookedBlock(Material.clay)).setHardness(1.5F).setResistance(2.0F),
+		blockPlasticTile = (new HookedBlock(Material.clay)).setHardness(1.5F).setResistance(2.0F);
 
 	public BlockHandler()
 	{
@@ -113,7 +115,7 @@ public class BlockHandler extends IBHandler implements IInitializable
 		((HookedBlock) blockWallSmartInvertedRidge).setRenderType(AliensVsPredator.instance().renderer.renderTypeAngled);
 		((HookedBlock) blockWallSmartRidge).setRenderType(AliensVsPredator.instance().renderer.renderTypeAngled);
 	}
-	
+
 	public void registerShapedBlockSet(Block block, String reference)
 	{
 		this.registerShapedBlockSet(block, reference, block);
@@ -132,7 +134,7 @@ public class BlockHandler extends IBHandler implements IInitializable
 			HookedBlock blockInvertedRidge = ((HookedBlock) (new BlockShape(blockBaseHook.getMaterial(), ShapeTypes.INVERTED_RIDGE)).setIconSet(blockParentHook.getIconSet()).setResistance(blockBaseHook.getResistance()).setHardness(blockBaseHook.getHardness()).setLightOpacity(blockBaseHook.getLightOpacity()));
 			HookedBlock blockSmartInvertedRidge = ((HookedBlock) (new BlockShape(blockBaseHook.getMaterial(), ShapeTypes.SMART_INVERTED_RIDGE)).setIconSet(blockParentHook.getIconSet()).setResistance(blockBaseHook.getResistance()).setHardness(blockBaseHook.getHardness()).setLightOpacity(blockBaseHook.getLightOpacity()));
 			HookedBlock blockSmartRidge = ((HookedBlock) (new BlockShape(blockBaseHook.getMaterial(), ShapeTypes.SMART_RIDGE)).setIconSet(blockParentHook.getIconSet()).setResistance(blockBaseHook.getResistance()).setHardness(blockBaseHook.getHardness()).setLightOpacity(blockBaseHook.getLightOpacity()));
-			
+
 			registerBlock(blockBaseHook, reference, blockParent);
 			registerBlock(blockSlope, reference + ".slope", blockParent);
 			registerBlock(blockCorner, reference + ".corner", blockParent);
@@ -141,7 +143,7 @@ public class BlockHandler extends IBHandler implements IInitializable
 			registerBlock(blockInvertedRidge, reference + ".invertedridge", blockParent);
 			registerBlock(blockSmartInvertedRidge, reference + ".smartinvertedridge", blockParent);
 			registerBlock(blockSmartRidge, reference + ".smartridge", blockParent);
-			
+
 			if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
 			{
 				blockSlope.setRenderType(AliensVsPredator.instance().renderer.renderTypeAngled);
@@ -233,5 +235,7 @@ public class BlockHandler extends IBHandler implements IInitializable
 		registerBlock(blockWorklight, "worklight", true);
 		registerBlock(blockServer, "server", true);
 		registerBlock(blockCryostasisTube, "cryostasistube", true);
+		registerShapedBlockSet(blockPlastic, "plasticblock");
+		registerShapedBlockSet(blockPlasticTile, "plastictile");
 	}
 }

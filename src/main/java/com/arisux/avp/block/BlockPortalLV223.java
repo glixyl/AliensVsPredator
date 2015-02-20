@@ -23,7 +23,7 @@ public class BlockPortalLV223 extends BlockBreakable
 {
 	public BlockPortalLV223()
 	{
-		super("", Material.portal, false);
+		super("avp:blockPortalVarda", Material.portal, false);
 		setTickRandomly(true);
 	}
 
