@@ -24,22 +24,25 @@ public class ItemSpear extends ItemSword
 		{
 			float charge = (this.getMaxItemUseDuration(itemstack) - itemInUseCount * 1F) / 9F;
 			float maxCharge = 3.5F;
-			
-			charge = charge >= maxCharge ? 3.5F : charge;
+
+			charge = charge >= maxCharge ? maxCharge : charge;
 
 			if (charge < 0.1D)
 			{
 				return;
 			}
-			
+
 			if (!world.isRemote)
 			{
-				System.out.println("PRE:" + itemstack);
 				EntitySpear entityspear = new EntitySpear(world, entityplayer, itemstack);
-				entityspear.setThrowableHeading(entityspear.motionX, entityspear.motionY, entityspear.motionZ, 0.8F * charge, 3.0F);
+				entityspear.setThrowableHeading(entityspear.motionX, entityspear.motionY, entityspear.motionZ, 0.8F * charge, 0.1F);
 				world.playSoundAtEntity(entityplayer, "random.pop", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + charge * 0.5F);
 				world.spawnEntityInWorld(entityspear);
-				WorldUtil.Entities.Players.Inventories.consumeItem(entityplayer, AliensVsPredator.instance().items.itemSpear, true);
+
+				if (!entityplayer.capabilities.isCreativeMode)
+				{
+					WorldUtil.Entities.Players.Inventories.consumeItem(entityplayer, AliensVsPredator.instance().items.itemSpear, true);
+				}
 			}
 		}
 	}
