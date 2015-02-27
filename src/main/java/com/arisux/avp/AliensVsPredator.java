@@ -128,7 +128,7 @@ public class AliensVsPredator implements IMod
 
 			if (settings.isUpdaterEnabled())
 			{
-				(updater = AIRI.updaterApi().createNewUpdater(AliensVsPredator.ID, "4.0", settings().getUrlUpdater(), settings.getServer(),  settings().getUrlChangelog())).postInitialize(event);
+				(updater = AIRI.updaterApi().createNewUpdater(AliensVsPredator.ID, "4.0", settings().getUrlUpdater(), settings.getServer(), settings().getUrlChangelog())).postInitialize(event);
 			}
 		}
 	}
