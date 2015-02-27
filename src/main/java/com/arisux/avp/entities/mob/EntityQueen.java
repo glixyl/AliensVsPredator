@@ -134,4 +134,10 @@ public class EntityQueen extends EntityXenomorph implements IHiveSignature
 	{
 		this.dataWatcher.updateObject(14, size);
 	}
+	
+	@Override
+	public boolean canBeCollidedWith()
+	{
+		return true;
+	}
 }

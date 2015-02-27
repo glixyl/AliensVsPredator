@@ -68,7 +68,7 @@ public class ItemFirearm extends HookedItem
 	{
 		if (world.isRemote)
 		{
-			if (this.ammoCount > 0)
+			if (this.ammoCount > 0 || player.capabilities.isCreativeMode)
 			{
 				MovingObjectPosition objMouseOver = WorldUtil.Entities.rayTrace(player, 128);
 

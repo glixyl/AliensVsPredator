@@ -8,6 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.world.Explosion;
 
 import com.arisux.avp.items.ItemEntitySummoner;
 
@@ -163,7 +164,10 @@ public class TileEntityCryostasisTube extends PoweredTileEntity
 	@Override
 	public void onOverloadTick()
 	{
-		;
+		Explosion explosion = new Explosion(this.worldObj, null, this.xCoord, this.yCoord, this.zCoord, 1);
+		explosion.doExplosionA();
+		explosion.doExplosionB(true);
+		this.worldObj.setBlock(this.xCoord, this.yCoord, this.zCoord, Blocks.fire);
 	}
 
 	@Override

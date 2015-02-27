@@ -77,6 +77,8 @@ public class DebugToolsRenderEvent
 								fontrenderer.drawStringWithShadow("Extends: " + entity.getClass().getSuperclass().getSimpleName(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
 								fontrenderer.drawStringWithShadow("Width: " + entity.width, subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
 								fontrenderer.drawStringWithShadow("Height: " + entity.height, subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
+								fontrenderer.drawStringWithShadow("Yaw: " + entity.rotationYaw, subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
+								fontrenderer.drawStringWithShadow("Pitch: " + entity.rotationPitch, subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFFFFF);
 
 								if (entity instanceof EntityLiving)
 								{

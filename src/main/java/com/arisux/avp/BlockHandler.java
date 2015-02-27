@@ -52,13 +52,6 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockFloorGrillSlab = (new HookedBlockSlab(Material.iron)).setRenderNormal(false).setOpaque(false).setHardness(3.5F).setResistance(2.0F).setLightOpacity(4),
 		blockFloorGrillStairs = (new HookedBlockStairs(blockFloorGrill)).setRenderNormal(false).setOpaque(false).setHardness(3.0F).setResistance(4.0F).setLightOpacity(4),
 		blockWall = (new HookedBlock(Material.iron)).setHardness(3.5F).setResistance(2.0F),
-		blockWallSlope = (new BlockShape(Material.iron, ShapeTypes.SLOPE)).setHardness(3.5F).setResistance(2.0F),
-		blockWallCorner = (new BlockShape(Material.iron, ShapeTypes.CORNER)).setHardness(3.5F).setResistance(2.0F),
-		blockWallInvertedCorner = (new BlockShape(Material.iron, ShapeTypes.INVERTED_CORNER)).setHardness(3.5F).setResistance(2.0F),
-		blockWallRidge = (new BlockShape(Material.iron, ShapeTypes.RIDGE)).setHardness(3.5F).setResistance(2.0F),
-		blockWallInvertedRidge = (new BlockShape(Material.iron, ShapeTypes.INVERTED_RIDGE)).setHardness(3.5F).setResistance(2.0F),
-		blockWallSmartInvertedRidge = (new BlockShape(Material.iron, ShapeTypes.SMART_INVERTED_RIDGE)).setHardness(3.5F).setResistance(2.0F),
-		blockWallSmartRidge = (new BlockShape(Material.iron, ShapeTypes.SMART_RIDGE)).setHardness(3.5F).setResistance(2.0F),
 		blockWallW = (new HookedBlock(Material.iron).setIconSet(new RenderUtil.IconSet(this.getMod().domain() + "wall_top", this.getMod().domain() + "wall_top", this.getMod().domain() + "wall_top", this.getMod().domain() + "wall_side", this.getMod().domain() + "wall_side", this.getMod().domain() + "wall_side", this.getMod().domain() + "wall_side"))).setHardness(3.5F).setResistance(2.0F),
 		blockCeiling = (new HookedBlock(Material.iron)).setHardness(3.5F).setResistance(2.0F).setLightOpacity(0),
 		blockCeilingFan = (new HookedBlock(Material.iron)).setOpaque(false).setHardness(3.5F).setResistance(2.0F),
@@ -90,7 +83,7 @@ public class BlockHandler extends IBHandler implements IInitializable
 		oreBauxite = (new HookedBlock(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockWorkstation = (new BlockWorkstation(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockStasisMechanism = (new BlockStasisMechanism(Material.iron)),
-		blockGenerator = (new BlockGenerator(Material.iron)).setHardness(3.2F).setResistance(2.6F),
+		blockRepulsionGenerator = (new BlockGenerator(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockPowerline = (new BlockPowerline(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockBlastdoor = (new BlockBlastdoor(Material.iron)).setHardness(5F).setResistance(5F),
 		ghostBlockBlastdoor = (new GhostBlock(blockBlastdoor)).setAttributesFrom((HookedBlock) blockBlastdoor),
@@ -103,17 +96,6 @@ public class BlockHandler extends IBHandler implements IInitializable
 	public BlockHandler()
 	{
 		super(AliensVsPredator.instance());
-	}
-
-	public void initializeClient(FMLInitializationEvent event)
-	{
-		((HookedBlock) blockWallSlope).setRenderType(AliensVsPredator.instance().renderer.renderTypeAngled);
-		((HookedBlock) blockWallCorner).setRenderType(AliensVsPredator.instance().renderer.renderTypeAngled);
-		((HookedBlock) blockWallInvertedCorner).setRenderType(AliensVsPredator.instance().renderer.renderTypeAngled);
-		((HookedBlock) blockWallRidge).setRenderType(AliensVsPredator.instance().renderer.renderTypeAngled);
-		((HookedBlock) blockWallInvertedRidge).setRenderType(AliensVsPredator.instance().renderer.renderTypeAngled);
-		((HookedBlock) blockWallSmartInvertedRidge).setRenderType(AliensVsPredator.instance().renderer.renderTypeAngled);
-		((HookedBlock) blockWallSmartRidge).setRenderType(AliensVsPredator.instance().renderer.renderTypeAngled);
 	}
 
 	public void registerShapedBlockSet(Block block, String reference)
@@ -160,11 +142,6 @@ public class BlockHandler extends IBHandler implements IInitializable
 	@Override
 	public void initialize(FMLInitializationEvent event)
 	{
-		if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
-		{
-			this.initializeClient(event);
-		}
-
 		registerShapedBlockSet(terrainUniDirt, "unidirt");
 		registerShapedBlockSet(terrainUniStone, "unistone");
 		registerShapedBlockSet(terrainUniSand, "unisand");
@@ -228,7 +205,7 @@ public class BlockHandler extends IBHandler implements IInitializable
 		registerBlock(blockTurret, "turret", true);
 		registerBlock(blockWorkstation, "terminal", true);
 		registerBlock(blockStasisMechanism, "stasismechanism", true);
-		registerBlock(blockGenerator, "generator", true);
+		registerBlock(blockRepulsionGenerator, "generator", true);
 		registerBlock(blockPowerline, "powerline", true);
 		registerBlock(blockBlastdoor, "blastdoor", true);
 		registerBlock(ghostBlockBlastdoor, "blastdoorghost", false);

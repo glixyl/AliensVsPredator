@@ -15,6 +15,9 @@ import net.minecraft.world.World;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.DamageSources;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+
 public class EntityShuriken extends Entity
 {
 	private int xTile = -1;
@@ -121,17 +124,20 @@ public class EntityShuriken extends Entity
 			this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(this.motionY, i) * 180.0D / Math.PI);
 		}
 
-		Block var16 = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
+		Block block = this.worldObj.getBlock(this.xTile, this.yTile, this.zTile);
 
-		if (var16 != Blocks.air)
+		if (block != Blocks.air)
 		{
-			var16.setBlockBoundsBasedOnState(this.worldObj, this.xTile, this.yTile, this.zTile);
-			
-			AxisAlignedBB vec3d = var16.getSelectedBoundingBoxFromPool(this.worldObj, this.xTile, this.yTile, this.zTile);
+			block.setBlockBoundsBasedOnState(this.worldObj, this.xTile, this.yTile, this.zTile);
 
-			if (vec3d != null && vec3d.isVecInside(Vec3.createVectorHelper(this.posX, this.posY, this.posZ)))
+			if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
 			{
-				this.inGround = true;
+				AxisAlignedBB vec3d = block.getSelectedBoundingBoxFromPool(this.worldObj, this.xTile, this.yTile, this.zTile);
+
+				if (vec3d != null && vec3d.isVecInside(Vec3.createVectorHelper(this.posX, this.posY, this.posZ)))
+				{
+					this.inGround = true;
+				}
 			}
 		}
 

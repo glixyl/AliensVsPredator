@@ -9,7 +9,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
-import com.arisux.avp.entities.tile.TileEntityGenerator;
+import com.arisux.avp.entities.tile.TileEntityRepulsionGenerator;
 
 public class BlockGenerator extends HookedBlockContainer
 {
@@ -35,7 +35,7 @@ public class BlockGenerator extends HookedBlockContainer
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2)
 	{
-		return new TileEntityGenerator();
+		return new TileEntityRepulsionGenerator();
 	}
 
 	@Override

@@ -384,7 +384,7 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 		for (int i = 0; i < 3; i++)
 		{
 			ItemStack pciSlot = this.inventoryExpansion.getStackInSlot(i);
-			
+
 			if (pciSlot != null && pciSlot.getItem() == AliensVsPredator.instance().items.itemProcessor)
 			{
 				runCyclesUpgrade += 1 * pciSlot.stackSize;
@@ -481,7 +481,10 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 			builder.append(id + "-");
 		}
 
-		AliensVsPredator.instance().network.sendToAll(new PacketTurretInit(this.xCoord, this.yCoord, this.zCoord, builder.toString()));
+		if (builder != null && builder.toString() != null)
+		{
+			AliensVsPredator.instance().network.sendToAll(new PacketTurretInit(this.xCoord, this.yCoord, this.zCoord, builder.toString()));
+		}
 	}
 
 	private void saveInventoryToNBT(NBTTagCompound nbt, IInventory inventory)

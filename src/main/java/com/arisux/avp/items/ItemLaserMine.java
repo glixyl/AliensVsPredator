@@ -7,19 +7,19 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.arisux.avp.entities.EntityProximityMine;
+import com.arisux.avp.entities.EntityLaserMine;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemProximityMine extends Item
+public class ItemLaserMine extends Item
 {
 	@Override
 	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int posX, int posY, int posZ, int side, float hitX, float hitY, float hitZ)
 	{
-		byte metaValue = (byte) (side == 4 ? 1 : side == 3 ? 2 : side == 5 ? 3 : 0);
+		byte metaValue = (byte) (side == 5 ? 3 : side == 4 ? 1 : side == 3 ? 2 : 0);
 
-		EntityProximityMine entity = new EntityProximityMine(world, posX, posY, posZ, metaValue, entityplayer.getUniqueID().toString());
+		EntityLaserMine entity = new EntityLaserMine(world, posX, posY, posZ, metaValue, entityplayer.getUniqueID().toString());
 
 		if (!world.isRemote && entity.canStay())
 		{
@@ -33,7 +33,7 @@ public class ItemProximityMine extends Item
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings("all")
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{
 		par3List.add("Right click to place on wall (Explodes when hostiles pass)");

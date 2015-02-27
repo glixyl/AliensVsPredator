@@ -1,12 +1,12 @@
 package com.arisux.avp.entities.tile;
 
-import com.arisux.avp.interfaces.IPowerDevice;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+
+import com.arisux.avp.interfaces.IPowerDevice;
 
 public abstract class PoweredTileEntity extends TileEntity implements IPowerDevice
 {
@@ -45,37 +45,21 @@ public abstract class PoweredTileEntity extends TileEntity implements IPowerDevi
 
 	public void outputPower()
 	{
-		double voltageOut = this.getVoltageAfterApplyingResistance();
+		double voltage = this.getVoltageAfterApplyingResistance();
 		
-		if (this instanceof TileEntityPowerline)
+		this.outputPowerToTile(this.getTop(), voltage);
+		this.outputPowerToTile(this.getBottom(), voltage);
+		this.outputPowerToTile(this.getFront(), voltage);
+		this.outputPowerToTile(this.getBack(), voltage);
+		this.outputPowerToTile(this.getLeft(), voltage);
+		this.outputPowerToTile(this.getRight(), voltage);
+	}
+	
+	public void outputPowerToTile(PoweredTileEntity tile, double voltage)
+	{
+		if (tile != null && tile.getPowerSourceTile() == this)
 		{
-			if ((this + "").replace(this.getClass().getName(), "").equalsIgnoreCase("@2745889"))
-			System.out.println(this.getVoltage() + "V");
-		}
-
-		if (getTop() != null && getTop().getPowerSourceTile() == this)
-		{
-			getTop().setVoltage(voltageOut);
-		}
-		if (getBottom() != null && getBottom().getPowerSourceTile() == this)
-		{
-			getBottom().setVoltage(voltageOut);
-		}
-		if (getFront() != null && getFront().getPowerSourceTile() == this)
-		{
-			getFront().setVoltage(voltageOut);
-		}
-		if (getBack() != null && getBack().getPowerSourceTile() == this)
-		{
-			getBack().setVoltage(voltageOut);
-		}
-		if (getLeft() != null && getLeft().getPowerSourceTile() == this)
-		{
-			getLeft().setVoltage(voltageOut);
-		}
-		if (getRight() != null && getRight().getPowerSourceTile() == this)
-		{
-			getRight().setVoltage(voltageOut);
+			tile.setVoltage(voltage);
 		}
 	}
 

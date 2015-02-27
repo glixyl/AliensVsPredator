@@ -16,7 +16,7 @@ public class AliensVsPredator implements IMod
 {
 	protected static final String ID = "avp";
 	
-	@Mod.Instance
+	@Mod.Instance(AliensVsPredator.ID)
 	private static AliensVsPredator instance;
 	private ModContainer container;
 	public LocalEventHandler localEvents;

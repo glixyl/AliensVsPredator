@@ -36,7 +36,7 @@ public class Resources
 	public final ResourceLocation BLUR_CHESTBURSTER_EMERGE = new ResourceLocation(AliensVsPredator.ID, "textures/misc/chestburster-emerge-overlay.png");
 	public final ResourceLocation BLUR_GUNSCOPE = new ResourceLocation(AliensVsPredator.ID, "textures/misc/scope.png");
 	public final ResourceLocation GRENADE = new ResourceLocation(AliensVsPredator.ID, "textures/items/itemGrenade.png");
-	public final ResourceLocation PROXIMITY_MINE = new ResourceLocation(AliensVsPredator.ID, "textures/items/itemWallMine.png");
+	public final ResourceLocation PROXIMITY_MINE = new ResourceLocation(AliensVsPredator.ID, "textures/misc/proximity-mine.png");
 	public final ResourceLocation WRISTBLADES = new ResourceLocation(AliensVsPredator.ID, "textures/items/models/wristblade.png");
 	public final ResourceLocation M240ICU = new ResourceLocation(AliensVsPredator.ID, "textures/items/models/m240icu.png");
 	public final ResourceLocation M41A = new ResourceLocation(AliensVsPredator.ID, "textures/items/models/pulserifle.png");
@@ -53,7 +53,7 @@ public class Resources
 	public final ResourceLocation CRYOSTASIS_TUBE_MASK_CRACKED = new ResourceLocation(AliensVsPredator.ID, "textures/tile/cryostasistube-cracked-mask.png");
 	public final ResourceLocation CRYOSTASIS_TUBE_MASK_SHATTERED = new ResourceLocation(AliensVsPredator.ID, "textures/tile/cryostasistube-shattered-mask.png");
 	public final ResourceLocation STASIS_MECHANISM = new ResourceLocation(AliensVsPredator.ID, "textures/tile/stasis-mechanism.png");
-	public final ResourceLocation GENERATOR = new ResourceLocation(AliensVsPredator.ID, "textures/tile/generator.png");
+	public final ResourceLocation REPULSION_GENERATOR = new ResourceLocation(AliensVsPredator.ID, "textures/tile/generator.png");
 	public final ResourceLocation CABLE = new ResourceLocation(AliensVsPredator.ID, "textures/tile/cable.png");
 	public final ResourceLocation NETWORKLIGHT = new ResourceLocation(AliensVsPredator.ID, "textures/tile/networklight.png");
 	public final ResourceLocation SERVER = new ResourceLocation(AliensVsPredator.ID, "textures/tile/server.png");

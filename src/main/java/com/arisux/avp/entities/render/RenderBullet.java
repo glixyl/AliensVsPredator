@@ -8,10 +8,12 @@ import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.entities.mob.model.ModelDrone;
+import com.arisux.avp.entities.model.ModelBullet;
 
 public class RenderBullet extends Render
 {
+	public static ModelBullet model = new ModelBullet();
+	
 	@Override
 	public void doRender(Entity entity, double posX, double posY, double posZ, float yaw, float renderPartialTicks)
 	{
@@ -23,7 +25,8 @@ public class RenderBullet extends Render
 			GL11.glTranslatef(0.25F, 0.5F, 0.0F);
 			RenderUtil.lightingHelper(entity, 2.0F);
 			RenderUtil.bindTexture(AliensVsPredator.resources().DRONE_ADVANCED);
-			new ModelDrone().render(null, 0F, 0F, 0F, 0F, 0F, RenderUtil.DEFAULT_BOX_TRANSLATION);
+			GL11.glRotatef(90F, 1, 0, 0);
+			model.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 			GL11.glColor3f(1.0F, 1.0F, 1.0F);
 		}
 		GL11.glPopMatrix();

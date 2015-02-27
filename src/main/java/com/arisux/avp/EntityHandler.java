@@ -33,7 +33,7 @@ public class EntityHandler implements IInitializable
 		GameRegistry.registerTileEntity(TileEntityHiveNode.class, "tileEntityBlockHiveNode");
 		GameRegistry.registerTileEntity(TileEntityAssembler.class, "tileEntityAssembler");
 		GameRegistry.registerTileEntity(TileEntityStasisMechanism.class, "tileStasisMechanism");
-		GameRegistry.registerTileEntity(TileEntityGenerator.class, "tileEntityGenerator");
+		GameRegistry.registerTileEntity(TileEntityRepulsionGenerator.class, "tileEntityGenerator");
 		GameRegistry.registerTileEntity(TileEntityPowerline.class, "tileEntityPowerline");
 		GameRegistry.registerTileEntity(TileEntityBlastdoor.class, "tileEntityBlastdoor");
 		GameRegistry.registerTileEntity(TileEntityWorklight.class, "tileEntityWorklight");
@@ -67,7 +67,7 @@ public class EntityHandler implements IInitializable
 		HashMap<String, Integer> entityIDs = AliensVsPredator.settings().entityList;
 		
 		EntityRegistry.registerModEntity(EntitySpear.class, "Spear", entityIDs.get("CELTIC_SPEAR"), AliensVsPredator.instance(), 250, 15, true);
-		EntityRegistry.registerModEntity(EntityProximityMine.class, "ProximityMine", entityIDs.get("PROXIMITY_MINE"), AliensVsPredator.instance(), 250, 5, true);
+		EntityRegistry.registerModEntity(EntityLaserMine.class, "ProximityMine", entityIDs.get("PROXIMITY_MINE"), AliensVsPredator.instance(), 250, 5, true);
 		EntityRegistry.registerModEntity(EntityPlasma.class, "Plasma", entityIDs.get("PLASMA"), AliensVsPredator.instance(), 250, 15, true);
 		EntityRegistry.registerModEntity(EntityGrenade.class, "Grenade", entityIDs.get("GRENADE"), AliensVsPredator.instance(), 250, 15, true);
 		EntityRegistry.registerModEntity(EntityFlame.class, "Flamethrower", entityIDs.get("FLAME"), AliensVsPredator.instance(), 250, 15, true);
