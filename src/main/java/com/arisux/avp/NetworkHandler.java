@@ -20,26 +20,26 @@ public class NetworkHandler extends SimpleNetworkWrapper implements IInitializab
 	@Override
 	public void initialize(FMLInitializationEvent event)
 	{
-		this.registerMessage(Side.SERVER, PacketSpawnNukeServerUpdate.class);
-		this.registerMessage(Side.SERVER, PacketOpenWristbracerGUIServerUpdate.class);
-		this.registerMessage(Side.SERVER, PacketInvisiblePlayerServerUpdate.class);
-		this.registerMessage(Side.SERVER, PacketBroadcastRadiusServerUpdate.class);
-		this.registerMessage(Side.SERVER, PacketReloadFirearmServerUpdate.class);
-		this.registerMessage(Side.SERVER, PacketGrenadeLaunchServerUpdate.class);
-		this.registerMessage(Side.SERVER, PacketTurretRemoveTargetUpdate.class);
-		this.registerMessage(Side.SERVER, PacketShootEntityServerUpdate.class);
-		this.registerMessage(Side.SERVER, PacketSpawnEntityServerUpdate.class);
-		this.registerMessage(Side.SERVER, PacketTurretAddTargetUpdate.class);
-		this.registerMessage(Side.SERVER, PacketChannelServerUpdate.class);
+		this.registerMessage(Side.SERVER, PacketOpenWristbracerContainer.class);
+		this.registerMessage(Side.SERVER, PacketBroadcastRadiusUpdate.class);
+		this.registerMessage(Side.SERVER, PacketReloadFirearm.class);
+		this.registerMessage(Side.SERVER, PacketLaunchGrenade.class);
+		this.registerMessage(Side.SERVER, PacketDamageEntity.class);
+		this.registerMessage(Side.SERVER, PacketRemoveTurretTarget.class);
+		this.registerMessage(Side.SERVER, PacketShootEntity.class);
+		this.registerMessage(Side.SERVER, PacketSpawnEntity.class);
+		this.registerMessage(Side.SERVER, PacketSpawnNuke.class);
+		this.registerMessage(Side.SERVER, PacketAddTuretTarget.class);
+		this.registerMessage(Side.SERVER, PacketChannelUpdate.class);
 		this.registerMessage(Side.SERVER, PacketReadFromDataDevice.class);
 		this.registerMessage(Side.SERVER, PacketTurretTargetUpdate.class);
 		this.registerMessage(Side.SERVER, PacketWriteToDataDevice.class);
-		this.registerMessage(Side.CLIENT, PacketBroadcastRadiusClientUpdate.class);
-		this.registerMessage(Side.CLIENT, PacketKillCountClientUpdate.class);
+		this.registerMessage(Side.CLIENT, PacketClientBroadcastRadiusUpdate.class);
+		this.registerMessage(Side.CLIENT, PacketKillCountUpdate.class);
 		this.registerMessage(Side.CLIENT, PacketChannelClientUpdate.class);
-		this.registerMessage(Side.CLIENT, PacketAmmoClientUpdate.class);
-		this.registerMessage(Side.CLIENT, PacketTurretInit.class);
+		this.registerMessage(Side.CLIENT, PacketAmmoUpdate.class);
 		this.registerMessage(Side.CLIENT, PacketPlayerModeUpdate.class);
+		this.registerMessage(Side.CLIENT, PacketTurretInit.class);
 	}
 
 	@SuppressWarnings("unchecked")

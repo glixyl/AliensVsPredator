@@ -6,9 +6,9 @@ import com.arisux.avp.items.ItemFirearm;
 
 import cpw.mods.fml.common.network.simpleimpl.*;
 
-public class PacketReloadFirearmServerUpdate implements IMessage, IMessageHandler<PacketReloadFirearmServerUpdate, PacketReloadFirearmServerUpdate>
+public class PacketReloadFirearm implements IMessage, IMessageHandler<PacketReloadFirearm, PacketReloadFirearm>
 {
-	public PacketReloadFirearmServerUpdate()
+	public PacketReloadFirearm()
 	{
 		;
 	}
@@ -23,7 +23,7 @@ public class PacketReloadFirearmServerUpdate implements IMessage, IMessageHandle
 		;
 	}
 
-	@Override public PacketReloadFirearmServerUpdate onMessage(PacketReloadFirearmServerUpdate message, MessageContext ctx)
+	@Override public PacketReloadFirearm onMessage(PacketReloadFirearm message, MessageContext ctx)
 	{
 		((ItemFirearm) ctx.getServerHandler().playerEntity.inventory.getCurrentItem().getItem()).reload(ctx.getServerHandler().playerEntity);
 		

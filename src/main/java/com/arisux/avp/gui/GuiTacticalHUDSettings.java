@@ -11,8 +11,8 @@ import com.arisux.airi.lib.interfaces.IActionPerformed;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.extended.ExtendedEntityPlayer;
 import com.arisux.avp.event.client.TacticalHUDRenderEvent;
-import com.arisux.avp.packets.server.PacketBroadcastRadiusServerUpdate;
-import com.arisux.avp.packets.server.PacketChannelServerUpdate;
+import com.arisux.avp.packets.server.PacketBroadcastRadiusUpdate;
+import com.arisux.avp.packets.server.PacketChannelUpdate;
 
 public class GuiTacticalHUDSettings extends GuiCustomScreen
 {
@@ -102,14 +102,14 @@ public class GuiTacticalHUDSettings extends GuiCustomScreen
 					if (properties.getBroadcastChannel() != newChannel)
 					{
 						properties.setBroadcastChannel(newChannel);
-						AliensVsPredator.instance().network.sendToServer(new PacketChannelServerUpdate(newChannel, mc.thePlayer.getCommandSenderName()));
+						AliensVsPredator.instance().network.sendToServer(new PacketChannelUpdate(newChannel, mc.thePlayer.getCommandSenderName()));
 					}
 
 					int newRadius = (int) (slider1.sliderValue * slider1.sliderMaxValue);
 					if (properties.getBroadcastRadius() != newRadius)
 					{
 						properties.setBroadcastRadius(newRadius);
-						AliensVsPredator.instance().network.sendToServer(new PacketBroadcastRadiusServerUpdate(newRadius, mc.thePlayer.getCommandSenderName()));
+						AliensVsPredator.instance().network.sendToServer(new PacketBroadcastRadiusUpdate(newRadius, mc.thePlayer.getCommandSenderName()));
 					}
 
 					int newThreshold = (int) (slider2.sliderValue * slider2.sliderMaxValue);

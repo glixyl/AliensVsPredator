@@ -7,9 +7,9 @@ import com.arisux.avp.entities.EntityNuke;
 
 import cpw.mods.fml.common.network.simpleimpl.*;
 
-public class PacketSpawnNukeServerUpdate implements IMessage, IMessageHandler<PacketSpawnNukeServerUpdate, PacketSpawnNukeServerUpdate>
+public class PacketSpawnNuke implements IMessage, IMessageHandler<PacketSpawnNuke, PacketSpawnNuke>
 {
-	public PacketSpawnNukeServerUpdate()
+	public PacketSpawnNuke()
 	{
 		;
 	}
@@ -26,7 +26,7 @@ public class PacketSpawnNukeServerUpdate implements IMessage, IMessageHandler<Pa
 		;
 	}
 
-	@Override public PacketSpawnNukeServerUpdate onMessage(PacketSpawnNukeServerUpdate packet, MessageContext ctx)
+	@Override public PacketSpawnNuke onMessage(PacketSpawnNuke packet, MessageContext ctx)
 	{
 		if (ctx.getServerHandler().playerEntity != null)
 		{

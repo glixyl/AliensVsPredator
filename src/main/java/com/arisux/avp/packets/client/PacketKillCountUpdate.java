@@ -9,16 +9,16 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
-public class PacketKillCountClientUpdate implements IMessage, IMessageHandler<PacketKillCountClientUpdate, PacketKillCountClientUpdate>
+public class PacketKillCountUpdate implements IMessage, IMessageHandler<PacketKillCountUpdate, PacketKillCountUpdate>
 {
 	public int uuid, killCount;
 
-	public PacketKillCountClientUpdate()
+	public PacketKillCountUpdate()
 	{
 		;
 	}
 
-	public PacketKillCountClientUpdate(int killCount, int uuid)
+	public PacketKillCountUpdate(int killCount, int uuid)
 	{
 		this.killCount = killCount;
 		this.uuid = uuid;
@@ -36,7 +36,7 @@ public class PacketKillCountClientUpdate implements IMessage, IMessageHandler<Pa
 		buf.writeInt(this.uuid);
 	}
 
-	@Override public PacketKillCountClientUpdate onMessage(PacketKillCountClientUpdate packet, MessageContext ctx)
+	@Override public PacketKillCountUpdate onMessage(PacketKillCountUpdate packet, MessageContext ctx)
 	{
 		EntitySpeciesAlien entity = ((EntitySpeciesAlien) Minecraft.getMinecraft().thePlayer.worldObj.getEntityByID(packet.uuid));
 

@@ -10,7 +10,7 @@ import net.minecraftforge.event.world.WorldEvent;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.extended.ExtendedEntityLivingBase;
 import com.arisux.avp.entities.extended.ExtendedEntityPlayer;
-import com.arisux.avp.packets.client.PacketBroadcastRadiusClientUpdate;
+import com.arisux.avp.packets.client.PacketClientBroadcastRadiusUpdate;
 import com.arisux.avp.packets.client.PacketChannelClientUpdate;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -69,7 +69,7 @@ public class ExtendedPropertiesEvents
 
 				if (thePlayer != null && extendedEntityProperties != null && extendedEntityProperties.getBroadcastChannel() != null)
 				{
-					AliensVsPredator.instance().network.sendToAll(new PacketBroadcastRadiusClientUpdate(extendedEntityProperties.getBroadcastRadius(), thePlayer.getCommandSenderName()));
+					AliensVsPredator.instance().network.sendToAll(new PacketClientBroadcastRadiusUpdate(extendedEntityProperties.getBroadcastRadius(), thePlayer.getCommandSenderName()));
 					AliensVsPredator.instance().network.sendToAll(new PacketChannelClientUpdate(extendedEntityProperties.getBroadcastChannel(), thePlayer.getCommandSenderName()));
 				}
 			}

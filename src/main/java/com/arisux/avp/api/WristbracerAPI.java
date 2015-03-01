@@ -7,7 +7,7 @@ import net.minecraft.client.Minecraft;
 import com.arisux.airi.AIRI;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.packets.server.PacketSpawnNukeServerUpdate;
+import com.arisux.avp.packets.server.PacketSpawnNuke;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -39,7 +39,7 @@ public class WristbracerAPI
 			@Override
 			public void actionPerformed(String combonation, Object... args)
 			{
-				AliensVsPredator.instance().network.sendToServer(new PacketSpawnNukeServerUpdate());
+				AliensVsPredator.instance().network.sendToServer(new PacketSpawnNuke());
 				Minecraft.getMinecraft().currentScreen = null;
 			}
 		});

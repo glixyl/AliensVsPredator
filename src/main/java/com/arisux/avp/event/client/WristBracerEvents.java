@@ -3,7 +3,7 @@ package com.arisux.avp.event.client;
 import net.minecraft.client.Minecraft;
 
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.packets.server.PacketOpenWristbracerGUIServerUpdate;
+import com.arisux.avp.packets.server.PacketOpenWristbracerContainer;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
@@ -19,7 +19,7 @@ public class WristBracerEvents
 		{
 			if (mc.thePlayer.getCurrentEquippedItem().getItem() == AliensVsPredator.instance().items.itemWristBlade && AliensVsPredator.instance().keybinds.KEYBIND_ITEM_ACTION.isPressed())
 			{
-				AliensVsPredator.instance().network.sendToServer(new PacketOpenWristbracerGUIServerUpdate());
+				AliensVsPredator.instance().network.sendToServer(new PacketOpenWristbracerContainer());
 			}
 		}
 	}

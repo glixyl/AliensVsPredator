@@ -9,17 +9,16 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
-public class PacketTurretAddTargetUpdate implements IMessage, IMessageHandler<PacketTurretAddTargetUpdate, PacketTurretAddTargetUpdate>
+public class PacketRemoveTurretTarget implements IMessage, IMessageHandler<PacketRemoveTurretTarget, PacketRemoveTurretTarget>
 {
-	public int x, y, z;
-	public int globalID;
+	public int x, y, z, globalID;
 
-	public PacketTurretAddTargetUpdate()
+	public PacketRemoveTurretTarget()
 	{
 		;
 	}
 
-	public PacketTurretAddTargetUpdate(int x, int y, int z, int globalID)
+	public PacketRemoveTurretTarget(int x, int y, int z, int globalID)
 	{
 		this.x = x;
 		this.y = y;
@@ -44,15 +43,14 @@ public class PacketTurretAddTargetUpdate implements IMessage, IMessageHandler<Pa
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override public PacketTurretAddTargetUpdate onMessage(PacketTurretAddTargetUpdate packet, MessageContext ctx)
+	@Override public PacketRemoveTurretTarget onMessage(PacketRemoveTurretTarget packet, MessageContext ctx)
 	{
 		TileEntityTurret tile = (TileEntityTurret) ctx.getServerHandler().playerEntity.worldObj.getTileEntity(packet.x, packet.y, packet.z);
 
 		if (tile != null)
 		{
-			tile.setDangerous(EntityList.getClassFromID(packet.globalID));
+			tile.setSafe(EntityList.getClassFromID(packet.globalID));
 		}
-		
 		return null;
 	}
 }

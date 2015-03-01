@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 import com.arisux.airi.lib.WorldUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.DamageSources;
+import com.arisux.avp.packets.server.PacketDamageEntity;
 
 public class EntityLaserMine extends Entity
 {
@@ -86,13 +87,20 @@ public class EntityLaserMine extends Entity
 			this.laserHit = WorldUtil.Entities.rayTrace(this, this.getLaserMaxDepth());
 		}
 
-		if (!this.worldObj.isRemote)
+		if (this.worldObj.isRemote)
 		{
 			if (this.getLaserHit() != null && this.getLaserHit().entityHit != null)
 			{
-				if (!(this.getLaserHit().entityHit instanceof EntityLaserMine) && this.getLaserHit().entityHit instanceof EntityPlayer && !((EntityPlayer) this.getLaserHit().entityHit).capabilities.isCreativeMode)
+				if (!(this.getLaserHit().entityHit instanceof EntityLaserMine))
 				{
-					this.explode();
+					if (!(this.getLaserHit().entityHit instanceof EntityPlayer))
+					{
+						this.explode(this.getLaserHit().entityHit);
+					}
+					else if (this.getLaserHit().entityHit instanceof EntityPlayer && !((EntityPlayer) this.getLaserHit().entityHit).capabilities.isCreativeMode)
+					{
+						this.explode(this.getLaserHit().entityHit);
+					}
 				}
 			}
 
@@ -134,18 +142,20 @@ public class EntityLaserMine extends Entity
 		this.setDead();
 	}
 
-	public void explode()
+	public void explode(Entity entityHit)
 	{
-		if (AliensVsPredator.instance().settings.areExplosionsEnabled())
-		{
-			Explosion explosion = new Explosion(worldObj, this, this.posX, this.posY, this.posZ, 4F);
-			explosion.isSmoking = true;
-			explosion.doExplosionB(true);
-		}
+		Explosion explosion = new Explosion(worldObj, this, this.posX, this.posY, this.posZ, 4F);
+		explosion.isSmoking = true;
+		explosion.doExplosionB(true);
 
-		if (this.getLaserHit() != null && this.getLaserHit().entityHit != null)
+		if (entityHit != null)
 		{
-			this.getLaserHit().entityHit.attackEntityFrom(DamageSources.causeLaserMineDamage(this, this.getLaserHit().entityHit), 15F);
+			entityHit.attackEntityFrom(DamageSources.causeLaserMineDamage(this, entityHit), 15F);
+
+			if (this.worldObj.isRemote)
+			{
+				AliensVsPredator.instance().network.sendToServer(new PacketDamageEntity(entityHit, this, 15F));
+			}
 		}
 
 		this.setDead();

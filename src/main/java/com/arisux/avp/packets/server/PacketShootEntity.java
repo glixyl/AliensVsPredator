@@ -9,18 +9,18 @@ import com.arisux.avp.items.ItemFirearm;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.*;
 
-public class PacketShootEntityServerUpdate implements IMessage, IMessageHandler<PacketShootEntityServerUpdate, PacketShootEntityServerUpdate>
+public class PacketShootEntity implements IMessage, IMessageHandler<PacketShootEntity, PacketShootEntity>
 {
 	public int entityId;
 	public String sound;
 	public double damage;
 
-	public PacketShootEntityServerUpdate()
+	public PacketShootEntity()
 	{
 		;
 	}
 
-	public PacketShootEntityServerUpdate(Entity entity, ItemFirearm itemFirearm)
+	public PacketShootEntity(Entity entity, ItemFirearm itemFirearm)
 	{
 		this.entityId = entity != null ? entity.getEntityId() : -1;
 		this.damage = itemFirearm.getAmmoType().getInflictionDamage();
@@ -44,7 +44,7 @@ public class PacketShootEntityServerUpdate implements IMessage, IMessageHandler<
 	}
 
 	@Override
-	public PacketShootEntityServerUpdate onMessage(PacketShootEntityServerUpdate packet, MessageContext ctx)
+	public PacketShootEntity onMessage(PacketShootEntity packet, MessageContext ctx)
 	{
 		ItemFirearm itemFirearm = (ItemFirearm) ctx.getServerHandler().playerEntity.getCurrentEquippedItem().getItem();
 

@@ -6,9 +6,9 @@ import com.arisux.avp.entities.EntityGrenade;
 
 import cpw.mods.fml.common.network.simpleimpl.*;
 
-public class PacketGrenadeLaunchServerUpdate implements IMessage, IMessageHandler<PacketGrenadeLaunchServerUpdate, PacketGrenadeLaunchServerUpdate>
+public class PacketLaunchGrenade implements IMessage, IMessageHandler<PacketLaunchGrenade, PacketLaunchGrenade>
 {
-	public PacketGrenadeLaunchServerUpdate()
+	public PacketLaunchGrenade()
 	{
 		;
 	}
@@ -25,7 +25,7 @@ public class PacketGrenadeLaunchServerUpdate implements IMessage, IMessageHandle
 		;
 	}
 
-	@Override public PacketGrenadeLaunchServerUpdate onMessage(PacketGrenadeLaunchServerUpdate packet, MessageContext ctx)
+	@Override public PacketLaunchGrenade onMessage(PacketLaunchGrenade packet, MessageContext ctx)
 	{
 		if (ctx.getServerHandler().playerEntity != null && ctx.getServerHandler().playerEntity.worldObj != null)
 		{

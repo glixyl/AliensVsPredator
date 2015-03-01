@@ -18,7 +18,7 @@ import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
 import com.arisux.airi.lib.WorldUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.TileEntityTurret;
-import com.arisux.avp.packets.server.PacketTurretAddTargetUpdate;
+import com.arisux.avp.packets.server.PacketAddTuretTarget;
 
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 
@@ -80,7 +80,7 @@ public class BlockTurret extends HookedBlockContainer
 				for (int i = 0; i < tile.getDangerousTargets().size(); i++)
 				{
 					if (tile.getDangerousTargets().get(i) != null)
-						AliensVsPredator.instance().network.sendToAll(new PacketTurretAddTargetUpdate(xCoord, yCoord, zCoord, EntityList.getEntityID(WorldUtil.Entities.constructEntity(worldObj, tile.getDangerousTargets().get(i)))));
+						AliensVsPredator.instance().network.sendToAll(new PacketAddTuretTarget(xCoord, yCoord, zCoord, EntityList.getEntityID(WorldUtil.Entities.constructEntity(worldObj, tile.getDangerousTargets().get(i)))));
 				}
 			}
 		}

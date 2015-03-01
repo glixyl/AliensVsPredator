@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.packets.client.PacketBroadcastRadiusClientUpdate;
+import com.arisux.avp.packets.client.PacketClientBroadcastRadiusUpdate;
 import com.arisux.avp.packets.client.PacketChannelClientUpdate;
 import com.arisux.avp.util.PlayerMode;
 
@@ -52,7 +52,7 @@ public class ExtendedEntityPlayer implements IExtendedEntityProperties
 		broadcastChannel = nbt.getString(ID_STRING_BROADCAST_CHANNEL);
 		broadcastRadius = nbt.getInteger(ID_INT_BROADCAST_RADIUS);
 
-		AliensVsPredator.instance().network.sendToAll(new PacketBroadcastRadiusClientUpdate(this.broadcastRadius, this.thePlayer.getCommandSenderName()));
+		AliensVsPredator.instance().network.sendToAll(new PacketClientBroadcastRadiusUpdate(this.broadcastRadius, this.thePlayer.getCommandSenderName()));
 		AliensVsPredator.instance().network.sendToAll(new PacketChannelClientUpdate(this.broadcastChannel, this.thePlayer.getCommandSenderName()));
 	}
 

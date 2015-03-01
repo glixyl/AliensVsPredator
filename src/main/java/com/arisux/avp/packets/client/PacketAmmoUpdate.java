@@ -9,16 +9,16 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
-public class PacketAmmoClientUpdate implements IMessage, IMessageHandler<PacketAmmoClientUpdate, PacketAmmoClientUpdate>
+public class PacketAmmoUpdate implements IMessage, IMessageHandler<PacketAmmoUpdate, PacketAmmoUpdate>
 {
 	public int ammo;
 
-	public PacketAmmoClientUpdate()
+	public PacketAmmoUpdate()
 	{
 		;
 	}
 
-	public PacketAmmoClientUpdate(int ammo)
+	public PacketAmmoUpdate(int ammo)
 	{
 		this.ammo = ammo;
 	}
@@ -33,7 +33,7 @@ public class PacketAmmoClientUpdate implements IMessage, IMessageHandler<PacketA
 		buf.writeInt(ammo);
 	}
 
-	@Override public PacketAmmoClientUpdate onMessage(PacketAmmoClientUpdate packet, MessageContext ctx)
+	@Override public PacketAmmoUpdate onMessage(PacketAmmoUpdate packet, MessageContext ctx)
 	{
 		((ItemFirearm) Minecraft.getMinecraft().thePlayer.inventory.getCurrentItem().getItem()).setAmmoCount(packet.ammo);
 		return null;

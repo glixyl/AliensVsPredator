@@ -4,7 +4,7 @@ import net.minecraft.client.Minecraft;
 
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.items.ItemFirearm;
-import com.arisux.avp.packets.server.PacketReloadFirearmServerUpdate;
+import com.arisux.avp.packets.server.PacketReloadFirearm;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
@@ -28,7 +28,7 @@ public class CommonFirearmEvents
 				if (AliensVsPredator.instance().keybinds.KEYBIND_FIREARM_RELOAD.isPressed() && this.lastReload > fireArm.getReloadRate())
 				{
 					this.lastReload = 0;
-					AliensVsPredator.instance().network.sendToServer(new PacketReloadFirearmServerUpdate());
+					AliensVsPredator.instance().network.sendToServer(new PacketReloadFirearm());
 				}
 			}
 		}

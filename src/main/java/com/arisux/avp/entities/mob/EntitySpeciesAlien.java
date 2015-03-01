@@ -12,7 +12,7 @@ import com.arisux.airi.lib.WorldUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.EntityAcidPool;
 import com.arisux.avp.interfaces.IHiveSignature;
-import com.arisux.avp.packets.client.PacketKillCountClientUpdate;
+import com.arisux.avp.packets.client.PacketKillCountUpdate;
 
 public abstract class EntitySpeciesAlien extends EntityHostileExtraterrestrial implements IMob, IHiveSignature
 {
@@ -75,7 +75,7 @@ public abstract class EntitySpeciesAlien extends EntityHostileExtraterrestrial i
 		super.onKillEntity(par1EntityLivingBase);
 
 		this.killedEntities++;
-		AliensVsPredator.instance().network.sendToAll(new PacketKillCountClientUpdate(this.getKilledEntities(), Integer.valueOf(this.getEntityId())));
+		AliensVsPredator.instance().network.sendToAll(new PacketKillCountUpdate(this.getKilledEntities(), Integer.valueOf(this.getEntityId())));
 
 		if (!this.worldObj.isRemote && entityEvolveTo != null && minKillsToEvolve != 0 && this.killedEntities >= minKillsToEvolve)
 		{

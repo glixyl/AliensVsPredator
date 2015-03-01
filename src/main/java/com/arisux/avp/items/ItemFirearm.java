@@ -15,8 +15,8 @@ import com.arisux.airi.lib.*;
 import com.arisux.airi.lib.ItemTypes.HookedItem;
 import com.arisux.airi.lib.WorldUtil.Entities.Players.Inventories;
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.packets.server.PacketReloadFirearmServerUpdate;
-import com.arisux.avp.packets.server.PacketShootEntityServerUpdate;
+import com.arisux.avp.packets.server.PacketReloadFirearm;
+import com.arisux.avp.packets.server.PacketShootEntity;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
@@ -75,7 +75,7 @@ public class ItemFirearm extends HookedItem
 				this.renderRecoil();
 				this.fixDelay();
 
-				AliensVsPredator.instance().network.sendToServer(new PacketShootEntityServerUpdate(objMouseOver.entityHit, this));
+				AliensVsPredator.instance().network.sendToServer(new PacketShootEntity(objMouseOver.entityHit, this));
 
 				if (!player.capabilities.isCreativeMode)
 				{
@@ -105,7 +105,7 @@ public class ItemFirearm extends HookedItem
 
 		if (player.worldObj.isRemote)
 		{
-			AliensVsPredator.instance().network.sendToServer(new PacketReloadFirearmServerUpdate());
+			AliensVsPredator.instance().network.sendToServer(new PacketReloadFirearm());
 		}
 
 		this.ammoCount = this.maxAmmoCount;

@@ -11,16 +11,16 @@ import com.arisux.avp.packets.client.PacketChannelClientUpdate;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.*;
 
-public class PacketChannelServerUpdate implements IMessage, IMessageHandler<PacketChannelServerUpdate, PacketChannelServerUpdate>
+public class PacketChannelUpdate implements IMessage, IMessageHandler<PacketChannelUpdate, PacketChannelUpdate>
 {
 	public String username, channel;
 
-	public PacketChannelServerUpdate()
+	public PacketChannelUpdate()
 	{
 		;
 	}
 
-	public PacketChannelServerUpdate(String channel, String username)
+	public PacketChannelUpdate(String channel, String username)
 	{
 		this.channel = channel;
 		this.username = username;
@@ -38,7 +38,7 @@ public class PacketChannelServerUpdate implements IMessage, IMessageHandler<Pack
 		ByteBufUtils.writeUTF8String(buf, this.username);
 	}
 
-	@Override public PacketChannelServerUpdate onMessage(PacketChannelServerUpdate packet, MessageContext ctx)
+	@Override public PacketChannelUpdate onMessage(PacketChannelUpdate packet, MessageContext ctx)
 	{
 		EntityPlayer targetPlayer = WorldUtil.Entities.Players.getPlayerForUsername(ctx.getServerHandler().playerEntity.worldObj, packet.username);
 		

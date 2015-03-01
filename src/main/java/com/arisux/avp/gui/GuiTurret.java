@@ -101,7 +101,7 @@ public class GuiTurret extends GuiContainer
 
 		for (Class<? extends Entity> c : this.tile.getDangerousTargets())
 		{
-			AliensVsPredator.instance().network.sendToServer(new PacketTurretAddTargetUpdate(this.tile.xCoord, this.tile.yCoord, this.tile.zCoord, EntityList.getEntityID(WorldUtil.Entities.constructEntity(this.tile.getWorldObj(), c))));
+			AliensVsPredator.instance().network.sendToServer(new PacketAddTuretTarget(this.tile.xCoord, this.tile.yCoord, this.tile.zCoord, EntityList.getEntityID(WorldUtil.Entities.constructEntity(this.tile.getWorldObj(), c))));
 		}
 	}
 
@@ -229,7 +229,7 @@ public class GuiTurret extends GuiContainer
 					else
 					{
 						tile.setSafe(getCurrentSelectedEntity());
-						AliensVsPredator.instance().network.sendToServer(new PacketTurretRemoveTargetUpdate(tile.xCoord, tile.yCoord, tile.zCoord, EntityList.getEntityID(getCurrentSelectedEntity())));
+						AliensVsPredator.instance().network.sendToServer(new PacketRemoveTurretTarget(tile.xCoord, tile.yCoord, tile.zCoord, EntityList.getEntityID(getCurrentSelectedEntity())));
 					}
 				}
 			}

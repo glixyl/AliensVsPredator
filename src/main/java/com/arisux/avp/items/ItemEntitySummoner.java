@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 import com.arisux.airi.lib.ItemTypes.HookedItem;
 import com.arisux.airi.lib.WorldUtil;
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.packets.server.PacketSpawnEntityServerUpdate;
+import com.arisux.avp.packets.server.PacketSpawnEntity;
 
 public class ItemEntitySummoner extends HookedItem
 {
@@ -34,7 +34,7 @@ public class ItemEntitySummoner extends HookedItem
 		if (par2World.isRemote && entity != null)
 		{
 			MovingObjectPosition ray = par3EntityPlayer.rayTrace(50D, 1F);
-			AliensVsPredator.instance().network.sendToServer(new PacketSpawnEntityServerUpdate(ray.blockX, ray.blockY, ray.blockZ, EntityList.getEntityID(entity)));
+			AliensVsPredator.instance().network.sendToServer(new PacketSpawnEntity(ray.blockX, ray.blockY, ray.blockZ, EntityList.getEntityID(entity)));
 		}
 
 		return super.onItemRightClick(par1ItemStack, par2World, par3EntityPlayer);
