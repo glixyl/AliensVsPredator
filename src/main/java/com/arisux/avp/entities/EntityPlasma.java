@@ -2,8 +2,7 @@ package com.arisux.avp.entities;
 
 import java.util.List;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.nbt.NBTTagCompound;
@@ -50,7 +49,17 @@ public class EntityPlasma extends EntityThrowable
 
 		MovingObjectPosition movingObjectPosition = this.worldObj.rayTraceBlocks(Vec3.createVectorHelper(this.posX, this.posY, this.posZ), Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ));
 
-		if (movingObjectPosition != null)
+		if (!this.worldObj.isRemote)
+		{
+			Entity entityHit = WorldUtil.Entities.getEntityInCoordsRange(worldObj, EntityLiving.class, new CoordData(this), 1, 1);
+
+			if (entityHit != null)
+			{
+				this.onImpact(movingObjectPosition);
+			}
+		}
+		
+		if (movingObjectPosition != null || this.isCollidedHorizontally)
 		{
 			this.onImpact(movingObjectPosition);
 			this.setDead();
