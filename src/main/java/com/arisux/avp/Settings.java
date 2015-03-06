@@ -84,6 +84,7 @@ public class Settings
 			entityList.put("PREDALIEN", config.get(CATEGORY_IDS, "PREDALIEN", idStart++).getInt());
 			entityList.put("AQUA", config.get(CATEGORY_IDS, "AQUA", idStart++).getInt());
 			entityList.put("COMBAT_SYNTHETIC", config.get(CATEGORY_IDS, "COMBAT_SYNTHETIC", idStart++).getInt());
+			entityList.put("PROTOMORPH", config.get(CATEGORY_IDS, "PROTOMORPH", idStart++).getInt());
 
 			entityList.put("CELTIC_SPEAR", config.get(CATEGORY_IDS, "CELTIC_SPEAR", 1512).getInt());
 			entityList.put("PROXIMITY_MINE", config.get(CATEGORY_IDS, "PROXIMITY_MINE", 1513).getInt());

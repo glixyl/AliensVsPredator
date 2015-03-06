@@ -14,14 +14,14 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.dimension.varda.TeleporterVarda;
+import com.arisux.avp.dimension.TeleporterLV;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockPortalLV223 extends BlockBreakable
+public class BlockPortalVarda extends BlockBreakable
 {
-	public BlockPortalLV223()
+	public BlockPortalVarda()
 	{
 		super("avp:blockPortalVarda", Material.portal, false);
 		setTickRandomly(true);
@@ -79,14 +79,14 @@ public class BlockPortalLV223 extends BlockBreakable
 			if (player.timeUntilPortal > 0)
 			{
 				player.timeUntilPortal = 10;
-			} else if (player.dimension != AliensVsPredator.properties().DIMENSION_ID_LV223)
+			} else if (player.dimension != AliensVsPredator.properties().DIMENSION_ID_INT_VARDA)
 			{
 				player.timeUntilPortal = 10;
-				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, AliensVsPredator.properties().DIMENSION_ID_LV223, new TeleporterVarda(server.worldServerForDimension(AliensVsPredator.properties().DIMENSION_ID_LV223)));
+				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, AliensVsPredator.properties().DIMENSION_ID_INT_VARDA, new TeleporterLV(server.worldServerForDimension(AliensVsPredator.properties().DIMENSION_ID_INT_VARDA)));
 			} else
 			{
 				player.timeUntilPortal = 10;
-				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, 0, new TeleporterVarda(server.worldServerForDimension(1)));
+				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, 0, new TeleporterLV(server.worldServerForDimension(1)));
 			}
 		}
 	}

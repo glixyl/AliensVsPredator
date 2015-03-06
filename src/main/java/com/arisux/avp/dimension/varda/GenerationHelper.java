@@ -1,8 +1,6 @@
 package com.arisux.avp.dimension.varda;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirectional;
@@ -28,7 +26,7 @@ public abstract class GenerationHelper extends WorldGenerator
 		this.componentType = var1;
 		this.coordBaseMode = -1;
 	}
-	
+
 	public StructureBoundingBox getBoundingBox()
 	{
 		return this.boundingBox;
@@ -51,7 +49,7 @@ public abstract class GenerationHelper extends WorldGenerator
 				return null;
 			}
 
-			var3 = (GenerationHelper) var2.next();
+			var3 = var2.next();
 		}
 		while ((var3.getBoundingBox() == null) || (!var3.getBoundingBox().intersectsWith(var1)));
 
@@ -139,13 +137,13 @@ public abstract class GenerationHelper extends WorldGenerator
 	{
 		switch (this.coordBaseMode)
 		{
-		case 0:
-		case 2:
-			return this.boundingBox.minX + var1;
-		case 1:
-			return this.boundingBox.maxX - var2;
-		case 3:
-			return this.boundingBox.minX + var2;
+			case 0:
+			case 2:
+				return this.boundingBox.minX + var1;
+			case 1:
+				return this.boundingBox.maxX - var2;
+			case 3:
+				return this.boundingBox.minX + var2;
 		}
 
 		return var1;
@@ -160,13 +158,13 @@ public abstract class GenerationHelper extends WorldGenerator
 	{
 		switch (this.coordBaseMode)
 		{
-		case 0:
-			return this.boundingBox.minZ + var2;
-		case 1:
-		case 3:
-			return this.boundingBox.minZ + var1;
-		case 2:
-			return this.boundingBox.maxZ - var2;
+			case 0:
+				return this.boundingBox.minZ + var2;
+			case 1:
+			case 3:
+				return this.boundingBox.minZ + var1;
+			case 2:
+				return this.boundingBox.maxZ - var2;
 		}
 
 		return var2;
@@ -592,27 +590,7 @@ public abstract class GenerationHelper extends WorldGenerator
 
 	protected void fillWithRandomizedBlocks(World var1, StructureBoundingBox var2, int var3, int var4, int var5, int var6, int var7, int var8, boolean var9, Random var10, StructureComponent var11)
 	{
-		for (int var12 = var4; var12 <= var7; var12++)
-		{
-			for (int var13 = var3; var13 <= var6; var13++)
-			{
-				for (int var14 = var5; var14 <= var8; var14++)
-				{
-					if ((var9) && (getBlockAtCurrentPosition(var1, var13, var12, var14, var2) == Blocks.air))
-						continue;
-					// TODO: WTF IS THIS
-					// var11.selectBlocks(var10, var13,
-					// var12, var14, (var12 == var4) ||
-					// (var12 == var7) || (var13 == var3) ||
-					// (var13 == var6) || (var14 == var5) ||
-					// (var14 == var8));
-					// placeBlockAtCurrentPosition(var1,
-					// var11.getSelectedBlockId(),
-					// var11.getSelectedBlockMetaData(),
-					// var13, var12, var14, var2);
-				}
-			}
-		}
+		;
 	}
 
 	protected void randomlyFillWithBlocks(World var1, StructureBoundingBox var2, Random var3, float var4, int var5, int var6, int var7, int var8, int var9, int var10, int var11, int var12, boolean var13)

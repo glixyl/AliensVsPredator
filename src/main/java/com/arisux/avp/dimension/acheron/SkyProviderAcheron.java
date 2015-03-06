@@ -1,36 +1,28 @@
-package com.arisux.avp.dimension.varda;
+package com.arisux.avp.dimension.acheron;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.*;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.client.IRenderHandler;
 
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.dimension.BiomeLVBase;
-import com.arisux.avp.event.StormUpdateEvent;
 
-public class SkyProviderVarda extends IRenderHandler
+import cpw.mods.fml.client.FMLClientHandler;
+
+public class SkyProviderAcheron extends IRenderHandler
 {
-	private StormUpdateEvent event;
-	private float[] stormXCoords = null;
-	private float[] stormZCoords = null;
-
 	public int starGLCallList = GLAllocation.generateDisplayLists(3);
 	public int glSkyList;
 
-	public SkyProviderVarda()
+	public SkyProviderAcheron()
 	{
-		this.event = (StormUpdateEvent) AliensVsPredator.instance().localEvents.getEvent(StormUpdateEvent.class);
 		Tessellator tessellator = Tessellator.instance;
 
 		GL11.glNewList(this.starGLCallList, GL11.GL_COMPILE);
@@ -62,54 +54,30 @@ public class SkyProviderVarda extends IRenderHandler
 	@Override
 	public void render(float renderPartialTicks, WorldClient world, Minecraft mc)
 	{
-		ProviderVarda provider = (ProviderVarda) world.provider;
 		Tessellator tessellator = Tessellator.instance;
-
-		if (provider.isSilicaStormActive())
-		{
-			// this.renderStorm(renderPartialTicks);
-		}
 
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glColor3f(1.0F, 1.0F, 1.0F);
 		GL11.glDepthMask(false);
 		GL11.glEnable(GL11.GL_FOG);
-		GL11.glColor3f(0.11F, 0.225F, 0.265F);
+		GL11.glColor3f(0.071F, 0.095F, 0.195F);
 		GL11.glCallList(this.glSkyList);
 		GL11.glDisable(GL11.GL_FOG);
 		GL11.glDisable(GL11.GL_ALPHA_TEST);
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, provider.getStarBrightness(renderPartialTicks) * 2);
+		GL11.glColor4f(0.0F, 0.5F, 1.0F, 0.15F);
 		GL11.glCallList(this.starGLCallList);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, 1);
 
 		GL11.glPushMatrix();
 		{
-			float scale = 30.0F;
+			float scale = 5.0F;
 			GL11.glRotatef(-90.0F, 0.0F, 1.0F, 0.0F);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			GL11.glRotatef(world.getCelestialAngle(renderPartialTicks) * 360.0F, 1.0F, 0.0F, 0.0F);
 			RenderUtil.bindTexture(AliensVsPredator.resources().SKY_SUN);
-			tessellator.startDrawingQuads();
-			tessellator.addVertexWithUV(-scale, 150.0D, -scale, 0.0D, 0.0D);
-			tessellator.addVertexWithUV(scale, 150.0D, -scale, 1.0D, 0.0D);
-			tessellator.addVertexWithUV(scale, 150.0D, scale, 1.0D, 1.0D);
-			tessellator.addVertexWithUV(-scale, 150.0D, scale, 0.0D, 1.0D);
-			tessellator.draw();
-		}
-		GL11.glPopMatrix();
-
-		GL11.glPushMatrix();
-		{
-			float scale = 275.0F;
-			GL11.glTranslatef(30F, 0F, 0F);
-			GL11.glRotatef(calculateAngleFromPlanet(world.getWorldTime(), renderPartialTicks) * 360.0F, 0.0F, 1.0F, 0.0F);
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			GL11.glRotatef(calculateAngleFromPlanet(world.getWorldTime(), renderPartialTicks) * 360.0F, 10.0F, -6.0F, -20.0F);
-			GL11.glRotatef(135F, 0.0F, 1.0F, 0.0F);
-			RenderUtil.bindTexture(AliensVsPredator.resources().SKY_CALPAMOS);
 			tessellator.startDrawingQuads();
 			tessellator.addVertexWithUV(-scale, 150.0D, -scale, 0.0D, 0.0D);
 			tessellator.addVertexWithUV(scale, 150.0D, -scale, 1.0D, 0.0D);
@@ -132,7 +100,7 @@ public class SkyProviderVarda extends IRenderHandler
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawingQuads();
 
-		for (int var3 = 0; var3 < 6000; var3++)
+		for (int amountOfStars = 0; amountOfStars < 6000; amountOfStars++)
 		{
 			double var4 = rand.nextFloat() * 2.0F - 1.0F;
 			double var6 = rand.nextFloat() * 2.0F - 1.0F;
@@ -178,6 +146,24 @@ public class SkyProviderVarda extends IRenderHandler
 		tessellator.draw();
 	}
 
+	public float getSkyBrightness(float renderPartialTicks)
+	{
+		float angle = FMLClientHandler.instance().getClient().theWorld.getCelestialAngle(renderPartialTicks);
+		float brightness = 1.0F - (MathHelper.sin(angle * 3.141593F * 2.0F) * 2.0F + 0.25F);
+
+		if (brightness < 0.0F)
+		{
+			brightness = 0.0F;
+		}
+
+		if (brightness > 1.0F)
+		{
+			brightness = 1.0F;
+		}
+
+		return brightness * brightness * 1.0F;
+	}
+
 	public static float calculateAngleFromPlanet(long worldTime, float renderPartialTicks)
 	{
 		int remainingTime = (int) (worldTime % 48000L);
@@ -199,119 +185,6 @@ public class SkyProviderVarda extends IRenderHandler
 		return angle;
 	}
 
-	public void renderStorm(float renderPartialTicks)
-	{
-		Minecraft mc = Minecraft.getMinecraft();
-		float gustSize = 4F;
-		float intensity = 2F;
-		float windSpeed = 1F;
-		int maxStormSize = 32;
-		mc.entityRenderer.enableLightmap(renderPartialTicks);
-
-		stormXCoords = null;
-
-		if (stormXCoords == null || stormZCoords == null)
-		{
-			stormXCoords = new float[maxStormSize * maxStormSize];
-			stormZCoords = new float[maxStormSize * maxStormSize];
-
-			for (int zCoord = 0; zCoord < maxStormSize; ++zCoord)
-			{
-				for (int xCoord = 0; xCoord < maxStormSize; ++xCoord)
-				{
-					float x = xCoord - 16;
-					float z = zCoord - 16;
-					float sq = MathHelper.sqrt_float(x * x + z * z);
-					stormXCoords[zCoord << 5 | xCoord] = -z / sq;
-					stormZCoords[zCoord << 5 | xCoord] = x / sq;
-				}
-			}
-		}
-
-		EntityLivingBase renderViewEntity = mc.renderViewEntity;
-		WorldClient worldclient = mc.theWorld;
-		Tessellator tessellator = Tessellator.instance;
-		int posX = MathHelper.floor_double(renderViewEntity.posX);
-		int posY = MathHelper.floor_double(renderViewEntity.posY);
-		int posZ = MathHelper.floor_double(renderViewEntity.posZ);
-		double renderPartialX = renderViewEntity.lastTickPosX + (renderViewEntity.posX - renderViewEntity.lastTickPosX) * renderPartialTicks;
-		double renderPartialY = renderViewEntity.lastTickPosY + (renderViewEntity.posY - renderViewEntity.lastTickPosY) * renderPartialTicks;
-		double renderPartialZ = renderViewEntity.lastTickPosZ + (renderViewEntity.posZ - renderViewEntity.lastTickPosZ) * renderPartialTicks;
-		int renderYFloor = MathHelper.floor_double(renderPartialY);
-		byte layers = (byte) (mc.gameSettings.fancyGraphics ? (maxStormSize / 2) - 1 : (maxStormSize / 4));
-
-		GL11.glDisable(GL11.GL_CULL_FACE);
-		GL11.glNormal3f(0.0F, 1.0F, 0.0F);
-		GL11.glEnable(GL11.GL_BLEND);
-		OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
-		GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		RenderUtil.bindTexture(AliensVsPredator.resources().SKY_SILICA);
-
-		for (int vZ = posZ - layers; vZ <= posZ + layers; ++vZ)
-		{
-			for (int vX = posX - layers; vX <= posX + layers; ++vX)
-			{
-				int j1 = (vZ - posZ + 16) * 32 + vX - posX + 16;
-				float rotationX = stormXCoords[j1] * 0.5F;
-				float rotationZ = stormZCoords[j1] * 0.5F;
-				BiomeGenBase biomegenbase = worldclient.getBiomeGenForCoords(vX, vZ);
-
-				if (biomegenbase == BiomeLVBase.varda)
-				{
-					int stormHeight = worldclient.getPrecipitationHeight(vX, vZ);
-					int minY = posY - (mc.gameSettings.fancyGraphics ? 32 : 16);
-					int maxY = posY + (mc.gameSettings.fancyGraphics ? 32 : 16);
-
-					if (minY < stormHeight)
-					{
-						minY = stormHeight;
-					}
-
-					if (maxY < stormHeight)
-					{
-						maxY = stormHeight;
-					}
-
-					int vY = stormHeight;
-
-					if (stormHeight < renderYFloor)
-					{
-						vY = renderYFloor;
-					}
-
-					if (maxY >= worldclient.provider.getCloudHeight())
-					{
-						maxY = (int) worldclient.provider.getCloudHeight();
-					}
-
-					if (minY != maxY)
-					{
-						float movement = 0F;
-						Block block = worldclient.getBlock(vX, vY, vZ);
-
-						movement = ((event.getStormUpdateCount() + vX * vX * 3121 + vX * 45238971 + vZ * vZ * 418711 + vZ * 13761 & 31) + renderPartialTicks) / 16.0F * intensity;
-						movement = movement * windSpeed;
-						tessellator.startDrawingQuads();
-						tessellator.setBrightness(worldclient.getLightBrightnessForSkyBlocks(vX, vY, vZ, 0));
-						tessellator.setColorRGBA_F(0.3F, 0.3F, 0.3F, 1F);
-						tessellator.setTranslation(-renderPartialX * 1.0D, -renderPartialY * 1.0D, -renderPartialZ * 1.0D);
-						tessellator.addVertexWithUV(vX - rotationX + 0.5D, minY, vZ - rotationZ + 0.5D + movement * gustSize, 0.0F * gustSize, minY * gustSize / 4.0F + movement * gustSize);
-						tessellator.addVertexWithUV(vX + rotationX + 0.5D, minY, vZ + rotationZ + 0.5D + movement * gustSize, 1.0F * gustSize, minY * gustSize / 4.0F + movement * gustSize);
-						tessellator.addVertexWithUV(vX + rotationX + 0.5D, maxY, vZ + rotationZ + 0.5D + movement * gustSize, 1.0F * gustSize, maxY * gustSize / 4.0F + movement * gustSize);
-						tessellator.addVertexWithUV(vX - rotationX + 0.5D, maxY, vZ - rotationZ + 0.5D + movement * gustSize, 0.0F * gustSize, maxY * gustSize / 4.0F + movement * gustSize);
-						tessellator.setTranslation(0.0D, 0.0D, 0.0D);
-						tessellator.draw();
-					}
-				}
-			}
-		}
-
-		GL11.glEnable(GL11.GL_CULL_FACE);
-		GL11.glDisable(GL11.GL_BLEND);
-		GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
-		mc.entityRenderer.disableLightmap(renderPartialTicks);
-	}
 
 	public void renderClouds(float renderPartialTicks)
 	{
@@ -354,7 +227,7 @@ public class SkyProviderVarda extends IRenderHandler
 					}
 
 					f5 = 4.8828125E-4F;
-					double d2 = this.event.getCloudTickCounter() + renderPartialTicks;
+					double d2 = Minecraft.getMinecraft().theWorld.getWorldTime() + renderPartialTicks;
 					double d0 = mc.renderViewEntity.prevPosX + (mc.renderViewEntity.posX - mc.renderViewEntity.prevPosX) * renderPartialTicks + d2 * 0.029999999329447746D;
 					double d1 = mc.renderViewEntity.prevPosZ + (mc.renderViewEntity.posZ - mc.renderViewEntity.prevPosZ) * renderPartialTicks;
 					int j = MathHelper.floor_double(d0 / 2048.0D);
@@ -397,7 +270,7 @@ public class SkyProviderVarda extends IRenderHandler
 		float f1 = (float) (mc.renderViewEntity.lastTickPosY + (mc.renderViewEntity.posY - mc.renderViewEntity.lastTickPosY) * renderPartialTicks);
 		float cloudSpan = 10.0F;
 		float cloudHeight = 7.0F;
-		double d0 = this.event.getCloudTickCounter() + renderPartialTicks;
+		double d0 = Minecraft.getMinecraft().theWorld.getWorldTime() + renderPartialTicks;
 		double d1 = (mc.renderViewEntity.prevPosX + (mc.renderViewEntity.posX - mc.renderViewEntity.prevPosX) * renderPartialTicks + d0 * 0.029999999329447746D) / cloudSpan;
 		double d2 = (mc.renderViewEntity.prevPosZ + (mc.renderViewEntity.posZ - mc.renderViewEntity.prevPosZ) * renderPartialTicks) / cloudSpan + 0.33000001311302185D;
 		float posY = mc.theWorld.provider.getCloudHeight() - 7 - f1 + 0.33F;
@@ -535,5 +408,4 @@ public class SkyProviderVarda extends IRenderHandler
 		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glEnable(GL11.GL_CULL_FACE);
 	}
-
 }

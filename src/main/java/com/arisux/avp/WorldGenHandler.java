@@ -1,6 +1,7 @@
 package com.arisux.avp;
 
 import com.arisux.airi.lib.interfaces.IInitializable;
+import com.arisux.avp.dimension.varda.WorldGeneratorVarda;
 import com.arisux.avp.world.WorldGenerator;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -12,5 +13,6 @@ public class WorldGenHandler implements IInitializable
 	public void initialize(FMLInitializationEvent event)
 	{
 		GameRegistry.registerWorldGenerator(new WorldGenerator(), 1);
+		GameRegistry.registerWorldGenerator(new WorldGeneratorVarda(), 1);
 	}
 }

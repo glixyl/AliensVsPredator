@@ -11,33 +11,33 @@ import com.arisux.avp.AliensVsPredator;
 
 public class VardaGenSpike2 extends WorldGenerator
 {
-	protected Block[] GetValidSpawnBlocks()
+	protected Block[] getSpawnBlocks()
 	{
 		return new Block[] { AliensVsPredator.instance().blocks.terrainUniDirt };
 	}
 
-	public boolean LocationIsValidSpawn(World world, int i, int j, int k)
+	public boolean isLocationValid(World world, int posX, int posY, int posZ)
 	{
 		int distanceToAir = 0;
-		Block checkID = world.getBlock(i, j, k);
+		Block checkID = world.getBlock(posX, posY, posZ);
 
 		while (checkID != Blocks.air)
 		{
 			distanceToAir++;
-			checkID = world.getBlock(i, j + distanceToAir, k);
+			checkID = world.getBlock(posX, posY + distanceToAir, posZ);
 		}
 
 		if (distanceToAir > 3)
 		{
 			return false;
 		}
-		j += distanceToAir - 1;
+		posY += distanceToAir - 1;
 
-		Block blockID = world.getBlock(i, j, k);
-		Block blockIDAbove = world.getBlock(i, j + 1, k);
-		Block blockIDBelow = world.getBlock(i, j - 1, k);
+		Block blockID = world.getBlock(posX, posY, posZ);
+		Block blockIDAbove = world.getBlock(posX, posY + 1, posZ);
+		Block blockIDBelow = world.getBlock(posX, posY - 1, posZ);
 
-		for (Block x : GetValidSpawnBlocks())
+		for (Block x : getSpawnBlocks())
 		{
 			if (blockIDAbove != Blocks.air)
 			{
@@ -56,27 +56,29 @@ public class VardaGenSpike2 extends WorldGenerator
 	}
 
 	@Override
-	public boolean generate(World world, Random rand, int i, int j, int k)
+	public boolean generate(World world, Random rand, int posX, int posY, int posZ)
 	{
-		if ((!LocationIsValidSpawn(world, i, j, k)) || (!LocationIsValidSpawn(world, i + 2, j, k)) || (!LocationIsValidSpawn(world, i + 2, j, k + 2)) || (!LocationIsValidSpawn(world, i, j, k + 2)))
+		if ((!isLocationValid(world, posX, posY, posZ)) || (!isLocationValid(world, posX + 2, posY, posZ)) || (!isLocationValid(world, posX + 2, posY, posZ + 2)) || (!isLocationValid(world, posX, posY, posZ + 2)))
 		{
 			return false;
 		}
+		
+		Block blockDirt = AliensVsPredator.instance().blocks.terrainUniDirt;
 
-		world.setBlock(i + 0, j + 0, k + 1, AliensVsPredator.instance().blocks.terrainUniDirt);
-		world.setBlock(i + 0, j + 1, k + 1, AliensVsPredator.instance().blocks.terrainUniDirt);
-		world.setBlock(i + 0, j + 2, k + 1, AliensVsPredator.instance().blocks.terrainUniDirt);
-		world.setBlock(i + 1, j + 0, k + 0, AliensVsPredator.instance().blocks.terrainUniDirt);
-		world.setBlock(i + 1, j + 0, k + 1, AliensVsPredator.instance().blocks.terrainUniDirt);
-		world.setBlock(i + 1, j + 0, k + 2, AliensVsPredator.instance().blocks.terrainUniDirt);
-		world.setBlock(i + 1, j + 1, k + 0, AliensVsPredator.instance().blocks.terrainUniDirt);
-		world.setBlock(i + 1, j + 1, k + 1, AliensVsPredator.instance().blocks.terrainUniDirt);
-		world.setBlock(i + 1, j + 2, k + 1, AliensVsPredator.instance().blocks.terrainUniDirt);
-		world.setBlock(i + 1, j + 3, k + 1, AliensVsPredator.instance().blocks.terrainUniDirt);
-		world.setBlock(i + 1, j + 4, k + 1, AliensVsPredator.instance().blocks.terrainUniDirt);
-		world.setBlock(i + 1, j + 5, k + 1, AliensVsPredator.instance().blocks.terrainUniDirt);
-		world.setBlock(i + 2, j + 0, k + 1, AliensVsPredator.instance().blocks.terrainUniDirt);
-		world.setBlock(i + 2, j + 1, k + 1, AliensVsPredator.instance().blocks.terrainUniDirt);
+		world.setBlock(posX + 0, posY + 0, posZ + 1, blockDirt);
+		world.setBlock(posX + 0, posY + 1, posZ + 1, blockDirt);
+		world.setBlock(posX + 0, posY + 2, posZ + 1, blockDirt);
+		world.setBlock(posX + 1, posY + 0, posZ + 0, blockDirt);
+		world.setBlock(posX + 1, posY + 0, posZ + 1, blockDirt);
+		world.setBlock(posX + 1, posY + 0, posZ + 2, blockDirt);
+		world.setBlock(posX + 1, posY + 1, posZ + 0, blockDirt);
+		world.setBlock(posX + 1, posY + 1, posZ + 1, blockDirt);
+		world.setBlock(posX + 1, posY + 2, posZ + 1, blockDirt);
+		world.setBlock(posX + 1, posY + 3, posZ + 1, blockDirt);
+		world.setBlock(posX + 1, posY + 4, posZ + 1, blockDirt);
+		world.setBlock(posX + 1, posY + 5, posZ + 1, blockDirt);
+		world.setBlock(posX + 2, posY + 0, posZ + 1, blockDirt);
+		world.setBlock(posX + 2, posY + 1, posZ + 1, blockDirt);
 
 		return true;
 	}

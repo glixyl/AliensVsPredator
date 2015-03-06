@@ -1,36 +1,29 @@
-package com.arisux.avp.dimension.varda;
+package com.arisux.avp.dimension.acheron;
 
 import java.util.Random;
 
-import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.feature.WorldGenFlowers;
+import net.minecraft.world.gen.feature.WorldGenerator;
 
 import com.arisux.airi.lib.WorldUtil;
 import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.dimension.BiomeLVBase;
-import com.arisux.avp.dimension.varda.worldgen.VardaGenSpike;
 
-public class BiomeDecoratorVarda extends BiomeDecorator
+public class BiomeDecoratorAcheron extends BiomeDecorator
 {
 	protected World world;
 	public BiomeLVBase biome;
 	public WorldGenerator stalagmiteGen;
-	public WorldGenerator landSpikeGen;
-	public WorldGenLakes lakeGeneration;
-	public WorldGenLiquids caveWaterGen;
 
-	public BiomeDecoratorVarda(BiomeLVBase biome)
+	public BiomeDecoratorAcheron(BiomeLVBase biome)
 	{
 		super();
 		this.biome = biome;
 		this.stalagmiteGen = new WorldGenFlowers(AliensVsPredator.instance().blocks.terrainStalagmite);
-		this.landSpikeGen = new VardaGenSpike(true);
-		this.lakeGeneration = new WorldGenLakes(Blocks.water);
-		this.caveWaterGen = new WorldGenLiquids(Blocks.flowing_water);
 	}
 
 	@Override
@@ -56,7 +49,6 @@ public class BiomeDecoratorVarda extends BiomeDecorator
 		this.generateOres();
 
 		WorldUtil.generateWorldGenInChunk(world, this.stalagmiteGen, this.randomGenerator, 10, new CoordData(chunk_X, 0, chunk_Z));
-		WorldUtil.generateWorldGenInChunk(world, this.landSpikeGen, this.randomGenerator, 10, new CoordData(chunk_X, 0, chunk_Z));
 	}
 
 	@Override

@@ -18,12 +18,12 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 
 public class ItemHandler extends IBHandler implements IInitializable
 {
-	public static final  ArmorMaterial YAUTJA = EnumHelper.addArmorMaterial("YAUTJA", 32, new int[] { 4, 7, 5, 3 }, 9);
-	public static final  ArmorMaterial XENO = EnumHelper.addArmorMaterial("XENO", 30, new int[] { 2, 7, 5, 3 }, 7);
-	public static final  ArmorMaterial TACTICAL = EnumHelper.addArmorMaterial("TACTICAL", 25, new int[] { 2, 6, 3, 2 }, 5);
-	public static final  ArmorMaterial PRESSURESUIT = EnumHelper.addArmorMaterial("PRESSURESUIT", 24, new int[] { 2, 4, 3, 2 }, 6);
+	public static final ArmorMaterial YAUTJA = EnumHelper.addArmorMaterial("YAUTJA", 32, new int[] { 4, 7, 5, 3 }, 9);
+	public static final ArmorMaterial XENO = EnumHelper.addArmorMaterial("XENO", 30, new int[] { 2, 7, 5, 3 }, 7);
+	public static final ArmorMaterial TACTICAL = EnumHelper.addArmorMaterial("TACTICAL", 25, new int[] { 2, 6, 3, 2 }, 5);
+	public static final ArmorMaterial PRESSURESUIT = EnumHelper.addArmorMaterial("PRESSURESUIT", 24, new int[] { 2, 4, 3, 2 }, 6);
 	public static final ToolMaterial YAUTJA_TOOLS = EnumHelper.addToolMaterial("CELTIC", 12, 1430, 9.0F, 8.0F, 9);
-	public static final  ToolMaterial XENO_TOOLS = EnumHelper.addToolMaterial("XENO", 7, 730, 10.0F, 7.0F, 14);
+	public static final ToolMaterial XENO_TOOLS = EnumHelper.addToolMaterial("XENO", 7, 730, 10.0F, 7.0F, 14);
 
 	public Item helmXeno = (new ItemArmorXeno(XENO, 4, 0)),
 		plateXeno = (new ItemArmorXeno(XENO, 4, 1)),
@@ -103,7 +103,8 @@ public class ItemHandler extends IBHandler implements IInitializable
 		itemSummonerRoyalFacehugger = (new ItemEntitySummoner(this.getMod().domain(), EntityRoyalFacehugger.class)),
 		itemSummonerYautja = (new ItemEntitySummoner(this.getMod().domain(), EntityYautja.class)),
 		itemSummonerPredalien = (new ItemEntitySummoner(this.getMod().domain(), EntityPredalien.class)),
-		itemSummonerCombatSynthetic = (new ItemEntitySummoner(this.getMod().domain(), EntityCombatSynthetic.class));
+		itemSummonerCombatSynthetic = (new ItemEntitySummoner(this.getMod().domain(), EntityCombatSynthetic.class)),
+		itemSummonerProtomorph = (new ItemEntitySummoner(this.getMod().domain(), EntityProtomorph.class));
 
 	public ItemHandler()
 	{
@@ -119,6 +120,8 @@ public class ItemHandler extends IBHandler implements IInitializable
 		registerItem(itemSummonerSpitter, "summon.spitter");
 		registerItem(itemSummonerPraetorian, "summon.praetorian");
 		registerItem(itemSummonerQueen, "summon.queen");
+		registerItem(itemSummonerPredalien, "summon.predalien");
+		registerItem(itemSummonerProtomorph, "summon.protomorph");
 		registerItem(itemSummonerOvamorph, "summon.ovamorph");
 		registerItem(itemSummonerFacehugger, "summon.facehugger");
 		registerItem(itemSummonerRoyalFacehugger, "summon.royalfacehugger");
@@ -127,7 +130,6 @@ public class ItemHandler extends IBHandler implements IInitializable
 		registerItem(itemSummonerMarine, "summon.marine");
 		registerItem(itemSummonerCombatSynthetic, "summon.synthetic.combat");
 		registerItem(itemSummonerAqua, "summon.aqua");
-		registerItem(itemSummonerPredalien, "summon.predalien");
 		registerItem(pressureMask, "helm.pressure");
 		registerItem(pressureChest, "body.pressure");
 		registerItem(pressurePants, "legwear.pressure");

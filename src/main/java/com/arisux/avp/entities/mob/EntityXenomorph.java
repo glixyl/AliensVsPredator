@@ -12,11 +12,13 @@ import com.arisux.avp.entities.EntityAcidPool;
 public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 {
 	public int targetQueenId;
+	protected boolean canClimb;
 
 	public EntityXenomorph(World world)
 	{
 		super(world);
 		this.jumpMovementFactor = 0.03F;
+		this.canClimb = true;
 	}
 
 	@Override
@@ -43,17 +45,26 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 	{
 		return true;
 	}
+	
+	public boolean canClimb()
+	{
+		return this.canClimb;
+	}
 
 	@Override
 	public void onUpdate()
 	{
 		super.onUpdate();
-
+		
 		this.fallDistance = 0F;
 
-		if (this.isCollidedHorizontally)
+		if (this.canClimb)
 		{
-			this.motionY += 0.2F;
+
+			if (this.isCollidedHorizontally)
+			{
+				this.motionY += 0.2F;
+			}
 		}
 
 		if (this.worldObj.getWorldTime() % 100 == 0 && rand.nextInt(6) == 0)

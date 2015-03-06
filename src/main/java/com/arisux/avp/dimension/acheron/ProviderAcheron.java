@@ -1,25 +1,23 @@
-package com.arisux.avp.dimension.varda;
+package com.arisux.avp.dimension.acheron;
 
 import net.minecraft.util.*;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.client.IRenderHandler;
-import net.minecraftforge.common.DimensionManager;
 
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.dimension.BiomeLVBase;
-import com.arisux.avp.dimension.acheron.ChunkProviderAcheron;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ProviderVarda extends WorldProvider
+public class ProviderAcheron extends WorldProvider
 {
 	@SideOnly(Side.CLIENT)
 	private IRenderHandler skyProvider;
 
-	public ProviderVarda()
+	public ProviderAcheron()
 	{
 		;
 	}
@@ -27,51 +25,46 @@ public class ProviderVarda extends WorldProvider
 	@Override
 	public void registerWorldChunkManager()
 	{
-		this.worldChunkMgr = new ChunkManagerVarda(BiomeLVBase.varda);
+		this.worldChunkMgr = new ChunkManagerAcheron(BiomeLVBase.acheron);
 		this.hasNoSky = false;
 		this.isHellWorld = false;
-	}
-
-	public static WorldProvider getProviderForDimension(int var0)
-	{
-		return DimensionManager.createProviderFor(7);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IRenderHandler getSkyRenderer()
 	{
-		return skyProvider == null ? skyProvider = new SkyProviderVarda() : skyProvider;
+		return skyProvider == null ? skyProvider = new SkyProviderAcheron() : skyProvider;
 	}
 
 	@Override
 	public String getSaveFolder()
 	{
-		return AliensVsPredator.properties().DIMENSION_ID_VARDA;
+		return AliensVsPredator.properties().DIMENSION_ID_ACHERON;
 	}
 
 	@Override
 	public String getWelcomeMessage()
 	{
-		return "Enterring " + AliensVsPredator.properties().DIMENSION_NAME_VARDA;
+		return "Enterring " + AliensVsPredator.properties().DIMENSION_NAME_ACHERON;
 	}
 
 	@Override
 	public String getDepartMessage()
 	{
-		return "Leaving" + AliensVsPredator.properties().DIMENSION_NAME_VARDA;
+		return "Leaving" + AliensVsPredator.properties().DIMENSION_NAME_ACHERON;
 	}
 
 	@Override
 	public ChunkCoordinates getEntrancePortalLocation()
 	{
-		return new ChunkCoordinates(0, 160, 0);
+		return new ChunkCoordinates(0, 48, 0);
 	}
 
 	@Override
 	public int getAverageGroundLevel()
 	{
-		return 110;
+		return 16;
 	}
 
 	@Override
@@ -83,13 +76,13 @@ public class ProviderVarda extends WorldProvider
 	@Override
 	public boolean canRespawnHere()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
 	public float getCloudHeight()
 	{
-		return 140.0F;
+		return 110.0F;
 	}
 
 	@Override
@@ -101,7 +94,7 @@ public class ProviderVarda extends WorldProvider
 	@Override
 	public String getDimensionName()
 	{
-		return AliensVsPredator.properties().DIMENSION_NAME_VARDA;
+		return AliensVsPredator.properties().DIMENSION_NAME_ACHERON;
 	}
 
 	@Override
@@ -114,13 +107,13 @@ public class ProviderVarda extends WorldProvider
 	@SideOnly(Side.CLIENT)
 	public Vec3 getFogColor(float var1, float var2)
 	{
-		return Vec3.createVectorHelper(0.0F, 0.0F, 0.01F);
+		return Vec3.createVectorHelper(0.0F, 0.01F, 0.05F);
 	}
 
 	@Override
 	public Vec3 drawClouds(float partialTicks)
 	{
-		return Vec3.createVectorHelper(0.07F, 0.07F, 0.09F);
+		return Vec3.createVectorHelper(0.01F, 0.00F, 0.02F);
 	}
 
 	@Override
@@ -142,14 +135,9 @@ public class ProviderVarda extends WorldProvider
 		brightness = 1.0F - brightness;
 		brightness = (float) (brightness * (1.0D - this.worldObj.getRainStrength(angle) * 5.0F / 16.0D));
 		brightness = (float) (brightness * (1.0D - this.worldObj.getWeightedThunderStrength(angle) * 5.0F / 16.0D));
-		return brightness * 0.45F;
+		return brightness * 0.25F;
 	}
-
-	public boolean isSilicaStormActive()
-	{
-		return (this.worldObj.getWorldTime() % 24000L) / 1000L < 7L;
-	}
-
+	
 	@Override
 	public boolean canSnowAt(int x, int y, int z, boolean checkLight)
 	{

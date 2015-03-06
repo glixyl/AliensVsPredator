@@ -7,7 +7,6 @@ import net.minecraftforge.common.MinecraftForge;
 import com.arisux.airi.lib.interfaces.IInitializable;
 import com.arisux.avp.event.*;
 import com.arisux.avp.event.client.*;
-import com.arisux.avp.event.server.EventDimensionInitialization;
 import com.arisux.avp.items.render.RenderMotionTrackerScreen;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -42,7 +41,7 @@ public class LocalEventHandler implements IInitializable
 
 		if (FMLCommonHandler.instance().getSide() == Side.SERVER)
 		{
-			this.registerEvent(new EventDimensionInitialization());
+			this.registerEvent(new DimensionHandler());
 		}
 
 		this.registerEvent(new EmbryoTickEvent());

@@ -1,4 +1,4 @@
-package com.arisux.avp.dimension.varda;
+package com.arisux.avp.dimension.acheron;
 
 import java.util.List;
 import java.util.Random;
@@ -13,16 +13,11 @@ import net.minecraft.world.*;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.gen.MapGenBase;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 
-import com.arisux.airi.lib.WorldUtil;
-import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.dimension.varda.worldgen.VardaGenCaves;
-import com.arisux.avp.dimension.varda.worldgen.VardaGenLakes;
 
-public class ChunkProviderVarda implements IChunkProvider
+public class ChunkProviderAcheron implements IChunkProvider
 {
 	private NoiseGeneratorOctaves[] noiseGenOctaves = new NoiseGeneratorOctaves[6];
 	private Random randomSeed;
@@ -30,7 +25,6 @@ public class ChunkProviderVarda implements IChunkProvider
 	private double[] noiseArray;
 	private double[] stoneNoise = new double[256];
 
-	private MapGenBase caveGenerator = new VardaGenCaves();
 	private BiomeGenBase[] biomesForGeneration;
 	private double[] noise3;
 	private double[] noise1;
@@ -39,7 +33,7 @@ public class ChunkProviderVarda implements IChunkProvider
 	private double[] noise6;
 	private float[] field_35388_l;
 
-	public ChunkProviderVarda(World world, long seed)
+	public ChunkProviderAcheron(World world, long seed)
 	{
 		this.world = world;
 		this.randomSeed = new Random(seed);
@@ -52,7 +46,7 @@ public class ChunkProviderVarda implements IChunkProvider
 		new NoiseGeneratorOctaves(this.randomSeed, 8);
 	}
 
-	public void generateTerrain(int var1, int var2, Block[] var3)
+	public void generateTerrain(int chunkX, int chunkZ, Block[] blocksInChunk)
 	{
 		byte var4 = 4;
 		byte var5 = 16;
@@ -60,8 +54,8 @@ public class ChunkProviderVarda implements IChunkProvider
 		int var7 = var4 + 1;
 		byte var8 = 17;
 		int var9 = var4 + 1;
-		this.biomesForGeneration = this.world.getWorldChunkManager().getBiomesForGeneration(this.biomesForGeneration, var1 * 4 - 2, var2 * 4 - 2, var7 + 5, var9 + 5);
-		this.noiseArray = initializeNoiseField(this.noiseArray, var1 * var4, 0, var2 * var4, var7, var8, var9);
+		this.biomesForGeneration = this.world.getWorldChunkManager().getBiomesForGeneration(this.biomesForGeneration, chunkX * 4 - 2, chunkZ * 4 - 2, var7 + 5, var9 + 5);
+		this.noiseArray = initializeNoiseField(this.noiseArray, chunkX * var4, 0, chunkZ * var4, var7, var8, var9);
 
 		for (int var10 = 0; var10 < var4; var10++)
 		{
@@ -100,19 +94,19 @@ public class ChunkProviderVarda implements IChunkProvider
 								{
 									int tmp510_509 = (var43 + var44);
 									var43 = tmp510_509;
-									var3[tmp510_509] = AliensVsPredator.instance().blocks.terrainUniStone;
+									blocksInChunk[tmp510_509] = AliensVsPredator.instance().blocks.terrainUniStone;
 								}
 								else if (var12 * 8 + var31 < var6)
 								{
 									int tmp543_542 = (var43 + var44);
 									var43 = tmp543_542;
-									var3[tmp543_542] = Blocks.water;
+									blocksInChunk[tmp543_542] = Blocks.water;
 								}
 								else
 								{
 									int tmp563_562 = (var43 + var44);
 									var43 = tmp563_562;
-									var3[tmp563_562] = Blocks.air;
+									blocksInChunk[tmp563_562] = Blocks.air;
 								}
 							}
 
@@ -226,14 +220,13 @@ public class ChunkProviderVarda implements IChunkProvider
 	@Override
 	public Chunk provideChunk(int chunkX, int chunkZ)
 	{
-		Block[] blocks = new Block[16 * 16 * 128];
+		Block[] blocksInChunk = new Block[16 * 16 * 128];
 		this.randomSeed.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
-		this.generateTerrain(chunkX, chunkZ, blocks);
+		this.generateTerrain(chunkX, chunkZ, blocksInChunk);
 		this.biomesForGeneration = this.world.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, chunkX * 16, chunkZ * 16, 16, 16);
-		this.replaceBlocksForBiome(chunkX, chunkZ, blocks, this.biomesForGeneration);
-		this.caveGenerator.func_151539_a(this, this.world, chunkX, chunkZ, blocks);
+		this.replaceBlocksForBiome(chunkX, chunkZ, blocksInChunk, this.biomesForGeneration);
 
-		Chunk chunk = new Chunk(this.world, blocks, chunkX, chunkZ);
+		Chunk chunk = new Chunk(this.world, blocksInChunk, chunkX, chunkZ);
 		byte[] biomes = chunk.getBiomeArray();
 
 		for (int x = 0; x < biomes.length; x++)
@@ -399,16 +392,12 @@ public class ChunkProviderVarda implements IChunkProvider
 	@Override
 	public void populate(IChunkProvider chunkProvider, int chunkX, int chunkZ)
 	{
-		CoordData chunkCoord = new CoordData(chunkX, 0, chunkZ);
 		BlockSand.fallInstantly = true;
 		int posX = chunkX * 16;
 		int posZ = chunkZ * 16;
 		BiomeGenBase biome = this.world.getBiomeGenForCoords(posX + 16, posZ + 16);
 		this.randomSeed.setSeed(this.world.getSeed());
 		this.randomSeed.setSeed(chunkX * (this.randomSeed.nextLong() / 2L * 2L + 1L) + chunkZ * (this.randomSeed.nextLong() / 2L * 2L + 1L) ^ this.world.getSeed());
-
-		WorldUtil.generateWorldGenInChunk(world, new VardaGenLakes(Blocks.water), randomSeed, this.randomSeed.nextInt(2), 0, this.randomSeed.nextInt(128), chunkCoord);
-		WorldUtil.generateWorldGenInChunk(world, new VardaGenLakes(Blocks.lava), randomSeed, this.randomSeed.nextInt(14), 0, this.randomSeed.nextInt(this.randomSeed.nextInt(120) + 8), chunkCoord);
 
 		biome.decorate(this.world, this.randomSeed, posX, posZ);
 		SpawnerAnimals.performWorldGenSpawning(this.world, biome, posX + 8, posZ + 8, 16, 16, this.randomSeed);

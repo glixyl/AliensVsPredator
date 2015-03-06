@@ -1,26 +1,26 @@
-package com.arisux.avp.dimension.varda;
+package com.arisux.avp.dimension.acheron;
 
 import net.minecraft.world.biome.BiomeGenBase;
 
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.dimension.BiomeLVBase;
 
-public class BiomeVarda extends BiomeLVBase
+public class BiomeAcheron extends BiomeLVBase
 {
-	public BiomeVarda(int biomeId)
+	public BiomeAcheron(int biomeId)
 	{
 		super(biomeId);
 		this.topBlock = AliensVsPredator.instance().blocks.terrainUniDirt;
 		this.fillerBlock = AliensVsPredator.instance().blocks.terrainUniStone;
-		this.setBiomeName(AliensVsPredator.properties().DIMENSION_NAME_VARDA);
-		this.setHeight(new BiomeGenBase.Height(1.0F, 8.0F));
+		this.setBiomeName(AliensVsPredator.properties().DIMENSION_NAME_ACHERON);
+		this.setHeight(new BiomeGenBase.Height(0.1F, 0.4F));
 		this.setTemperatureRainfall(0.7F, 0.1F);
 		this.setDisableRain();
-		this.theBiomeDecorator = new BiomeDecoratorVarda(this);
+		this.theBiomeDecorator = new BiomeDecoratorAcheron(this);
 	}
 
 	@Override
-	public BiomeVarda setColor(int color)
+	public BiomeAcheron setColor(int color)
 	{
 		this.func_150557_a(color, false);
 		return this;

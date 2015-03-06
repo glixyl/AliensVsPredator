@@ -9,7 +9,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 
-import com.arisux.avp.dimension.varda.TeleporterVarda;
+import com.arisux.avp.dimension.TeleporterLV;
 
 public class BlockPortal extends Block
 {
@@ -45,11 +45,11 @@ public class BlockPortal extends Block
 			} else if (var6.dimension != 7)
 			{
 				var6.timeUntilPortal = 10;
-				var6.mcServer.getConfigurationManager().transferPlayerToDimension(var6, 7, new TeleporterVarda(var7.worldServerForDimension(7)));
+				var6.mcServer.getConfigurationManager().transferPlayerToDimension(var6, 7, new TeleporterLV(var7.worldServerForDimension(7)));
 			} else
 			{
 				var6.timeUntilPortal = 10;
-				var6.mcServer.getConfigurationManager().transferPlayerToDimension(var6, 0, new TeleporterVarda(var7.worldServerForDimension(1)));
+				var6.mcServer.getConfigurationManager().transferPlayerToDimension(var6, 0, new TeleporterLV(var7.worldServerForDimension(1)));
 			}
 		}
 	}

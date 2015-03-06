@@ -8,24 +8,26 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class VardaGenStalagtites extends WorldGenerator
 {
-	private Block stalagtiteBlockId;
+	private Block block;
 
-	public VardaGenStalagtites(Block var1)
+	public VardaGenStalagtites(Block block)
 	{
-		this.stalagtiteBlockId = var1;
+		this.block = block;
 	}
 
-	public boolean generate(World var1, Random var2, int var3, int var4, int var5)
+	@Override
+	public boolean generate(World world, Random rand, int posX, int posY, int posZ)
 	{
-		for (int var6 = 0; var6 < 64; var6++)
+		for (int x = 0; x < 64; x++)
 		{
-			int var7 = var3 + var2.nextInt(8) - var2.nextInt(8);
-			int var8 = var4 + var2.nextInt(4) - var2.nextInt(4);
-			int var9 = var5 + var2.nextInt(8) - var2.nextInt(8);
+			int blockX = posX + rand.nextInt(8) - rand.nextInt(8);
+			int blockY = posY + rand.nextInt(4) - rand.nextInt(4);
+			int blockZ = posZ + rand.nextInt(8) - rand.nextInt(8);
 
-			if ((!var1.isAirBlock(var7, var8, var9)) || (!stalagtiteBlockId.canBlockStay(var1, var7, var8, var9)))
-				continue;
-			var1.setBlock(var7, var8, var9, this.stalagtiteBlockId);
+			if (world.isAirBlock(blockX, blockY, blockZ) && block.canBlockStay(world, blockX, blockY, blockZ))
+			{
+				world.setBlock(blockX, blockY, blockZ, this.block);
+			}
 		}
 
 		return true;

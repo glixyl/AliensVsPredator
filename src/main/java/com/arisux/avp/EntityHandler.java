@@ -6,6 +6,7 @@ import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
 
 import com.arisux.airi.lib.interfaces.IInitializable;
+import com.arisux.avp.dimension.BiomeLVBase;
 import com.arisux.avp.entities.*;
 import com.arisux.avp.entities.mob.*;
 import com.arisux.avp.entities.tile.*;
@@ -44,7 +45,7 @@ public class EntityHandler implements IInitializable
 	private void registerLivingEntities()
 	{
 		HashMap<String, Integer> entityIDs = AliensVsPredator.settings().entityList;
-		
+
 		EntityRegistry.registerGlobalEntityID(EntityDrone.class, "Drone", entityIDs.get("DRONE"), 0x333333, 0xFF0000);
 		EntityRegistry.registerGlobalEntityID(EntityWarrior.class, "Warrior", entityIDs.get("WARRIOR"), 0x333333, 0xFF0000);
 		EntityRegistry.registerGlobalEntityID(EntitySpitter.class, "Spitter", entityIDs.get("SPITTER"), 0x333333, 0xFF0000);
@@ -60,6 +61,7 @@ public class EntityHandler implements IInitializable
 		EntityRegistry.registerGlobalEntityID(EntityAqua.class, "AquaAlien", entityIDs.get("AQUA"));
 		EntityRegistry.registerGlobalEntityID(EntityPredalien.class, "Predalien", entityIDs.get("PREDALIEN"));
 		EntityRegistry.registerGlobalEntityID(EntityCombatSynthetic.class, "CombatSynthetic", entityIDs.get("COMBAT_SYNTHETIC"), 0x333333, 0xFF0000);
+		EntityRegistry.registerGlobalEntityID(EntityProtomorph.class, "Protomorph", entityIDs.get("PROTOMORPH"), 0x333333, 0xFF0000);
 	}
 
 	private void registerEntities()
@@ -143,6 +145,9 @@ public class EntityHandler implements IInitializable
 			BiomeGenBase.taigaHills, 
 			BiomeGenBase.jungle, 
 			BiomeGenBase.jungleHills 
+		});
+		EntityRegistry.addSpawn(EntityProtomorph.class, 6, 1, 2, EnumCreatureType.monster, new BiomeGenBase[] { 
+			BiomeLVBase.varda
 		});
 	}
 }

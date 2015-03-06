@@ -41,7 +41,8 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockTempleWall1 = (new HookedBlock(Material.rock)),
 		blockTempleWall2 = (new HookedBlock(Material.rock)),
 		blockSkulls = (new HookedBlock(Material.rock)),
-		blockPortal = (new BlockPortalLV223().setHardness(-1.0F).setLightLevel(2.0F)),
+		blockPortalVarda = (new BlockPortalVarda().setHardness(-1.0F).setLightLevel(2.0F)),
+		blockPortalAcheron = (new BlockPortalAcheron().setHardness(-1.0F).setLightLevel(2.0F)),
 		blockDerelict1 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
 		blockDerelict2 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
 		blockDerelict3 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
@@ -195,7 +196,8 @@ public class BlockHandler extends IBHandler implements IInitializable
 		registerShapedBlockSet(blockTempleWall1, "templewallbase");
 		registerShapedBlockSet(blockTempleWall2, "templefloor");
 		registerShapedBlockSet(blockSkulls, "skulls");
-		registerBlock(blockPortal, "lv223portal");
+		registerBlock(blockPortalVarda, "lv223portal");
+		registerBlock(blockPortalAcheron, "lv426portal");
 		registerShapedBlockSet(blockDerelict1, "engineershipwall");
 		registerShapedBlockSet(blockDerelict2, "engineershipfloor");
 		registerShapedBlockSet(blockDerelict3, "engineershiprock");
