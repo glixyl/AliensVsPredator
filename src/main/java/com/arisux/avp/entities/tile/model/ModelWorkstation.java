@@ -108,9 +108,10 @@ public class ModelWorkstation extends ModelBaseExtension
 		standBase.render(boxTranslation);
 		desk.render(boxTranslation);
 		mainArm.render(boxTranslation);
-		supportLeft.render(boxTranslation);
+//		supportLeft.render(boxTranslation);
 		supportCenter.render(boxTranslation);
-		supportRight.render(boxTranslation);
+//		supportRight.render(boxTranslation);
+		
 		screenCenter.render(boxTranslation);
 		
 		if (tile != null)
@@ -158,13 +159,13 @@ public class ModelWorkstation extends ModelBaseExtension
 
 			if (left != AliensVsPredator.instance().blocks.blockWorkstation && leftUp == Blocks.air && left.getBlockBoundsMaxY() <= 1.5)
 			{
-				leftArm.render(boxTranslation);
+//				leftArm.render(boxTranslation);
 				screenLeft.render(boxTranslation);
 			}
 
 			if (right != AliensVsPredator.instance().blocks.blockWorkstation && rightUp == Blocks.air && right.getBlockBoundsMaxY() <= 1.5)
 			{
-				rightArm.render(boxTranslation);
+//				rightArm.render(boxTranslation);
 				screenRight.render(boxTranslation);
 			}
 		}
