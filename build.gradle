@@ -35,7 +35,7 @@ minecraft {
 
 curse {
     displayName = "AliensVsPredator"
-    artifact = file("C:/Program Files (x86)/Jenkins/jobs/${project.curse.displayName}/builds/${System.env.BUILD_NUMBER}/archive/build/libs/[${project.minecraft.version}][${project.version} ${project.curse.displayName}.jar")
+    artifact = file("C:/Program Files (x86)/Jenkins/jobs/${project.curse.displayName}/builds/${System.env.BUILD_NUMBER}/archive/build/libs/[${project.minecraft.version}][${project.version}] ${project.curse.displayName}.jar")
     projectId = '221641'
     apiKey = project.curseForgeApiKey
     releaseType = 'beta'
