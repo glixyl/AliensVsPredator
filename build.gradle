@@ -33,6 +33,10 @@ minecraft {
     runDir = "eclipse"
 }
 
+jar {
+	archiveName = "test.jar"
+}
+
 curse {
     displayName = "AliensVsPredator"
     artifact = file("C:/Program Files (x86)/Jenkins/jobs/${project.curse.displayName}/builds/${System.env.BUILD_NUMBER}/archive/build/libs/[${System.env.FORGE_VERSION}][${project.version}] ${project.curse.displayName}.jar")
