@@ -18,7 +18,7 @@ buildscript {
 apply plugin: 'forge'
 apply plugin: 'curseforge'
 
-version = "4.0.0.${System.env.BUILD_NUMBER}"
+version = "${System.env.DEV_VERSION}.${System.env.BUILD_NUMBER}"
 group= "com.arisux"
 archivesBaseName = "avp"
 
@@ -35,7 +35,7 @@ minecraft {
 
 curse {
     displayName = "AliensVsPredator"
-    artifact = file("C:/Program Files (x86)/Jenkins/jobs/${project.curse.displayName}/builds/${System.env.BUILD_NUMBER}/archive/build/libs/[1.7.10-10.13.2.1291][${project.version}] ${project.curse.displayName}.jar")
+    artifact = file("C:/Program Files (x86)/Jenkins/jobs/${project.curse.displayName}/builds/${System.env.BUILD_NUMBER}/archive/build/libs/[${System.env.FORGE_VERSION}][${project.version}] ${project.curse.displayName}.jar")
     projectId = '221641'
     apiKey = project.curseForgeApiKey
     releaseType = 'beta'
