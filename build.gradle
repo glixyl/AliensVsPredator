@@ -18,9 +18,10 @@ buildscript {
 apply plugin: 'forge'
 apply plugin: 'curseforge'
 
+def forgeVersion = "1.7.10-10.13.2.1291"
 version = "4.0.0.${System.env.BUILD_NUMBER}"
 group= "com.arisux"
-archivesBaseName = "avp"
+archivesBaseName = "AliensVsPredator"
 
 tasks.withType(JavaCompile) {
 	sourceCompatibility = "1.7"
@@ -29,17 +30,17 @@ tasks.withType(JavaCompile) {
 }
 
 minecraft {
-    version = "1.7.10-10.13.2.1291"
+    version = "${project.forgeVersion}"
     runDir = "eclipse"
 }
 
 jar {
-	archiveName = "[${project.minecraft.version}][${project.version}] ${project.curse.displayName}.jar"
+	archiveName = "[${project.minecraft.version}][${project.version}] ${project.archivesBaseName}.jar"
 }
 
 curse {
-    displayName = "AliensVsPredator"
-    artifact = file("C:/Program Files (x86)/Jenkins/jobs/${project.curse.displayName}/builds/${System.env.BUILD_NUMBER}/archive/build/libs/[${System.env.FORGE_VERSION}][${project.version}] ${project.curse.displayName}.jar")
+    displayName = "${project.archivesBaseName}"
+    artifact = file("C:/Program Files (x86)/Jenkins/jobs/${project.archivesBaseName}/builds/${System.env.BUILD_NUMBER}/archive/build/libs/[${project.forgeVersion}][${project.version}] ${project.archivesBaseName}.jar")
     projectId = '221641'
     apiKey = project.curseForgeApiKey
     releaseType = 'beta'
