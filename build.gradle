@@ -39,7 +39,7 @@ jar {
 
 curse {
     displayName = "${project.archivesBaseName}"
-    artifact = file("C:/Program Files (x86)/Jenkins/jobs/${project.archivesBaseName}/builds/${System.env.BUILD_NUMBER}/archive/build/libs/[1.7.10-10.13.2.1291][${project.version}] ${project.archivesBaseName}.jar")
+    artifact = file("${project.buildDir}/[1.7.10-10.13.2.1291][${project.version}] ${project.archivesBaseName}.jar")
     projectId = '221641'
     apiKey = project.curseForgeApiKey
     releaseType = 'beta'
