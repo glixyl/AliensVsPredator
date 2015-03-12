@@ -34,12 +34,12 @@ minecraft {
 }
 
 jar {
-	archiveName = "[1.7.10-10.13.2.1291][${project.version}] ${project.archivesBaseName}.jar"
+	archiveName = "[${minecraft.getApiVersion()}][${project.version}] ${project.archivesBaseName}.jar"
 }
 
 curse {
     displayName = "${project.archivesBaseName} ${project.version}"
-    artifact = file("${project.buildDir}/libs/[1.7.10-10.13.2.1291][${project.version}] ${project.archivesBaseName}.jar")
+    artifact = file("${project.buildDir}/libs/[${minecraft.getApiVersion()}][${project.version}] ${project.archivesBaseName}.jar")
     projectId = '221641'
     apiKey = project.curseForgeApiKey
     releaseType = 'beta'
