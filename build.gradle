@@ -18,7 +18,7 @@ buildscript {
 apply plugin: 'forge'
 apply plugin: 'curseforge'
 
-version = "${System.env.DEV_VERSION}.${System.env.BUILD_NUMBER}"
+version = "4.0.0.${System.env.BUILD_NUMBER}"
 group= "com.arisux"
 archivesBaseName = "avp"
 
@@ -34,7 +34,7 @@ minecraft {
 }
 
 jar {
-	archiveName = "test.jar"
+	archiveName = "[${project.minecraft.version}][${project.version}] ${project.curse.displayName}.jar"
 }
 
 curse {
