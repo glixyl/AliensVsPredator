@@ -18,7 +18,7 @@ buildscript {
 apply plugin: 'forge'
 apply plugin: 'curseforge'
 
-def forgeVersion = "1.7.10-10.13.2.1291"
+forgeVersion = "1.7.10-10.13.2.1291"
 version = "4.0.0.${System.env.BUILD_NUMBER}"
 group= "com.arisux"
 archivesBaseName = "AliensVsPredator"
