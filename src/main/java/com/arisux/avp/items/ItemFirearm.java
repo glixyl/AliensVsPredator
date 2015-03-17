@@ -75,8 +75,11 @@ public class ItemFirearm extends HookedItem
 				this.renderRecoil();
 				this.fixDelay();
 
-				AliensVsPredator.instance().network.sendToServer(new PacketShootEntity(objMouseOver.entityHit, this));
-
+				if (objMouseOver != null)
+				{
+					AliensVsPredator.instance().network.sendToServer(new PacketShootEntity(objMouseOver.entityHit, this));
+				}
+				
 				if (!player.capabilities.isCreativeMode)
 				{
 					this.ammoCount -= ammoConsumptionRate;
