@@ -48,9 +48,9 @@ public class RenderWorkstation extends TileEntitySpecialRenderer
 
 				this.renderDisplay();
 
-				GL11.glRotatef(19.15F, 0F, 1F, 0F);
-				GL11.glTranslatef(0.88F, 0F, 0.149F);
-				this.renderDisplay();
+//				GL11.glRotatef(19.15F, 0F, 1F, 0F);
+//				GL11.glTranslatef(0.88F, 0F, 0.149F);
+//				this.renderDisplay();
 
 				glDisable(GL_BLEND);
 				RenderUtil.glEnableLight();
