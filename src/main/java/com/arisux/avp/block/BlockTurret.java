@@ -80,7 +80,7 @@ public class BlockTurret extends HookedBlockContainer
 				for (int i = 0; i < tile.getDangerousTargets().size(); i++)
 				{
 					if (tile.getDangerousTargets().get(i) != null)
-						AliensVsPredator.instance().network.sendToAll(new PacketAddTuretTarget(xCoord, yCoord, zCoord, EntityList.getEntityID(WorldUtil.Entities.constructEntity(worldObj, tile.getDangerousTargets().get(i)))));
+						AliensVsPredator.network().sendToAll(new PacketAddTuretTarget(xCoord, yCoord, zCoord, EntityList.getEntityID(WorldUtil.Entities.constructEntity(worldObj, tile.getDangerousTargets().get(i)))));
 				}
 			}
 		}

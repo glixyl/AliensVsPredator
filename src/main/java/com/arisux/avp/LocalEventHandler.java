@@ -16,6 +16,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class LocalEventHandler implements IInitializable
 {
+	public static final LocalEventHandler instance = new LocalEventHandler();
 	public ArrayList<Object> events = new ArrayList<Object>();
 
 	@Override
@@ -74,6 +75,6 @@ public class LocalEventHandler implements IInitializable
 	@SideOnly(Side.CLIENT)
 	public LightmapUpdateEvent getLightmapUpdateEvent()
 	{
-		return (LightmapUpdateEvent) AliensVsPredator.instance().localEvents.getEvent(LightmapUpdateEvent.class);
+		return (LightmapUpdateEvent) AliensVsPredator.events().getEvent(LightmapUpdateEvent.class);
 	}
 }

@@ -18,6 +18,6 @@ public class BlockOreSilicon extends HookedBlock
 	@Override
 	public Item getItemDropped(int par1, Random par2Random, int par3)
 	{
-		return AliensVsPredator.instance().items.itemSilicon;
+		return AliensVsPredator.items().itemSilicon;
 	}
 }

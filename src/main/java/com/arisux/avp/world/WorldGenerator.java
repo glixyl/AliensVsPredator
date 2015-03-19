@@ -45,9 +45,9 @@ public class WorldGenerator implements IWorldGenerator
 			}
 		}
 
-		WorldUtil.generateBlockInChunk(world, AliensVsPredator.instance().blocks.oreCopper, rand, 3, 4, 16, 48, chunkCoords);
-		WorldUtil.generateBlockInChunk(world, AliensVsPredator.instance().blocks.oreSilicon, rand, 2, 3, 0, 32, chunkCoords);
-		WorldUtil.generateBlockInChunk(world, AliensVsPredator.instance().blocks.oreLithium, rand, 3, 1, 0, 16, chunkCoords, new BiomeGenBase[] { BiomeGenBase.ocean });
-		WorldUtil.generateBlockInChunk(world, AliensVsPredator.instance().blocks.oreBauxite, rand, 4, 8, 16, 64, chunkCoords);
+		WorldUtil.generateBlockInChunk(world, AliensVsPredator.blocks().oreCopper, rand, 3, 4, 16, 48, chunkCoords);
+		WorldUtil.generateBlockInChunk(world, AliensVsPredator.blocks().oreSilicon, rand, 2, 3, 0, 32, chunkCoords);
+		WorldUtil.generateBlockInChunk(world, AliensVsPredator.blocks().oreLithium, rand, 3, 1, 0, 16, chunkCoords, new BiomeGenBase[] { BiomeGenBase.ocean });
+		WorldUtil.generateBlockInChunk(world, AliensVsPredator.blocks().oreBauxite, rand, 4, 8, 16, 64, chunkCoords);
 	}
 }

@@ -70,17 +70,11 @@ public class ItemHandler extends IBHandler implements IInitializable
 		itemDoritos = (new ItemFood(8, true)).setAlwaysEdible(),
 		itemDoritosCoolRanch = (new ItemFood(8, true)).setAlwaysEdible(),
 		itemArtifactTech = (new HookedItem()).setDescription("An unknown piece of technology aquired from the yautja species."),
-		healthProbe = new HookedItem().disableIcon(),
 		itemProcessor = ((new HookedItem())),
 		itemFlashDrive = (new ItemStorageDevice()),
-		itemCapacitor = ((new HookedItem())),
-		itemDiode = ((new HookedItem())),
 		itemLed = ((new HookedItem())),
 		itemLedDisplay = ((new HookedItem())),
 		itemIntegratedCircuit = ((new HookedItem())),
-		itemRegulator = ((new HookedItem())),
-		itemResistor = ((new HookedItem())),
-		itemTransistor = ((new HookedItem())),
 		itemSilicon = new HookedItem().setDescription("A few chunks of silicon, for use with electronics."),
 		itemIngotAluminum = new HookedItem().setDescription("An ingot melted down from bauxite ore, for use with guns."),
 		itemIngotCopper = new HookedItem().setDescription("An ingot melted down from copper ore, for use with electronics."),
@@ -187,12 +181,5 @@ public class ItemHandler extends IBHandler implements IInitializable
 		registerItem(itemWristbracerBlades, "wristbracer.blades");
 		registerItem(itemPolycarbonate, "polycarbonate");
 		registerItem(itemRoyalJelly, "royaljelly");
-
-		// registerItem(healthProbe, "healthprobe");
-		// registerItem(itemCapacitor, "part.capacitor");
-		// registerItem(itemDiode, "part.diode");
-		// registerItem(itemRegulator, "part.regulator");
-		// registerItem(itemResistor, "part.resistor");
-		// registerItem(itemTransistor, "part.transistor");
 	}
 }

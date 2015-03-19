@@ -143,19 +143,19 @@ public class EntityYautja extends EntityMob
 	{
 		if ((new Random()).nextInt(6) == 1)
 		{
-			this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.itemSpear), 1);
+			this.entityDropItem(new ItemStack(AliensVsPredator.items().itemSpear), 1);
 		}
 	}
 
 	@Override
 	protected void dropRareDrop(int par1)
 	{
-		this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.helmTitanium), 1);
-		this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.plateTitanium), 1);
-		this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.legsTitanium), 1);
-		this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.bootsTitanium), 1);
-		this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.itemWristBlade), 1);
-		this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.itemPlasmaCaster), 1);
+		this.entityDropItem(new ItemStack(AliensVsPredator.items().helmTitanium), 1);
+		this.entityDropItem(new ItemStack(AliensVsPredator.items().plateTitanium), 1);
+		this.entityDropItem(new ItemStack(AliensVsPredator.items().legsTitanium), 1);
+		this.entityDropItem(new ItemStack(AliensVsPredator.items().bootsTitanium), 1);
+		this.entityDropItem(new ItemStack(AliensVsPredator.items().itemWristBlade), 1);
+		this.entityDropItem(new ItemStack(AliensVsPredator.items().itemPlasmaCaster), 1);
 	}
 
 	@Override

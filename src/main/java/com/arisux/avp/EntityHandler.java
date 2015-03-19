@@ -17,6 +17,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class EntityHandler implements IInitializable
 {
+	public static final EntityHandler instance = new EntityHandler();
+
 	@Override
 	public void initialize(FMLInitializationEvent event)
 	{

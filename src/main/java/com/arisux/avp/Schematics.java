@@ -2,17 +2,21 @@ package com.arisux.avp;
 
 import java.io.File;
 
+import com.arisux.airi.lib.interfaces.IInitializable;
 import com.arisux.airi.lib.world.*;
 import com.arisux.airi.lib.world.Schematic.UnsupportedSchematicFormatException;
 
-public class Schematics
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+
+public class Schematics implements IInitializable
 {
 	public static final Schematics instance = new Schematics();
 	public static final File baseSchematicDir = new File("schematics/avp/");
 	public Schematic schematicTest;
 	public Schematic derelict;
 
-	public void initialize()
+	@Override
+	public void initialize(FMLInitializationEvent event)
 	{
 		try
 		{

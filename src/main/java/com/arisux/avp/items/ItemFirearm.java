@@ -77,7 +77,7 @@ public class ItemFirearm extends HookedItem
 
 				if (objMouseOver != null)
 				{
-					AliensVsPredator.instance().network.sendToServer(new PacketShootEntity(objMouseOver.entityHit, this));
+					AliensVsPredator.network().sendToServer(new PacketShootEntity(objMouseOver.entityHit, this));
 				}
 				
 				if (!player.capabilities.isCreativeMode)
@@ -108,7 +108,7 @@ public class ItemFirearm extends HookedItem
 
 		if (player.worldObj.isRemote)
 		{
-			AliensVsPredator.instance().network.sendToServer(new PacketReloadFirearm());
+			AliensVsPredator.network().sendToServer(new PacketReloadFirearm());
 		}
 
 		this.ammoCount = this.maxAmmoCount;

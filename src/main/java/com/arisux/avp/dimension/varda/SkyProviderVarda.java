@@ -30,7 +30,7 @@ public class SkyProviderVarda extends IRenderHandler
 
 	public SkyProviderVarda()
 	{
-		this.event = (StormUpdateEvent) AliensVsPredator.instance().localEvents.getEvent(StormUpdateEvent.class);
+		this.event = (StormUpdateEvent) AliensVsPredator.events().getEvent(StormUpdateEvent.class);
 		Tessellator tessellator = Tessellator.instance;
 
 		GL11.glNewList(this.starGLCallList, GL11.GL_COMPILE);

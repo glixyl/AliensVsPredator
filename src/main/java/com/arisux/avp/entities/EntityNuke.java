@@ -45,7 +45,7 @@ public class EntityNuke extends EntityThrowable
 
 		if (this.ticksExisted >= this.getDetonationTicks())
 		{
-			if (AliensVsPredator.instance().settings.areExplosionsEnabled())
+			if (AliensVsPredator.settings().areExplosionsEnabled())
 			{
 				WorldUtil.createCustomExplosion((Entity) null, worldObj, (int) this.posX, (int) this.posY, (int) this.posZ, 47F);
 			}

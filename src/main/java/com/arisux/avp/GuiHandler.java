@@ -17,6 +17,8 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 
 public class GuiHandler implements IGuiHandler, IInitializable
 {
+	public static final GuiHandler instance = new GuiHandler();
+	
 	@Override
 	public void initialize(FMLInitializationEvent event)
 	{
@@ -58,7 +60,7 @@ public class GuiHandler implements IGuiHandler, IInitializable
 		{
 			Item item = player.getCurrentEquippedItem().getItem();
 
-			if (item == AliensVsPredator.instance().items.itemWristBlade)
+			if (item == AliensVsPredator.items().itemWristBlade)
 			{
 				return new GuiWristbracer(player, (ContainerWristbracer) ((ItemWristbracer) item).getNewContainer(player));
 			}

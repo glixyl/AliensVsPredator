@@ -46,7 +46,7 @@ public class PacketChannelUpdate implements IMessage, IMessageHandler<PacketChan
 		{
 			ExtendedEntityPlayer extendedTargetPlayer = (ExtendedEntityPlayer) targetPlayer.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER);
 			extendedTargetPlayer.setBroadcastChannel(this.channel);
-			AliensVsPredator.instance().network.sendToAll(new PacketChannelClientUpdate(packet.channel, packet.username));
+			AliensVsPredator.network().sendToAll(new PacketChannelClientUpdate(packet.channel, packet.username));
 		}
 		
 		return null;

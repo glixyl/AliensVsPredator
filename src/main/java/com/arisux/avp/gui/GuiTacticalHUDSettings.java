@@ -30,7 +30,7 @@ public class GuiTacticalHUDSettings extends GuiCustomScreen
 	public void initGui()
 	{
 		super.initGui();
-		TacticalHUDRenderEvent event = ((TacticalHUDRenderEvent) AliensVsPredator.instance().localEvents.getEvent(TacticalHUDRenderEvent.class));
+		TacticalHUDRenderEvent event = ((TacticalHUDRenderEvent) AliensVsPredator.events().getEvent(TacticalHUDRenderEvent.class));
 
 		textBox1.setText("Default");
 		slider1.sliderValue = ((ExtendedEntityPlayer) mc.thePlayer.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER)).getBroadcastRadius() / slider1.sliderMaxValue;
@@ -96,20 +96,20 @@ public class GuiTacticalHUDSettings extends GuiCustomScreen
 				public void actionPerformed(GuiCustomButton button)
 				{
 					ExtendedEntityPlayer properties = (ExtendedEntityPlayer) mc.thePlayer.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER);
-					TacticalHUDRenderEvent event = ((TacticalHUDRenderEvent) AliensVsPredator.instance().localEvents.getEvent(TacticalHUDRenderEvent.class));
+					TacticalHUDRenderEvent event = ((TacticalHUDRenderEvent) AliensVsPredator.events().getEvent(TacticalHUDRenderEvent.class));
 
 					String newChannel = textBox1.getText();
 					if (properties.getBroadcastChannel() != newChannel)
 					{
 						properties.setBroadcastChannel(newChannel);
-						AliensVsPredator.instance().network.sendToServer(new PacketChannelUpdate(newChannel, mc.thePlayer.getCommandSenderName()));
+						AliensVsPredator.network().sendToServer(new PacketChannelUpdate(newChannel, mc.thePlayer.getCommandSenderName()));
 					}
 
 					int newRadius = (int) (slider1.sliderValue * slider1.sliderMaxValue);
 					if (properties.getBroadcastRadius() != newRadius)
 					{
 						properties.setBroadcastRadius(newRadius);
-						AliensVsPredator.instance().network.sendToServer(new PacketBroadcastRadiusUpdate(newRadius, mc.thePlayer.getCommandSenderName()));
+						AliensVsPredator.network().sendToServer(new PacketBroadcastRadiusUpdate(newRadius, mc.thePlayer.getCommandSenderName()));
 					}
 
 					int newThreshold = (int) (slider2.sliderValue * slider2.sliderMaxValue);

@@ -93,7 +93,7 @@ public class EntityPlasma extends EntityThrowable
 	{
 		if (!this.worldObj.isRemote)
 		{
-			WorldUtil.createExplosion(null, worldObj, new Blocks.CoordData(this), 1.5F * size, false, true, AliensVsPredator.instance().settings.areExplosionsEnabled());
+			WorldUtil.createExplosion(null, worldObj, new Blocks.CoordData(this), 1.5F * size, false, true, AliensVsPredator.settings().areExplosionsEnabled());
 			this.worldObj.playSoundAtEntity(this, "random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
 
 			@SuppressWarnings("unchecked")

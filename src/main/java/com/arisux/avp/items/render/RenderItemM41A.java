@@ -116,7 +116,7 @@ public class RenderItemM41A extends ItemRenderer
 				GL11.glColor4f(1F, 1F, 1F, 1F);
 			}
 
-			if (mc.thePlayer.inventory.hasItem(AliensVsPredator.instance().items.itemMotionTracker))
+			if (mc.thePlayer.inventory.hasItem(AliensVsPredator.items().itemMotionTracker))
 			{
 				GL11.glTranslatef(-50F, -20F, -50F);
 				GL11.glRotatef(-90F, 0F, 1F, 0F);

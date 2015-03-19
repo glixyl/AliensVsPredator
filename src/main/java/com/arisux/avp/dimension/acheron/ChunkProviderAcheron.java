@@ -94,7 +94,7 @@ public class ChunkProviderAcheron implements IChunkProvider
 								{
 									int tmp510_509 = (var43 + var44);
 									var43 = tmp510_509;
-									blocksInChunk[tmp510_509] = AliensVsPredator.instance().blocks.terrainUniStone;
+									blocksInChunk[tmp510_509] = AliensVsPredator.blocks().terrainUniStone;
 								}
 								else if (var12 * 8 + var31 < var6)
 								{
@@ -168,7 +168,7 @@ public class ChunkProviderAcheron implements IChunkProvider
 								if (var12 <= 0)
 								{
 									var14 = Blocks.air;
-									var15 = AliensVsPredator.instance().blocks.terrainUniStone;
+									var15 = AliensVsPredator.blocks().terrainUniStone;
 								}
 								else if ((var16 >= var5 - 4) && (var16 <= var5 + 1))
 								{

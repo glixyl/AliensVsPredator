@@ -10,6 +10,7 @@ import cpw.mods.fml.relauncher.Side;
 
 public class NetworkHandler extends SimpleNetworkWrapper implements IInitializable
 {
+	public static final NetworkHandler instance = new NetworkHandler();
 	private int descriminator = 0;
 
 	public NetworkHandler()

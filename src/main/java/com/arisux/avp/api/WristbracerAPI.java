@@ -6,43 +6,23 @@ import net.minecraft.client.Minecraft;
 
 import com.arisux.airi.AIRI;
 import com.arisux.airi.lib.RenderUtil;
+import com.arisux.airi.lib.interfaces.IInitializable;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.packets.server.PacketSpawnNuke;
 
+import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class WristbracerAPI
+public class WristbracerAPI implements IInitializable
 {
 	private HashMap<String, IWristbracerAction> registeredCombos = new HashMap<String, IWristbracerAction>();
+	public static final WristbracerAPI instance = new WristbracerAPI();
 
 	public static interface IWristbracerAction
 	{
 		public void actionPerformed(String combonation, Object... args);
-	}
-
-	public WristbracerAPI()
-	{
-		this.registerCombonation("009000", new IWristbracerAction()
-		{
-			@Override
-			public void actionPerformed(String combonation, Object... args)
-			{
-				RenderUtil.drawString("gui.avp.wristbracer.notify.detmode", 10, 10, 0xFFFF0000);
-				RenderUtil.drawString("gui.avp.wristbracer.warning.itemslost", 10, 20, 0xFFFF0000);
-			}
-		});
-
-		this.registerCombonation("009001", new IWristbracerAction()
-		{
-			@Override
-			public void actionPerformed(String combonation, Object... args)
-			{
-				AliensVsPredator.instance().network.sendToServer(new PacketSpawnNuke());
-				Minecraft.getMinecraft().currentScreen = null;
-			}
-		});
 	}
 
 	public String getComboFromDisplays(int d1, int d2, int d3, int d4, int d5, int d6)
@@ -75,5 +55,29 @@ public class WristbracerAPI
 		{
 			AIRI.logger.warning("[AVP/API/Wristbracer] Combonation '%s' is already registered.", combonation);
 		}
+	}
+
+	@Override
+	public void initialize(FMLInitializationEvent event)
+	{
+		this.registerCombonation("009000", new IWristbracerAction()
+		{
+			@Override
+			public void actionPerformed(String combonation, Object... args)
+			{
+				RenderUtil.drawString("gui.avp.wristbracer.notify.detmode", 10, 10, 0xFFFF0000);
+				RenderUtil.drawString("gui.avp.wristbracer.warning.itemslost", 10, 20, 0xFFFF0000);
+			}
+		});
+
+		this.registerCombonation("009001", new IWristbracerAction()
+		{
+			@Override
+			public void actionPerformed(String combonation, Object... args)
+			{
+				AliensVsPredator.network().sendToServer(new PacketSpawnNuke());
+				Minecraft.getMinecraft().currentScreen = null;
+			}
+		});		
 	}
 }

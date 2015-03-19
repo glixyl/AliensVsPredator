@@ -34,7 +34,7 @@ public class BlockBlastdoor extends HookedBlockContainer
 	@Override
 	public int onBlockPlaced(World world, int posX, int posY, int posZ, int side, float subX, float subY, float subZ, int meta)
 	{
-		GhostBlock ghostBlock = (GhostBlock) AliensVsPredator.instance().blocks.ghostBlockBlastdoor;
+		GhostBlock ghostBlock = (GhostBlock) AliensVsPredator.blocks().ghostBlockBlastdoor;
 
 		world.setBlock(posX, posY + 1, posZ, ghostBlock);
 		world.setBlock(posX, posY + 2, posZ, ghostBlock);

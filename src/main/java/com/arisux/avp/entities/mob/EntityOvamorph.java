@@ -59,7 +59,7 @@ public class EntityOvamorph extends EntitySpeciesAlien implements IMob
 	@Override
 	protected void dropRareDrop(int rate)
 	{
-		this.dropItem(AliensVsPredator.instance().items.itemRoyalJelly, 1);
+		this.dropItem(AliensVsPredator.items().itemRoyalJelly, 1);
 	}
 
 	/**

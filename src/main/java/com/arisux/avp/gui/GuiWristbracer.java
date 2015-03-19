@@ -26,7 +26,6 @@ public class GuiWristbracer extends GuiContainer
 {
 	private HashMap<GuiButton, Integer> displays = new HashMap<GuiButton, Integer>();
 	protected List<GuiButton> buttonList = new ArrayList<GuiButton>();
-	private WristbracerAPI api = new WristbracerAPI();
 	public ContainerWristbracer container;
 
 	public GuiWristbracer(EntityPlayer player, ContainerWristbracer container)
@@ -104,11 +103,11 @@ public class GuiWristbracer extends GuiContainer
 			drawYautjaDigit(this.displays.get(button), guiLeft + 13 + 27 * (x1 - 1), guiTop + 49);
 		}
 
-		String combonation = api.getComboFromDisplays(displays.get(this.buttonList.get(0)), displays.get(this.buttonList.get(1)), displays.get(this.buttonList.get(2)), displays.get(this.buttonList.get(3)), displays.get(this.buttonList.get(4)), displays.get(this.buttonList.get(5)));
+		String combonation = WristbracerAPI.instance.getComboFromDisplays(displays.get(this.buttonList.get(0)), displays.get(this.buttonList.get(1)), displays.get(this.buttonList.get(2)), displays.get(this.buttonList.get(3)), displays.get(this.buttonList.get(4)), displays.get(this.buttonList.get(5)));
 
-		if (api.isComboValid(combonation))
+		if (WristbracerAPI.instance.isComboValid(combonation))
 		{
-			api.getActionForCombo(combonation).actionPerformed(combonation, container);
+			WristbracerAPI.instance.getActionForCombo(combonation).actionPerformed(combonation, container);
 		}
 	}
 

@@ -11,6 +11,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 
 public class KeybindHandler implements IInitializablePost
 {
+	public static final KeybindHandler instance = new KeybindHandler();
 	public KeyBinding KEYBIND_VISION_MODE, KEYBIND_XENO_ARMOR_CLIMB, KEYBIND_FIREARM_RELOAD, KEYBIND_ITEM_ACTION;
 	public String KEYBIND_GROUP = "keybind.group.avp";
 

@@ -25,6 +25,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class PlayerModeHandler implements IInitializable
 {
+	public static final PlayerModeHandler instance = new PlayerModeHandler();
+	
 	@Override
 	public void initialize(FMLInitializationEvent event)
 	{
@@ -88,7 +90,7 @@ public class PlayerModeHandler implements IInitializable
 
 	public static final PlayerModeHandler instance()
 	{
-		return AliensVsPredator.instance().playerModeHandler;
+		return AliensVsPredator.playermodehandler();
 	}
 
 	public static boolean isPlayerInMode(EntityPlayer player, PlayerMode playerMode)

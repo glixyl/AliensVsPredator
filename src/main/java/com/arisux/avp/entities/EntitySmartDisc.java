@@ -22,7 +22,7 @@ public class EntitySmartDisc extends EntityProjectile
 	public EntitySmartDisc(World world)
 	{
 		super(world);
-		this.thrownItem = AliensVsPredator.instance().items.itemDisc;
+		this.thrownItem = AliensVsPredator.items().itemDisc;
 	}
 
 	public EntitySmartDisc(World world, double posX, double posY, double posZ)
@@ -249,7 +249,7 @@ public class EntitySmartDisc extends EntityProjectile
 		{
 			if (this.inGround && entityplayer == this.shootingEntity && this.arrowShake <= 0)
 			{
-				if (entityplayer.inventory.addItemStackToInventory(new ItemStack(AliensVsPredator.instance().items.itemDisc, 1)))
+				if (entityplayer.inventory.addItemStackToInventory(new ItemStack(AliensVsPredator.items().itemDisc, 1)))
 				{
 					this.worldObj.playSoundAtEntity(this, "random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
 					entityplayer.onItemPickup(this, 1);

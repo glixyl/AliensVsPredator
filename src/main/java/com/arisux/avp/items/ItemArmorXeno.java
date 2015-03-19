@@ -50,7 +50,7 @@ public class ItemArmorXeno extends ItemArmor
 		if (player != null)
 		{
 			ItemStack helm = player.inventory.armorItemInSlot(3), chest = player.inventory.armorItemInSlot(2), legs = player.inventory.armorItemInSlot(1), boots = player.inventory.armorItemInSlot(0);
-			return (helm != null && chest != null && legs != null && boots != null && (helm.getItem() == AliensVsPredator.instance().items.helmXeno && chest.getItem() == AliensVsPredator.instance().items.plateXeno && legs.getItem() == AliensVsPredator.instance().items.legsXeno && boots.getItem() == AliensVsPredator.instance().items.bootsXeno));
+			return (helm != null && chest != null && legs != null && boots != null && (helm.getItem() == AliensVsPredator.items().helmXeno && chest.getItem() == AliensVsPredator.items().plateXeno && legs.getItem() == AliensVsPredator.items().legsXeno && boots.getItem() == AliensVsPredator.items().bootsXeno));
 		}
 
 		return false;

@@ -10,8 +10,8 @@ public class BiomeVarda extends BiomeLVBase
 	public BiomeVarda(int biomeId)
 	{
 		super(biomeId);
-		this.topBlock = AliensVsPredator.instance().blocks.terrainUniDirt;
-		this.fillerBlock = AliensVsPredator.instance().blocks.terrainUniStone;
+		this.topBlock = AliensVsPredator.blocks().terrainUniDirt;
+		this.fillerBlock = AliensVsPredator.blocks().terrainUniStone;
 		this.setBiomeName(AliensVsPredator.properties().DIMENSION_NAME_VARDA);
 		this.setHeight(new BiomeGenBase.Height(1.0F, 8.0F));
 		this.setTemperatureRainfall(0.7F, 0.1F);

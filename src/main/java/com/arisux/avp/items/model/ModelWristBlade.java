@@ -128,7 +128,7 @@ public class ModelWristBlade extends ModelBase
 		this.b10.render(boxTranslation);
 		this.b11.render(boxTranslation);
 
-		if (Minecraft.getMinecraft().thePlayer.inventory.hasItem(AliensVsPredator.instance().items.swordTitanium))
+		if (Minecraft.getMinecraft().thePlayer.inventory.hasItem(AliensVsPredator.items().swordTitanium))
 		{
 			this.b6.render(boxTranslation);
 			this.bladeLeft.render(boxTranslation);

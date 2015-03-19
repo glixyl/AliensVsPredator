@@ -56,7 +56,7 @@ public class RenderItemSniper extends ItemRenderer
 	{
 		if (mc.gameSettings.thirdPersonView == 0 && mc.thePlayer.getHeldItem() != null)
 		{
-			if (mc.thePlayer.getHeldItem().getItem() == AliensVsPredator.instance().items.itemSniper)
+			if (mc.thePlayer.getHeldItem().getItem() == AliensVsPredator.items().itemSniper)
 			{
 				if (!mc.inGameHasFocus)
 				{

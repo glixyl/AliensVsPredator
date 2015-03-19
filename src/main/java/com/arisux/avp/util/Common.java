@@ -14,6 +14,6 @@ public class Common
 	
 	public static boolean isPlayerWearingCelticArmorSet(EntityPlayer player)
 	{
-		return isPlayerWearingArmorSet(player) && Inventories.getHelmSlotItemStack(player).getItem() == AliensVsPredator.instance().items.helmTitanium && Inventories.getChestSlotItemStack(player).getItem() == AliensVsPredator.instance().items.plateTitanium  && Inventories.getLegsSlotItemStack(player).getItem() == AliensVsPredator.instance().items.legsTitanium  && Inventories.getBootSlotItemStack(player).getItem() == AliensVsPredator.instance().items.bootsTitanium;
+		return isPlayerWearingArmorSet(player) && Inventories.getHelmSlotItemStack(player).getItem() == AliensVsPredator.items().helmTitanium && Inventories.getChestSlotItemStack(player).getItem() == AliensVsPredator.items().plateTitanium  && Inventories.getLegsSlotItemStack(player).getItem() == AliensVsPredator.items().legsTitanium  && Inventories.getBootSlotItemStack(player).getItem() == AliensVsPredator.items().bootsTitanium;
 	}
 }

@@ -15,7 +15,7 @@ import cpw.mods.fml.common.IWorldGenerator;
 public class TerrainFormation extends WorldGenerator implements IWorldGenerator
 {
 	Block[] validBlocks = new Block[] {
-		AliensVsPredator.instance().blocks.terrainUniDirt
+		AliensVsPredator.blocks().terrainUniDirt
 	};
 
 	public boolean locationIsValidSpawn(World world, int x, int y, int z)
@@ -83,7 +83,7 @@ public class TerrainFormation extends WorldGenerator implements IWorldGenerator
 			return false;
 		}
 
-		Block block = AliensVsPredator.instance().blocks.blockDerelict3;
+		Block block = AliensVsPredator.blocks().blockDerelict3;
 
 		this.setBlock(world, x + 0, y + 9, z + 1, block, 0);
 		this.setBlock(world, x + 0, y + 10, z + 1, block, 0);

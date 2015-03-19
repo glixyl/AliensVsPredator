@@ -96,13 +96,13 @@ public class EntitySpitter extends EntityXenomorph implements IRangedAttackMob
 	protected void dropRareDrop(int par1)
 	{
 		if (new Random().nextInt(4) == 1)
-			this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.helmXeno), 1);
+			this.entityDropItem(new ItemStack(AliensVsPredator.items().helmXeno), 1);
 		if (new Random().nextInt(4) == 1)
-			this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.plateXeno), 1);
+			this.entityDropItem(new ItemStack(AliensVsPredator.items().plateXeno), 1);
 		if (new Random().nextInt(4) == 1)
-			this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.legsXeno), 1);
+			this.entityDropItem(new ItemStack(AliensVsPredator.items().legsXeno), 1);
 		if (new Random().nextInt(4) == 1)
-			this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.bootsXeno), 1);
+			this.entityDropItem(new ItemStack(AliensVsPredator.items().bootsXeno), 1);
 
 		super.dropRareDrop(par1);
 	}

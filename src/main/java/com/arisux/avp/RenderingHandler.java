@@ -28,6 +28,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 public class RenderingHandler implements IInitializablePre, IInitializablePost
 {
+	public static final RenderingHandler instance = new RenderingHandler();
 	public ISimpleBlockRenderingHandler renderTypeAngled;
 	
 	@Override
@@ -40,7 +41,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 	public void postInitialize(FMLPostInitializationEvent event)
 	{
 		registerTileEntitySpecialRenderers();
-		registerItemRenderers(AliensVsPredator.instance().items);
+		registerItemRenderers(AliensVsPredator.items());
 		registerEntityRenderers();
 	}
 
@@ -64,7 +65,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		registerEntityRenderingHandler(EntityOvamorph.class, new RenderOvamorph(new ModelOvamorph(), 0.5F));
 		registerEntityRenderingHandler(EntitySpear.class, new RenderSpear());
 		registerEntityRenderingHandler(EntityLaserMine.class, new RenderLaserMine());
-		registerEntityRenderingHandler(EntityGrenade.class, new RenderSnowball(AliensVsPredator.instance().items.itemGrenade, 0));
+		registerEntityRenderingHandler(EntityGrenade.class, new RenderSnowball(AliensVsPredator.items().itemGrenade, 0));
 		registerEntityRenderingHandler(EntityFlame.class, new RenderFlame());
 		registerEntityRenderingHandler(EntityAcidPool.class, new RenderAcidPool());
 		registerEntityRenderingHandler(EntityPlasma.class, new RenderPlasmaBlast());
@@ -77,11 +78,11 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 
 	public void registerItemRenderers(ItemHandler items)
 	{
-		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.instance().blocks.blockTurret), new RenderItemTurret());
-		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.instance().blocks.blockWorkstation), new RenderItemWorkstation());
-		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.instance().blocks.blockStasisMechanism), new RenderItemStasisMechanism());
-		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.instance().blocks.blockCryostasisTube), new RenderItemCryostasisTube());
-		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.instance().blocks.blockRepulsionGenerator), new RenderItemRepulsionGenerator());
+		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.blocks().blockTurret), new RenderItemTurret());
+		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.blocks().blockWorkstation), new RenderItemWorkstation());
+		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.blocks().blockStasisMechanism), new RenderItemStasisMechanism());
+		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.blocks().blockCryostasisTube), new RenderItemCryostasisTube());
+		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.blocks().blockRepulsionGenerator), new RenderItemRepulsionGenerator());
 		registerItemRenderer(items.itemWristBlade, new RenderItemWristbracer());
 		registerItemRenderer(items.itemWristbracerBlades, new RenderItemWristbracerBlades());
 		registerItemRenderer(items.itemSpear, new RenderItemSpear());

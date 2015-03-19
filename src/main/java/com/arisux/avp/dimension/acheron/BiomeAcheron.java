@@ -10,8 +10,8 @@ public class BiomeAcheron extends BiomeLVBase
 	public BiomeAcheron(int biomeId)
 	{
 		super(biomeId);
-		this.topBlock = AliensVsPredator.instance().blocks.terrainUniDirt;
-		this.fillerBlock = AliensVsPredator.instance().blocks.terrainUniStone;
+		this.topBlock = AliensVsPredator.blocks().terrainUniDirt;
+		this.fillerBlock = AliensVsPredator.blocks().terrainUniStone;
 		this.setBiomeName(AliensVsPredator.properties().DIMENSION_NAME_ACHERON);
 		this.setHeight(new BiomeGenBase.Height(0.1F, 0.4F));
 		this.setTemperatureRainfall(0.7F, 0.1F);

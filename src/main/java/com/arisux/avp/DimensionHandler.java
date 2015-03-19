@@ -20,6 +20,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class DimensionHandler implements IInitializable
 {
+	public static final DimensionHandler instance = new DimensionHandler();
 	public boolean dimensionsInitialized;
 	
 	@Override

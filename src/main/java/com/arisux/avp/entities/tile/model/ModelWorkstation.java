@@ -157,13 +157,13 @@ public class ModelWorkstation extends ModelBaseExtension
 					break;
 			}
 
-			if (left != AliensVsPredator.instance().blocks.blockWorkstation && leftUp == Blocks.air && left.getBlockBoundsMaxY() <= 1.5)
+			if (left != AliensVsPredator.blocks().blockWorkstation && leftUp == Blocks.air && left.getBlockBoundsMaxY() <= 1.5)
 			{
 //				leftArm.render(boxTranslation);
 				screenLeft.render(boxTranslation);
 			}
 
-			if (right != AliensVsPredator.instance().blocks.blockWorkstation && rightUp == Blocks.air && right.getBlockBoundsMaxY() <= 1.5)
+			if (right != AliensVsPredator.blocks().blockWorkstation && rightUp == Blocks.air && right.getBlockBoundsMaxY() <= 1.5)
 			{
 //				rightArm.render(boxTranslation);
 				screenRight.render(boxTranslation);

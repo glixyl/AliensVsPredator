@@ -128,7 +128,7 @@ public class EntityMarine extends EntityCreature implements IMob, IRangedAttackM
 	@Override
 	public ItemStack getHeldItem()
 	{
-		return new ItemStack(AliensVsPredator.instance().items.itemM41A);
+		return new ItemStack(AliensVsPredator.items().itemM41A);
 	}
 
 	@Override

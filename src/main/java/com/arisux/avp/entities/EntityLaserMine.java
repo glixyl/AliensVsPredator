@@ -138,7 +138,7 @@ public class EntityLaserMine extends Entity
 
 	public void drop()
 	{
-		this.worldObj.spawnEntityInWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(AliensVsPredator.instance().items.itemProximityMine)));
+		this.worldObj.spawnEntityInWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(AliensVsPredator.items().itemProximityMine)));
 		this.setDead();
 	}
 
@@ -154,7 +154,7 @@ public class EntityLaserMine extends Entity
 
 			if (this.worldObj.isRemote)
 			{
-				AliensVsPredator.instance().network.sendToServer(new PacketDamageEntity(entityHit, this, 15F));
+				AliensVsPredator.network().sendToServer(new PacketDamageEntity(entityHit, this, 15F));
 			}
 		}
 

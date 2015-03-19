@@ -27,7 +27,7 @@ public class BiomeDecoratorVarda extends BiomeDecorator
 	{
 		super();
 		this.biome = biome;
-		this.stalagmiteGen = new WorldGenFlowers(AliensVsPredator.instance().blocks.terrainStalagmite);
+		this.stalagmiteGen = new WorldGenFlowers(AliensVsPredator.blocks().terrainStalagmite);
 		this.landSpikeGen = new VardaGenSpike(true);
 		this.lakeGeneration = new WorldGenLakes(Blocks.water);
 		this.caveWaterGen = new WorldGenLiquids(Blocks.flowing_water);
@@ -62,6 +62,6 @@ public class BiomeDecoratorVarda extends BiomeDecorator
 	@Override
 	protected void generateOres()
 	{
-		WorldUtil.generateBlockInChunk(world, AliensVsPredator.instance().blocks.terrainUniDirt, this.randomGenerator, 20, 32, 0, 128, new CoordData(chunk_X, 0, chunk_Z));
+		WorldUtil.generateBlockInChunk(world, AliensVsPredator.blocks().terrainUniDirt, this.randomGenerator, 20, 32, 0, 128, new CoordData(chunk_X, 0, chunk_Z));
 	}
 }

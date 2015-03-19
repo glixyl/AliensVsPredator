@@ -35,7 +35,7 @@ public class CommandPlayerMode extends CommandBase
 		PlayerMode playerMode = PlayerMode.get(Integer.valueOf(args[0]));
 		
 		playerExtension.setPlayerMode(playerMode);
-		AliensVsPredator.instance().network.sendTo(new PacketPlayerModeUpdate(playerMode.id), (EntityPlayerMP) Players.getPlayerForCommandSender(commandSender));
+		AliensVsPredator.network().sendTo(new PacketPlayerModeUpdate(playerMode.id), (EntityPlayerMP) Players.getPlayerForCommandSender(commandSender));
 		commandSender.addChatMessage(new ChatComponentText("You have changed to the " + playerMode.toString().toLowerCase() + " player mode."));
 	}
 }

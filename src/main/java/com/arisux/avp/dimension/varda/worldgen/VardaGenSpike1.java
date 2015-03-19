@@ -13,7 +13,7 @@ public class VardaGenSpike1 extends WorldGeneratorVarda
 {
 	protected Block[] GetValidSpawnBlocks()
 	{
-		return new Block[] { AliensVsPredator.instance().blocks.terrainUniDirt };
+		return new Block[] { AliensVsPredator.blocks().terrainUniDirt };
 	}
 
 	public boolean LocationIsValidSpawn(World world, int i, int j, int k)
@@ -44,7 +44,7 @@ public class VardaGenSpike1 extends WorldGeneratorVarda
 			}
 			if (blockID == x)
 				return true;
-			if ((blockID == AliensVsPredator.instance().blocks.terrainStalagmite) && (blockIDBelow == x))
+			if ((blockID == AliensVsPredator.blocks().terrainStalagmite) && (blockIDBelow == x))
 			{
 				return true;
 			}
@@ -59,7 +59,7 @@ public class VardaGenSpike1 extends WorldGeneratorVarda
 			return false;
 		}
 		
-		Block blockDirt = AliensVsPredator.instance().blocks.terrainUniDirt;
+		Block blockDirt = AliensVsPredator.blocks().terrainUniDirt;
 
 		world.setBlock(posX + 0, posY + 0, posZ + 1, blockDirt);
 		world.setBlock(posX + 0, posY + 1, posZ + 1, blockDirt);

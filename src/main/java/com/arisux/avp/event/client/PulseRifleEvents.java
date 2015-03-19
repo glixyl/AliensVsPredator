@@ -18,13 +18,13 @@ public class PulseRifleEvents
 	{
 		if (mc.thePlayer != null)
 		{
-			if (mc.thePlayer.getCurrentEquippedItem() != null && mc.thePlayer.getCurrentEquippedItem().getItem() == AliensVsPredator.instance().items.itemM41A)
+			if (mc.thePlayer.getCurrentEquippedItem() != null && mc.thePlayer.getCurrentEquippedItem().getItem() == AliensVsPredator.items().itemM41A)
 			{
-				if (AliensVsPredator.instance().keybinds.KEYBIND_ITEM_ACTION.isPressed())
+				if (AliensVsPredator.keybinds().KEYBIND_ITEM_ACTION.isPressed())
 				{
 					//((ItemFirearm) mc.thePlayer.getCurrentEquippedItem().getItem()).cancelRightClick = true;
 					AccessWrapper.setRightClickDelayTimer(20);
-					AliensVsPredator.instance().network.sendToServer(new PacketLaunchGrenade());
+					AliensVsPredator.network().sendToServer(new PacketLaunchGrenade());
 				}
 			}
 		}

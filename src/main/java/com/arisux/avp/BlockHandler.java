@@ -129,13 +129,13 @@ public class BlockHandler extends IBHandler implements IInitializable
 
 			if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
 			{
-				blockSlope.setRenderType(AliensVsPredator.instance().renderer.renderTypeAngled);
-				blockCorner.setRenderType(AliensVsPredator.instance().renderer.renderTypeAngled);
-				blockInvertedCorner.setRenderType(AliensVsPredator.instance().renderer.renderTypeAngled);
-				blockRidge.setRenderType(AliensVsPredator.instance().renderer.renderTypeAngled);
-				blockInvertedRidge.setRenderType(AliensVsPredator.instance().renderer.renderTypeAngled);
-				blockSmartInvertedRidge.setRenderType(AliensVsPredator.instance().renderer.renderTypeAngled);
-				blockSmartRidge.setRenderType(AliensVsPredator.instance().renderer.renderTypeAngled);
+				blockSlope.setRenderType(AliensVsPredator.renderer().renderTypeAngled);
+				blockCorner.setRenderType(AliensVsPredator.renderer().renderTypeAngled);
+				blockInvertedCorner.setRenderType(AliensVsPredator.renderer().renderTypeAngled);
+				blockRidge.setRenderType(AliensVsPredator.renderer().renderTypeAngled);
+				blockInvertedRidge.setRenderType(AliensVsPredator.renderer().renderTypeAngled);
+				blockSmartInvertedRidge.setRenderType(AliensVsPredator.renderer().renderTypeAngled);
+				blockSmartRidge.setRenderType(AliensVsPredator.renderer().renderTypeAngled);
 			}
 		}
 	}

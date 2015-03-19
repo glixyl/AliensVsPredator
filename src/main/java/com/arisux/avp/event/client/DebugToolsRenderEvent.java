@@ -33,7 +33,7 @@ public class DebugToolsRenderEvent
 		{
 			if (mc.objectMouseOver != null)
 			{
-				if (ModUtil.isDevEnvironment() || AliensVsPredator.instance().settings.areDebugToolsEnabled())
+				if (ModUtil.isDevEnvironment() || AliensVsPredator.settings().areDebugToolsEnabled())
 				{
 					if (mc.inGameHasFocus || mc.currentScreen instanceof GuiChat)
 					{

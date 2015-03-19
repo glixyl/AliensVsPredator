@@ -14,6 +14,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 public class Settings
 {
+	public static final Settings instance = new Settings();
 	public HashMap<String, Integer> entityList = new HashMap<String, Integer>();
 	private final String CATEGORY_OTHER = "ETC";
 	private final String CATEGORY_IDS = "IDS";

@@ -9,6 +9,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class WorldGenHandler implements IInitializable
 {
+	public static final WorldGenHandler instance = new WorldGenHandler();
+	
 	@Override
 	public void initialize(FMLInitializationEvent event)
 	{

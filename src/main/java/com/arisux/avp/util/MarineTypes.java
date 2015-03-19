@@ -10,11 +10,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public enum MarineTypes
 {
-	M4(0, (ItemFirearm) AliensVsPredator.instance().items.itemM4),
-	AK47(1, (ItemFirearm) AliensVsPredator.instance().items.itemAK47),
-	M41A(2, (ItemFirearm) AliensVsPredator.instance().items.itemM41A),
-	SNIPER(3, (ItemFirearm) AliensVsPredator.instance().items.itemSniper),
-	M56SG(4, (ItemFirearm) AliensVsPredator.instance().items.itemM56SG);
+	M4(0, (ItemFirearm) AliensVsPredator.items().itemM4),
+	AK47(1, (ItemFirearm) AliensVsPredator.items().itemAK47),
+	M41A(2, (ItemFirearm) AliensVsPredator.items().itemM41A),
+	SNIPER(3, (ItemFirearm) AliensVsPredator.items().itemSniper),
+	M56SG(4, (ItemFirearm) AliensVsPredator.items().itemM56SG);
 
 	private int id;
 	private ItemFirearm itemFirearm;

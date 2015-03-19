@@ -67,7 +67,7 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 		this.focusYaw = 0F;
 		this.ammoDisplayEnabled = false;
 		this.maxFiringTimeout = 60;
-		this.itemAmmo = AliensVsPredator.instance().items.itemAmmoSMG;
+		this.itemAmmo = AliensVsPredator.items().itemAmmoSMG;
 	}
 
 	public Entity getEntity()
@@ -146,7 +146,7 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 
 			if (newTarget != null && this.worldObj.isRemote)
 			{
-				AliensVsPredator.instance().network.sendToServer(new PacketTurretTargetUpdate(xCoord, yCoord, zCoord, newTarget.getEntityId()));
+				AliensVsPredator.network().sendToServer(new PacketTurretTargetUpdate(xCoord, yCoord, zCoord, newTarget.getEntityId()));
 			}
 		}
 	}
@@ -385,12 +385,12 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 		{
 			ItemStack pciSlot = this.inventoryExpansion.getStackInSlot(i);
 
-			if (pciSlot != null && pciSlot.getItem() == AliensVsPredator.instance().items.itemProcessor)
+			if (pciSlot != null && pciSlot.getItem() == AliensVsPredator.items().itemProcessor)
 			{
 				runCyclesUpgrade += 1 * pciSlot.stackSize;
 			}
 
-			if (pciSlot != null && pciSlot.getItem() == AliensVsPredator.instance().items.itemLedDisplay)
+			if (pciSlot != null && pciSlot.getItem() == AliensVsPredator.items().itemLedDisplay)
 			{
 				this.setAmmoDisplayEnabled(true);
 			}
@@ -483,7 +483,7 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 
 		if (builder != null && builder.toString() != null)
 		{
-			AliensVsPredator.instance().network.sendToAll(new PacketTurretInit(this.xCoord, this.yCoord, this.zCoord, builder.toString()));
+			AliensVsPredator.network().sendToAll(new PacketTurretInit(this.xCoord, this.yCoord, this.zCoord, builder.toString()));
 		}
 	}
 
@@ -733,7 +733,7 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 			}
 		}
 
-		AliensVsPredator.instance().network.sendToAll(new PacketTurretInit(xCoord, yCoord, zCoord, builder.toString()));
+		AliensVsPredator.network().sendToAll(new PacketTurretInit(xCoord, yCoord, zCoord, builder.toString()));
 	}
 
 	@Override

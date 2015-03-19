@@ -40,10 +40,10 @@ public class TacticalHUDRenderEvent
 		{
 			if (event.type == RenderGameOverlayEvent.ElementType.HOTBAR)
 			{
-				if (WorldUtil.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer) != null && mc.gameSettings.thirdPersonView == 0 && WorldUtil.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer).getItem() == AliensVsPredator.instance().items.helmMarine)
+				if (WorldUtil.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer) != null && mc.gameSettings.thirdPersonView == 0 && WorldUtil.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer).getItem() == AliensVsPredator.items().helmMarine)
 				{
 					this.gammaRestored = false;
-					AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue = 8F;
+					AliensVsPredator.events().getLightmapUpdateEvent().gammaValue = 8F;
 					this.scanForNearbyPlayers();
 					RenderUtil.renderOverlay(AliensVsPredator.resources().BLUR_TACTICAL_HUD, 0.4F);
 					this.drawInfoBar();
@@ -53,7 +53,7 @@ public class TacticalHUDRenderEvent
 				else if (!gammaRestored)
 				{
 					this.gammaRestored = true;
-					AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue = 0F;
+					AliensVsPredator.events().getLightmapUpdateEvent().gammaValue = 0F;
 				}
 			}
 		}
@@ -70,7 +70,7 @@ public class TacticalHUDRenderEvent
 
 	public void renderInventoryElements()
 	{
-		if (WorldUtil.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer) != null && WorldUtil.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer).getItem() == AliensVsPredator.instance().items.helmMarine)
+		if (WorldUtil.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer) != null && WorldUtil.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer).getItem() == AliensVsPredator.items().helmMarine)
 		{
 			if (mc.currentScreen instanceof GuiInventory || mc.currentScreen instanceof GuiContainerCreative)
 			{

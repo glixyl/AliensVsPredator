@@ -53,7 +53,7 @@ public class EntityCombatSynthetic extends EntityCreature implements IMob, IRang
 	{
 		super.dropFewItems(par1, par2);
 
-		ItemHandler items = AliensVsPredator.instance().items;
+		ItemHandler items = AliensVsPredator.items();
 		this.entityDropItem(Inventories.randomItemStackFromArray(new Item[]{items.itemAmmoAC, items.itemAmmoAR, items.itemAmmoPistol, items.itemAmmoSMG}, rand), rand.nextInt(6));
 	}
 
@@ -72,7 +72,7 @@ public class EntityCombatSynthetic extends EntityCreature implements IMob, IRang
 	@Override
 	public ItemStack getHeldItem()
 	{
-		return new ItemStack(AliensVsPredator.instance().items.itemM41A);
+		return new ItemStack(AliensVsPredator.items().itemM41A);
 	}
 
 	@Override

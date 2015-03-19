@@ -23,7 +23,7 @@ public enum VisionMode
 		@Override
 		public void render(Object... data)
 		{
-			AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue = 0F;
+			AliensVsPredator.events().getLightmapUpdateEvent().gammaValue = 0F;
 			renderOverlay(AliensVsPredator.resources().BLUR_CELTIC_HUD, 1F, 0F, 0F, 1F);
 		}
 
@@ -63,7 +63,7 @@ public enum VisionMode
 			}
 			GL11.glPopMatrix();
 
-			AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue = AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue < 0F ? AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue + 0.03F : AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue;
+			AliensVsPredator.events().getLightmapUpdateEvent().gammaValue = AliensVsPredator.events().getLightmapUpdateEvent().gammaValue < 0F ? AliensVsPredator.events().getLightmapUpdateEvent().gammaValue + 0.03F : AliensVsPredator.events().getLightmapUpdateEvent().gammaValue;
 			renderOverlay(AliensVsPredator.resources().BLUR_CELTIC_HUD, 1F, 1F, 1F, 1F);
 		}
 
@@ -127,7 +127,7 @@ public enum VisionMode
 			}
 			GL11.glPopMatrix();
 
-			AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue = AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue < 0F ? AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue + 0.03F : AliensVsPredator.instance().localEvents.getLightmapUpdateEvent().gammaValue;
+			AliensVsPredator.events().getLightmapUpdateEvent().gammaValue = AliensVsPredator.events().getLightmapUpdateEvent().gammaValue < 0F ? AliensVsPredator.events().getLightmapUpdateEvent().gammaValue + 0.03F : AliensVsPredator.events().getLightmapUpdateEvent().gammaValue;
 			renderOverlay(AliensVsPredator.resources().BLUR_CELTIC_HUD, 0F, 0.8F, 0.1F, 1F);
 		}
 

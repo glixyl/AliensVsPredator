@@ -20,7 +20,7 @@ public class ItemSpear extends ItemSword
 	@Override
 	public void onPlayerStoppedUsing(ItemStack itemstack, World world, EntityPlayer entityplayer, int itemInUseCount)
 	{
-		if (entityplayer.inventory.hasItem(AliensVsPredator.instance().items.itemSpear))
+		if (entityplayer.inventory.hasItem(AliensVsPredator.items().itemSpear))
 		{
 			float charge = (this.getMaxItemUseDuration(itemstack) - itemInUseCount * 1F) / 9F;
 			float maxCharge = 3.5F;
@@ -41,7 +41,7 @@ public class ItemSpear extends ItemSword
 
 				if (!entityplayer.capabilities.isCreativeMode)
 				{
-					WorldUtil.Entities.Players.Inventories.consumeItem(entityplayer, AliensVsPredator.instance().items.itemSpear, true);
+					WorldUtil.Entities.Players.Inventories.consumeItem(entityplayer, AliensVsPredator.items().itemSpear, true);
 				}
 			}
 		}
@@ -62,7 +62,7 @@ public class ItemSpear extends ItemSword
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer)
 	{
-		if (entityplayer.inventory.hasItem(AliensVsPredator.instance().items.itemSpear))
+		if (entityplayer.inventory.hasItem(AliensVsPredator.items().itemSpear))
 		{
 			entityplayer.setItemInUse(itemstack, this.getMaxItemUseDuration(itemstack));
 		}

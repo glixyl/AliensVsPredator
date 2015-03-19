@@ -24,6 +24,6 @@ public class CreativeTab extends CreativeTabs
 	@Override
 	public Item getTabIconItem()
 	{
-		return (new Random()).nextInt(2) == 1 ? Item.getItemFromBlock((Block) AliensVsPredator.instance().blocks.getHandledObjects().get(new Random().nextInt(AliensVsPredator.instance().blocks.getHandledObjects().size()))) : (Item) AliensVsPredator.instance().items.getHandledObjects().get(new Random().nextInt(AliensVsPredator.instance().items.getHandledObjects().size()));
+		return (new Random()).nextInt(2) == 1 ? Item.getItemFromBlock((Block) AliensVsPredator.blocks().getHandledObjects().get(new Random().nextInt(AliensVsPredator.blocks().getHandledObjects().size()))) : (Item) AliensVsPredator.items().getHandledObjects().get(new Random().nextInt(AliensVsPredator.items().getHandledObjects().size()));
 	}
 }

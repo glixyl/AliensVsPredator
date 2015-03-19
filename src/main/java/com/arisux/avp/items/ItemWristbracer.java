@@ -91,6 +91,6 @@ public class ItemWristbracer extends HookedItem
 
 	public static boolean playersWristbracerContainsBlades(EntityPlayer player)
 	{
-		return player.getCurrentEquippedItem() != null && ItemWristbracer.getBladesStack(player.getCurrentEquippedItem()) != null && ItemWristbracer.getBladesStack(player.getCurrentEquippedItem()).getItem() == AliensVsPredator.instance().items.itemWristbracerBlades;
+		return player.getCurrentEquippedItem() != null && ItemWristbracer.getBladesStack(player.getCurrentEquippedItem()) != null && ItemWristbracer.getBladesStack(player.getCurrentEquippedItem()).getItem() == AliensVsPredator.items().itemWristbracerBlades;
 	}
 }

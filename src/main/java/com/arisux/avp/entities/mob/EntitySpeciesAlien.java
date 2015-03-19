@@ -75,7 +75,7 @@ public abstract class EntitySpeciesAlien extends EntityHostileExtraterrestrial i
 		super.onKillEntity(par1EntityLivingBase);
 
 		this.killedEntities++;
-		AliensVsPredator.instance().network.sendToAll(new PacketKillCountUpdate(this.getKilledEntities(), Integer.valueOf(this.getEntityId())));
+		AliensVsPredator.network().sendToAll(new PacketKillCountUpdate(this.getKilledEntities(), Integer.valueOf(this.getEntityId())));
 
 		if (!this.worldObj.isRemote && entityEvolveTo != null && minKillsToEvolve != 0 && this.killedEntities >= minKillsToEvolve)
 		{

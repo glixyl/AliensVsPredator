@@ -67,13 +67,13 @@ public class EntityDrone extends EntityXenomorph
 	protected void dropRareDrop(int par1)
 	{
 		if (new Random().nextInt(4) == 1)
-			this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.helmXeno), 1);
+			this.entityDropItem(new ItemStack(AliensVsPredator.items().helmXeno), 1);
 		if (new Random().nextInt(4) == 1)
-			this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.plateXeno), 1);
+			this.entityDropItem(new ItemStack(AliensVsPredator.items().plateXeno), 1);
 		if (new Random().nextInt(4) == 1)
-			this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.legsXeno), 1);
+			this.entityDropItem(new ItemStack(AliensVsPredator.items().legsXeno), 1);
 		if (new Random().nextInt(4) == 1)
-			this.entityDropItem(new ItemStack(AliensVsPredator.instance().items.bootsXeno), 1);
+			this.entityDropItem(new ItemStack(AliensVsPredator.items().bootsXeno), 1);
 
 		super.dropRareDrop(par1);
 	}
@@ -119,7 +119,7 @@ public class EntityDrone extends EntityXenomorph
 			{
 				ItemStack stack = entityItem.getDataWatcher().getWatchableObjectItemStack(10);
 
-				if (stack != null && stack.getItem() == AliensVsPredator.instance().items.itemRoyalJelly)
+				if (stack != null && stack.getItem() == AliensVsPredator.items().itemRoyalJelly)
 				{
 					this.getNavigator().setPath(this.getNavigator().getPathToEntityLiving(entityItem), 1);
 
@@ -142,7 +142,7 @@ public class EntityDrone extends EntityXenomorph
 			{
 				if (this.resinLevel >= 250)
 				{
-					ArrayList<CoordData> data = WorldUtil.Blocks.getCoordDataInRangeForBlocksExcluding((int) posX, (int) posY, (int) posZ, this.resinMultiplier, this.worldObj, AliensVsPredator.instance().blocks.terrainHiveResin, Blocks.air);
+					ArrayList<CoordData> data = WorldUtil.Blocks.getCoordDataInRangeForBlocksExcluding((int) posX, (int) posY, (int) posZ, this.resinMultiplier, this.worldObj, AliensVsPredator.blocks().terrainHiveResin, Blocks.air);
 
 					if (data.size() > 0)
 					{
@@ -155,7 +155,7 @@ public class EntityDrone extends EntityXenomorph
 							if (coord.isAnySurfaceVisible(this.worldObj) && Entities.canCoordBeSeenBy(this, coord))
 							{
 								this.getNavigator().setPath(this.worldObj.getEntityPathToXYZ(this, coord.posX, coord.posY, coord.posZ, 128, true, true, true, true), 0.8D);
-								this.worldObj.setBlock(coord.posX, coord.posY, coord.posZ, AliensVsPredator.instance().blocks.terrainHiveResin);
+								this.worldObj.setBlock(coord.posX, coord.posY, coord.posZ, AliensVsPredator.blocks().terrainHiveResin);
 
 								TileEntity tileEntity = coord.getTileEntity(this.worldObj);
 
@@ -181,7 +181,7 @@ public class EntityDrone extends EntityXenomorph
 		CoordData coord = new CoordData(this).add(-this.resinMultiplier + this.rand.nextInt(this.resinMultiplier * 2), -this.resinMultiplier + this.rand.nextInt(this.resinMultiplier * 2), -this.resinMultiplier + this.rand.nextInt(this.resinMultiplier * 2));
 		Block coordBlock = coord.getBlock(this.worldObj);
 
-		if (coordBlock != AliensVsPredator.instance().blocks.terrainHiveResin && coordBlock != Blocks.air && coord.isAnySurfaceVisible(this.worldObj))
+		if (coordBlock != AliensVsPredator.blocks().terrainHiveResin && coordBlock != Blocks.air && coord.isAnySurfaceVisible(this.worldObj))
 		{
 			return coord;
 		}

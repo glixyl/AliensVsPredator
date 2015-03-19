@@ -139,7 +139,7 @@ public class VardaGenSpike extends WorldGenerator
 					var10[var9] += var13;
 					Block var16 = this.worldObj.getBlock(var11[0], var11[1], var11[2]);
 
-					if ((var16 != Blocks.air) && (var16 != AliensVsPredator.instance().blocks.terrainStalagmite))
+					if ((var16 != Blocks.air) && (var16 != AliensVsPredator.blocks().terrainStalagmite))
 					{
 						var13++;
 					} else
@@ -191,7 +191,7 @@ public class VardaGenSpike extends WorldGenerator
 		for (int var5 = var2 + this.leafDistanceLimit; var4 < var5; var4++)
 		{
 			float var6 = leafSize(var4 - var2);
-			genTreeLayer(var1, var4, var3, var6, (byte) 1, AliensVsPredator.instance().blocks.terrainStalagmite);
+			genTreeLayer(var1, var4, var3, var6, (byte) 1, AliensVsPredator.blocks().terrainStalagmite);
 		}
 	}
 
@@ -278,19 +278,19 @@ public class VardaGenSpike extends WorldGenerator
 		int var4 = this.basePos[2];
 		int[] var5 = { var1, var2, var4 };
 		int[] var6 = { var1, var3, var4 };
-		placeBlockLine(var5, var6, AliensVsPredator.instance().blocks.terrainUniSand);
+		placeBlockLine(var5, var6, AliensVsPredator.blocks().terrainUniSand);
 
 		if (this.trunkSize == 2)
 		{
 			var5[0] += 1;
 			var6[0] += 1;
-			placeBlockLine(var5, var6, AliensVsPredator.instance().blocks.terrainUniSand);
+			placeBlockLine(var5, var6, AliensVsPredator.blocks().terrainUniSand);
 			var5[2] += 1;
 			var6[2] += 1;
-			placeBlockLine(var5, var6, AliensVsPredator.instance().blocks.terrainUniSand);
+			placeBlockLine(var5, var6, AliensVsPredator.blocks().terrainUniSand);
 			var5[0] += -1;
 			var6[0] += -1;
-			placeBlockLine(var5, var6, AliensVsPredator.instance().blocks.terrainUniSand);
+			placeBlockLine(var5, var6, AliensVsPredator.blocks().terrainUniSand);
 		}
 	}
 
@@ -308,7 +308,7 @@ public class VardaGenSpike extends WorldGenerator
 
 			if (!leafNodeNeedsBase(var6))
 				continue;
-			placeBlockLine(var3, var5, AliensVsPredator.instance().blocks.terrainUniSand);
+			placeBlockLine(var3, var5, AliensVsPredator.blocks().terrainUniSand);
 		}
 	}
 
@@ -359,7 +359,7 @@ public class VardaGenSpike extends WorldGenerator
 			var13[var7] = MathHelper.floor_double(var1[var7] + var14 * var11);
 			Block var16 = this.worldObj.getBlock(var13[0], var13[1], var13[2]);
 
-			if ((var16 != Blocks.air) && (var16 != AliensVsPredator.instance().blocks.terrainStalagmite))
+			if ((var16 != Blocks.air) && (var16 != AliensVsPredator.blocks().terrainStalagmite))
 			{
 				break;
 			}

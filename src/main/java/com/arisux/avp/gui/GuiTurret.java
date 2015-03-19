@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
 import com.arisux.airi.lib.GuiElements.GuiCustomButton;
@@ -101,7 +102,7 @@ public class GuiTurret extends GuiContainer
 
 		for (Class<? extends Entity> c : this.tile.getDangerousTargets())
 		{
-			AliensVsPredator.instance().network.sendToServer(new PacketAddTuretTarget(this.tile.xCoord, this.tile.yCoord, this.tile.zCoord, EntityList.getEntityID(WorldUtil.Entities.constructEntity(this.tile.getWorldObj(), c))));
+			AliensVsPredator.network().sendToServer(new PacketAddTuretTarget(this.tile.xCoord, this.tile.yCoord, this.tile.zCoord, EntityList.getEntityID(WorldUtil.Entities.constructEntity(this.tile.getWorldObj(), c))));
 		}
 	}
 
@@ -109,7 +110,7 @@ public class GuiTurret extends GuiContainer
 	@SideOnly(Side.CLIENT)
 	protected void drawGuiContainerBackgroundLayer(float f, int mouseX, int mouseY)
 	{
-		this.mc.getTextureManager().bindTexture(this.texture);
+		RenderUtil.bindTexture(this.texture);
 		drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
 
 		int stacksTotal = this.tile.getContainer(this.mc.thePlayer).getAmmoBay().getSizeInventory() * this.tile.getContainer(this.mc.thePlayer).getAmmoBay().getInventoryStackLimit();
@@ -229,7 +230,7 @@ public class GuiTurret extends GuiContainer
 					else
 					{
 						tile.setSafe(getCurrentSelectedEntity());
-						AliensVsPredator.instance().network.sendToServer(new PacketRemoveTurretTarget(tile.xCoord, tile.yCoord, tile.zCoord, EntityList.getEntityID(getCurrentSelectedEntity())));
+						AliensVsPredator.network().sendToServer(new PacketRemoveTurretTarget(tile.xCoord, tile.yCoord, tile.zCoord, EntityList.getEntityID(getCurrentSelectedEntity())));
 					}
 				}
 			}
@@ -245,7 +246,7 @@ public class GuiTurret extends GuiContainer
 			@Override
 			public void actionPerformed(GuiCustomButton button)
 			{
-				AliensVsPredator.instance().network.sendToServer(new PacketWriteToDataDevice(tile.xCoord, tile.yCoord, tile.zCoord, 0));
+				AliensVsPredator.network().sendToServer(new PacketWriteToDataDevice(tile.xCoord, tile.yCoord, tile.zCoord, 0));
 				tile.writeToOtherDevice(0);
 			}
 		});
@@ -261,7 +262,7 @@ public class GuiTurret extends GuiContainer
 			public void actionPerformed(GuiCustomButton button)
 			{
 				tile.getDangerousTargets().clear();
-				AliensVsPredator.instance().network.sendToServer(new PacketReadFromDataDevice(tile.xCoord, tile.yCoord, tile.zCoord, 0));
+				AliensVsPredator.network().sendToServer(new PacketReadFromDataDevice(tile.xCoord, tile.yCoord, tile.zCoord, 0));
 				tile.readFromOtherDevice(0);
 			}
 		});
@@ -295,6 +296,16 @@ public class GuiTurret extends GuiContainer
 			scrollDown();
 		}
 		else if (dWheel < 0)
+		{
+			scrollUp();
+		}
+		
+		if (Keyboard.isKeyDown(Keyboard.KEY_DOWN))
+		{
+			scrollDown();
+		}
+		
+		if (Keyboard.isKeyDown(Keyboard.KEY_UP))
 		{
 			scrollUp();
 		}

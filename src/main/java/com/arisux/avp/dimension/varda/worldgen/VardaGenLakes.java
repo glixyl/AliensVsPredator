@@ -115,7 +115,7 @@ public class VardaGenLakes extends WorldGenerator
 				{
 					if ((var6[((var8 * 16 + var32) * 8 + var10)] == false) || (var1.getBlock(var3 + var8, var4 + var10 - 1, var5 + var32) != Blocks.dirt) || (var1.getSavedLightValue(EnumSkyBlock.Sky, var3 + var8, var4 + var10, var5 + var32) <= 0))
 						continue;
-					var1.setBlock(var3 + var8, var4 + var10 - 1, var5 + var32, AliensVsPredator.instance().blocks.terrainUniDirt);
+					var1.setBlock(var3 + var8, var4 + var10 - 1, var5 + var32, AliensVsPredator.blocks().terrainUniDirt);
 				}
 			}
 
@@ -133,7 +133,7 @@ public class VardaGenLakes extends WorldGenerator
 
 						if ((!var33) || ((var10 >= 4) && (var2.nextInt(2) == 0)) || (!var1.getBlock(var3 + var8, var4 + var10, var5 + var32).getMaterial().isSolid()))
 							continue;
-						var1.setBlock(var3 + var8, var4 + var10, var5 + var32, AliensVsPredator.instance().blocks.terrainUniStone);
+						var1.setBlock(var3 + var8, var4 + var10, var5 + var32, AliensVsPredator.blocks().terrainUniStone);
 					}
 				}
 			}
