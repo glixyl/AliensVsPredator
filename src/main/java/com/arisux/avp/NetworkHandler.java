@@ -21,6 +21,7 @@ public class NetworkHandler extends SimpleNetworkWrapper implements IInitializab
 	@Override
 	public void initialize(FMLInitializationEvent event)
 	{
+		this.registerMessage(Side.SERVER, PacketAssembleCurrentSchematic.class);
 		this.registerMessage(Side.SERVER, PacketOpenWristbracerContainer.class);
 		this.registerMessage(Side.SERVER, PacketBroadcastRadiusUpdate.class);
 		this.registerMessage(Side.SERVER, PacketReloadFirearm.class);

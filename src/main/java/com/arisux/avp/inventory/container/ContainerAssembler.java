@@ -18,7 +18,7 @@ public class ContainerAssembler extends Container
 		/** Add the 9 hotbar slots to the container **/
 		for (byte x = 0; x < 9; x++)
 		{
-			addSlotToContainer(new Slot(invPlayer, x, 33 + 18 * x, 141));
+			addSlotToContainer(new Slot(invPlayer, x, 49 + 18 * x, 141));
 		}
 	}
 
