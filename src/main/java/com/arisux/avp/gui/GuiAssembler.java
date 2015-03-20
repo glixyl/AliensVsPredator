@@ -108,7 +108,7 @@ public class GuiAssembler extends GuiContainer
 						int entryX = 8;
 						int entryY = 7 + (numberRendered + 1) * 14;
 
-						if (numberRendered >= 0 && numberRendered <= 6)
+						if (numberRendered >= 0 && numberRendered <= 7)
 						{
 							RenderUtil.drawRect(entryX, entryY, this.xSize - 16, 12, 0x11FFFFFF);
 							RenderUtil.drawString(StatCollector.translateToLocal(item.getUnlocalizedName() + ".name"), entryX + 13, entryY + 2, curItem == this.scroll ? 0xFF00AAFF : 0xFF555555);
@@ -144,7 +144,7 @@ public class GuiAssembler extends GuiContainer
 		this.buttonScrollUp.xPosition = this.guiLeft + xSize + 5;
 		this.buttonScrollUp.yPosition = this.guiTop + 0;
 		this.buttonScrollUp.displayString = "\u21e7";
-		this.buttonScrollUp.baseColor = 0xFF888888;
+		this.buttonScrollUp.baseColor = this.getScroll() == 0 ? 0x88888888 : 0xFF888888;
 		this.buttonScrollUp.drawButton();
 		this.buttonScrollUp.setAction(new IActionPerformed()
 		{
@@ -158,7 +158,7 @@ public class GuiAssembler extends GuiContainer
 		this.buttonScrollDown.xPosition = this.guiLeft + this.xSize + 5;
 		this.buttonScrollDown.yPosition = this.guiTop + 40;
 		this.buttonScrollDown.displayString = "\u21e9";
-		this.buttonScrollDown.baseColor = 0xFF888888;
+		this.buttonScrollDown.baseColor = this.getScroll() >= (this.schematics.size() - 1) ? 0x88888888 : 0xFF888888;
 		this.buttonScrollDown.drawButton();
 		this.buttonScrollDown.setAction(new IActionPerformed()
 		{

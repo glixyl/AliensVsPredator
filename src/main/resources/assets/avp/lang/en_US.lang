@@ -10,8 +10,8 @@ item.avp:itemSpear.name=Celtic Spear
 item.avp:itemExplosiveGauntlet.name=Nuclear Gauntlet
 item.avp:smartdisc.name=Smart Disc
 item.avp:itemShuriken.name=Shuriken
-item.avp:itemChips.name=Doritos (Nacho Cheese)
-item.avp:itemChipsCoolRanch.name=Doritos (Cool Ranch)
+item.avp:food.doritos.name=Doritos (Nacho Cheese)
+item.avp:food.doritos.coolranch.name=Doritos (Cool Ranch)
 item.avp:itemEnergy.name=Energy Capsule
 item.avp:itemTechnology.name=Unidentified
 item.avp:helmetMarine.name=Tactical Helmet
@@ -37,6 +37,8 @@ item.avp:itemTitaniumPins.name=Titanium Pins
 item.avp:itemDiamondShard.name=Diamond Shard
 item.avp:itemSilicon.name=Silicon
 item.avp:itemIngotTitanium.name=Titanium Ingot
+item.avp:part.ic.name=Integrated Circuit
+item.avp:part.processor.name=Microprocessor
 
 item.avp:summon.drone.name=Xenomorph Drone
 item.avp:summon.warrior.name=Xenomorph Warrior
@@ -63,6 +65,7 @@ item.avp:gun.sniper.name=Semi-Automatic Sniper Rifle
 item.avp:gun.m41a.name=M41A Pulse Rifle
 item.avp:gun.m56sg.name=M56 SmartGun
 item.avp:gun.ak47.name=AK47 Assault Rifle
+item.avp:gun.m240icu.name=M240 Incinerator Unit
 
 tile.avp:terrainHiveCore.name=Hive Core
 tile.avp:terrainHiveResin.name=Hive Resin

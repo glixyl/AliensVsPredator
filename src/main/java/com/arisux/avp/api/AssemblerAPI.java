@@ -3,6 +3,7 @@ package com.arisux.avp.api;
 import java.util.ArrayList;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -112,22 +113,75 @@ public class AssemblerAPI implements IInitializable
 	{
 		ItemHandler avp = AliensVsPredator.items();
 
-		this.registerSchematic(new AssemblerSchematic("itemM41A", Inventories.newStack(avp.itemM41A, 1),
-			Inventories.newStack(avp.itemPolycarbonate, 32),
+		this.registerSchematic(new AssemblerSchematic("pulserifle", Inventories.newStack(avp.itemM41A, 1),
+			Inventories.newStack(avp.itemPolycarbonate, 16),
 			Inventories.newStack(Items.iron_ingot, 12),
 			Inventories.newStack(avp.itemIngotAluminum, 6),
 			Inventories.newStack(avp.itemIngotCopper, 6),
 			Inventories.newStack(Items.gold_ingot, 4),
+			Inventories.newStack(avp.itemIntegratedCircuit, 1),
+			Inventories.newStack(Item.getItemFromBlock(Blocks.lever), 2),
 			Inventories.newStack(avp.itemLedDisplay, 1)));
-		this.registerSchematic(new AssemblerSchematic("itemPistol", Inventories.newStack(avp.itemPistol, 1),
+		this.registerSchematic(new AssemblerSchematic("m56sg", Inventories.newStack(avp.itemM56SG, 1),
 			Inventories.newStack(avp.itemPolycarbonate, 4),
+			Inventories.newStack(Items.iron_ingot, 16),
+			Inventories.newStack(avp.itemIngotAluminum, 16),
+			Inventories.newStack(avp.itemIngotCopper, 8),
+			Inventories.newStack(Items.gold_ingot, 4),
+			Inventories.newStack(avp.itemIntegratedCircuit, 8),
+			Inventories.newStack(Item.getItemFromBlock(Blocks.lever), 1),
+			Inventories.newStack(avp.itemLedDisplay, 1),
+			Inventories.newStack(avp.itemLed, 1),
+			Inventories.newStack(avp.itemProcessor, 1)));
+		this.registerSchematic(new AssemblerSchematic("pistol", Inventories.newStack(avp.itemPistol, 1),
+			Inventories.newStack(avp.itemPolycarbonate, 4),
+			Inventories.newStack(Item.getItemFromBlock(Blocks.lever), 1),
 			Inventories.newStack(Items.iron_ingot, 4)));
-		this.registerSchematic(new AssemblerSchematic("itemDoritos", Inventories.newStack(avp.itemDoritos, 4),
+		this.registerSchematic(new AssemblerSchematic("m4", Inventories.newStack(avp.itemM4, 1),
+			Inventories.newStack(avp.itemPolycarbonate, 4),
+			Inventories.newStack(avp.itemIngotAluminum, 8),
+			Inventories.newStack(Item.getItemFromBlock(Blocks.lever), 1),
+			Inventories.newStack(Items.iron_ingot, 8)));
+		this.registerSchematic(new AssemblerSchematic("ak47", Inventories.newStack(avp.itemAK47, 1),
+			Inventories.newStack(Item.getItemFromBlock(Blocks.planks), 4),
+			Inventories.newStack(avp.itemIngotAluminum, 8),
+			Inventories.newStack(Item.getItemFromBlock(Blocks.lever), 1),
+			Inventories.newStack(Items.iron_ingot, 8)));
+		this.registerSchematic(new AssemblerSchematic("doritos", Inventories.newStack(avp.itemDoritos, 4),
 			Inventories.newStack(Items.wheat, 4),
 			Inventories.newStack(Items.baked_potato, 4)));
-		this.registerSchematic(new AssemblerSchematic("itemDoritosCoolRanch", Inventories.newStack(avp.itemDoritosCoolRanch, 4),
+		this.registerSchematic(new AssemblerSchematic("doritosCoolRanch", Inventories.newStack(avp.itemDoritosCoolRanch, 4),
 			Inventories.newStack(avp.itemDoritos, 4),
 			Inventories.newStack(Items.wheat, 4)));
+		this.registerSchematic(new AssemblerSchematic("ic", Inventories.newStack(avp.itemIntegratedCircuit, 4),
+			Inventories.newStack(avp.itemPolycarbonate, 1),
+			Inventories.newStack(avp.itemIngotAluminum, 1),
+			Inventories.newStack(avp.itemIngotCopper, 1),
+			Inventories.newStack(avp.itemSilicon, 1),
+			Inventories.newStack(Items.iron_ingot, 1)));
+		this.registerSchematic(new AssemblerSchematic("processor", Inventories.newStack(avp.itemProcessor, 1),
+			Inventories.newStack(avp.itemPolycarbonate, 8),
+			Inventories.newStack(avp.itemIngotAluminum, 1),
+			Inventories.newStack(avp.itemIngotCopper, 1),
+			Inventories.newStack(avp.itemSilicon, 1),
+			Inventories.newStack(avp.itemIntegratedCircuit, 16),
+			Inventories.newStack(Items.iron_ingot, 1)));
+		this.registerSchematic(new AssemblerSchematic("motionTracker", Inventories.newStack(avp.itemMotionTracker, 1),
+			Inventories.newStack(avp.itemPolycarbonate, 12),
+			Inventories.newStack(avp.itemIngotAluminum, 8),
+			Inventories.newStack(avp.itemIngotCopper, 6),
+			Inventories.newStack(avp.itemLedDisplay, 1),
+			Inventories.newStack(avp.itemLed, 4),
+			Inventories.newStack(avp.itemIntegratedCircuit, 8),
+			Inventories.newStack(Items.diamond, 1),
+			Inventories.newStack(Items.iron_ingot, 8)));
+		this.registerSchematic(new AssemblerSchematic("flamethrower", Inventories.newStack(avp.itemM240ICU, 1),
+			Inventories.newStack(avp.itemPolycarbonate, 4),
+			Inventories.newStack(avp.itemIngotAluminum, 8),
+			Inventories.newStack(avp.itemIngotCopper, 6),
+			Inventories.newStack(Item.getItemFromBlock(Blocks.lever), 1),
+			Inventories.newStack(Items.blaze_rod, 1),
+			Inventories.newStack(Items.iron_ingot, 12)));
 	}
 
 	public boolean isSchematicComplete(AssemblerSchematic schematic, EntityPlayer player)
