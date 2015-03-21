@@ -77,7 +77,7 @@ public class GuiAssembler extends GuiContainer
 					int stackY = this.ySize + (curStack * 12);
 					int curStackSize = (amountOfStack > stack.stackSize ? stack.stackSize : amountOfStack);
 					RenderUtil.drawRect(2, stackY - 2, this.xSize - 4, 12, 0x11FFFFFF);
-					RenderUtil.drawString(curStackSize + "/" + stack.stackSize, 220, stackY, curStackSize >= stack.stackSize ? 0xFF00AAFF : curStackSize < stack.stackSize && curStackSize > 0 ? 0xFFFFAA00 : 0xFF888888);
+					RenderUtil.drawString(curStackSize + "/" + stack.stackSize, 220, stackY, curStackSize >= stack.stackSize ? 0xFFFF0000 : curStackSize < stack.stackSize && curStackSize > 0 ? 0xFFFFAA00 : 0xFF888888);
 					RenderUtil.drawString(stack.getDisplayName(), 20, stackY, 0xFF888888);
 					RenderUtil.drawItemIcon(stack.getItem(), 5, stackY, 8, 8);
 
@@ -90,7 +90,7 @@ public class GuiAssembler extends GuiContainer
 				}
 				
 				int percentComplete = (progress * 100 / maxProgress);
-				RenderUtil.drawProgressBar("Materials (" + progress + " of " + maxProgress + ") - " + percentComplete + "% Complete", maxProgress, progress, 0, -12, this.xSize, 7, 3, percentComplete < 25 ? 0xFFFF0000 : percentComplete < 50 ? 0xFFFFAA00 : 0xFF00AAFF, false);
+				RenderUtil.drawProgressBar("Materials (" + progress + " of " + maxProgress + ") - " + percentComplete + "% Complete", maxProgress, progress, 0, -12, this.xSize, 7, 3, percentComplete < 25 ? 0xFF888888 : percentComplete < 50 ? 0xFFFFAA00 : 0xFFFF0000, false);
 			}
 
 			int curItem = -1;
@@ -111,7 +111,7 @@ public class GuiAssembler extends GuiContainer
 						if (numberRendered >= 0 && numberRendered <= 7)
 						{
 							RenderUtil.drawRect(entryX, entryY, this.xSize - 16, 12, 0x11FFFFFF);
-							RenderUtil.drawString(StatCollector.translateToLocal(item.getUnlocalizedName() + ".name"), entryX + 13, entryY + 2, curItem == this.scroll ? 0xFF00AAFF : 0xFF555555);
+							RenderUtil.drawString(StatCollector.translateToLocal(item.getUnlocalizedName() + ".name"), entryX + 13, entryY + 2, curItem == this.scroll ? 0xFFFF0000 : 0xFF555555);
 							RenderUtil.drawItemIcon(item, entryX + 2, entryY + 2, 8, 8);
 						}
 					}

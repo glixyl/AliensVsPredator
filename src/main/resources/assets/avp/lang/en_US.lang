@@ -39,6 +39,9 @@ item.avp:itemSilicon.name=Silicon
 item.avp:itemIngotTitanium.name=Titanium Ingot
 item.avp:part.ic.name=Integrated Circuit
 item.avp:part.processor.name=Microprocessor
+item.avp:part.led.name=Light Emitting Diode (LED)
+item.avp:part.led.display.name=7 Segment LED Display
+item.avp:device.nbtdrive.name=NBT Drive
 
 item.avp:summon.drone.name=Xenomorph Drone
 item.avp:summon.warrior.name=Xenomorph Warrior

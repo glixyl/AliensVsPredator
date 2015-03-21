@@ -123,6 +123,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		bindTileEntitySpecialRenderer(TileEntityServer.class, new RenderServer());
 		bindTileEntitySpecialRenderer(TileEntityCryostasisTube.class, new RenderCryostasisTube());
 		bindTileEntitySpecialRenderer(TileEntityRepulsionGenerator.class, new RenderRepulsionGenerator());
+		bindTileEntitySpecialRenderer(TileEntityAssembler.class, new RenderAssembler());
 	}
 	
 	public void registerSimpleBlockRenderingHandlers()

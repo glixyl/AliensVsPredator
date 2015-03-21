@@ -13,22 +13,21 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
+import com.arisux.airi.lib.RenderUtil.IconSet;
 import com.arisux.avp.entities.tile.TileEntityAssembler;
 
 public class BlockAssembler extends HookedBlockContainer
 {
-	public BlockAssembler(Material par3)
+	public BlockAssembler(Material material)
 	{
-		super(par3);
-		this.setLightOpacity(2);
-		float var5 = 0.38F;
-		this.setBlockBounds(var5, 0.0F, var5, 1.0F - var5, 0.9F, 1.0F - var5);
+		super(material);
+		this.setIconSet(new IconSet("avp:assembler.top", "avp:assembler.top", "avp:assembler.top", "avp:assembler.side", "avp:assembler.side", "avp:assembler.side", "avp:assembler.side"));
 	}
 
 	@Override
-	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
+	public void updateTick(World par1World, int posX, int posY, int posZ, Random rand)
 	{
-		super.updateTick(par1World, par2, par3, par4, par5Random);
+		super.updateTick(par1World, posX, posY, posZ, rand);
 	}
 
 	@Override
@@ -55,7 +54,7 @@ public class BlockAssembler extends HookedBlockContainer
 
 		if (tile != null)
 		{
-			IInventory inv = (IInventory) tile;
+			IInventory inv = tile;
 
 			for (byte i = 0; i < inv.getSizeInventory(); i++)
 			{
@@ -87,6 +86,6 @@ public class BlockAssembler extends HookedBlockContainer
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegister)
 	{
-		;
+		super.registerBlockIcons(iconRegister);
 	}
 }
