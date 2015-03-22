@@ -136,6 +136,7 @@ public class GuiTurret extends GuiContainer
 		{
 			int modelScale = 25;
 			RenderUtil.drawEntity(-40, 100, getCurrentSelectedEntity().height >= 4.0F ? modelScale / 2 : getCurrentSelectedEntity().height >= 8.0F ? modelScale / 4 : modelScale, this.modelRotation += 1F, 0.0F, getCurrentSelectedEntity());
+			RenderUtil.glDisableLight();
 		}
 
 		for (int x = 0; x < this.entityLivingList.size(); x++)
@@ -147,8 +148,8 @@ public class GuiTurret extends GuiContainer
 
 			if (entity != null && yEntryPos <= yPos + 50)
 			{
-				RenderUtil.drawRectWithOutline(3, yEntryPos - 4, 134, 12, 1, 16777215, -8427264);
-				RenderUtil.drawString(entity.getCommandSenderName(), 6, yEntryPos - 2, !this.tile.isSafe(entity) ? -65536 : -8427264, false);
+				RenderUtil.drawRectWithOutline(3, yEntryPos - 4, 134, 12, 1, 0x00000000, 0xFF444444);
+				RenderUtil.drawString(entity.getCommandSenderName(), 6, yEntryPos - 2, !this.tile.isSafe(entity) ? (getCurrentSelectedEntity() == entity ? 0xFFFF8800 : 0xFFFF0000) : (getCurrentSelectedEntity() == entity ? 0xFFFFFFFF : 0xFF444444), false);
 			}
 		}
 
@@ -189,6 +190,7 @@ public class GuiTurret extends GuiContainer
 		this.buttonScrollUp.xPosition = this.guiLeft + xSize + 5;
 		this.buttonScrollUp.yPosition = this.guiTop + 42;
 		this.buttonScrollUp.displayString = "\u21e7";
+		this.buttonScrollUp.baseColor = this.getScroll() == 0 ? 0x22000000 : 0xAA000000;
 		this.buttonScrollUp.drawButton();
 		this.buttonScrollUp.setAction(new IActionPerformed()
 		{
@@ -202,6 +204,7 @@ public class GuiTurret extends GuiContainer
 		this.buttonScrollDown.xPosition = this.guiLeft + this.xSize + 5;
 		this.buttonScrollDown.yPosition = this.guiTop + 88;
 		this.buttonScrollDown.displayString = "\u21e9";
+		this.buttonScrollDown.baseColor = this.getScroll() >= this.entityLivingList.size() - 1 ? 0x22000000 : 0xAA000000;
 		this.buttonScrollDown.drawButton();
 		this.buttonScrollDown.setAction(new IActionPerformed()
 		{

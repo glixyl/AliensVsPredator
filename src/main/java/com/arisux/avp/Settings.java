@@ -108,11 +108,15 @@ public class Settings
 	{
 		Property versionProperty = config.get(CATEGORY_OTHER, "VERSION", AliensVsPredator.instance().container().getVersion());
 		
-		if (!versionProperty.getString().equalsIgnoreCase(AliensVsPredator.instance().container().getVersion()))
+		if (versionProperty != null && !versionProperty.getString().equalsIgnoreCase(AliensVsPredator.instance().container().getVersion()))
 		{
 			if (configFile.exists())
 			{
-				configFile.renameTo(new File(configFile.getName().replace(".cfg", ".cfg.bak")));
+				File renamedConfig = new File(evt.getModConfigurationDirectory(), configFile.getName().replace(".cfg", "-" + versionProperty.getString() + ".cfg"));
+				System.out.println("[ALIENSVSPREDATOR/CONFIG] Renaming " + configFile + " to " + renamedConfig);
+				configFile.renameTo(renamedConfig);
+				configFile.delete();
+				
 				this.preInitialize(evt);
 			}
 		}

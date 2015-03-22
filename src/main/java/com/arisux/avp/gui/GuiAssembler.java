@@ -35,6 +35,7 @@ public class GuiAssembler extends GuiContainer
 	private GuiCustomButton buttonScrollDown;
 	private GuiCustomButton buttonAssemble;
 	private int scroll = 0;
+	private boolean hasMaterials = false;
 
 	public GuiAssembler(InventoryPlayer invPlayer, TileEntityAssembler assembler, World world, int x, int y, int z)
 	{
@@ -91,6 +92,15 @@ public class GuiAssembler extends GuiContainer
 				
 				int percentComplete = (progress * 100 / maxProgress);
 				RenderUtil.drawProgressBar("Materials (" + progress + " of " + maxProgress + ") - " + percentComplete + "% Complete", maxProgress, progress, 0, -12, this.xSize, 7, 3, percentComplete < 25 ? 0xFF888888 : percentComplete < 50 ? 0xFFFFAA00 : 0xFFFF0000, false);
+				
+				if (percentComplete == 100)
+				{
+					this.hasMaterials = true;
+				}
+				else
+				{
+					this.hasMaterials = false;
+				}
 			}
 
 			int curItem = -1;
@@ -144,7 +154,7 @@ public class GuiAssembler extends GuiContainer
 		this.buttonScrollUp.xPosition = this.guiLeft + xSize + 5;
 		this.buttonScrollUp.yPosition = this.guiTop + 0;
 		this.buttonScrollUp.displayString = "\u21e7";
-		this.buttonScrollUp.baseColor = this.getScroll() == 0 ? 0x88888888 : 0xFF888888;
+		this.buttonScrollUp.baseColor = this.getScroll() == 0 ? 0x22000000 : 0xAA000000;
 		this.buttonScrollUp.drawButton();
 		this.buttonScrollUp.setAction(new IActionPerformed()
 		{
@@ -158,7 +168,7 @@ public class GuiAssembler extends GuiContainer
 		this.buttonScrollDown.xPosition = this.guiLeft + this.xSize + 5;
 		this.buttonScrollDown.yPosition = this.guiTop + 40;
 		this.buttonScrollDown.displayString = "\u21e9";
-		this.buttonScrollDown.baseColor = this.getScroll() >= (this.schematics.size() - 1) ? 0x88888888 : 0xFF888888;
+		this.buttonScrollDown.baseColor = this.getScroll() >= (this.schematics.size() - 1) ? 0x22000000 : 0xAA000000;
 		this.buttonScrollDown.drawButton();
 		this.buttonScrollDown.setAction(new IActionPerformed()
 		{
@@ -173,7 +183,7 @@ public class GuiAssembler extends GuiContainer
 		this.buttonAssemble.yPosition = this.guiTop + 20;
 		this.buttonAssemble.displayString = "\u2692";
 		this.buttonAssemble.width = 20;
-		this.buttonAssemble.baseColor = 0xFF888888;
+		this.buttonAssemble.baseColor = this.hasMaterials ? 0xAA000000 : 0x22000000;
 		this.buttonAssemble.drawButton();
 		this.buttonAssemble.setAction(new IActionPerformed()
 		{
