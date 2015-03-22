@@ -1,7 +1,12 @@
 package com.arisux.avp.entities.tile;
 
+import java.util.Random;
+
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -16,6 +21,7 @@ import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 
 public class TileEntityAssembler extends TileEntity implements IInventory
 {
+	private Item randomItem = AliensVsPredator.items().helmTitanium;
 	private ItemStack[] items = new ItemStack[28];
 	private ItemStack previousTickStack;
 	public int clickAmount = 0;
@@ -42,6 +48,16 @@ public class TileEntityAssembler extends TileEntity implements IInventory
 	@Override
 	public void updateEntity()
 	{
+		if (this.getWorldObj().getWorldTime() % 20 == 0)
+		{
+			Random rand = new Random();
+
+			if (rand.nextInt(3) == 0)
+			{
+				this.randomItem = AliensVsPredator.assembler().getSchematicRegistry().get(rand.nextInt(AliensVsPredator.assembler().getSchematicRegistry().size())).getItemStackAssembled().getItem();
+			}
+		}
+
 		if (previousTickStack != getStackInSlot(27) && getStackInSlot(27) != null)
 		{
 			setInventorySlotContents(26, null);
@@ -75,7 +91,8 @@ public class TileEntityAssembler extends TileEntity implements IInventory
 			if (stack.stackSize <= count)
 			{
 				setInventorySlotContents(i, null);
-			} else
+			}
+			else
 			{
 				stack = stack.splitStack(count);
 				markDirty();
@@ -150,12 +167,14 @@ public class TileEntityAssembler extends TileEntity implements IInventory
 		{
 			return TileEntityFurnace.getItemBurnTime(stack) > 313;
 
-		} else if (slot == 26 || slot == 27)
+		}
+		else if (slot == 26 || slot == 27)
 		{
 
 			return false;
 
-		} else
+		}
+		else
 		{
 
 			return true;
@@ -230,5 +249,16 @@ public class TileEntityAssembler extends TileEntity implements IInventory
 
 		if (!player.worldObj.isRemote)
 			FMLNetworkHandler.openGui(player, AliensVsPredator.instance(), AliensVsPredator.properties().GUI_ASSEMBLER, player.worldObj, xCoord, yCoord, zCoord);
+	}
+
+	@Override
+	public Block getBlockType()
+	{
+		return Blocks.beacon;
+	}
+
+	public Item getRandomItem()
+	{
+		return this.randomItem;
 	}
 }

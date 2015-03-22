@@ -48,6 +48,7 @@ public class Resources
 	public final ResourceLocation TURRET = new ResourceLocation(AliensVsPredator.ID, "textures/tile/turret.png");
 	public final ResourceLocation WORKSTATION = new ResourceLocation(AliensVsPredator.ID, "textures/tile/workstation.png");
 	public final ResourceLocation WORKSTATION_MASK = new ResourceLocation(AliensVsPredator.ID, "textures/tile/workstation-on.png");
+	public final ResourceLocation LIGHT_PANEL = new ResourceLocation(AliensVsPredator.ID, "textures/tile/lightpanel.png");
 	public final ResourceLocation CRYOSTASIS_TUBE = new ResourceLocation(AliensVsPredator.ID, "textures/tile/cryostasistube.png");
 	public final ResourceLocation CRYOSTASIS_TUBE_MASK = new ResourceLocation(AliensVsPredator.ID, "textures/tile/cryostasistube-mask.png");
 	public final ResourceLocation CRYOSTASIS_TUBE_MASK_CRACKED = new ResourceLocation(AliensVsPredator.ID, "textures/tile/cryostasistube-cracked-mask.png");

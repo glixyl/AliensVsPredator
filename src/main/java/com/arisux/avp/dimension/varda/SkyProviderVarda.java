@@ -67,7 +67,7 @@ public class SkyProviderVarda extends IRenderHandler
 
 		if (provider.isSilicaStormActive())
 		{
-			// this.renderStorm(renderPartialTicks);
+			 this.renderStorm(renderPartialTicks);
 		}
 
 		GL11.glDisable(GL11.GL_TEXTURE_2D);

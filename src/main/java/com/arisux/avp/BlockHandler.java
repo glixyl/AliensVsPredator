@@ -92,6 +92,8 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockServer = (new BlockServer(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockCryostasisTube = (new BlockCryostasisTube(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockPlastic = (new HookedBlock(Material.clay)).setHardness(1.5F).setResistance(2.0F),
+		blockLightPanel = (new BlockLightPanel(Material.iron, true)).setHardness(1.5F).setResistance(2.0F),
+		blockLightPanelOff = (new BlockLightPanel(Material.iron, false)).setHardness(1.5F).setResistance(2.0F),
 		blockPlasticTile = (new HookedBlock(Material.clay)).setHardness(1.5F).setResistance(2.0F);
 
 	public BlockHandler()
@@ -216,5 +218,7 @@ public class BlockHandler extends IBHandler implements IInitializable
 		registerBlock(blockCryostasisTube, "cryostasistube", true);
 		registerShapedBlockSet(blockPlastic, "plasticblock");
 		registerShapedBlockSet(blockPlasticTile, "plastictile");
+		registerBlock(blockLightPanel, "lightpanel", true);
+		registerBlock(blockLightPanelOff, "lightpaneloff", true);
 	}
 }

@@ -25,7 +25,7 @@ public class RenderQueen extends RenderLiving
 		super.doRender(entity, posX, posY, posZ, yaw, renderPartialTicks);
 
 		EntityLiving living = (EntityLiving) entity;
-		int scale = 6;
+		int scale = 10;
 		int maxProgress = 360 / scale;
 		int progress = (int) (living.getHealth() * maxProgress / living.getMaxHealth());
 		String progressString = (int) living.getHealth() + "/" + (int) living.getMaxHealth();
@@ -67,7 +67,7 @@ public class RenderQueen extends RenderLiving
 	@Override
 	protected void preRenderCallback(EntityLivingBase entityliving, float f)
 	{
-		GL11.glScalef(2.5F, 2.5F, 2.5F);
+		GL11.glScalef(1.75F, 1.75F, 1.75F);
 	}
 
 	@Override
