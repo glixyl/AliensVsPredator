@@ -27,7 +27,8 @@ public class UserInterfaceEvents
 			buttonFeedback.xPosition = RenderUtil.scaledDisplayResolution().getScaledWidth() - buttonFeedback.width;
 			buttonFeedback.yPosition = mc.currentScreen instanceof GuiMainMenu ? 0 : RenderUtil.scaledDisplayResolution().getScaledHeight() - buttonFeedback.height;
 			buttonFeedback.baseColor = 0xAA000000;
-			buttonFeedback.displayString = " \u27A4";
+			buttonFeedback.width = 80;
+			buttonFeedback.displayString = "New Feedback";
 			buttonFeedback.drawButton();
 			buttonFeedback.setAction(new IActionPerformed()
 			{

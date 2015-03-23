@@ -71,6 +71,7 @@ public class Resources
 	public final ResourceLocation WARRIOR_BLOOD = new ResourceLocation(AliensVsPredator.ID, "textures/mob/warrior_blood.png");
 	public final ResourceLocation DRONE_BASIC_BLOOD = new ResourceLocation(AliensVsPredator.ID, "textures/mob/drone_basic_blood.png");
 	public final ResourceLocation DRONE_ADVANCED_BLOOD = new ResourceLocation(AliensVsPredator.ID, "textures/mob/drone_advanced_blood.png");
+	public final ResourceLocation HAMMERPEDE = new ResourceLocation(AliensVsPredator.ID, "textures/mob/hammerpede.png");
 	public final ResourceLocation PROTOMORPH = new ResourceLocation(AliensVsPredator.ID, "textures/mob/deacon.png");
 	public final ResourceLocation AQUA_XENOMORPH = new ResourceLocation(AliensVsPredator.ID, "textures/mob/aqua.png");
 	public final ResourceLocation AQUA_XENOMORPH_MASK = new ResourceLocation(AliensVsPredator.ID, "textures/mob/aqua_glow.png");

@@ -98,7 +98,8 @@ public class ItemHandler extends IBHandler implements IInitializable
 		itemSummonerYautja = (new ItemEntitySummoner(this.getMod().domain(), EntityYautja.class)),
 		itemSummonerPredalien = (new ItemEntitySummoner(this.getMod().domain(), EntityPredalien.class)),
 		itemSummonerCombatSynthetic = (new ItemEntitySummoner(this.getMod().domain(), EntityCombatSynthetic.class)),
-		itemSummonerProtomorph = (new ItemEntitySummoner(this.getMod().domain(), EntityProtomorph.class));
+		itemSummonerProtomorph = (new ItemEntitySummoner(this.getMod().domain(), EntityProtomorph.class)),
+		itemSummonerHammerpede = (new ItemEntitySummoner(this.getMod().domain(), EntityHammerpede.class));
 
 	public ItemHandler()
 	{
@@ -116,6 +117,7 @@ public class ItemHandler extends IBHandler implements IInitializable
 		registerItem(itemSummonerQueen, "summon.queen");
 		registerItem(itemSummonerPredalien, "summon.predalien");
 		registerItem(itemSummonerProtomorph, "summon.protomorph");
+		registerItem(itemSummonerHammerpede, "summon.hammerpede");
 		registerItem(itemSummonerOvamorph, "summon.ovamorph");
 		registerItem(itemSummonerFacehugger, "summon.facehugger");
 		registerItem(itemSummonerRoyalFacehugger, "summon.royalfacehugger");

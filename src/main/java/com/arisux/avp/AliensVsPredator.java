@@ -1,4 +1,4 @@
-/** AliensVsPredator - Copyright (C) 2012-2015 Arisux (Ri5ux/Dustin Christensen) **/
+/** AliensVsPredator Minecraft Mod - Copyright (C) 2012-2015 Arisux (Ri5ux/Dustin Christensen) **/
 package com.arisux.avp;
 
 import com.arisux.airi.AIRI;

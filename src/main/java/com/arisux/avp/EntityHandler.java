@@ -65,6 +65,7 @@ public class EntityHandler implements IInitializable
 		EntityRegistry.registerGlobalEntityID(EntityPredalien.class, "Predalien", entityIDs.get("PREDALIEN"));
 		EntityRegistry.registerGlobalEntityID(EntityCombatSynthetic.class, "CombatSynthetic", entityIDs.get("COMBAT_SYNTHETIC"), 0x333333, 0xFF0000);
 		EntityRegistry.registerGlobalEntityID(EntityProtomorph.class, "Protomorph", entityIDs.get("PROTOMORPH"), 0x333333, 0xFF0000);
+		EntityRegistry.registerGlobalEntityID(EntityHammerpede.class, "Hammerpede", entityIDs.get("HAMMERPEDE"), 0x333333, 0xFF0000);
 	}
 
 	private void registerEntities()
@@ -149,7 +150,10 @@ public class EntityHandler implements IInitializable
 			BiomeGenBase.jungle, 
 			BiomeGenBase.jungleHills 
 		});
-		EntityRegistry.addSpawn(EntityProtomorph.class, 6, 1, 2, EnumCreatureType.monster, new BiomeGenBase[] { 
+		EntityRegistry.addSpawn(EntityProtomorph.class, 4, 1, 1, EnumCreatureType.monster, new BiomeGenBase[] { 
+			BiomeLVBase.varda
+		});
+		EntityRegistry.addSpawn(EntityHammerpede.class, 6, 1, 2, EnumCreatureType.monster, new BiomeGenBase[] { 
 			BiomeLVBase.varda
 		});
 	}
