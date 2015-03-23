@@ -2,7 +2,6 @@ package com.arisux.avp.dimension.varda;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.*;
@@ -288,7 +287,6 @@ public class SkyProviderVarda extends IRenderHandler
 					if (minY != maxY)
 					{
 						float movement = 0F;
-						Block block = worldclient.getBlock(vX, vY, vZ);
 
 						movement = ((event.getStormUpdateCount() + vX * vX * 3121 + vX * 45238971 + vZ * vZ * 418711 + vZ * 13761 & 31) + renderPartialTicks) / 16.0F * intensity;
 						movement = movement * windSpeed;

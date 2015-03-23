@@ -114,7 +114,10 @@ public class EntitySpear extends EntityItemStackProjectile
 			}
 
 			Entity entity = null;
+			
+			@SuppressWarnings("unchecked")
 			List<Entity> list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
+			
 			double d = 0.0D;
 			int f3;
 			float f6;

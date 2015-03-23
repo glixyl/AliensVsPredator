@@ -80,6 +80,7 @@ public class BlockShape extends HookedBlock
 	}
 
 	@Override
+	@SuppressWarnings("rawtypes")
 	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB clip, List list, Entity entity)
 	{
 		int data = world.getBlockMetadata(x, y, z);
@@ -102,6 +103,7 @@ public class BlockShape extends HookedBlock
 		}
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void addBox(double x0, double x1, double y0, double y1, double z0, double z1, Matrix3 rot, Vertex org, AxisAlignedBB clip, List list)
 	{
 		Vertex p0 = rot.mul(x0, y0, z0).add(org);

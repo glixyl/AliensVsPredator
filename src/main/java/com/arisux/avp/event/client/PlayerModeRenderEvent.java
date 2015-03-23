@@ -40,7 +40,6 @@ public class PlayerModeRenderEvent
 			super.doRender(entity, posX, posY, posZ, yaw, renderPartialTicks);
 
 			EntityLivingBase entityLiving = (EntityLivingBase) entity;
-			EntityPlayer entityPlayer = (EntityPlayer) entity;
 
 			float boxTranslationMultiplier = 0.0625F;
 			float yawOffset = RenderUtil.interpolateRotation(entityLiving.prevRenderYawOffset, entityLiving.renderYawOffset, renderPartialTicks);

@@ -80,6 +80,7 @@ public class EntityChestburster extends EntitySpeciesAlien implements IMob
 	{
 		super.onUpdate();
 		
+		@SuppressWarnings("unchecked")
 		ArrayList<EntityItem> entityItemList = (ArrayList<EntityItem>) WorldUtil.Entities.getEntitiesInCoordsRange(worldObj, EntityItem.class, new com.arisux.airi.lib.WorldUtil.Blocks.CoordData(this), 8);
 
 		for (EntityItem entityItem : entityItemList)

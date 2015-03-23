@@ -2,12 +2,10 @@ package com.arisux.avp.util;
 
 import static com.arisux.airi.lib.RenderUtil.*;
 import static org.lwjgl.opengl.GL11.*;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.monster.EntityEnderman;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.RenderLivingEvent;
 
 import org.lwjgl.opengl.GL11;
@@ -44,8 +42,6 @@ public enum VisionMode
 		@Override
 		public void render(Object... data)
 		{
-			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-
 			GL11.glPushMatrix();
 			{
 				glEnable(GL_BLEND);
@@ -108,8 +104,6 @@ public enum VisionMode
 		@Override
 		public void render(Object... data)
 		{
-			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-
 			GL11.glPushMatrix();
 			{
 				glEnable(GL_BLEND);

@@ -15,9 +15,10 @@ import com.arisux.avp.block.BlockShape.ShapeTypes;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
+@SuppressWarnings("unused")
 public class RenderShape implements ISimpleBlockRenderingHandler
 {
-	public static Tessellator tessellator;
+	public Tessellator tessellator;
 	public boolean ambientOcclusion;
 	private Block baseBlock;
 	private IBlockAccess blockAccess;
