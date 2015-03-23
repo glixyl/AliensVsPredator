@@ -24,12 +24,6 @@ public class RenderCombatSynthetic extends RenderLiving
 	}
 
 	@Override
-	public void doRender(Entity entity, double posX, double posY, double posZ, float yaw, float renderPartialTicks)
-	{
-		super.doRender(entity, posX, posY, posZ, yaw, renderPartialTicks);
-	}
-
-	@Override
 	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float partialTicks)
 	{
 		super.preRenderCallback(par1EntityLivingBase, partialTicks);

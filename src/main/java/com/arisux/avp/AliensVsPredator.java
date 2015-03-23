@@ -143,7 +143,12 @@ public class AliensVsPredator implements IMod
 	@Override
 	public CreativeTab tab()
 	{
-		return CreativeTab.instance;
+		return CreativeTab.tabMain;
+	}
+
+	public CreativeTab tabBlocks()
+	{
+		return CreativeTab.tabBlocks;
 	}
 
 	@Override

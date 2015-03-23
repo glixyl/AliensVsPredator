@@ -54,7 +54,7 @@ public class ItemHandler extends IBHandler implements IInitializable
 		itemDisc = (new ItemDisc()),
 		itemShuriken = (new ItemShuriken()),
 		itemGrenade = (new ItemGrenade()).setFlaming(false),
-		itemFireGrenade = (new ItemGrenade()).setFlaming(true),
+		itemIncindiaryGrenade = (new ItemGrenade()).setFlaming(true),
 		itemAmmoPistol = ((HookedItem) (new ItemAmmo(1.0F))).setDescription("A magazine classified for use with pistols."),
 		itemAmmoAR = ((HookedItem) (new ItemAmmo(2.0F))).setDescription("A magazine classified for use with assault rifles."),
 		itemAmmoAC = ((HookedItem) (new ItemAmmo(2.5F))).setDescription("A magazine classified for use with assault carbines."),
@@ -153,10 +153,10 @@ public class ItemHandler extends IBHandler implements IInitializable
 		registerItem(itemAmmoSMG, "ammo.smg");
 		registerItem(itemAmmoSniper, "ammo.sniper");
 		registerItem(itemGrenade, "grenade.m40");
-		registerItem(itemFireGrenade, "grenade.incinderary");
+		registerItem(itemIncindiaryGrenade, "grenade.incindiary");
 		registerItem(itemWristBlade, "wristblade");
 		registerItem(itemPlasmaCaster, "plasmacaster");
-		registerItem(itemProximityMine, "mine.proximity");
+		registerItem(itemProximityMine, "mine.laser");
 		registerItem(itemDisc, "smartdisc");
 		registerItem(itemShuriken, "shuriken");
 		registerItem(itemSpear, "tool.celtic.spear");

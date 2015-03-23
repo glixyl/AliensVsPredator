@@ -36,6 +36,6 @@ public class ItemLaserMine extends Item
 	@SuppressWarnings("all")
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{
-		par3List.add("Right click to place on wall (Explodes when hostiles pass)");
+		par3List.add("Right click to place on wall (Explodes when entities pass through laser)");
 	}
 }

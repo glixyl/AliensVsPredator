@@ -18,12 +18,6 @@ public class RenderPredalien extends RenderLiving
 	}
 
 	@Override
-	public void doRender(Entity entity, double posX, double posY, double posZ, float yaw, float renderPartialTicks)
-	{
-		super.doRender(entity, posX, posY, posZ, yaw, renderPartialTicks);
-	}
-
-	@Override
 	protected void preRenderCallback(EntityLivingBase par1EntityLiving, float par2)
 	{
 		GL11.glScalef(0.75F, 0.75F, 0.75F);

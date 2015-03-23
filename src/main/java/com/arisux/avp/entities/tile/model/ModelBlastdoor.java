@@ -1,11 +1,11 @@
 package com.arisux.avp.entities.tile.model;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
+import com.arisux.airi.lib.client.ModelBaseExtension;
 import com.arisux.avp.entities.tile.TileEntityBlastdoor;
 
-public class ModelBlastdoor extends ModelBase
+public class ModelBlastdoor extends ModelBaseExtension
 {
 	ModelRenderer doorLeftCorner1;
 	ModelRenderer doorLeftCorner2;
@@ -139,13 +139,6 @@ public class ModelBlastdoor extends ModelBase
 		frameRight.render(boxTranslation);
 		bar1.render(boxTranslation);
 		bar4.render(boxTranslation);
-	}
-
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
 	}
 
 	public void setRotationAngles(TileEntityBlastdoor tile)

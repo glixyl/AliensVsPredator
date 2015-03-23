@@ -8,7 +8,8 @@ import net.minecraft.item.Item;
 
 public class CreativeTab extends CreativeTabs
 {
-	public static CreativeTab instance = new CreativeTab();
+	public static CreativeTab tabMain = new CreativeTab();
+	public static CreativeTab tabBlocks = new CreativeTab();
 	
 	public CreativeTab()
 	{

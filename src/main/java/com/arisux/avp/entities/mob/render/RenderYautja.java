@@ -18,12 +18,6 @@ public class RenderYautja extends RenderLiving
 	}
 
 	@Override
-	public void doRender(Entity entity, double posX, double posY, double posZ, float yaw, float renderPartialTicks)
-	{
-		super.doRender(entity, posX, posY, posZ, yaw, renderPartialTicks);
-	}
-
-	@Override
 	protected void preRenderCallback(EntityLivingBase entityliving, float renderPartialTicks)
 	{
 		GL11.glScalef(0.85F, 0.85F, 0.85F);

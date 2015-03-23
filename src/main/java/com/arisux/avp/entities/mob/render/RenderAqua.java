@@ -20,13 +20,7 @@ public class RenderAqua extends RenderLiving
 		super(mainModel, shadowSize);
 		this.setRenderPassModel(new ModelAqua());
 	}
-
-	@Override
-	public void doRender(Entity entity, double posX, double posY, double posZ, float yaw, float renderPartialTicks)
-	{
-		super.doRender(entity, posX, posY, posZ, yaw, renderPartialTicks);
-	}
-
+	
 	@Override
 	protected void preRenderCallback(EntityLivingBase entityliving, float partialTicks)
 	{

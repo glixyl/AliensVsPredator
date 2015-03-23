@@ -2,6 +2,7 @@ package com.arisux.avp;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 
 import com.arisux.airi.lib.BlockTypes.GhostBlock;
 import com.arisux.airi.lib.BlockTypes.HookedBlock;
@@ -120,14 +121,16 @@ public class BlockHandler extends IBHandler implements IInitializable
 			HookedBlock blockSmartInvertedRidge = ((HookedBlock) (new BlockShape(blockBaseHook.getMaterial(), ShapeTypes.SMART_INVERTED_RIDGE)).setIconSet(blockParentHook.getIconSet()).setResistance(blockBaseHook.getResistance()).setHardness(blockBaseHook.getHardness()).setLightOpacity(blockBaseHook.getLightOpacity()));
 			HookedBlock blockSmartRidge = ((HookedBlock) (new BlockShape(blockBaseHook.getMaterial(), ShapeTypes.SMART_RIDGE)).setIconSet(blockParentHook.getIconSet()).setResistance(blockBaseHook.getResistance()).setHardness(blockBaseHook.getHardness()).setLightOpacity(blockBaseHook.getLightOpacity()));
 
-			registerBlock(blockBaseHook, reference, blockParent);
-			registerBlock(blockSlope, reference + ".slope", blockParent);
-			registerBlock(blockCorner, reference + ".corner", blockParent);
-			registerBlock(blockInvertedCorner, reference + ".invertedcorner", blockParent);
-			registerBlock(blockRidge, reference + ".ridge", blockParent);
-			registerBlock(blockInvertedRidge, reference + ".invertedridge", blockParent);
-			registerBlock(blockSmartInvertedRidge, reference + ".smartinvertedridge", blockParent);
-			registerBlock(blockSmartRidge, reference + ".smartridge", blockParent);
+			CreativeTabs tab = AliensVsPredator.instance().tabBlocks();
+			
+			registerBlock(blockBaseHook, reference, blockParent, tab);
+			registerBlock(blockSlope, reference + ".slope", blockParent, tab);
+			registerBlock(blockCorner, reference + ".corner", blockParent, tab);
+			registerBlock(blockInvertedCorner, reference + ".invertedcorner", blockParent, tab);
+			registerBlock(blockRidge, reference + ".ridge", blockParent, tab);
+			registerBlock(blockInvertedRidge, reference + ".invertedridge", blockParent, tab);
+			registerBlock(blockSmartInvertedRidge, reference + ".smartinvertedridge", blockParent, tab);
+			registerBlock(blockSmartRidge, reference + ".smartridge", blockParent, tab);
 
 			if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
 			{
@@ -145,6 +148,7 @@ public class BlockHandler extends IBHandler implements IInitializable
 	@Override
 	public void initialize(FMLInitializationEvent event)
 	{
+		CreativeTabs tab = AliensVsPredator.instance().tabBlocks();
 		registerShapedBlockSet(terrainUniDirt, "unidirt");
 		registerShapedBlockSet(terrainUniStone, "unistone");
 		registerShapedBlockSet(terrainUniSand, "unisand");
@@ -158,22 +162,22 @@ public class BlockHandler extends IBHandler implements IInitializable
 		registerShapedBlockSet(blockCeilingFan, "ceilingfan");
 		registerShapedBlockSet(blockCeiliingVent, "ceilingvent");
 		registerShapedBlockSet(blockCeilingGrill, "ceilinggrill");
-		registerBlock(blockCeilingGrillStairs, "ceilinggrillstairs", blockCeilingGrill);
-		registerBlock(blockCeilingGrillSlab, "ceilinggrillslab", blockCeilingGrill);
+		registerBlock(blockCeilingGrillStairs, "ceilinggrillstairs", blockCeilingGrill, tab);
+		registerBlock(blockCeilingGrillSlab, "ceilinggrillslab", blockCeilingGrill, tab);
 		registerShapedBlockSet(blockFloorGrill, "floorgrill");
-		registerBlock(blockFloorGrillStairs, "floorgrillstairs", blockFloorGrill);
-		registerBlock(blockFloorGrillSlab, "floorgrillslab", blockFloorGrill);
+		registerBlock(blockFloorGrillStairs, "floorgrillstairs", blockFloorGrill, tab);
+		registerBlock(blockFloorGrillSlab, "floorgrillslab", blockFloorGrill, tab);
 		registerShapedBlockSet(blockWall, "industrialwall");
 		registerShapedBlockSet(blockWallW, "industrialwall2");
-		registerBlock(blockWallStairs, "industrialwallstairs", blockWall);
-		registerBlock(blockWallSlab, "industrialslab", blockWall);
+		registerBlock(blockWallStairs, "industrialwallstairs", blockWall, tab);
+		registerBlock(blockWallSlab, "industrialslab", blockWall, tab);
 		registerShapedBlockSet(blockWallVent, "industrialvent");
 		registerShapedBlockSet(blockIronBricks, "industrialbricks");
-		registerBlock(blockIronBricksStairs, "industrialbrickstairs", blockIronBricks);
-		registerBlock(blockIronBricksSlab, "industrialbrickslab", blockIronBricks);
+		registerBlock(blockIronBricksStairs, "industrialbrickstairs", blockIronBricks, tab);
+		registerBlock(blockIronBricksSlab, "industrialbrickslab", blockIronBricks, tab);
 		registerShapedBlockSet(blockIndustrialGlass, "industrialglass");
-		registerBlock(blockIndustrialGlassStairs, "industrialglassstairs", blockIndustrialGlass);
-		registerBlock(blockIndustrialGlassSlab, "industrialglassslab", blockIndustrialGlass);
+		registerBlock(blockIndustrialGlassStairs, "industrialglassstairs", blockIndustrialGlass, tab);
+		registerBlock(blockIndustrialGlassSlab, "industrialglassslab", blockIndustrialGlass, tab);
 		registerShapedBlockSet(blockVerticalMetal, "metalpanel1");
 		registerShapedBlockSet(blockColumnMetal1, "metalpanel2");
 		registerShapedBlockSet(blockColumnMetal2, "metalpanel3");
