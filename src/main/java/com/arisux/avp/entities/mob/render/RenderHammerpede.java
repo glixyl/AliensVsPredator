@@ -10,9 +10,9 @@ import org.lwjgl.opengl.GL11;
 
 import com.arisux.avp.AliensVsPredator;
 
-public class RenderChestburster extends RenderLiving
+public class RenderHammerpede extends RenderLiving
 {
-	public RenderChestburster(ModelBase modelbase, float shadowSize)
+	public RenderHammerpede(ModelBase modelbase, float shadowSize)
 	{
 		super(modelbase, shadowSize);
 	}
@@ -21,12 +21,12 @@ public class RenderChestburster extends RenderLiving
 	protected void preRenderCallback(EntityLivingBase entitylivingBase, float partialTicks)
 	{
 		super.preRenderCallback(entitylivingBase, shadowSize);
-		GL11.glScalef(0.55F, 0.55F, 0.55F);
+		GL11.glScalef(0.65F, 0.65F, 0.65F);
 	}
 
 	@Override
 	public ResourceLocation getEntityTexture(Entity entity)
 	{
-		return AliensVsPredator.resources().CHESTBUSTER;
+		return AliensVsPredator.resources().HAMMERPEDE;
 	}
 }
