@@ -6,9 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import com.arisux.airi.lib.BlockTypes.GhostBlock;
 import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
-import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.TileEntityBlastdoor;
 
 public class BlockBlastdoor extends HookedBlockContainer
@@ -34,10 +32,10 @@ public class BlockBlastdoor extends HookedBlockContainer
 	@Override
 	public int onBlockPlaced(World world, int posX, int posY, int posZ, int side, float subX, float subY, float subZ, int meta)
 	{
-		GhostBlock ghostBlock = (GhostBlock) AliensVsPredator.blocks().ghostBlockBlastdoor;
+//		GhostBlock ghostBlock = (GhostBlock) AliensVsPredator.blocks().ghostBlockBlastdoor;
 
-		world.setBlock(posX, posY + 1, posZ, ghostBlock);
-		world.setBlock(posX, posY + 2, posZ, ghostBlock);
+//		world.setBlock(posX, posY + 1, posZ, ghostBlock);
+//		world.setBlock(posX, posY + 2, posZ, ghostBlock);
 
 		return super.onBlockPlaced(world, posX, posY, posZ, side, subX, subY, subZ, meta);
 	}
@@ -45,9 +43,9 @@ public class BlockBlastdoor extends HookedBlockContainer
 	@Override
 	public void breakBlock(World world, int posX, int posY, int posZ, Block blockBroken, int meta)
 	{
-		world.setBlockToAir(posX, posY + 0, posZ);
-		world.setBlockToAir(posX, posY + 1, posZ);
-		world.setBlockToAir(posX, posY + 2, posZ);
+//		world.setBlockToAir(posX, posY + 0, posZ);
+//		world.setBlockToAir(posX, posY + 1, posZ);
+//		world.setBlockToAir(posX, posY + 2, posZ);
 
 		super.breakBlock(world, posX, posY, posZ, blockBroken, meta);
 	}
@@ -56,5 +54,11 @@ public class BlockBlastdoor extends HookedBlockContainer
 	public TileEntity createNewTileEntity(World world, int meta)
 	{
 		return new TileEntityBlastdoor();
+	}
+	
+	@Override
+	public int getRenderType()
+	{
+		return -1;
 	}
 }

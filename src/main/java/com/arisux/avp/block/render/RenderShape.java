@@ -51,14 +51,14 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
 	{
 		tessellator.startDrawingQuads();
-		render(null, (BlockShape) block, 0, 0, 0, 0, block.getBlockTextureFromSide(2));
+		render(null, (BlockShape) block, 0, 0, 0, 0, block.getBlockTextureFromSide(block instanceof BlockShape ? ((BlockShape) block).getTextureSide() : 2));
 		tessellator.draw();
 	}
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks render)
 	{
-		return render(world, (BlockShape) block, world.getBlockMetadata(x, y, z), x, y, z, block.getBlockTextureFromSide(2));
+		return render(world, (BlockShape) block, world.getBlockMetadata(x, y, z), x, y, z, block.getBlockTextureFromSide(block instanceof BlockShape ? ((BlockShape) block).getTextureSide() : 2));
 	}
 
 	@Override

@@ -64,6 +64,7 @@ public class BlockShape extends HookedBlock
 	}
 	
 	private ShapeTypes shape;
+	private int textureSide;
 
 	public BlockShape(Material material, ShapeTypes shape)
 	{
@@ -71,6 +72,18 @@ public class BlockShape extends HookedBlock
 		this.shape = shape;
 		this.setRenderNormal(false);
 		this.setOpaque(false);
+		this.textureSide = 2;
+	}
+	
+	public BlockShape setTextureSide(int textureSide)
+	{
+		this.textureSide = textureSide;
+		return this;
+	}
+	
+	public int getTextureSide()
+	{
+		return this.textureSide;
 	}
 
 	@Override

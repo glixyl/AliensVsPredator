@@ -9,6 +9,7 @@ import com.arisux.avp.api.AssemblerAPI;
 import com.arisux.avp.api.WristbracerAPI;
 
 import cpw.mods.fml.common.*;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -204,6 +205,12 @@ public class AliensVsPredator implements IMod
 				(updater = AIRI.updaterApi().createNewUpdater(AliensVsPredator.ID, "4.0", settings().getUrlUpdater(), settings().getServer(), settings().getUrlChangelog())).postInitialize(event);
 			}
 		}
+	}
+
+	@EventHandler
+	public void onServerStarting(FMLServerStartingEvent event)
+	{
+		commands().onServerStarting(event);
 	}
 
 	public boolean isDevCopy()

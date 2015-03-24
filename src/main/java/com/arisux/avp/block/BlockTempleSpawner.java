@@ -23,7 +23,7 @@ public class BlockTempleSpawner extends HookedBlock
 
 	@Override
 	public void onNeighborBlockChange(World worldObj, int posX, int posY, int posZ, Block block)
-	{
+	{		
 		super.onNeighborBlockChange(worldObj, posX, posY, posZ, block);
 
 		int range = 25;

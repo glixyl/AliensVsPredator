@@ -1,19 +1,22 @@
 package com.arisux.avp.items.render;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.entities.tile.model.ModelBlastdoor;
+import com.arisux.avp.entities.tile.model.ModelLightPanel;
 
-public class RenderItemBlastDoor extends ItemRenderer
+public class RenderItemLightPanel extends ItemRenderer
 {
-	public RenderItemBlastDoor()
+	public static final ResourceLocation resourceLocation = AliensVsPredator.resources().LIGHT_PANEL;
+
+	public RenderItemLightPanel()
 	{
-		super(new ModelBlastdoor(), AliensVsPredator.resources().BLASTDOOR);
+		super(new ModelLightPanel(), resourceLocation);
 	}
 
 	@Override
@@ -28,13 +31,12 @@ public class RenderItemBlastDoor extends ItemRenderer
 		float glScale = 1F;
 
 		GL11.glRotatef(10F, 0F, 0F, 1F);
-		GL11.glRotatef(120F, 0F, 1F, 0F);
-		GL11.glTranslatef(-0.6F, 1.4F, 0F);
+		GL11.glRotatef(12F, 0F, 1F, 0F);
+		GL11.glTranslatef(0.4F, 1F, 0.5F);
 		GL11.glDisable(GL11.GL_CULL_FACE);
 		GL11.glScalef(glScale, -glScale, glScale);
-		RenderUtil.bindTexture(this.getResourceLocation());
-		((ModelBlastdoor) this.getModel()).render(null, RenderUtil.DEFAULT_BOX_TRANSLATION);
-		
+		RenderUtil.bindTexture(resourceLocation);
+		((ModelLightPanel) this.getModel()).render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 	}
 
 	@Override
@@ -50,24 +52,24 @@ public class RenderItemBlastDoor extends ItemRenderer
 			GL11.glRotatef(79.0F, 0.0F, 0.0F, 1.0F);
 			GL11.glDisable(GL11.GL_CULL_FACE);
 			GL11.glScalef(glScale, glScale, glScale);
-			RenderUtil.bindTexture(this.getResourceLocation());
-			((ModelBlastdoor) this.getModel()).render(null, RenderUtil.DEFAULT_BOX_TRANSLATION);
+			RenderUtil.bindTexture(resourceLocation);
+			((ModelLightPanel) this.getModel()).render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 		}
 	}
 
 	@Override
 	public void renderInInventory(ItemStack item, Object... data)
 	{
-		float glScale = 5F;
+		float glScale = 10F;
 		RenderUtil.glBlendClear();
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glTranslatef(8F, 7.5F, 0F);
+		GL11.glTranslatef(8F, 5F, 0F);
+		GL11.glRotatef(-45, 1.0F, 0.0F, 0.0F);
 		GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
-		GL11.glTranslatef(7.5F, 0F, 0F);
+		GL11.glTranslatef(0F, -6F, 0F);
 		GL11.glRotatef(-180F, 0.0F, 1.0F, 0.0F);
 		GL11.glDisable(GL11.GL_CULL_FACE);
 		GL11.glScalef(glScale, glScale, glScale);
-		RenderUtil.bindTexture(this.getResourceLocation());
-		((ModelBlastdoor) this.getModel()).render(null, RenderUtil.DEFAULT_BOX_TRANSLATION);
+		RenderUtil.bindTexture(resourceLocation);
+		((ModelLightPanel) this.getModel()).render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 	}
 }

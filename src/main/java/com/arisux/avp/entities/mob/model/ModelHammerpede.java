@@ -209,17 +209,13 @@ public class ModelHammerpede extends ModelBaseExtension
 	private void doTail(float angle, float distMult)
 	{
 		float multiplier = 0.15F;
-		this.body6.offsetZ = -0.35F;
 		this.body6.rotateAngleY = angle / 4F;
-		this.body7.offsetZ = -0.16F;
 		this.body7.rotateAngleY = angle / 4F;
 		this.body7.rotationPointZ = this.body6.rotationPointZ + (float) Math.cos(this.body6.rotateAngleY) * 5.0F;
 		this.body7.rotationPointX = this.body6.rotationPointX + (float) Math.sin(this.body6.rotateAngleY) * 5.0F;
 		multiplier = multiplier + distMult;
-		this.body8.offsetZ = -0.16F;
 		this.body8.rotationPointZ = this.body7.rotationPointZ + (float) Math.cos(this.body7.rotateAngleY) * 5.0F;
 		this.body8.rotationPointX = this.body7.rotationPointX + (float) Math.sin(this.body7.rotateAngleY) * 5.0F;
-		this.tail.offsetZ = -0.06F;
 		this.tail.rotateAngleY = angle / 4F;
 		this.tail.rotateAngleY = angle * 0.1F;
 		this.tail.rotationPointZ = this.body8.rotationPointZ + (float) Math.cos(this.body8.rotateAngleY) * 5.0F;

@@ -84,6 +84,8 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.blocks().blockStasisMechanism), new RenderItemStasisMechanism());
 		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.blocks().blockCryostasisTube), new RenderItemCryostasisTube());
 		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.blocks().blockRepulsionGenerator), new RenderItemRepulsionGenerator());
+		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.blocks().blockBlastdoor), new RenderItemBlastDoor());
+		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.blocks().blockLightPanel), new RenderItemLightPanel());
 		registerItemRenderer(items.itemWristBlade, new RenderItemWristbracer());
 		registerItemRenderer(items.itemWristbracerBlades, new RenderItemWristbracerBlades());
 		registerItemRenderer(items.itemSpear, new RenderItemSpear());
@@ -122,7 +124,6 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		bindTileEntitySpecialRenderer(TileEntityPowerline.class, new RenderPowerline());
 		bindTileEntitySpecialRenderer(TileEntityBlastdoor.class, new RenderBlastdoor());
 		bindTileEntitySpecialRenderer(TileEntityWorklight.class, new RenderWorklight());
-		bindTileEntitySpecialRenderer(TileEntityServer.class, new RenderServer());
 		bindTileEntitySpecialRenderer(TileEntityCryostasisTube.class, new RenderCryostasisTube());
 		bindTileEntitySpecialRenderer(TileEntityRepulsionGenerator.class, new RenderRepulsionGenerator());
 		bindTileEntitySpecialRenderer(TileEntityAssembler.class, new RenderAssembler());

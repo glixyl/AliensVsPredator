@@ -90,11 +90,9 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockBlastdoor = (new BlockBlastdoor(Material.iron)).setHardness(5F).setResistance(5F),
 		ghostBlockBlastdoor = (new GhostBlock(blockBlastdoor)).setAttributesFrom((HookedBlock) blockBlastdoor),
 		blockWorklight = (new BlockWorklight(Material.iron)).setHardness(3.2F).setResistance(2.6F),
-		blockServer = (new BlockServer(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockCryostasisTube = (new BlockCryostasisTube(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockPlastic = (new HookedBlock(Material.clay)).setHardness(1.5F).setResistance(2.0F),
 		blockLightPanel = (new BlockLightPanel(Material.iron, true)).setHardness(1.5F).setResistance(2.0F),
-		blockLightPanelOff = (new BlockLightPanel(Material.iron, false)).setHardness(1.5F).setResistance(2.0F),
 		blockPlasticTile = (new HookedBlock(Material.clay)).setHardness(1.5F).setResistance(2.0F);
 
 	public BlockHandler()
@@ -107,19 +105,29 @@ public class BlockHandler extends IBHandler implements IInitializable
 		this.registerShapedBlockSet(block, reference, block);
 	}
 
+	public void registerShapedBlockSet(Block block, String reference, int textureSide)
+	{
+		this.registerShapedBlockSet(block, reference, block, textureSide);
+	}
+
 	public void registerShapedBlockSet(Block block, String reference, Block blockParent)
+	{
+		this.registerShapedBlockSet(block, reference, blockParent, 2);
+	}
+
+	public void registerShapedBlockSet(Block block, String reference, Block blockParent, int textureSide)
 	{
 		if (block instanceof HookedBlock)
 		{
 			HookedBlock blockParentHook = (HookedBlock) blockParent;
 			HookedBlock blockBaseHook = (HookedBlock) block;
-			HookedBlock blockSlope = ((HookedBlock) (new BlockShape(blockBaseHook.getMaterial(), ShapeTypes.SLOPE)).setIconSet(blockParentHook.getIconSet()).setResistance(blockBaseHook.getResistance()).setHardness(blockBaseHook.getHardness()).setLightOpacity(blockBaseHook.getLightOpacity()));
-			HookedBlock blockCorner = ((HookedBlock) (new BlockShape(blockBaseHook.getMaterial(), ShapeTypes.CORNER)).setIconSet(blockParentHook.getIconSet()).setResistance(blockBaseHook.getResistance()).setHardness(blockBaseHook.getHardness()).setLightOpacity(blockBaseHook.getLightOpacity()));
-			HookedBlock blockInvertedCorner = ((HookedBlock) (new BlockShape(blockBaseHook.getMaterial(), ShapeTypes.INVERTED_CORNER)).setIconSet(blockParentHook.getIconSet()).setResistance(blockBaseHook.getResistance()).setHardness(blockBaseHook.getHardness()).setLightOpacity(blockBaseHook.getLightOpacity()));
-			HookedBlock blockRidge = ((HookedBlock) (new BlockShape(blockBaseHook.getMaterial(), ShapeTypes.RIDGE)).setIconSet(blockParentHook.getIconSet()).setResistance(blockBaseHook.getResistance()).setHardness(blockBaseHook.getHardness()).setLightOpacity(blockBaseHook.getLightOpacity()));
-			HookedBlock blockInvertedRidge = ((HookedBlock) (new BlockShape(blockBaseHook.getMaterial(), ShapeTypes.INVERTED_RIDGE)).setIconSet(blockParentHook.getIconSet()).setResistance(blockBaseHook.getResistance()).setHardness(blockBaseHook.getHardness()).setLightOpacity(blockBaseHook.getLightOpacity()));
-			HookedBlock blockSmartInvertedRidge = ((HookedBlock) (new BlockShape(blockBaseHook.getMaterial(), ShapeTypes.SMART_INVERTED_RIDGE)).setIconSet(blockParentHook.getIconSet()).setResistance(blockBaseHook.getResistance()).setHardness(blockBaseHook.getHardness()).setLightOpacity(blockBaseHook.getLightOpacity()));
-			HookedBlock blockSmartRidge = ((HookedBlock) (new BlockShape(blockBaseHook.getMaterial(), ShapeTypes.SMART_RIDGE)).setIconSet(blockParentHook.getIconSet()).setResistance(blockBaseHook.getResistance()).setHardness(blockBaseHook.getHardness()).setLightOpacity(blockBaseHook.getLightOpacity()));
+			HookedBlock blockSlope = ((HookedBlock) (new BlockShape(blockBaseHook.getMaterial(), ShapeTypes.SLOPE).setTextureSide(textureSide)).setIconSet(blockParentHook.getIconSet()).setResistance(blockBaseHook.getResistance()).setHardness(blockBaseHook.getHardness()).setLightOpacity(blockBaseHook.getLightOpacity()));
+			HookedBlock blockCorner = ((HookedBlock) (new BlockShape(blockBaseHook.getMaterial(), ShapeTypes.CORNER).setTextureSide(textureSide)).setIconSet(blockParentHook.getIconSet()).setResistance(blockBaseHook.getResistance()).setHardness(blockBaseHook.getHardness()).setLightOpacity(blockBaseHook.getLightOpacity()));
+			HookedBlock blockInvertedCorner = ((HookedBlock) (new BlockShape(blockBaseHook.getMaterial(), ShapeTypes.INVERTED_CORNER).setTextureSide(textureSide)).setIconSet(blockParentHook.getIconSet()).setResistance(blockBaseHook.getResistance()).setHardness(blockBaseHook.getHardness()).setLightOpacity(blockBaseHook.getLightOpacity()));
+			HookedBlock blockRidge = ((HookedBlock) (new BlockShape(blockBaseHook.getMaterial(), ShapeTypes.RIDGE).setTextureSide(textureSide)).setIconSet(blockParentHook.getIconSet()).setResistance(blockBaseHook.getResistance()).setHardness(blockBaseHook.getHardness()).setLightOpacity(blockBaseHook.getLightOpacity()));
+			HookedBlock blockInvertedRidge = ((HookedBlock) (new BlockShape(blockBaseHook.getMaterial(), ShapeTypes.INVERTED_RIDGE).setTextureSide(textureSide)).setIconSet(blockParentHook.getIconSet()).setResistance(blockBaseHook.getResistance()).setHardness(blockBaseHook.getHardness()).setLightOpacity(blockBaseHook.getLightOpacity()));
+			HookedBlock blockSmartInvertedRidge = ((HookedBlock) (new BlockShape(blockBaseHook.getMaterial(), ShapeTypes.SMART_INVERTED_RIDGE).setTextureSide(textureSide)).setIconSet(blockParentHook.getIconSet()).setResistance(blockBaseHook.getResistance()).setHardness(blockBaseHook.getHardness()).setLightOpacity(blockBaseHook.getLightOpacity()));
+			HookedBlock blockSmartRidge = ((HookedBlock) (new BlockShape(blockBaseHook.getMaterial(), ShapeTypes.SMART_RIDGE).setTextureSide(textureSide)).setIconSet(blockParentHook.getIconSet()).setResistance(blockBaseHook.getResistance()).setHardness(blockBaseHook.getHardness()).setLightOpacity(blockBaseHook.getLightOpacity()));
 
 			CreativeTabs tab = AliensVsPredator.instance().tabBlocks();
 			
@@ -196,7 +204,7 @@ public class BlockHandler extends IBHandler implements IInitializable
 		registerShapedBlockSet(blockShipDecor4, "shipbrick");
 		registerBlock(blockSacrificialSpawner, "spawner");
 		registerBlock(blockSpawnerCreative, "spawnerc", blockSacrificialSpawner);
-		registerShapedBlockSet(blockRelicTile, "templebricksingle", blockSacrificialSpawner);
+		registerShapedBlockSet(blockRelicTile, "templebricksingle", blockSacrificialSpawner, 0);
 		registerShapedBlockSet(blockTempleBrick, "templebrick");
 		registerShapedBlockSet(blockTempleTile, "templetile");
 		registerShapedBlockSet(blockTempleWall1, "templewallbase");
@@ -218,11 +226,9 @@ public class BlockHandler extends IBHandler implements IInitializable
 		registerBlock(blockBlastdoor, "blastdoor", true);
 		registerBlock(ghostBlockBlastdoor, "blastdoorghost", false);
 		registerBlock(blockWorklight, "worklight", true);
-		registerBlock(blockServer, "server", true);
 		registerBlock(blockCryostasisTube, "cryostasistube", true);
 		registerShapedBlockSet(blockPlastic, "plasticblock");
 		registerShapedBlockSet(blockPlasticTile, "plastictile");
 		registerBlock(blockLightPanel, "lightpanel", true);
-		registerBlock(blockLightPanelOff, "lightpaneloff", true);
 	}
 }
