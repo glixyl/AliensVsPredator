@@ -109,6 +109,7 @@ public class AliensVsPredator implements IMod
 		return AssemblerAPI.instance;
 	}
 
+    @SideOnly(Side.CLIENT)
 	public static WristbracerAPI wristbracer()
 	{
 		return WristbracerAPI.instance;
@@ -186,7 +187,11 @@ public class AliensVsPredator implements IMod
 		playermodehandler().initialize(event);
 		schematics().initialize(event);
 		assembler().initialize(event);
-		wristbracer().initialize(event);
+		
+        if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
+        {
+            wristbracer().initialize(event);
+        }
 	}
 
 	@Override
