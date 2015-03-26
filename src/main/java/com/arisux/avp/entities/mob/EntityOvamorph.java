@@ -10,7 +10,8 @@ import com.arisux.avp.AliensVsPredator;
 public class EntityOvamorph extends EntitySpeciesAlien implements IMob
 {
 	public int hatchingTime;
-	public boolean nearPlayer;
+	public boolean hasHatched;
+
 	public EntityOvamorph(World par1World)
 	{
 		super(par1World);
@@ -55,16 +56,13 @@ public class EntityOvamorph extends EntitySpeciesAlien implements IMob
 	{
 		return false;
 	}
-	
+
 	@Override
 	protected void dropRareDrop(int rate)
 	{
 		this.dropItem(AliensVsPredator.items().itemRoyalJelly, 1);
 	}
 
-	/**
-	 * Called to update the entity's position/logic.
-	 */
 	@Override
 	public void onUpdate()
 	{
@@ -72,19 +70,21 @@ public class EntityOvamorph extends EntitySpeciesAlien implements IMob
 
 		EntityPlayer player = this.worldObj.getClosestPlayerToEntity(this, 15.0D);
 
-		if (player != null)
+		if (player != null || this.hasHatched)
 		{
-			--this.hatchingTime;
-			this.nearPlayer = true;
-		}
+			if (!this.worldObj.isRemote && this.hatchingTime-- <= 1 || this.hasHatched)
+			{
+				EntityFacehugger facehugger = new EntityFacehugger(this.worldObj);
+				facehugger.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
+				worldObj.spawnEntityInWorld(facehugger);
 
-		if (!this.worldObj.isRemote && this.hatchingTime <= 1)
-		{
-			EntityFacehugger par1 = new EntityFacehugger(this.worldObj);
-			par1.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
-			worldObj.spawnEntityInWorld(par1);
-
-			this.setDead();
+				this.setDead();
+			}
 		}
+	}
+	
+	public void setHatched(boolean hasHatched)
+	{
+		this.hasHatched = hasHatched;
 	}
 }
