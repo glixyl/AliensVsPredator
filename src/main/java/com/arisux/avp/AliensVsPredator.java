@@ -174,9 +174,9 @@ public class AliensVsPredator implements IMod
 	{
 		AIRI.logger.info("[AliensVsPredator] Initialization");
 
+		network().initialize(event);
 		items().initialize(event);
 		blocks().initialize(event);
-		network().initialize(event);
 		dimensions().initialize(event);
 		entities().initialize(event);
 		worldgen().initialize(event);

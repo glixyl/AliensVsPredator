@@ -74,10 +74,10 @@ public class BlockPortalAcheron extends BlockBreakable
 			if (player.timeUntilPortal > 0)
 			{
 				player.timeUntilPortal = 10;
-			} else if (player.dimension != AliensVsPredator.properties().DIMENSION_ID_INT_ACHERON)
+			} else if (player.dimension != AliensVsPredator.settings().dimensionIdAcheron())
 			{
 				player.timeUntilPortal = 10;
-				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, AliensVsPredator.properties().DIMENSION_ID_INT_ACHERON, new TeleporterLV(server.worldServerForDimension(AliensVsPredator.properties().DIMENSION_ID_INT_ACHERON)));
+				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, AliensVsPredator.settings().dimensionIdAcheron(), new TeleporterLV(server.worldServerForDimension(AliensVsPredator.settings().dimensionIdAcheron())));
 			} else
 			{
 				player.timeUntilPortal = 10;

@@ -16,11 +16,9 @@ public class Properties
 
 	public final String DIMENSION_NAME_ACHERON = "LV-426 (Acheron)";
 	public final String DIMENSION_ID_ACHERON = "DIM_LV426";
-	public final int DIMENSION_ID_INT_ACHERON = 426;
 	
 	public final String DIMENSION_NAME_VARDA = "LV-223 (Varda)";
 	public final String DIMENSION_ID_VARDA = "DIM_LV223";
-	public final int DIMENSION_ID_INT_VARDA = 223;
 
 	public final String SOUND_ALIEN_LIVING = DOMAIN + "xeno.living";
 	public final String SOUND_ALIEN_HURT = DOMAIN + "xeno.hurt";

@@ -16,9 +16,11 @@ public class Settings
 {
 	public static final Settings instance = new Settings();
 	public HashMap<String, Integer> entityList = new HashMap<String, Integer>();
-	private final String CATEGORY_OTHER = "ETC";
+    private final String CATEGORY_OTHER = "ETC";
 	private final String CATEGORY_IDS = "IDS";
 	private final String CATEGORY_URLS = "URLS";
+    private final String CATEGORY_DIM = "DIMENSIONS";
+    private final String CATEGORY_BIOMES = "BIOMES";
 	private String mainDomain;
 	private String devDomain;
 	private String urlUpdater;
@@ -35,6 +37,10 @@ public class Settings
 	private boolean updater;
 	private boolean debugTools;
 	private int idStart = 101;
+	private int dimVarda;
+	private int dimAcheron;
+	private int biomeVarda;
+	private int biomeAcheron;
 
 	@EventHandler
 	public void preInitialize(FMLPreInitializationEvent evt)
@@ -49,9 +55,17 @@ public class Settings
 		try
 		{
 			config.addCustomCategoryComment(CATEGORY_IDS, "Configuration for the mod's entity IDs");
-			config.addCustomCategoryComment(CATEGORY_IDS, "WARNING: ONLY MODIFY THIS IF YOU KNOW WHAT YOU ARE DOING, YOU CAN BREAK WORLD SAVES AND/OR SERVERS.");
+			config.addCustomCategoryComment(CATEGORY_IDS, "WARNING: ONLY MODIFY THESE IF YOU KNOW WHAT YOU ARE DOING, YOU CAN BREAK WORLD SAVES AND/OR SERVERS.");
+            config.addCustomCategoryComment(CATEGORY_DIM, "WARNING: ONLY MODIFY THESE IF YOU KNOW WHAT YOU ARE DOING, YOU CAN BREAK WORLD SAVES AND/OR SERVERS.");
+            config.addCustomCategoryComment(CATEGORY_BIOMES, "WARNING: ONLY MODIFY THESE IF YOU KNOW WHAT YOU ARE DOING, YOU CAN BREAK WORLD SAVES AND/OR SERVERS.");
 			config.addCustomCategoryComment(CATEGORY_OTHER, "Other configuration options");
 			config.load();
+
+            dimVarda = config.get(CATEGORY_DIM, "VARDA", 223).getInt();
+            dimAcheron = config.get(CATEGORY_DIM, "ACHERON", 426).getInt();
+
+            biomeVarda = config.get(CATEGORY_BIOMES, "VARDA", 223).getInt();
+            biomeAcheron = config.get(CATEGORY_BIOMES, "ACHERON", 224).getInt();
 
 			mainDomain = config.get(CATEGORY_URLS, "DOMAIN_MAIN", "http://avp.arisux.x10.mx", "").getString();
 			devDomain = config.get(CATEGORY_URLS, "DOMAIN_DEV", "http://localhost:10/avp", "").getString();
@@ -98,7 +112,7 @@ public class Settings
 			entityList.put("DISC", config.get(CATEGORY_IDS, "DISC", 1519).getInt());
 			entityList.put("SHURIKEN", config.get(CATEGORY_IDS, "SHURIKEN", 1520).getInt());
 			entityList.put("TURRETENTITY", config.get(CATEGORY_IDS, "TURRETENTITY", 1521).getInt());
-			entityList.put("WRISTBRACERNUKE", config.get(CATEGORY_IDS, "WRISTBRACERNUKE", 1522).getInt());
+            entityList.put("WRISTBRACERNUKE", config.get(CATEGORY_IDS, "WRISTBRACERNUKE", 1522).getInt());
 		} finally
 		{
 			config.save();
@@ -192,4 +206,24 @@ public class Settings
 	{
 		return getServer() + urlSkins + urlSkinSniper;
 	}
+	
+	public int dimensionIdVarda() 
+	{
+        return this.dimVarda;
+    }
+	
+	public int dimensionIdAcheron() 
+	{
+        return this.dimAcheron;
+    }
+    
+    public int biomeIdVarda()
+    {
+        return this.biomeVarda;
+    }
+	
+	public int biomeIdAcheron()
+	{
+        return this.biomeAcheron;
+    }
 }

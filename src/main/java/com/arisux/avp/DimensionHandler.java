@@ -26,8 +26,8 @@ public class DimensionHandler implements IInitializable
 	@Override
 	public void initialize(FMLInitializationEvent event)
 	{
-		registerDimension(AliensVsPredator.properties().DIMENSION_ID_INT_ACHERON, ProviderAcheron.class, true);
-		registerDimension(AliensVsPredator.properties().DIMENSION_ID_INT_VARDA, ProviderVarda.class, true);
+		registerDimension(AliensVsPredator.settings().dimensionIdAcheron(), ProviderAcheron.class, true);
+		registerDimension(AliensVsPredator.settings().dimensionIdVarda(), ProviderVarda.class, true);
 	}
 
 	@SideOnly(Side.SERVER)
@@ -36,8 +36,8 @@ public class DimensionHandler implements IInitializable
 	{
 		if (FMLCommonHandler.instance() != null && FMLCommonHandler.instance().getMinecraftServerInstance() != null && !this.dimensionsInitialized)
 		{
-			tryLoadDimension(AliensVsPredator.properties().DIMENSION_ID_INT_VARDA);
-			tryLoadDimension(AliensVsPredator.properties().DIMENSION_ID_INT_ACHERON);
+			tryLoadDimension(AliensVsPredator.settings().dimensionIdAcheron());
+			tryLoadDimension(AliensVsPredator.settings().dimensionIdVarda());
 
 			this.dimensionsInitialized = true;
 		}

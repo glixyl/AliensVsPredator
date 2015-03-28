@@ -79,10 +79,10 @@ public class BlockPortalVarda extends BlockBreakable
 			if (player.timeUntilPortal > 0)
 			{
 				player.timeUntilPortal = 10;
-			} else if (player.dimension != AliensVsPredator.properties().DIMENSION_ID_INT_VARDA)
+			} else if (player.dimension != AliensVsPredator.settings().dimensionIdVarda())
 			{
 				player.timeUntilPortal = 10;
-				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, AliensVsPredator.properties().DIMENSION_ID_INT_VARDA, new TeleporterLV(server.worldServerForDimension(AliensVsPredator.properties().DIMENSION_ID_INT_VARDA)));
+				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, AliensVsPredator.settings().dimensionIdVarda(), new TeleporterLV(server.worldServerForDimension(AliensVsPredator.settings().dimensionIdVarda())));
 			} else
 			{
 				player.timeUntilPortal = 10;
