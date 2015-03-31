@@ -1,10 +1,10 @@
 package com.arisux.avp.entities.mob.model;
 
+import com.arisux.airi.lib.client.ModelBaseExtension;
+
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
-
-import com.arisux.airi.lib.client.ModelBaseExtension;
 
 public class ModelDrone extends ModelBaseExtension
 {
@@ -170,6 +170,18 @@ public class ModelDrone extends ModelBaseExtension
 		this.back2.setTextureSize(64, 32);
 		this.back2.mirror = true;
 		this.setRotation(this.back2, -0.5585054F, 0.0F, 0.0F);
+		this.head6 = new ModelRenderer(this, 53, 0);
+		this.head6.addBox(-0.499F, 3.0F, -5.0F, 3, 3, 5);
+		this.head6.setRotationPoint(0.0F, -2.5F, -17.0F);
+		this.head6.setTextureSize(64, 32);
+		this.head6.mirror = true;
+		this.setRotation(this.head6, -0.122173F, 0.0F, 0.0F);
+		this.tail1 = new ModelRenderer(this, 50, 66);
+		this.tail1.addBox(-2.0F, -2.5F, 0.0F, 4, 4, 11);
+		this.tail1.setRotationPoint(0.0F, 6.5F, 5.5F);
+		this.tail1.setTextureSize(64, 32);
+		this.tail1.mirror = true;
+		this.setRotation(this.tail1, -0.4014257F, 0.0F, 0.0F);
 		this.tail2 = new ModelRenderer(this, 85, 66);
 		this.tail2.addBox(-2.0F, -1.5F, 0.0F, 4, 4, 11);
 		this.tail2.setRotationPoint(0.0F, 9.5F, 29.5F);
@@ -182,12 +194,6 @@ public class ModelDrone extends ModelBaseExtension
 		this.tail3.setTextureSize(64, 32);
 		this.tail3.mirror = true;
 		this.setRotation(this.tail3, -0.2094395F, 0.0F, 0.0F);
-		this.stabber = new ModelRenderer(this, 205, 66);
-		this.stabber.addBox(-1.5F, 0.0F, 0.0F, 3, 0, 11);
-		this.stabber.setRotationPoint(0.0F, 18.5F, 61.5F);
-		this.stabber.setTextureSize(64, 32);
-		this.stabber.mirror = true;
-		this.setRotation(this.stabber, -0.0523599F, 0.0F, 0.0F);
 		this.tail4 = new ModelRenderer(this, 149, 66);
 		this.tail4.addBox(-1.0F, -1.0F, 0.0F, 2, 2, 11);
 		this.tail4.setRotationPoint(0.0F, 15.5F, 40.5F);
@@ -200,12 +206,6 @@ public class ModelDrone extends ModelBaseExtension
 		this.tail5.setTextureSize(64, 32);
 		this.tail5.mirror = true;
 		this.setRotation(this.tail5, -0.0523599F, 0.0F, 0.0F);
-		this.head6 = new ModelRenderer(this, 53, 0);
-		this.head6.addBox(-0.499F, 3.0F, -5.0F, 3, 3, 5);
-		this.head6.setRotationPoint(0.0F, -2.5F, -17.0F);
-		this.head6.setTextureSize(64, 32);
-		this.head6.mirror = true;
-		this.setRotation(this.head6, -0.122173F, 0.0F, 0.0F);
 		this.tailSpikes5 = new ModelRenderer(this, 178, 96);
 		this.tailSpikes5.addBox(0.0F, -1.5F, 0.0F, 0, 3, 11);
 		this.tailSpikes5.setRotationPoint(0.0F, 17.5F, 51.5F);
@@ -230,18 +230,18 @@ public class ModelDrone extends ModelBaseExtension
 		this.tailSpikes2.setTextureSize(64, 32);
 		this.tailSpikes2.mirror = true;
 		this.setRotation(this.tailSpikes2, -((float) Math.PI / 10F), 0.0F, 0.0F);
-		this.tail1 = new ModelRenderer(this, 50, 66);
-		this.tail1.addBox(-2.0F, -2.5F, 0.0F, 4, 4, 11);
-		this.tail1.setRotationPoint(0.0F, 6.5F, 5.5F);
-		this.tail1.setTextureSize(64, 32);
-		this.tail1.mirror = true;
-		this.setRotation(this.tail1, -0.4014257F, 0.0F, 0.0F);
 		this.tailSpikes1 = new ModelRenderer(this, 58, 93);
 		this.tailSpikes1.addBox(0.0F, -4.5F, 0.0F, 0, 8, 11);
 		this.tailSpikes1.setRotationPoint(0.0F, 6.5F, 5.5F);
 		this.tailSpikes1.setTextureSize(64, 32);
 		this.tailSpikes1.mirror = true;
 		this.setRotation(this.tailSpikes1, -0.4014257F, 0.0F, 0.0F);
+		this.stabber = new ModelRenderer(this, 205, 66);
+		this.stabber.addBox(-1.5F, 0.0F, 0.0F, 3, 0, 11);
+		this.stabber.setRotationPoint(0.0F, 18.5F, 61.5F);
+		this.stabber.setTextureSize(64, 32);
+		this.stabber.mirror = true;
+		this.setRotation(this.stabber, -0.0523599F, 0.0F, 0.0F);
 		this.backhorn1 = new ModelRenderer(this, 10, 86);
 		this.backhorn1.addBox(-4.5F, -11.0F, 7.0F, 2, 9, 2);
 		this.backhorn1.setRotationPoint(0.0F, -2.5F, -13.0F);

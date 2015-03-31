@@ -1,5 +1,12 @@
 package com.arisux.avp.entities.mob;
 
+import java.util.ArrayList;
+
+import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
+import com.arisux.airi.lib.WorldUtil.Entities;
+import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.interfaces.IHiveSignature;
+
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
@@ -7,17 +14,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.interfaces.IHiveSignature;
-
 public class EntityQueen extends EntityXenomorph implements IHiveSignature
 {
 	public boolean isInStasis;
 	private float ovipositorSize;
 
-	public EntityQueen(World var1)
+	public EntityQueen(World world)
 	{
-		super(var1);
+		super(world);
 		this.setSize(4.0F, 8.0F);
 		this.isInStasis = true;
 		this.experienceValue = 40000;
@@ -56,7 +60,27 @@ public class EntityQueen extends EntityXenomorph implements IHiveSignature
 	public void onUpdate()
 	{
 		super.onUpdate();
-		
+
+		if ((this.getAttackTarget() != null || this.getLastAttacker() != null) && this.worldObj.getWorldTime() % 40 == 0)
+		{
+			@SuppressWarnings("unchecked")
+			ArrayList<EntitySpeciesAlien> aliens = (ArrayList<EntitySpeciesAlien>) Entities.getEntitiesInCoordsRange(this.worldObj, EntitySpeciesAlien.class, new CoordData(this), 32);
+
+			for (EntitySpeciesAlien alien : aliens)
+			{
+				if (this.rand.nextInt(6) == 0)
+				{
+					if (alien instanceof EntityOvamorph)
+					{
+						EntityOvamorph ovamorph = (EntityOvamorph) alien;
+						ovamorph.setHatched(true);
+					}
+				}
+
+				alien.setAttackTarget(this.getLastAttacker() != null ? this.getLastAttacker() : this.getAttackTarget());
+			}
+		}
+
 		this.motionY += -0.5F;
 
 		if (isJumping)
@@ -71,19 +95,22 @@ public class EntityQueen extends EntityXenomorph implements IHiveSignature
 			this.ovipositorSize = this.ovipositorSize < 1.2F ? this.ovipositorSize += 0.0001F : this.ovipositorSize;
 		}
 
-		if (this.getHealth() > this.getMaxHealth() - (this.getMaxHealth() / 4))
+		if (this.worldObj.getWorldTime() % 10 == 0)
 		{
-			this.heal(0.3F);
-		}
+			if (this.getHealth() > this.getMaxHealth() - (this.getMaxHealth() / 4))
+			{
+				this.heal(3F);
+			}
 
-		if (this.getHealth() > this.getMaxHealth() / 2)
-		{
-			this.heal(0.2F);
-		}
+			if (this.getHealth() > 0 && this.getHealth() < this.getMaxHealth() / 4 * 3)
+			{
+				this.heal(4.5F);
+			}
 
-		if (this.getHealth() > this.getMaxHealth() / 4)
-		{
-			this.heal(0.1F);
+			if (this.getHealth() > 0 && this.getHealth() < this.getMaxHealth() / 4 * 2)
+			{
+				this.heal(6F);
+			}
 		}
 	}
 
@@ -124,17 +151,17 @@ public class EntityQueen extends EntityXenomorph implements IHiveSignature
 		super.writeEntityToNBT(nbt);
 		nbt.setFloat("ovipositorSize", this.getOvipositorSize());
 	}
-	
+
 	public float getOvipositorSize()
 	{
 		return this.dataWatcher.getWatchableObjectFloat(14);
 	}
-	
+
 	public void setOvipositorSize(float size)
 	{
 		this.dataWatcher.updateObject(14, size);
 	}
-	
+
 	@Override
 	public boolean canBeCollidedWith()
 	{

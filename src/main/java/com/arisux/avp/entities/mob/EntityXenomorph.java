@@ -1,13 +1,13 @@
 package com.arisux.avp.entities.mob;
 
+import com.arisux.airi.lib.WorldUtil;
+import com.arisux.airi.lib.WorldUtil.Blocks;
+import com.arisux.avp.entities.EntityAcidPool;
+
 import net.minecraft.entity.*;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-
-import com.arisux.airi.lib.WorldUtil;
-import com.arisux.airi.lib.WorldUtil.Blocks;
-import com.arisux.avp.entities.EntityAcidPool;
 
 public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 {
@@ -60,7 +60,6 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 
 		if (this.canClimb)
 		{
-
 			if (this.isCollidedHorizontally)
 			{
 				this.motionY += 0.2F;

@@ -1,5 +1,7 @@
 package com.arisux.avp.entities.mob;
 
+import com.arisux.avp.AliensVsPredator;
+
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
@@ -7,8 +9,6 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-
-import com.arisux.avp.AliensVsPredator;
 
 public class EntityProtomorph extends EntityXenomorph
 {
@@ -76,7 +76,7 @@ public class EntityProtomorph extends EntityXenomorph
 	@Override
 	public void onUpdate()
 	{
-		super.onUpdate();
+		;
 	}
 
 	@Override

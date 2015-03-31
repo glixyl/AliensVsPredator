@@ -3,20 +3,24 @@ package com.arisux.avp.entities.mob;
 import java.util.ArrayList;
 import java.util.Random;
 
+import com.arisux.airi.lib.WorldUtil;
+import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
+import com.arisux.airi.lib.WorldUtil.Entities;
+import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.entities.tile.TileEntityHiveResin;
+
 import net.minecraft.block.Block;
+import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-
-import com.arisux.airi.lib.*;
-import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
-import com.arisux.airi.lib.WorldUtil.Entities;
-import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.entities.tile.TileEntityHiveResin;
 
 public class EntityDrone extends EntityXenomorph
 {
@@ -33,23 +37,23 @@ public class EntityDrone extends EntityXenomorph
 		this.experienceValue = 100;
 		this.setSize(0.8F, 1.8F);
 		this.mobType = this.rand.nextInt(2);
-		// this.tasks.addTask(0, new EntityAILeapAtTarget(this, 0.6F));
-		// this.tasks.addTask(1, new EntityAISwimming(this));
-		// this.tasks.addTask(2, new EntityAIBreakDoor(this));
-		// this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
-		// this.tasks.addTask(4, new EntityAIAttackOnCollide(this, EntityMarine.class, 1.0D, true));
-		// this.tasks.addTask(5, new EntityAIAttackOnCollide(this, EntityYautja.class, 1.0D, false));
-		// this.tasks.addTask(6, new EntityAIAttackOnCollide(this, EntityAgeable.class, 1.0D, false));
-		// this.tasks.addTask(7, new EntityAIAttackOnCollide(this, EntityAnimal.class, 1.0D, false));
-		// this.tasks.addTask(8, new EntityAIFleeSun(this, 1.0D));
-		// this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-		// this.tasks.addTask(10, new EntityAILookIdle(this));
-		// this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
-		// this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
-		// this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityYautja.class, 0, false));
-		// this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityAnimal.class, 0, false));
-		// this.targetTasks.addTask(5, new EntityAINearestAttackableTarget(this, EntityMarine.class, 0, false));
-		// this.targetTasks.addTask(6, new EntityAINearestAttackableTarget(this, EntityAgeable.class, 0, false));
+		this.tasks.addTask(0, new EntityAILeapAtTarget(this, 0.6F));
+		this.tasks.addTask(1, new EntityAISwimming(this));
+		this.tasks.addTask(2, new EntityAIBreakDoor(this));
+		this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
+		this.tasks.addTask(4, new EntityAIAttackOnCollide(this, EntityMarine.class, 1.0D, true));
+		this.tasks.addTask(5, new EntityAIAttackOnCollide(this, EntityYautja.class, 1.0D, false));
+		this.tasks.addTask(6, new EntityAIAttackOnCollide(this, EntityAgeable.class, 1.0D, false));
+		this.tasks.addTask(7, new EntityAIAttackOnCollide(this, EntityAnimal.class, 1.0D, false));
+		this.tasks.addTask(8, new EntityAIFleeSun(this, 1.0D));
+		this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+		this.tasks.addTask(10, new EntityAILookIdle(this));
+		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
+		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityYautja.class, 0, false));
+		this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityAnimal.class, 0, false));
+		this.targetTasks.addTask(5, new EntityAINearestAttackableTarget(this, EntityMarine.class, 0, false));
+		this.targetTasks.addTask(6, new EntityAINearestAttackableTarget(this, EntityAgeable.class, 0, false));
 		this.setEvolveTo(EntityWarrior.class, 12);
 	}
 
@@ -109,7 +113,9 @@ public class EntityDrone extends EntityXenomorph
 	public void tickResinLevelAI()
 	{
 		if (this.rand.nextInt(4) == 0)
-		this.resinLevel += 1;
+		{
+			this.resinLevel += 1;
+		}
 
 		ArrayList<EntityItem> entityItemList = (ArrayList<EntityItem>) WorldUtil.Entities.getEntitiesInCoordsRange(worldObj, EntityItem.class, new com.arisux.airi.lib.WorldUtil.Blocks.CoordData(this), 8);
 
@@ -138,9 +144,9 @@ public class EntityDrone extends EntityXenomorph
 	{
 		if (this.getAttackTarget() == null)
 		{
-			if (this.getHiveSignature() != null && this.worldObj.getWorldTime() % 80 == 0)
+			if (this.getHiveSignature() != null && this.worldObj.getWorldTime() % 40 == 0)
 			{
-				if (this.resinLevel >= 250)
+				if (this.resinLevel >= 128)
 				{
 					ArrayList<CoordData> data = WorldUtil.Blocks.getCoordDataInRangeForBlocksExcluding((int) posX, (int) posY, (int) posZ, this.resinMultiplier, this.worldObj, AliensVsPredator.blocks().terrainHiveResin, Blocks.air);
 

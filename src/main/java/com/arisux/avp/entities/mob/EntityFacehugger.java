@@ -2,6 +2,10 @@ package com.arisux.avp.entities.mob;
 
 import java.util.ArrayList;
 
+import com.arisux.airi.lib.WorldUtil;
+import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.entities.extended.ExtendedEntityLivingBase;
+
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.item.EntityItem;
@@ -16,10 +20,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-
-import com.arisux.airi.lib.WorldUtil;
-import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.entities.extended.ExtendedEntityLivingBase;
 
 public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 {
@@ -68,6 +68,11 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 	public void onUpdate()
 	{
 		super.onUpdate();
+		
+		if (this.isCollidedHorizontally)
+		{
+			this.motionY += 0.2F;
+		}
 		
 		@SuppressWarnings("unchecked")
 		ArrayList<EntityItem> entityItemList = (ArrayList<EntityItem>) WorldUtil.Entities.getEntitiesInCoordsRange(worldObj, EntityItem.class, new com.arisux.airi.lib.WorldUtil.Blocks.CoordData(this), 8);

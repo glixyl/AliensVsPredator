@@ -1,14 +1,16 @@
 package com.arisux.avp.entities.mob.model;
 
+import org.lwjgl.opengl.GL11;
+
+import com.arisux.airi.lib.client.ModelBaseExtension;
+
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
-import com.arisux.airi.lib.client.ModelBaseExtension;
-
 public class ModelWarrior extends ModelBaseExtension
 {
-	public ModelRenderer chest, abdomen, rThigh, lThigh, lShin1, rShin1, lShin2, rShin2, lFoot, rFoot, lArm1, rArm1, lClaw1, rArm2, neck, headSpine1, rHead, jaw, jaw2, headSpine2, lArm2, rClaw1, lClaw2, rClaw2, spine1, spine2, spine3, tail1, tail2, tailStabber, tail3, tail4, lHead, spine4, spine5, spine6, spine7, spine8, spine9, spine10, spine11, tail5, spine12, part1, part2, part3, part4, headBase, headTop;
+	public ModelRenderer chest, abdomen, rThigh, lThigh, lShin1, rShin1, lShin2, rShin2, lFoot, rFoot, lArm1, rArm1, lClaw1, rArm2, neck, headSpine1, rHead, jaw, jaw2, headSpine2, lArm2, rClaw1, lClaw2, rClaw2, back1, back2, tail1, tail2, stabber, tail3, tail4, lHead, tailSpikes5, tailSpikes4, tailSpikes3, tailSpikes2, tail5, tailSpikes1, part1, part2, part3, part4, headBase, headTop;
 
 	public ModelWarrior()
 	{
@@ -200,114 +202,84 @@ public class ModelWarrior extends ModelBaseExtension
 		this.headTop.setTextureSize(256, 128);
 		this.headTop.mirror = true;
 		this.setRotation(this.headTop, -0.9075712F, 0.0F, 0.0F);
-		this.spine1 = new ModelRenderer(this, 0, 65);
-		this.spine1.addBox(0.0F, -10.0F, 0.0F, 0, 8, 10);
-		this.spine1.setRotationPoint(0.0F, -7.5F, 0.0F);
-		this.spine1.setTextureSize(256, 128);
-		this.spine1.mirror = true;
-		this.setRotation(this.spine1, -0.1919862F, 0.0F, 0.0F);
-		this.spine2 = new ModelRenderer(this, 23, 65);
-		this.spine2.addBox(0.0F, -11.0F, 8.0F, 0, 6, 12);
-		this.spine2.setRotationPoint(0.0F, -7.5F, 0.0F);
-		this.spine2.setTextureSize(256, 128);
-		this.spine2.mirror = true;
-		this.setRotation(this.spine2, -0.5585054F, 0.0F, 0.0F);
-		this.spine3 = new ModelRenderer(this, 50, 83);
-		this.spine3.addBox(-4.0F, -0.5F, 0.0F, 8, 0, 11);
-		this.spine3.setRotationPoint(0.0F, 1.5F, 18.5F);
-		this.spine3.setTextureSize(256, 128);
-		this.spine3.mirror = true;
-		this.setRotation(this.spine3, -0.4014257F, 0.0F, 0.0F);
-		this.tail1 = new ModelRenderer(this, 85, 66);
-		this.tail1.addBox(-2.0F, -1.5F, 11.0F, 4, 4, 11);
-		this.tail1.setRotationPoint(0.0F, 1.5F, 18.5F);
-		this.tail1.setTextureSize(256, 128);
+		this.back1 = new ModelRenderer(this, 0, 65);
+		this.back1.addBox(0.0F, -10.0F, 0.0F, 0, 8, 10);
+		this.back1.setRotationPoint(0.0F, -7.5F, 0.0F);
+		this.back1.setTextureSize(256, 128);
+		this.back1.mirror = true;
+		this.setRotation(this.back1, -0.1919862F, 0.0F, 0.0F);
+		this.back2 = new ModelRenderer(this, 23, 65);
+		this.back2.addBox(0.0F, -11.0F, 8.0F, 0, 6, 12);
+		this.back2.setRotationPoint(0.0F, -7.5F, 0.0F);
+		this.back2.setTextureSize(256, 128);
+		this.back2.mirror = true;
+		this.setRotation(this.back2, -0.5585054F, 0.0F, 0.0F);
+		this.tail1 = new ModelRenderer(this, 50, 66);
+		this.tail1.addBox(-2.0F, -2.5F, 0.0F, 4, 4, 11);
+		this.tail1.setRotationPoint(0.0F, 6.5F, 5.5F);
+		this.tail1.setTextureSize(64, 32);
 		this.tail1.mirror = true;
-		this.setRotation(this.tail1, -((float) Math.PI / 10F), 0.0F, 0.0F);
-		this.tail2 = new ModelRenderer(this, 118, 66);
-		this.tail2.addBox(-1.5F, 1.5F, 21.0F, 3, 3, 11);
-		this.tail2.setRotationPoint(0.0F, 1.5F, 18.5F);
-		this.tail2.setTextureSize(256, 128);
+		this.setRotation(this.tail1, -0.4014257F, 0.0F, 0.0F);
+		this.tail2 = new ModelRenderer(this, 85, 66);
+		this.tail2.addBox(-2.0F, -1.5F, 0.0F, 4, 4, 11);
+		this.tail2.setRotationPoint(0.0F, 9.5F, 29.5F);
+		this.tail2.setTextureSize(64, 32);
 		this.tail2.mirror = true;
-		this.setRotation(this.tail2, -0.2094395F, 0.0F, 0.0F);
-		this.tailStabber = new ModelRenderer(this, 205, 66);
-		this.tailStabber.addBox(-1.5F, 9.0F, 52.0F, 3, 0, 11);
-		this.tailStabber.setRotationPoint(0.0F, 1.5F, 18.5F);
-		this.tailStabber.setTextureSize(256, 128);
-		this.tailStabber.mirror = true;
-		this.setRotation(this.tailStabber, -0.0523599F, 0.0F, 0.0F);
-		this.tail3 = new ModelRenderer(this, 149, 66);
-		this.tail3.addBox(-1.0F, 4.0F, 31.0F, 2, 2, 11);
-		this.tail3.setRotationPoint(0.0F, 1.5F, 18.5F);
-		this.tail3.setTextureSize(256, 128);
+		this.setRotation(this.tail2, -((float) Math.PI / 10F), 0.0F, 0.0F);
+		this.tail3 = new ModelRenderer(this, 118, 66);
+		this.tail3.addBox(-1.5F, -1.5F, 0.0F, 3, 3, 11);
+		this.tail3.setRotationPoint(0.0F, 13.5F, 30.5F);
+		this.tail3.setTextureSize(64, 32);
 		this.tail3.mirror = true;
-		this.setRotation(this.tail3, -0.1396263F, 0.0F, 0.0F);
-		this.tail4 = new ModelRenderer(this, 178, 66);
-		this.tail4.addBox(-0.5F, 8.5F, 41.0F, 1, 1, 11);
-		this.tail4.setRotationPoint(0.0F, 1.5F, 18.5F);
-		this.tail4.setTextureSize(256, 128);
+		this.setRotation(this.tail3, -0.2094395F, 0.0F, 0.0F);
+		this.tail4 = new ModelRenderer(this, 149, 66);
+		this.tail4.addBox(-1.0F, -1.0F, 0.0F, 2, 2, 11);
+		this.tail4.setRotationPoint(0.0F, 15.5F, 40.5F);
+		this.tail4.setTextureSize(64, 32);
 		this.tail4.mirror = true;
-		this.setRotation(this.tail4, -0.0523599F, 0.0F, 0.0F);
-		this.spine4 = new ModelRenderer(this, 178, 80);
-		this.spine4.addBox(-1.5F, 9.0F, 41.0F, 3, 0, 11);
-		this.spine4.setRotationPoint(0.0F, 1.5F, 18.5F);
-		this.spine4.setTextureSize(256, 128);
-		this.spine4.mirror = true;
-		this.setRotation(this.spine4, -0.0523599F, 0.0F, 0.0F);
-		this.spine5 = new ModelRenderer(this, 178, 96);
-		this.spine5.addBox(0.0F, 7.5F, 41.0F, 0, 3, 11);
-		this.spine5.setRotationPoint(0.0F, 1.5F, 18.5F);
-		this.spine5.setTextureSize(256, 128);
-		this.spine5.mirror = true;
-		this.setRotation(this.spine5, -0.0523599F, 0.0F, 0.0F);
-		this.spine6 = new ModelRenderer(this, 149, 96);
-		this.spine6.addBox(0.0F, 3.0F, 32.0F, 0, 4, 10);
-		this.spine6.setRotationPoint(0.0F, 1.5F, 18.5F);
-		this.spine6.setTextureSize(256, 128);
-		this.spine6.mirror = true;
-		this.setRotation(this.spine6, -0.1396263F, 0.0F, 0.0F);
-		this.spine7 = new ModelRenderer(this, 149, 81);
-		this.spine7.addBox(-2.0F, 5.0F, 32.0F, 4, 0, 10);
-		this.spine7.setRotationPoint(0.0F, 1.5F, 18.5F);
-		this.spine7.setTextureSize(256, 128);
-		this.spine7.mirror = true;
-		this.setRotation(this.spine7, -0.1396263F, 0.0F, 0.0F);
-		this.spine8 = new ModelRenderer(this, 118, 82);
-		this.spine8.addBox(-3.0F, 3.0F, 22.0F, 6, 0, 10);
-		this.spine8.setRotationPoint(0.0F, 1.5F, 18.5F);
-		this.spine8.setTextureSize(256, 128);
-		this.spine8.mirror = true;
-		this.setRotation(this.spine8, -0.2094395F, 0.0F, 0.0F);
-		this.spine9 = new ModelRenderer(this, 118, 94);
-		this.spine9.addBox(0.0F, 0.0F, 22.0F, 0, 6, 10);
-		this.spine9.setRotationPoint(0.0F, 1.5F, 18.5F);
-		this.spine9.setTextureSize(256, 128);
-		this.spine9.mirror = true;
-		this.setRotation(this.spine9, -0.2094395F, 0.0F, 0.0F);
-		this.spine10 = new ModelRenderer(this, 85, 85);
-		this.spine10.addBox(-4.0F, 0.5F, 11.0F, 8, 0, 11);
-		this.spine10.setRotationPoint(0.0F, 1.5F, 18.5F);
-		this.spine10.setTextureSize(256, 128);
-		this.spine10.mirror = true;
-		this.setRotation(this.spine10, -((float) Math.PI / 10F), 0.0F, 0.0F);
-		this.spine11 = new ModelRenderer(this, 90, 93);
-		this.spine11.addBox(0.0F, -3.5F, 11.0F, 0, 8, 11);
-		this.spine11.setRotationPoint(0.0F, 1.5F, 18.5F);
-		this.spine11.setTextureSize(256, 128);
-		this.spine11.mirror = true;
-		this.setRotation(this.spine11, -((float) Math.PI / 10F), 0.0F, 0.0F);
-		this.tail5 = new ModelRenderer(this, 50, 66);
-		this.tail5.addBox(-2.0F, -2.5F, 0.0F, 4, 4, 11);
-		this.tail5.setRotationPoint(0.0F, 1.5F, 18.5F);
-		this.tail5.setTextureSize(256, 128);
+		this.setRotation(this.tail4, -0.1396263F, 0.0F, 0.0F);
+		this.tail5 = new ModelRenderer(this, 178, 66);
+		this.tail5.addBox(-0.5F, -0.5F, -1.0F, 1, 1, 11);
+		this.tail5.setRotationPoint(0.0F, 17.5F, 50.5F);
+		this.tail5.setTextureSize(64, 32);
 		this.tail5.mirror = true;
-		this.setRotation(this.tail5, -0.4014257F, 0.0F, 0.0F);
-		this.spine12 = new ModelRenderer(this, 58, 93);
-		this.spine12.addBox(0.0F, -4.5F, 0.0F, 0, 8, 11);
-		this.spine12.setRotationPoint(0.0F, 1.5F, 18.5F);
-		this.spine12.setTextureSize(256, 128);
-		this.spine12.mirror = true;
-		this.setRotation(this.spine12, -0.4014257F, 0.0F, 0.0F);
+		this.setRotation(this.tail5, -0.0523599F, 0.0F, 0.0F);
+		this.tailSpikes5 = new ModelRenderer(this, 178, 96);
+		this.tailSpikes5.addBox(0.0F, -1.5F, 0.0F, 0, 3, 11);
+		this.tailSpikes5.setRotationPoint(0.0F, 17.5F, 51.5F);
+		this.tailSpikes5.setTextureSize(64, 32);
+		this.tailSpikes5.mirror = true;
+		this.setRotation(this.tailSpikes5, -0.0523599F, 0.0F, 0.0F);
+		this.tailSpikes4 = new ModelRenderer(this, 149, 96);
+		this.tailSpikes4.addBox(0.0F, -2.0F, 0.0F, 0, 4, 10);
+		this.tailSpikes4.setRotationPoint(0.0F, 15.5F, 41.5F);
+		this.tailSpikes4.setTextureSize(64, 32);
+		this.tailSpikes4.mirror = true;
+		this.setRotation(this.tailSpikes4, -0.1396263F, 0.0F, 0.0F);
+		this.tailSpikes3 = new ModelRenderer(this, 118, 94);
+		this.tailSpikes3.addBox(0.0F, -3.0F, 0.0F, 0, 6, 10);
+		this.tailSpikes3.setRotationPoint(0.0F, 13.5F, 31.5F);
+		this.tailSpikes3.setTextureSize(64, 32);
+		this.tailSpikes3.mirror = true;
+		this.setRotation(this.tailSpikes3, -0.2094395F, 0.0F, 0.0F);
+		this.tailSpikes2 = new ModelRenderer(this, 90, 93);
+		this.tailSpikes2.addBox(0.0F, -3.5F, 0.0F, 0, 8, 11);
+		this.tailSpikes2.setRotationPoint(0.0F, 9.5F, 20.5F);
+		this.tailSpikes2.setTextureSize(64, 32);
+		this.tailSpikes2.mirror = true;
+		this.setRotation(this.tailSpikes2, -((float) Math.PI / 10F), 0.0F, 0.0F);
+		this.tailSpikes1 = new ModelRenderer(this, 58, 93);
+		this.tailSpikes1.addBox(0.0F, -4.5F, 0.0F, 0, 8, 11);
+		this.tailSpikes1.setRotationPoint(0.0F, 6.5F, 5.5F);
+		this.tailSpikes1.setTextureSize(64, 32);
+		this.tailSpikes1.mirror = true;
+		this.setRotation(this.tailSpikes1, -0.4014257F, 0.0F, 0.0F);
+		this.stabber = new ModelRenderer(this, 205, 66);
+		this.stabber.addBox(-1.5F, 0.0F, 0.0F, 3, 0, 11);
+		this.stabber.setRotationPoint(0.0F, 18.5F, 61.5F);
+		this.stabber.setTextureSize(64, 32);
+		this.stabber.mirror = true;
+		this.setRotation(this.stabber, -0.0523599F, 0.0F, 0.0F);
 	}
 
 	@Override
@@ -315,11 +287,20 @@ public class ModelWarrior extends ModelBaseExtension
 	{
 		super.render(entity, swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation);
 		this.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
-
-		float newangle = 0.0F;
-		float wingspeed = 0.1F;
-		newangle = MathHelper.cos(idleProgress * 4.0F * wingspeed) * (float) Math.PI * 0.5F * swingProgressPrev;
 		
+		GL11.glTranslatef(0F, 0.32F, 0F);
+		
+		float newangle = 0.0F;
+		float multiplier = 0.1F;
+		newangle = MathHelper.cos(idleProgress * 4.0F * multiplier) * (float) Math.PI * 0.5F * swingProgressPrev;
+		
+		if (entity != null && entity.prevPosX == entity.posX && entity.prevPosY == entity.posY && entity.prevPosZ == entity.posZ)
+		{
+			newangle = MathHelper.cos(idleProgress * 0.07F);
+			multiplier = 0.95F;
+		}
+		
+		this.doTail(newangle, multiplier);
 		this.lThigh.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev - 0.8028515F;
 		this.lShin1.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev - 0.4014257F;
 		this.lShin2.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev - 0.8028515F;
@@ -345,7 +326,7 @@ public class ModelWarrior extends ModelBaseExtension
 		this.lHead.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
 		this.jaw2.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
 		this.jaw2.rotateAngleX = 0.122F + Math.abs(newangle);
-		newangle = MathHelper.cos(idleProgress * 3.5F * wingspeed) * (float) Math.PI * 0.4F;
+		newangle = MathHelper.cos(idleProgress * 3.5F * multiplier) * (float) Math.PI * 0.4F;
 		this.chest.render(boxTranslation);
 		this.abdomen.render(boxTranslation);
 		this.rThigh.render(boxTranslation);
@@ -370,31 +351,65 @@ public class ModelWarrior extends ModelBaseExtension
 		this.rClaw1.render(boxTranslation);
 		this.lClaw2.render(boxTranslation);
 		this.rClaw2.render(boxTranslation);
-		this.spine1.render(boxTranslation);
-		this.spine2.render(boxTranslation);
-		this.spine3.render(boxTranslation);
-		this.tail1.render(boxTranslation);
-		this.tail2.render(boxTranslation);
-		this.tailStabber.render(boxTranslation);
-		this.tail3.render(boxTranslation);
-		this.tail4.render(boxTranslation);
 		this.lHead.render(boxTranslation);
-		this.spine4.render(boxTranslation);
-		this.spine5.render(boxTranslation);
-		this.spine6.render(boxTranslation);
-		this.spine7.render(boxTranslation);
-		this.spine8.render(boxTranslation);
-		this.spine9.render(boxTranslation);
-		this.spine10.render(boxTranslation);
-		this.spine11.render(boxTranslation);
-		this.tail5.render(boxTranslation);
-		this.spine12.render(boxTranslation);
 		this.part1.render(boxTranslation);
 		this.part2.render(boxTranslation);
 		this.part3.render(boxTranslation);
 		this.part4.render(boxTranslation);
 		this.headBase.render(boxTranslation);
 		this.headTop.render(boxTranslation);
+		this.back1.render(boxTranslation);
+		this.back2.render(boxTranslation);
+		GL11.glTranslatef(0F, -0.3F, 0.8F);
+		this.tail1.render(boxTranslation);
+		this.tail2.render(boxTranslation);
+		this.tail3.render(boxTranslation);
+		this.tail4.render(boxTranslation);
+		this.tail5.render(boxTranslation);
+		this.tailSpikes1.render(boxTranslation);
+		this.tailSpikes2.render(boxTranslation);
+		this.tailSpikes3.render(boxTranslation);
+		this.tailSpikes4.render(boxTranslation);
+		this.tailSpikes5.render(boxTranslation);
+		this.stabber.render(boxTranslation);
+	}
+	
+	private void doTail(float angle, float distMult)
+	{
+		float multiplier = 0.25F;
+		this.tail1.rotateAngleY = angle / 1.5F;
+		this.tailSpikes1.rotateAngleY = angle / 1.5F;
+		this.tail2.rotateAngleY = angle * multiplier;
+		this.tail2.rotationPointZ = this.tail1.rotationPointZ + (float) Math.cos(this.tail1.rotateAngleY) * 10.0F;
+		this.tail2.rotationPointX = this.tail1.rotationPointX + (float) Math.sin(this.tail1.rotateAngleY) * 10.0F;
+		this.tailSpikes2.rotateAngleY = angle * multiplier;
+		this.tailSpikes2.rotationPointZ = this.tail1.rotationPointZ + (float) Math.cos(this.tail1.rotateAngleY) * 10.0F;
+		this.tailSpikes2.rotationPointX = this.tail1.rotationPointX + (float) Math.sin(this.tail1.rotateAngleY) * 10.0F;
+		multiplier = multiplier + distMult;
+		this.tail3.rotateAngleY = angle * multiplier;
+		this.tail3.rotationPointZ = this.tail2.rotationPointZ + (float) Math.cos(this.tail2.rotateAngleY) * 10.0F;
+		this.tail3.rotationPointX = this.tail2.rotationPointX + (float) Math.sin(this.tail2.rotateAngleY) * 10.0F;
+		this.tailSpikes3.rotateAngleY = angle * multiplier;
+		this.tailSpikes3.rotationPointZ = this.tail2.rotationPointZ + (float) Math.cos(this.tail2.rotateAngleY) * 10.0F;
+		this.tailSpikes3.rotationPointX = this.tail2.rotationPointX + (float) Math.sin(this.tail2.rotateAngleY) * 10.0F;
+		multiplier = multiplier + distMult;
+		this.tail4.rotateAngleY = angle * multiplier;
+		this.tail4.rotationPointZ = this.tail3.rotationPointZ + (float) Math.cos(this.tail3.rotateAngleY) * 10.0F;
+		this.tail4.rotationPointX = this.tail3.rotationPointX + (float) Math.sin(this.tail3.rotateAngleY) * 10.0F;
+		this.tailSpikes4.rotateAngleY = angle * multiplier;
+		this.tailSpikes4.rotationPointZ = this.tail3.rotationPointZ + (float) Math.cos(this.tail3.rotateAngleY) * 10.0F;
+		this.tailSpikes4.rotationPointX = this.tail3.rotationPointX + (float) Math.sin(this.tail3.rotateAngleY) * 10.0F;
+		multiplier = multiplier + distMult;
+		this.tail5.rotateAngleY = angle * multiplier;
+		this.tail5.rotationPointZ = this.tail4.rotationPointZ + (float) Math.cos(this.tail4.rotateAngleY) * 10.0F;
+		this.tail5.rotationPointX = this.tail4.rotationPointX + (float) Math.sin(this.tail4.rotateAngleY) * 10.0F;
+		this.tailSpikes5.rotateAngleY = angle * multiplier;
+		this.tailSpikes5.rotationPointZ = this.tail4.rotationPointZ + (float) Math.cos(this.tail4.rotateAngleY) * 10.0F;
+		this.tailSpikes5.rotationPointX = this.tail4.rotationPointX + (float) Math.sin(this.tail4.rotateAngleY) * 10.0F;
+		multiplier = multiplier + distMult;
+		this.stabber.rotateAngleY = angle * multiplier;
+		this.stabber.rotationPointZ = this.tail5.rotationPointZ + (float) Math.cos(this.tail5.rotateAngleY) * 10.0F;
+		this.stabber.rotationPointX = this.tail5.rotationPointX + (float) Math.sin(this.tail5.rotateAngleY) * 10.0F;
 	}
 
 	@Override
