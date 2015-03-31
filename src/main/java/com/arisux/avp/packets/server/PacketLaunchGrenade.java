@@ -1,10 +1,11 @@
 package com.arisux.avp.packets.server;
 
-import io.netty.buffer.ByteBuf;
-
+import com.arisux.airi.lib.WorldUtil.Entities.Players.Inventories;
+import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.EntityGrenade;
 
 import cpw.mods.fml.common.network.simpleimpl.*;
+import io.netty.buffer.ByteBuf;
 
 public class PacketLaunchGrenade implements IMessage, IMessageHandler<PacketLaunchGrenade, PacketLaunchGrenade>
 {
@@ -25,15 +26,24 @@ public class PacketLaunchGrenade implements IMessage, IMessageHandler<PacketLaun
 		;
 	}
 
-	@Override public PacketLaunchGrenade onMessage(PacketLaunchGrenade packet, MessageContext ctx)
+	@Override
+	public PacketLaunchGrenade onMessage(PacketLaunchGrenade packet, MessageContext ctx)
 	{
 		if (ctx.getServerHandler().playerEntity != null && ctx.getServerHandler().playerEntity.worldObj != null)
 		{
-			EntityGrenade grenade = new EntityGrenade(ctx.getServerHandler().playerEntity.worldObj, ctx.getServerHandler().playerEntity);
-			grenade.explodeOnImpact = true;
-			ctx.getServerHandler().playerEntity.worldObj.spawnEntityInWorld(grenade);
+			boolean hasNormal = ctx.getServerHandler().playerEntity.inventory.hasItem(AliensVsPredator.items().itemGrenade);
+			boolean hasIncendiary = ctx.getServerHandler().playerEntity.inventory.hasItem(AliensVsPredator.items().itemIncendiaryGrenade);
+
+			if (hasNormal || hasIncendiary)
+			{
+				EntityGrenade grenade = new EntityGrenade(ctx.getServerHandler().playerEntity.worldObj, ctx.getServerHandler().playerEntity);
+				grenade.explodeOnImpact = true;
+				grenade.isFlaming = hasIncendiary;
+				ctx.getServerHandler().playerEntity.worldObj.spawnEntityInWorld(grenade);
+				Inventories.consumeItem(ctx.getServerHandler().playerEntity, !hasIncendiary ? AliensVsPredator.items().itemGrenade : AliensVsPredator.items().itemIncendiaryGrenade);
+			}
 		}
-		
+
 		return null;
 	}
 }
