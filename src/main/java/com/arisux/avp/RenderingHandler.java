@@ -4,9 +4,6 @@ import static cpw.mods.fml.client.registry.ClientRegistry.bindTileEntitySpecialR
 import static cpw.mods.fml.client.registry.RenderingRegistry.registerBlockHandler;
 import static cpw.mods.fml.client.registry.RenderingRegistry.registerEntityRenderingHandler;
 import static net.minecraftforge.client.MinecraftForgeClient.registerItemRenderer;
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.renderer.entity.RenderSnowball;
-import net.minecraft.item.Item;
 
 import com.arisux.airi.lib.client.ModelBipedExtension;
 import com.arisux.airi.lib.client.ModelTexMap;
@@ -25,6 +22,8 @@ import com.arisux.avp.items.render.*;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.item.Item;
 
 public class RenderingHandler implements IInitializablePre, IInitializablePost
 {
@@ -66,7 +65,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		registerEntityRenderingHandler(EntityOvamorph.class, new RenderOvamorph(new ModelOvamorph(), 0.5F));
 		registerEntityRenderingHandler(EntitySpear.class, new RenderSpear());
 		registerEntityRenderingHandler(EntityLaserMine.class, new RenderLaserMine());
-		registerEntityRenderingHandler(EntityGrenade.class, new RenderSnowball(AliensVsPredator.items().itemGrenade, 0));
+		registerEntityRenderingHandler(EntityGrenade.class, new RenderM40());
 		registerEntityRenderingHandler(EntityFlame.class, new RenderFlame());
 		registerEntityRenderingHandler(EntityAcidPool.class, new RenderAcidPool());
 		registerEntityRenderingHandler(EntityPlasma.class, new RenderPlasmaBlast());
@@ -96,6 +95,8 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		registerItemRenderer(items.itemM4, new RenderItemM4());
 		registerItemRenderer(items.itemSniper, new RenderItemSniper());
 		registerItemRenderer(items.itemMotionTracker, new RenderItemMotionTracker());
+		registerItemRenderer(items.itemGrenade, new RenderItemM40(AliensVsPredator.resources().M40GRENADE));
+		registerItemRenderer(items.itemIncendiaryGrenade, new RenderItemM40(AliensVsPredator.resources().M40GRENADE_INCENDIARY));
 		registerItemRenderer(items.itemSummonerDrone, (new RenderItemSummoner(EntityDrone.class, ModelDrone.class, AliensVsPredator.resources().DRONE_ADVANCED)).setScale(7.5F).setY(6F));
 		registerItemRenderer(items.itemSummonerProtomorph, (new RenderItemSummoner(EntityProtomorph.class, ModelProtomorph.class, AliensVsPredator.resources().PROTOMORPH)).setScale(7.5F).setY(6F));
 		registerItemRenderer(items.itemSummonerWarrior, (new RenderItemSummoner(EntityWarrior.class, ModelWarrior.class, AliensVsPredator.resources().WARRIOR)).setScale(7.5F).setY(9F));

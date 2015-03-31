@@ -1,8 +1,8 @@
 package com.arisux.avp;
 
-import net.minecraft.util.ResourceLocation;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.util.ResourceLocation;
 
 @SideOnly(Side.CLIENT)
 public class Resources
@@ -35,7 +35,6 @@ public class Resources
 	public final ResourceLocation BLUR_FACEHUGGER = new ResourceLocation(AliensVsPredator.ID, "textures/misc/facehugger.png");
 	public final ResourceLocation BLUR_CHESTBURSTER_EMERGE = new ResourceLocation(AliensVsPredator.ID, "textures/misc/chestburster-emerge-overlay.png");
 	public final ResourceLocation BLUR_GUNSCOPE = new ResourceLocation(AliensVsPredator.ID, "textures/misc/scope.png");
-	public final ResourceLocation GRENADE = new ResourceLocation(AliensVsPredator.ID, "textures/items/itemGrenade.png");
 	public final ResourceLocation PROXIMITY_MINE = new ResourceLocation(AliensVsPredator.ID, "textures/misc/proximity-mine.png");
 	public final ResourceLocation WRISTBLADES = new ResourceLocation(AliensVsPredator.ID, "textures/items/models/wristblade.png");
 	public final ResourceLocation M240ICU = new ResourceLocation(AliensVsPredator.ID, "textures/items/models/m240icu.png");
@@ -44,6 +43,8 @@ public class Resources
 	public final ResourceLocation AK47 = new ResourceLocation(AliensVsPredator.ID, "textures/items/models/ak-47.png");
 	public final ResourceLocation M4 = new ResourceLocation(AliensVsPredator.ID, "textures/items/models/m4.png");
 	public final ResourceLocation SNIPER = new ResourceLocation(AliensVsPredator.ID, "textures/items/models/sniper.png");
+	public final ResourceLocation M40GRENADE = new ResourceLocation(AliensVsPredator.ID, "textures/items/models/m40.png");
+	public final ResourceLocation M40GRENADE_INCENDIARY = new ResourceLocation(AliensVsPredator.ID, "textures/items/models/m40incendiary.png");
 	public final ResourceLocation MOTIONTRACKER = new ResourceLocation(AliensVsPredator.ID, "textures/items/models/motiontracker.png");
 	public final ResourceLocation TURRET = new ResourceLocation(AliensVsPredator.ID, "textures/tile/turret.png");
 	public final ResourceLocation WORKSTATION = new ResourceLocation(AliensVsPredator.ID, "textures/tile/workstation.png");
