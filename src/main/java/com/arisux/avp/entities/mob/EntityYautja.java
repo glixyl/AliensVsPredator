@@ -2,6 +2,8 @@ package com.arisux.avp.entities.mob;
 
 import java.util.Random;
 
+import com.arisux.avp.AliensVsPredator;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
@@ -12,8 +14,6 @@ import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-
-import com.arisux.avp.AliensVsPredator;
 
 public class EntityYautja extends EntityMob
 {
@@ -41,7 +41,6 @@ public class EntityYautja extends EntityMob
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(80.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5199999761581421D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(8.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(5.0D);
 	}
 

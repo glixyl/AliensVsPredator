@@ -1,13 +1,13 @@
 package com.arisux.avp.entities.mob;
 
+import com.arisux.avp.AliensVsPredator;
+
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-
-import com.arisux.avp.AliensVsPredator;
 
 public class EntityAqua extends EntityXenomorph
 {
@@ -45,7 +45,6 @@ public class EntityAqua extends EntityXenomorph
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5500000238418579D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
 	}
 
 	@Override

@@ -46,7 +46,6 @@ public class EntityProtomorph extends EntityXenomorph
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.4700000238418579D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.75D);
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(64.0D);
 	}
 
 	@Override

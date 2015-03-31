@@ -2,6 +2,8 @@ package com.arisux.avp.entities.mob;
 
 import java.util.Random;
 
+import com.arisux.avp.AliensVsPredator;
+
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
@@ -10,8 +12,6 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-
-import com.arisux.avp.AliensVsPredator;
 
 public class EntityWarrior extends EntityXenomorph implements IMob
 {
@@ -47,7 +47,6 @@ public class EntityWarrior extends EntityXenomorph implements IMob
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(50.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
 	}
 
 	@Override

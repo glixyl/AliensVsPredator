@@ -1,5 +1,8 @@
 package com.arisux.avp.entities.mob;
 
+import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.entities.EntityAcidPool;
+
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.IMob;
@@ -7,9 +10,6 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-
-import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.entities.EntityAcidPool;
 
 public class EntityPredalien extends EntityXenomorph implements IMob
 {
@@ -46,7 +46,6 @@ public class EntityPredalien extends EntityXenomorph implements IMob
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(200.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5500000238418579D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(5.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
 	}
 
 	@Override

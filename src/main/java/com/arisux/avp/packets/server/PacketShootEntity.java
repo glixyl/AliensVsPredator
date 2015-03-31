@@ -1,13 +1,12 @@
 package com.arisux.avp.packets.server;
 
-import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.DamageSource;
-
 import com.arisux.avp.items.ItemFirearm;
 
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.*;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.DamageSource;
 
 public class PacketShootEntity implements IMessage, IMessageHandler<PacketShootEntity, PacketShootEntity>
 {
@@ -46,22 +45,25 @@ public class PacketShootEntity implements IMessage, IMessageHandler<PacketShootE
 	@Override
 	public PacketShootEntity onMessage(PacketShootEntity packet, MessageContext ctx)
 	{
-		ItemFirearm itemFirearm = (ItemFirearm) ctx.getServerHandler().playerEntity.getCurrentEquippedItem().getItem();
-
-		if (itemFirearm != null && itemFirearm.canSoundPlay())
+		if (ctx.getServerHandler().playerEntity.getCurrentEquippedItem() != null)
 		{
-			ctx.getServerHandler().playerEntity.worldObj.playSoundAtEntity(ctx.getServerHandler().playerEntity, packet.sound, 1F, 1F);
-			itemFirearm.setLastSoundPlayed(System.currentTimeMillis());
-		}
+			ItemFirearm itemFirearm = (ItemFirearm) ctx.getServerHandler().playerEntity.getCurrentEquippedItem().getItem();
 
-		if (packet.entityId != -1)
-		{
-			Entity entity = ctx.getServerHandler().playerEntity.worldObj.getEntityByID(packet.entityId);
-
-			if (entity != null)
+			if (itemFirearm != null && itemFirearm.canSoundPlay())
 			{
-				entity.hurtResistantTime = 0;
-				entity.attackEntityFrom(DamageSource.generic, (float) packet.damage);
+				ctx.getServerHandler().playerEntity.worldObj.playSoundAtEntity(ctx.getServerHandler().playerEntity, packet.sound, 1F, 1F);
+				itemFirearm.setLastSoundPlayed(System.currentTimeMillis());
+			}
+
+			if (packet.entityId != -1)
+			{
+				Entity entity = ctx.getServerHandler().playerEntity.worldObj.getEntityByID(packet.entityId);
+
+				if (entity != null)
+				{
+					entity.hurtResistantTime = 0;
+					entity.attackEntityFrom(DamageSource.generic, (float) packet.damage);
+				}
 			}
 		}
 

@@ -7,6 +7,7 @@ import com.arisux.airi.lib.WorldUtil.Entities;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.interfaces.IHiveSignature;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
@@ -53,7 +54,6 @@ public class EntityQueen extends EntityXenomorph implements IHiveSignature
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(400.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5700000238418579D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(8.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
 	}
 
 	@Override
@@ -68,16 +68,26 @@ public class EntityQueen extends EntityXenomorph implements IHiveSignature
 
 			for (EntitySpeciesAlien alien : aliens)
 			{
-				if (this.rand.nextInt(6) == 0)
+				if (alien != null && alien.getHiveSignature() != null &&  !(alien instanceof EntityQueen) && alien.getHiveSignature().equals(this.getHiveSignature()))
 				{
-					if (alien instanceof EntityOvamorph)
+					if (this.rand.nextInt(6) == 0)
 					{
-						EntityOvamorph ovamorph = (EntityOvamorph) alien;
-						ovamorph.setHatched(true);
+						if (alien instanceof EntityOvamorph)
+						{
+							EntityOvamorph ovamorph = (EntityOvamorph) alien;
+							ovamorph.setHatched(true);
+						}
 					}
-				}
 
-				alien.setAttackTarget(this.getLastAttacker() != null ? this.getLastAttacker() : this.getAttackTarget());
+					EntityLivingBase target = this.getAttackTarget() != null ? this.getAttackTarget() : this.getLastAttacker();
+
+					alien.setAttackTarget(target);
+					alien.getNavigator().tryMoveToEntityLiving(target, alien.getMoveHelper().getSpeed());
+				}
+				else if (alien != null && alien.getHiveSignature() == null)
+				{
+					alien.setHiveSignature(this.getHiveSignature());
+				}
 			}
 		}
 

@@ -2,6 +2,8 @@ package com.arisux.avp.entities.mob;
 
 import java.util.Random;
 
+import com.arisux.avp.AliensVsPredator;
+
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
@@ -9,8 +11,6 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-
-import com.arisux.avp.AliensVsPredator;
 
 public class EntityPraetorian extends EntityXenomorph
 {
@@ -44,7 +44,6 @@ public class EntityPraetorian extends EntityXenomorph
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(5.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
 	}
 
 	@Override

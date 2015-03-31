@@ -2,15 +2,15 @@ package com.arisux.avp.entities.mob;
 
 import java.util.Random;
 
+import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.entities.EntityAcidProjectile;
+
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-
-import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.entities.EntityAcidProjectile;
 
 public class EntitySpitter extends EntityXenomorph implements IRangedAttackMob
 {
@@ -41,7 +41,6 @@ public class EntitySpitter extends EntityXenomorph implements IRangedAttackMob
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5500000238418579D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
 	}
 
 	@Override

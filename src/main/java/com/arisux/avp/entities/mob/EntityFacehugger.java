@@ -62,6 +62,7 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(14.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.6999999761581421D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(0.50D);
+		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(48.0D);
 	}
 
 	@Override

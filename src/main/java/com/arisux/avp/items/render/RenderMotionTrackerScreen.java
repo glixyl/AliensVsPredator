@@ -2,15 +2,15 @@ package com.arisux.avp.items.render;
 
 import java.util.ArrayList;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.util.ResourceLocation;
 
 public class RenderMotionTrackerScreen
 {
@@ -161,7 +161,7 @@ public class RenderMotionTrackerScreen
 
 					double hypot = Math.sqrt(wayX * wayX + wayY * wayY) / (Math.pow(2.0D, 2.0D) / 2.0D);
 
-					if (hypot < 31.0D && Math.abs(yCoord() - (int) entity.posY) < 12 && Math.abs(differenceDegrees) > 90.0F)
+					if (hypot < 31.0D && Math.abs(differenceDegrees) > 90.0F)
 					{
 						this.minDistance = hypot < this.minDistance ? (int) hypot : this.minDistance;
 						this.contactsAngle.add(Float.valueOf(locate));

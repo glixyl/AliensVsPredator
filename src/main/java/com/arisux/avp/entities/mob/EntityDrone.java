@@ -64,7 +64,6 @@ public class EntityDrone extends EntityXenomorph
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5000000238418579D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(2.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
 	}
 
 	@Override
