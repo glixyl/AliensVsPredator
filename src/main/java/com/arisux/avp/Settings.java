@@ -1,16 +1,14 @@
 package com.arisux.avp;
 
-import java.io.File;
-import java.util.HashMap;
-
+import com.arisux.airi.AIRI;
+import com.arisux.airi.lib.ModUtil;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
-import com.arisux.airi.AIRI;
-import com.arisux.airi.lib.ModUtil;
-
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import java.io.File;
+import java.util.HashMap;
 
 public class Settings
 {

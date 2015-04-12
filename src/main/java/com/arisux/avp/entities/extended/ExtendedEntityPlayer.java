@@ -1,26 +1,28 @@
 package com.arisux.avp.entities.extended;
 
+import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.packets.client.PacketSyncEEPPC;
+import com.arisux.avp.packets.server.PacketSyncEEPPS;
+import com.arisux.avp.util.PlayerMode;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
-import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.packets.client.PacketChannelClientUpdate;
-import com.arisux.avp.packets.client.PacketClientBroadcastRadiusUpdate;
-import com.arisux.avp.util.PlayerMode;
-
 public class ExtendedEntityPlayer implements IExtendedEntityProperties
 {
+	public static final String IDENTIFIER = "ExtendedEntityPlayer";
+	private static final String ID_INT_BROADCAST_RADIUS = "broadcastRadius";
+	private static final String ID_STRING_BROADCAST_CHANNEL = "broadcastChannel";
+	private static final String ID_BOOLEAN_NIGHTVISION = "nightvisionEnabled";
+	private EntityPlayer thePlayer;
+
+	/** Fields that need syncing **/
 	public int broadcastRadius;
 	private String broadcastChannel;
-	private EntityPlayer thePlayer;
+	private boolean nightvisionEnabled;
 	private PlayerMode playerMode = PlayerMode.NORMAL;
-
-	public static final String IDENTIFIER = "ExtendedEntityPlayer";
-	public static final String ID_INT_BROADCAST_RADIUS = "broadcastRadius";
-	public static final String ID_STRING_BROADCAST_CHANNEL = "broadcastChannel";
 
 	public ExtendedEntityPlayer(EntityPlayer player)
 	{
@@ -42,18 +44,35 @@ public class ExtendedEntityPlayer implements IExtendedEntityProperties
 	@Override
 	public void saveNBTData(NBTTagCompound nbt)
 	{
-		nbt.setInteger(ID_INT_BROADCAST_RADIUS, broadcastRadius);
-		nbt.setString(ID_STRING_BROADCAST_CHANNEL, broadcastChannel);
+		nbt.setInteger(ID_INT_BROADCAST_RADIUS, this.broadcastRadius);
+		nbt.setString(ID_STRING_BROADCAST_CHANNEL, this.broadcastChannel);
+		nbt.setBoolean(ID_BOOLEAN_NIGHTVISION, this.nightvisionEnabled);
 	}
 
 	@Override
 	public void loadNBTData(NBTTagCompound nbt)
 	{
-		broadcastChannel = nbt.getString(ID_STRING_BROADCAST_CHANNEL);
-		broadcastRadius = nbt.getInteger(ID_INT_BROADCAST_RADIUS);
+		this.broadcastChannel = nbt.getString(ID_STRING_BROADCAST_CHANNEL);
+		this.broadcastRadius = nbt.getInteger(ID_INT_BROADCAST_RADIUS);
+		this.nightvisionEnabled = nbt.getBoolean(ID_BOOLEAN_NIGHTVISION);
+	}
 
-		AliensVsPredator.network().sendToAll(new PacketClientBroadcastRadiusUpdate(this.broadcastRadius, this.thePlayer.getCommandSenderName()));
-		AliensVsPredator.network().sendToAll(new PacketChannelClientUpdate(this.broadcastChannel, this.thePlayer.getCommandSenderName()));
+	public NBTTagCompound asNBTTagCompound()
+	{
+		NBTTagCompound tag = new NBTTagCompound();
+		this.saveNBTData(tag);
+
+		return tag;
+	}
+
+	public void syncClients()
+	{
+		AliensVsPredator.network().sendToAll(new PacketSyncEEPPC(this.getPlayer().getEntityId(), this.asNBTTagCompound()));
+	}
+
+	public void syncServer()
+	{
+		AliensVsPredator.network().sendToServer(new PacketSyncEEPPS(this.getPlayer().getEntityId(), this.asNBTTagCompound()));
 	}
 
 	public String getBroadcastChannel()
@@ -89,5 +108,15 @@ public class ExtendedEntityPlayer implements IExtendedEntityProperties
 	public EntityPlayer getPlayer()
 	{
 		return thePlayer;
+	}
+
+	public boolean isNightvisionEnabled()
+	{
+		return nightvisionEnabled;
+	}
+
+	public void setNightvisionEnabled(boolean nightvisionEnabled)
+	{
+		this.nightvisionEnabled = nightvisionEnabled;
 	}
 }

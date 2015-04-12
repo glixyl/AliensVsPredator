@@ -1,5 +1,6 @@
 *
-!src/
+!src/main/java
+!src/main/resources
 !.gitignore
 !gradlew*
 !gradle/

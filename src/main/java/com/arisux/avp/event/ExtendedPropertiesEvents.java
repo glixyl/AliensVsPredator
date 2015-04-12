@@ -1,22 +1,26 @@
 package com.arisux.avp.event;
 
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
-import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.world.WorldEvent;
-
-import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.extended.ExtendedEntityLivingBase;
 import com.arisux.avp.entities.extended.ExtendedEntityPlayer;
-import com.arisux.avp.packets.client.PacketChannelClientUpdate;
-import com.arisux.avp.packets.client.PacketClientBroadcastRadiusUpdate;
-
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EntityTracker;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.world.WorldEvent;
 
 public class ExtendedPropertiesEvents
 {
+	@SubscribeEvent
+	public void onEntityTrackEvent(PlayerEvent.StartTracking event)
+	{
+		this.syncEntity(event.target);
+	}
+
 	@SubscribeEvent
 	public void onEntityConstructing(EntityConstructing event)
 	{
@@ -46,31 +50,48 @@ public class ExtendedPropertiesEvents
 	@SubscribeEvent
 	public void onEntitySpawnInWorld(EntityJoinWorldEvent event)
 	{
-		if (event.entity != null && !event.entity.worldObj.isRemote && event.entity instanceof EntityPlayer)
+		if (event.entity != null && !event.entity.worldObj.isRemote)
 		{
-			this.updateClientExtendedProperties(event.entity.worldObj);
+			this.syncEntity(event.entity);
 		}
 	}
 	
 	@SubscribeEvent
 	public void onWorldSave(WorldEvent.Save event)
 	{
-		this.updateClientExtendedProperties(event.world);
+		;
 	}
 
-	public void updateClientExtendedProperties(World worldObj)
+	public void syncEntity(Entity target)
 	{
-		for (Object o : worldObj.playerEntities)
-		{
-			if (o instanceof EntityPlayer)
-			{
-				EntityPlayer thePlayer = (EntityPlayer) o;
-				ExtendedEntityPlayer extendedEntityProperties = (ExtendedEntityPlayer) thePlayer.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER);
+		WorldServer worldServer = (WorldServer) target.worldObj;
 
-				if (thePlayer != null && extendedEntityProperties != null && extendedEntityProperties.getBroadcastChannel() != null)
+		if (worldServer != null)
+		{
+			EntityTracker tracker = worldServer.getEntityTracker();
+
+			if (tracker != null && target != null)
+			{
+				if (target instanceof EntityLivingBase)
 				{
-					AliensVsPredator.network().sendToAll(new PacketClientBroadcastRadiusUpdate(extendedEntityProperties.getBroadcastRadius(), thePlayer.getCommandSenderName()));
-					AliensVsPredator.network().sendToAll(new PacketChannelClientUpdate(extendedEntityProperties.getBroadcastChannel(), thePlayer.getCommandSenderName()));
+					ExtendedEntityLivingBase extendedLiving = (ExtendedEntityLivingBase) target.getExtendedProperties(ExtendedEntityLivingBase.IDENTIFIER);
+
+					if (extendedLiving != null)
+					{
+						if (target instanceof EntityPlayer)
+						System.out.println("Attempting to sync entity: " + target.getCommandSenderName());
+						extendedLiving.syncClients();
+					}
+				}
+
+				if (target instanceof EntityPlayer)
+				{
+					ExtendedEntityPlayer extendedPlayer = (ExtendedEntityPlayer) target.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER);
+
+					if (extendedPlayer != null)
+					{
+						extendedPlayer.syncClients();
+					}
 				}
 			}
 		}

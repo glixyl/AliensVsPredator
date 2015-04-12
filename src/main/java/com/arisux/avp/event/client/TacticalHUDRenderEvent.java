@@ -1,28 +1,34 @@
 package com.arisux.avp.event.client;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.inventory.GuiContainerCreative;
-import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
-
-import org.lwjgl.opengl.GL11;
-
+import com.arisux.airi.lib.AccessWrapper;
 import com.arisux.airi.lib.GuiElements.GuiCustomButton;
-import com.arisux.airi.lib.*;
+import com.arisux.airi.lib.RenderUtil;
+import com.arisux.airi.lib.WorldUtil;
+import com.arisux.airi.lib.client.ScaledResolution;
 import com.arisux.airi.lib.interfaces.IActionPerformed;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.extended.ExtendedEntityLivingBase;
 import com.arisux.avp.entities.extended.ExtendedEntityPlayer;
 import com.arisux.avp.gui.GuiTacticalHUDSettings;
-
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.RenderTickEvent;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiChat;
+import net.minecraft.client.gui.inventory.GuiInventory;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.Vec3;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.client.event.RenderWorldLastEvent;
+import org.lwjgl.opengl.GL11;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
+import static org.lwjgl.opengl.GL11.*;
 
 public class TacticalHUDRenderEvent
 {
@@ -31,7 +37,65 @@ public class TacticalHUDRenderEvent
 	private ExtendedEntityPlayer clientPlayerProperties = getProperties();
 	private GuiCustomButton buttonMarineHelmConfig = new GuiCustomButton(0, 0, 0, 50, 20, "", null);
 	private boolean gammaRestored = true;
-	public int viewportThreshold = 20;
+	private int viewportThreshold = 20;
+
+	@SubscribeEvent
+	public void renderWorldLastEvent(RenderWorldLastEvent event)
+	{
+		if (Minecraft.getMinecraft().gameSettings.thirdPersonView == 0)
+		{
+			if (WorldUtil.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer) != null && mc.gameSettings.thirdPersonView == 0 && WorldUtil.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer).getItem() == AliensVsPredator.items().helmMarine)
+			{
+				ArrayList<Entity> entities = (ArrayList<Entity>) WorldUtil.Entities.getEntitiesInCoordsRange(Minecraft.getMinecraft().thePlayer.worldObj, Entity.class, new WorldUtil.Blocks.CoordData(Minecraft.getMinecraft().thePlayer), 30, 30);
+				Vec3 p = Minecraft.getMinecraft().thePlayer.getLookVec();
+				float scale = 24.0F;
+
+				GL11.glPushMatrix();
+				GL11.glTranslated(p.xCoord, p.yCoord, p.zCoord);
+				GL11.glScalef(scale, scale, scale);
+
+				for (Entity entity : entities)
+				{
+					if (WorldUtil.Entities.canEntityBeSeenBy(entity, Minecraft.getMinecraft().thePlayer))
+					{
+						Vec3 t = Vec3.createVectorHelper(entity.posX, entity.posY, entity.posZ).addVector(0, entity.getEyeHeight() / 2, 0);
+						t = t.subtract(Minecraft.getMinecraft().thePlayer.getPosition(AccessWrapper.getRenderPartialTicks()));
+						Vec3 tmp = p.addVector(t.xCoord, t.yCoord, t.zCoord).normalize();
+						Vec3 res = p.addVector(tmp.xCoord, tmp.yCoord, tmp.zCoord);
+
+						GL11.glPushMatrix();
+						{
+							GL11.glDepthFunc(GL11.GL_ALWAYS);
+							GL11.glTranslated(p.xCoord, p.yCoord, p.zCoord);
+							GL11.glTranslated(-res.xCoord, -res.yCoord, -res.zCoord);
+							GL11.glRotatef(-Minecraft.getMinecraft().thePlayer.rotationYaw - 180, 0, 1, 0);
+							GL11.glRotatef(-Minecraft.getMinecraft().thePlayer.rotationPitch, 1, 0, 0);
+							RenderUtil.glBlendClear();
+							GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
+							RenderUtil.glDisableLight();
+							RenderUtil.glDisableLightMapping();
+
+							Tessellator tessellator = Tessellator.instance;
+							tessellator.startDrawing(2);
+							tessellator.setColorRGBA(0, 240, 255, 255);
+							float tScale = 0.05F;
+							tessellator.addVertex(-tScale, -tScale, 0.0);
+							tessellator.addVertex(+tScale, -tScale, 0.0);
+							tessellator.addVertex(+tScale, +tScale, 0.0);
+							tessellator.addVertex(-tScale, +tScale, 0.0);
+							tessellator.draw();
+
+							RenderUtil.glEnableLightMapping();
+							RenderUtil.glEnableLight();
+							GL11.glDepthFunc(GL11.GL_LEQUAL);
+						}
+						GL11.glPopMatrix();
+					}
+				}
+				GL11.glPopMatrix();
+			}
+		}
+	}
 
 	@SubscribeEvent
 	public void renderTickOverlay(RenderGameOverlayEvent.Pre event)
@@ -42,10 +106,28 @@ public class TacticalHUDRenderEvent
 			{
 				if (WorldUtil.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer) != null && mc.gameSettings.thirdPersonView == 0 && WorldUtil.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer).getItem() == AliensVsPredator.items().helmMarine)
 				{
+					ExtendedEntityPlayer playerProperties = ExtendedEntityPlayer.get(Minecraft.getMinecraft().thePlayer);
+
 					this.gammaRestored = false;
-					AliensVsPredator.events().getLightmapUpdateEvent().gammaValue = 8F;
+					AliensVsPredator.events().getLightmapUpdateEvent().gammaValue = playerProperties.isNightvisionEnabled() ? 8F : 0F;
 					this.scanForNearbyPlayers();
-					RenderUtil.renderOverlay(AliensVsPredator.resources().BLUR_TACTICAL_HUD, 0.4F);
+					RenderUtil.glDisableLight();
+					RenderUtil.glDisableLightMapping();
+
+					glEnable(GL_BLEND);
+					glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
+					glDisable(GL_DEPTH_TEST);
+					glDepthMask(false);
+					glColor4f(1F, 1F, 1F, 1F);
+					glDisable(GL_ALPHA_TEST);
+					RenderUtil.bindTexture(AliensVsPredator.resources().BLUR_TACTICAL_HUD);
+					RenderUtil.drawQuad(0, 0, RenderUtil.scaledDisplayResolution().getScaledWidth(), RenderUtil.scaledDisplayResolution().getScaledHeight());
+					glDepthMask(true);
+					glEnable(GL_DEPTH_TEST);
+					glEnable(GL_ALPHA_TEST);
+					glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+					glDisable(GL_BLEND);
+
 					this.drawInfoBar();
 					this.drawImpregnationIndicator(clientPlayerProperties);
 					this.drawPlayerScanner();
@@ -72,14 +154,14 @@ public class TacticalHUDRenderEvent
 	{
 		if (WorldUtil.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer) != null && WorldUtil.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer).getItem() == AliensVsPredator.items().helmMarine)
 		{
-			if (mc.currentScreen instanceof GuiInventory || mc.currentScreen instanceof GuiContainerCreative)
+			if (mc.currentScreen instanceof GuiInventory || mc.currentScreen instanceof GuiChat)
 			{
-				buttonMarineHelmConfig.displayString = "Tactical HUD";
-				buttonMarineHelmConfig.tooltip = "Click to configure Tactical HUD settings.";
-				buttonMarineHelmConfig.width = 80;
+				buttonMarineHelmConfig.displayString = "Configure";
+				buttonMarineHelmConfig.tooltip = "Click to configure the Tactical HUD.";
+				buttonMarineHelmConfig.width = 70;
 				buttonMarineHelmConfig.baseColor = 0x44000000;
-				buttonMarineHelmConfig.xPosition = RenderUtil.scaledDisplayResolution().getScaledWidth() / 2 - (!mc.thePlayer.capabilities.isCreativeMode ? 175 : 185);
-				buttonMarineHelmConfig.yPosition = RenderUtil.scaledDisplayResolution().getScaledHeight() / 2 - 80;
+				buttonMarineHelmConfig.xPosition = RenderUtil.scaledDisplayResolution().getScaledWidth() - buttonMarineHelmConfig.width;
+				buttonMarineHelmConfig.yPosition = 0;
 				buttonMarineHelmConfig.drawButton();
 				buttonMarineHelmConfig.setAction(new IActionPerformed()
 				{
@@ -87,7 +169,6 @@ public class TacticalHUDRenderEvent
 					public void actionPerformed(GuiCustomButton button)
 					{
 						Minecraft.getMinecraft().displayGuiScreen(new GuiTacticalHUDSettings(mc.currentScreen));
-//						Minecraft.getMinecraft().thePlayer.addChatComponentMessage(new ChatComponentText("It's not the button"));
 					}
 				});
 			}
@@ -106,27 +187,74 @@ public class TacticalHUDRenderEvent
 
 	public void drawInfoBar()
 	{
-		int xStartHeadBar = 65;
+		float scale = Minecraft.getMinecraft().gameSettings.guiScale / 2;
+		int barPadding = 90;
 		String fpsString = mc.debug.substring(0, mc.debug.indexOf(" fps")) + " FPS";
-		String date = new SimpleDateFormat("[MM/dd/yyyy] [HH:mm:ss]").format(new Date());
+		String barString = new SimpleDateFormat("[MM/dd/yyyy] [HH:mm:ss]").format(new Date()).toString() + " [" + fpsString + "]";
+		GL11.glScalef(scale, scale, scale);
 
-		RenderUtil.drawString(fpsString, RenderUtil.scaledDisplayResolution().getScaledWidth() - RenderUtil.getStringRenderWidth(fpsString) - 10, 10, 0x44EEEEEE);
-		RenderUtil.drawRect(xStartHeadBar, 10, RenderUtil.scaledDisplayResolution().getScaledWidth() - xStartHeadBar - RenderUtil.getStringRenderWidth(fpsString) - 15, 8, 0x66EEEEEE);
-		RenderUtil.drawStringAlignCenter("[" + mc.thePlayer.getCommandSenderName() + "] " + date + " [" + viewportThreshold + "/" + playersInHUD.size() + " players R->" + this.getProperties().getBroadcastRadius() + "@" + this.getProperties().getBroadcastChannel() + "]", RenderUtil.scaledDisplayResolution().getScaledWidth() / 2, 10, 0xFFFFFFFF);
+		GL11.glPushMatrix();
+		{
+			GL11.glEnable(GL_BLEND);
+			GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
+			RenderUtil.drawString(barString, barPadding, 45, 0xFF00AAFF, false);
+			GL11.glPushMatrix();
+			{
+				float nameScale = 1.5F;
+				GL11.glScalef(nameScale, nameScale, nameScale);
+				RenderUtil.drawString(mc.thePlayer.getCommandSenderName(), (int) ((barPadding) / nameScale), (int) (30 / nameScale), 0xFF00AAFF, false);
+			}
+			GL11.glPopMatrix();
+
+			GL11.glPushMatrix();
+			{
+				int batteryPercent = (int) Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 100 + 10;
+				int btX = 6;
+				int btY = 3;
+				int btWidth = 128;
+				int btHeight = 64;
+				int batteryWidth = btWidth / 2 * batteryPercent / 100;
+				float maxU = batteryPercent * 1F / 100F / 2F;
+				RenderUtil.bindTexture(AliensVsPredator.resources().BATTERY_INDICATOR);
+				RenderUtil.drawQuad(btX, btY, btWidth, btHeight, 0F, 1F, 0F, 0.5F);
+				RenderUtil.drawQuad(btX, btY, batteryWidth, btHeight, 0F, maxU, 0.5F, 1F);
+			}
+			GL11.glPopMatrix();
+		}
+		GL11.glPopMatrix();
 	}
 
 	public void drawImpregnationIndicator(ExtendedEntityPlayer playerProperties)
 	{
 		ExtendedEntityLivingBase livingProperties = ExtendedEntityLivingBase.get(playerProperties.getPlayer());
 		
-		if (livingProperties.doesEntityContainEmbryo())
+		if (livingProperties.doesEntityContainEmbryo() && livingProperties.getEntityLivingBase().worldObj.getWorldTime() % 20 <= 10)
 		{
+			ScaledResolution res = RenderUtil.scaledDisplayResolution();
 			int lifeTimeTicks = livingProperties.getMaxEmbryoAge() - livingProperties.getEmbryoAge();
 			int lifeTimeSeconds = lifeTimeTicks / 20;
+			int iconSize = 80;
 
-			// TODO: Infection notification
-			RenderUtil.drawString("Life Expectancy: " + lifeTimeTicks + " (" + lifeTimeSeconds + " Seconds)", 10, 40, 0xFFFF0000);
-			RenderUtil.drawString("Life Expectancy: " + lifeTimeSeconds, 10, 50, 0xFFFF0000);
+			GL11.glEnable(GL_BLEND);
+			GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
+			GL11.glPushMatrix();
+			{
+				float scale = 1.5F;
+				GL11.glScalef(scale, scale, scale);
+				RenderUtil.drawStringAlignRight("Analysis Complete:", (int) ((res.getScaledWidth() / scale) - (iconSize / scale)), (int) (30 / scale), 0xFFFF0000);
+			}
+			GL11.glPopMatrix();
+			RenderUtil.drawStringAlignRight("Foreign Organism(s) Detected (1)", res.getScaledWidth() - iconSize, 45, 0xFFFF0000);
+			RenderUtil.drawStringAlignRight("Xenomorphic Embryo Class A", res.getScaledWidth() - iconSize, 55, 0xFFFF0000);
+
+			if (!playerProperties.getPlayer().capabilities.isCreativeMode)
+			{
+				RenderUtil.drawStringAlignRight(lifeTimeSeconds / 60 + " Minute(s) Estimated Until Death", res.getScaledWidth() - iconSize, 65, 0xFFFFFFFF);
+			}
+
+			RenderUtil.glColorHexRGBA(0xFFFF0000);
+			RenderUtil.bindTexture(AliensVsPredator.resources().INFECTION_INDICATOR);
+			RenderUtil.drawQuad(res.getScaledWidth() - iconSize, 0, iconSize, iconSize);
 		}
 	}
 
@@ -164,22 +292,24 @@ public class TacticalHUDRenderEvent
 				int maxSignal = extendedPlayer.getBroadcastRadius() <= this.clientPlayerProperties.getBroadcastRadius() ? extendedPlayer.getBroadcastRadius() : this.clientPlayerProperties.getBroadcastRadius();
 				int pxMultiplier = signal >= maxSignal / 1.3 ? 5 : signal >= maxSignal / 2 ? 4 : signal >= maxSignal / 3 ? 3 : signal >= maxSignal / 4 ? 2 : signal >= maxSignal / 5 ? 1 : signal >= maxSignal / 6 ? 0 : 0;
 
-				RenderUtil.drawRect(RenderUtil.scaledDisplayResolution().getScaledWidth() - 111, 30 + barSpace * x - 5, 120, 2, 0x66EEEEEE);
-				RenderUtil.drawRect(RenderUtil.scaledDisplayResolution().getScaledWidth() - 111, 32 + barSpace * x - 5, 2, 9, 0x66EEEEEE);
+				RenderUtil.drawRect(RenderUtil.scaledDisplayResolution().getScaledWidth() - 111, 40 + barSpace * x - 5, 120, 2, 0xAA00AAFF);
+				RenderUtil.drawRect(RenderUtil.scaledDisplayResolution().getScaledWidth() - 111, 42 + barSpace * x - 5, 2, 9, 0xAA00AAFF);
 
 				if (mc.thePlayer.getDistanceToEntity(player) <= this.clientPlayerProperties.getBroadcastRadius() && signal <= maxSignal / 1.3)
 				{
 					GL11.glColor4f(1F, 1F, 1F, 1F);
 					Minecraft.getMinecraft().renderEngine.bindTexture(Gui.icons);
-					RenderUtil.drawQuad(RenderUtil.scaledDisplayResolution().getScaledWidth() - 135, 26 + barSpace * x, 10, 8, 0, (176 + pxMultiplier * 8));
+					RenderUtil.drawQuad(RenderUtil.scaledDisplayResolution().getScaledWidth() - 135, 36 + barSpace * x, 10, 8, 0, (176 + pxMultiplier * 8));
 
-					RenderUtil.drawProgressBar(player.getCommandSenderName(), (int) player.getMaxHealth(), (int) player.getHealth(), RenderUtil.scaledDisplayResolution().getScaledWidth() - 105, 30 + barSpace * x, 100, 1, 0, 0xFF00AAFF, false);
-					RenderUtil.drawPlayerFace(player.getCommandSenderName(), RenderUtil.scaledDisplayResolution().getScaledWidth() - 122, 25 + barSpace * x, 11, 11);
+					RenderUtil.drawProgressBar(player.getCommandSenderName(), (int) player.getMaxHealth(), (int) player.getHealth(), RenderUtil.scaledDisplayResolution().getScaledWidth() - 105, 40 + barSpace * x, 100, 1, 0, 0xFF00AAFF, false);
+					RenderUtil.drawPlayerFace(player.getCommandSenderName(), RenderUtil.scaledDisplayResolution().getScaledWidth() - 122, 35 + barSpace * x, 11, 11);
 				}
 				else
 				{
-					RenderUtil.drawRect(RenderUtil.scaledDisplayResolution().getScaledWidth() - 105, 30 + barSpace * x, 100, 5, 0x66EEEEEE);
-					RenderUtil.drawString("Connection lost...", RenderUtil.scaledDisplayResolution().getScaledWidth() - 100, 29 + barSpace * x, 0xFFFFFFFF, true);
+					glEnable(GL_BLEND);
+					glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
+					RenderUtil.drawRect(RenderUtil.scaledDisplayResolution().getScaledWidth() - 105, 40 + barSpace * x, 100, 5, 0x66EEEEEE);
+					RenderUtil.drawString("Connection lost...", RenderUtil.scaledDisplayResolution().getScaledWidth() - 100, 39 + barSpace * x, 0xFFFFFFFF, true);
 				}
 			}
 		}
@@ -197,5 +327,15 @@ public class TacticalHUDRenderEvent
 		}
 
 		return false;
+	}
+
+	public int getViewportThreshold()
+	{
+		return viewportThreshold;
+	}
+
+	public void setViewportThreshold(int viewportThreshold)
+	{
+		this.viewportThreshold = viewportThreshold;
 	}
 }

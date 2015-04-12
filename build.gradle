@@ -29,7 +29,7 @@ tasks.withType(JavaCompile) {
 }
 
 minecraft {
-    version = "1.7.10-10.13.2.1291"
+    version = "1.7.10-10.13.3.1358-1.7.10"
     runDir = "eclipse"
 }
 
@@ -62,3 +62,5 @@ processResources {
         exclude 'mcmod.info'
     }
 }
+
+idea { module { inheritOutputDirs = true } }

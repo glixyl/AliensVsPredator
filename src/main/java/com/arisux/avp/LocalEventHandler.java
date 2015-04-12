@@ -1,18 +1,19 @@
 package com.arisux.avp;
 
-import java.util.ArrayList;
-
-import net.minecraftforge.common.MinecraftForge;
-
 import com.arisux.airi.lib.interfaces.IInitializable;
-import com.arisux.avp.event.*;
+import com.arisux.avp.event.EmbryoTickEvent;
+import com.arisux.avp.event.EntityTrackingEvent;
+import com.arisux.avp.event.ExtendedPropertiesEvents;
+import com.arisux.avp.event.StormUpdateEvent;
 import com.arisux.avp.event.client.*;
 import com.arisux.avp.items.render.RenderMotionTrackerScreen;
-
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.common.MinecraftForge;
+
+import java.util.ArrayList;
 
 public class LocalEventHandler implements IInitializable
 {
@@ -45,6 +46,7 @@ public class LocalEventHandler implements IInitializable
 			this.registerEvent(new DimensionHandler());
 		}
 
+		this.registerEvent(new EntityTrackingEvent());
 		this.registerEvent(new EmbryoTickEvent());
 		this.registerEvent(new StormUpdateEvent());
 		this.registerEvent(new ExtendedPropertiesEvents());

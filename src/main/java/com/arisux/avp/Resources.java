@@ -34,6 +34,8 @@ public class Resources
 	public final ResourceLocation BLUR_TACTICAL_HUD = new ResourceLocation(AliensVsPredator.ID, "textures/misc/marine-helm-overlay.png");
 	public final ResourceLocation BLUR_FACEHUGGER = new ResourceLocation(AliensVsPredator.ID, "textures/misc/facehugger.png");
 	public final ResourceLocation BLUR_CHESTBURSTER_EMERGE = new ResourceLocation(AliensVsPredator.ID, "textures/misc/chestburster-emerge-overlay.png");
+	public final ResourceLocation BATTERY_INDICATOR = new ResourceLocation(AliensVsPredator.ID, "textures/misc/battery-indicator.png");
+	public final ResourceLocation INFECTION_INDICATOR = new ResourceLocation(AliensVsPredator.ID, "textures/misc/infection-indicator.png");
 	public final ResourceLocation BLUR_GUNSCOPE = new ResourceLocation(AliensVsPredator.ID, "textures/misc/scope.png");
 	public final ResourceLocation PROXIMITY_MINE = new ResourceLocation(AliensVsPredator.ID, "textures/misc/proximity-mine.png");
 	public final ResourceLocation WRISTBLADES = new ResourceLocation(AliensVsPredator.ID, "textures/items/models/wristblade.png");

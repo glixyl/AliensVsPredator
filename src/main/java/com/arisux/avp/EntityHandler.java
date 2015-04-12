@@ -1,19 +1,17 @@
 package com.arisux.avp;
 
-import java.util.HashMap;
-
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.world.biome.BiomeGenBase;
-
 import com.arisux.airi.lib.interfaces.IInitializable;
 import com.arisux.avp.dimension.BiomeLVBase;
 import com.arisux.avp.entities.*;
 import com.arisux.avp.entities.mob.*;
 import com.arisux.avp.entities.tile.*;
-
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.world.biome.BiomeGenBase;
+
+import java.util.HashMap;
 
 public class EntityHandler implements IInitializable
 {
@@ -93,61 +91,6 @@ public class EntityHandler implements IInitializable
 			BiomeGenBase.taiga, 
 			BiomeGenBase.taigaHills, 
 			BiomeGenBase.plains 
-		});
-		EntityRegistry.addSpawn(EntityYautja.class, 20, 1, 1, EnumCreatureType.creature, new BiomeGenBase[] { 
-			BiomeGenBase.jungle, 
-			BiomeGenBase.jungleHills, 
-			BiomeGenBase.desertHills 
-		});
-		EntityRegistry.addSpawn(EntityDrone.class, 20, 1, 2, EnumCreatureType.creature, new BiomeGenBase[] { 
-			BiomeGenBase.plains, 
-			BiomeGenBase.swampland, 
-			BiomeGenBase.forest, 
-			BiomeGenBase.forestHills, 
-			BiomeGenBase.taiga, 
-			BiomeGenBase.taigaHills, 
-			BiomeGenBase.jungle, 
-			BiomeGenBase.jungleHills 
-		});
-		EntityRegistry.addSpawn(EntityWarrior.class, 25, 1, 2, EnumCreatureType.creature, new BiomeGenBase[] { 
-			BiomeGenBase.plains, 
-			BiomeGenBase.swampland, 
-			BiomeGenBase.forest, 
-			BiomeGenBase.forestHills, 
-			BiomeGenBase.taiga, 
-			BiomeGenBase.taigaHills, 
-			BiomeGenBase.jungle, 
-			BiomeGenBase.jungleHills 
-		});
-		EntityRegistry.addSpawn(EntityPraetorian.class, 3, 1, 2, EnumCreatureType.creature, new BiomeGenBase[] { 
-			BiomeGenBase.plains, 
-			BiomeGenBase.swampland, 
-			BiomeGenBase.forest, 
-			BiomeGenBase.forestHills, 
-			BiomeGenBase.taiga, 
-			BiomeGenBase.taigaHills, 
-			BiomeGenBase.jungle, 
-			BiomeGenBase.jungleHills 
-		});
-		EntityRegistry.addSpawn(EntitySpitter.class, 5, 1, 2, EnumCreatureType.creature, new BiomeGenBase[] { 
-			BiomeGenBase.plains, 
-			BiomeGenBase.swampland, 
-			BiomeGenBase.forest, 
-			BiomeGenBase.forestHills, 
-			BiomeGenBase.taiga, 
-			BiomeGenBase.taigaHills, 
-			BiomeGenBase.jungle, 
-			BiomeGenBase.jungleHills 
-		});
-		EntityRegistry.addSpawn(EntityCrusher.class, 6, 1, 2, EnumCreatureType.creature, new BiomeGenBase[] { 
-			BiomeGenBase.plains, 
-			BiomeGenBase.swampland, 
-			BiomeGenBase.forest, 
-			BiomeGenBase.forestHills, 
-			BiomeGenBase.taiga, 
-			BiomeGenBase.taigaHills, 
-			BiomeGenBase.jungle, 
-			BiomeGenBase.jungleHills 
 		});
 		EntityRegistry.addSpawn(EntityProtomorph.class, 4, 1, 1, EnumCreatureType.monster, new BiomeGenBase[] { 
 			BiomeLVBase.varda

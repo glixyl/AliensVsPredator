@@ -1,25 +1,27 @@
 package com.arisux.avp.entities.extended;
 
+import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.DamageSources;
+import com.arisux.avp.entities.mob.EntityChestburster;
+import com.arisux.avp.packets.client.PacketSyncEEPC;
+import com.arisux.avp.packets.server.PacketSyncEEPS;
+import com.arisux.avp.util.HostParasiteTypes;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
-import com.arisux.avp.DamageSources;
-import com.arisux.avp.entities.mob.EntityChestburster;
-import com.arisux.avp.util.HostParasiteTypes;
-
 public class ExtendedEntityLivingBase implements IExtendedEntityProperties
 {
-	private EntityLivingBase entityLiving;
-	
-	private boolean containsEmbryo;
-	public int embryoAge;
-
 	public static final String IDENTIFIER = "ExtendedEntityLivingBase";
 	public static final String ID_INT_EMBRYO_AGE = "embryoAge";
 	public static final String ID_BOOL_CONTAINS_EMBRYO = "containsEmbryo";
+	private EntityLivingBase entityLiving;
+
+	/** Fields that need syncing **/
+	private boolean containsEmbryo;
+	private int embryoAge;
 
 	public ExtendedEntityLivingBase(EntityLivingBase entityLiving)
 	{
@@ -50,6 +52,24 @@ public class ExtendedEntityLivingBase implements IExtendedEntityProperties
 	{
 		this.embryoAge = nbt.getInteger(ID_INT_EMBRYO_AGE);
 		this.containsEmbryo = nbt.getBoolean(ID_BOOL_CONTAINS_EMBRYO);
+	}
+
+	public NBTTagCompound asNBTTagCompound()
+	{
+		NBTTagCompound tag = new NBTTagCompound();
+		this.saveNBTData(tag);
+
+		return tag;
+	}
+
+	public void syncClients()
+	{
+		AliensVsPredator.network().sendToAll(new PacketSyncEEPC(this.getEntityLivingBase().getEntityId(), this.asNBTTagCompound()));
+	}
+
+	public void syncServer()
+	{
+		AliensVsPredator.network().sendToServer(new PacketSyncEEPS(this.getEntityLivingBase().getEntityId(), this.asNBTTagCompound()));
 	}
 	
 	public EntityLivingBase getEntityLivingBase()

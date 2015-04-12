@@ -23,7 +23,6 @@ public class NetworkHandler extends SimpleNetworkWrapper implements IInitializab
 	{
 		this.registerMessage(Side.SERVER, PacketAssembleCurrentSchematic.class);
 		this.registerMessage(Side.SERVER, PacketOpenWristbracerContainer.class);
-		this.registerMessage(Side.SERVER, PacketBroadcastRadiusUpdate.class);
 		this.registerMessage(Side.SERVER, PacketReloadFirearm.class);
 		this.registerMessage(Side.SERVER, PacketLaunchGrenade.class);
 		this.registerMessage(Side.SERVER, PacketDamageEntity.class);
@@ -32,16 +31,17 @@ public class NetworkHandler extends SimpleNetworkWrapper implements IInitializab
 		this.registerMessage(Side.SERVER, PacketSpawnEntity.class);
 		this.registerMessage(Side.SERVER, PacketSpawnNuke.class);
 		this.registerMessage(Side.SERVER, PacketAddTuretTarget.class);
-		this.registerMessage(Side.SERVER, PacketChannelUpdate.class);
 		this.registerMessage(Side.SERVER, PacketReadFromDataDevice.class);
 		this.registerMessage(Side.SERVER, PacketTurretTargetUpdate.class);
 		this.registerMessage(Side.SERVER, PacketWriteToDataDevice.class);
-		this.registerMessage(Side.CLIENT, PacketClientBroadcastRadiusUpdate.class);
 		this.registerMessage(Side.CLIENT, PacketKillCountUpdate.class);
-		this.registerMessage(Side.CLIENT, PacketChannelClientUpdate.class);
 		this.registerMessage(Side.CLIENT, PacketAmmoUpdate.class);
 		this.registerMessage(Side.CLIENT, PacketPlayerModeUpdate.class);
 		this.registerMessage(Side.CLIENT, PacketTurretInit.class);
+		this.registerMessage(Side.CLIENT, PacketSyncEEPC.class);
+		this.registerMessage(Side.CLIENT, PacketSyncEEPPC.class);
+		this.registerMessage(Side.SERVER, PacketSyncEEPS.class);
+		this.registerMessage(Side.SERVER, PacketSyncEEPPS.class);
 	}
 
 	@SuppressWarnings("unchecked")

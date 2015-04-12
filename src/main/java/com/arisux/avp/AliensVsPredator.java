@@ -14,7 +14,7 @@ import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-@Mod(modid = AliensVsPredator.ID)
+@Mod(modid = AliensVsPredator.ID, acceptedMinecraftVersions = "1.7.10", canBeDeactivated = true, dependencies = "required-after:AIRI")
 public class AliensVsPredator implements IMod
 {
 	protected static final String ID = "avp";

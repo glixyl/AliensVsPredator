@@ -1,12 +1,12 @@
 package com.arisux.avp.entities.mob;
 
-import java.util.ArrayList;
-
 import com.arisux.airi.lib.WorldUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.extended.ExtendedEntityLivingBase;
-
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -20,6 +20,8 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
 
 public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 {
@@ -73,6 +75,19 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 		if (this.isCollidedHorizontally)
 		{
 			this.motionY += 0.2F;
+		}
+
+		if (!this.isFertile && !this.isRiding())
+		{
+			System.out.println("test");
+			if (!this.worldObj.isRemote)
+			{
+				EntityItem entityItem = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, WorldUtil.Entities.Players.Inventories.newStack(AliensVsPredator.items().itemSummonerFacehugger));
+				entityItem.setLocationAndAngles(this.posX, this.posY, this.posZ, 0, 0);
+				this.worldObj.spawnEntityInWorld(entityItem);
+			}
+
+			this.setDead();
 		}
 		
 		@SuppressWarnings("unchecked")
@@ -129,19 +144,11 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 			EntityLivingBase entityLiving = (EntityLivingBase) entity;
 			ExtendedEntityLivingBase extendedLiving = (ExtendedEntityLivingBase) entityLiving.getExtendedProperties(ExtendedEntityLivingBase.IDENTIFIER);
 
-			if (entityLiving instanceof EntityPlayer)
+			if (!(entityLiving instanceof EntityPlayer) || entityLiving instanceof EntityPlayer && !((EntityPlayer) entityLiving).capabilities.isCreativeMode)
 			{
-				if (!((EntityPlayer) entityLiving).capabilities.isCreativeMode)
-				{
-					this.mountEntity(entityLiving);
-					extendedLiving.setContainsEmbryo(true);
-					this.isFertile = false;
-				}
-			}
-			else
-			{
-				this.mountEntity(entity);
+				this.mountEntity(entityLiving);
 				extendedLiving.setContainsEmbryo(true);
+				extendedLiving.syncClients();
 				this.isFertile = false;
 			}
 		}
