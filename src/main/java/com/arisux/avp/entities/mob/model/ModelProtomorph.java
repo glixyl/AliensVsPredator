@@ -1,14 +1,11 @@
 package com.arisux.avp.entities.mob.model;
 
+import com.arisux.airi.lib.client.ModelBaseExtension;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
-
 import org.lwjgl.opengl.GL11;
-
-import com.arisux.airi.lib.RenderUtil;
-import com.arisux.airi.lib.client.ModelBaseExtension;
 
 public class ModelProtomorph extends ModelBaseExtension
 {
@@ -290,7 +287,6 @@ public class ModelProtomorph extends ModelBaseExtension
 	public void render(Entity entity, float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation)
 	{
 		this.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
-		RenderUtil.glDisableLight();
 		torso.render(boxTranslation);
 		abdomen.render(boxTranslation);
 		neck.render(boxTranslation);

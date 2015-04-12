@@ -13,12 +13,14 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 {
 	public int targetQueenId;
 	protected boolean canClimb;
+	protected boolean canBeOwnedByQueen;
 
 	public EntityXenomorph(World world)
 	{
 		super(world);
 		this.jumpMovementFactor = 0.03F;
 		this.canClimb = true;
+		this.canBeOwnedByQueen = true;
 	}
 
 	@Override
@@ -67,7 +69,7 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 			}
 		}
 
-		if (this.worldObj.getWorldTime() % 100 == 0 && rand.nextInt(6) == 0)
+		if (this.canBeOwnedByQueen && this.worldObj.getWorldTime() % 100 == 0 && rand.nextInt(6) == 0)
 		{
 			Entity entity = this.worldObj.getEntityByID(this.targetQueenId);
 			EntityQueen targetQueen = entity instanceof EntityQueen ? (EntityQueen) this.worldObj.getEntityByID(this.targetQueenId) : null;

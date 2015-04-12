@@ -20,6 +20,7 @@ public class EntityProtomorph extends EntityXenomorph
 		this.experienceValue = 100;
 		this.setSize(0.8F, 1.8F);
 		this.canClimb = false;
+		this.canBeOwnedByQueen = false;
 		this.tasks.addTask(0, new EntityAILeapAtTarget(this, 0.6F));
 		this.tasks.addTask(1, new EntityAISwimming(this));
 		this.tasks.addTask(2, new EntityAIBreakDoor(this));
@@ -75,7 +76,7 @@ public class EntityProtomorph extends EntityXenomorph
 	@Override
 	public void onUpdate()
 	{
-		;
+		super.onUpdate();
 	}
 
 	@Override

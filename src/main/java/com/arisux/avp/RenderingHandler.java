@@ -1,10 +1,5 @@
 package com.arisux.avp;
 
-import static cpw.mods.fml.client.registry.ClientRegistry.bindTileEntitySpecialRenderer;
-import static cpw.mods.fml.client.registry.RenderingRegistry.registerBlockHandler;
-import static cpw.mods.fml.client.registry.RenderingRegistry.registerEntityRenderingHandler;
-import static net.minecraftforge.client.MinecraftForgeClient.registerItemRenderer;
-
 import com.arisux.airi.lib.client.ModelBipedExtension;
 import com.arisux.airi.lib.client.ModelTexMap;
 import com.arisux.airi.lib.interfaces.IInitializablePost;
@@ -18,12 +13,16 @@ import com.arisux.avp.entities.render.*;
 import com.arisux.avp.entities.tile.*;
 import com.arisux.avp.entities.tile.render.*;
 import com.arisux.avp.items.render.*;
-
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.item.Item;
+
+import static cpw.mods.fml.client.registry.ClientRegistry.bindTileEntitySpecialRenderer;
+import static cpw.mods.fml.client.registry.RenderingRegistry.registerBlockHandler;
+import static cpw.mods.fml.client.registry.RenderingRegistry.registerEntityRenderingHandler;
+import static net.minecraftforge.client.MinecraftForgeClient.registerItemRenderer;
 
 public class RenderingHandler implements IInitializablePre, IInitializablePost
 {
@@ -47,7 +46,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 	public void registerEntityRenderers()
 	{
 		registerEntityRenderingHandler(EntityHammerpede.class, new RenderHammerpede(new ModelHammerpede(), 0.5F));
-		registerEntityRenderingHandler(EntityProtomorph.class, new RenderXenomorph(new ModelTexMap(new ModelProtomorph(), AliensVsPredator.resources().PROTOMORPH), 0.5F).setScale(2F));
+		registerEntityRenderingHandler(EntityProtomorph.class, new RenderXenomorph(new ModelTexMap(new ModelProtomorph(), AliensVsPredator.resources().PROTOMORPH), 0.5F).setScale(1.4F));
 		registerEntityRenderingHandler(EntityDrone.class, new RenderXenomorph(new ModelTexMap(new ModelDrone(), AliensVsPredator.resources().DRONE_BASIC), 0.5F));
 		registerEntityRenderingHandler(EntityWarrior.class, new RenderXenomorph(new ModelTexMap(new ModelWarrior(), AliensVsPredator.resources().WARRIOR), 0.5F));
 		registerEntityRenderingHandler(EntityPraetorian.class, new RenderXenomorph(new ModelTexMap(new ModelPraetorian(), AliensVsPredator.resources().PRAETORIAN), 0.85F));
