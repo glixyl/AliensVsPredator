@@ -33,6 +33,11 @@ public class EmbryoTickEvent
 						livingProperties.tickEmbryoGrowth();
 					}
 
+					living.moveEntity(0, 0, 0);
+					living.rotationPitch = 0;
+					living.rotationYaw = 0;
+					living.rotationYawHead = 0;
+
 					if (event.world.getWorldTime() % 60 == 0)
 					{
 						livingProperties.syncClients();
@@ -40,7 +45,8 @@ public class EmbryoTickEvent
 
 					if (!entity.isDead)
 					{
-						if (livingProperties.getEmbryoAge() >= livingProperties.getMaxEmbryoAge()) {
+						if (livingProperties.getEmbryoAge() >= livingProperties.getMaxEmbryoAge())
+						{
 							EntityChestburster chestburster = new EntityChestburster(event.world);
 							chestburster.setHostParasiteType(HostParasiteTypes.getTypeForHost(living.getClass()));
 							chestburster.setLocationAndAngles(living.posX, living.posY, living.posZ, 0.0F, 0.0F);
@@ -49,7 +55,8 @@ public class EmbryoTickEvent
 							entity.setDead();
 						}
 
-						if (livingProperties.getEmbryoAge() >= livingProperties.getMaxEmbryoAge() - (livingProperties.getMaxEmbryoAge() / 2)) {
+						if (livingProperties.getEmbryoAge() >= livingProperties.getMaxEmbryoAge() - (livingProperties.getMaxEmbryoAge() / 2))
+						{
 							living.addPotionEffect(new PotionEffect(Potion.blindness.getId(), livingProperties.getMaxEmbryoAge() / 2));
 						}
 					}

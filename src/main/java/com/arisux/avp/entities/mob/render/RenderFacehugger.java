@@ -42,7 +42,7 @@ public class RenderFacehugger extends RenderLiving
 	{
 		float glScale = entityFacehugger.facehuggerScaleAmount();
 		GL11.glScalef(glScale, glScale, glScale);
-		
+
 		if (entityFacehugger.ridingEntity != null)
 		{
 			if (entityFacehugger.ridingEntity instanceof EntityPlayer || entityFacehugger.ridingEntity instanceof EntityMarine)

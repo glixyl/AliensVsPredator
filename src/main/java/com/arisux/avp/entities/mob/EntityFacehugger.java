@@ -62,7 +62,7 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 		super.applyEntityAttributes();
 
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(14.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.6999999761581421D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5999999761581421D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(0.50D);
 		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(48.0D);
 	}
@@ -79,7 +79,6 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 
 		if (!this.isFertile && !this.isRiding())
 		{
-			System.out.println("test");
 			if (!this.worldObj.isRemote)
 			{
 				EntityItem entityItem = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, WorldUtil.Entities.Players.Inventories.newStack(AliensVsPredator.items().itemSummonerFacehugger));
@@ -174,7 +173,7 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 
 	public float facehuggerScaleAmount()
 	{
-		return 0.8F;
+		return 0.7F;
 	}
 
 	@Override

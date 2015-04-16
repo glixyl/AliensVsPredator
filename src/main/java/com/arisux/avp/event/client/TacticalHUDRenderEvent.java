@@ -16,8 +16,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.Vec3;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -42,13 +43,14 @@ public class TacticalHUDRenderEvent
 	@SubscribeEvent
 	public void renderWorldLastEvent(RenderWorldLastEvent event)
 	{
-		if (Minecraft.getMinecraft().gameSettings.thirdPersonView == 0)
+		if (mc.gameSettings.thirdPersonView == 0)
 		{
-			if (WorldUtil.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer) != null && mc.gameSettings.thirdPersonView == 0 && WorldUtil.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer).getItem() == AliensVsPredator.items().helmMarine)
+			if (WorldUtil.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer) != null && WorldUtil.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer).getItem() == AliensVsPredator.items().helmMarine)
 			{
 				ArrayList<Entity> entities = (ArrayList<Entity>) WorldUtil.Entities.getEntitiesInCoordsRange(Minecraft.getMinecraft().thePlayer.worldObj, Entity.class, new WorldUtil.Blocks.CoordData(Minecraft.getMinecraft().thePlayer), 30, 30);
 				Vec3 p = Minecraft.getMinecraft().thePlayer.getLookVec();
 				float scale = 24.0F;
+				int analysisIconSize = 100;
 
 				GL11.glPushMatrix();
 				GL11.glTranslated(p.xCoord, p.yCoord, p.zCoord);
@@ -56,8 +58,12 @@ public class TacticalHUDRenderEvent
 
 				for (Entity entity : entities)
 				{
-					if (WorldUtil.Entities.canEntityBeSeenBy(entity, Minecraft.getMinecraft().thePlayer))
+					if (WorldUtil.Entities.canEntityBeSeenBy(entity, Minecraft.getMinecraft().thePlayer) && entity instanceof EntityLivingBase)
 					{
+						ExtendedEntityLivingBase livingProperties = ExtendedEntityLivingBase.get((EntityLivingBase) entity);
+						int lifeTimeTicks = livingProperties.getMaxEmbryoAge() - livingProperties.getEmbryoAge();
+						int lifeTimeSeconds = lifeTimeTicks / 20;
+
 						Vec3 t = Vec3.createVectorHelper(entity.posX, entity.posY, entity.posZ).addVector(0, entity.getEyeHeight() / 2, 0);
 						t = t.subtract(Minecraft.getMinecraft().thePlayer.getPosition(AccessWrapper.getRenderPartialTicks()));
 						Vec3 tmp = p.addVector(t.xCoord, t.yCoord, t.zCoord).normalize();
@@ -65,29 +71,61 @@ public class TacticalHUDRenderEvent
 
 						GL11.glPushMatrix();
 						{
+							GL11.glDisable(GL11.GL_ALPHA_TEST);
+							GL11.glEnable(GL_DEPTH_TEST);
 							GL11.glDepthFunc(GL11.GL_ALWAYS);
-							GL11.glTranslated(p.xCoord, p.yCoord, p.zCoord);
-							GL11.glTranslated(-res.xCoord, -res.yCoord, -res.zCoord);
-							GL11.glRotatef(-Minecraft.getMinecraft().thePlayer.rotationYaw - 180, 0, 1, 0);
-							GL11.glRotatef(-Minecraft.getMinecraft().thePlayer.rotationPitch, 1, 0, 0);
 							RenderUtil.glBlendClear();
 							GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
 							RenderUtil.glDisableLight();
 							RenderUtil.glDisableLightMapping();
+							GL11.glTranslated(p.xCoord, p.yCoord, p.zCoord);
+							GL11.glTranslated(-res.xCoord, -res.yCoord, -res.zCoord);
+							GL11.glRotatef(-Minecraft.getMinecraft().thePlayer.rotationYaw - 180, 0, 1, 0);
+							GL11.glRotatef(-Minecraft.getMinecraft().thePlayer.rotationPitch, 1, 0, 0);
 
-							Tessellator tessellator = Tessellator.instance;
-							tessellator.startDrawing(2);
-							tessellator.setColorRGBA(0, 240, 255, 255);
-							float tScale = 0.05F;
-							tessellator.addVertex(-tScale, -tScale, 0.0);
-							tessellator.addVertex(+tScale, -tScale, 0.0);
-							tessellator.addVertex(+tScale, +tScale, 0.0);
-							tessellator.addVertex(-tScale, +tScale, 0.0);
-							tessellator.draw();
+							GL11.glPushMatrix();
+							{
+								GL11.glRotatef(Minecraft.getMinecraft().thePlayer.rotationYaw - 180, 0, 1, 0);
+								float indicatorScale = 0.05F;
+								RenderUtil.glBlendClear();
+								GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
+								GL11.glScalef(indicatorScale, indicatorScale, indicatorScale);
+								GL11.glRotatef(-Minecraft.getMinecraft().thePlayer.rotationYaw, 0, 1, 0);
+
+								if (livingProperties.doesEntityContainEmbryo())
+								{
+									RenderUtil.glColorHexRGBA(0xFFFF0000);
+									RenderUtil.drawResourceCentered(AliensVsPredator.resources().INFECTION_INDICATOR, 0, -1, 2, 2, 255, 0, 0, 255);
+								}
+
+								int color = livingProperties.doesEntityContainEmbryo() || livingProperties.getEntityLivingBase() instanceof IMob ? 0xFFFF0000 : 0xFF00AAFF;
+								int textMultiplier = 10;
+								int textX = 15;
+								int textY = -28 + textMultiplier;
+								float textScale = 0.0625F;
+								GL11.glRotatef(180F, 0F, 1F, 0F);
+								GL11.glScalef(textScale, -textScale, textScale);
+
+								RenderUtil.drawString(livingProperties.getEntityLivingBase().getCommandSenderName(), textX, textY += textMultiplier, color, false);
+								RenderUtil.drawString(((int) livingProperties.getEntityLivingBase().getDistanceToEntity(mc.thePlayer)) + " meters", textX, textY += textMultiplier, color, false);
+								if (livingProperties.doesEntityContainEmbryo())
+								{
+									RenderUtil.drawString("Analysis: 1 Foreign Organism(s) Detected", textX, textY += textMultiplier, 0xFFFF0000, false);
+									RenderUtil.drawString(lifeTimeSeconds / 60 + "." + lifeTimeSeconds % 60 + " Minute(s) Estimated Life Time", textX, textY += textMultiplier, 0xFFFF0000, false);
+								}
+								else
+								{
+									RenderUtil.drawCenteredRectWithOutline(0, 0, 16, 16, 1, 0x00000000, color);
+								}
+							}
+							GL11.glPopMatrix();
 
 							RenderUtil.glEnableLightMapping();
 							RenderUtil.glEnableLight();
+							GL11.glEnable(GL11.GL_DEPTH_TEST);
 							GL11.glDepthFunc(GL11.GL_LEQUAL);
+							GL11.glEnable(GL11.GL_ALPHA_TEST);
+							GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
 						}
 						GL11.glPopMatrix();
 					}

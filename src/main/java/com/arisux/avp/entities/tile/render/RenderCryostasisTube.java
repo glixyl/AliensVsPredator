@@ -1,17 +1,18 @@
 package com.arisux.avp.entities.tile.render;
 
-import static org.lwjgl.opengl.GL11.*;
+import com.arisux.airi.lib.RenderUtil;
+import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.entities.mob.EntityChestburster;
+import com.arisux.avp.entities.mob.EntityFacehugger;
+import com.arisux.avp.entities.mob.EntityOvamorph;
+import com.arisux.avp.entities.tile.TileEntityCryostasisTube;
+import com.arisux.avp.entities.tile.model.ModelCryostasisTtube;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
-
 import org.lwjgl.opengl.GL12;
 
-import com.arisux.airi.lib.RenderUtil;
-import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.entities.mob.*;
-import com.arisux.avp.entities.tile.TileEntityCryostasisTube;
-import com.arisux.avp.entities.tile.model.ModelCryostasisTtube;
+import static org.lwjgl.opengl.GL11.*;
 
 public class RenderCryostasisTube extends TileEntitySpecialRenderer
 {
@@ -45,7 +46,6 @@ public class RenderCryostasisTube extends TileEntitySpecialRenderer
 						RenderUtil.glDisableLight();
 					}
 
-					
 					if (tile.stasisEntity instanceof EntityChestburster || tile.stasisEntity instanceof EntityFacehugger)
 					{
 						glTranslatef(0F, -0.5F, 0F);
