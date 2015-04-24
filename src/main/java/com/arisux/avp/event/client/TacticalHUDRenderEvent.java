@@ -35,10 +35,15 @@ public class TacticalHUDRenderEvent
 {
 	private Minecraft mc = Minecraft.getMinecraft();
 	private ArrayList<EntityPlayer> playersInHUD = new ArrayList<EntityPlayer>();
-	private ExtendedEntityPlayer clientPlayerProperties = getProperties();
+	private ExtendedEntityPlayer clientPlayerProperties;
 	private GuiCustomButton buttonMarineHelmConfig = new GuiCustomButton(0, 0, 0, 50, 20, "", null);
 	private boolean gammaRestored = true;
 	private int viewportThreshold = 20;
+
+	public TacticalHUDRenderEvent()
+	{
+		this.clientPlayerProperties = getProperties();
+	}
 
 	@SubscribeEvent
 	public void renderWorldLastEvent(RenderWorldLastEvent event)
@@ -53,81 +58,84 @@ public class TacticalHUDRenderEvent
 				int analysisIconSize = 100;
 
 				GL11.glPushMatrix();
-				GL11.glTranslated(p.xCoord, p.yCoord, p.zCoord);
-				GL11.glScalef(scale, scale, scale);
-
-				for (Entity entity : entities)
 				{
-					if (WorldUtil.Entities.canEntityBeSeenBy(entity, Minecraft.getMinecraft().thePlayer) && entity instanceof EntityLivingBase)
+					GL11.glTranslated(p.xCoord, p.yCoord, p.zCoord);
+					GL11.glScalef(scale, scale, scale);
+
+					for (Entity entity : entities)
 					{
-						ExtendedEntityLivingBase livingProperties = ExtendedEntityLivingBase.get((EntityLivingBase) entity);
-						int lifeTimeTicks = livingProperties.getMaxEmbryoAge() - livingProperties.getEmbryoAge();
-						int lifeTimeSeconds = lifeTimeTicks / 20;
-
-						Vec3 t = Vec3.createVectorHelper(entity.posX, entity.posY, entity.posZ).addVector(0, entity.getEyeHeight() / 2, 0);
-						t = t.subtract(Minecraft.getMinecraft().thePlayer.getPosition(AccessWrapper.getRenderPartialTicks()));
-						Vec3 tmp = p.addVector(t.xCoord, t.yCoord, t.zCoord).normalize();
-						Vec3 res = p.addVector(tmp.xCoord, tmp.yCoord, tmp.zCoord);
-
-						GL11.glPushMatrix();
+						if ((WorldUtil.Entities.canEntityBeSeenBy(entity, Minecraft.getMinecraft().thePlayer) || !clientPlayerProperties.isEntityCullingEnabled()) && entity instanceof EntityLivingBase)
 						{
-							GL11.glDisable(GL11.GL_ALPHA_TEST);
-							GL11.glEnable(GL_DEPTH_TEST);
-							GL11.glDepthFunc(GL11.GL_ALWAYS);
-							RenderUtil.glBlendClear();
-							GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
-							RenderUtil.glDisableLight();
-							RenderUtil.glDisableLightMapping();
-							GL11.glTranslated(p.xCoord, p.yCoord, p.zCoord);
-							GL11.glTranslated(-res.xCoord, -res.yCoord, -res.zCoord);
-							GL11.glRotatef(-Minecraft.getMinecraft().thePlayer.rotationYaw - 180, 0, 1, 0);
-							GL11.glRotatef(-Minecraft.getMinecraft().thePlayer.rotationPitch, 1, 0, 0);
+							ExtendedEntityLivingBase livingProperties = ExtendedEntityLivingBase.get((EntityLivingBase) entity);
+							int lifeTimeTicks = livingProperties.getMaxEmbryoAge() - livingProperties.getEmbryoAge();
+							int lifeTimeSeconds = lifeTimeTicks / 20;
+
+							Vec3 t = Vec3.createVectorHelper(entity.posX, entity.posY, entity.posZ).addVector(0, entity.getEyeHeight() / 2, 0);
+							t = t.subtract(Minecraft.getMinecraft().thePlayer.getPosition(AccessWrapper.getRenderPartialTicks()));
+							Vec3 tmp = p.addVector(t.xCoord, t.yCoord, t.zCoord).normalize();
+							Vec3 res = p.addVector(tmp.xCoord, tmp.yCoord, tmp.zCoord);
 
 							GL11.glPushMatrix();
 							{
-								GL11.glRotatef(Minecraft.getMinecraft().thePlayer.rotationYaw - 180, 0, 1, 0);
-								float indicatorScale = 0.05F;
+								GL11.glDisable(GL11.GL_ALPHA_TEST);
+								GL11.glEnable(GL_DEPTH_TEST);
+								GL11.glDepthFunc(GL11.GL_ALWAYS);
 								RenderUtil.glBlendClear();
 								GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
-								GL11.glScalef(indicatorScale, indicatorScale, indicatorScale);
-								GL11.glRotatef(-Minecraft.getMinecraft().thePlayer.rotationYaw, 0, 1, 0);
+								RenderUtil.glDisableLight();
+								RenderUtil.glDisableLightMapping();
+								GL11.glTranslated(p.xCoord, p.yCoord, p.zCoord);
+								GL11.glTranslated(-res.xCoord, -res.yCoord, -res.zCoord);
+								GL11.glRotatef(-Minecraft.getMinecraft().thePlayer.rotationYaw - 180, 0, 1, 0);
+								GL11.glRotatef(-Minecraft.getMinecraft().thePlayer.rotationPitch, 1, 0, 0);
 
-								if (livingProperties.doesEntityContainEmbryo())
+								GL11.glPushMatrix();
 								{
-									RenderUtil.glColorHexRGBA(0xFFFF0000);
-									RenderUtil.drawResourceCentered(AliensVsPredator.resources().INFECTION_INDICATOR, 0, -1, 2, 2, 255, 0, 0, 255);
-								}
+									GL11.glRotatef(Minecraft.getMinecraft().thePlayer.rotationYaw - 180, 0, 1, 0);
+									float indicatorScale = 0.05F;
+									RenderUtil.glBlendClear();
+									GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
+									GL11.glScalef(indicatorScale, indicatorScale, indicatorScale);
+									GL11.glRotatef(-Minecraft.getMinecraft().thePlayer.rotationYaw, 0, 1, 0);
 
-								int color = livingProperties.doesEntityContainEmbryo() || livingProperties.getEntityLivingBase() instanceof IMob ? 0xFFFF0000 : 0xFF00AAFF;
-								int textMultiplier = 10;
-								int textX = 15;
-								int textY = -28 + textMultiplier;
-								float textScale = 0.0625F;
-								GL11.glRotatef(180F, 0F, 1F, 0F);
-								GL11.glScalef(textScale, -textScale, textScale);
+									if (livingProperties.doesEntityContainEmbryo())
+									{
+										RenderUtil.glColorHexRGBA(0xFFFF0000);
+										RenderUtil.drawResourceCentered(AliensVsPredator.resources().INFECTION_INDICATOR, 0, -1, 2, 2, 255, 0, 0, 255);
+									}
 
-								RenderUtil.drawString(livingProperties.getEntityLivingBase().getCommandSenderName(), textX, textY += textMultiplier, color, false);
-								RenderUtil.drawString(((int) livingProperties.getEntityLivingBase().getDistanceToEntity(mc.thePlayer)) + " meters", textX, textY += textMultiplier, color, false);
-								if (livingProperties.doesEntityContainEmbryo())
-								{
-									RenderUtil.drawString("Analysis: 1 Foreign Organism(s) Detected", textX, textY += textMultiplier, 0xFFFF0000, false);
-									RenderUtil.drawString(lifeTimeSeconds / 60 + "." + lifeTimeSeconds % 60 + " Minute(s) Estimated Life Time", textX, textY += textMultiplier, 0xFFFF0000, false);
+									int color = livingProperties.doesEntityContainEmbryo() || livingProperties.getEntityLivingBase() instanceof IMob ? 0xFFFF0000 : 0xFF00AAFF;
+									int textMultiplier = 10;
+									int textX = 15;
+									int textY = -28 + textMultiplier;
+									float textScale = 0.0625F;
+									GL11.glRotatef(180F, 0F, 1F, 0F);
+									GL11.glScalef(textScale, -textScale, textScale);
+
+									RenderUtil.drawString(livingProperties.getEntityLivingBase().getCommandSenderName(), textX, textY += textMultiplier, color, false);
+									RenderUtil.drawString(((int) livingProperties.getEntityLivingBase().getDistanceToEntity(mc.thePlayer)) + " meters", textX, textY += textMultiplier, color, false);
+
+									if (livingProperties.doesEntityContainEmbryo())
+									{
+										RenderUtil.drawString("Analysis: 1 Foreign Organism(s) Detected", textX, textY += textMultiplier, 0xFFFF0000, false);
+										RenderUtil.drawString(lifeTimeSeconds / 60 + "." + lifeTimeSeconds % 60 + " Minute(s) Estimated Life Time", textX, textY += textMultiplier, 0xFFFF0000, false);
+									}
+									else
+									{
+										RenderUtil.drawCenteredRectWithOutline(0, 0, 16, 16, 1, 0x00000000, color);
+									}
 								}
-								else
-								{
-									RenderUtil.drawCenteredRectWithOutline(0, 0, 16, 16, 1, 0x00000000, color);
-								}
+								GL11.glPopMatrix();
+
+								RenderUtil.glEnableLightMapping();
+								RenderUtil.glEnableLight();
+								GL11.glEnable(GL11.GL_DEPTH_TEST);
+								GL11.glDepthFunc(GL11.GL_LEQUAL);
+								GL11.glEnable(GL11.GL_ALPHA_TEST);
+								GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
 							}
 							GL11.glPopMatrix();
-
-							RenderUtil.glEnableLightMapping();
-							RenderUtil.glEnableLight();
-							GL11.glEnable(GL11.GL_DEPTH_TEST);
-							GL11.glDepthFunc(GL11.GL_LEQUAL);
-							GL11.glEnable(GL11.GL_ALPHA_TEST);
-							GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
 						}
-						GL11.glPopMatrix();
 					}
 				}
 				GL11.glPopMatrix();
@@ -215,7 +223,7 @@ public class TacticalHUDRenderEvent
 
 	public ExtendedEntityPlayer getProperties()
 	{
-		return this.mc != null ? this.mc.thePlayer != null ? this.clientPlayerProperties = (ExtendedEntityPlayer) mc.thePlayer.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER) : null : null;
+		return this.mc != null ? this.mc.thePlayer != null ? this.clientPlayerProperties = ExtendedEntityPlayer.get(Minecraft.getMinecraft().thePlayer) : null : null;
 	}
 
 	public void changeChannel(String channel)
@@ -225,14 +233,17 @@ public class TacticalHUDRenderEvent
 
 	public void drawInfoBar()
 	{
-		float scale = Minecraft.getMinecraft().gameSettings.guiScale / 2;
+		ScaledResolution res = RenderUtil.scaledDisplayResolution();
+		int guiScale = Minecraft.getMinecraft().gameSettings.guiScale;
+		float scale = guiScale == 0 ? res.getScaleFactor() * 0.25F : (guiScale == 1 ? res.getScaleFactor() * 1F : res.getScaleFactor() * 0.5F);
+		int batteryPercent = (int) (Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 100 + 10) / 10 * 10;
 		int barPadding = 90;
 		String fpsString = mc.debug.substring(0, mc.debug.indexOf(" fps")) + " FPS";
 		String barString = new SimpleDateFormat("[MM/dd/yyyy] [HH:mm:ss]").format(new Date()).toString() + " [" + fpsString + "]";
-		GL11.glScalef(scale, scale, scale);
 
 		GL11.glPushMatrix();
 		{
+			GL11.glScalef(scale, scale, scale);
 			GL11.glEnable(GL_BLEND);
 			GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
 			RenderUtil.drawString(barString, barPadding, 45, 0xFF00AAFF, false);
@@ -240,19 +251,19 @@ public class TacticalHUDRenderEvent
 			{
 				float nameScale = 1.5F;
 				GL11.glScalef(nameScale, nameScale, nameScale);
-				RenderUtil.drawString(mc.thePlayer.getCommandSenderName(), (int) ((barPadding) / nameScale), (int) (30 / nameScale), 0xFF00AAFF, false);
+				RenderUtil.drawString("[" + batteryPercent + "%%] " + mc.thePlayer.getCommandSenderName(), (int) ((barPadding) / nameScale), (int) (30 / nameScale), 0xFF00AAFF, false);
 			}
 			GL11.glPopMatrix();
 
 			GL11.glPushMatrix();
 			{
-				int batteryPercent = (int) Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 100 + 10;
+				int hOffset = 5;
 				int btX = 6;
 				int btY = 3;
 				int btWidth = 128;
 				int btHeight = 64;
-				int batteryWidth = btWidth / 2 * batteryPercent / 100;
-				float maxU = batteryPercent * 1F / 100F / 2F;
+				int batteryWidth = btWidth / 2 * (batteryPercent + hOffset) / 100;
+				float maxU = (batteryPercent + hOffset) / 100F / 2F;
 				RenderUtil.bindTexture(AliensVsPredator.resources().BATTERY_INDICATOR);
 				RenderUtil.drawQuad(btX, btY, btWidth, btHeight, 0F, 1F, 0F, 0.5F);
 				RenderUtil.drawQuad(btX, btY, batteryWidth, btHeight, 0F, maxU, 0.5F, 1F);

@@ -8,7 +8,7 @@ import net.minecraft.client.multiplayer.ServerList;
 
 import com.arisux.airi.AIRI;
 import com.arisux.airi.api.window.IWindow;
-import com.arisux.airi.api.window.Window;
+import com.arisux.airi.api.window.gui.windows.Window;
 
 import cpw.mods.fml.client.FMLClientHandler;
 

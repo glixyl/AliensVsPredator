@@ -1,5 +1,6 @@
 package com.arisux.avp.event.client;
 
+import com.arisux.airi.api.window.gui.DesktopWindowManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiMainMenu;
 
@@ -25,7 +26,7 @@ public class UserInterfaceEvents
 		if (AliensVsPredator.instance().isDevCopy())
 		{
 			buttonFeedback.xPosition = RenderUtil.scaledDisplayResolution().getScaledWidth() - buttonFeedback.width;
-			buttonFeedback.yPosition = mc.currentScreen instanceof GuiMainMenu ? 0 : RenderUtil.scaledDisplayResolution().getScaledHeight() - buttonFeedback.height;
+			buttonFeedback.yPosition = mc.currentScreen instanceof GuiMainMenu || mc.currentScreen instanceof DesktopWindowManager ? 0 : RenderUtil.scaledDisplayResolution().getScaledHeight() - buttonFeedback.height;
 			buttonFeedback.baseColor = 0xAA000000;
 			buttonFeedback.width = 80;
 			buttonFeedback.displayString = "New Feedback";
@@ -35,6 +36,7 @@ public class UserInterfaceEvents
 				@Override
 				public void actionPerformed(GuiCustomButton button)
 				{
+					window = new WindowSubmitFeedback();
 					AIRI.windowApi().addWindow(window);
 					AIRI.windowApi().showWindowManager();
 					window.setWindowCentered();

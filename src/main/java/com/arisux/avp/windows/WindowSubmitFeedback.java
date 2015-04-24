@@ -1,19 +1,20 @@
 package com.arisux.avp.windows;
 
-import java.net.URLEncoder;
-
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.resources.I18n;
-
 import com.arisux.airi.AIRI;
 import com.arisux.airi.api.window.IWindow;
-import com.arisux.airi.api.window.Window;
-import com.arisux.airi.lib.*;
+import com.arisux.airi.api.window.gui.windows.Window;
+import com.arisux.airi.lib.AccessWrapper;
 import com.arisux.airi.lib.GuiElements.GuiCustomButton;
 import com.arisux.airi.lib.GuiElements.GuiCustomTextbox;
+import com.arisux.airi.lib.ModUtil;
+import com.arisux.airi.lib.NetworkUtil;
 import com.arisux.airi.lib.WorldUtil.Entities.Players;
 import com.arisux.airi.lib.interfaces.IActionPerformed;
 import com.arisux.avp.AliensVsPredator;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.resources.I18n;
+
+import java.net.URLEncoder;
 
 public class WindowSubmitFeedback extends Window implements IWindow
 {
@@ -49,37 +50,6 @@ public class WindowSubmitFeedback extends Window implements IWindow
 		buttonSubmit.yPosition = yPos + this.height - buttonSubmit.height;
 		buttonSubmit.width = this.width;
 		buttonSubmit.baseColor = this.manager.getWindowAPI().getCurrentTheme().getButtonColor();
-		buttonSubmit.setAction(new IActionPerformed()
-		{
-			@Override
-			public void actionPerformed(GuiCustomButton button)
-			{
-				try
-				{
-					if (isValidatedBetaTeseterUUID(AccessWrapper.getSession().getPlayerID()) || ModUtil.isDevEnvironment())
-					{
-						if (!textbox.getText().equals("") && textbox.getText().length() > 12)
-						{
-							String request = String.format(AliensVsPredator.settings().getUrlFeedbackSubmit(), AccessWrapper.getSession().getUsername(), AccessWrapper.getSession().getPlayerID(), URLEncoder.encode(textbox.getText(), "UTF-8"));
-							feedback = NetworkUtil.getURLContents(request);
-							AIRI.logger.info("Submitted feedback: %s", feedback);
-						}
-
-						validated = true;
-					}
-					else
-					{
-						feedback = "INVALID";
-						validated = false;
-					}
-					submitted = true;
-				}
-				catch (Exception e)
-				{
-					AIRI.logger.info(e.toString());
-				}
-			}
-		});
 
 		textbox.xPosition = xPos + 6;
 		textbox.yPosition = yPos + 32;
@@ -91,6 +61,37 @@ public class WindowSubmitFeedback extends Window implements IWindow
 		if (!submitted)
 		{
 			buttonSubmit.drawButton();
+			buttonSubmit.setAction(new IActionPerformed()
+			{
+				@Override
+				public void actionPerformed(GuiCustomButton button)
+				{
+					try
+					{
+						if (isValidatedBetaTeseterUUID(AccessWrapper.getSession().getPlayerID()) || ModUtil.isDevEnvironment())
+						{
+							if (!textbox.getText().equals("") && textbox.getText().length() > 12)
+							{
+								String request = String.format(AliensVsPredator.settings().getUrlFeedbackSubmit(), AccessWrapper.getSession().getUsername(), AccessWrapper.getSession().getPlayerID(), URLEncoder.encode(textbox.getText(), "UTF-8"));
+								feedback = NetworkUtil.getURLContents(request);
+								AIRI.logger.info("Submitted feedback: %s", feedback);
+							}
+
+							validated = true;
+						}
+						else
+						{
+							feedback = "INVALID";
+							validated = false;
+						}
+						submitted = true;
+					}
+					catch (Exception e)
+					{
+						AIRI.logger.info(e.toString());
+					}
+				}
+			});
 
 			textbox.drawTextBox();
 			this.setTitle(I18n.format("gui.avp.beta.feedback.charsleft.title", charsLeft), false);
@@ -98,6 +99,8 @@ public class WindowSubmitFeedback extends Window implements IWindow
 		}
 		else
 		{
+			buttonSubmit.setAction(null);
+
 			if (feedback != null)
 			{
 				if (validated)
