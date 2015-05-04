@@ -75,7 +75,7 @@ public class EntityOvamorph extends EntitySpeciesAlien implements IMob
 			if (!this.worldObj.isRemote && this.hatchingTime-- <= 1 || this.hasHatched)
 			{
 				EntityFacehugger facehugger = new EntityFacehugger(this.worldObj);
-				facehugger.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
+				facehugger.setLocationAndAngles(posX, posY, posZ, 0F, 0F);
 				worldObj.spawnEntityInWorld(facehugger);
 
 				this.setDead();

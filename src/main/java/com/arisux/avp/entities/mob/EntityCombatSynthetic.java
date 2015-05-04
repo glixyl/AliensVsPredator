@@ -28,16 +28,6 @@ public class EntityCombatSynthetic extends EntityCreature implements IMob, IRang
 		this.dataWatcher.addObject(18, new Integer(15));
 		this.dataWatcher.addObject(17, "");
 		this.dataWatcher.addObject(16, Byte.valueOf((byte) 0));
-		this.tasks.addTask(1, new EntityAISwimming(this));
-		this.tasks.addTask(2, new EntityAIWander(this, 0.800000011920929D));
-		this.tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-		this.tasks.addTask(3, new EntityAILookIdle(this));
-		this.tasks.addTask(4, this.aiArrowAttack);
-		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntitySpeciesAlien.class, 0, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityMob.class, 0, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityYautja.class, 0, true));
-		this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
 	}
 
 	@Override

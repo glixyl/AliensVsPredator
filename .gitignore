@@ -1,12 +1,6 @@
 *
-!src
-!src/main
-!src/main/java
-!src/main/resources
+!src/
 !.gitignore
 !gradlew*
 !gradle/
-!LICENSE.txt
-!README.md
-!COPYING.lesser
 !build.gradle

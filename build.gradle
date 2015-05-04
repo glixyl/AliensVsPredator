@@ -29,7 +29,7 @@ tasks.withType(JavaCompile) {
 }
 
 minecraft {
-    version = "1.7.10-10.13.3.1358-1.7.10"
+    version = "1.7.10-10.13.3.1395-1710ls"
     runDir = "eclipse"
 }
 

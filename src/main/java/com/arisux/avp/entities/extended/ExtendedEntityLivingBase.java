@@ -29,9 +29,9 @@ public class ExtendedEntityLivingBase implements IExtendedEntityProperties
 		this.entityLiving = entityLiving;
 	}
 
-	public static final ExtendedEntityLivingBase get(EntityLivingBase EntityLivingBase)
+	public static final ExtendedEntityLivingBase get(EntityLivingBase livingBase)
 	{
-		return (ExtendedEntityLivingBase) EntityLivingBase.getExtendedProperties(IDENTIFIER);
+		return (ExtendedEntityLivingBase) livingBase.getExtendedProperties(IDENTIFIER);
 	}
 
 	@Override

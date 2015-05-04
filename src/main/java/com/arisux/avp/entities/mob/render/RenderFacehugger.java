@@ -63,9 +63,9 @@ public class RenderFacehugger extends RenderLiving
 			if (entityFacehugger.ridingEntity instanceof EntityVillager)
 			{
 				GL11.glRotatef(90.0F, 0.0F, 0.0F, 1.0F);
-				GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
+				GL11.glRotatef(110.0F, 0.0F, 1.0F, 0.0F);
 				GL11.glRotatef(90.0F, 0.0F, 0.0F, 1.0F);
-				GL11.glTranslatef(0F, -0.05F, -0.45F);
+				GL11.glTranslatef(0F, -0.1F, 0.15F);
 			}
 
 			if (entityFacehugger.ridingEntity instanceof EntityCow || entityFacehugger.ridingEntity instanceof EntityPig)

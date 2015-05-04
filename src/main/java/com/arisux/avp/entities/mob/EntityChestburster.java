@@ -33,20 +33,6 @@ public class EntityChestburster extends EntitySpeciesAlien implements IMob
 
 		this.setSize(1.0F, 0.2F);
 		this.experienceValue = 16;
-		this.tasks.addTask(0, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.5699999928474426D, false));
-		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, EntityMarine.class, 0.5699999928474426D, true));
-		this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityAnimal.class, 0.5699999928474426D, true));
-		this.tasks.addTask(3, new EntityAIMoveTowardsRestriction(this, 0.5699999928474426D));
-		this.tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-		this.targetTasks.addTask(6, new EntityAIHurtByTarget(this, false));
-		this.tasks.addTask(7, new EntityAILeapAtTarget(this, 0.3F));
-		this.targetTasks.addTask(8, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
-		this.targetTasks.addTask(9, new EntityAINearestAttackableTarget(this, EntityAnimal.class, 0, true));
-		this.targetTasks.addTask(10, new EntityAINearestAttackableTarget(this, EntityMarine.class, 0, true));
-		this.targetTasks.addTask(11, new EntityAINearestAttackableTarget(this, EntityYautja.class, 0, true));
-		this.tasks.addTask(12, new EntityAIWander(this, 0.4000000059604645D));
-		this.tasks.addTask(13, new EntityAIAttackOnCollide(this, EntityYautja.class, 0.5699999928474426D, true));
-		this.tasks.addTask(14, new EntityAISwimming(this));
 	}
 
 	@Override

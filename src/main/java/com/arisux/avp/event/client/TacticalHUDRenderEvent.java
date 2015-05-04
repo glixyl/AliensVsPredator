@@ -62,79 +62,79 @@ public class TacticalHUDRenderEvent
 					GL11.glTranslated(p.xCoord, p.yCoord, p.zCoord);
 					GL11.glScalef(scale, scale, scale);
 
-					for (Entity entity : entities)
+					if (Minecraft.getMinecraft().thePlayer != null && clientPlayerProperties != null)
 					{
-						if ((WorldUtil.Entities.canEntityBeSeenBy(entity, Minecraft.getMinecraft().thePlayer) || !clientPlayerProperties.isEntityCullingEnabled()) && entity instanceof EntityLivingBase)
+						for (Entity entity : entities)
 						{
-							ExtendedEntityLivingBase livingProperties = ExtendedEntityLivingBase.get((EntityLivingBase) entity);
-							int lifeTimeTicks = livingProperties.getMaxEmbryoAge() - livingProperties.getEmbryoAge();
-							int lifeTimeSeconds = lifeTimeTicks / 20;
-
-							Vec3 t = Vec3.createVectorHelper(entity.posX, entity.posY, entity.posZ).addVector(0, entity.getEyeHeight() / 2, 0);
-							t = t.subtract(Minecraft.getMinecraft().thePlayer.getPosition(AccessWrapper.getRenderPartialTicks()));
-							Vec3 tmp = p.addVector(t.xCoord, t.yCoord, t.zCoord).normalize();
-							Vec3 res = p.addVector(tmp.xCoord, tmp.yCoord, tmp.zCoord);
-
-							GL11.glPushMatrix();
+							if (entity != null && (WorldUtil.Entities.canEntityBeSeenBy(entity, Minecraft.getMinecraft().thePlayer) || !clientPlayerProperties.isEntityCullingEnabled()) && entity instanceof EntityLivingBase)
 							{
-								GL11.glDisable(GL11.GL_ALPHA_TEST);
-								GL11.glEnable(GL_DEPTH_TEST);
-								GL11.glDepthFunc(GL11.GL_ALWAYS);
-								RenderUtil.glBlendClear();
-								GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
-								RenderUtil.glDisableLight();
-								RenderUtil.glDisableLightMapping();
-								GL11.glTranslated(p.xCoord, p.yCoord, p.zCoord);
-								GL11.glTranslated(-res.xCoord, -res.yCoord, -res.zCoord);
-								GL11.glRotatef(-Minecraft.getMinecraft().thePlayer.rotationYaw - 180, 0, 1, 0);
-								GL11.glRotatef(-Minecraft.getMinecraft().thePlayer.rotationPitch, 1, 0, 0);
+								ExtendedEntityLivingBase livingProperties = ExtendedEntityLivingBase.get((EntityLivingBase) entity);
+								int lifeTimeTicks = livingProperties.getMaxEmbryoAge() - livingProperties.getEmbryoAge();
+								int lifeTimeSeconds = lifeTimeTicks / 20;
+
+								Vec3 t = Vec3.createVectorHelper(entity.posX, entity.posY, entity.posZ).addVector(0, entity.getEyeHeight() / 2, 0);
+								t = t.subtract(Minecraft.getMinecraft().thePlayer.getPosition(AccessWrapper.getRenderPartialTicks()));
+								Vec3 tmp = p.addVector(t.xCoord, t.yCoord, t.zCoord).normalize();
+								Vec3 res = p.addVector(tmp.xCoord, tmp.yCoord, tmp.zCoord);
 
 								GL11.glPushMatrix();
 								{
-									GL11.glRotatef(Minecraft.getMinecraft().thePlayer.rotationYaw - 180, 0, 1, 0);
-									float indicatorScale = 0.05F;
+									GL11.glDisable(GL11.GL_ALPHA_TEST);
+									GL11.glEnable(GL_DEPTH_TEST);
+									GL11.glDepthFunc(GL11.GL_ALWAYS);
 									RenderUtil.glBlendClear();
 									GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
-									GL11.glScalef(indicatorScale, indicatorScale, indicatorScale);
-									GL11.glRotatef(-Minecraft.getMinecraft().thePlayer.rotationYaw, 0, 1, 0);
+									RenderUtil.glDisableLight();
+									RenderUtil.glDisableLightMapping();
+									GL11.glTranslated(p.xCoord, p.yCoord, p.zCoord);
+									GL11.glTranslated(-res.xCoord, -res.yCoord, -res.zCoord);
+									GL11.glRotatef(-Minecraft.getMinecraft().thePlayer.rotationYaw - 180, 0, 1, 0);
+									GL11.glRotatef(-Minecraft.getMinecraft().thePlayer.rotationPitch, 1, 0, 0);
 
-									if (livingProperties.doesEntityContainEmbryo())
+									GL11.glPushMatrix();
 									{
-										RenderUtil.glColorHexRGBA(0xFFFF0000);
-										RenderUtil.drawResourceCentered(AliensVsPredator.resources().INFECTION_INDICATOR, 0, -1, 2, 2, 255, 0, 0, 255);
-									}
+										GL11.glRotatef(Minecraft.getMinecraft().thePlayer.rotationYaw - 180, 0, 1, 0);
+										float indicatorScale = 0.05F;
+										RenderUtil.glBlendClear();
+										GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
+										GL11.glScalef(indicatorScale, indicatorScale, indicatorScale);
+										GL11.glRotatef(-Minecraft.getMinecraft().thePlayer.rotationYaw, 0, 1, 0);
 
-									int color = livingProperties.doesEntityContainEmbryo() || livingProperties.getEntityLivingBase() instanceof IMob ? 0xFFFF0000 : 0xFF00AAFF;
-									int textMultiplier = 10;
-									int textX = 15;
-									int textY = -28 + textMultiplier;
-									float textScale = 0.0625F;
-									GL11.glRotatef(180F, 0F, 1F, 0F);
-									GL11.glScalef(textScale, -textScale, textScale);
+										if (livingProperties.doesEntityContainEmbryo()) {
+											RenderUtil.glColorHexRGBA(0xFFFF0000);
+											RenderUtil.drawResourceCentered(AliensVsPredator.resources().INFECTION_INDICATOR, 0, -1, 2, 2, 255, 0, 0, 255);
+										}
 
-									RenderUtil.drawString(livingProperties.getEntityLivingBase().getCommandSenderName(), textX, textY += textMultiplier, color, false);
-									RenderUtil.drawString(((int) livingProperties.getEntityLivingBase().getDistanceToEntity(mc.thePlayer)) + " meters", textX, textY += textMultiplier, color, false);
+										int color = livingProperties.doesEntityContainEmbryo() || livingProperties.getEntityLivingBase() instanceof IMob ? 0xFFFF0000 : 0xFF00AAFF;
+										int textMultiplier = 10;
+										int textX = 15;
+										int textY = -28 + textMultiplier;
+										float textScale = 0.0625F;
+										GL11.glRotatef(180F, 0F, 1F, 0F);
+										GL11.glScalef(textScale, -textScale, textScale);
 
-									if (livingProperties.doesEntityContainEmbryo())
-									{
-										RenderUtil.drawString("Analysis: 1 Foreign Organism(s) Detected", textX, textY += textMultiplier, 0xFFFF0000, false);
-										RenderUtil.drawString(lifeTimeSeconds / 60 + "." + lifeTimeSeconds % 60 + " Minute(s) Estimated Life Time", textX, textY += textMultiplier, 0xFFFF0000, false);
+										RenderUtil.drawString(livingProperties.getEntityLivingBase().getCommandSenderName(), textX, textY += textMultiplier, color, false);
+										RenderUtil.drawString(((int) livingProperties.getEntityLivingBase().getDistanceToEntity(mc.thePlayer)) + " meters", textX, textY += textMultiplier, color, false);
+
+										if (livingProperties.doesEntityContainEmbryo())
+										{
+											RenderUtil.drawString("Analysis: 1 Foreign Organism(s) Detected", textX, textY += textMultiplier, 0xFFFF0000, false);
+											RenderUtil.drawString(lifeTimeSeconds / 60 + "." + lifeTimeSeconds % 60 + " Minute(s) Estimated Life Time", textX, textY += textMultiplier, 0xFFFF0000, false);
+										} else {
+											RenderUtil.drawCenteredRectWithOutline(0, 0, 16, 16, 1, 0x00000000, color);
+										}
 									}
-									else
-									{
-										RenderUtil.drawCenteredRectWithOutline(0, 0, 16, 16, 1, 0x00000000, color);
-									}
+									GL11.glPopMatrix();
+
+									RenderUtil.glEnableLightMapping();
+									RenderUtil.glEnableLight();
+									GL11.glEnable(GL11.GL_DEPTH_TEST);
+									GL11.glDepthFunc(GL11.GL_LEQUAL);
+									GL11.glEnable(GL11.GL_ALPHA_TEST);
+									GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
 								}
 								GL11.glPopMatrix();
-
-								RenderUtil.glEnableLightMapping();
-								RenderUtil.glEnableLight();
-								GL11.glEnable(GL11.GL_DEPTH_TEST);
-								GL11.glDepthFunc(GL11.GL_LEQUAL);
-								GL11.glEnable(GL11.GL_ALPHA_TEST);
-								GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
 							}
-							GL11.glPopMatrix();
 						}
 					}
 				}

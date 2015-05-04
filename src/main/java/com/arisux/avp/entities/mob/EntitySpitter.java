@@ -19,19 +19,6 @@ public class EntitySpitter extends EntityXenomorph implements IRangedAttackMob
 		super(par1World);
 		this.experienceValue = 275;
 		this.setSize(1.0F, 3.0F);
-		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, new EntityAILeapAtTarget(this, 0.6F));
-		this.tasks.addTask(2, new EntityAIArrowAttack(this, this.getAIMoveSpeed(), 30, 15F));
-		this.tasks.addTask(7, new EntityAIFleeSun(this, 1.0D));
-		this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-		this.tasks.addTask(9, new EntityAILookIdle(this));
-		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
-		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityYautja.class, 0, false));
-		this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityAnimal.class, 0, false));
-		this.targetTasks.addTask(5, new EntityAINearestAttackableTarget(this, EntityMarine.class, 0, false));
-		this.targetTasks.addTask(6, new EntityAINearestAttackableTarget(this, EntityAgeable.class, 0, false));
-
 	}
 
 	@Override

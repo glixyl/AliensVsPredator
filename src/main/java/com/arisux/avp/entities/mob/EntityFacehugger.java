@@ -33,27 +33,6 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 		this.isFertile = true;
 		this.setSize(0.9F, 0.9F);
 		this.experienceValue = 10;
-		this.tasks.addTask(0, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.8999999761581421D, false));
-		this.tasks.addTask(0, new EntityAIAttackOnCollide(this, EntityAnimal.class, 0.8999999761581421D, true));
-		this.tasks.addTask(0, new EntityAIAttackOnCollide(this, EntityCreeper.class, 0.8999999761581421D, true));
-		this.tasks.addTask(0, new EntityAIAttackOnCollide(this, EntityMarine.class, 0.8999999761581421D, true));
-		this.tasks.addTask(3, new EntityAIMoveTowardsRestriction(this, 0.8999999761581421D));
-		this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-		this.tasks.addTask(5, new EntityAILeapAtTarget(this, 0.4F));
-		this.tasks.addTask(6, new EntityAIWander(this, 0.4000000059604645D));
-		this.tasks.addTask(7, new EntityAIAttackOnCollide(this, EntityYautja.class, 0.8999999761581421D, true));
-		this.tasks.addTask(8, new EntityAISwimming(this));
-		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityAnimal.class, 0, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityCreeper.class, 0, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityMarine.class, 0, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityYautja.class, 0, true));
-		this.addTargetType(EntityCreeper.class);
-		this.addTargetType(EntityPlayer.class);
-		this.addTargetType(EntityAnimal.class);
-		this.addTargetType(EntityMarine.class);
-		this.addTargetType(EntityYautja.class);
 	}
 
 	@Override

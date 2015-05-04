@@ -22,21 +22,6 @@ public class EntityPredalien extends EntityXenomorph implements IMob
 		this.ignoreFrustumCheck = true;
 		this.getNavigator().setAvoidsWater(true);
 		this.getNavigator().setBreakDoors(true);
-		this.tasks.addTask(0, new EntityAILeapAtTarget(this, 0.6F));
-		this.tasks.addTask(1, new EntityAISwimming(this));
-		this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
-		this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityMarine.class, 1.0D, true));
-		this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityYautja.class, 1.0D, false));
-		this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityAnimal.class, 1.0D, false));
-		this.tasks.addTask(4, new EntityAIFleeSun(this, 1.0D));
-		this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1.0D));
-		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-		this.tasks.addTask(8, new EntityAILookIdle(this));
-		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
-		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityYautja.class, 0, false));
-		this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityMarine.class, 0, false));
-		this.targetTasks.addTask(5, new EntityAINearestAttackableTarget(this, EntityAnimal.class, 0, false));
 	}
 
 	@Override

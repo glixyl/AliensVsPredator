@@ -1,10 +1,17 @@
 package com.arisux.avp.entities.mob;
 
-import com.arisux.airi.lib.WorldUtil;
-import com.arisux.airi.lib.WorldUtil.Blocks;
 import com.arisux.avp.entities.EntityAcidPool;
-
-import net.minecraft.entity.*;
+import com.arisux.avp.entities.ai.alien.EntityAIClimb;
+import com.arisux.avp.entities.ai.alien.EntityAIQueenIdentificationTask;
+import com.arisux.avp.entities.ai.alien.EntitySelectorXenomorph;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -13,14 +20,21 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 {
 	public int targetQueenId;
 	protected boolean canClimb;
-	protected boolean canBeOwnedByQueen;
+	protected boolean isDependant;
 
 	public EntityXenomorph(World world)
 	{
 		super(world);
-		this.jumpMovementFactor = 0.03F;
+		this.jumpMovementFactor = 0.06F;
 		this.canClimb = true;
-		this.canBeOwnedByQueen = true;
+		this.isDependant = true;
+		this.getNavigator().setCanSwim(true);
+		this.tasks.addTask(0, new EntityAIQueenIdentificationTask(this));
+		this.tasks.addTask(1, new EntityAIClimb(this, 0.03F));
+		this.tasks.addTask(2, new EntityAIWander(this, 0.8D));
+		this.tasks.addTask(3, new EntityAIAttackOnCollide(this, 0.8D, true));
+		this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
+		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, Entity.class, /** targetChance **/0, /** shouldCheckSight **/false, /** nearbyOnly **/false, EntitySelectorXenomorph.instance));
 	}
 
 	@Override
@@ -58,53 +72,23 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 	public void onUpdate()
 	{
 		super.onUpdate();
-		
 		this.fallDistance = 0F;
+	}
 
-		if (this.canClimb)
-		{
-			if (this.isCollidedHorizontally)
-			{
-				this.motionY += 0.2F;
-			}
-		}
+	@Override
+	protected void attackEntity(Entity entity, float damage)
+	{
+		super.attackEntity(entity, damage);
+	}
 
-		if (this.canBeOwnedByQueen && this.worldObj.getWorldTime() % 100 == 0 && rand.nextInt(6) == 0)
-		{
-			Entity entity = this.worldObj.getEntityByID(this.targetQueenId);
-			EntityQueen targetQueen = entity instanceof EntityQueen ? (EntityQueen) this.worldObj.getEntityByID(this.targetQueenId) : null;
+	@Override
+	public boolean attackEntityAsMob(Entity entity)
+	{
+		return super.attackEntityAsMob(entity);
+	}
 
-			if (targetQueen == null || targetQueen != null && targetQueen.isDead)
-			{
-				EntityQueen queen = (EntityQueen) WorldUtil.Entities.getEntityInCoordsRange(this.worldObj, EntityQueen.class, new Blocks.CoordData(this), 64, 64);
-				targetQueen = queen;
-			}
-
-			if (targetQueen == null || targetQueen != null && targetQueen.isDead)
-			{
-				this.targetQueenId = 0;
-				this.setHiveSignature(null);
-			}
-
-			if (targetQueen != null)
-			{
-				this.acquireHiveSignature(targetQueen);
-
-				if (!this.worldObj.isRemote)
-				{
-					if (this.getNavigator().getPath() == null)
-					{
-						this.getNavigator().setPath(this.worldObj.getPathEntityToEntity(this, targetQueen, 128, true, true, true, true), 0.8D);
-					}
-
-					if (targetQueen.getHealth() < targetQueen.getMaxHealth() / 4)
-					{
-						this.setAttackTarget(targetQueen.getLastAttacker());
-					}
-				}
-			}
-		}
-
+	public void attackAI()
+	{
 		if (worldObj.getWorldInfo().getWorldTime() % 70 == 0)
 		{
 			double range = this.getEntityAttribute(SharedMonsterAttributes.followRange).getAttributeValue();
@@ -120,7 +104,6 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 				{
 					this.addVelocity(0, 0.6D, 0);
 				}
-
 			}
 			else if (targetEntity != null && !(targetEntity instanceof EntityAcidPool) && !(targetEntity.getClass().getSuperclass().getSuperclass() == EntitySpeciesAlien.class) && !(targetEntity.getClass().getSuperclass() == EntitySpeciesAlien.class))
 			{
@@ -133,20 +116,8 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 		}
 	}
 
-	public void acquireHiveSignature(EntityQueen targetQueen)
+	public boolean isDependant()
 	{
-		this.targetQueenId = targetQueen.getEntityId();
-
-		if (this.getHiveSignature() == null)
-		{
-			if (this.worldObj.getWorldTime() % 40 == 0)
-			{
-				this.getNavigator().tryMoveToEntityLiving(targetQueen, 1.8D);
-			}
-			if (this.getDistanceToEntity(targetQueen) <= 16)
-			{
-				this.setHiveSignature(targetQueen.getUniqueID());
-			}
-		}
+		return this.isDependant;
 	}
 }
