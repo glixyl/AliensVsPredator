@@ -156,6 +156,7 @@ public class DebugToolsRenderEvent
 							Block block = mc.theWorld.getBlock(coord.posX, coord.posY, coord.posZ);
 							BlockSides side = BlockSides.getSide(mc.objectMouseOver.sideHit);
 							TileEntity tile = coord.getTileEntity(Minecraft.getMinecraft().thePlayer.worldObj);
+							int metadata = Minecraft.getMinecraft().thePlayer.worldObj.getBlockMetadata(coord.posX, coord.posY, coord.posZ);
 
 							Gui.drawRect(0, 0, 1, 1, 0xFFFFFFFF);
 							RenderUtil.drawBlockSide(block, side.getId(), 5, 5, 10, 10);
@@ -169,6 +170,10 @@ public class DebugToolsRenderEvent
 							else
 							{
 								info = block.getLocalizedName() + " from " + ModUtil.getModContainerForId(Blocks.getDomain(block).replace(":", "")).getName();
+							}
+
+							{
+								info = info + " (Meta: " + metadata + ")";
 							}
 
 							if (block.getRenderType() != 0)

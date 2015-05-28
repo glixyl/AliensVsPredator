@@ -5,7 +5,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
+
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Matrix3f;
 
 import com.arisux.airi.lib.RenderUtil.Matrix3;
 import com.arisux.airi.lib.RenderUtil.Vertex;
@@ -74,7 +78,10 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 		posX = x + 0.5;
 		posY = y + 0.5;
 		posZ = z + 0.5;
-		rotation = Matrix3.rotations[metadata & 3];
+		
+		boolean flipped = (metadata >> 2) != 0;
+		Matrix3 flip = Matrix3.rot(flipped ? 180 : 0, 1, ((metadata & 3) != 1 && (metadata & 3) != 3) ? 0 : 2);
+		rotation = Matrix3.rotations[metadata & 3].mul(flip);
 
 		if (icon == null)
 		{
@@ -269,7 +276,7 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 		tessellator.addVertexWithUV(vertexPosX, vertexPosY, vertexPosZ, texU, texV);
 	}
 
-	public void dummy()
+	public void addVertexWithUV()
 	{
 		tessellator.addVertexWithUV(vertexPosX, vertexPosY, vertexPosZ, texU, texV);
 	}
@@ -430,7 +437,7 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 		corner(0, 1, 1, 1, 0);
 		corner(0, 0, 0, 0, 1);
 		corner(0, 0, 1, 1, 1);
-		dummy();
+		addVertexWithUV();
 	}
 
 	private void ridgeLeftFace()
@@ -439,7 +446,7 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 		vertex(1, 0.5, 0.5, 0.5, 0.5);
 		corner(1, 0, 1, 0, 1);
 		corner(1, 0, 0, 1, 1);
-		dummy();
+		addVertexWithUV();
 	}
 
 	private void ridgeRightFace()
@@ -448,7 +455,7 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 		vertex(0, 0.5, 0.5, 0.5, 0.5);
 		corner(0, 0, 0, 0, 1);
 		corner(0, 0, 1, 1, 1);
-		dummy();
+		addVertexWithUV();
 	}
 
 	private void ridgeBackFace()
@@ -457,7 +464,7 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 		vertex(0.5, 0.5, 1, 0.5, 0.5);
 		corner(0, 0, 1, 0, 1);
 		corner(1, 0, 1, 1, 1);
-		dummy();
+		addVertexWithUV();
 	}
 
 	private void ridgeFrontFace()
@@ -466,7 +473,7 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 		vertex(0.5, 0.5, 0, 0.5, 0.5);
 		corner(1, 0, 0, 0, 1);
 		corner(0, 0, 0, 1, 1);
-		dummy();
+		addVertexWithUV();
 	}
 
 	private void ridgeFrontSlope()
@@ -475,7 +482,7 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 		vertex(0.5, 0.5, 0.5, 0.5, 0.5);
 		vertex(1, 0, 0, 0, 1);
 		vertex(0, 0, 0, 1, 1);
-		dummy();
+		addVertexWithUV();
 	}
 
 	private void ridgeBackSlope()
@@ -499,7 +506,7 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 			vertex(0.5, 0.5, 0.5, 0.5, 0.5);
 			vertex(1, 0, 1, 0, 1);
 			vertex(1, 0, 0, 1, 1);
-			dummy();
+			addVertexWithUV();
 		}
 	}
 
@@ -509,12 +516,12 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 		vertex(0.5, 0.5, 0.5, 0.5, 0.5);
 		vertex(1, 0.5, 0.5, 0, 0.5);
 		vertex(1, 0, 0, 0, 1);
-		dummy();
+		addVertexWithUV();
 		beginPosZSlope();
 		vertex(0.5, 0.5, 0.5, 0.5, 0.5);
 		vertex(1, 0, 1, 1, 1);
 		vertex(1, 0.5, 0.5, 1, 0.5);
-		dummy();
+		addVertexWithUV();
 	}
 
 	private void ridgeRight()
@@ -529,7 +536,7 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 			vertex(0.5, 0.5, 0.5, 0.5, 0.5);
 			vertex(0, 0, 0, 0, 1);
 			vertex(0, 0, 1, 1, 1);
-			dummy();
+			addVertexWithUV();
 		}
 	}
 
@@ -539,12 +546,12 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 		vertex(0.5, 0.5, 0.5, 0.5, 0.5);
 		vertex(0, 0, 0, 1, 1);
 		vertex(0, 0.5, 0.5, 1, 0.5);
-		dummy();
+		addVertexWithUV();
 		beginPosZSlope();
 		vertex(0.5, 0.5, 0.5, 0.5, 0.5);
 		vertex(0, 0.5, 0.5, 0, 0.5);
 		vertex(0, 0, 1, 0, 1);
-		dummy();
+		addVertexWithUV();
 	}
 
 	private void ridgeFront()
@@ -559,7 +566,7 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 			vertex(0.5, 0.5, 0.5, 0.5, 0.5);
 			vertex(1, 0, 0, 0, 1);
 			vertex(0, 0, 0, 1, 1);
-			dummy();
+			addVertexWithUV();
 		}
 	}
 
@@ -569,12 +576,12 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 		vertex(0.5, 0.5, 0.5, 0.5, 0.5);
 		vertex(1, 0, 0, 1, 1);
 		vertex(0.5, 0.5, 0, 1, 0.5);
-		dummy();
+		addVertexWithUV();
 		beginNegXSlope();
 		vertex(0.5, 0.5, 0.5, 0.5, 0.5);
 		vertex(0.5, 0.5, 0, 0, 0.5);
 		vertex(0, 0, 0, 0, 1);
-		dummy();
+		addVertexWithUV();
 	}
 
 	private void ridgeBack()
@@ -589,7 +596,7 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 			vertex(0.5, 0.5, 0.5, 0.5, 0.5);
 			vertex(0, 0, 1, 0, 1);
 			vertex(1, 0, 1, 1, 1);
-			dummy();
+			addVertexWithUV();
 		}
 	}
 
@@ -599,12 +606,12 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 		vertex(0.5, 0.5, 0.5, 0.5, 0.5);
 		vertex(0.5, 0.5, 1, 0, 0.5);
 		vertex(1, 0, 1, 0, 1);
-		dummy();
+		addVertexWithUV();
 		beginNegXSlope();
 		vertex(0.5, 0.5, 0.5, 0.5, 0.5);
 		vertex(0, 0, 1, 1, 1);
 		vertex(0.5, 0.5, 1, 1, 0.5);
-		dummy();
+		addVertexWithUV();
 	}
 
 	private void connectValleyLeft()
@@ -613,12 +620,12 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 		vertex(0.5, 0.5, 0.5, 0.5, 0.5);
 		vertex(1, 0.5, 0.5, 1, 0.5);
 		vertex(1, 1, 0, 1, 0);
-		dummy();
+		addVertexWithUV();
 		beginNegZSlope();
 		vertex(0.5, 0.5, 0.5, 0.5, 0.5);
 		vertex(1, 1, 1, 0, 0);
 		vertex(1, 0.5, 0.5, 0, 0.5);
-		dummy();
+		addVertexWithUV();
 		valleyEndLeft();
 	}
 
@@ -628,12 +635,12 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 		vertex(0.5, 0.5, 0.5, 0.5, 0.5);
 		vertex(0, 1, 0, 0, 0);
 		vertex(0, 0.5, 0.5, 0, 0.5);
-		dummy();
+		addVertexWithUV();
 		beginNegZSlope();
 		vertex(0.5, 0.5, 0.5, 0.5, 0.5);
 		vertex(0, 0.5, 0.5, 1, 0.5);
 		vertex(0, 1, 1, 1, 0);
-		dummy();
+		addVertexWithUV();
 		valleyEndRight();
 	}
 
@@ -643,12 +650,12 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 		vertex(0, 1, 0, 1, 0);
 		vertex(0.5, 0.5, 0.5, 0.5, 0.5);
 		vertex(0.5, 0.5, 0, 1, 0.5);
-		dummy();
+		addVertexWithUV();
 		beginNegXSlope();
 		vertex(1, 1, 0, 0, 0);
 		vertex(0.5, 0.5, 0, 0, 0.5);
 		vertex(0.5, 0.5, 0.5, 0.5, 0.5);
-		dummy();
+		addVertexWithUV();
 		valleyEndFront();
 	}
 
@@ -658,12 +665,12 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 		vertex(0, 1, 1, 0, 0);
 		vertex(0.5, 0.5, 1, 0, 0.5);
 		vertex(0.5, 0.5, 0.5, 0.5, 0.5);
-		dummy();
+		addVertexWithUV();
 		beginNegXSlope();
 		vertex(1, 1, 1, 1, 0);
 		vertex(0.5, 0.5, 0.5, 0.5, 0.5);
 		vertex(0.5, 0.5, 1, 1, 0.5);
-		dummy();
+		addVertexWithUV();
 		valleyEndBack();
 	}
 
@@ -673,15 +680,15 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 		corner(1, 1, 1, 0, 0);
 		corner(1, 0, 1, 0, 1);
 		vertex(1, 0.5, 0.5, 0.5, 0.5);
-		dummy();
+		addVertexWithUV();
 		corner(1, 0, 1, 0, 1);
 		corner(1, 0, 0, 1, 1);
 		vertex(1, 0.5, 0.5, 0.5, 0.5);
-		dummy();
+		addVertexWithUV();
 		corner(1, 0, 0, 1, 1);
 		corner(1, 1, 0, 1, 0);
 		vertex(1, 0.5, 0.5, 0.5, 0.5);
-		dummy();
+		addVertexWithUV();
 	}
 
 	private void valleyEndRight()
@@ -690,15 +697,15 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 		corner(0, 0, 1, 1, 1);
 		corner(0, 1, 1, 1, 0);
 		vertex(0, 0.5, 0.5, 0.5, 0.5);
-		dummy();
+		addVertexWithUV();
 		corner(0, 0, 0, 0, 1);
 		corner(0, 0, 1, 1, 1);
 		vertex(0, 0.5, 0.5, 0.5, 0.5);
-		dummy();
+		addVertexWithUV();
 		corner(0, 1, 0, 0, 0);
 		corner(0, 0, 0, 0, 1);
 		vertex(0, 0.5, 0.5, 0.5, 0.5);
-		dummy();
+		addVertexWithUV();
 	}
 
 	private void valleyEndFront()
@@ -707,15 +714,15 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 		corner(1, 1, 0, 0, 0);
 		corner(1, 0, 0, 0, 1);
 		vertex(0.5, 0.5, 0, 0.5, 0.5);
-		dummy();
+		addVertexWithUV();
 		corner(1, 0, 0, 0, 1);
 		corner(1, 0, 0, 1, 1);
 		vertex(0.5, 0.5, 0, 0.5, 0.5);
-		dummy();
+		addVertexWithUV();
 		corner(0, 0, 0, 1, 1);
 		corner(0, 1, 0, 1, 0);
 		vertex(0.5, 0.5, 0, 0.5, 0.5);
-		dummy();
+		addVertexWithUV();
 	}
 
 	private void valleyEndBack()
@@ -724,15 +731,15 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 		corner(0, 1, 1, 0, 0);
 		corner(0, 0, 1, 0, 1);
 		vertex(0.5, 0.5, 1, 0.5, 0.5);
-		dummy();
+		addVertexWithUV();
 		corner(0, 0, 1, 0, 1);
 		corner(1, 0, 1, 1, 1);
 		vertex(0.5, 0.5, 1, 0.5, 0.5);
-		dummy();
+		addVertexWithUV();
 		corner(1, 0, 1, 1, 1);
 		corner(1, 1, 1, 1, 0);
 		vertex(0.5, 0.5, 1, 0.5, 0.5);
-		dummy();
+		addVertexWithUV();
 	}
 
 	private void smartValleyLeft()
@@ -753,7 +760,7 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 		vertex(1, 1, 0, 0, 0);
 		vertex(0.5, 0.5, 0.5, 0.5, 0.5);
 		vertex(1, 1, 1, 1, 0);
-		dummy();
+		addVertexWithUV();
 		leftQuad();
 	}
 
@@ -775,7 +782,7 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 		vertex(0, 1, 1, 0, 0);
 		vertex(0.5, 0.5, 0.5, 0.5, 0.5);
 		vertex(0, 1, 0, 1, 0);
-		dummy();
+		addVertexWithUV();
 		rightQuad();
 	}
 
@@ -797,7 +804,7 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 		vertex(0, 1, 0, 0, 0);
 		vertex(0.5, 0.5, 0.5, 0.5, 0.5);
 		vertex(1, 1, 0, 1, 0);
-		dummy();
+		addVertexWithUV();
 		frontQuad();
 	}
 
@@ -819,7 +826,7 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 		vertex(1, 1, 1, 0, 0);
 		vertex(0.5, 0.5, 0.5, 0.5, 0.5);
 		vertex(0, 1, 1, 1, 0);
-		dummy();
+		addVertexWithUV();
 		backQuad();
 	}
 
@@ -834,15 +841,15 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 			vertex(1, 1, 1, 0, 0);
 			vertex(1, 0, 0, 0, 1);
 			vertex(0.5, 0.5, 0.5, 0.5, 0.5);
-			dummy();
+			addVertexWithUV();
 			vertex(1, 0, 0, 0, 1);
 			vertex(0, 0, 0, 1, 1);
 			vertex(0.5, 0.5, 0.5, 0.5, 0.5);
-			dummy();
+			addVertexWithUV();
 			vertex(0, 0, 0, 1, 1);
 			vertex(0, 1, 1, 1, 0);
 			vertex(0.5, 0.5, 0.5, 0.5, 0.5);
-			dummy();
+			addVertexWithUV();
 			connectValleyBack();
 		}
 		else
@@ -863,6 +870,12 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 			connectRidgeFront();
 		}
 	}
+	
+	@Deprecated
+	private void renderFlippedSlope()
+	{
+		;
+	}
 
 	private void renderCorner()
 	{
@@ -871,19 +884,19 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 		vertex(0, 1, 1, 1, 0);
 		vertex(1, 0, 0, 0, 1);
 		vertex(0, 0, 0, 1, 1);
-		dummy();
+		addVertexWithUV();
 		// Left slope
 		beginPosXSlope();
 		vertex(0, 1, 1, 0, 0);
 		vertex(1, 0, 1, 0, 1);
 		vertex(1, 0, 0, 1, 1);
-		dummy();
+		addVertexWithUV();
 		// Back
 		beginNegZFace();
 		corner(0, 1, 1, 0, 0);
 		corner(0, 0, 1, 0, 1);
 		corner(1, 0, 1, 1, 1);
-		dummy();
+		addVertexWithUV();
 		// Other faces
 		rightTriangle();
 		bottomQuad();
@@ -905,7 +918,7 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 		vertex(0, 1, 0, 1, 0);
 		vertex(0.5, 0.5, 0.5, 0.5, 0.5);
 		vertex(1, 0, 0, 1, 1);
-		dummy();
+		addVertexWithUV();
 
 		if (valleyAt(-1, 0, 0))
 		{
@@ -921,7 +934,7 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 		vertex(1, 1, 1, 0, 0);
 		vertex(1, 0, 0, 0, 1);
 		vertex(0.5, 0.5, 0.5, 0.5, 0.5);
-		dummy();
+		addVertexWithUV();
 
 		if (valleyAt(0, 0, 1))
 		{
@@ -937,7 +950,7 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 		corner(0, 1, 0, 1, 0);
 		corner(1, 0, 0, 0, 1);
 		corner(0, 0, 0, 1, 1);
-		dummy();
+		addVertexWithUV();
 		// Other faces
 		leftTriangle();
 		bottomQuad();

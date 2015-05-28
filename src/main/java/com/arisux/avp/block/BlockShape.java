@@ -90,6 +90,7 @@ public class BlockShape extends HookedBlock
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack stack)
 	{
 		world.setBlockMetadataWithNotify(x, y, z, placementRotation(player), 3);
+		System.out.println(String.format("%16s", Integer.toBinaryString(placementRotation(player))).replace(' ', '0'));
 	}
 
 	@Override
@@ -97,7 +98,7 @@ public class BlockShape extends HookedBlock
 	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB clip, List list, Entity entity)
 	{
 		int data = world.getBlockMetadata(x, y, z);
-		Matrix3 rot = Matrix3.rotations[data];
+		Matrix3 rot = Matrix3.rotations[data >> 2];
 		Vertex org = new Vertex(x + 0.5, y + 0.5, z + 0.5);
 		
 		this.addBox(-0.5, 0.5, -0.5, 0.0, -0.5, 0.5, rot, org, clip, list);
@@ -193,7 +194,9 @@ public class BlockShape extends HookedBlock
 
 	public static int placementRotation(EntityLivingBase player)
 	{
-		return MathHelper.floor_double((player.rotationYaw * 4.0 / 360.0) + 0.5) & 3;
+		int meta = (MathHelper.floor_double((player.rotationYaw * 4.0 / 360.0) + 0.5)) & 3;
+		meta = meta | ((player.rotationPitch < 0 ? 1 : 0) << 2);
+		return meta;
 	}
 
 	public ShapeTypes getShape()
