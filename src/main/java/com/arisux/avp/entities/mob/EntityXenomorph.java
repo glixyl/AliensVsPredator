@@ -12,6 +12,7 @@ import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityLookHelper;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -32,9 +33,9 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 		this.tasks.addTask(0, new EntityAIQueenIdentificationTask(this));
 		this.tasks.addTask(1, new EntityAIClimb(this, 0.03F));
 		this.tasks.addTask(2, new EntityAIWander(this, 0.8D));
-		this.tasks.addTask(3, new EntityAIAttackOnCollide(this, 0.8D, true));
 		this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
 		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, Entity.class, /** targetChance **/0, /** shouldCheckSight **/false, /** nearbyOnly **/false, EntitySelectorXenomorph.instance));
+		this.targetTasks.addTask(2, new EntityAIAttackOnCollide(this, 0.8D, true));
 	}
 
 	@Override

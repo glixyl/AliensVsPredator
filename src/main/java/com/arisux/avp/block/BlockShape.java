@@ -90,7 +90,6 @@ public class BlockShape extends HookedBlock
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack stack)
 	{
 		world.setBlockMetadataWithNotify(x, y, z, placementRotation(player), 3);
-		System.out.println(String.format("%16s", Integer.toBinaryString(placementRotation(player))).replace(' ', '0'));
 	}
 
 	@Override
