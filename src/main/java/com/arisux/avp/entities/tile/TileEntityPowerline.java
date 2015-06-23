@@ -1,14 +1,20 @@
 package com.arisux.avp.entities.tile;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 public class TileEntityPowerline extends PoweredTileEntity
 {
+	public TileEntityRepulsionGenerator originalpowersource = null;
 	@Override
 	public void onVoltageTick()
 	{
@@ -74,7 +80,13 @@ public class TileEntityPowerline extends PoweredTileEntity
 	@Override
 	public boolean canOutputPower()
 	{
-		return true;
+		getOriginalPowerSource();
+		if(isOriginalPowerSourceAttached()){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 	
 	@Override
@@ -93,5 +105,61 @@ public class TileEntityPowerline extends PoweredTileEntity
 	public void onUnderloadTick()
 	{
 		;
+	}
+
+	@Override
+	public boolean isOriginalPowerSourceAttached() {
+		try{
+			TileEntityRepulsionGenerator t = this.getPowerSource();
+			int x = t.xCoord;
+			int y = t.yCoord;
+			int z = t.zCoord;
+			World world = t.getWorldObj();
+			if(world.getTileEntity(x, y, z) instanceof TileEntityRepulsionGenerator){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		catch(java.lang.NullPointerException e){
+			return false;
+		}
+	}
+
+	@Override
+	public void getOriginalPowerSource() {
+		List<PoweredTileEntity> list = new ArrayList<PoweredTileEntity>();
+		list.add(this.getTop());
+		list.add(this.getBack());
+		list.add(this.getBottom());
+		list.add(this.getLeft());
+		list.add(this.getRight());
+		list.add(this.getFront());
+			for(PoweredTileEntity p : list){
+				if(p instanceof TileEntityRepulsionGenerator || p instanceof TileEntityPowerline){
+					if(p instanceof TileEntityRepulsionGenerator){
+						setOriginalPowerSource((TileEntityRepulsionGenerator) p);
+						break;
+					}
+					else if(p instanceof TileEntityPowerline && p.getPowerSource() != null){
+						setOriginalPowerSource((TileEntityRepulsionGenerator) p.getPowerSource());
+						break;
+					}
+				}
+				
+			}
+	}
+	@Override
+	public void setOriginalPowerSource(TileEntityRepulsionGenerator e) {
+		originalpowersource = e;
+		
+	}
+	@Override
+	public TileEntityRepulsionGenerator getPowerSource(){
+		if(originalpowersource != null){
+				return originalpowersource;
+		}
+		return null;
 	}
 }

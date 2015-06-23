@@ -6,6 +6,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityWorklight extends PoweredTileEntity
 {
@@ -93,5 +94,29 @@ public class TileEntityWorklight extends PoweredTileEntity
 	public void onUnderloadTick()
 	{
 		;
+	}
+
+	@Override
+	public boolean isOriginalPowerSourceAttached() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setOriginalPowerSource(TileEntityRepulsionGenerator e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void getOriginalPowerSource() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public TileEntityRepulsionGenerator getPowerSource() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

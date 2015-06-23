@@ -93,7 +93,11 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockCryostasisTube = (new BlockCryostasisTube(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockPlastic = (new HookedBlock(Material.clay)).setHardness(1.5F).setResistance(2.0F),
 		blockLightPanel = (new BlockLightPanel(Material.iron, true)).setHardness(1.5F).setResistance(2.0F),
-		blockPlasticTile = (new HookedBlock(Material.clay)).setHardness(1.5F).setResistance(2.0F);
+		blockPlasticTile = (new HookedBlock(Material.clay)).setHardness(1.5F).setResistance(2.0F),
+		blockSatelliteModem = (new HookedBlock(Material.iron)).setHardness(3.2F).setResistance(2.6F),
+		blockSatelliteDish = (new HookedBlock(Material.iron)).setHardness(3.2F).setResistance(2.6F),
+		blockBattery = (new HookedBlock(Material.iron)).setHardness(3.2F).setResistance(2.6F),
+		blockSolarPanel = (new HookedBlock(Material.iron)).setHardness(3.2F).setResistance(2.6F);
 
 	public BlockHandler()
 	{
@@ -166,6 +170,10 @@ public class BlockHandler extends IBHandler implements IInitializable
 		registerBlock(oreCopper, "orecopper");
 		registerBlock(oreLithium, "orelithium");
 		registerBlock(oreBauxite, "orebauxite");
+		registerBlock(blockSolarPanel, "blocksolarpanel");
+		registerBlock(blockSatelliteModem, "blocksatellitemodem");
+		registerBlock(blockSatelliteDish, "blocksatellitedish");
+		registerBlock(blockBattery, "blockbattery");
 		registerShapedBlockSet(blockCeiling, "ceilingpanel");
 		registerShapedBlockSet(blockCeilingFan, "ceilingfan");
 		registerShapedBlockSet(blockCeiliingVent, "ceilingvent");

@@ -17,6 +17,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.Constants.NBT;
@@ -819,5 +820,29 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 	public int getFiringTimeout()
 	{
 		return this.firingTimeout;
+	}
+
+	@Override
+	public boolean isOriginalPowerSourceAttached() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setOriginalPowerSource(TileEntityRepulsionGenerator e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void getOriginalPowerSource() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public TileEntityRepulsionGenerator getPowerSource() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

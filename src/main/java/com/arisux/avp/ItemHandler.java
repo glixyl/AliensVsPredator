@@ -56,6 +56,9 @@ public class ItemHandler extends IBHandler implements IInitializable
 		itemGrenade = (new ItemGrenade()).setFlaming(false),
 		itemIncendiaryGrenade = (new ItemGrenade()).setFlaming(true),
 		itemAmmoPistol = ((HookedItem) (new ItemAmmo(1.0F))).setDescription("A magazine classified for use with pistols."),
+		itemPistolStock = (new HookedItem()).setDescription("A Pistol stock for use in assembling pistols.").setMaxStackSize(64),
+		itemPistolBarrel = (new HookedItem()).setDescription("A Pistol barrel for use in assembling pistols.").setMaxStackSize(64),
+		itemPistolAction = (new HookedItem()).setDescription("A Pistol action for use in assembling pistols.").setMaxStackSize(64),
 		itemAmmoAR = ((HookedItem) (new ItemAmmo(2.0F))).setDescription("A magazine classified for use with assault rifles."),
 		itemAmmoAC = ((HookedItem) (new ItemAmmo(2.5F))).setDescription("A magazine classified for use with assault carbines."),
 		itemAmmoSMG = ((HookedItem) (new ItemAmmo(4.5F))).setDescription("A magazine classified for use with sub machine-guns."),
@@ -63,17 +66,52 @@ public class ItemHandler extends IBHandler implements IInitializable
 		itemM240ICU = (new ItemFlamethrower()).setDescription("M240 Incinerator Unit"),
 		itemPistol = (new ItemFirearm(12, 2.0F, 15, 120, (ItemAmmo) itemAmmoPistol, AliensVsPredator.properties().SOUND_WEAPON_GUNSHOT)),
 		itemM4 = (new ItemFirearm(24, 0.5F, 3, 120, (ItemAmmo) itemAmmoAR, AliensVsPredator.properties().SOUND_WEAPON_GUNSHOT).setSoundLength(0.75D).disableIcon()).setFull3D(),
+		itemM4Stock = (new HookedItem()).setDescription("An M4 stock for use in assembling M4's.").setMaxStackSize(64),
+		itemM4Barrel = (new HookedItem()).setDescription("An M4 barrel for use in assembling M4's.").setMaxStackSize(64),
+		itemM4Action = (new HookedItem()).setDescription("An M4 action for use in assembling M4's.").setMaxStackSize(64),
 		itemSniper = (new ItemFirearm(6, 1.8F, 40, 150, (ItemAmmo) itemAmmoSniper, AliensVsPredator.properties().SOUND_WEAPON_SNIPER).disableIcon()).setFull3D(),
+		itemSniperStock = (new HookedItem()).setDescription("A Sniper Rifle stock for use in assembling Sniper Rifle's.").setMaxStackSize(64),
+		itemSniperBarrel = (new HookedItem()).setDescription("A Sniper Rifle barrel for use in assembling Sniper Rifle's.").setMaxStackSize(64),
+		itemSniperAction =  (new HookedItem()).setDescription("A Sniper Rifle action for use in assembling Sniper Rifle's.").setMaxStackSize(64),
+		itemSniperScope = (new HookedItem()).setDescription("A Sniper Rifle scope for use in assembling Sniper Rifle's.").setMaxStackSize(64),
+		itemSniperPeripherals = (new HookedItem()).setDescription("Sniper Rifle peripherals for use in assembling Sniper Rifle's.").setMaxStackSize(64),
 		itemM41A = (new ItemFirearm(99, 0.5F, 2, 120, (ItemAmmo) itemAmmoAC, AliensVsPredator.properties().SOUND_WEAPON_PULSERIFLE).setSoundLength(1.25D).disableIcon()).setFull3D(),
+		itemM41AStock = (new HookedItem()).setDescription("An M41A stock for use in assembling M41A's.").setMaxStackSize(64),
+		itemM41ABarrel = (new HookedItem()).setDescription("An M41A barrel for use in assembling M41A's.").setMaxStackSize(64),
+		itemM41AAction = (new HookedItem()).setDescription("An M41A action for use in assembling M41A's.").setMaxStackSize(64),
+		itemM41APeripherals = (new HookedItem()).setDescription("M41A peripherals for use in assembling M41A's.").setMaxStackSize(64),
 		itemM56SG = (new ItemFirearm(128, 0.2F, 2, 120, (ItemAmmo) itemAmmoSMG, AliensVsPredator.properties().SOUND_WEAPON_M56SG).disableIcon()).setFull3D(),
+		itemM56SGStock = (new HookedItem()).setDescription("An M56SG stock for use in assembling M56SG's.").setMaxStackSize(64),
+		itemM56SGBarrel = (new HookedItem()).setDescription("An M56SG barrel for use in assembling M56SG's.").setMaxStackSize(64),
+		itemM56SGAction = (new HookedItem()).setDescription("An M56SG action for use in assembling M56SG's.").setMaxStackSize(64),
+		itemM56SGSupportFrame = (new HookedItem()).setDescription("An M56SG support frame for use in assembling M56SG's.").setMaxStackSize(64),
+		itemM56SGAimingModule = (new HookedItem()).setDescription("An M56SG aiming module for use in assembling M56SG's.").setMaxStackSize(64),
 		itemAK47 = (new ItemFirearm(32, 0.6F, 3, 110, (ItemAmmo) itemAmmoAR, AliensVsPredator.properties().SOUND_WEAPON_GUNSHOT).disableIcon()).setFull3D(),
+		itemAK47Stock = (new HookedItem()).setDescription("An AK47 stock for use in assembling AK-47's").setMaxStackSize(64),
+		itemAK47Barrel = (new HookedItem()).setDescription("An AK47 barrel for use in assembling AK-47's.").setMaxStackSize(64),
+		itemAK47Action = (new HookedItem()).setDescription("An AK47 action for use in assembling AK-47's.").setMaxStackSize(64),
 		itemDoritos = (new ItemFood(8, true)).setAlwaysEdible(),
 		itemDoritosCoolRanch = (new ItemFood(8, true)).setAlwaysEdible(),
+		itemCapacitor = (new HookedItem()).setMaxStackSize(64),
+		itemTransistor = (new HookedItem()).setMaxStackSize(64),
+		itemRAM = (new HookedItem()).setMaxStackSize(64),
+		itemResistor = (new HookedItem()).setMaxStackSize(64),
 		itemArtifactTech = (new HookedItem()).setDescription("An unknown piece of technology aquired from the yautja species."),
 		itemProcessor = ((new HookedItem())),
+		itemLiquidStateDrive = ((new HookedItem())),
+		itemDiode = ((new HookedItem())),
+		itemMotherboard = ((new HookedItem())),
+		itemPowerSupply = ((new HookedItem())),
 		itemFlashDrive = (new ItemStorageDevice()),
+		itemVoltageRegulator = ((new HookedItem())),
 		itemLed = ((new HookedItem())),
 		itemLedDisplay = ((new HookedItem())),
+		itemTransformer = ((new HookedItem())),
+		itemR2PConvertor = ((new HookedItem())),
+		itemP2RConvertor = ((new HookedItem())),
+		itemCarbon = (new HookedItem()).setDescription("Used in the crafting of several electrical components."),
+		itemPOEInputConvertor = ((new HookedItem())),
+		itemPOEOutputConvertor = ((new HookedItem())),
 		itemIntegratedCircuit = ((new HookedItem())),
 		itemSilicon = new HookedItem().setDescription("A few chunks of silicon, for use with electronics."),
 		itemIngotAluminum = new HookedItem().setDescription("An ingot melted down from bauxite ore, for use with guns."),
@@ -172,8 +210,45 @@ public class ItemHandler extends IBHandler implements IInitializable
 		registerItem(itemDoritosCoolRanch, "food.doritos.coolranch");
 		registerItem(itemFlashDrive, "device.nbtdrive");
 		registerItem(itemProcessor, "part.processor");
+		registerItem(itemLiquidStateDrive, "part.liquidstatedrive");
+		registerItem(itemVoltageRegulator, "part.voltageregulator");
+		registerItem(itemCapacitor, "part.capacitor");
+		registerItem(itemTransistor, "part.transistor");
+		registerItem(itemMotherboard, "part.motherboard");
+		registerItem(itemR2PConvertor, "part.r2pconvertor");
+		registerItem(itemP2RConvertor, "part.p2rconvertor");
+		registerItem(itemRAM,  "part.ram");
+		registerItem(itemTransformer, "part.transformer");
+		registerItem(itemResistor, "part.resistor");
+		registerItem(itemPOEInputConvertor, "part.poeinputconvertor");
+		registerItem(itemPOEOutputConvertor, "part.poeoutputconvertor");
 		registerItem(itemLed, "part.led");
+		registerItem(itemCarbon, "part.carbon");
+		registerItem(itemDiode, "part.diode");
+		registerItem(itemPowerSupply, "part.powersupply");
 		registerItem(itemLedDisplay, "part.led.display");
+		registerItem(itemPistolStock, "part.pistol.stock");
+		registerItem(itemPistolBarrel, "part.pistol.barrel");
+		registerItem(itemPistolAction, "part.pistol.action");
+		registerItem(itemSniperStock, "part.sniper.stock");
+		registerItem(itemSniperBarrel, "part.sniper.barrel");
+		registerItem(itemSniperAction, "part.sniper.action");
+		registerItem(itemSniperScope, "part.sniper.scope");
+		registerItem(itemSniperPeripherals, "part.sniper.peripherals");
+		registerItem(itemM41AStock, "part.m41a.stock");
+		registerItem(itemM41AAction, "part.m41a.action");
+		registerItem(itemM41ABarrel, "part.m41a.barrel");
+		registerItem(itemM41APeripherals, "part.m41a.peripherals");
+		registerItem(itemM56SGStock, "part.M56SG.stock");
+		registerItem(itemM56SGBarrel, "part.M56SG.barrel");
+		registerItem(itemM56SGSupportFrame, "part.M56SG.supportframe");
+		registerItem(itemM56SGAimingModule, "part.M56SG.aimingmodule");
+		registerItem(itemM4Stock, "part.m4.stock");
+		registerItem(itemM4Action, "part.m4.action");
+		registerItem(itemM4Barrel, "part.m4.barrel");
+		registerItem(itemAK47Action, "part.ak47.action");
+		registerItem(itemAK47Stock, "part.ak47.stock");
+		registerItem(itemAK47Barrel, "part.ak47.barrel");
 		registerItem(itemIntegratedCircuit, "part.ic");
 		registerItem(itemIngotCopper, "ingot.copper");
 		registerItem(itemIngotLithium, "ingot.lithium");

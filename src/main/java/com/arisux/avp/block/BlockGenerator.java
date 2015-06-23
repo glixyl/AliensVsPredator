@@ -2,6 +2,7 @@ package com.arisux.avp.block;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -36,6 +37,13 @@ public class BlockGenerator extends HookedBlockContainer
 	public TileEntity createNewTileEntity(World var1, int var2)
 	{
 		return new TileEntityRepulsionGenerator();
+	}
+	
+	@Override
+	public void breakBlock(World world, int posX, int posY, int posZ, Block blockBroken, int meta)
+	{
+		super.breakBlock(world, posX, posY, posZ, blockBroken, meta);
+		world.removeTileEntity(posX, posY, posZ);
 	}
 
 	@Override

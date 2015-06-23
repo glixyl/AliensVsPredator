@@ -6,6 +6,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.gen.feature.WorldGenMinable;
 
 import com.arisux.airi.lib.WorldUtil;
 import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
@@ -45,7 +46,7 @@ public class WorldGenerator implements IWorldGenerator
 			}
 		}
 
-		WorldUtil.generateBlockInChunk(world, AliensVsPredator.blocks().oreCopper, rand, 3, 4, 16, 48, chunkCoords);
+		WorldUtil.generateBlockInChunk(world, AliensVsPredator.blocks().oreCopper, rand, 3, 4, 16, 48, chunkCoords, new BiomeGenBase[] { BiomeGenBase.desert });
 		WorldUtil.generateBlockInChunk(world, AliensVsPredator.blocks().oreSilicon, rand, 2, 3, 0, 32, chunkCoords);
 		WorldUtil.generateBlockInChunk(world, AliensVsPredator.blocks().oreLithium, rand, 3, 1, 0, 16, chunkCoords, new BiomeGenBase[] { BiomeGenBase.ocean });
 		WorldUtil.generateBlockInChunk(world, AliensVsPredator.blocks().oreBauxite, rand, 4, 8, 16, 64, chunkCoords);
