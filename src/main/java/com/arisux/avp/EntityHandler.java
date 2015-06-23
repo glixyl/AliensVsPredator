@@ -40,6 +40,8 @@ public class EntityHandler implements IInitializable
 		GameRegistry.registerTileEntity(TileEntityWorklight.class, "tileEntityWorklight");
 		GameRegistry.registerTileEntity(TileEntityCryostasisTube.class, "tileEntityCryostasisTube");
 		GameRegistry.registerTileEntity(TileEntityLightPanel.class, "tileEntityLightPanel");
+		GameRegistry.registerTileEntity(TileEntitySatelliteModem.class, "tileEntitySatelliteModem");
+		GameRegistry.registerTileEntity(TileEntitySolarPanel.class, "tileEntitySolarPanel");
 	}
 
 	private void registerLivingEntities()

@@ -124,42 +124,32 @@ public class AssemblerAPI implements IInitializable
 			Inventories.newStack(avp.itemLedDisplay, 1)
 		));
 		this.registerSchematic(new AssemblerSchematic("m56sg", Inventories.newStack(avp.itemM56SG, 1),
-			Inventories.newStack(avp.itemPolycarbonate, 4),
-			Inventories.newStack(Items.iron_ingot, 16),
-			Inventories.newStack(avp.itemIngotAluminum, 16),
-			Inventories.newStack(avp.itemIngotCopper, 8),
-			Inventories.newStack(Items.gold_ingot, 4),
-			Inventories.newStack(avp.itemIntegratedCircuit, 8),
-			Inventories.newStack(Item.getItemFromBlock(Blocks.lever), 1),
-			Inventories.newStack(avp.itemLedDisplay, 1),
-			Inventories.newStack(avp.itemLed, 1),
-			Inventories.newStack(avp.itemProcessor, 1)
+			Inventories.newStack(avp.itemM56SGAimingModule, 1),
+			Inventories.newStack(avp.itemM56SGStock, 1),
+			Inventories.newStack(avp.itemM56SGBarrel, 1),
+			Inventories.newStack(avp.itemM56SGSupportFrame, 1)
 		));
 		this.registerSchematic(new AssemblerSchematic("sniper", Inventories.newStack(avp.itemSniper, 1),
-			Inventories.newStack(avp.itemPolycarbonate, 1),
-			Inventories.newStack(Items.iron_ingot, 16),
-			Inventories.newStack(avp.itemIngotAluminum, 16),
-			Inventories.newStack(avp.itemIngotCopper, 2),
-			Inventories.newStack(Items.gold_ingot, 4),
-			Inventories.newStack(Item.getItemFromBlock(Blocks.glass), 1),
-			Inventories.newStack(Item.getItemFromBlock(Blocks.lever), 1)
+			Inventories.newStack(avp.itemSniperScope, 1),
+			Inventories.newStack(avp.itemSniperAction, 1),
+			Inventories.newStack(avp.itemSniperPeripherals, 1),
+			Inventories.newStack(avp.itemSniperBarrel, 1),
+			Inventories.newStack(avp.itemSniperStock, 1)
 		));
 		this.registerSchematic(new AssemblerSchematic("pistol", Inventories.newStack(avp.itemPistol, 1),
-			Inventories.newStack(avp.itemPolycarbonate, 4),
-			Inventories.newStack(Item.getItemFromBlock(Blocks.lever), 1),
-			Inventories.newStack(Items.iron_ingot, 4)
+			Inventories.newStack(avp.itemPistolStock, 1),
+			Inventories.newStack(avp.itemPistolBarrel, 1),
+			Inventories.newStack(avp.itemPistolAction, 1)
 		));
 		this.registerSchematic(new AssemblerSchematic("m4", Inventories.newStack(avp.itemM4, 1),
-			Inventories.newStack(avp.itemPolycarbonate, 4),
-			Inventories.newStack(avp.itemIngotAluminum, 8),
-			Inventories.newStack(Item.getItemFromBlock(Blocks.lever), 1),
-			Inventories.newStack(Items.iron_ingot, 8)
+			Inventories.newStack(avp.itemM4Stock, 1),
+			Inventories.newStack(avp.itemM4Barrel, 1),
+			Inventories.newStack(avp.itemM4Action, 1)
 		));
 		this.registerSchematic(new AssemblerSchematic("ak47", Inventories.newStack(avp.itemAK47, 1),
-			Inventories.newStack(Item.getItemFromBlock(Blocks.planks), 4),
-			Inventories.newStack(avp.itemIngotAluminum, 8),
-			Inventories.newStack(Item.getItemFromBlock(Blocks.lever), 1),
-			Inventories.newStack(Items.iron_ingot, 8)
+			Inventories.newStack(avp.itemAK47Action, 1),
+			Inventories.newStack(avp.itemAK47Barrel, 1),
+			Inventories.newStack(avp.itemAK47Stock, 1)
 		));
 		this.registerSchematic(new AssemblerSchematic("doritos", Inventories.newStack(avp.itemDoritos, 4),
 			Inventories.newStack(Items.wheat, 4),

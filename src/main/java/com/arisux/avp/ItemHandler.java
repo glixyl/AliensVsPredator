@@ -107,8 +107,6 @@ public class ItemHandler extends IBHandler implements IInitializable
 		itemLed = ((new HookedItem())),
 		itemLedDisplay = ((new HookedItem())),
 		itemTransformer = ((new HookedItem())),
-		itemR2PConvertor = ((new HookedItem())),
-		itemP2RConvertor = ((new HookedItem())),
 		itemCarbon = (new HookedItem()).setDescription("Used in the crafting of several electrical components."),
 		itemPOEInputConvertor = ((new HookedItem())),
 		itemPOEOutputConvertor = ((new HookedItem())),
@@ -215,8 +213,6 @@ public class ItemHandler extends IBHandler implements IInitializable
 		registerItem(itemCapacitor, "part.capacitor");
 		registerItem(itemTransistor, "part.transistor");
 		registerItem(itemMotherboard, "part.motherboard");
-		registerItem(itemR2PConvertor, "part.r2pconvertor");
-		registerItem(itemP2RConvertor, "part.p2rconvertor");
 		registerItem(itemRAM,  "part.ram");
 		registerItem(itemTransformer, "part.transformer");
 		registerItem(itemResistor, "part.resistor");

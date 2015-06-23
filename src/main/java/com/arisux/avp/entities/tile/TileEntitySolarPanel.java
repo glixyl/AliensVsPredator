@@ -5,8 +5,11 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.EnumSkyBlock;
+import net.minecraft.world.World;
 
-public class TileEntityRepulsionGenerator extends PoweredTileEntity
+public class TileEntitySolarPanel extends PoweredTileEntity
 {
 	public int rotation;
 
@@ -61,43 +64,18 @@ public class TileEntityRepulsionGenerator extends PoweredTileEntity
 	@Override
 	public boolean canOutputPower()
 	{
-		return true;
+		World world = this.getWorldObj();
+		if(world.getWorldTime() < 12300 || world.getWorldTime()  > 23850){
+			return true;
+		}
+		return false;
 	}
-
+	
 	@Override
 	public double getVoltage()
 	{
-		double addedVoltage = 120;
+		double addedVoltage = 220;
 		
-		if (getTop() instanceof TileEntityRepulsionGenerator)
-		{
-			addedVoltage += 120;
-		}
-		
-		if (getBottom() instanceof TileEntityRepulsionGenerator)
-		{
-			addedVoltage += 120;
-		}
-		
-		if (getLeft() instanceof TileEntityRepulsionGenerator)
-		{
-			addedVoltage += 120;
-		}
-		
-		if (getRight() instanceof TileEntityRepulsionGenerator)
-		{
-			addedVoltage += 120;
-		}
-		
-		if (getFront() instanceof TileEntityRepulsionGenerator)
-		{
-			addedVoltage += 120;
-		}
-		
-		if (getBack() instanceof TileEntityRepulsionGenerator)
-		{
-			addedVoltage += 120;
-		}
 		if (getTop() instanceof TileEntityRepulsionGenerator)
 		{
 			addedVoltage += 120;
@@ -157,6 +135,7 @@ public class TileEntityRepulsionGenerator extends PoweredTileEntity
 		{
 			addedVoltage += 220;
 		}
+		
 		return addedVoltage;
 	}
 

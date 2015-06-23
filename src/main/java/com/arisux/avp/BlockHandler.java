@@ -8,6 +8,7 @@ import com.arisux.airi.lib.BlockTypes.GhostBlock;
 import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.airi.lib.BlockTypes.HookedBlockSlab;
 import com.arisux.airi.lib.BlockTypes.HookedBlockStairs;
+import com.arisux.airi.lib.ItemTypes.HookedItem;
 import com.arisux.airi.lib.ModUtil.IBHandler;
 import com.arisux.airi.lib.*;
 import com.arisux.airi.lib.interfaces.IInitializable;
@@ -94,10 +95,12 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockPlastic = (new HookedBlock(Material.clay)).setHardness(1.5F).setResistance(2.0F),
 		blockLightPanel = (new BlockLightPanel(Material.iron, true)).setHardness(1.5F).setResistance(2.0F),
 		blockPlasticTile = (new HookedBlock(Material.clay)).setHardness(1.5F).setResistance(2.0F),
-		blockSatelliteModem = (new HookedBlock(Material.iron)).setHardness(3.2F).setResistance(2.6F),
+		blockSatelliteModem = (new BlockSatelliteModem(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockSatelliteDish = (new HookedBlock(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockBattery = (new HookedBlock(Material.iron)).setHardness(3.2F).setResistance(2.6F),
-		blockSolarPanel = (new HookedBlock(Material.iron)).setHardness(3.2F).setResistance(2.6F);
+		blockR2PConvertor = (new HookedBlock(Material.iron)).setHardness(3.2F).setResistance(2.6F),
+		blockP2RConvertor = (new HookedBlock(Material.iron)).setHardness(3.2F).setResistance(2.6F),
+		blockSolarPanel = (new BlockSolarPanel(Material.iron)).setHardness(3.2F).setResistance(2.6F);
 
 	public BlockHandler()
 	{
@@ -185,6 +188,8 @@ public class BlockHandler extends IBHandler implements IInitializable
 		registerBlock(blockFloorGrillSlab, "floorgrillslab", blockFloorGrill, tab);
 		registerShapedBlockSet(blockWall, "industrialwall");
 		registerShapedBlockSet(blockWallW, "industrialwall2");
+		registerBlock(blockR2PConvertor, "blockr2pconvertor");
+		registerBlock(blockP2RConvertor, "blockp2rconvertor");
 		registerBlock(blockWallStairs, "industrialwallstairs", blockWall, tab);
 		registerBlock(blockWallSlab, "industrialslab", blockWall, tab);
 		registerShapedBlockSet(blockWallVent, "industrialvent");
