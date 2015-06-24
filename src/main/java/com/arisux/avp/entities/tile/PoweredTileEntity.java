@@ -201,6 +201,54 @@ public abstract class PoweredTileEntity extends TileEntity implements IPowerDevi
 			}
 			return (PoweredTileEntity) t.getPowerSource();
 		}
+		if (getTop() instanceof TileEntityNegativeTransformer)
+		{
+			TileEntityNegativeTransformer t = (TileEntityNegativeTransformer)getTop();
+			if(!t.isOriginalPowerSourceAttached()){
+				return null;
+			}
+			return (PoweredTileEntity) t.getPowerSource();
+		}
+		if (getBottom() instanceof TileEntityNegativeTransformer)
+		{
+			TileEntityNegativeTransformer t = (TileEntityNegativeTransformer)getBottom();
+			if(!t.isOriginalPowerSourceAttached()){
+				return null;
+			}
+			return (PoweredTileEntity) t.getPowerSource();
+		}
+		if (getFront() instanceof TileEntityNegativeTransformer)
+		{
+			TileEntityNegativeTransformer t = (TileEntityNegativeTransformer)getFront();
+			if(!t.isOriginalPowerSourceAttached()){
+				return null;
+			}
+			return (PoweredTileEntity) t.getPowerSource();
+		}
+		if (getBack() instanceof TileEntityNegativeTransformer)
+		{
+			TileEntityNegativeTransformer t = (TileEntityNegativeTransformer)getBack();
+			if(!t.isOriginalPowerSourceAttached()){
+				return null;
+			}
+			return (PoweredTileEntity) t.getPowerSource();
+		}
+		if (getLeft() instanceof TileEntityNegativeTransformer)
+		{
+			TileEntityNegativeTransformer t = (TileEntityNegativeTransformer)getLeft();
+			if(!t.isOriginalPowerSourceAttached()){
+				return null;
+			}
+			return (PoweredTileEntity) t.getPowerSource();
+		}
+		if (getRight() instanceof TileEntityNegativeTransformer)
+		{
+			TileEntityNegativeTransformer t = (TileEntityNegativeTransformer)getRight();
+			if(!t.isOriginalPowerSourceAttached()){
+				return null;
+			}
+			return (PoweredTileEntity) t.getPowerSource();
+		}
 		return null;
 	}
 	
