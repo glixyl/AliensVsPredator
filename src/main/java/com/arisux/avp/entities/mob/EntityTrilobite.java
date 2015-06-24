@@ -12,11 +12,11 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityHammerpede extends EntitySpeciesAlien implements IMob
+public class EntityTrilobite extends EntitySpeciesAlien implements IMob
 {
-	public EntityHammerpede(World par1World)
+	public EntityTrilobite(World world)
 	{
-		super(par1World);
+		super(world);
 
 		this.setSize(1.0F, 0.2F);
 		this.experienceValue = 16;
@@ -26,7 +26,7 @@ public class EntityHammerpede extends EntitySpeciesAlien implements IMob
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(14.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(44.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.6499999761581421D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(0.5D);
 		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
@@ -68,13 +68,13 @@ public class EntityHammerpede extends EntitySpeciesAlien implements IMob
 	@Override
 	protected String getDeathSound()
 	{
-		return AliensVsPredator.properties().SOUND_CHESTBURSTER_DEATH;
+		return AliensVsPredator.properties().SOUND_FACEHUGGER_DEATH;
 	}
 
 	@Override
 	protected boolean canTriggerWalking()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
@@ -115,9 +115,9 @@ public class EntityHammerpede extends EntitySpeciesAlien implements IMob
 	}
 
 	@Override
-	public boolean isPotionApplicable(PotionEffect par1PotionEffect)
+	public boolean isPotionApplicable(PotionEffect potionEffect)
 	{
-		return par1PotionEffect.getPotionID() == Potion.poison.id ? false : super.isPotionApplicable(par1PotionEffect);
+		return potionEffect.getPotionID() == Potion.poison.id ? false : super.isPotionApplicable(potionEffect);
 	}
 	
 	@Override

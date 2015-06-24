@@ -45,6 +45,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 
 	public void registerEntityRenderers()
 	{
+		registerEntityRenderingHandler(EntityTrilobite.class, new RenderTrilobite(new ModelTrilobite(), 0.5F));
 		registerEntityRenderingHandler(EntityHammerpede.class, new RenderHammerpede(new ModelHammerpede(), 0.5F));
 		registerEntityRenderingHandler(EntityProtomorph.class, new RenderXenomorph(new ModelTexMap(new ModelProtomorph(), AliensVsPredator.resources().PROTOMORPH), 0.5F).setScale(1.4F));
 		registerEntityRenderingHandler(EntityDrone.class, new RenderXenomorph(new ModelTexMap(new ModelDrone(), AliensVsPredator.resources().DRONE_BASIC), 0.5F));
@@ -113,6 +114,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		registerItemRenderer(items.itemSummonerAqua, (new RenderItemSummoner(EntityAqua.class, ModelAqua.class, AliensVsPredator.resources().AQUA_XENOMORPH)).setScale(7.5F).setY(8F));
 		registerItemRenderer(items.itemSummonerCombatSynthetic, (new RenderItemSummoner(EntityCombatSynthetic.class, ModelBipedExtension.class, AliensVsPredator.resources().COMBAT_SYNTHETIC)).setScale(7.5F).setY(8F));
 		registerItemRenderer(items.itemSummonerHammerpede, (new RenderItemSummoner(EntityHammerpede.class, ModelHammerpede.class, AliensVsPredator.resources().HAMMERPEDE)).setScale(25.5F).setY(8F));
+		registerItemRenderer(items.itemSummonerTrilobite, (new RenderItemSummoner(EntityTrilobite.class, ModelTrilobite.class, AliensVsPredator.resources().TRILOBITE)).setScale(25.5F).setY(8F));
 	}
 
 	public void registerTileEntitySpecialRenderers()
