@@ -1,21 +1,8 @@
 package com.arisux.avp.entities.tile;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-
 public class TileEntityTransformer extends PoweredTileEntity
 {
 	public int rotation;
-	public double addedVoltage;
-	public double currentVoltage;
 	
 	public void setDirection(byte direction)
 	{
@@ -31,12 +18,7 @@ public class TileEntityTransformer extends PoweredTileEntity
 	@Override
 	public void outputPowerToTile(PoweredTileEntity tile, double voltage)
 	{
-		if (tile != null && tile instanceof TileEntityPowerline)
-		{
-			double previousVoltage = tile.getVoltage();
-			tile.setVoltage(voltage + previousVoltage);
-			currentVoltage = previousVoltage + voltage;
-		}
+		super.outputPowerToTile(tile, voltage);
 	}
 
 	@Override
@@ -46,57 +28,65 @@ public class TileEntityTransformer extends PoweredTileEntity
 	}
 
 	@Override
-	public double getVoltage(){
-		addedVoltage = 24;
-
-		if (getTop() instanceof TileEntityPowerline)
-		{
-			if(getTop().voltage > 0){
-				return addedVoltage;
-			}
-		}
-		
-		if (getBottom() instanceof TileEntityPowerline)
-		{
-			if(getBottom().voltage > 0){
-				return addedVoltage;
-			}
-		}
-		
-		if (getLeft() instanceof TileEntityPowerline)
-		{
-			if(getLeft().voltage > 0){
-				return addedVoltage;
-			}
-		}
-		
-		if (getRight() instanceof TileEntityPowerline)
-		{
-			if(getRight().voltage > 0){
-				return addedVoltage;
-			}
-		}
-		
-		if (getFront() instanceof TileEntityPowerline)
-		{
-				if(getFront().voltage > 0 ){
-					return addedVoltage;
-				}
-		}
-		
-		if (getBack() instanceof TileEntityPowerline){
-			if(getBack().voltage > 0 ){
-				return addedVoltage;
-			}
-		}		
-		return 0;
+	public double getVoltage()
+	{
+		return super.getVoltage();
 	}
 
 
 	@Override
 	public void onVoltageTick()
 	{
-		;
+		double addedVoltage = 24;
+		addedVoltage = (addedVoltage + (this.getPowerSourceTile() != null ? this.getPowerSourceTile().getVoltageAfterApplyingResistance() : 0));
+
+		if (getTop() instanceof TileEntityPowerline && getTop() != getPowerSourceTile())
+		{
+			if(getTop().voltage <= 0)
+			{
+				getTop().setVoltage(addedVoltage);
+			}
+		}
+		
+		if (getBottom() instanceof TileEntityPowerline && getBottom() != getPowerSourceTile())
+		{
+			if(getBottom().voltage <= 0)
+			{
+				getBottom().setVoltage(addedVoltage);
+			}
+		}
+		
+		if (getLeft() instanceof TileEntityPowerline && getLeft() != getPowerSourceTile())
+		{
+			if(getLeft().voltage <= 0)
+			{
+				getLeft().setVoltage(addedVoltage);
+			}
+		}
+		
+		if (getRight() instanceof TileEntityPowerline && getRight() != getPowerSourceTile())
+		{
+			if(getRight().voltage <= 0)
+			{
+				getRight().setVoltage(addedVoltage);
+			}
+		}
+		
+		if (getFront() instanceof TileEntityPowerline && getFront() != getPowerSourceTile())
+		{
+			if(getFront().voltage <= 0 )
+			{
+				getFront().setVoltage(addedVoltage);
+			}
+		}
+		
+		if (getBack() instanceof TileEntityPowerline && getBack() != getPowerSourceTile())
+		{
+			if(getBack().voltage <= 0 )
+			{
+				getBack().setVoltage(addedVoltage);
+			}
+		}		
 	}
 
 	@Override
@@ -118,26 +108,26 @@ public class TileEntityTransformer extends PoweredTileEntity
 	}
 
 	@Override
-	public boolean isOriginalPowerSourceAttached() {
-		// TODO Auto-generated method stub
+	public boolean isOriginalPowerSourceAttached() 
+	{
 		return false;
 	}
 
 	@Override
-	public void getOriginalPowerSource() {
-		// TODO Auto-generated method stub
-		
+	public void getOriginalPowerSource() 
+	{
+		;
 	}
 
 	@Override
-	public TileEntityRepulsionGenerator getPowerSource() {
-		// TODO Auto-generated method stub
+	public TileEntityRepulsionGenerator getPowerSource() 
+	{
 		return null;
 	}
 
 	@Override
-	public void setOriginalPowerSource(PoweredTileEntity e) {
-		// TODO Auto-generated method stub
-		
+	public void setOriginalPowerSource(PoweredTileEntity e)
+	{
+		;
 	}
 }
