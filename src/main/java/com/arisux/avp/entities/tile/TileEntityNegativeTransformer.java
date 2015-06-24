@@ -49,40 +49,26 @@ public class TileEntityNegativeTransformer extends PoweredTileEntity
 	@Override
 	public void onVoltageTick()
 	{
-		double addedVoltage = ((this.getPowerSourceTile() != null ? this.getPowerSourceTile().getVoltageAfterApplyingResistance() : 0));
-		addedVoltage -= 24;
-
-		if (getTop() instanceof TileEntityPowerline)
-		{
-			getTop().setVoltage(addedVoltage);
+		double addedVoltage = -24;
+		List<PoweredTileEntity> list = new ArrayList<PoweredTileEntity>();
+		list.add(this.getTop());
+		list.add(this.getBack());
+		list.add(this.getBottom());
+		list.add(this.getLeft());
+		list.add(this.getRight());
+		list.add(this.getFront());
+		for(PoweredTileEntity e : list){
+			if(e instanceof TileEntityPowerline && e.isOriginalPowerSourceAttached()){
+				addedVoltage += e.getVoltage();
+				break;
+			}
 		}
-		
-		if (getBottom() instanceof TileEntityPowerline)
-		{
-			getBottom().setVoltage(addedVoltage);
+		for(PoweredTileEntity e : list){
+			if(e instanceof TileEntityPowerline && e.getVoltage() >= 0){
+				e.setVoltage(addedVoltage);
+			}
 		}
-		
-		if (getLeft() instanceof TileEntityPowerline)
-		{
-			getLeft().setVoltage(addedVoltage);
-		}
-		
-		if (getRight() instanceof TileEntityPowerline)
-		{
-			getRight().setVoltage(addedVoltage);
-		}
-		
-		if (getFront() instanceof TileEntityPowerline)
-		{
-			getFront().setVoltage(addedVoltage);
-		}
-		
-		if (getBack() instanceof TileEntityPowerline)
-		{
-			getBack().setVoltage(addedVoltage);
-		}		
 	}
-
 	@Override
 	public void onOverloadTick()
 	{
