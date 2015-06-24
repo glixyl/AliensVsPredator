@@ -52,52 +52,34 @@ public class TileEntityNegativeTransformer extends PoweredTileEntity
 		double addedVoltage = ((this.getPowerSourceTile() != null ? this.getPowerSourceTile().getVoltageAfterApplyingResistance() : 0));
 		addedVoltage -= 24;
 
-		if (getTop() instanceof TileEntityPowerline && getTop() != getPowerSourceTile())
+		if (getTop() instanceof TileEntityPowerline)
 		{
-			if(getTop().voltage <= 0)
-			{
-				getTop().setVoltage(addedVoltage);
-			}
+			getTop().setVoltage(addedVoltage);
 		}
 		
-		if (getBottom() instanceof TileEntityPowerline && getBottom() != getPowerSourceTile())
+		if (getBottom() instanceof TileEntityPowerline)
 		{
-			if(getBottom().voltage <= 0)
-			{
-				getBottom().setVoltage(addedVoltage);
-			}
+			getBottom().setVoltage(addedVoltage);
 		}
 		
-		if (getLeft() instanceof TileEntityPowerline && getLeft() != getPowerSourceTile())
+		if (getLeft() instanceof TileEntityPowerline)
 		{
-			if(getLeft().voltage <= 0)
-			{
-				getLeft().setVoltage(addedVoltage);
-			}
+			getLeft().setVoltage(addedVoltage);
 		}
 		
-		if (getRight() instanceof TileEntityPowerline && getRight() != getPowerSourceTile())
+		if (getRight() instanceof TileEntityPowerline)
 		{
-			if(getRight().voltage <= 0)
-			{
-				getRight().setVoltage(addedVoltage);
-			}
+			getRight().setVoltage(addedVoltage);
 		}
 		
-		if (getFront() instanceof TileEntityPowerline && getFront() != getPowerSourceTile())
+		if (getFront() instanceof TileEntityPowerline)
 		{
-			if(getFront().voltage <= 0 )
-			{
-				getFront().setVoltage(addedVoltage);
-			}
+			getFront().setVoltage(addedVoltage);
 		}
 		
-		if (getBack() instanceof TileEntityPowerline && getBack() != getPowerSourceTile())
+		if (getBack() instanceof TileEntityPowerline)
 		{
-			if(getBack().voltage <= 0 )
-			{
-				getBack().setVoltage(addedVoltage);
-			}
+			getBack().setVoltage(addedVoltage);
 		}		
 	}
 
@@ -150,7 +132,6 @@ public class TileEntityNegativeTransformer extends PoweredTileEntity
 	@Override
 	public PoweredTileEntity getPowerSource(){
 		if(originalpowersource != null){
-			System.out.println("here 3");
 			return originalpowersource;
 		}
 		return null;

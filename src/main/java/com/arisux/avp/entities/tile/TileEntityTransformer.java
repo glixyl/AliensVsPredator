@@ -150,7 +150,6 @@ public class TileEntityTransformer extends PoweredTileEntity
 	@Override
 	public PoweredTileEntity getPowerSource(){
 		if(originalpowersource != null){
-			System.out.println("here 3");
 			return originalpowersource;
 		}
 		return null;
