@@ -184,11 +184,6 @@ public class TileEntityCryostasisTube extends PoweredTileEntity
 	}
 
 	@Override
-	public void setOriginalPowerSource(TileEntityRepulsionGenerator e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
 	public TileEntityRepulsionGenerator getPowerSource() {
 		// TODO Auto-generated method stub
 		return null;
@@ -196,6 +191,12 @@ public class TileEntityCryostasisTube extends PoweredTileEntity
 
 	@Override
 	public void getOriginalPowerSource() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setOriginalPowerSource(PoweredTileEntity e) {
 		// TODO Auto-generated method stub
 		
 	}

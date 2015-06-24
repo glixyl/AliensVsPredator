@@ -151,12 +151,6 @@ public class TileEntityBlastdoor extends PoweredTileEntity
 	}
 
 	@Override
-	public void setOriginalPowerSource(TileEntityRepulsionGenerator e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void getOriginalPowerSource() {
 		// TODO Auto-generated method stub
 		
@@ -166,5 +160,11 @@ public class TileEntityBlastdoor extends PoweredTileEntity
 	public TileEntityRepulsionGenerator getPowerSource() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void setOriginalPowerSource(PoweredTileEntity e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

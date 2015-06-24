@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 
 public class TileEntityPowerline extends PoweredTileEntity
 {
-	public TileEntityRepulsionGenerator originalpowersource = null;
+	public PoweredTileEntity originalpowersource = null;
 	@Override
 	public void onVoltageTick()
 	{
@@ -110,12 +110,15 @@ public class TileEntityPowerline extends PoweredTileEntity
 	@Override
 	public boolean isOriginalPowerSourceAttached() {
 		try{
-			TileEntityRepulsionGenerator t = this.getPowerSource();
+			PoweredTileEntity t = this.getPowerSource();
 			int x = t.xCoord;
 			int y = t.yCoord;
 			int z = t.zCoord;
 			World world = t.getWorldObj();
 			if(world.getTileEntity(x, y, z) instanceof TileEntityRepulsionGenerator){
+				return true;
+			}
+			else if(world.getTileEntity(x, y, z) instanceof TileEntitySolarPanel){
 				return true;
 			}
 			else{
@@ -137,13 +140,17 @@ public class TileEntityPowerline extends PoweredTileEntity
 		list.add(this.getRight());
 		list.add(this.getFront());
 			for(PoweredTileEntity p : list){
-				if(p instanceof TileEntityRepulsionGenerator || p instanceof TileEntityPowerline){
+				if(p instanceof TileEntityRepulsionGenerator || p instanceof TileEntityPowerline || p instanceof TileEntitySolarPanel){
 					if(p instanceof TileEntityRepulsionGenerator){
-						setOriginalPowerSource((TileEntityRepulsionGenerator) p);
+						setOriginalPowerSource(p);
+						break;
+					}
+					if(p instanceof TileEntitySolarPanel){
+						setOriginalPowerSource(p);
 						break;
 					}
 					else if(p instanceof TileEntityPowerline && p.getPowerSource() != null){
-						setOriginalPowerSource((TileEntityRepulsionGenerator) p.getPowerSource());
+						setOriginalPowerSource(p.getPowerSource());
 						break;
 					}
 				}
@@ -151,12 +158,11 @@ public class TileEntityPowerline extends PoweredTileEntity
 			}
 	}
 	@Override
-	public void setOriginalPowerSource(TileEntityRepulsionGenerator e) {
-		originalpowersource = e;
-		
+	public void setOriginalPowerSource(PoweredTileEntity e) {
+		originalpowersource = e;	
 	}
 	@Override
-	public TileEntityRepulsionGenerator getPowerSource(){
+	public PoweredTileEntity getPowerSource(){
 		if(originalpowersource != null){
 				return originalpowersource;
 		}

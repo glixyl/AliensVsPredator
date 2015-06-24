@@ -106,7 +106,6 @@ public class ItemHandler extends IBHandler implements IInitializable
 		itemVoltageRegulator = ((new HookedItem())),
 		itemLed = ((new HookedItem())),
 		itemLedDisplay = ((new HookedItem())),
-		itemTransformer = ((new HookedItem())),
 		itemCarbon = (new HookedItem()).setDescription("Used in the crafting of several electrical components."),
 		itemPOEInputConvertor = ((new HookedItem())),
 		itemPOEOutputConvertor = ((new HookedItem())),
@@ -214,7 +213,6 @@ public class ItemHandler extends IBHandler implements IInitializable
 		registerItem(itemTransistor, "part.transistor");
 		registerItem(itemMotherboard, "part.motherboard");
 		registerItem(itemRAM,  "part.ram");
-		registerItem(itemTransformer, "part.transformer");
 		registerItem(itemResistor, "part.resistor");
 		registerItem(itemPOEInputConvertor, "part.poeinputconvertor");
 		registerItem(itemPOEOutputConvertor, "part.poeoutputconvertor");

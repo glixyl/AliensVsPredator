@@ -1,6 +1,8 @@
 package com.arisux.avp.interfaces;
 
+import com.arisux.avp.entities.tile.PoweredTileEntity;
 import com.arisux.avp.entities.tile.TileEntityRepulsionGenerator;
+import com.arisux.avp.entities.tile.TileEntitySolarPanel;
 
 import net.minecraft.tileentity.TileEntity;
 
@@ -18,7 +20,7 @@ public interface IPowerDevice
 	public void getOriginalPowerSource();
 	public void onVoltageTick();
 	public void onOverloadTick();
-	public TileEntityRepulsionGenerator getPowerSource();
+	public PoweredTileEntity getPowerSource();
 	public void onUnderloadTick();
-	public void setOriginalPowerSource(TileEntityRepulsionGenerator e);
+	public void setOriginalPowerSource(PoweredTileEntity e);
 }

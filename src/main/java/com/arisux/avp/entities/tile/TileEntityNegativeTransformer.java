@@ -1,18 +1,20 @@
 package com.arisux.avp.entities.tile;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
-public class TileEntitySolarPanel extends PoweredTileEntity
+public class TileEntityNegativeTransformer extends PoweredTileEntity
 {
 	public int rotation;
-
+	
 	public void setDirection(byte direction)
 	{
 		this.rotation = direction;
@@ -55,89 +57,66 @@ public class TileEntitySolarPanel extends PoweredTileEntity
 	@Override
 	public void outputPowerToTile(PoweredTileEntity tile, double voltage)
 	{
-		if (tile != null && tile.getPowerSourceTile() == this)
+		if (tile != null)
 		{
-			tile.setVoltage(voltage);
+			double previousVoltage = tile.getVoltage();
+			tile.setVoltage(previousVoltage + voltage);
 		}
 	}
 
 	@Override
 	public boolean canOutputPower()
 	{
-		World world = this.getWorldObj();
-		if(world.getWorldTime() < 12300 || world.getWorldTime()  > 23850){
-			return true;
-		}
-		return false;
+		return true;
 	}
-	
+
 	@Override
-	public double getVoltage()
-	{
-		double addedVoltage = 220;
-		
-		if (getTop() instanceof TileEntityRepulsionGenerator)
+	public double getVoltage(){
+		double addedVoltage = -24;
+
+		if (getTop() instanceof TileEntityPowerline)
 		{
-			addedVoltage += 120;
+			if(getTop().voltage > 0){
+				return addedVoltage;
+			}
 		}
 		
-		if (getBottom() instanceof TileEntityRepulsionGenerator)
+		if (getBottom() instanceof TileEntityPowerline)
 		{
-			addedVoltage += 120;
+			if(getBottom().voltage > 0){
+				return addedVoltage;
+			}
 		}
 		
-		if (getLeft() instanceof TileEntityRepulsionGenerator)
+		if (getLeft() instanceof TileEntityPowerline)
 		{
-			addedVoltage += 120;
+			if(getLeft().voltage > 0){
+				return addedVoltage;
+			}
 		}
 		
-		if (getRight() instanceof TileEntityRepulsionGenerator)
+		if (getRight() instanceof TileEntityPowerline)
 		{
-			addedVoltage += 120;
+			if(getRight().voltage > 0){
+				return addedVoltage;
+			}
 		}
 		
-		if (getFront() instanceof TileEntityRepulsionGenerator)
+		if (getFront() instanceof TileEntityPowerline)
 		{
-			addedVoltage += 120;
+				if(getFront().voltage > 0 ){
+					return addedVoltage;
+				}
 		}
 		
-		if (getBack() instanceof TileEntityRepulsionGenerator)
-		{
-			addedVoltage += 120;
-		}
-		
-		if (getTop() instanceof TileEntitySolarPanel)
-		{
-			addedVoltage += 220;
-		}
-		
-		if (getBottom() instanceof TileEntitySolarPanel)
-		{
-			addedVoltage += 220;
-		}
-		
-		if (getLeft() instanceof TileEntitySolarPanel)
-		{
-			addedVoltage += 220;
-		}
-		
-		if (getRight() instanceof TileEntitySolarPanel)
-		{
-			addedVoltage += 220;
-		}
-		
-		if (getFront() instanceof TileEntitySolarPanel)
-		{
-			addedVoltage += 220;
-		}
-		
-		if (getBack() instanceof TileEntitySolarPanel)
-		{
-			addedVoltage += 220;
-		}
-		
-		return addedVoltage;
+		if (getBack() instanceof TileEntityPowerline){
+			if(getBack().voltage > 0 ){
+				return addedVoltage;
+			}
+		}		
+		return 0;
 	}
+
 
 	@Override
 	public void onVoltageTick()
@@ -180,6 +159,7 @@ public class TileEntitySolarPanel extends PoweredTileEntity
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	@Override
 	public void setOriginalPowerSource(PoweredTileEntity e) {
 		// TODO Auto-generated method stub

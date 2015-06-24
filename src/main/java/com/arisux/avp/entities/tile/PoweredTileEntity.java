@@ -61,6 +61,9 @@ public abstract class PoweredTileEntity extends TileEntity implements IPowerDevi
 		{
 			tile.setVoltage(voltage);
 		}
+		else if(tile != null && tile instanceof TileEntityPowerline && tile.getVoltage() == 0){
+			tile.setVoltage(this.getVoltage());
+		}
 	}
 
 	@Override

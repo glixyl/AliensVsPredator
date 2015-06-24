@@ -100,6 +100,8 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockBattery = (new HookedBlock(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockR2PConvertor = (new HookedBlock(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockP2RConvertor = (new HookedBlock(Material.iron)).setHardness(3.2F).setResistance(2.6F),
+		blockTransformer = (new BlockTransformer(Material.iron)).setHardness(3.2F).setResistance(2.6F),
+		blockNegativeTransformer = (new BlockNegativeTransformer(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockSolarPanel = (new BlockSolarPanel(Material.iron)).setHardness(3.2F).setResistance(2.6F);
 
 	public BlockHandler()
@@ -180,6 +182,8 @@ public class BlockHandler extends IBHandler implements IInitializable
 		registerShapedBlockSet(blockCeiling, "ceilingpanel");
 		registerShapedBlockSet(blockCeilingFan, "ceilingfan");
 		registerShapedBlockSet(blockCeiliingVent, "ceilingvent");
+		registerBlock(blockTransformer, "blocktransformer");
+		registerBlock(blockNegativeTransformer, "blocktransformernegative");
 		registerShapedBlockSet(blockCeilingGrill, "ceilinggrill");
 		registerBlock(blockCeilingGrillStairs, "ceilinggrillstairs", blockCeilingGrill, tab);
 		registerBlock(blockCeilingGrillSlab, "ceilinggrillslab", blockCeilingGrill, tab);
