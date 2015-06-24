@@ -58,7 +58,7 @@ public class TileEntityNegativeTransformer extends PoweredTileEntity
 		list.add(this.getRight());
 		list.add(this.getFront());
 		for(PoweredTileEntity e : list){
-			if(e instanceof TileEntityPowerline && e.isOriginalPowerSourceAttached()){
+			if(e instanceof TileEntityPowerline && e.isOriginalPowerSourceAttached() && e.getVoltage() > 0){
 				addedVoltage += e.getVoltage();
 				break;
 			}

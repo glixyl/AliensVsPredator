@@ -47,21 +47,6 @@ public class TileEntitySolarPanel extends PoweredTileEntity
 	}
 
 	@Override
-	public void outputPower()
-	{
-		super.outputPower();
-	}
-
-	@Override
-	public void outputPowerToTile(PoweredTileEntity tile, double voltage)
-	{
-		if (tile != null && tile.getPowerSourceTile() == this)
-		{
-			tile.setVoltage(voltage);
-		}
-	}
-
-	@Override
 	public boolean canOutputPower()
 	{
 		World world = this.getWorldObj();
@@ -134,6 +119,44 @@ public class TileEntitySolarPanel extends PoweredTileEntity
 		if (getBack() instanceof TileEntitySolarPanel)
 		{
 			addedVoltage += 220;
+		}
+		
+		
+		
+		if (getTop() instanceof TileEntityPowerline)
+		{
+			TileEntityPowerline te = (TileEntityPowerline) getTop();
+			te.state = true;
+		}
+		
+		if (getBottom() instanceof TileEntityPowerline)
+		{
+			TileEntityPowerline te = (TileEntityPowerline) getBottom();
+			te.state = true;
+		}
+		
+		if (getLeft() instanceof TileEntityPowerline)
+		{
+			TileEntityPowerline te = (TileEntityPowerline) getLeft();
+			te.state = true;
+		}
+		
+		if (getRight() instanceof TileEntityPowerline)
+		{
+			TileEntityPowerline te = (TileEntityPowerline) getRight();
+			te.state = true;
+		}
+		
+		if (getFront() instanceof TileEntityPowerline)
+		{
+			TileEntityPowerline te = (TileEntityPowerline) getFront();
+			te.state = true;
+		}
+		
+		if (getBack() instanceof TileEntityPowerline)
+		{
+			TileEntityPowerline te = (TileEntityPowerline) getBack();
+			te.state = true;
 		}
 		
 		return addedVoltage;

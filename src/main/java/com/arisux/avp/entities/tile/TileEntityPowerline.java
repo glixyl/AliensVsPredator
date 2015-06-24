@@ -15,6 +15,14 @@ import net.minecraft.world.World;
 public class TileEntityPowerline extends PoweredTileEntity
 {
 	public PoweredTileEntity originalpowersource = null;
+	public boolean state;
+	
+	@Override
+	public void updateEntity(){
+		super.updateEntity();
+		updateState();
+	}
+	
 	@Override
 	public void onVoltageTick()
 	{
@@ -81,11 +89,39 @@ public class TileEntityPowerline extends PoweredTileEntity
 	public boolean canOutputPower()
 	{
 		getOriginalPowerSource();
-		if(isOriginalPowerSourceAttached()){
+		if(isOriginalPowerSourceAttached() && state){
 			return true;
 		}
 		else{
 			return false;
+		}
+	}
+	
+	public void updateState(){
+		try{
+			List<PoweredTileEntity> list = new ArrayList<PoweredTileEntity>();
+			list.add(this.getTop());
+			list.add(this.getBack());
+			list.add(this.getBottom());
+			list.add(this.getLeft());
+			list.add(this.getRight());
+			list.add(this.getFront());
+			for (int i = 0; i < list.size(); i++) {
+				PoweredTileEntity p = list.get(i);
+				if(p.isPowerSource()){
+					state = true;
+				}
+				else if(p instanceof TileEntityPowerline){
+					TileEntityPowerline te = (TileEntityPowerline) p;
+					boolean itsState = te.state;
+					if(itsState && !this.state){
+						this.state = itsState;
+						System.out.println(this.state);
+					}
+				}
+			}
+		}catch(NullPointerException e)
+		{
 		}
 	}
 	

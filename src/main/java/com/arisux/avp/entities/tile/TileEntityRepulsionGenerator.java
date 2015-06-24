@@ -52,7 +52,7 @@ public class TileEntityRepulsionGenerator extends PoweredTileEntity
 	@Override
 	public void outputPowerToTile(PoweredTileEntity tile, double voltage)
 	{
-		if (tile != null && tile.getPowerSourceTile() == this)
+		if (tile != null && tile.getPowerSourceTile(tile) == this)
 		{
 			tile.setVoltage(voltage);
 		}
@@ -98,35 +98,7 @@ public class TileEntityRepulsionGenerator extends PoweredTileEntity
 		{
 			addedVoltage += 120;
 		}
-		if (getTop() instanceof TileEntityRepulsionGenerator)
-		{
-			addedVoltage += 120;
-		}
 		
-		if (getBottom() instanceof TileEntityRepulsionGenerator)
-		{
-			addedVoltage += 120;
-		}
-		
-		if (getLeft() instanceof TileEntityRepulsionGenerator)
-		{
-			addedVoltage += 120;
-		}
-		
-		if (getRight() instanceof TileEntityRepulsionGenerator)
-		{
-			addedVoltage += 120;
-		}
-		
-		if (getFront() instanceof TileEntityRepulsionGenerator)
-		{
-			addedVoltage += 120;
-		}
-		
-		if (getBack() instanceof TileEntityRepulsionGenerator)
-		{
-			addedVoltage += 120;
-		}
 		
 		if (getTop() instanceof TileEntitySolarPanel)
 		{
@@ -157,6 +129,45 @@ public class TileEntityRepulsionGenerator extends PoweredTileEntity
 		{
 			addedVoltage += 220;
 		}
+		
+		
+		
+		if (getTop() instanceof TileEntityPowerline)
+		{
+			TileEntityPowerline te = (TileEntityPowerline) getTop();
+			te.state = true;
+		}
+		
+		if (getBottom() instanceof TileEntityPowerline)
+		{
+			TileEntityPowerline te = (TileEntityPowerline) getBottom();
+			te.state = true;
+		}
+		
+		if (getLeft() instanceof TileEntityPowerline)
+		{
+			TileEntityPowerline te = (TileEntityPowerline) getLeft();
+			te.state = true;
+		}
+		
+		if (getRight() instanceof TileEntityPowerline)
+		{
+			TileEntityPowerline te = (TileEntityPowerline) getRight();
+			te.state = true;
+		}
+		
+		if (getFront() instanceof TileEntityPowerline)
+		{
+			TileEntityPowerline te = (TileEntityPowerline) getFront();
+			te.state = true;
+		}
+		
+		if (getBack() instanceof TileEntityPowerline)
+		{
+			TileEntityPowerline te = (TileEntityPowerline) getBack();
+			te.state = true;
+		}
+		
 		return addedVoltage;
 	}
 
