@@ -140,7 +140,7 @@ public class TileEntityPowerline extends PoweredTileEntity
 		list.add(this.getRight());
 		list.add(this.getFront());
 			for(PoweredTileEntity p : list){
-				if(p instanceof TileEntityRepulsionGenerator || p instanceof TileEntityPowerline || p instanceof TileEntitySolarPanel){
+				if(p instanceof TileEntityRepulsionGenerator || p instanceof TileEntityPowerline || p instanceof TileEntitySolarPanel || p instanceof TileEntityTransformer || p instanceof TileEntityNegativeTransformer){
 					if(p instanceof TileEntityRepulsionGenerator){
 						setOriginalPowerSource(p);
 						break;
@@ -153,10 +153,19 @@ public class TileEntityPowerline extends PoweredTileEntity
 						setOriginalPowerSource(p.getPowerSource());
 						break;
 					}
+					else if(p instanceof TileEntityTransformer && p.getPowerSource() != null){
+						setOriginalPowerSource(p.getPowerSource());
+						break;
+					}
+					else if(p instanceof TileEntityNegativeTransformer && p.getPowerSource() != null){
+						setOriginalPowerSource(p.getPowerSource());
+						break;
+					}
 				}
 				
 			}
 	}
+	
 	@Override
 	public void setOriginalPowerSource(PoweredTileEntity e) {
 		originalpowersource = e;	
