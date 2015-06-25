@@ -110,7 +110,7 @@ public class TileEntityPowerline extends PoweredTileEntity
 			list.add(this.getFront());
 			for (int i = 0; i < list.size(); i++) {
 				PoweredTileEntity p = list.get(i);
-				if(p instanceof TileEntityRepulsionGenerator || p instanceof TileEntitySolarPanel){
+				if(p instanceof TileEntityRepulsionGenerator || p instanceof TileEntitySolarPanel || p instanceof TileEntityNegativeTransformer || p instanceof TileEntityTransformer){
 					state = true;
 				}
 				else if(p instanceof TileEntityPowerline){
