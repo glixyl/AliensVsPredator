@@ -18,7 +18,8 @@ public class TileEntityPowerline extends PoweredTileEntity
 	public boolean state;
 	
 	@Override
-	public void updateEntity(){
+	public void updateEntity()
+	{
 		super.updateEntity();
 		updateState();
 	}
@@ -88,13 +89,14 @@ public class TileEntityPowerline extends PoweredTileEntity
 	@Override
 	public boolean canOutputPower()
 	{
-		getOriginalPowerSource();
-		if(isOriginalPowerSourceAttached() && state){
-			return true;
-		}
-		else{
-			return false;
-		}
+		return true;
+		//getOriginalPowerSource();
+		//if(isOriginalPowerSourceAttached()){
+		//	return true;
+		//}
+		//else{
+		//	return false;
+		//}
 	}
 	
 	public void updateState(){
@@ -108,15 +110,17 @@ public class TileEntityPowerline extends PoweredTileEntity
 			list.add(this.getFront());
 			for (int i = 0; i < list.size(); i++) {
 				PoweredTileEntity p = list.get(i);
-				if(p.isPowerSource()){
+				if(p instanceof TileEntityRepulsionGenerator || p instanceof TileEntitySolarPanel){
 					state = true;
 				}
 				else if(p instanceof TileEntityPowerline){
 					TileEntityPowerline te = (TileEntityPowerline) p;
 					boolean itsState = te.state;
-					if(itsState && !this.state){
+					if(itsState == true && this.state == false){
 						this.state = itsState;
-						System.out.println(this.state);
+					}
+					if(itsState == false && this.state == true){
+						this.state = itsState;
 					}
 				}
 			}

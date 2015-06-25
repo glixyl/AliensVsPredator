@@ -33,7 +33,12 @@ public abstract class PoweredTileEntity extends TileEntity implements IPowerDevi
 		{
 			this.onOverloadTick();
 		}
-		
+		if(this instanceof TileEntityPowerline){
+			TileEntityPowerline te = (TileEntityPowerline) this;
+			if(!te.state){
+				this.voltage = 0;
+			}
+		}
 		if (this.voltage <= this.getMinOperatingVoltage())
 		{
 			this.onUnderloadTick();
@@ -137,8 +142,125 @@ public abstract class PoweredTileEntity extends TileEntity implements IPowerDevi
 	}
 
 	public PoweredTileEntity getPowerSourceTile(PoweredTileEntity e){
-		if(e instanceof TileEntitySolarPanel || e instanceof TileEntityRepulsionGenerator){
-			return e;
+		if (getTop() != null && getTop().isOutputVoltageHigherThan(this) && getTop().canOutputPower())
+		{
+			return getTop();
+		}
+		if (getBottom() != null && getBottom().isOutputVoltageHigherThan(this) && getBottom().canOutputPower())
+		{
+			return getBottom();
+		}
+		if (getFront() != null && getFront().isOutputVoltageHigherThan(this) && getFront().canOutputPower())
+		{
+			return getFront();
+		}
+		if (getBack() != null && getBack().isOutputVoltageHigherThan(this) && getBack().canOutputPower())
+		{
+			return getBack();
+		}
+		if (getLeft() != null && getLeft().isOutputVoltageHigherThan(this) && getLeft().canOutputPower())
+		{
+			return getLeft();
+		}
+		if (getRight() != null && getRight().isOutputVoltageHigherThan(this) && getRight().canOutputPower())
+		{
+			return getRight();
+		}
+		if (getTop() instanceof TileEntityTransformer)
+		{
+			TileEntityTransformer t = (TileEntityTransformer)getTop();
+			if(!t.isOriginalPowerSourceAttached()){
+				return null;
+			}
+			return (PoweredTileEntity) t.getPowerSource();
+		}
+		if (getBottom() instanceof TileEntityTransformer)
+		{
+			TileEntityTransformer t = (TileEntityTransformer)getBottom();
+			if(!t.isOriginalPowerSourceAttached()){
+				return null;
+			}
+			return (PoweredTileEntity) t.getPowerSource();
+		}
+		if (getFront() instanceof TileEntityTransformer)
+		{
+			TileEntityTransformer t = (TileEntityTransformer)getFront();
+			if(!t.isOriginalPowerSourceAttached()){
+				return null;
+			}
+			return (PoweredTileEntity) t.getPowerSource();
+		}
+		if (getBack() instanceof TileEntityTransformer)
+		{
+			TileEntityTransformer t = (TileEntityTransformer)getBack();
+			if(!t.isOriginalPowerSourceAttached()){
+				return null;
+			}
+			return (PoweredTileEntity) t.getPowerSource();
+		}
+		if (getLeft() instanceof TileEntityTransformer)
+		{
+			TileEntityTransformer t = (TileEntityTransformer)getLeft();
+			if(!t.isOriginalPowerSourceAttached()){
+				return null;
+			}
+			return (PoweredTileEntity) t.getPowerSource();
+		}
+		if (getRight() instanceof TileEntityTransformer)
+		{
+			TileEntityTransformer t = (TileEntityTransformer)getRight();
+			if(!t.isOriginalPowerSourceAttached()){
+				return null;
+			}
+			return (PoweredTileEntity) t.getPowerSource();
+		}
+		if (getTop() instanceof TileEntityNegativeTransformer)
+		{
+			TileEntityNegativeTransformer t = (TileEntityNegativeTransformer)getTop();
+			if(!t.isOriginalPowerSourceAttached()){
+				return null;
+			}
+			return (PoweredTileEntity) t.getPowerSource();
+		}
+		if (getBottom() instanceof TileEntityNegativeTransformer)
+		{
+			TileEntityNegativeTransformer t = (TileEntityNegativeTransformer)getBottom();
+			if(!t.isOriginalPowerSourceAttached()){
+				return null;
+			}
+			return (PoweredTileEntity) t.getPowerSource();
+		}
+		if (getFront() instanceof TileEntityNegativeTransformer)
+		{
+			TileEntityNegativeTransformer t = (TileEntityNegativeTransformer)getFront();
+			if(!t.isOriginalPowerSourceAttached()){
+				return null;
+			}
+			return (PoweredTileEntity) t.getPowerSource();
+		}
+		if (getBack() instanceof TileEntityNegativeTransformer)
+		{
+			TileEntityNegativeTransformer t = (TileEntityNegativeTransformer)getBack();
+			if(!t.isOriginalPowerSourceAttached()){
+				return null;
+			}
+			return (PoweredTileEntity) t.getPowerSource();
+		}
+		if (getLeft() instanceof TileEntityNegativeTransformer)
+		{
+			TileEntityNegativeTransformer t = (TileEntityNegativeTransformer)getLeft();
+			if(!t.isOriginalPowerSourceAttached()){
+				return null;
+			}
+			return (PoweredTileEntity) t.getPowerSource();
+		}
+		if (getRight() instanceof TileEntityNegativeTransformer)
+		{
+			TileEntityNegativeTransformer t = (TileEntityNegativeTransformer)getRight();
+			if(!t.isOriginalPowerSourceAttached()){
+				return null;
+			}
+			return (PoweredTileEntity) t.getPowerSource();
 		}
 		return null;
 	}

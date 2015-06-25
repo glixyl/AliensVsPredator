@@ -58,7 +58,7 @@ public class TileEntityTransformer extends PoweredTileEntity
 		list.add(this.getRight());
 		list.add(this.getFront());
 		for(PoweredTileEntity e : list){
-			if(e instanceof TileEntityPowerline && e.isOriginalPowerSourceAttached()){
+			if(e instanceof TileEntityPowerline && e.getVoltage() > 24){
 				addedVoltage += e.getVoltage();
 				break;
 			}

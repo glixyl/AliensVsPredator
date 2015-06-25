@@ -45,11 +45,10 @@ public class TileEntityNegativeTransformer extends PoweredTileEntity
 		return super.getVoltage();
 	}
 
-
 	@Override
 	public void onVoltageTick()
 	{
-		double addedVoltage = -24;
+		double addedVoltage = 24;
 		List<PoweredTileEntity> list = new ArrayList<PoweredTileEntity>();
 		list.add(this.getTop());
 		list.add(this.getBack());
@@ -58,17 +57,25 @@ public class TileEntityNegativeTransformer extends PoweredTileEntity
 		list.add(this.getRight());
 		list.add(this.getFront());
 		for(PoweredTileEntity e : list){
-			if(e instanceof TileEntityPowerline && e.isOriginalPowerSourceAttached() && e.getVoltage() > 0){
-				addedVoltage += e.getVoltage();
+			if(e instanceof TileEntityPowerline && e.getVoltage() > 0){
+				addedVoltage = e.getVoltage() - addedVoltage;
 				break;
 			}
 		}
-		for(PoweredTileEntity e : list){
-			if(e instanceof TileEntityPowerline && e.getVoltage() >= 0){
-				e.setVoltage(addedVoltage);
+		try{
+			for(PoweredTileEntity e : list)
+			{
+				if(e instanceof TileEntityPowerline && e.getVoltage() <= 0)
+				{
+					e.setVoltage(addedVoltage);
+				}
 			}
 		}
+		catch(NullPointerException e)
+		{
+		}
 	}
+	
 	@Override
 	public void onOverloadTick()
 	{

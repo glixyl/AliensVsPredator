@@ -177,6 +177,7 @@ tile.avp:server.name=Network Beacon
 tile.avp:terminal.name=Terminal
 
 entity.Drone.name=Xenomorph Drone
+entity.Trilobite.name=Trilobite
 entity.Warrior.name=Xenomorph Warrior
 entity.Spitter.name=Xenomorph Spitter
 entity.Crusher.name=Xenomorph Crusher

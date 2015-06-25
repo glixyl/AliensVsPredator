@@ -52,7 +52,7 @@ public class TileEntityRepulsionGenerator extends PoweredTileEntity
 	@Override
 	public void outputPowerToTile(PoweredTileEntity tile, double voltage)
 	{
-		if (tile != null && tile.getPowerSourceTile(tile) == this)
+		if (tile != null)
 		{
 			tile.setVoltage(voltage);
 		}
