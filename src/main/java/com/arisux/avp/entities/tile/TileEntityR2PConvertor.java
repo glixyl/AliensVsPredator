@@ -35,34 +35,39 @@ public class TileEntityR2PConvertor extends PoweredTileEntity
 			this.isActiveRedstoneWireAttached = world.getBlockMetadata(x + 1, y, z) != 0;
 		}
 		
-		if(world.getBlock(x, y + 1, z) instanceof BlockRedstoneWire)
+		else if(world.getBlock(x, y + 1, z) instanceof BlockRedstoneWire)
 		{
 			BlockRedstoneWire wire = (BlockRedstoneWire) world.getBlock(x, y + 1, z);
 			this.isActiveRedstoneWireAttached = world.getBlockMetadata(x, y + 1, z) != 0;
 		}
 		
-		if(world.getBlock(x, y, z + 1) instanceof BlockRedstoneWire)
+		else if(world.getBlock(x, y, z + 1) instanceof BlockRedstoneWire)
 		{
 			BlockRedstoneWire wire = (BlockRedstoneWire) world.getBlock(x, y, z + 1);
 			this.isActiveRedstoneWireAttached = world.getBlockMetadata(x, y, z + 1) != 0;
 		}
 		
-		if(world.getBlock(x - 1, y, z) instanceof BlockRedstoneWire)
+		else if(world.getBlock(x - 1, y, z) instanceof BlockRedstoneWire)
 		{
 			BlockRedstoneWire wire = (BlockRedstoneWire) world.getBlock(x - 1, y, z);
 			this.isActiveRedstoneWireAttached = world.getBlockMetadata(x - 1, y, z) != 0;
 		}
 		
-		if(world.getBlock(x, y - 1, z) instanceof BlockRedstoneWire)
+		else if(world.getBlock(x, y - 1, z) instanceof BlockRedstoneWire)
 		{
 			BlockRedstoneWire wire = (BlockRedstoneWire) world.getBlock(x, y - 1, z);
 			this.isActiveRedstoneWireAttached = world.getBlockMetadata(x, y - 1, z) != 0;
 		}
 		
-		if(world.getBlock(x, y, z - 1) instanceof BlockRedstoneWire)
+		else if(world.getBlock(x, y, z - 1) instanceof BlockRedstoneWire)
 		{
 			BlockRedstoneWire wire = (BlockRedstoneWire) world.getBlock(x, y, z - 1);
 			this.isActiveRedstoneWireAttached = world.getBlockMetadata(x, y, z - 1) != 0;
+		}
+		
+		else
+		{
+			this.isActiveRedstoneWireAttached = false;
 		}
 	}
 	
@@ -100,22 +105,7 @@ public class TileEntityR2PConvertor extends PoweredTileEntity
 		super.outputPower();
 	}
 
-	@Override
-	public void outputPowerToTile(PoweredTileEntity tile, double voltage)
-	{
-		if (tile != null)
-		{
-			if (isActiveRedstoneWireAttached)
-			{
-				tile.setVoltage(voltage);
-			}
-			else
-			{
-				tile.setVoltage(0);
-			}
-		}
-	}
-
+	
 	@Override
 	public boolean canOutputPower()
 	{
@@ -125,107 +115,71 @@ public class TileEntityR2PConvertor extends PoweredTileEntity
 	@Override
 	public double getVoltage()
 	{
-		double addedVoltage = 120;
+		double addedVoltage = 0;
+		if(isActiveRedstoneWireAttached){
+			addedVoltage = 120;
 		
-		if (getTop() instanceof TileEntityRepulsionGenerator)
-		{
-			addedVoltage += 120;
+			if (getTop() instanceof TileEntityRepulsionGenerator)
+			{
+				addedVoltage += 120;
+			}
+		
+			if (getBottom() instanceof TileEntityRepulsionGenerator)
+			{
+				addedVoltage += 120;
+			}
+		
+			if (getLeft() instanceof TileEntityRepulsionGenerator)
+			{
+				addedVoltage += 120;
+			}
+		
+			if (getRight() instanceof TileEntityRepulsionGenerator)
+			{
+				addedVoltage += 120;
+			}
+		
+			if (getFront() instanceof TileEntityRepulsionGenerator)
+			{
+				addedVoltage += 120;
+			}
+		
+			if (getBack() instanceof TileEntityRepulsionGenerator)
+			{
+				addedVoltage += 120;
+			}
+		
+		
+			if (getTop() instanceof TileEntitySolarPanel)
+			{
+				addedVoltage += 220;
+			}
+		
+			if (getBottom() instanceof TileEntitySolarPanel)
+			{
+				addedVoltage += 220;
+			}
+		
+			if (getLeft() instanceof TileEntitySolarPanel)
+			{
+				addedVoltage += 220;
+			}
+		
+			if (getRight() instanceof TileEntitySolarPanel)
+			{
+				addedVoltage += 220;
+			}
+		
+			if (getFront() instanceof TileEntitySolarPanel)
+			{
+				addedVoltage += 220;
+			}
+		
+			if (getBack() instanceof TileEntitySolarPanel)
+			{
+				addedVoltage += 220;
+			}
 		}
-		
-		if (getBottom() instanceof TileEntityRepulsionGenerator)
-		{
-			addedVoltage += 120;
-		}
-		
-		if (getLeft() instanceof TileEntityRepulsionGenerator)
-		{
-			addedVoltage += 120;
-		}
-		
-		if (getRight() instanceof TileEntityRepulsionGenerator)
-		{
-			addedVoltage += 120;
-		}
-		
-		if (getFront() instanceof TileEntityRepulsionGenerator)
-		{
-			addedVoltage += 120;
-		}
-		
-		if (getBack() instanceof TileEntityRepulsionGenerator)
-		{
-			addedVoltage += 120;
-		}
-		
-		
-		if (getTop() instanceof TileEntitySolarPanel)
-		{
-			addedVoltage += 220;
-		}
-		
-		if (getBottom() instanceof TileEntitySolarPanel)
-		{
-			addedVoltage += 220;
-		}
-		
-		if (getLeft() instanceof TileEntitySolarPanel)
-		{
-			addedVoltage += 220;
-		}
-		
-		if (getRight() instanceof TileEntitySolarPanel)
-		{
-			addedVoltage += 220;
-		}
-		
-		if (getFront() instanceof TileEntitySolarPanel)
-		{
-			addedVoltage += 220;
-		}
-		
-		if (getBack() instanceof TileEntitySolarPanel)
-		{
-			addedVoltage += 220;
-		}
-		
-		
-		
-		if (getTop() instanceof TileEntityPowerline)
-		{
-			TileEntityPowerline te = (TileEntityPowerline) getTop();
-			te.state = true;
-		}
-		
-		if (getBottom() instanceof TileEntityPowerline)
-		{
-			TileEntityPowerline te = (TileEntityPowerline) getBottom();
-			te.state = true;
-		}
-		
-		if (getLeft() instanceof TileEntityPowerline)
-		{
-			TileEntityPowerline te = (TileEntityPowerline) getLeft();
-			te.state = true;
-		}
-		
-		if (getRight() instanceof TileEntityPowerline)
-		{
-			TileEntityPowerline te = (TileEntityPowerline) getRight();
-			te.state = true;
-		}
-		
-		if (getFront() instanceof TileEntityPowerline)
-		{
-			TileEntityPowerline te = (TileEntityPowerline) getFront();
-			te.state = true;
-		}
-		
-		if (getBack() instanceof TileEntityPowerline)
-		{
-			TileEntityPowerline te = (TileEntityPowerline) getBack();
-			te.state = true;
-		}
-		
 		return addedVoltage;
 	}
 

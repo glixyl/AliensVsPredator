@@ -122,16 +122,11 @@ public class TileEntityPowerline extends PoweredTileEntity
 				else if(p instanceof TileEntityR2PConvertor)
 				{
 					TileEntityR2PConvertor te = (TileEntityR2PConvertor) p;
-					if(te.isActiveRedstoneWireAttached)
-					{
-						state = true;
-					}
-					else if(!te.isActiveRedstoneWireAttached){
-						state = false;
-					}
+					state = te.isActiveRedstoneWireAttached;
 				}
 			}
-		}catch(NullPointerException e)
+		}
+		catch(NullPointerException e)
 		{
 		}
 	}

@@ -44,6 +44,14 @@ public abstract class PoweredTileEntity extends TileEntity implements IPowerDevi
 			this.onUnderloadTick();
 		}
 		
+		if (this instanceof TileEntityR2PConvertor)
+		{
+			TileEntityR2PConvertor te = (TileEntityR2PConvertor) this;
+			if(!te.isActiveRedstoneWireAttached){
+				te.setVoltage(0);
+			}
+		}
+		
 		if (this.canOutputPower())
 		{
 			this.outputPower();
@@ -61,12 +69,40 @@ public abstract class PoweredTileEntity extends TileEntity implements IPowerDevi
 	{
 		double voltage = this.getVoltageAfterApplyingResistance();
 		
-		this.outputPowerToTile(this.getTop(), voltage);
-		this.outputPowerToTile(this.getBottom(), voltage);
-		this.outputPowerToTile(this.getFront(), voltage);
-		this.outputPowerToTile(this.getBack(), voltage);
-		this.outputPowerToTile(this.getLeft(), voltage);
-		this.outputPowerToTile(this.getRight(), voltage);
+		if(this.getTop() instanceof TileEntityR2PConvertor);
+		
+		else{
+			this.outputPowerToTile(this.getTop(), voltage);
+		}
+		
+		if(this.getBottom() instanceof TileEntityR2PConvertor);
+		else
+		{
+			this.outputPowerToTile(this.getBottom(), voltage);
+		}
+		
+		if(this.getFront() instanceof TileEntityR2PConvertor);
+		else
+		{
+			this.outputPowerToTile(this.getFront(), voltage);
+		}
+		
+		if(this.getBack() instanceof TileEntityR2PConvertor);
+		else
+		{
+			this.outputPowerToTile(this.getBack(), voltage);
+		}
+		if(this.getLeft() instanceof TileEntityR2PConvertor);
+		else
+		{
+			this.outputPowerToTile(this.getLeft(), voltage);
+		}
+		
+		if(this.getRight() instanceof TileEntityR2PConvertor);
+		else
+		{
+			this.outputPowerToTile(this.getRight(), voltage);
+		}
 	}
 	
 	public void outputPowerToTile(PoweredTileEntity tile, double voltage)
