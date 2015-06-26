@@ -90,13 +90,6 @@ public class TileEntityPowerline extends PoweredTileEntity
 	public boolean canOutputPower()
 	{
 		return true;
-		//getOriginalPowerSource();
-		//if(isOriginalPowerSourceAttached()){
-		//	return true;
-		//}
-		//else{
-		//	return false;
-		//}
 	}
 	
 	public void updateState(){
@@ -113,14 +106,28 @@ public class TileEntityPowerline extends PoweredTileEntity
 				if(p instanceof TileEntityRepulsionGenerator || p instanceof TileEntitySolarPanel || p instanceof TileEntityNegativeTransformer || p instanceof TileEntityTransformer){
 					state = true;
 				}
-				else if(p instanceof TileEntityPowerline){
+				else if(p instanceof TileEntityPowerline)
+				{
 					TileEntityPowerline te = (TileEntityPowerline) p;
 					boolean itsState = te.state;
-					if(itsState == true && this.state == false){
+					if(itsState == true && this.state == false)
+					{
 						this.state = itsState;
 					}
-					if(itsState == false && this.state == true){
+					if(itsState == false && this.state == true)
+					{
 						this.state = itsState;
+					}
+				}
+				else if(p instanceof TileEntityR2PConvertor)
+				{
+					TileEntityR2PConvertor te = (TileEntityR2PConvertor) p;
+					if(te.isActiveRedstoneWireAttached)
+					{
+						state = true;
+					}
+					else if(!te.isActiveRedstoneWireAttached){
+						state = false;
 					}
 				}
 			}
