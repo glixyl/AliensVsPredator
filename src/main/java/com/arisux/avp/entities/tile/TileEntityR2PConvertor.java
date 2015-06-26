@@ -1,5 +1,7 @@
 package com.arisux.avp.entities.tile;
 
+import com.arisux.airi.lib.WorldUtil;
+
 import net.minecraft.block.BlockRedstoneWire;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -30,98 +32,38 @@ public class TileEntityR2PConvertor extends PoweredTileEntity
 		if(world.getBlock(x + 1, y, z) instanceof BlockRedstoneWire)
 		{
 			BlockRedstoneWire wire = (BlockRedstoneWire) world.getBlock(x + 1, y, z);
-			if(world.getBlockMetadata(x + 1, y, z) != 0)
-			{
-				isActiveRedstoneWireAttached = true;
-				
-			}
-			else
-			{
-				isActiveRedstoneWireAttached = false;
-				
-			}
+			this.isActiveRedstoneWireAttached = world.getBlockMetadata(x + 1, y, z) != 0;
 		}
 		
 		if(world.getBlock(x, y + 1, z) instanceof BlockRedstoneWire)
 		{
 			BlockRedstoneWire wire = (BlockRedstoneWire) world.getBlock(x, y + 1, z);
-			if(world.getBlockMetadata(x, y + 1, z) != 0)
-			{
-				isActiveRedstoneWireAttached = true;
-				
-			}
-			else
-			{
-				isActiveRedstoneWireAttached = false;
-				
-			}
-
+			this.isActiveRedstoneWireAttached = world.getBlockMetadata(x, y + 1, z) != 0;
 		}
 		
 		if(world.getBlock(x, y, z + 1) instanceof BlockRedstoneWire)
 		{
 			BlockRedstoneWire wire = (BlockRedstoneWire) world.getBlock(x, y, z + 1);
-			if(world.getBlockMetadata(x, y, z + 1) != 0)
-			{
-				isActiveRedstoneWireAttached = true;
-				
-			}
-			else
-			{
-				isActiveRedstoneWireAttached = false;
-				
-			}
+			this.isActiveRedstoneWireAttached = world.getBlockMetadata(x, y, z + 1) != 0;
 		}
 		
 		if(world.getBlock(x - 1, y, z) instanceof BlockRedstoneWire)
 		{
 			BlockRedstoneWire wire = (BlockRedstoneWire) world.getBlock(x - 1, y, z);
-			if(world.getBlockMetadata(x - 1, y, z) != 0)
-			{
-				isActiveRedstoneWireAttached = true;
-				
-			}
-			else
-			{
-				isActiveRedstoneWireAttached = false;
-				
-			}
-
+			this.isActiveRedstoneWireAttached = world.getBlockMetadata(x - 1, y, z) != 0;
 		}
 		
 		if(world.getBlock(x, y - 1, z) instanceof BlockRedstoneWire)
 		{
 			BlockRedstoneWire wire = (BlockRedstoneWire) world.getBlock(x, y - 1, z);
-			if(world.getBlockMetadata(x, y - 1, z) != 0)
-			{
-				isActiveRedstoneWireAttached = true;
-				
-			}
-			else
-			{
-				isActiveRedstoneWireAttached = false;
-				
-			}
-
+			this.isActiveRedstoneWireAttached = world.getBlockMetadata(x, y - 1, z) != 0;
 		}
 		
 		if(world.getBlock(x, y, z - 1) instanceof BlockRedstoneWire)
 		{
 			BlockRedstoneWire wire = (BlockRedstoneWire) world.getBlock(x, y, z - 1);
-			
-			if(world.getBlockMetadata(x, y, z - 1) != 0)
-			{
-				isActiveRedstoneWireAttached = true;
-				
-			}
-			
-			else
-			{
-				isActiveRedstoneWireAttached = false;
-				
-			}
+			this.isActiveRedstoneWireAttached = world.getBlockMetadata(x, y, z - 1) != 0;
 		}
-	
 	}
 	
 	@Override
@@ -155,15 +97,22 @@ public class TileEntityR2PConvertor extends PoweredTileEntity
 	@Override
 	public void outputPower()
 	{
-			super.outputPower();
+		super.outputPower();
 	}
 
 	@Override
 	public void outputPowerToTile(PoweredTileEntity tile, double voltage)
 	{
-		if (tile != null && isActiveRedstoneWireAttached)
+		if (tile != null)
 		{
-			tile.setVoltage(voltage);
+			if (isActiveRedstoneWireAttached)
+			{
+				tile.setVoltage(voltage);
+			}
+			else
+			{
+				tile.setVoltage(0);
+			}
 		}
 	}
 
