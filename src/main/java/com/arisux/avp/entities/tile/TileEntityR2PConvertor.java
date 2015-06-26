@@ -12,7 +12,6 @@ public class TileEntityR2PConvertor extends PoweredTileEntity
 {
 	public int rotation;
 	public boolean isActiveRedstoneWireAttached = false;
-	public double addedVoltage;
 	
 	public void setDirection(byte direction)
 	{
@@ -31,30 +30,30 @@ public class TileEntityR2PConvertor extends PoweredTileEntity
 		if(world.getBlock(x + 1, y, z) instanceof BlockRedstoneWire)
 		{
 			BlockRedstoneWire wire = (BlockRedstoneWire) world.getBlock(x + 1, y, z);
-			if(world.getBlockMetadata(x + 1, y, z) == 15)
+			if(world.getBlockMetadata(x + 1, y, z) != 0)
 			{
 				isActiveRedstoneWireAttached = true;
-				addedVoltage = 120;
+				
 			}
 			else
 			{
 				isActiveRedstoneWireAttached = false;
-				addedVoltage = 0;
+				
 			}
 		}
 		
 		if(world.getBlock(x, y + 1, z) instanceof BlockRedstoneWire)
 		{
 			BlockRedstoneWire wire = (BlockRedstoneWire) world.getBlock(x, y + 1, z);
-			if(world.getBlockMetadata(x, y + 1, z) == 15)
+			if(world.getBlockMetadata(x, y + 1, z) != 0)
 			{
 				isActiveRedstoneWireAttached = true;
-				addedVoltage = 120;
+				
 			}
 			else
 			{
 				isActiveRedstoneWireAttached = false;
-				addedVoltage = 0;
+				
 			}
 
 		}
@@ -62,30 +61,30 @@ public class TileEntityR2PConvertor extends PoweredTileEntity
 		if(world.getBlock(x, y, z + 1) instanceof BlockRedstoneWire)
 		{
 			BlockRedstoneWire wire = (BlockRedstoneWire) world.getBlock(x, y, z + 1);
-			if(world.getBlockMetadata(x, y, z + 1) == 15)
+			if(world.getBlockMetadata(x, y, z + 1) != 0)
 			{
 				isActiveRedstoneWireAttached = true;
-				addedVoltage = 120;
+				
 			}
 			else
 			{
 				isActiveRedstoneWireAttached = false;
-				addedVoltage = 0;
+				
 			}
 		}
 		
 		if(world.getBlock(x - 1, y, z) instanceof BlockRedstoneWire)
 		{
 			BlockRedstoneWire wire = (BlockRedstoneWire) world.getBlock(x - 1, y, z);
-			if(world.getBlockMetadata(x - 1, y, z) == 15)
+			if(world.getBlockMetadata(x - 1, y, z) != 0)
 			{
 				isActiveRedstoneWireAttached = true;
-				addedVoltage = 120;
+				
 			}
 			else
 			{
 				isActiveRedstoneWireAttached = false;
-				addedVoltage = 0;
+				
 			}
 
 		}
@@ -93,15 +92,15 @@ public class TileEntityR2PConvertor extends PoweredTileEntity
 		if(world.getBlock(x, y - 1, z) instanceof BlockRedstoneWire)
 		{
 			BlockRedstoneWire wire = (BlockRedstoneWire) world.getBlock(x, y - 1, z);
-			if(world.getBlockMetadata(x, y - 1, z) == 15)
+			if(world.getBlockMetadata(x, y - 1, z) != 0)
 			{
 				isActiveRedstoneWireAttached = true;
-				addedVoltage = 120;
+				
 			}
 			else
 			{
 				isActiveRedstoneWireAttached = false;
-				addedVoltage = 0;
+				
 			}
 
 		}
@@ -110,16 +109,16 @@ public class TileEntityR2PConvertor extends PoweredTileEntity
 		{
 			BlockRedstoneWire wire = (BlockRedstoneWire) world.getBlock(x, y, z - 1);
 			
-			if(world.getBlockMetadata(x, y, z - 1) == 15)
+			if(world.getBlockMetadata(x, y, z - 1) != 0)
 			{
 				isActiveRedstoneWireAttached = true;
-				addedVoltage = 120;
+				
 			}
 			
 			else
 			{
 				isActiveRedstoneWireAttached = false;
-				addedVoltage = 0;
+				
 			}
 		}
 	
@@ -177,7 +176,7 @@ public class TileEntityR2PConvertor extends PoweredTileEntity
 	@Override
 	public double getVoltage()
 	{
-		addedVoltage = 120;
+		double addedVoltage = 120;
 		
 		if (getTop() instanceof TileEntityRepulsionGenerator)
 		{
