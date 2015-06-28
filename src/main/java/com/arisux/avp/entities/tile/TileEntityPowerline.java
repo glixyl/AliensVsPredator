@@ -21,6 +21,7 @@ public class TileEntityPowerline extends PoweredTileEntity
 	public void updateEntity()
 	{
 		super.updateEntity();
+		getOriginalPowerSource();
 		updateState();
 	}
 	

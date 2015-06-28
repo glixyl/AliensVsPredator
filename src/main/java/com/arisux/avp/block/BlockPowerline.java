@@ -1,5 +1,7 @@
 package com.arisux.avp.block;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -57,6 +59,47 @@ public class BlockPowerline extends HookedBlockContainer
 	public TileEntity createNewTileEntity(World var1, int var2)
 	{
 		return new TileEntityPowerline();
+	}
+	
+	@Override
+	public void breakBlock(World world, int posX, int posY, int posZ, Block blockBroken, int meta)
+	{
+		super.breakBlock(world, posX, posY, posZ, blockBroken, meta);
+		world.removeTileEntity(posX, posY, posZ);
+		
+		if(world.getTileEntity(posX + 1, posY, posZ) instanceof PoweredTileEntity)
+		{
+			PoweredTileEntity te = (PoweredTileEntity) world.getTileEntity(posX + 1, posY, posZ);
+			te.setVoltage(0);
+		}
+		
+		if(world.getTileEntity(posX, posY + 1, posZ) instanceof PoweredTileEntity)
+		{
+			PoweredTileEntity te = (PoweredTileEntity) world.getTileEntity(posX, posY + 1, posZ);
+			te.setVoltage(0);
+		}
+		
+		if(world.getTileEntity(posX, posY, posZ + 1) instanceof PoweredTileEntity)
+		{
+			PoweredTileEntity te = (PoweredTileEntity) world.getTileEntity(posX, posY, posZ + 1);
+			te.setVoltage(0);
+		}
+		if(world.getTileEntity(posX - 1, posY, posZ) instanceof PoweredTileEntity)
+		{
+			PoweredTileEntity te = (PoweredTileEntity) world.getTileEntity(posX - 1, posY, posZ);
+			te.setVoltage(0);
+		}
+		if(world.getTileEntity(posX, posY - 1, posZ) instanceof PoweredTileEntity)
+		{
+			PoweredTileEntity te = (PoweredTileEntity) world.getTileEntity(posX, posY - 1, posZ);
+			te.setVoltage(0);
+		}
+		if(world.getTileEntity(posX, posY, posZ - 1) instanceof PoweredTileEntity)
+		{
+			PoweredTileEntity te = (PoweredTileEntity) world.getTileEntity(posX, posY, posZ - 1);
+			te.setVoltage(0);
+		}
+		
 	}
 	
 	@Override

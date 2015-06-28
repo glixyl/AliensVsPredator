@@ -99,7 +99,7 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockSatelliteDish = (new HookedBlock(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockBattery = (new HookedBlock(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockR2PConvertor = (new BlockR2PConvertor(Material.iron)).setHardness(3.2F).setResistance(2.6F),
-		blockP2RConvertor = (new HookedBlock(Material.iron)).setHardness(3.2F).setResistance(2.6F),
+		blockP2RConvertor = (new BlockP2RConvertor(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockTransformer = (new BlockTransformer(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockNegativeTransformer = (new BlockNegativeTransformer(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockSolarPanel = (new BlockSolarPanel(Material.iron)).setHardness(3.2F).setResistance(2.6F);

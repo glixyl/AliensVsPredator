@@ -52,6 +52,21 @@ public abstract class PoweredTileEntity extends TileEntity implements IPowerDevi
 			}
 		}
 		
+		if (this instanceof TileEntityPowerline)
+		{
+			TileEntityPowerline te = (TileEntityPowerline) this;
+			if(!te.isOriginalPowerSourceAttached()){
+				te.setVoltage(0);
+			}
+		}
+		
+		if (!(this instanceof TileEntityPowerline) && !(this instanceof TileEntitySolarPanel) && !(this instanceof TileEntityRepulsionGenerator))
+		{
+			if(!isConnectedToAnything(this)){
+				this.setVoltage(0);
+			}
+		}
+		
 		if (this.canOutputPower())
 		{
 			this.outputPower();
@@ -59,6 +74,23 @@ public abstract class PoweredTileEntity extends TileEntity implements IPowerDevi
 	
 	}
 	
+	private boolean isConnectedToAnything(PoweredTileEntity poweredTileEntity) {
+		List<PoweredTileEntity> list = new ArrayList<PoweredTileEntity>();
+		list.add(poweredTileEntity.getTop());
+		list.add(poweredTileEntity.getBack());
+		list.add(poweredTileEntity.getBottom());
+		list.add(poweredTileEntity.getLeft());
+		list.add(poweredTileEntity.getRight());
+		list.add(poweredTileEntity.getFront());
+		for(PoweredTileEntity te : list)
+		{
+			if(te instanceof TileEntitySolarPanel || te instanceof TileEntityRepulsionGenerator || te instanceof TileEntityPowerline){
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public boolean isPowerSource(){
 		if(this.canOutputPower() && getPowerSourceTile(this) == this){
 			return true;
