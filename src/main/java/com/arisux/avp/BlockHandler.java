@@ -4,7 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 
-import com.arisux.airi.lib.BlockTypes.GhostBlock;
 import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.airi.lib.BlockTypes.HookedBlockSlab;
 import com.arisux.airi.lib.BlockTypes.HookedBlockStairs;
@@ -89,7 +88,7 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockRepulsionGenerator = (new BlockGenerator(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockPowerline = (new BlockPowerline(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockBlastdoor = (new BlockBlastdoor(Material.iron)).setHardness(5F).setResistance(5F),
-		ghostBlockBlastdoor = (new GhostBlock(blockBlastdoor)).setAttributesFrom((HookedBlock) blockBlastdoor),
+		ghostBlockBlastdoor = (new GhostBlock(blockBlastdoor, 0, 0, 0)),
 		blockWorklight = (new BlockWorklight(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockCryostasisTube = (new BlockCryostasisTube(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockPlastic = (new HookedBlock(Material.clay)).setHardness(1.5F).setResistance(2.0F),
@@ -241,7 +240,7 @@ public class BlockHandler extends IBHandler implements IInitializable
 		registerBlock(blockRepulsionGenerator, "generator", true);
 		registerBlock(blockPowerline, "powerline", true);
 		registerBlock(blockBlastdoor, "blastdoor", true);
-		registerBlock(ghostBlockBlastdoor, "blastdoorghost", false);
+		registerBlock(ghostBlockBlastdoor, "ghostBlockBlastdoor", false);
 		registerBlock(blockWorklight, "worklight", true);
 		registerBlock(blockCryostasisTube, "cryostasistube", true);
 		registerShapedBlockSet(blockPlastic, "plasticblock");

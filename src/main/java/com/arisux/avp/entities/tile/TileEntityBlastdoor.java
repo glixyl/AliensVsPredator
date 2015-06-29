@@ -2,13 +2,18 @@ package com.arisux.avp.entities.tile;
 
 import java.util.ArrayList;
 
+import com.arisux.avp.block.GhostBlock;
+
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockGlass;
+import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 public class TileEntityBlastdoor extends PoweredTileEntity
 {
@@ -25,6 +30,21 @@ public class TileEntityBlastdoor extends PoweredTileEntity
 	public void updateEntity()
 	{
 		super.updateEntity();
+		World world = this.getWorldObj();
+		Block parentBlock = world.getBlock(this.xCoord, this.yCoord, this.zCoord);
+		if(this.voltage == 0)
+		{
+			this.setDoorOpen(false);
+		}
+		if (!this.doorOpen)
+		{
+			world.setBlock(this.xCoord + 1, this.yCoord, this.zCoord, new GhostBlock(parentBlock, 1, 0, 0));
+			world.setBlock(this.xCoord, this.yCoord + 1, this.zCoord, new GhostBlock(parentBlock, 0, 1, 0));
+			world.setBlock(this.xCoord, this.yCoord + 2, this.zCoord, new GhostBlock(parentBlock, 0, 2, 0));
+			
+			this.doorProgress = this.doorProgress > 0.0F ? this.doorProgress - 0.02F : this.doorProgress;
+		}
+		
 	}
 
 	@Override

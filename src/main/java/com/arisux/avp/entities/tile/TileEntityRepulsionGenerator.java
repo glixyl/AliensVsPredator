@@ -196,26 +196,24 @@ public class TileEntityRepulsionGenerator extends PoweredTileEntity
 	}
 
 	@Override
-	public boolean isOriginalPowerSourceAttached() {
-		// TODO Auto-generated method stub
+	public boolean isOriginalPowerSourceAttached()
+	{
 		return false;
 	}
 
 	@Override
-	public void getOriginalPowerSource() {
-		// TODO Auto-generated method stub
-		
+	public void getOriginalPowerSource()
+	{
 	}
 
 	@Override
-	public TileEntityRepulsionGenerator getPowerSource() {
-		// TODO Auto-generated method stub
+	public TileEntityRepulsionGenerator getPowerSource()
+	{
 		return null;
 	}
 
 	@Override
-	public void setOriginalPowerSource(PoweredTileEntity e) {
-		// TODO Auto-generated method stub
-		
+	public void setOriginalPowerSource(PoweredTileEntity e)
+	{	
 	}
 }
