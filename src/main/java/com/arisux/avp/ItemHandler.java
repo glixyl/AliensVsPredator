@@ -171,7 +171,6 @@ public class ItemHandler extends IBHandler implements IInitializable
 		registerItem(helmMarine, "helm.tactical");
 		registerItem(plateMarine, "body.tactical");
 		registerItem(legsMarine, "legwear.tactical");
-		registerItem(itemSupplyChute, "supply.chute");
 		registerItem(bootsMarine, "boots.tactical");
 		registerItem(helmXeno, "helm.xeno");
 		registerItem(plateXeno, "body.xeno");
@@ -210,6 +209,7 @@ public class ItemHandler extends IBHandler implements IInitializable
 		registerItem(itemDoritos, "food.doritos");
 		registerItem(itemDoritosCoolRanch, "food.doritos.coolranch");
 		registerItem(itemFlashDrive, "device.nbtdrive");
+		registerItem(itemSupplyChute, "device.supplychute");
 		registerItem(itemProcessor, "part.processor");
 		registerItem(itemLiquidStateDrive, "part.liquidstatedrive");
 		registerItem(itemVoltageRegulator, "part.voltageregulator");

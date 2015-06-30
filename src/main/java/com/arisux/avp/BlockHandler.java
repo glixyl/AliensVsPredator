@@ -1,6 +1,7 @@
 package com.arisux.avp;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockGravel;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 
@@ -101,6 +102,7 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockP2RConvertor = (new BlockP2RConvertor(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockTransformer = (new BlockTransformer(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockNegativeTransformer = (new BlockNegativeTransformer(Material.iron)).setHardness(3.2F).setResistance(2.6F),
+		blockSupplies = (new BlockSupplies(Material.iron)),
 		blockSolarPanel = (new BlockSolarPanel(Material.iron)).setHardness(3.2F).setResistance(2.6F);
 
 	public BlockHandler()
@@ -241,6 +243,7 @@ public class BlockHandler extends IBHandler implements IInitializable
 		registerBlock(blockPowerline, "powerline", true);
 		registerBlock(blockBlastdoor, "blastdoor", true);
 		registerBlock(ghostBlockBlastdoor, "ghostBlockBlastdoor", false);
+		registerBlock(blockSupplies, "blocksupplies", false);
 		registerBlock(blockWorklight, "worklight", true);
 		registerBlock(blockCryostasisTube, "cryostasistube", true);
 		registerShapedBlockSet(blockPlastic, "plasticblock");

@@ -1,5 +1,7 @@
 package com.arisux.avp.items;
 
+import com.arisux.avp.AliensVsPredator;
+
 import net.minecraft.block.BlockGravel;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -16,10 +18,10 @@ public class ItemSupplyChute extends Item{
 		if(playerIn.capabilities.isCreativeMode||playerIn.inventory.consumeInventoryItem(this)){
 		        if (!worldIn.isRemote)
 		         {
-		             //worldIn.setBlock((int) (playerIn.posX), (int) (playerIn.posY + 40), (int) (playerIn.posZ), BlockGravel());
+		             worldIn.setBlock((int) (playerIn.posX + 1), (int) (playerIn.posY + 80), (int) (playerIn.posZ), AliensVsPredator.blocks().blockSupplies);
 		         }
 		         return itemStackIn;
 		   }
 		   return itemStackIn;
-		}
+	}
 }
