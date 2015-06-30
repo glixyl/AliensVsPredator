@@ -2,6 +2,8 @@ package com.arisux.avp.entities.tile;
 
 import java.util.ArrayList;
 
+import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.BlockHandler;
 import com.arisux.avp.block.GhostBlock;
 
 import net.minecraft.block.Block;
@@ -36,13 +38,37 @@ public class TileEntityBlastdoor extends PoweredTileEntity
 		{
 			this.setDoorOpen(false);
 		}
+		
 		if (!this.doorOpen)
 		{
-			world.setBlock(this.xCoord + 1, this.yCoord, this.zCoord, new GhostBlock(parentBlock, 1, 0, 0));
-			world.setBlock(this.xCoord, this.yCoord + 1, this.zCoord, new GhostBlock(parentBlock, 0, 1, 0));
-			world.setBlock(this.xCoord, this.yCoord + 2, this.zCoord, new GhostBlock(parentBlock, 0, 2, 0));
-			
+			world.setBlock(this.xCoord + 1, this.yCoord, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
+			world.setBlock(this.xCoord + 2, this.yCoord, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
+			world.setBlock(this.xCoord + 3, this.yCoord, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
+			world.setBlock(this.xCoord, this.yCoord + 1, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
+			world.setBlock(this.xCoord, this.yCoord + 2, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
+			world.setBlock(this.xCoord + 1, this.yCoord + 2, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
+			world.setBlock(this.xCoord + 1, this.yCoord + 1, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
+			world.setBlock(this.xCoord + 2, this.yCoord + 2, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
+			world.setBlock(this.xCoord + 2, this.yCoord + 1, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
+			world.setBlock(this.xCoord + 3, this.yCoord + 2, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
+			world.setBlock(this.xCoord + 3, this.yCoord + 1, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
+
 			this.doorProgress = this.doorProgress > 0.0F ? this.doorProgress - 0.02F : this.doorProgress;
+		}
+		
+		if (this.doorOpen && this.doorProgress > 0.5F)
+		{
+			world.setBlockToAir(this.xCoord + 1, this.yCoord, this.zCoord);
+			world.setBlockToAir(this.xCoord + 2, this.yCoord, this.zCoord);
+			world.setBlockToAir(this.xCoord + 3, this.yCoord, this.zCoord);
+			world.setBlockToAir(this.xCoord, this.yCoord + 1, this.zCoord);
+			world.setBlockToAir(this.xCoord, this.yCoord + 2, this.zCoord);
+			world.setBlockToAir(this.xCoord + 1, this.yCoord + 2, this.zCoord);
+			world.setBlockToAir(this.xCoord + 2, this.yCoord + 2, this.zCoord);
+			world.setBlockToAir(this.xCoord + 3, this.yCoord + 2, this.zCoord);
+			world.setBlockToAir(this.xCoord + 3, this.yCoord + 1, this.zCoord);
+			world.setBlockToAir(this.xCoord + 1, this.yCoord + 1, this.zCoord);
+			world.setBlockToAir(this.xCoord + 2, this.yCoord + 1, this.zCoord);
 		}
 		
 	}

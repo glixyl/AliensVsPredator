@@ -42,8 +42,16 @@ public class BlockBlastdoor extends HookedBlockContainer
 	{
 		world.setBlockToAir(posX, posY, posZ);
 		world.setBlockToAir(posX + 1, posY, posZ);
+		world.setBlockToAir(posX + 2, posY, posZ);
+		world.setBlockToAir(posX + 3, posY, posZ);
 		world.setBlockToAir(posX, posY + 1, posZ);
 		world.setBlockToAir(posX, posY + 2, posZ);
+		world.setBlockToAir(posX + 1, posY + 2, posZ);
+		world.setBlockToAir(posX + 2, posY + 2, posZ);
+		world.setBlockToAir(posX + 3, posY + 2, posZ);
+		world.setBlockToAir(posX + 3, posY + 1, posZ);
+		world.setBlockToAir(posX + 1, posY + 1, posZ);
+		world.setBlockToAir(posX + 2, posY + 1, posZ);
 	
 		world.removeTileEntity(posX, posY, posZ);
 		

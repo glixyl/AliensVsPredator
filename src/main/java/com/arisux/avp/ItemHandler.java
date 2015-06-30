@@ -102,6 +102,7 @@ public class ItemHandler extends IBHandler implements IInitializable
 		itemDiode = ((new HookedItem())),
 		itemMotherboard = ((new HookedItem())),
 		itemPowerSupply = ((new HookedItem())),
+		itemSupplyChute = ((new ItemSupplyChute())),
 		itemFlashDrive = (new ItemStorageDevice()),
 		itemVoltageRegulator = ((new HookedItem())),
 		itemLed = ((new HookedItem())),
@@ -170,6 +171,7 @@ public class ItemHandler extends IBHandler implements IInitializable
 		registerItem(helmMarine, "helm.tactical");
 		registerItem(plateMarine, "body.tactical");
 		registerItem(legsMarine, "legwear.tactical");
+		registerItem(itemSupplyChute, "supply.chute");
 		registerItem(bootsMarine, "boots.tactical");
 		registerItem(helmXeno, "helm.xeno");
 		registerItem(plateXeno, "body.xeno");
