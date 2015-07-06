@@ -55,21 +55,6 @@ public class TileEntityBlastdoor extends PoweredTileEntity
 
 			this.doorProgress = this.doorProgress > 0.0F ? this.doorProgress - 0.02F : this.doorProgress;
 		}
-		
-		if (this.doorOpen && this.doorProgress > 0.5F)
-		{
-			//world.setBlockToAir(this.xCoord + 1, this.yCoord, this.zCoord);
-			//world.setBlockToAir(this.xCoord + 2, this.yCoord, this.zCoord);
-			//world.setBlockToAir(this.xCoord + 3, this.yCoord, this.zCoord);
-			//world.setBlockToAir(this.xCoord, this.yCoord + 1, this.zCoord);
-			//world.setBlockToAir(this.xCoord, this.yCoord + 2, this.zCoord);
-			//world.setBlockToAir(this.xCoord + 1, this.yCoord + 2, this.zCoord);
-			//world.setBlockToAir(this.xCoord + 3, this.yCoord + 2, this.zCoord);
-			//world.setBlockToAir(this.xCoord + 3, this.yCoord + 1, this.zCoord);
-			//world.setBlockToAir(this.xCoord + 1, this.yCoord + 1, this.zCoord);
-			//world.setBlockToAir(this.xCoord + 2, this.yCoord + 1, this.zCoord);
-		}
-		
 	}
 
 	@Override
