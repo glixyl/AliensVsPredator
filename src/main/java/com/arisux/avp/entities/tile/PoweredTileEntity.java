@@ -38,24 +38,24 @@ public abstract class PoweredTileEntity extends TileEntity implements IPowerDevi
 			if(!te.state){
 				this.voltage = 0;
 			}
+			if(!te.isOriginalPowerSourceAttached())
+			{
+				te.setVoltage(0);
+			}
+			if(te.getPowerSource() == null)
+			{
+				this.voltage = 0;
+				te.state = false;
+			}
 		}
 		if (this.voltage <= this.getMinOperatingVoltage())
 		{
 			this.onUnderloadTick();
 		}
-		
 		if (this instanceof TileEntityR2PConvertor)
 		{
 			TileEntityR2PConvertor te = (TileEntityR2PConvertor) this;
 			if(!te.isActiveRedstoneWireAttached){
-				te.setVoltage(0);
-			}
-		}
-		
-		if (this instanceof TileEntityPowerline)
-		{
-			TileEntityPowerline te = (TileEntityPowerline) this;
-			if(!te.isOriginalPowerSourceAttached()){
 				te.setVoltage(0);
 			}
 		}
@@ -84,7 +84,19 @@ public abstract class PoweredTileEntity extends TileEntity implements IPowerDevi
 		list.add(poweredTileEntity.getFront());
 		for(PoweredTileEntity te : list)
 		{
-			if(te instanceof TileEntitySolarPanel || te instanceof TileEntityRepulsionGenerator || te instanceof TileEntityPowerline){
+			if(te instanceof TileEntitySolarPanel || te instanceof TileEntityRepulsionGenerator || te instanceof TileEntityPowerline || te instanceof TileEntityR2PConvertor){
+				if(te instanceof TileEntityR2PConvertor)
+				{
+					TileEntityR2PConvertor ter = (TileEntityR2PConvertor) te;
+					if(ter.isActiveRedstoneWireAttached)
+					{
+						return true;
+					}
+					else
+					{
+						return false;
+					}
+				}
 				return true;
 			}
 		}

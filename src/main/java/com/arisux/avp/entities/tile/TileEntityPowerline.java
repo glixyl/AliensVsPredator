@@ -104,8 +104,13 @@ public class TileEntityPowerline extends PoweredTileEntity
 			list.add(this.getFront());
 			for (int i = 0; i < list.size(); i++) {
 				PoweredTileEntity p = list.get(i);
-				if(p instanceof TileEntityRepulsionGenerator || p instanceof TileEntitySolarPanel || p instanceof TileEntityNegativeTransformer || p instanceof TileEntityTransformer){
+				if(p instanceof TileEntityRepulsionGenerator || p instanceof TileEntitySolarPanel || p instanceof TileEntityNegativeTransformer  || p instanceof TileEntityR2PConvertor || p instanceof TileEntityTransformer){
 					state = true;
+					if(p instanceof TileEntityR2PConvertor)
+					{
+						TileEntityR2PConvertor te = (TileEntityR2PConvertor) p;
+						state = te.isActiveRedstoneWireAttached;
+					}
 				}
 				else if(p instanceof TileEntityPowerline)
 				{
@@ -117,13 +122,20 @@ public class TileEntityPowerline extends PoweredTileEntity
 					}
 					if(itsState == false && this.state == true)
 					{
-						this.state = itsState;
+						if(this.getPowerSource() instanceof TileEntityR2PConvertor && this.isOriginalPowerSourceAttached())
+						{
+							TileEntityR2PConvertor tre = (TileEntityR2PConvertor) this.getPowerSource();
+							if(tre.isActiveRedstoneWireAttached);
+							else
+							{
+								this.state = itsState;
+							}
+						}
+						else
+						{
+							this.state = itsState;
+						}
 					}
-				}
-				else if(p instanceof TileEntityR2PConvertor)
-				{
-					TileEntityR2PConvertor te = (TileEntityR2PConvertor) p;
-					state = te.isActiveRedstoneWireAttached;
 				}
 			}
 		}
@@ -158,11 +170,25 @@ public class TileEntityPowerline extends PoweredTileEntity
 			int y = t.yCoord;
 			int z = t.zCoord;
 			World world = t.getWorldObj();
-			if(world.getTileEntity(x, y, z) instanceof TileEntityRepulsionGenerator){
+			if(world.getTileEntity(x, y, z) instanceof TileEntityRepulsionGenerator)
+			{
 				return true;
 			}
-			else if(world.getTileEntity(x, y, z) instanceof TileEntitySolarPanel){
+			else if(world.getTileEntity(x, y, z) instanceof TileEntitySolarPanel)
+			{
 				return true;
+			}
+			else if(world.getTileEntity(x, y, z) instanceof TileEntityR2PConvertor)
+			{
+				TileEntityR2PConvertor tre = (TileEntityR2PConvertor) world.getTileEntity(x, y, z);
+				if(tre.isActiveRedstoneWireAttached)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
 			}
 			else{
 				return false;
@@ -183,12 +209,16 @@ public class TileEntityPowerline extends PoweredTileEntity
 		list.add(this.getRight());
 		list.add(this.getFront());
 			for(PoweredTileEntity p : list){
-				if(p instanceof TileEntityRepulsionGenerator || p instanceof TileEntityPowerline || p instanceof TileEntitySolarPanel || p instanceof TileEntityTransformer || p instanceof TileEntityNegativeTransformer){
+				if(p instanceof TileEntityRepulsionGenerator || p instanceof TileEntityPowerline || p instanceof TileEntitySolarPanel || p instanceof TileEntityTransformer || p instanceof TileEntityNegativeTransformer || p instanceof TileEntityR2PConvertor){
 					if(p instanceof TileEntityRepulsionGenerator){
 						setOriginalPowerSource(p);
 						break;
 					}
 					if(p instanceof TileEntitySolarPanel){
+						setOriginalPowerSource(p);
+						break;
+					}
+					if(p instanceof TileEntityR2PConvertor){
 						setOriginalPowerSource(p);
 						break;
 					}
