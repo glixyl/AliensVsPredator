@@ -1,5 +1,8 @@
 package com.arisux.avp.entities.tile;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
@@ -206,6 +209,43 @@ public class TileEntitySolarPanel extends PoweredTileEntity
 	@Override
 	public void setOriginalPowerSource(PoweredTileEntity e) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isReciever() {
+		return false;
+	}
+
+	@Override
+	public boolean isOutputter() {
+		return true;
+	}
+
+	@Override
+	public void updateState() {
+		//Must keep lists empty so we don't have 1 block as a parent AND a child.
+		parents.clear();
+		children.clear();
+				
+		List<PoweredTileEntity> list = new ArrayList<PoweredTileEntity>();
+		list.add(this.getTop());
+		list.add(this.getBack());
+		list.add(this.getBottom());
+		list.add(this.getLeft());
+		list.add(this.getRight());
+		list.add(this.getFront());
+		for (PoweredTileEntity e : list) {
+			if(e != null){
+			if(e.isReciever())
+			{
+				e.parents.add(this);
+				this.children.add(e);
+				e.state = this.canOutputPower();
+				e.updateChildren();
+			}
+		}
+		}
 		
 	}
 }

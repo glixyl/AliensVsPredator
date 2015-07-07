@@ -7,6 +7,8 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -14,9 +16,12 @@ import net.minecraft.world.World;
 import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
 import com.arisux.avp.entities.tile.PoweredTileEntity;
 import com.arisux.avp.entities.tile.TileEntityPowerline;
+import com.arisux.avp.entities.tile.TileEntityR2PConvertor;
+import com.google.common.collect.Lists;
 
 public class BlockPowerline extends HookedBlockContainer
 {
+	TileEntityPowerline pte;
 	public BlockPowerline(Material material)
 	{
 		super(material);
@@ -37,22 +42,30 @@ public class BlockPowerline extends HookedBlockContainer
 	}
 	
 	@Override
+	public void onBlockPlacedBy(World worldIn, int xPos, int yPos, int zPos, EntityLivingBase entityIn, ItemStack itemStackIn)
+	{
+		if(worldIn.getTileEntity(xPos, yPos, zPos) != null && worldIn.getTileEntity(xPos, yPos, zPos) instanceof TileEntityPowerline)
+		{
+			TileEntityPowerline te = (TileEntityPowerline) worldIn.getTileEntity(xPos, yPos, zPos);
+			te.updateState();
+		}
+	}
+
+//	public int onBlockPlaced(World worldIn, int xPos, int yPos, int zPos, int side, float hitX, float hitY, float hitZ, int metadata)
+//    {
+//		if(worldIn.getTileEntity(xPos, yPos, zPos) != null && worldIn.getTileEntity(xPos, yPos, zPos) instanceof TileEntityPowerline)
+//		{
+//			System.out.println("dis far");
+//			TileEntityPowerline te = (TileEntityPowerline) worldIn.getTileEntity(xPos, yPos, zPos);
+//			te.updateState();
+//		}	
+//        return metadata;
+//    }
+	
+	@Override
     public void onNeighborChange(IBlockAccess world, int x, int y, int z, int tileX, int tileY, int tileZ)
     {
-		TileEntityPowerline pte = (TileEntityPowerline) world.getTileEntity(x, y, z);
-		TileEntity te = world.getTileEntity(tileX, tileY, tileZ);
-		if(te instanceof TileEntityPowerline){
-			TileEntityPowerline pe = (TileEntityPowerline) te;
-			if(pe.state == true && pte.state == false){
-				pe.state = pte.state;
-			}
-			if(pe.state == false && pte.state == true){
-				pte.state = pe.state;
-			}
-		}
-		if(world.getTileEntity(tileX, tileY, tileZ) == null){
-			pte.state = false;
-		}
+		
     }
 	
 	@Override
@@ -62,44 +75,25 @@ public class BlockPowerline extends HookedBlockContainer
 	}
 	
 	@Override
-	public void breakBlock(World world, int posX, int posY, int posZ, Block blockBroken, int meta)
+	public void breakBlock(World worldIn, int posX, int posY, int posZ, Block blockBroken, int meta)
 	{
-		super.breakBlock(world, posX, posY, posZ, blockBroken, meta);
-		world.removeTileEntity(posX, posY, posZ);
-		
-		if(world.getTileEntity(posX + 1, posY, posZ) instanceof PoweredTileEntity)
+		if(worldIn.getTileEntity(posX, posY, posZ) != null && worldIn.getTileEntity(posX, posY, posZ) instanceof TileEntityPowerline)
 		{
-			PoweredTileEntity te = (PoweredTileEntity) world.getTileEntity(posX + 1, posY, posZ);
-			te.setVoltage(0);
-		}
-		
-		if(world.getTileEntity(posX, posY + 1, posZ) instanceof PoweredTileEntity)
-		{
-			PoweredTileEntity te = (PoweredTileEntity) world.getTileEntity(posX, posY + 1, posZ);
-			te.setVoltage(0);
-		}
-		
-		if(world.getTileEntity(posX, posY, posZ + 1) instanceof PoweredTileEntity)
-		{
-			PoweredTileEntity te = (PoweredTileEntity) world.getTileEntity(posX, posY, posZ + 1);
-			te.setVoltage(0);
-		}
-		if(world.getTileEntity(posX - 1, posY, posZ) instanceof PoweredTileEntity)
-		{
-			PoweredTileEntity te = (PoweredTileEntity) world.getTileEntity(posX - 1, posY, posZ);
-			te.setVoltage(0);
-		}
-		if(world.getTileEntity(posX, posY - 1, posZ) instanceof PoweredTileEntity)
-		{
-			PoweredTileEntity te = (PoweredTileEntity) world.getTileEntity(posX, posY - 1, posZ);
-			te.setVoltage(0);
-		}
-		if(world.getTileEntity(posX, posY, posZ - 1) instanceof PoweredTileEntity)
-		{
-			PoweredTileEntity te = (PoweredTileEntity) world.getTileEntity(posX, posY, posZ - 1);
-			te.setVoltage(0);
-		}
-		
+			TileEntityPowerline te = (TileEntityPowerline) worldIn.getTileEntity(posX, posY, posZ);
+			System.out.println("Parents: " + te.parents.size() + " Children: " + te.children.size());
+			List<PoweredTileEntity> l = Lists.newArrayList(te.parents);
+			for(PoweredTileEntity tep : l)
+			{
+				tep.children.remove(te);
+			}
+			List<PoweredTileEntity> list = Lists.newArrayList(te.children);
+			for(PoweredTileEntity tep : list)
+			{
+				tep.parents.remove(te);
+				tep.updateState();
+			}
+		}	
+		super.breakBlock(worldIn, posX, posY, posZ, blockBroken, meta);
 	}
 	
 	@Override

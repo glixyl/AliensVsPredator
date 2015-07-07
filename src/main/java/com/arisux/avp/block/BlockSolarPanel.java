@@ -10,6 +10,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
+import com.arisux.avp.entities.tile.PoweredTileEntity;
+import com.arisux.avp.entities.tile.TileEntityPowerline;
 import com.arisux.avp.entities.tile.TileEntityRepulsionGenerator;
 import com.arisux.avp.entities.tile.TileEntitySolarPanel;
 
@@ -41,10 +43,22 @@ public class BlockSolarPanel extends HookedBlockContainer
 	}
 	
 	@Override
-	public void breakBlock(World world, int posX, int posY, int posZ, Block blockBroken, int meta)
+	public void breakBlock(World worldIn, int posX, int posY, int posZ, Block blockBroken, int meta)
 	{
-		super.breakBlock(world, posX, posY, posZ, blockBroken, meta);
-		world.removeTileEntity(posX, posY, posZ);
+		if(worldIn.getTileEntity(posX, posY, posZ) != null && worldIn.getTileEntity(posX, posY, posZ) instanceof TileEntityPowerline)
+		{
+			TileEntityPowerline te = (TileEntityPowerline) worldIn.getTileEntity(posX, posY, posZ);
+			for(PoweredTileEntity tep : te.parents)
+			{
+				tep.children.remove(te);
+			}
+			for(PoweredTileEntity tep : te.children)
+			{
+				tep.parents.remove(te);
+				tep.updateState();
+			}
+		}	
+		super.breakBlock(worldIn, posX, posY, posZ, blockBroken, meta);
 	}
 
 	@Override

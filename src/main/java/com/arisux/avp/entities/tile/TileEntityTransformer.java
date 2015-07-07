@@ -159,4 +159,64 @@ public class TileEntityTransformer extends PoweredTileEntity
 				
 			}
 	}
+
+	@Override
+	public boolean isReciever() {
+		return true;
+	}
+
+	@Override
+	public boolean isOutputter() {
+		return true;
+	}
+
+	@Override
+	public void updateState()
+	{
+		//Must keep lists empty so we don't have 1 block as a parent AND a child.
+		parents.clear();
+		children.clear();
+		
+		List<PoweredTileEntity> list = new ArrayList<PoweredTileEntity>();
+		list.add(this.getTop());
+		list.add(this.getBack());
+		list.add(this.getBottom());
+		list.add(this.getLeft());
+		list.add(this.getRight());
+		list.add(this.getFront());
+		for (PoweredTileEntity te : list) {
+			if(te != null){
+			//If it's a powersource, then add it.
+			if(te.isOutputter() && !te.isReciever())
+			{
+				this.parents.add(te);
+				te.children.add(this);
+				this.state = te.canOutputPower();
+			}
+			else if(te.isOutputter() && te.isReciever())
+			{
+				//Is the neighbor powered?
+				if(te.state)
+				{
+					this.parents.add(te);
+					te.children.add(this);
+					this.state = true;
+				}
+				else if(this.state && !te.state)
+				{
+					this.children.add(te);
+					te.parents.add(this);
+					te.state = true;
+					te.updateChildren();
+				}
+			}
+			else if(te.isReciever() && !te.isOutputter())
+			{
+				this.children.add(te);
+				te.parents.add(this);
+				te.state = this.state;
+			}
+		}
+		}
+	}
 }

@@ -1,6 +1,7 @@
 package com.arisux.avp.entities.tile;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.BlockHandler;
@@ -195,6 +196,51 @@ public class TileEntityBlastdoor extends PoweredTileEntity
 	@Override
 	public void setOriginalPowerSource(PoweredTileEntity e) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isReciever() {
+		return true;
+	}
+
+	@Override
+	public boolean isOutputter() {
+		return false;
+	}
+
+	@Override
+	public void updateState() {
+		//Must keep lists empty so we don't have 1 block as a parent AND a child.
+		parents.clear();
+		children.clear();
+				
+		List<PoweredTileEntity> list = new ArrayList<PoweredTileEntity>();
+		list.add(this.getTop());
+		list.add(this.getBack());
+		list.add(this.getBottom());
+		list.add(this.getLeft());
+		list.add(this.getRight());
+		list.add(this.getFront());
+		for (PoweredTileEntity e : list) {
+			if(e != null){
+			if(e.isOutputter())
+			{
+				if(!this.parents.contains(e))
+				{
+					this.parents.add(e);
+				}
+				if(!e.children.contains(this))
+				{
+					e.children.add(this);
+				}
+				if(!this.state)
+				{
+					this.state = e.canOutputPower();
+				}
+			}
+		}
+		}
 		
 	}
 }

@@ -14,11 +14,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 
 import com.arisux.avp.interfaces.IPowerDevice;
+import com.google.common.collect.Lists;
 
 public abstract class PoweredTileEntity extends TileEntity implements IPowerDevice
 {
 	public double voltage, amps;
-
+	public boolean state = false;
+	
 	@Override
 	public void updateEntity()
 	{
@@ -33,45 +35,21 @@ public abstract class PoweredTileEntity extends TileEntity implements IPowerDevi
 		{
 			this.onOverloadTick();
 		}
-		if(this instanceof TileEntityPowerline){
-			TileEntityPowerline te = (TileEntityPowerline) this;
-			if(!te.state){
-				this.voltage = 0;
-			}
+			
+		if(!this.state)
+		{
+			this.voltage = 0;
 		}
+		
 		if (this.voltage <= this.getMinOperatingVoltage())
 		{
 			this.onUnderloadTick();
-		}
-		
-		if (this instanceof TileEntityR2PConvertor)
-		{
-			TileEntityR2PConvertor te = (TileEntityR2PConvertor) this;
-			if(!te.isActiveRedstoneWireAttached){
-				te.setVoltage(0);
-			}
-		}
-		
-		if (this instanceof TileEntityPowerline)
-		{
-			TileEntityPowerline te = (TileEntityPowerline) this;
-			if(!te.isOriginalPowerSourceAttached()){
-				te.setVoltage(0);
-			}
-		}
-		
-		if (!(this instanceof TileEntityPowerline) && !(this instanceof TileEntitySolarPanel) && !(this instanceof TileEntityRepulsionGenerator))
-		{
-			if(!isConnectedToAnything(this)){
-				this.setVoltage(0);
-			}
 		}
 		
 		if (this.canOutputPower())
 		{
 			this.outputPower();
 		}
-	
 	}
 	
 	private boolean isConnectedToAnything(PoweredTileEntity poweredTileEntity) {
@@ -84,7 +62,19 @@ public abstract class PoweredTileEntity extends TileEntity implements IPowerDevi
 		list.add(poweredTileEntity.getFront());
 		for(PoweredTileEntity te : list)
 		{
-			if(te instanceof TileEntitySolarPanel || te instanceof TileEntityRepulsionGenerator || te instanceof TileEntityPowerline){
+			if(te instanceof TileEntitySolarPanel || te instanceof TileEntityRepulsionGenerator || te instanceof TileEntityPowerline || te instanceof TileEntityR2PConvertor){
+				if(te instanceof TileEntityR2PConvertor)
+				{
+					TileEntityR2PConvertor ter = (TileEntityR2PConvertor) te;
+					if(ter.isActiveRedstoneWireAttached)
+					{
+						return true;
+					}
+					else
+					{
+						return false;
+					}
+				}
 				return true;
 			}
 		}
@@ -100,40 +90,10 @@ public abstract class PoweredTileEntity extends TileEntity implements IPowerDevi
 	public void outputPower()
 	{
 		double voltage = this.getVoltageAfterApplyingResistance();
-		
-		if(this.getTop() instanceof TileEntityR2PConvertor);
-		
-		else{
-			this.outputPowerToTile(this.getTop(), voltage);
-		}
-		
-		if(this.getBottom() instanceof TileEntityR2PConvertor);
-		else
+		List<PoweredTileEntity> list = Lists.newArrayList(this.children);
+		for(PoweredTileEntity e : list)
 		{
-			this.outputPowerToTile(this.getBottom(), voltage);
-		}
-		
-		if(this.getFront() instanceof TileEntityR2PConvertor);
-		else
-		{
-			this.outputPowerToTile(this.getFront(), voltage);
-		}
-		
-		if(this.getBack() instanceof TileEntityR2PConvertor);
-		else
-		{
-			this.outputPowerToTile(this.getBack(), voltage);
-		}
-		if(this.getLeft() instanceof TileEntityR2PConvertor);
-		else
-		{
-			this.outputPowerToTile(this.getLeft(), voltage);
-		}
-		
-		if(this.getRight() instanceof TileEntityR2PConvertor);
-		else
-		{
-			this.outputPowerToTile(this.getRight(), voltage);
+			this.outputPowerToTile(e, voltage);
 		}
 	}
 	
@@ -143,7 +103,8 @@ public abstract class PoweredTileEntity extends TileEntity implements IPowerDevi
 		{
 			tile.setVoltage(voltage);
 		}
-		else if(tile != null && tile instanceof TileEntityPowerline && tile.getVoltage() == 0){
+		else if(tile != null && tile instanceof TileEntityPowerline && tile.getVoltage() == 0)
+		{
 			tile.setVoltage(this.getVoltage());
 		}
 	}
@@ -156,7 +117,32 @@ public abstract class PoweredTileEntity extends TileEntity implements IPowerDevi
 
 	@Override
 	public abstract void onUnderloadTick();
-
+	
+	@Override
+	public void updateChildren()
+	{
+		if(this.children.size() > 0)
+		{
+			if(this.children.contains(this))
+			{
+				this.children.remove(this);
+			}
+			if(this.children.size() > 0)
+			{
+				List <PoweredTileEntity> list = Lists.newArrayList(this.children);
+				for(PoweredTileEntity te : list)
+				{
+					if(te == null);
+					else
+					{
+						te.state = this.state;
+						te.updateChildren();
+					}
+				}
+			}
+		}
+	}
+	
 	@Override
 	public Packet getDescriptionPacket()
 	{

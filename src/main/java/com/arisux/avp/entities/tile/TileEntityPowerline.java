@@ -1,6 +1,7 @@
 package com.arisux.avp.entities.tile;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 
 import net.minecraft.block.Block;
@@ -15,14 +16,11 @@ import net.minecraft.world.World;
 public class TileEntityPowerline extends PoweredTileEntity
 {
 	public PoweredTileEntity originalpowersource = null;
-	public boolean state;
 	
 	@Override
 	public void updateEntity()
 	{
-		super.updateEntity();
-		getOriginalPowerSource();
-		updateState();
+		this.updateState();
 	}
 	
 	@Override
@@ -93,42 +91,72 @@ public class TileEntityPowerline extends PoweredTileEntity
 		return true;
 	}
 	
-	public void updateState(){
-		try{
-			List<PoweredTileEntity> list = new ArrayList<PoweredTileEntity>();
-			list.add(this.getTop());
-			list.add(this.getBack());
-			list.add(this.getBottom());
-			list.add(this.getLeft());
-			list.add(this.getRight());
-			list.add(this.getFront());
-			for (int i = 0; i < list.size(); i++) {
-				PoweredTileEntity p = list.get(i);
-				if(p instanceof TileEntityRepulsionGenerator || p instanceof TileEntitySolarPanel || p instanceof TileEntityNegativeTransformer || p instanceof TileEntityTransformer){
-					state = true;
-				}
-				else if(p instanceof TileEntityPowerline)
+	@Override
+	public void updateState()
+	{
+		//Must keep lists empty so we don't have 1 block as a parent AND a child.
+		parents.clear();
+		children.clear();
+		
+		List<PoweredTileEntity> list = new ArrayList<PoweredTileEntity>();
+		list.add(this.getTop());
+		list.add(this.getBack());
+		list.add(this.getBottom());
+		list.add(this.getLeft());
+		list.add(this.getRight());
+		list.add(this.getFront());
+		for (PoweredTileEntity te : list) {
+			if(te != null){
+			//If it's a powersource, then add it.
+			if(te.isOutputter() && !te.isReciever())
+			{
+				this.parents.add(te);
+				te.children.add(this);
+				if(!this.state)
 				{
-					TileEntityPowerline te = (TileEntityPowerline) p;
-					boolean itsState = te.state;
-					if(itsState == true && this.state == false)
-					{
-						this.state = itsState;
-					}
-					if(itsState == false && this.state == true)
-					{
-						this.state = itsState;
-					}
-				}
-				else if(p instanceof TileEntityR2PConvertor)
-				{
-					TileEntityR2PConvertor te = (TileEntityR2PConvertor) p;
-					state = te.isActiveRedstoneWireAttached;
+					System.out.println("peoeo");
+					this.state = te.canOutputPower();
 				}
 			}
+			else if(te.isOutputter() && te.isReciever())
+			{
+				//Is the neighbor powered?
+				if(te.state)
+				{
+					try
+					{
+							this.parents.add(te);
+							te.children.add(this);
+							this.state = true;
+							te.updateChildren();
+					}
+					catch(ConcurrentModificationException e)
+					{
+						System.out.println("Hello world.");
+					}
+				}
+				else if(this.state && !te.state)
+				{
+					try{
+						this.children.add(te);
+						te.parents.add(this);
+						te.state = true;
+						te.updateChildren();
+					}
+					catch(ConcurrentModificationException e)
+					{
+						System.out.println("Hello world.");
+					}
+				}
+			}
+			else if(te.isReciever() && !te.isOutputter())
+			{
+				this.children.add(te);
+				te.parents.add(this);
+				te.state = this.state;
+				te.updateChildren();
+			}
 		}
-		catch(NullPointerException e)
-		{
 		}
 	}
 	
@@ -158,11 +186,25 @@ public class TileEntityPowerline extends PoweredTileEntity
 			int y = t.yCoord;
 			int z = t.zCoord;
 			World world = t.getWorldObj();
-			if(world.getTileEntity(x, y, z) instanceof TileEntityRepulsionGenerator){
+			if(world.getTileEntity(x, y, z) instanceof TileEntityRepulsionGenerator)
+			{
 				return true;
 			}
-			else if(world.getTileEntity(x, y, z) instanceof TileEntitySolarPanel){
+			else if(world.getTileEntity(x, y, z) instanceof TileEntitySolarPanel)
+			{
 				return true;
+			}
+			else if(world.getTileEntity(x, y, z) instanceof TileEntityR2PConvertor)
+			{
+				TileEntityR2PConvertor tre = (TileEntityR2PConvertor) world.getTileEntity(x, y, z);
+				if(tre.isActiveRedstoneWireAttached)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
 			}
 			else{
 				return false;
@@ -175,43 +217,54 @@ public class TileEntityPowerline extends PoweredTileEntity
 
 	@Override
 	public void getOriginalPowerSource() {
-		List<PoweredTileEntity> list = new ArrayList<PoweredTileEntity>();
-		list.add(this.getTop());
-		list.add(this.getBack());
-		list.add(this.getBottom());
-		list.add(this.getLeft());
-		list.add(this.getRight());
-		list.add(this.getFront());
-			for(PoweredTileEntity p : list){
-				if(p instanceof TileEntityRepulsionGenerator || p instanceof TileEntityPowerline || p instanceof TileEntitySolarPanel || p instanceof TileEntityTransformer || p instanceof TileEntityNegativeTransformer){
-					if(p instanceof TileEntityRepulsionGenerator){
-						setOriginalPowerSource(p);
-						break;
-					}
-					if(p instanceof TileEntitySolarPanel){
-						setOriginalPowerSource(p);
-						break;
-					}
-					else if(p instanceof TileEntityPowerline && p.getPowerSource() != null){
-						setOriginalPowerSource(p.getPowerSource());
-						break;
-					}
-					else if(p instanceof TileEntityTransformer && p.getPowerSource() != null){
-						setOriginalPowerSource(p.getPowerSource());
-						break;
-					}
-					else if(p instanceof TileEntityNegativeTransformer && p.getPowerSource() != null){
-						setOriginalPowerSource(p.getPowerSource());
-						break;
-					}
-				}
-				
-			}
+//		List<PoweredTileEntity> list = new ArrayList<PoweredTileEntity>();
+//		list.add(this.getTop());
+//		list.add(this.getBack());
+//		list.add(this.getBottom());
+//		list.add(this.getLeft());
+//		list.add(this.getRight());
+//		list.add(this.getFront());
+//			for(PoweredTileEntity p : list){
+//				if(p instanceof TileEntityRepulsionGenerator || p instanceof TileEntityPowerline || p instanceof TileEntitySolarPanel || p instanceof TileEntityTransformer || p instanceof TileEntityNegativeTransformer || p instanceof TileEntityR2PConvertor){
+//					if(p instanceof TileEntityRepulsionGenerator){
+//						setOriginalPowerSource(p);
+//						break;
+//					}
+//					if(p instanceof TileEntitySolarPanel){
+//						setOriginalPowerSource(p);
+//						break;
+//					}
+//					if(p instanceof TileEntityR2PConvertor){
+//						setOriginalPowerSource(p);
+//						break;
+//					}
+//					else if(p instanceof TileEntityPowerline && p.getPowerSource() != null){
+//						if(p.getPowerSource() instanceof TileEntityR2PConvertor && this.getPowerSource() == null && this.neighborRemoved)
+//						{
+//							p.setOriginalPowerSource(null);
+//						}
+//						else
+//						{
+//							setOriginalPowerSource(p.getPowerSource());
+//						}
+//						break;
+//					}
+//					else if(p instanceof TileEntityTransformer && p.getPowerSource() != null){
+//						setOriginalPowerSource(p.getPowerSource());
+//						break;
+//					}
+//					else if(p instanceof TileEntityNegativeTransformer && p.getPowerSource() != null){
+//						setOriginalPowerSource(p.getPowerSource());
+//						break;
+//					}
+//				}
+//				
+//			}
 	}
 	
 	@Override
 	public void setOriginalPowerSource(PoweredTileEntity e) {
-		originalpowersource = e;	
+		originalpowersource = e;
 	}
 	@Override
 	public PoweredTileEntity getPowerSource(){
@@ -219,5 +272,15 @@ public class TileEntityPowerline extends PoweredTileEntity
 				return originalpowersource;
 		}
 		return null;
+	}
+
+	@Override
+	public boolean isReciever() {
+		return true;
+	}
+
+	@Override
+	public boolean isOutputter() {
+		return true;
 	}
 }
