@@ -35,6 +35,7 @@ public abstract class PoweredTileEntity extends TileEntity implements IPowerDevi
 		{
 			this.onOverloadTick();
 		}
+<<<<<<< HEAD
 			
 		if(!this.state)
 		{
@@ -42,6 +43,36 @@ public abstract class PoweredTileEntity extends TileEntity implements IPowerDevi
 		}
 		
 		if (this.voltage <= this.getMinOperatingVoltage())
+=======
+		if(this instanceof TileEntityPowerline){
+			TileEntityPowerline te = (TileEntityPowerline) this;
+			if(!te.state){
+				this.voltage = 0;
+			}
+			if(!te.isOriginalPowerSourceAttached())
+			{
+				te.setVoltage(0);
+			}
+			if(te.getPowerSource() == null)
+			{
+				this.voltage = 0;
+				te.state = false;
+			}
+		}
+		if (this.voltage <= this.getMinOperatingVoltage())
+		{
+			this.onUnderloadTick();
+		}
+		if (this instanceof TileEntityR2PConvertor)
+		{
+			TileEntityR2PConvertor te = (TileEntityR2PConvertor) this;
+			if(!te.isActiveRedstoneWireAttached){
+				te.setVoltage(0);
+			}
+		}
+		
+		if (!(this instanceof TileEntityPowerline) && !(this instanceof TileEntitySolarPanel) && !(this instanceof TileEntityRepulsionGenerator))
+>>>>>>> origin/master
 		{
 			this.onUnderloadTick();
 		}
