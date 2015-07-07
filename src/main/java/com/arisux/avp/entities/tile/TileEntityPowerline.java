@@ -91,7 +91,6 @@ public class TileEntityPowerline extends PoweredTileEntity
 		return true;
 	}
 	
-<<<<<<< HEAD
 	@Override
 	public void updateState()
 	{
@@ -117,26 +116,6 @@ public class TileEntityPowerline extends PoweredTileEntity
 				{
 					System.out.println("peoeo");
 					this.state = te.canOutputPower();
-=======
-	public void updateState(){
-		try{
-			List<PoweredTileEntity> list = new ArrayList<PoweredTileEntity>();
-			list.add(this.getTop());
-			list.add(this.getBack());
-			list.add(this.getBottom());
-			list.add(this.getLeft());
-			list.add(this.getRight());
-			list.add(this.getFront());
-			for (int i = 0; i < list.size(); i++) {
-				PoweredTileEntity p = list.get(i);
-				if(p instanceof TileEntityRepulsionGenerator || p instanceof TileEntitySolarPanel || p instanceof TileEntityNegativeTransformer  || p instanceof TileEntityR2PConvertor || p instanceof TileEntityTransformer){
-					state = true;
-					if(p instanceof TileEntityR2PConvertor)
-					{
-						TileEntityR2PConvertor te = (TileEntityR2PConvertor) p;
-						state = te.isActiveRedstoneWireAttached;
-					}
->>>>>>> origin/master
 				}
 			}
 			else if(te.isOutputter() && te.isReciever())
@@ -153,7 +132,6 @@ public class TileEntityPowerline extends PoweredTileEntity
 					}
 					catch(ConcurrentModificationException e)
 					{
-<<<<<<< HEAD
 						System.out.println("Hello world.");
 					}
 				}
@@ -170,23 +148,6 @@ public class TileEntityPowerline extends PoweredTileEntity
 						System.out.println("Hello world.");
 					}
 				}
-=======
-						if(this.getPowerSource() instanceof TileEntityR2PConvertor && this.isOriginalPowerSourceAttached())
-						{
-							TileEntityR2PConvertor tre = (TileEntityR2PConvertor) this.getPowerSource();
-							if(tre.isActiveRedstoneWireAttached);
-							else
-							{
-								this.state = itsState;
-							}
-						}
-						else
-						{
-							this.state = itsState;
-						}
-					}
-				}
->>>>>>> origin/master
 			}
 			else if(te.isReciever() && !te.isOutputter())
 			{
@@ -256,7 +217,6 @@ public class TileEntityPowerline extends PoweredTileEntity
 
 	@Override
 	public void getOriginalPowerSource() {
-<<<<<<< HEAD
 //		List<PoweredTileEntity> list = new ArrayList<PoweredTileEntity>();
 //		list.add(this.getTop());
 //		list.add(this.getBack());
@@ -300,44 +260,6 @@ public class TileEntityPowerline extends PoweredTileEntity
 //				}
 //				
 //			}
-=======
-		List<PoweredTileEntity> list = new ArrayList<PoweredTileEntity>();
-		list.add(this.getTop());
-		list.add(this.getBack());
-		list.add(this.getBottom());
-		list.add(this.getLeft());
-		list.add(this.getRight());
-		list.add(this.getFront());
-			for(PoweredTileEntity p : list){
-				if(p instanceof TileEntityRepulsionGenerator || p instanceof TileEntityPowerline || p instanceof TileEntitySolarPanel || p instanceof TileEntityTransformer || p instanceof TileEntityNegativeTransformer || p instanceof TileEntityR2PConvertor){
-					if(p instanceof TileEntityRepulsionGenerator){
-						setOriginalPowerSource(p);
-						break;
-					}
-					if(p instanceof TileEntitySolarPanel){
-						setOriginalPowerSource(p);
-						break;
-					}
-					if(p instanceof TileEntityR2PConvertor){
-						setOriginalPowerSource(p);
-						break;
-					}
-					else if(p instanceof TileEntityPowerline && p.getPowerSource() != null){
-						setOriginalPowerSource(p.getPowerSource());
-						break;
-					}
-					else if(p instanceof TileEntityTransformer && p.getPowerSource() != null){
-						setOriginalPowerSource(p.getPowerSource());
-						break;
-					}
-					else if(p instanceof TileEntityNegativeTransformer && p.getPowerSource() != null){
-						setOriginalPowerSource(p.getPowerSource());
-						break;
-					}
-				}
-				
-			}
->>>>>>> origin/master
 	}
 	
 	@Override
