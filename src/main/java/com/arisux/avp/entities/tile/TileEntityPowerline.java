@@ -25,7 +25,8 @@ public class TileEntityPowerline extends TileEntity implements IEnergyProvider, 
 	public int voltage;
 	public boolean turnOff = true;
 	public Set<ForgeDirection> d = new HashSet<ForgeDirection>();
-
+	public boolean firstTimeCalled = true;
+	
 	@Override
 	public void updateEntity()
 	{
@@ -42,6 +43,11 @@ public class TileEntityPowerline extends TileEntity implements IEnergyProvider, 
 
 	public void pushEnergy()
 	{
+		if(firstTimeCalled)
+		{
+			whatDirectionsAreBanned();
+			firstTimeCalled = false;
+		}
 		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)
 		{
 			if(d.contains(dir))
@@ -55,6 +61,25 @@ public class TileEntityPowerline extends TileEntity implements IEnergyProvider, 
 				{
 					IEnergyReceiver ier = (IEnergyReceiver) tile;
 					ier.receiveEnergy(dir, 120, false);
+				}
+			}
+		}
+	}
+
+	public void whatDirectionsAreBanned() {
+		for(ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS)
+		{
+			if(this.d.contains(direction))
+			{		
+				continue;
+			}
+			TileEntity tile = worldObj.getTileEntity(xCoord + direction.offsetX, yCoord + direction.offsetY, zCoord + direction.offsetZ);
+			if(tile != null && tile instanceof TileEntityPowerline)
+			{
+				TileEntityPowerline tep = (TileEntityPowerline) tile;
+				if(tep.voltage > 0)
+				{
+					this.d.add(direction);
 				}
 			}
 		}
