@@ -13,6 +13,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
+import cofh.api.energy.IEnergyProvider;
+import cofh.api.energy.IEnergyReceiver;
 
 import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
 import com.arisux.avp.entities.tile.TileEntityPowerline;
@@ -35,14 +38,29 @@ public class BlockPowerline extends HookedBlockContainer
 	}
 	
 	@Override
-	public void onBlockPlacedBy(World worldIn, int x, int y, int z, EntityLivingBase placer, ItemStack itemIn)
-	{
-		System.out.println("I was just placed.");
-	}
-	
-	@Override
 	public int getRenderType()
 	{
 		return -1;
+	}
+	
+	@Override
+	public void breakBlock(World world, int posX, int posY, int posZ, Block blockBroken, int meta)
+	{
+		for(ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS)
+		{
+			TileEntity te = world.getTileEntity(posX + direction.offsetX, posY + direction.offsetY, posZ + direction.offsetZ);
+			if(te != null)
+			{
+				if(te instanceof TileEntityPowerline)
+				{
+					TileEntityPowerline tep = (TileEntityPowerline) te;
+					if(tep.d.contains(direction.getOpposite()))
+					{
+						tep.d.remove(direction.getOpposite());
+					}
+				}
+			}
+		}
+		super.breakBlock(world, posX, posY, posZ, blockBroken, meta);
 	}
 }

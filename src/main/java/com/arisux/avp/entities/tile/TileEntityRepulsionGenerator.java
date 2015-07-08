@@ -69,5 +69,4 @@ public class TileEntityRepulsionGenerator extends TileEntity implements IEnergyP
 	public int getMaxEnergyStored(ForgeDirection from) {
 		return 10000;
 	}
-
 }

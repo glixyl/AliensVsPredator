@@ -25,7 +25,7 @@ public class TileEntityPowerline extends TileEntity implements IEnergyProvider, 
 	public int voltage;
 	public boolean turnOff = true;
 	public Set<ForgeDirection> d = new HashSet<ForgeDirection>();
-	
+
 	@Override
 	public void updateEntity()
 	{
@@ -42,7 +42,7 @@ public class TileEntityPowerline extends TileEntity implements IEnergyProvider, 
 
 	public void pushEnergy()
 	{
-		System.out.println("Pushing.. " + d.size());
+
 		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)
 		{
 			if(d.contains(dir))
@@ -50,8 +50,33 @@ public class TileEntityPowerline extends TileEntity implements IEnergyProvider, 
 				continue;
 			}
 			TileEntity tile = worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+			//Checks for any directions trying to give us power
 			if(tile != null)
 			{
+//				if(tile instanceof TileEntityPowerline)
+//				{
+//					TileEntityPowerline tep = (TileEntityPowerline) tile;
+//					if(tep.voltage > 0)
+//					{
+//						d.add(dir);
+//					}
+//				}
+//				else if(tile instanceof TileEntityRepulsionGenerator)
+//				{
+//					TileEntityRepulsionGenerator terg = (TileEntityRepulsionGenerator) tile;
+//					if(terg.voltage > 0)
+//					{
+//						d.add(dir);
+//					}
+//				}
+//				else if(tile instanceof TileEntitySolarPanel)
+//				{
+//					TileEntitySolarPanel tesp = (TileEntitySolarPanel) tile;
+//					if(tesp.voltage > 0)
+//					{
+//						d.add(dir);
+//					}
+//				}
 				if (tile instanceof IEnergyReceiver)
 				{
 					IEnergyReceiver ier = (IEnergyReceiver) tile;
@@ -140,6 +165,62 @@ public class TileEntityPowerline extends TileEntity implements IEnergyProvider, 
 		{
 			return true;
 		}
+
+		if(this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord) instanceof TileEntitySolarPanel)
+		{
+			TileEntitySolarPanel te = (TileEntitySolarPanel) this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
+			if(te.canOutputPower())
+			{
+				return true;
+			}
+			return false;
+		}
+		if(this.getWorldObj().getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord) instanceof TileEntitySolarPanel)
+		{
+			TileEntitySolarPanel te = (TileEntitySolarPanel) this.getWorldObj().getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord);
+			if(te.canOutputPower())
+			{
+				return true;
+			}
+			return false;
+		}
+		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord + 1, this.zCoord) instanceof TileEntitySolarPanel)
+		{
+			TileEntitySolarPanel te = (TileEntitySolarPanel) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord + 1, this.zCoord);
+			if(te.canOutputPower())
+			{
+				return true;
+			}
+			return false;
+		}
+		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord - 1, this.zCoord) instanceof TileEntitySolarPanel)
+		{
+			TileEntitySolarPanel te = (TileEntitySolarPanel) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord - 1, this.zCoord);
+			if(te.canOutputPower())
+			{
+				return true;
+			}
+			return false;
+		}
+		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1) instanceof TileEntitySolarPanel)
+		{
+			TileEntitySolarPanel te = (TileEntitySolarPanel) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1);
+			if(te.canOutputPower())
+			{
+				return true;
+			}
+			return false;
+		}
+		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1) instanceof TileEntitySolarPanel)
+		{
+			TileEntitySolarPanel te = (TileEntitySolarPanel) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1);
+			if(te.canOutputPower())
+			{
+				return true;
+			}
+			return false;
+		}
+
 		return false;
 	}
 
@@ -152,7 +233,6 @@ public class TileEntityPowerline extends TileEntity implements IEnergyProvider, 
 	@Override
 	public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) 
 	{
-		System.out.println("Receiving... ");
 		d.add(from.getOpposite());
 		pushEnergy();
 		if(turnOff)

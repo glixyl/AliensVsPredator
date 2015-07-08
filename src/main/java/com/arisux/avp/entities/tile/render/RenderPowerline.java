@@ -23,12 +23,14 @@ public class RenderPowerline extends TileEntitySpecialRenderer
 		{
 			glDisable(GL_CULL_FACE);
 			this.bindTexture(AliensVsPredator.resources().CABLE);
+			glPushMatrix();
 			glTranslated(posX + 0.5F, posY + 1.5F, posZ + 0.5F);
-			glRotatef(0F, 0F, 1F, 0F);
+			//glRotatef(0F, 0F, 1F, 0F);
 			glScalef(1.0F, -1.0F, 1.0F);
 			glEnable(GL_ALPHA_TEST);
 			this.model.render(tile, 0.0625F);
-
+			glPopMatrix();
+			glTranslated(posX + 0.5F, posY + 1.5F, posZ + 0.5F);
 			if (Minecraft.getMinecraft().objectMouseOver != null)
 			{
 				TileEntity tileOver = Minecraft.getMinecraft().thePlayer.worldObj.getTileEntity(Minecraft.getMinecraft().objectMouseOver.blockX, Minecraft.getMinecraft().objectMouseOver.blockY, Minecraft.getMinecraft().objectMouseOver.blockZ);
@@ -38,10 +40,16 @@ public class RenderPowerline extends TileEntitySpecialRenderer
 					float scale = 0.02F;
 					glScalef(scale, scale, scale);
 					RenderUtil.glDisableLight();
+					glPushMatrix();
+					glRotatef(Minecraft.getMinecraft().thePlayer.rotationYaw + 180, 0F, -1F, 0F);
+					glPushMatrix();
+					glRotatef(Minecraft.getMinecraft().thePlayer.rotationPitch + 180, -1F, 0F, 0F);
 					RenderUtil.drawString(((float) tile.voltage) + "V", -20, 30, tile.voltage <= 0 ? 0xFFFF0000 : 0xFF00FF00);
 					scale = 0.5F;
 					glScalef(scale, scale, scale);
 					RenderUtil.drawString((tile + "").replace(tile.getClass().getName(), ""), -20, 80, 0xFF00AAFF);
+					glPopMatrix();
+					glPopMatrix();
 					RenderUtil.glEnableLight();
 				}
 			}

@@ -1,5 +1,7 @@
 package com.arisux.avp.block;
 
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGlass;
 import net.minecraft.block.material.Material;
@@ -13,18 +15,21 @@ import com.arisux.avp.entities.tile.TileEntityBlastdoor;
 
 public class BlockBlastdoor extends HookedBlockContainer
 {
+	
 	public BlockBlastdoor(Material material)
 	{
 		super(material);
+		setTickRandomly(true);
 	}
-
+	
 	@Override
 	public boolean onBlockActivated(World world, int posX, int posY, int posZ, EntityPlayer player, int side, float subX, float subY, float subZ)
 	{
 		TileEntityBlastdoor tile = (TileEntityBlastdoor) world.getTileEntity(posX, posY, posZ);
 
-		if (tile != null)
+		if (tile != null && tile.voltage > 0)
 		{
+			System.out.println(tile.voltage);
 			tile.setDoorOpen(!tile.isDoorOpen());
 		}
 
