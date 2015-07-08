@@ -20,6 +20,7 @@ import cofh.api.energy.IEnergyReceiver;
 import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
 import com.arisux.avp.entities.tile.TileEntityPowerline;
 import com.arisux.avp.entities.tile.TileEntityR2PConvertor;
+import com.arisux.avp.entities.tile.TileEntityRepulsionGenerator;
 import com.google.common.collect.Lists;
 
 public class BlockPowerline extends HookedBlockContainer

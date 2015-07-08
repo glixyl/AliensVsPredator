@@ -1,7 +1,9 @@
 package com.arisux.avp.entities.tile;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyProvider;
@@ -23,30 +25,30 @@ public class TileEntityRepulsionGenerator extends TileEntity implements IEnergyP
 	{
 		pushEnergy();
 	}
-	
+
 	public void setDirection(byte direction)
 	{
 		this.rotation = direction;
 	}
-	
+
 	@Override
 	public boolean canConnectEnergy(ForgeDirection from) {
 		return false;
 	}
 
 	protected void pushEnergy()
-    {
-        for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)
-        {
-            TileEntity tile = worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
-            if (tile instanceof IEnergyReceiver)
-            {
-                IEnergyReceiver ier = (IEnergyReceiver) tile;
-                ier.receiveEnergy(dir, 120, false);
-            }
-        }
-    }
-	
+	{
+		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)
+		{
+			TileEntity tile = worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+			if (tile instanceof IEnergyReceiver)
+			{
+				IEnergyReceiver ier = (IEnergyReceiver) tile;
+				ier.receiveEnergy(dir, 120, false);
+			}
+		}
+	}
+
 	@Override
 	public int extractEnergy(ForgeDirection from, int maxExtract,
 			boolean simulate) {

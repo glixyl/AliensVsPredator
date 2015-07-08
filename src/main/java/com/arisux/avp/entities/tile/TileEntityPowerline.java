@@ -57,13 +57,41 @@ public class TileEntityPowerline extends TileEntity implements IEnergyProvider, 
 			TileEntity tile = worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
 			if(tile != null)
 			{
-				if (tile instanceof IEnergyReceiver)
+				if (tile instanceof IEnergyReceiver && !isTileNextToGenerator(tile))
 				{
 					IEnergyReceiver ier = (IEnergyReceiver) tile;
 					ier.receiveEnergy(dir, 120, false);
 				}
 			}
 		}
+	}
+
+	public boolean isTileNextToGenerator(TileEntity te) {
+		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)
+		{
+			TileEntity tile = worldObj.getTileEntity(te.xCoord + dir.offsetX, te.yCoord + dir.offsetY, te.zCoord + dir.offsetZ);
+			if(tile instanceof TileEntityRepulsionGenerator)
+			{
+				return true;
+			}
+			else if(tile instanceof TileEntitySolarPanel)
+			{
+				TileEntitySolarPanel tesp = (TileEntitySolarPanel) tile;
+				if(tesp.canOutputPower())
+				{
+					return true;
+				}
+			}
+			else if(tile instanceof TileEntityR2PConvertor)
+			{
+				TileEntityR2PConvertor r2p = (TileEntityR2PConvertor) tile;
+				if(r2p.canOutputPower())
+				{
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	public void whatDirectionsAreBanned() {
@@ -81,6 +109,16 @@ public class TileEntityPowerline extends TileEntity implements IEnergyProvider, 
 				{
 					this.d.add(direction);
 				}
+			}
+			
+			if(tile != null && tile instanceof TileEntityRepulsionGenerator)
+			{
+				this.d.add(direction);
+			}
+			
+			if(tile != null && tile instanceof TileEntitySolarPanel)
+			{
+				this.d.add(direction);
 			}
 		}
 	}
