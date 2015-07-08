@@ -3,256 +3,71 @@ package com.arisux.avp.entities.tile;
 import java.util.ArrayList;
 import java.util.List;
 
+import cofh.api.energy.EnergyStorage;
+import cofh.api.energy.IEnergyProvider;
+import cofh.api.energy.IEnergyReceiver;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityRepulsionGenerator extends PoweredTileEntity
+public class TileEntityRepulsionGenerator extends TileEntity implements IEnergyProvider
 {
 	public int rotation;
-
+	public int voltage;
+	
+	@Override
+	public void updateEntity()
+	{
+		pushEnergy();
+	}
+	
 	public void setDirection(byte direction)
 	{
 		this.rotation = direction;
 	}
-
+	
 	@Override
-	public Packet getDescriptionPacket()
-	{
-		NBTTagCompound nbtTag = new NBTTagCompound();
-		this.writeToNBT(nbtTag);
-		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
-	}
-
-	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
-	{
-		readFromNBT(packet.func_148857_g());
-	}
-
-	@Override
-	public void writeToNBT(NBTTagCompound nbt)
-	{
-		super.writeToNBT(nbt);
-		nbt.setInteger("Rotation", this.rotation);
-	}
-
-	@Override
-	public void readFromNBT(NBTTagCompound nbt)
-	{
-		super.readFromNBT(nbt);
-		this.rotation = nbt.getInteger("Rotation");
-	}
-
-	@Override
-	public void outputPower()
-	{
-		super.outputPower();
-	}
-
-	@Override
-	public void outputPowerToTile(PoweredTileEntity tile, double voltage)
-	{
-		if (tile != null)
-		{
-			tile.setVoltage(voltage);
-		}
-	}
-
-	@Override
-	public boolean canOutputPower()
-	{
-		return true;
-	}
-
-	@Override
-	public double getVoltage()
-	{
-		double addedVoltage = 120;
-		
-		if (getTop() instanceof TileEntityRepulsionGenerator)
-		{
-			addedVoltage += 120;
-		}
-		
-		if (getBottom() instanceof TileEntityRepulsionGenerator)
-		{
-			addedVoltage += 120;
-		}
-		
-		if (getLeft() instanceof TileEntityRepulsionGenerator)
-		{
-			addedVoltage += 120;
-		}
-		
-		if (getRight() instanceof TileEntityRepulsionGenerator)
-		{
-			addedVoltage += 120;
-		}
-		
-		if (getFront() instanceof TileEntityRepulsionGenerator)
-		{
-			addedVoltage += 120;
-		}
-		
-		if (getBack() instanceof TileEntityRepulsionGenerator)
-		{
-			addedVoltage += 120;
-		}
-		
-		
-		if (getTop() instanceof TileEntitySolarPanel)
-		{
-			addedVoltage += 220;
-		}
-		
-		if (getBottom() instanceof TileEntitySolarPanel)
-		{
-			addedVoltage += 220;
-		}
-		
-		if (getLeft() instanceof TileEntitySolarPanel)
-		{
-			addedVoltage += 220;
-		}
-		
-		if (getRight() instanceof TileEntitySolarPanel)
-		{
-			addedVoltage += 220;
-		}
-		
-		if (getFront() instanceof TileEntitySolarPanel)
-		{
-			addedVoltage += 220;
-		}
-		
-		if (getBack() instanceof TileEntitySolarPanel)
-		{
-			addedVoltage += 220;
-		}
-		
-		
-		
-		if (getTop() instanceof TileEntityPowerline)
-		{
-			TileEntityPowerline te = (TileEntityPowerline) getTop();
-			te.state = true;
-		}
-		
-		if (getBottom() instanceof TileEntityPowerline)
-		{
-			TileEntityPowerline te = (TileEntityPowerline) getBottom();
-			te.state = true;
-		}
-		
-		if (getLeft() instanceof TileEntityPowerline)
-		{
-			TileEntityPowerline te = (TileEntityPowerline) getLeft();
-			te.state = true;
-		}
-		
-		if (getRight() instanceof TileEntityPowerline)
-		{
-			TileEntityPowerline te = (TileEntityPowerline) getRight();
-			te.state = true;
-		}
-		
-		if (getFront() instanceof TileEntityPowerline)
-		{
-			TileEntityPowerline te = (TileEntityPowerline) getFront();
-			te.state = true;
-		}
-		
-		if (getBack() instanceof TileEntityPowerline)
-		{
-			TileEntityPowerline te = (TileEntityPowerline) getBack();
-			te.state = true;
-		}
-		
-		return addedVoltage;
-	}
-
-	@Override
-	public void onVoltageTick()
-	{
-		;
-	}
-
-	@Override
-	public void onOverloadTick()
-	{
-		;
-	}
-
-	@Override
-	public void onUnderloadTick()
-	{
-		;
-	}
-
-	@Override
-	public double getMaxOperatingVoltage()
-	{
-		return 24000;
-	}
-
-	@Override
-	public boolean isOriginalPowerSourceAttached()
-	{
+	public boolean canConnectEnergy(ForgeDirection from) {
 		return false;
 	}
 
+	protected void pushEnergy()
+    {
+        for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)
+        {
+            TileEntity tile = worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+            if (tile instanceof IEnergyReceiver)
+            {
+                IEnergyReceiver ier = (IEnergyReceiver) tile;
+                ier.receiveEnergy(dir, 120, false);
+            }
+        }
+    }
+	
 	@Override
-	public void getOriginalPowerSource()
-	{
-	}
-
-	@Override
-	public TileEntityRepulsionGenerator getPowerSource()
-	{
-		return null;
-	}
-
-	@Override
-	public void setOriginalPowerSource(PoweredTileEntity e)
-	{	
-	}
-
-	@Override
-	public boolean isReciever() {
-		return false;
-	}
-
-	@Override
-	public boolean isOutputter() {
-		return true;
-	}
-
-	@Override
-	public void updateState() {
-		//Must keep lists empty so we don't have 1 block as a parent AND a child.
-		parents.clear();
-		children.clear();
-				
-		List<PoweredTileEntity> list = new ArrayList<PoweredTileEntity>();
-		list.add(this.getTop());
-		list.add(this.getBack());
-		list.add(this.getBottom());
-		list.add(this.getLeft());
-		list.add(this.getRight());
-		list.add(this.getFront());
-		for (PoweredTileEntity e : list) {
-			if(e != null){
-			if(e.isReciever())
-			{
-				e.parents.add(this);
-				this.children.add(e);
-				e.state = this.canOutputPower();
-				e.updateChildren();
-			}
+	public int extractEnergy(ForgeDirection from, int maxExtract,
+			boolean simulate) {
+		if(maxExtract < this.voltage)
+		{
+			return maxExtract;
 		}
+		else
+		{
+			return this.voltage;
 		}
 	}
+
+	@Override
+	public int getEnergyStored(ForgeDirection from) {
+		return this.voltage;
+	}
+
+	@Override
+	public int getMaxEnergyStored(ForgeDirection from) {
+		return 10000;
+	}
+
 }

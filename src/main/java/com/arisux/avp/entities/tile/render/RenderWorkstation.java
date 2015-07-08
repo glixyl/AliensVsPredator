@@ -37,7 +37,7 @@ public class RenderWorkstation extends TileEntitySpecialRenderer
 			glEnable(GL_ALPHA_TEST);
 			this.model.render(tile, 0.0625F);
 
-			if (tile.isPowered())
+			if (tile.voltage > 0)
 			{
 				RenderUtil.glDisableLightMapping();
 				RenderUtil.glDisableLight();

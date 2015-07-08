@@ -30,7 +30,7 @@ public class RenderWorklight extends TileEntitySpecialRenderer
 			float scale = 0.02F;
 			glScalef(scale, scale, scale);
 			RenderUtil.glDisableLight();
-			RenderUtil.drawString(tile.getVoltage() + "V", -20, 30, 0xFF00FF00);
+			RenderUtil.drawString(tile.voltage + "V", -20, 30, 0xFF00FF00);
 			RenderUtil.glEnableLight();
 		}
 		glPopMatrix();

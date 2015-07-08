@@ -3,6 +3,8 @@ package com.arisux.avp.entities.tile;
 import java.util.ArrayList;
 import java.util.List;
 
+import cofh.api.energy.IEnergyReceiver;
+
 import com.arisux.airi.lib.WorldUtil;
 
 import net.minecraft.block.BlockRedstoneWire;
@@ -12,10 +14,12 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityP2RConvertor extends PoweredTileEntity
+public class TileEntityP2RConvertor extends TileEntity implements IEnergyReceiver
 {
 	public int rotation;
+	public int voltage;
 	
 	public void setDirection(byte direction)
 	{
@@ -109,140 +113,29 @@ public class TileEntityP2RConvertor extends PoweredTileEntity
 			}
 		}
 	}
-	
-	@Override
-	public Packet getDescriptionPacket()
-	{
-		NBTTagCompound nbtTag = new NBTTagCompound();
-		this.writeToNBT(nbtTag);
-		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
-	}
 
 	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
-	{
-		readFromNBT(packet.func_148857_g());
-	}
-
-	@Override
-	public void writeToNBT(NBTTagCompound nbt)
-	{
-		super.writeToNBT(nbt);
-		nbt.setInteger("Rotation", this.rotation);
-	}
-
-	@Override
-	public void readFromNBT(NBTTagCompound nbt)
-	{
-		super.readFromNBT(nbt);
-		this.rotation = nbt.getInteger("Rotation");
-	}
-
-	@Override
-	public void outputPower()
-	{
-		super.outputPower();
-	}
-
-	
-	@Override
-	public boolean canOutputPower()
-	{
+	public boolean canConnectEnergy(ForgeDirection from) {
 		return false;
 	}
 
 	@Override
-	public void onVoltageTick()
-	{
-		;
-	}
-
-	@Override
-	public void onOverloadTick()
-	{
-		;
-	}
-
-	@Override
-	public void onUnderloadTick()
-	{
-		;
-	}
-
-	@Override
-	public double getMinOperatingVoltage()
-	{
-		return 24;
-	}
-	
-	@Override
-	public double getMaxOperatingVoltage()
-	{
-		return 24000;
-	}
-
-	@Override
-	public boolean isOriginalPowerSourceAttached()
-	{
-		return false;
-	}
-
-	@Override
-	public void getOriginalPowerSource()
-	{}
-
-	@Override
-	public TileEntityRepulsionGenerator getPowerSource()
-	{
-		return null;
-	}
-
-	@Override
-	public void setOriginalPowerSource(PoweredTileEntity e)
-	{}
-
-	@Override
-	public boolean isReciever() {
-		return true;
-	}
-
-	@Override
-	public boolean isOutputter() {
-		return false;
-	}
-
-	@Override
-	public void updateState() {
-		//Must keep lists empty so we don't have 1 block as a parent AND a child.
-		parents.clear();
-		children.clear();
-				
-		List<PoweredTileEntity> list = new ArrayList<PoweredTileEntity>();
-		list.add(this.getTop());
-		list.add(this.getBack());
-		list.add(this.getBottom());
-		list.add(this.getLeft());
-		list.add(this.getRight());
-		list.add(this.getFront());
-		for (PoweredTileEntity e : list) {
-			if(e != null){
-			if(e.isOutputter())
-			{
-				if(!this.parents.contains(e))
-				{
-					this.parents.add(e);
-				}
-				if(!e.children.contains(this))
-				{
-					e.children.add(this);
-				}
-				if(!this.state)
-				{
-					this.state = e.canOutputPower();
-				}
-			}
+	public int receiveEnergy(ForgeDirection from, int maxReceive,
+			boolean simulate) {
+		if(!simulate)
+		{
+			this.voltage += maxReceive;
 		}
-		}
-		
+		return maxReceive + this.voltage;
+	}
+
+	@Override
+	public int getEnergyStored(ForgeDirection from) {
+		return this.voltage;
+	}
+
+	@Override
+	public int getMaxEnergyStored(ForgeDirection from) {
+		return 10000;
 	}
 }

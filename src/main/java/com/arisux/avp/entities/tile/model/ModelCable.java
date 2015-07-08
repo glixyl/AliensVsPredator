@@ -2,8 +2,9 @@ package com.arisux.avp.entities.tile.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import cofh.api.energy.IEnergyProvider;
+import cofh.api.energy.IEnergyReceiver;
 
-import com.arisux.avp.entities.tile.PoweredTileEntity;
 import com.arisux.avp.entities.tile.TileEntityPowerline;
 
 public class ModelCable extends ModelBase
@@ -70,34 +71,34 @@ public class ModelCable extends ModelBase
 		left.setRotationPoint(1F, 15F, 1F);
 		right.setRotationPoint(-1F, 15F, -1F);
 		
-		if (tile.getBottom() instanceof PoweredTileEntity)
-		{
-			down.render(boxTranslation);
-		}
-
-		if (tile.getTop() instanceof PoweredTileEntity)
-		{
-			up.render(boxTranslation);
-		}
-
-		if (tile.getFront() instanceof PoweredTileEntity)
-		{
-			front.render(boxTranslation);
-		}
-
-		if (tile.getBack() instanceof PoweredTileEntity)
-		{
-			back.render(boxTranslation);
-		}
-
-		if (tile.getLeft() instanceof PoweredTileEntity)
+		if (tile.getWorldObj().getTileEntity(tile.xCoord + 1, tile.yCoord, tile.zCoord) instanceof IEnergyReceiver || tile.getWorldObj().getTileEntity(tile.xCoord + 1, tile.yCoord, tile.zCoord) instanceof IEnergyProvider)
 		{
 			left.render(boxTranslation);
 		}
 
-		if (tile.getRight() instanceof PoweredTileEntity)
+		if (tile.getWorldObj().getTileEntity(tile.xCoord - 1, tile.yCoord, tile.zCoord) instanceof IEnergyReceiver || tile.getWorldObj().getTileEntity(tile.xCoord - 1, tile.yCoord, tile.zCoord) instanceof IEnergyProvider)
 		{
 			right.render(boxTranslation);
+		}
+
+		if (tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord + 1, tile.zCoord) instanceof IEnergyReceiver || tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord + 1, tile.zCoord) instanceof IEnergyProvider)
+		{
+			up.render(boxTranslation);
+		}
+
+		if (tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord - 1, tile.zCoord) instanceof IEnergyReceiver || tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord - 1, tile.zCoord) instanceof IEnergyProvider)
+		{
+			down.render(boxTranslation);
+		}
+
+		if (tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord, tile.zCoord + 1) instanceof IEnergyReceiver || tile.getWorldObj().getTileEntity(tile.xCoord , tile.yCoord, tile.zCoord + 1) instanceof IEnergyProvider)
+		{
+			back.render(boxTranslation);
+		}
+
+		if (tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord, tile.zCoord - 1) instanceof IEnergyReceiver || tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord, tile.zCoord - 1) instanceof IEnergyProvider)
+		{
+			front.render(boxTranslation);
 		}
 	}
 

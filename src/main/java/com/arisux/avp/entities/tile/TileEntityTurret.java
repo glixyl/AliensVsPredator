@@ -22,6 +22,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.Constants.NBT;
+import net.minecraftforge.common.util.ForgeDirection;
+import cofh.api.energy.EnergyStorage;
+import cofh.api.energy.IEnergyReceiver;
 
 import com.arisux.airi.lib.WorldUtil;
 import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
@@ -30,12 +33,11 @@ import com.arisux.avp.entities.EntityBullet;
 import com.arisux.avp.entities.EntityTurret;
 import com.arisux.avp.entities.mob.*;
 import com.arisux.avp.interfaces.IDataDevice;
-import com.arisux.avp.interfaces.IPowerDevice;
 import com.arisux.avp.inventory.container.ContainerTurret;
 import com.arisux.avp.packets.client.PacketTurretInit;
 import com.arisux.avp.packets.server.PacketTurretTargetUpdate;
 
-public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, IPowerDevice
+public class TileEntityTurret extends TileEntity implements IDataDevice, IEnergyReceiver
 {
 	private long fireRate;
 	private boolean ammoDisplayEnabled, isFiring;
@@ -48,7 +50,8 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 	private CoordData focusPoint;
 	private Item itemAmmo;
 	public int beamColor = 0xFFFF0000;
-
+	public int voltage;
+	
 	public TileEntityTurret()
 	{
 		super();
@@ -81,15 +84,20 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 	public void updateEntity()
 	{
 		super.updateEntity();
-
+		
 		this.isFiring = false;
-
+		
+		if(!this.isAdjacentToPowerSource())
+		{
+			this.voltage = 0;
+		}
+		
 		if (this.worldObj != null && this.getEntity() != null)
 		{
 			this.getEntity().setLocationAndAngles(this.xCoord + getEntity().width / 2, this.yCoord + 1, this.zCoord + getEntity().width / 2, this.rotationYaw, this.rotationPitch);
 		}
 
-		if (this.isVoltageInOperatingRange())
+		if (this.voltage > 0)
 		{
 			this.firingTimeout = this.firingTimeout > 0 ? this.firingTimeout - 1 : this.firingTimeout;
 			this.pickupItemstacks();
@@ -771,122 +779,85 @@ public class TileEntityTurret extends PoweredTileEntity implements IDataDevice, 
 	}
 
 	@Override
-	public double getMaxOperatingVoltage()
-	{
-		return 250;
-	}
-
-	@Override
-	public double getMinOperatingVoltage()
-	{
-		return 110;
-	}
-
-	@Override
-	public double getMaxOperatingAmps()
-	{
-		return 6.5;
-	}
-
-	@Override
-	public double getMinOperatingAmps()
-	{
-		return 2;
-	}
-
-	@Override
-	public double getResistance()
-	{
-		return 0;
-	}
-
-	@Override
-	public void onVoltageTick()
-	{
-		;
-	}
-
-	@Override
-	public void onOverloadTick()
-	{
-		;
-	}
-
-	@Override
-	public void onUnderloadTick()
-	{
-		;
-	}
-
-	public int getFiringTimeout()
-	{
-		return this.firingTimeout;
-	}
-
-	@Override
-	public boolean isOriginalPowerSourceAttached() {
-		// TODO Auto-generated method stub
+	public boolean canConnectEnergy(ForgeDirection from) {
 		return false;
 	}
 
 	@Override
-	public void getOriginalPowerSource() {
-		// TODO Auto-generated method stub
-		
+	public int receiveEnergy(ForgeDirection from, int maxReceive,
+			boolean simulate) {
+		if(!simulate)
+		{
+			this.voltage += maxReceive;
+		}
+		return this.voltage;
 	}
 
-	@Override
-	public TileEntityRepulsionGenerator getPowerSource() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public void setOriginalPowerSource(PoweredTileEntity e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean isReciever() {
-		return true;
-	}
-
-	@Override
-	public boolean isOutputter() {
-		return false;
-	}
-
-	@Override
-	public void updateState() {
-		//Must keep lists empty so we don't have 1 block as a parent AND a child.
-		parents.clear();
-		children.clear();
-				
-		List<PoweredTileEntity> list = new ArrayList<PoweredTileEntity>();
-		list.add(this.getTop());
-		list.add(this.getBack());
-		list.add(this.getBottom());
-		list.add(this.getLeft());
-		list.add(this.getRight());
-		list.add(this.getFront());
-		for (PoweredTileEntity e : list) {
-			if(e != null){
-			if(e.isOutputter())
+	public boolean isAdjacentToPowerSource() {
+		if(this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord) instanceof TileEntityPowerline)
+		{
+			TileEntityPowerline te = (TileEntityPowerline) this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
+			if(te.voltage > 0)
 			{
-				if(!this.parents.contains(e))
-				{
-					this.parents.add(e);
-				}
-				if(!e.children.contains(this))
-				{
-					e.children.add(this);
-				}
-				if(!this.state)
-				{
-					this.state = e.canOutputPower();
-				}
+				return true;
 			}
+			return false;
 		}
+		if(this.getWorldObj().getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord) instanceof TileEntityPowerline)
+		{
+			TileEntityPowerline te = (TileEntityPowerline) this.getWorldObj().getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord);
+			if(te.voltage > 0)
+			{
+				return true;
+			}
+			return false;
 		}
+		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord + 1, this.zCoord) instanceof TileEntityPowerline)
+		{
+			TileEntityPowerline te = (TileEntityPowerline) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord + 1, this.zCoord);
+			if(te.voltage > 0)
+			{
+				return true;
+			}
+			return false;
+		}
+		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord - 1, this.zCoord) instanceof TileEntityPowerline)
+		{
+			TileEntityPowerline te = (TileEntityPowerline) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord - 1, this.zCoord);
+			if(te.voltage > 0)
+			{
+				return true;
+			}
+			return false;
+		}
+		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1) instanceof TileEntityPowerline)
+		{
+			TileEntityPowerline te = (TileEntityPowerline) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1);
+			if(te.voltage > 0)
+			{
+				return true;
+			}
+			return false;
+		}
+		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1) instanceof TileEntityPowerline)
+		{
+			TileEntityPowerline te = (TileEntityPowerline) this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord - 1);
+			if(te.voltage > 0)
+			{
+				return true;
+			}
+			return false;
+		}
+		return false;
+	}
+
+	@Override
+	public int getEnergyStored(ForgeDirection from) {
+		return this.voltage;
+	}
+
+	@Override
+	public int getMaxEnergyStored(ForgeDirection from) {
+		return 10000;
 	}
 }

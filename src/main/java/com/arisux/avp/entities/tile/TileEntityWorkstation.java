@@ -8,13 +8,16 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
+import cofh.api.energy.IEnergyReceiver;
 
 import com.arisux.avp.interfaces.INetworkDevice;
 
-public class TileEntityWorkstation extends PoweredTileEntity implements INetworkDevice
+public class TileEntityWorkstation extends TileEntity implements INetworkDevice, IEnergyReceiver
 {
 	public int rotation;
-
+	public int voltage;
+	
 	public TileEntityWorkstation()
 	{
 		;
@@ -64,25 +67,7 @@ public class TileEntityWorkstation extends PoweredTileEntity implements INetwork
 	{
 		;
 	}
-
-	@Override
-	public void onVoltageTick()
-	{
-		;
-	}
-
-	@Override
-	public void onOverloadTick()
-	{
-		;
-	}
-
-	@Override
-	public void onUnderloadTick()
-	{
-		;
-	}
-
+	
 	@Override
 	public INetworkDevice getHostDevice()
 	{
@@ -96,71 +81,27 @@ public class TileEntityWorkstation extends PoweredTileEntity implements INetwork
 	}
 
 	@Override
-	public boolean isOriginalPowerSourceAttached() {
-		// TODO Auto-generated method stub
+	public boolean canConnectEnergy(ForgeDirection from) {
 		return false;
 	}
 
 	@Override
-	public void getOriginalPowerSource() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public TileEntityRepulsionGenerator getPowerSource() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public void setOriginalPowerSource(PoweredTileEntity e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean isReciever() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isOutputter() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void updateState() {
-		//Must keep lists empty so we don't have 1 block as a parent AND a child.
-		parents.clear();
-		children.clear();
-				
-		List<PoweredTileEntity> list = new ArrayList<PoweredTileEntity>();
-		list.add(this.getTop());
-		list.add(this.getBack());
-		list.add(this.getBottom());
-		list.add(this.getLeft());
-		list.add(this.getRight());
-		list.add(this.getFront());
-		for (PoweredTileEntity e : list) {
-			if(e != null){
-			if(e.isOutputter())
-			{
-				if(!this.parents.contains(e))
-				{
-					this.parents.add(e);
-				}
-				if(!e.children.contains(this))
-				{
-					e.children.add(this);
-				}
-				if(!this.state)
-				{
-					this.state = e.canOutputPower();
-				}
-			}
+	public int receiveEnergy(ForgeDirection from, int maxReceive,
+			boolean simulate) {
+		if(!simulate)
+		{
+			this.voltage += maxReceive;
 		}
-		}
+		return this.voltage + maxReceive;
+	}
+
+	@Override
+	public int getEnergyStored(ForgeDirection from) {
+		return this.voltage;
+	}
+
+	@Override
+	public int getMaxEnergyStored(ForgeDirection from) {
+		return 10000;
 	}
 }

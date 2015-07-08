@@ -16,7 +16,7 @@ import com.arisux.airi.lib.enums.BlockSides;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.extended.ExtendedEntityLivingBase;
 import com.arisux.avp.entities.mob.*;
-import com.arisux.avp.entities.tile.PoweredTileEntity;
+import com.arisux.avp.entities.tile.TileEntityPowerline;
 import com.arisux.avp.entities.tile.TileEntityStasisMechanism;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -191,10 +191,10 @@ public class DebugToolsRenderEvent
 								info = info + " (" + tile.getClass().getSimpleName() + tile.toString().replace(tile.getClass().getName(), "") + ")";
 							}
 
-							if (tile instanceof PoweredTileEntity)
+							if (tile instanceof TileEntityPowerline)
 							{
-								PoweredTileEntity poweredTile = (PoweredTileEntity) tile;
-								info = info + " (" + ((float) poweredTile.getVoltage()) + "V & " + poweredTile.getAmperage() + "A)";
+								TileEntityPowerline poweredTile = (TileEntityPowerline) tile;
+								info = info + " (" + ((float) poweredTile.voltage) + "V)";
 							}
 
 							if (tile instanceof TileEntityStasisMechanism)

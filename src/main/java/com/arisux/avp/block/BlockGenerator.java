@@ -10,6 +10,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
+import com.arisux.avp.entities.tile.TileEntityPowerline;
 import com.arisux.avp.entities.tile.TileEntityRepulsionGenerator;
 
 public class BlockGenerator extends HookedBlockContainer
@@ -37,19 +38,6 @@ public class BlockGenerator extends HookedBlockContainer
 	public TileEntity createNewTileEntity(World var1, int var2)
 	{
 		return new TileEntityRepulsionGenerator();
-	}
-	
-	@Override
-	public void breakBlock(World world, int posX, int posY, int posZ, Block blockBroken, int meta)
-	{
-		super.breakBlock(world, posX, posY, posZ, blockBroken, meta);
-		world.removeTileEntity(posX, posY, posZ);
-	}
-
-	@Override
-	public boolean onBlockActivated(World worldObj, int xCoord, int yCoord, int zCoord, EntityPlayer player, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_)
-	{
-		return true;
 	}
 	
 	@Override

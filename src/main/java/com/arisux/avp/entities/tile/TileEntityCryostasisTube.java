@@ -13,33 +13,26 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.Explosion;
+import net.minecraftforge.common.util.ForgeDirection;
+import cofh.api.energy.IEnergyReceiver;
 
 import com.arisux.avp.items.ItemEntitySummoner;
 
-public class TileEntityCryostasisTube extends PoweredTileEntity
+public class TileEntityCryostasisTube extends TileEntity implements IEnergyReceiver
 {
 	public int rotation;
+	public int voltage;
 	public Entity stasisEntity;
 	public ItemStack stasisItemstack;
 	private boolean cracked;
 	private boolean shattered;
-
-	public TileEntityCryostasisTube()
-	{
-		;
-	}
-
-	public void setDirection(byte direction)
-	{
-		this.rotation = direction;
-	}
 
 	@Override
 	public void updateEntity()
 	{
 		super.updateEntity();
 
-		if (this.stasisEntity != null && !this.isPowered())
+		if (this.stasisEntity != null && this.voltage > 0)
 		{
 			if (this.worldObj.getWorldTime() % 100 == 0)
 			{
@@ -160,92 +153,32 @@ public class TileEntityCryostasisTube extends PoweredTileEntity
 	}
 
 	@Override
-	public void onVoltageTick()
-	{
-		;
-	}
-
-	@Override
-	public void onOverloadTick()
-	{
-		Explosion explosion = new Explosion(this.worldObj, null, this.xCoord, this.yCoord, this.zCoord, 1);
-		explosion.doExplosionA();
-		explosion.doExplosionB(true);
-		this.worldObj.setBlock(this.xCoord, this.yCoord, this.zCoord, Blocks.fire);
-	}
-
-	@Override
-	public void onUnderloadTick()
-	{
-		;
-	}
-
-	@Override
-	public boolean isOriginalPowerSourceAttached() {
-		// TODO Auto-generated method stub
+	public boolean canConnectEnergy(ForgeDirection from) {
 		return false;
 	}
 
 	@Override
-	public TileEntityRepulsionGenerator getPowerSource() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void getOriginalPowerSource() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setOriginalPowerSource(PoweredTileEntity e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean isReciever() {
-		return true;
-	}
-
-	@Override
-	public boolean isOutputter() {
-		return false;
-	}
-
-	@Override
-	public void updateState() {
-		//Must keep lists empty so we don't have 1 block as a parent AND a child.
-		parents.clear();
-		children.clear();
-				
-		List<PoweredTileEntity> list = new ArrayList<PoweredTileEntity>();
-		list.add(this.getTop());
-		list.add(this.getBack());
-		list.add(this.getBottom());
-		list.add(this.getLeft());
-		list.add(this.getRight());
-		list.add(this.getFront());
-		for (PoweredTileEntity e : list) {
-			if(e != null){
-			if(e.isOutputter())
-			{
-				if(!this.parents.contains(e))
-				{
-					this.parents.add(e);
-				}
-				if(!e.children.contains(this))
-				{
-					e.children.add(this);
-				}
-				if(!this.state)
-				{
-					this.state = e.canOutputPower();
-				}
-			}
+	public int receiveEnergy(ForgeDirection from, int maxReceive,
+			boolean simulate) {
+		if(!simulate)
+		{
+			this.voltage += maxReceive;
 		}
-		}
-		
+		return voltage + maxReceive;
+	}
+
+	@Override
+	public int getEnergyStored(ForgeDirection from) {
+		return this.voltage;
+	}
+
+	@Override
+	public int getMaxEnergyStored(ForgeDirection from) {
+		return 10000;
+	}
+	
+	public void setDirection(byte direction)
+	{
+		this.rotation = direction;
 	}
 }

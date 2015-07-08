@@ -2,13 +2,13 @@ package com.arisux.avp.block;
 
 import java.util.Random;
 
-import com.arisux.avp.entities.tile.PoweredTileEntity;
 import com.arisux.avp.entities.tile.TileEntityBlastdoor;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -17,7 +17,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class GhostBlock extends Block
 	{
 		private Block parentBlock;
-		private PoweredTileEntity parentTileEntity;
+		private TileEntity parentTileEntity;
 		public GhostBlock()
 		{
 			super(Material.circuits); //The only reason this is here is because shadekiller666 is awesome.
