@@ -42,7 +42,6 @@ public class TileEntityPowerline extends TileEntity implements IEnergyProvider, 
 
 	public void pushEnergy()
 	{
-
 		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)
 		{
 			if(d.contains(dir))
@@ -50,33 +49,8 @@ public class TileEntityPowerline extends TileEntity implements IEnergyProvider, 
 				continue;
 			}
 			TileEntity tile = worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
-			//Checks for any directions trying to give us power
 			if(tile != null)
 			{
-//				if(tile instanceof TileEntityPowerline)
-//				{
-//					TileEntityPowerline tep = (TileEntityPowerline) tile;
-//					if(tep.voltage > 0)
-//					{
-//						d.add(dir);
-//					}
-//				}
-//				else if(tile instanceof TileEntityRepulsionGenerator)
-//				{
-//					TileEntityRepulsionGenerator terg = (TileEntityRepulsionGenerator) tile;
-//					if(terg.voltage > 0)
-//					{
-//						d.add(dir);
-//					}
-//				}
-//				else if(tile instanceof TileEntitySolarPanel)
-//				{
-//					TileEntitySolarPanel tesp = (TileEntitySolarPanel) tile;
-//					if(tesp.voltage > 0)
-//					{
-//						d.add(dir);
-//					}
-//				}
 				if (tile instanceof IEnergyReceiver)
 				{
 					IEnergyReceiver ier = (IEnergyReceiver) tile;
@@ -220,7 +194,62 @@ public class TileEntityPowerline extends TileEntity implements IEnergyProvider, 
 			}
 			return false;
 		}
-
+		
+		if(this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord) instanceof TileEntityR2PConvertor)
+		{
+			TileEntityR2PConvertor te = (TileEntityR2PConvertor) this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
+			if(te.canOutputPower())
+			{
+				return true;
+			}
+			return false;
+		}
+		if(this.getWorldObj().getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord) instanceof TileEntityR2PConvertor)
+		{
+			TileEntityR2PConvertor te = (TileEntityR2PConvertor) this.getWorldObj().getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord);
+			if(te.canOutputPower())
+			{
+				return true;
+			}
+			return false;
+		}
+		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord + 1, this.zCoord) instanceof TileEntityR2PConvertor)
+		{
+			TileEntityR2PConvertor te = (TileEntityR2PConvertor) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord + 1, this.zCoord);
+			if(te.canOutputPower())
+			{
+				return true;
+			}
+			return false;
+		}
+		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord - 1, this.zCoord) instanceof TileEntityR2PConvertor)
+		{
+			TileEntityR2PConvertor te = (TileEntityR2PConvertor) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord - 1, this.zCoord);
+			if(te.canOutputPower())
+			{
+				return true;
+			}
+			return false;
+		}
+		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1) instanceof TileEntityR2PConvertor)
+		{
+			TileEntityR2PConvertor te = (TileEntityR2PConvertor) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1);
+			if(te.canOutputPower())
+			{
+				return true;
+			}
+			return false;
+		}
+		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1) instanceof TileEntityR2PConvertor)
+		{
+			TileEntityR2PConvertor te = (TileEntityR2PConvertor) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1);
+			if(te.canOutputPower())
+			{
+				return true;
+			}
+			return false;
+		}
+		
 		return false;
 	}
 
