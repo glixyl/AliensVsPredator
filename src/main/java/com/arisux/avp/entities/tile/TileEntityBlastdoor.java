@@ -6,6 +6,8 @@ import com.arisux.avp.AliensVsPredator;
 
 import cofh.api.energy.IEnergyReceiver;
 import net.minecraft.block.Block;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -16,7 +18,8 @@ public class TileEntityBlastdoor extends TileEntity implements IEnergyReceiver
 	private float doorProgress;
 	private boolean doorOpen;
 	private ArrayList<com.arisux.airi.lib.WorldUtil.Blocks.CoordData> managedCoords = new ArrayList<com.arisux.airi.lib.WorldUtil.Blocks.CoordData>();
-	
+	public ForgeDirection direction;
+
 	@Override
 	public void updateEntity()
 	{
@@ -27,24 +30,45 @@ public class TileEntityBlastdoor extends TileEntity implements IEnergyReceiver
 		{
 			this.setDoorOpen(false);
 		}
-		
+
 		if (!this.doorOpen)
 		{
-			world.setBlock(this.xCoord + 1, this.yCoord, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
-			world.setBlock(this.xCoord + 2, this.yCoord, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
-			world.setBlock(this.xCoord + 3, this.yCoord, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
-			world.setBlock(this.xCoord, this.yCoord + 1, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
-			world.setBlock(this.xCoord, this.yCoord + 2, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
-			world.setBlock(this.xCoord + 1, this.yCoord + 2, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
-			world.setBlock(this.xCoord + 1, this.yCoord + 1, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
-			world.setBlock(this.xCoord + 2, this.yCoord + 2, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
-			world.setBlock(this.xCoord + 2, this.yCoord + 1, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
-			world.setBlock(this.xCoord + 3, this.yCoord + 2, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
-			world.setBlock(this.xCoord + 3, this.yCoord + 1, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
+			if(direction != null)
+			{
+				if(direction == ForgeDirection.NORTH || direction == ForgeDirection.SOUTH)
+				{
+					world.setBlock(this.xCoord + 1, this.yCoord, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
+					world.setBlock(this.xCoord + 2, this.yCoord, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
+					world.setBlock(this.xCoord + 3, this.yCoord, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
+					world.setBlock(this.xCoord, this.yCoord + 1, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
+					world.setBlock(this.xCoord, this.yCoord + 2, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
+					world.setBlock(this.xCoord + 1, this.yCoord + 2, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
+					world.setBlock(this.xCoord + 1, this.yCoord + 1, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
+					world.setBlock(this.xCoord + 2, this.yCoord + 2, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
+					world.setBlock(this.xCoord + 2, this.yCoord + 1, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
+					world.setBlock(this.xCoord + 3, this.yCoord + 2, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
+					world.setBlock(this.xCoord + 3, this.yCoord + 1, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
+				}
+				
+				if(direction == ForgeDirection.WEST|| direction == ForgeDirection.EAST)
+				{
+					world.setBlock(this.xCoord, this.yCoord, this.zCoord - 1, AliensVsPredator.blocks().ghostBlockBlastdoor);
+					world.setBlock(this.xCoord, this.yCoord, this.zCoord - 2, AliensVsPredator.blocks().ghostBlockBlastdoor);
+					world.setBlock(this.xCoord, this.yCoord, this.zCoord - 3, AliensVsPredator.blocks().ghostBlockBlastdoor);
+					world.setBlock(this.xCoord, this.yCoord + 1, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
+					world.setBlock(this.xCoord, this.yCoord + 2, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
+					world.setBlock(this.xCoord, this.yCoord + 2, this.zCoord - 1, AliensVsPredator.blocks().ghostBlockBlastdoor);
+					world.setBlock(this.xCoord, this.yCoord + 1, this.zCoord - 1, AliensVsPredator.blocks().ghostBlockBlastdoor);
+					world.setBlock(this.xCoord, this.yCoord + 2, this.zCoord - 2, AliensVsPredator.blocks().ghostBlockBlastdoor);
+					world.setBlock(this.xCoord, this.yCoord + 1, this.zCoord - 2, AliensVsPredator.blocks().ghostBlockBlastdoor);
+					world.setBlock(this.xCoord, this.yCoord + 2, this.zCoord - 3, AliensVsPredator.blocks().ghostBlockBlastdoor);
+					world.setBlock(this.xCoord, this.yCoord + 1, this.zCoord - 3, AliensVsPredator.blocks().ghostBlockBlastdoor);
+				}
+			}
 
 			this.doorProgress = this.doorProgress > 0.0F ? this.doorProgress - 0.02F : this.doorProgress;
 		}
-		
+
 		if (this.doorOpen)
 		{
 			this.doorProgress = this.doorProgress < 1.0F ? this.doorProgress + 0.02F : this.doorProgress;
@@ -54,13 +78,13 @@ public class TileEntityBlastdoor extends TileEntity implements IEnergyReceiver
 		{
 			this.doorProgress = this.doorProgress > 0.0F ? this.doorProgress - 0.02F : this.doorProgress;
 		}
-		
+
 		if(!isAdjacentToPowerSource())
 		{
 			this.voltage = 0;
 		}
 	}
-	
+
 	@Override
 	public boolean canConnectEnergy(ForgeDirection from) {
 		return false;
@@ -93,6 +117,12 @@ public class TileEntityBlastdoor extends TileEntity implements IEnergyReceiver
 	public void setDoorOpen(boolean doorOpen)
 	{
 		this.doorOpen = doorOpen;
+	}
+	
+	@Override
+	public Block getBlockType()
+	{
+		return Blocks.beacon;
 	}
 	
 	public boolean isAdjacentToPowerSource() {
@@ -229,7 +259,7 @@ public class TileEntityBlastdoor extends TileEntity implements IEnergyReceiver
 			}
 			return false;
 		}
-		
+
 		if(this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord) instanceof TileEntityR2PConvertor)
 		{
 			TileEntityR2PConvertor te = (TileEntityR2PConvertor) this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
@@ -284,7 +314,7 @@ public class TileEntityBlastdoor extends TileEntity implements IEnergyReceiver
 			}
 			return false;
 		}
-		
+
 		return false;
 	}
 
