@@ -51,7 +51,7 @@ public class TileEntityTurret extends TileEntity implements IDataDevice, IEnergy
 	private Item itemAmmo;
 	public int beamColor = 0xFFFF0000;
 	public int voltage;
-	
+
 	public TileEntityTurret()
 	{
 		super();
@@ -84,14 +84,14 @@ public class TileEntityTurret extends TileEntity implements IDataDevice, IEnergy
 	public void updateEntity()
 	{
 		super.updateEntity();
-		
+
 		this.isFiring = false;
-		
+
 		if(!this.isAdjacentToPowerSource())
 		{
 			this.voltage = 0;
 		}
-		
+
 		if (this.worldObj != null && this.getEntity() != null)
 		{
 			this.getEntity().setLocationAndAngles(this.xCoord + getEntity().width / 2, this.yCoord + 1, this.zCoord + getEntity().width / 2, this.rotationYaw, this.rotationPitch);
@@ -927,7 +927,7 @@ public class TileEntityTurret extends TileEntity implements IDataDevice, IEnergy
 			}
 			return false;
 		}
-		
+
 		if(this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord) instanceof TileEntityR2PConvertor)
 		{
 			TileEntityR2PConvertor te = (TileEntityR2PConvertor) this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
@@ -982,7 +982,117 @@ public class TileEntityTurret extends TileEntity implements IDataDevice, IEnergy
 			}
 			return false;
 		}
-		
+
+		if(this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord) instanceof TileEntityTransformer)
+		{
+			TileEntityTransformer te = (TileEntityTransformer) this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
+			if(te.voltage > 0)
+			{
+				return true;
+			}
+			return false;
+		}
+		if(this.getWorldObj().getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord) instanceof TileEntityTransformer)
+		{
+			TileEntityTransformer te = (TileEntityTransformer) this.getWorldObj().getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord);
+			if(te.voltage > 0)
+			{
+				return true;
+			}
+			return false;
+		}
+		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord + 1, this.zCoord) instanceof TileEntityTransformer)
+		{
+			TileEntityTransformer te = (TileEntityTransformer) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord + 1, this.zCoord);
+			if(te.voltage > 0)
+			{
+				return true;
+			}
+			return false;
+		}
+		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord - 1, this.zCoord) instanceof TileEntityTransformer)
+		{
+			TileEntityTransformer te = (TileEntityTransformer) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord - 1, this.zCoord);
+			if(te.voltage > 0)
+			{
+				return true;
+			}
+			return false;
+		}
+		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1) instanceof TileEntityTransformer)
+		{
+			TileEntityTransformer te = (TileEntityTransformer) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1);
+			if(te.voltage > 0)
+			{
+				return true;
+			}
+			return false;
+		}
+		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1) instanceof TileEntityTransformer)
+		{
+			TileEntityTransformer te = (TileEntityTransformer) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1);
+			if(te.voltage > 0)
+			{
+				return true;
+			}
+			return false;
+		}
+
+		if(this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord) instanceof TileEntityNegativeTransformer)
+		{
+			TileEntityNegativeTransformer te = (TileEntityNegativeTransformer) this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
+			if(te.voltage > 0)
+			{
+				return true;
+			}
+			return false;
+		}
+		if(this.getWorldObj().getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord) instanceof TileEntityNegativeTransformer)
+		{
+			TileEntityNegativeTransformer te = (TileEntityNegativeTransformer) this.getWorldObj().getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord);
+			if(te.voltage > 0)
+			{
+				return true;
+			}
+			return false;
+		}
+		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord + 1, this.zCoord) instanceof TileEntityNegativeTransformer)
+		{
+			TileEntityNegativeTransformer te = (TileEntityNegativeTransformer) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord + 1, this.zCoord);
+			if(te.voltage > 0)
+			{
+				return true;
+			}
+			return false;
+		}
+		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord - 1, this.zCoord) instanceof TileEntityNegativeTransformer)
+		{
+			TileEntityNegativeTransformer te = (TileEntityNegativeTransformer) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord - 1, this.zCoord);
+			if(te.voltage > 0)
+			{
+				return true;
+			}
+			return false;
+		}
+		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1) instanceof TileEntityNegativeTransformer)
+		{
+			TileEntityNegativeTransformer te = (TileEntityNegativeTransformer) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1);
+			if(te.voltage > 0)
+			{
+				return true;
+			}
+			return false;
+		}
+		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1) instanceof TileEntityNegativeTransformer)
+		{
+			TileEntityNegativeTransformer te = (TileEntityNegativeTransformer) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1);
+			if(te.voltage > 0)
+			{
+				return true;
+			}
+			return false;
+		}
+
 		return false;
 	}
 
