@@ -20,7 +20,7 @@ public class GhostBlock extends Block
 	private TileEntity parentTileEntity;
 	public GhostBlock()
 	{
-		super(Material.circuits); //The only reason this is here is because shadekiller666 is awesome.
+		super(Material.glass); //The only reason this is here is because shadekiller666 is awesome.
 		setTickRandomly(true);
 	}
 
@@ -29,12 +29,23 @@ public class GhostBlock extends Block
 	{
 		return -1;
 	}
-
+	
+	@Override
+	public boolean renderAsNormalBlock()
+    {
+        return false;
+    }
+	
+	@Override
+	public boolean isOpaqueCube()
+	{
+		return false;
+	}
+	
 	@Override
 	public void updateTick(World worldIn, int x, int y, int z, Random rand)
 	{
 		getParentBlock(worldIn, x, y, z);
-		System.out.println(this.parentBlock + " " + this.parentTileEntity);
 	}
 
 	@Override
@@ -146,6 +157,7 @@ public class GhostBlock extends Block
 			TileEntityBlastdoor te = (TileEntityBlastdoor) this.parentTileEntity;
 			if(te.isDoorOpen())
 			{
+				System.out.println("WTF?");
 				return null;
 			}
 			else
