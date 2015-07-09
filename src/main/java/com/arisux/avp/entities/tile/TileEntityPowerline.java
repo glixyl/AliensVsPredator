@@ -60,7 +60,14 @@ public class TileEntityPowerline extends TileEntity implements IEnergyProvider, 
 				if (tile instanceof IEnergyReceiver && !isTileNextToGenerator(tile))
 				{
 					IEnergyReceiver ier = (IEnergyReceiver) tile;
-					ier.receiveEnergy(dir, 120, false);
+					if(this.voltage > 0)
+					{
+						ier.receiveEnergy(dir, this.voltage, false);
+					}
+					else
+					{
+						ier.receiveEnergy(dir, 120, false);
+					}
 				}
 			}
 		}
