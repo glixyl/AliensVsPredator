@@ -3,6 +3,7 @@ package com.arisux.avp.entities.tile;
 import java.util.ArrayList;
 
 import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.block.GhostBlock;
 
 import cofh.api.energy.IEnergyReceiver;
 import net.minecraft.block.Block;
@@ -73,34 +74,38 @@ public class TileEntityBlastdoor extends TileEntity implements IEnergyReceiver
 		{
 			if(direction != null)
 			{
+				GhostBlock block = (GhostBlock) AliensVsPredator.blocks().ghostBlockBlastdoor;
+				block.parentBlock = parentBlock;
+				block.parentTileEntity = this;
+				
 				if(direction == ForgeDirection.NORTH || direction == ForgeDirection.SOUTH)
 				{
-					world.setBlock(this.xCoord + 1, this.yCoord, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
-					world.setBlock(this.xCoord + 2, this.yCoord, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
-					world.setBlock(this.xCoord + 3, this.yCoord, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
-					world.setBlock(this.xCoord, this.yCoord + 1, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
-					world.setBlock(this.xCoord, this.yCoord + 2, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
-					world.setBlock(this.xCoord + 1, this.yCoord + 2, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
-					world.setBlock(this.xCoord + 1, this.yCoord + 1, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
-					world.setBlock(this.xCoord + 2, this.yCoord + 2, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
-					world.setBlock(this.xCoord + 2, this.yCoord + 1, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
-					world.setBlock(this.xCoord + 3, this.yCoord + 2, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
-					world.setBlock(this.xCoord + 3, this.yCoord + 1, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
+					world.setBlock(this.xCoord + 1, this.yCoord, this.zCoord, block);
+					world.setBlock(this.xCoord + 2, this.yCoord, this.zCoord, block);
+					world.setBlock(this.xCoord + 3, this.yCoord, this.zCoord, block);
+					world.setBlock(this.xCoord, this.yCoord + 1, this.zCoord, block);
+					world.setBlock(this.xCoord, this.yCoord + 2, this.zCoord, block);
+					world.setBlock(this.xCoord + 1, this.yCoord + 2, this.zCoord, block);
+					world.setBlock(this.xCoord + 1, this.yCoord + 1, this.zCoord, block);
+					world.setBlock(this.xCoord + 2, this.yCoord + 2, this.zCoord, block);
+					world.setBlock(this.xCoord + 2, this.yCoord + 1, this.zCoord, block);
+					world.setBlock(this.xCoord + 3, this.yCoord + 2, this.zCoord, block);
+					world.setBlock(this.xCoord + 3, this.yCoord + 1, this.zCoord, block);
 				}
 				
 				if(direction == ForgeDirection.WEST|| direction == ForgeDirection.EAST)
 				{
-					world.setBlock(this.xCoord, this.yCoord, this.zCoord - 1, AliensVsPredator.blocks().ghostBlockBlastdoor);
-					world.setBlock(this.xCoord, this.yCoord, this.zCoord - 2, AliensVsPredator.blocks().ghostBlockBlastdoor);
-					world.setBlock(this.xCoord, this.yCoord, this.zCoord - 3, AliensVsPredator.blocks().ghostBlockBlastdoor);
-					world.setBlock(this.xCoord, this.yCoord + 1, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
-					world.setBlock(this.xCoord, this.yCoord + 2, this.zCoord, AliensVsPredator.blocks().ghostBlockBlastdoor);
-					world.setBlock(this.xCoord, this.yCoord + 2, this.zCoord - 1, AliensVsPredator.blocks().ghostBlockBlastdoor);
-					world.setBlock(this.xCoord, this.yCoord + 1, this.zCoord - 1, AliensVsPredator.blocks().ghostBlockBlastdoor);
-					world.setBlock(this.xCoord, this.yCoord + 2, this.zCoord - 2, AliensVsPredator.blocks().ghostBlockBlastdoor);
-					world.setBlock(this.xCoord, this.yCoord + 1, this.zCoord - 2, AliensVsPredator.blocks().ghostBlockBlastdoor);
-					world.setBlock(this.xCoord, this.yCoord + 2, this.zCoord - 3, AliensVsPredator.blocks().ghostBlockBlastdoor);
-					world.setBlock(this.xCoord, this.yCoord + 1, this.zCoord - 3, AliensVsPredator.blocks().ghostBlockBlastdoor);
+					world.setBlock(this.xCoord, this.yCoord, this.zCoord - 1, block);
+					world.setBlock(this.xCoord, this.yCoord, this.zCoord - 2, block);
+					world.setBlock(this.xCoord, this.yCoord, this.zCoord - 3, block);
+					world.setBlock(this.xCoord, this.yCoord + 1, this.zCoord, block);
+					world.setBlock(this.xCoord, this.yCoord + 2, this.zCoord, block);
+					world.setBlock(this.xCoord, this.yCoord + 2, this.zCoord - 1, block);
+					world.setBlock(this.xCoord, this.yCoord + 1, this.zCoord - 1, block);
+					world.setBlock(this.xCoord, this.yCoord + 2, this.zCoord - 2, block);
+					world.setBlock(this.xCoord, this.yCoord + 1, this.zCoord - 2, block);
+					world.setBlock(this.xCoord, this.yCoord + 2, this.zCoord - 3, block);
+					world.setBlock(this.xCoord, this.yCoord + 1, this.zCoord - 3, block);
 				}
 			}
 

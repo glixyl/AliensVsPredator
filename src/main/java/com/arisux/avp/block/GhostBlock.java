@@ -16,8 +16,9 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class GhostBlock extends Block
 {
-	private Block parentBlock;
-	private TileEntity parentTileEntity;
+	public Block parentBlock;
+	public TileEntity parentTileEntity;
+	
 	public GhostBlock()
 	{
 		super(Material.glass); //The only reason this is here is because shadekiller666 is awesome.
@@ -41,12 +42,6 @@ public class GhostBlock extends Block
 	{
 		return false;
 	}
-	
-	@Override
-	public void updateTick(World worldIn, int x, int y, int z, Random rand)
-	{
-		getParentBlock(worldIn, x, y, z);
-	}
 
 	@Override
 	public int quantityDropped(Random p_149745_1_)
@@ -54,90 +49,9 @@ public class GhostBlock extends Block
 		return 0;
 	}
 
-	public Block getParentBlock(World world, int xPos, int yPos, int zPos)
-	{
-		for(int x = xPos + 1; x <= (3 + xPos); x++)
-		{
-			if(world.getTileEntity(x, yPos, zPos) instanceof TileEntityBlastdoor)
-			{
-				parentTileEntity = (TileEntityBlastdoor) world.getTileEntity(x, yPos, zPos);
-				parentBlock = (BlockBlastdoor) world.getBlock(x, yPos, zPos);
-				return parentBlock;
-			}
-			for(int y = yPos + 1; y <= (3 + yPos); y++)
-			{
-				if(world.getTileEntity(x, y, zPos) instanceof TileEntityBlastdoor)
-				{
-					parentTileEntity = (TileEntityBlastdoor) world.getTileEntity(x, y, zPos);
-					parentBlock = (BlockBlastdoor) world.getBlock(x, y, zPos);
-					return parentBlock;
-				}
-				for(int z = zPos + 1; z <= (3 + zPos); z++)
-				{
-					if(world.getTileEntity(x, y, z) instanceof TileEntityBlastdoor)
-					{
-						parentTileEntity = (TileEntityBlastdoor) world.getTileEntity(x, y, z);
-						parentBlock = (BlockBlastdoor) world.getBlock(x, y, z);
-						return parentBlock;
-					}
-				}
-			}
-		}
-
-		for(int x = xPos; x >= (xPos - 3); x--)
-		{
-			if(world.getTileEntity(x, yPos, zPos) instanceof TileEntityBlastdoor)
-			{
-				parentTileEntity = (TileEntityBlastdoor) world.getTileEntity(x, yPos, zPos);
-				parentBlock = (BlockBlastdoor) world.getBlock(x, yPos, zPos);
-				return parentBlock;
-			}
-			for(int y = yPos; y >= (yPos - 3); y--)
-			{
-				if(world.getTileEntity(x, y, zPos) instanceof TileEntityBlastdoor)
-				{
-					parentTileEntity = (TileEntityBlastdoor) world.getTileEntity(x, y, zPos);
-					parentBlock = (BlockBlastdoor) world.getBlock(x, y, zPos);
-					return parentBlock;
-				}
-				for(int z = zPos - 1; z >= (zPos - 3); z--)
-				{
-					if(world.getTileEntity(x, y, z) instanceof TileEntityBlastdoor)
-					{
-						parentTileEntity = (TileEntityBlastdoor) world.getTileEntity(x, y, z);
-						parentBlock = (BlockBlastdoor) world.getBlock(x, y, z);
-						return parentBlock;
-					}
-				}
-			}
-		}
-
-		for(int z = zPos - 1; z >= (zPos - 3); z--)
-		{
-			if(world.getTileEntity(xPos, yPos, z) instanceof TileEntityBlastdoor)
-			{
-				parentTileEntity = (TileEntityBlastdoor) world.getTileEntity(xPos, yPos, z);
-				parentBlock = (BlockBlastdoor) world.getBlock(xPos, yPos, z);
-				return parentBlock;
-			}
-			for(int y = yPos + 1; y >= (yPos + 3); y++)
-			{
-				if(world.getTileEntity(xPos, y, z) instanceof TileEntityBlastdoor)
-				{
-					parentTileEntity = (TileEntityBlastdoor) world.getTileEntity(xPos, y, z);
-					parentBlock = (BlockBlastdoor) world.getBlock(xPos, y, z);
-					return parentBlock;
-				}
-			}
-		}
-
-		return null;
-	}
-
 	@Override
 	public boolean onBlockActivated(World world, int posX, int posY, int posZ, EntityPlayer player, int side, float subX, float subY, float subZ)
 	{
-		getParentBlock(world, posX, posY, posZ);
 		try
 		{
 			return parentBlock.onBlockActivated(world, parentTileEntity.xCoord, parentTileEntity.yCoord, parentTileEntity.zCoord, player, side, subX, subY, subZ);
@@ -157,7 +71,6 @@ public class GhostBlock extends Block
 			TileEntityBlastdoor te = (TileEntityBlastdoor) this.parentTileEntity;
 			if(te.isDoorOpen())
 			{
-				System.out.println("WTF?");
 				return null;
 			}
 			else
@@ -189,7 +102,6 @@ public class GhostBlock extends Block
 		}
 		else
 		{
-			getParentBlock(world, posX, posY, posZ);
 			try
 			{
 				TileEntityBlastdoor te = (TileEntityBlastdoor) parentTileEntity;
