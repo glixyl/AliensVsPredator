@@ -47,6 +47,7 @@ public class EntityAPC extends Entity
 		this.preventEntitySpawning = true;
 		this.setSize(1.5F, 0.6F);
 		this.yOffset = this.height;
+		this.ignoreFrustumCheck = true;
 	}
 
 	protected boolean canTriggerWalking()

@@ -1,25 +1,29 @@
 package com.arisux.avp.entities.render;
 
-import com.arisux.airi.AIRI;
-import com.arisux.airi.api.wavefrontapi.WavefrontModel;
+import org.lwjgl.opengl.GL11;
+
+import com.arisux.airi.api.wavefrontapi.WavefrontModel.Part;
+import com.arisux.avp.AliensVsPredator;
 
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderAPC extends Render{
-
+public class RenderAPC extends Render
+{
 	@Override
-	public void doRender(Entity entityIn, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
+	public void doRender(Entity entityIn, double posX, double posY, double posZ, float yaw, float partialTicks)
 	{
-		WavefrontModel model = AIRI.wavefrontAPI().getModel("M577_APC");
-		if(model != null)
+		GL11.glPushMatrix();
 		{
-			for(String part : model.nameToStringHash.values())
+			GL11.glTranslated(posX, posY, posZ);
+			
+			for (Part p : AliensVsPredator.resources().M577_APC.nameToPartHash.values())
 			{
-				model.draw(part);
+				p.draw();
 			}
 		}
+		GL11.glPopMatrix();
 	}
 
 	@Override
@@ -27,5 +31,4 @@ public class RenderAPC extends Render{
 	{
 		return null;
 	}
-
 }
