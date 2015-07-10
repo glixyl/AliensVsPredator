@@ -24,7 +24,7 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 	public int targetQueenId;
 	protected boolean canClimb;
 	protected boolean isDependant;
-	
+
 	public EntityXenomorph(World world)
 	{
 		super(world);
@@ -65,7 +65,7 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 	{
 		return true;
 	}
-	
+
 	public boolean canClimb()
 	{
 		return this.canClimb;
@@ -76,6 +76,7 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 	{
 		super.onUpdate();
 		this.fallDistance = 0F;
+
 		if(this instanceof EntitySpitter)
 		{
 			EntitySpitter spitter = (EntitySpitter) this;
@@ -87,7 +88,7 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 			{
 				this.setAttackTarget(null);
 			}
-			
+
 			//Attacks it
 			else if(this.getAttackTarget() != null)
 			{
@@ -114,40 +115,41 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 				}
 			}
 		}
+
 		else
 		{
-		this.attackAI();
-		if(this.getAttackTarget() != null && this.getAttackTarget().isDead)
-		{
-			this.setAttackTarget(null);
-		}
-		 
-		else if(this.getAttackTarget() != null)
-		{
-			if(this.getAttackTarget() instanceof EntityPlayer)
+			this.attackAI();
+			if(this.getAttackTarget() != null && this.getAttackTarget().isDead)
 			{
-				EntityPlayer target = (EntityPlayer) this.getAttackTarget();
-				if(target.capabilities.isCreativeMode)
+				this.setAttackTarget(null);
+			}
+
+			else if(this.getAttackTarget() != null)
+			{
+				if(this.getAttackTarget() instanceof EntityPlayer)
 				{
-					this.setAttackTarget(null);
-					return;
-				}
-				else
-				{
-					if(this.getDistance(this.getAttackTarget().posX, this.getAttackTarget().posY, this.getAttackTarget().posZ) < 10)
+					EntityPlayer target = (EntityPlayer) this.getAttackTarget();
+					if(target.capabilities.isCreativeMode)
 					{
-						this.attackEntityAsMob(this.getAttackTarget());
+						this.setAttackTarget(null);
+						return;
+					}
+					else
+					{
+						if(this.getDistance(this.getAttackTarget().posX, this.getAttackTarget().posY, this.getAttackTarget().posZ) < 3)
+						{
+							this.attackEntityAsMob(this.getAttackTarget());
+						}
 					}
 				}
+				if(this.getDistance(this.getAttackTarget().posX, this.getAttackTarget().posY, this.getAttackTarget().posZ) < 3)
+				{
+					this.attackEntityAsMob(this.getAttackTarget());
+				}
 			}
-			if(this.getDistance(this.getAttackTarget().posX, this.getAttackTarget().posY, this.getAttackTarget().posZ) < 3)
-			{
-				this.attackEntityAsMob(this.getAttackTarget());
-			}
-		}
 		}
 	}
-	
+
 	@Override
 	protected void attackEntity(Entity entity, float damage)
 	{
@@ -165,8 +167,8 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 		if (worldObj.getWorldInfo().getWorldTime() % 70 == 0)
 		{
 			double range = this.getEntityAttribute(SharedMonsterAttributes.followRange).getAttributeValue();
-			Entity targetEntity = (this.worldObj.findNearestEntityWithinAABB(EntityLiving.class, this.boundingBox.expand(range * 2, 64.0D, range * 2), this));
-			Entity targetPlayer = (this.worldObj.findNearestEntityWithinAABB(EntityPlayer.class, this.boundingBox.expand(range * 2, 64.0D, range * 2), this));
+			Entity targetEntity = (this.worldObj.findNearestEntityWithinAABB(EntityLiving.class, this.boundingBox.expand(range * 10, 64.0D, range * 10), this));
+			Entity targetPlayer = (this.worldObj.findNearestEntityWithinAABB(EntityPlayer.class, this.boundingBox.expand(range * 10, 64.0D, range * 10), this));
 			if (targetPlayer != null && !((EntityPlayer) targetPlayer).capabilities.isCreativeMode)
 			{
 				this.setAttackTarget((EntityLivingBase) targetPlayer);
