@@ -112,6 +112,7 @@ public class Settings
 			entityList.put("SHURIKEN", config.get(CATEGORY_IDS, "SHURIKEN", 1520).getInt());
 			entityList.put("TURRETENTITY", config.get(CATEGORY_IDS, "TURRETENTITY", 1521).getInt());
             entityList.put("WRISTBRACERNUKE", config.get(CATEGORY_IDS, "WRISTBRACERNUKE", 1522).getInt());
+            entityList.put("APC", config.get(CATEGORY_IDS, "APC", 1523).getInt());
 		} finally
 		{
 			config.save();

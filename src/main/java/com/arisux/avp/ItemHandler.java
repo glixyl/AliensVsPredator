@@ -111,6 +111,7 @@ public class ItemHandler extends IBHandler implements IInitializable
 		itemPOEInputConvertor = ((new HookedItem())),
 		itemPOEOutputConvertor = ((new HookedItem())),
 		itemIntegratedCircuit = ((new HookedItem())),
+		itemAPC = ((new ItemAPC())),
 		itemSilicon = new HookedItem().setDescription("A few chunks of silicon, for use with electronics."),
 		itemIngotAluminum = new HookedItem().setDescription("An ingot melted down from bauxite ore, for use with guns."),
 		itemIngotCopper = new HookedItem().setDescription("An ingot melted down from copper ore, for use with electronics."),
@@ -252,6 +253,7 @@ public class ItemHandler extends IBHandler implements IInitializable
 		registerItem(itemIngotLithium, "ingot.lithium");
 		registerItem(itemIngotAluminum, "ingot.aluminum");
 		registerItem(itemSilicon, "silicon");
+		registerItem(itemAPC, "apc");
 		registerItem(itemMotionTracker, "motiontracker");
 		registerItem(itemWristbracerBlades, "wristbracer.blades");
 		registerItem(itemPolycarbonate, "polycarbonate");

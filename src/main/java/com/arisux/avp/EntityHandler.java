@@ -87,6 +87,7 @@ public class EntityHandler implements IInitializable
 		EntityRegistry.registerModEntity(EntityShuriken.class, "EntityShuriken", entityIDs.get("SHURIKEN"), AliensVsPredator.instance(), 250, 15, true);
 		EntityRegistry.registerModEntity(EntityTurret.class, "EntityTurret", entityIDs.get("TURRETENTITY"), AliensVsPredator.instance(), 250, 5, true);
 		EntityRegistry.registerModEntity(EntityNuke.class, "Nuke", entityIDs.get("WRISTBRACERNUKE"), AliensVsPredator.instance(), 250, 5, true);
+		EntityRegistry.registerModEntity(EntityAPC.class, "APC", entityIDs.get("APC"), AliensVsPredator.instance(), 250, 15, true);
 	}
 
 	private void registerSpawns()

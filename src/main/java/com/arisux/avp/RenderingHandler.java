@@ -74,6 +74,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		registerEntityRenderingHandler(EntityShuriken.class, new RenderShuriken());
 		registerEntityRenderingHandler(EntityBullet.class, new RenderBullet());
 		registerEntityRenderingHandler(EntityNuke.class, new RenderNuke());
+		registerEntityRenderingHandler(EntityAPC.class, new RenderAPC());
 	}
 
 	public void registerItemRenderers(ItemHandler items)

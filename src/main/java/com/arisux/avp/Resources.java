@@ -1,11 +1,19 @@
 package com.arisux.avp;
 
+import java.io.File;
+
+import com.arisux.airi.AIRI;
+import com.arisux.airi.api.wavefrontapi.WavefrontAPI;
+import com.arisux.airi.api.wavefrontapi.WavefrontModel;
+import com.arisux.airi.lib.interfaces.IInitializable;
+
+import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.util.ResourceLocation;
 
 @SideOnly(Side.CLIENT)
-public class Resources
+public class Resources implements IInitializable
 {
 	public static final Resources instance = new Resources();
 
@@ -100,5 +108,11 @@ public class Resources
 	public final ResourceLocation MOTIONTRACKER_S4 = new ResourceLocation(AliensVsPredator.ID, "textures/misc/motiontracker/sweep4.png");
 	public final ResourceLocation MOTIONTRACKER_S5 = new ResourceLocation(AliensVsPredator.ID, "textures/misc/motiontracker/sweep5.png");
 	public final ResourceLocation MOTIONTRACKER_S6 = new ResourceLocation(AliensVsPredator.ID, "textures/misc/motiontracker/sweep6.png");
+
+	@Override
+	public void initialize(FMLInitializationEvent event) {
+		final File baseDir = new File("models/avp");
+		WavefrontModel model = AIRI.wavefrontAPI().loadModel(AliensVsPredator.ID, new File(baseDir, "M577_APC.obj"), AliensVsPredator.class.getResource("/assets/avp/models/M577_APC.obj"));	
+	}
 
 }
