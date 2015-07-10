@@ -161,8 +161,8 @@ public class EntityAcidProjectile extends Entity implements IProjectile
 		super.onUpdate();
 
 		++this.ticksInGround;
-
-		if (this.ticksInGround >= 400)
+		
+		if (this.ticksInGround >= 200)
 		{
 			 this.setDead();
 		}

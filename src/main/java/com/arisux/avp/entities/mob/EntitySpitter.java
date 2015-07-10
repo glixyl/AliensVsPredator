@@ -3,6 +3,7 @@ package com.arisux.avp.entities.mob;
 import java.util.Random;
 
 import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.entities.EntityAcidPool;
 import com.arisux.avp.entities.EntityAcidProjectile;
 
 import net.minecraft.entity.*;
@@ -77,7 +78,7 @@ public class EntitySpitter extends EntityXenomorph implements IRangedAttackMob
 			}
 		}
 	}
-
+	
 	@Override
 	protected void dropRareDrop(int par1)
 	{
@@ -97,10 +98,5 @@ public class EntitySpitter extends EntityXenomorph implements IRangedAttackMob
 	public void onUpdate()
 	{
 		super.onUpdate();
-
-		if (this.getAttackTarget() != null && !(this.getAttackTarget() instanceof EntityXenomorph) && this.getDistanceToEntity(this.getAttackTarget()) < 30)
-		{
-			this.getMoveHelper().setMoveTo(this.getAttackTarget().posX, this.getAttackTarget().posY, this.getAttackTarget().posZ, 1D);
-		}
 	}
 }

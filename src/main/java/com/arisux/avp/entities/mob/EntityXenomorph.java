@@ -4,6 +4,7 @@ import com.arisux.avp.entities.EntityAcidPool;
 import com.arisux.avp.entities.ai.alien.EntityAIClimb;
 import com.arisux.avp.entities.ai.alien.EntityAIQueenIdentificationTask;
 import com.arisux.avp.entities.ai.alien.EntitySelectorXenomorph;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -15,6 +16,7 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityLookHelper;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.world.World;
 
 public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
@@ -22,7 +24,7 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 	public int targetQueenId;
 	protected boolean canClimb;
 	protected boolean isDependant;
-
+	
 	public EntityXenomorph(World world)
 	{
 		super(world);
@@ -74,8 +76,78 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 	{
 		super.onUpdate();
 		this.fallDistance = 0F;
-	}
+		if(this instanceof EntitySpitter)
+		{
+			EntitySpitter spitter = (EntitySpitter) this;
+			//Finds Target
+			this.attackAI();
 
+			//Checks if it's dead or not
+			if(this.getAttackTarget() != null && this.getAttackTarget().isDead)
+			{
+				this.setAttackTarget(null);
+			}
+			
+			//Attacks it
+			else if(this.getAttackTarget() != null)
+			{
+				if(this.getAttackTarget() instanceof EntityPlayer)
+				{
+					EntityPlayer target = (EntityPlayer) this.getAttackTarget();
+					//If it's in creative mode stop attacking
+					if(target.capabilities.isCreativeMode)
+					{
+						this.setAttackTarget(null);
+						return;
+					}
+					else
+					{
+						if(this.getDistance(this.getAttackTarget().posX, this.getAttackTarget().posY, this.getAttackTarget().posZ) < 10)
+						{
+							spitter.attackEntityWithRangedAttack(this.getAttackTarget(), 0.05F);
+						}
+					}
+				}
+				if(this.getDistance(this.getAttackTarget().posX, this.getAttackTarget().posY, this.getAttackTarget().posZ) < 10)
+				{
+					spitter.attackEntityWithRangedAttack(this.getAttackTarget(), 0.05F);
+				}
+			}
+		}
+		else
+		{
+		this.attackAI();
+		if(this.getAttackTarget() != null && this.getAttackTarget().isDead)
+		{
+			this.setAttackTarget(null);
+		}
+		 
+		else if(this.getAttackTarget() != null)
+		{
+			if(this.getAttackTarget() instanceof EntityPlayer)
+			{
+				EntityPlayer target = (EntityPlayer) this.getAttackTarget();
+				if(target.capabilities.isCreativeMode)
+				{
+					this.setAttackTarget(null);
+					return;
+				}
+				else
+				{
+					if(this.getDistance(this.getAttackTarget().posX, this.getAttackTarget().posY, this.getAttackTarget().posZ) < 10)
+					{
+						this.attackEntityAsMob(this.getAttackTarget());
+					}
+				}
+			}
+			if(this.getDistance(this.getAttackTarget().posX, this.getAttackTarget().posY, this.getAttackTarget().posZ) < 3)
+			{
+				this.attackEntityAsMob(this.getAttackTarget());
+			}
+		}
+		}
+	}
+	
 	@Override
 	protected void attackEntity(Entity entity, float damage)
 	{
@@ -95,12 +167,10 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 			double range = this.getEntityAttribute(SharedMonsterAttributes.followRange).getAttributeValue();
 			Entity targetEntity = (this.worldObj.findNearestEntityWithinAABB(EntityLiving.class, this.boundingBox.expand(range * 2, 64.0D, range * 2), this));
 			Entity targetPlayer = (this.worldObj.findNearestEntityWithinAABB(EntityPlayer.class, this.boundingBox.expand(range * 2, 64.0D, range * 2), this));
-
 			if (targetPlayer != null && !((EntityPlayer) targetPlayer).capabilities.isCreativeMode)
 			{
 				this.setAttackTarget((EntityLivingBase) targetPlayer);
 				this.getNavigator().tryMoveToEntityLiving(targetPlayer, this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue() * 2.5D);
-
 				if (this.isCollidedHorizontally)
 				{
 					this.addVelocity(0, 0.6D, 0);
@@ -109,6 +179,11 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 			else if (targetEntity != null && !(targetEntity instanceof EntityAcidPool) && !(targetEntity.getClass().getSuperclass().getSuperclass() == EntitySpeciesAlien.class) && !(targetEntity.getClass().getSuperclass() == EntitySpeciesAlien.class))
 			{
 				this.setAttackTarget((EntityLivingBase) targetEntity);
+				this.getNavigator().tryMoveToEntityLiving(targetEntity, this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue() * 2.5D);
+				if (this.isCollidedHorizontally)
+				{
+					this.addVelocity(0, 0.6D, 0);
+				}
 			}
 			else
 			{
