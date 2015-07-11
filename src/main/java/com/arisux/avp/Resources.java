@@ -1,7 +1,5 @@
 package com.arisux.avp;
 
-import java.io.File;
-
 import com.arisux.airi.AIRI;
 import com.arisux.airi.api.wavefrontapi.WavefrontModel;
 import com.arisux.airi.lib.interfaces.IInitializable;
@@ -108,12 +106,11 @@ public class Resources implements IInitializable
 	public final ResourceLocation MOTIONTRACKER_S5 = new ResourceLocation(AliensVsPredator.ID, "textures/misc/motiontracker/sweep5.png");
 	public final ResourceLocation MOTIONTRACKER_S6 = new ResourceLocation(AliensVsPredator.ID, "textures/misc/motiontracker/sweep6.png");
 
-	public final File baseDir = new File("models/avp/");
 	public WavefrontModel M577_APC;
 	
 	@Override
 	public void initialize(FMLInitializationEvent event) 
 	{
-		M577_APC = AIRI.wavefrontAPI().loadModel(AliensVsPredator.ID, new File(baseDir, "m577apc.obj"), AliensVsPredator.class.getResource("/assets/avp/models/m577apc.obj"));
+		M577_APC = AIRI.wavefrontAPI().loadModel(AliensVsPredator.class, AliensVsPredator.ID, "m577apc", "/assets/avp/models/m577apc");
 	}
 }
