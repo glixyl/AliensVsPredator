@@ -26,6 +26,7 @@ public class LocalEventHandler implements IInitializable
 		if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
 		{
 			this.registerEvent(new AlienArmorEvents());
+			this.registerEvent(new FireAPCEvent());
 			this.registerEvent(new ChestbursterOverlayEvent());
 			this.registerEvent(new CommonFirearmEvents());
 			this.registerEvent(new PlayerModeRenderEvent());

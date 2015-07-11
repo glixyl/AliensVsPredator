@@ -12,7 +12,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 public class KeybindHandler implements IInitializablePost
 {
 	public static final KeybindHandler instance = new KeybindHandler();
-	public KeyBinding KEYBIND_VISION_MODE, KEYBIND_XENO_ARMOR_CLIMB, KEYBIND_FIREARM_RELOAD, KEYBIND_ITEM_ACTION;
+	public KeyBinding KEYBIND_VISION_MODE, KEYBIND_XENO_ARMOR_CLIMB, KEYBIND_FIREARM_RELOAD, KEYBIND_ITEM_ACTION, KEYBIND_FIRE_APC;
 	public String KEYBIND_GROUP = "keybind.group.avp";
 
 	@Override
@@ -22,5 +22,6 @@ public class KeybindHandler implements IInitializablePost
 		KEYBIND_VISION_MODE = ModUtil.registerKeybinding("armor.celtic.helm.vision", Keyboard.KEY_V, KEYBIND_GROUP);
 		KEYBIND_XENO_ARMOR_CLIMB = ModUtil.registerKeybinding("armor.xeno.climb", Keyboard.KEY_C, KEYBIND_GROUP);
 		KEYBIND_ITEM_ACTION = ModUtil.registerKeybinding("avp.item.action", Keyboard.KEY_F, KEYBIND_GROUP);
+		KEYBIND_FIRE_APC = ModUtil.registerKeybinding("avp.fire.apc", Keyboard.KEY_X, KEYBIND_GROUP);
 	}
 }

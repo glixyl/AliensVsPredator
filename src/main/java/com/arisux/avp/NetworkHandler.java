@@ -25,6 +25,7 @@ public class NetworkHandler extends SimpleNetworkWrapper implements IInitializab
 		this.registerMessage(Side.SERVER, PacketOpenWristbracerContainer.class);
 		this.registerMessage(Side.SERVER, PacketReloadFirearm.class);
 		this.registerMessage(Side.SERVER, PacketLaunchGrenade.class);
+		this.registerMessage(Side.SERVER, PacketFireAPC.class);
 		this.registerMessage(Side.SERVER, PacketDamageEntity.class);
 		this.registerMessage(Side.SERVER, PacketRemoveTurretTarget.class);
 		this.registerMessage(Side.SERVER, PacketShootEntity.class);

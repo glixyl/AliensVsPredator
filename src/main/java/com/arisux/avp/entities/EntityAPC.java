@@ -45,7 +45,7 @@ public class EntityAPC extends Entity
 		this.isBoatEmpty = true;
 		this.speedMultiplier = 0.07D;
 		this.preventEntitySpawning = true;
-		this.setSize(2.5F, 1.5F);
+		this.setSize(3.75F, 1.75F);
 		this.yOffset = this.height;
 		this.ignoreFrustumCheck = true;
 	}
@@ -74,7 +74,7 @@ public class EntityAPC extends Entity
 
 	public boolean canBePushed()
 	{
-		return true;
+		return false;
 	}
 
 	public EntityAPC(World worldIn, double x, double y, double z)
@@ -91,7 +91,7 @@ public class EntityAPC extends Entity
 
 	public double getMountedYOffset()
 	{
-		return (double)this.height * 0.0D;
+		return (double)this.height * 0.0D - 0.25D;
 	}
 
 	public boolean attackEntityFrom(DamageSource dmgSource, float f)
