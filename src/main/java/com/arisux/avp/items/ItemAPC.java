@@ -73,44 +73,44 @@ public class ItemAPC extends Item
 				}
 			}
 
-			if (flag)
+			//			if (flag)
+			//			{
+			//				return itemStackIn;
+			//			}
+			//			else
+			//			{
+			if (movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK)
 			{
-				return itemStackIn;
-			}
-			else
-			{
-				if (movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK)
+				i = movingobjectposition.blockX;
+				int j = movingobjectposition.blockY;
+				int k = movingobjectposition.blockZ;
+
+				if (worldIn.getBlock(i, j, k) == Blocks.snow_layer)
 				{
-					i = movingobjectposition.blockX;
-					int j = movingobjectposition.blockY;
-					int k = movingobjectposition.blockZ;
-
-					if (worldIn.getBlock(i, j, k) == Blocks.snow_layer)
-					{
-						--j;
-					}
-
-					EntityAPC entityapc = new EntityAPC(worldIn, (double)((float)i + 0.5F), (double)((float)j + 1.0F), (double)((float)k + 0.5F));
-					entityapc.rotationYaw = (float)(((MathHelper.floor_double((double)(playerIn.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) - 1) * 90);
-
-					if (!worldIn.getCollidingBoundingBoxes(entityapc, entityapc.boundingBox.expand(-0.1D, -0.1D, -0.1D)).isEmpty())
-					{
-						return itemStackIn;
-					}
-
-					if (!worldIn.isRemote)
-					{
-						worldIn.spawnEntityInWorld(entityapc);
-					}
-
-					if (!playerIn.capabilities.isCreativeMode)
-					{
-						--itemStackIn.stackSize;
-					}
+					--j;
 				}
 
-				return itemStackIn;
+				EntityAPC entityapc = new EntityAPC(worldIn, (double)((float)i + 0.5F), (double)((float)j + 1.0F), (double)((float)k + 0.5F));
+				entityapc.rotationYaw = (float)(((MathHelper.floor_double((double)(playerIn.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) - 1) * 90);
+
+//				if (!worldIn.getCollidingBoundingBoxes(entityapc, entityapc.boundingBox.expand(-0.1D, -0.1D, -0.1D)).isEmpty())
+//				{
+//					return itemStackIn;
+//				}
+
+				if (!worldIn.isRemote)
+				{
+					worldIn.spawnEntityInWorld(entityapc);
+				}
+
+				if (!playerIn.capabilities.isCreativeMode)
+				{
+					--itemStackIn.stackSize;
+				}
 			}
+
+			return itemStackIn;
+			//			}
 		}
 	}
 }
