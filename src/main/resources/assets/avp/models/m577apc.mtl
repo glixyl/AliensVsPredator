@@ -9,7 +9,7 @@ Ks 0.165000 0.165000 0.165000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd M577_APC/APC02.jpg
+map_Kd m577apc/APC02.jpg
 
 newmtl APC03
 Ns 96.078431
@@ -19,7 +19,7 @@ Ks 0.165000 0.165000 0.165000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd M577_APC/APC03.jpg
+map_Kd m577apc/APC03.jpg
 
 newmtl APC04
 Ns 96.078431
@@ -29,7 +29,7 @@ Ks 0.165000 0.165000 0.165000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd M577_APC/APC04.jpg
+map_Kd m577apc/APC04.jpg
 
 newmtl APC05
 Ns 96.078431
@@ -39,7 +39,7 @@ Ks 0.165000 0.165000 0.165000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd M577_APC/APC05.jpg
+map_Kd m577apc/APC05.jpg
 
 newmtl APCDoor01
 Ns 96.078431
@@ -49,7 +49,7 @@ Ks 0.165000 0.165000 0.165000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd M577_APC/APCDoor01.jpg
+map_Kd m577apc/APCDoor01.jpg
 
 newmtl APCGrill01
 Ns 96.078431
@@ -59,7 +59,7 @@ Ks 0.165000 0.165000 0.165000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd M577_APC/APCGrill01.jpg
+map_Kd m577apc/APCGrill01.jpg
 
 newmtl APCLight01
 Ns 96.078431
@@ -69,7 +69,7 @@ Ks 0.165000 0.165000 0.165000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd M577_APC/APCLight01.jpg
+map_Kd m577apc/APCLight01.jpg
 
 newmtl APCLight02
 Ns 96.078431
@@ -79,7 +79,7 @@ Ks 0.165000 0.165000 0.165000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd M577_APC/APCLight02.jpg
+map_Kd m577apc/APCLight02.jpg
 
 newmtl APCLight03
 Ns 96.078431
@@ -89,7 +89,7 @@ Ks 0.165000 0.165000 0.165000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd M577_APC/APCLight03.jpg
+map_Kd m577apc/APCLight03.jpg
 
 newmtl APCNose01
 Ns 96.078431
@@ -99,7 +99,7 @@ Ks 0.165000 0.165000 0.165000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd M577_APC/APCNose01.jpg
+map_Kd m577apc/APCNose01.jpg
 
 newmtl APCScreen01
 Ns 96.078431
@@ -109,7 +109,7 @@ Ks 0.165000 0.165000 0.165000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd M577_APC/APCScreen01.jpg
+map_Kd m577apc/APCScreen01.jpg
 
 newmtl APCWheel01
 Ns 96.078431
@@ -119,7 +119,7 @@ Ks 0.165000 0.165000 0.165000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd M577_APC/APCWheel01.jpg
+map_Kd m577apc/APCWheel01.jpg
 
 newmtl M_0136_Charcoal
 Ns 96.078431
@@ -138,7 +138,7 @@ Ks 0.165000 0.165000 0.165000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd M577_APC/M_01___Default1.jpg
+map_Kd m577apc/M_01___Default1.jpg
 
 newmtl _Burnt_Umber_1
 Ns 96.078431
