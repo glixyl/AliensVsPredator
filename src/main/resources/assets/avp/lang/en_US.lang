@@ -74,6 +74,7 @@ item.avp:part.carbon.name=Carbon
 item.avp:part.poeinputconvertor.name=POE Input Convertor
 item.avp:part.poeoutputconvertor.name=POE Output Convertor
 item.avp:device.nbtdrive.name=NBT Drive
+item.avp:apc.name=APC
 
 item.avp:summon.drone.name=Xenomorph Drone
 item.avp:summon.warrior.name=Xenomorph Warrior
@@ -197,6 +198,7 @@ entity.CombatSynthetic.name=Combat Synthetic
 
 entity.avp.EntityFXAcid.name=Acid
 entity.avp.EntityTurret.name=Turret
+entity.avp.APC.name=APC
 
 death.attack.bullet=%1$s was shot by %2$s.
 death.attack.acidshot=%1$s was vaporized in acid by %2$s.

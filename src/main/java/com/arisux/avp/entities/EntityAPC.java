@@ -45,7 +45,7 @@ public class EntityAPC extends Entity
 		this.isBoatEmpty = true;
 		this.speedMultiplier = 0.07D;
 		this.preventEntitySpawning = true;
-		this.setSize(3.75F, 1.75F);
+		this.setSize(3.75F, 2F);
 		this.yOffset = this.height;
 		this.ignoreFrustumCheck = true;
 	}
@@ -203,7 +203,6 @@ public class EntityAPC extends Entity
 	public void onUpdate()
 	{
 		super.onUpdate();
-
 		if (this.getTimeSinceHit() > 0)
 		{
 			this.setTimeSinceHit(this.getTimeSinceHit() - 1);
@@ -247,8 +246,8 @@ public class EntityAPC extends Entity
 		}
 
 		double d11;
-		double d12;
-
+		double d12; 
+		
 		if (this.worldObj.isRemote && this.isBoatEmpty)
 		{
 			if (this.boatPosRotationIncrements > 0)
@@ -359,7 +358,7 @@ public class EntityAPC extends Entity
 						this.isCollidedHorizontally = false;
 					}
 				}
-				
+
 				if(this.riddenByEntity == null)
 				{
 					this.motionX = 0;
@@ -398,7 +397,7 @@ public class EntityAPC extends Entity
 			this.rotationYaw = (float)((double)this.rotationYaw + d7);
 			this.setRotation(this.rotationYaw, this.rotationPitch);
 
-			if (!this.worldObj.isRemote)
+			//if (!this.worldObj.isRemote)
 			{
 				List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(0.20000000298023224D, 0.0D, 0.20000000298023224D));
 
@@ -489,16 +488,6 @@ public class EntityAPC extends Entity
 				{
 					this.setDead();
 					int l;
-
-					for (l = 0; l < 3; ++l)
-					{
-						this.func_145778_a(Item.getItemFromBlock(Blocks.planks), 1, 0.0F);
-					}
-
-					for (l = 0; l < 2; ++l)
-					{
-						this.func_145778_a(Items.stick, 1, 0.0F);
-					}
 				}
 
 				this.fallDistance = 0.0F;

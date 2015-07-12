@@ -6,6 +6,7 @@ import com.arisux.avp.entities.EntityAPC;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -98,7 +99,15 @@ public class ItemAPC extends Item
 						List<Entity> e = worldIn.getEntitiesWithinAABBExcludingEntity(playerIn, entityapc.boundingBox);
                     	for(Entity entityIn : e)
                     	{
-                    		entityIn.setDead();
+                    		if(entityIn instanceof EntityLivingBase)
+                    		{
+                    			EntityLivingBase entity = (EntityLivingBase) entityIn;
+                    			entity.setHealth(0);
+                    		}
+                    		else
+                    		{
+                    			entityIn.setDead();
+                    		}
                     	}
 					}
 
