@@ -3,11 +3,13 @@ package com.arisux.avp.entities;
 import java.util.List;
 
 import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.event.client.RenderPlayerAPCEvent;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -87,7 +89,7 @@ public class EntityAPC extends Entity
 
 	public double getMountedYOffset()
 	{
-		return (double)this.height * 0.0D - 0.5D;
+		return (double)this.height * 0.0D + 0.25;
 	}
 
 	public boolean attackEntityFrom(DamageSource dmgSource, float f)
@@ -394,7 +396,7 @@ public class EntityAPC extends Entity
 			this.rotationYaw = (float)((double)this.rotationYaw + d7);
 			this.setRotation(this.rotationYaw, this.rotationPitch);
 
-			//if (!this.worldObj.isRemote)
+			if (!this.worldObj.isRemote)
 			{
 				List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(0.20000000298023224D, 0.0D, 0.20000000298023224D));
 
@@ -425,7 +427,14 @@ public class EntityAPC extends Entity
 		{
 			double d0 = Math.cos((double)this.rotationYaw * Math.PI / 180.0D) * 0.4D;
 			double d1 = Math.sin((double)this.rotationYaw * Math.PI / 180.0D) * 0.4D;
-			this.riddenByEntity.setPosition(this.posX + d0, this.posY + this.getMountedYOffset() + this.riddenByEntity.getYOffset(), this.posZ + d1);
+			this.riddenByEntity.setPosition(this.posX + d0 - 2.5F, this.posY + this.getMountedYOffset() + this.riddenByEntity.getYOffset(), this.posZ + d1 + 0.25F);
+			if(this.riddenByEntity instanceof EntityPlayer)
+			{
+				if(Minecraft.getMinecraft().gameSettings.thirdPersonView == 0)
+				{
+					Minecraft.getMinecraft().gameSettings.thirdPersonView = 1;
+				}
+			}
 		}
 	}
 
@@ -459,6 +468,7 @@ public class EntityAPC extends Entity
 			if (!this.worldObj.isRemote)
 			{
 				playerIn.mountEntity(this);
+				Minecraft.getMinecraft().gameSettings.thirdPersonView = 1;
 			}
 
 			return true;

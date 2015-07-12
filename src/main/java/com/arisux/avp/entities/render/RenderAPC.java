@@ -22,6 +22,7 @@ public class RenderAPC extends Render
 		GL11.glPushMatrix();
 		{
 			GL11.glTranslatef((float)posX, (float)posY - 2.02F, (float)posZ);
+			//GL11.glRotatef(180.0F - yaw, 0.0F, 1.0F, 0.0F);
 			if (damage < 0.0F)
 			{
 				damage = 0.0F;
