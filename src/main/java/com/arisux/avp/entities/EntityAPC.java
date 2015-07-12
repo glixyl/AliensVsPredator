@@ -87,7 +87,7 @@ public class EntityAPC extends Entity
 
 	public double getMountedYOffset()
 	{
-		return (double)this.height * 0.0D - 0.25D;
+		return (double)this.height * 0.0D - 0.5D;
 	}
 
 	public boolean attackEntityFrom(DamageSource dmgSource, float f)
