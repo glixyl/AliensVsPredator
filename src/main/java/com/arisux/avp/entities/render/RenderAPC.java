@@ -37,12 +37,6 @@ public class RenderAPC extends Render
 			GL11.glScalef(1.0F / scale, 1.0F / scale, 1.0F / scale);
 			GL11.glScalef(-1.0F, -1.0F, 1.0F);
 
-			if(entityIn.riddenByEntity != null && entityIn.riddenByEntity instanceof EntityPlayer)
-			{
-				EntityPlayer playerIn = (EntityPlayer) entityIn.riddenByEntity;
-				GL11.glRotatef(playerIn.rotationYawHead + 90, 0F, 1F, 0F);
-			}
-
 			GL11.glRotatef(-180f, 0f, 0f, 1f);
 
 			//Tire Parts
@@ -118,11 +112,39 @@ public class RenderAPC extends Render
 			Part tire3Fin13 = AliensVsPredator.resources().M577_APC.getPart("Mesh40_APCWhPlt3_Group7_Model");
 			Part tire3Fin14 = AliensVsPredator.resources().M577_APC.getPart("Mesh36_APCWhPlt3_Group7_Model");
 
-			if(entityIn.motionX > 0 || entityIn.motionY > 0 || entityIn.motionZ > 0)
+			Part turret = AliensVsPredator.resources().M577_APC.getPart("Mesh13_APCMnTrt1_Group5_Model");
+			Part turret1 = AliensVsPredator.resources().M577_APC.getPart("Mesh14_APCMnGun1_Group5_Model");
+			Part turret2 = AliensVsPredator.resources().M577_APC.getPart("Mesh15_APCMnGun2_Group5_Model");
+			Part turret3 = AliensVsPredator.resources().M577_APC.getPart("Mesh16_APCAmHdl1_Group5_Model");
+			Part turret4 = AliensVsPredator.resources().M577_APC.getPart("Mesh17_APCAmHdl1_Group5_Model");
+			Part turret5 = AliensVsPredator.resources().M577_APC.getPart("Mesh18_APCAmHdl1_Group5_Model");
+			Part turret6 = AliensVsPredator.resources().M577_APC.getPart("Mesh19_APCAmHdl2_Group5_Model");
+			Part turret7 = AliensVsPredator.resources().M577_APC.getPart("Mesh20_APCAmHdl2_Group5_Model");
+			Part turret8 = AliensVsPredator.resources().M577_APC.getPart("Mesh21_APCAmHdl2_Group5_Model");
+			
+			
+			
+			for (Part p : AliensVsPredator.resources().M577_APC.nameToPartHash.values())
 			{
-				for (Part p : AliensVsPredator.resources().M577_APC.nameToPartHash.values())
+				if(p == turret || p == turret1 || p == turret2 || p == turret3 || p == turret4 || p == turret5 || p == turret6 || p == turret7 || p == turret8)
 				{
-
+					if(entityIn.riddenByEntity != null && entityIn.riddenByEntity instanceof EntityPlayer)
+					{
+						GL11.glPushMatrix();
+						{
+							EntityPlayer playerIn = (EntityPlayer) entityIn.riddenByEntity;
+							GL11.glTranslatef(-2.9F, 0.75F, -0.25F);
+							GL11.glRotatef(-90, 0F, 1F, 0F);
+							GL11.glRotatef(-playerIn.rotationYawHead, 0F, 1F, 0F);
+							GL11.glTranslatef(2.9F, -0.75F, 0.25F);
+							p.draw();
+						}
+						GL11.glPopMatrix();
+					}
+				}
+				
+				if(entityIn.motionX > 0.05 || entityIn.motionY > 0.05 || entityIn.motionZ > 0.05)
+				{
 					if (p == tire0 || p == tire0Rim || p == tire0Fin0 || p == tire0Fin1 || p == tire0Fin2 || p == tire0Fin3 || p == tire0Fin4 || p == tire0Fin5 || p == tire0Fin6 || p == tire0Fin7 || p == tire0Fin8 || p == tire0Fin9 || p == tire0Fin10 || p == tire0Fin11 || p == tire0Fin12 || p == tire0Fin13 || p == tire0Fin14)
 					{
 						GL11.glPushMatrix();
@@ -169,15 +191,22 @@ public class RenderAPC extends Render
 					}
 					else
 					{
-						p.draw();
+						if((p == turret || p == turret1 || p == turret2 || p == turret3 || p == turret4 || p == turret5 || p == turret6 || p == turret7 || p == turret8) && entityIn.riddenByEntity != null );
+						
+						else
+						{
+							p.draw();
+						}
 					}
 				}
-			}
-			else
-			{
-				for (Part p : AliensVsPredator.resources().M577_APC.nameToPartHash.values())
+				else
 				{
-					p.draw();
+					if((p == turret || p == turret1 || p == turret2 || p == turret3 || p == turret4 || p == turret5 || p == turret6 || p == turret7 || p == turret8) && entityIn.riddenByEntity != null );
+					
+					else
+					{
+						p.draw();
+					}
 				}
 			}
 		}
