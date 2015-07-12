@@ -1,20 +1,17 @@
 package com.arisux.avp.entities;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import java.util.List;
 
 import com.arisux.avp.AliensVsPredator;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
@@ -23,10 +20,9 @@ import net.minecraft.world.World;
 
 public class EntityAPC extends Entity
 {
-	/** true if no player in APC */
-	private boolean isBoatEmpty;
+	private boolean isVehicleEmpty;
 	private double speedMultiplier;
-	private int boatPosRotationIncrements;
+	private int rotationIncrements;
 	private double boatX;
 	private double boatY;
 	private double boatZ;
@@ -42,8 +38,8 @@ public class EntityAPC extends Entity
 	public EntityAPC(World worldIn)
 	{
 		super(worldIn);
-		this.isBoatEmpty = true;
-		this.speedMultiplier = 0.07D;
+		this.isVehicleEmpty = true;
+		this.speedMultiplier = 1.37D;
 		this.preventEntitySpawning = true;
 		this.setSize(3.75F, 2F);
 		this.yOffset = this.height;
@@ -157,9 +153,9 @@ public class EntityAPC extends Entity
 	@SideOnly(Side.CLIENT)
 	public void setPositionAndRotation2(double posX, double posY, double posZ, float yaw, float pitch, int p_70056_9_)
 	{
-		if (this.isBoatEmpty)
+		if (this.isVehicleEmpty)
 		{
-			this.boatPosRotationIncrements = p_70056_9_ + 5;
+			this.rotationIncrements = p_70056_9_ + 5;
 		}
 		else
 		{
@@ -173,7 +169,7 @@ public class EntityAPC extends Entity
 				return;
 			}
 
-			this.boatPosRotationIncrements = 3;
+			this.rotationIncrements = 3;
 		}
 
 		this.boatX = posX;
@@ -200,6 +196,7 @@ public class EntityAPC extends Entity
 	/**
 	 * Called to update the entity's position/logic.
 	 */
+	@Override
 	public void onUpdate()
 	{
 		super.onUpdate();
@@ -248,17 +245,17 @@ public class EntityAPC extends Entity
 		double d11;
 		double d12; 
 		
-		if (this.worldObj.isRemote && this.isBoatEmpty)
+		if (this.worldObj.isRemote && this.isVehicleEmpty)
 		{
-			if (this.boatPosRotationIncrements > 0)
+			if (this.rotationIncrements > 0)
 			{
-				d2 = this.posX + (this.boatX - this.posX) / (double)this.boatPosRotationIncrements;
-				d4 = this.posY + (this.boatY - this.posY) / (double)this.boatPosRotationIncrements;
-				d11 = this.posZ + (this.boatZ - this.posZ) / (double)this.boatPosRotationIncrements;
+				d2 = this.posX + (this.boatX - this.posX) / (double)this.rotationIncrements;
+				d4 = this.posY + (this.boatY - this.posY) / (double)this.rotationIncrements;
+				d11 = this.posZ + (this.boatZ - this.posZ) / (double)this.rotationIncrements;
 				d12 = MathHelper.wrapAngleTo180_double(this.boatYaw - (double)this.rotationYaw);
-				this.rotationYaw = (float)((double)this.rotationYaw + d12 / (double)this.boatPosRotationIncrements);
-				this.rotationPitch = (float)((double)this.rotationPitch + (this.boatPitch - (double)this.rotationPitch) / (double)this.boatPosRotationIncrements);
-				--this.boatPosRotationIncrements;
+				this.rotationYaw = (float)((double)this.rotationYaw + d12 / (double)this.rotationIncrements);
+				this.rotationPitch = (float)((double)this.rotationPitch + (this.boatPitch - (double)this.rotationPitch) / (double)this.rotationIncrements);
+				--this.rotationIncrements;
 				this.setPosition(d2, d4, d11);
 				this.setRotation(this.rotationYaw, this.rotationPitch);
 			}
@@ -553,6 +550,6 @@ public class EntityAPC extends Entity
 	@SideOnly(Side.CLIENT)
 	public void setIsBoatEmpty(boolean isEmpty)
 	{
-		this.isBoatEmpty = isEmpty;
+		this.isVehicleEmpty = isEmpty;
 	}
 }
