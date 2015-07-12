@@ -108,7 +108,7 @@ public class EntityAPC extends Entity
 			this.setBeenAttacked();
 			boolean flag = dmgSource.getEntity() instanceof EntityPlayer && ((EntityPlayer)dmgSource.getEntity()).capabilities.isCreativeMode;
 
-			if (flag || this.getDamageTaken() > 40.0F)
+			if (flag || this.getDamageTaken() > 200.0F)
 			{
 				if (this.riddenByEntity != null)
 				{
@@ -358,6 +358,13 @@ public class EntityAPC extends Entity
 						this.worldObj.func_147480_a(i1, k, j, true);
 						this.isCollidedHorizontally = false;
 					}
+				}
+				
+				if(this.riddenByEntity == null)
+				{
+					this.motionX = 0;
+					this.motionY = 0;
+					this.motionZ = 0;
 				}
 			}
 
