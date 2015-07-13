@@ -3,7 +3,6 @@ package com.arisux.avp.entities;
 import java.util.List;
 
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.event.client.RenderPlayerAPCEvent;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -202,6 +201,10 @@ public class EntityAPC extends Entity
 	public void onUpdate()
 	{
 		super.onUpdate();
+		
+		this.speedMultiplier = 1.95D;
+		this.fallDistance = 0;
+		
 		if (this.getTimeSinceHit() > 0)
 		{
 			this.setTimeSinceHit(this.getTimeSinceHit() - 1);
@@ -215,65 +218,40 @@ public class EntityAPC extends Entity
 		this.prevPosX = this.posX;
 		this.prevPosY = this.posY;
 		this.prevPosZ = this.posZ;
-		byte b0 = 5;
-		double d0 = 0.0D;
+		int blockZ;
+		double mass = -0.1D;
+		double curVelocity = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
+		double rotX;
+		double rotY;
+		double rotZ;
+		double vehicleYaw; 
 
-		for (int i = 0; i < b0; ++i)
+		if (curVelocity > 0.26249999999999996D)
 		{
-			double d1 = this.boundingBox.minY + (this.boundingBox.maxY - this.boundingBox.minY) * (double)(i + 0) / (double)b0 - 0.125D;
-			double d3 = this.boundingBox.minY + (this.boundingBox.maxY - this.boundingBox.minY) * (double)(i + 1) / (double)b0 - 0.125D;
-			AxisAlignedBB axisalignedbb = AxisAlignedBB.getBoundingBox(this.boundingBox.minX, d1, this.boundingBox.minZ, this.boundingBox.maxX, d3, this.boundingBox.maxZ);
+			rotX = Math.cos((double)this.rotationYaw * Math.PI / 180.0D);
+			rotY = Math.sin((double)this.rotationYaw * Math.PI / 180.0D);
 		}
-
-		double d10 = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
-		double d2;
-		double d4;
-		int j;
-
-		if (d10 > 0.26249999999999996D)
-		{
-			d2 = Math.cos((double)this.rotationYaw * Math.PI / 180.0D);
-			d4 = Math.sin((double)this.rotationYaw * Math.PI / 180.0D);
-
-			for (j = 0; (double)j < 1.0D + d10 * 60.0D; ++j)
-			{
-				double d5 = (double)(this.rand.nextFloat() * 2.0F - 1.0F);
-				double d6 = (double)(this.rand.nextInt(2) * 2 - 1) * 0.7D;
-				double d8;
-				double d9;
-			}
-		}
-
-		double d11;
-		double d12; 
 		
 		if (this.worldObj.isRemote && this.isVehicleEmpty)
 		{
 			if (this.rotationIncrements > 0)
 			{
-				d2 = this.posX + (this.boatX - this.posX) / (double)this.rotationIncrements;
-				d4 = this.posY + (this.boatY - this.posY) / (double)this.rotationIncrements;
-				d11 = this.posZ + (this.boatZ - this.posZ) / (double)this.rotationIncrements;
-				d12 = MathHelper.wrapAngleTo180_double(this.boatYaw - (double)this.rotationYaw);
-				this.rotationYaw = (float)((double)this.rotationYaw + d12 / (double)this.rotationIncrements);
+				rotX = this.posX + (this.boatX - this.posX) / (double)this.rotationIncrements;
+				rotY = this.posY + (this.boatY - this.posY) / (double)this.rotationIncrements;
+				rotZ = this.posZ + (this.boatZ - this.posZ) / (double)this.rotationIncrements;
+				vehicleYaw = MathHelper.wrapAngleTo180_double(this.boatYaw - (double)this.rotationYaw);
+				this.rotationYaw = (float)((double)this.rotationYaw + vehicleYaw / (double)this.rotationIncrements);
 				this.rotationPitch = (float)((double)this.rotationPitch + (this.boatPitch - (double)this.rotationPitch) / (double)this.rotationIncrements);
 				--this.rotationIncrements;
-				this.setPosition(d2, d4, d11);
+				this.setPosition(rotX, rotY, rotZ);
 				this.setRotation(this.rotationYaw, this.rotationPitch);
 			}
 			else
 			{
-				d2 = this.posX + this.motionX;
-				d4 = this.posY + this.motionY;
-				d11 = this.posZ + this.motionZ;
-				this.setPosition(d2, d4, d11);
-
-				if (this.onGround)
-				{
-					this.motionX *= 0.5D;
-					this.motionY *= 0.5D;
-					this.motionZ *= 0.5D;
-				}
+				rotX = this.posX + this.motionX;
+				rotY = this.posY + this.motionY;
+				rotZ = this.posZ + this.motionZ;
+				this.setPosition(rotX, rotY, rotZ);
 
 				this.motionX *= 0.9900000095367432D;
 				this.motionY *= 0.949999988079071D;
@@ -282,10 +260,10 @@ public class EntityAPC extends Entity
 		}
 		else
 		{
-			if (d0 < 1.0D)
+			if (mass < 1.0D)
 			{
-				d2 = d0 * 2.0D - 1.0D;
-				this.motionY += 0.03999999910593033D * d2;
+				rotX = mass * 2.0D - 1.0D;
+				this.motionY += 0.03999999910593033D * rotX;
 			}
 			else
 			{
@@ -305,23 +283,23 @@ public class EntityAPC extends Entity
 				this.motionZ += Math.cos((double)(f * (float)Math.PI / 180.0F)) * this.speedMultiplier * (double)entitylivingbase.moveForward * 0.05000000074505806D;
 			}
 
-			d2 = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
+			rotX = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
 
-			if (d2 > 0.35D)
+			if (rotX > 0.35D)
 			{
-				d4 = 0.35D / d2;
-				this.motionX *= d4;
-				this.motionZ *= d4;
-				d2 = 0.35D;
+				rotY = 0.35D / rotX;
+				this.motionX *= rotY;
+				this.motionZ *= rotY;
+				rotX = 0.35D;
 			}
 
-			if (d2 > d10 && this.speedMultiplier < 0.35D)
+			if (rotX > curVelocity && this.speedMultiplier < 0.35D)
 			{
 				this.speedMultiplier += (0.35D - this.speedMultiplier) / 35.0D;
 
 				if (this.speedMultiplier > 0.35D)
 				{
-					this.speedMultiplier = 0.35D;
+//					this.speedMultiplier = 0.35D;
 				}
 			}
 			else
@@ -334,36 +312,34 @@ public class EntityAPC extends Entity
 				}
 			}
 
-			int l;
-
-			for (l = 0; l < 4; ++l)
+			for (int checkDistance = 0; checkDistance < 4; ++checkDistance)
 			{
-				int i1 = MathHelper.floor_double(this.posX + ((double)(l % 2) - 0.5D) * 0.8D);
-				j = MathHelper.floor_double(this.posZ + ((double)(l / 2) - 0.5D) * 0.8D);
+				int blockX = MathHelper.floor_double(this.posX + ((double)(checkDistance % 2) - 0.5D) * 0.8D);
+				blockZ = MathHelper.floor_double(this.posZ + ((double)(checkDistance / 2) - 0.5D) * 0.8D);
 
-				for (int j1 = 0; j1 < 2; ++j1)
+				for (int checkHeight = 0; checkHeight < 2; ++checkHeight)
 				{
-					int k = MathHelper.floor_double(this.posY) + j1;
-					Block block = this.worldObj.getBlock(i1, k, j);
+					int blockY = MathHelper.floor_double(this.posY) + checkHeight;
+					Block block = this.worldObj.getBlock(blockX, blockY, blockZ);
 
 					if (block == Blocks.snow_layer)
 					{
-						this.worldObj.setBlockToAir(i1, k, j);
+						this.worldObj.setBlockToAir(blockX, blockY, blockZ);
 						this.isCollidedHorizontally = false;
 					}
 					else if (block == Blocks.waterlily)
 					{
-						this.worldObj.func_147480_a(i1, k, j, true);
+						this.worldObj.func_147480_a(blockX, blockY, blockZ, true);
 						this.isCollidedHorizontally = false;
 					}
 				}
-
-				if(this.riddenByEntity == null)
-				{
-					this.motionX = 0;
-					this.motionY = 0;
-					this.motionZ = 0;
-				}
+			}
+			
+			if(this.riddenByEntity == null)
+			{
+				this.motionX = 0;
+				this.motionY = 0;
+				this.motionZ = 0;
 			}
 
 			this.moveEntity(this.motionX, this.motionY, this.motionZ);
@@ -372,16 +348,16 @@ public class EntityAPC extends Entity
 			this.motionZ *= 0.9900000095367432D;
 
 			this.rotationPitch = 0.0F;
-			d4 = (double)this.rotationYaw;
-			d11 = this.prevPosX - this.posX;
-			d12 = this.prevPosZ - this.posZ;
+			rotY = (double)this.rotationYaw;
+			rotZ = this.prevPosX - this.posX;
+			vehicleYaw = this.prevPosZ - this.posZ;
 
-			if (d11 * d11 + d12 * d12 > 0.001D)
+			if (rotZ * rotZ + vehicleYaw * vehicleYaw > 0.001D)
 			{
-				d4 = (double)((float)(Math.atan2(d12, d11) * 180.0D / Math.PI));
+				rotY = (double)((float)(Math.atan2(vehicleYaw, rotZ) * 180.0D / Math.PI));
 			}
 
-			double d7 = MathHelper.wrapAngleTo180_double(d4 - (double)this.rotationYaw);
+			double d7 = MathHelper.wrapAngleTo180_double(rotY - (double)this.rotationYaw);
 
 			if (d7 > 20.0D)
 			{
