@@ -24,11 +24,11 @@ public class EntityAPC extends Entity
 	private boolean isVehicleEmpty;
 	private double speedMultiplier;
 	private int rotationIncrements;
-	private double boatX;
-	private double boatY;
-	private double boatZ;
-	private double boatYaw;
-	private double boatPitch;
+	private double vehicleX;
+	private double vehicleY;
+	private double vehicleZ;
+	private double vehicleYaw;
+	private double vehiclePitch;
 	@SideOnly(Side.CLIENT)
 	private double velocityX;
 	@SideOnly(Side.CLIENT)
@@ -47,11 +47,13 @@ public class EntityAPC extends Entity
 		this.ignoreFrustumCheck = true;
 	}
 
+	@Override
 	protected boolean canTriggerWalking()
 	{
 		return false;
 	}
 
+	@Override
 	protected void entityInit()
 	{
 		this.dataWatcher.addObject(17, new Integer(0));
@@ -59,16 +61,19 @@ public class EntityAPC extends Entity
 		this.dataWatcher.addObject(19, new Float(0.0F));
 	}
 
+	@Override
 	public AxisAlignedBB getCollisionBox(Entity entityIn)
 	{
 		return entityIn.boundingBox;
 	}
 
+	@Override
 	public AxisAlignedBB getBoundingBox()
 	{
 		return this.boundingBox;
 	}
 
+	@Override
 	public boolean canBePushed()
 	{
 		return false;
@@ -86,11 +91,13 @@ public class EntityAPC extends Entity
 		this.prevPosZ = z;
 	}
 
+	@Override
 	public double getMountedYOffset()
 	{
 		return (double)this.height * 0.0D + 0.25;
 	}
 
+	@Override
 	public boolean attackEntityFrom(DamageSource dmgSource, float f)
 	{
 		if (this.isEntityInvulnerable())
@@ -128,9 +135,7 @@ public class EntityAPC extends Entity
 		}
 	}
 
-	/**
-	 * Setups the entity to do the hurt animation. Only used by packets in multiplayer.
-	 */
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void performHurtAnimation()
 	{
@@ -139,18 +144,13 @@ public class EntityAPC extends Entity
 		this.setDamageTaken(this.getDamageTaken() * 11.0F);
 	}
 
-	/**
-	 * Returns true if other Entities should be prevented from moving through this Entity.
-	 */
+	@Override
 	public boolean canBeCollidedWith()
 	{
 		return !this.isDead;
 	}
 
-	/**
-	 * Sets the position and rotation. Only difference from the other one is no bounding on the rotation. Args: posX,
-	 * posY, posZ, yaw, pitch
-	 */
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void setPositionAndRotation2(double posX, double posY, double posZ, float yaw, float pitch, int p_70056_9_)
 	{
@@ -173,19 +173,17 @@ public class EntityAPC extends Entity
 			this.rotationIncrements = 3;
 		}
 
-		this.boatX = posX;
-		this.boatY = posY;
-		this.boatZ = posZ;
-		this.boatYaw = (double)yaw;
-		this.boatPitch = (double)pitch;
+		this.vehicleX = posX;
+		this.vehicleY = posY;
+		this.vehicleZ = posZ;
+		this.vehicleYaw = (double)yaw;
+		this.vehiclePitch = (double)pitch;
 		this.motionX = this.velocityX;
 		this.motionY = this.velocityY;
 		this.motionZ = this.velocityZ;
 	}
 
-	/**
-	 * Sets the velocity to the args. Args: x, y, z
-	 */
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void setVelocity(double x, double y, double z)
 	{
@@ -194,9 +192,6 @@ public class EntityAPC extends Entity
 		this.velocityZ = this.motionZ = z;
 	}
 
-	/**
-	 * Called to update the entity's position/logic.
-	 */
 	@Override
 	public void onUpdate()
 	{
@@ -219,7 +214,7 @@ public class EntityAPC extends Entity
 		this.prevPosY = this.posY;
 		this.prevPosZ = this.posZ;
 		int blockZ;
-		double mass = -0.1D;
+		double mass = 0.2D;
 		double curVelocity = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
 		double rotX;
 		double rotY;
@@ -236,12 +231,12 @@ public class EntityAPC extends Entity
 		{
 			if (this.rotationIncrements > 0)
 			{
-				rotX = this.posX + (this.boatX - this.posX) / (double)this.rotationIncrements;
-				rotY = this.posY + (this.boatY - this.posY) / (double)this.rotationIncrements;
-				rotZ = this.posZ + (this.boatZ - this.posZ) / (double)this.rotationIncrements;
-				vehicleYaw = MathHelper.wrapAngleTo180_double(this.boatYaw - (double)this.rotationYaw);
+				rotX = this.posX + (this.vehicleX - this.posX) / (double)this.rotationIncrements;
+				rotY = this.posY + (this.vehicleY - this.posY) / (double)this.rotationIncrements;
+				rotZ = this.posZ + (this.vehicleZ - this.posZ) / (double)this.rotationIncrements;
+				vehicleYaw = MathHelper.wrapAngleTo180_double(this.vehicleYaw - (double)this.rotationYaw);
 				this.rotationYaw = (float)((double)this.rotationYaw + vehicleYaw / (double)this.rotationIncrements);
-				this.rotationPitch = (float)((double)this.rotationPitch + (this.boatPitch - (double)this.rotationPitch) / (double)this.rotationIncrements);
+				this.rotationPitch = (float)((double)this.rotationPitch + (this.vehiclePitch - (double)this.rotationPitch) / (double)this.rotationIncrements);
 				--this.rotationIncrements;
 				this.setPosition(rotX, rotY, rotZ);
 				this.setRotation(this.rotationYaw, this.rotationPitch);
@@ -397,6 +392,7 @@ public class EntityAPC extends Entity
 		}
 	}
 
+	@Override
 	public void updateRiderPosition()
 	{
 		if (this.riddenByEntity != null)
@@ -414,25 +410,26 @@ public class EntityAPC extends Entity
 		}
 	}
 
-	/**
-	 * (abstract) Protected helper method to write subclass entity data to NBT.
-	 */
-	protected void writeEntityToNBT(NBTTagCompound nbtTagCompound) {}
+	@Override
+	protected void writeEntityToNBT(NBTTagCompound nbtTagCompound) 
+	{
+		;
+	}
 
-	/**
-	 * (abstract) Protected helper method to read subclass entity data from NBT.
-	 */
-	protected void readEntityFromNBT(NBTTagCompound nbtTagCompound) {}
+	@Override
+	protected void readEntityFromNBT(NBTTagCompound nbtTagCompound) 
+	{
+		;
+	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public float getShadowSize()
 	{
-		return 0.0F;
+		return 10.0F;
 	}
 
-	/**
-	 * First layer of player interaction
-	 */
+	@Override
 	public boolean interactFirst(EntityPlayer playerIn)
 	{
 		if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer && this.riddenByEntity != playerIn)
@@ -451,10 +448,7 @@ public class EntityAPC extends Entity
 		}
 	}
 
-	/**
-	 * Takes in the distance the entity has fallen this tick and whether its on the ground to update the fall distance
-	 * and deal fall damage if landing on the ground.  Args: distanceFallenThisTick, onGround
-	 */
+	@Override
 	protected void updateFallState(double distanceFallenThisTick, boolean onGround)
 	{
 		int i = MathHelper.floor_double(this.posX);
@@ -482,59 +476,37 @@ public class EntityAPC extends Entity
 		}
 	}
 
-	/**
-	 * Sets the damage taken from the last hit.
-	 */
 	public void setDamageTaken(float damage)
 	{
 		this.dataWatcher.updateObject(19, Float.valueOf(damage));
 	}
 
-	/**
-	 * Gets the damage taken from the last hit.
-	 */
 	public float getDamageTaken()
 	{
 		return this.dataWatcher.getWatchableObjectFloat(19);
 	}
 
-	/**
-	 * Sets the time to count down from since the last time entity was hit.
-	 */
 	public void setTimeSinceHit(int time)
 	{
 		this.dataWatcher.updateObject(17, Integer.valueOf(time));
 	}
 
-	/**
-	 * Gets the time since the last hit.
-	 */
 	public int getTimeSinceHit()
 	{
 		return this.dataWatcher.getWatchableObjectInt(17);
 	}
 
-	/**
-	 * Sets the forward direction of the entity.
-	 */
 	public void setForwardDirection(int direction)
 	{
 		this.dataWatcher.updateObject(18, Integer.valueOf(direction));
 	}
 
-	/**
-	 * Gets the forward direction of the entity.
-	 */
 	public int getForwardDirection()
 	{
 		return this.dataWatcher.getWatchableObjectInt(18);
 	}
 
-	/**
-	 * true if no player in boat
-	 */
-	@SideOnly(Side.CLIENT)
-	public void setIsBoatEmpty(boolean isEmpty)
+	public void setEmpty(boolean isEmpty)
 	{
 		this.isVehicleEmpty = isEmpty;
 	}

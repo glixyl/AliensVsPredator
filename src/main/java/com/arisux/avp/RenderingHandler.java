@@ -96,6 +96,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		registerItemRenderer(items.itemM4, new RenderItemM4());
 		registerItemRenderer(items.itemSniper, new RenderItemSniper());
 		registerItemRenderer(items.itemMotionTracker, new RenderItemMotionTracker());
+		registerItemRenderer(items.itemAPC, new RenderItemAPC());
 		registerItemRenderer(items.itemGrenade, new RenderItemM40(AliensVsPredator.resources().M40GRENADE));
 		registerItemRenderer(items.itemIncendiaryGrenade, new RenderItemM40(AliensVsPredator.resources().M40GRENADE_INCENDIARY));
 		registerItemRenderer(items.itemSummonerDrone, (new RenderItemSummoner(EntityDrone.class, ModelDrone.class, AliensVsPredator.resources().DRONE_ADVANCED)).setScale(7.5F).setY(6F));
