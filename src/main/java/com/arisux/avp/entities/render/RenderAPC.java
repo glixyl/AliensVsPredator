@@ -160,7 +160,11 @@ public class RenderAPC extends Render
 					}
 				}
 				
-				if (!this.isPartOfTurret(p) && !this.isPartATire(p))
+				if (((this.isPartOfTurret(p) && apc.riddenByEntity == null)))
+				{
+					p.draw();
+				}
+				else if(!this.isPartOfTurret(p) && !this.isPartATire(p))
 				{
 					p.draw();
 				}
