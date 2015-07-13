@@ -33,8 +33,10 @@ public class ItemArmorXeno extends ItemArmor
 				return RenderUtil.getResourcePath(AliensVsPredator.resources().XENO1);
 			case 1:
 				return RenderUtil.getResourcePath(AliensVsPredator.resources().XENO1);
-			default:
+			case 2:
 				return RenderUtil.getResourcePath(AliensVsPredator.resources().XENO2);
+			default:
+				return RenderUtil.getResourcePath(AliensVsPredator.resources().XENO1);
 		}
 	}
 

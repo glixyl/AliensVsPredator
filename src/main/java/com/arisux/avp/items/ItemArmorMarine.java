@@ -24,7 +24,7 @@ public class ItemArmorMarine extends ItemArmor
 			case 1:
 				return RenderUtil.getResourcePath(AliensVsPredator.resources().MARINE1);
 			case 2:
-				return RenderUtil.getResourcePath(AliensVsPredator.resources().MARINE1);
+				return RenderUtil.getResourcePath(AliensVsPredator.resources().MARINE2);
 			case 3:
 				return RenderUtil.getResourcePath(AliensVsPredator.resources().MARINE1);
 			default:

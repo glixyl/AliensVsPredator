@@ -26,7 +26,7 @@ public class ItemArmorTitanium extends ItemArmor
 			case 2:
 				return RenderUtil.getResourcePath(AliensVsPredator.resources().TITANIUM2);
 			case 3:
-				return RenderUtil.getResourcePath(AliensVsPredator.resources().TITANIUM2);
+				return RenderUtil.getResourcePath(AliensVsPredator.resources().TITANIUM1);
 			default:
 				return RenderUtil.getResourcePath(AliensVsPredator.resources().TITANIUM1);
 		}
