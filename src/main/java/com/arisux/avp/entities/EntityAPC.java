@@ -45,6 +45,7 @@ public class EntityAPC extends Entity
 		this.setSize(3.75F, 2F);
 		this.yOffset = this.height;
 		this.ignoreFrustumCheck = true;
+		this.stepHeight = 1.0F;
 	}
 
 	@Override
