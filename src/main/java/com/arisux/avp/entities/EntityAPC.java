@@ -443,9 +443,11 @@ public class EntityAPC extends Entity
 			if (!this.worldObj.isRemote)
 			{
 				playerIn.mountEntity(this);
+			}
+			else
+			{
 				Minecraft.getMinecraft().gameSettings.thirdPersonView = 1;
 			}
-
 			return true;
 		}
 	}
@@ -466,7 +468,6 @@ public class EntityAPC extends Entity
 				if (!this.worldObj.isRemote && !this.isDead)
 				{
 					this.setDead();
-					int l;
 				}
 
 				this.fallDistance = 0.0F;
