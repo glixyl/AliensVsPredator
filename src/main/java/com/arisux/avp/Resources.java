@@ -2,15 +2,15 @@ package com.arisux.avp;
 
 import com.arisux.airi.AIRI;
 import com.arisux.airi.api.wavefrontapi.WavefrontModel;
-import com.arisux.airi.lib.interfaces.IInitializable;
+import com.arisux.airi.lib.interfaces.IInitializablePre;
 
-import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.util.ResourceLocation;
 
 @SideOnly(Side.CLIENT)
-public class Resources implements IInitializable
+public class Resources implements IInitializablePre
 {
 	public static final Resources instance = new Resources();
 
@@ -109,7 +109,7 @@ public class Resources implements IInitializable
 	public WavefrontModel M577_APC;
 	
 	@Override
-	public void initialize(FMLInitializationEvent event) 
+	public void preInitialize(FMLPreInitializationEvent event) 
 	{
 		M577_APC = AIRI.wavefrontAPI().loadModel(AliensVsPredator.class, AliensVsPredator.ID, "m577apc", "/assets/avp/models/m577apc");
 	}

@@ -168,7 +168,8 @@ public class AliensVsPredator implements IMod
 		settings().preInitialize(event);
 
 		if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
-		{
+		{		
+			resources().preInitialize(event);
 			renderer().preInitialize(event);
 		}
 	}
@@ -179,7 +180,6 @@ public class AliensVsPredator implements IMod
 	{
 		AIRI.logger.info("[AliensVsPredator] Initialization");
 
-		resources().initialize(event);
 		network().initialize(event);
 		items().initialize(event);
 		blocks().initialize(event);
