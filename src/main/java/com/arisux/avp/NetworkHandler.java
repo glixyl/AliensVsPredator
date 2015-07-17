@@ -1,11 +1,33 @@
 package com.arisux.avp;
 
 import com.arisux.airi.lib.interfaces.IInitializable;
-import com.arisux.avp.packets.client.*;
-import com.arisux.avp.packets.server.*;
+import com.arisux.avp.packets.client.PacketAmmoUpdate;
+import com.arisux.avp.packets.client.PacketKillCountUpdate;
+import com.arisux.avp.packets.client.PacketPlayerModeUpdate;
+import com.arisux.avp.packets.client.PacketSyncEEPC;
+import com.arisux.avp.packets.client.PacketSyncEEPPC;
+import com.arisux.avp.packets.client.PacketTurretInit;
+import com.arisux.avp.packets.server.PacketAddTuretTarget;
+import com.arisux.avp.packets.server.PacketAssembleCurrentSchematic;
+import com.arisux.avp.packets.server.PacketDamageEntity;
+import com.arisux.avp.packets.server.PacketFireAPC;
+import com.arisux.avp.packets.server.PacketLaunchGrenade;
+import com.arisux.avp.packets.server.PacketOpenWristbracerContainer;
+import com.arisux.avp.packets.server.PacketReadFromDataDevice;
+import com.arisux.avp.packets.server.PacketReloadFirearm;
+import com.arisux.avp.packets.server.PacketRemoveTurretTarget;
+import com.arisux.avp.packets.server.PacketShootEntity;
+import com.arisux.avp.packets.server.PacketSpawnEntity;
+import com.arisux.avp.packets.server.PacketSpawnNuke;
+import com.arisux.avp.packets.server.PacketSyncEEPPS;
+import com.arisux.avp.packets.server.PacketSyncEEPS;
+import com.arisux.avp.packets.server.PacketTurretTargetUpdate;
+import com.arisux.avp.packets.server.PacketWriteToDataDevice;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.network.simpleimpl.*;
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 
 public class NetworkHandler extends SimpleNetworkWrapper implements IInitializable

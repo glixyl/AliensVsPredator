@@ -1,7 +1,9 @@
 package com.arisux.avp;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.util.*;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityDamageSource;
+import net.minecraft.util.EntityDamageSourceIndirect;
 
 public class DamageSources extends DamageSource
 {

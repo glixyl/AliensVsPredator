@@ -1,23 +1,45 @@
 package com.arisux.avp;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockGravel;
-import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
-
 import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.airi.lib.BlockTypes.HookedBlockSlab;
 import com.arisux.airi.lib.BlockTypes.HookedBlockStairs;
-import com.arisux.airi.lib.ItemTypes.HookedItem;
 import com.arisux.airi.lib.ModUtil.IBHandler;
-import com.arisux.airi.lib.*;
+import com.arisux.airi.lib.client.render.IconSet;
 import com.arisux.airi.lib.interfaces.IInitializable;
-import com.arisux.avp.block.*;
+import com.arisux.avp.block.BlockAssembler;
+import com.arisux.avp.block.BlockBlastdoor;
+import com.arisux.avp.block.BlockCryostasisTube;
+import com.arisux.avp.block.BlockGenerator;
+import com.arisux.avp.block.BlockHiveNode;
+import com.arisux.avp.block.BlockHiveResin;
+import com.arisux.avp.block.BlockLightPanel;
+import com.arisux.avp.block.BlockNegativeTransformer;
+import com.arisux.avp.block.BlockOreSilicon;
+import com.arisux.avp.block.BlockP2RConvertor;
+import com.arisux.avp.block.BlockPortalAcheron;
+import com.arisux.avp.block.BlockPortalVarda;
+import com.arisux.avp.block.BlockPowerline;
+import com.arisux.avp.block.BlockR2PConvertor;
+import com.arisux.avp.block.BlockSatelliteModem;
+import com.arisux.avp.block.BlockShape;
 import com.arisux.avp.block.BlockShape.ShapeTypes;
+import com.arisux.avp.block.BlockSolarPanel;
+import com.arisux.avp.block.BlockStalagmite;
+import com.arisux.avp.block.BlockStasisMechanism;
+import com.arisux.avp.block.BlockSupplies;
+import com.arisux.avp.block.BlockTempleSpawner;
+import com.arisux.avp.block.BlockTransformer;
+import com.arisux.avp.block.BlockTurret;
+import com.arisux.avp.block.BlockWorklight;
+import com.arisux.avp.block.BlockWorkstation;
+import com.arisux.avp.block.GhostBlock;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 
 public class BlockHandler extends IBHandler implements IInitializable
 {
@@ -55,7 +77,7 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockFloorGrillSlab = (new HookedBlockSlab(Material.iron)).setRenderNormal(false).setOpaque(false).setHardness(3.5F).setResistance(2.0F).setLightOpacity(4),
 		blockFloorGrillStairs = (new HookedBlockStairs(blockFloorGrill)).setRenderNormal(false).setOpaque(false).setHardness(3.0F).setResistance(4.0F).setLightOpacity(4),
 		blockWall = (new HookedBlock(Material.iron)).setHardness(3.5F).setResistance(2.0F),
-		blockWallW = (new HookedBlock(Material.iron).setIconSet(new RenderUtil.IconSet(this.getMod().domain() + "wall_top", this.getMod().domain() + "wall_top", this.getMod().domain() + "wall_top", this.getMod().domain() + "wall_side", this.getMod().domain() + "wall_side", this.getMod().domain() + "wall_side", this.getMod().domain() + "wall_side"))).setHardness(3.5F).setResistance(2.0F),
+		blockWallW = (new HookedBlock(Material.iron).setIconSet(new IconSet(this.getMod().domain() + "wall_top", this.getMod().domain() + "wall_top", this.getMod().domain() + "wall_top", this.getMod().domain() + "wall_side", this.getMod().domain() + "wall_side", this.getMod().domain() + "wall_side", this.getMod().domain() + "wall_side"))).setHardness(3.5F).setResistance(2.0F),
 		blockCeiling = (new HookedBlock(Material.iron)).setHardness(3.5F).setResistance(2.0F).setLightOpacity(0),
 		blockCeilingFan = (new HookedBlock(Material.iron)).setOpaque(false).setHardness(3.5F).setResistance(2.0F),
 		blockCeiliingVent = (new HookedBlock(Material.iron)).setOpaque(false).setRenderNormal(false).setHardness(3.5F).setResistance(2.0F).setLightOpacity(0),

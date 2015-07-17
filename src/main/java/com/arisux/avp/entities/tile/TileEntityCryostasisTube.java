@@ -1,8 +1,8 @@
 package com.arisux.avp.entities.tile;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.arisux.avp.items.ItemEntitySummoner;
 
+import cofh.api.energy.IEnergyReceiver;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
@@ -12,11 +12,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.Explosion;
 import net.minecraftforge.common.util.ForgeDirection;
-import cofh.api.energy.IEnergyReceiver;
-
-import com.arisux.avp.items.ItemEntitySummoner;
 
 public class TileEntityCryostasisTube extends TileEntity implements IEnergyReceiver
 {

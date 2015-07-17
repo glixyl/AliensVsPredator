@@ -1,16 +1,15 @@
 package com.arisux.avp.windows;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiMultiplayer;
-import net.minecraft.client.multiplayer.ServerData;
-import net.minecraft.client.multiplayer.ServerList;
-
 import com.arisux.airi.AIRI;
 import com.arisux.airi.api.window.IWindow;
 import com.arisux.airi.api.window.gui.windows.Window;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiMultiplayer;
+import net.minecraft.client.multiplayer.ServerData;
+import net.minecraft.client.multiplayer.ServerList;
 
 public class WindowNotificationServer extends Window implements IWindow
 {

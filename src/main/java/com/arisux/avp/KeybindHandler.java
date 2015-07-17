@@ -1,13 +1,12 @@
 package com.arisux.avp;
 
-import net.minecraft.client.settings.KeyBinding;
-
 import org.lwjgl.input.Keyboard;
 
 import com.arisux.airi.lib.ModUtil;
 import com.arisux.airi.lib.interfaces.IInitializablePost;
 
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import net.minecraft.client.settings.KeyBinding;
 
 public class KeybindHandler implements IInitializablePost
 {

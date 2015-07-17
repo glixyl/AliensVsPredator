@@ -1,6 +1,8 @@
 package com.arisux.avp.dimension.varda;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirectional;

@@ -2,6 +2,13 @@ package com.arisux.avp.block;
 
 import java.util.Random;
 
+import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
+import com.arisux.airi.lib.WorldUtil;
+import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.entities.tile.TileEntityTurret;
+import com.arisux.avp.packets.server.PacketAddTuretTarget;
+
+import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityList;
@@ -13,14 +20,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
-
-import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
-import com.arisux.airi.lib.WorldUtil;
-import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.entities.tile.TileEntityTurret;
-import com.arisux.avp.packets.server.PacketAddTuretTarget;
-
-import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 
 public class BlockTurret extends HookedBlockContainer
 {

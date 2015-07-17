@@ -1,11 +1,11 @@
 package com.arisux.avp.items;
 
+import com.arisux.airi.lib.ItemTypes.HookedItem;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
-
-import com.arisux.airi.lib.ItemTypes.HookedItem;
 
 public class ItemStorageDevice extends HookedItem
 {

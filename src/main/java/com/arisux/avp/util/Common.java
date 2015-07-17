@@ -1,9 +1,9 @@
 package com.arisux.avp.util;
 
-import net.minecraft.entity.player.EntityPlayer;
-
 import com.arisux.airi.lib.WorldUtil.Entities.Players.Inventories;
 import com.arisux.avp.AliensVsPredator;
+
+import net.minecraft.entity.player.EntityPlayer;
 
 public class Common
 {

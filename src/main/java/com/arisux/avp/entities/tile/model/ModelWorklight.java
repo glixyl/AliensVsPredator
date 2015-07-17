@@ -1,9 +1,9 @@
 package com.arisux.avp.entities.tile.model;
 
+import com.arisux.avp.entities.tile.TileEntityWorklight;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-
-import com.arisux.avp.entities.tile.TileEntityWorklight;
 
 public class ModelWorklight extends ModelBase
 {

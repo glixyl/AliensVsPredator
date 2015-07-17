@@ -1,27 +1,13 @@
 package com.arisux.avp.block;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
-import cofh.api.energy.IEnergyProvider;
-import cofh.api.energy.IEnergyReceiver;
-
 import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
 import com.arisux.avp.entities.tile.TileEntityPowerline;
-import com.arisux.avp.entities.tile.TileEntityR2PConvertor;
-import com.arisux.avp.entities.tile.TileEntityRepulsionGenerator;
-import com.google.common.collect.Lists;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockPowerline extends HookedBlockContainer
 {

@@ -2,6 +2,9 @@ package com.arisux.avp.block;
 
 import java.util.Random;
 
+import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
+import com.arisux.avp.entities.tile.TileEntityWorkstation;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -10,9 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-
-import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
-import com.arisux.avp.entities.tile.TileEntityWorkstation;
 
 public class BlockWorkstation extends HookedBlockContainer
 {

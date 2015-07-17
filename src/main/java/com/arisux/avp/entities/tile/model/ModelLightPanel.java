@@ -1,8 +1,8 @@
 package com.arisux.avp.entities.tile.model;
 
-import net.minecraft.client.model.ModelRenderer;
-
 import com.arisux.airi.lib.client.ModelBaseExtension;
+
+import net.minecraft.client.model.ModelRenderer;
 
 public class ModelLightPanel extends ModelBaseExtension
 {

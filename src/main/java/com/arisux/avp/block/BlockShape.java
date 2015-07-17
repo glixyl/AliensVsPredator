@@ -2,6 +2,10 @@ package com.arisux.avp.block;
 
 import java.util.List;
 
+import com.arisux.airi.lib.BlockTypes.HookedBlock;
+import com.arisux.airi.lib.client.render.Matrix3;
+import com.arisux.airi.lib.client.render.Vertex;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -11,10 +15,6 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
-import com.arisux.airi.lib.BlockTypes.HookedBlock;
-import com.arisux.airi.lib.RenderUtil.Matrix3;
-import com.arisux.airi.lib.RenderUtil.Vertex;
 
 public class BlockShape extends HookedBlock
 {

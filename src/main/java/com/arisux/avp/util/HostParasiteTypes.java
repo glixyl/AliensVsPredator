@@ -1,12 +1,18 @@
 package com.arisux.avp.util;
 
+import com.arisux.avp.entities.mob.EntityAqua;
+import com.arisux.avp.entities.mob.EntityCrusher;
+import com.arisux.avp.entities.mob.EntityDrone;
+import com.arisux.avp.entities.mob.EntityPredalien;
+import com.arisux.avp.entities.mob.EntitySpitter;
+import com.arisux.avp.entities.mob.EntityXenomorph;
+import com.arisux.avp.entities.mob.EntityYautja;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntitySquid;
-
-import com.arisux.avp.entities.mob.*;
 
 @SuppressWarnings("all")
 public enum HostParasiteTypes

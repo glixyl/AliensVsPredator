@@ -2,15 +2,16 @@ package com.arisux.avp.dimension.varda;
 
 import java.util.Random;
 
-import net.minecraft.world.World;
-import net.minecraft.world.chunk.IChunkProvider;
-
 import com.arisux.avp.dimension.BiomeLVBase;
-import com.arisux.avp.dimension.acheron.worldgen.*;
+import com.arisux.avp.dimension.acheron.worldgen.TerrainFormation;
+import com.arisux.avp.dimension.acheron.worldgen.TerrainFormation1;
+import com.arisux.avp.dimension.acheron.worldgen.TerrainFormation2;
 import com.arisux.avp.dimension.varda.worldgen.VardaGenSpike1;
 import com.arisux.avp.dimension.varda.worldgen.VardaGenSpike2;
 
 import cpw.mods.fml.common.IWorldGenerator;
+import net.minecraft.world.World;
+import net.minecraft.world.chunk.IChunkProvider;
 
 public class WorldGeneratorVarda implements IWorldGenerator
 {

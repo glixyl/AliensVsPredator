@@ -1,5 +1,7 @@
 package com.arisux.avp.windows;
 
+import java.net.URLEncoder;
+
 import com.arisux.airi.AIRI;
 import com.arisux.airi.api.window.IWindow;
 import com.arisux.airi.api.window.gui.windows.Window;
@@ -11,10 +13,9 @@ import com.arisux.airi.lib.NetworkUtil;
 import com.arisux.airi.lib.WorldUtil.Entities.Players;
 import com.arisux.airi.lib.interfaces.IActionPerformed;
 import com.arisux.avp.AliensVsPredator;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;
-
-import java.net.URLEncoder;
 
 public class WindowSubmitFeedback extends Window implements IWindow
 {

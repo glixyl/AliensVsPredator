@@ -1,5 +1,7 @@
 package com.arisux.avp.entities.tile;
 
+import com.arisux.avp.items.ItemEntitySummoner;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
@@ -9,8 +11,6 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-
-import com.arisux.avp.items.ItemEntitySummoner;
 
 public class TileEntityStasisMechanism extends TileEntity
 {

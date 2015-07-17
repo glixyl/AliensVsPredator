@@ -1,11 +1,11 @@
 package com.arisux.avp.entities.mob;
 
+import com.arisux.avp.AliensVsPredator;
+
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-
-import com.arisux.avp.AliensVsPredator;
 
 public class EntityOvamorph extends EntitySpeciesAlien implements IMob
 {

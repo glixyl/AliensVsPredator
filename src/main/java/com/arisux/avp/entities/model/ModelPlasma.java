@@ -1,13 +1,13 @@
 package com.arisux.avp.entities.model;
 
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.renderer.Tessellator;
-
 import org.lwjgl.opengl.GL11;
 
-import com.arisux.airi.lib.*;
-import com.arisux.airi.lib.RenderUtil.Color;
-import com.arisux.airi.lib.RenderUtil.Vertex;
+import com.arisux.airi.lib.RenderUtil;
+import com.arisux.airi.lib.client.render.Color;
+import com.arisux.airi.lib.client.render.Vertex;
+
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.Tessellator;
 
 public class ModelPlasma extends ModelBase
 {

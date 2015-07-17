@@ -1,5 +1,11 @@
 package com.arisux.avp.items.render;
 
+import org.lwjgl.opengl.GL11;
+
+import com.arisux.airi.lib.RenderUtil;
+import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.items.model.ModelWristBlade;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.gui.inventory.GuiInventory;
@@ -8,12 +14,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
-
-import org.lwjgl.opengl.GL11;
-
-import com.arisux.airi.lib.RenderUtil;
-import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.items.model.ModelWristBlade;
 
 public class RenderItemWristbracerBlades implements IItemRenderer
 {

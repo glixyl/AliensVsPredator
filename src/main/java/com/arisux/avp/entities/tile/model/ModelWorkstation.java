@@ -1,12 +1,12 @@
 package com.arisux.avp.entities.tile.model;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.init.Blocks;
-
 import com.arisux.airi.lib.client.ModelBaseExtension;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.TileEntityWorkstation;
+
+import net.minecraft.block.Block;
+import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.init.Blocks;
 
 public class ModelWorkstation extends ModelBaseExtension
 {

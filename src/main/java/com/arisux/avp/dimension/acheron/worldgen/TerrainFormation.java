@@ -2,15 +2,14 @@ package com.arisux.avp.dimension.acheron.worldgen;
 
 import java.util.Random;
 
+import com.arisux.avp.AliensVsPredator;
+
+import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenerator;
-
-import com.arisux.avp.AliensVsPredator;
-
-import cpw.mods.fml.common.IWorldGenerator;
 
 public class TerrainFormation extends WorldGenerator implements IWorldGenerator
 {

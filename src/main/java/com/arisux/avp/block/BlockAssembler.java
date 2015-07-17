@@ -2,6 +2,10 @@ package com.arisux.avp.block;
 
 import java.util.Random;
 
+import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
+import com.arisux.airi.lib.client.render.IconSet;
+import com.arisux.avp.entities.tile.TileEntityAssembler;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -11,10 +15,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-
-import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
-import com.arisux.airi.lib.RenderUtil.IconSet;
-import com.arisux.avp.entities.tile.TileEntityAssembler;
 
 public class BlockAssembler extends HookedBlockContainer
 {

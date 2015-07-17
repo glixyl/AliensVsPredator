@@ -1,5 +1,10 @@
 package com.arisux.avp.items;
 
+import com.arisux.airi.lib.ItemTypes.HookedItem;
+import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.ItemHandler;
+import com.arisux.avp.inventory.container.ContainerWristbracer;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -7,11 +12,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.common.util.Constants;
-
-import com.arisux.airi.lib.ItemTypes.HookedItem;
-import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.ItemHandler;
-import com.arisux.avp.inventory.container.ContainerWristbracer;
 
 public class ItemWristbracer extends HookedItem
 {

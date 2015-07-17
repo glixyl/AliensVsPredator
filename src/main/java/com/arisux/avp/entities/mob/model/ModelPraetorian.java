@@ -1,10 +1,10 @@
 package com.arisux.avp.entities.mob.model;
 
+import com.arisux.airi.lib.client.ModelBaseExtension;
+
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
-
-import com.arisux.airi.lib.client.ModelBaseExtension;
 
 public class ModelPraetorian extends ModelBaseExtension
 {

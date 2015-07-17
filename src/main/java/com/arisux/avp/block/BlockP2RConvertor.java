@@ -1,25 +1,13 @@
 package com.arisux.avp.block;
 
-import java.util.Random;
+import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
+import com.arisux.avp.entities.tile.TileEntityP2RConvertor;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockRedstoneWire;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
-import com.arisux.airi.lib.BlockTypes.HookedBlock;
-import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
-import com.arisux.avp.entities.tile.TileEntityAssembler;
-import com.arisux.avp.entities.tile.TileEntityP2RConvertor;
-import com.arisux.avp.entities.tile.TileEntityPowerline;
-import com.arisux.avp.entities.tile.TileEntityR2PConvertor;
-import com.arisux.avp.entities.tile.TileEntityRepulsionGenerator;
-import com.arisux.avp.entities.tile.TileEntityTransformer;
 
 public class BlockP2RConvertor extends HookedBlockContainer
 {

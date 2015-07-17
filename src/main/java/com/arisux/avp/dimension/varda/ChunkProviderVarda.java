@@ -3,24 +3,26 @@ package com.arisux.avp.dimension.varda;
 import java.util.List;
 import java.util.Random;
 
+import com.arisux.airi.lib.WorldUtil;
+import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
+import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.dimension.varda.worldgen.VardaGenCaves;
+import com.arisux.avp.dimension.varda.worldgen.VardaGenLakes;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSand;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.IProgressUpdate;
 import net.minecraft.util.MathHelper;
-import net.minecraft.world.*;
+import net.minecraft.world.ChunkPosition;
+import net.minecraft.world.SpawnerAnimals;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.MapGenBase;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
-
-import com.arisux.airi.lib.WorldUtil;
-import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
-import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.dimension.varda.worldgen.VardaGenCaves;
-import com.arisux.avp.dimension.varda.worldgen.VardaGenLakes;
 
 public class ChunkProviderVarda implements IChunkProvider
 {

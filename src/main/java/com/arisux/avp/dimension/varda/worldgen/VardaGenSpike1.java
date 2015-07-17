@@ -2,12 +2,12 @@ package com.arisux.avp.dimension.varda.worldgen;
 
 import java.util.Random;
 
+import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.dimension.varda.WorldGeneratorVarda;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-
-import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.dimension.varda.WorldGeneratorVarda;
 
 public class VardaGenSpike1 extends WorldGeneratorVarda
 {

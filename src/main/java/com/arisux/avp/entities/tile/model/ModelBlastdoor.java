@@ -1,9 +1,9 @@
 package com.arisux.avp.entities.tile.model;
 
-import net.minecraft.client.model.ModelRenderer;
-
 import com.arisux.airi.lib.client.ModelBaseExtension;
 import com.arisux.avp.entities.tile.TileEntityBlastdoor;
+
+import net.minecraft.client.model.ModelRenderer;
 
 public class ModelBlastdoor extends ModelBaseExtension
 {

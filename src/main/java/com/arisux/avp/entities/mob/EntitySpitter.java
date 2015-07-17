@@ -3,13 +3,11 @@ package com.arisux.avp.entities.mob;
 import java.util.Random;
 
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.entities.EntityAcidPool;
 import com.arisux.avp.entities.EntityAcidProjectile;
 
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IRangedAttackMob;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 

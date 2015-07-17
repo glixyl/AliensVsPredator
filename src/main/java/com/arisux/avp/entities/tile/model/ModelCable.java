@@ -1,11 +1,11 @@
 package com.arisux.avp.entities.tile.model;
 
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
+import com.arisux.avp.entities.tile.TileEntityPowerline;
+
 import cofh.api.energy.IEnergyProvider;
 import cofh.api.energy.IEnergyReceiver;
-
-import com.arisux.avp.entities.tile.TileEntityPowerline;
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelRenderer;
 
 public class ModelCable extends ModelBase
 {

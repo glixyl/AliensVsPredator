@@ -3,6 +3,7 @@ package com.arisux.avp.packets.server;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.extended.ExtendedEntityPlayer;
 import com.arisux.avp.packets.client.PacketSyncEEPPC;
+
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;

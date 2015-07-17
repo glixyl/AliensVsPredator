@@ -1,10 +1,10 @@
 package com.arisux.avp.entities;
 
+import com.arisux.avp.entities.tile.TileEntityTurret;
+
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.world.World;
-
-import com.arisux.avp.entities.tile.TileEntityTurret;
 
 public class EntityTurret extends EntityLiving
 {

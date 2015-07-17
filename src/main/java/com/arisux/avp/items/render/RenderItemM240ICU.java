@@ -1,8 +1,6 @@
 package com.arisux.avp.items.render;
 
 import static com.arisux.airi.lib.RenderUtil.bindTexture;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
@@ -13,6 +11,9 @@ import com.arisux.airi.lib.client.ModelBaseExtension;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.items.ItemFirearm;
 import com.arisux.avp.items.model.ModelM240ICU;
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
 public class RenderItemM240ICU extends ItemRenderer
 {

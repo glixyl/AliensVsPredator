@@ -4,6 +4,7 @@ import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.packets.client.PacketSyncEEPPC;
 import com.arisux.avp.packets.server.PacketSyncEEPPS;
 import com.arisux.avp.util.PlayerMode;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;

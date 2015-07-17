@@ -1,9 +1,15 @@
 package com.arisux.avp.entities.mob;
 
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
+import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.entities.EntityAcidPool;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
@@ -11,12 +17,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-
-import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.entities.EntityAcidPool;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityRoyalFacehugger extends EntityFacehugger implements IMob
 {

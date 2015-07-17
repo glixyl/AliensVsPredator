@@ -1,11 +1,11 @@
 package com.arisux.avp.block;
 
+import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
+import com.arisux.avp.entities.tile.TileEntityWorklight;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-
-import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
-import com.arisux.avp.entities.tile.TileEntityWorklight;
 
 public class BlockWorklight extends HookedBlockContainer
 {

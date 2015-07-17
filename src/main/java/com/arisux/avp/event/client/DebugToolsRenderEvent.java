@@ -1,26 +1,34 @@
 package com.arisux.avp.event.client;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.item.EntityItemFrame;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.MovingObjectPosition.MovingObjectType;
-import net.minecraftforge.common.util.ForgeDirection;
-
-import com.arisux.airi.lib.*;
+import com.arisux.airi.lib.ModUtil;
+import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.WorldUtil.Blocks;
 import com.arisux.airi.lib.enums.BlockSides;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.extended.ExtendedEntityLivingBase;
-import com.arisux.avp.entities.mob.*;
+import com.arisux.avp.entities.mob.EntityChestburster;
+import com.arisux.avp.entities.mob.EntityDrone;
+import com.arisux.avp.entities.mob.EntityMarine;
+import com.arisux.avp.entities.mob.EntitySpeciesAlien;
+import com.arisux.avp.entities.mob.EntityXenomorph;
 import com.arisux.avp.entities.tile.TileEntityPowerline;
 import com.arisux.avp.entities.tile.TileEntityStasisMechanism;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.RenderTickEvent;
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiChat;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItemFrame;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.MovingObjectPosition.MovingObjectType;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class DebugToolsRenderEvent
 {
@@ -33,7 +41,7 @@ public class DebugToolsRenderEvent
 		{
 			if (mc.objectMouseOver != null)
 			{
-				if (ModUtil.isDevEnvironment() || AliensVsPredator.settings().areDebugToolsEnabled())
+				if (AliensVsPredator.settings().areDebugToolsEnabled())
 				{
 					if (mc.inGameHasFocus || mc.currentScreen instanceof GuiChat)
 					{

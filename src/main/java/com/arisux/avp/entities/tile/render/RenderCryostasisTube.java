@@ -1,5 +1,22 @@
 package com.arisux.avp.entities.tile.render;
 
+import static org.lwjgl.opengl.GL11.GL_ALPHA_TEST;
+import static org.lwjgl.opengl.GL11.GL_BLEND;
+import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
+import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_SRC_ALPHA;
+import static org.lwjgl.opengl.GL11.GL_SRC_ALPHA;
+import static org.lwjgl.opengl.GL11.glBlendFunc;
+import static org.lwjgl.opengl.GL11.glDisable;
+import static org.lwjgl.opengl.GL11.glEnable;
+import static org.lwjgl.opengl.GL11.glPopMatrix;
+import static org.lwjgl.opengl.GL11.glPushMatrix;
+import static org.lwjgl.opengl.GL11.glRotatef;
+import static org.lwjgl.opengl.GL11.glScalef;
+import static org.lwjgl.opengl.GL11.glTranslated;
+import static org.lwjgl.opengl.GL11.glTranslatef;
+
+import org.lwjgl.opengl.GL12;
+
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntityChestburster;
@@ -7,12 +24,10 @@ import com.arisux.avp.entities.mob.EntityFacehugger;
 import com.arisux.avp.entities.mob.EntityOvamorph;
 import com.arisux.avp.entities.tile.TileEntityCryostasisTube;
 import com.arisux.avp.entities.tile.model.ModelCryostasisTtube;
+
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
-import org.lwjgl.opengl.GL12;
-
-import static org.lwjgl.opengl.GL11.*;
 
 public class RenderCryostasisTube extends TileEntitySpecialRenderer
 {

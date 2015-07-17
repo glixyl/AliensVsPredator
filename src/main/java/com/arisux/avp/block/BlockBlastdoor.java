@@ -1,24 +1,19 @@
 package com.arisux.avp.block;
 
-import java.util.Random;
+import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
+import com.arisux.avp.entities.tile.TileEntityBlastdoor;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockGlass;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-
-import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
-import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.entities.tile.TileEntityBlastdoor;
 
 public class BlockBlastdoor extends HookedBlockContainer
 {

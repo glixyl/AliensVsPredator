@@ -1,14 +1,14 @@
 package com.arisux.avp.entities.tile.render;
 
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.Entity;
-import net.minecraft.tileentity.TileEntity;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.model.ModelHiveNode;
+
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.entity.Entity;
+import net.minecraft.tileentity.TileEntity;
 
 public class RenderHiveNode extends TileEntitySpecialRenderer
 {

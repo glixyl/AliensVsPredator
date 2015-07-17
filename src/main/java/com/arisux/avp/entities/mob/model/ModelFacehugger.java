@@ -1,14 +1,14 @@
 package com.arisux.avp.entities.mob.model;
 
+import org.lwjgl.opengl.GL11;
+
+import com.arisux.airi.lib.client.ModelBaseExtension;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
-
-import org.lwjgl.opengl.GL11;
-
-import com.arisux.airi.lib.client.ModelBaseExtension;
 
 public class ModelFacehugger extends ModelBaseExtension
 {

@@ -1,14 +1,14 @@
 package com.arisux.avp.entities.render;
 
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.model.ModelSpear;
+
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
 
 public class RenderSpear extends Render
 {

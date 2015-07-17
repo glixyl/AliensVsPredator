@@ -1,12 +1,11 @@
 package com.arisux.avp.event.client;
 
-import net.minecraft.client.Minecraft;
-
 import com.arisux.airi.lib.WorldUtil;
 import com.arisux.avp.AliensVsPredator;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
+import net.minecraft.client.Minecraft;
 
 public class AlienArmorEvents
 {

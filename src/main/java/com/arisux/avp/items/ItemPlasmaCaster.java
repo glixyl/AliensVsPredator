@@ -1,14 +1,14 @@
 package com.arisux.avp.items;
 
+import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.entities.EntityPlasma;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-
-import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.entities.EntityPlasma;
 
 public class ItemPlasmaCaster extends Item
 {

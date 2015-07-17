@@ -1,12 +1,11 @@
 package com.arisux.avp.util;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.stats.Achievement;
-
 import com.arisux.airi.lib.client.ModelTexMap;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.stats.Achievement;
 
 public class LevelData
 {

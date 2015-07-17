@@ -2,14 +2,14 @@ package com.arisux.avp.block;
 
 import java.util.Random;
 
+import com.arisux.avp.dimension.TeleporterLV;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
-
-import com.arisux.avp.dimension.TeleporterLV;
 
 public class BlockPortal extends Block
 {

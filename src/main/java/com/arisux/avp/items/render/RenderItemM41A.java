@@ -2,20 +2,22 @@ package com.arisux.avp.items.render;
 
 import static com.arisux.airi.lib.RenderUtil.bindTexture;
 import static com.arisux.airi.lib.RenderUtil.downloadResource;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
-import com.arisux.airi.lib.*;
-import com.arisux.airi.lib.RenderUtil.PlayerResourceManager.PlayerResource;
+import com.arisux.airi.lib.AccessWrapper;
+import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
 import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.PlayerResource;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.items.ItemFirearm;
 import com.arisux.avp.items.model.ModelM41A;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
 public class RenderItemM41A extends ItemRenderer
 {

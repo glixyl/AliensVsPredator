@@ -2,16 +2,19 @@ package com.arisux.avp.entities;
 
 import java.util.ArrayList;
 
-import net.minecraft.entity.*;
+import com.arisux.avp.DamageSources;
+import com.arisux.avp.entities.ai.EntityAIMeltBlock;
+import com.arisux.avp.entities.mob.EntitySpeciesAlien;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
-
-import com.arisux.avp.DamageSources;
-import com.arisux.avp.entities.ai.EntityAIMeltBlock;
-import com.arisux.avp.entities.mob.EntitySpeciesAlien;
 
 public class EntityAcidPool extends EntityCreature implements IMob
 {

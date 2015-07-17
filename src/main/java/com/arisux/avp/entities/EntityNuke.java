@@ -1,13 +1,13 @@
 package com.arisux.avp.entities;
 
+import com.arisux.airi.lib.WorldUtil;
+import com.arisux.airi.lib.client.Sound;
+import com.arisux.avp.AliensVsPredator;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-
-import com.arisux.airi.lib.WorldUtil;
-import com.arisux.airi.lib.client.Sound;
-import com.arisux.avp.AliensVsPredator;
 
 public class EntityNuke extends EntityThrowable
 {

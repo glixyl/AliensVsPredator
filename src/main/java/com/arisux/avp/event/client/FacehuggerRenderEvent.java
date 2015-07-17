@@ -1,13 +1,15 @@
 package com.arisux.avp.event.client;
 
+import org.lwjgl.opengl.GL11;
+
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntityFacehugger;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
-import org.lwjgl.opengl.GL11;
 
 public class FacehuggerRenderEvent
 {

@@ -1,11 +1,11 @@
 package com.arisux.avp.dimension;
 
-import net.minecraft.world.biome.BiomeDecorator;
-import net.minecraft.world.biome.BiomeGenBase;
-
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.dimension.acheron.BiomeAcheron;
 import com.arisux.avp.dimension.varda.BiomeVarda;
+
+import net.minecraft.world.biome.BiomeDecorator;
+import net.minecraft.world.biome.BiomeGenBase;
 
 public abstract class BiomeLVBase extends BiomeGenBase
 {

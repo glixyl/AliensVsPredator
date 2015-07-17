@@ -1,9 +1,9 @@
 package com.arisux.avp.block;
 
-import net.minecraft.block.material.Material;
-
 import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.avp.AliensVsPredator;
+
+import net.minecraft.block.material.Material;
 
 public class BlockAngled extends HookedBlock
 {

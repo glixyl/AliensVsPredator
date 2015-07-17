@@ -2,11 +2,7 @@ package com.arisux.avp.entities.mob;
 
 import com.arisux.avp.AliensVsPredator;
 
-import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
 public class EntityAqua extends EntityXenomorph

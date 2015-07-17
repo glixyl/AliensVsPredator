@@ -3,6 +3,7 @@ package com.arisux.avp.entities.ai.alien;
 import com.arisux.airi.lib.WorldUtil;
 import com.arisux.avp.entities.mob.EntityQueen;
 import com.arisux.avp.entities.mob.EntityXenomorph;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIBase;
 

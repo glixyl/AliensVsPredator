@@ -1,10 +1,7 @@
 package com.arisux.avp.event.client;
 
-import com.arisux.airi.api.window.gui.DesktopWindowManager;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiMainMenu;
-
 import com.arisux.airi.AIRI;
+import com.arisux.airi.api.window.gui.DesktopWindowManager;
 import com.arisux.airi.lib.GuiElements.GuiCustomButton;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.interfaces.IActionPerformed;
@@ -13,6 +10,8 @@ import com.arisux.avp.windows.WindowSubmitFeedback;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.RenderTickEvent;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiMainMenu;
 
 public class UserInterfaceEvents
 {

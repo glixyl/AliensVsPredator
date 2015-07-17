@@ -1,23 +1,11 @@
 package com.arisux.avp.entities.tile;
 
-import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
-import java.util.EnumMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyProvider;
 import cofh.api.energy.IEnergyReceiver;
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityNegativeTransformer extends TileEntity implements IEnergyProvider, IEnergyReceiver

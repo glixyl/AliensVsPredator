@@ -1,13 +1,12 @@
 package com.arisux.avp.event.client;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
-
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.items.ItemFirearm;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.client.Minecraft;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 
 public class AmmoIndicatorRenderEvent
 {

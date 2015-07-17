@@ -1,9 +1,9 @@
 package com.arisux.avp.entities.tile.model;
 
-import net.minecraft.client.model.ModelRenderer;
-
 import com.arisux.airi.lib.client.ModelBaseExtension;
 import com.arisux.avp.entities.tile.TileEntityStasisMechanism;
+
+import net.minecraft.client.model.ModelRenderer;
 
 public class ModelStasisMechanism extends ModelBaseExtension
 {

@@ -1,18 +1,12 @@
 package com.arisux.avp.block;
 
-import java.util.Random;
+import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
+import com.arisux.avp.entities.tile.TileEntitySolarPanel;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-
-import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
-import com.arisux.avp.entities.tile.TileEntityPowerline;
-import com.arisux.avp.entities.tile.TileEntityRepulsionGenerator;
-import com.arisux.avp.entities.tile.TileEntitySolarPanel;
 
 public class BlockSolarPanel extends HookedBlockContainer
 {

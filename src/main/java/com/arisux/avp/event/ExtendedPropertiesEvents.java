@@ -2,6 +2,7 @@ package com.arisux.avp.event;
 
 import com.arisux.avp.entities.extended.ExtendedEntityLivingBase;
 import com.arisux.avp.entities.extended.ExtendedEntityPlayer;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

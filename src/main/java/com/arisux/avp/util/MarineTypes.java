@@ -3,7 +3,11 @@ package com.arisux.avp.util;
 import com.arisux.airi.lib.client.ModelTexMap;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.items.ItemFirearm;
-import com.arisux.avp.items.render.*;
+import com.arisux.avp.items.render.RenderItemAK47;
+import com.arisux.avp.items.render.RenderItemM4;
+import com.arisux.avp.items.render.RenderItemM41A;
+import com.arisux.avp.items.render.RenderItemM56SG;
+import com.arisux.avp.items.render.RenderItemSniper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

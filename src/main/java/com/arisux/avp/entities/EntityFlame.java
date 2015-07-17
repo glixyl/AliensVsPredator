@@ -2,19 +2,21 @@ package com.arisux.avp.entities;
 
 import java.util.ArrayList;
 
-import net.minecraft.entity.*;
+import com.arisux.airi.lib.WorldUtil;
+import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
+import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.DamageSources;
+import com.arisux.avp.entities.tile.TileEntityCryostasisTube;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-
-import com.arisux.airi.lib.WorldUtil;
-import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
-import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.DamageSources;
-import com.arisux.avp.entities.tile.TileEntityCryostasisTube;
 
 public class EntityFlame extends EntityThrowable
 {

@@ -4,6 +4,7 @@ import com.arisux.avp.DamageSources;
 import com.arisux.avp.entities.extended.ExtendedEntityLivingBase;
 import com.arisux.avp.entities.mob.EntityChestburster;
 import com.arisux.avp.util.HostParasiteTypes;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import net.minecraft.entity.Entity;

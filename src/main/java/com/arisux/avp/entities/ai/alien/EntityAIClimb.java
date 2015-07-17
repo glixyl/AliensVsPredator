@@ -1,6 +1,7 @@
 package com.arisux.avp.entities.ai.alien;
 
 import com.arisux.avp.entities.mob.EntityXenomorph;
+
 import net.minecraft.entity.ai.EntityAIBase;
 
 public class EntityAIClimb extends EntityAIBase

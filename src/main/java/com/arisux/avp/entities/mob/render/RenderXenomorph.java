@@ -1,13 +1,13 @@
 package com.arisux.avp.entities.mob.render;
 
+import org.lwjgl.opengl.GL11;
+
+import com.arisux.airi.lib.client.ModelTexMap;
+
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
-
-import com.arisux.airi.lib.client.ModelTexMap;
 
 public class RenderXenomorph extends RenderLiving
 {

@@ -2,10 +2,10 @@ package com.arisux.avp.entities.tile;
 
 import java.util.UUID;
 
+import com.arisux.avp.interfaces.IHiveSignature;
+
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
-
-import com.arisux.avp.interfaces.IHiveSignature;
 
 public class TileEntityHiveResin extends TileEntity implements IHiveSignature
 {

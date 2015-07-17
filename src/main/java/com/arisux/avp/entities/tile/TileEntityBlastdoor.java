@@ -7,7 +7,6 @@ import com.arisux.avp.block.GhostBlock;
 
 import cofh.api.energy.IEnergyReceiver;
 import net.minecraft.block.Block;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;

@@ -2,7 +2,6 @@ package com.arisux.avp.items;
 
 import com.arisux.avp.AliensVsPredator;
 
-import net.minecraft.block.BlockGravel;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

@@ -2,7 +2,7 @@ package com.arisux.avp.items.render;
 
 import org.lwjgl.opengl.GL11;
 
-import com.arisux.airi.api.wavefrontapi.WavefrontModel.Part;
+import com.arisux.airi.api.wavefrontapi.Part;
 import com.arisux.avp.AliensVsPredator;
 
 import net.minecraft.item.ItemStack;

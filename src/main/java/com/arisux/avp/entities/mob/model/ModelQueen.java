@@ -1,13 +1,13 @@
 package com.arisux.avp.entities.mob.model;
 
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
-
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.client.ModelBaseExtension;
 import com.arisux.avp.entities.mob.EntityQueen;
+
+import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.MathHelper;
 
 public class ModelQueen extends ModelBaseExtension
 {

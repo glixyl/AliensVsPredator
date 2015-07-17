@@ -3,12 +3,9 @@ package com.arisux.avp.gui;
 import static com.arisux.airi.lib.RenderUtil.bindTexture;
 import static com.arisux.airi.lib.RenderUtil.drawQuad;
 
-import java.util.*;
-
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.EnumDifficulty;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
@@ -21,6 +18,10 @@ import com.arisux.avp.inventory.container.ContainerWristbracer;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.EnumDifficulty;
 
 public class GuiWristbracer extends GuiContainer
 {

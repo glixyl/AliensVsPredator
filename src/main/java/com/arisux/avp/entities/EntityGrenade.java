@@ -2,6 +2,11 @@ package com.arisux.avp.entities;
 
 import java.util.List;
 
+import com.arisux.airi.lib.WorldUtil;
+import com.arisux.airi.lib.WorldUtil.Blocks;
+import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.entities.mob.EntityXenomorph;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
@@ -10,11 +15,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
-
-import com.arisux.airi.lib.WorldUtil;
-import com.arisux.airi.lib.WorldUtil.Blocks;
-import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.entities.mob.EntityXenomorph;
 
 public class EntityGrenade extends EntityThrowable
 {

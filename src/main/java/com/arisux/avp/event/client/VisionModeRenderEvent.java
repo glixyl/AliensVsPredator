@@ -1,17 +1,14 @@
 package com.arisux.avp.event.client;
 
-import static com.arisux.airi.lib.RenderUtil.*;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiChat;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.event.*;
-import net.minecraftforge.client.event.RenderGameOverlayEvent.Pre;
+import static com.arisux.airi.lib.RenderUtil.drawStringAlignCenter;
+import static com.arisux.airi.lib.RenderUtil.glColorHexRGBA;
+import static com.arisux.airi.lib.RenderUtil.scaledDisplayResolution;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GuiElements.GuiCustomButton;
-import com.arisux.airi.lib.*;
+import com.arisux.airi.lib.WorldUtil;
 import com.arisux.airi.lib.WorldUtil.Entities.Players;
 import com.arisux.airi.lib.interfaces.IActionPerformed;
 import com.arisux.avp.AliensVsPredator;
@@ -19,6 +16,12 @@ import com.arisux.avp.util.VisionMode;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiChat;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.client.event.RenderGameOverlayEvent.Pre;
+import net.minecraftforge.client.event.RenderLivingEvent;
 
 public class VisionModeRenderEvent
 {

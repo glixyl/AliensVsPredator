@@ -1,15 +1,18 @@
 package com.arisux.avp.items.render;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
 import com.arisux.airi.lib.client.ModelBaseExtension;
-import com.arisux.avp.entities.mob.*;
+import com.arisux.avp.entities.mob.EntityChestburster;
+import com.arisux.avp.entities.mob.EntityMarine;
+import com.arisux.avp.entities.mob.EntityXenomorph;
+import com.arisux.avp.entities.mob.EntityYautja;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
 public class RenderItemSummoner extends ItemRenderer
 {

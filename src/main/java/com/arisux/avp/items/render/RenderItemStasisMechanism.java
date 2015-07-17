@@ -1,8 +1,6 @@
 package com.arisux.avp.items.render;
 
 import static com.arisux.airi.lib.RenderUtil.bindTexture;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
@@ -10,6 +8,9 @@ import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.model.ModelStasisMechanism;
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
 public class RenderItemStasisMechanism extends ItemRenderer
 {

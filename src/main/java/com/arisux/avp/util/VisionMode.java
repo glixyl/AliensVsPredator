@@ -1,18 +1,36 @@
 package com.arisux.avp.util;
 
-import static com.arisux.airi.lib.RenderUtil.*;
-import static org.lwjgl.opengl.GL11.*;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.boss.EntityDragon;
-import net.minecraft.entity.monster.EntityEnderman;
-import net.minecraftforge.client.event.RenderLivingEvent;
+import static com.arisux.airi.lib.RenderUtil.bindTexture;
+import static com.arisux.airi.lib.RenderUtil.drawQuad;
+import static com.arisux.airi.lib.RenderUtil.glColorHexRGB;
+import static com.arisux.airi.lib.RenderUtil.glDisableLight;
+import static com.arisux.airi.lib.RenderUtil.glDisableLightMapping;
+import static com.arisux.airi.lib.RenderUtil.glEnableLight;
+import static com.arisux.airi.lib.RenderUtil.glEnableLightMapping;
+import static com.arisux.airi.lib.RenderUtil.renderOverlay;
+import static com.arisux.airi.lib.RenderUtil.scaledDisplayResolution;
+import static org.lwjgl.opengl.GL11.GL_ALPHA_TEST;
+import static org.lwjgl.opengl.GL11.GL_BLEND;
+import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_DST_COLOR;
+import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_SRC_ALPHA;
+import static org.lwjgl.opengl.GL11.GL_SRC_ALPHA;
+import static org.lwjgl.opengl.GL11.GL_ZERO;
+import static org.lwjgl.opengl.GL11.glBlendFunc;
+import static org.lwjgl.opengl.GL11.glColor4f;
+import static org.lwjgl.opengl.GL11.glDisable;
+import static org.lwjgl.opengl.GL11.glEnable;
 
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntitySpeciesAlien;
 import com.arisux.avp.entities.mob.EntityXenomorph;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.boss.EntityDragon;
+import net.minecraft.entity.monster.EntityEnderman;
+import net.minecraftforge.client.event.RenderLivingEvent;
 
 public enum VisionMode
 {

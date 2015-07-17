@@ -6,6 +6,7 @@ import com.arisux.avp.entities.mob.EntityChestburster;
 import com.arisux.avp.packets.client.PacketSyncEEPC;
 import com.arisux.avp.packets.server.PacketSyncEEPS;
 import com.arisux.avp.util.HostParasiteTypes;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;

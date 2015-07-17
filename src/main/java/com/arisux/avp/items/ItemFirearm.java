@@ -2,17 +2,9 @@ package com.arisux.avp.items;
 
 import java.util.List;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumAction;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.world.World;
-
-import com.arisux.airi.lib.*;
+import com.arisux.airi.lib.AccessWrapper;
 import com.arisux.airi.lib.ItemTypes.HookedItem;
+import com.arisux.airi.lib.WorldUtil;
 import com.arisux.airi.lib.WorldUtil.Entities.Players.Inventories;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.packets.server.PacketReloadFirearm;
@@ -21,6 +13,14 @@ import com.arisux.avp.packets.server.PacketShootEntity;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumAction;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.World;
 
 @SuppressWarnings("unchecked")
 public class ItemFirearm extends HookedItem

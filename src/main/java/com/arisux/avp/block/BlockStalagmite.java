@@ -2,14 +2,14 @@ package com.arisux.avp.block;
 
 import java.util.Random;
 
+import com.arisux.airi.lib.BlockTypes.HookedBlock;
+import com.arisux.avp.AliensVsPredator;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
-
-import com.arisux.airi.lib.BlockTypes.HookedBlock;
-import com.arisux.avp.AliensVsPredator;
 
 public class BlockStalagmite extends HookedBlock
 {

@@ -1,12 +1,11 @@
 package com.arisux.avp.event.client;
 
-import net.minecraft.client.Minecraft;
-
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.packets.server.PacketOpenWristbracerContainer;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
+import net.minecraft.client.Minecraft;
 
 public class WristBracerEvents
 {

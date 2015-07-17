@@ -1,19 +1,35 @@
 package com.arisux.avp;
 
+import java.util.ArrayList;
+
 import com.arisux.airi.lib.interfaces.IInitializable;
 import com.arisux.avp.event.EmbryoTickEvent;
 import com.arisux.avp.event.EntityTrackingEvent;
 import com.arisux.avp.event.ExtendedPropertiesEvents;
 import com.arisux.avp.event.StormUpdateEvent;
-import com.arisux.avp.event.client.*;
+import com.arisux.avp.event.client.AlienArmorEvents;
+import com.arisux.avp.event.client.AmmoIndicatorRenderEvent;
+import com.arisux.avp.event.client.ChestbursterOverlayEvent;
+import com.arisux.avp.event.client.CommonFirearmEvents;
+import com.arisux.avp.event.client.DebugToolsRenderEvent;
+import com.arisux.avp.event.client.FacehuggerRenderEvent;
+import com.arisux.avp.event.client.FireAPCEvent;
+import com.arisux.avp.event.client.LightmapUpdateEvent;
+import com.arisux.avp.event.client.PlayerModeRenderEvent;
+import com.arisux.avp.event.client.PulseRifleEvents;
+import com.arisux.avp.event.client.RenderPlayerAPCEvent;
+import com.arisux.avp.event.client.RenderPlayerHotbarAPCEvent;
+import com.arisux.avp.event.client.TacticalHUDRenderEvent;
+import com.arisux.avp.event.client.UserInterfaceEvents;
+import com.arisux.avp.event.client.VisionModeRenderEvent;
+import com.arisux.avp.event.client.WristBracerEvents;
 import com.arisux.avp.items.render.RenderMotionTrackerScreen;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraftforge.common.MinecraftForge;
-
-import java.util.ArrayList;
 
 public class LocalEventHandler implements IInitializable
 {

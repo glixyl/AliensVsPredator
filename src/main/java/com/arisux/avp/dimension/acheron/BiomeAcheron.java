@@ -1,9 +1,9 @@
 package com.arisux.avp.dimension.acheron;
 
-import net.minecraft.world.biome.BiomeGenBase;
-
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.dimension.BiomeLVBase;
+
+import net.minecraft.world.biome.BiomeGenBase;
 
 public class BiomeAcheron extends BiomeLVBase
 {

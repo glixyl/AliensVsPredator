@@ -2,6 +2,10 @@ package com.arisux.avp.entities.tile;
 
 import java.util.Random;
 
+import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.inventory.container.ContainerAssembler;
+
+import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -13,11 +17,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.common.util.Constants;
-
-import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.inventory.container.ContainerAssembler;
-
-import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 
 public class TileEntityAssembler extends TileEntity implements IInventory
 {

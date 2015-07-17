@@ -1,10 +1,10 @@
 package com.arisux.avp.items.model;
 
-import net.minecraft.client.model.ModelRenderer;
-
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.client.ModelBaseExtension;
+
+import net.minecraft.client.model.ModelRenderer;
 
 public class ModelM240ICU extends ModelBaseExtension
 {

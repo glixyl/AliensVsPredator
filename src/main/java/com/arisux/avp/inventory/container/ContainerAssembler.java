@@ -1,11 +1,13 @@
 package com.arisux.avp.inventory.container;
 
+import com.arisux.avp.entities.tile.TileEntityAssembler;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.*;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-
-import com.arisux.avp.entities.tile.TileEntityAssembler;
 
 public class ContainerAssembler extends Container
 {

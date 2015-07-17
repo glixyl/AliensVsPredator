@@ -1,14 +1,14 @@
 package com.arisux.avp.items.render;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.items.model.ModelMotionTracker;
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
 public class RenderItemMotionTracker extends ItemRenderer
 {

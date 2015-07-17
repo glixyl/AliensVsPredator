@@ -3,27 +3,33 @@ package com.arisux.avp.gui;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.entity.*;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
-
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
 import com.arisux.airi.lib.GuiElements.GuiCustomButton;
 import com.arisux.airi.lib.GuiElements.GuiCustomSlider;
-import com.arisux.airi.lib.*;
+import com.arisux.airi.lib.RenderUtil;
+import com.arisux.airi.lib.WorldUtil;
 import com.arisux.airi.lib.interfaces.IActionPerformed;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.TileEntityTurret;
-import com.arisux.avp.packets.server.*;
+import com.arisux.avp.packets.server.PacketAddTuretTarget;
+import com.arisux.avp.packets.server.PacketReadFromDataDevice;
+import com.arisux.avp.packets.server.PacketRemoveTurretTarget;
+import com.arisux.avp.packets.server.PacketWriteToDataDevice;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 
 @SideOnly(Side.CLIENT)
 public class GuiTurret extends GuiContainer

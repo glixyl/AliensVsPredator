@@ -3,19 +3,21 @@ package com.arisux.avp.dimension.acheron;
 import java.util.List;
 import java.util.Random;
 
+import com.arisux.avp.AliensVsPredator;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSand;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.IProgressUpdate;
 import net.minecraft.util.MathHelper;
-import net.minecraft.world.*;
+import net.minecraft.world.ChunkPosition;
+import net.minecraft.world.SpawnerAnimals;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
-
-import com.arisux.avp.AliensVsPredator;
 
 public class ChunkProviderAcheron implements IChunkProvider
 {

@@ -1,18 +1,19 @@
 package com.arisux.avp.entities.mob;
 
+import java.util.UUID;
+
 import com.arisux.airi.lib.WorldUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.EntityAcidPool;
 import com.arisux.avp.interfaces.IHiveSignature;
 import com.arisux.avp.packets.client.PacketKillCountUpdate;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-
-import java.util.UUID;
 
 public abstract class EntitySpeciesAlien extends EntityMob implements IMob, IHiveSignature
 {

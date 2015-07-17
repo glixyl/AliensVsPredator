@@ -1,11 +1,11 @@
 package com.arisux.avp.items;
 
+import com.arisux.airi.lib.RenderUtil;
+import com.arisux.avp.AliensVsPredator;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-
-import com.arisux.airi.lib.RenderUtil;
-import com.arisux.avp.AliensVsPredator;
 
 public class ItemArmorMarine extends ItemArmor
 {

@@ -2,17 +2,16 @@ package com.arisux.avp.items;
 
 import java.util.List;
 
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
-
 import com.arisux.airi.lib.ItemTypes.HookedItem;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.EntityFlame;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 public class ItemFlamethrower extends HookedItem
 {

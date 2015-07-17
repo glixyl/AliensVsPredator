@@ -1,5 +1,10 @@
 package com.arisux.avp.items;
 
+import com.arisux.airi.lib.ItemTypes.HookedItem;
+import com.arisux.airi.lib.WorldUtil;
+import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.packets.server.PacketSpawnEntity;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -7,11 +12,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-
-import com.arisux.airi.lib.ItemTypes.HookedItem;
-import com.arisux.airi.lib.WorldUtil;
-import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.packets.server.PacketSpawnEntity;
 
 public class ItemEntitySummoner extends HookedItem
 {

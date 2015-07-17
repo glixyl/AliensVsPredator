@@ -1,17 +1,63 @@
 package com.arisux.avp;
 
+import java.util.HashMap;
+
 import com.arisux.airi.lib.interfaces.IInitializable;
 import com.arisux.avp.dimension.BiomeLVBase;
-import com.arisux.avp.entities.*;
-import com.arisux.avp.entities.mob.*;
-import com.arisux.avp.entities.tile.*;
+import com.arisux.avp.entities.EntityAPC;
+import com.arisux.avp.entities.EntityAcidPool;
+import com.arisux.avp.entities.EntityAcidProjectile;
+import com.arisux.avp.entities.EntityFlame;
+import com.arisux.avp.entities.EntityGrenade;
+import com.arisux.avp.entities.EntityLaserMine;
+import com.arisux.avp.entities.EntityNuke;
+import com.arisux.avp.entities.EntityPlasma;
+import com.arisux.avp.entities.EntityShuriken;
+import com.arisux.avp.entities.EntitySmartDisc;
+import com.arisux.avp.entities.EntitySpear;
+import com.arisux.avp.entities.EntityTurret;
+import com.arisux.avp.entities.mob.EntityAqua;
+import com.arisux.avp.entities.mob.EntityChestburster;
+import com.arisux.avp.entities.mob.EntityCombatSynthetic;
+import com.arisux.avp.entities.mob.EntityCrusher;
+import com.arisux.avp.entities.mob.EntityDrone;
+import com.arisux.avp.entities.mob.EntityFacehugger;
+import com.arisux.avp.entities.mob.EntityHammerpede;
+import com.arisux.avp.entities.mob.EntityMarine;
+import com.arisux.avp.entities.mob.EntityOvamorph;
+import com.arisux.avp.entities.mob.EntityPraetorian;
+import com.arisux.avp.entities.mob.EntityPredalien;
+import com.arisux.avp.entities.mob.EntityProtomorph;
+import com.arisux.avp.entities.mob.EntityQueen;
+import com.arisux.avp.entities.mob.EntityRoyalFacehugger;
+import com.arisux.avp.entities.mob.EntitySpitter;
+import com.arisux.avp.entities.mob.EntityTrilobite;
+import com.arisux.avp.entities.mob.EntityWarrior;
+import com.arisux.avp.entities.mob.EntityYautja;
+import com.arisux.avp.entities.tile.TileEntityAssembler;
+import com.arisux.avp.entities.tile.TileEntityBlastdoor;
+import com.arisux.avp.entities.tile.TileEntityCryostasisTube;
+import com.arisux.avp.entities.tile.TileEntityHiveNode;
+import com.arisux.avp.entities.tile.TileEntityHiveResin;
+import com.arisux.avp.entities.tile.TileEntityLightPanel;
+import com.arisux.avp.entities.tile.TileEntityNegativeTransformer;
+import com.arisux.avp.entities.tile.TileEntityP2RConvertor;
+import com.arisux.avp.entities.tile.TileEntityPowerline;
+import com.arisux.avp.entities.tile.TileEntityR2PConvertor;
+import com.arisux.avp.entities.tile.TileEntityRepulsionGenerator;
+import com.arisux.avp.entities.tile.TileEntitySatelliteModem;
+import com.arisux.avp.entities.tile.TileEntitySolarPanel;
+import com.arisux.avp.entities.tile.TileEntityStasisMechanism;
+import com.arisux.avp.entities.tile.TileEntityTransformer;
+import com.arisux.avp.entities.tile.TileEntityTurret;
+import com.arisux.avp.entities.tile.TileEntityWorklight;
+import com.arisux.avp.entities.tile.TileEntityWorkstation;
+
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
-
-import java.util.HashMap;
 
 public class EntityHandler implements IInitializable
 {

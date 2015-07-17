@@ -1,21 +1,25 @@
 package com.arisux.avp.entities.mob;
 
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
+import com.arisux.airi.lib.WorldUtil.Entities.Players.Inventories;
+import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.ItemHandler;
+import com.arisux.avp.entities.EntityBullet;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IRangedAttackMob;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIArrowAttack;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-
-import com.arisux.airi.lib.WorldUtil.Entities.Players.Inventories;
-import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.ItemHandler;
-import com.arisux.avp.entities.EntityBullet;
 
 public class EntityCombatSynthetic extends EntityCreature implements IMob, IRangedAttackMob
 {

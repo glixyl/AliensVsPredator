@@ -1,10 +1,33 @@
 package com.arisux.avp.entities.tile;
 
 import java.util.ArrayList;
-import java.util.List;
 
+import com.arisux.airi.lib.WorldUtil;
+import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
+import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.entities.EntityBullet;
+import com.arisux.avp.entities.EntityTurret;
+import com.arisux.avp.entities.mob.EntityAqua;
+import com.arisux.avp.entities.mob.EntityChestburster;
+import com.arisux.avp.entities.mob.EntityCrusher;
+import com.arisux.avp.entities.mob.EntityDrone;
+import com.arisux.avp.entities.mob.EntityFacehugger;
+import com.arisux.avp.entities.mob.EntityOvamorph;
+import com.arisux.avp.entities.mob.EntityPraetorian;
+import com.arisux.avp.entities.mob.EntityPredalien;
+import com.arisux.avp.entities.mob.EntityQueen;
+import com.arisux.avp.entities.mob.EntitySpitter;
+import com.arisux.avp.entities.mob.EntityWarrior;
+import com.arisux.avp.interfaces.IDataDevice;
+import com.arisux.avp.inventory.container.ContainerTurret;
+import com.arisux.avp.packets.client.PacketTurretInit;
+import com.arisux.avp.packets.server.PacketTurretTargetUpdate;
+
+import cofh.api.energy.IEnergyReceiver;
 import net.minecraft.block.Block;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,19 +46,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.common.util.ForgeDirection;
-import cofh.api.energy.EnergyStorage;
-import cofh.api.energy.IEnergyReceiver;
-
-import com.arisux.airi.lib.WorldUtil;
-import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
-import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.entities.EntityBullet;
-import com.arisux.avp.entities.EntityTurret;
-import com.arisux.avp.entities.mob.*;
-import com.arisux.avp.interfaces.IDataDevice;
-import com.arisux.avp.inventory.container.ContainerTurret;
-import com.arisux.avp.packets.client.PacketTurretInit;
-import com.arisux.avp.packets.server.PacketTurretTargetUpdate;
 
 public class TileEntityTurret extends TileEntity implements IDataDevice, IEnergyReceiver
 {

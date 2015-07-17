@@ -2,16 +2,16 @@ package com.arisux.avp.dimension.acheron;
 
 import java.util.Random;
 
+import com.arisux.airi.lib.WorldUtil;
+import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
+import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.dimension.BiomeLVBase;
+
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenFlowers;
 import net.minecraft.world.gen.feature.WorldGenerator;
-
-import com.arisux.airi.lib.WorldUtil;
-import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
-import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.dimension.BiomeLVBase;
 
 public class BiomeDecoratorAcheron extends BiomeDecorator
 {

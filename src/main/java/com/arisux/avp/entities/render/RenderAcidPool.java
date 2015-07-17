@@ -1,5 +1,10 @@
 package com.arisux.avp.entities.render;
 
+import org.lwjgl.opengl.GL11;
+
+import com.arisux.airi.lib.RenderUtil;
+import com.arisux.avp.AliensVsPredator;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
@@ -8,11 +13,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
-
-import com.arisux.airi.lib.RenderUtil;
-import com.arisux.avp.AliensVsPredator;
 
 public class RenderAcidPool extends Render
 {

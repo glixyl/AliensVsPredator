@@ -1,5 +1,11 @@
 package com.arisux.avp.entities.mob.render;
 
+import org.lwjgl.opengl.GL11;
+
+import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.entities.mob.EntityFacehugger;
+import com.arisux.avp.entities.mob.EntityMarine;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
@@ -10,12 +16,6 @@ import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
-
-import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.entities.mob.EntityFacehugger;
-import com.arisux.avp.entities.mob.EntityMarine;
 
 public class RenderFacehugger extends RenderLiving
 {

@@ -2,13 +2,16 @@ package com.arisux.avp.entities.mob;
 
 import java.util.ArrayList;
 
+import com.arisux.airi.lib.WorldUtil;
+import com.arisux.airi.lib.WorldUtil.Entities;
+import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.util.HostParasiteTypes;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -16,11 +19,6 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-
-import com.arisux.airi.lib.WorldUtil;
-import com.arisux.airi.lib.WorldUtil.Entities;
-import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.util.HostParasiteTypes;
 
 public class EntityChestburster extends EntitySpeciesAlien implements IMob
 {

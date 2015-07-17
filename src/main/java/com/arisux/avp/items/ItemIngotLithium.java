@@ -1,13 +1,13 @@
 package com.arisux.avp.items;
 
+import com.arisux.airi.lib.ItemTypes.HookedItem;
+import com.arisux.airi.lib.WorldUtil;
+import com.arisux.airi.lib.WorldUtil.Blocks;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-
-import com.arisux.airi.lib.ItemTypes.HookedItem;
-import com.arisux.airi.lib.*;
-import com.arisux.airi.lib.WorldUtil.Blocks;
 
 public class ItemIngotLithium extends HookedItem
 {

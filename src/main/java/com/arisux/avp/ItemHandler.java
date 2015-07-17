@@ -1,20 +1,57 @@
 package com.arisux.avp;
 
-import net.minecraft.item.*;
-import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.item.ItemArmor.ArmorMaterial;
-import net.minecraftforge.common.util.EnumHelper;
-
 import com.arisux.airi.lib.ItemTypes.HookedItem;
 import com.arisux.airi.lib.ItemTypes.HookedItemAxe;
 import com.arisux.airi.lib.ItemTypes.HookedItemPickaxe;
 import com.arisux.airi.lib.ModUtil.IBHandler;
 import com.arisux.airi.lib.interfaces.IInitializable;
-import com.arisux.avp.entities.mob.*;
-import com.arisux.avp.items.*;
+import com.arisux.avp.entities.mob.EntityAqua;
+import com.arisux.avp.entities.mob.EntityChestburster;
+import com.arisux.avp.entities.mob.EntityCombatSynthetic;
+import com.arisux.avp.entities.mob.EntityCrusher;
+import com.arisux.avp.entities.mob.EntityDrone;
+import com.arisux.avp.entities.mob.EntityFacehugger;
+import com.arisux.avp.entities.mob.EntityHammerpede;
+import com.arisux.avp.entities.mob.EntityMarine;
+import com.arisux.avp.entities.mob.EntityOvamorph;
+import com.arisux.avp.entities.mob.EntityPraetorian;
+import com.arisux.avp.entities.mob.EntityPredalien;
+import com.arisux.avp.entities.mob.EntityProtomorph;
+import com.arisux.avp.entities.mob.EntityQueen;
+import com.arisux.avp.entities.mob.EntityRoyalFacehugger;
+import com.arisux.avp.entities.mob.EntitySpitter;
+import com.arisux.avp.entities.mob.EntityTrilobite;
+import com.arisux.avp.entities.mob.EntityWarrior;
+import com.arisux.avp.entities.mob.EntityYautja;
+import com.arisux.avp.items.ItemAPC;
+import com.arisux.avp.items.ItemArmorMarine;
+import com.arisux.avp.items.ItemArmorPressureSuit;
+import com.arisux.avp.items.ItemArmorTitanium;
+import com.arisux.avp.items.ItemArmorXeno;
+import com.arisux.avp.items.ItemDisc;
+import com.arisux.avp.items.ItemEntitySummoner;
+import com.arisux.avp.items.ItemFirearm;
 import com.arisux.avp.items.ItemFirearm.ItemAmmo;
+import com.arisux.avp.items.ItemFlamethrower;
+import com.arisux.avp.items.ItemGrenade;
+import com.arisux.avp.items.ItemIngotLithium;
+import com.arisux.avp.items.ItemLaserMine;
+import com.arisux.avp.items.ItemPlasmaCaster;
+import com.arisux.avp.items.ItemShuriken;
+import com.arisux.avp.items.ItemSpear;
+import com.arisux.avp.items.ItemStorageDevice;
+import com.arisux.avp.items.ItemSupplyChute;
+import com.arisux.avp.items.ItemWristbracer;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import net.minecraft.item.Item;
+import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemArmor.ArmorMaterial;
+import net.minecraft.item.ItemFood;
+import net.minecraft.item.ItemHoe;
+import net.minecraft.item.ItemSpade;
+import net.minecraft.item.ItemSword;
+import net.minecraftforge.common.util.EnumHelper;
 
 public class ItemHandler extends IBHandler implements IInitializable
 {

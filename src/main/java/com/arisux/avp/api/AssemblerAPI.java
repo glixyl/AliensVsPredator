@@ -2,12 +2,6 @@ package com.arisux.avp.api;
 
 import java.util.ArrayList;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-
 import com.arisux.airi.AIRI;
 import com.arisux.airi.lib.WorldUtil.Entities.Players.Inventories;
 import com.arisux.airi.lib.interfaces.IInitializable;
@@ -15,6 +9,11 @@ import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.ItemHandler;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 public class AssemblerAPI implements IInitializable
 {

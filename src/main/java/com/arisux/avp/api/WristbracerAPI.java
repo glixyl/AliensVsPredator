@@ -2,8 +2,6 @@ package com.arisux.avp.api;
 
 import java.util.HashMap;
 
-import net.minecraft.client.Minecraft;
-
 import com.arisux.airi.AIRI;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.interfaces.IInitializable;
@@ -13,6 +11,7 @@ import com.arisux.avp.packets.server.PacketSpawnNuke;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.Minecraft;
 
 @SideOnly(Side.CLIENT)
 public class WristbracerAPI implements IInitializable

@@ -1,12 +1,12 @@
 package com.arisux.avp.entities.tile.model;
 
-import net.minecraft.client.model.ModelRenderer;
-
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.AccessWrapper;
 import com.arisux.airi.lib.client.ModelBaseExtension;
 import com.arisux.avp.entities.tile.TileEntityRepulsionGenerator;
+
+import net.minecraft.client.model.ModelRenderer;
 
 public class ModelRepulsionGenerator extends ModelBaseExtension
 {

@@ -1,19 +1,20 @@
 package com.arisux.avp;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.world.World;
-
 import com.arisux.airi.lib.interfaces.IInitializable;
 import com.arisux.avp.entities.tile.TileEntityAssembler;
 import com.arisux.avp.entities.tile.TileEntityTurret;
-import com.arisux.avp.gui.*;
+import com.arisux.avp.gui.GuiAssembler;
+import com.arisux.avp.gui.GuiTurret;
+import com.arisux.avp.gui.GuiWristbracer;
 import com.arisux.avp.inventory.container.ContainerWristbracer;
 import com.arisux.avp.items.ItemWristbracer;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.world.World;
 
 public class GuiHandler implements IGuiHandler, IInitializable
 {

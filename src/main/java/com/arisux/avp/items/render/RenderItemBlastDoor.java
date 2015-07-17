@@ -1,13 +1,13 @@
 package com.arisux.avp.items.render;
 
-import net.minecraft.item.ItemStack;
-
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.model.ModelBlastdoor;
+
+import net.minecraft.item.ItemStack;
 
 public class RenderItemBlastDoor extends ItemRenderer
 {
