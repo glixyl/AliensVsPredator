@@ -197,10 +197,10 @@ public class EntityAPC extends Entity
 	public void onUpdate()
 	{
 		super.onUpdate();
-		
+
 		this.speedMultiplier = 1.95D;
 		this.fallDistance = 0;
-		
+
 		if (this.getTimeSinceHit() > 0)
 		{
 			this.setTimeSinceHit(this.getTimeSinceHit() - 1);
@@ -227,7 +227,7 @@ public class EntityAPC extends Entity
 			rotX = Math.cos((double)this.rotationYaw * Math.PI / 180.0D);
 			rotY = Math.sin((double)this.rotationYaw * Math.PI / 180.0D);
 		}
-		
+
 		if (this.worldObj.isRemote && this.isVehicleEmpty)
 		{
 			if (this.rotationIncrements > 0)
@@ -295,7 +295,7 @@ public class EntityAPC extends Entity
 
 				if (this.speedMultiplier > 0.35D)
 				{
-//					this.speedMultiplier = 0.35D;
+					//					this.speedMultiplier = 0.35D;
 				}
 			}
 			else
@@ -330,7 +330,7 @@ public class EntityAPC extends Entity
 					}
 				}
 			}
-			
+
 			if(this.riddenByEntity == null)
 			{
 				this.motionX = 0;
@@ -401,12 +401,15 @@ public class EntityAPC extends Entity
 			double d0 = Math.cos((double)this.rotationYaw * Math.PI / 180.0D) * 0.4D;
 			double d1 = Math.sin((double)this.rotationYaw * Math.PI / 180.0D) * 0.4D;
 			this.riddenByEntity.setPosition(this.posX + d0 - 2.5F, this.posY + this.getMountedYOffset() + this.riddenByEntity.getYOffset(), this.posZ + d1 + 0.25F);
-			
+
 			if(this.worldObj.isRemote && this.riddenByEntity instanceof EntityPlayer)
 			{
 				if(Minecraft.getMinecraft().gameSettings.thirdPersonView == 0)
 				{
-					Minecraft.getMinecraft().gameSettings.thirdPersonView = 1;
+					if(Minecraft.getMinecraft().thePlayer == this.riddenByEntity)
+					{
+						Minecraft.getMinecraft().gameSettings.thirdPersonView = 1;
+					}
 				}
 			}
 		}
@@ -440,13 +443,9 @@ public class EntityAPC extends Entity
 		}
 		else
 		{
-			if (!this.worldObj.isRemote)
+			if(!this.worldObj.isRemote)
 			{
 				playerIn.mountEntity(this);
-			}
-			else
-			{
-				Minecraft.getMinecraft().gameSettings.thirdPersonView = 1;
 			}
 			return true;
 		}
