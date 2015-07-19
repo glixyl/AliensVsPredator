@@ -60,7 +60,7 @@ public class EntitySpitter extends EntityXenomorph implements IRangedAttackMob
 	}
 
 	@Override
-	public void attackEntityWithRangedAttack(EntityLivingBase par1EntityLivingBase, float f)
+	public void attackEntityWithRangedAttack(EntityLivingBase par1EntityLivingBase, float damage)
 	{
 		if (!par1EntityLivingBase.isDead)
 		{
@@ -71,7 +71,8 @@ public class EntitySpitter extends EntityXenomorph implements IRangedAttackMob
 				int attackDamage = 2;
 
 				EntityAcidProjectile entityacid = new EntityAcidProjectile(this.worldObj, this, par1EntityLivingBase, 1.6F, 14 - attackDamage * 4);
-				entityacid.setDamage(f * 2.0F + this.rand.nextGaussian() * 0.25D + attackDamage * 0.11F);
+				entityacid.setDamage(damage * 2.0F + this.rand.nextGaussian() * 0.25D + attackDamage * 0.11F);
+				
 				if (this.worldObj.getWorldTime() % 30 == 0)
 				{
 					this.worldObj.spawnEntityInWorld(entityacid);

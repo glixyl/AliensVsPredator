@@ -69,7 +69,7 @@ public class RenderQueen extends RenderLiving
 	@Override
 	protected void preRenderCallback(EntityLivingBase entityliving, float f)
 	{
-		GL11.glScalef(1.75F, 1.75F, 1.75F);
+		GL11.glScalef(1.25F, 1.25F, 1.25F);
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.arisux.airi.lib.WorldUtil;
 import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.entities.ai.alien.EntityAIFacehuggerMountTarget;
 import com.arisux.avp.entities.extended.ExtendedEntityLivingBase;
 
 import net.minecraft.entity.Entity;
@@ -24,13 +25,15 @@ import net.minecraft.world.World;
 public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 {
 	private boolean isFertile;
-	
+	private EntityLivingBase entityToFacehug;
+
 	public EntityFacehugger(World world)
 	{
 		super(world);
 		this.isFertile = true;
 		this.setSize(0.9F, 0.9F);
 		this.experienceValue = 10;
+		this.targetTasks.addTask(0, new EntityAIFacehuggerMountTarget(this));
 	}
 
 	@Override
@@ -48,7 +51,7 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 	public void onUpdate()
 	{
 		super.onUpdate();
-		
+
 		if (this.isCollidedHorizontally)
 		{
 			this.motionY += 0.2F;
@@ -71,35 +74,38 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 
 			this.setDead();
 		}
-		
-		@SuppressWarnings("unchecked")
-		ArrayList<EntityItem> entityItemList = (ArrayList<EntityItem>) WorldUtil.Entities.getEntitiesInCoordsRange(worldObj, EntityItem.class, new com.arisux.airi.lib.WorldUtil.Blocks.CoordData(this), 8);
 
-		for (EntityItem entityItem : entityItemList)
+		if (!this.isFertile)
 		{
-			if (entityItem.delayBeforeCanPickup <= 0)
+			@SuppressWarnings("unchecked")
+			ArrayList<EntityItem> entityItemList = (ArrayList<EntityItem>) WorldUtil.Entities.getEntitiesInCoordsRange(worldObj, EntityItem.class, new com.arisux.airi.lib.WorldUtil.Blocks.CoordData(this), 8);
+
+			for (EntityItem entityItem : entityItemList)
 			{
-				ItemStack stack = entityItem.getDataWatcher().getWatchableObjectItemStack(10);
-
-				if (stack != null && stack.getItem() == AliensVsPredator.items().itemRoyalJelly)
+				if (entityItem.delayBeforeCanPickup <= 0)
 				{
-					this.getNavigator().setPath(this.getNavigator().getPathToEntityLiving(entityItem), 1);
+					ItemStack stack = entityItem.getDataWatcher().getWatchableObjectItemStack(10);
 
-					if (this.getDistanceToEntity(entityItem) < 1)
+					if (stack != null && stack.getItem() == AliensVsPredator.items().itemRoyalJelly)
 					{
-						this.isFertile = true;
-						entityItem.setDead();
+						this.getNavigator().setPath(this.getNavigator().getPathToEntityLiving(entityItem), 1);
+
+						if (this.getDistanceToEntity(entityItem) < 1)
+						{
+							this.isFertile = true;
+							entityItem.setDead();
+						}
+						break;
 					}
-					break;
 				}
 			}
 		}
 	}
 
 	@Override
-	public void onCollideWithPlayer(EntityPlayer p_70100_1_)
+	public void onCollideWithPlayer(EntityPlayer player)
 	{
-		super.onCollideWithPlayer(p_70100_1_);
+		super.onCollideWithPlayer(player);
 	}
 
 	@Override
@@ -113,8 +119,8 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 		double rX = leapTarget.posX - leaper.posX;
 		double rZ = leapTarget.posZ - leaper.posZ;
 		float sq = MathHelper.sqrt_double(rX * rX + rZ * rZ);
-		leaper.motionX += rX / sq * 0.5D * 0.800000011920929D + leaper.motionX * 0.20000000298023224D;
-		leaper.motionZ += rZ / sq * 0.5D * 0.800000011920929D + leaper.motionZ * 0.20000000298023224D;
+		leaper.motionX += rX / sq * 0.5D * 0.800000011920929D + leaper.motionX * 0.16000000298023224D;
+		leaper.motionZ += rZ / sq * 0.5D * 0.800000011920929D + leaper.motionZ * 0.16000000298023224D;
 		leaper.motionY = leapMotionY;
 	}
 
@@ -135,13 +141,13 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 			}
 		}
 	}
-	
+
 	@Override
 	public boolean attackEntityAsMob(Entity entity)
 	{
 		return false;
 	}
-	
+
 	@Override
 	public boolean attackEntityFrom(DamageSource damagesource, float damage)
 	{
@@ -229,18 +235,33 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 	{
 		super.onKillEntity(host);
 	}
-	
+
 	@Override
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
 		this.isFertile = nbt.getBoolean("fertile");
 	}
-	
+
 	@Override
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
 		nbt.setBoolean("fertile", this.isFertile);
+	}
+
+	public boolean isFertile()
+	{
+		return this.isFertile;
+	}
+
+	public EntityLivingBase getEntityToFacehug()
+	{
+		return entityToFacehug;
+	}
+
+	public void setEntityToFacehug(EntityLivingBase entityToFacehug)
+	{
+		this.entityToFacehug = entityToFacehug;
 	}
 }
