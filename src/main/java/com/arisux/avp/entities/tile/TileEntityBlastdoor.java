@@ -37,7 +37,7 @@ public class TileEntityBlastdoor extends TileEntity implements IEnergyReceiver
 	{
 		readFromNBT(packet.func_148857_g());
 	}
-	
+
 	@Override
 	public void writeToNBT(NBTTagCompound nbt)
 	{
@@ -46,8 +46,12 @@ public class TileEntityBlastdoor extends TileEntity implements IEnergyReceiver
 		{
 			nbt.setInteger("Direction", this.direction.ordinal());
 		}
+
+		nbt.setBoolean("DoorOpen", this.doorOpen);
+		nbt.setFloat("DoorProgress", this.doorProgress);
+
 	}
-	
+
 	@Override
 	public void readFromNBT(NBTTagCompound nbt)
 	{
@@ -56,8 +60,10 @@ public class TileEntityBlastdoor extends TileEntity implements IEnergyReceiver
 		{
 			this.direction = ForgeDirection.getOrientation(nbt.getInteger("Direction"));
 		}
+		this.doorOpen = nbt.getBoolean("DoorOpen");
+		this.doorProgress = nbt.getFloat("DoorProgress");
 	}
-	
+
 	@Override
 	public void updateEntity()
 	{
@@ -68,7 +74,7 @@ public class TileEntityBlastdoor extends TileEntity implements IEnergyReceiver
 		{
 			this.setDoorOpen(false);
 		}
-		
+
 		if (!this.doorOpen)
 		{
 			if(direction != null)
@@ -76,7 +82,7 @@ public class TileEntityBlastdoor extends TileEntity implements IEnergyReceiver
 				GhostBlock block = (GhostBlock) AliensVsPredator.blocks().ghostBlockBlastdoor;
 				block.parentBlock = parentBlock;
 				block.parentTileEntity = this;
-				
+
 				if(direction == ForgeDirection.NORTH || direction == ForgeDirection.SOUTH)
 				{
 					world.setBlock(this.xCoord + 1, this.yCoord, this.zCoord, block);
@@ -91,7 +97,7 @@ public class TileEntityBlastdoor extends TileEntity implements IEnergyReceiver
 					world.setBlock(this.xCoord + 3, this.yCoord + 2, this.zCoord, block);
 					world.setBlock(this.xCoord + 3, this.yCoord + 1, this.zCoord, block);
 				}
-				
+
 				if(direction == ForgeDirection.WEST|| direction == ForgeDirection.EAST)
 				{
 					world.setBlock(this.xCoord, this.yCoord, this.zCoord - 1, block);
@@ -160,13 +166,13 @@ public class TileEntityBlastdoor extends TileEntity implements IEnergyReceiver
 	{
 		this.doorOpen = doorOpen;
 	}
-	
+
 	@Override
 	public Block getBlockType()
 	{
 		return Blocks.beacon;
 	}
-	
+
 	public boolean isAdjacentToPowerSource() {
 		if(this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord) instanceof TileEntityPowerline)
 		{
@@ -301,7 +307,7 @@ public class TileEntityBlastdoor extends TileEntity implements IEnergyReceiver
 			}
 			return false;
 		}
-		
+
 		if(this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord) instanceof TileEntityR2PConvertor)
 		{
 			TileEntityR2PConvertor te = (TileEntityR2PConvertor) this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
@@ -411,7 +417,7 @@ public class TileEntityBlastdoor extends TileEntity implements IEnergyReceiver
 			}
 			return false;
 		}
-		
+
 		if(this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord) instanceof TileEntityNegativeTransformer)
 		{
 			TileEntityNegativeTransformer te = (TileEntityNegativeTransformer) this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
@@ -466,7 +472,7 @@ public class TileEntityBlastdoor extends TileEntity implements IEnergyReceiver
 			}
 			return false;
 		}
-		
+
 		return false;
 	}
 
