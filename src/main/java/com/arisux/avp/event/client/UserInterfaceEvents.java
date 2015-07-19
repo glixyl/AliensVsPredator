@@ -29,7 +29,7 @@ public class UserInterfaceEvents
 			buttonFeedback.baseColor = 0xAA000000;
 			buttonFeedback.width = 80;
 			buttonFeedback.displayString = "New Feedback";
-			buttonFeedback.drawButton();
+			//buttonFeedback.drawButton();
 			buttonFeedback.setAction(new IActionPerformed()
 			{
 				@Override
@@ -43,12 +43,14 @@ public class UserInterfaceEvents
 				}
 			});
 
+			/**
 			if (Minecraft.getMinecraft().currentScreen == null)
 			{
 				String watermark = "Developer Build";
 				RenderUtil.drawString(watermark, RenderUtil.scaledDisplayResolution().getScaledWidth() / 2 - 100 - RenderUtil.getStringRenderWidth(watermark), RenderUtil.scaledDisplayResolution().getScaledHeight() - 15, 0xFFFF0000, false);
 				RenderUtil.drawString("Do Not Redistribute", RenderUtil.scaledDisplayResolution().getScaledWidth() / 2 + 100, RenderUtil.scaledDisplayResolution().getScaledHeight() - 15, 0xFFFF0000, false);
 			}
+			**/
 		}
 	}
 }
