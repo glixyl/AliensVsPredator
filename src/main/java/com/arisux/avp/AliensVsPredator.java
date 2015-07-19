@@ -29,6 +29,7 @@ public class AliensVsPredator implements IMod
 	private ModContainer container;
 	public ItemHandler items;
 	public BlockHandler blocks;
+	public FluidHandler fluids;
 	public Updater updater;
 
 	public static AliensVsPredator instance()
@@ -44,6 +45,11 @@ public class AliensVsPredator implements IMod
 	public static BlockHandler blocks()
 	{
 		return instance().blocks == null ? instance().blocks = new BlockHandler() : instance().blocks;
+	}
+	
+	public static FluidHandler fluids()
+	{
+		return instance().fluids == null ? instance().fluids = new FluidHandler() : instance().fluids;
 	}
 
 	public static LocalEventHandler events()
@@ -180,6 +186,7 @@ public class AliensVsPredator implements IMod
 	{
 		AIRI.logger.info("[AliensVsPredator] Initialization");
 
+		fluids().initialize(event);
 		network().initialize(event);
 		items().initialize(event);
 		blocks().initialize(event);

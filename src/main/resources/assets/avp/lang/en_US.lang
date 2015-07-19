@@ -75,6 +75,7 @@ item.avp:part.poeinputconvertor.name=POE Input Convertor
 item.avp:part.poeoutputconvertor.name=POE Output Convertor
 item.avp:device.nbtdrive.name=NBT Drive
 item.avp:apc.name=APC
+item.avp:blackGooBucket.name=Black Goo Bucket
 
 item.avp:summon.drone.name=Xenomorph Drone
 item.avp:summon.warrior.name=Xenomorph Warrior
@@ -160,6 +161,7 @@ tile.avp:blockLampPowered.name=Industrial Lamp (Powered)
 tile.avp:blockGrillStairs.name=Grilled Stairs
 tile.avp:blockCeilingGrillSlab.name=Ceiling Grill Slab
 tile.avp:blockFloorGrillSlab.name=Floor Grill Slab
+tile.avp:blockBlackGoo.name=Black Goo
 tile.avp:blockIndustrialGlassStairs.name=Industrial Glass Stairs
 tile.avp:blockIronBrickStairs.name=Steel Brick Stairs
 tile.avp:blockWallStairs.name=Industrial Stairs

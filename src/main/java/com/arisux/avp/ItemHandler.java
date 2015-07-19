@@ -28,6 +28,7 @@ import com.arisux.avp.items.ItemArmorMarine;
 import com.arisux.avp.items.ItemArmorPressureSuit;
 import com.arisux.avp.items.ItemArmorTitanium;
 import com.arisux.avp.items.ItemArmorXeno;
+import com.arisux.avp.items.ItemBlackGooBucket;
 import com.arisux.avp.items.ItemDisc;
 import com.arisux.avp.items.ItemEntitySummoner;
 import com.arisux.avp.items.ItemFirearm;
@@ -47,6 +48,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
+import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemSpade;
@@ -79,6 +81,7 @@ public class ItemHandler extends IBHandler implements IInitializable
 		plateTitanium = (new ItemArmorTitanium(YAUTJA, 4, 1)),
 		bootsTitanium = (new ItemArmorTitanium(YAUTJA, 4, 3)),
 		shovelTitanium = (new ItemSpade(YAUTJA_TOOLS)),
+		blackGooBucket = (new ItemBlackGooBucket(AliensVsPredator.blocks().blockBlackGoo)),
 		pickaxeTitanium = (new HookedItemPickaxe(YAUTJA_TOOLS)),
 		axeTitanium = (new HookedItemAxe(YAUTJA_TOOLS)),
 		swordTitanium = (new ItemSword(YAUTJA_TOOLS)),
@@ -225,6 +228,7 @@ public class ItemHandler extends IBHandler implements IInitializable
 		registerItem(itemM41A, "gun.m41a");
 		registerItem(itemM56SG, "gun.m56sg");
 		registerItem(itemAK47, "gun.ak47");
+		registerItem(blackGooBucket, "blackGooBucket");
 		registerItem(itemAmmoAR, "ammo.ar");
 		registerItem(itemAmmoAC, "ammo.ac");
 		registerItem(itemAmmoPistol, "ammo.pistol");

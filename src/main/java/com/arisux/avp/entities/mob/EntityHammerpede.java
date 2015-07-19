@@ -1,9 +1,19 @@
 package com.arisux.avp.entities.mob;
 
+import java.util.ArrayList;
+
+import com.arisux.airi.lib.WorldUtil;
+import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
 import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.entities.EntityAcidPool;
+import com.arisux.avp.entities.ai.alien.EntityAIClimb;
+import com.arisux.avp.entities.ai.alien.EntityAIQueenIdentificationTask;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -20,8 +30,18 @@ public class EntityHammerpede extends EntitySpeciesAlien implements IMob
 
 		this.setSize(1.0F, 0.2F);
 		this.experienceValue = 16;
+		this.getNavigator().setCanSwim(true);
+		this.getNavigator().setAvoidsWater(false);
+		this.tasks.addTask(2, new EntityAIWander(this, 0.8D));
+		
 	}
 
+	@Override
+	public boolean canBreatheUnderwater()
+	{
+		return true;
+	}
+	
 	@Override
 	protected void applyEntityAttributes()
 	{
@@ -49,19 +69,86 @@ public class EntityHammerpede extends EntitySpeciesAlien implements IMob
 	public void onUpdate()
 	{
 		super.onUpdate();
+
+		this.attackAI();
+
+		if(this.getAttackTarget() == null)
+		{
+			if(this.worldObj.getWorldTime() % 100 == 0)
+			{
+				this.lurkInBlackGoo();
+			}
+		}
+
+		if(this.getAttackTarget() != null && this.getAttackTarget().isDead)
+		{
+			this.setAttackTarget(null);
+		}
+
+		else if(this.getAttackTarget() != null)
+		{
+			if(this.getAttackTarget() instanceof EntityPlayer)
+			{
+				EntityPlayer target = (EntityPlayer) this.getAttackTarget();
+				if(target.capabilities.isCreativeMode)
+				{
+					this.setAttackTarget(null);
+					return;
+				}
+				else
+				{
+					if(this.getDistance(this.getAttackTarget().posX, this.getAttackTarget().posY, this.getAttackTarget().posZ) < 3)
+					{
+						this.attackEntityAsMob(this.getAttackTarget());
+					}
+				}
+			}
+			if(this.getDistance(this.getAttackTarget().posX, this.getAttackTarget().posY, this.getAttackTarget().posZ) < 3)
+			{
+				this.attackEntityAsMob(this.getAttackTarget());
+			}
+		}
 	}
 
-	protected Entity findPlayerToAttack(EntityPlayer entityplayer)
-	{
-		float brightness = this.getBrightness(1.0F);
+	public void lurkInBlackGoo()
+	{	
+		double range = this.getEntityAttribute(SharedMonsterAttributes.followRange).getAttributeValue();
+		ArrayList<CoordData> coordData = WorldUtil.Blocks.getCoordDataInRangeForBlocks((int) this.posX, (int) this.posY, (int) this.posZ, (int) range, this.worldObj, AliensVsPredator.blocks().blockBlackGoo);
+		if(coordData.size() > 0)
+		{
+			this.getNavigator().tryMoveToXYZ((double) coordData.get(0).posX, (double) coordData.get(0).posY, (double) coordData.get(0).posZ, this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue());
+		}
+	}
 
-		if (brightness < 0.5F)
+	public void attackAI()
+	{
+		if (worldObj.getWorldInfo().getWorldTime() % 70 == 0)
 		{
-			double range = 40.0D;
-			return this.worldObj.getClosestVulnerablePlayerToEntity(this, range);
-		} else
-		{
-			return null;
+			double range = this.getEntityAttribute(SharedMonsterAttributes.followRange).getAttributeValue();
+			Entity targetEntity = (this.worldObj.findNearestEntityWithinAABB(EntityLiving.class, this.boundingBox.expand(range * 10, 64.0D, range * 10), this));
+			Entity targetPlayer = (this.worldObj.findNearestEntityWithinAABB(EntityPlayer.class, this.boundingBox.expand(range * 10, 64.0D, range * 10), this));
+			if (targetPlayer != null && !((EntityPlayer) targetPlayer).capabilities.isCreativeMode)
+			{
+				this.setAttackTarget((EntityLivingBase) targetPlayer);
+				this.getNavigator().tryMoveToEntityLiving(targetPlayer, this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue());
+				if (this.isCollidedHorizontally)
+				{
+					this.addVelocity(0, 0.6D, 0);
+				}
+			}
+			else if (targetEntity != null && !(targetEntity instanceof EntityAcidPool) && !(targetEntity instanceof EntitySpeciesAlien))
+			{
+				this.setAttackTarget((EntityLivingBase) targetEntity);
+				this.getNavigator().tryMoveToEntityLiving(targetEntity, this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue());
+				if (this.isCollidedHorizontally)
+				{
+					this.addVelocity(0, 0.6D, 0);
+				}
+			}
+			else
+			{
+				this.setAttackTarget(null);
+			}
 		}
 	}
 
@@ -119,13 +206,13 @@ public class EntityHammerpede extends EntitySpeciesAlien implements IMob
 	{
 		return par1PotionEffect.getPotionID() == Potion.poison.id ? false : super.isPotionApplicable(par1PotionEffect);
 	}
-	
+
 	@Override
 	public void readEntityFromNBT(NBTTagCompound nbt)
 	{
 		super.readEntityFromNBT(nbt);
 	}
-	
+
 	@Override
 	public void writeEntityToNBT(NBTTagCompound nbt)
 	{
