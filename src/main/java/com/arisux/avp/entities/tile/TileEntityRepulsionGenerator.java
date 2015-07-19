@@ -9,7 +9,7 @@ public class TileEntityRepulsionGenerator extends TileEntity implements IEnergyP
 {
 	public int rotation;
 	public int voltage;
-	
+
 	@Override
 	public void updateEntity()
 	{
@@ -31,7 +31,15 @@ public class TileEntityRepulsionGenerator extends TileEntity implements IEnergyP
 		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)
 		{
 			TileEntity tile = worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
-			if (tile instanceof IEnergyReceiver)
+			if (tile instanceof TileEntityPowerline)
+			{
+				TileEntityPowerline tep = (TileEntityPowerline) tile;
+				if(tep.d.contains(dir.getOpposite()) || tep.voltage == 0)
+				{
+					tep.receiveEnergy(dir, 120, false);
+				}
+			}
+			else if(tile instanceof IEnergyReceiver)
 			{
 				IEnergyReceiver ier = (IEnergyReceiver) tile;
 				ier.receiveEnergy(dir, 120, false);

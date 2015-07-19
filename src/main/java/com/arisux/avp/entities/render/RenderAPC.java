@@ -104,7 +104,7 @@ public class RenderAPC extends Render
 		
 		GL11.glPushMatrix();
 		{
-			GL11.glEnable(GL11.GL_CULL_FACE);
+			GL11.glDisable(GL11.GL_CULL_FACE);
 			GL11.glTranslatef((float)posX - 2.2F, (float)posY - 2.02F, (float)posZ + 0.1F);
 			GL11.glRotatef(-apc.rotationYaw + 180, 0, 1, 0);
 
