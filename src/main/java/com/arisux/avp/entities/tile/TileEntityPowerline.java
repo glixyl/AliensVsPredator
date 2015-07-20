@@ -57,6 +57,10 @@ public class TileEntityPowerline extends TileEntity implements IEnergyProvider, 
 						ier.receiveEnergy(dir, 120, false);
 					}
 				}
+				else
+				{
+					this.d.add(dir);
+				}
 			}
 		}
 	}
