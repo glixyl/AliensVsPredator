@@ -88,6 +88,7 @@ import com.arisux.avp.entities.tile.TileEntityHiveNode;
 import com.arisux.avp.entities.tile.TileEntityLightPanel;
 import com.arisux.avp.entities.tile.TileEntityNegativeTransformer;
 import com.arisux.avp.entities.tile.TileEntityP2RConverter;
+import com.arisux.avp.entities.tile.TileEntityPowercell;
 import com.arisux.avp.entities.tile.TileEntityPowerline;
 import com.arisux.avp.entities.tile.TileEntityR2PConverter;
 import com.arisux.avp.entities.tile.TileEntityRepulsionGenerator;
@@ -96,7 +97,6 @@ import com.arisux.avp.entities.tile.TileEntitySolarPanel;
 import com.arisux.avp.entities.tile.TileEntityStasisMechanism;
 import com.arisux.avp.entities.tile.TileEntityTransformer;
 import com.arisux.avp.entities.tile.TileEntityTurret;
-import com.arisux.avp.entities.tile.TileEntityWorklight;
 import com.arisux.avp.entities.tile.TileEntityWorkstation;
 import com.arisux.avp.entities.tile.render.RenderAssembler;
 import com.arisux.avp.entities.tile.render.RenderBlastdoor;
@@ -104,6 +104,7 @@ import com.arisux.avp.entities.tile.render.RenderCryostasisTube;
 import com.arisux.avp.entities.tile.render.RenderHiveNode;
 import com.arisux.avp.entities.tile.render.RenderLightPanel;
 import com.arisux.avp.entities.tile.render.RenderP2RConverter;
+import com.arisux.avp.entities.tile.render.RenderPowercell;
 import com.arisux.avp.entities.tile.render.RenderPowerline;
 import com.arisux.avp.entities.tile.render.RenderR2PConverter;
 import com.arisux.avp.entities.tile.render.RenderRepulsionGenerator;
@@ -112,7 +113,6 @@ import com.arisux.avp.entities.tile.render.RenderSolarPanel;
 import com.arisux.avp.entities.tile.render.RenderStasisMechanism;
 import com.arisux.avp.entities.tile.render.RenderTransformer;
 import com.arisux.avp.entities.tile.render.RenderTurret;
-import com.arisux.avp.entities.tile.render.RenderWorklight;
 import com.arisux.avp.entities.tile.render.RenderWorkstation;
 import com.arisux.avp.items.render.RenderItemAK47;
 import com.arisux.avp.items.render.RenderItemAPC;
@@ -125,9 +125,11 @@ import com.arisux.avp.items.render.RenderItemM40;
 import com.arisux.avp.items.render.RenderItemM41A;
 import com.arisux.avp.items.render.RenderItemM56SG;
 import com.arisux.avp.items.render.RenderItemMotionTracker;
+import com.arisux.avp.items.render.RenderItemPowercell;
 import com.arisux.avp.items.render.RenderItemPowerline;
 import com.arisux.avp.items.render.RenderItemRepulsionGenerator;
 import com.arisux.avp.items.render.RenderItemSniper;
+import com.arisux.avp.items.render.RenderItemSolarPanel;
 import com.arisux.avp.items.render.RenderItemSpear;
 import com.arisux.avp.items.render.RenderItemStasisMechanism;
 import com.arisux.avp.items.render.RenderItemSummoner;
@@ -205,6 +207,8 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.blocks().blockBlastdoor), new RenderItemBlastDoor());
 		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.blocks().blockLightPanel), new RenderItemLightPanel());
 		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.blocks().blockPowerline), new RenderItemPowerline());
+		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.blocks().blockSolarPanel), new RenderItemSolarPanel());
+		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.blocks().blockPowercell), new RenderItemPowercell());
 		registerItemRenderer(items.itemWristBlade, new RenderItemWristbracer());
 		registerItemRenderer(items.itemWristbracerBlades, new RenderItemWristbracerBlades());
 		registerItemRenderer(items.itemSpear, new RenderItemSpear());
@@ -246,7 +250,6 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		bindTileEntitySpecialRenderer(TileEntityStasisMechanism.class, new RenderStasisMechanism());
 		bindTileEntitySpecialRenderer(TileEntityPowerline.class, new RenderPowerline());
 		bindTileEntitySpecialRenderer(TileEntityBlastdoor.class, new RenderBlastdoor());
-		bindTileEntitySpecialRenderer(TileEntityWorklight.class, new RenderWorklight());
 		bindTileEntitySpecialRenderer(TileEntityCryostasisTube.class, new RenderCryostasisTube());
 		bindTileEntitySpecialRenderer(TileEntityRepulsionGenerator.class, new RenderRepulsionGenerator());
 		bindTileEntitySpecialRenderer(TileEntityAssembler.class, new RenderAssembler());
@@ -257,6 +260,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		bindTileEntitySpecialRenderer(TileEntityNegativeTransformer.class, new RenderTransformer());
 		bindTileEntitySpecialRenderer(TileEntityR2PConverter.class, new RenderR2PConverter());
 		bindTileEntitySpecialRenderer(TileEntityP2RConverter.class, new RenderP2RConverter());
+		bindTileEntitySpecialRenderer(TileEntityPowercell.class, new RenderPowercell());
 	}
 	
 	public void registerSimpleBlockRenderingHandlers()

@@ -80,37 +80,31 @@ public class TileEntityR2PConverter extends TileEntity implements IEnergyProvide
 		
 		if(world.getBlock(x + 1, y, z) instanceof BlockRedstoneWire)
 		{
-			BlockRedstoneWire wire = (BlockRedstoneWire) world.getBlock(x + 1, y, z);
 			this.isActiveRedstoneWireAttached = world.getBlockMetadata(x + 1, y, z) != 0;
 		}
 		
 		else if(world.getBlock(x, y + 1, z) instanceof BlockRedstoneWire)
 		{
-			BlockRedstoneWire wire = (BlockRedstoneWire) world.getBlock(x, y + 1, z);
 			this.isActiveRedstoneWireAttached = world.getBlockMetadata(x, y + 1, z) != 0;
 		}
 		
 		else if(world.getBlock(x, y, z + 1) instanceof BlockRedstoneWire)
 		{
-			BlockRedstoneWire wire = (BlockRedstoneWire) world.getBlock(x, y, z + 1);
 			this.isActiveRedstoneWireAttached = world.getBlockMetadata(x, y, z + 1) != 0;
 		}
 		
 		else if(world.getBlock(x - 1, y, z) instanceof BlockRedstoneWire)
 		{
-			BlockRedstoneWire wire = (BlockRedstoneWire) world.getBlock(x - 1, y, z);
 			this.isActiveRedstoneWireAttached = world.getBlockMetadata(x - 1, y, z) != 0;
 		}
 		
 		else if(world.getBlock(x, y - 1, z) instanceof BlockRedstoneWire)
 		{
-			BlockRedstoneWire wire = (BlockRedstoneWire) world.getBlock(x, y - 1, z);
 			this.isActiveRedstoneWireAttached = world.getBlockMetadata(x, y - 1, z) != 0;
 		}
 		
 		else if(world.getBlock(x, y, z - 1) instanceof BlockRedstoneWire)
 		{
-			BlockRedstoneWire wire = (BlockRedstoneWire) world.getBlock(x, y, z - 1);
 			this.isActiveRedstoneWireAttached = world.getBlockMetadata(x, y, z - 1) != 0;
 		}
 		

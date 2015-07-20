@@ -14,6 +14,9 @@ public class Resources implements IInitializablePre
 {
 	public static final Resources instance = new Resources();
 
+	public final ResourceLocation SOLAR_PANEL = new ResourceLocation(AliensVsPredator.ID, "textures/tile/solarpanel.png");
+	public final ResourceLocation POWERCELL = new ResourceLocation(AliensVsPredator.ID, "textures/tile/powercell.png");
+	public final ResourceLocation POWERCELL_LIQUID = new ResourceLocation(AliensVsPredator.ID, "textures/tile/powercellliquid.png");
 	public final ResourceLocation SKY_RAIN = new ResourceLocation("textures/environment/rain.png");
 	public final ResourceLocation SKY_CLOUDS = new ResourceLocation("textures/environment/clouds.png");
 	public final ResourceLocation SKY_VARDA_CLOUDS = new ResourceLocation(AliensVsPredator.ID, "textures/misc/varda-clouds.png");

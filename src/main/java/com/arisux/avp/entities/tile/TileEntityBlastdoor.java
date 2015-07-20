@@ -1,7 +1,5 @@
 package com.arisux.avp.entities.tile;
 
-import java.util.ArrayList;
-
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.block.GhostBlock;
 
@@ -21,7 +19,6 @@ public class TileEntityBlastdoor extends TileEntity implements IEnergyReceiver
 	public int voltage;
 	private float doorProgress;
 	private boolean doorOpen;
-	private ArrayList<com.arisux.airi.lib.WorldUtil.Blocks.CoordData> managedCoords = new ArrayList<com.arisux.airi.lib.WorldUtil.Blocks.CoordData>();
 	public ForgeDirection direction;
 
 	@Override

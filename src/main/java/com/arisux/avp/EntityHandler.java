@@ -42,6 +42,7 @@ import com.arisux.avp.entities.tile.TileEntityHiveResin;
 import com.arisux.avp.entities.tile.TileEntityLightPanel;
 import com.arisux.avp.entities.tile.TileEntityNegativeTransformer;
 import com.arisux.avp.entities.tile.TileEntityP2RConverter;
+import com.arisux.avp.entities.tile.TileEntityPowercell;
 import com.arisux.avp.entities.tile.TileEntityPowerline;
 import com.arisux.avp.entities.tile.TileEntityR2PConverter;
 import com.arisux.avp.entities.tile.TileEntityRepulsionGenerator;
@@ -92,6 +93,7 @@ public class EntityHandler implements IInitializable
 		GameRegistry.registerTileEntity(TileEntityNegativeTransformer.class, "tileEntityNegativeTransformer");
 		GameRegistry.registerTileEntity(TileEntityR2PConverter.class, "tileEntityR2PConverter");
 		GameRegistry.registerTileEntity(TileEntityP2RConverter.class, "tileEntityP2RConverter");
+		GameRegistry.registerTileEntity(TileEntityPowercell.class, "tileEntityPowercell");
 	}
 
 	private void registerLivingEntities()

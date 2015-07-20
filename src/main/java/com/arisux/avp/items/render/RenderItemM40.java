@@ -6,6 +6,7 @@ import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
 import com.arisux.avp.items.model.ModelM40;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -66,5 +67,17 @@ public class RenderItemM40 extends ItemRenderer
 		GL11.glScalef(glScale, glScale, glScale);
 		RenderUtil.bindTexture(this.getResourceLocation());
 		((ModelM40) this.getModel()).render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+	}
+	
+	@Override
+	public void renderInWorld(ItemStack item, Object... data)
+	{
+		super.renderInWorld(item, data);		
+		GL11.glScalef(1F, -1F, 1F);
+		GL11.glTranslatef(0F, -0.5F, 0F);
+		GL11.glRotatef(Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 360 * 6, 0.0F, 1.0F, 0.0F);
+		GL11.glDisable(GL11.GL_CULL_FACE);
+		RenderUtil.bindTexture(this.getResourceLocation());
+		this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 	}
 }

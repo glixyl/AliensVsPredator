@@ -19,6 +19,7 @@ import com.arisux.avp.block.BlockOreSilicon;
 import com.arisux.avp.block.BlockP2RConvertor;
 import com.arisux.avp.block.BlockPortalAcheron;
 import com.arisux.avp.block.BlockPortalVarda;
+import com.arisux.avp.block.BlockPowercell;
 import com.arisux.avp.block.BlockPowerline;
 import com.arisux.avp.block.BlockR2PConvertor;
 import com.arisux.avp.block.BlockSatelliteModem;
@@ -31,7 +32,6 @@ import com.arisux.avp.block.BlockSupplies;
 import com.arisux.avp.block.BlockTempleSpawner;
 import com.arisux.avp.block.BlockTransformer;
 import com.arisux.avp.block.BlockTurret;
-import com.arisux.avp.block.BlockWorklight;
 import com.arisux.avp.block.BlockWorkstation;
 import com.arisux.avp.block.GhostBlock;
 
@@ -41,7 +41,6 @@ import cpw.mods.fml.relauncher.Side;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraftforge.fluids.Fluid;
 
 public class BlockHandler extends IBHandler implements IInitializable
 {
@@ -114,14 +113,13 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockPowerline = (new BlockPowerline(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockBlastdoor = (new BlockBlastdoor(Material.iron)).setHardness(5F).setResistance(5F),
 		ghostBlockBlastdoor = (new GhostBlock()),
-		blockWorklight = (new BlockWorklight(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockCryostasisTube = (new BlockCryostasisTube(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockPlastic = (new HookedBlock(Material.clay)).setHardness(1.5F).setResistance(2.0F),
 		blockLightPanel = (new BlockLightPanel(Material.iron, true)).setHardness(1.5F).setResistance(2.0F),
 		blockPlasticTile = (new HookedBlock(Material.clay)).setHardness(1.5F).setResistance(2.0F),
 		blockSatelliteModem = (new BlockSatelliteModem(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockSatelliteDish = (new HookedBlock(Material.iron)).setHardness(3.2F).setResistance(2.6F),
-		blockBattery = (new HookedBlock(Material.iron)).setHardness(3.2F).setResistance(2.6F),
+		blockPowercell = (new BlockPowercell(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockR2PConvertor = (new BlockR2PConvertor(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockP2RConvertor = (new BlockP2RConvertor(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockBlackGoo = (new BlockBlackGoo(AliensVsPredator.fluids().fluidBlackGoo, Material.water).setBlockName("blackGoo")),
@@ -201,15 +199,15 @@ public class BlockHandler extends IBHandler implements IInitializable
 		registerBlock(oreCopper, "orecopper");
 		registerBlock(oreLithium, "orelithium");
 		registerBlock(oreBauxite, "orebauxite");
-		registerBlock(blockSolarPanel, "blocksolarpanel");
-		registerBlock(blockSatelliteModem, "blocksatellitemodem");
-		registerBlock(blockSatelliteDish, "blocksatellitedish");
-		registerBlock(blockBattery, "blockbattery");
+		registerBlock(blockSolarPanel, "solarpanel");
+		registerBlock(blockSatelliteModem, "satellitemodem");
+		registerBlock(blockSatelliteDish, "satellitedish");
+		registerBlock(blockPowercell, "powercell");
 		registerShapedBlockSet(blockCeiling, "ceilingpanel");
 		registerShapedBlockSet(blockCeilingFan, "ceilingfan");
 		registerShapedBlockSet(blockCeiliingVent, "ceilingvent");
-		registerBlock(blockTransformer, "blocktransformer");
-		registerBlock(blockNegativeTransformer, "blocktransformernegative");
+		registerBlock(blockTransformer, "transformer");
+		registerBlock(blockNegativeTransformer, "transformernegative");
 		registerShapedBlockSet(blockCeilingGrill, "ceilinggrill");
 		registerBlock(blockCeilingGrillStairs, "ceilinggrillstairs", blockCeilingGrill, tab);
 		registerBlock(blockCeilingGrillSlab, "ceilinggrillslab", blockCeilingGrill, tab);
@@ -218,8 +216,8 @@ public class BlockHandler extends IBHandler implements IInitializable
 		registerBlock(blockFloorGrillSlab, "floorgrillslab", blockFloorGrill, tab);
 		registerShapedBlockSet(blockWall, "industrialwall");
 		registerShapedBlockSet(blockWallW, "industrialwall2");
-		registerBlock(blockR2PConvertor, "blockr2pconvertor");
-		registerBlock(blockP2RConvertor, "blockp2rconvertor");
+		registerBlock(blockR2PConvertor, "r2pconverter");
+		registerBlock(blockP2RConvertor, "p2rconverter");
 		registerBlock(blockWallStairs, "industrialwallstairs", blockWall, tab);
 		registerBlock(blockWallSlab, "industrialslab", blockWall, tab);
 		registerShapedBlockSet(blockWallVent, "industrialvent");
@@ -268,9 +266,8 @@ public class BlockHandler extends IBHandler implements IInitializable
 		registerBlock(blockPowerline, "powerline", true);
 		registerBlock(blockBlastdoor, "blastdoor", true);
 		registerBlock(ghostBlockBlastdoor, "ghostBlockBlastdoor", false);
-		registerBlock(blockSupplies, "blocksupplies", false);
-		registerBlock(blockBlackGoo, "blockBlackGoo", false);
-		registerBlock(blockWorklight, "worklight", true);
+		registerBlock(blockSupplies, "supplychuteblock", false);
+		registerBlock(blockBlackGoo, "blackgoo", false);
 		registerBlock(blockCryostasisTube, "cryostasistube", true);
 		registerShapedBlockSet(blockPlastic, "plasticblock");
 		registerShapedBlockSet(blockPlasticTile, "plastictile");

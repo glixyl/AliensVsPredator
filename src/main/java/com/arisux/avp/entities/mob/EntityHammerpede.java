@@ -6,8 +6,6 @@ import com.arisux.airi.lib.WorldUtil;
 import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.EntityAcidPool;
-import com.arisux.avp.entities.ai.alien.EntityAIClimb;
-import com.arisux.avp.entities.ai.alien.EntityAIQueenIdentificationTask;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;

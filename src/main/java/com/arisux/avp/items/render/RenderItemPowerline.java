@@ -58,9 +58,23 @@ public class RenderItemPowerline extends ItemRenderer
 			GL11.glRotatef(45, 1, 0, 1);
 			GL11.glRotatef(Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 360 * 8, 0, 1, 0);
 			RenderUtil.glColorHexRGBA(0xFF222222);
+			RenderUtil.glEnableLight();
 			model.render(0.0625F);
 			glEnable(GL11.GL_TEXTURE_2D);
 		}
 		GL11.glPopMatrix();
+	}
+	
+	@Override
+	public void renderInWorld(ItemStack item, Object... data)
+	{
+		super.renderInWorld(item, data);	
+		glDisable(GL11.GL_TEXTURE_2D);	
+		GL11.glRotatef(Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 360 * 6, 0.0F, 1.0F, 0.0F);
+		GL11.glDisable(GL11.GL_CULL_FACE);
+		RenderUtil.glEnableLight();
+		RenderUtil.glColorHexRGBA(0xFF222222);
+		this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+		glEnable(GL11.GL_TEXTURE_2D);
 	}
 }
