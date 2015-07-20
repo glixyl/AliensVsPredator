@@ -1,7 +1,7 @@
 package com.arisux.avp.block;
 
 import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
-import com.arisux.avp.entities.tile.TileEntityR2PConvertor;
+import com.arisux.avp.entities.tile.TileEntityR2PConverter;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -29,7 +29,7 @@ public class BlockR2PConvertor extends HookedBlockContainer
 	@Override
     public void onNeighborChange(IBlockAccess world, int x, int y, int z, int tileX, int tileY, int tileZ)
     {
-		TileEntityR2PConvertor rte = (TileEntityR2PConvertor) world.getTileEntity(x, y, z);
+		TileEntityR2PConverter rte = (TileEntityR2PConverter) world.getTileEntity(x, y, z);
 		Block block = world.getBlock(tileX, tileY, tileZ);
 		if(world.getBlock(tileX, tileY, tileZ) == null){
 			rte.isActiveRedstoneWireAttached = false;
@@ -50,6 +50,6 @@ public class BlockR2PConvertor extends HookedBlockContainer
 
 	@Override
 	public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
-		return new TileEntityR2PConvertor();
+		return new TileEntityR2PConverter();
 	}
 }

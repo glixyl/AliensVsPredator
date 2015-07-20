@@ -41,9 +41,9 @@ import com.arisux.avp.entities.tile.TileEntityHiveNode;
 import com.arisux.avp.entities.tile.TileEntityHiveResin;
 import com.arisux.avp.entities.tile.TileEntityLightPanel;
 import com.arisux.avp.entities.tile.TileEntityNegativeTransformer;
-import com.arisux.avp.entities.tile.TileEntityP2RConvertor;
+import com.arisux.avp.entities.tile.TileEntityP2RConverter;
 import com.arisux.avp.entities.tile.TileEntityPowerline;
-import com.arisux.avp.entities.tile.TileEntityR2PConvertor;
+import com.arisux.avp.entities.tile.TileEntityR2PConverter;
 import com.arisux.avp.entities.tile.TileEntityRepulsionGenerator;
 import com.arisux.avp.entities.tile.TileEntitySatelliteModem;
 import com.arisux.avp.entities.tile.TileEntitySolarPanel;
@@ -90,8 +90,8 @@ public class EntityHandler implements IInitializable
 		GameRegistry.registerTileEntity(TileEntitySolarPanel.class, "tileEntitySolarPanel");
 		GameRegistry.registerTileEntity(TileEntityTransformer.class, "tileEntityTransformer");
 		GameRegistry.registerTileEntity(TileEntityNegativeTransformer.class, "tileEntityNegativeTransformer");
-		GameRegistry.registerTileEntity(TileEntityR2PConvertor.class, "tileEntityR2PConverter");
-		GameRegistry.registerTileEntity(TileEntityP2RConvertor.class, "tileEntityP2RConverter");
+		GameRegistry.registerTileEntity(TileEntityR2PConverter.class, "tileEntityR2PConverter");
+		GameRegistry.registerTileEntity(TileEntityP2RConverter.class, "tileEntityP2RConverter");
 	}
 
 	private void registerLivingEntities()

@@ -1,13 +1,13 @@
 package com.arisux.avp.entities.tile.model;
 
+import com.arisux.airi.lib.client.ModelBaseExtension;
 import com.arisux.avp.entities.tile.TileEntityPowerline;
 
 import cofh.api.energy.IEnergyProvider;
 import cofh.api.energy.IEnergyReceiver;
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelCable extends ModelBase
+public class ModelCable extends ModelBaseExtension
 {
 	ModelRenderer node, down, up, front, back, left, right;
 
@@ -60,57 +60,64 @@ public class ModelCable extends ModelBase
 		setRotation(right, 0F, -1.570796F, 0F);
 	}
 
+	@Override
+	public void render(float boxTranslation)
+	{
+		super.render(boxTranslation);
+		this.render(null, boxTranslation);
+	}
+
 	public void render(TileEntityPowerline tile, float boxTranslation)
 	{
-		this.setRotationAngles(tile);
 		node.render(boxTranslation);
-		down.setRotationPoint(1F, 17F, -1F);
-		up.setRotationPoint(1F, 15F, 1F);
-		front.setRotationPoint(1F, 15F, -1F);
-		back.setRotationPoint(-1F, 15F, 1F);
-		left.setRotationPoint(1F, 15F, 1F);
-		right.setRotationPoint(-1F, 15F, -1F);
 		
-		if (tile.getWorldObj().getTileEntity(tile.xCoord + 1, tile.yCoord, tile.zCoord) instanceof IEnergyReceiver || tile.getWorldObj().getTileEntity(tile.xCoord + 1, tile.yCoord, tile.zCoord) instanceof IEnergyProvider)
+		if (tile != null)
+		{
+			down.setRotationPoint(1F, 17F, -1F);
+			up.setRotationPoint(1F, 15F, 1F);
+			front.setRotationPoint(1F, 15F, -1F);
+			back.setRotationPoint(-1F, 15F, 1F);
+			left.setRotationPoint(1F, 15F, 1F);
+			right.setRotationPoint(-1F, 15F, -1F);
+
+			if (tile.getWorldObj().getTileEntity(tile.xCoord + 1, tile.yCoord, tile.zCoord) instanceof IEnergyReceiver || tile.getWorldObj().getTileEntity(tile.xCoord + 1, tile.yCoord, tile.zCoord) instanceof IEnergyProvider)
+			{
+				left.render(boxTranslation);
+			}
+
+			if (tile.getWorldObj().getTileEntity(tile.xCoord - 1, tile.yCoord, tile.zCoord) instanceof IEnergyReceiver || tile.getWorldObj().getTileEntity(tile.xCoord - 1, tile.yCoord, tile.zCoord) instanceof IEnergyProvider)
+			{
+				right.render(boxTranslation);
+			}
+
+			if (tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord + 1, tile.zCoord) instanceof IEnergyReceiver || tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord + 1, tile.zCoord) instanceof IEnergyProvider)
+			{
+				up.render(boxTranslation);
+			}
+
+			if (tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord - 1, tile.zCoord) instanceof IEnergyReceiver || tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord - 1, tile.zCoord) instanceof IEnergyProvider)
+			{
+				down.render(boxTranslation);
+			}
+
+			if (tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord, tile.zCoord + 1) instanceof IEnergyReceiver || tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord, tile.zCoord + 1) instanceof IEnergyProvider)
+			{
+				back.render(boxTranslation);
+			}
+
+			if (tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord, tile.zCoord - 1) instanceof IEnergyReceiver || tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord, tile.zCoord - 1) instanceof IEnergyProvider)
+			{
+				front.render(boxTranslation);
+			}
+		}
+		else
 		{
 			left.render(boxTranslation);
-		}
-
-		if (tile.getWorldObj().getTileEntity(tile.xCoord - 1, tile.yCoord, tile.zCoord) instanceof IEnergyReceiver || tile.getWorldObj().getTileEntity(tile.xCoord - 1, tile.yCoord, tile.zCoord) instanceof IEnergyProvider)
-		{
 			right.render(boxTranslation);
-		}
-
-		if (tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord + 1, tile.zCoord) instanceof IEnergyReceiver || tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord + 1, tile.zCoord) instanceof IEnergyProvider)
-		{
 			up.render(boxTranslation);
-		}
-
-		if (tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord - 1, tile.zCoord) instanceof IEnergyReceiver || tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord - 1, tile.zCoord) instanceof IEnergyProvider)
-		{
 			down.render(boxTranslation);
-		}
-
-		if (tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord, tile.zCoord + 1) instanceof IEnergyReceiver || tile.getWorldObj().getTileEntity(tile.xCoord , tile.yCoord, tile.zCoord + 1) instanceof IEnergyProvider)
-		{
+			front.render(boxTranslation);
 			back.render(boxTranslation);
 		}
-
-		if (tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord, tile.zCoord - 1) instanceof IEnergyReceiver || tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord, tile.zCoord - 1) instanceof IEnergyProvider)
-		{
-			front.render(boxTranslation);
-		}
-	}
-
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
-	}
-
-	public void setRotationAngles(TileEntityPowerline tile)
-	{
-		;
 	}
 }

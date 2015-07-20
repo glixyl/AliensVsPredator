@@ -77,9 +77,9 @@ public class TileEntityPowerline extends TileEntity implements IEnergyProvider, 
 					return true;
 				}
 			}
-			else if(tile instanceof TileEntityR2PConvertor)
+			else if(tile instanceof TileEntityR2PConverter)
 			{
-				TileEntityR2PConvertor r2p = (TileEntityR2PConvertor) tile;
+				TileEntityR2PConverter r2p = (TileEntityR2PConverter) tile;
 				if(r2p.canOutputPower())
 				{
 					return true;
@@ -253,54 +253,54 @@ public class TileEntityPowerline extends TileEntity implements IEnergyProvider, 
 			return false;
 		}
 		
-		if(this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord) instanceof TileEntityR2PConvertor)
+		if(this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord) instanceof TileEntityR2PConverter)
 		{
-			TileEntityR2PConvertor te = (TileEntityR2PConvertor) this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
+			TileEntityR2PConverter te = (TileEntityR2PConverter) this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
 			if(te.canOutputPower())
 			{
 				return true;
 			}
 			return false;
 		}
-		if(this.getWorldObj().getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord) instanceof TileEntityR2PConvertor)
+		if(this.getWorldObj().getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord) instanceof TileEntityR2PConverter)
 		{
-			TileEntityR2PConvertor te = (TileEntityR2PConvertor) this.getWorldObj().getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord);
+			TileEntityR2PConverter te = (TileEntityR2PConverter) this.getWorldObj().getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord);
 			if(te.canOutputPower())
 			{
 				return true;
 			}
 			return false;
 		}
-		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord + 1, this.zCoord) instanceof TileEntityR2PConvertor)
+		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord + 1, this.zCoord) instanceof TileEntityR2PConverter)
 		{
-			TileEntityR2PConvertor te = (TileEntityR2PConvertor) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord + 1, this.zCoord);
+			TileEntityR2PConverter te = (TileEntityR2PConverter) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord + 1, this.zCoord);
 			if(te.canOutputPower())
 			{
 				return true;
 			}
 			return false;
 		}
-		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord - 1, this.zCoord) instanceof TileEntityR2PConvertor)
+		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord - 1, this.zCoord) instanceof TileEntityR2PConverter)
 		{
-			TileEntityR2PConvertor te = (TileEntityR2PConvertor) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord - 1, this.zCoord);
+			TileEntityR2PConverter te = (TileEntityR2PConverter) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord - 1, this.zCoord);
 			if(te.canOutputPower())
 			{
 				return true;
 			}
 			return false;
 		}
-		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1) instanceof TileEntityR2PConvertor)
+		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1) instanceof TileEntityR2PConverter)
 		{
-			TileEntityR2PConvertor te = (TileEntityR2PConvertor) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1);
+			TileEntityR2PConverter te = (TileEntityR2PConverter) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1);
 			if(te.canOutputPower())
 			{
 				return true;
 			}
 			return false;
 		}
-		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1) instanceof TileEntityR2PConvertor)
+		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1) instanceof TileEntityR2PConverter)
 		{
-			TileEntityR2PConvertor te = (TileEntityR2PConvertor) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1);
+			TileEntityR2PConverter te = (TileEntityR2PConverter) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1);
 			if(te.canOutputPower())
 			{
 				return true;

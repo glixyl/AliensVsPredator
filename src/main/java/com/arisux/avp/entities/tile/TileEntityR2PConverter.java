@@ -7,7 +7,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityR2PConvertor extends TileEntity implements IEnergyProvider
+public class TileEntityR2PConverter extends TileEntity implements IEnergyProvider
 {	
 	public int rotation;
 	public int voltage;

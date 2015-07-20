@@ -1,7 +1,7 @@
 package com.arisux.avp.block;
 
 import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
-import com.arisux.avp.entities.tile.TileEntityP2RConvertor;
+import com.arisux.avp.entities.tile.TileEntityP2RConverter;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -38,6 +38,6 @@ public class BlockP2RConvertor extends HookedBlockContainer
 
 	@Override
 	public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
-		return new TileEntityP2RConvertor();
+		return new TileEntityP2RConverter();
 	}
 }
