@@ -7,6 +7,7 @@ import com.arisux.airi.lib.ModUtil.IBHandler;
 import com.arisux.airi.lib.client.render.IconSet;
 import com.arisux.airi.lib.interfaces.IInitializable;
 import com.arisux.avp.block.BlockAssembler;
+import com.arisux.avp.block.BlockBlackGoo;
 import com.arisux.avp.block.BlockBlastdoor;
 import com.arisux.avp.block.BlockCryostasisTube;
 import com.arisux.avp.block.BlockGenerator;
@@ -40,6 +41,7 @@ import cpw.mods.fml.relauncher.Side;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraftforge.fluids.Fluid;
 
 public class BlockHandler extends IBHandler implements IInitializable
 {
@@ -122,6 +124,7 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockBattery = (new HookedBlock(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockR2PConvertor = (new BlockR2PConvertor(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockP2RConvertor = (new BlockP2RConvertor(Material.iron)).setHardness(3.2F).setResistance(2.6F),
+		blockBlackGoo = (new BlockBlackGoo(AliensVsPredator.fluids().fluidBlackGoo, Material.water).setBlockName("blackGoo")),
 		blockTransformer = (new BlockTransformer(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockNegativeTransformer = (new BlockNegativeTransformer(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockSupplies = (new BlockSupplies(Material.iron)),
@@ -266,6 +269,7 @@ public class BlockHandler extends IBHandler implements IInitializable
 		registerBlock(blockBlastdoor, "blastdoor", true);
 		registerBlock(ghostBlockBlastdoor, "ghostBlockBlastdoor", false);
 		registerBlock(blockSupplies, "blocksupplies", false);
+		registerBlock(blockBlackGoo, "blockBlackGoo", false);
 		registerBlock(blockWorklight, "worklight", true);
 		registerBlock(blockCryostasisTube, "cryostasistube", true);
 		registerShapedBlockSet(blockPlastic, "plasticblock");

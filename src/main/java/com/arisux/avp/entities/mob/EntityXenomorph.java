@@ -34,7 +34,7 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 		this.tasks.addTask(1, new EntityAIClimb(this, 0.03F));
 		this.tasks.addTask(2, new EntityAIWander(this, 0.8D));
 		this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
-		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, Entity.class, /** targetChance **/1, /** shouldCheckSight **/false, /** nearbyOnly **/false, EntitySelectorXenomorph.instance));
+		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, Entity.class, /** targetChance **/0, /** shouldCheckSight **/false, /** nearbyOnly **/false, EntitySelectorXenomorph.instance));
 		this.targetTasks.addTask(2, new EntityAIAttackOnCollide(this, 0.8D, true));
 	}
 
@@ -43,7 +43,7 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 	{
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(1F);
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(100.0D);
 	}
 
 	@Override
@@ -113,6 +113,7 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 				}
 			}
 		}
+
 		else
 		{
 			this.attackAI();
@@ -175,7 +176,7 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 					this.addVelocity(0, 0.6D, 0);
 				}
 			}
-			else if (targetEntity != null && !(targetEntity instanceof EntityAcidPool) && !(targetEntity.getClass().getSuperclass().getSuperclass() == EntitySpeciesAlien.class) && !(targetEntity.getClass().getSuperclass() == EntitySpeciesAlien.class))
+			else if (targetEntity != null && !(targetEntity instanceof EntityAcidPool) && !(targetEntity instanceof EntitySpeciesAlien))
 			{
 				this.setAttackTarget((EntityLivingBase) targetEntity);
 				this.getNavigator().tryMoveToEntityLiving(targetEntity, this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue() * 2.5D);

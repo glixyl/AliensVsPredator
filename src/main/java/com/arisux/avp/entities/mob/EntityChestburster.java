@@ -92,7 +92,10 @@ public class EntityChestburster extends EntitySpeciesAlien implements IMob
 			if (this.ticksExisted >= this.getMaxParasiteAge())
 			{
 				EntityXenomorph entityxeno = (EntityXenomorph) Entities.constructEntity(this.worldObj, this.getGrownParasiteType());
-				entityxeno.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
+				double d = this.posX;
+				double d1 = this.posY;
+				double d2 = this.posZ;
+				entityxeno.setLocationAndAngles(d, d1, d2, 0.0F, 0.0F);
 				this.worldObj.spawnEntityInWorld(entityxeno);
 
 				for (int i = 0; i < 8; ++i)

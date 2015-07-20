@@ -40,7 +40,7 @@ public class EntityDrone extends EntityXenomorph
 	{
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.43D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.53D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(2.0D);
 	}
 
@@ -92,9 +92,6 @@ public class EntityDrone extends EntityXenomorph
 	public void onUpdate()
 	{
 		super.onUpdate();
-
-		this.tickResinLevelAI();
-		this.tickHiveBuildingAI();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -105,27 +102,24 @@ public class EntityDrone extends EntityXenomorph
 			this.resinLevel += 1;
 		}
 
-		if (this.rand.nextInt(20) == 0)
+		ArrayList<EntityItem> entityItemList = (ArrayList<EntityItem>) WorldUtil.Entities.getEntitiesInCoordsRange(worldObj, EntityItem.class, new CoordData(this), 8);
+
+		for (EntityItem entityItem : entityItemList)
 		{
-			ArrayList<EntityItem> entityItemList = (ArrayList<EntityItem>) WorldUtil.Entities.getEntitiesInCoordsRange(worldObj, EntityItem.class, new CoordData(this), 8);
-
-			for (EntityItem entityItem : entityItemList)
+			if (entityItem.delayBeforeCanPickup <= 0)
 			{
-				if (entityItem.delayBeforeCanPickup <= 0)
+				ItemStack stack = entityItem.getDataWatcher().getWatchableObjectItemStack(10);
+
+				if (stack != null && stack.getItem() == AliensVsPredator.items().itemRoyalJelly)
 				{
-					ItemStack stack = entityItem.getDataWatcher().getWatchableObjectItemStack(10);
+					this.getNavigator().setPath(this.getNavigator().getPathToEntityLiving(entityItem), this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue());
 
-					if (stack != null && stack.getItem() == AliensVsPredator.items().itemRoyalJelly)
+					if (this.getDistanceToEntity(entityItem) < 1)
 					{
-						this.getNavigator().setPath(this.getNavigator().getPathToEntityLiving(entityItem), 1.5);
-
-						if (this.getDistanceToEntity(entityItem) < 1)
-						{
-							this.resinLevel += 1000;
-							entityItem.setDead();
-						}
-						break;
+						this.resinLevel += 1000;
+						entityItem.setDead();
 					}
+					break;
 				}
 			}
 		}

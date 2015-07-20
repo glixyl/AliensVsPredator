@@ -1,8 +1,13 @@
 package com.arisux.avp.entities.mob;
 
+import java.util.ArrayList;
+
+import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
+import com.arisux.airi.lib.WorldUtil.Entities;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.interfaces.IHiveSignature;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -15,7 +20,7 @@ public class EntityQueen extends EntityXenomorph implements IHiveSignature
 	public EntityQueen(World world)
 	{
 		super(world);
-		this.setSize(1.0F, 3.5F);
+		this.setSize(4.0F, 8.0F);
 		this.isInStasis = true;
 		this.experienceValue = 40000;
 		this.jumpMovementFactor = 0.1F;
@@ -30,8 +35,8 @@ public class EntityQueen extends EntityXenomorph implements IHiveSignature
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(300.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.4700000238418579D);
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(400.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5700000238418579D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(8.0D);
 	}
 
@@ -40,62 +45,67 @@ public class EntityQueen extends EntityXenomorph implements IHiveSignature
 	{
 		super.onUpdate();
 
-//		if ((this.getAttackTarget() != null || this.getLastAttacker() != null) && this.worldObj.getWorldTime() % 40 == 0)
-//		{
-//			@SuppressWarnings("unchecked")
-//			ArrayList<EntitySpeciesAlien> aliens = (ArrayList<EntitySpeciesAlien>) Entities.getEntitiesInCoordsRange(this.worldObj, EntitySpeciesAlien.class, new CoordData(this), 32);
-//
-//			for (EntitySpeciesAlien alien : aliens)
-//			{
-//				if (alien != null && alien.getHiveSignature() != null &&  !(alien instanceof EntityQueen) && alien.getHiveSignature().equals(this.getHiveSignature()))
-//				{
-//					if (this.rand.nextInt(6) == 0)
-//					{
-//						if (alien instanceof EntityOvamorph)
-//						{
-//							EntityOvamorph ovamorph = (EntityOvamorph) alien;
-//							ovamorph.setHatched(true);
-//						}
-//					}
-//
-//					EntityLivingBase target = this.getAttackTarget() != null ? this.getAttackTarget() : this.getLastAttacker();
-//
-//					alien.setAttackTarget(target);
-//					alien.getNavigator().tryMoveToEntityLiving(target, alien.getMoveHelper().getSpeed());
-//				}
-//				else if (alien != null && alien.getHiveSignature() == null)
-//				{
-//					alien.setHiveSignature(this.getHiveSignature());
-//				}
-//			}
-//		}
+		if ((this.getAttackTarget() != null || this.getLastAttacker() != null) && this.worldObj.getWorldTime() % 40 == 0)
+		{
+			@SuppressWarnings("unchecked")
+			ArrayList<EntitySpeciesAlien> aliens = (ArrayList<EntitySpeciesAlien>) Entities.getEntitiesInCoordsRange(this.worldObj, EntitySpeciesAlien.class, new CoordData(this), 32);
 
-//		this.motionY += -0.5F;
-//
-//		if (isJumping)
-//		{
-//			this.addVelocity(0, 0.25D, 0);
-//		}
+			for (EntitySpeciesAlien alien : aliens)
+			{
+				if (alien != null && alien.getHiveSignature() != null &&  !(alien instanceof EntityQueen) && alien.getHiveSignature().equals(this.getHiveSignature()))
+				{
+					if (this.rand.nextInt(6) == 0)
+					{
+						if (alien instanceof EntityOvamorph)
+						{
+							EntityOvamorph ovamorph = (EntityOvamorph) alien;
+							ovamorph.setHatched(true);
+						}
+					}
 
-//		if (this.isInStasis)
-//		{
-//			this.tasks.taskEntries.clear();
-//			this.targetTasks.taskEntries.clear();
-//			this.ovipositorSize = this.ovipositorSize < 1.2F ? this.ovipositorSize += 0.0001F : this.ovipositorSize;
-//		}
+					EntityLivingBase target = this.getAttackTarget() != null ? this.getAttackTarget() : this.getLastAttacker();
 
-//		if (this.worldObj.getWorldTime() % 10 == 0)
-//		{
-//			if (this.getHealth() > this.getMaxHealth() - (this.getMaxHealth() / 4))
-//			{
-//				this.heal(2F);
-//			}
-//			
-//			if (this.getHealth() > 0 && this.getHealth() < this.getMaxHealth() / 4 * 3)
-//			{
-//				this.heal(3F);
-//			}
-//		}
+					alien.setAttackTarget(target);
+					alien.getNavigator().tryMoveToEntityLiving(target, alien.getMoveHelper().getSpeed());
+				}
+				else if (alien != null && alien.getHiveSignature() == null)
+				{
+					alien.setHiveSignature(this.getHiveSignature());
+				}
+			}
+		}
+
+		this.motionY += -0.5F;
+
+		if (isJumping)
+		{
+			this.addVelocity(0, 0.25D, 0);
+		}
+
+		if (this.isInStasis)
+		{
+			this.tasks.taskEntries.clear();
+			this.targetTasks.taskEntries.clear();
+			this.ovipositorSize = this.ovipositorSize < 1.2F ? this.ovipositorSize += 0.0001F : this.ovipositorSize;
+		}
+
+		if (this.worldObj.getWorldTime() % 10 == 0)
+		{
+			if (this.getHealth() > this.getMaxHealth() - (this.getMaxHealth() / 4))
+			{
+				this.heal(3F);
+			}
+
+			if (this.getHealth() > 0 && this.getHealth() < this.getMaxHealth() / 4 * 3)
+			{
+				this.heal(4.5F);
+			}
+
+			if (this.getHealth() > 0 && this.getHealth() < this.getMaxHealth() / 4 * 2)
+			{
+				this.heal(6F);
+			}
+		}
 	}
 
 	@Override
@@ -113,7 +123,7 @@ public class EntityQueen extends EntityXenomorph implements IHiveSignature
 	@Override
 	protected String getLivingSound()
 	{
-		return /** this.getHealth() > this.getMaxHealth() / 4 ? AliensVsPredator.properties().SOUND_QUEEN_LIVING + ".constant" : **/ AliensVsPredator.properties().SOUND_QUEEN_LIVING;
+		return this.getHealth() > this.getMaxHealth() / 4 ? AliensVsPredator.properties().SOUND_QUEEN_LIVING + ".constant" : AliensVsPredator.properties().SOUND_QUEEN_LIVING;
 	}
 
 	@Override
