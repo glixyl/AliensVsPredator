@@ -38,6 +38,10 @@ public class TileEntityRepulsionGenerator extends TileEntity implements IEnergyP
 				{
 					tep.receiveEnergy(dir, 120, false);
 				}
+				else
+				{
+					tep.d.add(dir.getOpposite());
+				}
 			}
 			else if(tile instanceof IEnergyReceiver)
 			{

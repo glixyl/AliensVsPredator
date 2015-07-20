@@ -43,6 +43,10 @@ public class TileEntitySolarPanel extends TileEntity implements IEnergyProvider
 				{
 					tep.receiveEnergy(dir, 120, false);
 				}
+				else
+				{
+					tep.d.add(dir.getOpposite());
+				}
 			}
 			else if(tile instanceof IEnergyReceiver)
 			{
