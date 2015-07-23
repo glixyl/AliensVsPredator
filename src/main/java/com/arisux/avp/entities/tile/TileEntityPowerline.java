@@ -11,7 +11,7 @@ public class TileEntityPowerline extends TileEntityElectrical implements IEnergy
 	{
 		super(false);
 	}
-
+	
 	@Override
 	public void updateEntity()
 	{
