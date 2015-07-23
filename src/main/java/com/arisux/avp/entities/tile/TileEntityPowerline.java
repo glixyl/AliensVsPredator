@@ -14,7 +14,7 @@ public class TileEntityPowerline extends TileEntity implements IEnergyProvider, 
 	public boolean turnOff = true;
 	public Set<ForgeDirection> d = new HashSet<ForgeDirection>();
 	public boolean firstTimeCalled = true;
-
+	
 	@Override
 	public void updateEntity()
 	{
@@ -45,22 +45,21 @@ public class TileEntityPowerline extends TileEntity implements IEnergyProvider, 
 			TileEntity tile = worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
 			if(tile != null)
 			{
-				if (tile instanceof TileEntityPowerline)
+				if (tile instanceof IEnergyReceiver && !isTileNextToGenerator(tile))
 				{
-					TileEntityPowerline tep = (TileEntityPowerline) tile;
-					if(tep.d.contains(dir.getOpposite()) || tep.voltage == 0)
+					IEnergyReceiver ier = (IEnergyReceiver) tile;
+					if(this.voltage > 0)
 					{
-						tep.receiveEnergy(dir, this.voltage, false);
+						ier.receiveEnergy(dir, this.voltage, false);
 					}
 					else
 					{
-						tep.d.add(dir.getOpposite());
+						ier.receiveEnergy(dir, 120, false);
 					}
 				}
-				else if(tile instanceof IEnergyReceiver)
+				else
 				{
-					IEnergyReceiver ier = (IEnergyReceiver) tile;
-					ier.receiveEnergy(dir, this.voltage, false);
+					this.d.add(dir);
 				}
 			}
 		}
@@ -110,12 +109,12 @@ public class TileEntityPowerline extends TileEntity implements IEnergyProvider, 
 					this.d.add(direction);
 				}
 			}
-
+			
 			if(tile != null && tile instanceof TileEntityRepulsionGenerator)
 			{
 				this.d.add(direction);
 			}
-
+			
 			if(tile != null && tile instanceof TileEntitySolarPanel)
 			{
 				this.d.add(direction);
@@ -257,7 +256,7 @@ public class TileEntityPowerline extends TileEntity implements IEnergyProvider, 
 			}
 			return false;
 		}
-
+		
 		if(this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord) instanceof TileEntityR2PConverter)
 		{
 			TileEntityR2PConverter te = (TileEntityR2PConverter) this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
@@ -367,7 +366,7 @@ public class TileEntityPowerline extends TileEntity implements IEnergyProvider, 
 			}
 			return false;
 		}
-
+		
 		if(this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord) instanceof TileEntityNegativeTransformer)
 		{
 			TileEntityNegativeTransformer te = (TileEntityNegativeTransformer) this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
@@ -422,7 +421,7 @@ public class TileEntityPowerline extends TileEntity implements IEnergyProvider, 
 			}
 			return false;
 		}
-
+		
 		return false;
 	}
 
