@@ -68,6 +68,8 @@ public class RenderItemBlastDoor extends ItemRenderer
 		GL11.glDisable(GL11.GL_CULL_FACE);
 		GL11.glScalef(glScale, glScale, glScale);
 		RenderUtil.bindTexture(this.getResourceLocation());
+		RenderUtil.glEnableLight();
 		((ModelBlastdoor) this.getModel()).render(null, RenderUtil.DEFAULT_BOX_TRANSLATION);
+		RenderUtil.glDisableLight();
 	}
 }

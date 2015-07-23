@@ -2,7 +2,7 @@ package com.arisux.avp.block;
 
 import java.util.Random;
 
-import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
+import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.avp.entities.tile.TileEntitySatelliteModem;
 
 import net.minecraft.block.material.Material;
@@ -10,13 +10,15 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class BlockSatelliteModem extends HookedBlockContainer
+public class BlockSatelliteModem extends HookedBlock
 {
 	public BlockSatelliteModem(Material material)
 	{
 		super(material);
 		this.setBlockBounds(0F, 0F, 0F, 1F, 1F, 1F);
 		this.setTickRandomly(true);
+		this.setRenderNormal(false);
+		this.setOpaque(false);
 	}
 
 	@Override
@@ -32,9 +34,15 @@ public class BlockSatelliteModem extends HookedBlockContainer
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1, int var2)
+	public TileEntity createTileEntity(World world, int meta)
 	{
 		return new TileEntitySatelliteModem();
+	}
+	
+	@Override
+	public boolean hasTileEntity(int metadata)
+	{
+		return true;
 	}
 	
 	@Override

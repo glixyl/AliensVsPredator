@@ -56,7 +56,7 @@ public class RenderCryostasisTube extends TileEntitySpecialRenderer
 			{
 				glPushMatrix();
 				{
-					if (tile.voltage > 0)
+					if (tile.getVoltage() > 0)
 					{
 						RenderUtil.glDisableLight();
 					}
@@ -78,7 +78,7 @@ public class RenderCryostasisTube extends TileEntitySpecialRenderer
 				glPopMatrix();
 			}
 
-			if (tile.voltage > 0)
+			if (tile.getVoltage() > 0)
 			{
 				RenderUtil.glDisableLightMapping();
 				RenderUtil.glDisableLight();

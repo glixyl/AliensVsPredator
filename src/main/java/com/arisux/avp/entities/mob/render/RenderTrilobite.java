@@ -21,7 +21,9 @@ public class RenderTrilobite extends RenderLiving
 	protected void preRenderCallback(EntityLivingBase entitylivingBase, float partialTicks)
 	{
 		super.preRenderCallback(entitylivingBase, shadowSize);
-		GL11.glScalef(1F, 1F, 1F);
+		float scale = 1.7F;
+		GL11.glScalef(scale, scale, scale);
+		GL11.glTranslatef(-0.2F, 0F, 0F);
 	}
 
 	@Override

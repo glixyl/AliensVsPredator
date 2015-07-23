@@ -70,6 +70,8 @@ public class RenderItemLightPanel extends ItemRenderer
 		GL11.glDisable(GL11.GL_CULL_FACE);
 		GL11.glScalef(glScale, glScale, glScale);
 		RenderUtil.bindTexture(resourceLocation);
+		RenderUtil.glEnableLight();
 		((ModelLightPanel) this.getModel()).render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+		RenderUtil.glDisableLight();
 	}
 }

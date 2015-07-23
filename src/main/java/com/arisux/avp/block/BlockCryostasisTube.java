@@ -2,7 +2,7 @@ package com.arisux.avp.block;
 
 import java.util.Random;
 
-import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
+import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.airi.lib.WorldUtil;
 import com.arisux.avp.entities.tile.TileEntityCryostasisTube;
 import com.arisux.avp.items.ItemEntitySummoner;
@@ -16,13 +16,15 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class BlockCryostasisTube extends HookedBlockContainer
+public class BlockCryostasisTube extends HookedBlock
 {
 	public BlockCryostasisTube(Material material)
 	{
 		super(material);
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 2F, 1.0F);
 		this.setTickRandomly(true);
+		this.setRenderNormal(false);
+		this.setOpaque(false);
 	}
 
 	@Override
@@ -38,9 +40,15 @@ public class BlockCryostasisTube extends HookedBlockContainer
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1, int var2)
+	public TileEntity createTileEntity(World world, int metadata)
 	{
 		return new TileEntityCryostasisTube();
+	}
+	
+	@Override
+	public boolean hasTileEntity(int metadata)
+	{
+		return true;
 	}
 
 	@Override

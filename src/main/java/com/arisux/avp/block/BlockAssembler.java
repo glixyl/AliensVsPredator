@@ -2,7 +2,7 @@ package com.arisux.avp.block;
 
 import java.util.Random;
 
-import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
+import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.airi.lib.client.render.IconSet;
 import com.arisux.avp.entities.tile.TileEntityAssembler;
 
@@ -16,7 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class BlockAssembler extends HookedBlockContainer
+public class BlockAssembler extends HookedBlock
 {
 	public BlockAssembler(Material material)
 	{
@@ -78,9 +78,15 @@ public class BlockAssembler extends HookedBlockContainer
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1, int var2)
+	public TileEntity createTileEntity(World world, int metadata)
 	{
 		return new TileEntityAssembler();
+	}
+	
+	@Override
+	public boolean hasTileEntity(int metadata)
+	{
+		return true;
 	}
 	
 	@Override

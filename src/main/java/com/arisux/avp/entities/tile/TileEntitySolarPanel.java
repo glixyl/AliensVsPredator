@@ -1,92 +1,53 @@
 package com.arisux.avp.entities.tile;
 
-import cofh.api.energy.IEnergyProvider;
-import cofh.api.energy.IEnergyReceiver;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
+import com.arisux.avp.interfaces.energy.IEnergyProvider;
+
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntitySolarPanel extends TileEntity implements IEnergyProvider
-{	
-	public int rotation;
-	public int voltage;
-	
+public class TileEntitySolarPanel extends TileEntityElectrical implements IEnergyProvider
+{
+	public TileEntitySolarPanel()
+	{
+		super(true);
+	}
+
 	@Override
 	public void updateEntity()
 	{
-		if(this.canOutputPower())
+		if (this.worldObj.getWorldTime() < 12300 || this.worldObj.getWorldTime() > 23850)
 		{
-			pushEnergy();
+			if (this.getWorldObj().getWorldTime() % (1000 / this.getSourceHertz()) == 0)
+			{
+				this.setVoltage(120);
+			}
+		}
+		else
+		{
+			this.setVoltage(0);
 		}
 	}
-	
-	public void setDirection(byte direction)
-	{
-		this.rotation = direction;
-	}
-	
+
 	@Override
 	public boolean canConnectEnergy(ForgeDirection from)
 	{
 		return false;
 	}
-
-	protected void pushEnergy()
-	{
-		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)
-		{
-			TileEntity tile = worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
-			if (tile instanceof TileEntityPowerline)
-			{
-				TileEntityPowerline tep = (TileEntityPowerline) tile;
-				if(tep.d.contains(dir.getOpposite()) || tep.voltage == 0)
-				{
-					tep.receiveEnergy(dir, 120, false);
-				}
-				else
-				{
-					tep.d.add(dir.getOpposite());
-				}
-			}
-			else if(tile instanceof IEnergyReceiver)
-			{
-				IEnergyReceiver ier = (IEnergyReceiver) tile;
-				ier.receiveEnergy(dir, 120, false);
-			}
-		}
-	}
 	
 	@Override
-	public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate)
+	public double extractEnergy(ForgeDirection from, double maxExtract, boolean simulate)
 	{
-		if(maxExtract < this.voltage)
-		{
-			return maxExtract;
-		}
-		else
-		{
-			return this.voltage;
-		}
+		return super.extractEnergy(from, maxExtract, simulate);
 	}
 
 	@Override
-	public int getEnergyStored(ForgeDirection from)
+	public double getEnergyStored(ForgeDirection from)
 	{
 		return this.voltage;
 	}
 
 	@Override
-	public int getMaxEnergyStored(ForgeDirection from)
+	public double getMaxEnergyStored(ForgeDirection from)
 	{
 		return 10000;
-	}
-	
-	public boolean canOutputPower()
-	{
-		World world = this.getWorldObj();
-		if(world.getWorldTime() < 12300 || world.getWorldTime()  > 23850){
-			return true;
-		}
-		return false;
 	}
 }

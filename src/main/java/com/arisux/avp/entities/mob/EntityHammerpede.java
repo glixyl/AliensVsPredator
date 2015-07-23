@@ -4,24 +4,34 @@ import java.util.ArrayList;
 
 import com.arisux.airi.lib.WorldUtil;
 import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
+import com.arisux.airi.lib.WorldUtil.Entities;
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.entities.EntityAcidPool;
 
+import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityHammerpede extends EntitySpeciesAlien implements IMob
 {
+	public static IEntitySelector entitySelector = new IEntitySelector()
+	{
+		@Override
+		public boolean isEntityApplicable(Entity entity)
+		{
+			return !(entity instanceof EntitySpeciesAlien) && !(entity instanceof EntityHammerpede);
+		}
+	};
+	
 	public EntityHammerpede(World par1World)
 	{
 		super(par1World);
@@ -30,8 +40,9 @@ public class EntityHammerpede extends EntitySpeciesAlien implements IMob
 		this.experienceValue = 16;
 		this.getNavigator().setCanSwim(true);
 		this.getNavigator().setAvoidsWater(false);
-		this.tasks.addTask(2, new EntityAIWander(this, 0.8D));
-		
+		this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
+		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, Entity.class, 10 /** targetChance **/, false /** checkSight **/, false /** nearbyOnly **/, entitySelector));
+		this.tasks.addTask(0, new EntityAIAttackOnCollide(this, 0.8D, true));
 	}
 
 	@Override
@@ -39,13 +50,13 @@ public class EntityHammerpede extends EntitySpeciesAlien implements IMob
 	{
 		return true;
 	}
-	
+
 	@Override
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(14.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.6499999761581421D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5499999761581421D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(0.5D);
 		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
 	}
@@ -54,7 +65,6 @@ public class EntityHammerpede extends EntitySpeciesAlien implements IMob
 	protected void entityInit()
 	{
 		super.entityInit();
-		this.dataWatcher.addObject(16, new Byte((byte) 0));
 	}
 
 	@Override
@@ -67,85 +77,42 @@ public class EntityHammerpede extends EntitySpeciesAlien implements IMob
 	public void onUpdate()
 	{
 		super.onUpdate();
-
-		this.attackAI();
-
-		if(this.getAttackTarget() == null)
+		
+		this.lurkInBlackGoo();
+		
+		if (this.getAttackTarget() == null && this.worldObj.getWorldTime() % 60 == 0 && this.rand.nextInt(3) == 0)
 		{
-			if(this.worldObj.getWorldTime() % 100 == 0)
+			ArrayList<EntityLivingBase> entities = (ArrayList<EntityLivingBase>) WorldUtil.Entities.getEntitiesInCoordsRange(worldObj, EntityLivingBase.class, new CoordData(this), (int)this.getEntityAttribute(SharedMonsterAttributes.followRange).getAttributeValue() / 2);
+		
+			for (EntityLivingBase entity : entities)
 			{
-				this.lurkInBlackGoo();
-			}
-		}
-
-		if(this.getAttackTarget() != null && this.getAttackTarget().isDead)
-		{
-			this.setAttackTarget(null);
-		}
-
-		else if(this.getAttackTarget() != null)
-		{
-			if(this.getAttackTarget() instanceof EntityPlayer)
-			{
-				EntityPlayer target = (EntityPlayer) this.getAttackTarget();
-				if(target.capabilities.isCreativeMode)
+				if (entitySelector.isEntityApplicable(entity) && Entities.canEntityBeSeenBy(entity, this) && (!entitySelector.isEntityApplicable(entity.getLastAttacker()) && (entity.ticksExisted - entity.getLastAttackerTime() > 150) ))
 				{
-					this.setAttackTarget(null);
-					return;
+					if (entity instanceof EntityPlayer && !((EntityPlayer) entity).capabilities.isCreativeMode)
+					
+					this.setAttackTarget(entity);
 				}
-				else
-				{
-					if(this.getDistance(this.getAttackTarget().posX, this.getAttackTarget().posY, this.getAttackTarget().posZ) < 3)
-					{
-						this.attackEntityAsMob(this.getAttackTarget());
-					}
-				}
-			}
-			if(this.getDistance(this.getAttackTarget().posX, this.getAttackTarget().posY, this.getAttackTarget().posZ) < 3)
-			{
-				this.attackEntityAsMob(this.getAttackTarget());
 			}
 		}
 	}
 
 	public void lurkInBlackGoo()
-	{	
-		double range = this.getEntityAttribute(SharedMonsterAttributes.followRange).getAttributeValue();
-		ArrayList<CoordData> coordData = WorldUtil.Blocks.getCoordDataInRangeForBlocks((int) this.posX, (int) this.posY, (int) this.posZ, (int) range, this.worldObj, AliensVsPredator.blocks().blockBlackGoo);
-		if(coordData.size() > 0)
-		{
-			this.getNavigator().tryMoveToXYZ((double) coordData.get(0).posX, (double) coordData.get(0).posY, (double) coordData.get(0).posZ, this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue());
-		}
-	}
-
-	public void attackAI()
 	{
-		if (worldObj.getWorldInfo().getWorldTime() % 70 == 0)
+		if (this.getAttackTarget() == null)
 		{
-			double range = this.getEntityAttribute(SharedMonsterAttributes.followRange).getAttributeValue();
-			Entity targetEntity = (this.worldObj.findNearestEntityWithinAABB(EntityLiving.class, this.boundingBox.expand(range * 10, 64.0D, range * 10), this));
-			Entity targetPlayer = (this.worldObj.findNearestEntityWithinAABB(EntityPlayer.class, this.boundingBox.expand(range * 10, 64.0D, range * 10), this));
-			if (targetPlayer != null && !((EntityPlayer) targetPlayer).capabilities.isCreativeMode)
+			if (this.worldObj.getWorldTime() % 40 == 0 && this.rand.nextInt(4) == 0)
 			{
-				this.setAttackTarget((EntityLivingBase) targetPlayer);
-				this.getNavigator().tryMoveToEntityLiving(targetPlayer, this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue());
-				if (this.isCollidedHorizontally)
+				if (this.worldObj.getBlock((int) this.posX, (int) this.posY, (int) this.posZ) != AliensVsPredator.blocks().blockBlackGoo)
 				{
-					this.addVelocity(0, 0.6D, 0);
+					double range = this.getEntityAttribute(SharedMonsterAttributes.followRange).getAttributeValue() / 2;
+					ArrayList<CoordData> coordData = WorldUtil.Blocks.getCoordDataInRangeForBlocks((int) this.posX, (int) this.posY, (int) this.posZ, (int) range, this.worldObj, AliensVsPredator.blocks().blockBlackGoo);
+
+					if (coordData.size() > 0)
+					{
+						CoordData selectedCoord = coordData.get(this.rand.nextInt(coordData.size()));
+						this.getNavigator().tryMoveToXYZ((double) selectedCoord.posX, (double) selectedCoord.posY, (double) selectedCoord.posZ, this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue());
+					}
 				}
-			}
-			else if (targetEntity != null && !(targetEntity instanceof EntityAcidPool) && !(targetEntity instanceof EntitySpeciesAlien))
-			{
-				this.setAttackTarget((EntityLivingBase) targetEntity);
-				this.getNavigator().tryMoveToEntityLiving(targetEntity, this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue());
-				if (this.isCollidedHorizontally)
-				{
-					this.addVelocity(0, 0.6D, 0);
-				}
-			}
-			else
-			{
-				this.setAttackTarget(null);
 			}
 		}
 	}
@@ -180,29 +147,15 @@ public class EntityHammerpede extends EntitySpeciesAlien implements IMob
 	}
 
 	@Override
-	protected void attackEntity(Entity entity, float f)
+	protected void attackEntity(Entity entity, float damage)
 	{
-		if (f > 2.0F && f < 6.0F && this.rand.nextInt(50) == 0)
-		{
-			if (this.onGround)
-			{
-				double var4 = entity.posX - this.posX;
-				double var6 = entity.posZ - this.posZ;
-				float var8 = MathHelper.sqrt_double(var4 * var4 + var6 * var6);
-				this.motionX = var4 / var8 * 0.5D * 0.800000011920929D + this.motionX * 0.20000000298023224D;
-				this.motionZ = var6 / var8 * 0.5D * 0.800000011920929D + this.motionZ * 0.20000000298023224D;
-				this.motionY = 0.4000000059604645D;
-			}
-		} else
-		{
-			super.attackEntity(entity, f);
-		}
+		super.attackEntity(entity, damage);
 	}
 
 	@Override
-	public boolean isPotionApplicable(PotionEffect par1PotionEffect)
+	public boolean isPotionApplicable(PotionEffect potionEffect)
 	{
-		return par1PotionEffect.getPotionID() == Potion.poison.id ? false : super.isPotionApplicable(par1PotionEffect);
+		return potionEffect.getPotionID() == Potion.poison.id ? false : super.isPotionApplicable(potionEffect);
 	}
 
 	@Override

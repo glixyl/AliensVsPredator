@@ -6,7 +6,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -28,28 +27,37 @@ public class BlockBlackGoo extends BlockFluidClassic
 	@Override
 	public IIcon getIcon(int side, int meta)
 	{
-		return (side == 0 || side == 1)? stillIcon : flowingIcon;
+		return (side == 0 || side == 1) ? stillIcon : flowingIcon;
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register)
 	{
-		stillIcon = register.registerIcon(AliensVsPredator.properties().DOMAIN + "fluidStill");
-		flowingIcon = register.registerIcon(AliensVsPredator.properties().DOMAIN + "fluidFlowing");
+		stillIcon = register.registerIcon("avp:blackgoo.still");
+		flowingIcon = register.registerIcon("avp:blackgoo.flowing");
+		AliensVsPredator.fluids().fluidBlackGoo.setIcons(stillIcon, flowingIcon);
 	}
 
 	@Override
 	public boolean canDisplace(IBlockAccess world, int x, int y, int z)
 	{
-		if (world.getBlock(x,  y,  z).getMaterial().isLiquid()) return false;
+		if (world.getBlock(x, y, z).getMaterial().isLiquid())
+		{
+			return false;
+		}
+		
 		return super.canDisplace(world, x, y, z);
 	}
 
 	@Override
 	public boolean displaceIfPossible(World world, int x, int y, int z)
 	{
-		if (world.getBlock(x,  y,  z).getMaterial().isLiquid()) return false;
+		if (world.getBlock(x, y, z).getMaterial().isLiquid())
+		{
+			return false;
+		}
+		
 		return super.displaceIfPossible(world, x, y, z);
 	}
 }

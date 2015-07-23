@@ -15,7 +15,6 @@ import com.arisux.avp.block.BlockHiveNode;
 import com.arisux.avp.block.BlockHiveResin;
 import com.arisux.avp.block.BlockLightPanel;
 import com.arisux.avp.block.BlockNegativeTransformer;
-import com.arisux.avp.block.BlockOreSilicon;
 import com.arisux.avp.block.BlockP2RConvertor;
 import com.arisux.avp.block.BlockPortalAcheron;
 import com.arisux.avp.block.BlockPortalVarda;
@@ -44,8 +43,7 @@ import net.minecraft.creativetab.CreativeTabs;
 
 public class BlockHandler extends IBHandler implements IInitializable
 {
-	public Block
-		terrainHiveResin = (new BlockHiveResin(Material.wood)).setHardness(0.1F).setResistance(2.0F),
+	public Block terrainHiveResin = (new BlockHiveResin(Material.wood)).setHardness(0.1F).setResistance(2.0F),
 		blockOvamorph = (new HookedBlock(Material.rock)),
 		blockShipMetal1 = (new HookedBlock(Material.iron)),
 		blockShipMetal2 = (new HookedBlock(Material.iron)),
@@ -102,11 +100,7 @@ public class BlockHandler extends IBHandler implements IInitializable
 		terrainUniSand = (new HookedBlock(Material.sand)).setHardness(3.5F).setResistance(2.0F),
 		terrainUniGravel = (new HookedBlock(Material.sand)).setHardness(3.0F),
 		terrainStalagmite = (new BlockStalagmite(Material.plants)).setHardness(0.0F).setLightOpacity(0),
-		oreSilicon = (new BlockOreSilicon(Material.rock)).setHardness(2.2F).setResistance(1.4F),
-		oreLithium = (new BlockOreSilicon(Material.iron)).setHardness(4.2F).setResistance(5.4F),
-		oreCopper = (new HookedBlock(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockTurret = (new BlockTurret(Material.iron)).setHardness(3.2F).setResistance(2.6F),
-		oreBauxite = (new HookedBlock(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockWorkstation = (new BlockWorkstation(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockStasisMechanism = (new BlockStasisMechanism(Material.iron)),
 		blockRepulsionGenerator = (new BlockGenerator(Material.iron)).setHardness(3.2F).setResistance(2.6F),
@@ -122,11 +116,15 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockPowercell = (new BlockPowercell(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockR2PConvertor = (new BlockR2PConvertor(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockP2RConvertor = (new BlockP2RConvertor(Material.iron)).setHardness(3.2F).setResistance(2.6F),
-		blockBlackGoo = (new BlockBlackGoo(AliensVsPredator.fluids().fluidBlackGoo, Material.water).setBlockName("blackGoo")),
+		blockBlackGoo = (new BlockBlackGoo(AliensVsPredator.fluids().fluidBlackGoo, Material.water)),
 		blockTransformer = (new BlockTransformer(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockNegativeTransformer = (new BlockNegativeTransformer(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockSupplies = (new BlockSupplies(Material.iron)),
-		blockSolarPanel = (new BlockSolarPanel(Material.iron)).setHardness(3.2F).setResistance(2.6F);
+		blockSolarPanel = (new BlockSolarPanel(Material.iron)).setHardness(3.2F).setResistance(2.6F),
+		oreSilicon = (new HookedBlock(Material.rock)).setHardness(2.2F).setResistance(1.4F),
+		oreLithium = (new HookedBlock(Material.iron)).setHardness(4.2F).setResistance(5.4F),
+		oreCopper = (new HookedBlock(Material.iron)).setHardness(3.2F).setResistance(2.6F),
+		oreBauxite = (new HookedBlock(Material.iron)).setHardness(3.2F).setResistance(2.6F);
 
 	public BlockHandler()
 	{
@@ -163,7 +161,7 @@ public class BlockHandler extends IBHandler implements IInitializable
 			HookedBlock blockSmartRidge = ((HookedBlock) (new BlockShape(blockBaseHook.getMaterial(), ShapeTypes.SMART_RIDGE).setTextureSide(textureSide)).setIconSet(blockParentHook.getIconSet()).setResistance(blockBaseHook.getResistance()).setHardness(blockBaseHook.getHardness()).setLightOpacity(blockBaseHook.getLightOpacity()));
 
 			CreativeTabs tab = AliensVsPredator.instance().tabBlocks();
-			
+
 			registerBlock(blockBaseHook, reference, blockParent, tab);
 			registerBlock(blockSlope, reference + ".slope", blockParent, tab);
 			registerBlock(blockCorner, reference + ".corner", blockParent, tab);

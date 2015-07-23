@@ -2,21 +2,24 @@ package com.arisux.avp.entities.tile;
 
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.block.GhostBlock;
+import com.arisux.avp.interfaces.energy.IEnergyReceiver;
 
-import cofh.api.energy.IEnergyReceiver;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityBlastdoor extends TileEntity implements IEnergyReceiver
+public class TileEntityBlastdoor extends TileEntityElectrical implements IEnergyReceiver
 {
-	public int voltage;
+	public TileEntityBlastdoor()
+	{
+		super(false);
+	}
+
 	private float doorProgress;
 	private boolean doorOpen;
 	public ForgeDirection direction;
@@ -39,7 +42,8 @@ public class TileEntityBlastdoor extends TileEntity implements IEnergyReceiver
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
-		if(this.direction != null)
+		
+		if (this.direction != null)
 		{
 			nbt.setInteger("Direction", this.direction.ordinal());
 		}
@@ -53,10 +57,12 @@ public class TileEntityBlastdoor extends TileEntity implements IEnergyReceiver
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
-		if(ForgeDirection.getOrientation(nbt.getInteger("Direction")) != null)
+		
+		if (ForgeDirection.getOrientation(nbt.getInteger("Direction")) != null)
 		{
 			this.direction = ForgeDirection.getOrientation(nbt.getInteger("Direction"));
 		}
+		
 		this.doorOpen = nbt.getBoolean("DoorOpen");
 		this.doorProgress = nbt.getFloat("DoorProgress");
 	}
@@ -67,20 +73,21 @@ public class TileEntityBlastdoor extends TileEntity implements IEnergyReceiver
 		super.updateEntity();
 		World world = this.getWorldObj();
 		Block parentBlock = world.getBlock(this.xCoord, this.yCoord, this.zCoord);
-		if(this.voltage == 0)
+		
+		if (!this.isOperational())
 		{
 			this.setDoorOpen(false);
 		}
 
 		if (!this.doorOpen)
 		{
-			if(direction != null)
+			if (direction != null)
 			{
 				GhostBlock block = (GhostBlock) AliensVsPredator.blocks().ghostBlockBlastdoor;
 				block.parentBlock = parentBlock;
 				block.parentTileEntity = this;
 
-				if(direction == ForgeDirection.NORTH || direction == ForgeDirection.SOUTH)
+				if (direction == ForgeDirection.NORTH || direction == ForgeDirection.SOUTH)
 				{
 					world.setBlock(this.xCoord + 1, this.yCoord, this.zCoord, block);
 					world.setBlock(this.xCoord + 2, this.yCoord, this.zCoord, block);
@@ -95,7 +102,7 @@ public class TileEntityBlastdoor extends TileEntity implements IEnergyReceiver
 					world.setBlock(this.xCoord + 3, this.yCoord + 1, this.zCoord, block);
 				}
 
-				if(direction == ForgeDirection.WEST|| direction == ForgeDirection.EAST)
+				if (direction == ForgeDirection.WEST || direction == ForgeDirection.EAST)
 				{
 					world.setBlock(this.xCoord, this.yCoord, this.zCoord - 1, block);
 					world.setBlock(this.xCoord, this.yCoord, this.zCoord - 2, block);
@@ -123,37 +130,26 @@ public class TileEntityBlastdoor extends TileEntity implements IEnergyReceiver
 		{
 			this.doorProgress = this.doorProgress > 0.0F ? this.doorProgress - 0.02F : this.doorProgress;
 		}
-
-		if(!isAdjacentToPowerSource())
-		{
-			this.voltage = 0;
-		}
 	}
 
 	@Override
-	public boolean canConnectEnergy(ForgeDirection from) {
-		return false;
+	public boolean canConnectEnergy(ForgeDirection from)
+	{
+		return true;
 	}
 
 	@Override
-	public int receiveEnergy(ForgeDirection from, int maxReceive,
-			boolean simulate) {
-		if(!simulate)
-		{
-			voltage = maxReceive;
-		}
-		return maxReceive;
+	public double getEnergyStored(ForgeDirection from)
+	{
+		return this.getVoltage();
 	}
 
 	@Override
-	public int getEnergyStored(ForgeDirection from) {
-		return voltage;
+	public double getMaxEnergyStored(ForgeDirection from)
+	{
+		return 220;
 	}
 
-	@Override
-	public int getMaxEnergyStored(ForgeDirection from) {
-		return 10000;
-	}
 	public boolean isDoorOpen()
 	{
 		return doorOpen;
@@ -170,312 +166,8 @@ public class TileEntityBlastdoor extends TileEntity implements IEnergyReceiver
 		return Blocks.beacon;
 	}
 
-	public boolean isAdjacentToPowerSource() {
-		if(this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord) instanceof TileEntityPowerline)
-		{
-			TileEntityPowerline te = (TileEntityPowerline) this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
-			if(te.voltage > 0)
-			{
-				return true;
-			}
-			return false;
-		}
-		if(this.getWorldObj().getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord) instanceof TileEntityPowerline)
-		{
-			TileEntityPowerline te = (TileEntityPowerline) this.getWorldObj().getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord);
-			if(te.voltage > 0)
-			{
-				return true;
-			}
-			return false;
-		}
-		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord + 1, this.zCoord) instanceof TileEntityPowerline)
-		{
-			TileEntityPowerline te = (TileEntityPowerline) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord + 1, this.zCoord);
-			if(te.voltage > 0)
-			{
-				return true;
-			}
-			return false;
-		}
-		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord - 1, this.zCoord) instanceof TileEntityPowerline)
-		{
-			TileEntityPowerline te = (TileEntityPowerline) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord - 1, this.zCoord);
-			if(te.voltage > 0)
-			{
-				return true;
-			}
-			return false;
-		}
-		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1) instanceof TileEntityPowerline)
-		{
-			TileEntityPowerline te = (TileEntityPowerline) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1);
-			if(te.voltage > 0)
-			{
-				return true;
-			}
-			return false;
-		}
-		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1) instanceof TileEntityPowerline)
-		{
-			TileEntityPowerline te = (TileEntityPowerline) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1);
-			if(te.voltage > 0)
-			{
-				return true;
-			}
-			return false;
-		}
-		if(this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord) instanceof TileEntityRepulsionGenerator)
-		{
-			return true;
-		}
-		if(this.getWorldObj().getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord) instanceof TileEntityRepulsionGenerator)
-		{
-			return true;
-		}
-		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord + 1, this.zCoord) instanceof TileEntityRepulsionGenerator)
-		{
-			return true;
-		}
-		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord - 1, this.zCoord) instanceof TileEntityRepulsionGenerator)
-		{
-			return true;
-		}
-		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1) instanceof TileEntityRepulsionGenerator)
-		{
-			return true;
-		}
-		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1) instanceof TileEntityRepulsionGenerator)
-		{
-			return true;
-		}
-
-		if(this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord) instanceof TileEntitySolarPanel)
-		{
-			TileEntitySolarPanel te = (TileEntitySolarPanel) this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
-			if(te.canOutputPower())
-			{
-				return true;
-			}
-			return false;
-		}
-		if(this.getWorldObj().getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord) instanceof TileEntitySolarPanel)
-		{
-			TileEntitySolarPanel te = (TileEntitySolarPanel) this.getWorldObj().getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord);
-			if(te.canOutputPower())
-			{
-				return true;
-			}
-			return false;
-		}
-		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord + 1, this.zCoord) instanceof TileEntitySolarPanel)
-		{
-			TileEntitySolarPanel te = (TileEntitySolarPanel) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord + 1, this.zCoord);
-			if(te.canOutputPower())
-			{
-				return true;
-			}
-			return false;
-		}
-		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord - 1, this.zCoord) instanceof TileEntitySolarPanel)
-		{
-			TileEntitySolarPanel te = (TileEntitySolarPanel) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord - 1, this.zCoord);
-			if(te.canOutputPower())
-			{
-				return true;
-			}
-			return false;
-		}
-		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1) instanceof TileEntitySolarPanel)
-		{
-			TileEntitySolarPanel te = (TileEntitySolarPanel) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1);
-			if(te.canOutputPower())
-			{
-				return true;
-			}
-			return false;
-		}
-		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1) instanceof TileEntitySolarPanel)
-		{
-			TileEntitySolarPanel te = (TileEntitySolarPanel) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1);
-			if(te.canOutputPower())
-			{
-				return true;
-			}
-			return false;
-		}
-
-		if(this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord) instanceof TileEntityR2PConverter)
-		{
-			TileEntityR2PConverter te = (TileEntityR2PConverter) this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
-			if(te.canOutputPower())
-			{
-				return true;
-			}
-			return false;
-		}
-		if(this.getWorldObj().getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord) instanceof TileEntityR2PConverter)
-		{
-			TileEntityR2PConverter te = (TileEntityR2PConverter) this.getWorldObj().getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord);
-			if(te.canOutputPower())
-			{
-				return true;
-			}
-			return false;
-		}
-		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord + 1, this.zCoord) instanceof TileEntityR2PConverter)
-		{
-			TileEntityR2PConverter te = (TileEntityR2PConverter) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord + 1, this.zCoord);
-			if(te.canOutputPower())
-			{
-				return true;
-			}
-			return false;
-		}
-		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord - 1, this.zCoord) instanceof TileEntityR2PConverter)
-		{
-			TileEntityR2PConverter te = (TileEntityR2PConverter) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord - 1, this.zCoord);
-			if(te.canOutputPower())
-			{
-				return true;
-			}
-			return false;
-		}
-		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1) instanceof TileEntityR2PConverter)
-		{
-			TileEntityR2PConverter te = (TileEntityR2PConverter) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1);
-			if(te.canOutputPower())
-			{
-				return true;
-			}
-			return false;
-		}
-		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1) instanceof TileEntityR2PConverter)
-		{
-			TileEntityR2PConverter te = (TileEntityR2PConverter) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1);
-			if(te.canOutputPower())
-			{
-				return true;
-			}
-			return false;
-		}
-
-		if(this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord) instanceof TileEntityTransformer)
-		{
-			TileEntityTransformer te = (TileEntityTransformer) this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
-			if(te.voltage > 0)
-			{
-				return true;
-			}
-			return false;
-		}
-		if(this.getWorldObj().getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord) instanceof TileEntityTransformer)
-		{
-			TileEntityTransformer te = (TileEntityTransformer) this.getWorldObj().getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord);
-			if(te.voltage > 0)
-			{
-				return true;
-			}
-			return false;
-		}
-		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord + 1, this.zCoord) instanceof TileEntityTransformer)
-		{
-			TileEntityTransformer te = (TileEntityTransformer) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord + 1, this.zCoord);
-			if(te.voltage > 0)
-			{
-				return true;
-			}
-			return false;
-		}
-		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord - 1, this.zCoord) instanceof TileEntityTransformer)
-		{
-			TileEntityTransformer te = (TileEntityTransformer) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord - 1, this.zCoord);
-			if(te.voltage > 0)
-			{
-				return true;
-			}
-			return false;
-		}
-		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1) instanceof TileEntityTransformer)
-		{
-			TileEntityTransformer te = (TileEntityTransformer) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1);
-			if(te.voltage > 0)
-			{
-				return true;
-			}
-			return false;
-		}
-		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1) instanceof TileEntityTransformer)
-		{
-			TileEntityTransformer te = (TileEntityTransformer) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1);
-			if(te.voltage > 0)
-			{
-				return true;
-			}
-			return false;
-		}
-
-		if(this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord) instanceof TileEntityNegativeTransformer)
-		{
-			TileEntityNegativeTransformer te = (TileEntityNegativeTransformer) this.getWorldObj().getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
-			if(te.voltage > 0)
-			{
-				return true;
-			}
-			return false;
-		}
-		if(this.getWorldObj().getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord) instanceof TileEntityNegativeTransformer)
-		{
-			TileEntityNegativeTransformer te = (TileEntityNegativeTransformer) this.getWorldObj().getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord);
-			if(te.voltage > 0)
-			{
-				return true;
-			}
-			return false;
-		}
-		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord + 1, this.zCoord) instanceof TileEntityNegativeTransformer)
-		{
-			TileEntityNegativeTransformer te = (TileEntityNegativeTransformer) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord + 1, this.zCoord);
-			if(te.voltage > 0)
-			{
-				return true;
-			}
-			return false;
-		}
-		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord - 1, this.zCoord) instanceof TileEntityNegativeTransformer)
-		{
-			TileEntityNegativeTransformer te = (TileEntityNegativeTransformer) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord - 1, this.zCoord);
-			if(te.voltage > 0)
-			{
-				return true;
-			}
-			return false;
-		}
-		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1) instanceof TileEntityNegativeTransformer)
-		{
-			TileEntityNegativeTransformer te = (TileEntityNegativeTransformer) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1);
-			if(te.voltage > 0)
-			{
-				return true;
-			}
-			return false;
-		}
-		if(this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1) instanceof TileEntityNegativeTransformer)
-		{
-			TileEntityNegativeTransformer te = (TileEntityNegativeTransformer) this.getWorldObj().getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1);
-			if(te.voltage > 0)
-			{
-				return true;
-			}
-			return false;
-		}
-
-		return false;
-	}
-
 	public float getDoorProgress()
 	{
 		return doorProgress;
 	}
-
 }

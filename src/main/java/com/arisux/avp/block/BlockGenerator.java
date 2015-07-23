@@ -2,7 +2,7 @@ package com.arisux.avp.block;
 
 import java.util.Random;
 
-import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
+import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.avp.entities.tile.TileEntityPowerline;
 import com.arisux.avp.entities.tile.TileEntityRepulsionGenerator;
 
@@ -13,13 +13,15 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockGenerator extends HookedBlockContainer
+public class BlockGenerator extends HookedBlock
 {
 	public BlockGenerator(Material material)
 	{
 		super(material);
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 		this.setTickRandomly(true);
+		this.setRenderNormal(false);
+		this.setOpaque(false);
 	}
 
 	@Override
@@ -44,11 +46,11 @@ public class BlockGenerator extends HookedBlockContainer
 			{
 				if(te instanceof TileEntityPowerline)
 				{
-					TileEntityPowerline tep = (TileEntityPowerline) te;
-					if(tep.d.contains(direction.getOpposite()))
-					{
-						tep.d.remove(direction.getOpposite());
-					}
+//					TileEntityPowerline tep = (TileEntityPowerline) te;
+//					if(tep.d.contains(direction.getOpposite()))
+//					{
+//						tep.d.remove(direction.getOpposite());
+//					}
 				}
 			}
 		}
@@ -56,9 +58,15 @@ public class BlockGenerator extends HookedBlockContainer
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1, int var2)
+	public TileEntity createTileEntity(World world, int metadata)
 	{
 		return new TileEntityRepulsionGenerator();
+	}
+	
+	@Override
+	public boolean hasTileEntity(int metadata)
+	{
+		return true;
 	}
 
 	@Override

@@ -51,7 +51,6 @@ import com.arisux.avp.entities.tile.TileEntitySolarPanel;
 import com.arisux.avp.entities.tile.TileEntityStasisMechanism;
 import com.arisux.avp.entities.tile.TileEntityTransformer;
 import com.arisux.avp.entities.tile.TileEntityTurret;
-import com.arisux.avp.entities.tile.TileEntityWorklight;
 import com.arisux.avp.entities.tile.TileEntityWorkstation;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -84,7 +83,6 @@ public class EntityHandler implements IInitializable
 		GameRegistry.registerTileEntity(TileEntityRepulsionGenerator.class, "tileEntityGenerator");
 		GameRegistry.registerTileEntity(TileEntityPowerline.class, "tileEntityPowerline");
 		GameRegistry.registerTileEntity(TileEntityBlastdoor.class, "tileEntityBlastdoor");
-		GameRegistry.registerTileEntity(TileEntityWorklight.class, "tileEntityWorklight");
 		GameRegistry.registerTileEntity(TileEntityCryostasisTube.class, "tileEntityCryostasisTube");
 		GameRegistry.registerTileEntity(TileEntityLightPanel.class, "tileEntityLightPanel");
 		GameRegistry.registerTileEntity(TileEntitySatelliteModem.class, "tileEntitySatelliteModem");

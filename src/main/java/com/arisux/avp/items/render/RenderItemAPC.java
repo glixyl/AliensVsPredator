@@ -29,6 +29,7 @@ public class RenderItemAPC extends ItemRenderer
 			GL11.glTranslatef(6.5F, 1.5F, 0F);
 			GL11.glRotatef(15F, 0F, 1F, 1F);
 			GL11.glDisable(GL11.GL_CULL_FACE);
+			
 			for (Part p : AliensVsPredator.resources().M577_APC.nameToPartHash.values())
 			{
 				p.draw();
@@ -50,6 +51,7 @@ public class RenderItemAPC extends ItemRenderer
 			GL11.glRotatef(110F, 0F, 0F, 1F);
 			GL11.glRotatef(16F, 1F, 0F, 0F);
 			GL11.glDisable(GL11.GL_CULL_FACE);
+			
 			for (Part p : AliensVsPredator.resources().M577_APC.nameToPartHash.values())
 			{
 				p.draw();
@@ -70,10 +72,12 @@ public class RenderItemAPC extends ItemRenderer
 			GL11.glScalef(scale, -scale, scale);
 			GL11.glTranslatef(1.5F, -3.5F, 0F);
 			GL11.glRotatef(rotation, 0F, 1F, 0F);
+			
 			for (Part p : AliensVsPredator.resources().M577_APC.nameToPartHash.values())
 			{
 				p.draw();
 			}
+			RenderUtil.glDisableLight();
 		}
 		GL11.glPopMatrix();
 	}
@@ -88,6 +92,7 @@ public class RenderItemAPC extends ItemRenderer
 			GL11.glScalef(0.2F, 0.2F, 0.2F);
 			GL11.glTranslatef(0, -1F, 0);
 			GL11.glRotatef(Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 360 * 6, 0.0F, 1.0F, 0.0F);
+			
 			for (Part p : AliensVsPredator.resources().M577_APC.nameToPartHash.values())
 			{
 				p.draw();

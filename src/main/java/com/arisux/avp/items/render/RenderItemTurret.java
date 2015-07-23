@@ -2,11 +2,11 @@ package com.arisux.avp.items.render;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.model.ModelTurret;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -39,7 +39,7 @@ public class RenderItemTurret extends ItemRenderer
 	{
 		GL11.glPushMatrix();
 		{
-			Minecraft.getMinecraft().renderEngine.bindTexture(getResourceLocation());
+			RenderUtil.bindTexture(getResourceLocation());
 			GL11.glDisable(GL11.GL_CULL_FACE);
 			((ModelTurret) this.getModel()).render(null, 0.0625F);
 		}
@@ -51,14 +51,16 @@ public class RenderItemTurret extends ItemRenderer
 	{
 		GL11.glPushMatrix();
 		{
-			Minecraft.getMinecraft().renderEngine.bindTexture(getResourceLocation());
+			float glScale = 15F;
+			RenderUtil.bindTexture(getResourceLocation());
 			GL11.glDisable(GL11.GL_CULL_FACE);
 			GL11.glTranslatef(8F, -7.5F, 0F);
 			GL11.glRotatef(0F, 1.0F, 0.0F, 0.0F);
 			GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
-			float glScale = 15F;
 			GL11.glScalef(glScale, glScale, glScale);
+			RenderUtil.glEnableLight();
 			((ModelTurret) this.getModel()).render(null, 0.0625F);
+			RenderUtil.glDisableLight();
 		}
 		GL11.glPopMatrix();
 	}

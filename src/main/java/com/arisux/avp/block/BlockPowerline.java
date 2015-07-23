@@ -1,53 +1,37 @@
 package com.arisux.avp.block;
 
-import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
+import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.avp.entities.tile.TileEntityPowerline;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockPowerline extends HookedBlockContainer
+public class BlockPowerline extends HookedBlock
 {
-	TileEntityPowerline pte;
 	public BlockPowerline(Material material)
 	{
 		super(material);
 		this.setBlockBounds(0F, 0F, 0F, 1F, 1F, 1F);
+		this.setRenderNormal(false);
+		this.setOpaque(false);
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1, int var2)
+	public TileEntity createTileEntity(World world, int metadata)
 	{
 		return new TileEntityPowerline();
+	}
+	
+	@Override
+	public boolean hasTileEntity(int metadata)
+	{
+		return true;
 	}
 	
 	@Override
 	public int getRenderType()
 	{
 		return -1;
-	}
-	
-	@Override
-	public void breakBlock(World world, int posX, int posY, int posZ, Block blockBroken, int meta)
-	{
-		for(ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS)
-		{
-			TileEntity te = world.getTileEntity(posX + direction.offsetX, posY + direction.offsetY, posZ + direction.offsetZ);
-			if(te != null)
-			{
-				if(te instanceof TileEntityPowerline)
-				{
-					TileEntityPowerline tep = (TileEntityPowerline) te;
-					if(tep.d.contains(direction.getOpposite()))
-					{
-						tep.d.remove(direction.getOpposite());
-					}
-				}
-			}
-		}
-		super.breakBlock(world, posX, posY, posZ, blockBroken, meta);
 	}
 }

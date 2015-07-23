@@ -67,7 +67,7 @@ public class RenderPowerline extends TileEntitySpecialRenderer
 						glPushMatrix();
 						{
 							glRotatef(Minecraft.getMinecraft().thePlayer.rotationPitch + 180, -1F, 0F, 0F);
-							RenderUtil.drawString(((float) tile.voltage) + "V", -20, 30, tile.voltage <= 0 ? 0xFFFF0000 : 0xFF00FF00);
+							RenderUtil.drawString(((float) tile.getVoltage()) + "V", -20, 30, tile.getVoltage() <= 0 ? 0xFFFF0000 : 0xFF00FF00);
 							scale = 0.5F;
 							glScalef(scale, scale, scale);
 							RenderUtil.drawString((tile + "").replace(tile.getClass().getName(), ""), -20, 80, 0xFF00AAFF);

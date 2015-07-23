@@ -1,19 +1,25 @@
 package com.arisux.avp.entities.tile;
 
-import cofh.api.energy.IEnergyProvider;
-import cofh.api.energy.IEnergyReceiver;
-import net.minecraft.tileentity.TileEntity;
+import com.arisux.avp.interfaces.energy.IEnergyProvider;
+
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityRepulsionGenerator extends TileEntity implements IEnergyProvider
+public class TileEntityRepulsionGenerator extends TileEntityElectrical implements IEnergyProvider
 {
+	public TileEntityRepulsionGenerator()
+	{
+		super(true);
+	}
+
 	public int rotation;
-	public int voltage;
 
 	@Override
 	public void updateEntity()
 	{
-		pushEnergy();
+		if (this.getWorldObj().getWorldTime() % (1000 / this.getSourceHertz()) == 0)
+		{
+			this.setVoltage(220);
+		}
 	}
 
 	public void setDirection(byte direction)
@@ -22,55 +28,26 @@ public class TileEntityRepulsionGenerator extends TileEntity implements IEnergyP
 	}
 
 	@Override
-	public boolean canConnectEnergy(ForgeDirection from) {
+	public boolean canConnectEnergy(ForgeDirection from)
+	{
 		return false;
 	}
 
-	protected void pushEnergy()
+	@Override
+	public double extractEnergy(ForgeDirection from, double maxExtract, boolean simulate)
 	{
-		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)
-		{
-			TileEntity tile = worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
-			if (tile instanceof TileEntityPowerline)
-			{
-				TileEntityPowerline tep = (TileEntityPowerline) tile;
-				if(tep.d.contains(dir.getOpposite()) || tep.voltage == 0)
-				{
-					tep.receiveEnergy(dir, 120, false);
-				}
-				else
-				{
-					tep.d.add(dir.getOpposite());
-				}
-			}
-			else if(tile instanceof IEnergyReceiver)
-			{
-				IEnergyReceiver ier = (IEnergyReceiver) tile;
-				ier.receiveEnergy(dir, 120, false);
-			}
-		}
+		return 0;
 	}
 
 	@Override
-	public int extractEnergy(ForgeDirection from, int maxExtract,
-			boolean simulate) {
-		if(maxExtract < this.voltage)
-		{
-			return maxExtract;
-		}
-		else
-		{
-			return this.voltage;
-		}
-	}
-
-	@Override
-	public int getEnergyStored(ForgeDirection from) {
+	public double getEnergyStored(ForgeDirection from)
+	{
 		return this.voltage;
 	}
 
 	@Override
-	public int getMaxEnergyStored(ForgeDirection from) {
-		return 10000;
+	public double getMaxEnergyStored(ForgeDirection from)
+	{
+		return 220;
 	}
 }

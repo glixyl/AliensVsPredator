@@ -2,32 +2,38 @@ package com.arisux.avp.block;
 
 import java.util.Random;
 
-import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
+import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.avp.entities.tile.TileEntityHiveNode;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class BlockHiveNode extends HookedBlockContainer
+public class BlockHiveNode extends HookedBlock
 {
-	public BlockHiveNode(Material par3)
+	public BlockHiveNode(Material material)
 	{
-		super(par3);
+		super(material);
 		this.setLightOpacity(2);
-		float var5 = 0.38F;
-		this.setBlockBounds(var5, 0.0F, var5, 1.0F - var5, 0.9F, 1.0F - var5);
+		float size = 0.38F;
+		this.setBlockBounds(size, 0.0F, size, 1.0F - size, 0.9F, 1.0F - size);
 	}
 
 	@Override
-	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
+	public void updateTick(World world, int posX, int posY, int posZ, Random random)
 	{
-		super.updateTick(par1World, par2, par3, par4, par5Random);
+		super.updateTick(world, posX, posY, posZ, random);
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1, int var2)
+	public TileEntity createTileEntity(World world, int metadata)
 	{
 		return new TileEntityHiveNode();
+	}
+	
+	@Override
+	public boolean hasTileEntity(int metadata)
+	{
+		return true;
 	}
 }

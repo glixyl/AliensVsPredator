@@ -60,6 +60,7 @@ public class RenderItemPowerline extends ItemRenderer
 			RenderUtil.glColorHexRGBA(0xFF222222);
 			RenderUtil.glEnableLight();
 			model.render(0.0625F);
+			RenderUtil.glDisableLight();
 			glEnable(GL11.GL_TEXTURE_2D);
 		}
 		GL11.glPopMatrix();

@@ -2,7 +2,7 @@ package com.arisux.avp.block;
 
 import java.util.Random;
 
-import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
+import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.airi.lib.WorldUtil;
 import com.arisux.avp.entities.tile.TileEntityStasisMechanism;
 import com.arisux.avp.items.ItemEntitySummoner;
@@ -17,13 +17,15 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class BlockStasisMechanism extends HookedBlockContainer
+public class BlockStasisMechanism extends HookedBlock
 {
 	public BlockStasisMechanism(Material material)
 	{
 		super(material);
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 		this.setTickRandomly(true);
+		this.setRenderNormal(false);
+		this.setOpaque(false);
 	}
 
 	@Override
@@ -39,9 +41,15 @@ public class BlockStasisMechanism extends HookedBlockContainer
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1, int var2)
+	public TileEntity createTileEntity(World world, int meta)
 	{
 		return new TileEntityStasisMechanism();
+	}
+	
+	@Override
+	public boolean hasTileEntity(int metadata)
+	{
+		return true;
 	}
 
 	@Override
@@ -87,7 +95,7 @@ public class BlockStasisMechanism extends HookedBlockContainer
 	@Override
 	public void onBlockClicked(World world, int posX, int posY, int posZ, EntityPlayer player)
 	{
-		;
+		super.onBlockClicked(world, posX, posY, posZ, player);
 	}
 
 	@Override

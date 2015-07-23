@@ -1,6 +1,9 @@
 package com.arisux.avp.entities.mob.model;
 
+import org.lwjgl.opengl.GL11;
+
 import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.avp.entities.mob.EntityHammerpede;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -171,29 +174,49 @@ public class ModelHammerpede extends ModelBaseExtension
 		body2.render(boxTranslation);
 		body1.render(boxTranslation);
 		body3.render(boxTranslation);
-		head.render(boxTranslation);
 		body5.render(boxTranslation);
 		body4.render(boxTranslation);
 		body6.render(boxTranslation);
 		body7.render(boxTranslation);
 		body8.render(boxTranslation);
-		lCrest.render(boxTranslation);
-		rCrest.render(boxTranslation);
-		mouthLower.render(boxTranslation);
-		rMouth.render(boxTranslation);
-		mouthUpper.render(boxTranslation);
-		lMouth.render(boxTranslation);
-		fangUpper.render(boxTranslation);
-		rFangLower.render(boxTranslation);
-		lFangLower.render(boxTranslation);
-		rFang.render(boxTranslation);
-		lFang.render(boxTranslation);
 		tail.render(boxTranslation);
+
+		GL11.glPushMatrix();
+		{
+			head.render(boxTranslation);
+			lCrest.render(boxTranslation);
+			rCrest.render(boxTranslation);
+			mouthLower.render(boxTranslation);
+			rMouth.render(boxTranslation);
+			mouthUpper.render(boxTranslation);
+			lMouth.render(boxTranslation);
+			fangUpper.render(boxTranslation);
+			rFangLower.render(boxTranslation);
+			lFangLower.render(boxTranslation);
+			rFang.render(boxTranslation);
+			lFang.render(boxTranslation);
+		}
+		GL11.glPopMatrix();
 	}
 	
 	@Override
 	public void setRotationAngles(float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation, Entity entity)
 	{
+		if (entity != null)
+		{
+			EntityHammerpede hammerpede = (EntityHammerpede) entity;
+			long angle = hammerpede.getAttackTarget() != null ? 0 : 49; //0 - 49
+			float speed = 5;
+			
+			this.lCrest.rotateAngleX = 19 + -angle % (10 * speed) / (13F * speed);
+			this.lCrest.rotateAngleY = angle % (10 * speed) / (9F * speed);
+			this.lCrest.rotateAngleZ = -0.7F + -angle % (10 * speed) / (9F * speed);
+
+			this.rCrest.rotateAngleX = 19 + -angle % (10 * speed) / (13F * speed);
+			this.rCrest.rotateAngleY = -angle % (10 * speed) / (9F * speed);
+			this.rCrest.rotateAngleZ = 0.7F + angle % (10 * speed) / (9F * speed);
+		}
+		
 		float newangle = MathHelper.cos(idleProgress * 4.0F * 0.1F) * (float) Math.PI * 0.9F * swingProgressPrev;
 		float distMult = 0.25F;
 		
@@ -209,16 +232,16 @@ public class ModelHammerpede extends ModelBaseExtension
 	private void doTail(float angle, float distMult)
 	{
 		float multiplier = 0.15F;
-		this.body6.rotateAngleY = angle / 4F;
-		this.body7.rotateAngleY = angle / 4F;
+		this.body6.rotateAngleY = angle / 2F;
+		this.body7.rotateAngleY = angle / 2F;
 		this.body7.rotationPointZ = this.body6.rotationPointZ + (float) Math.cos(this.body6.rotateAngleY) * 5.0F;
 		this.body7.rotationPointX = this.body6.rotationPointX + (float) Math.sin(this.body6.rotateAngleY) * 5.0F;
 		multiplier = multiplier + distMult;
 		this.body8.rotationPointZ = this.body7.rotationPointZ + (float) Math.cos(this.body7.rotateAngleY) * 5.0F;
 		this.body8.rotationPointX = this.body7.rotationPointX + (float) Math.sin(this.body7.rotateAngleY) * 5.0F;
-		this.tail.rotateAngleY = angle / 4F;
-		this.tail.rotateAngleY = angle * 0.1F;
-		this.tail.rotationPointZ = this.body8.rotationPointZ + (float) Math.cos(this.body8.rotateAngleY) * 5.0F;
+		this.tail.rotateAngleY = angle / 2F;
+		this.tail.rotateAngleY = angle * 0.5F;
+		this.tail.rotationPointZ = this.body8.rotationPointZ + (float) Math.cos(this.body8.rotateAngleY) * 7.0F;
 		this.tail.rotationPointX = this.body8.rotationPointX + (float) Math.sin(this.body8.rotateAngleY) * 5.0F;
 //		multiplier = multiplier + distMult;
 //		this.stabber.rotateAngleY = angle * multiplier;

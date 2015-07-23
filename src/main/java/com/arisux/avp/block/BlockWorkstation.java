@@ -2,7 +2,7 @@ package com.arisux.avp.block;
 
 import java.util.Random;
 
-import com.arisux.airi.lib.BlockTypes.HookedBlockContainer;
+import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.avp.entities.tile.TileEntityWorkstation;
 
 import net.minecraft.block.material.Material;
@@ -14,19 +14,21 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class BlockWorkstation extends HookedBlockContainer
+public class BlockWorkstation extends HookedBlock
 {
 	public BlockWorkstation(Material material)
 	{
 		super(material);
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 		this.setTickRandomly(true);
+		this.setRenderNormal(false);
+		this.setOpaque(false);
 	}
 
 	@Override
-	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
+	public void updateTick(World world, int posX, int posY, int posZ, Random rand)
 	{
-		super.updateTick(par1World, par2, par3, par4, par5Random);
+		super.updateTick(world, posX, posY, posZ, rand);
 	}
 	
 	@Override
@@ -36,15 +38,21 @@ public class BlockWorkstation extends HookedBlockContainer
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1, int var2)
+	public TileEntity createTileEntity(World world, int meta)
 	{
 		return new TileEntityWorkstation();
 	}
-
+	
 	@Override
-	public boolean onBlockActivated(World worldObj, int xCoord, int yCoord, int zCoord, EntityPlayer player, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_)
+	public boolean hasTileEntity(int metadata)
 	{
 		return true;
+	}
+
+	@Override
+	public boolean onBlockActivated(World worldObj, int xCoord, int yCoord, int zCoord, EntityPlayer player, int side, float subX, float subY, float subZ)
+	{
+		return super.onBlockActivated(worldObj, xCoord, yCoord, zCoord, player, side, subX, subY, subZ);
 	}
 	
 	@Override

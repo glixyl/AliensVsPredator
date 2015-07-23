@@ -13,9 +13,9 @@ import net.minecraft.world.World;
 
 public class BlockPortal extends Block
 {
-	public BlockPortal(int var2, Material var3)
+	public BlockPortal(Material material)
 	{
-		super(var3);
+		super(material);
 		setLightOpacity(100);
 		setTickRandomly(true);
 	}
@@ -25,31 +25,31 @@ public class BlockPortal extends Block
 	{
 		super.randomDisplayTick(worldObj, posX, posY, posZ, rand);
 
-		for (int p = 19; p > 0; --p)
+		for (int i = 19; i > 0; --i)
 		{
 			worldObj.spawnParticle("flame", posX + rand.nextDouble(), posY + rand.nextDouble(), posZ + rand.nextDouble(), 0.0D, 0.0D, 0.0D);
 		}
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World var1, int var2, int var3, int var4, Entity var5)
+	public void onEntityCollidedWithBlock(World world, int posX, int posY, int posZ, Entity entity)
 	{
-		if ((var5.ridingEntity == null) && (var5.riddenByEntity == null) && ((var5 instanceof EntityPlayerMP)))
+		if ((entity.ridingEntity == null) && (entity.riddenByEntity == null) && ((entity instanceof EntityPlayerMP)))
 		{
-			EntityPlayerMP var6 = (EntityPlayerMP) var5;
-			MinecraftServer var7 = MinecraftServer.getServer();
+			EntityPlayerMP player = (EntityPlayerMP) entity;
+			MinecraftServer server = MinecraftServer.getServer();
 
-			if (var6.timeUntilPortal > 0)
+			if (player.timeUntilPortal > 0)
 			{
-				var6.timeUntilPortal = 10;
-			} else if (var6.dimension != 7)
+				player.timeUntilPortal = 10;
+			} else if (player.dimension != 7)
 			{
-				var6.timeUntilPortal = 10;
-				var6.mcServer.getConfigurationManager().transferPlayerToDimension(var6, 7, new TeleporterLV(var7.worldServerForDimension(7)));
+				player.timeUntilPortal = 10;
+				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, 7, new TeleporterLV(server.worldServerForDimension(7)));
 			} else
 			{
-				var6.timeUntilPortal = 10;
-				var6.mcServer.getConfigurationManager().transferPlayerToDimension(var6, 0, new TeleporterLV(var7.worldServerForDimension(1)));
+				player.timeUntilPortal = 10;
+				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, 0, new TeleporterLV(server.worldServerForDimension(1)));
 			}
 		}
 	}

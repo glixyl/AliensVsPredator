@@ -17,27 +17,24 @@ import net.minecraft.tileentity.TileEntity;
 public class RenderSolarPanel extends TileEntitySpecialRenderer
 {
 	public static ModelBaseExtension model = new ModelSolarPanel();
-	
+
 	@Override
 	public void renderTileEntityAt(TileEntity tileEntity, double posX, double posY, double posZ, float renderPartialTicks)
 	{
 		glPushMatrix();
 		{
 			GL11.glDisable(GL11.GL_CULL_FACE);
-			glTranslated(posX + 0.5, posY - 1.4, posZ + 0.5);
+			glTranslated(posX + 0.5, posY + 0.5, posZ + 0.5);
+			
+			if (tileEntity != null)
+			{
+				float angle = tileEntity.getWorldObj().getCelestialAngle(renderPartialTicks) * 360;
+				GL11.glRotatef(angle > 90 && angle < 270 ? 90 : angle, 0, 0, 1);
+				GL11.glTranslatef(0F, -1.4F, 0F);
+			}
+			
 			RenderUtil.bindTexture(AliensVsPredator.resources().SOLAR_PANEL);
 			model.render();
-//			RenderUtil.drawRect(0, 0, 1, 1, 0xFFFF0000);
-//			GL11.glTranslated(0, 0, 1);
-//			RenderUtil.drawRect(0, 0, 1, 1, 0xFFFF0000);
-//			GL11.glRotatef(90, 1, 0, 0);
-//			RenderUtil.drawRect(0, 0, 1, -1, 0xFFFF0000);
-//			GL11.glTranslated(0, 0, -1);
-//			RenderUtil.drawRect(0, 0, 1, -1, 0xFFFF0000);
-//			GL11.glRotatef(90, 0, 1, 0);
-//			RenderUtil.drawRect(0, 0, -1, -1, 0xFFFF0000);
-//			GL11.glTranslated(0, 0, 1);
-//			RenderUtil.drawRect(0, 0, -1, -1, 0xFFFF0000);
 		}
 		glPopMatrix();
 	}

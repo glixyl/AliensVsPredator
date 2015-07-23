@@ -31,6 +31,7 @@ public class RenderBlastdoor extends TileEntitySpecialRenderer
 			bindTexture(AliensVsPredator.resources().BLASTDOOR);
 			glTranslated(posX + 0.5F, posY + 1.5F, posZ + 0.5F);
 			glScalef(1.0F, -1.0F, 1.0F);
+			
 			if(tile.direction != null)
 			{
 				if(tile.direction == ForgeDirection.NORTH)

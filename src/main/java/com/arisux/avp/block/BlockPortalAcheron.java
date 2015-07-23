@@ -10,6 +10,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
@@ -100,8 +101,8 @@ public class BlockPortalAcheron extends BlockBreakable
 	}
 
 	@Override
-	public ItemStack getPickBlock(MovingObjectPosition movingObjPos, World world, int posX, int posY, int posZ)
+	public ItemStack getPickBlock(MovingObjectPosition movingObjPos, World world, int posX, int posY, int posZ, EntityPlayer player)
 	{
-		return super.getPickBlock(movingObjPos, world, posX, posY, posZ);
+		return super.getPickBlock(movingObjPos, world, posX, posY, posZ, player);
 	}
 }

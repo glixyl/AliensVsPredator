@@ -202,7 +202,7 @@ public class DebugToolsRenderEvent
 							if (tile instanceof TileEntityPowerline)
 							{
 								TileEntityPowerline poweredTile = (TileEntityPowerline) tile;
-								info = info + " (" + ((float) poweredTile.voltage) + "V)";
+								info = info + " (" + ((float) poweredTile.getVoltage()) + "V)";
 							}
 
 							if (tile instanceof TileEntityStasisMechanism)

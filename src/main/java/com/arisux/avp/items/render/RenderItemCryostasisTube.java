@@ -84,6 +84,7 @@ public class RenderItemCryostasisTube extends ItemRenderer
 		GL11.glRotatef(-180F, 0.0F, 1.0F, 0.0F);
 		GL11.glDisable(GL11.GL_CULL_FACE);
 		GL11.glScalef(glScale, glScale, glScale);
+		RenderUtil.glEnableLight();
 		RenderUtil.bindTexture(resourceLocation);
 		((ModelCryostasisTtube) this.getModel()).render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
 
@@ -94,5 +95,6 @@ public class RenderItemCryostasisTube extends ItemRenderer
 			((ModelCryostasisTtube) this.getModel()).render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
 		}
 		GL11.glPopMatrix();
+		RenderUtil.glDisableLight();
 	}
 }

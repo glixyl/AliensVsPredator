@@ -32,7 +32,7 @@ public class RenderTurret extends TileEntitySpecialRenderer
 			GL11.glScalef(2F, -2F, 2F);
 			this.model.render(tile, RenderUtil.DEFAULT_BOX_TRANSLATION);
 
-			if (tile.voltage> 0)
+			if (tile.getVoltage() > 0)
 			{
 				glRotatef(tile.getDirection() * 90F, 0F, 1F, 0F);
 				this.renderAmmoDisplay(tile);
