@@ -8,26 +8,27 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityR2PConverter extends TileEntityElectrical implements IEnergyProvider
 {
+	public boolean isActiveRedstoneWireAttached;
+	
 	public TileEntityR2PConverter()
 	{
-		super(false);
+		super(true);
 	}
-
-	public int rotation;
-	public boolean isActiveRedstoneWireAttached;
 
 	@Override
 	public void updateEntity()
 	{
 		if (this.canOutputPower())
 		{
-			;
+			if (this.getWorldObj().getWorldTime() % (1000 / this.getSourceHertz()) == 0)
+			{
+				this.setVoltage(120);
+			}
 		}
-	}
-
-	public void setDirection(byte direction)
-	{
-		this.rotation = direction;
+		else
+		{
+			this.setVoltage(0);
+		}
 	}
 
 	@Override
@@ -35,11 +36,11 @@ public class TileEntityR2PConverter extends TileEntityElectrical implements IEne
 	{
 		return false;
 	}
-
+	
 	@Override
 	public double extractEnergy(ForgeDirection from, double maxExtract, boolean simulate)
 	{
-		return 0;
+		return super.extractEnergy(from, maxExtract, simulate);
 	}
 
 	@Override
@@ -53,7 +54,6 @@ public class TileEntityR2PConverter extends TileEntityElectrical implements IEne
 	{
 		return 10000;
 	}
-
 	public boolean canOutputPower()
 	{
 		World world = this.getWorldObj();
@@ -99,3 +99,4 @@ public class TileEntityR2PConverter extends TileEntityElectrical implements IEne
 		return this.isActiveRedstoneWireAttached;
 	}
 }
+

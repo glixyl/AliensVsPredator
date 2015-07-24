@@ -24,6 +24,8 @@ public class TileEntityP2RConverter extends TileEntityElectrical implements IEne
 	public void updateEntity()
 	{
 		super.updateEntity();
+		this.updateEnergyAsReceiver();
+
 		World world = this.getWorldObj();
 		int x = this.xCoord;
 		int y = this.yCoord;
@@ -38,7 +40,6 @@ public class TileEntityP2RConverter extends TileEntityElectrical implements IEne
 			if (world.getBlockMetadata(x + 1, y, z) == 15 && this.voltage == 0)
 			{
 				world.setBlockMetadataWithNotify(x + 1, y, z, 0, 1);
-
 			}
 		}
 
@@ -107,12 +108,6 @@ public class TileEntityP2RConverter extends TileEntityElectrical implements IEne
 	public boolean canConnectEnergy(ForgeDirection from)
 	{
 		return false;
-	}
-
-	@Override
-	public double receiveEnergy(ForgeDirection from, double maxReceive, boolean simulate)
-	{
-		return maxReceive;
 	}
 
 	@Override

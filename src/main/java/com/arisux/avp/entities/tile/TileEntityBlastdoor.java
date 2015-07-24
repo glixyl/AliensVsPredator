@@ -71,6 +71,8 @@ public class TileEntityBlastdoor extends TileEntityElectrical implements IEnergy
 	public void updateEntity()
 	{
 		super.updateEntity();
+		this.updateEnergyAsReceiver();
+		
 		World world = this.getWorldObj();
 		Block parentBlock = world.getBlock(this.xCoord, this.yCoord, this.zCoord);
 		

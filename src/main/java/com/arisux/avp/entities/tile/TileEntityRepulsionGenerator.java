@@ -36,7 +36,7 @@ public class TileEntityRepulsionGenerator extends TileEntityElectrical implement
 	@Override
 	public double extractEnergy(ForgeDirection from, double maxExtract, boolean simulate)
 	{
-		return 0;
+		return super.extractEnergy(from, maxExtract, simulate);
 	}
 
 	@Override
@@ -48,6 +48,6 @@ public class TileEntityRepulsionGenerator extends TileEntityElectrical implement
 	@Override
 	public double getMaxEnergyStored(ForgeDirection from)
 	{
-		return 220;
+		return 10000;
 	}
 }
