@@ -34,7 +34,7 @@ public class RenderItemBlastDoor extends ItemRenderer
 		GL11.glScalef(glScale, -glScale, glScale);
 		RenderUtil.bindTexture(this.getResourceLocation());
 		((ModelBlastdoor) this.getModel()).render(null, RenderUtil.DEFAULT_BOX_TRANSLATION);
-		
+
 	}
 
 	@Override
@@ -58,18 +58,22 @@ public class RenderItemBlastDoor extends ItemRenderer
 	@Override
 	public void renderInInventory(ItemStack item, Object... data)
 	{
-		float glScale = 5F;
-		RenderUtil.glBlendClear();
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glTranslatef(8F, 7.5F, 0F);
-		GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
-		GL11.glTranslatef(7.5F, 0F, 0F);
-		GL11.glRotatef(-180F, 0.0F, 1.0F, 0.0F);
-		GL11.glDisable(GL11.GL_CULL_FACE);
-		GL11.glScalef(glScale, glScale, glScale);
-		RenderUtil.bindTexture(this.getResourceLocation());
-		RenderUtil.glEnableLight();
-		((ModelBlastdoor) this.getModel()).render(null, RenderUtil.DEFAULT_BOX_TRANSLATION);
-		RenderUtil.glDisableLight();
+		GL11.glPushMatrix();
+		{
+			float glScale = 5F;
+			GL11.glTranslatef(8F, 7.5F, 0F);
+			GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
+			GL11.glTranslatef(7.5F, 0F, 0F);
+			GL11.glRotatef(-180F, 0.0F, 1.0F, 0.0F);
+			GL11.glDisable(GL11.GL_CULL_FACE);
+			GL11.glScalef(glScale, glScale, glScale);
+			GL11.glEnable(GL11.GL_BLEND);
+			RenderUtil.glBlendClear();
+			RenderUtil.bindTexture(this.getResourceLocation());
+			RenderUtil.glEnableLight();
+			((ModelBlastdoor) this.getModel()).render(null, RenderUtil.DEFAULT_BOX_TRANSLATION);
+			RenderUtil.glDisableLight();
+		}
+		GL11.glPopMatrix();
 	}
 }

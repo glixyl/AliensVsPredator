@@ -18,7 +18,7 @@ public class RenderItemWorkstation extends ItemRenderer
 	{
 		super(new ModelWorkstation(), resourceLocation);
 	}
-	
+
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data)
 	{
@@ -52,23 +52,28 @@ public class RenderItemWorkstation extends ItemRenderer
 			GL11.glRotatef(79.0F, 0.0F, 0.0F, 1.0F);
 			GL11.glDisable(GL11.GL_CULL_FACE);
 			GL11.glScalef(glScale, glScale, glScale);
-			RenderUtil.bindTexture(resourceLocation);((ModelWorkstation) this.getModel()).render(null, RenderUtil.DEFAULT_BOX_TRANSLATION);
+			RenderUtil.bindTexture(resourceLocation);
+			((ModelWorkstation) this.getModel()).render(null, RenderUtil.DEFAULT_BOX_TRANSLATION);
 		}
 	}
 
 	@Override
 	public void renderInInventory(ItemStack item, Object... data)
 	{
-		float glScale = 7F;
-		GL11.glTranslatef(8F, 5F, 0F);
-		GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
-		GL11.glTranslatef(0F, 0F, 0F);
-		GL11.glRotatef(-180F, 0.0F, 1.0F, 0.0F);
-		GL11.glDisable(GL11.GL_CULL_FACE);
-		GL11.glScalef(glScale, glScale, glScale);
-		RenderUtil.glEnableLight();
-		RenderUtil.bindTexture(resourceLocation);
-		((ModelWorkstation) this.getModel()).render(null, RenderUtil.DEFAULT_BOX_TRANSLATION);
-		RenderUtil.glDisableLight();
+		GL11.glPushMatrix();
+		{
+			float glScale = 7F;
+			GL11.glTranslatef(8F, 5F, 0F);
+			GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
+			GL11.glTranslatef(0F, 0F, 0F);
+			GL11.glRotatef(-180F, 0.0F, 1.0F, 0.0F);
+			GL11.glDisable(GL11.GL_CULL_FACE);
+			GL11.glScalef(glScale, glScale, glScale);
+			RenderUtil.glEnableLight();
+			RenderUtil.bindTexture(resourceLocation);
+			((ModelWorkstation) this.getModel()).render(null, RenderUtil.DEFAULT_BOX_TRANSLATION);
+			RenderUtil.glDisableLight();
+		}
+		GL11.glPopMatrix();
 	}
 }

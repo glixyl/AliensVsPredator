@@ -31,7 +31,6 @@ public class RenderItemSolarPanel extends ItemRenderer
 	{
 		float glScale = 1.6F;
 		GL11.glScalef(glScale, glScale, glScale);
-//		GL11.glRotatef(10F, 0F, 0F, 1F);
 		GL11.glRotatef(90F, 0F, 0F, 1F);
 		GL11.glTranslatef(0F, -1.6F, 0.4F);
 		GL11.glDisable(GL11.GL_CULL_FACE);
@@ -58,18 +57,21 @@ public class RenderItemSolarPanel extends ItemRenderer
 	@Override
 	public void renderInInventory(ItemStack item, Object... data)
 	{
-		float glScale = 12F;
-		GL11.glScalef(glScale, -glScale, glScale);
-		GL11.glTranslatef(0.65F, -2F, 0F);
-		GL11.glRotatef(30, 1.0F, 0.0F, 0.0F);
-//		GL11.glRotatef(90, 0.0F, 1.0F, 0.0F);
-		GL11.glRotatef(Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 360 * 6, 0.0F, 1.0F, 0.0F);
-		GL11.glTranslatef(0F, 0F, 0F);
-		GL11.glDisable(GL11.GL_CULL_FACE);
-		RenderUtil.bindTexture(resourceLocation);
-		this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+		GL11.glPushMatrix();
+		{
+			float glScale = 12F;
+			GL11.glScalef(glScale, -glScale, glScale);
+			GL11.glTranslatef(0.65F, -2F, 0F);
+			GL11.glRotatef(30, 1.0F, 0.0F, 0.0F);
+			GL11.glRotatef(Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 360 * 6, 0.0F, 1.0F, 0.0F);
+			GL11.glTranslatef(0F, 0F, 0F);
+			GL11.glDisable(GL11.GL_CULL_FACE);
+			RenderUtil.bindTexture(resourceLocation);
+			this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+		}
+		GL11.glPopMatrix();
 	}
-	
+
 	@Override
 	public void renderInWorld(ItemStack item, Object... data)
 	{
