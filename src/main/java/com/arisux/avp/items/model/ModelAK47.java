@@ -6,23 +6,23 @@ import net.minecraft.client.model.ModelRenderer;
 
 public class ModelAK47 extends ModelBaseExtension
 {
-	ModelRenderer handle;
-	ModelRenderer clip;
-	ModelRenderer barrel;
-	ModelRenderer sight1;
-	ModelRenderer sightBase;
-	ModelRenderer rbody1;
-	ModelRenderer lbody1;
-	ModelRenderer stockEnd;
-	ModelRenderer barrelBase;
-	ModelRenderer rBarrelGrip;
-	ModelRenderer lBarrelGrip;
-	ModelRenderer stockAngle;
-	ModelRenderer trigger;
-	ModelRenderer triggerGuard;
-	ModelRenderer sightBase1;
-	ModelRenderer sight2;
-	ModelRenderer stockBase;
+	public ModelRenderer handle;
+	public ModelRenderer clip;
+	public ModelRenderer barrel;
+	public ModelRenderer sight1;
+	public ModelRenderer sightBase;
+	public ModelRenderer rbody1;
+	public ModelRenderer lbody1;
+	public ModelRenderer stockEnd;
+	public ModelRenderer barrelBase;
+	public ModelRenderer rBarrelGrip;
+	public ModelRenderer lBarrelGrip;
+	public ModelRenderer stockAngle;
+	public ModelRenderer trigger;
+	public ModelRenderer triggerGuard;
+	public ModelRenderer sightBase1;
+	public ModelRenderer sight2;
+	public ModelRenderer stockBase;
 
 	public ModelAK47()
 	{
@@ -139,7 +139,7 @@ public class ModelAK47 extends ModelBaseExtension
 		this.clip.render(boxTranslation);
 		this.barrel.render(boxTranslation);
 		this.sight1.render(boxTranslation);
-		this.sightBase.render(boxTranslation);
+//		this.sightBase.render(boxTranslation);
 		this.rbody1.render(boxTranslation);
 		this.lbody1.render(boxTranslation);
 		this.stockEnd.render(boxTranslation);
@@ -147,9 +147,9 @@ public class ModelAK47 extends ModelBaseExtension
 		this.rBarrelGrip.render(boxTranslation);
 		this.lBarrelGrip.render(boxTranslation);
 		this.stockAngle.render(boxTranslation);
-		this.trigger.render(boxTranslation);
-		this.triggerGuard.render(boxTranslation);
-		this.sightBase1.render(boxTranslation);
+//		this.trigger.render(boxTranslation);
+//		this.triggerGuard.render(boxTranslation);
+//		this.sightBase1.render(boxTranslation);
 		this.sight2.render(boxTranslation);
 		this.stockBase.render(boxTranslation);
 	}

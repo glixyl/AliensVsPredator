@@ -114,6 +114,7 @@ import com.arisux.avp.entities.tile.render.RenderStasisMechanism;
 import com.arisux.avp.entities.tile.render.RenderTransformer;
 import com.arisux.avp.entities.tile.render.RenderTurret;
 import com.arisux.avp.entities.tile.render.RenderWorkstation;
+import com.arisux.avp.items.model.ModelAK47;
 import com.arisux.avp.items.render.RenderItemAK47;
 import com.arisux.avp.items.render.RenderItemAPC;
 import com.arisux.avp.items.render.RenderItemBlastDoor;
@@ -137,6 +138,9 @@ import com.arisux.avp.items.render.RenderItemTurret;
 import com.arisux.avp.items.render.RenderItemWorkstation;
 import com.arisux.avp.items.render.RenderItemWristbracer;
 import com.arisux.avp.items.render.RenderItemWristbracerBlades;
+import com.arisux.avp.items.render.parts.RenderItemAK47Action;
+import com.arisux.avp.items.render.parts.RenderItemAK47Barrel;
+import com.arisux.avp.items.render.parts.RenderItemAK47Stock;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -148,13 +152,13 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 {
 	public static final RenderingHandler instance = new RenderingHandler();
 	public ISimpleBlockRenderingHandler renderTypeAngled;
-	
+
 	@Override
 	public void preInitialize(FMLPreInitializationEvent event)
 	{
 		registerSimpleBlockRenderingHandlers();
 	}
-	
+
 	@Override
 	public void postInitialize(FMLPostInitializationEvent event)
 	{
@@ -225,7 +229,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		registerItemRenderer(items.itemSummonerDrone, (new RenderItemSummoner(EntityDrone.class, ModelDrone.class, AliensVsPredator.resources().DRONE_ADVANCED)).setScale(7.5F).setY(6F));
 		registerItemRenderer(items.itemSummonerProtomorph, (new RenderItemSummoner(EntityProtomorph.class, ModelProtomorph.class, AliensVsPredator.resources().PROTOMORPH)).setScale(7.5F).setY(6F));
 		registerItemRenderer(items.itemSummonerWarrior, (new RenderItemSummoner(EntityWarrior.class, ModelWarrior.class, AliensVsPredator.resources().WARRIOR)).setScale(7.5F).setY(9F));
-		registerItemRenderer(items.itemSummonerPraetorian, (new RenderItemSummoner(EntityPraetorian.class, ModelPraetorian.class,AliensVsPredator.resources().PRAETORIAN)).setScale(7.5F).setY(7.5F));
+		registerItemRenderer(items.itemSummonerPraetorian, (new RenderItemSummoner(EntityPraetorian.class, ModelPraetorian.class, AliensVsPredator.resources().PRAETORIAN)).setScale(7.5F).setY(7.5F));
 		registerItemRenderer(items.itemSummonerSpitter, (new RenderItemSummoner(EntitySpitter.class, ModelSpitter.class, AliensVsPredator.resources().SPITTER)).setScale(2.5F).setY(9F));
 		registerItemRenderer(items.itemSummonerCrusher, (new RenderItemSummoner(EntityCrusher.class, ModelCrusher.class, AliensVsPredator.resources().CRUSHER)).setScale(7.5F).setY(9.5F));
 		registerItemRenderer(items.itemSummonerQueen, (new RenderItemSummoner(EntityQueen.class, ModelQueen.class, AliensVsPredator.resources().XENOQUEEN)).setScale(7.5F).setY(8F));
@@ -240,6 +244,14 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		registerItemRenderer(items.itemSummonerCombatSynthetic, (new RenderItemSummoner(EntityCombatSynthetic.class, ModelBipedExtension.class, AliensVsPredator.resources().COMBAT_SYNTHETIC)).setScale(7.5F).setY(8F));
 		registerItemRenderer(items.itemSummonerHammerpede, (new RenderItemSummoner(EntityHammerpede.class, ModelHammerpede.class, AliensVsPredator.resources().HAMMERPEDE)).setScale(25.5F).setY(8F));
 		registerItemRenderer(items.itemSummonerTrilobite, (new RenderItemSummoner(EntityTrilobite.class, ModelTrilobite.class, AliensVsPredator.resources().TRILOBITE)).setScale(25.5F).setY(8F));
+
+		ModelAK47 ak47 = new ModelAK47();
+		registerItemRenderer(items.itemAK47Barrel, new RenderItemAK47Barrel(AliensVsPredator.resources().AK47, ak47.barrel, ak47.barrelBase, ak47.lBarrelGrip, ak47.rBarrelGrip));
+		registerItemRenderer(items.itemAK47Action, new RenderItemAK47Action(AliensVsPredator.resources().AK47, ak47.lbody1, ak47.rbody1, ak47.sightBase, ak47.sightBase1, ak47.trigger, ak47.triggerGuard));
+		registerItemRenderer(items.itemAK47Stock, new RenderItemAK47Stock(AliensVsPredator.resources().AK47, ak47.handle, ak47.stockBase, ak47.stockAngle, ak47.stockEnd));
+		
+		// registerItemRenderer(items.itemAK47Barrel, new RenderItemMotionTracker());
+		// registerItemRenderer(items.itemAK47Stock, new RenderItemMotionTracker());
 	}
 
 	public void registerTileEntitySpecialRenderers()
@@ -262,7 +274,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		bindTileEntitySpecialRenderer(TileEntityP2RConverter.class, new RenderP2RConverter());
 		bindTileEntitySpecialRenderer(TileEntityPowercell.class, new RenderPowercell());
 	}
-	
+
 	public void registerSimpleBlockRenderingHandlers()
 	{
 		registerBlockHandler(this.renderTypeAngled = new RenderShape());

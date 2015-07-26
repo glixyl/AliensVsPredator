@@ -67,7 +67,7 @@ public class RenderItemM4 extends ItemRenderer
 			GL11.glRotatef(80.0F, 0.0F, 0.0F, 1.0F);
 			GL11.glDisable(GL11.GL_CULL_FACE);
 			GL11.glScalef(1.2F, 1.2F, 1.2F);
-			this.getModel().render(0.0625F);
+			this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 		}
 	}
 
@@ -97,7 +97,7 @@ public class RenderItemM4 extends ItemRenderer
 			GL11.glDisable(GL11.GL_CULL_FACE);
 			GL11.glScalef(2.0F, 2.0F, 2.0F);
 			bindTexture(getResourceLocation());
-			this.getModel().render(0.0625F);
+			this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 		}
 	}
 
@@ -112,6 +112,6 @@ public class RenderItemM4 extends ItemRenderer
 		GL11.glTranslatef(0F, -5.77F, -20.85F);
 		GL11.glScalef(20F, 20F, 20F);
 		bindTexture(getResourceLocation());
-		this.getModel().render(0.0625F);
+		this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 	}
 }

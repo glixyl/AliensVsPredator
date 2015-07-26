@@ -67,7 +67,7 @@ public class RenderItemAK47 extends ItemRenderer
 			GL11.glDisable(GL11.GL_CULL_FACE);
 			GL11.glScalef(1.3F, 1.3F, 1.3F);
 			bindTexture(getResourceLocation());
-			this.getModel().render(0.0625F);
+			this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 		}
 	}
 
@@ -98,7 +98,7 @@ public class RenderItemAK47 extends ItemRenderer
 			float glScale = 2.0F;
 			GL11.glScalef(glScale, glScale, glScale);
 			bindTexture(getResourceLocation());
-			this.getModel().render(0.0625F);
+			this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 		}
 	}
 
@@ -115,6 +115,6 @@ public class RenderItemAK47 extends ItemRenderer
 		float glScale = 20F;
 		GL11.glScalef(glScale, glScale, glScale);
 		bindTexture(getResourceLocation());
-		this.getModel().render(0.0625F);
+		this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 	}
 }
