@@ -9,11 +9,17 @@ import cpw.mods.fml.common.IWorldGenerator;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class WorldGenHandler implements IInitializable
+public class WorldHandler implements IInitializable
 {
-	public static final WorldGenHandler instance = new WorldGenHandler();
+	public static final WorldHandler instance = new WorldHandler();
+	private SaveHandler saveHandler;
 	private IWorldGenerator worldGeneratorVarda;
 	private IWorldGenerator worldGeneratorDerelict;
+	
+	public WorldHandler()
+	{
+		this.saveHandler = new SaveHandler();
+	}
 	
 	@Override
 	public void initialize(FMLInitializationEvent event)
@@ -31,5 +37,10 @@ public class WorldGenHandler implements IInitializable
 	public WorldGeneratorDerelict getWorldGeneratorDerelict()
 	{
 		return (WorldGeneratorDerelict) worldGeneratorDerelict;
+	}
+	
+	public SaveHandler getSaveHandler()
+	{
+		return saveHandler;
 	}
 }

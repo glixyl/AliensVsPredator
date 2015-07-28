@@ -67,9 +67,9 @@ public class AliensVsPredator implements IMod
 		return DimensionHandler.instance;
 	}
 
-	public static WorldGenHandler worldgen()
+	public static WorldHandler worldgen()
 	{
-		return WorldGenHandler.instance;
+		return WorldHandler.instance;
 	}
 
 	public static EntityHandler entities()
