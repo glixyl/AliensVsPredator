@@ -3,7 +3,7 @@ package com.arisux.avp;
 import java.util.ArrayList;
 
 import com.arisux.airi.lib.interfaces.IInitializable;
-import com.arisux.avp.event.BucketHandler;
+import com.arisux.avp.event.BucketHandlingEvent;
 import com.arisux.avp.event.EmbryoTickEvent;
 import com.arisux.avp.event.EntityTrackingEvent;
 import com.arisux.avp.event.ExtendedPropertiesEvents;
@@ -70,7 +70,7 @@ public class LocalEventHandler implements IInitializable
 		this.registerEvent(new EmbryoTickEvent());
 		this.registerEvent(new StormUpdateEvent());
 		this.registerEvent(new ExtendedPropertiesEvents());
-		this.registerEvent(BucketHandler.INSTANCE);
+		this.registerEvent(BucketHandlingEvent.INSTANCE);
 	}
 
 	public void registerEvent(Object event)

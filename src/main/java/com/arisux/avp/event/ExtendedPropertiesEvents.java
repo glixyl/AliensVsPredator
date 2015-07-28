@@ -35,11 +35,11 @@ public class ExtendedPropertiesEvents
 				thePlayer.registerExtendedProperties(ExtendedEntityPlayer.IDENTIFIER, extendedPlayer);
 			}
 		}
-		
+
 		if (event.entity instanceof EntityLivingBase)
 		{
 			EntityLivingBase entityLiving = (EntityLivingBase) event.entity;
-			
+
 			if (entityLiving != null)
 			{
 				ExtendedEntityLivingBase extendedLiving = new ExtendedEntityLivingBase(entityLiving);
@@ -56,7 +56,7 @@ public class ExtendedPropertiesEvents
 			this.syncEntity(event.entity);
 		}
 	}
-	
+
 	@SubscribeEvent
 	public void onWorldSave(WorldEvent.Save event)
 	{
@@ -80,8 +80,9 @@ public class ExtendedPropertiesEvents
 					if (extendedLiving != null)
 					{
 						if (target instanceof EntityPlayer)
-						System.out.println("Attempting to sync entity: " + target.getCommandSenderName());
-						extendedLiving.syncClients();
+						{
+							extendedLiving.syncClients();
+						}
 					}
 				}
 

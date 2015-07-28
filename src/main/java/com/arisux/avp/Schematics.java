@@ -24,6 +24,6 @@ public class Schematics implements IInitializable
 		}
 
 		this.schematicTest = SchematicLoader.loadSchematic(new File(baseSchematicDir, "test.schematic"), AliensVsPredator.class.getResource("/assets/avp/schematics/test.schematic"));
-		// this.derelict = SchematicLoader.extractAndLoadSchematic(new File(baseSchematicDir, "derelict.schematic"), AliensVsPredator.class.getResource("/assets/avp/schematics/derelict.schematic"));
+		this.derelict = SchematicLoader.loadSchematic(new File(baseSchematicDir, "derelict.schematic"), AliensVsPredator.class.getResource("/assets/avp/schematics/derelict.schematic"));
 	}
 }

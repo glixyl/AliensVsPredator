@@ -1,7 +1,7 @@
 package com.arisux.avp;
 
 import com.arisux.airi.lib.interfaces.IInitializable;
-import com.arisux.avp.event.BucketHandler;
+import com.arisux.avp.event.BucketHandlingEvent;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import net.minecraft.init.Items;
@@ -19,6 +19,6 @@ public class FluidHandler implements IInitializable
 	{
 		FluidRegistry.registerFluid(fluidBlackGoo);
 		FluidContainerRegistry.registerFluidContainer(fluidBlackGoo, new ItemStack(AliensVsPredator.items().blackGooBucket), new ItemStack(Items.bucket));
-		BucketHandler.INSTANCE.buckets.put(AliensVsPredator.blocks().blockBlackGoo, AliensVsPredator.items().blackGooBucket);
+		BucketHandlingEvent.INSTANCE.buckets.put(AliensVsPredator.blocks().blockBlackGoo, AliensVsPredator.items().blackGooBucket);
 	}
 }

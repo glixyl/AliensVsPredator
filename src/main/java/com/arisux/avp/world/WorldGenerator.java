@@ -7,7 +7,6 @@ import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
 import com.arisux.avp.AliensVsPredator;
 
 import cpw.mods.fml.common.IWorldGenerator;
-import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -23,26 +22,6 @@ public class WorldGenerator implements IWorldGenerator
 	private void generateSurface(World world, Random rand, int chunkX, int chunkZ)
 	{
 		CoordData chunkCoords = new CoordData(chunkX, 0, chunkZ);
-
-		for (int x = 0; x <= 1; x++)
-		{
-			CoordData genCoords = new CoordData(chunkCoords.posX + rand.nextInt(16), 0 + rand.nextInt(128), chunkCoords.posZ + rand.nextInt(16), world);
-
-			if (genCoords.getBlock() == Blocks.grass)
-			{
-				AliensVsPredator.schematics().schematicTest.generate(world, genCoords);
-			}
-		}
-		
-		for (int x = 0; x <= 1; x++)
-		{
-			CoordData genCoords = new CoordData(chunkCoords.posX + rand.nextInt(16), 0 + rand.nextInt(128), chunkCoords.posZ + rand.nextInt(16), world);
-
-			if (genCoords.getBlock() == Blocks.grass)
-			{
-//				AliensVsPredator.schematics().derelict.generate(world, genCoords);
-			}
-		}
 
 		WorldUtil.generateBlockInChunk(world, AliensVsPredator.blocks().oreCopper, rand, 3, 4, 16, 48, chunkCoords, new BiomeGenBase[] { BiomeGenBase.desert });
 		WorldUtil.generateBlockInChunk(world, AliensVsPredator.blocks().oreSilicon, rand, 2, 3, 0, 32, chunkCoords);
