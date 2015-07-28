@@ -113,114 +113,158 @@ public class AssemblerAPI implements IInitializable
 		ItemHandler avp = AliensVsPredator.items();
 
 		this.registerSchematic(new AssemblerSchematic("pulserifle", Inventories.newStack(avp.itemM41A, 1),
-			Inventories.newStack(avp.itemPolycarbonate, 16),
-			Inventories.newStack(Items.iron_ingot, 12),
-			Inventories.newStack(avp.itemIngotAluminum, 6),
-			Inventories.newStack(avp.itemIngotCopper, 6),
-			Inventories.newStack(Items.gold_ingot, 4),
-			Inventories.newStack(avp.itemIntegratedCircuit, 1),
-			Inventories.newStack(Item.getItemFromBlock(Blocks.lever), 2),
-			Inventories.newStack(avp.itemLedDisplay, 1)
-		));
+				Inventories.newStack(avp.itemPolycarbonate, 16),
+				Inventories.newStack(Items.iron_ingot, 12),
+				Inventories.newStack(avp.itemIngotAluminum, 6),
+				Inventories.newStack(avp.itemIngotCopper, 6),
+				Inventories.newStack(Items.gold_ingot, 4),
+				Inventories.newStack(avp.itemIntegratedCircuit, 1),
+				Inventories.newStack(Item.getItemFromBlock(Blocks.lever), 2),
+				Inventories.newStack(avp.itemLedDisplay, 1)
+				));
+		this.registerSchematic(new AssemblerSchematic("grenade", Inventories.newStack(avp.itemGrenade, 1),
+				Inventories.newStack(Items.iron_ingot, 7),
+				Inventories.newStack(Blocks.stone_button, 1),
+				Inventories.newStack(Items.gunpowder, 1)
+				));
+		this.registerSchematic(new AssemblerSchematic("fire_grenade", Inventories.newStack(avp.itemIncendiaryGrenade, 1),
+				Inventories.newStack(Items.iron_ingot, 7),
+				Inventories.newStack(Blocks.stone_button, 1),
+				Inventories.newStack(Items.blaze_powder, 1)
+				));
+		this.registerSchematic(new AssemblerSchematic("marineHelm", Inventories.newStack(avp.helmMarine, 1),
+				Inventories.newStack(Blocks.wool, 5)
+				));
+		this.registerSchematic(new AssemblerSchematic("marinePlate", Inventories.newStack(avp.plateMarine, 1),
+				Inventories.newStack(Blocks.wool, 8)
+				));
+		this.registerSchematic(new AssemblerSchematic("marineLeggings", Inventories.newStack(avp.legsMarine, 1),
+				Inventories.newStack(Blocks.wool, 7)
+				));
+		this.registerSchematic(new AssemblerSchematic("marineBoots", Inventories.newStack(avp.bootsMarine, 1),
+				Inventories.newStack(Blocks.wool, 4)
+				));
+		this.registerSchematic(new AssemblerSchematic("sniperMagazine", Inventories.newStack(avp.itemAmmoSniper, 1),
+				Inventories.newStack(avp.itemIngotAluminum, 5),
+				Inventories.newStack(Items.gunpowder, 1)
+				));
+		this.registerSchematic(new AssemblerSchematic("pistolMagazine", Inventories.newStack(avp.itemAmmoPistol, 1),
+				Inventories.newStack(avp.itemIngotAluminum, 6),
+				Inventories.newStack(Items.gunpowder, 1)
+				));
+		this.registerSchematic(new AssemblerSchematic("ARAmmo", Inventories.newStack(avp.itemAmmoAR, 1),
+				Inventories.newStack(avp.itemIngotAluminum, 5),
+				Inventories.newStack(Items.iron_ingot, 1),
+				Inventories.newStack(Items.gunpowder, 1)
+				));
+		this.registerSchematic(new AssemblerSchematic("ACAmmo", Inventories.newStack(avp.itemAmmoAC, 1),
+				Inventories.newStack(avp.itemIngotAluminum, 5),
+				Inventories.newStack(Items.gunpowder, 2)
+				));
+		this.registerSchematic(new AssemblerSchematic("SMGAmmo", Inventories.newStack(avp.itemAmmoSMG, 1),
+				Inventories.newStack(avp.itemIngotAluminum, 4),
+				Inventories.newStack(Items.iron_ingot, 4),
+				Inventories.newStack(Items.gunpowder, 1)
+				));
 		this.registerSchematic(new AssemblerSchematic("m56sg", Inventories.newStack(avp.itemM56SG, 1),
-			Inventories.newStack(avp.itemM56SGAimingModule, 1),
-			Inventories.newStack(avp.itemM56SGStock, 1),
-			Inventories.newStack(avp.itemM56SGBarrel, 1),
-			Inventories.newStack(avp.itemM56SGSupportFrame, 1)
-		));
+				Inventories.newStack(avp.itemM56SGAimingModule, 1),
+				Inventories.newStack(avp.itemM56SGStock, 1),
+				Inventories.newStack(avp.itemM56SGBarrel, 1),
+				Inventories.newStack(avp.itemM56SGSupportFrame, 1)
+				));
 		this.registerSchematic(new AssemblerSchematic("sniper", Inventories.newStack(avp.itemSniper, 1),
-			Inventories.newStack(avp.itemSniperScope, 1),
-			Inventories.newStack(avp.itemSniperAction, 1),
-			Inventories.newStack(avp.itemSniperPeripherals, 1),
-			Inventories.newStack(avp.itemSniperBarrel, 1),
-			Inventories.newStack(avp.itemSniperStock, 1)
-		));
+				Inventories.newStack(avp.itemSniperScope, 1),
+				Inventories.newStack(avp.itemSniperAction, 1),
+				Inventories.newStack(avp.itemSniperPeripherals, 1),
+				Inventories.newStack(avp.itemSniperBarrel, 1),
+				Inventories.newStack(avp.itemSniperStock, 1)
+				));
 		this.registerSchematic(new AssemblerSchematic("pistol", Inventories.newStack(avp.itemPistol, 1),
-			Inventories.newStack(avp.itemPistolStock, 1),
-			Inventories.newStack(avp.itemPistolBarrel, 1),
-			Inventories.newStack(avp.itemPistolAction, 1)
-		));
+				Inventories.newStack(avp.itemPistolStock, 1),
+				Inventories.newStack(avp.itemPistolBarrel, 1),
+				Inventories.newStack(avp.itemPistolAction, 1)
+				));
 		this.registerSchematic(new AssemblerSchematic("m4", Inventories.newStack(avp.itemM4, 1),
-			Inventories.newStack(avp.itemM4Stock, 1),
-			Inventories.newStack(avp.itemM4Barrel, 1),
-			Inventories.newStack(avp.itemM4Action, 1)
-		));
+				Inventories.newStack(avp.itemM4Stock, 1),
+				Inventories.newStack(avp.itemM4Barrel, 1),
+				Inventories.newStack(avp.itemM4Action, 1)
+				));
 		this.registerSchematic(new AssemblerSchematic("ak47", Inventories.newStack(avp.itemAK47, 1),
-			Inventories.newStack(avp.itemAK47Action, 1),
-			Inventories.newStack(avp.itemAK47Barrel, 1),
-			Inventories.newStack(avp.itemAK47Stock, 1)
-		));
+				Inventories.newStack(avp.itemAK47Action, 1),
+				Inventories.newStack(avp.itemAK47Barrel, 1),
+				Inventories.newStack(avp.itemAK47Stock, 1)
+				));
 		this.registerSchematic(new AssemblerSchematic("doritos", Inventories.newStack(avp.itemDoritos, 4),
-			Inventories.newStack(Items.wheat, 4),
-			Inventories.newStack(Items.baked_potato, 4)
-		));
+				Inventories.newStack(Items.wheat, 4),
+				Inventories.newStack(Items.baked_potato, 4)
+				));
 		this.registerSchematic(new AssemblerSchematic("doritosCoolRanch", Inventories.newStack(avp.itemDoritosCoolRanch, 4),
-			Inventories.newStack(avp.itemDoritos, 4),
-			Inventories.newStack(Items.wheat, 4)
-		));
+				Inventories.newStack(avp.itemDoritos, 4),
+				Inventories.newStack(Items.wheat, 4)
+				));
 		this.registerSchematic(new AssemblerSchematic("ic", Inventories.newStack(avp.itemIntegratedCircuit, 4),
-			Inventories.newStack(avp.itemPolycarbonate, 1),
-			Inventories.newStack(avp.itemIngotAluminum, 1),
-			Inventories.newStack(avp.itemIngotCopper, 1),
-			Inventories.newStack(avp.itemSilicon, 1),
-			Inventories.newStack(Items.iron_ingot, 1)
-		));
+				Inventories.newStack(avp.itemPolycarbonate, 1),
+				Inventories.newStack(avp.itemIngotAluminum, 1),
+				Inventories.newStack(avp.itemIngotCopper, 1),
+				Inventories.newStack(avp.itemSilicon, 1),
+				Inventories.newStack(Items.iron_ingot, 1)
+				));
 		this.registerSchematic(new AssemblerSchematic("led", Inventories.newStack(avp.itemLed, 4),
-			Inventories.newStack(avp.itemPolycarbonate, 2),
-			Inventories.newStack(avp.itemIngotCopper, 1),
-			Inventories.newStack(avp.itemSilicon, 1)
-		));
+				Inventories.newStack(avp.itemPolycarbonate, 2),
+				Inventories.newStack(avp.itemIngotCopper, 1),
+				Inventories.newStack(avp.itemSilicon, 1)
+				));
 		this.registerSchematic(new AssemblerSchematic("ledDisplay", Inventories.newStack(avp.itemLedDisplay, 2),
-			Inventories.newStack(avp.itemPolycarbonate, 8),
-			Inventories.newStack(avp.itemLed, 24),
-			Inventories.newStack(avp.itemIngotAluminum, 2),
-			Inventories.newStack(avp.itemIngotCopper, 4),
-			Inventories.newStack(avp.itemSilicon, 2),
-			Inventories.newStack(avp.itemIntegratedCircuit, 2),
-			Inventories.newStack(Items.iron_ingot, 2)
-		));
+				Inventories.newStack(avp.itemPolycarbonate, 8),
+				Inventories.newStack(avp.itemLed, 24),
+				Inventories.newStack(avp.itemIngotAluminum, 2),
+				Inventories.newStack(avp.itemIngotCopper, 4),
+				Inventories.newStack(avp.itemSilicon, 2),
+				Inventories.newStack(avp.itemIntegratedCircuit, 2),
+				Inventories.newStack(Items.iron_ingot, 2)
+				));
 		this.registerSchematic(new AssemblerSchematic("processor", Inventories.newStack(avp.itemProcessor, 1),
-			Inventories.newStack(avp.itemPolycarbonate, 8),
-			Inventories.newStack(avp.itemIngotAluminum, 1),
-			Inventories.newStack(avp.itemIngotCopper, 1),
-			Inventories.newStack(avp.itemSilicon, 1),
-			Inventories.newStack(avp.itemIntegratedCircuit, 16),
-			Inventories.newStack(Items.iron_ingot, 1)
-		));
+				Inventories.newStack(avp.itemPolycarbonate, 8),
+				Inventories.newStack(avp.itemIngotAluminum, 1),
+				Inventories.newStack(avp.itemIngotCopper, 1),
+				Inventories.newStack(avp.itemSilicon, 1),
+				Inventories.newStack(avp.itemIntegratedCircuit, 16),
+				Inventories.newStack(Items.iron_ingot, 1)
+				));
 		this.registerSchematic(new AssemblerSchematic("motionTracker", Inventories.newStack(avp.itemMotionTracker, 1),
-			Inventories.newStack(avp.itemPolycarbonate, 12),
-			Inventories.newStack(avp.itemIngotAluminum, 8),
-			Inventories.newStack(avp.itemIngotCopper, 6),
-			Inventories.newStack(avp.itemLedDisplay, 1),
-			Inventories.newStack(avp.itemLed, 4),
-			Inventories.newStack(avp.itemIntegratedCircuit, 8),
-			Inventories.newStack(avp.itemProcessor, 1),
-			Inventories.newStack(Items.diamond, 1),
-			Inventories.newStack(Items.iron_ingot, 8)
-		));
+				Inventories.newStack(avp.itemPolycarbonate, 12),
+				Inventories.newStack(avp.itemIngotAluminum, 8),
+				Inventories.newStack(avp.itemIngotCopper, 6),
+				Inventories.newStack(avp.itemLedDisplay, 1),
+				Inventories.newStack(avp.itemLed, 4),
+				Inventories.newStack(avp.itemIntegratedCircuit, 8),
+				Inventories.newStack(avp.itemProcessor, 1),
+				Inventories.newStack(Items.diamond, 1),
+				Inventories.newStack(Items.iron_ingot, 8)
+				));
 		this.registerSchematic(new AssemblerSchematic("flamethrower", Inventories.newStack(avp.itemM240ICU, 1),
-			Inventories.newStack(avp.itemPolycarbonate, 4),
-			Inventories.newStack(avp.itemIngotAluminum, 8),
-			Inventories.newStack(avp.itemIngotCopper, 6),
-			Inventories.newStack(Item.getItemFromBlock(Blocks.lever), 1),
-			Inventories.newStack(Items.blaze_rod, 1),
-			Inventories.newStack(Items.iron_ingot, 12)
-		));
+				Inventories.newStack(avp.itemPolycarbonate, 4),
+				Inventories.newStack(avp.itemIngotAluminum, 8),
+				Inventories.newStack(avp.itemIngotCopper, 6),
+				Inventories.newStack(Item.getItemFromBlock(Blocks.lever), 1),
+				Inventories.newStack(Items.blaze_rod, 1),
+				Inventories.newStack(Items.iron_ingot, 12)
+				));
 		this.registerSchematic(new AssemblerSchematic("nbtDrive", Inventories.newStack(avp.itemFlashDrive, 4),
-			Inventories.newStack(avp.itemPolycarbonate, 8),
-			Inventories.newStack(avp.itemIngotAluminum, 1),
-			Inventories.newStack(avp.itemSilicon, 1),
-			Inventories.newStack(avp.itemIngotCopper, 1),
-			Inventories.newStack(avp.itemProcessor, 1),
-			Inventories.newStack(avp.itemLed, 1),
-			Inventories.newStack(avp.itemIntegratedCircuit, 4)
-		));
+				Inventories.newStack(avp.itemPolycarbonate, 8),
+				Inventories.newStack(avp.itemIngotAluminum, 1),
+				Inventories.newStack(avp.itemSilicon, 1),
+				Inventories.newStack(avp.itemIngotCopper, 1),
+				Inventories.newStack(avp.itemProcessor, 1),
+				Inventories.newStack(avp.itemLed, 1),
+				Inventories.newStack(avp.itemIntegratedCircuit, 4)
+				));
 		this.registerSchematic(new AssemblerSchematic("artifactTech", Inventories.newStack(avp.itemArtifactTech, 4),
-			Inventories.newStack(Items.redstone, 8),
-			Inventories.newStack(avp.itemIngotAluminum, 4),
-			Inventories.newStack(avp.itemSilicon, 4),
-			Inventories.newStack(avp.itemIngotCopper, 4)
-		));
+				Inventories.newStack(Items.redstone, 8),
+				Inventories.newStack(avp.itemIngotAluminum, 4),
+				Inventories.newStack(avp.itemSilicon, 4),
+				Inventories.newStack(avp.itemIngotCopper, 4)
+				));
 	}
 
 	public boolean isSchematicComplete(AssemblerSchematic schematic, EntityPlayer player)

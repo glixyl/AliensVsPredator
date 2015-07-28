@@ -1,9 +1,9 @@
-item.avp:item.ammo.pistol.name=Pistol Rounds
-item.avp:item.ammo.ar.name=Assault Rifle Rounds
-item.avp:item.ammo.ac.name=Assault Carbine Rounds
-item.avp:item.ammo.smg.name=Sub Machine-Gun Rounds
-item.avp:item.ammo.sniper.name=Sniper Rounds
-item.avp:grenade.name=M40 Grenade
+item.avp:ammo.pistol.name=Pistol Rounds
+item.avp:ammo.ar.name=Assault Rifle Rounds
+item.avp:ammo.ac.name=Assault Carbine Rounds
+item.avp:ammo.smg.name=Sub Machine-Gun Rounds
+item.avp:ammo.sniper.name=Sniper Rounds
+item.avp:grenade.m40.name=M40 Grenade
 item.avp:grenade.incindiary.name=M40 Incendiary Grenade
 item.avp:tool.celtic.spear.name=Celtic Spear
 item.avp:smartdisc.name=Smart Disc

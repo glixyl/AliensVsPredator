@@ -4,6 +4,7 @@ import com.arisux.airi.lib.interfaces.IInitializable;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 public class CraftingHandler implements IInitializable
@@ -20,8 +21,8 @@ public class CraftingHandler implements IInitializable
 
 	public void addRecipes()
 	{
+		GameRegistry.addRecipe(new ItemStack(AliensVsPredator.blocks().blockAssembler, 1), new Object[]{"YXY", "YXY", "YXY", Character.valueOf('X'), AliensVsPredator.items().itemIngotAluminum, Character.valueOf('Y'), AliensVsPredator.items().itemIngotCopper});
 //		GameRegistry.addRecipe(new ItemStack(AliensVsPredator.items().itemDoritos, 1), new Object[]{"***", "*0*", "***", Character.valueOf('0'), Items.potato, Character.valueOf('*'), Items.wheat});
-//		GameRegistry.addRecipe(new ItemStack(Items.diamond, 1), new Object[]{"000", "000", "000", Character.valueOf('0'), AliensVsPredator.items().itemShardDiamond});
 //		GameRegistry.addRecipe(new ItemStack(AliensVsPredator.items().itemAK47, 1), new Object[]{"***", "341", "32*", Character.valueOf('1'), AliensVsPredator.items().itemIngotAluminum, Character.valueOf('2'), Blocks.lever, Character.valueOf('3'), Blocks.planks, Character.valueOf('4'), AliensVsPredator.items().itemM4});
 //		GameRegistry.addRecipe(new ItemStack(AliensVsPredator.items().itemM56sg, 1), new Object[]{"LR*", "ITI", "LA*", Character.valueOf('A'), AliensVsPredator.items().itemIngotAluminum, Character.valueOf('L'), Blocks.lever, Character.valueOf('T'), AliensVsPredator.items().itemM41A, Character.valueOf('I'), Items.iron_ingot, Character.valueOf('R'), Items.redstone});
 //		GameRegistry.addRecipe(new ItemStack(AliensVsPredator.items().itemM4, 1), new Object[]{"***", "111", "12*", Character.valueOf('1'), AliensVsPredator.items().itemIngotAluminum, Character.valueOf('2'), Blocks.lever});
@@ -29,7 +30,7 @@ public class CraftingHandler implements IInitializable
 //		GameRegistry.addRecipe(new ItemStack(AliensVsPredator.items().itemM4, 1), new Object[]{"***", "130", "12*", Character.valueOf('1'), AliensVsPredator.items().itemIngotAluminum, Character.valueOf('2'), Blocks.lever, Character.valueOf('3'), AliensVsPredator.items().itemM4, Character.valueOf('0'), Items.gold_ingot});
 //		GameRegistry.addRecipe(new ItemStack(AliensVsPredator.items().itemFlamethrower, 1), new Object[]{"***", "111", "12*", Character.valueOf('1'), Items.iron_ingot, Character.valueOf('2'), Items.blaze_rod});
 //		GameRegistry.addRecipe(new ItemStack(AliensVsPredator.items().itemPistol, 1), new Object[]{"***", "111", "1**", Character.valueOf('1'), Items.iron_ingot, Character.valueOf('2'), Blocks.lever});
-//		GameRegistry.addRecipe(new ItemStack(AliensVsPredator.items().itemEnergy, 1), new Object[]{"***", "*0*", "*1*", Character.valueOf('0'), AliensVsPredator.items().itemShardDiamond, Character.valueOf('1'), AliensVsPredator.items().itemIngotTitanium});
+
 //		GameRegistry.addRecipe(new ItemStack(AliensVsPredator.items().plateTitanium, 1), new Object[]{"0*0", "010", "000", Character.valueOf('0'), AliensVsPredator.items().itemIngotTitanium, Character.valueOf('1'), AliensVsPredator.items().itemArtifactTech});
 //		GameRegistry.addRecipe(new ItemStack(AliensVsPredator.items().legsTitanium, 1), new Object[]{"010", "0*0", "0*0", Character.valueOf('0'), AliensVsPredator.items().itemIngotTitanium, Character.valueOf('1'), AliensVsPredator.items().itemArtifactTech});
 //		GameRegistry.addRecipe(new ItemStack(AliensVsPredator.items().bootsTitanium, 1), new Object[]{"***", "0*0", "0*0", Character.valueOf('0'), AliensVsPredator.items().itemIngotTitanium, Character.valueOf('1'), AliensVsPredator.items().itemArtifactTech});
