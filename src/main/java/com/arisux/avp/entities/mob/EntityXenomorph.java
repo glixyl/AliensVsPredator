@@ -43,7 +43,7 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 	{
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(1F);
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(100.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
 	}
 
 	@Override
@@ -74,78 +74,6 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 	{
 		super.onUpdate();
 		this.fallDistance = 0F;
-
-		if(this instanceof EntitySpitter)
-		{
-			EntitySpitter spitter = (EntitySpitter) this;
-			//Finds Target
-			this.attackAI();
-
-			//Checks if it's dead or not
-			if(this.getAttackTarget() != null && this.getAttackTarget().isDead)
-			{
-				this.setAttackTarget(null);
-			}
-
-			//Attacks it
-			else if(this.getAttackTarget() != null)
-			{
-				if(this.getAttackTarget() instanceof EntityPlayer)
-				{
-					EntityPlayer target = (EntityPlayer) this.getAttackTarget();
-					//If it's in creative mode stop attacking
-					if(target.capabilities.isCreativeMode)
-					{
-						this.setAttackTarget(null);
-						return;
-					}
-					else
-					{
-						if(this.getDistance(this.getAttackTarget().posX, this.getAttackTarget().posY, this.getAttackTarget().posZ) < 10)
-						{
-							spitter.attackEntityWithRangedAttack(this.getAttackTarget(), 0.05F);
-						}
-					}
-				}
-				if(this.getDistance(this.getAttackTarget().posX, this.getAttackTarget().posY, this.getAttackTarget().posZ) < 10)
-				{
-					spitter.attackEntityWithRangedAttack(this.getAttackTarget(), 0.05F);
-				}
-			}
-		}
-
-		else
-		{
-			this.attackAI();
-			if(this.getAttackTarget() != null && this.getAttackTarget().isDead)
-			{
-				this.setAttackTarget(null);
-			}
-
-			else if(this.getAttackTarget() != null)
-			{
-				if(this.getAttackTarget() instanceof EntityPlayer)
-				{
-					EntityPlayer target = (EntityPlayer) this.getAttackTarget();
-					if(target.capabilities.isCreativeMode)
-					{
-						this.setAttackTarget(null);
-						return;
-					}
-					else
-					{
-						if(this.getDistance(this.getAttackTarget().posX, this.getAttackTarget().posY, this.getAttackTarget().posZ) < 3)
-						{
-							this.attackEntityAsMob(this.getAttackTarget());
-						}
-					}
-				}
-				if(this.getDistance(this.getAttackTarget().posX, this.getAttackTarget().posY, this.getAttackTarget().posZ) < 3)
-				{
-					this.attackEntityAsMob(this.getAttackTarget());
-				}
-			}
-		}
 	}
 
 	@Override
