@@ -2,6 +2,7 @@ package com.arisux.avp;
 
 import java.io.File;
 
+import com.arisux.airi.AIRI;
 import com.arisux.airi.lib.WorldUtil.NBT;
 import com.arisux.avp.world.DedicatedWorldInfo;
 
@@ -19,7 +20,7 @@ public class SaveHandler
 
 	public DedicatedWorldInfo getWorldInfo()
 	{
-		return worldInfo;
+		return worldInfo == null ? worldInfo = new DedicatedWorldInfo(new NBTTagCompound()) : worldInfo;
 	}
 
 	public File getWorldFile(World world)
@@ -29,26 +30,25 @@ public class SaveHandler
 
 	public String getFileName()
 	{
-		return "avp.dat";
+		return "aliensvspredator.dat";
 	}
 
 	public void saveData(World world)
 	{
+		File file = this.getWorldFile(world);
+		NBTTagCompound tag = new NBTTagCompound();
+
 		try
 		{
-			File file = this.getWorldFile(world);
-
-			if (file != null)
+			if (this.getWorldInfo() != null)
 			{
-				NBTTagCompound tag = this.loadData(world);
-
-				if (this.getWorldInfo() != null)
+				if (!this.getWorldInfo().save(tag))
 				{
-					this.getWorldInfo().save(tag);
+					AIRI.logger.info("Unable to save world data: ", this.getFileName());
 				}
-				
-				NBT.writeCompressed(tag, file);
 			}
+
+			NBT.writeCompressed(tag, file);
 		}
 		catch (Exception e)
 		{
@@ -62,34 +62,26 @@ public class SaveHandler
 
 	public NBTTagCompound loadData(World world)
 	{
+		NBTTagCompound tag = new NBTTagCompound();
+		File file = this.getWorldFile(world);
+
 		try
 		{
-			File file = this.getWorldFile(world);
-
-			if (file != null)
+			if (!file.exists())
 			{
-				NBTTagCompound tag = new NBTTagCompound();
-
-				if (!file.exists())
-				{
-					file.createNewFile();
-				}
-
-				if (file.exists())
-				{
-					tag = NBT.readCompressed(file);
-				}
-
-				this.worldInfo = new DedicatedWorldInfo(tag);
-
-				return tag;
+				NBT.writeCompressed(tag, file);
 			}
+
+			NBTTagCompound read = NBT.readCompressed(file);
+			tag = read == null ? tag : read;
+
+			this.worldInfo = new DedicatedWorldInfo(tag);
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
 
-		return new NBTTagCompound();
+		return tag;
 	}
 }
