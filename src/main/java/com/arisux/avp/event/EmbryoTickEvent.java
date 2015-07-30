@@ -57,7 +57,7 @@ public class EmbryoTickEvent
 							living.getActivePotionEffects().clear();
 						}
 
-						if (livingProperties.getEmbryoAge() >= livingProperties.getMaxEmbryoAge() - (livingProperties.getMaxEmbryoAge() / 2))
+						if (livingProperties.getEmbryoAge() <= livingProperties.getMaxEmbryoAge())
 						{
 							living.addPotionEffect(new PotionEffect(Potion.blindness.getId(), livingProperties.getMaxEmbryoAge() / 2));
 						}
