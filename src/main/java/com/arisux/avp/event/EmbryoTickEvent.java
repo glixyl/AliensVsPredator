@@ -55,15 +55,27 @@ public class EmbryoTickEvent
 							entity.attackEntityFrom(DamageSources.causeChestbursterDamage(chestburster, entity), 200F);
 							livingProperties.setEmbryoAge(livingProperties.getMaxEmbryoAge());
 							living.getActivePotionEffects().clear();
+							livingProperties.setContainsEmbryo(false);
 						}
 
-						if (livingProperties.getEmbryoAge() >= livingProperties.getMaxEmbryoAge() - (livingProperties.getMaxEmbryoAge() / 2))
+						if (livingProperties.getEmbryoAge() <= livingProperties.getMaxEmbryoAge())
 						{
 							living.addPotionEffect(new PotionEffect(Potion.blindness.getId(), livingProperties.getMaxEmbryoAge() / 2));
 						}
 					}
 				}
 			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void respawnEvent(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent event)
+	{
+		EntityLivingBase living = (EntityLivingBase) event.player;
+		ExtendedEntityLivingBase livingProperties = (ExtendedEntityLivingBase) living.getExtendedProperties(ExtendedEntityLivingBase.IDENTIFIER);
+		if(livingProperties.doesEntityContainEmbryo())
+		{
+			livingProperties.setContainsEmbryo(false);
 		}
 	}
 }
