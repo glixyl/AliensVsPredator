@@ -108,6 +108,7 @@ public class Resources implements IInitializablePre
 	public final ResourceLocation MOTIONTRACKER_S4 = new ResourceLocation(AliensVsPredator.ID, "textures/misc/motiontracker/sweep4.png");
 	public final ResourceLocation MOTIONTRACKER_S5 = new ResourceLocation(AliensVsPredator.ID, "textures/misc/motiontracker/sweep5.png");
 	public final ResourceLocation MOTIONTRACKER_S6 = new ResourceLocation(AliensVsPredator.ID, "textures/misc/motiontracker/sweep6.png");
+	public final ResourceLocation QUEEN_BOSS_BAR = new ResourceLocation(AliensVsPredator.ID, "textures/misc/queenbossbar.png");
 
 	public WavefrontModel M577_APC;
 	

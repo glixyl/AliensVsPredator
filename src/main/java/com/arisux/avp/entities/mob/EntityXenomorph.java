@@ -74,8 +74,10 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 	{
 		super.onUpdate();
 		this.fallDistance = 0F;
+		
+		
 	}
-
+	
 	@Override
 	protected void attackEntity(Entity entity, float damage)
 	{

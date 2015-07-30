@@ -53,6 +53,8 @@ public class EmbryoTickEvent
 							chestburster.setLocationAndAngles(living.posX, living.posY, living.posZ, 0.0F, 0.0F);
 							event.world.spawnEntityInWorld(chestburster);
 							entity.attackEntityFrom(DamageSources.causeChestbursterDamage(chestburster, entity), 200F);
+							livingProperties.setEmbryoAge(livingProperties.getMaxEmbryoAge());
+							living.getActivePotionEffects().clear();
 						}
 
 						if (livingProperties.getEmbryoAge() >= livingProperties.getMaxEmbryoAge() - (livingProperties.getMaxEmbryoAge() / 2))

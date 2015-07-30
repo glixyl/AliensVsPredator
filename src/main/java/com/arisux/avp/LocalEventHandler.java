@@ -11,6 +11,7 @@ import com.arisux.avp.event.StormUpdateEvent;
 import com.arisux.avp.event.WorldInfoEvent;
 import com.arisux.avp.event.client.AlienArmorEvents;
 import com.arisux.avp.event.client.AmmoIndicatorRenderEvent;
+import com.arisux.avp.event.client.BossBarEvent;
 import com.arisux.avp.event.client.ChestbursterOverlayEvent;
 import com.arisux.avp.event.client.CommonFirearmEvents;
 import com.arisux.avp.event.client.DebugToolsRenderEvent;
@@ -60,6 +61,7 @@ public class LocalEventHandler implements IInitializable
 			this.registerEvent(new UserInterfaceEvents());
 			this.registerEvent(new PulseRifleEvents());
 			this.registerEvent(new WristBracerEvents());
+			this.registerEvent(new BossBarEvent());
 		}
 
 		if (FMLCommonHandler.instance().getSide() == Side.SERVER)
