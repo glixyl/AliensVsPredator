@@ -15,6 +15,7 @@ public abstract class TileEntityElectrical extends TileEntity
 	protected double srcVoltage;
 	protected double thresholdVoltage;
 	protected double resistance;
+	protected double boost;
 	protected int srcHertz;
 	protected boolean isSrc;
 	
@@ -25,6 +26,7 @@ public abstract class TileEntityElectrical extends TileEntity
 		this.srcVoltage = 120;
 		this.srcHertz = 50; /** 1000 / 50Hz = 20 Ticks **/
 		this.resistance = 0.1;
+		this.boost = 0;
 	}
 
 	@Override
@@ -104,6 +106,15 @@ public abstract class TileEntityElectrical extends TileEntity
 	}
 	
 	/**
+	 * @param side - ForgeDirection from the receiver. 
+	 * @return If this side can provide energy to the receiver.
+	 */
+	public boolean canProvideEnergyToReceiver(ForgeDirection side)
+	{
+		return true;
+	}
+	
+	/**
 	 * @return The amount of voltage this component currently contains.
 	 */
 	public double getVoltage()
@@ -117,6 +128,22 @@ public abstract class TileEntityElectrical extends TileEntity
 	public void setVoltage(double voltage)
 	{
 		this.voltage = voltage;
+	}
+	
+	/**
+	 * @return The amount of boost this component currently contains.
+	 */
+	public double getBoost()
+	{
+		return this.boost;
+	}
+	
+	/**
+	 * @param voltage - The amount of boost this component should contain.
+	 */
+	public void setBoost(double boost)
+	{
+		this.boost = boost;
 	}
 	
 	/**
@@ -184,7 +211,7 @@ public abstract class TileEntityElectrical extends TileEntity
 				{
 					IEnergyProvider provider = (IEnergyProvider) electrical;
 					
-					if (electrical.getVoltage() > this.getVoltage())
+					if (electrical.canProvideEnergyToReceiver(direction) && provider.canConnectEnergy(direction) && electrical.getVoltage() > this.getVoltage())
 					{
 						this.receiveEnergy(direction.getOpposite(), provider.extractEnergy(direction.getOpposite(), electrical.getVoltage() - this.getVoltage(), false), false);
 					}
@@ -199,6 +226,10 @@ public abstract class TileEntityElectrical extends TileEntity
 			TileEntity tile = this.worldObj.getTileEntity(this.xCoord + direction.offsetX, this.yCoord + direction.offsetY, this.zCoord + direction.offsetZ);
 
 			if (tile != null && ((tile instanceof TileEntityElectrical && ((TileEntityElectrical) tile).getVoltage() > this.getVoltage() && tile instanceof IEnergyProvider)))
+			{
+				surroundingTile = tile;
+			}
+			else if(tile != null && tile instanceof TileEntityElectrical && ((TileEntityElectrical) tile).getBoost() != 0)
 			{
 				surroundingTile = tile;
 			}

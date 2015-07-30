@@ -3,6 +3,7 @@ package com.arisux.avp.entities.tile;
 import com.arisux.avp.interfaces.energy.IEnergyProvider;
 import com.arisux.avp.interfaces.energy.IEnergyReceiver;
 
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityPowerline extends TileEntityElectrical implements IEnergyProvider, IEnergyReceiver
