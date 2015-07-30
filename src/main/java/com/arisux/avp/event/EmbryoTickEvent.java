@@ -67,4 +67,15 @@ public class EmbryoTickEvent
 			}
 		}
 	}
+	
+	@SubscribeEvent
+	public void respawnEvent(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent event)
+	{
+		EntityLivingBase living = (EntityLivingBase) event.player;
+		ExtendedEntityLivingBase livingProperties = (ExtendedEntityLivingBase) living.getExtendedProperties(ExtendedEntityLivingBase.IDENTIFIER);
+		if(livingProperties.doesEntityContainEmbryo())
+		{
+			livingProperties.setContainsEmbryo(false);
+		}
+	}
 }
