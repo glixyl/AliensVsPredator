@@ -9,7 +9,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityTransformer extends TileEntityElectrical implements IEnergyProvider, IEnergyReceiver
-{	
+{
 	public TileEntityTransformer()
 	{
 		super(false);
@@ -21,8 +21,38 @@ public class TileEntityTransformer extends TileEntityElectrical implements IEner
 	{
 		super.updateEntity();
 		this.updateEnergyAsReceiver();
+
+		if (this.voltage > 0)
+		{
+			ForgeDirection direction = ForgeDirection.SOUTH;
+
+			TileEntity tile = this.worldObj.getTileEntity(this.xCoord + direction.offsetX, this.yCoord + direction.offsetY, this.zCoord + direction.offsetZ);
+
+			if (tile != null && tile instanceof TileEntityElectrical)
+			{
+				TileEntityElectrical electrical = (TileEntityElectrical) tile;
+
+				if (electrical instanceof IEnergyProvider)
+				{
+					if (electrical.getVoltage() == 0)
+					{
+						this.voltage = 0;
+					}
+				}
+			}
+			else
+			{
+				this.voltage = 0;
+			}
+		}
 	}
 
+	@Override
+	public ForgeDirection getSourcePowerDirection()
+	{
+		return ForgeDirection.SOUTH;
+	}
+	
 	@Override
 	public boolean canConnectEnergy(ForgeDirection from)
 	{

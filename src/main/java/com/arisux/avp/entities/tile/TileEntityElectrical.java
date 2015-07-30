@@ -18,13 +18,14 @@ public abstract class TileEntityElectrical extends TileEntity
 	protected double boost;
 	protected int srcHertz;
 	protected boolean isSrc;
-	
+
 	public TileEntityElectrical(boolean isSource)
 	{
 		this.isSrc = isSource;
 		this.thresholdVoltage = 110;
 		this.srcVoltage = 120;
-		this.srcHertz = 50; /** 1000 / 50Hz = 20 Ticks **/
+		this.srcHertz = 50;
+		/** 1000 / 50Hz = 20 Ticks **/
 		this.resistance = 0.1;
 		this.boost = 0;
 	}
@@ -62,7 +63,7 @@ public abstract class TileEntityElectrical extends TileEntity
 		super.readFromNBT(nbt);
 		this.voltage = nbt.getDouble("voltage");
 	}
-	
+
 	/**
 	 * @return Returns true if this component is currently operational.
 	 */
@@ -70,7 +71,7 @@ public abstract class TileEntityElectrical extends TileEntity
 	{
 		return this.getVoltage() >= this.getThresholdVoltage();
 	}
-	
+
 	/**
 	 * @return Returns the amount of resistance this component applies.
 	 */
@@ -78,7 +79,7 @@ public abstract class TileEntityElectrical extends TileEntity
 	{
 		return resistance;
 	}
-	
+
 	/**
 	 * @param resistance - The amount of resistance this component will apply 
 	 * on components extracting energy from it.
@@ -87,7 +88,7 @@ public abstract class TileEntityElectrical extends TileEntity
 	{
 		this.resistance = resistance;
 	}
-	
+
 	/**
 	 * @return The threshold voltage required for this component to operate.
 	 */
@@ -95,7 +96,7 @@ public abstract class TileEntityElectrical extends TileEntity
 	{
 		return thresholdVoltage;
 	}
-	
+
 	/**
 	 * @param thresholdVoltage - The threshold voltage required for this 
 	 * component to operate.
@@ -104,7 +105,7 @@ public abstract class TileEntityElectrical extends TileEntity
 	{
 		this.thresholdVoltage = thresholdVoltage;
 	}
-	
+
 	/**
 	 * @param side - ForgeDirection from the receiver. 
 	 * @return If this side can provide energy to the receiver.
@@ -113,7 +114,7 @@ public abstract class TileEntityElectrical extends TileEntity
 	{
 		return true;
 	}
-	
+
 	/**
 	 * @return The amount of voltage this component currently contains.
 	 */
@@ -121,7 +122,7 @@ public abstract class TileEntityElectrical extends TileEntity
 	{
 		return this.voltage;
 	}
-	
+
 	/**
 	 * @param voltage - The amount of voltage this component should contain.
 	 */
@@ -129,7 +130,7 @@ public abstract class TileEntityElectrical extends TileEntity
 	{
 		this.voltage = voltage;
 	}
-	
+
 	/**
 	 * @return The amount of boost this component currently contains.
 	 */
@@ -137,7 +138,7 @@ public abstract class TileEntityElectrical extends TileEntity
 	{
 		return this.boost;
 	}
-	
+
 	/**
 	 * @param voltage - The amount of boost this component should contain.
 	 */
@@ -145,7 +146,7 @@ public abstract class TileEntityElectrical extends TileEntity
 	{
 		this.boost = boost;
 	}
-	
+
 	/**
 	 * @return The rate at which this source component will update its voltage.
 	 */
@@ -153,7 +154,7 @@ public abstract class TileEntityElectrical extends TileEntity
 	{
 		return srcHertz;
 	}
-	
+
 	/**
 	 * @param hertz - The rate at which this source component should update its voltage.
 	 */
@@ -161,7 +162,7 @@ public abstract class TileEntityElectrical extends TileEntity
 	{
 		this.srcHertz = hertz;
 	}
-	
+
 	/**
 	 * @return The voltage this source component provides.
 	 */
@@ -169,7 +170,15 @@ public abstract class TileEntityElectrical extends TileEntity
 	{
 		return srcVoltage;
 	}
-	
+
+	/**
+	 * @return The Source Direction that a receiver can extract from
+	 */
+	public ForgeDirection getSourcePowerDirection()
+	{
+		return null;
+	}
+
 	/**
 	 * @param srcVoltage - The voltage this source component should provide.
 	 */
@@ -177,7 +186,7 @@ public abstract class TileEntityElectrical extends TileEntity
 	{
 		this.srcVoltage = srcVoltage;
 	}
-	
+
 	/**
 	 * @return True if this is a source component.
 	 */
@@ -185,7 +194,7 @@ public abstract class TileEntityElectrical extends TileEntity
 	{
 		return this.isSrc;
 	}
-	
+
 	/**
 	 * @param isSrc - Set true if this should be a source component.
 	 */
@@ -193,7 +202,7 @@ public abstract class TileEntityElectrical extends TileEntity
 	{
 		this.isSrc = isSrc;
 	}
-	
+
 	/**
 	 * Updates the voltage of this component based on surrounding components.
 	 */
@@ -206,11 +215,11 @@ public abstract class TileEntityElectrical extends TileEntity
 			if (tile != null && tile instanceof TileEntityElectrical)
 			{
 				TileEntityElectrical electrical = (TileEntityElectrical) tile;
-				
+
 				if (electrical instanceof IEnergyProvider)
 				{
 					IEnergyProvider provider = (IEnergyProvider) electrical;
-					
+
 					if (electrical.canProvideEnergyToReceiver(direction) && provider.canConnectEnergy(direction) && electrical.getVoltage() > this.getVoltage())
 					{
 						this.receiveEnergy(direction.getOpposite(), provider.extractEnergy(direction.getOpposite(), electrical.getVoltage() - this.getVoltage(), false), false);
@@ -225,13 +234,18 @@ public abstract class TileEntityElectrical extends TileEntity
 		{
 			TileEntity tile = this.worldObj.getTileEntity(this.xCoord + direction.offsetX, this.yCoord + direction.offsetY, this.zCoord + direction.offsetZ);
 
-			if (tile != null && ((tile instanceof TileEntityElectrical && ((TileEntityElectrical) tile).getVoltage() > this.getVoltage() && tile instanceof IEnergyProvider)))
+			if (tile != null && tile instanceof TileEntityElectrical)
 			{
-				surroundingTile = tile;
-			}
-			else if(tile != null && tile instanceof TileEntityElectrical && ((TileEntityElectrical) tile).getBoost() != 0)
-			{
-				surroundingTile = tile;
+				TileEntityElectrical tee = (TileEntityElectrical) tile;
+
+				if (tee.getBoost() == 0 && tee.getVoltage() > this.getVoltage() && tile instanceof IEnergyProvider)
+				{
+					surroundingTile = tile;
+				}
+				else if (tee.getVoltage() > 0 && tee.getBoost() != 0 && direction == tee.getSourcePowerDirection())
+				{
+					surroundingTile = tile;
+				}
 			}
 		}
 
@@ -240,7 +254,7 @@ public abstract class TileEntityElectrical extends TileEntity
 			this.setVoltage(0);
 		}
 	}
-	
+
 	/**
 	 * Returns the amount of energy to be extracted from this component.
 	 * 
@@ -274,12 +288,12 @@ public abstract class TileEntityElectrical extends TileEntity
 	public double receiveEnergy(ForgeDirection from, double maxReceive, boolean simulate)
 	{
 		double result = this.getVoltage() + maxReceive;
-		
+
 		if (!simulate)
 		{
 			this.setVoltage(result);
 		}
-		
+
 		return result;
 	}
 }
