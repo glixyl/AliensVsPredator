@@ -88,11 +88,12 @@ public class BossBarEvent
 
 	public void drawBossBar(EntityLivingBase boss, int index, int posX, int posY)
 	{
-		String label = boss.getCommandSenderName();
 		int tW = 233;
 		int tH = 50;
 		int offset = tW * 30 / 100;
 		int health = (int) (boss.getHealth() * 100 / boss.getMaxHealth());
+		int color = health < 50 ? health < 20 ? 0xFFFF0000 : 0xFFFFCC00 : 0xFF00FF00;
+		String label = String.format("%s [%s]", boss.getCommandSenderName(), health + "%%");
 
 		GL11.glPushMatrix();
 		{
@@ -101,9 +102,11 @@ public class BossBarEvent
 			RenderUtil.glColorHexRGBA(0xFFFFFFFF);
 			RenderUtil.bindTexture(AliensVsPredator.resources().QUEEN_BOSS_BAR);
 			posX = posX + (index * (tW));
+			RenderUtil.glColorHexRGBA(color);
 			RenderUtil.drawQuad(posX + (offset / 2), posY, (tW - offset) * health / 100, tH, 0, 0.15F, 0.85F, 0F, 0.5F);
+			GL11.glColor4f(1F, 1F, 1F, 1F);
 			RenderUtil.drawQuad(posX, posY, tW, tH, 0, 0F, 1F, 0.5F, 1F);
-			RenderUtil.drawStringAlignCenter(label, posX + (tW / 2), posY + 16, 0xFF00FF00);
+			RenderUtil.drawStringAlignCenter(label, posX + (tW / 2), posY + 16, color);
 			GL11.glDisable(GL11.GL_BLEND);
 		}
 		GL11.glPopMatrix();
