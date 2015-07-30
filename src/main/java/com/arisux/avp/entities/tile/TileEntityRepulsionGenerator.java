@@ -30,7 +30,7 @@ public class TileEntityRepulsionGenerator extends TileEntityElectrical implement
 	@Override
 	public boolean canConnectEnergy(ForgeDirection from)
 	{
-		return false;
+		return true;
 	}
 
 	@Override

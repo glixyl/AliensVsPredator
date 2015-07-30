@@ -20,9 +20,9 @@ public class RenderTransformer extends TileEntitySpecialRenderer
 		{
 			GL11.glDisable(GL11.GL_CULL_FACE);
 			glTranslated(posX, posY, posZ);
-			RenderUtil.drawRect(0, 0, 1, 1, 0xFFFF0000);
+			RenderUtil.drawRect(0, 0, 1, 1, 0xFF00FF00);
 			GL11.glTranslated(0, 0, 1);
-			RenderUtil.drawRect(0, 0, 1, 1, 0xFFFF0000);
+			RenderUtil.drawRect(0, 0, 1, 1, 0xFF00FF00);
 			GL11.glRotatef(90, 1, 0, 0);
 			RenderUtil.drawRect(0, 0, 1, -1, 0xFFFF0000);
 			GL11.glTranslated(0, 0, -1);

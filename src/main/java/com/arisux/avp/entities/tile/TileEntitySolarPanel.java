@@ -30,7 +30,7 @@ public class TileEntitySolarPanel extends TileEntityElectrical implements IEnerg
 	@Override
 	public boolean canConnectEnergy(ForgeDirection from)
 	{
-		return false;
+		return true;
 	}
 	
 	@Override
