@@ -55,6 +55,7 @@ public class EmbryoTickEvent
 							entity.attackEntityFrom(DamageSources.causeChestbursterDamage(chestburster, entity), 200F);
 							livingProperties.setEmbryoAge(livingProperties.getMaxEmbryoAge());
 							living.getActivePotionEffects().clear();
+							livingProperties.setContainsEmbryo(false);
 						}
 
 						if (livingProperties.getEmbryoAge() <= livingProperties.getMaxEmbryoAge())
