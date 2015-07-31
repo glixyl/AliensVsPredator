@@ -51,10 +51,11 @@ public class TileEntityTransformer extends TileEntityElectrical implements IEner
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
+		int direction = nbt.getInteger("Direction");
 		
-		if (ForgeDirection.getOrientation(nbt.getInteger("Direction")) != null)
+		if (ForgeDirection.getOrientation(direction) != null)
 		{
-			this.acceptVoltageDirection = ForgeDirection.getOrientation(nbt.getInteger("Direction"));
+			this.acceptVoltageDirection = ForgeDirection.getOrientation(direction);
 		}
 	}
 	

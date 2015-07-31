@@ -56,23 +56,23 @@ public class GhostBlock extends HookedBlock
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World p_149668_1_, int p_149668_2_, int p_149668_3_, int p_149668_4_)
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World worldIn, int posX, int posY, int posZ)
 	{
 		if (this.parentBlock != null && this.parentTileEntity != null)
 		{
-			TileEntityBlastdoor te = (TileEntityBlastdoor) this.parentTileEntity;
-
+			TileEntityBlastdoor te = (TileEntityBlastdoor) worldIn.getTileEntity(this.parentTileEntity.xCoord, this.parentTileEntity.yCoord, this.parentTileEntity.zCoord);
+			
 			if (te.isDoorOpen())
 			{
 				return null;
 			}
 			else
 			{
-				return AxisAlignedBB.getBoundingBox((double) p_149668_2_ + this.minX, (double) p_149668_3_ + this.minY, (double) p_149668_4_ + this.minZ, (double) p_149668_2_ + this.maxX, (double) p_149668_3_ + this.maxY, (double) p_149668_4_ + this.maxZ);
+				return AxisAlignedBB.getBoundingBox((double) posX + this.minX, (double) posY + this.minY, (double) posZ + this.minZ, (double) posX + this.maxX, (double) posY + this.maxY, (double) posZ + this.maxZ);
 			}
 		}
 
-		return AxisAlignedBB.getBoundingBox((double) p_149668_2_ + this.minX, (double) p_149668_3_ + this.minY, (double) p_149668_4_ + this.minZ, (double) p_149668_2_ + this.maxX, (double) p_149668_3_ + this.maxY, (double) p_149668_4_ + this.maxZ);
+		return AxisAlignedBB.getBoundingBox((double) posX + this.minX, (double) posY + this.minY, (double) posZ + this.minZ, (double) posX + this.maxX, (double) posY + this.maxY, (double) posZ + this.maxZ);
 	}
 
 	@Override

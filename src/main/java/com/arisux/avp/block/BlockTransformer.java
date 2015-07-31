@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Random;
 
 import com.arisux.airi.lib.BlockTypes.HookedBlock;
+import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.TileEntityTransformer;
+import com.arisux.avp.packets.client.PacketRotateTransformer;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -60,26 +62,34 @@ public class BlockTransformer extends HookedBlock
 	@Override
 	public boolean onBlockActivated(World worldObj, int xCoord, int yCoord, int zCoord, EntityPlayer player, int side, float subX, float subY, float subZ)
 	{
-		if (worldObj.getTileEntity(xCoord, yCoord, zCoord) != null && worldObj.getTileEntity(xCoord, yCoord, zCoord) instanceof TileEntityTransformer)
+		TileEntity te = worldObj.getTileEntity(xCoord, yCoord, zCoord);
+
+		if (te != null && te instanceof TileEntityTransformer)
 		{
-			TileEntityTransformer tet = (TileEntityTransformer) worldObj.getTileEntity(xCoord, yCoord, zCoord);
+			TileEntityTransformer tet = (TileEntityTransformer) te;
+
 			ArrayList<ForgeDirection> forgeDirections = new ArrayList<ForgeDirection>();
 
 			for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)
 			{
 				forgeDirections.add(dir);
 			}
-
-			int index = forgeDirections.indexOf(tet.acceptVoltageDirection);
-			if (index + 1 >= forgeDirections.size())
+			
+			if (tet.acceptVoltageDirection != null)
 			{
-				index = -1;
-			}
+				int index = forgeDirections.indexOf(tet.acceptVoltageDirection);
+				if (index + 1 >= forgeDirections.size())
+				{
+					index = -1;
+				}
 
-			if (forgeDirections.get(index + 1) != null)
-			{
-				tet.acceptVoltageDirection = forgeDirections.get(index + 1);
+				if (forgeDirections.get(index + 1) != null)
+				{
+					tet.acceptVoltageDirection = forgeDirections.get(index + 1);
+				}
+				AliensVsPredator.network().sendToAll(new PacketRotateTransformer(tet.acceptVoltageDirection.ordinal(), tet.xCoord, tet.yCoord, tet.zCoord));
 			}
+			
 			tet.getDescriptionPacket();
 		}
 		return super.onBlockActivated(worldObj, xCoord, yCoord, zCoord, player, side, subX, subY, subZ);

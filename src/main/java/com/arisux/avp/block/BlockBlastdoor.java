@@ -1,7 +1,9 @@
 package com.arisux.avp.block;
 
 import com.arisux.airi.lib.BlockTypes.HookedBlock;
+import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.TileEntityBlastdoor;
+import com.arisux.avp.packets.client.PacketOpenBlastdoor;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -30,9 +32,9 @@ public class BlockBlastdoor extends HookedBlock
 
 		if (tile != null && tile.isOperational())
 		{
-			tile.setDoorOpen(!tile.isDoorOpen());
+			AliensVsPredator.network().sendToAll(new PacketOpenBlastdoor(!tile.isDoorOpen(), posX, posY, posZ));
+			tile.getDescriptionPacket();
 		}
-		
 		return true;
 	}
 
