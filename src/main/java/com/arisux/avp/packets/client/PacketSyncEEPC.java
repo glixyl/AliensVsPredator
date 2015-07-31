@@ -39,7 +39,6 @@ public class PacketSyncEEPC implements IMessage, IMessageHandler<PacketSyncEEPC,
 		ByteBufUtils.writeTag(buf, tag);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override public PacketSyncEEPC onMessage(PacketSyncEEPC packet, MessageContext ctx)
 	{
 		Entity entity = Minecraft.getMinecraft().thePlayer.worldObj.getEntityByID(packet.entityId);

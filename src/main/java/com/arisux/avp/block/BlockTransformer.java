@@ -1,7 +1,6 @@
 package com.arisux.avp.block;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import com.arisux.airi.lib.BlockTypes.HookedBlock;
@@ -66,7 +65,7 @@ public class BlockTransformer extends HookedBlock
 
 		if (te != null && te instanceof TileEntityTransformer)
 		{
-			TileEntityTransformer tet = (TileEntityTransformer) te;
+			TileEntityTransformer transformer = (TileEntityTransformer) te;
 
 			ArrayList<ForgeDirection> forgeDirections = new ArrayList<ForgeDirection>();
 
@@ -74,10 +73,11 @@ public class BlockTransformer extends HookedBlock
 			{
 				forgeDirections.add(dir);
 			}
-			
-			if (tet.acceptVoltageDirection != null)
+
+			if (transformer.acceptVoltageDirection != null)
 			{
-				int index = forgeDirections.indexOf(tet.acceptVoltageDirection);
+				int index = forgeDirections.indexOf(transformer.acceptVoltageDirection);
+
 				if (index + 1 >= forgeDirections.size())
 				{
 					index = -1;
@@ -85,12 +85,16 @@ public class BlockTransformer extends HookedBlock
 
 				if (forgeDirections.get(index + 1) != null)
 				{
-					tet.acceptVoltageDirection = forgeDirections.get(index + 1);
+					transformer.acceptVoltageDirection = forgeDirections.get(index + 1);
 				}
-				AliensVsPredator.network().sendToAll(new PacketRotateTransformer(tet.acceptVoltageDirection.ordinal(), tet.xCoord, tet.yCoord, tet.zCoord));
+
+				if (!worldObj.isRemote)
+				{
+					AliensVsPredator.network().sendToAll(new PacketRotateTransformer(transformer.acceptVoltageDirection.ordinal(), transformer.xCoord, transformer.yCoord, transformer.zCoord));
+				}
 			}
-			
-			tet.getDescriptionPacket();
+
+			transformer.getDescriptionPacket();
 		}
 		return super.onBlockActivated(worldObj, xCoord, yCoord, zCoord, player, side, subX, subY, subZ);
 	}

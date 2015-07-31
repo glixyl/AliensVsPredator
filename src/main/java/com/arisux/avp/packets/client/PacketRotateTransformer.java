@@ -1,7 +1,6 @@
 package com.arisux.avp.packets.client;
 
 import com.arisux.avp.entities.tile.TileEntityTransformer;
-import com.arisux.avp.items.ItemFirearm;
 
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
@@ -14,11 +13,11 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class PacketRotateTransformer implements IMessage, IMessageHandler<PacketRotateTransformer, PacketRotateTransformer>
 {
-	private int direction;
-	private int x;
-	private int y;
-	private int z;
-
+	public int direction;
+	public int x;
+	public int y;
+	public int z;
+	
 	public PacketRotateTransformer()
 	{
 		;
@@ -54,12 +53,16 @@ public class PacketRotateTransformer implements IMessage, IMessageHandler<Packet
 	public PacketRotateTransformer onMessage(PacketRotateTransformer packet, MessageContext ctx)
 	{
 		World world = Minecraft.getMinecraft().thePlayer.worldObj;
-		TileEntity tile = world.getTileEntity(packet.x, packet.y, packet.z);
-
-		if (world != null && tile != null && tile instanceof TileEntityTransformer)
+		
+		if (world != null)
 		{
-			TileEntityTransformer tileTransformer = (TileEntityTransformer) tile;
-			tileTransformer.acceptVoltageDirection = ForgeDirection.getOrientation(packet.direction);
+			TileEntity tile = world.getTileEntity(packet.x, packet.y, packet.z);
+
+			if (tile != null && tile instanceof TileEntityTransformer)
+			{
+				TileEntityTransformer tileTransformer = (TileEntityTransformer) tile;
+				tileTransformer.acceptVoltageDirection = ForgeDirection.getOrientation(packet.direction);
+			}
 		}
 
 		return null;

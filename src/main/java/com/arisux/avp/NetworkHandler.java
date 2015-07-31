@@ -61,7 +61,6 @@ public class NetworkHandler extends SimpleNetworkWrapper implements IInitializab
 		this.registerMessage(Side.SERVER, PacketWriteToDataDevice.class);
 		this.registerMessage(Side.CLIENT, PacketKillCountUpdate.class);
 		this.registerMessage(Side.CLIENT, PacketAmmoUpdate.class);
-		this.registerMessage(Side.CLIENT, PacketRotateTransformer.class);
 		this.registerMessage(Side.CLIENT, PacketOpenBlastdoor.class);
 		this.registerMessage(Side.CLIENT, PacketPlayerModeUpdate.class);
 		this.registerMessage(Side.CLIENT, PacketTurretInit.class);
@@ -69,6 +68,7 @@ public class NetworkHandler extends SimpleNetworkWrapper implements IInitializab
 		this.registerMessage(Side.CLIENT, PacketSyncEEPPC.class);
 		this.registerMessage(Side.SERVER, PacketSyncEEPS.class);
 		this.registerMessage(Side.SERVER, PacketSyncEEPPS.class);
+		this.registerMessage(Side.CLIENT, PacketRotateTransformer.class);
 	}
 
 	@SuppressWarnings("unchecked")

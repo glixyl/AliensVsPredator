@@ -52,7 +52,12 @@ public class GhostBlock extends HookedBlock
 	@Override
 	public boolean onBlockActivated(World world, int posX, int posY, int posZ, EntityPlayer player, int side, float subX, float subY, float subZ)
 	{
-		return parentBlock.onBlockActivated(world, parentTileEntity.xCoord, parentTileEntity.yCoord, parentTileEntity.zCoord, player, side, subX, subY, subZ);
+		if (parentTileEntity != null && parentBlock != null)
+		{
+			return parentBlock.onBlockActivated(world, parentTileEntity.xCoord, parentTileEntity.yCoord, parentTileEntity.zCoord, player, side, subX, subY, subZ);
+		}
+		
+		return false;
 	}
 
 	@Override
@@ -61,7 +66,7 @@ public class GhostBlock extends HookedBlock
 		if (this.parentBlock != null && this.parentTileEntity != null)
 		{
 			TileEntityBlastdoor te = (TileEntityBlastdoor) this.parentTileEntity;
-			
+
 			if (te.isDoorOpen())
 			{
 				return null;

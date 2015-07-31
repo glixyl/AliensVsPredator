@@ -1,8 +1,6 @@
 package com.arisux.avp.packets.client;
 
 import com.arisux.avp.entities.tile.TileEntityBlastdoor;
-import com.arisux.avp.entities.tile.TileEntityTransformer;
-import com.arisux.avp.items.ItemFirearm;
 
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
@@ -11,7 +9,6 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
 public class PacketOpenBlastdoor implements IMessage, IMessageHandler<PacketOpenBlastdoor, PacketOpenBlastdoor>
 {

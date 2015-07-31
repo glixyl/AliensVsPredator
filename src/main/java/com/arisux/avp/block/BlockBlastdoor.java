@@ -34,8 +34,13 @@ public class BlockBlastdoor extends HookedBlock
 		{
 			boolean doorOpen = !tile.isDoorOpen();
 			tile.setDoorOpen(doorOpen);
-			AliensVsPredator.network().sendToAll(new PacketOpenBlastdoor(doorOpen, posX, posY, posZ));
-//			tile.getDescriptionPacket();
+
+			if (!world.isRemote)
+			{
+				AliensVsPredator.network().sendToAll(new PacketOpenBlastdoor(doorOpen, posX, posY, posZ));
+			}
+			
+			// tile.getDescriptionPacket();
 		}
 		return true;
 	}
