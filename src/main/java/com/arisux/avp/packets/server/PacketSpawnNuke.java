@@ -1,12 +1,15 @@
 package com.arisux.avp.packets.server;
 
+import com.arisux.airi.AIRI;
 import com.arisux.airi.lib.WorldUtil.Entities.Players.Inventories;
+import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.EntityNuke;
 
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.player.EntityPlayer;
 
 public class PacketSpawnNuke implements IMessage, IMessageHandler<PacketSpawnNuke, PacketSpawnNuke>
 {
@@ -29,8 +32,11 @@ public class PacketSpawnNuke implements IMessage, IMessageHandler<PacketSpawnNuk
 
 	@Override public PacketSpawnNuke onMessage(PacketSpawnNuke packet, MessageContext ctx)
 	{
-		if (ctx.getServerHandler().playerEntity != null)
+		EntityPlayer player = ctx.getServerHandler().playerEntity;
+		
+		if (player != null && AliensVsPredator.settings().areNukesEnabled())
 		{
+			AIRI.logger.info("Player %s has just initiated a nuclear explosion at %s, %s, %s", player.getCommandSenderName(), player.posX, player.posY, player.posZ);
 			EntityNuke nuke = new EntityNuke(ctx.getServerHandler().playerEntity.worldObj);
 			nuke.setLocationAndAngles(ctx.getServerHandler().playerEntity.posX, ctx.getServerHandler().playerEntity.posY, ctx.getServerHandler().playerEntity.posZ, 0F, 0F);
 			ctx.getServerHandler().playerEntity.worldObj.spawnEntityInWorld(nuke);

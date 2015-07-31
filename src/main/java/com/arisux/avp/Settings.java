@@ -32,9 +32,10 @@ public class Settings
 	private String urlSkinM41a;
 	private String urlSkinM56sg;
 	private String urlSkinSniper;
-	private boolean explosions;
-	private boolean updater;
-	private boolean debugTools;
+	private boolean explosionsEnabled;
+	private boolean updaterEnabled;
+	private boolean debugToolsEnabled;
+	private boolean nukesEnabled;
 	private int idStart = 101;
 	private int dimVarda;
 	private int dimAcheron;
@@ -78,10 +79,11 @@ public class Settings
 			urlSkinM41a = config.get(CATEGORY_URLS, "URL_SKIN_M41A", "/m4a1/%s.png", "").getString();
 			urlSkinM56sg = config.get(CATEGORY_URLS, "URL_SKIN_M56SG", "/m56sg/%s.png", "").getString();
 			urlSkinSniper = config.get(CATEGORY_URLS, "URL_SKIN_SNIPER", "/sniper/%s.png", "").getString();
-			
-			explosions = config.get(CATEGORY_OTHER, "EXPLOSION_BLOCK_DAMAGE", true).getBoolean(true);
-			updater = config.get(CATEGORY_OTHER, "UPDATER_ENABLED", true, "Toggle the mod's updater.").getBoolean(true);
-			debugTools = config.get(CATEGORY_OTHER, "DEBUG_TOOLS", false, "Toggle the debugging tools.").getBoolean(false);
+
+			explosionsEnabled = config.get(CATEGORY_OTHER, "EXPLOSION_BLOCK_DAMAGE", true).getBoolean(true);
+			nukesEnabled = config.get(CATEGORY_OTHER, "NUKES_ENABLED", true).getBoolean(true);
+			updaterEnabled = config.get(CATEGORY_OTHER, "UPDATER_ENABLED", true, "Toggle the mod's updater.").getBoolean(true);
+			debugToolsEnabled = config.get(CATEGORY_OTHER, "DEBUG_TOOLS", false, "Toggle the debugging tools.").getBoolean(false);
 
 			entityList.put("DRONE", config.get(CATEGORY_IDS, "DRONE", idStart++).getInt());
 			entityList.put("WARRIOR", config.get(CATEGORY_IDS, "WARRIOR", idStart++).getInt());
@@ -140,17 +142,17 @@ public class Settings
 
 	public boolean areExplosionsEnabled()
 	{
-		return this.explosions;
+		return this.explosionsEnabled;
 	}
 
 	public boolean isUpdaterEnabled()
 	{
-		return this.updater;
+		return this.updaterEnabled;
 	}
 	
 	public boolean areDebugToolsEnabled()
 	{
-		return this.debugTools;
+		return this.debugToolsEnabled;
 	}
 	
 	public String getUpdateStringUrl()
@@ -227,4 +229,9 @@ public class Settings
 	{
         return this.biomeAcheron;
     }
+
+	public boolean areNukesEnabled()
+	{
+		return this.nukesEnabled;
+	}
 }
