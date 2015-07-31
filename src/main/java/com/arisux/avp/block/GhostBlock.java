@@ -60,7 +60,7 @@ public class GhostBlock extends HookedBlock
 	{
 		if (this.parentBlock != null && this.parentTileEntity != null)
 		{
-			TileEntityBlastdoor te = (TileEntityBlastdoor) worldIn.getTileEntity(this.parentTileEntity.xCoord, this.parentTileEntity.yCoord, this.parentTileEntity.zCoord);
+			TileEntityBlastdoor te = (TileEntityBlastdoor) this.parentTileEntity;
 			
 			if (te.isDoorOpen())
 			{
