@@ -32,7 +32,7 @@ public class BlockBlastdoor extends HookedBlock
 		{
 			tile.setDoorOpen(!tile.isDoorOpen());
 		}
-
+		
 		return true;
 	}
 

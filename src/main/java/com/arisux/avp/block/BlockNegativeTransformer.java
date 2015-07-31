@@ -1,9 +1,11 @@
 package com.arisux.avp.block;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.avp.entities.tile.TileEntityNegativeTransformer;
+import com.arisux.avp.entities.tile.TileEntityTransformer;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -11,6 +13,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockNegativeTransformer extends HookedBlock
 {
@@ -57,6 +60,29 @@ public class BlockNegativeTransformer extends HookedBlock
 	@Override
 	public boolean onBlockActivated(World worldObj, int xCoord, int yCoord, int zCoord, EntityPlayer player, int side, float subX, float subY, float subZ)
 	{
+		if (worldObj.getTileEntity(xCoord, yCoord, zCoord) != null && worldObj.getTileEntity(xCoord, yCoord, zCoord) instanceof TileEntityNegativeTransformer)
+		{
+			TileEntityNegativeTransformer tent = (TileEntityNegativeTransformer) worldObj.getTileEntity(xCoord, yCoord, zCoord);
+			ArrayList<ForgeDirection> forgeDirections = new ArrayList<ForgeDirection>();
+
+			for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)
+			{
+				forgeDirections.add(dir);
+			}
+
+			int index = forgeDirections.indexOf(tent.acceptVoltageDirection);
+			if (index + 1 >= forgeDirections.size())
+			{
+				index = -1;
+			}
+
+			if (forgeDirections.get(index + 1) != null)
+			{
+				tent.acceptVoltageDirection = forgeDirections.get(index + 1);
+			}
+			
+			tent.getDescriptionPacket();
+		}
 		return super.onBlockActivated(worldObj, xCoord, yCoord, zCoord, player, side, subX, subY, subZ);
 	}
 	
