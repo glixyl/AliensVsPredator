@@ -2,22 +2,53 @@ package com.arisux.avp.block;
 
 import java.util.Random;
 
+import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.avp.dimension.TeleporterLV;
 
-import net.minecraft.block.Block;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
-public class BlockPortal extends Block
+public class BlockPortal extends HookedBlock
 {
-	public BlockPortal(Material material)
+	private int dimensionId;
+	
+	public BlockPortal(int dimensionId)
 	{
-		super(material);
+		super(Material.portal);
 		setLightOpacity(100);
 		setTickRandomly(true);
+		this.dimensionId = dimensionId;
+	}
+
+	@Override
+	public boolean isOpaqueCube()
+	{
+		return false;
+	}
+
+	@Override
+	public boolean renderAsNormalBlock()
+	{
+		return false;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getRenderBlockPass()
+	{
+		return 1;
+	}
+
+	@Override
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int posX, int posY, int posZ)
+	{
+		return null;
 	}
 
 	@Override
@@ -25,9 +56,9 @@ public class BlockPortal extends Block
 	{
 		super.randomDisplayTick(worldObj, posX, posY, posZ, rand);
 
-		for (int i = 19; i > 0; --i)
+		for (int i = 6; i > 0; --i)
 		{
-			worldObj.spawnParticle("flame", posX + rand.nextDouble(), posY + rand.nextDouble(), posZ + rand.nextDouble(), 0.0D, 0.0D, 0.0D);
+			worldObj.spawnParticle("enchantmenttable", posX + rand.nextDouble(), posY + rand.nextDouble(), posZ + rand.nextDouble(), 0.0D, 0.0D, 0.0D);
 		}
 	}
 
@@ -42,11 +73,13 @@ public class BlockPortal extends Block
 			if (player.timeUntilPortal > 0)
 			{
 				player.timeUntilPortal = 10;
-			} else if (player.dimension != 7)
+			}
+			else if (player.dimension != this.dimensionId)
 			{
 				player.timeUntilPortal = 10;
-				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, 7, new TeleporterLV(server.worldServerForDimension(7)));
-			} else
+				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, this.dimensionId, new TeleporterLV(server.worldServerForDimension(this.dimensionId)));
+			}
+			else
 			{
 				player.timeUntilPortal = 10;
 				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, 0, new TeleporterLV(server.worldServerForDimension(1)));

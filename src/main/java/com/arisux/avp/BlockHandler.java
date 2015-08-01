@@ -16,8 +16,7 @@ import com.arisux.avp.block.BlockHiveResin;
 import com.arisux.avp.block.BlockLightPanel;
 import com.arisux.avp.block.BlockNegativeTransformer;
 import com.arisux.avp.block.BlockP2RConvertor;
-import com.arisux.avp.block.BlockPortalAcheron;
-import com.arisux.avp.block.BlockPortalVarda;
+import com.arisux.avp.block.BlockPortal;
 import com.arisux.avp.block.BlockPowercell;
 import com.arisux.avp.block.BlockPowerline;
 import com.arisux.avp.block.BlockR2PConvertor;
@@ -64,8 +63,8 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockTempleWall1 = (new HookedBlock(Material.rock)),
 		blockTempleWall2 = (new HookedBlock(Material.rock)),
 		blockSkulls = (new HookedBlock(Material.rock)),
-		blockPortalVarda = (new BlockPortalVarda().setHardness(-1.0F).setLightLevel(2.0F)),
-		blockPortalAcheron = (new BlockPortalAcheron().setHardness(-1.0F).setLightLevel(2.0F)),
+		blockPortalVarda = (new BlockPortal(AliensVsPredator.settings().dimensionIdVarda()).setIconSet(new IconSet(this.getMod().domain() + "portal.varda")).setHardness(-1.0F).setLightLevel(2.0F)),
+		blockPortalAcheron = (new BlockPortal(AliensVsPredator.settings().dimensionIdAcheron()).setIconSet(new IconSet(this.getMod().domain() + "portal.acheron")).setHardness(-1.0F).setLightLevel(2.0F)),
 		blockDerelict1 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
 		blockDerelict2 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
 		blockDerelict3 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
