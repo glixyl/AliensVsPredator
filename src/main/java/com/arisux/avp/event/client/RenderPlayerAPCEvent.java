@@ -13,13 +13,9 @@ public class RenderPlayerAPCEvent
 	@SubscribeEvent
 	public void onRenderPlayerEvent(RenderPlayerEvent.Pre event)
 	{
-		if (mc.thePlayer.isRiding() && mc.thePlayer.ridingEntity instanceof EntityAPC)
+		if (event.entityPlayer.isRiding() && event.entityPlayer.ridingEntity instanceof EntityAPC)
 		{
 			event.setCanceled(true);
-		}
-		else
-		{
-			event.setCanceled(false);
 		}
 	}
 }
