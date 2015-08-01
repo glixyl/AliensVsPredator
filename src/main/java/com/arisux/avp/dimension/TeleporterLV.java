@@ -38,7 +38,8 @@ public class TeleporterLV extends Teleporter
 				this.makePortal(entity);
 				this.placeInExistingPortal(entity, xCoord, yCoord, zCoord, yaw);
 			}
-		} else
+		}
+		else
 		{
 			int entityPosX = MathHelper.floor_double(entity.posX);
 			int entityPosY = MathHelper.floor_double(entity.posY) - 1;
@@ -64,7 +65,7 @@ public class TeleporterLV extends Teleporter
 
 				entity.setLocationAndAngles(entityPosX, entityPosY, entityPosZ, entity.rotationYaw, 0F);
 				entity.setVelocity(0D, 0D, 0D);
-			} 
+			}
 			else
 			{
 				this.placeInPortal(entity, xCoord, yCoord, zCoord, yaw);
@@ -94,7 +95,8 @@ public class TeleporterLV extends Teleporter
 			var14 = var26.posZ;
 			var26.lastUpdateTime = this.worldServer.getTotalWorldTime();
 			var19 = false;
-		} else
+		}
+		else
 		{
 			for (int var22 = var15 - var9; var22 <= var15 + var9; var22++)
 			{
@@ -196,10 +198,12 @@ public class TeleporterLV extends Teleporter
 				if ((!var34) && (var35))
 				{
 					var49 = 1.0F;
-				} else if ((var34) && (!var35))
+				}
+				else if ((var34) && (!var35))
 				{
 					var49 = 0.0F;
-				} else if ((var34) && (var35))
+				}
+				else if ((var34) && (var35))
 				{
 					var37 = 0.0F;
 				}
@@ -215,15 +219,18 @@ public class TeleporterLV extends Teleporter
 				{
 					var38 = 1.0F;
 					var39 = 1.0F;
-				} else if (var28 == net.minecraft.util.Direction.facingToDirection[var23])
+				}
+				else if (var28 == net.minecraft.util.Direction.facingToDirection[var23])
 				{
 					var38 = -1.0F;
 					var39 = -1.0F;
-				} else if (var28 == net.minecraft.util.Direction.facingToDirection[var23])
+				}
+				else if (var28 == net.minecraft.util.Direction.facingToDirection[var23])
 				{
 					var40 = 1.0F;
 					var41 = -1.0F;
-				} else
+				}
+				else
 				{
 					var40 = -1.0F;
 					var41 = 1.0F;
@@ -234,7 +241,8 @@ public class TeleporterLV extends Teleporter
 				entity.motionX = (var42 * var38 + var44 * var41);
 				entity.motionZ = (var42 * var40 + var44 * var39);
 				entity.rotationYaw = (var8 - var23 * 90 + var28 * 90);
-			} else
+			}
+			else
 			{
 				entity.motionX = (entity.motionY = entity.motionZ = 0.0D);
 			}
@@ -268,7 +276,8 @@ public class TeleporterLV extends Teleporter
 			{
 				double var16 = var19 + 0.5D - var1.posZ;
 
-				label430: for (int var18 = this.worldServer.getActualHeight() - 1; var18 >= 0; var18--)
+				label430:
+				for (int var18 = this.worldServer.getActualHeight() - 1; var18 >= 0; var18--)
 				{
 					if (!this.worldServer.isAirBlock(var13, var18, var19))
 						continue;
@@ -332,7 +341,8 @@ public class TeleporterLV extends Teleporter
 				{
 					double var16 = var19 + 0.5D - var1.posZ;
 
-					label780: for (int var18 = this.worldServer.getActualHeight() - 1; var18 >= 0; var18--)
+					label780:
+					for (int var18 = this.worldServer.getActualHeight() - 1; var18 >= 0; var18--)
 					{
 						if (!this.worldServer.isAirBlock(var13, var18, var19))
 							continue;
