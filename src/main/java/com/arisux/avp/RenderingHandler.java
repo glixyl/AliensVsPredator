@@ -115,6 +115,10 @@ import com.arisux.avp.entities.tile.render.RenderTransformer;
 import com.arisux.avp.entities.tile.render.RenderTurret;
 import com.arisux.avp.entities.tile.render.RenderWorkstation;
 import com.arisux.avp.items.model.ModelAK47;
+import com.arisux.avp.items.model.ModelM4;
+import com.arisux.avp.items.model.ModelM41A;
+import com.arisux.avp.items.model.ModelM56SG;
+import com.arisux.avp.items.model.ModelSniper;
 import com.arisux.avp.items.render.RenderItemAK47;
 import com.arisux.avp.items.render.RenderItemAPC;
 import com.arisux.avp.items.render.RenderItemBlastDoor;
@@ -142,6 +146,23 @@ import com.arisux.avp.items.render.RenderItemWristbracerBlades;
 import com.arisux.avp.items.render.parts.RenderItemAK47Action;
 import com.arisux.avp.items.render.parts.RenderItemAK47Barrel;
 import com.arisux.avp.items.render.parts.RenderItemAK47Stock;
+import com.arisux.avp.items.render.parts.RenderItemM41AAction;
+import com.arisux.avp.items.render.parts.RenderItemM41ABarrel;
+import com.arisux.avp.items.render.parts.RenderItemM41APeripherals;
+import com.arisux.avp.items.render.parts.RenderItemM41AStock;
+import com.arisux.avp.items.render.parts.RenderItemM4Action;
+import com.arisux.avp.items.render.parts.RenderItemM4Barrel;
+import com.arisux.avp.items.render.parts.RenderItemM4Stock;
+import com.arisux.avp.items.render.parts.RenderItemM56SGAction;
+import com.arisux.avp.items.render.parts.RenderItemM56SGAimingModule;
+import com.arisux.avp.items.render.parts.RenderItemM56SGBarrel;
+import com.arisux.avp.items.render.parts.RenderItemM56SGStock;
+import com.arisux.avp.items.render.parts.RenderItemM56SGSupportFrame;
+import com.arisux.avp.items.render.parts.RenderItemSniperAction;
+import com.arisux.avp.items.render.parts.RenderItemSniperBarrel;
+import com.arisux.avp.items.render.parts.RenderItemSniperPeripherals;
+import com.arisux.avp.items.render.parts.RenderItemSniperScope;
+import com.arisux.avp.items.render.parts.RenderItemSniperStock;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -252,6 +273,31 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		registerItemRenderer(items.itemAK47Barrel, new RenderItemAK47Barrel(AliensVsPredator.resources().AK47, ak47.barrel, ak47.barrelBase, ak47.lBarrelGrip, ak47.rBarrelGrip));
 		registerItemRenderer(items.itemAK47Action, new RenderItemAK47Action(AliensVsPredator.resources().AK47, ak47.lbody1, ak47.rbody1, ak47.sightBase, ak47.sightBase1, ak47.trigger, ak47.triggerGuard));
 		registerItemRenderer(items.itemAK47Stock, new RenderItemAK47Stock(AliensVsPredator.resources().AK47, ak47.handle, ak47.stockBase, ak47.stockAngle, ak47.stockEnd));
+		
+		ModelM4 m4 = new ModelM4();
+		registerItemRenderer(items.itemM4Barrel, new RenderItemM4Barrel(AliensVsPredator.resources().M4, m4.barrel, m4.barrelGuard));
+		registerItemRenderer(items.itemM4Action, new RenderItemM4Action(AliensVsPredator.resources().M4, m4.mainBody1, m4.mainBody2, m4.mainBody3, m4.sightBase1, m4.sightBase2, m4.sightBase3, m4.triggerGuard));
+		registerItemRenderer(items.itemM4Stock, new RenderItemM4Stock(AliensVsPredator.resources().M4, m4.handle, m4.stock1, m4.stock2, m4.stock3));
+		
+		ModelM56SG m56sg = new ModelM56SG();
+		registerItemRenderer(items.itemM56SGAction, new RenderItemM56SGAction(AliensVsPredator.resources().M56SG, m56sg.base, m56sg.base2, m56sg.base3, m56sg.baseUnder, m56sg.baseUnder2, m56sg.ammoHolder, m56sg.topHandle, m56sg.topHandleBase, m56sg.topHandleBase2));
+		registerItemRenderer(items.itemM56SGAimingModule, new RenderItemM56SGAimingModule(AliensVsPredator.resources().M56SG, m56sg.autoTargetControl, m56sg.autoTargetEye));
+		registerItemRenderer(items.itemM56SGBarrel, new RenderItemM56SGBarrel(AliensVsPredator.resources().M56SG, m56sg.barrel, m56sg.barrelHolderBase));
+		registerItemRenderer(items.itemM56SGStock, new RenderItemM56SGStock(AliensVsPredator.resources().M56SG, m56sg.handle, m56sg.handleBase, m56sg.handleTop, m56sg.handleWire));
+		registerItemRenderer(items.itemM56SGSupportFrame, new RenderItemM56SGSupportFrame(AliensVsPredator.resources().M56SG, m56sg.barrelSupportLeft, m56sg.barrelSupportRight));
+		
+		ModelM41A m41a = new ModelM41A();
+		registerItemRenderer(items.itemM41AAction, new RenderItemM41AAction(AliensVsPredator.resources().M41A, m41a.gunBase1, m41a.gunBase2, m41a.gunBase3, m41a.gunFrame, m41a.underrail, m41a.underrail2));
+		registerItemRenderer(items.itemM41ABarrel, new RenderItemM41ABarrel(AliensVsPredator.resources().M41A, m41a.barrel, m41a.mechanism));
+		registerItemRenderer(items.itemM41AStock, new RenderItemM41AStock(AliensVsPredator.resources().M41A, m41a.handle, m41a.stock1, m41a.stockEnd));
+		registerItemRenderer(items.itemM41APeripherals, new RenderItemM41APeripherals(AliensVsPredator.resources().M41A, m41a.sight1, m41a.sight2, m41a.sight3, m41a.grip, m41a.grip2));
+		
+		ModelSniper sniper = new ModelSniper();
+		registerItemRenderer(items.itemSniperBarrel, new RenderItemSniperBarrel(AliensVsPredator.resources().SNIPER, sniper.barrel));
+		registerItemRenderer(items.itemSniperAction, new RenderItemSniperAction(AliensVsPredator.resources().SNIPER, sniper.base1, sniper.base2, sniper.clipHolder1, sniper.clipHolder2, sniper.trigger, sniper.triggerGuard, sniper.scopeBase));
+		registerItemRenderer(items.itemSniperScope, new RenderItemSniperScope(AliensVsPredator.resources().SNIPER, sniper.scope, sniper.scopeSupport));
+		registerItemRenderer(items.itemSniperStock, new RenderItemSniperStock(AliensVsPredator.resources().SNIPER, sniper.stock1, sniper.stock2, sniper.stockEnd));
+		registerItemRenderer(items.itemSniperPeripherals, new RenderItemSniperPeripherals(AliensVsPredator.resources().SNIPER, sniper.barrelSupport));
 		
 		// registerItemRenderer(items.itemAK47Barrel, new RenderItemMotionTracker());
 		// registerItemRenderer(items.itemAK47Stock, new RenderItemMotionTracker());

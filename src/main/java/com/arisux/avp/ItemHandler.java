@@ -282,6 +282,7 @@ public class ItemHandler extends IBHandler implements IInitializable
 		registerItem(itemM41ABarrel, "part.m41a.barrel");
 		registerItem(itemM41APeripherals, "part.m41a.peripherals");
 		registerItem(itemM56SGStock, "part.m56sg.stock");
+		registerItem(itemM56SGAction, "part.m56sg.action");
 		registerItem(itemM56SGBarrel, "part.m56sg.barrel");
 		registerItem(itemM56SGSupportFrame, "part.m56sg.supportframe");
 		registerItem(itemM56SGAimingModule, "part.m56sg.aimingmodule");

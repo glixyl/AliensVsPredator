@@ -6,22 +6,22 @@ import net.minecraft.client.model.ModelRenderer;
 
 public class ModelM4 extends ModelBaseExtension
 {
-	ModelRenderer barrel;
-	ModelRenderer clip;
-	ModelRenderer stock1;
-	ModelRenderer stock2;
-	ModelRenderer stock3;
-	ModelRenderer handle;
-	ModelRenderer mainBody1;
-	ModelRenderer mainBody2;
-	ModelRenderer mainBody3;
-	ModelRenderer triggerGuard;
-	ModelRenderer barrelGuard;
-	ModelRenderer sightBase1;
-	ModelRenderer sightBase2;
-	ModelRenderer sightBase3;
-	ModelRenderer sight1;
-	ModelRenderer sight2;
+	public ModelRenderer barrel;
+	public ModelRenderer clip;
+	public ModelRenderer stock1;
+	public ModelRenderer stock2;
+	public ModelRenderer stock3;
+	public ModelRenderer handle;
+	public ModelRenderer mainBody1;
+	public ModelRenderer mainBody2;
+	public ModelRenderer mainBody3;
+	public ModelRenderer triggerGuard;
+	public ModelRenderer barrelGuard;
+	public ModelRenderer sightBase1;
+	public ModelRenderer sightBase2;
+	public ModelRenderer sightBase3;
+	public ModelRenderer sight1;
+	public ModelRenderer sight2;
 
 	public ModelM4()
 	{

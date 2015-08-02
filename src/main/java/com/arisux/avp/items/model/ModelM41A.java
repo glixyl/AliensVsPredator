@@ -6,22 +6,22 @@ import net.minecraft.client.model.ModelRenderer;
 
 public class ModelM41A extends ModelBaseExtension
 {
-	ModelRenderer stockEnd;
-	ModelRenderer stock1;
-	ModelRenderer sight1;
-	ModelRenderer sight2;
-	ModelRenderer underrail;
-	ModelRenderer underrail2;
-	ModelRenderer sight3;
-	ModelRenderer gunBase1;
-	ModelRenderer gunBase2;
-	ModelRenderer barrel;
-	ModelRenderer gunBase3;
-	ModelRenderer mechanism;
-	ModelRenderer grip;
-	ModelRenderer grip2;
-	ModelRenderer handle;
-	ModelRenderer gunFrame;
+	public ModelRenderer stockEnd;
+	public ModelRenderer stock1;
+	public ModelRenderer sight1;
+	public ModelRenderer sight2;
+	public ModelRenderer underrail;
+	public ModelRenderer underrail2;
+	public ModelRenderer sight3;
+	public ModelRenderer gunBase1;
+	public ModelRenderer gunBase2;
+	public ModelRenderer barrel;
+	public ModelRenderer gunBase3;
+	public ModelRenderer mechanism;
+	public ModelRenderer grip;
+	public ModelRenderer grip2;
+	public ModelRenderer handle;
+	public ModelRenderer gunFrame;
 
 	public ModelM41A()
 	{
