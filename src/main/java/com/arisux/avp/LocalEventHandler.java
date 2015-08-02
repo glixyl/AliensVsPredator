@@ -47,7 +47,6 @@ public class LocalEventHandler implements IInitializable
 			this.registerEvent(new AlienArmorEvents());
 			this.registerEvent(new FireAPCEvent());
 			this.registerEvent(new RenderPlayerHotbarAPCEvent());
-			this.registerEvent(new RenderPlayerAPCEvent());
 			this.registerEvent(new ChestbursterOverlayEvent());
 			this.registerEvent(new CommonFirearmEvents());
 			this.registerEvent(new PlayerModeRenderEvent());
@@ -58,6 +57,7 @@ public class LocalEventHandler implements IInitializable
 			this.registerEvent(new VisionModeRenderEvent());
 			this.registerEvent(new RenderMotionTrackerScreen());
 			this.registerEvent(new LightmapUpdateEvent());
+			this.registerEvent(new RenderPlayerAPCEvent());
 			this.registerEvent(new UserInterfaceEvents());
 			this.registerEvent(new PulseRifleEvents());
 			this.registerEvent(new WristBracerEvents());
