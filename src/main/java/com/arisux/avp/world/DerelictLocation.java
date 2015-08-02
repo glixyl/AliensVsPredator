@@ -97,7 +97,7 @@ public class DerelictLocation
 	
 	public void generate(World world, int addX, int addY, int addZ)
 	{
-		AliensVsPredator.schematics().derelict.generate(world, this.getCoord().add(addX, addY, addZ));
 		this.setGenerated(true);
+		AliensVsPredator.schematics().derelict.generate(world, this.getCoord().add(addX, addY, addZ));
 	}
 }

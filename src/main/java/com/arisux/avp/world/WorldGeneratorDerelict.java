@@ -14,14 +14,12 @@ public class WorldGeneratorDerelict implements IWorldGenerator
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
 	{
-		final World worldInstance = world;
-
 		for (final DerelictLocation location : AliensVsPredator.worldgen().getSaveHandler().getWorldInfo().getDerelictLocations())
 		{
 			if (!location.isGenerated() && location.getCoord().posX / 16 == chunkX && location.getCoord().posZ / 16 == chunkZ)
 			{
 				AIRI.logger.info("Generating a Derelict in chunk at %s, %s", chunkX, chunkZ);
-				location.generate(worldInstance);
+				location.generate(world);
 			}
 		}
 	}

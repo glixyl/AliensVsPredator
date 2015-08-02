@@ -42,9 +42,9 @@ public class TeleporterLV extends Teleporter
 		else
 		{
 			int entityPosX = MathHelper.floor_double(entity.posX);
-			int entityPosY = MathHelper.floor_double(entity.posY) - 1;
+			int entityPosY = MathHelper.floor_double(entity.posY);
 			int entityPosZ = MathHelper.floor_double(entity.posZ);
-			byte var12 = 1;
+			byte var12 = 2;
 			byte var13 = 0;
 
 			if (worldServer.getBlock(entityPosX, entityPosY, entityPosZ) == Blocks.air)

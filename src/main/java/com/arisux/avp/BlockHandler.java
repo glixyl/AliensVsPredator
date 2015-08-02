@@ -39,6 +39,7 @@ import cpw.mods.fml.relauncher.Side;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraftforge.fluids.BlockFluidBase;
 
 public class BlockHandler extends IBHandler implements IInitializable
 {
@@ -123,7 +124,9 @@ public class BlockHandler extends IBHandler implements IInitializable
 		oreSilicon = (new HookedBlock(Material.rock)).setHardness(2.2F).setResistance(1.4F),
 		oreLithium = (new HookedBlock(Material.iron)).setHardness(4.2F).setResistance(5.4F),
 		oreCopper = (new HookedBlock(Material.iron)).setHardness(3.2F).setResistance(2.6F),
-		oreBauxite = (new HookedBlock(Material.iron)).setHardness(3.2F).setResistance(2.6F);
+		oreBauxite = (new HookedBlock(Material.iron)).setHardness(3.2F).setResistance(2.6F),
+		mainframePanelShimmer = (new HookedBlock(Material.iron).setIconSet(new IconSet("avp:mainframe_shimmer")).setHardness(3F).setResistance(1F)),
+		mainframePanelFlicker = (new HookedBlock(Material.iron).setIconSet(new IconSet("avp:mainframe_flicker")).setHardness(3F).setResistance(1F));
 
 	public BlockHandler()
 	{
@@ -269,5 +272,7 @@ public class BlockHandler extends IBHandler implements IInitializable
 		registerShapedBlockSet(blockPlastic, "plasticblock");
 		registerShapedBlockSet(blockPlasticTile, "plastictile");
 		registerBlock(blockLightPanel, "lightpanel", true);
+		registerBlock(mainframePanelShimmer, "mainframepanel.shimmer", true);
+		registerBlock(mainframePanelFlicker, "mainframepanel.flicker", true);
 	}
 }
