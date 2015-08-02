@@ -256,7 +256,7 @@ public class ItemHandler extends IBHandler implements IInitializable
 		registerItem(itemSupplyChute, "device.supplychute");
 		registerItem(itemProcessor, "part.processor");
 		registerItem(itemLiquidStateDrive, "part.liquidstatedrive");
-		registerItem(itemVoltageRegulator, "part.voltageregulator");
+		registerItem(itemVoltageRegulator, "part.regulator");
 		registerItem(itemCapacitor, "part.capacitor");
 		registerItem(itemTransistor, "part.transistor");
 		registerItem(itemMotherboard, "part.motherboard");
