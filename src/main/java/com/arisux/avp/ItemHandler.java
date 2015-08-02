@@ -262,10 +262,7 @@ public class ItemHandler extends IBHandler implements IInitializable
 		registerItem(itemMotherboard, "part.motherboard");
 		registerItem(itemRAM, "part.ram");
 		registerItem(itemResistor, "part.resistor");
-		registerItem(itemPOEInputConvertor, "part.poeinputconvertor");
-		registerItem(itemPOEOutputConvertor, "part.poeoutputconvertor");
 		registerItem(itemLed, "part.led");
-		registerItem(itemCarbon, "part.carbon");
 		registerItem(itemDiode, "part.diode");
 		registerItem(itemPowerSupply, "part.powersupply");
 		registerItem(itemLedDisplay, "part.led.display");
@@ -297,6 +294,7 @@ public class ItemHandler extends IBHandler implements IInitializable
 		registerItem(itemIngotLithium, "ingot.lithium");
 		registerItem(itemIngotAluminum, "ingot.aluminum");
 		registerItem(itemSilicon, "silicon");
+		registerItem(itemCarbon, "carbon");
 		registerItem(itemAPC, "apc");
 		registerItem(itemMotionTracker, "motiontracker");
 		registerItem(itemWristbracerBlades, "wristbracer.blades");
