@@ -31,7 +31,6 @@ import com.arisux.avp.block.BlockTempleSpawner;
 import com.arisux.avp.block.BlockTransformer;
 import com.arisux.avp.block.BlockTurret;
 import com.arisux.avp.block.BlockWorkstation;
-import com.arisux.avp.block.GhostBlock;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -39,7 +38,6 @@ import cpw.mods.fml.relauncher.Side;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraftforge.fluids.BlockFluidBase;
 
 public class BlockHandler extends IBHandler implements IInitializable
 {
@@ -106,7 +104,6 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockRepulsionGenerator = (new BlockGenerator(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockPowerline = (new BlockPowerline(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockBlastdoor = (new BlockBlastdoor(Material.iron)).setHardness(5F).setResistance(5F),
-		ghostBlockBlastdoor = (new GhostBlock()),
 		blockCryostasisTube = (new BlockCryostasisTube(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockPlastic = (new HookedBlock(Material.clay)).setHardness(1.5F).setResistance(2.0F),
 		blockLightPanel = (new BlockLightPanel(Material.iron, true)).setHardness(1.5F).setResistance(2.0F),
@@ -265,7 +262,6 @@ public class BlockHandler extends IBHandler implements IInitializable
 		registerBlock(blockRepulsionGenerator, "generator", true);
 		registerBlock(blockPowerline, "powerline", true);
 		registerBlock(blockBlastdoor, "blastdoor", true);
-		registerBlock(ghostBlockBlastdoor, "ghostBlockBlastdoor", false);
 		registerBlock(blockSupplies, "supplychuteblock", false);
 		registerBlock(blockBlackGoo, "blackgoo", false);
 		registerBlock(blockCryostasisTube, "cryostasistube", true);

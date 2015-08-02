@@ -19,40 +19,43 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class RenderBlastdoor extends TileEntitySpecialRenderer
 {
 	private ModelBlastdoor model = new ModelBlastdoor();
-	
-	@Override
-	public void renderTileEntityAt(TileEntity var1, double posX, double posY, double posZ, float renderPartialTicks)
-	{
-		TileEntityBlastdoor tile = (TileEntityBlastdoor) var1;
 
-		glPushMatrix();
+	@Override
+	public void renderTileEntityAt(TileEntity tileEntity, double posX, double posY, double posZ, float renderPartialTicks)
+	{
+		TileEntityBlastdoor tile = (TileEntityBlastdoor) tileEntity;
+
+		if (tile != null && !tile.isChild())
 		{
-			glDisable(GL_CULL_FACE);
-			bindTexture(AliensVsPredator.resources().BLASTDOOR);
-			glTranslated(posX + 0.5F, posY + 1.5F, posZ + 0.5F);
-			glScalef(1.0F, -1.0F, 1.0F);
-			
-			if(tile.direction != null)
+			glPushMatrix();
 			{
-				if(tile.direction == ForgeDirection.NORTH)
+				glDisable(GL_CULL_FACE);
+				bindTexture(AliensVsPredator.resources().BLASTDOOR);
+				glTranslated(posX + 0.5F, posY + 1.5F, posZ + 0.5F);
+				glScalef(1.0F, -1.0F, 1.0F);
+
+				if (tile.direction != null)
 				{
-					glRotatef(0F, 0F, 0F, 0F);
+					if (tile.direction == ForgeDirection.NORTH)
+					{
+						glRotatef(0F, 0F, 0F, 0F);
+					}
+					if (tile.direction == ForgeDirection.SOUTH)
+					{
+						glRotatef(0F, 0F, 0F, 0F);
+					}
+					if (tile.direction == ForgeDirection.WEST)
+					{
+						glRotatef(90F, 0F, 1F, 0F);
+					}
+					if (tile.direction == ForgeDirection.EAST)
+					{
+						glRotatef(90F, 0F, 1F, 0F);
+					}
 				}
-				if(tile.direction == ForgeDirection.SOUTH)
-				{
-					glRotatef(0F, 0F, 0F, 0F);
-				}
-				if(tile.direction == ForgeDirection.WEST)
-				{
-					glRotatef(90F, 0F, 1F, 0F);
-				}
-				if(tile.direction == ForgeDirection.EAST)
-				{
-					glRotatef(90F, 0F, 1F, 0F);
-				}
+				this.model.render(tile, 0.0625F);
 			}
-			this.model.render(tile, 0.0625F);
+			glPopMatrix();
 		}
-		glPopMatrix();
 	}
 }

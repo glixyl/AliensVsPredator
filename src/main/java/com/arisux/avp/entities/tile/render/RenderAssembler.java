@@ -14,6 +14,8 @@ import static org.lwjgl.opengl.GL11.glRotatef;
 import static org.lwjgl.opengl.GL11.glScalef;
 import static org.lwjgl.opengl.GL11.glTranslated;
 
+import org.lwjgl.opengl.GL11;
+
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.entities.tile.TileEntityAssembler;
 
@@ -54,6 +56,8 @@ public class RenderAssembler extends TileEntitySpecialRenderer
 			{
 				glScalef(0.05F, 0.05F, 0.05F);
 				RenderUtil.glDisableLight();
+				GL11.glEnable(GL11.GL_BLEND);
+				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_CONSTANT_COLOR);
 
 				for (int x = 64; x > 0; x--)
 				{
