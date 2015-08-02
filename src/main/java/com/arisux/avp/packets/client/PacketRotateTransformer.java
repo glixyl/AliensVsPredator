@@ -61,7 +61,7 @@ public class PacketRotateTransformer implements IMessage, IMessageHandler<Packet
 			if (tile != null && tile instanceof TileEntityTransformer)
 			{
 				TileEntityTransformer tileTransformer = (TileEntityTransformer) tile;
-				tileTransformer.acceptVoltageDirection = ForgeDirection.getOrientation(packet.direction);
+				tileTransformer.setDirection(ForgeDirection.getOrientation(packet.direction));
 			}
 		}
 

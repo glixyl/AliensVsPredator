@@ -1,11 +1,12 @@
 package com.arisux.avp.entities.tile.model;
 
 import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.avp.entities.tile.TileEntityElectrical;
 import com.arisux.avp.entities.tile.TileEntityPowerline;
-import com.arisux.avp.interfaces.energy.IEnergyProvider;
-import com.arisux.avp.interfaces.energy.IEnergyReceiver;
 
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class ModelCable extends ModelBaseExtension
 {
@@ -70,7 +71,7 @@ public class ModelCable extends ModelBaseExtension
 	public void render(TileEntityPowerline tile, float boxTranslation)
 	{
 		node.render(boxTranslation);
-		
+
 		if (tile != null)
 		{
 			down.setRotationPoint(1F, 17F, -1F);
@@ -80,34 +81,64 @@ public class ModelCable extends ModelBaseExtension
 			left.setRotationPoint(1F, 15F, 1F);
 			right.setRotationPoint(-1F, 15F, -1F);
 
-			if (tile.getWorldObj().getTileEntity(tile.xCoord + 1, tile.yCoord, tile.zCoord) instanceof IEnergyReceiver || tile.getWorldObj().getTileEntity(tile.xCoord + 1, tile.yCoord, tile.zCoord) instanceof IEnergyProvider)
+			TileEntity leftTile = tile.getWorldObj().getTileEntity(tile.xCoord + 1, tile.yCoord, tile.zCoord);
+
+			if (leftTile instanceof TileEntityElectrical)
 			{
-				left.render(boxTranslation);
+				TileEntityElectrical connection = (TileEntityElectrical) leftTile;
+
+				if (connection.canProvideEnergyToReceiver(ForgeDirection.EAST))
+					left.render(boxTranslation);
 			}
 
-			if (tile.getWorldObj().getTileEntity(tile.xCoord - 1, tile.yCoord, tile.zCoord) instanceof IEnergyReceiver || tile.getWorldObj().getTileEntity(tile.xCoord - 1, tile.yCoord, tile.zCoord) instanceof IEnergyProvider)
+			TileEntity rightTile = tile.getWorldObj().getTileEntity(tile.xCoord - 1, tile.yCoord, tile.zCoord);
+
+			if (rightTile instanceof TileEntityElectrical)
 			{
-				right.render(boxTranslation);
+				TileEntityElectrical connection = (TileEntityElectrical) rightTile;
+
+				if (connection.canProvideEnergyToReceiver(ForgeDirection.WEST))
+					right.render(boxTranslation);
 			}
 
-			if (tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord + 1, tile.zCoord) instanceof IEnergyReceiver || tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord + 1, tile.zCoord) instanceof IEnergyProvider)
+			TileEntity topTile = tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord + 1, tile.zCoord);
+
+			if (topTile instanceof TileEntityElectrical)
 			{
-				up.render(boxTranslation);
+				TileEntityElectrical connection = (TileEntityElectrical) topTile;
+
+				if (connection.canProvideEnergyToReceiver(ForgeDirection.UP))
+					up.render(boxTranslation);
 			}
 
-			if (tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord - 1, tile.zCoord) instanceof IEnergyReceiver || tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord - 1, tile.zCoord) instanceof IEnergyProvider)
+			TileEntity bottomTile = tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord - 1, tile.zCoord);
+
+			if (bottomTile instanceof TileEntityElectrical)
 			{
-				down.render(boxTranslation);
+				TileEntityElectrical connection = (TileEntityElectrical) bottomTile;
+
+				if (connection.canProvideEnergyToReceiver(ForgeDirection.DOWN))
+					down.render(boxTranslation);
 			}
 
-			if (tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord, tile.zCoord + 1) instanceof IEnergyReceiver || tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord, tile.zCoord + 1) instanceof IEnergyProvider)
+			TileEntity backTile = tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord, tile.zCoord + 1);
+
+			if (backTile instanceof TileEntityElectrical)
 			{
-				back.render(boxTranslation);
+				TileEntityElectrical connection = (TileEntityElectrical) backTile;
+
+				if (connection.canProvideEnergyToReceiver(ForgeDirection.SOUTH))
+					back.render(boxTranslation);
 			}
 
-			if (tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord, tile.zCoord - 1) instanceof IEnergyReceiver || tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord, tile.zCoord - 1) instanceof IEnergyProvider)
+			TileEntity frontTile = tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord, tile.zCoord - 1);
+
+			if (frontTile instanceof TileEntityElectrical)
 			{
-				front.render(boxTranslation);
+				TileEntityElectrical connection = (TileEntityElectrical) frontTile;
+
+				if (connection.canProvideEnergyToReceiver(ForgeDirection.NORTH))
+					front.render(boxTranslation);
 			}
 		}
 		else

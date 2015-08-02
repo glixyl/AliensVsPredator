@@ -1,7 +1,5 @@
 package com.arisux.avp.entities.tile;
 
-import java.util.ArrayList;
-
 import com.arisux.avp.interfaces.energy.IEnergyProvider;
 import com.arisux.avp.interfaces.energy.IEnergyReceiver;
 
@@ -14,8 +12,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityTransformer extends TileEntityElectrical implements IEnergyProvider, IEnergyReceiver
 {
-	public ForgeDirection acceptVoltageDirection = ForgeDirection.SOUTH;
-	
+	private ForgeDirection direction = ForgeDirection.SOUTH;
+
 	public TileEntityTransformer()
 	{
 		super(false);
@@ -40,10 +38,10 @@ public class TileEntityTransformer extends TileEntityElectrical implements IEner
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
-		
-		if (this.acceptVoltageDirection != null)
+
+		if (this.direction != null)
 		{
-			nbt.setInteger("Direction", this.acceptVoltageDirection.ordinal());
+			nbt.setInteger("Direction", this.direction.ordinal());
 		}
 	}
 
@@ -51,14 +49,10 @@ public class TileEntityTransformer extends TileEntityElectrical implements IEner
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
-		int direction = nbt.getInteger("Direction");
-		
-		if (ForgeDirection.getOrientation(direction) != null)
-		{
-			this.acceptVoltageDirection = ForgeDirection.getOrientation(direction);
-		}
+
+		this.direction = ForgeDirection.getOrientation(nbt.getInteger("Direction"));
 	}
-	
+
 	@Override
 	public void updateEntity()
 	{
@@ -67,8 +61,6 @@ public class TileEntityTransformer extends TileEntityElectrical implements IEner
 
 		if (this.voltage > 0)
 		{
-			ForgeDirection direction = acceptVoltageDirection;
-
 			TileEntity tile = this.worldObj.getTileEntity(this.xCoord + direction.offsetX, this.yCoord + direction.offsetY, this.zCoord + direction.offsetZ);
 
 			if (tile != null && tile instanceof TileEntityElectrical)
@@ -93,13 +85,13 @@ public class TileEntityTransformer extends TileEntityElectrical implements IEner
 	@Override
 	public ForgeDirection getSourcePowerDirection()
 	{
-		return acceptVoltageDirection;
+		return direction;
 	}
-	
+
 	@Override
 	public boolean canConnectEnergy(ForgeDirection from)
 	{
-		return from == acceptVoltageDirection;
+		return from == direction;
 	}
 
 	@Override
@@ -124,12 +116,22 @@ public class TileEntityTransformer extends TileEntityElectrical implements IEner
 	@Override
 	public boolean canProvideEnergyToReceiver(ForgeDirection side)
 	{
-		return side == acceptVoltageDirection || side == acceptVoltageDirection.getOpposite();
+		return side == direction || side == direction.getOpposite();
 	}
 
 	@Override
 	public double getMaxEnergyStored(ForgeDirection from)
 	{
 		return 10000;
+	}
+
+	public ForgeDirection getDirection()
+	{
+		return direction;
+	}
+
+	public void setDirection(ForgeDirection direction)
+	{
+		this.direction = direction;
 	}
 }

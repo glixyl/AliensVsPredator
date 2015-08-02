@@ -71,12 +71,15 @@ public class BlockTransformer extends HookedBlock
 
 			for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)
 			{
-				forgeDirections.add(dir);
+				if (dir != ForgeDirection.UP && dir != ForgeDirection.DOWN)
+				{
+					forgeDirections.add(dir);
+				}
 			}
 
-			if (transformer.acceptVoltageDirection != null)
+			if (transformer.getDirection() != null)
 			{
-				int index = forgeDirections.indexOf(transformer.acceptVoltageDirection);
+				int index = forgeDirections.indexOf(transformer.getDirection());
 
 				if (index + 1 >= forgeDirections.size())
 				{
@@ -85,12 +88,12 @@ public class BlockTransformer extends HookedBlock
 
 				if (forgeDirections.get(index + 1) != null)
 				{
-					transformer.acceptVoltageDirection = forgeDirections.get(index + 1);
+					transformer.setDirection(forgeDirections.get(index + 1));
 				}
 
 				if (!worldObj.isRemote)
 				{
-					AliensVsPredator.network().sendToAll(new PacketRotateTransformer(transformer.acceptVoltageDirection.ordinal(), transformer.xCoord, transformer.yCoord, transformer.zCoord));
+					AliensVsPredator.network().sendToAll(new PacketRotateTransformer(transformer.getDirection().ordinal(), transformer.xCoord, transformer.yCoord, transformer.zCoord));
 				}
 			}
 

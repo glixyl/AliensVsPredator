@@ -134,6 +134,7 @@ import com.arisux.avp.items.render.RenderItemSolarPanel;
 import com.arisux.avp.items.render.RenderItemSpear;
 import com.arisux.avp.items.render.RenderItemStasisMechanism;
 import com.arisux.avp.items.render.RenderItemSummoner;
+import com.arisux.avp.items.render.RenderItemTransformer;
 import com.arisux.avp.items.render.RenderItemTurret;
 import com.arisux.avp.items.render.RenderItemWorkstation;
 import com.arisux.avp.items.render.RenderItemWristbracer;
@@ -213,6 +214,8 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.blocks().blockPowerline), new RenderItemPowerline());
 		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.blocks().blockSolarPanel), new RenderItemSolarPanel());
 		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.blocks().blockPowercell), new RenderItemPowercell());
+		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.blocks().blockTransformer), new RenderItemTransformer());
+		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.blocks().blockNegativeTransformer), new RenderItemTransformer());
 		registerItemRenderer(items.itemWristBlade, new RenderItemWristbracer());
 		registerItemRenderer(items.itemWristbracerBlades, new RenderItemWristbracerBlades());
 		registerItemRenderer(items.itemSpear, new RenderItemSpear());

@@ -111,7 +111,7 @@ public class ItemHandler extends IBHandler implements IInitializable
 		itemSniper = (new ItemFirearm(6, 1.8F, 40, 150, (ItemAmmo) itemAmmoSniper, AliensVsPredator.properties().SOUND_WEAPON_SNIPER).disableIcon()).setFull3D(),
 		itemSniperStock = (new HookedItem()).setDescription("A Sniper Rifle stock for use in assembling Sniper Rifle's.").setMaxStackSize(64),
 		itemSniperBarrel = (new HookedItem()).setDescription("A Sniper Rifle barrel for use in assembling Sniper Rifle's.").setMaxStackSize(64),
-		itemSniperAction =  (new HookedItem()).setDescription("A Sniper Rifle action for use in assembling Sniper Rifle's.").setMaxStackSize(64),
+		itemSniperAction = (new HookedItem()).setDescription("A Sniper Rifle action for use in assembling Sniper Rifle's.").setMaxStackSize(64),
 		itemSniperScope = (new HookedItem()).setDescription("A Sniper Rifle scope for use in assembling Sniper Rifle's.").setMaxStackSize(64),
 		itemSniperPeripherals = (new HookedItem()).setDescription("Sniper Rifle peripherals for use in assembling Sniper Rifle's.").setMaxStackSize(64),
 		itemM41A = (new ItemFirearm(99, 0.5F, 2, 120, (ItemAmmo) itemAmmoAC, AliensVsPredator.properties().SOUND_WEAPON_PULSERIFLE).setSoundLength(1.25D).disableIcon()).setFull3D(),
@@ -157,7 +157,10 @@ public class ItemHandler extends IBHandler implements IInitializable
 		itemIngotLithium = ((HookedItem) new ItemIngotLithium()).setDescription("An ingot of lithium. Depletes quicly after mining."),
 		itemMotionTracker = ((HookedItem) (new HookedItem()).disableIcon()).setDescription("Tracks movement by detecting changes in air density."),
 		itemPolycarbonate = (new HookedItem()).setDescription("Polycarbonate (A hard plastic used in the crafting of many items/blocks)"),
-		itemRoyalJelly = (new HookedItem()).setDescription("Royal Jelly (A potent, transformative substance produced by a Xenomorph Queen)");
+		itemRoyalJelly = (new HookedItem()).setDescription("Royal Jelly (A potent, transformative substance produced by a Xenomorph Queen)"),
+		itemBlackGoo = (new HookedItem()).setDescription("Black Goo (A0-3959X.91 – 15)"),
+		itemPhial = (new HookedItem()).setDescription(""),
+		itemPhialEmpty = (new HookedItem()).setDescription("");
 
 	public ItemEntitySummoner itemSummonerDrone = (new ItemEntitySummoner(this.getMod().domain(), EntityDrone.class)),
 		itemSummonerAqua = (new ItemEntitySummoner(this.getMod().domain(), EntityAqua.class)),
@@ -257,7 +260,7 @@ public class ItemHandler extends IBHandler implements IInitializable
 		registerItem(itemCapacitor, "part.capacitor");
 		registerItem(itemTransistor, "part.transistor");
 		registerItem(itemMotherboard, "part.motherboard");
-		registerItem(itemRAM,  "part.ram");
+		registerItem(itemRAM, "part.ram");
 		registerItem(itemResistor, "part.resistor");
 		registerItem(itemPOEInputConvertor, "part.poeinputconvertor");
 		registerItem(itemPOEOutputConvertor, "part.poeoutputconvertor");
@@ -278,10 +281,10 @@ public class ItemHandler extends IBHandler implements IInitializable
 		registerItem(itemM41AAction, "part.m41a.action");
 		registerItem(itemM41ABarrel, "part.m41a.barrel");
 		registerItem(itemM41APeripherals, "part.m41a.peripherals");
-		registerItem(itemM56SGStock, "part.M56SG.stock");
-		registerItem(itemM56SGBarrel, "part.M56SG.barrel");
-		registerItem(itemM56SGSupportFrame, "part.M56SG.supportframe");
-		registerItem(itemM56SGAimingModule, "part.M56SG.aimingmodule");
+		registerItem(itemM56SGStock, "part.m56sg.stock");
+		registerItem(itemM56SGBarrel, "part.m56sg.barrel");
+		registerItem(itemM56SGSupportFrame, "part.m56sg.supportframe");
+		registerItem(itemM56SGAimingModule, "part.m56sg.aimingmodule");
 		registerItem(itemM4Stock, "part.m4.stock");
 		registerItem(itemM4Action, "part.m4.action");
 		registerItem(itemM4Barrel, "part.m4.barrel");
@@ -298,5 +301,8 @@ public class ItemHandler extends IBHandler implements IInitializable
 		registerItem(itemWristbracerBlades, "wristbracer.blades");
 		registerItem(itemPolycarbonate, "polycarbonate");
 		registerItem(itemRoyalJelly, "royaljelly");
+		registerItem(itemBlackGoo, "blackgoo.item");
+		registerItem(itemPhial, "phial.goo");
+		registerItem(itemPhialEmpty, "phial.empty");
 	}
 }
