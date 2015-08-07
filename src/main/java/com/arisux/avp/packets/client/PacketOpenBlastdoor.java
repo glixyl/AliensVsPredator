@@ -57,7 +57,11 @@ public class PacketOpenBlastdoor implements IMessage, IMessageHandler<PacketOpen
 		if (world != null && tile != null && tile instanceof TileEntityBlastdoor)
 		{
 			TileEntityBlastdoor blastdoor = (TileEntityBlastdoor) tile;
-			blastdoor.setDoorOpen(packet.open);
+
+			if (blastdoor != null)
+			{
+				blastdoor.setDoorOpen(packet.open);
+			}
 		}
 
 		return null;

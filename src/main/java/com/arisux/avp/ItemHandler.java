@@ -137,7 +137,7 @@ public class ItemHandler extends IBHandler implements IInitializable
 		itemResistor = (new HookedItem()).setMaxStackSize(64),
 		itemArtifactTech = (new HookedItem()).setDescription("An unknown piece of technology aquired from the yautja species."),
 		itemProcessor = ((new HookedItem())),
-		itemLiquidStateDrive = ((new HookedItem())),
+		itemSolidStateDrive = ((new HookedItem())),
 		itemDiode = ((new HookedItem())),
 		itemMotherboard = ((new HookedItem())),
 		itemPowerSupply = ((new HookedItem())),
@@ -147,8 +147,6 @@ public class ItemHandler extends IBHandler implements IInitializable
 		itemLed = ((new HookedItem())),
 		itemLedDisplay = ((new HookedItem())),
 		itemCarbon = (new HookedItem()).setDescription("Used in the crafting of several electrical components."),
-		itemPOEInputConvertor = ((new HookedItem())),
-		itemPOEOutputConvertor = ((new HookedItem())),
 		itemIntegratedCircuit = ((new HookedItem())),
 		itemAPC = ((new ItemAPC())),
 		itemSilicon = new HookedItem().setDescription("A few chunks of silicon, for use with electronics."),
@@ -255,7 +253,7 @@ public class ItemHandler extends IBHandler implements IInitializable
 		registerItem(itemFlashDrive, "device.nbtdrive");
 		registerItem(itemSupplyChute, "device.supplychute");
 		registerItem(itemProcessor, "part.processor");
-		registerItem(itemLiquidStateDrive, "part.liquidstatedrive");
+		registerItem(itemSolidStateDrive, "part.solidstatedrive");
 		registerItem(itemVoltageRegulator, "part.regulator");
 		registerItem(itemCapacitor, "part.capacitor");
 		registerItem(itemTransistor, "part.transistor");
