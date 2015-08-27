@@ -34,21 +34,21 @@ public class RenderBlastdoor extends TileEntitySpecialRenderer
 				glTranslated(posX + 0.5F, posY + 1.5F, posZ + 0.5F);
 				glScalef(1.0F, -1.0F, 1.0F);
 
-				if (tile.direction != null)
+				if (tile.getDirection() != null)
 				{
-					if (tile.direction == ForgeDirection.NORTH)
+					if (tile.getDirection() == ForgeDirection.NORTH)
 					{
 						glRotatef(0F, 0F, 0F, 0F);
 					}
-					if (tile.direction == ForgeDirection.SOUTH)
+					if (tile.getDirection() == ForgeDirection.SOUTH)
 					{
 						glRotatef(0F, 0F, 0F, 0F);
 					}
-					if (tile.direction == ForgeDirection.WEST)
+					if (tile.getDirection() == ForgeDirection.WEST)
 					{
 						glRotatef(90F, 0F, 1F, 0F);
 					}
-					if (tile.direction == ForgeDirection.EAST)
+					if (tile.getDirection() == ForgeDirection.EAST)
 					{
 						glRotatef(90F, 0F, 1F, 0F);
 					}

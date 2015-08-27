@@ -82,7 +82,7 @@ public class TerrainFormation extends WorldGenerator implements IWorldGenerator
 			return false;
 		}
 
-		Block block = AliensVsPredator.blocks().blockDerelict3;
+		Block block = AliensVsPredator.blocks().blockEngineerShipRock0;
 
 		this.setBlock(world, x + 0, y + 9, z + 1, block, 0);
 		this.setBlock(world, x + 0, y + 10, z + 1, block, 0);

@@ -68,7 +68,7 @@ public class Settings
             biomeAcheron = config.get(CATEGORY_BIOMES, "ACHERON", 224).getInt();
 
 			mainDomain = config.get(CATEGORY_URLS, "DOMAIN_MAIN", "http://avp.arisux.x10.mx", "").getString();
-			devDomain = config.get(CATEGORY_URLS, "DOMAIN_DEV", "http://localhost:10/avp", "").getString();
+			devDomain = config.get(CATEGORY_URLS, "DOMAIN_DEV", "http://aliensvspredator.org", "").getString();
 			urlUpdater = config.get(CATEGORY_URLS, "UPDATE_STRING_URL", "/latest.txt", "").getString();
 			urlChangelog = config.get(CATEGORY_URLS, "URL_CHANGELOG", "/changelog.txt", "").getString();
 			urlFeedbackSubmit = config.get(CATEGORY_URLS, "URL_AVP_FEEDBACK_SUBMIT", "/page/beta/submit.php?user=%s&uuid=%s&info=%s", "").getString();

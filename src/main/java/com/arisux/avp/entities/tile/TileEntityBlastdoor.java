@@ -16,7 +16,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityBlastdoor extends TileEntityElectrical implements IEnergyReceiver
 {
-	public ForgeDirection direction;
+	private ForgeDirection direction;
 	private float doorProgress;
 	private boolean doorOpen;
 	private boolean setupParent;
@@ -106,11 +106,6 @@ public class TileEntityBlastdoor extends TileEntityElectrical implements IEnergy
 			this.setupParent = false;
 		}
 
-		if (this.isParent() && !this.isOperational())
-		{
-			this.setDoorOpen(false);
-		}
-
 		if (!this.isDoorOpen())
 		{
 			this.doorProgress = this.doorProgress > 0.0F ? this.doorProgress - 0.02F : this.doorProgress;
@@ -156,10 +151,14 @@ public class TileEntityBlastdoor extends TileEntityElectrical implements IEnergy
 		{
 			this.getParent().setDoorOpen(doorOpen);
 		}
-		else
+		else if (this.isParent())
 		{
 			this.doorOpen = doorOpen;
-			AliensVsPredator.network().sendToAll(new PacketOpenBlastdoor(doorOpen, this.xCoord, this.yCoord, this.zCoord));
+			
+			if (this.worldObj.isRemote)
+			{
+				AliensVsPredator.network().sendToAll(new PacketOpenBlastdoor(doorOpen, this.xCoord, this.yCoord, this.zCoord));
+			}
 		}
 	}
 
@@ -174,16 +173,28 @@ public class TileEntityBlastdoor extends TileEntityElectrical implements IEnergy
 		return this.doorProgress;
 	}
 
-	public void setChildTile(int posX, int posY, int posZ)
+	public boolean setChildTile(int posX, int posY, int posZ)
 	{
+		if (worldObj.getBlock(posX, posY, posZ) != Blocks.air)
+		{
+			return false;
+		}
+
 		worldObj.setBlock(posX, posY, posZ, AliensVsPredator.blocks().blockBlastdoor);
 		TileEntityBlastdoor blastdoor = (TileEntityBlastdoor) worldObj.getTileEntity(posX, posY, posZ);
 
+		if (blastdoor == null)
+		{
+			return false;
+		}
+		
 		if (blastdoor != null)
 		{
 			blastdoor.addToParent(this);
 			blastdoor.setParent(this);
 		}
+
+		return true;
 	}
 
 	public void breakChildren()
@@ -214,7 +225,7 @@ public class TileEntityBlastdoor extends TileEntityElectrical implements IEnergy
 		this.parent = parent;
 	}
 
-	public void setup()
+	public boolean setup()
 	{
 		ForgeDirection direction = this.direction;
 
@@ -222,33 +233,25 @@ public class TileEntityBlastdoor extends TileEntityElectrical implements IEnergy
 		{
 			if (direction == ForgeDirection.NORTH || direction == ForgeDirection.SOUTH)
 			{
-				this.setChildTile(this.xCoord + 1, this.yCoord, this.zCoord);
-				this.setChildTile(this.xCoord + 2, this.yCoord, this.zCoord);
-				this.setChildTile(this.xCoord + 3, this.yCoord, this.zCoord);
-				this.setChildTile(this.xCoord, this.yCoord + 1, this.zCoord);
-				this.setChildTile(this.xCoord, this.yCoord + 2, this.zCoord);
-				this.setChildTile(this.xCoord + 1, this.yCoord + 2, this.zCoord);
-				this.setChildTile(this.xCoord + 1, this.yCoord + 1, this.zCoord);
-				this.setChildTile(this.xCoord + 2, this.yCoord + 2, this.zCoord);
-				this.setChildTile(this.xCoord + 2, this.yCoord + 1, this.zCoord);
-				this.setChildTile(this.xCoord + 3, this.yCoord + 2, this.zCoord);
-				this.setChildTile(this.xCoord + 3, this.yCoord + 1, this.zCoord);
+				return this.setChildTile(this.xCoord + 1, this.yCoord, this.zCoord) && this.setChildTile(this.xCoord + 2, this.yCoord, this.zCoord) && this.setChildTile(this.xCoord + 3, this.yCoord, this.zCoord) && this.setChildTile(this.xCoord, this.yCoord + 1, this.zCoord) && this.setChildTile(this.xCoord, this.yCoord + 2, this.zCoord) && this.setChildTile(this.xCoord + 1, this.yCoord + 2, this.zCoord) && this.setChildTile(this.xCoord + 1, this.yCoord + 1, this.zCoord) && this.setChildTile(this.xCoord + 2, this.yCoord + 2, this.zCoord) && this.setChildTile(this.xCoord + 2, this.yCoord + 1, this.zCoord) && this.setChildTile(this.xCoord + 3, this.yCoord + 2, this.zCoord) && this.setChildTile(this.xCoord + 3, this.yCoord + 1, this.zCoord);
 			}
 
 			if (direction == ForgeDirection.WEST || direction == ForgeDirection.EAST)
 			{
-				this.setChildTile(this.xCoord, this.yCoord, this.zCoord - 1);
-				this.setChildTile(this.xCoord, this.yCoord, this.zCoord - 2);
-				this.setChildTile(this.xCoord, this.yCoord, this.zCoord - 3);
-				this.setChildTile(this.xCoord, this.yCoord + 1, this.zCoord);
-				this.setChildTile(this.xCoord, this.yCoord + 2, this.zCoord);
-				this.setChildTile(this.xCoord, this.yCoord + 2, this.zCoord - 1);
-				this.setChildTile(this.xCoord, this.yCoord + 1, this.zCoord - 1);
-				this.setChildTile(this.xCoord, this.yCoord + 2, this.zCoord - 2);
-				this.setChildTile(this.xCoord, this.yCoord + 1, this.zCoord - 2);
-				this.setChildTile(this.xCoord, this.yCoord + 2, this.zCoord - 3);
-				this.setChildTile(this.xCoord, this.yCoord + 1, this.zCoord - 3);
+				return this.setChildTile(this.xCoord, this.yCoord, this.zCoord - 1) && this.setChildTile(this.xCoord, this.yCoord, this.zCoord - 2) && this.setChildTile(this.xCoord, this.yCoord, this.zCoord - 3) && this.setChildTile(this.xCoord, this.yCoord + 1, this.zCoord) && this.setChildTile(this.xCoord, this.yCoord + 2, this.zCoord) && this.setChildTile(this.xCoord, this.yCoord + 2, this.zCoord - 1) && this.setChildTile(this.xCoord, this.yCoord + 1, this.zCoord - 1) && this.setChildTile(this.xCoord, this.yCoord + 2, this.zCoord - 2) && this.setChildTile(this.xCoord, this.yCoord + 1, this.zCoord - 2) && this.setChildTile(this.xCoord, this.yCoord + 2, this.zCoord - 3) && this.setChildTile(this.xCoord, this.yCoord + 1, this.zCoord - 3);
 			}
 		}
+		
+		return false;
+	}
+
+	public ForgeDirection getDirection()
+	{
+		return direction;
+	}
+
+	public void setDirection(ForgeDirection direction)
+	{
+		this.direction = direction;
 	}
 }

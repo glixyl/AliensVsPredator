@@ -58,7 +58,7 @@ public class TeleporterLV extends Teleporter
 							int blockX = entityPosX + portalBlockZ * var12 + portalBlockX * var13;
 							int blockY = entityPosY + height;
 							int blockZ = entityPosZ + portalBlockZ * var13 - portalBlockX * var12;
-							this.worldServer.setBlock(blockX, blockY, blockZ, (height < 0) ? AliensVsPredator.blocks().blockDerelict2 : Blocks.air);
+							this.worldServer.setBlock(blockX, blockY, blockZ, (height < 0) ? AliensVsPredator.blocks().blockEngineerShipFloor : Blocks.air);
 						}
 					}
 				}
@@ -424,7 +424,7 @@ public class TeleporterLV extends Teleporter
 						int var23 = var33 + var21 + 70;
 						int var24 = var19 + (var20 - 1) * var35 - var18 * var34;
 						boolean var36 = var21 < 0;
-						this.worldServer.setBlock(var22, var23, var24, var36 ? AliensVsPredator.blocks().blockDerelict2 : Blocks.air);
+						this.worldServer.setBlock(var22, var23, var24, var36 ? AliensVsPredator.blocks().blockEngineerShipFloor : Blocks.air);
 					}
 				}
 			}
@@ -441,9 +441,9 @@ public class TeleporterLV extends Teleporter
 					int var24 = var19 + (var20 - 1) * var35;
 					boolean var36 = (var20 == 0) || (var20 == 3) || (var21 == -1) || (var21 == 3);
 					boolean var37 = var21 == -1;
-					this.worldServer.setBlock(var22, var23, var24, var36 ? AliensVsPredator.blocks().blockDerelict2 : AliensVsPredator.blocks().blockPortalVarda);
-					this.worldServer.setBlock(var22, var23, var24 + 1, var37 ? AliensVsPredator.blocks().blockDerelict2 : Blocks.air);
-					this.worldServer.setBlock(var22, var23, var24 - 1, var37 ? AliensVsPredator.blocks().blockDerelict2 : Blocks.air);
+					this.worldServer.setBlock(var22, var23, var24, var36 ? AliensVsPredator.blocks().blockEngineerShipFloor : AliensVsPredator.blocks().blockPortalVarda);
+					this.worldServer.setBlock(var22, var23, var24 + 1, var37 ? AliensVsPredator.blocks().blockEngineerShipFloor : Blocks.air);
+					this.worldServer.setBlock(var22, var23, var24 - 1, var37 ? AliensVsPredator.blocks().blockEngineerShipFloor : Blocks.air);
 				}
 
 			}

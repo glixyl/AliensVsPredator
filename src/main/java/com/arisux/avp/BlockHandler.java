@@ -64,11 +64,6 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockSkulls = (new HookedBlock(Material.rock)),
 		blockPortalVarda = (new BlockPortal(AliensVsPredator.settings().dimensionIdVarda()).setIconSet(new IconSet(this.getMod().domain() + "portal.varda")).setHardness(-1.0F).setLightLevel(2.0F)),
 		blockPortalAcheron = (new BlockPortal(AliensVsPredator.settings().dimensionIdAcheron()).setIconSet(new IconSet(this.getMod().domain() + "portal.acheron")).setHardness(-1.0F).setLightLevel(2.0F)),
-		blockDerelict1 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
-		blockDerelict2 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
-		blockDerelict3 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
-		blockDerelict4 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
-		blockDerelict5 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
 		blockAssembler = (new BlockAssembler(Material.iron).setHardness(1.5F).setResistance(10.0F)),
 		blockFloorGrill = ((HookedBlock) (new HookedBlock(Material.iron)).setHardness(3.5F).setResistance(2.0F)).setRenderNormal(false).setOpaque(false).setLightOpacity(4),
 		blockFloorGrillSlab = (new HookedBlockSlab(Material.iron)).setRenderNormal(false).setOpaque(false).setHardness(3.5F).setResistance(2.0F).setLightOpacity(4),
@@ -81,7 +76,6 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockCeilingGrill = ((HookedBlock) (new HookedBlock(Material.iron)).setOpaque(false).setRenderNormal(false).setHardness(3.5F).setResistance(2.0F)).setLightOpacity(4),
 		blockCeilingGrillStairs = (new HookedBlockStairs(blockCeilingGrill)).setOpaque(false).setRenderNormal(false).setHardness(3.5F).setResistance(2.0F).setLightOpacity(4),
 		blockCeilingGrillSlab = (new HookedBlockSlab(Material.iron)).setOpaque(false).setRenderNormal(false).setHardness(3.5F).setResistance(2.0F).setLightOpacity(4),
-		blockWallVent = (new HookedBlock(Material.iron)).setOpaque(false).setHardness(3.5F).setResistance(2.0F).setLightOpacity(0),
 		blockIronBricks = (new HookedBlock(Material.iron)).setHardness(3.5F).setResistance(2.0F),
 		blockVerticalMetal = (new HookedBlock(Material.iron)).setHardness(3.5F).setResistance(2.0F),
 		blockColumnMetal1 = (new HookedBlock(Material.iron)).setHardness(3.5F).setResistance(2.0F),
@@ -123,7 +117,28 @@ public class BlockHandler extends IBHandler implements IInitializable
 		oreCopper = (new HookedBlock(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		oreBauxite = (new HookedBlock(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		mainframePanelShimmer = (new HookedBlock(Material.iron).setIconSet(new IconSet("avp:mainframe_shimmer")).setHardness(3F).setResistance(1F)),
-		mainframePanelFlicker = (new HookedBlock(Material.iron).setIconSet(new IconSet("avp:mainframe_flicker")).setHardness(3F).setResistance(1F));
+		mainframePanelFlicker = (new HookedBlock(Material.iron).setIconSet(new IconSet("avp:mainframe_flicker")).setHardness(3F).setResistance(1F)),
+		blockVent0 = (new HookedBlock(Material.iron)).setOpaque(false).setHardness(3.5F).setResistance(2.0F).setLightOpacity(0),
+		blockVent1 = (new HookedBlock(Material.iron)).setOpaque(false).setHardness(3.5F).setResistance(2.0F).setLightOpacity(0),
+		blockVent2 = (new HookedBlock(Material.iron)).setOpaque(false).setHardness(3.5F).setResistance(2.0F).setLightOpacity(0),
+		blockEngineerShipFloor = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
+		blockEngineerShipBrick0 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
+		blockEngineerShipBrick1 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
+		blockEngineerShipBrick2 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
+		blockEngineerShipBrick3 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
+		blockEngineerShipGravel = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
+		blockEngineerShipWall0 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
+		blockEngineerShipWall1 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
+		blockEngineerShipWall2 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
+		blockEngineerShipWall3 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
+		blockEngineerShipWall4 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
+		blockEngineerShipRock0 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
+		blockEngineerShipRock1 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
+		blockEngineerShipRock2 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
+		blockEngineerShipRock3 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
+		blockEngineerShipMaterial1 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
+		blockEngineerShipMaterial2 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
+		blockEngineerShipMaterial0 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F));
 
 	public BlockHandler()
 	{
@@ -217,7 +232,9 @@ public class BlockHandler extends IBHandler implements IInitializable
 		registerBlock(blockP2RConvertor, "p2rconverter");
 		registerBlock(blockWallStairs, "industrialwallstairs", blockWall, tab);
 		registerBlock(blockWallSlab, "industrialslab", blockWall, tab);
-		registerShapedBlockSet(blockWallVent, "industrialvent");
+		registerShapedBlockSet(blockVent0, "industrialvent");
+		registerShapedBlockSet(blockVent1, "vent.wall");
+		registerShapedBlockSet(blockVent2, "vent.ceiling");
 		registerShapedBlockSet(blockIronBricks, "industrialbricks");
 		registerBlock(blockIronBricksStairs, "industrialbrickstairs", blockIronBricks, tab);
 		registerBlock(blockIronBricksSlab, "industrialbrickslab", blockIronBricks, tab);
@@ -250,11 +267,6 @@ public class BlockHandler extends IBHandler implements IInitializable
 		registerShapedBlockSet(blockSkulls, "skulls");
 		registerBlock(blockPortalVarda, "lv223portal");
 		registerBlock(blockPortalAcheron, "lv426portal");
-		registerShapedBlockSet(blockDerelict1, "engineershipwall");
-		registerShapedBlockSet(blockDerelict2, "engineershipfloor");
-		registerShapedBlockSet(blockDerelict3, "engineershiprock");
-		registerShapedBlockSet(blockDerelict4, "engineershipbrick");
-		registerShapedBlockSet(blockDerelict5, "engineershipwall2");
 		registerBlock(blockAssembler, "assembler", true);
 		registerBlock(blockTurret, "turret", true);
 		registerBlock(blockWorkstation, "terminal", true);
@@ -270,5 +282,23 @@ public class BlockHandler extends IBHandler implements IInitializable
 		registerBlock(blockLightPanel, "lightpanel", true);
 		registerBlock(mainframePanelShimmer, "mainframepanel.shimmer", true);
 		registerBlock(mainframePanelFlicker, "mainframepanel.flicker", true);
+		registerShapedBlockSet(blockEngineerShipFloor, "engineershipfloor");
+		registerShapedBlockSet(blockEngineerShipBrick0, "engineershipbrick");
+		registerShapedBlockSet(blockEngineerShipBrick1, "engineershipbrick1");
+		registerShapedBlockSet(blockEngineerShipBrick2, "engineershipbrick2");
+		registerShapedBlockSet(blockEngineerShipBrick3, "engineershipbrick3");
+		registerShapedBlockSet(blockEngineerShipGravel, "engineershipgravel");
+		registerShapedBlockSet(blockEngineerShipWall0, "engineershipwall");
+		registerShapedBlockSet(blockEngineerShipWall1, "engineershipwall1");
+		registerShapedBlockSet(blockEngineerShipWall2, "engineershipwall2");
+		registerShapedBlockSet(blockEngineerShipWall3, "engineershipwall3");
+		registerShapedBlockSet(blockEngineerShipWall4, "engineershipwall4");
+		registerShapedBlockSet(blockEngineerShipRock0, "engineershiprock");
+		registerShapedBlockSet(blockEngineerShipRock1, "engineershiprock1");
+		registerShapedBlockSet(blockEngineerShipRock2, "engineershiprock2");
+		registerShapedBlockSet(blockEngineerShipRock3, "engineershiprock3");
+		registerShapedBlockSet(blockEngineerShipMaterial0, "engineershipmaterial0");
+		registerShapedBlockSet(blockEngineerShipMaterial1, "engineershipmaterial1");
+		registerShapedBlockSet(blockEngineerShipMaterial2, "engineershipmaterial2");
 	}
 }
