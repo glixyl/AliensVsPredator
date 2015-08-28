@@ -60,7 +60,7 @@ public class PacketOpenBlastdoor implements IMessage, IMessageHandler<PacketOpen
 
 			if (blastdoor != null)
 			{
-				blastdoor.setDoorOpen(packet.open);
+				blastdoor.setDoorOpen(packet.open, false);
 			}
 		}
 

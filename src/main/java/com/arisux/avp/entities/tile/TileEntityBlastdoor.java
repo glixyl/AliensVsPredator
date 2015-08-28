@@ -144,8 +144,13 @@ public class TileEntityBlastdoor extends TileEntityElectrical implements IEnergy
 	{
 		return this.isChild() ? (this.getParent() != null ? this.getParent().isDoorOpen() : false) : doorOpen;
 	}
-
+	
 	public void setDoorOpen(boolean doorOpen)
+	{
+		this.setDoorOpen(doorOpen, true);
+	}
+
+	public void setDoorOpen(boolean doorOpen, boolean sendPacket)
 	{
 		if (this.isChild())
 		{
@@ -155,8 +160,9 @@ public class TileEntityBlastdoor extends TileEntityElectrical implements IEnergy
 		{
 			this.doorOpen = doorOpen;
 			
-			if (this.worldObj.isRemote)
+			if (this.worldObj.isRemote && sendPacket)
 			{
+				System.out.println("send packet");
 				AliensVsPredator.network().sendToAll(new PacketOpenBlastdoor(doorOpen, this.xCoord, this.yCoord, this.zCoord));
 			}
 		}
