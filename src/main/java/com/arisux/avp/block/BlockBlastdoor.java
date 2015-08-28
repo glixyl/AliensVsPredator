@@ -36,7 +36,7 @@ public class BlockBlastdoor extends HookedBlock
 		if (tile != null && tile instanceof TileEntityBlastdoor)
 		{
 			TileEntityBlastdoor blastdoor = (TileEntityBlastdoor) tile;
-			
+
 			if (blastdoor.isChild() && blastdoor.getParent() != null && blastdoor.getParent().isOperational())
 			{
 				blastdoor.getParent().setDoorOpen(!blastdoor.getParent().isDoorOpen());
@@ -45,32 +45,33 @@ public class BlockBlastdoor extends HookedBlock
 				{
 					Minecraft.getMinecraft().thePlayer.addChatComponentMessage(new ChatComponentText("\u00A77 Blast door \u00A7a" + (blastdoor.getParent().isDoorOpen() ? "opened" : "closed") + "."));
 				}
-			} else if (blastdoor.isParent() && blastdoor.isOperational())
+			}
+			else if (blastdoor.isParent() && blastdoor.isOperational())
 			{
 				blastdoor.setDoorOpen(!blastdoor.isDoorOpen());
 			}
 		}
 		return true;
 	}
-	
+
 	@Override
 	public boolean canPlaceBlockAt(World world, int posX, int posY, int posZ)
 	{
 		return super.canPlaceBlockAt(world, posX, posY, posZ);
 	}
-	
+
 	@Override
 	public void onBlockPlacedBy(World world, int posX, int posY, int posZ, EntityLivingBase placer, ItemStack itemstack)
 	{
 		TileEntity tile = world.getTileEntity(posX, posY, posZ);
 
-		if (tile != null && tile instanceof TileEntityBlastdoor)
+		if (tile != null && tile instanceof TileEntityBlastdoor && placer != null)
 		{
 			TileEntityBlastdoor blastdoor = (TileEntityBlastdoor) tile;
-			
+
 			blastdoor.setDirection(getFacing(placer));
-			
-			if (!blastdoor.setup())
+
+			if (!blastdoor.setup(true))
 			{
 				world.setBlockToAir(posX, posY, posZ);
 			}
@@ -88,8 +89,11 @@ public class BlockBlastdoor extends HookedBlock
 
 			if (blastdoor.isChild())
 			{
-				world.setBlockToAir(blastdoor.getParent().xCoord, blastdoor.getParent().yCoord, blastdoor.getParent().zCoord);
-				blastdoor.getParent().breakChildren();
+				if (blastdoor.getParent() != null)
+				{
+					world.setBlockToAir(blastdoor.getParent().xCoord, blastdoor.getParent().yCoord, blastdoor.getParent().zCoord);
+					blastdoor.getParent().breakChildren();
+				}
 			}
 			else
 			{

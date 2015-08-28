@@ -7,11 +7,13 @@ import com.arisux.avp.interfaces.energy.IEnergyReceiver;
 import com.arisux.avp.packets.client.PacketOpenBlastdoor;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityBlastdoor extends TileEntityElectrical implements IEnergyReceiver
@@ -19,7 +21,8 @@ public class TileEntityBlastdoor extends TileEntityElectrical implements IEnergy
 	private ForgeDirection direction;
 	private float doorProgress;
 	private boolean doorOpen;
-	private boolean setupParent;
+	private boolean isParent;
+	private boolean placedByPlayer;
 	private TileEntityBlastdoor parent;
 	private ArrayList<TileEntityBlastdoor> children;
 	private int ticksExisted;
@@ -69,9 +72,9 @@ public class TileEntityBlastdoor extends TileEntityElectrical implements IEnergy
 			nbt.setInteger("Direction", this.direction.ordinal());
 		}
 
-		nbt.setBoolean("DoorOpen", this.isDoorOpen());
 		nbt.setFloat("DoorProgress", this.doorProgress);
-		nbt.setBoolean("Parent", this.isParent());
+		nbt.setBoolean("DoorOpen", this.isDoorOpen());
+		nbt.setBoolean("Parent", this.isParent);
 	}
 
 	@Override
@@ -85,12 +88,8 @@ public class TileEntityBlastdoor extends TileEntityElectrical implements IEnergy
 		}
 
 		this.doorProgress = nbt.getFloat("DoorProgress");
-		setupParent = nbt.getBoolean("Parent");
-
-		if (setupParent)
-		{
-			this.setDoorOpen(nbt.getBoolean("DoorOpen"));
-		}
+		this.isParent = nbt.getBoolean("Parent");
+		this.setDoorOpen(nbt.getBoolean("DoorOpen"));
 	}
 
 	@Override
@@ -100,10 +99,9 @@ public class TileEntityBlastdoor extends TileEntityElectrical implements IEnergy
 		this.updateEnergyAsReceiver();
 		this.ticksExisted++;
 
-		if (this.setupParent && this.ticksExisted > 1)
+		if (this.isParent && this.ticksExisted > 1 && !placedByPlayer)
 		{
-			this.setup();
-			this.setupParent = false;
+			this.setup(false);
 		}
 
 		if (!this.isDoorOpen())
@@ -144,7 +142,7 @@ public class TileEntityBlastdoor extends TileEntityElectrical implements IEnergy
 	{
 		return this.isChild() ? (this.getParent() != null ? this.getParent().isDoorOpen() : false) : doorOpen;
 	}
-	
+
 	public void setDoorOpen(boolean doorOpen)
 	{
 		this.setDoorOpen(doorOpen, true);
@@ -154,13 +152,16 @@ public class TileEntityBlastdoor extends TileEntityElectrical implements IEnergy
 	{
 		if (this.isChild())
 		{
-			this.getParent().setDoorOpen(doorOpen);
+			if (this.getParent() != null)
+			{
+				this.getParent().setDoorOpen(doorOpen);
+			}
 		}
 		else if (this.isParent())
 		{
 			this.doorOpen = doorOpen;
-			
-			if (this.worldObj.isRemote && sendPacket)
+
+			if (this.worldObj != null && this.worldObj.isRemote && sendPacket)
 			{
 				AliensVsPredator.network().sendToAll(new PacketOpenBlastdoor(doorOpen, this.xCoord, this.yCoord, this.zCoord));
 			}
@@ -180,8 +181,15 @@ public class TileEntityBlastdoor extends TileEntityElectrical implements IEnergy
 
 	public boolean setChildTile(int posX, int posY, int posZ)
 	{
-		if (worldObj.getBlock(posX, posY, posZ) != Blocks.air)
+		Block block = worldObj.getBlock(posX, posY, posZ);
+		
+		if (block != Blocks.air && block != AliensVsPredator.blocks().blockBlastdoor)
 		{
+			if (this.worldObj.isRemote)
+			{
+				Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("Unable to place a blastdoor here. Blocks are in the way."));
+			}
+
 			return false;
 		}
 
@@ -190,9 +198,10 @@ public class TileEntityBlastdoor extends TileEntityElectrical implements IEnergy
 
 		if (blastdoor == null)
 		{
+			System.out.println("Blastdoor was null");
 			return false;
 		}
-		
+
 		if (blastdoor != null)
 		{
 			blastdoor.addToParent(this);
@@ -212,12 +221,12 @@ public class TileEntityBlastdoor extends TileEntityElectrical implements IEnergy
 
 	public boolean isChild()
 	{
-		return this.getParent() != null;
+		return !this.isParent();
 	}
 
 	public boolean isParent()
 	{
-		return !this.isChild();
+		return this.isParent;
 	}
 
 	public TileEntityBlastdoor getParent()
@@ -230,9 +239,12 @@ public class TileEntityBlastdoor extends TileEntityElectrical implements IEnergy
 		this.parent = parent;
 	}
 
-	public boolean setup()
+	public boolean setup(boolean placedByPlayer)
 	{
 		ForgeDirection direction = this.direction;
+
+		this.isParent = true;
+		this.placedByPlayer = true;
 
 		if (direction != null)
 		{
@@ -246,7 +258,7 @@ public class TileEntityBlastdoor extends TileEntityElectrical implements IEnergy
 				return this.setChildTile(this.xCoord, this.yCoord, this.zCoord - 1) && this.setChildTile(this.xCoord, this.yCoord, this.zCoord - 2) && this.setChildTile(this.xCoord, this.yCoord, this.zCoord - 3) && this.setChildTile(this.xCoord, this.yCoord + 1, this.zCoord) && this.setChildTile(this.xCoord, this.yCoord + 2, this.zCoord) && this.setChildTile(this.xCoord, this.yCoord + 2, this.zCoord - 1) && this.setChildTile(this.xCoord, this.yCoord + 1, this.zCoord - 1) && this.setChildTile(this.xCoord, this.yCoord + 2, this.zCoord - 2) && this.setChildTile(this.xCoord, this.yCoord + 1, this.zCoord - 2) && this.setChildTile(this.xCoord, this.yCoord + 2, this.zCoord - 3) && this.setChildTile(this.xCoord, this.yCoord + 1, this.zCoord - 3);
 			}
 		}
-		
+
 		return false;
 	}
 
