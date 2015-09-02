@@ -161,7 +161,7 @@ public class TileEntityBlastdoor extends TileEntityElectrical implements IEnergy
 		{
 			this.doorOpen = doorOpen;
 
-			if (this.worldObj != null && this.worldObj.isRemote && sendPacket)
+			if (this.worldObj != null && !this.worldObj.isRemote && sendPacket)
 			{
 				AliensVsPredator.network().sendToAll(new PacketOpenBlastdoor(doorOpen, this.xCoord, this.yCoord, this.zCoord));
 			}
