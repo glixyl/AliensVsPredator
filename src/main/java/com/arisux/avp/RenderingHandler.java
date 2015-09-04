@@ -81,6 +81,7 @@ import com.arisux.avp.entities.render.RenderNuke;
 import com.arisux.avp.entities.render.RenderPlasmaBlast;
 import com.arisux.avp.entities.render.RenderShuriken;
 import com.arisux.avp.entities.render.RenderSpear;
+import com.arisux.avp.entities.tile.TileEntityAmpule;
 import com.arisux.avp.entities.tile.TileEntityAssembler;
 import com.arisux.avp.entities.tile.TileEntityBlastdoor;
 import com.arisux.avp.entities.tile.TileEntityCryostasisTube;
@@ -98,6 +99,7 @@ import com.arisux.avp.entities.tile.TileEntityStasisMechanism;
 import com.arisux.avp.entities.tile.TileEntityTransformer;
 import com.arisux.avp.entities.tile.TileEntityTurret;
 import com.arisux.avp.entities.tile.TileEntityWorkstation;
+import com.arisux.avp.entities.tile.render.RenderAmpule;
 import com.arisux.avp.entities.tile.render.RenderAssembler;
 import com.arisux.avp.entities.tile.render.RenderBlastdoor;
 import com.arisux.avp.entities.tile.render.RenderCryostasisTube;
@@ -322,6 +324,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		bindTileEntitySpecialRenderer(TileEntityR2PConverter.class, new RenderR2PConverter());
 		bindTileEntitySpecialRenderer(TileEntityP2RConverter.class, new RenderP2RConverter());
 		bindTileEntitySpecialRenderer(TileEntityPowercell.class, new RenderPowercell());
+		bindTileEntitySpecialRenderer(TileEntityAmpule.class, new RenderAmpule());
 	}
 
 	public void registerSimpleBlockRenderingHandlers()

@@ -34,6 +34,7 @@ import com.arisux.avp.entities.mob.EntitySpitter;
 import com.arisux.avp.entities.mob.EntityTrilobite;
 import com.arisux.avp.entities.mob.EntityWarrior;
 import com.arisux.avp.entities.mob.EntityYautja;
+import com.arisux.avp.entities.tile.TileEntityAmpule;
 import com.arisux.avp.entities.tile.TileEntityAssembler;
 import com.arisux.avp.entities.tile.TileEntityBlastdoor;
 import com.arisux.avp.entities.tile.TileEntityCryostasisTube;
@@ -92,6 +93,7 @@ public class EntityHandler implements IInitializable
 		GameRegistry.registerTileEntity(TileEntityR2PConverter.class, "tileEntityR2PConverter");
 		GameRegistry.registerTileEntity(TileEntityP2RConverter.class, "tileEntityP2RConverter");
 		GameRegistry.registerTileEntity(TileEntityPowercell.class, "tileEntityPowercell");
+		GameRegistry.registerTileEntity(TileEntityAmpule.class, "tileEntityAmpule");
 	}
 
 	private void registerLivingEntities()

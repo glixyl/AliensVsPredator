@@ -6,6 +6,7 @@ import com.arisux.airi.lib.BlockTypes.HookedBlockStairs;
 import com.arisux.airi.lib.ModUtil.IBHandler;
 import com.arisux.airi.lib.client.render.IconSet;
 import com.arisux.airi.lib.interfaces.IInitializable;
+import com.arisux.avp.block.BlockAmpule;
 import com.arisux.avp.block.BlockAssembler;
 import com.arisux.avp.block.BlockBlackGoo;
 import com.arisux.avp.block.BlockBlastdoor;
@@ -138,7 +139,8 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockEngineerShipRock3 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
 		blockEngineerShipMaterial1 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
 		blockEngineerShipMaterial2 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
-		blockEngineerShipMaterial0 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F));
+		blockEngineerShipMaterial0 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
+		blockAmpule = (new BlockAmpule().setHardness(1.5F).setResistance(10.0F));
 
 	public BlockHandler()
 	{
@@ -300,5 +302,6 @@ public class BlockHandler extends IBHandler implements IInitializable
 		registerShapedBlockSet(blockEngineerShipMaterial0, "engineershipmaterial0");
 		registerShapedBlockSet(blockEngineerShipMaterial1, "engineershipmaterial1");
 		registerShapedBlockSet(blockEngineerShipMaterial2, "engineershipmaterial2");
+		registerBlock(blockAmpule, "engineership.ampule");
 	}
 }
