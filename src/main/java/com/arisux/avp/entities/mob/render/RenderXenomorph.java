@@ -19,6 +19,13 @@ public class RenderXenomorph extends RenderLiving
 		super(modelTexMap.asModelBase(), shadowSize);
 		this.modelTexMap = modelTexMap;
 		this.renderScale = 1F;
+	}	
+	
+	public RenderXenomorph(ModelTexMap modelTexMap, float shadowSize, float renderScale)
+	{
+		super(modelTexMap.asModelBase(), shadowSize);
+		this.modelTexMap = modelTexMap;
+		this.renderScale = renderScale;
 	}
 
 	@Override
