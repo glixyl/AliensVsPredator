@@ -21,6 +21,7 @@ import com.arisux.avp.entities.mob.EntityChestburster;
 import com.arisux.avp.entities.mob.EntityCombatSynthetic;
 import com.arisux.avp.entities.mob.EntityCrusher;
 import com.arisux.avp.entities.mob.EntityDrone;
+import com.arisux.avp.entities.mob.EntityEngineer;
 import com.arisux.avp.entities.mob.EntityFacehugger;
 import com.arisux.avp.entities.mob.EntityHammerpede;
 import com.arisux.avp.entities.mob.EntityMarine;
@@ -118,6 +119,7 @@ public class EntityHandler implements IInitializable
 		EntityRegistry.registerGlobalEntityID(EntityProtomorph.class, "Protomorph", entityIDs.get("PROTOMORPH"), 0x333333, 0xFF0000);
 		EntityRegistry.registerGlobalEntityID(EntityHammerpede.class, "Hammerpede", entityIDs.get("HAMMERPEDE"), 0x333333, 0xFF0000);
 		EntityRegistry.registerGlobalEntityID(EntityTrilobite.class, "Trilobite", entityIDs.get("TRILOBITE"), 0x333333, 0xFF0000);
+		EntityRegistry.registerGlobalEntityID(EntityEngineer.class, "Engineer", entityIDs.get("ENGINEER"), 0x333333, 0xFF0000);
 	}
 
 	private void registerEntities()

@@ -27,6 +27,7 @@ import com.arisux.avp.entities.mob.EntityChestburster;
 import com.arisux.avp.entities.mob.EntityCombatSynthetic;
 import com.arisux.avp.entities.mob.EntityCrusher;
 import com.arisux.avp.entities.mob.EntityDrone;
+import com.arisux.avp.entities.mob.EntityEngineer;
 import com.arisux.avp.entities.mob.EntityFacehugger;
 import com.arisux.avp.entities.mob.EntityHammerpede;
 import com.arisux.avp.entities.mob.EntityMarine;
@@ -44,6 +45,7 @@ import com.arisux.avp.entities.mob.model.ModelAqua;
 import com.arisux.avp.entities.mob.model.ModelChestburster;
 import com.arisux.avp.entities.mob.model.ModelCrusher;
 import com.arisux.avp.entities.mob.model.ModelDrone;
+import com.arisux.avp.entities.mob.model.ModelEngineer;
 import com.arisux.avp.entities.mob.model.ModelFacehugger;
 import com.arisux.avp.entities.mob.model.ModelHammerpede;
 import com.arisux.avp.entities.mob.model.ModelOvamorph;
@@ -58,6 +60,7 @@ import com.arisux.avp.entities.mob.model.ModelYautja;
 import com.arisux.avp.entities.mob.render.RenderAqua;
 import com.arisux.avp.entities.mob.render.RenderChestburster;
 import com.arisux.avp.entities.mob.render.RenderCombatSynthetic;
+import com.arisux.avp.entities.mob.render.RenderEngineer;
 import com.arisux.avp.entities.mob.render.RenderFacehugger;
 import com.arisux.avp.entities.mob.render.RenderHammerpede;
 import com.arisux.avp.entities.mob.render.RenderMarine;
@@ -194,6 +197,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 
 	public void registerEntityRenderers()
 	{
+		registerEntityRenderingHandler(EntityEngineer.class, new RenderEngineer(new ModelEngineer(), 0.5F));
 		registerEntityRenderingHandler(EntityTrilobite.class, new RenderTrilobite(new ModelTrilobite(), 0.5F));
 		registerEntityRenderingHandler(EntityHammerpede.class, new RenderHammerpede(new ModelHammerpede(), 0.5F));
 		registerEntityRenderingHandler(EntityProtomorph.class, new RenderXenomorph(new ModelTexMap(new ModelProtomorph(), AliensVsPredator.resources().PROTOMORPH), 0.5F).setScale(1.4F));
@@ -272,6 +276,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		registerItemRenderer(items.itemSummonerCombatSynthetic, (new RenderItemSummoner(EntityCombatSynthetic.class, ModelBipedExtension.class, AliensVsPredator.resources().COMBAT_SYNTHETIC)).setScale(7.5F).setY(8F));
 		registerItemRenderer(items.itemSummonerHammerpede, (new RenderItemSummoner(EntityHammerpede.class, ModelHammerpede.class, AliensVsPredator.resources().HAMMERPEDE)).setScale(25.5F).setY(8F));
 		registerItemRenderer(items.itemSummonerTrilobite, (new RenderItemSummoner(EntityTrilobite.class, ModelTrilobite.class, AliensVsPredator.resources().TRILOBITE)).setScale(25.5F).setY(8F));
+		registerItemRenderer(items.itemSummonerEngineer, (new RenderItemSummoner(EntityEngineer.class, ModelEngineer.class, AliensVsPredator.resources().ENGINEER)).setScale(27.5F).setY(8F));
 
 		ModelAK47 ak47 = new ModelAK47();
 		registerItemRenderer(items.itemAK47Barrel, new RenderItemAK47Barrel(AliensVsPredator.resources().AK47, ak47.barrel, ak47.barrelBase, ak47.lBarrelGrip, ak47.rBarrelGrip));
