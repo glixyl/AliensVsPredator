@@ -8,7 +8,6 @@ import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.model.ModelAmpule;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 
 public class RenderAmpule extends TileEntitySpecialRenderer
