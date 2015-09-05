@@ -3,6 +3,8 @@ package com.arisux.avp.block;
 import java.util.Random;
 
 import com.arisux.airi.lib.BlockTypes.HookedBlock;
+import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.DimensionHandler;
 import com.arisux.avp.dimension.TeleporterLV;
 
 import cpw.mods.fml.relauncher.Side;
@@ -17,7 +19,7 @@ import net.minecraft.world.World;
 public class BlockPortal extends HookedBlock
 {
 	private int dimensionId;
-	
+
 	public BlockPortal(int dimensionId)
 	{
 		super(Material.portal);
@@ -77,12 +79,12 @@ public class BlockPortal extends HookedBlock
 			else if (player.dimension != this.dimensionId)
 			{
 				player.timeUntilPortal = 10;
-				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, this.dimensionId, new TeleporterLV(server.worldServerForDimension(this.dimensionId)));
+				AliensVsPredator.dimensions().teleportPlayerToDimension(player, this.dimensionId);
 			}
 			else
 			{
 				player.timeUntilPortal = 10;
-				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, 0, new TeleporterLV(server.worldServerForDimension(1)));
+				AliensVsPredator.dimensions().teleportPlayerToDimension(player, 0);
 			}
 		}
 	}

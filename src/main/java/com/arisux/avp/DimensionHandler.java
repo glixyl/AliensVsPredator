@@ -1,5 +1,15 @@
 package com.arisux.avp;
 
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.management.ServerConfigurationManager;
+import net.minecraft.world.Teleporter;
+import net.minecraft.world.WorldProvider;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.DimensionManager;
+
+import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
+import com.arisux.airi.lib.WorldUtil.Entities;
 import com.arisux.airi.lib.interfaces.IInitializable;
 import com.arisux.avp.dimension.TeleporterLV;
 import com.arisux.avp.dimension.acheron.ProviderAcheron;
@@ -11,19 +21,12 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.ServerTickEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.management.ServerConfigurationManager;
-import net.minecraft.world.Teleporter;
-import net.minecraft.world.WorldProvider;
-import net.minecraft.world.WorldServer;
-import net.minecraftforge.common.DimensionManager;
 
 public class DimensionHandler implements IInitializable
 {
 	public static final DimensionHandler instance = new DimensionHandler();
 	public boolean dimensionsInitialized;
-	
+
 	@Override
 	public void initialize(FMLInitializationEvent event)
 	{
@@ -77,31 +80,69 @@ public class DimensionHandler implements IInitializable
 
 		if (player.dimension == 0 || player.dimension != dimensionId)
 		{
-			Teleporter teleporter = new TeleporterLV(MinecraftServer.getServer().worldServerForDimension(dimensionId));
+			WorldServer worldServer = MinecraftServer.getServer().worldServerForDimension(dimensionId);
+			Teleporter teleporter = new TeleporterLV(worldServer);
 			serverManager.transferPlayerToDimension(player, dimensionId, teleporter);
-		} else if (player.dimension == dimensionId)
+
+			CoordData safePos = Entities.getSafePosition(new CoordData(player.posX, player.posY, player.posZ), worldServer);
+
+			if (safePos == null)
+			{
+				player.setLocationAndAngles(worldServer.getSpawnPoint().posX, worldServer.getSpawnPoint().posY, worldServer.getSpawnPoint().posZ, player.rotationYaw, player.rotationPitch);
+			}
+			else
+			{
+				player.setLocationAndAngles(safePos.posX, safePos.posY, safePos.posZ, player.rotationYaw, player.rotationPitch);
+			}
+		}
+		else if (player.dimension == dimensionId)
 		{
-			Teleporter teleporter = new TeleporterLV(MinecraftServer.getServer().worldServerForDimension(0));
+			WorldServer worldServer = MinecraftServer.getServer().worldServerForDimension(0);
+			Teleporter teleporter = new TeleporterLV(worldServer);
 			serverManager.transferPlayerToDimension(player, 0, teleporter);
-		} else
+
+			CoordData safePos = Entities.getSafePosition(new CoordData(player.posX, player.posY, player.posZ), worldServer);
+
+			if (safePos == null)
+			{
+				player.setLocationAndAngles(worldServer.getSpawnPoint().posX, worldServer.getSpawnPoint().posY, worldServer.getSpawnPoint().posZ, player.rotationYaw, player.rotationPitch);
+			}
+			else
+			{
+				player.setLocationAndAngles(safePos.posX, safePos.posY, safePos.posZ, player.rotationYaw, player.rotationPitch);
+			}
+		}
+		else
 		{
+			WorldServer worldServer = MinecraftServer.getServer().worldServerForDimension(dimensionId);
 			Teleporter teleporter = new TeleporterLV(MinecraftServer.getServer().worldServerForDimension(dimensionId));
 			serverManager.transferPlayerToDimension(player, dimensionId, teleporter);
+
+			CoordData safePos = Entities.getSafePosition(new CoordData(player.posX, player.posY, player.posZ), worldServer);
+
+			if (safePos == null)
+			{
+				player.setLocationAndAngles(worldServer.getSpawnPoint().posX, worldServer.getSpawnPoint().posY, worldServer.getSpawnPoint().posZ, player.rotationYaw, player.rotationPitch);
+			}
+			else
+			{
+				player.setLocationAndAngles(safePos.posX, safePos.posY, safePos.posZ, player.rotationYaw, player.rotationPitch);
+			}
 		}
 	}
-	
+
 	public void tryLoadDimension(int dimensionId)
 	{
 		MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
 		WorldServer worldServer = server.worldServerForDimension(dimensionId);
-		
+
 		if (worldServer != null && worldServer instanceof WorldServer)
 		{
 			server.logInfo("Preparing start region for level " + worldServer.provider.getDimensionName());
 			initialWorldChunkLoad(worldServer);
 		}
 	}
-	
+
 	public void registerDimension(int dimensionId, Class<? extends WorldProvider> provider, boolean keepLoaded)
 	{
 		DimensionManager.registerProviderType(dimensionId, provider, keepLoaded);

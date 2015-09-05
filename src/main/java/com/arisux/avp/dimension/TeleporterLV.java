@@ -4,15 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.arisux.avp.AliensVsPredator;
-
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.Direction;
 import net.minecraft.util.LongHashMap;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
+
+import com.arisux.avp.AliensVsPredator;
 
 public class TeleporterLV extends Teleporter
 {
@@ -29,432 +31,446 @@ public class TeleporterLV extends Teleporter
 	}
 
 	@Override
-	public void placeInPortal(Entity entity, double xCoord, double yCoord, double zCoord, float yaw)
+	public void placeInPortal(Entity entity, double posX, double posY, double posZ, float yaw)
 	{
 		if (this.worldServer.provider.dimensionId != 1)
 		{
-			if (!placeInExistingPortal(entity, xCoord, yCoord, zCoord, yaw))
+			if (!this.placeInExistingPortal(entity, posX, posY, posZ, yaw))
 			{
 				this.makePortal(entity);
-				this.placeInExistingPortal(entity, xCoord, yCoord, zCoord, yaw);
+				this.placeInExistingPortal(entity, posX, posY, posZ, yaw);
 			}
 		}
 		else
 		{
-			int entityPosX = MathHelper.floor_double(entity.posX);
-			int entityPosY = MathHelper.floor_double(entity.posY);
-			int entityPosZ = MathHelper.floor_double(entity.posZ);
-			byte var12 = 2;
-			byte var13 = 0;
+			int i = MathHelper.floor_double(entity.posX);
+			int j = MathHelper.floor_double(entity.posY) - 1;
+			int k = MathHelper.floor_double(entity.posZ);
+			byte b0 = 1;
+			byte b1 = 0;
 
-			if (worldServer.getBlock(entityPosX, entityPosY, entityPosZ) == Blocks.air)
+			for (int l = -2; l <= 2; ++l)
 			{
-				for (int portalBlockX = -2; portalBlockX <= 2; portalBlockX++)
+				for (int i1 = -2; i1 <= 2; ++i1)
 				{
-					for (int portalBlockZ = -2; portalBlockZ <= 2; portalBlockZ++)
+					for (int j1 = -1; j1 < 3; ++j1)
 					{
-						for (int height = -1; height < 3; height++)
-						{
-							int blockX = entityPosX + portalBlockZ * var12 + portalBlockX * var13;
-							int blockY = entityPosY + height;
-							int blockZ = entityPosZ + portalBlockZ * var13 - portalBlockX * var12;
-							this.worldServer.setBlock(blockX, blockY, blockZ, (height < 0) ? AliensVsPredator.blocks().blockEngineerShipFloor : Blocks.air);
-						}
+						int k1 = i + i1 * b0 + l * b1;
+						int l1 = j + j1;
+						int i2 = k + i1 * b1 - l * b0;
+						boolean flag = j1 < 0;
+						this.worldServer.setBlock(k1, l1, i2, flag ? AliensVsPredator.blocks().blockEngineerShipFloor : Blocks.air);
 					}
 				}
+			}
 
-				entity.setLocationAndAngles(entityPosX, entityPosY, entityPosZ, entity.rotationYaw, 0F);
-			}
-			else
-			{
-				this.placeInPortal(entity, xCoord, yCoord, zCoord, yaw);
-			}
+			entity.setLocationAndAngles((double) i, (double) j, (double) k, entity.rotationYaw, 0.0F);
+			entity.motionX = entity.motionY = entity.motionZ = 0.0D;
 		}
 	}
 
 	@Override
-	public boolean placeInExistingPortal(Entity entity, double var2, double var4, double var6, float var8)
+	public boolean placeInExistingPortal(Entity entity, double posX, double posY, double posZ, float yaw)
 	{
-		short var9 = 128;
-		double var10 = -1.0D;
-		int var12 = 0;
-		int var13 = 0;
-		int var14 = 0;
-		int var15 = MathHelper.floor_double(entity.posX);
-		int var16 = MathHelper.floor_double(entity.posZ);
-		long var17 = ChunkCoordIntPair.chunkXZ2Int(var15, var16);
-		boolean var19 = true;
+		short short1 = 128;
+		double d3 = -1.0D;
+		int i = 0;
+		int j = 0;
+		int k = 0;
+		int l = MathHelper.floor_double(entity.posX);
+		int i1 = MathHelper.floor_double(entity.posZ);
+		long j1 = ChunkCoordIntPair.chunkXZ2Int(l, i1);
+		boolean flag = true;
+		double d7;
+		int l3;
 
-		if (this.destinationCoordinateCache.containsItem(var17))
+		if (this.destinationCoordinateCache.containsItem(j1))
 		{
-			PortalPosition var26 = (PortalPosition) this.destinationCoordinateCache.getValueByKey(var17);
-			var10 = 0.0D;
-			var12 = var26.posX;
-			var13 = var26.posY;
-			var14 = var26.posZ;
-			var26.lastUpdateTime = this.worldServer.getTotalWorldTime();
-			var19 = false;
+			Teleporter.PortalPosition portalposition = (Teleporter.PortalPosition) this.destinationCoordinateCache.getValueByKey(j1);
+			d3 = 0.0D;
+			i = portalposition.posX;
+			j = portalposition.posY;
+			k = portalposition.posZ;
+			portalposition.lastUpdateTime = this.worldServer.getTotalWorldTime();
+			flag = false;
 		}
 		else
 		{
-			for (int var22 = var15 - var9; var22 <= var15 + var9; var22++)
+			for (l3 = l - short1; l3 <= l + short1; ++l3)
 			{
-				double var24 = var22 + 0.5D - entity.posX;
+				double d4 = (double) l3 + 0.5D - entity.posX;
 
-				for (int var46 = var16 - var9; var46 <= var16 + var9; var46++)
+				for (int l1 = i1 - short1; l1 <= i1 + short1; ++l1)
 				{
-					double var27 = var46 + 0.5D - entity.posZ;
+					double d5 = (double) l1 + 0.5D - entity.posZ;
 
-					for (int var23 = this.worldServer.getActualHeight() - 1; var23 >= 0; var23--)
+					for (int i2 = this.worldServer.getActualHeight() - 1; i2 >= 0; --i2)
 					{
-						if (this.worldServer.getBlock(var22, var23, var46) != AliensVsPredator.blocks().blockPortalVarda)
-							continue;
-						while (this.worldServer.getBlock(var22, var23 - 1, var46) == AliensVsPredator.blocks().blockPortalVarda)
+						if (this.worldServer.getBlock(l3, i2, l1) == AliensVsPredator.blocks().blockPortalVarda)
 						{
-							var23--;
+							while (this.worldServer.getBlock(l3, i2 - 1, l1) == AliensVsPredator.blocks().blockPortalVarda)
+							{
+								--i2;
+							}
+
+							d7 = (double) i2 + 0.5D - entity.posY;
+							double d8 = d4 * d4 + d7 * d7 + d5 * d5;
+
+							if (d3 < 0.0D || d8 < d3)
+							{
+								d3 = d8;
+								i = l3;
+								j = i2;
+								k = l1;
+							}
 						}
-
-						double var20 = var23 + 0.5D - entity.posY;
-						double var29 = var24 * var24 + var20 * var20 + var27 * var27;
-
-						if ((var10 >= 0.0D) && (var29 >= var10))
-							continue;
-						var10 = var29;
-						var12 = var22;
-						var13 = var23;
-						var14 = var46;
 					}
 				}
-
 			}
-
 		}
 
-		if (var10 >= 0.0D)
+		if (d3 >= 0.0D)
 		{
-			if (var19)
+			if (flag)
 			{
-				this.destinationCoordinateCache.add(var17, new PortalPosition(var12, var13, var14, this.worldServer.getTotalWorldTime()));
-				this.destinationCoordinateKeys.add(Long.valueOf(var17));
+				this.destinationCoordinateCache.add(j1, new Teleporter.PortalPosition(i, j, k, this.worldServer.getTotalWorldTime()));
+				this.destinationCoordinateKeys.add(Long.valueOf(j1));
 			}
 
-			double var24 = var12 + 0.5D;
-			double var47 = var13 + 0.5D;
-			double var20 = var14 + 0.5D;
-			int var28 = -1;
+			double d11 = (double) i + 0.5D;
+			double d6 = (double) j + 0.5D;
+			d7 = (double) k + 0.5D;
+			int i4 = -1;
 
-			if (this.worldServer.getBlock(var12 - 1, var13, var14) == AliensVsPredator.blocks().blockPortalVarda)
+			if (this.worldServer.getBlock(i - 1, j, k) == AliensVsPredator.blocks().blockPortalVarda)
 			{
-				var28 = 2;
+				i4 = 2;
 			}
 
-			if (this.worldServer.getBlock(var12 + 1, var13, var14) == AliensVsPredator.blocks().blockPortalVarda)
+			if (this.worldServer.getBlock(i + 1, j, k) == AliensVsPredator.blocks().blockPortalVarda)
 			{
-				var28 = 0;
+				i4 = 0;
 			}
 
-			if (this.worldServer.getBlock(var12, var13, var14 - 1) == AliensVsPredator.blocks().blockPortalVarda)
+			if (this.worldServer.getBlock(i, j, k - 1) == AliensVsPredator.blocks().blockPortalVarda)
 			{
-				var28 = 3;
+				i4 = 3;
 			}
 
-			if (this.worldServer.getBlock(var12, var13, var14 + 1) == AliensVsPredator.blocks().blockPortalVarda)
+			if (this.worldServer.getBlock(i, j, k + 1) == AliensVsPredator.blocks().blockPortalVarda)
 			{
-				var28 = 1;
+				i4 = 1;
 			}
 
-			int var23 = entity.getMaxSafePointTries();
+			int j2 = entity.getTeleportDirection();
 
-			if (var28 > -1)
+			if (i4 > -1)
 			{
-				int var48 = net.minecraft.util.Direction.rotateOpposite[var28];
-				int var30 = net.minecraft.util.Direction.offsetX[var28];
-				int var31 = net.minecraft.util.Direction.offsetZ[var28];
-				int var32 = net.minecraft.util.Direction.offsetX[var48];
-				int var33 = net.minecraft.util.Direction.offsetZ[var48];
-				boolean var34 = (!this.worldServer.isAirBlock(var12 + var30 + var32, var13, var14 + var31 + var33)) || (!this.worldServer.isAirBlock(var12 + var30 + var32, var13 + 1, var14 + var31 + var33));
-				boolean var35 = (!this.worldServer.isAirBlock(var12 + var30, var13, var14 + var31)) || (!this.worldServer.isAirBlock(var12 + var30, var13 + 1, var14 + var31));
+				int k2 = Direction.rotateLeft[i4];
+				int l2 = Direction.offsetX[i4];
+				int i3 = Direction.offsetZ[i4];
+				int j3 = Direction.offsetX[k2];
+				int k3 = Direction.offsetZ[k2];
+				boolean flag1 = !this.worldServer.isAirBlock(i + l2 + j3, j, k + i3 + k3) || !this.worldServer.isAirBlock(i + l2 + j3, j + 1, k + i3 + k3);
+				boolean flag2 = !this.worldServer.isAirBlock(i + l2, j, k + i3) || !this.worldServer.isAirBlock(i + l2, j + 1, k + i3);
 
-				if ((var34) && (var35))
+				if (flag1 && flag2)
 				{
-					var28 = net.minecraft.util.Direction.facingToDirection[var28];
-					var48 = net.minecraft.util.Direction.facingToDirection[var48];
-					var30 = net.minecraft.util.Direction.offsetX[var28];
-					var31 = net.minecraft.util.Direction.offsetZ[var28];
-					var32 = net.minecraft.util.Direction.offsetX[var48];
-					var33 = net.minecraft.util.Direction.offsetZ[var48];
-					int var22 = var12 - var32;
-					var24 -= var32;
-					int var36 = var14 - var33;
-					var20 -= var33;
-					var34 = (!this.worldServer.isAirBlock(var22 + var30 + var32, var13, var36 + var31 + var33)) || (!this.worldServer.isAirBlock(var22 + var30 + var32, var13 + 1, var36 + var31 + var33));
-					var35 = (!this.worldServer.isAirBlock(var22 + var30, var13, var36 + var31)) || (!this.worldServer.isAirBlock(var22 + var30, var13 + 1, var36 + var31));
-				}
-
-				float var49 = 0.5F;
-				float var37 = 0.5F;
-
-				if ((!var34) && (var35))
-				{
-					var49 = 1.0F;
-				}
-				else if ((var34) && (!var35))
-				{
-					var49 = 0.0F;
-				}
-				else if ((var34) && (var35))
-				{
-					var37 = 0.0F;
+					i4 = Direction.rotateOpposite[i4];
+					k2 = Direction.rotateOpposite[k2];
+					l2 = Direction.offsetX[i4];
+					i3 = Direction.offsetZ[i4];
+					j3 = Direction.offsetX[k2];
+					k3 = Direction.offsetZ[k2];
+					l3 = i - j3;
+					d11 -= (double) j3;
+					int k1 = k - k3;
+					d7 -= (double) k3;
+					flag1 = !this.worldServer.isAirBlock(l3 + l2 + j3, j, k1 + i3 + k3) || !this.worldServer.isAirBlock(l3 + l2 + j3, j + 1, k1 + i3 + k3);
+					flag2 = !this.worldServer.isAirBlock(l3 + l2, j, k1 + i3) || !this.worldServer.isAirBlock(l3 + l2, j + 1, k1 + i3);
 				}
 
-				var24 += var32 * var49 + var37 * var30;
-				var20 += var33 * var49 + var37 * var31;
-				float var38 = 0.0F;
-				float var39 = 0.0F;
-				float var40 = 0.0F;
-				float var41 = 0.0F;
+				float f1 = 0.5F;
+				float f2 = 0.5F;
 
-				if (var28 == var23)
+				if (!flag1 && flag2)
 				{
-					var38 = 1.0F;
-					var39 = 1.0F;
+					f1 = 1.0F;
 				}
-				else if (var28 == net.minecraft.util.Direction.facingToDirection[var23])
+				else if (flag1 && !flag2)
 				{
-					var38 = -1.0F;
-					var39 = -1.0F;
+					f1 = 0.0F;
 				}
-				else if (var28 == net.minecraft.util.Direction.facingToDirection[var23])
+				else if (flag1 && flag2)
 				{
-					var40 = 1.0F;
-					var41 = -1.0F;
+					f2 = 0.0F;
+				}
+
+				d11 += (double) ((float) j3 * f1 + f2 * (float) l2);
+				d7 += (double) ((float) k3 * f1 + f2 * (float) i3);
+				float f3 = 0.0F;
+				float f4 = 0.0F;
+				float f5 = 0.0F;
+				float f6 = 0.0F;
+
+				if (i4 == j2)
+				{
+					f3 = 1.0F;
+					f4 = 1.0F;
+				}
+				else if (i4 == Direction.rotateOpposite[j2])
+				{
+					f3 = -1.0F;
+					f4 = -1.0F;
+				}
+				else if (i4 == Direction.rotateRight[j2])
+				{
+					f5 = 1.0F;
+					f6 = -1.0F;
 				}
 				else
 				{
-					var40 = -1.0F;
-					var41 = 1.0F;
+					f5 = -1.0F;
+					f6 = 1.0F;
 				}
 
-				double var42 = entity.motionX;
-				double var44 = entity.motionZ;
-				entity.motionX = (var42 * var38 + var44 * var41);
-				entity.motionZ = (var42 * var40 + var44 * var39);
-				entity.rotationYaw = (var8 - var23 * 90 + var28 * 90);
+				double d9 = entity.motionX;
+				double d10 = entity.motionZ;
+				entity.motionX = d9 * (double) f3 + d10 * (double) f6;
+				entity.motionZ = d9 * (double) f5 + d10 * (double) f4;
+				entity.rotationYaw = yaw - (float) (j2 * 90) + (float) (i4 * 90);
 			}
 			else
 			{
-				entity.motionX = (entity.motionY = entity.motionZ = 0.0D);
+				entity.motionX = entity.motionY = entity.motionZ = 0.0D;
 			}
 
-			entity.setLocationAndAngles(var24, var47, var20, entity.rotationYaw, entity.rotationPitch);
+			entity.setLocationAndAngles(d11, d6, d7, entity.rotationYaw, entity.rotationPitch);
 			return true;
 		}
-
-		return false;
+		else
+		{
+			return false;
+		}
 	}
 
 	@Override
-	public boolean makePortal(Entity var1)
+	public boolean makePortal(Entity entity)
 	{
-		byte var2 = 16;
-		double var3 = -1.0D;
-		int var5 = MathHelper.floor_double(var1.posX);
-		int var6 = MathHelper.floor_double(var1.posY);
-		int var7 = MathHelper.floor_double(var1.posZ);
-		int var8 = var5;
-		int var9 = var6;
-		int var10 = var7;
-		int var11 = 0;
-		int var12 = this.rand.nextInt(4);
+		byte b0 = 16;
+		double d0 = -1.0D;
+		int i = MathHelper.floor_double(entity.posX);
+		int j = MathHelper.floor_double(entity.posY);
+		int k = MathHelper.floor_double(entity.posZ);
+		int l = i;
+		int i1 = j;
+		int j1 = k;
+		int k1 = 0;
+		int l1 = this.rand.nextInt(4);
+		int i2;
+		double d1;
+		int k2;
+		double d2;
+		int i3;
+		int j3;
+		int k3;
+		int l3;
+		int i4;
+		int j4;
+		int k4;
+		int l4;
+		int i5;
+		double d3;
+		double d4;
 
-		for (int var13 = var5 - var2; var13 <= var5 + var2; var13++)
+		for (i2 = i - b0; i2 <= i + b0; ++i2)
 		{
-			double var14 = var13 + 0.5D - var1.posX;
+			d1 = (double) i2 + 0.5D - entity.posX;
 
-			for (int var19 = var7 - var2; var19 <= var7 + var2; var19++)
+			for (k2 = k - b0; k2 <= k + b0; ++k2)
 			{
-				double var16 = var19 + 0.5D - var1.posZ;
+				d2 = (double) k2 + 0.5D - entity.posZ;
+				label274:
 
-				label430:
-				for (int var18 = this.worldServer.getActualHeight() - 1; var18 >= 0; var18--)
+				for (i3 = this.worldServer.getActualHeight() - 1; i3 >= 0; --i3)
 				{
-					if (!this.worldServer.isAirBlock(var13, var18, var19))
-						continue;
-					while ((var18 > 0) && (this.worldServer.isAirBlock(var13, var18 - 1, var19)))
+					if (this.worldServer.isAirBlock(i2, i3, k2))
 					{
-						var18--;
-					}
-
-					for (int var20 = var12; var20 < var12 + 4; var20++)
-					{
-						int var21 = var20 % 2;
-						int var22 = 1 - var21;
-
-						if (var20 % 4 >= 2)
+						while (i3 > 0 && this.worldServer.isAirBlock(i2, i3 - 1, k2))
 						{
-							var21 = -var21;
-							var22 = -var22;
+							--i3;
 						}
 
-						for (int var23 = 0; var23 < 3; var23++)
+						for (j3 = l1; j3 < l1 + 4; ++j3)
 						{
-							for (int var24 = 0; var24 < 4; var24++)
-							{
-								for (int var25 = -1; var25 < 4; var25++)
-								{
-									int var26 = var13 + (var24 - 1) * var21 + var23 * var22;
-									int var27 = var18 + var25;
-									int var32 = var19 + (var24 - 1) * var22 - var23 * var21;
+							k3 = j3 % 2;
+							l3 = 1 - k3;
 
-									if (((var25 < 0) && (!this.worldServer.getBlock(var26, var27, var32).getMaterial().isSolid())) || ((var25 >= 0) && (!this.worldServer.isAirBlock(var26, var27, var32))))
+							if (j3 % 4 >= 2)
+							{
+								k3 = -k3;
+								l3 = -l3;
+							}
+
+							for (i4 = 0; i4 < 3; ++i4)
+							{
+								for (j4 = 0; j4 < 4; ++j4)
+								{
+									for (k4 = -1; k4 < 4; ++k4)
 									{
-										break label430;
+										l4 = i2 + (j4 - 1) * k3 + i4 * l3;
+										i5 = i3 + k4;
+										int j5 = k2 + (j4 - 1) * l3 - i4 * k3;
+
+										if (k4 < 0 && !this.worldServer.getBlock(l4, i5, j5).getMaterial().isSolid() || k4 >= 0 && !this.worldServer.isAirBlock(l4, i5, j5))
+										{
+											continue label274;
+										}
 									}
 								}
 							}
-						}
-						double var30 = var18 + 0.5D - var1.posY;
-						double var28 = var14 * var14 + var30 * var30 + var16 * var16;
 
-						if ((var3 >= 0.0D) && (var28 >= var3))
-							continue;
-						var3 = var28;
-						var8 = var13;
-						var9 = var18;
-						var10 = var19;
-						var11 = var20 % 4;
+							d3 = (double) i3 + 0.5D - entity.posY;
+							d4 = d1 * d1 + d3 * d3 + d2 * d2;
+
+							if (d0 < 0.0D || d4 < d0)
+							{
+								d0 = d4;
+								l = i2;
+								i1 = i3;
+								j1 = k2;
+								k1 = j3 % 4;
+							}
+						}
 					}
 				}
-
 			}
-
 		}
 
-		if (var3 < 0.0D)
+		if (d0 < 0.0D)
 		{
-			for (int var13 = var5 - var2; var13 <= var5 + var2; var13++)
+			for (i2 = i - b0; i2 <= i + b0; ++i2)
 			{
-				double var14 = var13 + 0.5D - var1.posX;
+				d1 = (double) i2 + 0.5D - entity.posX;
 
-				for (int var19 = var7 - var2; var19 <= var7 + var2; var19++)
+				for (k2 = k - b0; k2 <= k + b0; ++k2)
 				{
-					double var16 = var19 + 0.5D - var1.posZ;
+					d2 = (double) k2 + 0.5D - entity.posZ;
+					label222:
 
-					label780:
-					for (int var18 = this.worldServer.getActualHeight() - 1; var18 >= 0; var18--)
+					for (i3 = this.worldServer.getActualHeight() - 1; i3 >= 0; --i3)
 					{
-						if (!this.worldServer.isAirBlock(var13, var18, var19))
-							continue;
-						while ((var18 > 0) && (this.worldServer.isAirBlock(var13, var18 - 1, var19)))
+						if (this.worldServer.isAirBlock(i2, i3, k2))
 						{
-							var18--;
-						}
-
-						for (int var20 = var12; var20 < var12 + 2; var20++)
-						{
-							int var21 = var20 % 2;
-							int var22 = 1 - var21;
-
-							for (int var23 = 0; var23 < 4; var23++)
+							while (i3 > 0 && this.worldServer.isAirBlock(i2, i3 - 1, k2))
 							{
-								for (int var24 = -1; var24 < 4; var24++)
-								{
-									int var25 = var13 + (var23 - 1) * var21;
-									int var26 = var18 + var24;
-									int var27 = var19 + (var23 - 1) * var22;
+								--i3;
+							}
 
-									if (((var24 < 0) && (!this.worldServer.getBlock(var25, var26, var27).getMaterial().isSolid())) || ((var24 >= 0) && (!this.worldServer.isAirBlock(var25, var26, var27))))
+							for (j3 = l1; j3 < l1 + 2; ++j3)
+							{
+								k3 = j3 % 2;
+								l3 = 1 - k3;
+
+								for (i4 = 0; i4 < 4; ++i4)
+								{
+									for (j4 = -1; j4 < 4; ++j4)
 									{
-										break label780;
+										k4 = i2 + (i4 - 1) * k3;
+										l4 = i3 + j4;
+										i5 = k2 + (i4 - 1) * l3;
+
+										if (j4 < 0 && !this.worldServer.getBlock(k4, l4, i5).getMaterial().isSolid() || j4 >= 0 && !this.worldServer.isAirBlock(k4, l4, i5))
+										{
+											continue label222;
+										}
 									}
 								}
-							}
-							double var30 = var18 + 0.5D - var1.posY;
-							double var28 = var14 * var14 + var30 * var30 + var16 * var16;
 
-							if ((var3 >= 0.0D) && (var28 >= var3))
-								continue;
-							var3 = var28;
-							var8 = var13;
-							var9 = var18;
-							var10 = var19;
-							var11 = var20 % 2;
+								d3 = (double) i3 + 0.5D - entity.posY;
+								d4 = d1 * d1 + d3 * d3 + d2 * d2;
+
+								if (d0 < 0.0D || d4 < d0)
+								{
+									d0 = d4;
+									l = i2;
+									i1 = i3;
+									j1 = k2;
+									k1 = j3 % 2;
+								}
+							}
 						}
 					}
 				}
-
 			}
-
 		}
 
-		int var32 = var8;
-		int var33 = var9;
-		int var19 = var10;
-		int var34 = var11 % 2;
-		int var35 = 1 - var34;
+		int k5 = l;
+		int j2 = i1;
+		k2 = j1;
+		int l5 = k1 % 2;
+		int l2 = 1 - l5;
 
-		if (var11 % 4 >= 2)
+		if (k1 % 4 >= 2)
 		{
-			var34 = -var34;
-			var35 = -var35;
+			l5 = -l5;
+			l2 = -l2;
 		}
 
-		if (var3 < 0.0D)
+		boolean flag;
+
+		if (d0 < 0.0D)
 		{
-			if (var9 < 70)
+			if (i1 < 70)
 			{
-				var9 = 70;
+				i1 = 70;
 			}
 
-			if (var9 > this.worldServer.getActualHeight() - 10)
+			if (i1 > this.worldServer.getActualHeight() - 10)
 			{
-				var9 = this.worldServer.getActualHeight() - 10;
+				i1 = this.worldServer.getActualHeight() - 10;
 			}
 
-			var33 = var9 + 30;
+			j2 = i1;
 
-			for (int var18 = -1; var18 <= 1; var18++)
+			for (i3 = -1; i3 <= 1; ++i3)
 			{
-				for (int var20 = 1; var20 < 3; var20++)
+				for (j3 = 1; j3 < 3; ++j3)
 				{
-					for (int var21 = -1; var21 < 3; var21++)
+					for (k3 = -1; k3 < 3; ++k3)
 					{
-						int var22 = var32 + (var20 - 1) * var34 + var18 * var35;
-						int var23 = var33 + var21 + 70;
-						int var24 = var19 + (var20 - 1) * var35 - var18 * var34;
-						boolean var36 = var21 < 0;
-						this.worldServer.setBlock(var22, var23, var24, var36 ? AliensVsPredator.blocks().blockEngineerShipFloor : Blocks.air);
+						l3 = k5 + (j3 - 1) * l5 + i3 * l2;
+						i4 = j2 + k3;
+						j4 = k2 + (j3 - 1) * l2 - i3 * l5;
+						flag = k3 < 0;
+						this.worldServer.setBlock(l3, i4, j4, flag ? AliensVsPredator.blocks().blockEngineerShipFloor : Blocks.air);
 					}
 				}
 			}
 		}
 
-		for (int var18 = 0; var18 < 4; var18++)
+		for (i3 = 0; i3 < 4; ++i3)
 		{
-			for (int var20 = 0; var20 < 4; var20++)
+			for (j3 = 0; j3 < 4; ++j3)
 			{
-				for (int var21 = -1; var21 < 4; var21++)
+				for (k3 = -1; k3 < 4; ++k3)
 				{
-					int var22 = var32 + (var20 - 1) * var34;
-					int var23 = var33 + var21 + 70;
-					int var24 = var19 + (var20 - 1) * var35;
-					boolean var36 = (var20 == 0) || (var20 == 3) || (var21 == -1) || (var21 == 3);
-					boolean var37 = var21 == -1;
-					this.worldServer.setBlock(var22, var23, var24, var36 ? AliensVsPredator.blocks().blockEngineerShipFloor : AliensVsPredator.blocks().blockPortalVarda);
-					this.worldServer.setBlock(var22, var23, var24 + 1, var37 ? AliensVsPredator.blocks().blockEngineerShipFloor : Blocks.air);
-					this.worldServer.setBlock(var22, var23, var24 - 1, var37 ? AliensVsPredator.blocks().blockEngineerShipFloor : Blocks.air);
+					l3 = k5 + (j3 - 1) * l5;
+					i4 = j2 + k3;
+					j4 = k2 + (j3 - 1) * l2;
+					flag = j3 == 0 || j3 == 3 || k3 == -1 || k3 == 3;
+					this.worldServer.setBlock(l3, i4, j4, (Block) (flag ? AliensVsPredator.blocks().blockEngineerShipFloor : AliensVsPredator.blocks().blockPortalVarda), 0, 2);
 				}
-
 			}
 
-			for (int var20 = 0; var20 < 4; var20++)
+			for (j3 = 0; j3 < 4; ++j3)
 			{
-				for (int var21 = -1; var21 < 4; var21++)
+				for (k3 = -1; k3 < 4; ++k3)
 				{
-					int var22 = var32 + (var20 - 1) * var34;
-					int var23 = var33 + var21;
-					int var24 = var19 + (var20 - 1) * var35;
-					this.worldServer.notifyBlocksOfNeighborChange(var22, var23, var24, this.worldServer.getBlock(var22, var23, var24));
+					l3 = k5 + (j3 - 1) * l5;
+					i4 = j2 + k3;
+					j4 = k2 + (j3 - 1) * l2;
+					this.worldServer.notifyBlocksOfNeighborChange(l3, i4, j4, this.worldServer.getBlock(l3, i4, j4));
 				}
 			}
 		}
