@@ -64,7 +64,7 @@ public class TeleporterLV extends Teleporter
 				}
 
 				entity.setLocationAndAngles(entityPosX, entityPosY, entityPosZ, entity.rotationYaw, 0F);
-				entity.setVelocity(0D, 0D, 0D);
+//				entity.setVelocity(0D, 0D, 0D);
 			}
 			else
 			{
