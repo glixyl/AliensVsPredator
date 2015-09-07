@@ -22,7 +22,8 @@ public class TeleporterLV extends Teleporter
 	private final Random rand;
 	private final LongHashMap destinationCoordinateCache = new LongHashMap();
 	private final List<Long> destinationCoordinateKeys = new ArrayList<Long>();
-
+	public Block portal;
+	
 	public TeleporterLV(WorldServer worldServer)
 	{
 		super(worldServer);
@@ -33,6 +34,8 @@ public class TeleporterLV extends Teleporter
 	@Override
 	public void placeInPortal(Entity entity, double posX, double posY, double posZ, float yaw)
 	{
+		portal = this.worldServer.provider.dimensionId == AliensVsPredator.settings().dimensionIdVarda() ? AliensVsPredator.blocks().blockPortalVarda : AliensVsPredator.blocks().blockPortalAcheron;
+		
 		if (this.worldServer.provider.dimensionId != 1)
 		{
 			if (!this.placeInExistingPortal(entity, posX, posY, posZ, yaw))
@@ -106,9 +109,9 @@ public class TeleporterLV extends Teleporter
 
 					for (int i2 = this.worldServer.getActualHeight() - 1; i2 >= 0; --i2)
 					{
-						if (this.worldServer.getBlock(l3, i2, l1) == AliensVsPredator.blocks().blockPortalVarda)
+						if (this.worldServer.getBlock(l3, i2, l1) == portal)
 						{
-							while (this.worldServer.getBlock(l3, i2 - 1, l1) == AliensVsPredator.blocks().blockPortalVarda)
+							while (this.worldServer.getBlock(l3, i2 - 1, l1) == portal)
 							{
 								--i2;
 							}
@@ -142,22 +145,22 @@ public class TeleporterLV extends Teleporter
 			d7 = (double) k + 0.5D;
 			int i4 = -1;
 
-			if (this.worldServer.getBlock(i - 1, j, k) == AliensVsPredator.blocks().blockPortalVarda)
+			if (this.worldServer.getBlock(i - 1, j, k) == portal)
 			{
 				i4 = 2;
 			}
 
-			if (this.worldServer.getBlock(i + 1, j, k) == AliensVsPredator.blocks().blockPortalVarda)
+			if (this.worldServer.getBlock(i + 1, j, k) == portal)
 			{
 				i4 = 0;
 			}
 
-			if (this.worldServer.getBlock(i, j, k - 1) == AliensVsPredator.blocks().blockPortalVarda)
+			if (this.worldServer.getBlock(i, j, k - 1) == portal)
 			{
 				i4 = 3;
 			}
 
-			if (this.worldServer.getBlock(i, j, k + 1) == AliensVsPredator.blocks().blockPortalVarda)
+			if (this.worldServer.getBlock(i, j, k + 1) == portal)
 			{
 				i4 = 1;
 			}
@@ -459,7 +462,7 @@ public class TeleporterLV extends Teleporter
 					i4 = j2 + k3;
 					j4 = k2 + (j3 - 1) * l2;
 					flag = j3 == 0 || j3 == 3 || k3 == -1 || k3 == 3;
-					this.worldServer.setBlock(l3, i4, j4, (Block) (flag ? AliensVsPredator.blocks().blockEngineerShipFloor : AliensVsPredator.blocks().blockPortalVarda), 0, 2);
+					this.worldServer.setBlock(l3, i4, j4, (Block) (flag ? AliensVsPredator.blocks().blockEngineerShipFloor : portal), 0, 2);
 				}
 			}
 
