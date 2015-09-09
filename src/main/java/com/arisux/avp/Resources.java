@@ -101,6 +101,7 @@ public class Resources implements IInitializablePre
 	public final ResourceLocation GUI_BASIC = new ResourceLocation(AliensVsPredator.ID, "textures/gui/background.png");
 	public final ResourceLocation GUI_TURRET = new ResourceLocation(AliensVsPredator.ID, "textures/gui/turret.png");
 	public final ResourceLocation GUI_WRISTBRACER = new ResourceLocation(AliensVsPredator.ID, "textures/gui/wristbracer.png");
+	public final ResourceLocation GUI_LOCKER = new ResourceLocation(AliensVsPredator.ID, "textures/gui/locker.png");
 	public final ResourceLocation ICON_AMMO = new ResourceLocation(AliensVsPredator.ID, "textures/misc/icon-ammo.png");
 	public final ResourceLocation MOTIONTRACKER_BG = new ResourceLocation(AliensVsPredator.ID, "textures/misc/motiontracker/background.png");
 	public final ResourceLocation MOTIONTRACKER_FG = new ResourceLocation(AliensVsPredator.ID, "textures/misc/motiontracker/foreground.png");

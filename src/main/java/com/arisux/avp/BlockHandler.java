@@ -1,5 +1,9 @@
 package com.arisux.avp;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
+
 import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.airi.lib.BlockTypes.HookedBlockSlab;
 import com.arisux.airi.lib.BlockTypes.HookedBlockStairs;
@@ -12,9 +16,11 @@ import com.arisux.avp.block.BlockBlackGoo;
 import com.arisux.avp.block.BlockBlastdoor;
 import com.arisux.avp.block.BlockCryostasisTube;
 import com.arisux.avp.block.BlockGenerator;
+import com.arisux.avp.block.BlockGunLocker;
 import com.arisux.avp.block.BlockHiveNode;
 import com.arisux.avp.block.BlockHiveResin;
 import com.arisux.avp.block.BlockLightPanel;
+import com.arisux.avp.block.BlockLocker;
 import com.arisux.avp.block.BlockNegativeTransformer;
 import com.arisux.avp.block.BlockP2RConvertor;
 import com.arisux.avp.block.BlockPortal;
@@ -36,9 +42,6 @@ import com.arisux.avp.block.BlockWorkstation;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 
 public class BlockHandler extends IBHandler implements IInitializable
 {
@@ -140,6 +143,8 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockEngineerShipMaterial1 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
 		blockEngineerShipMaterial2 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
 		blockEngineerShipMaterial0 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
+		blockLocker = (new BlockLocker(Material.iron).setHardness(1.5F).setResistance(10.0F)),
+		blockGunLocker = (new BlockGunLocker(Material.iron).setHardness(1.5F).setResistance(10.0F)),
 		blockAmpule = (new BlockAmpule().setHardness(1.5F).setResistance(10.0F));
 
 	public BlockHandler()
@@ -303,5 +308,7 @@ public class BlockHandler extends IBHandler implements IInitializable
 		registerShapedBlockSet(blockEngineerShipMaterial1, "engineershipmaterial1");
 		registerShapedBlockSet(blockEngineerShipMaterial2, "engineershipmaterial2");
 		registerBlock(blockAmpule, "engineership.ampule");
+		registerBlock(blockLocker, "locker");
+		registerBlock(blockGunLocker, "gunlocker");
 	}
 }

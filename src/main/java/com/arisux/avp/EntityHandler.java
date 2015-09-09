@@ -2,6 +2,9 @@ package com.arisux.avp;
 
 import java.util.HashMap;
 
+import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.world.biome.BiomeGenBase;
+
 import com.arisux.airi.lib.interfaces.IInitializable;
 import com.arisux.avp.dimension.BiomeLVBase;
 import com.arisux.avp.entities.EntityAPC;
@@ -39,9 +42,11 @@ import com.arisux.avp.entities.tile.TileEntityAmpule;
 import com.arisux.avp.entities.tile.TileEntityAssembler;
 import com.arisux.avp.entities.tile.TileEntityBlastdoor;
 import com.arisux.avp.entities.tile.TileEntityCryostasisTube;
+import com.arisux.avp.entities.tile.TileEntityGunLocker;
 import com.arisux.avp.entities.tile.TileEntityHiveNode;
 import com.arisux.avp.entities.tile.TileEntityHiveResin;
 import com.arisux.avp.entities.tile.TileEntityLightPanel;
+import com.arisux.avp.entities.tile.TileEntityLocker;
 import com.arisux.avp.entities.tile.TileEntityNegativeTransformer;
 import com.arisux.avp.entities.tile.TileEntityP2RConverter;
 import com.arisux.avp.entities.tile.TileEntityPowercell;
@@ -58,8 +63,6 @@ import com.arisux.avp.entities.tile.TileEntityWorkstation;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.world.biome.BiomeGenBase;
 
 public class EntityHandler implements IInitializable
 {
@@ -95,6 +98,8 @@ public class EntityHandler implements IInitializable
 		GameRegistry.registerTileEntity(TileEntityP2RConverter.class, "tileEntityP2RConverter");
 		GameRegistry.registerTileEntity(TileEntityPowercell.class, "tileEntityPowercell");
 		GameRegistry.registerTileEntity(TileEntityAmpule.class, "tileEntityAmpule");
+		GameRegistry.registerTileEntity(TileEntityLocker.class, "tileEntityLocker");
+		GameRegistry.registerTileEntity(TileEntityGunLocker.class, "tileEntityGunLocker");
 	}
 
 	private void registerLivingEntities()
