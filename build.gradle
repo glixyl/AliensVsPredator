@@ -45,10 +45,6 @@ curse {
     releaseType = 'beta'
 }
 
-dependencies {
-	// Define dependencies here or place them in "./libs/"
-}
-
 processResources {
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
