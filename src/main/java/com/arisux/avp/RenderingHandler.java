@@ -132,6 +132,7 @@ import com.arisux.avp.items.render.RenderItemAmpule;
 import com.arisux.avp.items.render.RenderItemBlastDoor;
 import com.arisux.avp.items.render.RenderItemCryostasisTube;
 import com.arisux.avp.items.render.RenderItemLightPanel;
+import com.arisux.avp.items.render.RenderItemLocker;
 import com.arisux.avp.items.render.RenderItemM240ICU;
 import com.arisux.avp.items.render.RenderItemM4;
 import com.arisux.avp.items.render.RenderItemM40;
@@ -247,6 +248,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.blocks().blockTransformer), new RenderItemTransformer());
 		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.blocks().blockNegativeTransformer), new RenderItemTransformer());
 		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.blocks().blockAmpule), new RenderItemAmpule());
+		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.blocks().blockLocker), new RenderItemLocker());
 		registerItemRenderer(items.itemWristBlade, new RenderItemWristbracer());
 		registerItemRenderer(items.itemWristbracerBlades, new RenderItemWristbracerBlades());
 		registerItemRenderer(items.itemSpear, new RenderItemSpear());
