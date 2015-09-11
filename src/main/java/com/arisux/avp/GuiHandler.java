@@ -78,8 +78,7 @@ public class GuiHandler implements IGuiHandler, IInitializable
 		
 		if(ID == AliensVsPredator.properties().GUI_LOCKER)
 		{
-			TileEntityLocker locker = (TileEntityLocker) (world.getTileEntity(x, y, z));
-			return new GuiLocker(locker.getNewContainer(player));
+			return new GuiLocker(player, (TileEntityLocker) (world.getTileEntity(x, y, z)));
 		}
 		
 		return null;

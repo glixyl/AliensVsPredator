@@ -77,7 +77,6 @@ public class RenderItemAPC extends ItemRenderer
 			{
 				p.draw();
 			}
-			RenderUtil.glDisableLight();
 		}
 		GL11.glPopMatrix();
 	}

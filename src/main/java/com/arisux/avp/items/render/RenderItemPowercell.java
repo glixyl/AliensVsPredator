@@ -85,6 +85,7 @@ public class RenderItemPowercell extends ItemRenderer
 			RenderUtil.glDisableLight();
 			RenderUtil.bindTexture(resourceLocationMask);
 			this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+			RenderUtil.glEnableLight();
 		}
 		GL11.glPopMatrix();
 	}

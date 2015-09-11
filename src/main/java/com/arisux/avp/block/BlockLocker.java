@@ -42,7 +42,7 @@ public class BlockLocker extends HookedBlock
 			tileEntityLocker.openGui(playerIn);
 		}
 		
-		return false;
+		return true;
 	}
 
 	@Override

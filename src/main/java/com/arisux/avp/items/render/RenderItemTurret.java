@@ -60,7 +60,6 @@ public class RenderItemTurret extends ItemRenderer
 			GL11.glScalef(glScale, glScale, glScale);
 			RenderUtil.glEnableLight();
 			((ModelTurret) this.getModel()).render(null, 0.0625F);
-			RenderUtil.glDisableLight();
 		}
 		GL11.glPopMatrix();
 	}

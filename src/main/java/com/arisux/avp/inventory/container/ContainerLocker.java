@@ -1,13 +1,12 @@
 package com.arisux.avp.inventory.container;
 
+import com.arisux.avp.entities.tile.TileEntityLocker;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-
-import com.arisux.avp.entities.tile.TileEntityLocker;
 
 public class ContainerLocker extends Container
 {
@@ -21,18 +20,24 @@ public class ContainerLocker extends Container
 		this.player = player;
 		this.locker = locker;
 		this.initialize();
+		this.locker.setOpen(true);
 	}
 	
 	public void initialize()
 	{
-		for (byte x = 0; x < this.inventory.getSizeInventory(); x++)
+		int index = 0;
+		
+		for (byte x = 0; x < 8; x++)
 		{
-			addSlotToContainer(new Slot(inventory, x, 31 + (28 * x), 16));
+			for (byte y = 0; y < this.inventory.getSizeInventory() / 8; y++)
+			{
+				addSlotToContainer(new Slot(inventory, index++, 14 + (18 * x), 26 + (18 * y)));
+			}
 		}
 
 		for (byte x = 0; x < 9; x++)
 		{
-			addSlotToContainer(new Slot(player.inventory, x, 15 + (18 * x), 136));
+			addSlotToContainer(new Slot(player.inventory, x, 5 + (18 * x), 182));
 		}
 	}
 
@@ -48,6 +53,7 @@ public class ContainerLocker extends Container
 		super.onContainerClosed(par1EntityPlayer);
 		
 		this.locker.inventory = this.inventory;
+		this.locker.setOpen(false);
 	}
 
 	@Override
@@ -57,7 +63,6 @@ public class ContainerLocker extends Container
 
 		if (slot != null && slot.getHasStack())
 		{
-
 			ItemStack stack = slot.getStack();
 			ItemStack result = stack.copy();
 

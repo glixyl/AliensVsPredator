@@ -72,6 +72,5 @@ public class RenderItemLightPanel extends ItemRenderer
 		RenderUtil.bindTexture(resourceLocation);
 		RenderUtil.glEnableLight();
 		((ModelLightPanel) this.getModel()).render(RenderUtil.DEFAULT_BOX_TRANSLATION);
-		RenderUtil.glDisableLight();
 	}
 }

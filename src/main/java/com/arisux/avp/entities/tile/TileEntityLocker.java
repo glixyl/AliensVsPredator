@@ -1,8 +1,11 @@
 package com.arisux.avp.entities.tile;
 
-import net.minecraft.block.Block;
+import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.inventory.container.ContainerLocker;
+import com.arisux.avp.packets.client.PacketOpenLocker;
+
+import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
@@ -16,23 +19,18 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.inventory.container.ContainerLocker;
-
-import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
-
 public class TileEntityLocker extends TileEntity
 {
 	public IInventory inventory;
 	private ForgeDirection direction;
 	public Container container;
-	private EntityPlayer player;
+	private boolean isOpen;
 
 	public TileEntityLocker()
 	{
 		super();
-		
-		this.inventory = new InventoryBasic("container.locker.slots", true, 5);
+		this.inventory = new InventoryBasic("container.locker.slots", true, 64);
+		this.isOpen = false;
 	}
 
 	@Override
@@ -51,7 +49,6 @@ public class TileEntityLocker extends TileEntity
 
 	public Container getNewContainer(EntityPlayer player)
 	{
-		this.player = player;
 		return (container = new ContainerLocker(player, this));
 	}
 
@@ -123,22 +120,16 @@ public class TileEntityLocker extends TileEntity
 	
 	public void openGui(EntityPlayer player)
 	{
-		this.player = player;
-
 		if (!player.worldObj.isRemote)
+		{
 			FMLNetworkHandler.openGui(player, AliensVsPredator.instance(), AliensVsPredator.properties().GUI_LOCKER, player.worldObj, xCoord, yCoord, zCoord);
+		}
 	}
 
 	@Override
 	public void updateEntity()
 	{
 		super.updateEntity();
-	}
-
-	@Override
-	public Block getBlockType()
-	{
-		return Blocks.beacon;
 	}
 
 	public ForgeDirection getDirection()
@@ -149,5 +140,20 @@ public class TileEntityLocker extends TileEntity
 	public void setDirection(ForgeDirection direction)
 	{
 		this.direction = direction;
+	}
+
+	public void setOpen(boolean isOpen)
+	{
+		this.isOpen = isOpen;
+		
+		if (!this.worldObj.isRemote)
+		{
+			AliensVsPredator.network().sendToAll(new PacketOpenLocker(isOpen, this.xCoord, this.yCoord, this.zCoord));
+		}
+	}
+	
+	public boolean isOpen()
+	{
+		return isOpen;
 	}
 }

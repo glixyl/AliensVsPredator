@@ -63,7 +63,6 @@ public class RenderItemAmpule extends ItemRenderer
 			GL11.glScalef(glScale, glScale, glScale);
 			RenderUtil.glEnableLight();
 			this.getModel().render();
-			RenderUtil.glDisableLight();
 		}
 		GL11.glPopMatrix();
 	}
