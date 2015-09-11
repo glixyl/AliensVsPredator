@@ -72,6 +72,7 @@ public class RenderItemBlastDoor extends ItemRenderer
 			RenderUtil.bindTexture(this.getResourceLocation());
 			RenderUtil.glEnableLight();
 			((ModelBlastdoor) this.getModel()).render(null, RenderUtil.DEFAULT_BOX_TRANSLATION);
+			RenderUtil.glDisableLight();
 		}
 		GL11.glPopMatrix();
 	}

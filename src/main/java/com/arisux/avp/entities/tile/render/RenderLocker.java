@@ -91,6 +91,7 @@ public class RenderLocker extends TileEntitySpecialRenderer
 									{
 										GL11.glTranslatef(8F, 0F, 0F);
 										renderer.renderItem(ItemRenderType.INVENTORY, stack, args);
+										RenderUtil.glEnableLight();
 									}
 									GL11.glPopMatrix();
 								}

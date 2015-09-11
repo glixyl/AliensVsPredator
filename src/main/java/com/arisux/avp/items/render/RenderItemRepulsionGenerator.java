@@ -70,5 +70,6 @@ public class RenderItemRepulsionGenerator extends ItemRenderer
 		RenderUtil.bindTexture(resourceLocation);
 		RenderUtil.glEnableLight();
 		((ModelRepulsionGenerator) this.getModel()).render(null, RenderUtil.DEFAULT_BOX_TRANSLATION);
+		RenderUtil.glDisableLight();
 	}
 }

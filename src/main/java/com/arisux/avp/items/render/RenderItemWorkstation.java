@@ -72,6 +72,7 @@ public class RenderItemWorkstation extends ItemRenderer
 			RenderUtil.glEnableLight();
 			RenderUtil.bindTexture(resourceLocation);
 			((ModelWorkstation) this.getModel()).render(null, RenderUtil.DEFAULT_BOX_TRANSLATION);
+			RenderUtil.glDisableLight();
 		}
 		GL11.glPopMatrix();
 	}
