@@ -32,14 +32,22 @@ public class BlockLocker extends HookedBlock
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int posX, int posY, int posZ, EntityPlayer playerIn, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_)
+	public boolean onBlockActivated(World world, int posX, int posY, int posZ, EntityPlayer player, int side, float blockX, float blockY, float blockZ)
 	{
 		TileEntity tileEntity = world.getTileEntity(posX, posY, posZ);
 		
 		if(tileEntity != null && tileEntity instanceof TileEntityLocker)
 		{
 			TileEntityLocker tileEntityLocker = (TileEntityLocker) tileEntity;
-			tileEntityLocker.openGui(playerIn);
+			
+			if (!player.isSneaking())
+			{
+				tileEntityLocker.openGui(player);
+			}
+			else
+			{
+				tileEntityLocker.setOpen(!tileEntityLocker.isOpen());
+			}
 		}
 		
 		return true;

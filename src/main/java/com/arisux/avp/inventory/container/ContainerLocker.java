@@ -53,7 +53,7 @@ public class ContainerLocker extends Container
 		super.onContainerClosed(par1EntityPlayer);
 		
 		this.locker.inventory = this.inventory;
-		this.locker.setOpen(false);
+		this.locker.setOpen(!this.locker.isOpen());
 	}
 
 	@Override
