@@ -22,7 +22,7 @@ public class RenderItemSummoner extends ItemRenderer
 
 	public RenderItemSummoner(Class<? extends Entity> entityClass, Class<? extends ModelBaseExtension> modelClass, ResourceLocation resourceLocation)
 	{
-		super(RenderUtil.createModelBaseExtended(modelClass), resourceLocation);
+		super(ModelBaseExtension.createExtendedModelBase(modelClass), resourceLocation);
 		this.resourceLocation = resourceLocation;
 		this.entityClass = entityClass;
 	}

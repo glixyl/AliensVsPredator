@@ -4,8 +4,6 @@ import java.util.Random;
 
 import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.DimensionHandler;
-import com.arisux.avp.dimension.TeleporterLV;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
