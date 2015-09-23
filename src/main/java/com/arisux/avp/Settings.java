@@ -104,6 +104,7 @@ public class Settings
 			entityList.put("HAMMERPEDE", config.get(CATEGORY_IDS, "HAMMERPEDE", idStart++).getInt());
 			entityList.put("TRILOBITE", config.get(CATEGORY_IDS, "TRILOBITE", idStart++).getInt());
 			entityList.put("ENGINEER", config.get(CATEGORY_IDS, "ENGINEER", idStart++).getInt());
+			entityList.put("YAUTJA_BERSERKER", config.get(CATEGORY_IDS, "YAUTJA_BERSERKER", (idStart++) + 1).getInt());
 
 			entityList.put("CELTIC_SPEAR", config.get(CATEGORY_IDS, "CELTIC_SPEAR", 1512).getInt());
 			entityList.put("PROXIMITY_MINE", config.get(CATEGORY_IDS, "PROXIMITY_MINE", 1513).getInt());

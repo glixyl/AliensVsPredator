@@ -24,6 +24,7 @@ import com.arisux.avp.entities.mob.EntitySpitter;
 import com.arisux.avp.entities.mob.EntityTrilobite;
 import com.arisux.avp.entities.mob.EntityWarrior;
 import com.arisux.avp.entities.mob.EntityYautja;
+import com.arisux.avp.entities.mob.EntityYautjaBerserker;
 import com.arisux.avp.items.ItemAPC;
 import com.arisux.avp.items.ItemArmorMarine;
 import com.arisux.avp.items.ItemArmorPressureSuit;
@@ -179,6 +180,7 @@ public class ItemHandler extends IBHandler implements IInitializable
 		itemSummonerProtomorph = (new ItemEntitySummoner(this.getMod().domain(), EntityProtomorph.class)),
 		itemSummonerHammerpede = (new ItemEntitySummoner(this.getMod().domain(), EntityHammerpede.class)),
 		itemSummonerTrilobite = (new ItemEntitySummoner(this.getMod().domain(), EntityTrilobite.class)),
+		itemSummonerYautjaBerserker = (new ItemEntitySummoner(this.getMod().domain(), EntityYautjaBerserker.class)),
 		itemSummonerEngineer = (new ItemEntitySummoner(this.getMod().domain(), EntityEngineer.class));
 
 	public ItemHandler()
@@ -205,6 +207,7 @@ public class ItemHandler extends IBHandler implements IInitializable
 		registerItem(itemSummonerRoyalFacehugger, "summon.royalfacehugger");
 		registerItem(itemSummonerChestburster, "summon.chestburster");
 		registerItem(itemSummonerYautja, "summon.yautja");
+		registerItem(itemSummonerYautjaBerserker, "summon.yautja.berserker");
 		registerItem(itemSummonerMarine, "summon.marine");
 		registerItem(itemSummonerCombatSynthetic, "summon.synthetic.combat");
 		registerItem(itemSummonerAqua, "summon.aqua");

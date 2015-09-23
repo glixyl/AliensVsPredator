@@ -38,6 +38,7 @@ import com.arisux.avp.entities.mob.EntitySpitter;
 import com.arisux.avp.entities.mob.EntityTrilobite;
 import com.arisux.avp.entities.mob.EntityWarrior;
 import com.arisux.avp.entities.mob.EntityYautja;
+import com.arisux.avp.entities.mob.EntityYautjaBerserker;
 import com.arisux.avp.entities.tile.TileEntityAmpule;
 import com.arisux.avp.entities.tile.TileEntityAssembler;
 import com.arisux.avp.entities.tile.TileEntityBlastdoor;
@@ -125,6 +126,7 @@ public class EntityHandler implements IInitializable
 		EntityRegistry.registerGlobalEntityID(EntityHammerpede.class, "Hammerpede", entityIDs.get("HAMMERPEDE"), 0x333333, 0xFF0000);
 		EntityRegistry.registerGlobalEntityID(EntityTrilobite.class, "Trilobite", entityIDs.get("TRILOBITE"), 0x333333, 0xFF0000);
 		EntityRegistry.registerGlobalEntityID(EntityEngineer.class, "Engineer", entityIDs.get("ENGINEER"), 0x333333, 0xFF0000);
+		EntityRegistry.registerGlobalEntityID(EntityYautjaBerserker.class, "YautjaBerserker", entityIDs.get("YAUTJA_BERSERKER"), 0x333333, 0xFF0000);
 	}
 
 	private void registerEntities()

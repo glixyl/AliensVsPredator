@@ -41,6 +41,7 @@ import com.arisux.avp.entities.mob.EntitySpitter;
 import com.arisux.avp.entities.mob.EntityTrilobite;
 import com.arisux.avp.entities.mob.EntityWarrior;
 import com.arisux.avp.entities.mob.EntityYautja;
+import com.arisux.avp.entities.mob.EntityYautjaBerserker;
 import com.arisux.avp.entities.mob.model.ModelAqua;
 import com.arisux.avp.entities.mob.model.ModelChestburster;
 import com.arisux.avp.entities.mob.model.ModelCrusher;
@@ -57,6 +58,7 @@ import com.arisux.avp.entities.mob.model.ModelSpitter;
 import com.arisux.avp.entities.mob.model.ModelTrilobite;
 import com.arisux.avp.entities.mob.model.ModelWarrior;
 import com.arisux.avp.entities.mob.model.ModelYautja;
+import com.arisux.avp.entities.mob.model.ModelYautjaBerserker;
 import com.arisux.avp.entities.mob.render.RenderAqua;
 import com.arisux.avp.entities.mob.render.RenderChestburster;
 import com.arisux.avp.entities.mob.render.RenderCombatSynthetic;
@@ -72,6 +74,7 @@ import com.arisux.avp.entities.mob.render.RenderSpitter;
 import com.arisux.avp.entities.mob.render.RenderTrilobite;
 import com.arisux.avp.entities.mob.render.RenderXenomorph;
 import com.arisux.avp.entities.mob.render.RenderYautja;
+import com.arisux.avp.entities.mob.render.RenderYautjaBerserker;
 import com.arisux.avp.entities.render.RenderAPC;
 import com.arisux.avp.entities.render.RenderAcidPool;
 import com.arisux.avp.entities.render.RenderAcidSpit;
@@ -200,6 +203,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 
 	public void registerEntityRenderers()
 	{
+		registerEntityRenderingHandler(EntityYautjaBerserker.class, new RenderYautjaBerserker(new ModelYautjaBerserker(), 0.5F));
 		registerEntityRenderingHandler(EntityEngineer.class, new RenderEngineer(new ModelEngineer(), 0.5F));
 		registerEntityRenderingHandler(EntityTrilobite.class, new RenderTrilobite(new ModelTrilobite(), 0.5F));
 		registerEntityRenderingHandler(EntityHammerpede.class, new RenderHammerpede(new ModelHammerpede(), 0.5F));
@@ -281,6 +285,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		registerItemRenderer(items.itemSummonerHammerpede, (new RenderItemSummoner(EntityHammerpede.class, ModelHammerpede.class, AliensVsPredator.resources().HAMMERPEDE)).setScale(25.5F).setY(8F));
 		registerItemRenderer(items.itemSummonerTrilobite, (new RenderItemSummoner(EntityTrilobite.class, ModelTrilobite.class, AliensVsPredator.resources().TRILOBITE)).setScale(25.5F).setY(8F));
 		registerItemRenderer(items.itemSummonerEngineer, (new RenderItemSummoner(EntityEngineer.class, ModelEngineer.class, AliensVsPredator.resources().ENGINEER)).setScale(27.5F).setY(8F));
+		registerItemRenderer(items.itemSummonerYautjaBerserker, (new RenderItemSummoner(EntityYautjaBerserker.class, ModelYautjaBerserker.class, AliensVsPredator.resources().YAUTJA_BERSERKER)).setScale(7.5F).setY(8F));
 
 		ModelAK47 ak47 = new ModelAK47();
 		registerItemRenderer(items.itemAK47Barrel, new RenderItemAK47Barrel(AliensVsPredator.resources().AK47, ak47.barrel, ak47.barrelBase, ak47.lBarrelGrip, ak47.rBarrelGrip));

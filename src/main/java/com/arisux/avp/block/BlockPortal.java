@@ -3,14 +3,13 @@ package com.arisux.avp.block;
 import java.util.Random;
 
 import com.arisux.airi.lib.BlockTypes.HookedBlock;
-import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.DimensionHandler;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
@@ -68,7 +67,6 @@ public class BlockPortal extends HookedBlock
 		if ((entity.ridingEntity == null) && (entity.riddenByEntity == null) && ((entity instanceof EntityPlayerMP)))
 		{
 			EntityPlayerMP player = (EntityPlayerMP) entity;
-			MinecraftServer server = MinecraftServer.getServer();
 
 			if (player.timeUntilPortal > 0)
 			{
@@ -77,12 +75,12 @@ public class BlockPortal extends HookedBlock
 			else if (player.dimension != this.dimensionId)
 			{
 				player.timeUntilPortal = 10;
-				AliensVsPredator.dimensions().teleportPlayerToDimension(player, this.dimensionId);
+				DimensionHandler.teleportPlayerToDimension(player, this.dimensionId);
 			}
 			else
 			{
 				player.timeUntilPortal = 10;
-				AliensVsPredator.dimensions().teleportPlayerToDimension(player, 0);
+				DimensionHandler.teleportPlayerToDimension(player, 0);
 			}
 		}
 	}
