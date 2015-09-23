@@ -22,10 +22,12 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
     public int targetQueenId;
     protected boolean canClimb;
     protected boolean isDependant;
-
+    public int hitRange;
+    
     public EntityXenomorph(World world)
     {
         super(world);
+        this.hitRange = 3;
         this.jumpMovementFactor = 0.02F;
         this.canClimb = true;
         this.isDependant = true;
@@ -84,7 +86,7 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
         
         if(this.getAttackTarget() != null)
         {   
-            if(this.getDistanceToEntity(this.getAttackTarget()) <= 3)
+            if(this.getDistanceToEntity(this.getAttackTarget()) <= hitRange)
             {
                 this.attackEntityAsMob(this.getAttackTarget());
             }

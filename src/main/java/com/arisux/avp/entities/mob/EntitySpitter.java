@@ -1,10 +1,11 @@
 package com.arisux.avp.entities.mob;
 
+import net.minecraft.entity.Entity;
+
 import java.util.Random;
 
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.EntityAcidProjectile;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -16,6 +17,7 @@ public class EntitySpitter extends EntityXenomorph implements IRangedAttackMob
 	public EntitySpitter(World par1World)
 	{
 		super(par1World);
+		this.hitRange = 8;
 		this.experienceValue = 275;
 		this.setSize(1.0F, 3.0F);
 	}
@@ -57,6 +59,13 @@ public class EntitySpitter extends EntityXenomorph implements IRangedAttackMob
 	public int getTotalArmorValue()
 	{
 		return 2;
+	}
+	
+	@Override
+	public boolean attackEntityAsMob(Entity entity)
+	{
+	    this.attackEntityWithRangedAttack((EntityLivingBase) entity, 0.2f);
+	    return true;
 	}
 
 	@Override
