@@ -2,6 +2,7 @@ package com.arisux.avp.entities.mob.model;
 
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.avp.entities.mob.EntitySpeciesYautja;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -508,15 +509,12 @@ public class ModelYautjaBerserker extends ModelBaseExtension
 		this.Sights.render(boxTranslation);
 		this.head25.render(boxTranslation);
 		this.LCheekLower.render(boxTranslation);
-		this.head1Biomask.render(boxTranslation);
 		this.head36.render(boxTranslation);
 		this.head30.render(boxTranslation);
 		this.head10.render(boxTranslation);
-		this.head14BioMask.render(boxTranslation);
 		this.head50.render(boxTranslation);
 		this.head7.render(boxTranslation);
 		this.head29.render(boxTranslation);
-		this.BiomaskHeadPlate.render(boxTranslation);
 		this.head37.render(boxTranslation);
 		this.head1.render(boxTranslation);
 		this.head5.render(boxTranslation);
@@ -525,30 +523,23 @@ public class ModelYautjaBerserker extends ModelBaseExtension
 		this.head48.render(boxTranslation);
 		this.head38.render(boxTranslation);
 		this.head33.render(boxTranslation);
-		this.BiomaskSlope.render(boxTranslation);
 		this.head15.render(boxTranslation);
-		this.head13Biomask.render(boxTranslation);
 		this.head21.render(boxTranslation);
 		this.head42.render(boxTranslation);
 		this.head.render(boxTranslation);
 		this.head34.render(boxTranslation);
 		this.head14.render(boxTranslation);
 		this.head44.render(boxTranslation);
-		this.Sights_1.render(boxTranslation);
-		this.LCheekLower2.render(boxTranslation);
 		this.head43.render(boxTranslation);
 		this.head13.render(boxTranslation);
 		this.RCheekLower.render(boxTranslation);
 		this.head12.render(boxTranslation);
 		this.head32.render(boxTranslation);
-		this.RBiomaskRidge.render(boxTranslation);
 		this.head47.render(boxTranslation);
 		this.head52.render(boxTranslation);
 		this.LCheekUpper2.render(boxTranslation);
 		this.head20.render(boxTranslation);
 		this.head26.render(boxTranslation);
-		this.BiomaskSlope3.render(boxTranslation);
-		this.LBiomaskRidge.render(boxTranslation);
 		this.head24.render(boxTranslation);
 		this.head49.render(boxTranslation);
 		this.head46.render(boxTranslation);
@@ -556,13 +547,11 @@ public class ModelYautjaBerserker extends ModelBaseExtension
 		this.head51.render(boxTranslation);
 		this.head22.render(boxTranslation);
 		this.head3.render(boxTranslation);
-		this.RCheekLower2.render(boxTranslation);
 		this.LCheekUpper.render(boxTranslation);
 		this.head31.render(boxTranslation);
 		this.head35.render(boxTranslation);
 		this.head11.render(boxTranslation);
 		this.head9.render(boxTranslation);
-		this.BiomaskMouth.render(boxTranslation);
 		this.body1.render(boxTranslation);
 		this.head27.render(boxTranslation);
 		this.head45.render(boxTranslation);
@@ -575,15 +564,33 @@ public class ModelYautjaBerserker extends ModelBaseExtension
 		this.head4.render(boxTranslation);
 		this.RCheekUpper2.render(boxTranslation);
 		this.head6.render(boxTranslation);
-		this.LEyeSide.render(boxTranslation);
 		this.head_1.render(boxTranslation);
 		this.head23.render(boxTranslation);
 		this.head39.render(boxTranslation);
 		this.head28.render(boxTranslation);
-		this.biomaksVisor.render(boxTranslation);
-		this.BiomaskSlope2.render(boxTranslation);
-		this.REyeSide.render(boxTranslation);
 		this.body2.render(boxTranslation);
+
+		EntitySpeciesYautja predator = (EntitySpeciesYautja) entity;
+
+		if (predator != null && predator.isWearingMask())
+		{
+			this.biomaksVisor.render(boxTranslation);
+			this.BiomaskSlope2.render(boxTranslation);
+			this.REyeSide.render(boxTranslation);
+			this.LEyeSide.render(boxTranslation);
+			this.BiomaskMouth.render(boxTranslation);
+			this.RCheekLower2.render(boxTranslation);
+			this.BiomaskSlope3.render(boxTranslation);
+			this.LBiomaskRidge.render(boxTranslation);
+			this.RBiomaskRidge.render(boxTranslation);
+			this.Sights_1.render(boxTranslation);
+			this.LCheekLower2.render(boxTranslation);
+			this.head13Biomask.render(boxTranslation);
+			this.BiomaskSlope.render(boxTranslation);
+			this.head1Biomask.render(boxTranslation);
+			this.head14BioMask.render(boxTranslation);
+			this.BiomaskHeadPlate.render(boxTranslation);
+		}
 
 		GlStateManager.pushMatrix();
 		{
@@ -597,7 +604,7 @@ public class ModelYautjaBerserker extends ModelBaseExtension
 			this.blade2.render(boxTranslation);
 		}
 		GlStateManager.popMatrix();
-		
+
 		GlStateManager.pushMatrix();
 		{
 			float leftArmRotation = -MathHelper.cos(swingProgress * boxTranslation + (float) Math.PI) * 2.0F * swingProgressPrev * 0.5F;
@@ -608,7 +615,7 @@ public class ModelYautjaBerserker extends ModelBaseExtension
 			this.leftarm3.render(boxTranslation);
 		}
 		GlStateManager.popMatrix();
-		
+
 		GlStateManager.pushMatrix();
 		{
 			float leftLegRotation = -MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev;
@@ -619,7 +626,7 @@ public class ModelYautjaBerserker extends ModelBaseExtension
 			this.leftlegLower.render(boxTranslation);
 		}
 		GlStateManager.popMatrix();
-		
+
 		GlStateManager.pushMatrix();
 		{
 			float rightLegRotation = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev;
