@@ -14,6 +14,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -45,7 +46,7 @@ public class BlockStasisMechanism extends HookedBlock
 	{
 		return new TileEntityStasisMechanism();
 	}
-	
+
 	@Override
 	public boolean hasTileEntity(int metadata)
 	{
@@ -64,6 +65,13 @@ public class BlockStasisMechanism extends HookedBlock
 				ItemEntitySummoner item = (ItemEntitySummoner) player.getCurrentEquippedItem().getItem();
 				tile.stasisItemstack = new ItemStack(item, 1);
 				tile.stasisEntity = item.createNewEntity(worldObj);
+				tile.stasisEntity.setLocationAndAngles(xCoord + 0.5, yCoord + 1, zCoord + 0.5, 0, 0);
+
+				if (!worldObj.isRemote && worldObj.spawnEntityInWorld(tile.stasisEntity))
+				{
+					tile.stasisEntity.mountEntity(tile.mechanism);
+				}
+
 				WorldUtil.Entities.Players.Inventories.consumeItem(player, item);
 			}
 			else if (player.getCurrentEquippedItem() == null)
@@ -78,18 +86,32 @@ public class BlockStasisMechanism extends HookedBlock
 	}
 
 	@Override
-	public void onBlockDestroyedByPlayer(World world, int posX, int posY, int posZ, int meta)
+	public void onBlockPreDestroy(World world, int posX, int posY, int posZ, int meta)
 	{
-		super.onBlockDestroyedByPlayer(world, posX, posY, posZ, meta);
+		super.onBlockPreDestroy(world, posX, posY, posZ, meta);
 
 		TileEntityStasisMechanism tile = (TileEntityStasisMechanism) world.getTileEntity(posX, posY, posZ);
 
-		if (tile != null && tile.stasisItemstack != null)
+		if (tile != null)
 		{
-			EntityItem entityitem = new EntityItem(world, posX, posY, posZ, tile.stasisItemstack);
-			entityitem.delayBeforeCanPickup = 10;
-			world.spawnEntityInWorld(entityitem);
+			if (tile.mechanism != null)
+			{
+				world.removeEntity(tile.mechanism);
+			}
+
+			if (tile.stasisItemstack != null)
+			{
+				EntityItem entityitem = new EntityItem(world, posX, posY, posZ, tile.stasisItemstack);
+				entityitem.delayBeforeCanPickup = 10;
+				world.spawnEntityInWorld(entityitem);
+			}
 		}
+	}
+
+	@Override
+	public void onBlockDestroyedByPlayer(World world, int posX, int posY, int posZ, int meta)
+	{
+		super.onBlockDestroyedByPlayer(world, posX, posY, posZ, meta);
 	}
 
 	@Override
@@ -104,7 +126,7 @@ public class BlockStasisMechanism extends HookedBlock
 		super.onBlockPlacedBy(world, x, y, z, living, stack);
 
 		TileEntityStasisMechanism tile = (TileEntityStasisMechanism) world.getTileEntity(x, y, z);
-		
+
 		if (tile != null)
 		{
 			tile.setDirection((byte) (MathHelper.floor_double(((living.rotationYaw * 4F) / 360F) + 0.5D) & 3));
@@ -116,5 +138,11 @@ public class BlockStasisMechanism extends HookedBlock
 	public int getRenderType()
 	{
 		return -1;
+	}
+
+	@Override
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
+	{
+		return null;
 	}
 }

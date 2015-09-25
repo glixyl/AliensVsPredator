@@ -1,5 +1,6 @@
 package com.arisux.avp.entities.tile;
 
+import com.arisux.avp.entities.EntityMechanism;
 import com.arisux.avp.items.ItemEntitySummoner;
 
 import net.minecraft.block.Block;
@@ -17,28 +18,47 @@ public class TileEntityStasisMechanism extends TileEntity
 	public int rotation;
 	public Entity stasisEntity;
 	public ItemStack stasisItemstack;
+	public EntityMechanism mechanism;
 
 	public TileEntityStasisMechanism()
 	{
-		;
+		super();
+	}
+
+	@Override
+	public void updateEntity()
+	{
+		super.updateEntity();
+
+		if (this.mechanism == null)
+		{
+			if (!this.worldObj.isRemote)
+			{
+				this.mechanism = new EntityMechanism(this.worldObj);
+				this.mechanism.setLocationAndAngles(this.xCoord + 0.5, this.yCoord, this.zCoord + 0.5, this.rotation * 90, 0);
+				this.worldObj.spawnEntityInWorld(this.mechanism);
+			}
+		}
+
+		if (stasisEntity != null && mechanism != null)
+		{
+			mechanism.setLocationAndAngles(this.xCoord + 0.5, this.yCoord, this.zCoord + 0.5, 0, 0);
+			
+			if (stasisEntity.ridingEntity == null)
+			{
+				stasisEntity.mountEntity(mechanism);
+			}
+//			System.out.println(this.mechanism.riddenByEntity);
+		}
+		
+		// System.out.println((worldObj.isRemote ? "client" : "server") + ":" + this.stasisEntity);
 	}
 
 	public void setDirection(byte direction)
 	{
 		this.rotation = direction;
 	}
-	
-	@Override
-	public void updateEntity()
-	{
-		super.updateEntity();
-		
-		if (stasisEntity != null && worldObj.isRemote)
-		{
-			stasisEntity.onUpdate();
-		}
-	}
-	
+
 	@Override
 	public Block getBlockType()
 	{
@@ -78,13 +98,20 @@ public class TileEntityStasisMechanism extends TileEntity
 	{
 		super.readFromNBT(nbt);
 		this.rotation = nbt.getInteger("Rotation");
-
-		NBTTagCompound nbtStack = nbt.getCompoundTag("StasisItemstack");
-		this.stasisItemstack = ItemStack.loadItemStackFromNBT(nbtStack);
+		this.stasisItemstack = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("StasisItemstack"));
 
 		if (this.stasisEntity == null && this.stasisItemstack != null)
 		{
 			this.stasisEntity = ((ItemEntitySummoner) this.stasisItemstack.getItem()).createNewEntity(this.worldObj);
+
+			if (this.stasisEntity != null && this.worldObj != null)
+			{
+				if (!this.worldObj.isRemote)
+				{
+					this.stasisEntity.setLocationAndAngles(this.xCoord, this.yCoord, this.zCoord, 0F, 0F);
+					this.worldObj.spawnEntityInWorld(this.stasisEntity);
+				}
+			}
 		}
 	}
 }

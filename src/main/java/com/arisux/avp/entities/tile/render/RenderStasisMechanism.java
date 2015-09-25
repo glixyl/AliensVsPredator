@@ -17,7 +17,6 @@ import com.arisux.avp.entities.mob.EntityQueen;
 import com.arisux.avp.entities.tile.TileEntityStasisMechanism;
 import com.arisux.avp.entities.tile.model.ModelStasisMechanism;
 
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 
@@ -52,11 +51,11 @@ public class RenderStasisMechanism extends TileEntitySpecialRenderer
 			
 			this.model.render(tile, 0.0625F);
 
-			if (tile.stasisEntity != null)
-			{
-				glRotatef(180F, 1F, 0F, 0F);
-				RenderManager.instance.renderEntityWithPosYaw(tile.stasisEntity, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
-			}
+//			if (tile.stasisEntity != null)
+//			{
+//				glRotatef(180F, 1F, 0F, 0F);
+//				RenderManager.instance.renderEntityWithPosYaw(tile.stasisEntity, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
+//			}
 		}
 		glPopMatrix();
 	}
