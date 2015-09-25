@@ -53,7 +53,7 @@ public class EntitySpeciesYautja extends EntityMob
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(8.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(5.0D);
 	}
-	
+
 	@Override
 	protected void entityInit()
 	{
@@ -179,14 +179,31 @@ public class EntitySpeciesYautja extends EntityMob
 	{
 		return false;
 	}
-	
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound tag)
+	{
+		super.readEntityFromNBT(tag);
+		this.setWearingMask(tag.getBoolean("wearingMask"));
+	}
+
+	@Override
+	public void writeEntityToNBT(NBTTagCompound tag)
+	{
+		super.writeEntityToNBT(tag);
+		tag.setBoolean("wearingMask", this.isWearingMask());
+	}
+
 	public boolean isWearingMask()
 	{
 		return Boolean.parseBoolean(this.dataWatcher.getWatchableObjectString(17));
 	}
-	
+
 	public void setWearingMask(boolean wearingMask)
 	{
-		this.dataWatcher.updateObject(17, wearingMask);
+		if (!this.worldObj.isRemote)
+		{
+			this.dataWatcher.updateObject(17, String.valueOf(wearingMask));
+		}
 	}
 }
