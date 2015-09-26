@@ -17,6 +17,7 @@ import com.arisux.avp.entities.EntityBullet;
 import com.arisux.avp.entities.EntityFlame;
 import com.arisux.avp.entities.EntityGrenade;
 import com.arisux.avp.entities.EntityLaserMine;
+import com.arisux.avp.entities.EntityMechanism;
 import com.arisux.avp.entities.EntityNuke;
 import com.arisux.avp.entities.EntityPlasma;
 import com.arisux.avp.entities.EntityShuriken;
@@ -83,6 +84,7 @@ import com.arisux.avp.entities.render.RenderDisc;
 import com.arisux.avp.entities.render.RenderFlame;
 import com.arisux.avp.entities.render.RenderLaserMine;
 import com.arisux.avp.entities.render.RenderM40;
+import com.arisux.avp.entities.render.RenderMechanism;
 import com.arisux.avp.entities.render.RenderNuke;
 import com.arisux.avp.entities.render.RenderPlasmaBlast;
 import com.arisux.avp.entities.render.RenderShuriken;
@@ -235,6 +237,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		registerEntityRenderingHandler(EntityBullet.class, new RenderBullet());
 		registerEntityRenderingHandler(EntityNuke.class, new RenderNuke());
 		registerEntityRenderingHandler(EntityAPC.class, new RenderAPC());
+		registerEntityRenderingHandler(EntityMechanism.class, new RenderMechanism());
 	}
 
 	public void registerItemRenderers(ItemHandler items)
