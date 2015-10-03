@@ -1,9 +1,5 @@
 package com.arisux.avp.entities.mob;
 
-import java.util.Random;
-
-import com.arisux.avp.AliensVsPredator;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -18,16 +14,15 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public abstract class EntitySpeciesYautja extends EntityMob
+public abstract class EntitySpeciesEngineer extends EntityMob
 {
-	public EntitySpeciesYautja(World world)
+	public EntitySpeciesEngineer(World world)
 	{
 		super(world);
 		this.experienceValue = 250;
@@ -45,20 +40,20 @@ public abstract class EntitySpeciesYautja extends EntityMob
 	}
 
 	@Override
-	protected void applyEntityAttributes()
-	{
-		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(80.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5199999761581421D);
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(8.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(5.0D);
-	}
-
-	@Override
 	protected void entityInit()
 	{
 		super.entityInit();
 		this.dataWatcher.addObject(17, String.valueOf(this.rand.nextBoolean()));
+	}
+
+	@Override
+	protected void applyEntityAttributes()
+	{
+		super.applyEntityAttributes();
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(160.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5199999761581421D);
+		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(8.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(1F);
 	}
 
 	@Override
@@ -119,15 +114,15 @@ public abstract class EntitySpeciesYautja extends EntityMob
 	}
 
 	@Override
-	protected void collideWithEntity(Entity par1Entity)
+	protected void collideWithEntity(Entity entity)
 	{
-		if (par1Entity instanceof IMob && this.getRNG().nextInt(20) == 0 && !(par1Entity instanceof EntitySpeciesYautja))
+		if (entity instanceof IMob && this.getRNG().nextInt(20) == 0 && !(entity instanceof EntitySpeciesEngineer))
 		{
-			this.setAttackTarget((EntityLivingBase) par1Entity);
-			this.setRevengeTarget((EntityLivingBase) par1Entity);
+			this.setAttackTarget((EntityLivingBase) entity);
+			this.setRevengeTarget((EntityLivingBase) entity);
 		}
 
-		super.collideWithEntity(par1Entity);
+		super.collideWithEntity(entity);
 	}
 
 	@Override
@@ -139,39 +134,31 @@ public abstract class EntitySpeciesYautja extends EntityMob
 	@Override
 	protected String getLivingSound()
 	{
-		return AliensVsPredator.properties().SOUND_YAUTJA_LIVING;
+		return null;
 	}
 
 	@Override
 	protected String getHurtSound()
 	{
-		return AliensVsPredator.properties().SOUND_YAUTJA_HURT;
+		return null;
 	}
 
 	@Override
 	protected String getDeathSound()
 	{
-		return AliensVsPredator.properties().SOUND_YAUTJA_DEATH;
+		return null;
 	}
 
 	@Override
 	protected void dropFewItems(boolean flag, int i)
 	{
-		if ((new Random()).nextInt(6) == 1)
-		{
-			this.entityDropItem(new ItemStack(AliensVsPredator.items().itemSpear), 1);
-		}
+		;
 	}
 
 	@Override
 	protected void dropRareDrop(int par1)
 	{
-		this.entityDropItem(new ItemStack(AliensVsPredator.items().helmTitanium), 1);
-		this.entityDropItem(new ItemStack(AliensVsPredator.items().plateTitanium), 1);
-		this.entityDropItem(new ItemStack(AliensVsPredator.items().legsTitanium), 1);
-		this.entityDropItem(new ItemStack(AliensVsPredator.items().bootsTitanium), 1);
-		this.entityDropItem(new ItemStack(AliensVsPredator.items().itemWristBlade), 1);
-		this.entityDropItem(new ItemStack(AliensVsPredator.items().itemPlasmaCaster), 1);
+		;
 	}
 
 	@Override

@@ -1,8 +1,13 @@
 package com.arisux.avp.entities.mob;
 
+import java.util.ArrayList;
+
+import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
+import com.arisux.airi.lib.WorldUtil.Entities;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.interfaces.IHiveSignature;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -38,65 +43,70 @@ public class EntityQueen extends EntityXenomorph implements IHiveSignature
 	@Override
 	public void onUpdate()
 	{
+		double prevMotionY = this.motionY;
 		super.onUpdate();
+		
+		if (this.motionY < prevMotionY)
+			this.motionY += -0.08F;
 
-//		if ((this.getAttackTarget() != null || this.getLastAttacker() != null) && this.worldObj.getWorldTime() % 40 == 0)
-//		{
-//			@SuppressWarnings("unchecked")
-//			ArrayList<EntitySpeciesAlien> aliens = (ArrayList<EntitySpeciesAlien>) Entities.getEntitiesInCoordsRange(this.worldObj, EntitySpeciesAlien.class, new CoordData(this), 16);
-//
-//			for (EntitySpeciesAlien alien : aliens)
-//			{
-//				if (alien != null && alien.getHiveSignature() != null &&  !(alien instanceof EntityQueen) && alien.getHiveSignature().equals(this.getHiveSignature()))
-//				{
-//					if (this.rand.nextInt(6) == 0)
-//					{
-//						if (alien instanceof EntityOvamorph)
-//						{
-//							EntityOvamorph ovamorph = (EntityOvamorph) alien;
-//							ovamorph.setHatched(true);
-//						}
-//					}
-//
-//					EntityLivingBase target = this.getAttackTarget() != null ? this.getAttackTarget() : this.getLastAttacker();
-//
-//					alien.setAttackTarget(target);
-//					alien.getNavigator().tryMoveToEntityLiving(target, alien.getMoveHelper().getSpeed());
-//				}
-//				else if (alien != null && alien.getHiveSignature() == null)
-//				{
-//					alien.setHiveSignature(this.getHiveSignature());
-//				}
-//			}
-//		}
-//
-//		if (isJumping)
-//		{
-//			this.addVelocity(0, 0.15D, 0);
-//		}
-//
-//		if (this.isInStasis)
-//		{
-//			this.ovipositorSize = this.ovipositorSize < 1.2F ? this.ovipositorSize += 0.0001F : this.ovipositorSize;
-//		}
-//
-//		if (this.worldObj.getWorldTime() % 10 == 0)
-//		{
-//			if (this.getHealth() > this.getMaxHealth() - (this.getMaxHealth() / 4))
-//			{
-//				this.heal(2F);
-//			}
-//
-//			if (this.getHealth() > 0 && this.getHealth() < this.getMaxHealth() / 4 * 3)
-//			{
-//				this.heal(2F);
-//			}
-//
-//			if (this.getHealth() > 0 && this.getHealth() < this.getMaxHealth() / 4 * 2)
-//			{
-//				this.heal(2F);
-//			}
-//		}
+		if ((this.getAttackTarget() != null || this.getLastAttacker() != null) && this.worldObj.getWorldTime() % 40 == 0)
+		{
+			@SuppressWarnings("unchecked")
+			ArrayList<EntitySpeciesAlien> aliens = (ArrayList<EntitySpeciesAlien>) Entities.getEntitiesInCoordsRange(this.worldObj, EntitySpeciesAlien.class, new CoordData(this), 16);
+
+			for (EntitySpeciesAlien alien : aliens)
+			{
+				if (alien != null && alien.getHiveSignature() != null &&  !(alien instanceof EntityQueen) && alien.getHiveSignature().equals(this.getHiveSignature()))
+				{
+					if (this.rand.nextInt(6) == 0)
+					{
+						if (alien instanceof EntityOvamorph)
+						{
+							EntityOvamorph ovamorph = (EntityOvamorph) alien;
+							ovamorph.setHatched(true);
+						}
+					}
+
+					EntityLivingBase target = this.getAttackTarget() != null ? this.getAttackTarget() : this.getLastAttacker();
+
+					alien.setAttackTarget(target);
+					alien.getNavigator().tryMoveToEntityLiving(target, alien.getMoveHelper().getSpeed());
+				}
+				else if (alien != null && alien.getHiveSignature() == null)
+				{
+					alien.setHiveSignature(this.getHiveSignature());
+				}
+			}
+		}
+
+		if (isJumping)
+		{
+			this.addVelocity(0, 0.35D, 0);
+		}
+
+		if (this.isInStasis)
+		{
+			this.ovipositorSize = this.ovipositorSize < 1.3F ? this.ovipositorSize += 0.0001F : 1.3F;
+			this.setOvipositorSize(this.ovipositorSize);
+		}
+
+		if (this.worldObj.getWorldTime() % 10 == 0)
+		{
+			if (this.getHealth() > this.getMaxHealth() - (this.getMaxHealth() / 4))
+			{
+				this.heal(2F);
+			}
+
+			if (this.getHealth() > 0 && this.getHealth() < this.getMaxHealth() / 4 * 3)
+			{
+				this.heal(2F);
+			}
+
+			if (this.getHealth() > 0 && this.getHealth() < this.getMaxHealth() / 4 * 2)
+			{
+				this.heal(2F);
+			}
+		}
 	}
 
 	@Override

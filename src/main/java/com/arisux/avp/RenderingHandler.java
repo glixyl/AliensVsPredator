@@ -29,6 +29,7 @@ import com.arisux.avp.entities.mob.EntityCombatSynthetic;
 import com.arisux.avp.entities.mob.EntityCrusher;
 import com.arisux.avp.entities.mob.EntityDrone;
 import com.arisux.avp.entities.mob.EntityEngineer;
+import com.arisux.avp.entities.mob.EntitySpaceJockey;
 import com.arisux.avp.entities.mob.EntityFacehugger;
 import com.arisux.avp.entities.mob.EntityHammerpede;
 import com.arisux.avp.entities.mob.EntityMarine;
@@ -205,8 +206,9 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 
 	public void registerEntityRenderers()
 	{
+		registerEntityRenderingHandler(EntityEngineer.class, new RenderEngineer(new ModelEngineer(), AliensVsPredator.resources().ENGINEER));
 		registerEntityRenderingHandler(EntityYautjaBerserker.class, new RenderYautjaBerserker(new ModelYautjaBerserker(), 0.5F));
-		registerEntityRenderingHandler(EntityEngineer.class, new RenderEngineer(new ModelEngineer(), 0.5F));
+		registerEntityRenderingHandler(EntitySpaceJockey.class, new RenderEngineer(new ModelEngineer(), AliensVsPredator.resources().SPACE_JOCKEY));
 		registerEntityRenderingHandler(EntityTrilobite.class, new RenderTrilobite(new ModelTrilobite(), 0.5F));
 		registerEntityRenderingHandler(EntityHammerpede.class, new RenderHammerpede(new ModelHammerpede(), 0.5F));
 		registerEntityRenderingHandler(EntityProtomorph.class, new RenderXenomorph(new ModelTexMap(new ModelProtomorph(), AliensVsPredator.resources().PROTOMORPH), 0.5F).setScale(1.4F));
@@ -287,6 +289,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		registerItemRenderer(items.itemSummonerCombatSynthetic, (new RenderItemSummoner(EntityCombatSynthetic.class, ModelBipedExtension.class, AliensVsPredator.resources().COMBAT_SYNTHETIC)).setScale(7.5F).setY(8F));
 		registerItemRenderer(items.itemSummonerHammerpede, (new RenderItemSummoner(EntityHammerpede.class, ModelHammerpede.class, AliensVsPredator.resources().HAMMERPEDE)).setScale(25.5F).setY(8F));
 		registerItemRenderer(items.itemSummonerTrilobite, (new RenderItemSummoner(EntityTrilobite.class, ModelTrilobite.class, AliensVsPredator.resources().TRILOBITE)).setScale(25.5F).setY(8F));
+		registerItemRenderer(items.itemSummonerSpaceJockey, (new RenderItemSummoner(EntitySpaceJockey.class, ModelEngineer.class, AliensVsPredator.resources().SPACE_JOCKEY)).setScale(27.5F).setY(8F));
 		registerItemRenderer(items.itemSummonerEngineer, (new RenderItemSummoner(EntityEngineer.class, ModelEngineer.class, AliensVsPredator.resources().ENGINEER)).setScale(27.5F).setY(8F));
 		registerItemRenderer(items.itemSummonerYautjaBerserker, (new RenderItemSummoner(EntityYautjaBerserker.class, ModelYautjaBerserker.class, AliensVsPredator.resources().YAUTJA_BERSERKER)).setScale(7.5F).setY(8F));
 

@@ -23,7 +23,7 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 public class BossBarEvent
 {
 	private Minecraft mc = Minecraft.getMinecraft();
-	ArrayList<EntityLivingBase> bosses;
+	public ArrayList<EntityLivingBase> bosses;
 
 	public BossBarEvent()
 	{

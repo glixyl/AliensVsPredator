@@ -2,8 +2,6 @@ package com.arisux.avp.entities.mob.render;
 
 import org.lwjgl.opengl.GL11;
 
-import com.arisux.avp.AliensVsPredator;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
@@ -12,9 +10,12 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderEngineer extends RenderLiving
 {
-	public RenderEngineer(ModelBase mainModel, float shadowSize)
+	private ResourceLocation resourceLocation;
+	
+	public RenderEngineer(ModelBase mainModel, ResourceLocation resourceLocation)
 	{
-		super(mainModel, shadowSize);
+		super(mainModel, 0.5F);
+		this.resourceLocation = resourceLocation;
 	}
 	
 	public void doRender(Entity entity, double posX, double posY, double posZ, float yaw, float renderPartialTicks)
@@ -31,6 +32,6 @@ public class RenderEngineer extends RenderLiving
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity)
 	{
-		return AliensVsPredator.resources().ENGINEER;
+		return this.resourceLocation;
 	}
 }

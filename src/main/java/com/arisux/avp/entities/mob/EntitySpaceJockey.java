@@ -3,9 +3,9 @@ package com.arisux.avp.entities.mob;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.world.World;
 
-public class EntityEngineer extends EntitySpeciesEngineer
+public class EntitySpaceJockey extends EntitySpeciesEngineer
 {
-	public EntityEngineer(World world)
+	public EntitySpaceJockey(World world)
 	{
 		super(world);
 		this.experienceValue = 250;
@@ -61,5 +61,11 @@ public class EntityEngineer extends EntitySpeciesEngineer
 	public boolean canDespawn()
 	{
 		return false;
+	}
+	
+	@Override
+	public boolean isWearingMask()
+	{
+		return true;
 	}
 }

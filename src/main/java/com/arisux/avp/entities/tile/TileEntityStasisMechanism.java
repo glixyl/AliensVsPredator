@@ -12,13 +12,16 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 public class TileEntityStasisMechanism extends TileEntity
 {
-	public int rotation;
-	public Entity stasisEntity;
-	public ItemStack stasisItemstack;
-	public EntityMechanism mechanism;
+	private int direction;
+	public Entity dummyEntity;
+	private Entity stasisEntity;
+	public ItemStack itemstack;
+	private String readOnlyDmmyEntityUUID;
+	private int readOnlyStasisEntityID;
 
 	public TileEntityStasisMechanism()
 	{
@@ -29,34 +32,61 @@ public class TileEntityStasisMechanism extends TileEntity
 	public void updateEntity()
 	{
 		super.updateEntity();
-
-		if (this.mechanism == null)
+		
+		if (this.dummyEntity == null)
 		{
-			if (!this.worldObj.isRemote)
-			{
-				this.mechanism = new EntityMechanism(this.worldObj);
-				this.mechanism.setLocationAndAngles(this.xCoord + 0.5, this.yCoord, this.zCoord + 0.5, this.rotation * 90, 0);
-				this.worldObj.spawnEntityInWorld(this.mechanism);
-			}
-		}
-
-		if (stasisEntity != null && mechanism != null)
-		{
-			mechanism.setLocationAndAngles(this.xCoord + 0.5, this.yCoord, this.zCoord + 0.5, 0, 0);
+			this.dummyEntity = getEntityForUUID(this.worldObj, this.readOnlyDmmyEntityUUID);
 			
-			if (stasisEntity.ridingEntity == null)
+			if (this.dummyEntity != null)
 			{
-				stasisEntity.mountEntity(mechanism);
+				this.stasisEntity = this.dummyEntity.riddenByEntity;
 			}
-//			System.out.println(this.mechanism.riddenByEntity);
 		}
 		
-		// System.out.println((worldObj.isRemote ? "client" : "server") + ":" + this.stasisEntity);
+		if (this.dummyEntity == null && !this.worldObj.isRemote)
+		{
+			this.dummyEntity = new EntityMechanism(this.worldObj);
+			this.dummyEntity.setLocationAndAngles(this.xCoord + 0.5, this.yCoord, this.zCoord + 0.5, 0, 0);
+			this.worldObj.spawnEntityInWorld(this.dummyEntity);
+		}
+		
+		if (this.dummyEntity != null && this.itemstack != null && this.stasisEntity == null && !this.worldObj.isRemote)
+		{
+			ItemEntitySummoner summoner = (ItemEntitySummoner) this.itemstack.getItem();
+			this.stasisEntity = summoner.createNewEntity(this.worldObj);
+			this.stasisEntity.setLocationAndAngles(this.xCoord + 0.5, this.yCoord, this.zCoord + 0.5, 0, 0);
+			this.worldObj.spawnEntityInWorld(this.stasisEntity);
+		}
+		
+		if (this.dummyEntity != null)
+		{
+			this.dummyEntity.setLocationAndAngles(this.xCoord + 0.5, this.yCoord, this.zCoord + 0.5, 0, 0);
+			
+			if (this.dummyEntity.riddenByEntity == null)
+			{
+				this.itemstack = null;
+			}
+			
+			if (this.dummyEntity.riddenByEntity != null)
+			{
+				this.dummyEntity.riddenByEntity.setRotationYawHead(direction * 90);
+			}
+		}
+		
+		if (this.stasisEntity != null)
+		{
+			this.stasisEntity.mountEntity(this.dummyEntity);
+		}
 	}
 
 	public void setDirection(byte direction)
 	{
-		this.rotation = direction;
+		this.direction = direction;
+	}
+	
+	public int getDirection()
+	{
+		return direction;
 	}
 
 	@Override
@@ -83,12 +113,22 @@ public class TileEntityStasisMechanism extends TileEntity
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
-		nbt.setInteger("Rotation", this.rotation);
+		nbt.setInteger("Direction", this.direction);
+		
+		if (this.dummyEntity != null)
+		{
+			nbt.setString("DummyEntity", this.dummyEntity.getUniqueID().toString());
+			
+			if (this.dummyEntity.riddenByEntity != null)
+			{
+				nbt.setInteger("StasisEntity", this.dummyEntity.riddenByEntity.getEntityId());
+			}
+		}
 
-		if (this.stasisItemstack != null)
+		if (this.itemstack != null)
 		{
 			NBTTagCompound nbtStack = new NBTTagCompound();
-			this.stasisItemstack.writeToNBT(nbtStack);
+			this.itemstack.writeToNBT(nbtStack);
 			nbt.setTag("StasisItemstack", nbtStack);
 		}
 	}
@@ -97,21 +137,39 @@ public class TileEntityStasisMechanism extends TileEntity
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
-		this.rotation = nbt.getInteger("Rotation");
-		this.stasisItemstack = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("StasisItemstack"));
-
-		if (this.stasisEntity == null && this.stasisItemstack != null)
+		this.direction = nbt.getInteger("Direction");
+		this.readOnlyDmmyEntityUUID = nbt.getString("DummyEntity");
+		this.readOnlyStasisEntityID = nbt.getInteger("StasisEntity");
+		this.itemstack = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("StasisItemstack"));
+	}
+	
+	public static Entity getEntityForUUID(World world, String uuid)
+	{
+		for (Object o : world.loadedEntityList)
 		{
-			this.stasisEntity = ((ItemEntitySummoner) this.stasisItemstack.getItem()).createNewEntity(this.worldObj);
-
-			if (this.stasisEntity != null && this.worldObj != null)
+			Entity e = (Entity) o;
+			
+			if (e.getUniqueID().toString().equals(uuid))
 			{
-				if (!this.worldObj.isRemote)
-				{
-					this.stasisEntity.setLocationAndAngles(this.xCoord, this.yCoord, this.zCoord, 0F, 0F);
-					this.worldObj.spawnEntityInWorld(this.stasisEntity);
-				}
+				return e;
 			}
 		}
+		
+		return null;
+	}
+	
+	public Entity getStasisEntity()
+	{
+		return stasisEntity;
+	}
+	
+	public String getReadOnlyDmmyEntityUUID()
+	{
+		return readOnlyDmmyEntityUUID;
+	}
+	
+	public int getReadOnlyStasisEntityID()
+	{
+		return readOnlyStasisEntityID;
 	}
 }

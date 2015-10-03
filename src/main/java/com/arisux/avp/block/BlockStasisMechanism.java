@@ -63,22 +63,13 @@ public class BlockStasisMechanism extends HookedBlock
 			if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof ItemEntitySummoner)
 			{
 				ItemEntitySummoner item = (ItemEntitySummoner) player.getCurrentEquippedItem().getItem();
-				tile.stasisItemstack = new ItemStack(item, 1);
-				tile.stasisEntity = item.createNewEntity(worldObj);
-				tile.stasisEntity.setLocationAndAngles(xCoord + 0.5, yCoord + 1, zCoord + 0.5, 0, 0);
-
-				if (!worldObj.isRemote && worldObj.spawnEntityInWorld(tile.stasisEntity))
-				{
-					tile.stasisEntity.mountEntity(tile.mechanism);
-				}
-
+				tile.itemstack = new ItemStack(item, 1);
 				WorldUtil.Entities.Players.Inventories.consumeItem(player, item);
 			}
 			else if (player.getCurrentEquippedItem() == null)
 			{
-				player.inventory.addItemStackToInventory(tile.stasisItemstack);
-				tile.stasisEntity = null;
-				tile.stasisItemstack = null;
+				player.inventory.addItemStackToInventory(tile.itemstack);
+				tile.itemstack = null;
 			}
 		}
 
@@ -94,14 +85,14 @@ public class BlockStasisMechanism extends HookedBlock
 
 		if (tile != null)
 		{
-			if (tile.mechanism != null)
+			if (tile.dummyEntity != null)
 			{
-				world.removeEntity(tile.mechanism);
+				world.removeEntity(tile.dummyEntity);
 			}
 
-			if (tile.stasisItemstack != null)
+			if (tile.itemstack != null)
 			{
-				EntityItem entityitem = new EntityItem(world, posX, posY, posZ, tile.stasisItemstack);
+				EntityItem entityitem = new EntityItem(world, posX, posY, posZ, tile.itemstack);
 				entityitem.delayBeforeCanPickup = 10;
 				world.spawnEntityInWorld(entityitem);
 			}

@@ -208,7 +208,7 @@ public class DebugToolsRenderEvent
 							if (tile instanceof TileEntityStasisMechanism)
 							{
 								TileEntityStasisMechanism stasisMechanism = (TileEntityStasisMechanism) tile;
-								info = info + " (" + stasisMechanism.stasisEntity + ")";
+								info = info + " (" + stasisMechanism.getStasisEntity() + ")";
 							}
 
 							fontrenderer.drawString(info, 20, 6, 0xFFFFFFFF);

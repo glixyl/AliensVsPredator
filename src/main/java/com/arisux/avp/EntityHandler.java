@@ -2,9 +2,6 @@ package com.arisux.avp;
 
 import java.util.HashMap;
 
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.world.biome.BiomeGenBase;
-
 import com.arisux.airi.lib.interfaces.IInitializable;
 import com.arisux.avp.dimension.BiomeLVBase;
 import com.arisux.avp.entities.EntityAPC;
@@ -35,6 +32,7 @@ import com.arisux.avp.entities.mob.EntityPredalien;
 import com.arisux.avp.entities.mob.EntityProtomorph;
 import com.arisux.avp.entities.mob.EntityQueen;
 import com.arisux.avp.entities.mob.EntityRoyalFacehugger;
+import com.arisux.avp.entities.mob.EntitySpaceJockey;
 import com.arisux.avp.entities.mob.EntitySpitter;
 import com.arisux.avp.entities.mob.EntityTrilobite;
 import com.arisux.avp.entities.mob.EntityWarrior;
@@ -65,6 +63,8 @@ import com.arisux.avp.entities.tile.TileEntityWorkstation;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.world.biome.BiomeGenBase;
 
 public class EntityHandler implements IInitializable
 {
@@ -126,6 +126,7 @@ public class EntityHandler implements IInitializable
 		EntityRegistry.registerGlobalEntityID(EntityProtomorph.class, "Protomorph", entityIDs.get("PROTOMORPH"), 0x333333, 0xFF0000);
 		EntityRegistry.registerGlobalEntityID(EntityHammerpede.class, "Hammerpede", entityIDs.get("HAMMERPEDE"), 0x333333, 0xFF0000);
 		EntityRegistry.registerGlobalEntityID(EntityTrilobite.class, "Trilobite", entityIDs.get("TRILOBITE"), 0x333333, 0xFF0000);
+		EntityRegistry.registerGlobalEntityID(EntitySpaceJockey.class, "SpaceJockey", entityIDs.get("SPACEJOCKEY"), 0x333333, 0xFF0000);
 		EntityRegistry.registerGlobalEntityID(EntityEngineer.class, "Engineer", entityIDs.get("ENGINEER"), 0x333333, 0xFF0000);
 		EntityRegistry.registerGlobalEntityID(EntityYautjaBerserker.class, "YautjaBerserker", entityIDs.get("YAUTJA_BERSERKER"), 0x333333, 0xFF0000);
 	}

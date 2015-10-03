@@ -1,11 +1,15 @@
 package com.arisux.avp.entities;
 
+import com.arisux.avp.entities.tile.TileEntityStasisMechanism;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 public class EntityMechanism extends Entity
 {
+	public TileEntityStasisMechanism host;
+	
 	public EntityMechanism(World world)
 	{
 		super(world);
@@ -16,6 +20,12 @@ public class EntityMechanism extends Entity
 	protected void entityInit()
 	{
 		this.dataWatcher.addObject(14, 0);
+	}
+	
+	@Override
+	public void onUpdate()
+	{
+		super.onUpdate();
 	}
 
 	@Override
