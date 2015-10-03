@@ -14,9 +14,10 @@ public class Resources implements IInitializablePre
 {
 	public static final Resources instance = new Resources();
 
+	public final ResourceLocation ENGINEER = new ResourceLocation(AliensVsPredator.ID, "textures/mob/engineer_bio.png");
 	public final ResourceLocation YAUTJA_BERSERKER = new ResourceLocation(AliensVsPredator.ID, "textures/mob/yautja_berserker.png");
 	public final ResourceLocation LOCKER = new ResourceLocation(AliensVsPredator.ID, "textures/tile/locker.png");
-	public final ResourceLocation ENGINEER = new ResourceLocation(AliensVsPredator.ID, "textures/mob/engineer.png");
+	public final ResourceLocation SPACE_JOCKEY = new ResourceLocation(AliensVsPredator.ID, "textures/mob/engineer.png");
 	public final ResourceLocation AMPULE = new ResourceLocation(AliensVsPredator.ID, "textures/tile/ampule.png");
 	public final ResourceLocation TRANSFORMER = new ResourceLocation(AliensVsPredator.ID, "textures/tile/transformer.png");
 	public final ResourceLocation SOLAR_PANEL = new ResourceLocation(AliensVsPredator.ID, "textures/tile/solarpanel.png");
@@ -70,6 +71,7 @@ public class Resources implements IInitializablePre
 	public final ResourceLocation CRYOSTASIS_TUBE_MASK_CRACKED = new ResourceLocation(AliensVsPredator.ID, "textures/tile/cryostasistube-cracked-mask.png");
 	public final ResourceLocation CRYOSTASIS_TUBE_MASK_SHATTERED = new ResourceLocation(AliensVsPredator.ID, "textures/tile/cryostasistube-shattered-mask.png");
 	public final ResourceLocation STASIS_MECHANISM = new ResourceLocation(AliensVsPredator.ID, "textures/tile/stasis-mechanism.png");
+	public final ResourceLocation STASIS_MECHANISM_MASK = new ResourceLocation(AliensVsPredator.ID, "textures/tile/stasis-mechanism-mask.png");
 	public final ResourceLocation REPULSION_GENERATOR = new ResourceLocation(AliensVsPredator.ID, "textures/tile/generator.png");
 	public final ResourceLocation CABLE = new ResourceLocation(AliensVsPredator.ID, "textures/tile/cable.png");
 	public final ResourceLocation NETWORKLIGHT = new ResourceLocation(AliensVsPredator.ID, "textures/tile/networklight.png");
