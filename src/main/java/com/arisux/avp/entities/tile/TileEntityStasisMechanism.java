@@ -67,7 +67,7 @@ public class TileEntityStasisMechanism extends TileEntity
 				this.itemstack = null;
 			}
 			
-			if (this.dummyEntity.riddenByEntity != null)
+			if (this.dummyEntity.riddenByEntity != null && this.worldObj.isRemote)
 			{
 				this.dummyEntity.riddenByEntity.setRotationYawHead(direction * 90);
 			}
