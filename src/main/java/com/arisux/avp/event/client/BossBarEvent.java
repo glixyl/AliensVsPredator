@@ -19,6 +19,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
+import net.minecraftforge.event.world.WorldEvent;
 
 public class BossBarEvent
 {
@@ -28,6 +29,12 @@ public class BossBarEvent
 	public BossBarEvent()
 	{
 		bosses = new ArrayList<EntityLivingBase>();
+	}
+	
+	@SubscribeEvent
+	public void onWorldLoad(WorldEvent.Load event)
+	{
+		this.bosses.clear();
 	}
 
 	@SubscribeEvent
@@ -44,7 +51,7 @@ public class BossBarEvent
 					bossesToRemove.add(boss);
 				}
 			}
-
+			
 			for (EntityLivingBase boss : bossesToRemove)
 			{
 				this.bosses.remove(boss);
@@ -107,6 +114,9 @@ public class BossBarEvent
 			GL11.glColor4f(1F, 1F, 1F, 1F);
 			RenderUtil.drawQuad(posX, posY, tW, tH, 0, 0F, 1F, 0.5F, 1F);
 			RenderUtil.drawStringAlignCenter(label, posX + (tW / 2), posY + 16, color);
+
+			RenderUtil.drawStringAlignCenter((int)boss.posX + "/" + (int)boss.posY + "/" + (int)boss.posZ, posX + (tW / 2), posY + 26, 0xFFFFFFFF);
+			
 			GL11.glDisable(GL11.GL_BLEND);
 		}
 		GL11.glPopMatrix();
