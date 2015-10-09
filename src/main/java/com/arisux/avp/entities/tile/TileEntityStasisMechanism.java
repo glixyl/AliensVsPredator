@@ -5,6 +5,7 @@ import com.arisux.avp.items.ItemEntitySummoner;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -67,9 +68,9 @@ public class TileEntityStasisMechanism extends TileEntity
 				this.itemstack = null;
 			}
 			
-			if (this.dummyEntity.riddenByEntity != null && this.worldObj.isRemote)
+			if (this.dummyEntity.riddenByEntity != null && this.dummyEntity.riddenByEntity instanceof EntityLivingBase)
 			{
-				this.dummyEntity.riddenByEntity.setRotationYawHead(direction * 90);
+				((EntityLivingBase)this.dummyEntity.riddenByEntity).rotationYawHead = direction * 90;
 			}
 		}
 		
