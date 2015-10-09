@@ -5,6 +5,7 @@ import static org.lwjgl.opengl.GL11.glEnable;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
 import com.arisux.airi.lib.client.ModelBaseExtension;
@@ -57,7 +58,7 @@ public class RenderItemPowerline extends ItemRenderer
 			GL11.glTranslated(1.1, -0.1, 0);
 			GL11.glRotatef(45, 1, 0, 1);
 			GL11.glRotatef(Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 360 * 8, 0, 1, 0);
-			RenderUtil.glColorHexRGBA(0xFF222222);
+			GlStateManager.color4i(0xFF222222);
 			RenderUtil.glEnableLight();
 			model.render(0.0625F);
 			RenderUtil.glDisableLight();
@@ -74,7 +75,7 @@ public class RenderItemPowerline extends ItemRenderer
 		GL11.glRotatef(Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 360 * 6, 0.0F, 1.0F, 0.0F);
 		GL11.glDisable(GL11.GL_CULL_FACE);
 		RenderUtil.glEnableLight();
-		RenderUtil.glColorHexRGBA(0xFF222222);
+		GlStateManager.color4i(0xFF222222);
 		this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 		glEnable(GL11.GL_TEXTURE_2D);
 	}

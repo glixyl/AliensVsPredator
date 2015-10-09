@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.WorldUtil;
 import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
@@ -106,10 +107,10 @@ public class BossBarEvent
 		{
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-			RenderUtil.glColorHexRGBA(0xFFFFFFFF);
+			GlStateManager.color4i(0xFFFFFFFF);
 			RenderUtil.bindTexture(AliensVsPredator.resources().QUEEN_BOSS_BAR);
 			posX = posX + (index * (tW));
-			RenderUtil.glColorHexRGBA(color);
+			GlStateManager.color4i(color);
 			RenderUtil.drawQuad(posX + (offset / 2), posY, (tW - offset) * health / 100, tH, 0, 0.15F, 0.85F, 0F, 0.5F);
 			GL11.glColor4f(1F, 1F, 1F, 1F);
 			RenderUtil.drawQuad(posX, posY, tW, tH, 0, 0F, 1F, 0.5F, 1F);

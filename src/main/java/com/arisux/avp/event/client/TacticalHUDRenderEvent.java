@@ -18,6 +18,7 @@ import java.util.Date;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.AccessWrapper;
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.GuiElements.GuiCustomButton;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.WorldUtil;
@@ -112,7 +113,7 @@ public class TacticalHUDRenderEvent
 										GL11.glRotatef(-Minecraft.getMinecraft().thePlayer.rotationYaw, 0, 1, 0);
 
 										if (livingProperties.doesEntityContainEmbryo()) {
-											RenderUtil.glColorHexRGBA(0xFFFF0000);
+											GlStateManager.color4i(0xFFFF0000);
 											RenderUtil.drawResourceCentered(AliensVsPredator.resources().INFECTION_INDICATOR, 0, -1, 2, 2, 255, 0, 0, 255);
 										}
 
@@ -312,7 +313,7 @@ public class TacticalHUDRenderEvent
 				RenderUtil.drawStringAlignRight(lifeTimeSeconds / 60 + " Minute(s) Estimated Until Death", res.getScaledWidth() - iconSize, 65, 0xFFFFFFFF);
 			}
 
-			RenderUtil.glColorHexRGBA(0xFFFF0000);
+			GlStateManager.color4i(0xFFFF0000);
 			RenderUtil.bindTexture(AliensVsPredator.resources().INFECTION_INDICATOR);
 			RenderUtil.drawQuad(res.getScaledWidth() - iconSize, 0, iconSize, iconSize);
 		}

@@ -1,12 +1,12 @@
 package com.arisux.avp.event.client;
 
 import static com.arisux.airi.lib.RenderUtil.drawStringAlignCenter;
-import static com.arisux.airi.lib.RenderUtil.glColorHexRGBA;
 import static com.arisux.airi.lib.RenderUtil.scaledDisplayResolution;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.GuiElements.GuiCustomButton;
 import com.arisux.airi.lib.WorldUtil;
 import com.arisux.airi.lib.WorldUtil.Entities.Players;
@@ -51,7 +51,7 @@ public class VisionModeRenderEvent
 					this.currentVisionMode.render();
 
 					drawStringAlignCenter(currentVisionMode.modeName, scaledDisplayResolution().getScaledWidth() / 2, 5, currentVisionMode.color, false);
-					glColorHexRGBA(0xFFFFFFFF);
+					GlStateManager.color4i(0xFFFFFFFF);
 
 					if (mc.currentScreen instanceof GuiChat)
 					{

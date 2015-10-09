@@ -16,6 +16,7 @@ import static org.lwjgl.opengl.GL11.glTranslated;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.entities.tile.TileEntityAssembler;
 
@@ -40,7 +41,7 @@ public class RenderAssembler extends TileEntitySpecialRenderer
 			{
 				glScalef(0.025F, -0.025F, 0.025F);
 				RenderUtil.glDisableLight();
-				RenderUtil.glColorHexRGBA(0xFFFF0000);
+				GlStateManager.color4i(0xFFFF0000);
 				glEnable(GL_BLEND);
 				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_DST_COLOR);
 				RenderUtil.drawItemIcon(((TileEntityAssembler) tile).getRandomItem(), -8, -60, 16, 16);

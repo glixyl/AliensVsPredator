@@ -12,6 +12,7 @@ import static org.lwjgl.opengl.GL11.glTranslated;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.TileEntityPowerline;
@@ -41,7 +42,7 @@ public class RenderPowerline extends TileEntitySpecialRenderer
 				glTranslated(posX + 0.5F, posY + 1.5F, posZ + 0.5F);
 				glScalef(1.0F, -1.0F, 1.0F);
 				glEnable(GL_ALPHA_TEST);
-				RenderUtil.glColorHexRGBA(0xFF222222);
+				GlStateManager.color4i(0xFF222222);
 				this.model.render(tile, 0.0625F);
 			}
 			glPopMatrix();
