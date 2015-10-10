@@ -13,7 +13,7 @@ public class ModelDrone extends ModelBaseExtension
 	public ModelDrone()
 	{
 		this.textureWidth = 256;
-		this.textureHeight = 128;
+		this.textureHeight = 256;
 		this.body1 = new ModelRenderer(this, 0, 46);
 		this.body1.addBox(-4.5F, -2.0F, 0.0F, 9, 8, 10);
 		this.body1.setRotationPoint(0.0F, -2.5F, -13.0F);
