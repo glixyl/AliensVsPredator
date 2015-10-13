@@ -2,6 +2,7 @@ package com.arisux.avp.entities.tile;
 
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.inventory.container.ContainerLocker;
+import com.arisux.avp.items.ItemFirearm;
 import com.arisux.avp.packets.client.PacketOpenLocker;
 
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
@@ -29,8 +30,16 @@ public class TileEntityLocker extends TileEntity
 	public TileEntityLocker()
 	{
 		super();
-		this.inventory = new InventoryBasic("container.locker.slots", true, 64);
 		this.isOpen = false;
+		final TileEntityLocker locker = this;
+		this.inventory = new InventoryBasic("container.locker.slots", true, 64)
+		{
+			@Override
+			public boolean isItemValidForSlot(int slot, ItemStack stack)
+			{
+				return locker instanceof TileEntityGunLocker ? (stack.getItem() instanceof ItemFirearm) : (true);
+			}
+		};
 	}
 
 	@Override

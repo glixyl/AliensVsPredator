@@ -29,7 +29,6 @@ import com.arisux.avp.entities.mob.EntityCombatSynthetic;
 import com.arisux.avp.entities.mob.EntityCrusher;
 import com.arisux.avp.entities.mob.EntityDrone;
 import com.arisux.avp.entities.mob.EntityEngineer;
-import com.arisux.avp.entities.mob.EntitySpaceJockey;
 import com.arisux.avp.entities.mob.EntityFacehugger;
 import com.arisux.avp.entities.mob.EntityHammerpede;
 import com.arisux.avp.entities.mob.EntityMarine;
@@ -39,6 +38,7 @@ import com.arisux.avp.entities.mob.EntityPredalien;
 import com.arisux.avp.entities.mob.EntityProtomorph;
 import com.arisux.avp.entities.mob.EntityQueen;
 import com.arisux.avp.entities.mob.EntityRoyalFacehugger;
+import com.arisux.avp.entities.mob.EntitySpaceJockey;
 import com.arisux.avp.entities.mob.EntitySpitter;
 import com.arisux.avp.entities.mob.EntityTrilobite;
 import com.arisux.avp.entities.mob.EntityWarrior;
@@ -94,6 +94,7 @@ import com.arisux.avp.entities.tile.TileEntityAmpule;
 import com.arisux.avp.entities.tile.TileEntityAssembler;
 import com.arisux.avp.entities.tile.TileEntityBlastdoor;
 import com.arisux.avp.entities.tile.TileEntityCryostasisTube;
+import com.arisux.avp.entities.tile.TileEntityGunLocker;
 import com.arisux.avp.entities.tile.TileEntityHiveNode;
 import com.arisux.avp.entities.tile.TileEntityLightPanel;
 import com.arisux.avp.entities.tile.TileEntityLocker;
@@ -113,6 +114,7 @@ import com.arisux.avp.entities.tile.render.RenderAmpule;
 import com.arisux.avp.entities.tile.render.RenderAssembler;
 import com.arisux.avp.entities.tile.render.RenderBlastdoor;
 import com.arisux.avp.entities.tile.render.RenderCryostasisTube;
+import com.arisux.avp.entities.tile.render.RenderGunLocker;
 import com.arisux.avp.entities.tile.render.RenderHiveNode;
 import com.arisux.avp.entities.tile.render.RenderLightPanel;
 import com.arisux.avp.entities.tile.render.RenderLocker;
@@ -137,6 +139,7 @@ import com.arisux.avp.items.render.RenderItemAPC;
 import com.arisux.avp.items.render.RenderItemAmpule;
 import com.arisux.avp.items.render.RenderItemBlastDoor;
 import com.arisux.avp.items.render.RenderItemCryostasisTube;
+import com.arisux.avp.items.render.RenderItemGunLocker;
 import com.arisux.avp.items.render.RenderItemLightPanel;
 import com.arisux.avp.items.render.RenderItemLocker;
 import com.arisux.avp.items.render.RenderItemM240ICU;
@@ -258,6 +261,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.blocks().blockNegativeTransformer), new RenderItemTransformer());
 		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.blocks().blockAmpule), new RenderItemAmpule());
 		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.blocks().blockLocker), new RenderItemLocker());
+		registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.blocks().blockGunLocker), new RenderItemGunLocker());
 		registerItemRenderer(items.itemWristBlade, new RenderItemWristbracer());
 		registerItemRenderer(items.itemWristbracerBlades, new RenderItemWristbracerBlades());
 		registerItemRenderer(items.itemSpear, new RenderItemSpear());
@@ -348,6 +352,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		bindTileEntitySpecialRenderer(TileEntityPowercell.class, new RenderPowercell());
 		bindTileEntitySpecialRenderer(TileEntityAmpule.class, new RenderAmpule());
 		bindTileEntitySpecialRenderer(TileEntityLocker.class, new RenderLocker());
+		bindTileEntitySpecialRenderer(TileEntityGunLocker.class, new RenderGunLocker());
 	}
 
 	public void registerSimpleBlockRenderingHandlers()
