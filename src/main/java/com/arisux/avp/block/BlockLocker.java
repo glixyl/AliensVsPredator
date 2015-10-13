@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Direction;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -87,5 +88,19 @@ public class BlockLocker extends HookedBlock
 	{
 		int dir = MathHelper.floor_double((entity.rotationYaw / 90) + 0.5) & 3;
 		return ForgeDirection.VALID_DIRECTIONS[Direction.directionToFacing[dir]];
+	}
+	
+	@Override
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int posX, int posY, int posZ)
+	{
+		TileEntity tile = world.getTileEntity(posX, posY, posZ);
+		
+		if (tile != null)
+		{
+			TileEntityLocker locker = (TileEntityLocker) tile;
+			return locker.isOpen() ? null : super.getCollisionBoundingBoxFromPool(world, posX, posY, posZ);
+		}
+		
+		return super.getCollisionBoundingBoxFromPool(world, posX, posY, posZ);
 	}
 }
