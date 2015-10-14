@@ -4,9 +4,7 @@ import static com.arisux.airi.lib.RenderUtil.bindTexture;
 import static com.arisux.airi.lib.RenderUtil.drawQuad;
 import static com.arisux.airi.lib.RenderUtil.glColorHexRGB;
 import static com.arisux.airi.lib.RenderUtil.glDisableLight;
-import static com.arisux.airi.lib.RenderUtil.glDisableLightMapping;
 import static com.arisux.airi.lib.RenderUtil.glEnableLight;
-import static com.arisux.airi.lib.RenderUtil.glEnableLightMapping;
 import static com.arisux.airi.lib.RenderUtil.renderOverlay;
 import static com.arisux.airi.lib.RenderUtil.scaledDisplayResolution;
 import static org.lwjgl.opengl.GL11.GL_ALPHA_TEST;
@@ -22,6 +20,8 @@ import static org.lwjgl.opengl.GL11.glEnable;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.GlStateManager;
+import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntitySpeciesAlien;
 import com.arisux.avp.entities.mob.EntityXenomorph;
@@ -86,9 +86,9 @@ public enum VisionMode
 		{
 			if (isEntityTypeAllowed(event.entity))
 			{
-				glDisableLight();
-				glDisableLightMapping();
-				glColorHexRGB(0xFF00FF00);
+				RenderUtil.glDisableLight();
+				GlStateManager.disableLightMapping();
+				RenderUtil.glColorHexRGB(0xFF00FF00);
 			}
 		}
 
@@ -97,8 +97,8 @@ public enum VisionMode
 		{
 			if (isEntityTypeAllowed(event.entity))
 			{
-				glEnableLight();
-				glEnableLightMapping();
+				RenderUtil.glEnableLight();
+				GlStateManager.enableLightMapping();
 			}
 		}
 		
@@ -149,7 +149,7 @@ public enum VisionMode
 			if (event.entity.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD && !(event.entity instanceof EntityXenomorph))
 			{
 				glDisableLight();
-				glDisableLightMapping();
+				GlStateManager.disableLightMapping();
 				glColorHexRGB(0xFFFF0000);
 			}
 		}
@@ -160,7 +160,7 @@ public enum VisionMode
 			if (event.entity.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD)
 			{
 				glEnableLight();
-				glEnableLightMapping();
+				GlStateManager.enableLightMapping();
 			}
 		}
 	};

@@ -2,7 +2,7 @@ package com.arisux.avp.entities.render;
 
 import org.lwjgl.opengl.GL11;
 
-import com.arisux.airi.lib.RenderUtil;
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.avp.AliensVsPredator;
 
 import net.minecraft.block.Block;
@@ -26,7 +26,7 @@ public class RenderAcidPool extends Render
 			GL11.glDisable(GL11.GL_LIGHTING);
 			GL11.glEnable(GL11.GL_BLEND);
 	        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
-	        RenderUtil.glDisableLightMapping();
+	        GlStateManager.disableLightMapping();
 			bindTexture(AliensVsPredator.resources().ACID_POOL);
 			float offset = 1.4F;
 			double renderX = entity.lastTickPosX + (entity.posX - entity.lastTickPosX) * renderPartialTicks;

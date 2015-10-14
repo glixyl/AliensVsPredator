@@ -18,6 +18,7 @@ import org.apache.commons.lang3.SystemUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.SystemUtil;
 import com.arisux.avp.AliensVsPredator;
@@ -53,7 +54,7 @@ public class RenderWorkstation extends TileEntitySpecialRenderer
 
 			if (tile.isOperational())
 			{
-				RenderUtil.glDisableLightMapping();
+				GlStateManager.disableLightMapping();
 				RenderUtil.glDisableLight();
 				glEnable(GL_BLEND);
 				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -68,7 +69,7 @@ public class RenderWorkstation extends TileEntitySpecialRenderer
 
 				glDisable(GL_BLEND);
 				RenderUtil.glEnableLight();
-				RenderUtil.glEnableLightMapping();
+				GlStateManager.enableLightMapping();
 			}
 		}
 		glPopMatrix();

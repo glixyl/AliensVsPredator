@@ -17,6 +17,7 @@ import static org.lwjgl.opengl.GL11.glTranslatef;
 
 import org.lwjgl.opengl.GL12;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntityChestburster;
@@ -80,7 +81,7 @@ public class RenderCryostasisTube extends TileEntitySpecialRenderer
 
 			if (tile.getVoltage() > 0)
 			{
-				RenderUtil.glDisableLightMapping();
+				GlStateManager.disableLightMapping();
 				RenderUtil.glDisableLight();
 			}
 
@@ -89,7 +90,7 @@ public class RenderCryostasisTube extends TileEntitySpecialRenderer
 
 			glDisable(GL_BLEND);
 			RenderUtil.glEnableLight();
-			RenderUtil.glEnableLightMapping();
+			GlStateManager.enableLightMapping();
 		}
 		glPopMatrix();
 	}

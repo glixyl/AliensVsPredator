@@ -5,6 +5,7 @@ import static com.arisux.airi.lib.RenderUtil.bindTexture;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
 import com.arisux.airi.lib.client.ModelBaseExtension;
@@ -102,7 +103,7 @@ public class RenderItemM240ICU extends ItemRenderer
 				GL11.glRotatef(90F, 0F, 1F, 0F);
 				RenderUtil.drawRect(-2, -2, 16, 11, 0xFF000000);
 				GL11.glTranslatef(0F, 0F, -0.01F);
-				RenderUtil.glDisableLightMapping();
+				GlStateManager.disableLightMapping();
 				RenderUtil.drawString(getAmmoCountDisplayString(), 0, 0, 0xFFFF0000);
 				GL11.glEnable(GL11.GL_LIGHTING);
 				GL11.glColor4f(1F, 1F, 1F, 1F);

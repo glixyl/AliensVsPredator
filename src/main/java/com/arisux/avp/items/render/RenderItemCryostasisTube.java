@@ -2,6 +2,7 @@ package com.arisux.avp.items.render;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
 import com.arisux.avp.AliensVsPredator;
@@ -41,7 +42,7 @@ public class RenderItemCryostasisTube extends ItemRenderer
 		
 		GL11.glPushMatrix();
 		{
-			RenderUtil.glDisableLightMapping();
+			GlStateManager.disableLightMapping();
 			RenderUtil.bindTexture(resourceLocationMask);
 			((ModelCryostasisTtube) this.getModel()).render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
 		}
@@ -66,7 +67,7 @@ public class RenderItemCryostasisTube extends ItemRenderer
 			
 			GL11.glPushMatrix();
 			{
-				RenderUtil.glDisableLightMapping();
+				GlStateManager.disableLightMapping();
 				RenderUtil.bindTexture(resourceLocationMask);
 				((ModelCryostasisTtube) this.getModel()).render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
 			}

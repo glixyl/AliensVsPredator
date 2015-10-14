@@ -2,7 +2,7 @@ package com.arisux.avp.entities.model;
 
 import org.lwjgl.opengl.GL11;
 
-import com.arisux.airi.lib.RenderUtil;
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.client.render.Color;
 import com.arisux.airi.lib.client.render.Vertex;
 
@@ -45,8 +45,8 @@ public class ModelPlasma extends ModelBase
 		{
 			GL11.glScalef(scale, scale, scale);
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
-			RenderUtil.glDisableLightMapping();
-			RenderUtil.glDisableLight();
+			GlStateManager.disableLightMapping();
+			GlStateManager.disableLight();
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE);
 
@@ -79,8 +79,8 @@ public class ModelPlasma extends ModelBase
 					GL11.glPopMatrix();
 				}
 			}
-			RenderUtil.glEnableLight();
-			RenderUtil.glEnableLightMapping();
+			GlStateManager.enableLight();
+			GlStateManager.enableLightMapping();
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
 			GL11.glDisable(GL11.GL_BLEND);
 		}

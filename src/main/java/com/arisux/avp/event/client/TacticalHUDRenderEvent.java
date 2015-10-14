@@ -97,7 +97,7 @@ public class TacticalHUDRenderEvent
 									RenderUtil.glBlendClear();
 									GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
 									RenderUtil.glDisableLight();
-									RenderUtil.glDisableLightMapping();
+									GlStateManager.disableLightMapping();
 									GL11.glTranslated(p.xCoord, p.yCoord, p.zCoord);
 									GL11.glTranslated(-res.xCoord, -res.yCoord, -res.zCoord);
 									GL11.glRotatef(-Minecraft.getMinecraft().thePlayer.rotationYaw - 180, 0, 1, 0);
@@ -138,7 +138,7 @@ public class TacticalHUDRenderEvent
 									}
 									GL11.glPopMatrix();
 
-									RenderUtil.glEnableLightMapping();
+									GlStateManager.enableLightMapping();
 									RenderUtil.glEnableLight();
 									GL11.glEnable(GL11.GL_DEPTH_TEST);
 									GL11.glDepthFunc(GL11.GL_LEQUAL);
@@ -170,7 +170,7 @@ public class TacticalHUDRenderEvent
 					AliensVsPredator.events().getLightmapUpdateEvent().gammaValue = playerProperties.isNightvisionEnabled() ? 8F : 0F;
 					this.scanForNearbyPlayers();
 					RenderUtil.glDisableLight();
-					RenderUtil.glDisableLightMapping();
+					GlStateManager.disableLightMapping();
 
 					glEnable(GL_BLEND);
 					glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
