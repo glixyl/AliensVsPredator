@@ -1,26 +1,21 @@
 package com.arisux.avp.entities.tile.render;
 
-import static org.lwjgl.opengl.GL11.GL_ALPHA_TEST;
 import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
 import static org.lwjgl.opengl.GL11.glDisable;
-import static org.lwjgl.opengl.GL11.glEnable;
 import static org.lwjgl.opengl.GL11.glPopMatrix;
 import static org.lwjgl.opengl.GL11.glPushMatrix;
 import static org.lwjgl.opengl.GL11.glRotatef;
 import static org.lwjgl.opengl.GL11.glScalef;
 import static org.lwjgl.opengl.GL11.glTranslated;
 
-import org.lwjgl.opengl.GL12;
-
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.entities.mob.EntityQueen;
 import com.arisux.avp.entities.tile.TileEntityStasisMechanism;
 import com.arisux.avp.entities.tile.model.ModelStasisMechanism;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 
 public class RenderStasisMechanism extends TileEntitySpecialRenderer
@@ -34,35 +29,21 @@ public class RenderStasisMechanism extends TileEntitySpecialRenderer
 
 		glPushMatrix();
 		{
-			glDisable(GL_CULL_FACE);
-			glTranslated(posX + 0.5F, posY, posZ + 0.5F);
-			glRotatef(tile.getDirection() * (-90F), 0F, 1F, 0F);
-			glEnable(GL12.GL_RESCALE_NORMAL);
-			glScalef(1.0F, -1.0F, 1.0F);
-			glEnable(GL_ALPHA_TEST);
+			GlStateManager.disable(GL_CULL_FACE);
+			GlStateManager.translate(posX + 0.5F, posY, posZ + 0.5F);
+			GlStateManager.rotate(tile.getDirection() * (-90F), 0F, 1F, 0F);
+			GlStateManager.scale(1.0F, -1.0F, 1.0F);
+
 			bindTexture(AliensVsPredator.resources().STASIS_MECHANISM);
+			this.model.render(tile, RenderUtil.DEFAULT_BOX_TRANSLATION);
 
-			if (tile != null)
+			if (Minecraft.getMinecraft().gameSettings.fancyGraphics)
 			{
-				Entity entity = tile.getWorldObj().getEntityByID(tile.getReadOnlyStasisEntityID());
-
-				if (entity != null && entity instanceof EntityQueen)
-				{
-					glPushMatrix();
-					glScalef(3.0F, 3.0F, 3.0F);
-					this.model.render(tile, RenderUtil.DEFAULT_BOX_TRANSLATION);
-					glScalef(-2.0F, -2.0F, -2.0F);
-					this.model.render(tile, RenderUtil.DEFAULT_BOX_TRANSLATION);
-					glPopMatrix();
-				}
+				GlStateManager.disableLight();
+				bindTexture(AliensVsPredator.resources().STASIS_MECHANISM_MASK);
+				this.model.render(tile, RenderUtil.DEFAULT_BOX_TRANSLATION);
+				GlStateManager.enableLight();
 			}
-
-			this.model.render(tile, RenderUtil.DEFAULT_BOX_TRANSLATION);
-			
-			GlStateManager.disableLight();
-			bindTexture(AliensVsPredator.resources().STASIS_MECHANISM_MASK);
-			this.model.render(tile, RenderUtil.DEFAULT_BOX_TRANSLATION);
-			GlStateManager.enableLight();
 		}
 		glPopMatrix();
 	}

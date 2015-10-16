@@ -34,7 +34,7 @@ public class TileEntityStasisMechanism extends TileEntity
 	{
 		super.updateEntity();
 		
-		if (this.dummyEntity == null)
+		if (this.dummyEntity == null && this.worldObj.getWorldTime() % 20 == 0)
 		{
 			this.dummyEntity = getEntityForUUID(this.worldObj, this.readOnlyDmmyEntityUUID);
 			
@@ -88,12 +88,6 @@ public class TileEntityStasisMechanism extends TileEntity
 	public int getDirection()
 	{
 		return direction;
-	}
-
-	@Override
-	public Block getBlockType()
-	{
-		return Blocks.beacon;
 	}
 
 	@Override
