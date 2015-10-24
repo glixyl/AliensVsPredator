@@ -2,6 +2,7 @@ package com.arisux.avp.entities.mob.render;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntityAqua;
 import com.arisux.avp.entities.mob.model.ModelAqua;
@@ -24,7 +25,7 @@ public class RenderAqua extends RenderLiving
 	@Override
 	protected void preRenderCallback(EntityLivingBase entityliving, float partialTicks)
 	{
-		GL11.glScalef(0.8F, 0.8F, 0.8F);
+		GlStateManager.scale(0.8F, 0.8F, 0.8F);
 	}
 
 	@Override

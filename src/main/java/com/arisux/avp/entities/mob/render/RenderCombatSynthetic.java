@@ -2,6 +2,7 @@ package com.arisux.avp.entities.mob.render;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.items.model.ModelM41A;
@@ -43,12 +44,12 @@ public class RenderCombatSynthetic extends RenderLiving
 			GL11.glPushMatrix();
 			{
 				model.bipedRightArm.postRender(0.0625F);
-				GL11.glTranslatef(-0.35F, 0.8F, -0.85F);
-				GL11.glRotatef(270.0F, 1.0F, 0.0F, 0.0F);
-				GL11.glRotatef(0.0F, 0.0F, 1.0F, 0.0F);
-				GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
-				GL11.glDisable(GL11.GL_CULL_FACE);
-				GL11.glScalef(glScale, glScale, glScale);
+				GlStateManager.translate(-0.35F, 0.8F, -0.85F);
+				GlStateManager.rotate(270.0F, 1.0F, 0.0F, 0.0F);
+				GlStateManager.rotate(0.0F, 0.0F, 1.0F, 0.0F);
+				GlStateManager.rotate(180.0F, 0.0F, 0.0F, 1.0F);
+				GlStateManager.disable(GL11.GL_CULL_FACE);
+				GlStateManager.scale(glScale, glScale, glScale);
 
 				model.aimedBow = true;
 				Minecraft.getMinecraft().renderEngine.bindTexture(RenderItemM41A.resourceLocation);

@@ -2,6 +2,7 @@ package com.arisux.avp.items.render;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
 import com.arisux.avp.items.model.ModelAK47;
@@ -58,9 +59,9 @@ public abstract class RenderItemFirearmPart extends ItemRenderer
 
 	public void renderPart()
 	{
-		RenderUtil.glBlendClear();
+		GlStateManager.blendClear();
 		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glDisable(GL11.GL_CULL_FACE);
+		GlStateManager.disable(GL11.GL_CULL_FACE);
 		RenderUtil.bindTexture(this.getResourceLocation());
 
 		for (ModelRenderer renderer : modelRenderers)
@@ -73,10 +74,10 @@ public abstract class RenderItemFirearmPart extends ItemRenderer
 	{
 		GL11.glPushMatrix();
 		RenderUtil.drawRect(-(size / 2), 0, size, 1, 0xFFFF0000);
-		GL11.glRotatef(90F, 0F, 0F, 1F);
+		GlStateManager.rotate(90F, 0F, 0F, 1F);
 		RenderUtil.drawRect(-(size / 2), 0, size, 1, 0xFFFF0000);
-		GL11.glRotatef(90F, 0F, 1F, 0F);
-		GL11.glTranslatef(0F, 0F, 0.5F);
+		GlStateManager.rotate(90F, 0F, 1F, 0F);
+		GlStateManager.translate(0F, 0F, 0.5F);
 		RenderUtil.drawRect(-(size / 2), 0, size, 1, 0xFFFF0000);
 		GL11.glPopMatrix();
 	}

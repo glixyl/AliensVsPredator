@@ -2,6 +2,7 @@ package com.arisux.avp.event.client;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.PlayerModeHandler;
 import com.arisux.avp.entities.extended.ExtendedEntityPlayer;
@@ -51,9 +52,9 @@ public class PlayerModeRenderEvent
 
 			GL11.glPushMatrix();
 			{
-				GL11.glRotatef(-yaw, 0F, 1F, 0F);
-				GL11.glRotatef(180F, 1F, 0F, 0F);
-				GL11.glDisable(GL11.GL_CULL_FACE);
+				GlStateManager.rotate(-yaw, 0F, 1F, 0F);
+				GlStateManager.rotate(180F, 1F, 0F, 0F);
+				GlStateManager.disable(GL11.GL_CULL_FACE);
 
 				ModelBase model = PlayerModeHandler.instance().getModelForPlayer((EntityPlayer) entity);
 				this.bindTexture(this.getEntityTexture(entity));

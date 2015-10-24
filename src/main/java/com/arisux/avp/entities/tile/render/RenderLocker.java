@@ -1,9 +1,8 @@
 package com.arisux.avp.entities.tile.render;
 
-import static org.lwjgl.opengl.GL11.glRotatef;
-
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.TileEntityLocker;
@@ -29,29 +28,29 @@ public class RenderLocker extends TileEntitySpecialRenderer
 		GL11.glPushMatrix();
 		{
 			float scale = 0.95F;
-			GL11.glDisable(GL11.GL_CULL_FACE);
+			GlStateManager.disable(GL11.GL_CULL_FACE);
 			this.bindTexture(AliensVsPredator.resources().LOCKER);
 			GL11.glTranslated(posX + 0.5F, posY + 1.41F, posZ + 0.5F);
-			GL11.glScalef(-scale, -scale, scale);
+			GlStateManager.scale(-scale, -scale, scale);
 			GL11.glEnable(GL11.GL_ALPHA_TEST);
 
 			if (tile != null && tile.getDirection() != null)
 			{
 				if (tile.getDirection() == ForgeDirection.NORTH)
 				{
-					glRotatef(180F, 0F, 1F, 0F);
+					GL11.glRotatef(180F, 0F, 1F, 0F);
 				}
 				if (tile.getDirection() == ForgeDirection.SOUTH)
 				{
-					glRotatef(0F, 0F, 0F, 0F);
+					GL11.glRotatef(0F, 0F, 0F, 0F);
 				}
 				if (tile.getDirection() == ForgeDirection.WEST)
 				{
-					glRotatef(90F, 0F, 1F, 0F);
+					GL11.glRotatef(90F, 0F, 1F, 0F);
 				}
 				if (tile.getDirection() == ForgeDirection.EAST)
 				{
-					glRotatef(270F, 0F, 1F, 0F);
+					GL11.glRotatef(270F, 0F, 1F, 0F);
 				}
 			}
 
@@ -63,10 +62,10 @@ public class RenderLocker extends TileEntitySpecialRenderer
 				GL11.glPushMatrix();
 				{
 					float itemScale = 0.009F;
-					GL11.glScalef(itemScale, itemScale, itemScale);
-					GL11.glTranslatef(-46F, -64F, 24F);
-					RenderUtil.glEnableLight();
-					RenderUtil.glBlendClear();
+					GlStateManager.scale(itemScale, itemScale, itemScale);
+					GlStateManager.translate(-46F, -64F, 24F);
+					GlStateManager.enableLight();
+					GlStateManager.blendClear();
 
 					int rows = 21;
 					int stackIndex = 0;
@@ -77,7 +76,7 @@ public class RenderLocker extends TileEntitySpecialRenderer
 						{
 							ItemStack stack = tile.inventory.getStackInSlot(stackIndex++);
 							GL11.glPushMatrix();
-							GL11.glTranslatef((rowX * 32), (rowY * 9), 0F);
+							GlStateManager.translate((rowX * 32), (rowY * 9), 0F);
 
 							if (stack != null)
 							{
@@ -89,9 +88,9 @@ public class RenderLocker extends TileEntitySpecialRenderer
 
 									GL11.glPushMatrix();
 									{
-										GL11.glTranslatef(8F, 0F, 0F);
+										GlStateManager.translate(8F, 0F, 0F);
 										renderer.renderItem(ItemRenderType.INVENTORY, stack, args);
-										RenderUtil.glEnableLight();
+										GlStateManager.enableLight();
 									}
 									GL11.glPopMatrix();
 								}
@@ -99,7 +98,7 @@ public class RenderLocker extends TileEntitySpecialRenderer
 								{
 									GL11.glPushMatrix();
 									{
-										GL11.glRotatef(-45, 1F, 0F, 0F);
+										GlStateManager.rotate(-45, 1F, 0F, 0F);
 										RenderUtil.drawItemIcon(stack.getItem(), 0, 0, 32, 32);
 									}
 									GL11.glPopMatrix();

@@ -2,6 +2,7 @@ package com.arisux.avp.entities.render;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.EntityLaserMine;
@@ -24,16 +25,16 @@ public class RenderLaserMine extends Render
 		
 		GL11.glPushMatrix();
 		{
-			GL11.glTranslatef((float) posX, (float) posY, (float) posZ);
-			GL11.glTranslatef(0.0F, 0.25F, 0.0F);
-			GL11.glRotatef(yaw, 0.0F, 1.0F, 0.0F);
-			GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
+			GlStateManager.translate((float) posX, (float) posY, (float) posZ);
+			GlStateManager.translate(0.0F, 0.25F, 0.0F);
+			GlStateManager.rotate(yaw, 0.0F, 1.0F, 0.0F);
+			GlStateManager.rotate(180.0F, 0.0F, 0.0F, 1.0F);
 			GL11.glScaled(0.5F, 0.5F, 0.5F);
 			RenderUtil.bindTexture(resource);
 			model.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
-			GL11.glDisable(GL11.GL_CULL_FACE);
-			GL11.glScalef(2F, -2F, 2F);
-			GL11.glTranslatef(0.004F, -0.74F, 0.06F);
+			GlStateManager.disable(GL11.GL_CULL_FACE);
+			GlStateManager.scale(2F, -2F, 2F);
+			GlStateManager.translate(0.004F, -0.74F, 0.06F);
 			
 			boolean active = laserMine.getLaserHit() != null && laserMine.getLaserHit().entityHit != null;
 			
@@ -54,13 +55,13 @@ public class RenderLaserMine extends Render
 
 		GL11.glPushMatrix();
 		{
-			GL11.glTranslatef(0F, 0.75F, 0F);
-			GL11.glRotatef(rotationYaw, 0F, 1F, 0F);
-			GL11.glRotatef(rotationPitch, 0F, 0F, 1F);
-			GL11.glScalef(1F / scale, 1F / scale, 1F / scale);
-			GL11.glDisable(GL11.GL_TEXTURE_2D);
-			GL11.glDisable(GL11.GL_LIGHTING);
-			RenderUtil.glDisableLight();
+			GlStateManager.translate(0F, 0.75F, 0F);
+			GlStateManager.rotate(rotationYaw, 0F, 1F, 0F);
+			GlStateManager.rotate(rotationPitch, 0F, 0F, 1F);
+			GlStateManager.scale(1F / scale, 1F / scale, 1F / scale);
+			GlStateManager.disable(GL11.GL_TEXTURE_2D);
+			GlStateManager.disable(GL11.GL_LIGHTING);
+			GlStateManager.disableLight();
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
 			GL11.glShadeModel(GL11.GL_SMOOTH);
@@ -74,8 +75,8 @@ public class RenderLaserMine extends Render
 			tessellator.addVertex(w, h, zLevel);
 			tessellator.draw();
 			
-			GL11.glTranslatef(0F, -0.5F, 0.5F);
-			GL11.glRotatef(90F, 1F, 0F, 0F);
+			GlStateManager.translate(0F, -0.5F, 0.5F);
+			GlStateManager.rotate(90F, 1F, 0F, 0F);
 			tessellator.startDrawingQuads();
 			tessellator.setColorRGBA_F((color2 >> 16 & 255) / 255.0F, (color2 >> 8 & 255) / 255.0F, (color2 & 255) / 255.0F, (color2 >> 24 & 255) / 255.0F);
 			tessellator.addVertex(w, y, zLevel);
@@ -86,9 +87,9 @@ public class RenderLaserMine extends Render
 			tessellator.draw();
 			GL11.glShadeModel(GL11.GL_FLAT);
 			GL11.glEnable(GL11.GL_LIGHTING);
-			RenderUtil.glEnableLight();
+			GlStateManager.enableLight();
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
-			GL11.glDisable(GL11.GL_BLEND);
+			GlStateManager.disable(GL11.GL_BLEND);
 		}
 		GL11.glPopMatrix();
 	}

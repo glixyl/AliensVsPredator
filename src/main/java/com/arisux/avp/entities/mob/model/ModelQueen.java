@@ -524,7 +524,7 @@ public class ModelQueen extends ModelBaseExtension
 
 		GL11.glPushMatrix();
 		{
-			GL11.glRotatef(((float) Math.toRadians(headYaw) + swingProgressPrev) * 30F, 0, 1, 0);
+			GlStateManager.rotate(((float) Math.toRadians(headYaw) + swingProgressPrev) * 30F, 0, 1, 0);
 			this.Jaw1.render(boxTranslation);
 			this.head0.render(boxTranslation);
 			this.head1.render(boxTranslation);

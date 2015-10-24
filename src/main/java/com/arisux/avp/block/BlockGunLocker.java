@@ -1,10 +1,10 @@
 package com.arisux.avp.block;
 
+import com.arisux.avp.entities.tile.TileEntityGunLocker;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-
-import com.arisux.avp.entities.tile.TileEntityGunLocker;
 
 public class BlockGunLocker extends BlockLocker
 {

@@ -2,6 +2,8 @@ package com.arisux.avp.entities.mob.model;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.GlStateManager;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -66,13 +68,13 @@ public class ModelMarine extends ModelBase
 		{
 			float scale = 2.0F;
 			GL11.glPushMatrix();
-			GL11.glScalef(1.5F / scale, 1.5F / scale, 1.5F / scale);
-			GL11.glTranslatef(0.0F, 16.0F * boxTranslation, 0.0F);
+			GlStateManager.scale(1.5F / scale, 1.5F / scale, 1.5F / scale);
+			GlStateManager.translate(0.0F, 16.0F * boxTranslation, 0.0F);
 			this.bipedHead.render(boxTranslation);
 			GL11.glPopMatrix();
 			GL11.glPushMatrix();
-			GL11.glScalef(1.0F / scale, 1.0F / scale, 1.0F / scale);
-			GL11.glTranslatef(0.0F, 24.0F * boxTranslation, 0.0F);
+			GlStateManager.scale(1.0F / scale, 1.0F / scale, 1.0F / scale);
+			GlStateManager.translate(0.0F, 24.0F * boxTranslation, 0.0F);
 			this.bipedBody.render(boxTranslation);
 			this.bipedRightArm.render(boxTranslation);
 			this.bipedLeftArm.render(boxTranslation);

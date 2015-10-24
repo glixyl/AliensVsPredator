@@ -3,6 +3,7 @@ package com.arisux.avp.entities.render;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.model.ModelSpear;
 
@@ -19,13 +20,13 @@ public class RenderSpear extends Render
 	{
 		GL11.glPushMatrix();
 		{
-			GL11.glTranslatef((float) posX, (float) posY, (float) posZ);
-			GL11.glRotatef(entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * renderPartialTicks - 90.0F, 0.0F, 1.0F, 0.0F);
-			GL11.glRotatef(entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * renderPartialTicks, 0.0F, 0.0F, 1.0F);
+			GlStateManager.translate((float) posX, (float) posY, (float) posZ);
+			GlStateManager.rotate(entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * renderPartialTicks - 90.0F, 0.0F, 1.0F, 0.0F);
+			GlStateManager.rotate(entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * renderPartialTicks, 0.0F, 0.0F, 1.0F);
 			this.bindTexture(this.getEntityTexture(entity));
 			model.render();
 
-			GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+			GlStateManager.disable(GL12.GL_RESCALE_NORMAL);
 		}
 		GL11.glPopMatrix();
 	}

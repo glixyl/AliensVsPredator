@@ -1,9 +1,8 @@
 package com.arisux.avp.entities.tile.render;
 
-import static org.lwjgl.opengl.GL11.glRotatef;
-
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.TileEntityTurret;
@@ -24,17 +23,17 @@ public class RenderTurret extends TileEntitySpecialRenderer
 
 		GL11.glPushMatrix();
 		{
-			GL11.glDisable(GL11.GL_CULL_FACE);
+			GlStateManager.disable(GL11.GL_CULL_FACE);
 			this.bindTexture(AliensVsPredator.resources().TURRET);
 			GL11.glTranslated(posX + 0.5F, posY + 3.0F, posZ - 0.0F);
-			glRotatef(tile.getDirection() * (-90F), 0F, 1F, 0F);
+			GL11.glRotatef(tile.getDirection() * (-90F), 0F, 1F, 0F);
 
-			GL11.glScalef(2F, -2F, 2F);
+			GlStateManager.scale(2F, -2F, 2F);
 			this.model.render(tile, RenderUtil.DEFAULT_BOX_TRANSLATION);
 
 			if (tile.getVoltage() > 0)
 			{
-				glRotatef(tile.getDirection() * 90F, 0F, 1F, 0F);
+				GL11.glRotatef(tile.getDirection() * 90F, 0F, 1F, 0F);
 				this.renderAmmoDisplay(tile);
 
 				if (!tile.isFiring())
@@ -56,24 +55,24 @@ public class RenderTurret extends TileEntitySpecialRenderer
 			GL11.glPushMatrix();
 			{
 				// Reposition to the turret head's rotation point
-				RenderUtil.glDisableLight();
-				GL11.glDisable(GL11.GL_LIGHTING);
+				GlStateManager.disableLight();
+				GlStateManager.disable(GL11.GL_LIGHTING);
 				float displayScale = 0.005F;
-				GL11.glScalef(displayScale, displayScale, displayScale);
-				GL11.glTranslatef(0F, 137.5F, 0F);
+				GlStateManager.scale(displayScale, displayScale, displayScale);
+				GlStateManager.translate(0F, 137.5F, 0F);
 
 				// Rotate & Reposition Display
-				GL11.glRotatef(180 + -tile.getRotationYaw(), 0F, 1F, 0F);
-				GL11.glRotatef(tile.getRotationPitch(), 1F, 0F, 0F);
-				GL11.glTranslatef(-12.5F, -23.5F, 43.76F);
+				GlStateManager.rotate(180 + -tile.getRotationYaw(), 0F, 1F, 0F);
+				GlStateManager.rotate(tile.getRotationPitch(), 1F, 0F, 0F);
+				GlStateManager.translate(-12.5F, -23.5F, 43.76F);
 
 				// Display itself
 				RenderUtil.drawRect(-5, -3, 35, 14, 0xFF000000);
 				RenderUtil.drawRect(-5, -3, 35, 14, 0xFF000000);
-				GL11.glTranslatef(0.0F, 0.0F, 0.001F);
+				GlStateManager.translate(0.0F, 0.0F, 0.001F);
 				RenderUtil.drawString(displayText, 0, 0, tile.beamColor);
 				GL11.glEnable(GL11.GL_LIGHTING);
-				RenderUtil.glEnableLight();
+				GlStateManager.enableLight();
 			}
 			GL11.glPopMatrix();
 		}
@@ -85,13 +84,13 @@ public class RenderTurret extends TileEntitySpecialRenderer
 
 		GL11.glPushMatrix();
 		{
-			GL11.glTranslatef(0F, 0.75F, 0F);
-			GL11.glRotatef(-90 + -rotationYaw, 0F, 1F, 0F);
-			GL11.glRotatef(rotationPitch, 0F, 0F, 1F);
-			GL11.glScalef(1F / scale, 1F / scale, 1F / scale);
-			GL11.glDisable(GL11.GL_TEXTURE_2D);
-			GL11.glDisable(GL11.GL_LIGHTING);
-			RenderUtil.glDisableLight();
+			GlStateManager.translate(0F, 0.75F, 0F);
+			GlStateManager.rotate(-90 + -rotationYaw, 0F, 1F, 0F);
+			GlStateManager.rotate(rotationPitch, 0F, 0F, 1F);
+			GlStateManager.scale(1F / scale, 1F / scale, 1F / scale);
+			GlStateManager.disable(GL11.GL_TEXTURE_2D);
+			GlStateManager.disable(GL11.GL_LIGHTING);
+			GlStateManager.disableLight();
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
 			GL11.glShadeModel(GL11.GL_SMOOTH);
@@ -106,9 +105,9 @@ public class RenderTurret extends TileEntitySpecialRenderer
 			tessellator.draw();
 			GL11.glShadeModel(GL11.GL_FLAT);
 			GL11.glEnable(GL11.GL_LIGHTING);
-			RenderUtil.glEnableLight();
+			GlStateManager.enableLight();
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
-			GL11.glDisable(GL11.GL_BLEND);
+			GlStateManager.disable(GL11.GL_BLEND);
 		}
 		GL11.glPopMatrix();
 	}

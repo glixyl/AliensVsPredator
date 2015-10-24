@@ -1,7 +1,6 @@
 package com.arisux.avp.items.model;
 
-import org.lwjgl.opengl.GL11;
-
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.client.ModelBaseExtension;
 
 import net.minecraft.client.model.ModelRenderer;
@@ -172,7 +171,7 @@ public class ModelM240ICU extends ModelBaseExtension
 	@Override
 	public void render(float boxTranslation)
 	{
-		GL11.glRotatef(180F, 0, 1, 0);
+		GlStateManager.rotate(180F, 0, 1, 0);
 		canister.render(boxTranslation);
 		canisterSealTop.render(boxTranslation);
 		canisterSealTopLeft.render(boxTranslation);

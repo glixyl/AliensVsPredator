@@ -23,7 +23,7 @@ public class RenderAcidPool extends Render
 	{
 		GL11.glPushMatrix();
 		{
-			GL11.glDisable(GL11.GL_LIGHTING);
+			GlStateManager.disable(GL11.GL_LIGHTING);
 			GL11.glEnable(GL11.GL_BLEND);
 	        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
 	        GlStateManager.disableLightMapping();
@@ -56,7 +56,7 @@ public class RenderAcidPool extends Render
 
 			tessellator.draw();
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			GL11.glDisable(GL11.GL_BLEND);
+			GlStateManager.disable(GL11.GL_BLEND);
 			GL11.glEnable(GL11.GL_LIGHTING);
 		}
 		GL11.glPopMatrix();
@@ -78,7 +78,7 @@ public class RenderAcidPool extends Render
 
 			GL11.glPushMatrix();
 			{
-				GL11.glRotatef(yaw, 0F, 1F, 0F);
+				GlStateManager.rotate(yaw, 0F, 1F, 0F);
 				tessellator.addVertexWithUV(x1, y, z1, u1, v1);
 				tessellator.addVertexWithUV(x1, y, z2, u1, v2);
 				tessellator.addVertexWithUV(x2, y, z2, u2, v2);

@@ -43,8 +43,8 @@ public class ModelPlasma extends ModelBase
 
 		GL11.glPushMatrix();
 		{
-			GL11.glScalef(scale, scale, scale);
-			GL11.glDisable(GL11.GL_TEXTURE_2D);
+			GlStateManager.scale(scale, scale, scale);
+			GlStateManager.disable(GL11.GL_TEXTURE_2D);
 			GlStateManager.disableLightMapping();
 			GlStateManager.disableLight();
 			GL11.glEnable(GL11.GL_BLEND);
@@ -52,13 +52,13 @@ public class ModelPlasma extends ModelBase
 
 			for (int rZ = 0; rZ < 2; ++rZ)
 			{
-				GL11.glRotatef(rZ * 180, 0.0F, 0.0F, 1.0F);
+				GlStateManager.rotate(rZ * 180, 0.0F, 0.0F, 1.0F);
 
 				for (int rY = 0; rY < 4; ++rY)
 				{
 					GL11.glPushMatrix();
 					{
-						GL11.glRotatef(rY * 90, 0.0F, 1.0F, 0.0F);
+						GlStateManager.rotate(rY * 90, 0.0F, 1.0F, 0.0F);
 						this.addTri(t2, t10, t12);
 						this.addTri(t10, t5, t11);
 						this.addTri(t12, t11, t4);
@@ -82,7 +82,7 @@ public class ModelPlasma extends ModelBase
 			GlStateManager.enableLight();
 			GlStateManager.enableLightMapping();
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
-			GL11.glDisable(GL11.GL_BLEND);
+			GlStateManager.disable(GL11.GL_BLEND);
 		}
 		GL11.glPopMatrix();
 	}

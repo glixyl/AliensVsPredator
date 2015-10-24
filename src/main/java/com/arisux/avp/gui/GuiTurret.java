@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.GuiElements.GuiCustomButton;
 import com.arisux.airi.lib.GuiElements.GuiCustomSlider;
 import com.arisux.airi.lib.RenderUtil;
@@ -142,7 +143,7 @@ public class GuiTurret extends GuiContainer
 		{
 			int modelScale = 25;
 			RenderUtil.drawEntity(-40, 100, getCurrentSelectedEntity().height >= 4.0F ? modelScale / 2 : getCurrentSelectedEntity().height >= 8.0F ? modelScale / 4 : modelScale, this.modelRotation += 1F, 0.0F, getCurrentSelectedEntity());
-			RenderUtil.glDisableLight();
+			GlStateManager.disableLight();
 		}
 
 		for (int x = 0; x < this.entityLivingList.size(); x++)

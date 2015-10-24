@@ -2,9 +2,6 @@ package com.arisux.avp.util;
 
 import static com.arisux.airi.lib.RenderUtil.bindTexture;
 import static com.arisux.airi.lib.RenderUtil.drawQuad;
-import static com.arisux.airi.lib.RenderUtil.glColorHexRGB;
-import static com.arisux.airi.lib.RenderUtil.glDisableLight;
-import static com.arisux.airi.lib.RenderUtil.glEnableLight;
 import static com.arisux.airi.lib.RenderUtil.renderOverlay;
 import static com.arisux.airi.lib.RenderUtil.scaledDisplayResolution;
 import static org.lwjgl.opengl.GL11.GL_ALPHA_TEST;
@@ -15,13 +12,11 @@ import static org.lwjgl.opengl.GL11.GL_SRC_ALPHA;
 import static org.lwjgl.opengl.GL11.GL_ZERO;
 import static org.lwjgl.opengl.GL11.glBlendFunc;
 import static org.lwjgl.opengl.GL11.glColor4f;
-import static org.lwjgl.opengl.GL11.glDisable;
 import static org.lwjgl.opengl.GL11.glEnable;
 
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
-import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntitySpeciesAlien;
 import com.arisux.avp.entities.mob.EntityXenomorph;
@@ -65,14 +60,14 @@ public enum VisionMode
 				glEnable(GL_BLEND);
 				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 				glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
-				glDisable(GL_ALPHA_TEST);
+				GlStateManager.disable(GL_ALPHA_TEST);
 				bindTexture(AliensVsPredator.resources().BLUR_CELTIC_HUD);
 				glColor4f(0F, 1F, 0.1F, 0F);
 				drawQuad(0, 0, scaledDisplayResolution().getScaledWidth(), scaledDisplayResolution().getScaledHeight(), 0, 0, 0, 0);
 				glColor4f(0F, 1F, 0F, 1F);
 				drawQuad(0, 0, scaledDisplayResolution().getScaledWidth(), scaledDisplayResolution().getScaledHeight(), 0, 0, 0, 0);
 				glEnable(GL_ALPHA_TEST);
-				glDisable(GL_BLEND);
+				GlStateManager.disable(GL_BLEND);
 				glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			}
 			GL11.glPopMatrix();
@@ -86,9 +81,9 @@ public enum VisionMode
 		{
 			if (isEntityTypeAllowed(event.entity))
 			{
-				RenderUtil.glDisableLight();
+				GlStateManager.disableLight();
 				GlStateManager.disableLightMapping();
-				RenderUtil.glColorHexRGB(0xFF00FF00);
+				GlStateManager.color3i(0xFF00FF00);
 			}
 		}
 
@@ -97,7 +92,7 @@ public enum VisionMode
 		{
 			if (isEntityTypeAllowed(event.entity))
 			{
-				RenderUtil.glEnableLight();
+				GlStateManager.enableLight();
 				GlStateManager.enableLightMapping();
 			}
 		}
@@ -127,14 +122,14 @@ public enum VisionMode
 				glEnable(GL_BLEND);
 				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 				glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
-				glDisable(GL_ALPHA_TEST);
+				GlStateManager.disable(GL_ALPHA_TEST);
 				bindTexture(AliensVsPredator.resources().BLUR_CELTIC_HUD);
 				glColor4f(1F, 1F, 0F, 0F);
 				drawQuad(0, 0, scaledDisplayResolution().getScaledWidth(), scaledDisplayResolution().getScaledHeight(), 0, 0, 0, 0);
 				glColor4f(1F, 1F, 0.45F, 0F);
 				drawQuad(0, 0, scaledDisplayResolution().getScaledWidth(), scaledDisplayResolution().getScaledHeight(), 0, 0, 0, 0);
 				glEnable(GL_ALPHA_TEST);
-				glDisable(GL_BLEND);
+				GlStateManager.disable(GL_BLEND);
 				glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			}
 			GL11.glPopMatrix();
@@ -148,9 +143,9 @@ public enum VisionMode
 		{
 			if (event.entity.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD && !(event.entity instanceof EntityXenomorph))
 			{
-				glDisableLight();
+				GlStateManager.disableLight();
 				GlStateManager.disableLightMapping();
-				glColorHexRGB(0xFFFF0000);
+				GlStateManager.color3i(0xFFFF0000);
 			}
 		}
 
@@ -159,7 +154,7 @@ public enum VisionMode
 		{
 			if (event.entity.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD)
 			{
-				glEnableLight();
+				GlStateManager.enableLight();
 				GlStateManager.enableLightMapping();
 			}
 		}

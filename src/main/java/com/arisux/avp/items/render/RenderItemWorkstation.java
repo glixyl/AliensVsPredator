@@ -2,6 +2,7 @@ package com.arisux.avp.items.render;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
 import com.arisux.avp.AliensVsPredator;
@@ -30,11 +31,11 @@ public class RenderItemWorkstation extends ItemRenderer
 	{
 		float glScale = 1.6F;
 
-		GL11.glRotatef(10F, 0F, 0F, 1F);
-		GL11.glRotatef(12F, 0F, 1F, 0F);
-		GL11.glTranslatef(0.4F, -0.1F, 0F);
-		GL11.glDisable(GL11.GL_CULL_FACE);
-		GL11.glScalef(glScale, -glScale, glScale);
+		GlStateManager.rotate(10F, 0F, 0F, 1F);
+		GlStateManager.rotate(12F, 0F, 1F, 0F);
+		GlStateManager.translate(0.4F, -0.1F, 0F);
+		GlStateManager.disable(GL11.GL_CULL_FACE);
+		GlStateManager.scale(glScale, -glScale, glScale);
 		RenderUtil.bindTexture(resourceLocation);
 		((ModelWorkstation) this.getModel()).render(null, RenderUtil.DEFAULT_BOX_TRANSLATION);
 	}
@@ -46,12 +47,12 @@ public class RenderItemWorkstation extends ItemRenderer
 
 		if (firstPersonRenderCheck(data[1]))
 		{
-			GL11.glTranslatef(0.1F, 1.0F, 0.2F);
-			GL11.glRotatef(95.0F, 1.0F, 0.0F, 0.0F);
-			GL11.glRotatef(120.0F, 0.0F, 1.0F, 0.0F);
-			GL11.glRotatef(79.0F, 0.0F, 0.0F, 1.0F);
-			GL11.glDisable(GL11.GL_CULL_FACE);
-			GL11.glScalef(glScale, glScale, glScale);
+			GlStateManager.translate(0.1F, 1.0F, 0.2F);
+			GlStateManager.rotate(95.0F, 1.0F, 0.0F, 0.0F);
+			GlStateManager.rotate(120.0F, 0.0F, 1.0F, 0.0F);
+			GlStateManager.rotate(79.0F, 0.0F, 0.0F, 1.0F);
+			GlStateManager.disable(GL11.GL_CULL_FACE);
+			GlStateManager.scale(glScale, glScale, glScale);
 			RenderUtil.bindTexture(resourceLocation);
 			((ModelWorkstation) this.getModel()).render(null, RenderUtil.DEFAULT_BOX_TRANSLATION);
 		}
@@ -63,16 +64,16 @@ public class RenderItemWorkstation extends ItemRenderer
 		GL11.glPushMatrix();
 		{
 			float glScale = 7F;
-			GL11.glTranslatef(8F, 5F, 0F);
-			GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
-			GL11.glTranslatef(0F, 0F, 0F);
-			GL11.glRotatef(-180F, 0.0F, 1.0F, 0.0F);
-			GL11.glDisable(GL11.GL_CULL_FACE);
-			GL11.glScalef(glScale, glScale, glScale);
-			RenderUtil.glEnableLight();
+			GlStateManager.translate(8F, 5F, 0F);
+			GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
+			GlStateManager.translate(0F, 0F, 0F);
+			GlStateManager.rotate(-180F, 0.0F, 1.0F, 0.0F);
+			GlStateManager.disable(GL11.GL_CULL_FACE);
+			GlStateManager.scale(glScale, glScale, glScale);
+			GlStateManager.enableLight();
 			RenderUtil.bindTexture(resourceLocation);
 			((ModelWorkstation) this.getModel()).render(null, RenderUtil.DEFAULT_BOX_TRANSLATION);
-			RenderUtil.glDisableLight();
+			GlStateManager.disableLight();
 		}
 		GL11.glPopMatrix();
 	}

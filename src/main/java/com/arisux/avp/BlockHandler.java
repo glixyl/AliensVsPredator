@@ -1,9 +1,5 @@
 package com.arisux.avp;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
-
 import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.airi.lib.BlockTypes.HookedBlockSlab;
 import com.arisux.airi.lib.BlockTypes.HookedBlockStairs;
@@ -42,6 +38,9 @@ import com.arisux.avp.block.BlockWorkstation;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 
 public class BlockHandler extends IBHandler implements IInitializable
 {

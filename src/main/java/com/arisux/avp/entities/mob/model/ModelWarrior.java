@@ -2,6 +2,7 @@ package com.arisux.avp.entities.mob.model;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.client.ModelBaseExtension;
 
 import net.minecraft.client.model.ModelRenderer;
@@ -290,7 +291,7 @@ public class ModelWarrior extends ModelBaseExtension
 
 		GL11.glPushMatrix();
 		{
-			GL11.glTranslatef(0F, 0.32F, 0F);
+			GlStateManager.translate(0F, 0.32F, 0F);
 
 			float newangle = 0.0F;
 			float multiplier = 0.1F;
@@ -362,7 +363,7 @@ public class ModelWarrior extends ModelBaseExtension
 			this.headTop.render(boxTranslation);
 			this.back1.render(boxTranslation);
 			this.back2.render(boxTranslation);
-			GL11.glTranslatef(0F, -0.3F, 0.8F);
+			GlStateManager.translate(0F, -0.3F, 0.8F);
 			this.tail1.render(boxTranslation);
 			this.tail2.render(boxTranslation);
 			this.tail3.render(boxTranslation);

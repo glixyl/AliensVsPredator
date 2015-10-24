@@ -5,6 +5,7 @@ import static com.arisux.airi.lib.RenderUtil.bindTexture;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.AccessWrapper;
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
 import com.arisux.airi.lib.client.ModelBaseExtension;
@@ -42,10 +43,10 @@ public class RenderItemM56SG extends ItemRenderer
 	public void renderInWorld(ItemStack item, Object... data)
 	{
 		super.renderInWorld(item, data);
-		GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
-		GL11.glTranslatef(-0.1F, 0.5F, -0.5F);
-		GL11.glScalef(1F, -1F, 1F);
-		GL11.glDisable(GL11.GL_CULL_FACE);
+		GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
+		GlStateManager.translate(-0.1F, 0.5F, -0.5F);
+		GlStateManager.scale(1F, -1F, 1F);
+		GlStateManager.disable(GL11.GL_CULL_FACE);
 		bindTexture(getResourceLocation());
 		this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 	}
@@ -58,12 +59,12 @@ public class RenderItemM56SG extends ItemRenderer
 
 		if (firstPersonRenderCheck(data[1]))
 		{
-			GL11.glTranslatef(0.1F, 0.15F, 0.2F);
-			GL11.glRotatef(95.0F, 1.0F, 0.0F, 0.0F);
-			GL11.glRotatef(120.0F, 0.0F, 1.0F, 0.0F);
-			GL11.glRotatef(80.0F, 0.0F, 0.0F, 1.0F);
-			GL11.glDisable(GL11.GL_CULL_FACE);
-			GL11.glScalef(2.0F, 2.0F, 2.0F);
+			GlStateManager.translate(0.1F, 0.15F, 0.2F);
+			GlStateManager.rotate(95.0F, 1.0F, 0.0F, 0.0F);
+			GlStateManager.rotate(120.0F, 0.0F, 1.0F, 0.0F);
+			GlStateManager.rotate(80.0F, 0.0F, 0.0F, 1.0F);
+			GlStateManager.disable(GL11.GL_CULL_FACE);
+			GlStateManager.scale(2.0F, 2.0F, 2.0F);
 			this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 		}
 	}
@@ -76,11 +77,11 @@ public class RenderItemM56SG extends ItemRenderer
 
 		if (player != null)
 		{
-			GL11.glTranslatef(0.25F, -0.3F, -0.1F);
-			GL11.glRotatef(280.0F, 1.0F, 0.0F, 0.0F);
-			GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
-			GL11.glRotatef(-93.0F, 0.0F, 0.0F, 1.0F);
-			GL11.glScalef(1.3F, 1.3F, 1.3F);
+			GlStateManager.translate(0.25F, -0.3F, -0.1F);
+			GlStateManager.rotate(280.0F, 1.0F, 0.0F, 0.0F);
+			GlStateManager.rotate(45.0F, 0.0F, 1.0F, 0.0F);
+			GlStateManager.rotate(-93.0F, 0.0F, 0.0F, 1.0F);
+			GlStateManager.scale(1.3F, 1.3F, 1.3F);
 			mc.renderEngine.bindTexture(RenderUtil.downloadResource(String.format(AliensVsPredator.settings().getUrlSkinM56sg(), player.getUUID()), resourceLocation, false));
 			this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 		}
@@ -90,12 +91,12 @@ public class RenderItemM56SG extends ItemRenderer
 	public void renderInInventory(ItemStack item, Object... data)
 	{
 		this.resource = RenderUtil.downloadResource(String.format(AliensVsPredator.settings().getUrlSkinM56sg(), AccessWrapper.getSession().getPlayerID()), resourceLocation);
-		GL11.glDisable(GL11.GL_CULL_FACE);
-		GL11.glRotatef(0F, 1.0F, 0.0F, 0.0F);
-		GL11.glRotatef(-40F, 0.0F, 1.0F, 0.0F);
-		GL11.glRotatef(0F, 0.0F, 0.0F, 1.0F);
-		GL11.glTranslatef(0F, 5.77F, -20.85F);
-		GL11.glScalef(20F, 20F, 20F);
+		GlStateManager.disable(GL11.GL_CULL_FACE);
+		GlStateManager.rotate(0F, 1.0F, 0.0F, 0.0F);
+		GlStateManager.rotate(-40F, 0.0F, 1.0F, 0.0F);
+		GlStateManager.rotate(0F, 0.0F, 0.0F, 1.0F);
+		GlStateManager.translate(0F, 5.77F, -20.85F);
+		GlStateManager.scale(20F, 20F, 20F);
 		mc.renderEngine.bindTexture(getResourceLocation());
 		this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 	}

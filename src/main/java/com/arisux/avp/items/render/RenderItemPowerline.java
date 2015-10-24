@@ -1,6 +1,5 @@
 package com.arisux.avp.items.render;
 
-import static org.lwjgl.opengl.GL11.glDisable;
 import static org.lwjgl.opengl.GL11.glEnable;
 
 import org.lwjgl.opengl.GL11;
@@ -53,15 +52,15 @@ public class RenderItemPowerline extends ItemRenderer
 		GL11.glPushMatrix();
 		{
 			float glScale = 12F;
-			glDisable(GL11.GL_TEXTURE_2D);
-			GL11.glScalef(glScale, glScale, glScale);
+			GlStateManager.disable(GL11.GL_TEXTURE_2D);
+			GlStateManager.scale(glScale, glScale, glScale);
 			GL11.glTranslated(1.1, -0.1, 0);
-			GL11.glRotatef(45, 1, 0, 1);
-			GL11.glRotatef(Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 360 * 8, 0, 1, 0);
+			GlStateManager.rotate(45, 1, 0, 1);
+			GlStateManager.rotate(Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 360 * 8, 0, 1, 0);
 			GlStateManager.color4i(0xFF222222);
-			RenderUtil.glEnableLight();
+			GlStateManager.enableLight();
 			model.render(0.0625F);
-			RenderUtil.glDisableLight();
+			GlStateManager.disableLight();
 			glEnable(GL11.GL_TEXTURE_2D);
 		}
 		GL11.glPopMatrix();
@@ -71,10 +70,10 @@ public class RenderItemPowerline extends ItemRenderer
 	public void renderInWorld(ItemStack item, Object... data)
 	{
 		super.renderInWorld(item, data);	
-		glDisable(GL11.GL_TEXTURE_2D);	
-		GL11.glRotatef(Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 360 * 6, 0.0F, 1.0F, 0.0F);
-		GL11.glDisable(GL11.GL_CULL_FACE);
-		RenderUtil.glEnableLight();
+		GlStateManager.disable(GL11.GL_TEXTURE_2D);	
+		GlStateManager.rotate(Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 360 * 6, 0.0F, 1.0F, 0.0F);
+		GlStateManager.disable(GL11.GL_CULL_FACE);
+		GlStateManager.enableLight();
 		GlStateManager.color4i(0xFF222222);
 		this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 		glEnable(GL11.GL_TEXTURE_2D);

@@ -2,6 +2,7 @@ package com.arisux.avp.items.render;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
 import com.arisux.airi.lib.client.ModelBaseExtension;
@@ -24,14 +25,14 @@ public class RenderItemLocker extends ItemRenderer
 	{
 		GL11.glPushMatrix();
 		{			
-			GL11.glScalef(-1F, 1F, 1F);
-			GL11.glRotatef(90F, 0F, 0F, 1F);
-			GL11.glRotatef(-45F, 0F, 1F, 0F);
-			GL11.glRotatef(90F, 1F, 0F, 0F);
-			GL11.glTranslatef(0F, -0.5F, -0.9F);
-			GL11.glDisable(GL11.GL_CULL_FACE);
+			GlStateManager.scale(-1F, 1F, 1F);
+			GlStateManager.rotate(90F, 0F, 0F, 1F);
+			GlStateManager.rotate(-45F, 0F, 1F, 0F);
+			GlStateManager.rotate(90F, 1F, 0F, 0F);
+			GlStateManager.translate(0F, -0.5F, -0.9F);
+			GlStateManager.disable(GL11.GL_CULL_FACE);
 			RenderUtil.bindTexture(getResourceLocation());
-			GL11.glDisable(GL11.GL_CULL_FACE);
+			GlStateManager.disable(GL11.GL_CULL_FACE);
 			this.getModel().render();
 		}
 		GL11.glPopMatrix();
@@ -43,7 +44,7 @@ public class RenderItemLocker extends ItemRenderer
 		GL11.glPushMatrix();
 		{
 			RenderUtil.bindTexture(getResourceLocation());
-			GL11.glDisable(GL11.GL_CULL_FACE);
+			GlStateManager.disable(GL11.GL_CULL_FACE);
 			this.getModel().render();
 		}
 		GL11.glPopMatrix();
@@ -56,14 +57,14 @@ public class RenderItemLocker extends ItemRenderer
 		{
 			float glScale = 8F;
 			RenderUtil.bindTexture(getResourceLocation());
-			GL11.glDisable(GL11.GL_CULL_FACE);
-			GL11.glTranslatef(8F, 4F, 0F);
-			GL11.glRotatef(0F, 1.0F, 0.0F, 0.0F);
-			GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
-			GL11.glScalef(glScale, glScale, glScale);
-			RenderUtil.glEnableLight();
+			GlStateManager.disable(GL11.GL_CULL_FACE);
+			GlStateManager.translate(8F, 4F, 0F);
+			GlStateManager.rotate(0F, 1.0F, 0.0F, 0.0F);
+			GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
+			GlStateManager.scale(glScale, glScale, glScale);
+			GlStateManager.enableLight();
 			this.getModel().render();
-			RenderUtil.glDisableLight();
+			GlStateManager.disableLight();
 		}
 		GL11.glPopMatrix();
 	}

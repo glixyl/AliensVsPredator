@@ -3,6 +3,7 @@ package com.arisux.avp.entities.render;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.api.wavefrontapi.Part;
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.EntityAPC;
 
@@ -104,17 +105,17 @@ public class RenderAPC extends Render
 		
 		GL11.glPushMatrix();
 		{
-			GL11.glDisable(GL11.GL_CULL_FACE);
-			GL11.glTranslatef((float)posX - 2.2F, (float)posY - 2.02F, (float)posZ + 0.1F);
-			GL11.glRotatef(-apc.rotationYaw + 180, 0, 1, 0);
+			GlStateManager.disable(GL11.GL_CULL_FACE);
+			GlStateManager.translate((float)posX - 2.2F, (float)posY - 2.02F, (float)posZ + 0.1F);
+			GlStateManager.rotate(-apc.rotationYaw + 180, 0, 1, 0);
 
 			if (time > 0.0F)
 			{
-				GL11.glRotatef(MathHelper.sin(time) * time * damage / 10.0F * (float)apc.getForwardDirection(), 1.0F, 0.0F, 0.0F);
+				GlStateManager.rotate(MathHelper.sin(time) * time * damage / 10.0F * (float)apc.getForwardDirection(), 1.0F, 0.0F, 0.0F);
 			}
 			
-			GL11.glScalef(-scale, -scale, scale);
-			GL11.glRotatef(-180f, 0f, 0f, 1f);
+			GlStateManager.scale(-scale, -scale, scale);
+			GlStateManager.rotate(-180f, 0f, 0f, 1f);
 
 			for (Part p : AliensVsPredator.resources().M577_APC.nameToPartHash.values())
 			{
@@ -124,16 +125,16 @@ public class RenderAPC extends Render
 					{
 						if (this.isPartOfTire0(p) || this.isPartOfTire1(p))
 						{
-							GL11.glTranslatef(-3.2F, 0.8F, -0.01F);
-							GL11.glRotatef(tireRotation, 0, 0, 1);
-							GL11.glTranslatef(3.2F, -0.8F, 0);
+							GlStateManager.translate(-3.2F, 0.8F, -0.01F);
+							GlStateManager.rotate(tireRotation, 0, 0, 1);
+							GlStateManager.translate(3.2F, -0.8F, 0);
 						}
 							
 						if (this.isPartOfTire2(p) || this.isPartOfTire3(p))
 						{
-							GL11.glTranslatef(1.6F, 0.8F, 0F);
-							GL11.glRotatef(tireRotation, 0, 0, 1);
-							GL11.glTranslatef(-1.6F, -0.8F, 0F);
+							GlStateManager.translate(1.6F, 0.8F, 0F);
+							GlStateManager.rotate(tireRotation, 0, 0, 1);
+							GlStateManager.translate(-1.6F, -0.8F, 0F);
 						}
 
 						p.draw();
@@ -148,11 +149,11 @@ public class RenderAPC extends Render
 						GL11.glPushMatrix();
 						{
 							EntityPlayer playerIn = (EntityPlayer) apc.riddenByEntity;
-							GL11.glTranslatef(-2.9F, 0.75F, -0.25F);
-							GL11.glRotatef(-90, 0F, 1F, 0F);
-							GL11.glRotatef(apc.rotationYaw - 108, 0, 1, 0);
-							GL11.glRotatef(-playerIn.rotationYawHead - 72, 0F, 1F, 0F);
-							GL11.glTranslatef(2.9F, -0.75F, 0.25F);
+							GlStateManager.translate(-2.9F, 0.75F, -0.25F);
+							GlStateManager.rotate(-90, 0F, 1F, 0F);
+							GlStateManager.rotate(apc.rotationYaw - 108, 0, 1, 0);
+							GlStateManager.rotate(-playerIn.rotationYawHead - 72, 0F, 1F, 0F);
+							GlStateManager.translate(2.9F, -0.75F, 0.25F);
 							
 							p.draw();
 						}

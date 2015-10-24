@@ -2,6 +2,7 @@ package com.arisux.avp.entities.mob.render;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ModelTexMap;
 import com.arisux.avp.AliensVsPredator;
@@ -48,23 +49,23 @@ public class RenderMarine extends RenderLiving
 			{
 				this.model.aimedBow = false;
 			}
-			GL11.glTranslatef(-0.35F, 0.8F, -0.85F);
-			GL11.glRotatef(270.0F, 1.0F, 0.0F, 0.0F);
-			GL11.glRotatef(0.0F, 0.0F, 1.0F, 0.0F);
-			GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
-			GL11.glScalef(1.2F, 1.2F, 1.2F);
-			GL11.glDisable(GL11.GL_CULL_FACE);
+			GlStateManager.translate(-0.35F, 0.8F, -0.85F);
+			GlStateManager.rotate(270.0F, 1.0F, 0.0F, 0.0F);
+			GlStateManager.rotate(0.0F, 0.0F, 1.0F, 0.0F);
+			GlStateManager.rotate(180.0F, 0.0F, 0.0F, 1.0F);
+			GlStateManager.scale(1.2F, 1.2F, 1.2F);
+			GlStateManager.disable(GL11.GL_CULL_FACE);
 
 			switch (entity.getMarineType())
 			{
 				case AK47:
-					GL11.glTranslatef(-0.35F, 0.45F, -0.55F);
+					GlStateManager.translate(-0.35F, 0.45F, -0.55F);
 					break;
 				case SNIPER:
-					GL11.glTranslatef(-0.25F, 0.45F, 0.05F);
+					GlStateManager.translate(-0.25F, 0.45F, 0.05F);
 					break;
 				case M56SG:
-					GL11.glTranslatef(-0.15F, 0.7F, -0.73F);
+					GlStateManager.translate(-0.15F, 0.7F, -0.73F);
 					this.model.aimedBow = false;
 					break;
 				default:

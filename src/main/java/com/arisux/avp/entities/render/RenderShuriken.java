@@ -2,6 +2,7 @@ package com.arisux.avp.entities.render;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 
@@ -18,10 +19,10 @@ public class RenderShuriken extends Render
 		GL11.glPushMatrix();
 		{
 			GL11.glTranslated(posX, posY, posZ);
-			GL11.glRotatef(entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * renderPartialTicks, 0.0F, 0.0F, 1.0F);
-			GL11.glRotatef(entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * renderPartialTicks - 90.0F, 0.0F, 1.0F, 0.0F);
-			GL11.glDisable(GL11.GL_CULL_FACE);
-			GL11.glTranslatef(-0.5F, 0.0F, -0.5F);
+			GlStateManager.rotate(entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * renderPartialTicks, 0.0F, 0.0F, 1.0F);
+			GlStateManager.rotate(entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * renderPartialTicks - 90.0F, 0.0F, 1.0F, 0.0F);
+			GlStateManager.disable(GL11.GL_CULL_FACE);
+			GlStateManager.translate(-0.5F, 0.0F, -0.5F);
 			GL11.glNormal3f(0.0F, 1.0F, 0.0F);
 			RenderUtil.drawQuad(0, 0, 1, 1, 0, 0.5F, 0F, 0F, 0.5F);
 			GL11.glEnable(GL11.GL_CULL_FACE);

@@ -6,6 +6,7 @@ import static org.lwjgl.opengl.GL11.glTranslated;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ModelBaseExtension;
 import com.arisux.avp.AliensVsPredator;
@@ -23,14 +24,14 @@ public class RenderSolarPanel extends TileEntitySpecialRenderer
 	{
 		glPushMatrix();
 		{
-			GL11.glDisable(GL11.GL_CULL_FACE);
+			GlStateManager.disable(GL11.GL_CULL_FACE);
 			glTranslated(posX + 0.5, posY + 0.5, posZ + 0.5);
 			
 			if (tileEntity != null)
 			{
 				float angle = tileEntity.getWorldObj().getCelestialAngle(renderPartialTicks) * 360;
-				GL11.glRotatef(angle > 90 && angle < 270 ? 90 : angle, 0, 0, 1);
-				GL11.glTranslatef(0F, -1.4F, 0F);
+				GlStateManager.rotate(angle > 90 && angle < 270 ? 90 : angle, 0, 0, 1);
+				GlStateManager.translate(0F, -1.4F, 0F);
 			}
 			
 			RenderUtil.bindTexture(AliensVsPredator.resources().SOLAR_PANEL);

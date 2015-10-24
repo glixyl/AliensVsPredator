@@ -47,10 +47,10 @@ public class RenderItemM41A extends ItemRenderer
 	public void renderInWorld(ItemStack item, Object... data)
 	{
 		super.renderInWorld(item, data);
-		GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
-		GL11.glTranslatef(0.3F, 1F, 0F);
-		GL11.glScalef(1F, -1F, 1F);
-		GL11.glDisable(GL11.GL_CULL_FACE);
+		GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
+		GlStateManager.translate(0.3F, 1F, 0F);
+		GlStateManager.scale(1F, -1F, 1F);
+		GlStateManager.disable(GL11.GL_CULL_FACE);
 		bindTexture(getResourceLocation());
 		this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 	}
@@ -63,12 +63,12 @@ public class RenderItemM41A extends ItemRenderer
 
 		if (player != null)
 		{
-			GL11.glRotatef(95.0F, 1.0F, 0.0F, 0.0F);
-			GL11.glRotatef(130.0F, 0.0F, 1.0F, 0.0F);
-			GL11.glRotatef(90.0F, 0.0F, 0.0F, 1.0F);
-			GL11.glTranslatef(0.28F, -0.77F, 0.85F);
+			GlStateManager.rotate(95.0F, 1.0F, 0.0F, 0.0F);
+			GlStateManager.rotate(130.0F, 0.0F, 1.0F, 0.0F);
+			GlStateManager.rotate(90.0F, 0.0F, 0.0F, 1.0F);
+			GlStateManager.translate(0.28F, -0.77F, 0.85F);
 			float glScale = 1.3F;
-			GL11.glScalef(glScale, glScale, glScale);
+			GlStateManager.scale(glScale, glScale, glScale);
 			bindTexture(getResourceLocation());
 			this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 		}
@@ -86,33 +86,33 @@ public class RenderItemM41A extends ItemRenderer
 
 			if (Mouse.isButtonDown(0) && mc.inGameHasFocus)
 			{
-				GL11.glTranslatef(-0.1F, 1.44F, -0.595F);
-				GL11.glRotatef(102F, 1.0F, 0.0F, 0.0F);
-				GL11.glRotatef(115.0F, 0.0F, 1.0F, 0.0F);
-				GL11.glRotatef(79F, 0.0F, 0.0F, 1.0F);
-				GL11.glTranslatef(0.027F, 0F, 0F);
+				GlStateManager.translate(-0.1F, 1.44F, -0.595F);
+				GlStateManager.rotate(102F, 1.0F, 0.0F, 0.0F);
+				GlStateManager.rotate(115.0F, 0.0F, 1.0F, 0.0F);
+				GlStateManager.rotate(79F, 0.0F, 0.0F, 1.0F);
+				GlStateManager.translate(0.027F, 0F, 0F);
 			}
 			else
 			{
-				GL11.glTranslatef(0.1F, 1.55F, 0.2F);
-				GL11.glRotatef(95.0F, 1.0F, 0.0F, 0.0F);
-				GL11.glRotatef(120.0F, 0.0F, 1.0F, 0.0F);
-				GL11.glRotatef(79.0F, 0.0F, 0.0F, 1.0F);
+				GlStateManager.translate(0.1F, 1.55F, 0.2F);
+				GlStateManager.rotate(95.0F, 1.0F, 0.0F, 0.0F);
+				GlStateManager.rotate(120.0F, 0.0F, 1.0F, 0.0F);
+				GlStateManager.rotate(79.0F, 0.0F, 0.0F, 1.0F);
 			}
 
-			GL11.glDisable(GL11.GL_CULL_FACE);
-			GL11.glScalef(glScale, glScale, glScale);
+			GlStateManager.disable(GL11.GL_CULL_FACE);
+			GlStateManager.scale(glScale, glScale, glScale);
 			bindTexture(getResourceLocation());
 			this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 
 			if (mc.thePlayer.getCurrentEquippedItem() != null && mc.thePlayer.getCurrentEquippedItem().getItem() instanceof ItemFirearm)
 			{
-				GL11.glDisable(GL11.GL_LIGHTING);
-				GL11.glTranslatef(-0.3439F, 0.6F, 0.04F);
-				GL11.glScalef(displayScale, displayScale, displayScale);
-				GL11.glRotatef(90F, 0F, 1F, 0F);
+				GlStateManager.disable(GL11.GL_LIGHTING);
+				GlStateManager.translate(-0.3439F, 0.6F, 0.04F);
+				GlStateManager.scale(displayScale, displayScale, displayScale);
+				GlStateManager.rotate(90F, 0F, 1F, 0F);
 				RenderUtil.drawRect(-2, -2, 16, 11, 0xFF000000);
-				GL11.glTranslatef(0F, 0F, -0.01F);
+				GlStateManager.translate(0F, 0F, -0.01F);
 				GlStateManager.disableLightMapping();
 				RenderUtil.drawString(getAmmoCountDisplayString(), 0, 0, 0xFFFF0000);
 				GL11.glEnable(GL11.GL_LIGHTING);
@@ -121,12 +121,12 @@ public class RenderItemM41A extends ItemRenderer
 
 			if (mc.thePlayer.inventory.hasItem(AliensVsPredator.items().itemMotionTracker))
 			{
-				GL11.glTranslatef(-50F, -20F, -50F);
-				GL11.glRotatef(-90F, 0F, 1F, 0F);
-				GL11.glScalef(0.4F, 0.4F, 0.4F);
-				RenderUtil.glDisableLight();
+				GlStateManager.translate(-50F, -20F, -50F);
+				GlStateManager.rotate(-90F, 0F, 1F, 0F);
+				GlStateManager.scale(0.4F, 0.4F, 0.4F);
+				GlStateManager.disableLight();
 				motionTracker.draw(0, 0, 128, 96);
-				RenderUtil.glEnableLight();
+				GlStateManager.enableLight();
 			}
 		}
 	}
@@ -135,12 +135,12 @@ public class RenderItemM41A extends ItemRenderer
 	public void renderInInventory(ItemStack item, Object... data)
 	{
 		this.resource = downloadResource(String.format(AliensVsPredator.settings().getUrlSkinM41a(), AccessWrapper.getSession().getPlayerID()), resourceLocation);
-		GL11.glRotatef(0F, 1.0F, 0.0F, 0.0F);
-		GL11.glRotatef(-40F, 0.0F, 1.0F, 0.0F);
-		GL11.glRotatef(0F, 0.0F, 0.0F, 1.0F);
-		GL11.glTranslatef(0F, -5.77F, -20.85F);
-		GL11.glScalef(20F, 20F, 20F);
-		GL11.glDisable(GL11.GL_CULL_FACE);
+		GlStateManager.rotate(0F, 1.0F, 0.0F, 0.0F);
+		GlStateManager.rotate(-40F, 0.0F, 1.0F, 0.0F);
+		GlStateManager.rotate(0F, 0.0F, 0.0F, 1.0F);
+		GlStateManager.translate(0F, -5.77F, -20.85F);
+		GlStateManager.scale(20F, 20F, 20F);
+		GlStateManager.disable(GL11.GL_CULL_FACE);
 		bindTexture(getResourceLocation());
 		this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 	}

@@ -1,6 +1,6 @@
 package com.arisux.avp.entities.mob.render;
 
-import org.lwjgl.opengl.GL11;
+import com.arisux.airi.lib.GlStateManager;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -26,7 +26,7 @@ public class RenderEngineer extends RenderLiving
 	@Override
 	protected void preRenderCallback(EntityLivingBase entityliving, float renderPartialTicks)
 	{
-		GL11.glScalef(1.25F, 1.25F, 1.25F);
+		GlStateManager.scale(1.25F, 1.25F, 1.25F);
 	}
 
 	@Override

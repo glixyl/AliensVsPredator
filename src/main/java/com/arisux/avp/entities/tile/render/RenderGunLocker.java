@@ -1,7 +1,5 @@
 package com.arisux.avp.entities.tile.render;
 
-import static org.lwjgl.opengl.GL11.glRotatef;
-
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;

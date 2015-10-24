@@ -1,7 +1,6 @@
 package com.arisux.avp.entities.mob.render;
 
-import org.lwjgl.opengl.GL11;
-
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.model.ModelPredalien;
 
@@ -20,7 +19,7 @@ public class RenderPredalien extends RenderLiving
 	@Override
 	protected void preRenderCallback(EntityLivingBase par1EntityLiving, float par2)
 	{
-		GL11.glScalef(0.75F, 0.75F, 0.75F);
+		GlStateManager.scale(0.75F, 0.75F, 0.75F);
 	}
 
 	@Override

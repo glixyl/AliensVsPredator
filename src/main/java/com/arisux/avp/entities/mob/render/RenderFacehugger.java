@@ -1,7 +1,6 @@
 package com.arisux.avp.entities.mob.render;
 
-import org.lwjgl.opengl.GL11;
-
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntityFacehugger;
 import com.arisux.avp.entities.mob.EntityMarine;
@@ -50,37 +49,37 @@ public class RenderFacehugger extends RenderLiving
 	public void scaleFacehugger(EntityFacehugger entityFacehugger)
 	{
 		float glScale = entityFacehugger.facehuggerScaleAmount();
-		GL11.glScalef(glScale, glScale, glScale);
+		GlStateManager.scale(glScale, glScale, glScale);
 
 		if (entityFacehugger.ridingEntity != null)
 		{
 			if (entityFacehugger.ridingEntity instanceof EntityPlayer || entityFacehugger.ridingEntity instanceof EntityMarine)
 			{
-				GL11.glRotatef(90.0F, 0.0F, 0.0F, 1.0F);
-				GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
+				GlStateManager.rotate(90.0F, 0.0F, 0.0F, 1.0F);
+				GlStateManager.rotate(90.0F, 0.0F, 1.0F, 0.0F);
 			}
 
 			if (entityFacehugger.ridingEntity instanceof EntityVillager)
 			{
-				GL11.glRotatef(90.0F, 0.0F, 0.0F, 1.0F);
-				GL11.glRotatef(110.0F, 0.0F, 1.0F, 0.0F);
-				GL11.glRotatef(90.0F, 0.0F, 0.0F, 1.0F);
-				GL11.glTranslatef(0F, -0.1F, 0.15F);
+				GlStateManager.rotate(90.0F, 0.0F, 0.0F, 1.0F);
+				GlStateManager.rotate(110.0F, 0.0F, 1.0F, 0.0F);
+				GlStateManager.rotate(90.0F, 0.0F, 0.0F, 1.0F);
+				GlStateManager.translate(0F, -0.1F, 0.15F);
 			}
 
 			if (entityFacehugger.ridingEntity instanceof EntityCow || entityFacehugger.ridingEntity instanceof EntityPig)
 			{
-				GL11.glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
-				GL11.glRotatef(-120.0F, 1.0F, 0.0F, 0.0F);
-				GL11.glTranslatef(0F, -0.75F, -1.25F);
-				GL11.glRotatef(5F, 1F, 0F, 0F);
+				GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
+				GlStateManager.rotate(-120.0F, 1.0F, 0.0F, 0.0F);
+				GlStateManager.translate(0F, -0.75F, -1.25F);
+				GlStateManager.rotate(5F, 1F, 0F, 0F);
 			}
 
 			if (entityFacehugger.ridingEntity instanceof EntityHorse)
 			{
-				GL11.glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
-				GL11.glRotatef(-150.0F, 1.0F, 0.0F, 0.0F);
-				GL11.glTranslatef(0F, -0.5F, -2.15F);
+				GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
+				GlStateManager.rotate(-150.0F, 1.0F, 0.0F, 0.0F);
+				GlStateManager.translate(0F, -0.5F, -2.15F);
 			}
 		}
 	}

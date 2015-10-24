@@ -44,7 +44,7 @@ public class RenderItemGunLocker extends ItemRenderer
 		GL11.glPushMatrix();
 		{
 			RenderUtil.bindTexture(getResourceLocation());
-			GL11.glDisable(GL11.GL_CULL_FACE);
+			GlStateManager.disable(GL11.GL_CULL_FACE);
 			this.getModel().render();
 		}
 		GL11.glPopMatrix();

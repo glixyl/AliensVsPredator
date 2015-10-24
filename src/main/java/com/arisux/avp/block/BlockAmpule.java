@@ -2,6 +2,9 @@ package com.arisux.avp.block;
 
 import java.util.Random;
 
+import com.arisux.airi.lib.BlockTypes.HookedBlock;
+import com.arisux.avp.entities.tile.TileEntityAmpule;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -12,9 +15,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-
-import com.arisux.airi.lib.BlockTypes.HookedBlock;
-import com.arisux.avp.entities.tile.TileEntityAmpule;
 
 public class BlockAmpule extends HookedBlock
 {

@@ -3,6 +3,7 @@ package com.arisux.avp.entities.tile.render;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.model.ModelHiveNode;
 
@@ -18,11 +19,11 @@ public class RenderHiveNode extends TileEntitySpecialRenderer
 	{
 		GL11.glPushMatrix();
 		{
-			GL11.glDisable(GL11.GL_CULL_FACE);
+			GlStateManager.disable(GL11.GL_CULL_FACE);
 			this.bindTexture(AliensVsPredator.resources().HIVE_NODE);
-			GL11.glTranslatef(posX + 0.0F, posY + 1.2F, posZ + 0.0F);
+			GlStateManager.translate(posX + 0.0F, posY + 1.2F, posZ + 0.0F);
 			GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-			GL11.glScalef(-1.0F, -1.0F, 1.0F);
+			GlStateManager.scale(-1.0F, -1.0F, 1.0F);
 			GL11.glEnable(GL11.GL_ALPHA_TEST);
 			this.mainModel.render((Entity) null, 0.0F, 0.0F, 0.0F, renderPartialTicks, 0.0F, 0.0625F);
 		}

@@ -6,6 +6,7 @@ import static org.lwjgl.opengl.GL11.glTranslated;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ModelBaseExtension;
 import com.arisux.avp.AliensVsPredator;
@@ -23,14 +24,14 @@ public class RenderPowercell extends TileEntitySpecialRenderer
 	{
 		glPushMatrix();
 		{
-			GL11.glDisable(GL11.GL_CULL_FACE);
+			GlStateManager.disable(GL11.GL_CULL_FACE);
 			glTranslated(posX + 0.5, posY - 0.5, posZ + 0.5);
 			RenderUtil.bindTexture(AliensVsPredator.resources().POWERCELL);
 			model.render();
-			RenderUtil.glDisableLight();
+			GlStateManager.disableLight();
 			RenderUtil.bindTexture(AliensVsPredator.resources().POWERCELL_LIQUID);
 			model.render();
-			RenderUtil.glEnableLight();
+			GlStateManager.enableLight();
 		}
 		glPopMatrix();
 	}

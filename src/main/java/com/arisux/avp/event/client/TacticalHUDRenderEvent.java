@@ -8,7 +8,6 @@ import static org.lwjgl.opengl.GL11.GL_SRC_ALPHA;
 import static org.lwjgl.opengl.GL11.glBlendFunc;
 import static org.lwjgl.opengl.GL11.glColor4f;
 import static org.lwjgl.opengl.GL11.glDepthMask;
-import static org.lwjgl.opengl.GL11.glDisable;
 import static org.lwjgl.opengl.GL11.glEnable;
 
 import java.text.SimpleDateFormat;
@@ -72,7 +71,7 @@ public class TacticalHUDRenderEvent
 				GL11.glPushMatrix();
 				{
 					GL11.glTranslated(p.xCoord, p.yCoord, p.zCoord);
-					GL11.glScalef(scale, scale, scale);
+					GlStateManager.scale(scale, scale, scale);
 
 					if (Minecraft.getMinecraft().thePlayer != null && clientPlayerProperties != null)
 					{
@@ -91,26 +90,26 @@ public class TacticalHUDRenderEvent
 
 								GL11.glPushMatrix();
 								{
-									GL11.glDisable(GL11.GL_ALPHA_TEST);
+									GlStateManager.disable(GL11.GL_ALPHA_TEST);
 									GL11.glEnable(GL_DEPTH_TEST);
 									GL11.glDepthFunc(GL11.GL_ALWAYS);
-									RenderUtil.glBlendClear();
+									GlStateManager.blendClear();
 									GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
-									RenderUtil.glDisableLight();
+									GlStateManager.disableLight();
 									GlStateManager.disableLightMapping();
 									GL11.glTranslated(p.xCoord, p.yCoord, p.zCoord);
 									GL11.glTranslated(-res.xCoord, -res.yCoord, -res.zCoord);
-									GL11.glRotatef(-Minecraft.getMinecraft().thePlayer.rotationYaw - 180, 0, 1, 0);
-									GL11.glRotatef(-Minecraft.getMinecraft().thePlayer.rotationPitch, 1, 0, 0);
+									GlStateManager.rotate(-Minecraft.getMinecraft().thePlayer.rotationYaw - 180, 0, 1, 0);
+									GlStateManager.rotate(-Minecraft.getMinecraft().thePlayer.rotationPitch, 1, 0, 0);
 
 									GL11.glPushMatrix();
 									{
-										GL11.glRotatef(Minecraft.getMinecraft().thePlayer.rotationYaw - 180, 0, 1, 0);
+										GlStateManager.rotate(Minecraft.getMinecraft().thePlayer.rotationYaw - 180, 0, 1, 0);
 										float indicatorScale = 0.05F;
-										RenderUtil.glBlendClear();
+										GlStateManager.blendClear();
 										GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
-										GL11.glScalef(indicatorScale, indicatorScale, indicatorScale);
-										GL11.glRotatef(-Minecraft.getMinecraft().thePlayer.rotationYaw, 0, 1, 0);
+										GlStateManager.scale(indicatorScale, indicatorScale, indicatorScale);
+										GlStateManager.rotate(-Minecraft.getMinecraft().thePlayer.rotationYaw, 0, 1, 0);
 
 										if (livingProperties.doesEntityContainEmbryo()) {
 											GlStateManager.color4i(0xFFFF0000);
@@ -122,8 +121,8 @@ public class TacticalHUDRenderEvent
 										int textX = 15;
 										int textY = -28 + textMultiplier;
 										float textScale = 0.0625F;
-										GL11.glRotatef(180F, 0F, 1F, 0F);
-										GL11.glScalef(textScale, -textScale, textScale);
+										GlStateManager.rotate(180F, 0F, 1F, 0F);
+										GlStateManager.scale(textScale, -textScale, textScale);
 
 										RenderUtil.drawString(livingProperties.getEntityLivingBase().getCommandSenderName(), textX, textY += textMultiplier, color, false);
 										RenderUtil.drawString(((int) livingProperties.getEntityLivingBase().getDistanceToEntity(mc.thePlayer)) + " meters", textX, textY += textMultiplier, color, false);
@@ -139,7 +138,7 @@ public class TacticalHUDRenderEvent
 									GL11.glPopMatrix();
 
 									GlStateManager.enableLightMapping();
-									RenderUtil.glEnableLight();
+									GlStateManager.enableLight();
 									GL11.glEnable(GL11.GL_DEPTH_TEST);
 									GL11.glDepthFunc(GL11.GL_LEQUAL);
 									GL11.glEnable(GL11.GL_ALPHA_TEST);
@@ -169,22 +168,22 @@ public class TacticalHUDRenderEvent
 					this.gammaRestored = false;
 					AliensVsPredator.events().getLightmapUpdateEvent().gammaValue = playerProperties.isNightvisionEnabled() ? 8F : 0F;
 					this.scanForNearbyPlayers();
-					RenderUtil.glDisableLight();
+					GlStateManager.disableLight();
 					GlStateManager.disableLightMapping();
 
 					glEnable(GL_BLEND);
 					glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
-					glDisable(GL_DEPTH_TEST);
+					GlStateManager.disable(GL_DEPTH_TEST);
 					glDepthMask(false);
 					glColor4f(1F, 1F, 1F, 1F);
-					glDisable(GL_ALPHA_TEST);
+					GlStateManager.disable(GL_ALPHA_TEST);
 					RenderUtil.bindTexture(AliensVsPredator.resources().BLUR_TACTICAL_HUD);
 					RenderUtil.drawQuad(0, 0, RenderUtil.scaledDisplayResolution().getScaledWidth(), RenderUtil.scaledDisplayResolution().getScaledHeight());
 					glDepthMask(true);
 					glEnable(GL_DEPTH_TEST);
 					glEnable(GL_ALPHA_TEST);
 					glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-					glDisable(GL_BLEND);
+					GlStateManager.disable(GL_BLEND);
 
 					this.drawInfoBar();
 					this.drawImpregnationIndicator(clientPlayerProperties);
@@ -255,14 +254,14 @@ public class TacticalHUDRenderEvent
 
 		GL11.glPushMatrix();
 		{
-			GL11.glScalef(scale, scale, scale);
+			GlStateManager.scale(scale, scale, scale);
 			GL11.glEnable(GL_BLEND);
 			GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
 			RenderUtil.drawString(barString, barPadding, 45, 0xFF00AAFF, false);
 			GL11.glPushMatrix();
 			{
 				float nameScale = 1.5F;
-				GL11.glScalef(nameScale, nameScale, nameScale);
+				GlStateManager.scale(nameScale, nameScale, nameScale);
 				RenderUtil.drawString("[" + batteryPercent + "%%] " + mc.thePlayer.getCommandSenderName(), (int) ((barPadding) / nameScale), (int) (30 / nameScale), 0xFF00AAFF, false);
 			}
 			GL11.glPopMatrix();
@@ -301,7 +300,7 @@ public class TacticalHUDRenderEvent
 			GL11.glPushMatrix();
 			{
 				float scale = 1.5F;
-				GL11.glScalef(scale, scale, scale);
+				GlStateManager.scale(scale, scale, scale);
 				RenderUtil.drawStringAlignRight("Analysis Complete:", (int) ((res.getScaledWidth() / scale) - (iconSize / scale)), (int) (30 / scale), 0xFFFF0000);
 			}
 			GL11.glPopMatrix();

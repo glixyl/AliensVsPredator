@@ -2,6 +2,7 @@ package com.arisux.avp.entities.render;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.avp.entities.model.ModelPlasma;
 
 import net.minecraft.client.renderer.entity.Render;
@@ -20,33 +21,33 @@ public class RenderAcidSpit extends Render
 		GL11.glPushMatrix();
 		{
 			GL11.glTranslated(posX, posY, posZ);
-			GL11.glRotatef(entity.rotationYaw - 90.0F, 0.0F, 1.0F, 0.0F);
-			GL11.glRotatef(entity.rotationPitch - 90.0F, 0.0F, 0.0F, 1.0F);
-			GL11.glScalef(0.1F, 0.4F, 0.1F);
+			GlStateManager.rotate(entity.rotationYaw - 90.0F, 0.0F, 1.0F, 0.0F);
+			GlStateManager.rotate(entity.rotationPitch - 90.0F, 0.0F, 0.0F, 1.0F);
+			GlStateManager.scale(0.1F, 0.4F, 0.1F);
 
 			GL11.glPushMatrix();
 			{
-				GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
+				GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
 				this.model.render(0.6F, 0.2F, 1.0F, 0.0F, 0.7F);
 				
 				GL11.glPushMatrix();
 				{
-					GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
+					GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
 					this.model.render(0.7F, 0.2F, 1.0F, 0.0F, 0.7F);
 					
 					GL11.glPushMatrix();
 					{
-						GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
+						GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
 						this.model.render(0.8F, 0.2F, 1.0F, 0.0F, 0.7F);
 						
 						GL11.glPushMatrix();
 						{
-							GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
+							GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
 							this.model.render(0.9F, 0.2F, 1.0F, 0.0F, 0.7F);
 							
 							GL11.glPushMatrix();
 							{
-								GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
+								GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
 								this.model.render(1.0F, 0.2F, 1.0F, 0.0F, 0.7F);
 							}
 							GL11.glPopMatrix();

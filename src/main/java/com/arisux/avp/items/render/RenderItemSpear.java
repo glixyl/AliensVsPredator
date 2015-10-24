@@ -3,6 +3,7 @@ package com.arisux.avp.items.render;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.model.ModelSpear;
@@ -55,49 +56,49 @@ public class RenderItemSpear implements IItemRenderer
 		switch (type)
 		{
 			case EQUIPPED:
-				GL11.glRotatef(175.0F, 0.0F, 1.0F, 0.0F);
-				GL11.glRotatef(55.0F, 0.0F, 0.0F, 1.0F);
-				GL11.glTranslatef(-0.25F, 0.75F, 0.065F);
-				GL11.glScalef(1F, 1F, 1F);
+				GlStateManager.rotate(175.0F, 0.0F, 1.0F, 0.0F);
+				GlStateManager.rotate(55.0F, 0.0F, 0.0F, 1.0F);
+				GlStateManager.translate(-0.25F, 0.75F, 0.065F);
+				GlStateManager.scale(1F, 1F, 1F);
 				GL11.glEnable(GL11.GL_CULL_FACE);
 				RenderUtil.bindTexture(resourceLocation);
 				if (Mouse.isButtonDown(1))
 				{
-					GL11.glRotatef(90.0F, 0.0F, 0.0F, 1.0F);
-					GL11.glTranslatef(0.25F, -0.2F, 0F);
+					GlStateManager.rotate(90.0F, 0.0F, 0.0F, 1.0F);
+					GlStateManager.translate(0.25F, -0.2F, 0F);
 				}
 				this.model.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 				break;
 
 			case EQUIPPED_FIRST_PERSON:
-				GL11.glRotatef(170.0F, 1.0F, 0.0F, 0.0F);
-				GL11.glRotatef(10.0F, 0.0F, 0.0F, 1.0F);
+				GlStateManager.rotate(170.0F, 1.0F, 0.0F, 0.0F);
+				GlStateManager.rotate(10.0F, 0.0F, 0.0F, 1.0F);
 
 				if ((EntityPlayer) data[1] == Minecraft.getMinecraft().renderViewEntity && Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && (!(Minecraft.getMinecraft().currentScreen instanceof GuiInventory) && !(Minecraft.getMinecraft().currentScreen instanceof GuiContainerCreative) || RenderManager.instance.playerViewY != 180.0F))
 				{
-					GL11.glTranslatef(0.2F, -0.4F, -0.5F);
-					GL11.glRotatef(270.0F, 1.0F, 0.0F, 0.0F);
-					GL11.glRotatef(50.0F, 0.0F, 1.0F, 0.0F);
-					GL11.glRotatef(9.0F, 0.0F, 0.0F, 1.0F);
+					GlStateManager.translate(0.2F, -0.4F, -0.5F);
+					GlStateManager.rotate(270.0F, 1.0F, 0.0F, 0.0F);
+					GlStateManager.rotate(50.0F, 0.0F, 1.0F, 0.0F);
+					GlStateManager.rotate(9.0F, 0.0F, 0.0F, 1.0F);
 				}
 				else
 				{
-					GL11.glTranslatef(0.45F, 0.0F, 0.0F);
+					GlStateManager.translate(0.45F, 0.0F, 0.0F);
 				}
 
-				GL11.glScalef(1.6F, 1.6F, 1.6F);
+				GlStateManager.scale(1.6F, 1.6F, 1.6F);
 				RenderUtil.bindTexture(resourceLocation);
 				this.model.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 				break;
 
 			case INVENTORY:
-				GL11.glDisable(GL11.GL_CULL_FACE);
+				GlStateManager.disable(GL11.GL_CULL_FACE);
 				GL11.glEnable(GL11.GL_BLEND);
-				GL11.glTranslatef(8.5F, 0F, 0F);
-				GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
-				GL11.glRotatef(-45, 0.0F, 0.0F, 1.0F);
-				GL11.glTranslatef(-6F, 5F, 0F);
-				GL11.glScalef(7F, 7F, 7F);
+				GlStateManager.translate(8.5F, 0F, 0F);
+				GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
+				GlStateManager.rotate(-45, 0.0F, 0.0F, 1.0F);
+				GlStateManager.translate(-6F, 5F, 0F);
+				GlStateManager.scale(7F, 7F, 7F);
 				RenderUtil.bindTexture(resourceLocation);
 				this.model.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 				break;

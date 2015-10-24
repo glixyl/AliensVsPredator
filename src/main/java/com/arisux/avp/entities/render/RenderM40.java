@@ -2,6 +2,7 @@ package com.arisux.avp.entities.render;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ModelBaseExtension;
 import com.arisux.avp.AliensVsPredator;
@@ -21,12 +22,12 @@ public class RenderM40 extends Render
 	{
 		EntityGrenade grenade = (EntityGrenade) entity;
 		GL11.glPushMatrix();
-		GL11.glTranslatef((float) posX, (float) posY + 0.75F, (float) posZ);
-		GL11.glRotatef(entity.rotationYaw, 0.0F, 1.0F, 0.0F);
-		GL11.glRotatef(entity.rotationPitch, 0.0F, 0.0F, 1.0F);
-		GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
-		GL11.glTranslatef(0.25F, 0.5F, 0.0F);
-		GL11.glScalef(0.75F, 0.75F, 0.75F);
+		GlStateManager.translate((float) posX, (float) posY + 0.75F, (float) posZ);
+		GlStateManager.rotate(entity.rotationYaw, 0.0F, 1.0F, 0.0F);
+		GlStateManager.rotate(entity.rotationPitch, 0.0F, 0.0F, 1.0F);
+		GlStateManager.rotate(180.0F, 1.0F, 0.0F, 0.0F);
+		GlStateManager.translate(0.25F, 0.5F, 0.0F);
+		GlStateManager.scale(0.75F, 0.75F, 0.75F);
 		RenderUtil.bindTexture(!grenade.isFlaming ? AliensVsPredator.resources().M40GRENADE : AliensVsPredator.resources().M40GRENADE_INCENDIARY);
 		model.render();
 		GL11.glColor3f(1.0F, 1.0F, 1.0F);

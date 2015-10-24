@@ -6,12 +6,9 @@ import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
 import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_SRC_ALPHA;
 import static org.lwjgl.opengl.GL11.GL_SRC_ALPHA;
 import static org.lwjgl.opengl.GL11.glBlendFunc;
-import static org.lwjgl.opengl.GL11.glDisable;
 import static org.lwjgl.opengl.GL11.glEnable;
 import static org.lwjgl.opengl.GL11.glPopMatrix;
 import static org.lwjgl.opengl.GL11.glPushMatrix;
-import static org.lwjgl.opengl.GL11.glRotatef;
-import static org.lwjgl.opengl.GL11.glScalef;
 import static org.lwjgl.opengl.GL11.glTranslated;
 
 import org.apache.commons.lang3.SystemUtils;
@@ -41,21 +38,21 @@ public class RenderWorkstation extends TileEntitySpecialRenderer
 
 		glPushMatrix();
 		{
-			glDisable(GL_CULL_FACE);
+			GlStateManager.disable(GL_CULL_FACE);
 			glEnable(GL_BLEND);
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 			this.bindTexture(AliensVsPredator.resources().WORKSTATION);
 			glTranslated(posX + 0.5F, posY + 1.5F, posZ + 0.5F);
-			glRotatef(tile.rotation * (-90F), 0F, 1F, 0F);
+			GL11.glRotatef(tile.rotation * (-90F), 0F, 1F, 0F);
 			glEnable(GL12.GL_RESCALE_NORMAL);
-			glScalef(1.0F, -1.0F, 1.0F);
+			GlStateManager.scale(1.0F, -1.0F, 1.0F);
 			glEnable(GL_ALPHA_TEST);
 			this.model.render(tile, 0.0625F);
 
 			if (tile.isOperational())
 			{
 				GlStateManager.disableLightMapping();
-				RenderUtil.glDisableLight();
+				GlStateManager.disableLight();
 				glEnable(GL_BLEND);
 				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 				this.bindTexture(AliensVsPredator.resources().WORKSTATION_MASK);
@@ -63,12 +60,12 @@ public class RenderWorkstation extends TileEntitySpecialRenderer
 
 				this.renderDisplay(tile);
 
-//				GL11.glRotatef(19.15F, 0F, 1F, 0F);
-//				GL11.glTranslatef(0.88F, 0F, 0.149F);
+//				GlStateManager.rotate(19.15F, 0F, 1F, 0F);
+//				GlStateManager.translate(0.88F, 0F, 0.149F);
 //				this.renderDisplay();
 
-				glDisable(GL_BLEND);
-				RenderUtil.glEnableLight();
+				GlStateManager.disable(GL_BLEND);
+				GlStateManager.enableLight();
 				GlStateManager.enableLightMapping();
 			}
 		}
@@ -80,9 +77,9 @@ public class RenderWorkstation extends TileEntitySpecialRenderer
 		GL11.glPushMatrix();
 		{
 			float textscale = 0.004F;
-			GL11.glTranslatef(0.45F, -0.58F, 0.254F);
-			GL11.glRotatef(6.5F, 1F, 0F, 0F);
-			GL11.glScalef(-textscale, textscale, textscale);
+			GlStateManager.translate(0.45F, -0.58F, 0.254F);
+			GlStateManager.rotate(6.5F, 1F, 0F, 0F);
+			GlStateManager.scale(-textscale, textscale, textscale);
 
 			if (tile.getWorldObj().getWorldTime() % 40 == 0)
 			{

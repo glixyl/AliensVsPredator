@@ -1,7 +1,6 @@
 package com.arisux.avp.entities.mob.render;
 
-import org.lwjgl.opengl.GL11;
-
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntityRoyalFacehugger;
 
@@ -22,7 +21,7 @@ public class RenderRoyalFacehugger extends RenderLiving
 	protected void preRenderCallback(EntityLivingBase entityliving, float partialTicks)
 	{
 		float scale = ((EntityRoyalFacehugger) entityliving).facehuggerScaleAmount();
-		GL11.glScalef(scale, scale, scale);
+		GlStateManager.scale(scale, scale, scale);
 	}
 
 	@Override

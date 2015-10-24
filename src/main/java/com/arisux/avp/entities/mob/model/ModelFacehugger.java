@@ -1,7 +1,6 @@
 package com.arisux.avp.entities.mob.model;
 
-import org.lwjgl.opengl.GL11;
-
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.client.ModelBaseExtension;
 
 import net.minecraft.client.Minecraft;
@@ -221,7 +220,7 @@ public class ModelFacehugger extends ModelBaseExtension
 
 		if (!(rotationToGround >= -10F && rotationToGround <= 10F))
 		{
-			GL11.glRotatef(rotationToGround, 1F, 0F, 0F);
+			GlStateManager.rotate(rotationToGround, 1F, 0F, 0F);
 		}
 	}
 

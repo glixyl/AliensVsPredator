@@ -2,6 +2,7 @@ package com.arisux.avp.items.render;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.items.model.ModelWristBlade;
@@ -54,35 +55,35 @@ public class RenderItemWristbracerBlades implements IItemRenderer
 		switch (type)
 		{
 			case EQUIPPED:
-				GL11.glRotatef(-78.0F, 0.0F, 1.0F, 0.0F);
-				GL11.glRotatef(-165.0F, 1.0F, 0.0F, 0.0F);
-				GL11.glRotatef(13.0F, 0.0F, 0.0F, 1.0F);
-				GL11.glTranslatef(-0.25F, -0.15F, 0.3F);
-				GL11.glScalef(2F, 2F, 2F);
+				GlStateManager.rotate(-78.0F, 0.0F, 1.0F, 0.0F);
+				GlStateManager.rotate(-165.0F, 1.0F, 0.0F, 0.0F);
+				GlStateManager.rotate(13.0F, 0.0F, 0.0F, 1.0F);
+				GlStateManager.translate(-0.25F, -0.15F, 0.3F);
+				GlStateManager.scale(2F, 2F, 2F);
 				RenderUtil.bindTexture(resourceLocation);
 				this.model.b6.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 				this.model.bladeLeft.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 				break;
 
 			case EQUIPPED_FIRST_PERSON:
-				GL11.glRotatef(186.0F, 1.0F, 0.0F, 0.0F);
-				GL11.glRotatef(3.0F, 0.0F, 1.0F, 0.0F);
-				GL11.glRotatef(-35.0F, 0.0F, 0.0F, 1.0F);
+				GlStateManager.rotate(186.0F, 1.0F, 0.0F, 0.0F);
+				GlStateManager.rotate(3.0F, 0.0F, 1.0F, 0.0F);
+				GlStateManager.rotate(-35.0F, 0.0F, 0.0F, 1.0F);
 
 				if ((EntityPlayer) data[1] == Minecraft.getMinecraft().renderViewEntity && Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && (!(Minecraft.getMinecraft().currentScreen instanceof GuiInventory) && !(Minecraft.getMinecraft().currentScreen instanceof GuiContainerCreative) || RenderManager.instance.playerViewY != 180.0F))
 				{
-					GL11.glTranslatef(0.4F, 0.1F, -0.1F);
-					GL11.glRotatef(340.0F, 1.0F, 0.0F, 0.0F);
-					GL11.glRotatef(-30.0F, 0.0F, 1.0F, 0.0F);
-					GL11.glRotatef(-70.0F, 0.0F, 0.0F, 1.0F);
-					GL11.glDisable(GL11.GL_CULL_FACE);
+					GlStateManager.translate(0.4F, 0.1F, -0.1F);
+					GlStateManager.rotate(340.0F, 1.0F, 0.0F, 0.0F);
+					GlStateManager.rotate(-30.0F, 0.0F, 1.0F, 0.0F);
+					GlStateManager.rotate(-70.0F, 0.0F, 0.0F, 1.0F);
+					GlStateManager.disable(GL11.GL_CULL_FACE);
 				}
 				else
 				{
-					GL11.glTranslatef(0.45F, 0.0F, 0.0F);
+					GlStateManager.translate(0.45F, 0.0F, 0.0F);
 				}
 
-				GL11.glScalef(1.6F, 1.6F, 1.6F);
+				GlStateManager.scale(1.6F, 1.6F, 1.6F);
 				RenderUtil.bindTexture(resourceLocation);
 				this.model.b6.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 				this.model.bladeLeft.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
@@ -90,12 +91,12 @@ public class RenderItemWristbracerBlades implements IItemRenderer
 				break;
 
 			case INVENTORY:
-				GL11.glDisable(GL11.GL_CULL_FACE);
+				GlStateManager.disable(GL11.GL_CULL_FACE);
 				GL11.glEnable(GL11.GL_BLEND);
-				GL11.glTranslatef(8.5F, 0F, 0F);
-				GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
-				GL11.glTranslatef(-16F, 6F, -3F);
-				GL11.glScalef(33F, 33F, 33F);
+				GlStateManager.translate(8.5F, 0F, 0F);
+				GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
+				GlStateManager.translate(-16F, 6F, -3F);
+				GlStateManager.scale(33F, 33F, 33F);
 				RenderUtil.bindTexture(resourceLocation);
 				this.model.b6.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 				this.model.bladeLeft.render(RenderUtil.DEFAULT_BOX_TRANSLATION);

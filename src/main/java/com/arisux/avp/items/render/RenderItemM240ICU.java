@@ -42,10 +42,10 @@ public class RenderItemM240ICU extends ItemRenderer
 	public void renderInWorld(ItemStack item, Object... data)
 	{
 		super.renderInWorld(item, data);
-		GL11.glRotatef(this.rotation, 0.0F, 1.0F, 0.0F);
-		GL11.glTranslatef(0F, 0.5F, 0F);
-		GL11.glScalef(1F, -1F, 1F);
-		GL11.glDisable(GL11.GL_CULL_FACE);
+		GlStateManager.rotate(this.rotation, 0.0F, 1.0F, 0.0F);
+		GlStateManager.translate(0F, 0.5F, 0F);
+		GlStateManager.scale(1F, -1F, 1F);
+		GlStateManager.disable(GL11.GL_CULL_FACE);
 		bindTexture(getResourceLocation());
 		this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 	}
@@ -53,12 +53,12 @@ public class RenderItemM240ICU extends ItemRenderer
 	@Override
 	public void renderThirdPerson(ItemStack item, Object... data)
 	{
-		GL11.glRotatef(15.0F, 1.0F, 0.0F, 0.0F);
-		GL11.glRotatef(15.0F, 0.0F, 1.0F, 0.0F);
-		GL11.glRotatef(190.0F, 0.0F, 0.0F, 1.0F);
-		GL11.glTranslatef(-0.35F, -0.27F, 0.7F);
+		GlStateManager.rotate(15.0F, 1.0F, 0.0F, 0.0F);
+		GlStateManager.rotate(15.0F, 0.0F, 1.0F, 0.0F);
+		GlStateManager.rotate(190.0F, 0.0F, 0.0F, 1.0F);
+		GlStateManager.translate(-0.35F, -0.27F, 0.7F);
 		float glScale = 1.9F;
-		GL11.glScalef(glScale, glScale, glScale);
+		GlStateManager.scale(glScale, glScale, glScale);
 		bindTexture(getResourceLocation());
 		this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 	}
@@ -71,38 +71,38 @@ public class RenderItemM240ICU extends ItemRenderer
 
 		if (firstPersonRenderCheck(data[1]))
 		{
-			GL11.glRotatef(10.0F, 1.0F, 0.0F, 0.0F);
+			GlStateManager.rotate(10.0F, 1.0F, 0.0F, 0.0F);
 			
 			if (Mouse.isButtonDown(0) && mc.inGameHasFocus)
 			{
-				GL11.glTranslatef(0.8F, 0.7F, -0.7F);
-				GL11.glRotatef(91.0F, 1.0F, 0.0F, 0.0F);
-				GL11.glRotatef(117.0F, 0.0F, 1.0F, 0.0F);
-				GL11.glRotatef(80.0F, 0.0F, 0.0F, 1.0F);
-				GL11.glTranslatef(-0.26F, 0F, 0F);
+				GlStateManager.translate(0.8F, 0.7F, -0.7F);
+				GlStateManager.rotate(91.0F, 1.0F, 0.0F, 0.0F);
+				GlStateManager.rotate(117.0F, 0.0F, 1.0F, 0.0F);
+				GlStateManager.rotate(80.0F, 0.0F, 0.0F, 1.0F);
+				GlStateManager.translate(-0.26F, 0F, 0F);
 			}
 			else
 			{
-				GL11.glTranslatef(0.8F, 0.85F, -0.5F);
-				GL11.glRotatef(70.0F, 1.0F, 0.0F, 0.0F);
-				GL11.glRotatef(120.0F, 0.0F, 1.0F, 0.0F);
-				GL11.glRotatef(100.0F, 0.0F, 0.0F, 1.0F);
-				GL11.glTranslatef(0.2F, 0F, 0F);
+				GlStateManager.translate(0.8F, 0.85F, -0.5F);
+				GlStateManager.rotate(70.0F, 1.0F, 0.0F, 0.0F);
+				GlStateManager.rotate(120.0F, 0.0F, 1.0F, 0.0F);
+				GlStateManager.rotate(100.0F, 0.0F, 0.0F, 1.0F);
+				GlStateManager.translate(0.2F, 0F, 0F);
 			}
 
-			GL11.glDisable(GL11.GL_CULL_FACE);
-			GL11.glScalef(glScale, glScale, glScale);
+			GlStateManager.disable(GL11.GL_CULL_FACE);
+			GlStateManager.scale(glScale, glScale, glScale);
 			bindTexture(getResourceLocation());
 			this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 
 			if (mc.thePlayer.getCurrentEquippedItem() != null && mc.thePlayer.getCurrentEquippedItem().getItem() instanceof ItemFirearm)
 			{
-				GL11.glDisable(GL11.GL_LIGHTING);
-				GL11.glTranslatef(-0.3439F, 0.6F, 0.04F);
-				GL11.glScalef(displayScale, displayScale, displayScale);
-				GL11.glRotatef(90F, 0F, 1F, 0F);
+				GlStateManager.disable(GL11.GL_LIGHTING);
+				GlStateManager.translate(-0.3439F, 0.6F, 0.04F);
+				GlStateManager.scale(displayScale, displayScale, displayScale);
+				GlStateManager.rotate(90F, 0F, 1F, 0F);
 				RenderUtil.drawRect(-2, -2, 16, 11, 0xFF000000);
-				GL11.glTranslatef(0F, 0F, -0.01F);
+				GlStateManager.translate(0F, 0F, -0.01F);
 				GlStateManager.disableLightMapping();
 				RenderUtil.drawString(getAmmoCountDisplayString(), 0, 0, 0xFFFF0000);
 				GL11.glEnable(GL11.GL_LIGHTING);
@@ -114,11 +114,11 @@ public class RenderItemM240ICU extends ItemRenderer
 	@Override
 	public void renderInInventory(ItemStack item, Object... data)
 	{
-		GL11.glTranslatef(8F, 1F, 0F);
-		GL11.glRotatef(this.rotation, 0.0F, 1.0F, 0.0F);
-		GL11.glTranslatef(0F, 5F, 0F);
-		GL11.glScalef(10F, 10F, 10F);
-		GL11.glDisable(GL11.GL_CULL_FACE);
+		GlStateManager.translate(8F, 1F, 0F);
+		GlStateManager.rotate(this.rotation, 0.0F, 1.0F, 0.0F);
+		GlStateManager.translate(0F, 5F, 0F);
+		GlStateManager.scale(10F, 10F, 10F);
+		GlStateManager.disable(GL11.GL_CULL_FACE);
 		bindTexture(getResourceLocation());
 		this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 	}

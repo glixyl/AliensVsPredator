@@ -2,6 +2,7 @@ package com.arisux.avp.items.render;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
 import com.arisux.avp.AliensVsPredator;
@@ -40,7 +41,7 @@ public class RenderItemTurret extends ItemRenderer
 		GL11.glPushMatrix();
 		{
 			RenderUtil.bindTexture(getResourceLocation());
-			GL11.glDisable(GL11.GL_CULL_FACE);
+			GlStateManager.disable(GL11.GL_CULL_FACE);
 			((ModelTurret) this.getModel()).render(null, 0.0625F);
 		}
 		GL11.glPopMatrix();
@@ -53,12 +54,12 @@ public class RenderItemTurret extends ItemRenderer
 		{
 			float glScale = 15F;
 			RenderUtil.bindTexture(getResourceLocation());
-			GL11.glDisable(GL11.GL_CULL_FACE);
-			GL11.glTranslatef(8F, -7.5F, 0F);
-			GL11.glRotatef(0F, 1.0F, 0.0F, 0.0F);
-			GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
-			GL11.glScalef(glScale, glScale, glScale);
-			RenderUtil.glEnableLight();
+			GlStateManager.disable(GL11.GL_CULL_FACE);
+			GlStateManager.translate(8F, -7.5F, 0F);
+			GlStateManager.rotate(0F, 1.0F, 0.0F, 0.0F);
+			GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
+			GlStateManager.scale(glScale, glScale, glScale);
+			GlStateManager.enableLight();
 			((ModelTurret) this.getModel()).render(null, 0.0625F);
 		}
 		GL11.glPopMatrix();

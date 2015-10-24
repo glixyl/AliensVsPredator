@@ -1,7 +1,6 @@
 package com.arisux.avp.entities.mob.render;
 
-import org.lwjgl.opengl.GL11;
-
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.avp.AliensVsPredator;
 
 import net.minecraft.client.model.ModelBase;
@@ -22,8 +21,8 @@ public class RenderTrilobite extends RenderLiving
 	{
 		super.preRenderCallback(entitylivingBase, shadowSize);
 		float scale = 1.7F;
-		GL11.glScalef(scale, scale, scale);
-		GL11.glTranslatef(-0.2F, 0F, 0F);
+		GlStateManager.scale(scale, scale, scale);
+		GlStateManager.translate(-0.2F, 0F, 0F);
 	}
 
 	@Override

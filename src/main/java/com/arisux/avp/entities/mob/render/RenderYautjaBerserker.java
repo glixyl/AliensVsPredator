@@ -1,7 +1,6 @@
 package com.arisux.avp.entities.mob.render;
 
-import org.lwjgl.opengl.GL11;
-
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.avp.AliensVsPredator;
 
 import net.minecraft.client.model.ModelBase;
@@ -20,7 +19,7 @@ public class RenderYautjaBerserker extends RenderLiving
 	@Override
 	protected void preRenderCallback(EntityLivingBase entityliving, float renderPartialTicks)
 	{
-		GL11.glScalef(0.85F, 0.85F, 0.85F);
+		GlStateManager.scale(0.85F, 0.85F, 0.85F);
 	}
 
 	@Override

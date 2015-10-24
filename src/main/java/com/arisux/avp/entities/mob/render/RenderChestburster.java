@@ -1,7 +1,6 @@
 package com.arisux.avp.entities.mob.render;
 
-import org.lwjgl.opengl.GL11;
-
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.avp.AliensVsPredator;
 
 import net.minecraft.client.model.ModelBase;
@@ -21,7 +20,7 @@ public class RenderChestburster extends RenderLiving
 	protected void preRenderCallback(EntityLivingBase entitylivingBase, float partialTicks)
 	{
 		super.preRenderCallback(entitylivingBase, shadowSize);
-		GL11.glScalef(0.55F, 0.55F, 0.55F);
+		GlStateManager.scale(0.55F, 0.55F, 0.55F);
 	}
 
 	@Override

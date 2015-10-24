@@ -1,7 +1,6 @@
 package com.arisux.avp.entities.mob.render;
 
-import org.lwjgl.opengl.GL11;
-
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.client.ModelTexMap;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -31,7 +30,7 @@ public class RenderXenomorph extends RenderLiving
 	@Override
 	protected void preRenderCallback(EntityLivingBase entity, float renderPartialTicks)
 	{
-		GL11.glScalef(this.renderScale, this.renderScale, this.renderScale);
+		GlStateManager.scale(this.renderScale, this.renderScale, this.renderScale);
 		super.preRenderCallback(entity, renderPartialTicks);
 	}
 

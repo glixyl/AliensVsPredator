@@ -82,7 +82,7 @@ public class BossBarEvent
 			GL11.glPushMatrix();
 			{
 				float scale = 0.5F;
-				GL11.glScalef(scale, scale, scale);
+				GlStateManager.scale(scale, scale, scale);
 
 				for (EntityLivingBase boss : bosses)
 				{
@@ -118,7 +118,7 @@ public class BossBarEvent
 
 			RenderUtil.drawStringAlignCenter((int)boss.posX + "/" + (int)boss.posY + "/" + (int)boss.posZ, posX + (tW / 2), posY + 26, 0xFFFFFFFF);
 			
-			GL11.glDisable(GL11.GL_BLEND);
+			GlStateManager.disable(GL11.GL_BLEND);
 		}
 		GL11.glPopMatrix();
 	}

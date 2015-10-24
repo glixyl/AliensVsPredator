@@ -1,7 +1,6 @@
 package com.arisux.avp.entities.mob.render;
 
-import org.lwjgl.opengl.GL11;
-
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.model.ModelQueen;
 
@@ -26,7 +25,7 @@ public class RenderQueen extends RenderLiving
 	@Override
 	protected void preRenderCallback(EntityLivingBase entityliving, float f)
 	{
-		GL11.glScalef(1.75F, 1.75F, 1.75F);
+		GlStateManager.scale(1.75F, 1.75F, 1.75F);
 	}
 
 	@Override

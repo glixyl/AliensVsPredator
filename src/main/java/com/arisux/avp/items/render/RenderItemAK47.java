@@ -7,6 +7,7 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.AccessWrapper;
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
 import com.arisux.airi.lib.client.ModelBaseExtension;
@@ -44,10 +45,10 @@ public class RenderItemAK47 extends ItemRenderer
 	public void renderInWorld(ItemStack item, Object... data)
 	{
 		super.renderInWorld(item, data);
-		GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
-		GL11.glTranslatef(-0.1F, 0.5F, -0.5F);
-		GL11.glScalef(1F, -1F, 1F);
-		GL11.glDisable(GL11.GL_CULL_FACE);
+		GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
+		GlStateManager.translate(-0.1F, 0.5F, -0.5F);
+		GlStateManager.scale(1F, -1F, 1F);
+		GlStateManager.disable(GL11.GL_CULL_FACE);
 		bindTexture(getResourceLocation());
 		this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 	}
@@ -60,12 +61,12 @@ public class RenderItemAK47 extends ItemRenderer
 
 		if (player != null)
 		{
-			GL11.glTranslatef(0.2F, 0.3F, -0.17F);
-			GL11.glRotatef(97.0F, 1.0F, 0.0F, 0.0F);
-			GL11.glRotatef(130.0F, 0.0F, 1.0F, 0.0F);
-			GL11.glRotatef(80.0F, 0.0F, 0.0F, 1.0F);
-			GL11.glDisable(GL11.GL_CULL_FACE);
-			GL11.glScalef(1.3F, 1.3F, 1.3F);
+			GlStateManager.translate(0.2F, 0.3F, -0.17F);
+			GlStateManager.rotate(97.0F, 1.0F, 0.0F, 0.0F);
+			GlStateManager.rotate(130.0F, 0.0F, 1.0F, 0.0F);
+			GlStateManager.rotate(80.0F, 0.0F, 0.0F, 1.0F);
+			GlStateManager.disable(GL11.GL_CULL_FACE);
+			GlStateManager.scale(1.3F, 1.3F, 1.3F);
 			bindTexture(getResourceLocation());
 			this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 		}
@@ -80,23 +81,23 @@ public class RenderItemAK47 extends ItemRenderer
 		{
 			if (Mouse.isButtonDown(0) && mc.inGameHasFocus)
 			{
-				GL11.glTranslatef(-0.5F, 0.44F, -1.23F);
-				GL11.glRotatef(101.3F, 1.0F, 0.0F, 0.0F);
-				GL11.glRotatef(117.0F, 0.0F, 1.0F, 0.0F);
-				GL11.glRotatef(80.0F, 0.0F, 0.0F, 1.0F);
-				GL11.glDisable(GL11.GL_CULL_FACE);
+				GlStateManager.translate(-0.5F, 0.44F, -1.23F);
+				GlStateManager.rotate(101.3F, 1.0F, 0.0F, 0.0F);
+				GlStateManager.rotate(117.0F, 0.0F, 1.0F, 0.0F);
+				GlStateManager.rotate(80.0F, 0.0F, 0.0F, 1.0F);
+				GlStateManager.disable(GL11.GL_CULL_FACE);
 			}
 			else
 			{
-				GL11.glTranslatef(0.1F, 0.35F, -0.1F);
-				GL11.glRotatef(95.0F, 1.0F, 0.0F, 0.0F);
-				GL11.glRotatef(120.0F, 0.0F, 1.0F, 0.0F);
-				GL11.glRotatef(80.0F, 0.0F, 0.0F, 1.0F);
-				GL11.glDisable(GL11.GL_CULL_FACE);
+				GlStateManager.translate(0.1F, 0.35F, -0.1F);
+				GlStateManager.rotate(95.0F, 1.0F, 0.0F, 0.0F);
+				GlStateManager.rotate(120.0F, 0.0F, 1.0F, 0.0F);
+				GlStateManager.rotate(80.0F, 0.0F, 0.0F, 1.0F);
+				GlStateManager.disable(GL11.GL_CULL_FACE);
 			}
 
 			float glScale = 2.0F;
-			GL11.glScalef(glScale, glScale, glScale);
+			GlStateManager.scale(glScale, glScale, glScale);
 			bindTexture(getResourceLocation());
 			this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 		}
@@ -107,13 +108,13 @@ public class RenderItemAK47 extends ItemRenderer
 	{
 		this.resource = downloadResource(String.format(AliensVsPredator.settings().getUrlSkinAk47(), AccessWrapper.getSession().getPlayerID()), resourceLocation);
 
-		GL11.glDisable(GL11.GL_CULL_FACE);
-		GL11.glRotatef(0F, 1.0F, 0.0F, 0.0F);
-		GL11.glRotatef(-40F, 0.0F, 1.0F, 0.0F);
-		GL11.glRotatef(0F, 0.0F, 0.0F, 1.0F);
-		GL11.glTranslatef(0F, 5.77F, -20.85F);
+		GlStateManager.disable(GL11.GL_CULL_FACE);
+		GlStateManager.rotate(0F, 1.0F, 0.0F, 0.0F);
+		GlStateManager.rotate(-40F, 0.0F, 1.0F, 0.0F);
+		GlStateManager.rotate(0F, 0.0F, 0.0F, 1.0F);
+		GlStateManager.translate(0F, 5.77F, -20.85F);
 		float glScale = 20F;
-		GL11.glScalef(glScale, glScale, glScale);
+		GlStateManager.scale(glScale, glScale, glScale);
 		bindTexture(getResourceLocation());
 		this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 	}

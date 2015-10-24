@@ -2,6 +2,7 @@ package com.arisux.avp.items.render;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
 import com.arisux.airi.lib.client.ModelBaseExtension;
@@ -50,7 +51,7 @@ public class RenderItemSummoner extends ItemRenderer
 	{
 		this.rotation = rotation > 360F ? rotation = 0F : (rotation = rotation + 0.6F);
 
-		GL11.glDisable(GL11.GL_CULL_FACE);
+		GlStateManager.disable(GL11.GL_CULL_FACE);
 		super.renderItem(type, item, data);
 	}
 
@@ -58,11 +59,11 @@ public class RenderItemSummoner extends ItemRenderer
 	public void renderThirdPerson(ItemStack item, Object... data)
 	{
 		scale = 0.5F;
-		GL11.glRotatef(195F, 1.0F, 0.0F, 0.0F);
-		GL11.glRotatef(180F, 0.0F, 1.0F, 0.0F);
-		GL11.glRotatef(30F, 0.0F, 0.0F, 1.0F);
-		GL11.glTranslatef(-0.5F, 0F, 0F);
-		GL11.glScalef(scale, scale, scale);
+		GlStateManager.rotate(195F, 1.0F, 0.0F, 0.0F);
+		GlStateManager.rotate(180F, 0.0F, 1.0F, 0.0F);
+		GlStateManager.rotate(30F, 0.0F, 0.0F, 1.0F);
+		GlStateManager.translate(-0.5F, 0F, 0F);
+		GlStateManager.scale(scale, scale, scale);
 		RenderUtil.bindTexture(resourceLocation);
 		this.model.render(null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, RenderUtil.DEFAULT_BOX_TRANSLATION);
 	}
@@ -70,11 +71,11 @@ public class RenderItemSummoner extends ItemRenderer
 	@Override
 	public void renderFirstPerson(ItemStack item, Object... data)
 	{
-		GL11.glRotatef(195F, 1.0F, 0.0F, 0.0F);
-		GL11.glRotatef(180F, 0.0F, 1.0F, 0.0F);
-		GL11.glRotatef(30F, 0.0F, 0.0F, 1.0F);
-		GL11.glTranslatef(-25F, 0F + y, 20.85F);
-		GL11.glScalef(scale, scale, scale);
+		GlStateManager.rotate(195F, 1.0F, 0.0F, 0.0F);
+		GlStateManager.rotate(180F, 0.0F, 1.0F, 0.0F);
+		GlStateManager.rotate(30F, 0.0F, 0.0F, 1.0F);
+		GlStateManager.translate(-25F, 0F + y, 20.85F);
+		GlStateManager.scale(scale, scale, scale);
 		RenderUtil.bindTexture(resourceLocation);
 		this.model.render(null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, RenderUtil.DEFAULT_BOX_TRANSLATION);
 	}
@@ -83,10 +84,10 @@ public class RenderItemSummoner extends ItemRenderer
 	public void renderInInventory(ItemStack item, Object... data)
 	{
 		scale = 7.5F;
-		GL11.glTranslatef(8F + x, -1.77F + y, -4F);
-		GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
-		GL11.glRotatef(0F, 1.0F, 0.0F, 0.0F);
-		GL11.glScalef(7.5F, 7.5F, 7.5F);
+		GlStateManager.translate(8F + x, -1.77F + y, -4F);
+		GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
+		GlStateManager.rotate(0F, 1.0F, 0.0F, 0.0F);
+		GlStateManager.scale(7.5F, 7.5F, 7.5F);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		GL11.glEnable(GL11.GL_ALPHA_TEST);
 		GL11.glEnable(GL11.GL_BLEND);
@@ -98,23 +99,23 @@ public class RenderItemSummoner extends ItemRenderer
 	@Override
 	public void renderInWorld(ItemStack item, Object... data)
 	{
-		GL11.glRotatef(180F, 0.0F, 0.0F, 1F);
-		GL11.glRotatef(90F, 0.0F, 1F, 0F);
+		GlStateManager.rotate(180F, 0.0F, 0.0F, 1F);
+		GlStateManager.rotate(90F, 0.0F, 1F, 0F);
 
 		if (entityClass.getSuperclass() == EntityXenomorph.class || entityClass == EntityYautja.class || entityClass == EntityMarine.class)
 		{
-			GL11.glScalef(0.5F, 0.5F, 0.5F);
-			GL11.glTranslatef(0F, -0.5F, -0.5F);
+			GlStateManager.scale(0.5F, 0.5F, 0.5F);
+			GlStateManager.translate(0F, -0.5F, -0.5F);
 		}
 		else if (entityClass.getSuperclass() == EntityChestburster.class)
 		{
-			GL11.glScalef(0.5F, 0.5F, 0.5F);
-			GL11.glTranslatef(0F, -1.5F, -0.5F);
+			GlStateManager.scale(0.5F, 0.5F, 0.5F);
+			GlStateManager.translate(0F, -1.5F, -0.5F);
 		}
 		else
 		{
-			GL11.glScalef(1F, 1F, 1F);
-			GL11.glTranslatef(0F, -1.25F, 0F);
+			GlStateManager.scale(1F, 1F, 1F);
+			GlStateManager.translate(0F, -1.25F, 0F);
 		}
 
 		RenderUtil.bindTexture(resourceLocation);

@@ -2,6 +2,7 @@ package com.arisux.avp.items.render.parts;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.avp.items.render.RenderItemFirearmPart;
 
 import net.minecraft.client.model.ModelRenderer;
@@ -23,10 +24,10 @@ public class RenderItemM4Action extends RenderItemFirearmPart
 		GL11.glPushMatrix();
 		{
 			float glScale = 32F;
-			GL11.glTranslatef(8F, 8F, 0F);
-			GL11.glRotatef(this.getRotation(), 0F, 1F, 0F);
-			GL11.glScalef(glScale, glScale, glScale);
-			GL11.glTranslatef(0.25F, -0.6F, -0F);
+			GlStateManager.translate(8F, 8F, 0F);
+			GlStateManager.rotate(this.getRotation(), 0F, 1F, 0F);
+			GlStateManager.scale(glScale, glScale, glScale);
+			GlStateManager.translate(0.25F, -0.6F, -0F);
 			this.renderPart();
 		}
 		GL11.glPopMatrix();

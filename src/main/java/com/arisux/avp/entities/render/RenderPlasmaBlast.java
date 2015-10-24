@@ -2,6 +2,7 @@ package com.arisux.avp.entities.render;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.client.render.Color;
 import com.arisux.avp.entities.EntityPlasma;
 import com.arisux.avp.entities.model.ModelPlasma;
@@ -24,28 +25,28 @@ public class RenderPlasmaBlast extends Render
 		GL11.glPushMatrix();
 		{
 			GL11.glTranslated(posX, posY, posZ);
-			GL11.glRotatef(entity.rotationYaw - 90.0F, 0.0F, 1.0F, 0.0F);
-			GL11.glRotatef(entity.rotationPitch - 90.0F, 0.0F, 0.0F, 1.0F);
-			GL11.glScalef(plasma.getPlasmaSize(), plasma.getPlasmaSize(), plasma.getPlasmaSize());
+			GlStateManager.rotate(entity.rotationYaw - 90.0F, 0.0F, 1.0F, 0.0F);
+			GlStateManager.rotate(entity.rotationPitch - 90.0F, 0.0F, 0.0F, 1.0F);
+			GlStateManager.scale(plasma.getPlasmaSize(), plasma.getPlasmaSize(), plasma.getPlasmaSize());
 
 			GL11.glPushMatrix();
 			{
-				GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
+				GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
 				this.model.render(0.1F, color);
 
 				GL11.glPushMatrix();
 				{
-					GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
+					GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
 					this.model.render(0.2F, color);
 
 					GL11.glPushMatrix();
 					{
-						GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
+						GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
 						this.model.render(0.3F, color);
 
 						GL11.glPushMatrix();
 						{
-							GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
+							GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
 							this.model.render(0.35F, color);
 						}
 						GL11.glPopMatrix();

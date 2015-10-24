@@ -134,6 +134,7 @@ import com.arisux.avp.items.model.ModelM4;
 import com.arisux.avp.items.model.ModelM41A;
 import com.arisux.avp.items.model.ModelM56SG;
 import com.arisux.avp.items.model.ModelSniper;
+import com.arisux.avp.items.render.RenderItem88MOD4;
 import com.arisux.avp.items.render.RenderItemAK47;
 import com.arisux.avp.items.render.RenderItemAPC;
 import com.arisux.avp.items.render.RenderItemAmpule;
@@ -270,6 +271,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		registerItemRenderer(items.itemM56SG, new RenderItemM56SG());
 		registerItemRenderer(items.itemAK47, new RenderItemAK47());
 		registerItemRenderer(items.itemM4, new RenderItemM4());
+		registerItemRenderer(items.itemPistol, new RenderItem88MOD4());
 		registerItemRenderer(items.itemSniper, new RenderItemSniper());
 		registerItemRenderer(items.itemMotionTracker, new RenderItemMotionTracker());
 		registerItemRenderer(items.itemAPC, new RenderItemAPC());

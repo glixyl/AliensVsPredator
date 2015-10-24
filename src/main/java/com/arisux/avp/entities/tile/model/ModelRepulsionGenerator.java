@@ -3,6 +3,7 @@ package com.arisux.avp.entities.tile.model;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.AccessWrapper;
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.client.ModelBaseExtension;
 import com.arisux.avp.entities.tile.TileEntityRepulsionGenerator;
 
@@ -114,7 +115,7 @@ public class ModelRepulsionGenerator extends ModelBaseExtension
 		{
 			GL11.glPushMatrix();
 			{
-				GL11.glRotatef(tileEntity.getWorldObj().getWorldTime() % 360 * 48 * AccessWrapper.getRenderPartialTicks(), 0F, 1F, 0F);
+				GlStateManager.rotate(tileEntity.getWorldObj().getWorldTime() % 360 * 48 * AccessWrapper.getRenderPartialTicks(), 0F, 1F, 0F);
 				dualMagnet.render(boxTranslation);
 			}
 			GL11.glPopMatrix();

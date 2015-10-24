@@ -1,13 +1,13 @@
 package com.arisux.avp.entities.tile.render;
 
 import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
-import static org.lwjgl.opengl.GL11.glDisable;
 import static org.lwjgl.opengl.GL11.glPopMatrix;
 import static org.lwjgl.opengl.GL11.glPushMatrix;
-import static org.lwjgl.opengl.GL11.glRotatef;
-import static org.lwjgl.opengl.GL11.glScalef;
 import static org.lwjgl.opengl.GL11.glTranslated;
 
+import org.lwjgl.opengl.GL11;
+
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.TileEntityBlastdoor;
 import com.arisux.avp.entities.tile.model.ModelBlastdoor;
@@ -29,28 +29,28 @@ public class RenderBlastdoor extends TileEntitySpecialRenderer
 		{
 			glPushMatrix();
 			{
-				glDisable(GL_CULL_FACE);
+				GlStateManager.disable(GL_CULL_FACE);
 				bindTexture(AliensVsPredator.resources().BLASTDOOR);
 				glTranslated(posX + 0.5F, posY + 1.5F, posZ + 0.5F);
-				glScalef(1.0F, -1.0F, 1.0F);
+				GlStateManager.scale(1.0F, -1.0F, 1.0F);
 
 				if (tile.getDirection() != null)
 				{
 					if (tile.getDirection() == ForgeDirection.NORTH)
 					{
-						glRotatef(0F, 0F, 0F, 0F);
+						GL11.glRotatef(0F, 0F, 0F, 0F);
 					}
 					if (tile.getDirection() == ForgeDirection.SOUTH)
 					{
-						glRotatef(0F, 0F, 0F, 0F);
+						GL11.glRotatef(0F, 0F, 0F, 0F);
 					}
 					if (tile.getDirection() == ForgeDirection.WEST)
 					{
-						glRotatef(90F, 0F, 1F, 0F);
+						GL11.glRotatef(90F, 0F, 1F, 0F);
 					}
 					if (tile.getDirection() == ForgeDirection.EAST)
 					{
-						glRotatef(90F, 0F, 1F, 0F);
+						GL11.glRotatef(90F, 0F, 1F, 0F);
 					}
 				}
 				this.model.render(tile, 0.0625F);

@@ -4,6 +4,7 @@ import java.util.Random;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 
@@ -57,14 +58,14 @@ public class SkyProviderAcheron extends IRenderHandler
 	{
 		Tessellator tessellator = Tessellator.instance;
 
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		GlStateManager.disable(GL11.GL_TEXTURE_2D);
 		GL11.glColor3f(1.0F, 1.0F, 1.0F);
 		GL11.glDepthMask(false);
 		GL11.glEnable(GL11.GL_FOG);
 		GL11.glColor3f(0.071F, 0.095F, 0.195F);
 		GL11.glCallList(this.glSkyList);
-		GL11.glDisable(GL11.GL_FOG);
-		GL11.glDisable(GL11.GL_ALPHA_TEST);
+		GlStateManager.disable(GL11.GL_FOG);
+		GlStateManager.disable(GL11.GL_ALPHA_TEST);
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glColor4f(0.0F, 0.5F, 1.0F, 0.15F);
@@ -75,9 +76,9 @@ public class SkyProviderAcheron extends IRenderHandler
 		GL11.glPushMatrix();
 		{
 			float scale = 5.0F;
-			GL11.glRotatef(-90.0F, 0.0F, 1.0F, 0.0F);
+			GlStateManager.rotate(-90.0F, 0.0F, 1.0F, 0.0F);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			GL11.glRotatef(world.getCelestialAngle(renderPartialTicks) * 360.0F, 1.0F, 0.0F, 0.0F);
+			GlStateManager.rotate(world.getCelestialAngle(renderPartialTicks) * 360.0F, 1.0F, 0.0F, 0.0F);
 			RenderUtil.bindTexture(AliensVsPredator.resources().SKY_SUN);
 			tessellator.startDrawingQuads();
 			tessellator.addVertexWithUV(-scale, 150.0D, -scale, 0.0D, 0.0D);
@@ -88,7 +89,7 @@ public class SkyProviderAcheron extends IRenderHandler
 		}
 		GL11.glPopMatrix();
 
-		GL11.glDisable(GL11.GL_BLEND);
+		GlStateManager.disable(GL11.GL_BLEND);
 		GL11.glEnable(GL11.GL_ALPHA_TEST);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glDepthMask(true);
@@ -203,7 +204,7 @@ public class SkyProviderAcheron extends IRenderHandler
 				}
 				else
 				{
-					GL11.glDisable(GL11.GL_CULL_FACE);
+					GlStateManager.disable(GL11.GL_CULL_FACE);
 					float f1 = (float) (mc.renderViewEntity.lastTickPosY + (mc.renderViewEntity.posY - mc.renderViewEntity.lastTickPosY) * renderPartialTicks);
 					byte b0 = 32;
 					int i = 256 / b0;
@@ -254,10 +255,10 @@ public class SkyProviderAcheron extends IRenderHandler
 
 					tessellator.draw();
 					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-					GL11.glDisable(GL11.GL_BLEND);
+					GlStateManager.disable(GL11.GL_BLEND);
 					GL11.glEnable(GL11.GL_CULL_FACE);
 				}
-				GL11.glDisable(GL11.GL_FOG);
+				GlStateManager.disable(GL11.GL_FOG);
 			}
 			GL11.glPopMatrix();
 		}
@@ -267,7 +268,7 @@ public class SkyProviderAcheron extends IRenderHandler
 	{
 		Minecraft mc = Minecraft.getMinecraft();
 		Tessellator tessellator = Tessellator.instance;
-		GL11.glDisable(GL11.GL_CULL_FACE);
+		GlStateManager.disable(GL11.GL_CULL_FACE);
 		float f1 = (float) (mc.renderViewEntity.lastTickPosY + (mc.renderViewEntity.posY - mc.renderViewEntity.lastTickPosY) * renderPartialTicks);
 		float cloudSpan = 10.0F;
 		float cloudHeight = 7.0F;
@@ -300,7 +301,7 @@ public class SkyProviderAcheron extends IRenderHandler
 		byte distance = (byte) (mc.gameSettings.renderDistanceChunks / 2);
 		byte b1 = 4;
 		float f13 = 9.765625E-4F;
-		GL11.glScalef(cloudSpan, 1.0F, cloudSpan);
+		GlStateManager.scale(cloudSpan, 1.0F, cloudSpan);
 
 		for (int k = 0; k < 2; ++k)
 		{
@@ -406,7 +407,7 @@ public class SkyProviderAcheron extends IRenderHandler
 		}
 
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		GL11.glDisable(GL11.GL_BLEND);
+		GlStateManager.disable(GL11.GL_BLEND);
 		GL11.glEnable(GL11.GL_CULL_FACE);
 	}
 }
