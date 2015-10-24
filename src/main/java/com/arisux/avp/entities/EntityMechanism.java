@@ -1,15 +1,14 @@
 package com.arisux.avp.entities;
 
-import com.arisux.avp.entities.tile.TileEntityStasisMechanism;
+import com.arisux.avp.AliensVsPredator;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 public class EntityMechanism extends Entity
 {
-	public TileEntityStasisMechanism host;
-	
 	public EntityMechanism(World world)
 	{
 		super(world);
@@ -26,6 +25,16 @@ public class EntityMechanism extends Entity
 	public void onUpdate()
 	{
 		super.onUpdate();
+		
+		if (this.worldObj.getWorldTime() % 20 == 0)
+		{
+			Block block = this.worldObj.getBlock((int)this.posX, (int)this.posY, (int)this.posZ - 1);
+			
+			if (block != AliensVsPredator.blocks().blockStasisMechanism)
+			{
+				this.setDead();
+			}
+		}
 	}
 
 	@Override

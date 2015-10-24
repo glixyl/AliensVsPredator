@@ -3,10 +3,8 @@ package com.arisux.avp.entities.tile;
 import com.arisux.avp.entities.EntityMechanism;
 import com.arisux.avp.items.ItemEntitySummoner;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -18,7 +16,7 @@ import net.minecraft.world.World;
 public class TileEntityStasisMechanism extends TileEntity
 {
 	private int direction;
-	public Entity dummyEntity;
+	public EntityMechanism dummyEntity;
 	private Entity stasisEntity;
 	public ItemStack itemstack;
 	private String readOnlyDmmyEntityUUID;
@@ -36,7 +34,7 @@ public class TileEntityStasisMechanism extends TileEntity
 		
 		if (this.dummyEntity == null && this.worldObj.getWorldTime() % 20 == 0)
 		{
-			this.dummyEntity = getEntityForUUID(this.worldObj, this.readOnlyDmmyEntityUUID);
+			this.dummyEntity = (EntityMechanism) getEntityForUUID(this.worldObj, this.readOnlyDmmyEntityUUID);
 			
 			if (this.dummyEntity != null)
 			{
