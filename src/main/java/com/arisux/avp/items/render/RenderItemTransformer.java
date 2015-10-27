@@ -28,7 +28,7 @@ public class RenderItemTransformer extends ItemRenderer
 	public void renderThirdPerson(ItemStack item, Object... data)
 	{
 		float glScale = 1.6F;
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			GlStateManager.scale(glScale, glScale, glScale);
 			GlStateManager.rotate(90F, 0F, 0F, 1F);
@@ -37,14 +37,14 @@ public class RenderItemTransformer extends ItemRenderer
 			RenderUtil.bindTexture(this.getResourceLocation());
 			this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	@Override
 	public void renderFirstPerson(ItemStack item, Object... data)
 	{
 		float glScale = 0.8F;
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			if (firstPersonRenderCheck(data[1]))
 			{
@@ -56,14 +56,14 @@ public class RenderItemTransformer extends ItemRenderer
 				this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 			}
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	@Override
 	public void renderInInventory(ItemStack item, Object... data)
 	{
 		float glScale = 11F;
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			GlStateManager.scale(glScale, glScale, glScale);
 			GlStateManager.translate(0.72F, -0.15F, 0F);
@@ -71,18 +71,18 @@ public class RenderItemTransformer extends ItemRenderer
 			GlStateManager.rotate(Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 360 * 6, 0.0F, 1.0F, 0.0F);
 			GlStateManager.translate(0F, 0F, 0F);
 			GlStateManager.disable(GL11.GL_CULL_FACE);
-			GL11.glEnable(GL11.GL_BLEND);
+			GlStateManager.enable(GL11.GL_BLEND);
 			RenderUtil.bindTexture(this.getResourceLocation());
 			this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	@Override
 	public void renderInWorld(ItemStack item, Object... data)
 	{
 		super.renderInWorld(item, data);
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			GlStateManager.rotate(Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 360 * 6, 0.0F, 1.0F, 0.0F);
 			GlStateManager.disable(GL11.GL_CULL_FACE);
@@ -90,6 +90,6 @@ public class RenderItemTransformer extends ItemRenderer
 			this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 			GlStateManager.enableLight();
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 }

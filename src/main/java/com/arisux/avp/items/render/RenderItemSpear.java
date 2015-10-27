@@ -60,7 +60,7 @@ public class RenderItemSpear implements IItemRenderer
 				GlStateManager.rotate(55.0F, 0.0F, 0.0F, 1.0F);
 				GlStateManager.translate(-0.25F, 0.75F, 0.065F);
 				GlStateManager.scale(1F, 1F, 1F);
-				GL11.glEnable(GL11.GL_CULL_FACE);
+				GlStateManager.enable(GL11.GL_CULL_FACE);
 				RenderUtil.bindTexture(resourceLocation);
 				if (Mouse.isButtonDown(1))
 				{
@@ -93,7 +93,7 @@ public class RenderItemSpear implements IItemRenderer
 
 			case INVENTORY:
 				GlStateManager.disable(GL11.GL_CULL_FACE);
-				GL11.glEnable(GL11.GL_BLEND);
+				GlStateManager.enable(GL11.GL_BLEND);
 				GlStateManager.translate(8.5F, 0F, 0F);
 				GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
 				GlStateManager.rotate(-45, 0.0F, 0.0F, 1.0F);

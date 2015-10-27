@@ -50,7 +50,7 @@ public class PlayerModeRenderEvent
 			float headRotateAngleY = (yawHead - yawOffset);
 			float headRotationPitch = (entityLiving.prevRotationPitch + (entityLiving.rotationPitch - entityLiving.prevRotationPitch) * renderPartialTicks);
 
-			GL11.glPushMatrix();
+			GlStateManager.pushMatrix();
 			{
 				GlStateManager.rotate(-yaw, 0F, 1F, 0F);
 				GlStateManager.rotate(180F, 1F, 0F, 0F);
@@ -60,7 +60,7 @@ public class PlayerModeRenderEvent
 				this.bindTexture(this.getEntityTexture(entity));
 				model.render(entity, swingProgress, swingProgressPrevious, idleProgress, headRotateAngleY, headRotationPitch, boxTranslationMultiplier);
 			}
-			GL11.glPopMatrix();
+			GlStateManager.popMatrix();
 		}
 
 		@Override

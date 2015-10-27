@@ -61,7 +61,7 @@ public class RenderItemWorkstation extends ItemRenderer
 	@Override
 	public void renderInInventory(ItemStack item, Object... data)
 	{
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			float glScale = 7F;
 			GlStateManager.translate(8F, 5F, 0F);
@@ -75,6 +75,6 @@ public class RenderItemWorkstation extends ItemRenderer
 			((ModelWorkstation) this.getModel()).render(null, RenderUtil.DEFAULT_BOX_TRANSLATION);
 			GlStateManager.disableLight();
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 }

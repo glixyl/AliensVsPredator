@@ -103,7 +103,7 @@ public class RenderAPC extends Render
 		float damage = apc.getDamageTaken() - partialTicks;
 		damage = damage < 0.0F ? 0.0F : damage;
 		
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			GlStateManager.disable(GL11.GL_CULL_FACE);
 			GlStateManager.translate((float)posX - 2.2F, (float)posY - 2.02F, (float)posZ + 0.1F);
@@ -121,7 +121,7 @@ public class RenderAPC extends Render
 			{
 				if (isPartATire(p))
 				{
-					GL11.glPushMatrix();
+					GlStateManager.pushMatrix();
 					{
 						if (this.isPartOfTire0(p) || this.isPartOfTire1(p))
 						{
@@ -139,14 +139,14 @@ public class RenderAPC extends Render
 
 						p.draw();
 					}
-					GL11.glPopMatrix();
+					GlStateManager.popMatrix();
 				}
 				
 				if(this.isPartOfTurret(p))
 				{
 					if(apc.riddenByEntity != null && apc.riddenByEntity instanceof EntityPlayer)
 					{
-						GL11.glPushMatrix();
+						GlStateManager.pushMatrix();
 						{
 							EntityPlayer playerIn = (EntityPlayer) apc.riddenByEntity;
 							GlStateManager.translate(-2.9F, 0.75F, -0.25F);
@@ -157,7 +157,7 @@ public class RenderAPC extends Render
 							
 							p.draw();
 						}
-						GL11.glPopMatrix();
+						GlStateManager.popMatrix();
 					}
 				}
 				
@@ -171,7 +171,7 @@ public class RenderAPC extends Render
 				}
 			}
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 	
 	public boolean isPartOfTurret(Part p)

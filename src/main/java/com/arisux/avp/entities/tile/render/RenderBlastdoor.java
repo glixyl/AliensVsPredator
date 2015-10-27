@@ -1,11 +1,6 @@
 package com.arisux.avp.entities.tile.render;
 
 import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
-import static org.lwjgl.opengl.GL11.glPopMatrix;
-import static org.lwjgl.opengl.GL11.glPushMatrix;
-import static org.lwjgl.opengl.GL11.glTranslated;
-
-import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.avp.AliensVsPredator;
@@ -27,35 +22,35 @@ public class RenderBlastdoor extends TileEntitySpecialRenderer
 
 		if (tile != null && !tile.isChild())
 		{
-			glPushMatrix();
+			GlStateManager.pushMatrix();
 			{
 				GlStateManager.disable(GL_CULL_FACE);
 				bindTexture(AliensVsPredator.resources().BLASTDOOR);
-				glTranslated(posX + 0.5F, posY + 1.5F, posZ + 0.5F);
+				GlStateManager.translate(posX + 0.5F, posY + 1.5F, posZ + 0.5F);
 				GlStateManager.scale(1.0F, -1.0F, 1.0F);
 
 				if (tile.getDirection() != null)
 				{
 					if (tile.getDirection() == ForgeDirection.NORTH)
 					{
-						GL11.glRotatef(0F, 0F, 0F, 0F);
+						GlStateManager.rotate(0F, 0F, 0F, 0F);
 					}
 					if (tile.getDirection() == ForgeDirection.SOUTH)
 					{
-						GL11.glRotatef(0F, 0F, 0F, 0F);
+						GlStateManager.rotate(0F, 0F, 0F, 0F);
 					}
 					if (tile.getDirection() == ForgeDirection.WEST)
 					{
-						GL11.glRotatef(90F, 0F, 1F, 0F);
+						GlStateManager.rotate(90F, 0F, 1F, 0F);
 					}
 					if (tile.getDirection() == ForgeDirection.EAST)
 					{
-						GL11.glRotatef(90F, 0F, 1F, 0F);
+						GlStateManager.rotate(90F, 0F, 1F, 0F);
 					}
 				}
 				this.model.render(tile, 0.0625F);
 			}
-			glPopMatrix();
+			GlStateManager.popMatrix();
 		}
 	}
 }

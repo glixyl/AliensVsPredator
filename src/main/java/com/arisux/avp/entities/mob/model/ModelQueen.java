@@ -522,7 +522,7 @@ public class ModelQueen extends ModelBaseExtension
 		GlStateManager.enableCullFace();
 		GlStateManager.popMatrix();
 
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			GlStateManager.rotate(((float) Math.toRadians(headYaw) + swingProgressPrev) * 30F, 0, 1, 0);
 			this.Jaw1.render(boxTranslation);
@@ -541,7 +541,7 @@ public class ModelQueen extends ModelBaseExtension
 			this.headSpinesR.render(boxTranslation);
 			this.headWebR.render(boxTranslation);
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 
 		this.rHip.render(boxTranslation);
 		this.lHip.render(boxTranslation);

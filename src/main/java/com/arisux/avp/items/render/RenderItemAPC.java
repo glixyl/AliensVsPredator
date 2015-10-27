@@ -22,7 +22,7 @@ public class RenderItemAPC extends ItemRenderer
 	{
 		super.renderFirstPerson(item, data);
 
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			float scale = 0.25F;
 			GlStateManager.scale(scale, scale, scale);
@@ -35,7 +35,7 @@ public class RenderItemAPC extends ItemRenderer
 				p.draw();
 			}
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class RenderItemAPC extends ItemRenderer
 	{
 		super.renderThirdPerson(item, data);
 
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			float scale = 0.75F;
 			GlStateManager.scale(scale, scale, scale);
@@ -57,7 +57,7 @@ public class RenderItemAPC extends ItemRenderer
 				p.draw();
 			}
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class RenderItemAPC extends ItemRenderer
 	{
 		super.renderInInventory(item, data);
 
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			float scale = 3.5F;
 			GlStateManager.enableLight();
@@ -79,7 +79,7 @@ public class RenderItemAPC extends ItemRenderer
 			}
 			GlStateManager.disableLight();
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	@Override
@@ -87,7 +87,7 @@ public class RenderItemAPC extends ItemRenderer
 	{
 		super.renderInWorld(item, data);
 		
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			GlStateManager.scale(0.2F, 0.2F, 0.2F);
 			GlStateManager.translate(0, -1F, 0);
@@ -98,6 +98,6 @@ public class RenderItemAPC extends ItemRenderer
 				p.draw();
 			}
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 }

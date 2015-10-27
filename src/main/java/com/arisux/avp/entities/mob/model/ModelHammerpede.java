@@ -1,7 +1,6 @@
 package com.arisux.avp.entities.mob.model;
 
-import org.lwjgl.opengl.GL11;
-
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.client.ModelBaseExtension;
 import com.arisux.avp.entities.mob.EntityHammerpede;
 
@@ -181,7 +180,7 @@ public class ModelHammerpede extends ModelBaseExtension
 		body8.render(boxTranslation);
 		tail.render(boxTranslation);
 
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			head.render(boxTranslation);
 			lCrest.render(boxTranslation);
@@ -196,7 +195,7 @@ public class ModelHammerpede extends ModelBaseExtension
 			rFang.render(boxTranslation);
 			lFang.render(boxTranslation);
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 	
 	@Override

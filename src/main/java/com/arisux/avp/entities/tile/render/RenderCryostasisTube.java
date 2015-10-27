@@ -5,13 +5,7 @@ import static org.lwjgl.opengl.GL11.GL_BLEND;
 import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
 import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_SRC_ALPHA;
 import static org.lwjgl.opengl.GL11.GL_SRC_ALPHA;
-import static org.lwjgl.opengl.GL11.glBlendFunc;
-import static org.lwjgl.opengl.GL11.glEnable;
-import static org.lwjgl.opengl.GL11.glPopMatrix;
-import static org.lwjgl.opengl.GL11.glPushMatrix;
-import static org.lwjgl.opengl.GL11.glTranslated;
 
-import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import com.arisux.airi.lib.GlStateManager;
@@ -36,23 +30,23 @@ public class RenderCryostasisTube extends TileEntitySpecialRenderer
 	{
 		TileEntityCryostasisTube tile = (TileEntityCryostasisTube) var1;
 
-		glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			GlStateManager.disable(GL_CULL_FACE);
-			glEnable(GL_BLEND);
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			GlStateManager.enable(GL_BLEND);
+			GlStateManager.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 			this.bindTexture(AliensVsPredator.resources().CRYOSTASIS_TUBE);
-			glTranslated(posX + 0.5F, posY + 1.125F, posZ + 0.5F);
-			GL11.glRotatef(tile.rotation * (-90F), 0F, 1F, 0F);
-			glEnable(GL12.GL_RESCALE_NORMAL);
+			GlStateManager.translate(posX + 0.5F, posY + 1.125F, posZ + 0.5F);
+			GlStateManager.rotate(tile.rotation * (-90F), 0F, 1F, 0F);
+			GlStateManager.enable(GL12.GL_RESCALE_NORMAL);
 			GlStateManager.scale(0.75F, -0.75F, 0.75F);
-			glEnable(GL_ALPHA_TEST);
+			GlStateManager.enable(GL_ALPHA_TEST);
 			this.model.render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
-			glEnable(GL_BLEND);
+			GlStateManager.enable(GL_BLEND);
 
 			if (tile.stasisEntity != null)
 			{
-				glPushMatrix();
+				GlStateManager.pushMatrix();
 				{
 					if (tile.getVoltage() > 0)
 					{
@@ -62,18 +56,18 @@ public class RenderCryostasisTube extends TileEntitySpecialRenderer
 					if (tile.stasisEntity instanceof EntityChestburster || tile.stasisEntity instanceof EntityFacehugger)
 					{
 						GlStateManager.translate(0F, -0.5F, 0F);
-						GL11.glRotatef(90F, 1F, 0F, 0F);
+						GlStateManager.rotate(90F, 1F, 0F, 0F);
 					}
 					
 					if (tile.stasisEntity instanceof EntityOvamorph)
 					{
 						GlStateManager.translate(0F, 0.5F, 0F);
-						GL11.glRotatef(180F, 1F, 0F, 0F);
+						GlStateManager.rotate(180F, 1F, 0F, 0F);
 					}
 
 					RenderManager.instance.renderEntityWithPosYaw(tile.stasisEntity, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
 				}
-				glPopMatrix();
+				GlStateManager.popMatrix();
 			}
 
 			if (tile.getVoltage() > 0)
@@ -89,6 +83,6 @@ public class RenderCryostasisTube extends TileEntitySpecialRenderer
 			GlStateManager.enableLight();
 			GlStateManager.enableLightMapping();
 		}
-		glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 }

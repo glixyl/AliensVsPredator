@@ -38,19 +38,19 @@ public class RenderItemTurret extends ItemRenderer
 	@Override
 	public void renderFirstPerson(ItemStack item, Object... data)
 	{
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			RenderUtil.bindTexture(getResourceLocation());
 			GlStateManager.disable(GL11.GL_CULL_FACE);
 			((ModelTurret) this.getModel()).render(null, 0.0625F);
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	@Override
 	public void renderInInventory(ItemStack item, Object... data)
 	{
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			float glScale = 15F;
 			RenderUtil.bindTexture(getResourceLocation());
@@ -62,6 +62,6 @@ public class RenderItemTurret extends ItemRenderer
 			GlStateManager.enableLight();
 			((ModelTurret) this.getModel()).render(null, 0.0625F);
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 }

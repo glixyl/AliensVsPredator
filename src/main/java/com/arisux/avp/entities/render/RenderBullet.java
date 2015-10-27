@@ -18,7 +18,7 @@ public class RenderBullet extends Render
 	@Override
 	public void doRender(Entity entity, double posX, double posY, double posZ, float yaw, float renderPartialTicks)
 	{
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			GlStateManager.translate((float) posX, (float) posY, (float) posZ);
 			GlStateManager.rotate(yaw, 0.0F, 1.0F, 0.0F);
@@ -30,7 +30,7 @@ public class RenderBullet extends Render
 			model.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 			GL11.glColor3f(1.0F, 1.0F, 1.0F);
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	@Override

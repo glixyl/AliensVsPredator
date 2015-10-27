@@ -1,9 +1,5 @@
 package com.arisux.avp.entities.tile.render;
 
-import static org.lwjgl.opengl.GL11.glPopMatrix;
-import static org.lwjgl.opengl.GL11.glPushMatrix;
-import static org.lwjgl.opengl.GL11.glTranslated;
-
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
@@ -22,10 +18,10 @@ public class RenderSolarPanel extends TileEntitySpecialRenderer
 	@Override
 	public void renderTileEntityAt(TileEntity tileEntity, double posX, double posY, double posZ, float renderPartialTicks)
 	{
-		glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			GlStateManager.disable(GL11.GL_CULL_FACE);
-			glTranslated(posX + 0.5, posY + 0.5, posZ + 0.5);
+			GlStateManager.translate(posX + 0.5, posY + 0.5, posZ + 0.5);
 			
 			if (tileEntity != null)
 			{
@@ -37,6 +33,6 @@ public class RenderSolarPanel extends TileEntitySpecialRenderer
 			RenderUtil.bindTexture(AliensVsPredator.resources().SOLAR_PANEL);
 			model.render();
 		}
-		glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 }

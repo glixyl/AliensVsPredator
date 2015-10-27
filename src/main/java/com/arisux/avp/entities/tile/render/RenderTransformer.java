@@ -1,8 +1,5 @@
 package com.arisux.avp.entities.tile.render;
 
-import static org.lwjgl.opengl.GL11.glPopMatrix;
-import static org.lwjgl.opengl.GL11.glPushMatrix;
-
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
@@ -26,10 +23,10 @@ public class RenderTransformer extends TileEntitySpecialRenderer
 		{
 			TileEntityTransformer transformer = (TileEntityTransformer) tileEntity;
 
-			glPushMatrix();
+			GlStateManager.pushMatrix();
 			{
 				GlStateManager.disable(GL11.GL_CULL_FACE);
-				GL11.glTranslated(posX, posY, posZ);
+				GlStateManager.translate(posX, posY, posZ);
 				GlStateManager.scale(1F, -1F, 1F);
 				GlStateManager.translate(0.5F, -1.5F, 0.5F);
 				
@@ -41,7 +38,7 @@ public class RenderTransformer extends TileEntitySpecialRenderer
 				RenderUtil.bindTexture(AliensVsPredator.resources().TRANSFORMER);
 				model.render();
 			}
-			glPopMatrix();
+			GlStateManager.popMatrix();
 		}
 	}
 }

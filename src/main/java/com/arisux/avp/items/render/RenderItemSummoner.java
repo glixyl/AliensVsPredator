@@ -88,10 +88,10 @@ public class RenderItemSummoner extends ItemRenderer
 		GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
 		GlStateManager.rotate(0F, 1.0F, 0.0F, 0.0F);
 		GlStateManager.scale(7.5F, 7.5F, 7.5F);
-		GL11.glEnable(GL11.GL_DEPTH_TEST);
-		GL11.glEnable(GL11.GL_ALPHA_TEST);
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GlStateManager.enable(GL11.GL_DEPTH_TEST);
+		GlStateManager.enable(GL11.GL_ALPHA_TEST);
+		GlStateManager.enable(GL11.GL_BLEND);
+		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		RenderUtil.bindTexture(resourceLocation);
 		this.model.render(null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, RenderUtil.DEFAULT_BOX_TRANSLATION);
 	}

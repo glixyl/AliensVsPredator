@@ -1,7 +1,5 @@
 package com.arisux.avp.items.render.parts;
 
-import org.lwjgl.opengl.GL11;
-
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.avp.items.render.RenderItemFirearmPart;
 
@@ -21,7 +19,7 @@ public class RenderItemM56SGAimingModule extends RenderItemFirearmPart
 	{
 		super.renderInInventory(item, data);
 
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			float glScale = 32F;
 			GlStateManager.translate(8F, 8F, 0F);
@@ -30,6 +28,6 @@ public class RenderItemM56SGAimingModule extends RenderItemFirearmPart
 			GlStateManager.translate(-0.1F, 0F, -0.7F);
 			this.renderPart();
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 }

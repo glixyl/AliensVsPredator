@@ -25,7 +25,7 @@ public class RenderGunLocker extends TileEntitySpecialRenderer
 	{
 		TileEntityLocker tile = (TileEntityLocker) tileEntity;
 
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			float scale = 0.95F;
 			GlStateManager.enable(GL11.GL_CULL_FACE);
@@ -99,7 +99,7 @@ public class RenderGunLocker extends TileEntitySpecialRenderer
 						{
 							Object[] args = {};
 
-							GL11.glPushMatrix();
+							GlStateManager.pushMatrix();
 							{
 								GlStateManager.translate(8F, 0F, 0F);
 								renderer.renderItem(ItemRenderType.INVENTORY, stack, args);

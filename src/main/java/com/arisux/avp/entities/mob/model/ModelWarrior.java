@@ -1,7 +1,5 @@
 package com.arisux.avp.entities.mob.model;
 
-import org.lwjgl.opengl.GL11;
-
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.client.ModelBaseExtension;
 
@@ -289,7 +287,7 @@ public class ModelWarrior extends ModelBaseExtension
 		super.render(entity, swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation);
 		this.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
 
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			GlStateManager.translate(0F, 0.32F, 0F);
 
@@ -376,7 +374,7 @@ public class ModelWarrior extends ModelBaseExtension
 			this.tailSpikes5.render(boxTranslation);
 			this.stabber.render(boxTranslation);
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	private void doTail(float angle, float distMult)

@@ -21,7 +21,7 @@ public class RenderM40 extends Render
 	public void doRender(Entity entity, double posX, double posY, double posZ, float yaw, float renderPartialTicks)
 	{
 		EntityGrenade grenade = (EntityGrenade) entity;
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		GlStateManager.translate((float) posX, (float) posY + 0.75F, (float) posZ);
 		GlStateManager.rotate(entity.rotationYaw, 0.0F, 1.0F, 0.0F);
 		GlStateManager.rotate(entity.rotationPitch, 0.0F, 0.0F, 1.0F);
@@ -31,7 +31,7 @@ public class RenderM40 extends Render
 		RenderUtil.bindTexture(!grenade.isFlaming ? AliensVsPredator.resources().M40GRENADE : AliensVsPredator.resources().M40GRENADE_INCENDIARY);
 		model.render();
 		GL11.glColor3f(1.0F, 1.0F, 1.0F);
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	@Override

@@ -40,13 +40,13 @@ public class RenderItemCryostasisTube extends ItemRenderer
 		RenderUtil.bindTexture(resourceLocation);
 		((ModelCryostasisTtube) this.getModel()).render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
 		
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			GlStateManager.disableLightMapping();
 			RenderUtil.bindTexture(resourceLocationMask);
 			((ModelCryostasisTtube) this.getModel()).render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	@Override
@@ -65,13 +65,13 @@ public class RenderItemCryostasisTube extends ItemRenderer
 			RenderUtil.bindTexture(resourceLocation);
 			((ModelCryostasisTtube) this.getModel()).render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
 			
-			GL11.glPushMatrix();
+			GlStateManager.pushMatrix();
 			{
 				GlStateManager.disableLightMapping();
 				RenderUtil.bindTexture(resourceLocationMask);
 				((ModelCryostasisTtube) this.getModel()).render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
 			}
-			GL11.glPopMatrix();
+			GlStateManager.popMatrix();
 		}
 	}
 
@@ -85,17 +85,17 @@ public class RenderItemCryostasisTube extends ItemRenderer
 		GlStateManager.rotate(-180F, 0.0F, 1.0F, 0.0F);
 		GlStateManager.disable(GL11.GL_CULL_FACE);
 		GlStateManager.scale(glScale, glScale, glScale);
-		GL11.glEnable(GL11.GL_BLEND);
+		GlStateManager.enable(GL11.GL_BLEND);
 		GlStateManager.blendClear();
 		RenderUtil.bindTexture(resourceLocation);
 		((ModelCryostasisTtube) this.getModel()).render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
 
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			GlStateManager.blendClear();
 			RenderUtil.bindTexture(resourceLocationMask);
 			((ModelCryostasisTtube) this.getModel()).render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 }

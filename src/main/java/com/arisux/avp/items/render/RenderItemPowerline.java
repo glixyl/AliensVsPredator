@@ -1,7 +1,5 @@
 package com.arisux.avp.items.render;
 
-import static org.lwjgl.opengl.GL11.glEnable;
-
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
@@ -39,31 +37,31 @@ public class RenderItemPowerline extends ItemRenderer
 	@Override
 	public void renderFirstPerson(ItemStack item, Object... data)
 	{
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	@Override
 	public void renderInInventory(ItemStack item, Object... data)
 	{
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			float glScale = 12F;
 			GlStateManager.disable(GL11.GL_TEXTURE_2D);
 			GlStateManager.scale(glScale, glScale, glScale);
-			GL11.glTranslated(1.1, -0.1, 0);
+			GlStateManager.translate(1.1, -0.1, 0);
 			GlStateManager.rotate(45, 1, 0, 1);
 			GlStateManager.rotate(Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 360 * 8, 0, 1, 0);
 			GlStateManager.color4i(0xFF222222);
 			GlStateManager.enableLight();
 			model.render(0.0625F);
 			GlStateManager.disableLight();
-			glEnable(GL11.GL_TEXTURE_2D);
+			GlStateManager.enable(GL11.GL_TEXTURE_2D);
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 	
 	@Override
@@ -76,6 +74,6 @@ public class RenderItemPowerline extends ItemRenderer
 		GlStateManager.enableLight();
 		GlStateManager.color4i(0xFF222222);
 		this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
-		glEnable(GL11.GL_TEXTURE_2D);
+		GlStateManager.enable(GL11.GL_TEXTURE_2D);
 	}
 }

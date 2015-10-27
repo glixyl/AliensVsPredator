@@ -41,7 +41,7 @@ public class RenderCombatSynthetic extends RenderLiving
 		{
 			ModelBiped model = (ModelBiped) this.mainModel;
 			
-			GL11.glPushMatrix();
+			GlStateManager.pushMatrix();
 			{
 				model.bipedRightArm.postRender(0.0625F);
 				GlStateManager.translate(-0.35F, 0.8F, -0.85F);
@@ -55,7 +55,7 @@ public class RenderCombatSynthetic extends RenderLiving
 				Minecraft.getMinecraft().renderEngine.bindTexture(RenderItemM41A.resourceLocation);
 				modelM41a.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 			}
-			GL11.glPopMatrix();
+			GlStateManager.popMatrix();
 		}
 	}
 

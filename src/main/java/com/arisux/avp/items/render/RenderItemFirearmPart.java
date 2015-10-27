@@ -60,7 +60,7 @@ public abstract class RenderItemFirearmPart extends ItemRenderer
 	public void renderPart()
 	{
 		GlStateManager.blendClear();
-		GL11.glEnable(GL11.GL_BLEND);
+		GlStateManager.enable(GL11.GL_BLEND);
 		GlStateManager.disable(GL11.GL_CULL_FACE);
 		RenderUtil.bindTexture(this.getResourceLocation());
 
@@ -72,13 +72,13 @@ public abstract class RenderItemFirearmPart extends ItemRenderer
 
 	public static void drawMarker(int size)
 	{
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		RenderUtil.drawRect(-(size / 2), 0, size, 1, 0xFFFF0000);
 		GlStateManager.rotate(90F, 0F, 0F, 1F);
 		RenderUtil.drawRect(-(size / 2), 0, size, 1, 0xFFFF0000);
 		GlStateManager.rotate(90F, 0F, 1F, 0F);
 		GlStateManager.translate(0F, 0F, 0.5F);
 		RenderUtil.drawRect(-(size / 2), 0, size, 1, 0xFFFF0000);
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 }

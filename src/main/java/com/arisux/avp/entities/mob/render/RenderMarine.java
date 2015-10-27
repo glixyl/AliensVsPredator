@@ -38,7 +38,7 @@ public class RenderMarine extends RenderLiving
 		EntityMarine entity = (EntityMarine) entityLiving;
 		ModelTexMap map = entity.getMarineType().getFirearmModelTexMap();
 
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			this.model.bipedRightArm.postRender(RenderUtil.DEFAULT_BOX_TRANSLATION);
 			if (entity.isFiring())
@@ -75,7 +75,7 @@ public class RenderMarine extends RenderLiving
 			bindTexture(map.asResourceLocation());
 			map.asModelBaseExtension().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	@Override

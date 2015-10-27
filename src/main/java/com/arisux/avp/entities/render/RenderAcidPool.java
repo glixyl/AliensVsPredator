@@ -21,11 +21,11 @@ public class RenderAcidPool extends Render
 	@Override
 	public void doRender(Entity entity, double posX, double posY, double posZ, float yaw, float renderPartialTicks)
 	{
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			GlStateManager.disable(GL11.GL_LIGHTING);
-			GL11.glEnable(GL11.GL_BLEND);
-	        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
+			GlStateManager.enable(GL11.GL_BLEND);
+	        GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
 	        GlStateManager.disableLightMapping();
 			bindTexture(AliensVsPredator.resources().ACID_POOL);
 			float offset = 1.4F;
@@ -55,11 +55,11 @@ public class RenderAcidPool extends Render
 			}
 
 			tessellator.draw();
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 			GlStateManager.disable(GL11.GL_BLEND);
-			GL11.glEnable(GL11.GL_LIGHTING);
+			GlStateManager.enable(GL11.GL_LIGHTING);
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	private void renderImageOnBlock(Block block, double posX, double posY, double posZ, int blockX, int blockY, int blockZ, float yaw, float offset, double partialX, double partialY, double partialZ, float opacity)
@@ -76,7 +76,7 @@ public class RenderAcidPool extends Render
 			float v1 = (float) ((posZ - z1) / 2.0D / offset + 0.5D);
 			float v2 = (float) ((posZ - z2) / 2.0D / offset + 0.5D);
 
-			GL11.glPushMatrix();
+			GlStateManager.pushMatrix();
 			{
 				GlStateManager.rotate(yaw, 0F, 1F, 0F);
 				tessellator.addVertexWithUV(x1, y, z1, u1, v1);
@@ -84,7 +84,7 @@ public class RenderAcidPool extends Render
 				tessellator.addVertexWithUV(x2, y, z2, u2, v2);
 				tessellator.addVertexWithUV(x2, y, z1, u2, v1);
 			}
-			GL11.glPopMatrix();
+			GlStateManager.popMatrix();
 		}
 	}
 

@@ -1,6 +1,5 @@
 package com.arisux.avp.entities.render;
 
-import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import com.arisux.airi.lib.GlStateManager;
@@ -18,7 +17,7 @@ public class RenderSpear extends Render
 	@Override
 	public void doRender(Entity entity, double posX, double posY, double posZ, float rotationYaw, float renderPartialTicks)
 	{
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			GlStateManager.translate((float) posX, (float) posY, (float) posZ);
 			GlStateManager.rotate(entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * renderPartialTicks - 90.0F, 0.0F, 1.0F, 0.0F);
@@ -28,7 +27,7 @@ public class RenderSpear extends Render
 
 			GlStateManager.disable(GL12.GL_RESCALE_NORMAL);
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	@Override

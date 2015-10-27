@@ -23,7 +23,7 @@ public class RenderLaserMine extends Render
 	{
 		EntityLaserMine laserMine = (EntityLaserMine) entity;
 		
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			GlStateManager.translate((float) posX, (float) posY, (float) posZ);
 			GlStateManager.translate(0.0F, 0.25F, 0.0F);
@@ -40,7 +40,7 @@ public class RenderLaserMine extends Render
 			
 			this.renderBeam(0, 0, Math.abs(laserMine.getLaserHitDistanceFromMine() * 2), -1, 0, 100, active ? 0x8800FF00 : 0x88FF0000, active ? 0x8800FF00 : 0x88FF0000, 90, 0, -1);
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class RenderLaserMine extends Render
 	{
 		w = w * scale / 2;
 
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			GlStateManager.translate(0F, 0.75F, 0F);
 			GlStateManager.rotate(rotationYaw, 0F, 1F, 0F);
@@ -62,8 +62,8 @@ public class RenderLaserMine extends Render
 			GlStateManager.disable(GL11.GL_TEXTURE_2D);
 			GlStateManager.disable(GL11.GL_LIGHTING);
 			GlStateManager.disableLight();
-			GL11.glEnable(GL11.GL_BLEND);
-			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
+			GlStateManager.enable(GL11.GL_BLEND);
+			GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
 			GL11.glShadeModel(GL11.GL_SMOOTH);
 			Tessellator tessellator = Tessellator.instance;
 			tessellator.startDrawingQuads();
@@ -86,11 +86,11 @@ public class RenderLaserMine extends Render
 			tessellator.addVertex(w, h, zLevel);
 			tessellator.draw();
 			GL11.glShadeModel(GL11.GL_FLAT);
-			GL11.glEnable(GL11.GL_LIGHTING);
+			GlStateManager.enable(GL11.GL_LIGHTING);
 			GlStateManager.enableLight();
-			GL11.glEnable(GL11.GL_TEXTURE_2D);
+			GlStateManager.enable(GL11.GL_TEXTURE_2D);
 			GlStateManager.disable(GL11.GL_BLEND);
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 }

@@ -21,19 +21,19 @@ public class RenderTurret extends TileEntitySpecialRenderer
 	{
 		TileEntityTurret tile = (TileEntityTurret) tileEntity;
 
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			GlStateManager.disable(GL11.GL_CULL_FACE);
 			this.bindTexture(AliensVsPredator.resources().TURRET);
-			GL11.glTranslated(posX + 0.5F, posY + 3.0F, posZ - 0.0F);
-			GL11.glRotatef(tile.getDirection() * (-90F), 0F, 1F, 0F);
+			GlStateManager.translate(posX + 0.5F, posY + 3.0F, posZ - 0.0F);
+			GlStateManager.rotate(tile.getDirection() * (-90F), 0F, 1F, 0F);
 
 			GlStateManager.scale(2F, -2F, 2F);
 			this.model.render(tile, RenderUtil.DEFAULT_BOX_TRANSLATION);
 
 			if (tile.getVoltage() > 0)
 			{
-				GL11.glRotatef(tile.getDirection() * 90F, 0F, 1F, 0F);
+				GlStateManager.rotate(tile.getDirection() * 90F, 0F, 1F, 0F);
 				this.renderAmmoDisplay(tile);
 
 				if (!tile.isFiring())
@@ -42,7 +42,7 @@ public class RenderTurret extends TileEntitySpecialRenderer
 				}
 			}
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	public void renderAmmoDisplay(TileEntityTurret tile)
@@ -52,7 +52,7 @@ public class RenderTurret extends TileEntitySpecialRenderer
 			int ammo = (tile.getCurRounds() * tile.getMaxAmmo()) + tile.getCurAmmo();
 			String displayText = ammo >= 0 ? ammo < 10 ? "000" + ammo : ammo < 100 ? "00" + ammo : ammo < 1000 ? "0" + ammo : "" + ammo : "----";
 
-			GL11.glPushMatrix();
+			GlStateManager.pushMatrix();
 			{
 				// Reposition to the turret head's rotation point
 				GlStateManager.disableLight();
@@ -71,10 +71,10 @@ public class RenderTurret extends TileEntitySpecialRenderer
 				RenderUtil.drawRect(-5, -3, 35, 14, 0xFF000000);
 				GlStateManager.translate(0.0F, 0.0F, 0.001F);
 				RenderUtil.drawString(displayText, 0, 0, tile.beamColor);
-				GL11.glEnable(GL11.GL_LIGHTING);
+				GlStateManager.enable(GL11.GL_LIGHTING);
 				GlStateManager.enableLight();
 			}
-			GL11.glPopMatrix();
+			GlStateManager.popMatrix();
 		}
 	}
 
@@ -82,7 +82,7 @@ public class RenderTurret extends TileEntitySpecialRenderer
 	{
 		w = w * scale / 2;
 
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			GlStateManager.translate(0F, 0.75F, 0F);
 			GlStateManager.rotate(-90 + -rotationYaw, 0F, 1F, 0F);
@@ -91,8 +91,8 @@ public class RenderTurret extends TileEntitySpecialRenderer
 			GlStateManager.disable(GL11.GL_TEXTURE_2D);
 			GlStateManager.disable(GL11.GL_LIGHTING);
 			GlStateManager.disableLight();
-			GL11.glEnable(GL11.GL_BLEND);
-			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
+			GlStateManager.enable(GL11.GL_BLEND);
+			GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
 			GL11.glShadeModel(GL11.GL_SMOOTH);
 			Tessellator tessellator = Tessellator.instance;
 			tessellator.startDrawingQuads();
@@ -104,11 +104,11 @@ public class RenderTurret extends TileEntitySpecialRenderer
 			tessellator.addVertex(w, h, zLevel);
 			tessellator.draw();
 			GL11.glShadeModel(GL11.GL_FLAT);
-			GL11.glEnable(GL11.GL_LIGHTING);
+			GlStateManager.enable(GL11.GL_LIGHTING);
 			GlStateManager.enableLight();
-			GL11.glEnable(GL11.GL_TEXTURE_2D);
+			GlStateManager.enable(GL11.GL_TEXTURE_2D);
 			GlStateManager.disable(GL11.GL_BLEND);
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 }

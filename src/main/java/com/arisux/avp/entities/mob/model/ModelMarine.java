@@ -1,7 +1,5 @@
 package com.arisux.avp.entities.mob.model;
 
-import org.lwjgl.opengl.GL11;
-
 import com.arisux.airi.lib.GlStateManager;
 
 import net.minecraft.client.model.ModelBase;
@@ -67,12 +65,12 @@ public class ModelMarine extends ModelBase
 		if (this.isChild)
 		{
 			float scale = 2.0F;
-			GL11.glPushMatrix();
+			GlStateManager.pushMatrix();
 			GlStateManager.scale(1.5F / scale, 1.5F / scale, 1.5F / scale);
 			GlStateManager.translate(0.0F, 16.0F * boxTranslation, 0.0F);
 			this.bipedHead.render(boxTranslation);
-			GL11.glPopMatrix();
-			GL11.glPushMatrix();
+			GlStateManager.popMatrix();
+			GlStateManager.pushMatrix();
 			GlStateManager.scale(1.0F / scale, 1.0F / scale, 1.0F / scale);
 			GlStateManager.translate(0.0F, 24.0F * boxTranslation, 0.0F);
 			this.bipedBody.render(boxTranslation);
@@ -81,7 +79,7 @@ public class ModelMarine extends ModelBase
 			this.bipedRightLeg.render(boxTranslation);
 			this.bipedLeftLeg.render(boxTranslation);
 			this.bipedHeadwear.render(boxTranslation);
-			GL11.glPopMatrix();
+			GlStateManager.popMatrix();
 		} else
 		{
 			this.bipedHead.render(boxTranslation);

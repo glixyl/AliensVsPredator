@@ -23,7 +23,7 @@ public class RenderItemAmpule extends ItemRenderer
 	@Override
 	public void renderThirdPerson(ItemStack item, Object... data)
 	{
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{			
 			GlStateManager.scale(-1F, 1F, 1F);
 			GlStateManager.rotate(90F, 0F, 0F, 1F);
@@ -35,25 +35,25 @@ public class RenderItemAmpule extends ItemRenderer
 			GlStateManager.disable(GL11.GL_CULL_FACE);
 			this.getModel().render();
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	@Override
 	public void renderFirstPerson(ItemStack item, Object... data)
 	{
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			RenderUtil.bindTexture(getResourceLocation());
 			GlStateManager.disable(GL11.GL_CULL_FACE);
 			this.getModel().render();
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	@Override
 	public void renderInInventory(ItemStack item, Object... data)
 	{
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			float glScale = 10F;
 			RenderUtil.bindTexture(getResourceLocation());
@@ -66,6 +66,6 @@ public class RenderItemAmpule extends ItemRenderer
 			this.getModel().render();
 			GlStateManager.disableLight();
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 }

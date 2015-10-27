@@ -106,7 +106,7 @@ public class RenderItemWristbracer implements IItemRenderer
 
 			case INVENTORY:
 				GlStateManager.disable(GL11.GL_CULL_FACE);
-				GL11.glEnable(GL11.GL_BLEND);
+				GlStateManager.enable(GL11.GL_BLEND);
 				GlStateManager.translate(8.5F, 0F, 0F);
 				GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
 				GlStateManager.translate(-10F, 6F, -3F);

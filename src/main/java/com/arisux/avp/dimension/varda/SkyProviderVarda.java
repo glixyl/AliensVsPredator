@@ -75,23 +75,23 @@ public class SkyProviderVarda extends IRenderHandler
 		GlStateManager.disable(GL11.GL_TEXTURE_2D);
 		GL11.glColor3f(1.0F, 1.0F, 1.0F);
 		GL11.glDepthMask(false);
-		GL11.glEnable(GL11.GL_FOG);
+		GlStateManager.enable(GL11.GL_FOG);
 		GL11.glColor3f(0.11F, 0.225F, 0.265F);
 		GL11.glCallList(this.glSkyList);
 		GlStateManager.disable(GL11.GL_FOG);
 		GlStateManager.disable(GL11.GL_ALPHA_TEST);
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, provider.getStarBrightness(renderPartialTicks) * 2);
+		GlStateManager.enable(GL11.GL_BLEND);
+		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GlStateManager.color(1.0F, 1.0F, 1.0F, provider.getStarBrightness(renderPartialTicks) * 2);
 		GL11.glCallList(this.starGLCallList);
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, 1);
+		GlStateManager.enable(GL11.GL_TEXTURE_2D);
+		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, 1);
 
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			float scale = 30.0F;
 			GlStateManager.rotate(-90.0F, 0.0F, 1.0F, 0.0F);
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 			GlStateManager.rotate(world.getCelestialAngle(renderPartialTicks) * 360.0F, 1.0F, 0.0F, 0.0F);
 			RenderUtil.bindTexture(AliensVsPredator.resources().SKY_SUN);
 			tessellator.startDrawingQuads();
@@ -101,14 +101,14 @@ public class SkyProviderVarda extends IRenderHandler
 			tessellator.addVertexWithUV(-scale, 150.0D, scale, 0.0D, 1.0D);
 			tessellator.draw();
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			float scale = 275.0F;
 			GlStateManager.translate(30F, 0F, 0F);
 			GlStateManager.rotate(calculateAngleFromPlanet(world.getWorldTime(), renderPartialTicks) * 360.0F, 0.0F, 1.0F, 0.0F);
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 			GlStateManager.rotate(calculateAngleFromPlanet(world.getWorldTime(), renderPartialTicks) * 360.0F, 10.0F, -6.0F, -20.0F);
 			GlStateManager.rotate(135F, 0.0F, 1.0F, 0.0F);
 			RenderUtil.bindTexture(AliensVsPredator.resources().SKY_CALPAMOS);
@@ -119,11 +119,11 @@ public class SkyProviderVarda extends IRenderHandler
 			tessellator.addVertexWithUV(-scale, 150.0D, scale, 0.0D, 1.0D);
 			tessellator.draw();
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 
 		GlStateManager.disable(GL11.GL_BLEND);
-		GL11.glEnable(GL11.GL_ALPHA_TEST);
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GlStateManager.enable(GL11.GL_ALPHA_TEST);
+		GlStateManager.enable(GL11.GL_TEXTURE_2D);
 		GL11.glDepthMask(true);
 		this.renderClouds(renderPartialTicks);
 	}
@@ -244,10 +244,10 @@ public class SkyProviderVarda extends IRenderHandler
 
 		GlStateManager.disable(GL11.GL_CULL_FACE);
 		GL11.glNormal3f(0.0F, 1.0F, 0.0F);
-		GL11.glEnable(GL11.GL_BLEND);
+		GlStateManager.enable(GL11.GL_BLEND);
 		OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
 		GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		RenderUtil.bindTexture(AliensVsPredator.resources().SKY_SILICA);
 
 		for (int vZ = posZ - layers; vZ <= posZ + layers; ++vZ)
@@ -308,7 +308,7 @@ public class SkyProviderVarda extends IRenderHandler
 			}
 		}
 
-		GL11.glEnable(GL11.GL_CULL_FACE);
+		GlStateManager.enable(GL11.GL_CULL_FACE);
 		GlStateManager.disable(GL11.GL_BLEND);
 		GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
 		mc.entityRenderer.disableLightmap(renderPartialTicks);
@@ -320,9 +320,9 @@ public class SkyProviderVarda extends IRenderHandler
 
 		if (mc.gameSettings.shouldRenderClouds())
 		{
-			GL11.glPushMatrix();
+			GlStateManager.pushMatrix();
 			{
-				GL11.glEnable(GL11.GL_FOG);
+				GlStateManager.enable(GL11.GL_FOG);
 
 				if (mc.gameSettings.fancyGraphics)
 				{
@@ -336,7 +336,7 @@ public class SkyProviderVarda extends IRenderHandler
 					int i = 256 / b0;
 					Tessellator tessellator = Tessellator.instance;
 					RenderUtil.bindTexture(AliensVsPredator.resources().SKY_CLOUDS);
-					GL11.glEnable(GL11.GL_BLEND);
+					GlStateManager.enable(GL11.GL_BLEND);
 					OpenGlHelper.glBlendFunc(770, 771, 1, 0);
 					Vec3 vec3 = mc.theWorld.getCloudColour(renderPartialTicks);
 					float f2 = (float) vec3.xCoord;
@@ -380,13 +380,13 @@ public class SkyProviderVarda extends IRenderHandler
 					}
 
 					tessellator.draw();
-					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+					GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 					GlStateManager.disable(GL11.GL_BLEND);
-					GL11.glEnable(GL11.GL_CULL_FACE);
+					GlStateManager.enable(GL11.GL_CULL_FACE);
 				}
 				GlStateManager.disable(GL11.GL_FOG);
 			}
-			GL11.glPopMatrix();
+			GlStateManager.popMatrix();
 		}
 	}
 
@@ -407,7 +407,7 @@ public class SkyProviderVarda extends IRenderHandler
 		d1 -= i * 2048;
 		d2 -= j * 2048;
 		RenderUtil.bindTexture(AliensVsPredator.resources().SKY_VARDA_CLOUDS);
-		GL11.glEnable(GL11.GL_BLEND);
+		GlStateManager.enable(GL11.GL_BLEND);
 		OpenGlHelper.glBlendFunc(770, 771, 1, 0);
 		Vec3 color = mc.theWorld.getCloudColour(renderPartialTicks);
 		float f5 = (float) color.xCoord;
@@ -532,9 +532,9 @@ public class SkyProviderVarda extends IRenderHandler
 			}
 		}
 
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		GlStateManager.disable(GL11.GL_BLEND);
-		GL11.glEnable(GL11.GL_CULL_FACE);
+		GlStateManager.enable(GL11.GL_CULL_FACE);
 	}
 
 }

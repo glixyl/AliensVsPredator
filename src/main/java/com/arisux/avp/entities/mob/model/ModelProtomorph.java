@@ -1,7 +1,5 @@
 package com.arisux.avp.entities.mob.model;
 
-import org.lwjgl.opengl.GL11;
-
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.client.ModelBaseExtension;
 
@@ -329,12 +327,12 @@ public class ModelProtomorph extends ModelBaseExtension
 		rClaw4.render(boxTranslation);
 		rClaw5.render(boxTranslation);
 
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			GlStateManager.rotate(Minecraft.getMinecraft().theWorld.getWorldTime() % 10, 1, 0, 0);
 			exteriorJaw.render(boxTranslation);
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 		interiorJaw.render(boxTranslation);
 	}
 

@@ -60,8 +60,8 @@ public class RenderAqua extends RenderLiving
 				f1 = 0.0F;
 			}
 
-			GL11.glEnable(GL11.GL_BLEND);
-			GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);
+			GlStateManager.enable(GL11.GL_BLEND);
+			GlStateManager.blendFunc(GL11.GL_ONE, GL11.GL_ONE);
 
 			if (par1EntityAqua.isInvisible())
 			{
@@ -75,8 +75,8 @@ public class RenderAqua extends RenderLiving
 			int j = c0 % 65536;
 			int k = c0 / 65536;
 			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, j / 1.0F, k / 1.0F);
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, f1);
+			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+			GlStateManager.color(1.0F, 1.0F, 1.0F, f1);
 
 			return 1;
 		}

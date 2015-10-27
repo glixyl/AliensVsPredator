@@ -59,7 +59,7 @@ public class RenderItemBlastDoor extends ItemRenderer
 	@Override
 	public void renderInInventory(ItemStack item, Object... data)
 	{
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			float glScale = 5F;
 			GlStateManager.translate(8F, 7.5F, 0F);
@@ -68,13 +68,13 @@ public class RenderItemBlastDoor extends ItemRenderer
 			GlStateManager.rotate(-180F, 0.0F, 1.0F, 0.0F);
 			GlStateManager.disable(GL11.GL_CULL_FACE);
 			GlStateManager.scale(glScale, glScale, glScale);
-			GL11.glEnable(GL11.GL_BLEND);
+			GlStateManager.enable(GL11.GL_BLEND);
 			GlStateManager.blendClear();
 			RenderUtil.bindTexture(this.getResourceLocation());
 			GlStateManager.enableLight();
 			((ModelBlastdoor) this.getModel()).render(null, RenderUtil.DEFAULT_BOX_TRANSLATION);
 			GlStateManager.disableLight();
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 }

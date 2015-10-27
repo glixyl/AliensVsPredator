@@ -10,11 +10,6 @@ import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_DST_COLOR;
 import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_SRC_ALPHA;
 import static org.lwjgl.opengl.GL11.GL_SRC_ALPHA;
 import static org.lwjgl.opengl.GL11.GL_ZERO;
-import static org.lwjgl.opengl.GL11.glBlendFunc;
-import static org.lwjgl.opengl.GL11.glColor4f;
-import static org.lwjgl.opengl.GL11.glEnable;
-
-import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.avp.AliensVsPredator;
@@ -55,22 +50,22 @@ public enum VisionMode
 		@Override
 		public void render(Object... data)
 		{
-			GL11.glPushMatrix();
+			GlStateManager.pushMatrix();
 			{
-				glEnable(GL_BLEND);
-				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-				glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
+				GlStateManager.enable(GL_BLEND);
+				GlStateManager.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+				GlStateManager.blendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
 				GlStateManager.disable(GL_ALPHA_TEST);
 				bindTexture(AliensVsPredator.resources().BLUR_CELTIC_HUD);
-				glColor4f(0F, 1F, 0.1F, 0F);
+				GlStateManager.color(0F, 1F, 0.1F, 0F);
 				drawQuad(0, 0, scaledDisplayResolution().getScaledWidth(), scaledDisplayResolution().getScaledHeight(), 0, 0, 0, 0);
-				glColor4f(0F, 1F, 0F, 1F);
+				GlStateManager.color(0F, 1F, 0F, 1F);
 				drawQuad(0, 0, scaledDisplayResolution().getScaledWidth(), scaledDisplayResolution().getScaledHeight(), 0, 0, 0, 0);
-				glEnable(GL_ALPHA_TEST);
+				GlStateManager.enable(GL_ALPHA_TEST);
 				GlStateManager.disable(GL_BLEND);
-				glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 			}
-			GL11.glPopMatrix();
+			GlStateManager.popMatrix();
 
 			AliensVsPredator.events().getLightmapUpdateEvent().gammaValue = AliensVsPredator.events().getLightmapUpdateEvent().gammaValue < 0F ? AliensVsPredator.events().getLightmapUpdateEvent().gammaValue + 0.03F : AliensVsPredator.events().getLightmapUpdateEvent().gammaValue;
 			renderOverlay(AliensVsPredator.resources().BLUR_CELTIC_HUD, 1F, 1F, 1F, 1F);
@@ -117,22 +112,22 @@ public enum VisionMode
 		@Override
 		public void render(Object... data)
 		{
-			GL11.glPushMatrix();
+			GlStateManager.pushMatrix();
 			{
-				glEnable(GL_BLEND);
-				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-				glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
+				GlStateManager.enable(GL_BLEND);
+				GlStateManager.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+				GlStateManager.blendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
 				GlStateManager.disable(GL_ALPHA_TEST);
 				bindTexture(AliensVsPredator.resources().BLUR_CELTIC_HUD);
-				glColor4f(1F, 1F, 0F, 0F);
+				GlStateManager.color(1F, 1F, 0F, 0F);
 				drawQuad(0, 0, scaledDisplayResolution().getScaledWidth(), scaledDisplayResolution().getScaledHeight(), 0, 0, 0, 0);
-				glColor4f(1F, 1F, 0.45F, 0F);
+				GlStateManager.color(1F, 1F, 0.45F, 0F);
 				drawQuad(0, 0, scaledDisplayResolution().getScaledWidth(), scaledDisplayResolution().getScaledHeight(), 0, 0, 0, 0);
-				glEnable(GL_ALPHA_TEST);
+				GlStateManager.enable(GL_ALPHA_TEST);
 				GlStateManager.disable(GL_BLEND);
-				glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 			}
-			GL11.glPopMatrix();
+			GlStateManager.popMatrix();
 
 			AliensVsPredator.events().getLightmapUpdateEvent().gammaValue = AliensVsPredator.events().getLightmapUpdateEvent().gammaValue < 0F ? AliensVsPredator.events().getLightmapUpdateEvent().gammaValue + 0.03F : AliensVsPredator.events().getLightmapUpdateEvent().gammaValue;
 			renderOverlay(AliensVsPredator.resources().BLUR_CELTIC_HUD, 0F, 0.8F, 0.1F, 1F);

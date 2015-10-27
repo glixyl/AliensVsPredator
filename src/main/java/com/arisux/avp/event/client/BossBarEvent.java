@@ -79,7 +79,7 @@ public class BossBarEvent
 	{
 		if (event.type == ElementType.BOSSHEALTH)
 		{
-			GL11.glPushMatrix();
+			GlStateManager.pushMatrix();
 			{
 				float scale = 0.5F;
 				GlStateManager.scale(scale, scale, scale);
@@ -90,7 +90,7 @@ public class BossBarEvent
 					this.drawBossBar(boss, index, 0, 0);
 				}
 			}
-			GL11.glPopMatrix();
+			GlStateManager.popMatrix();
 		}
 	}
 
@@ -103,16 +103,16 @@ public class BossBarEvent
 		int color = health < 50 ? health < 20 ? 0xFFFF0000 : 0xFFFFCC00 : 0xFF00FF00;
 		String label = String.format("%s [%s]", boss.getCommandSenderName(), health + "%%");
 
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
-			GL11.glEnable(GL11.GL_BLEND);
-			GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			GlStateManager.enable(GL11.GL_BLEND);
+			GlStateManager.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 			GlStateManager.color4i(0xFFFFFFFF);
 			RenderUtil.bindTexture(AliensVsPredator.resources().QUEEN_BOSS_BAR);
 			posX = posX + (index * (tW));
 			GlStateManager.color4i(color);
 			RenderUtil.drawQuad(posX + (offset / 2), posY, (tW - offset) * health / 100, tH, 0, 0.15F, 0.85F, 0F, 0.5F);
-			GL11.glColor4f(1F, 1F, 1F, 1F);
+			GlStateManager.color(1F, 1F, 1F, 1F);
 			RenderUtil.drawQuad(posX, posY, tW, tH, 0, 0F, 1F, 0.5F, 1F);
 			RenderUtil.drawStringAlignCenter(label, posX + (tW / 2), posY + 16, color);
 
@@ -120,6 +120,6 @@ public class BossBarEvent
 			
 			GlStateManager.disable(GL11.GL_BLEND);
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 }

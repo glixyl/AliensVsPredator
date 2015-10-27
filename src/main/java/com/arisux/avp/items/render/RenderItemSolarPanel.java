@@ -58,7 +58,7 @@ public class RenderItemSolarPanel extends ItemRenderer
 	@Override
 	public void renderInInventory(ItemStack item, Object... data)
 	{
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			float glScale = 12F;
 			GlStateManager.scale(glScale, -glScale, glScale);
@@ -70,7 +70,7 @@ public class RenderItemSolarPanel extends ItemRenderer
 			RenderUtil.bindTexture(resourceLocation);
 			this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	@Override

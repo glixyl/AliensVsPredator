@@ -1,7 +1,5 @@
 package com.arisux.avp.entities.render;
 
-import org.lwjgl.opengl.GL11;
-
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.avp.entities.model.ModelPlasma;
 
@@ -18,49 +16,49 @@ public class RenderAcidSpit extends Render
 	{
 		float rotation = 20;
 		model.drawInternalVertices = false;
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
-			GL11.glTranslated(posX, posY, posZ);
+			GlStateManager.translate(posX, posY, posZ);
 			GlStateManager.rotate(entity.rotationYaw - 90.0F, 0.0F, 1.0F, 0.0F);
 			GlStateManager.rotate(entity.rotationPitch - 90.0F, 0.0F, 0.0F, 1.0F);
 			GlStateManager.scale(0.1F, 0.4F, 0.1F);
 
-			GL11.glPushMatrix();
+			GlStateManager.pushMatrix();
 			{
 				GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
 				this.model.render(0.6F, 0.2F, 1.0F, 0.0F, 0.7F);
 				
-				GL11.glPushMatrix();
+				GlStateManager.pushMatrix();
 				{
 					GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
 					this.model.render(0.7F, 0.2F, 1.0F, 0.0F, 0.7F);
 					
-					GL11.glPushMatrix();
+					GlStateManager.pushMatrix();
 					{
 						GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
 						this.model.render(0.8F, 0.2F, 1.0F, 0.0F, 0.7F);
 						
-						GL11.glPushMatrix();
+						GlStateManager.pushMatrix();
 						{
 							GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
 							this.model.render(0.9F, 0.2F, 1.0F, 0.0F, 0.7F);
 							
-							GL11.glPushMatrix();
+							GlStateManager.pushMatrix();
 							{
 								GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
 								this.model.render(1.0F, 0.2F, 1.0F, 0.0F, 0.7F);
 							}
-							GL11.glPopMatrix();
+							GlStateManager.popMatrix();
 						}
-						GL11.glPopMatrix();
+						GlStateManager.popMatrix();
 					}
-					GL11.glPopMatrix();
+					GlStateManager.popMatrix();
 				}
-				GL11.glPopMatrix();
+				GlStateManager.popMatrix();
 			}
-			GL11.glPopMatrix();
+			GlStateManager.popMatrix();
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 	
 	@Override

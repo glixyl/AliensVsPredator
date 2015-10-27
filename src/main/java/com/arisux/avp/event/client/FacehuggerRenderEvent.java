@@ -1,7 +1,6 @@
 package com.arisux.avp.event.client;
 
-import org.lwjgl.opengl.GL11;
-
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntityFacehugger;
@@ -24,11 +23,11 @@ public class FacehuggerRenderEvent
 			{
 				if (mc.gameSettings.thirdPersonView == 0 && mc.thePlayer.riddenByEntity != null && mc.thePlayer.riddenByEntity instanceof EntityFacehugger)
 				{
-					GL11.glPushMatrix();
+					GlStateManager.pushMatrix();
 					{
 						RenderUtil.renderOverlay(AliensVsPredator.resources().BLUR_FACEHUGGER);
 					}
-					GL11.glPopMatrix();
+					GlStateManager.popMatrix();
 				}
 			}
 		}

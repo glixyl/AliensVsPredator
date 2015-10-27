@@ -14,14 +14,14 @@ public class RenderFlame extends Render
 	@Override
 	public void doRender(Entity entity, double posX, double posY, double posZ, float yaw, float renderPartialTicks)
 	{
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		GlStateManager.translate((float) posX, (float) posY, (float) posZ);
 		GlStateManager.rotate(yaw, 0.0F, 1.0F, 0.0F);
 		GlStateManager.rotate(180.0F, 1.0F, 0.0F, 0.0F);
 		GlStateManager.translate(0.25F, 0.5F, 0.0F);
 		RenderUtil.lightingHelper(entity, 2.0F);
 		GL11.glColor3f(1.0F, 1.0F, 1.0F);
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	@Override

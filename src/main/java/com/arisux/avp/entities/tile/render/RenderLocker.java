@@ -25,32 +25,32 @@ public class RenderLocker extends TileEntitySpecialRenderer
 	{
 		TileEntityLocker tile = (TileEntityLocker) tileEntity;
 
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			float scale = 0.95F;
 			GlStateManager.disable(GL11.GL_CULL_FACE);
 			this.bindTexture(AliensVsPredator.resources().LOCKER);
-			GL11.glTranslated(posX + 0.5F, posY + 1.41F, posZ + 0.5F);
+			GlStateManager.translate(posX + 0.5F, posY + 1.41F, posZ + 0.5F);
 			GlStateManager.scale(-scale, -scale, scale);
-			GL11.glEnable(GL11.GL_ALPHA_TEST);
+			GlStateManager.enable(GL11.GL_ALPHA_TEST);
 
 			if (tile != null && tile.getDirection() != null)
 			{
 				if (tile.getDirection() == ForgeDirection.NORTH)
 				{
-					GL11.glRotatef(180F, 0F, 1F, 0F);
+					GlStateManager.rotate(180F, 0F, 1F, 0F);
 				}
 				if (tile.getDirection() == ForgeDirection.SOUTH)
 				{
-					GL11.glRotatef(0F, 0F, 0F, 0F);
+					GlStateManager.rotate(0F, 0F, 0F, 0F);
 				}
 				if (tile.getDirection() == ForgeDirection.WEST)
 				{
-					GL11.glRotatef(90F, 0F, 1F, 0F);
+					GlStateManager.rotate(90F, 0F, 1F, 0F);
 				}
 				if (tile.getDirection() == ForgeDirection.EAST)
 				{
-					GL11.glRotatef(270F, 0F, 1F, 0F);
+					GlStateManager.rotate(270F, 0F, 1F, 0F);
 				}
 			}
 
@@ -59,7 +59,7 @@ public class RenderLocker extends TileEntitySpecialRenderer
 
 			if (tile != null)
 			{
-				GL11.glPushMatrix();
+				GlStateManager.pushMatrix();
 				{
 					float itemScale = 0.009F;
 					GlStateManager.scale(itemScale, itemScale, itemScale);
@@ -75,7 +75,7 @@ public class RenderLocker extends TileEntitySpecialRenderer
 						for (int rowY = 0; rowY < rows; rowY++)
 						{
 							ItemStack stack = tile.inventory.getStackInSlot(stackIndex++);
-							GL11.glPushMatrix();
+							GlStateManager.pushMatrix();
 							GlStateManager.translate((rowX * 32), (rowY * 9), 0F);
 
 							if (stack != null)
@@ -86,31 +86,31 @@ public class RenderLocker extends TileEntitySpecialRenderer
 								{
 									Object[] args = {};
 
-									GL11.glPushMatrix();
+									GlStateManager.pushMatrix();
 									{
 										GlStateManager.translate(8F, 0F, 0F);
 										renderer.renderItem(ItemRenderType.INVENTORY, stack, args);
 										GlStateManager.enableLight();
 									}
-									GL11.glPopMatrix();
+									GlStateManager.popMatrix();
 								}
 								else
 								{
-									GL11.glPushMatrix();
+									GlStateManager.pushMatrix();
 									{
 										GlStateManager.rotate(-45, 1F, 0F, 0F);
 										RenderUtil.drawItemIcon(stack.getItem(), 0, 0, 32, 32);
 									}
-									GL11.glPopMatrix();
+									GlStateManager.popMatrix();
 								}
 							}
-							GL11.glPopMatrix();
+							GlStateManager.popMatrix();
 						}
 					}
 				}
-				GL11.glPopMatrix();
+				GlStateManager.popMatrix();
 			}
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 }

@@ -1,8 +1,6 @@
 package com.arisux.avp.entities.tile.render;
 
 import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
-import static org.lwjgl.opengl.GL11.glPopMatrix;
-import static org.lwjgl.opengl.GL11.glPushMatrix;
 
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
@@ -23,7 +21,7 @@ public class RenderStasisMechanism extends TileEntitySpecialRenderer
 	{
 		TileEntityStasisMechanism tile = (TileEntityStasisMechanism) te;
 
-		glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			GlStateManager.disable(GL_CULL_FACE);
 			GlStateManager.translate(posX + 0.5F, posY, posZ + 0.5F);
@@ -41,6 +39,6 @@ public class RenderStasisMechanism extends TileEntitySpecialRenderer
 				GlStateManager.enableLight();
 			}
 		}
-		glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 }

@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.GuiElements.GuiCustomButton;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.interfaces.IActionPerformed;
@@ -140,7 +141,7 @@ public class GuiWristbracer extends GuiContainer
 		{
 			if (x == number)
 			{
-				GL11.glEnable(GL11.GL_BLEND);
+				GlStateManager.enable(GL11.GL_BLEND);
 				bindTexture(AliensVsPredator.resources().GUI_WRISTBRACER);
 				drawQuad(xPos, yPos, 28, 50, 0, (27 * (x - 1)), 126);
 			}

@@ -17,17 +17,17 @@ public class RenderHiveNode extends TileEntitySpecialRenderer
 
 	public void doRender(float posX, float posY, float posZ, float renderPartialTicks)
 	{
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			GlStateManager.disable(GL11.GL_CULL_FACE);
 			this.bindTexture(AliensVsPredator.resources().HIVE_NODE);
 			GlStateManager.translate(posX + 0.0F, posY + 1.2F, posZ + 0.0F);
-			GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+			GlStateManager.enable(GL12.GL_RESCALE_NORMAL);
 			GlStateManager.scale(-1.0F, -1.0F, 1.0F);
-			GL11.glEnable(GL11.GL_ALPHA_TEST);
+			GlStateManager.enable(GL11.GL_ALPHA_TEST);
 			this.mainModel.render((Entity) null, 0.0F, 0.0F, 0.0F, renderPartialTicks, 0.0F, 0.0625F);
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	@Override

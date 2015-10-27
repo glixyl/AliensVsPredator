@@ -5,11 +5,6 @@ import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
 import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_DST_COLOR;
 import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_SRC_ALPHA;
 import static org.lwjgl.opengl.GL11.GL_SRC_ALPHA;
-import static org.lwjgl.opengl.GL11.glBlendFunc;
-import static org.lwjgl.opengl.GL11.glEnable;
-import static org.lwjgl.opengl.GL11.glPopMatrix;
-import static org.lwjgl.opengl.GL11.glPushMatrix;
-import static org.lwjgl.opengl.GL11.glTranslated;
 
 import org.lwjgl.opengl.GL11;
 
@@ -25,37 +20,37 @@ public class RenderAssembler extends TileEntitySpecialRenderer
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double posX, double posY, double posZ, float renderPartialTicks)
 	{
-		glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			GlStateManager.disable(GL_CULL_FACE);
-			glEnable(GL_BLEND);
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-			glTranslated(posX + 0.5F, posY + 0.95F, posZ + 0.5F);
+			GlStateManager.enable(GL_BLEND);
+			GlStateManager.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			GlStateManager.translate(posX + 0.5F, posY + 0.95F, posZ + 0.5F);
 
 			GlStateManager.rotate(tile.getWorldObj().getWorldTime() % 360 * 12, 0, 1, 0);
 
-			glPushMatrix();
+			GlStateManager.pushMatrix();
 			{
 				GlStateManager.scale(0.025F, -0.025F, 0.025F);
 				GlStateManager.disableLight();
 				GlStateManager.color4i(0xFFFF0000);
-				glEnable(GL_BLEND);
-				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_DST_COLOR);
+				GlStateManager.enable(GL_BLEND);
+				GlStateManager.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_DST_COLOR);
 				RenderUtil.drawItemIcon(((TileEntityAssembler) tile).getRandomItem(), -8, -60, 16, 16);
 				GlStateManager.disable(GL_BLEND);
 				GlStateManager.enableLight();
 			}
-			glPopMatrix();
+			GlStateManager.popMatrix();
 			
 			GlStateManager.rotate(-15, 1, 0, 0);
 			GlStateManager.rotate(10, 0, 0, 1);
 
-			glPushMatrix();
+			GlStateManager.pushMatrix();
 			{
 				GlStateManager.scale(0.05F, 0.05F, 0.05F);
 				GlStateManager.disableLight();
-				GL11.glEnable(GL11.GL_BLEND);
-				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_CONSTANT_COLOR);
+				GlStateManager.enable(GL11.GL_BLEND);
+				GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_CONSTANT_COLOR);
 
 				for (int x = 64; x > 0; x--)
 				{
@@ -66,10 +61,10 @@ public class RenderAssembler extends TileEntitySpecialRenderer
 
 				GlStateManager.enableLight();
 			}
-			glPopMatrix();
+			GlStateManager.popMatrix();
 
 			GlStateManager.disable(GL_BLEND);
 		}
-		glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 }

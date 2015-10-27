@@ -41,14 +41,14 @@ public class ModelPlasma extends ModelBase
 	{
 		this.color = new Color(r, g, b, a);
 
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			GlStateManager.scale(scale, scale, scale);
 			GlStateManager.disable(GL11.GL_TEXTURE_2D);
 			GlStateManager.disableLightMapping();
 			GlStateManager.disableLight();
-			GL11.glEnable(GL11.GL_BLEND);
-			GL11.glBlendFunc(GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE);
+			GlStateManager.enable(GL11.GL_BLEND);
+			GlStateManager.blendFunc(GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE);
 
 			for (int rZ = 0; rZ < 2; ++rZ)
 			{
@@ -56,7 +56,7 @@ public class ModelPlasma extends ModelBase
 
 				for (int rY = 0; rY < 4; ++rY)
 				{
-					GL11.glPushMatrix();
+					GlStateManager.pushMatrix();
 					{
 						GlStateManager.rotate(rY * 90, 0.0F, 1.0F, 0.0F);
 						this.addTri(t2, t10, t12);
@@ -76,15 +76,15 @@ public class ModelPlasma extends ModelBase
 						this.addTri(t6, t8, t14);
 						this.addTri(t8, t11, t14);
 					}
-					GL11.glPopMatrix();
+					GlStateManager.popMatrix();
 				}
 			}
 			GlStateManager.enableLight();
 			GlStateManager.enableLightMapping();
-			GL11.glEnable(GL11.GL_TEXTURE_2D);
+			GlStateManager.enable(GL11.GL_TEXTURE_2D);
 			GlStateManager.disable(GL11.GL_BLEND);
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	private void addTri(Vertex vertex1, Vertex vertex2, Vertex vertex3)

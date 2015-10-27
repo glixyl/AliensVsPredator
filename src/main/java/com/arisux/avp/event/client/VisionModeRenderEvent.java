@@ -4,7 +4,6 @@ import static com.arisux.airi.lib.RenderUtil.drawStringAlignCenter;
 import static com.arisux.airi.lib.RenderUtil.scaledDisplayResolution;
 
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.GuiElements.GuiCustomButton;
@@ -47,7 +46,7 @@ public class VisionModeRenderEvent
 			{
 				if (WorldUtil.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer) != null && WorldUtil.Entities.Players.Inventories.getHelmSlotItemStack(mc.thePlayer).getItem() == AliensVsPredator.items().helmTitanium)
 				{
-					GL11.glPushMatrix();
+					GlStateManager.pushMatrix();
 					this.currentVisionMode.render();
 
 					drawStringAlignCenter(currentVisionMode.modeName, scaledDisplayResolution().getScaledWidth() / 2, 5, currentVisionMode.color, false);
@@ -63,7 +62,7 @@ public class VisionModeRenderEvent
 						buttonToggleVisionMode.overlayColorHover = 0x77FF0000;
 						buttonToggleVisionMode.drawButton();
 					}
-					GL11.glPopMatrix();
+					GlStateManager.popMatrix();
 				}
 			}
 		}

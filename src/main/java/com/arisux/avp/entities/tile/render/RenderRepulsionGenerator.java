@@ -5,13 +5,7 @@ import static org.lwjgl.opengl.GL11.GL_BLEND;
 import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
 import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_SRC_ALPHA;
 import static org.lwjgl.opengl.GL11.GL_SRC_ALPHA;
-import static org.lwjgl.opengl.GL11.glBlendFunc;
-import static org.lwjgl.opengl.GL11.glEnable;
-import static org.lwjgl.opengl.GL11.glPopMatrix;
-import static org.lwjgl.opengl.GL11.glPushMatrix;
-import static org.lwjgl.opengl.GL11.glTranslated;
 
-import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import com.arisux.airi.lib.GlStateManager;
@@ -32,19 +26,19 @@ public class RenderRepulsionGenerator extends TileEntitySpecialRenderer
 	{
 		TileEntityRepulsionGenerator tile = (TileEntityRepulsionGenerator) tileEntity;
 
-		glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			GlStateManager.disable(GL_CULL_FACE);
-			glEnable(GL_BLEND);
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			GlStateManager.enable(GL_BLEND);
+			GlStateManager.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 			this.bindTexture(AliensVsPredator.resources().REPULSION_GENERATOR);
-			glTranslated(posX + 0.5F, posY + 1.5F, posZ + 0.5F);
-			GL11.glRotatef(tile.rotation * (-90F), 0F, 1F, 0F);
-			glEnable(GL12.GL_RESCALE_NORMAL);
+			GlStateManager.translate(posX + 0.5F, posY + 1.5F, posZ + 0.5F);
+			GlStateManager.rotate(tile.rotation * (-90F), 0F, 1F, 0F);
+			GlStateManager.enable(GL12.GL_RESCALE_NORMAL);
 			GlStateManager.scale(1.0F, -1.0F, 1.0F);
-			glEnable(GL_ALPHA_TEST);
+			GlStateManager.enable(GL_ALPHA_TEST);
 			this.model.render(tile, RenderUtil.DEFAULT_BOX_TRANSLATION);
 		}
-		glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 }

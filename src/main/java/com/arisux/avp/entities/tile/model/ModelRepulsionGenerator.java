@@ -1,7 +1,5 @@
 package com.arisux.avp.entities.tile.model;
 
-import org.lwjgl.opengl.GL11;
-
 import com.arisux.airi.lib.AccessWrapper;
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.client.ModelBaseExtension;
@@ -113,12 +111,12 @@ public class ModelRepulsionGenerator extends ModelBaseExtension
 
 		if (tileEntity != null)
 		{
-			GL11.glPushMatrix();
+			GlStateManager.pushMatrix();
 			{
 				GlStateManager.rotate(tileEntity.getWorldObj().getWorldTime() % 360 * 48 * AccessWrapper.getRenderPartialTicks(), 0F, 1F, 0F);
 				dualMagnet.render(boxTranslation);
 			}
-			GL11.glPopMatrix();
+			GlStateManager.popMatrix();
 		}
 		else
 		{

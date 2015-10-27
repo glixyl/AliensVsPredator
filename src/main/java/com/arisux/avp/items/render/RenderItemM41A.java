@@ -115,8 +115,8 @@ public class RenderItemM41A extends ItemRenderer
 				GlStateManager.translate(0F, 0F, -0.01F);
 				GlStateManager.disableLightMapping();
 				RenderUtil.drawString(getAmmoCountDisplayString(), 0, 0, 0xFFFF0000);
-				GL11.glEnable(GL11.GL_LIGHTING);
-				GL11.glColor4f(1F, 1F, 1F, 1F);
+				GlStateManager.enable(GL11.GL_LIGHTING);
+				GlStateManager.color(1F, 1F, 1F, 1F);
 			}
 
 			if (mc.thePlayer.inventory.hasItem(AliensVsPredator.items().itemMotionTracker))

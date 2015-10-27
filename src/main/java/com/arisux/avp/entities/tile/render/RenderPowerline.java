@@ -2,10 +2,6 @@ package com.arisux.avp.entities.tile.render;
 
 import static org.lwjgl.opengl.GL11.GL_ALPHA_TEST;
 import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
-import static org.lwjgl.opengl.GL11.glEnable;
-import static org.lwjgl.opengl.GL11.glPopMatrix;
-import static org.lwjgl.opengl.GL11.glPushMatrix;
-import static org.lwjgl.opengl.GL11.glTranslated;
 
 import org.lwjgl.opengl.GL11;
 
@@ -28,25 +24,25 @@ public class RenderPowerline extends TileEntitySpecialRenderer
 	{
 		TileEntityPowerline tile = (TileEntityPowerline) var1;
 
-		glPushMatrix();
+		GlStateManager.pushMatrix();
 		{
 			GlStateManager.disable(GL_CULL_FACE);
 			this.bindTexture(AliensVsPredator.resources().CABLE);
 			GlStateManager.disable(GL11.GL_TEXTURE_2D);
 			
-			glPushMatrix();
+			GlStateManager.pushMatrix();
 			{
-				glTranslated(posX + 0.5F, posY + 1.5F, posZ + 0.5F);
+				GlStateManager.translate(posX + 0.5F, posY + 1.5F, posZ + 0.5F);
 				GlStateManager.scale(1.0F, -1.0F, 1.0F);
-				glEnable(GL_ALPHA_TEST);
+				GlStateManager.enable(GL_ALPHA_TEST);
 				GlStateManager.color4i(0xFF222222);
 				this.model.render(tile, 0.0625F);
 			}
-			glPopMatrix();
+			GlStateManager.popMatrix();
 			
-			glEnable(GL11.GL_TEXTURE_2D);
+			GlStateManager.enable(GL11.GL_TEXTURE_2D);
 
-			glTranslated(posX + 0.5F, posY + 1.5F, posZ + 0.5F);
+			GlStateManager.translate(posX + 0.5F, posY + 1.5F, posZ + 0.5F);
 			
 			if (Minecraft.getMinecraft().objectMouseOver != null)
 			{
@@ -58,26 +54,26 @@ public class RenderPowerline extends TileEntitySpecialRenderer
 					GlStateManager.scale(scale, scale, scale);
 					GlStateManager.disableLight();
 					
-					glPushMatrix();
+					GlStateManager.pushMatrix();
 					{
-						GL11.glRotatef(Minecraft.getMinecraft().thePlayer.rotationYaw + 180, 0F, -1F, 0F);
+						GlStateManager.rotate(Minecraft.getMinecraft().thePlayer.rotationYaw + 180, 0F, -1F, 0F);
 						
-						glPushMatrix();
+						GlStateManager.pushMatrix();
 						{
-							GL11.glRotatef(Minecraft.getMinecraft().thePlayer.rotationPitch + 180, -1F, 0F, 0F);
+							GlStateManager.rotate(Minecraft.getMinecraft().thePlayer.rotationPitch + 180, -1F, 0F, 0F);
 							RenderUtil.drawString(((float) tile.getVoltage()) + "V", -20, 30, tile.getVoltage() <= 0 ? 0xFFFF0000 : 0xFF00FF00);
 							scale = 0.5F;
 							GlStateManager.scale(scale, scale, scale);
 							RenderUtil.drawString((tile + "").replace(tile.getClass().getName(), ""), -20, 80, 0xFF00AAFF);
 						}
-						glPopMatrix();
+						GlStateManager.popMatrix();
 					}
-					glPopMatrix();
+					GlStateManager.popMatrix();
 					
 					GlStateManager.enableLight();
 				}
 			}
 		}
-		glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 }

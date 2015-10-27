@@ -2,6 +2,7 @@ package com.arisux.avp.entities.mob.render;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntitySpitter;
 import com.arisux.avp.entities.mob.model.ModelSpitter;
@@ -47,8 +48,8 @@ public class RenderSpitter extends RenderLiving
 		} else
 		{
 			this.bindTexture(AliensVsPredator.resources().SPITTER_MASK);
-			GL11.glEnable(GL11.GL_BLEND);
-			GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);
+			GlStateManager.enable(GL11.GL_BLEND);
+			GlStateManager.blendFunc(GL11.GL_ONE, GL11.GL_ONE);
 
 			if (entity.isInvisible())
 			{
@@ -60,7 +61,7 @@ public class RenderSpitter extends RenderLiving
 
 			char light = 61680;
 			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (light % 65536) / 1.0F, (light / 65536) / 1.0F);
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 			return 1;
 		}
 	}
