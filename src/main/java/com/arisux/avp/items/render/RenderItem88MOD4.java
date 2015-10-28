@@ -18,7 +18,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderItem88MOD4 extends ItemRenderer
 {
-	public static final ResourceLocation resourceLocation = AliensVsPredator.resources().R_88MOD4;
+	public static final ResourceLocation resourceLocation = AliensVsPredator.resources()._88MOD4;
 	public static final ModelBaseExtension model = new Model88MOD4();
 
 	public RenderItem88MOD4()

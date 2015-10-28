@@ -129,6 +129,7 @@ import com.arisux.avp.entities.tile.render.RenderStasisMechanism;
 import com.arisux.avp.entities.tile.render.RenderTransformer;
 import com.arisux.avp.entities.tile.render.RenderTurret;
 import com.arisux.avp.entities.tile.render.RenderWorkstation;
+import com.arisux.avp.items.model.Model88MOD4;
 import com.arisux.avp.items.model.ModelAK47;
 import com.arisux.avp.items.model.ModelM4;
 import com.arisux.avp.items.model.ModelM41A;
@@ -162,6 +163,9 @@ import com.arisux.avp.items.render.RenderItemTurret;
 import com.arisux.avp.items.render.RenderItemWorkstation;
 import com.arisux.avp.items.render.RenderItemWristbracer;
 import com.arisux.avp.items.render.RenderItemWristbracerBlades;
+import com.arisux.avp.items.render.parts.RenderItem88Mod4Action;
+import com.arisux.avp.items.render.parts.RenderItem88Mod4Barrel;
+import com.arisux.avp.items.render.parts.RenderItem88Mod4Stock;
 import com.arisux.avp.items.render.parts.RenderItemAK47Action;
 import com.arisux.avp.items.render.parts.RenderItemAK47Barrel;
 import com.arisux.avp.items.render.parts.RenderItemAK47Stock;
@@ -298,7 +302,12 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		registerItemRenderer(items.itemSummonerSpaceJockey, (new RenderItemSummoner(EntitySpaceJockey.class, ModelEngineer.class, AliensVsPredator.resources().SPACE_JOCKEY)).setScale(27.5F).setY(8F));
 		registerItemRenderer(items.itemSummonerEngineer, (new RenderItemSummoner(EntityEngineer.class, ModelEngineer.class, AliensVsPredator.resources().ENGINEER)).setScale(27.5F).setY(8F));
 		registerItemRenderer(items.itemSummonerYautjaBerserker, (new RenderItemSummoner(EntityYautjaBerserker.class, ModelYautjaBerserker.class, AliensVsPredator.resources().YAUTJA_BERSERKER)).setScale(7.5F).setY(8F));
-
+		
+		Model88MOD4 _88mod4 = new Model88MOD4();
+		registerItemRenderer(items.itemPistolBarrel, new RenderItem88Mod4Barrel(AliensVsPredator.resources()._88MOD4, _88mod4.barrelLeft, _88mod4.barrelRight, _88mod4.barrelNose, _88mod4.barrelSupport));
+		registerItemRenderer(items.itemPistolAction, new RenderItem88Mod4Action(AliensVsPredator.resources()._88MOD4, _88mod4.rack, _88mod4.underGrip, _88mod4.trigger, _88mod4.gripSupport, _88mod4.trigger));
+		registerItemRenderer(items.itemPistolStock, new RenderItem88Mod4Stock(AliensVsPredator.resources()._88MOD4, _88mod4.handleGrip, _88mod4.butt1, _88mod4.gripSupport));
+		
 		ModelAK47 ak47 = new ModelAK47();
 		registerItemRenderer(items.itemAK47Barrel, new RenderItemAK47Barrel(AliensVsPredator.resources().AK47, ak47.barrel, ak47.barrelBase, ak47.lBarrelGrip, ak47.rBarrelGrip));
 		registerItemRenderer(items.itemAK47Action, new RenderItemAK47Action(AliensVsPredator.resources().AK47, ak47.lbody1, ak47.rbody1, ak47.sightBase, ak47.sightBase1, ak47.trigger, ak47.triggerGuard));
