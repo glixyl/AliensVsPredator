@@ -63,7 +63,6 @@ public class TacticalHUDRenderEvent
 				ArrayList<Entity> entities = (ArrayList<Entity>) WorldUtil.Entities.getEntitiesInCoordsRange(Minecraft.getMinecraft().thePlayer.worldObj, Entity.class, new WorldUtil.Blocks.CoordData(Minecraft.getMinecraft().thePlayer), 30, 30);
 				Vec3 p = Minecraft.getMinecraft().thePlayer.getLookVec();
 				float scale = 24.0F;
-				int analysisIconSize = 100;
 
 				GlStateManager.pushMatrix();
 				{

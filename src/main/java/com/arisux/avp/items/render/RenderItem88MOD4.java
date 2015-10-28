@@ -54,12 +54,12 @@ public class RenderItem88MOD4 extends ItemRenderer
 	public void renderThirdPerson(ItemStack item, Object... data)
 	{
 		bindTexture(this.getResourceLocation());
-		GlStateManager.translate(0.2F, 1.15F, 0.25F);
-		GlStateManager.rotate(97.0F, 1.0F, 0.0F, 0.0F);
-		GlStateManager.rotate(130.0F, 0.0F, 1.0F, 0.0F);
-		GlStateManager.rotate(80.0F, 0.0F, 0.0F, 1.0F);
+		GlStateManager.translate(0.37F, 0.25F, 0.25F);
+		GlStateManager.rotate(20, 1F, 0F, 0F);
+		GlStateManager.rotate(10, 0F, 0F, 1F);
+		GlStateManager.rotate(15, 0F, 1F, 0F);
 		GlStateManager.disable(GL11.GL_CULL_FACE);
-		GlStateManager.scale(1.2F, 1.2F, 1.2F);
+		GlStateManager.scale(1.2F, -1.2F, -1.2F);
 		this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 	}
 
@@ -70,22 +70,22 @@ public class RenderItem88MOD4 extends ItemRenderer
 		{
 			if (Mouse.isButtonDown(0) && mc.inGameHasFocus)
 			{
-				GlStateManager.translate(0.3F, 2.0F, -0.409F);
-				GlStateManager.rotate(103.0F, 1.0F, 0.0F, 0.0F);
-				GlStateManager.rotate(114.0F, 0.0F, 1.0F, 0.0F);
-				GlStateManager.rotate(78.0F, 0.0F, 0.0F, 1.0F);
-				GlStateManager.translate(0.0F, 0.0F, -0.46F);
+				GlStateManager.translate(1.7F, 1.5F, -0.885F);
+				GlStateManager.rotate(100.0F, 1.0F, 0.0F, 0.0F);
+				GlStateManager.rotate(122.0F, 0.0F, 1.0F, 0.0F);
+				GlStateManager.rotate(81.0F, 0.0F, 0.0F, 1.0F);
+				GlStateManager.translate(0F, 0F, -0.45F);
 			}
 			else
 			{
-				GlStateManager.translate(0.6F, 1.85F, 0.9F);
+				GlStateManager.translate(2F, 0.95F, 0.9F);
 				GlStateManager.rotate(95.0F, 1.0F, 0.0F, 0.0F);
 				GlStateManager.rotate(120.0F, 0.0F, 1.0F, 0.0F);
 				GlStateManager.rotate(80.0F, 0.0F, 0.0F, 1.0F);
 			}
 
 			GlStateManager.disable(GL11.GL_CULL_FACE);
-			GlStateManager.scale(2.0F, 2.0F, 2.0F);
+			GlStateManager.scale(2.0F, 2.0F, -2.0F);
 			bindTexture(getResourceLocation());
 			this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 		}
