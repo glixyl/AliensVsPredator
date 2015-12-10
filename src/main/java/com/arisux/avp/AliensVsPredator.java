@@ -191,7 +191,6 @@ public class AliensVsPredator implements IMod
 		items().initialize(event);
 		blocks().initialize(event);
 		dimensions().initialize(event);
-		entities().initialize(event);
 		worldgen().initialize(event);
 		crafting().initialize(event);
 		interfaces().initialize(event);
@@ -200,6 +199,7 @@ public class AliensVsPredator implements IMod
 		playermodehandler().initialize(event);
 		schematics().initialize(event);
 		assembler().initialize(event);
+		entities().initialize(event);
 		
         if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
         {

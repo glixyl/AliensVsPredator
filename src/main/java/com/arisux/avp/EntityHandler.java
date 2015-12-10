@@ -152,6 +152,38 @@ public class EntityHandler implements IInitializable
 
 	private void registerSpawns()
 	{
+		BiomeGenBase[] biomes = new BiomeGenBase[] 
+		{
+				BiomeGenBase.beach,
+				BiomeGenBase.birchForest,
+				BiomeGenBase.birchForestHills,
+				BiomeGenBase.coldBeach,
+				BiomeGenBase.coldTaiga,
+				BiomeGenBase.coldTaigaHills,
+				BiomeGenBase.desert,
+				BiomeGenBase.desertHills,
+				BiomeGenBase.extremeHills,
+				BiomeGenBase.extremeHillsEdge,
+				BiomeGenBase.extremeHillsPlus,
+				BiomeGenBase.forest,
+				BiomeGenBase.forestHills,
+				BiomeGenBase.frozenOcean,
+				BiomeGenBase.frozenRiver,
+				BiomeGenBase.iceMountains,
+				BiomeGenBase.icePlains,
+				BiomeGenBase.jungle,
+				BiomeGenBase.jungleEdge,
+				BiomeGenBase.jungleHills,
+				BiomeGenBase.plains,
+				BiomeGenBase.roofedForest,
+				BiomeGenBase.savanna,
+				BiomeGenBase.savannaPlateau,
+				BiomeGenBase.swampland,
+				BiomeGenBase.taiga,
+				BiomeGenBase.taigaHills
+		};
+		
+		EntityRegistry.addSpawn(EntityDrone.class, 56, 1, 3, EnumCreatureType.monster, biomes);
 		EntityRegistry.addSpawn(EntityMarine.class, 16, 1, 2, EnumCreatureType.creature, new BiomeGenBase[] { 
 			BiomeGenBase.swampland, 
 			BiomeGenBase.forest, 
