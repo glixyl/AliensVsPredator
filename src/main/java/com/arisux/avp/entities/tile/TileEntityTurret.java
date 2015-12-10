@@ -99,8 +99,8 @@ public class TileEntityTurret extends TileEntityElectrical implements IDataDevic
 		{
 			this.getEntity().setLocationAndAngles(this.xCoord + getEntity().width / 2, this.yCoord + 1, this.zCoord + getEntity().width / 2, this.rotationYaw, this.rotationPitch);
 		}
-
-		if (this.voltage > 0)
+		
+		if (this.getSourceVoltage() > 0)
 		{
 			this.firingTimeout = this.firingTimeout > 0 ? this.firingTimeout - 1 : this.firingTimeout;
 			this.pickupItemstacks();
@@ -784,13 +784,13 @@ public class TileEntityTurret extends TileEntityElectrical implements IDataDevic
 	@Override
 	public boolean canConnectEnergy(ForgeDirection from)
 	{
-		return false;
+		return true;
 	}
 
 	@Override
 	public double receiveEnergy(ForgeDirection from, double maxReceive, boolean simulate)
 	{
-		return this.voltage;
+		return super.receiveEnergy(from, maxReceive, simulate);
 	}
 
 	@Override
