@@ -152,14 +152,35 @@ public class EntityHandler implements IInitializable
 
 	private void registerSpawns()
 	{
-		BiomeGenBase[] biomes = new BiomeGenBase[] 
+		BiomeGenBase[] xenomorphBiomes = new BiomeGenBase[] 
 		{
-				BiomeGenBase.beach,
 				BiomeGenBase.birchForest,
 				BiomeGenBase.birchForestHills,
 				BiomeGenBase.coldBeach,
 				BiomeGenBase.coldTaiga,
 				BiomeGenBase.coldTaigaHills,
+				BiomeGenBase.desertHills,
+				BiomeGenBase.extremeHills,
+				BiomeGenBase.extremeHillsEdge,
+				BiomeGenBase.extremeHillsPlus,
+				BiomeGenBase.forest,
+				BiomeGenBase.forestHills,
+				BiomeGenBase.iceMountains,
+				BiomeGenBase.icePlains,
+				BiomeGenBase.jungle,
+				BiomeGenBase.jungleEdge,
+				BiomeGenBase.jungleHills,
+				BiomeGenBase.plains,
+				BiomeGenBase.roofedForest,
+				BiomeGenBase.swampland,
+				BiomeGenBase.taiga,
+				BiomeGenBase.taigaHills
+		};
+		
+		BiomeGenBase[] predatorBiomes = new BiomeGenBase[] 
+		{
+				BiomeGenBase.birchForest,
+				BiomeGenBase.birchForestHills,
 				BiomeGenBase.desert,
 				BiomeGenBase.desertHills,
 				BiomeGenBase.extremeHills,
@@ -169,21 +190,21 @@ public class EntityHandler implements IInitializable
 				BiomeGenBase.forestHills,
 				BiomeGenBase.frozenOcean,
 				BiomeGenBase.frozenRiver,
-				BiomeGenBase.iceMountains,
 				BiomeGenBase.icePlains,
 				BiomeGenBase.jungle,
 				BiomeGenBase.jungleEdge,
 				BiomeGenBase.jungleHills,
-				BiomeGenBase.plains,
-				BiomeGenBase.roofedForest,
-				BiomeGenBase.savanna,
-				BiomeGenBase.savannaPlateau,
-				BiomeGenBase.swampland,
 				BiomeGenBase.taiga,
 				BiomeGenBase.taigaHills
 		};
-		
-		EntityRegistry.addSpawn(EntityDrone.class, 56, 1, 3, EnumCreatureType.monster, biomes);
+
+		EntityRegistry.addSpawn(EntityDrone.class, 56, 1, 3, EnumCreatureType.monster, xenomorphBiomes);
+		EntityRegistry.addSpawn(EntityWarrior.class, 38, 1, 3, EnumCreatureType.monster, xenomorphBiomes);
+		EntityRegistry.addSpawn(EntityPraetorian.class, 14, 1, 3, EnumCreatureType.monster, xenomorphBiomes);
+		EntityRegistry.addSpawn(EntityFacehugger.class, 24, 1, 3, EnumCreatureType.monster, xenomorphBiomes);
+		EntityRegistry.addSpawn(EntityChestburster.class, 12, 1, 3, EnumCreatureType.monster, xenomorphBiomes);
+		EntityRegistry.addSpawn(EntityYautja.class, 19, 1, 3, EnumCreatureType.monster, predatorBiomes);
+		EntityRegistry.addSpawn(EntityYautjaBerserker.class, 6, 1, 3, EnumCreatureType.monster, predatorBiomes);
 		EntityRegistry.addSpawn(EntityMarine.class, 16, 1, 2, EnumCreatureType.creature, new BiomeGenBase[] { 
 			BiomeGenBase.swampland, 
 			BiomeGenBase.forest, 
