@@ -103,6 +103,8 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockBlastdoor = (new BlockBlastdoor(Material.iron)).setHardness(5F).setResistance(5F),
 		blockCryostasisTube = (new BlockCryostasisTube(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockPlastic = (new HookedBlock(Material.clay)).setHardness(1.5F).setResistance(2.0F),
+		blockPlasticTri = (new HookedBlock(Material.clay)).setHardness(1.5F).setResistance(2.0F),
+		blockPlasticCircle = (new HookedBlock(Material.clay)).setHardness(1.5F).setResistance(2.0F),
 		blockLightPanel = (new BlockLightPanel(Material.iron, true)).setHardness(1.5F).setResistance(2.0F),
 		blockPlasticTile = (new HookedBlock(Material.clay)).setHardness(1.5F).setResistance(2.0F),
 		blockSatelliteModem = (new BlockSatelliteModem(Material.iron)).setHardness(3.2F).setResistance(2.6F),
@@ -285,6 +287,8 @@ public class BlockHandler extends IBHandler implements IInitializable
 		registerBlock(blockCryostasisTube, "cryostasistube", true);
 		registerShapedBlockSet(blockPlastic, "plasticblock");
 		registerShapedBlockSet(blockPlasticTile, "plastictile");
+		registerShapedBlockSet(blockPlasticTri, "plastictiletri");
+		registerShapedBlockSet(blockPlasticCircle, "plastictilecircle");
 		registerBlock(blockLightPanel, "lightpanel", true);
 		registerBlock(mainframePanelShimmer, "mainframepanel.shimmer", true);
 		registerBlock(mainframePanelFlicker, "mainframepanel.flicker", true);
