@@ -11,39 +11,60 @@ import org.lwjgl.opengl.GL12;
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.entities.mob.EntityChestburster;
-import com.arisux.avp.entities.mob.EntityFacehugger;
-import com.arisux.avp.entities.mob.EntityOvamorph;
 import com.arisux.avp.entities.tile.TileEntityCryostasisTube;
-import com.arisux.avp.entities.tile.model.ModelCryostasisTtube;
+import com.arisux.avp.entities.tile.model.ModelCryostasisTube;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 
+@SideOnly(Side.CLIENT)
 public class RenderCryostasisTube extends TileEntitySpecialRenderer
 {
-	private ModelCryostasisTtube model = new ModelCryostasisTtube();
-
-	@Override
-	public void renderTileEntityAt(TileEntity var1, double posX, double posY, double posZ, float var8)
+	public ModelCryostasisTube model = new ModelCryostasisTube();
+	public static CryostasisTubeRenderer cryostasisRenderer = new CryostasisTubeRenderer();
+	
+	@SideOnly(Side.CLIENT)
+	public interface ICustomCryostasisRenderer
 	{
-		TileEntityCryostasisTube tile = (TileEntityCryostasisTube) var1;
-
-		GlStateManager.pushMatrix();
+		@SideOnly(Side.CLIENT)
+		public CryostasisTubeRenderer getCustomCryostasisRenderer();
+	}
+	
+	public static class CryostasisTubeRenderer
+	{		
+		public void renderChassis(RenderCryostasisTube renderer, TileEntityCryostasisTube tile, double posX, double posY, double posZ)
 		{
 			GlStateManager.disable(GL_CULL_FACE);
 			GlStateManager.enable(GL_BLEND);
 			GlStateManager.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-			this.bindTexture(AliensVsPredator.resources().CRYOSTASIS_TUBE);
 			GlStateManager.translate(posX + 0.5F, posY + 1.125F, posZ + 0.5F);
 			GlStateManager.rotate(tile.rotation * (-90F), 0F, 1F, 0F);
 			GlStateManager.enable(GL12.GL_RESCALE_NORMAL);
 			GlStateManager.scale(0.75F, -0.75F, 0.75F);
 			GlStateManager.enable(GL_ALPHA_TEST);
-			this.model.render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
-			GlStateManager.enable(GL_BLEND);
+			renderer.bindTexture(AliensVsPredator.resources().CRYOSTASIS_TUBE);
+			renderer.model.render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
+		}
+		
+		public void renderTube(RenderCryostasisTube renderer, TileEntityCryostasisTube tile, double posX, double posY, double posZ)
+		{
+			if (tile.getVoltage() > 0)
+			{
+				GlStateManager.disableLightMapping();
+				GlStateManager.disableLight();
+			}
 
+			renderer.bindTexture(tile.isShattered() ? AliensVsPredator.resources().CRYOSTASIS_TUBE_MASK_SHATTERED : tile.isCracked() ? AliensVsPredator.resources().CRYOSTASIS_TUBE_MASK_CRACKED : AliensVsPredator.resources().CRYOSTASIS_TUBE_MASK);
+			renderer.model.render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
+			GlStateManager.enableLightMapping();
+			GlStateManager.enableLight();
+		}
+		
+		public void renderEntity(RenderCryostasisTube renderer, TileEntityCryostasisTube tile, double posX, double posY, double posZ)
+		{
 			if (tile.stasisEntity != null)
 			{
 				GlStateManager.pushMatrix();
@@ -53,32 +74,34 @@ public class RenderCryostasisTube extends TileEntitySpecialRenderer
 						GlStateManager.disableLight();
 					}
 
-					if (tile.stasisEntity instanceof EntityChestburster || tile.stasisEntity instanceof EntityFacehugger)
-					{
-						GlStateManager.translate(0F, -0.5F, 0F);
-						GlStateManager.rotate(90F, 1F, 0F, 0F);
-					}
-					
-					if (tile.stasisEntity instanceof EntityOvamorph)
-					{
-						GlStateManager.translate(0F, 0.5F, 0F);
-						GlStateManager.rotate(180F, 1F, 0F, 0F);
-					}
-
 					RenderManager.instance.renderEntityWithPosYaw(tile.stasisEntity, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
 				}
 				GlStateManager.popMatrix();
 			}
+		}
+	}
 
-			if (tile.getVoltage() > 0)
+	@Override
+	public void renderTileEntityAt(TileEntity var1, double posX, double posY, double posZ, float renderPartialTicks)
+	{
+		TileEntityCryostasisTube tile = (TileEntityCryostasisTube) var1;
+
+		GlStateManager.pushMatrix();
+		{
+			CryostasisTubeRenderer renderer = null;
+			
+			if (tile != null && tile.stasisEntity != null && tile.stasisEntity instanceof ICustomCryostasisRenderer)
 			{
-				GlStateManager.disableLightMapping();
-				GlStateManager.disableLight();
+				ICustomCryostasisRenderer customRenderer = (ICustomCryostasisRenderer) tile.stasisEntity;
+				renderer = customRenderer.getCustomCryostasisRenderer();
 			}
+			
+			renderer = renderer == null ? cryostasisRenderer : renderer;
 
-			this.bindTexture(tile.isShattered() ? AliensVsPredator.resources().CRYOSTASIS_TUBE_MASK_SHATTERED : tile.isCracked() ? AliensVsPredator.resources().CRYOSTASIS_TUBE_MASK_CRACKED : AliensVsPredator.resources().CRYOSTASIS_TUBE_MASK);
-			this.model.render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
-
+			renderer.renderChassis(this, tile, posX, posY, posZ);
+			renderer.renderEntity(this, tile, posX, posY, posZ);
+			renderer.renderTube(this, tile, posX, posY, posZ);
+			
 			GlStateManager.disable(GL_BLEND);
 			GlStateManager.enableLight();
 			GlStateManager.enableLightMapping();

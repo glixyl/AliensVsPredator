@@ -6,7 +6,7 @@ import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.entities.tile.model.ModelCryostasisTtube;
+import com.arisux.avp.entities.tile.model.ModelCryostasisTube;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -18,7 +18,7 @@ public class RenderItemCryostasisTube extends ItemRenderer
 
 	public RenderItemCryostasisTube()
 	{
-		super(new ModelCryostasisTtube(), resourceLocation);
+		super(new ModelCryostasisTube(), resourceLocation);
 	}
 
 	@Override
@@ -38,13 +38,13 @@ public class RenderItemCryostasisTube extends ItemRenderer
 		GlStateManager.disable(GL11.GL_CULL_FACE);
 		GlStateManager.scale(glScale, -glScale, glScale);
 		RenderUtil.bindTexture(resourceLocation);
-		((ModelCryostasisTtube) this.getModel()).render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
+		((ModelCryostasisTube) this.getModel()).render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
 		
 		GlStateManager.pushMatrix();
 		{
 			GlStateManager.disableLightMapping();
 			RenderUtil.bindTexture(resourceLocationMask);
-			((ModelCryostasisTtube) this.getModel()).render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
+			((ModelCryostasisTube) this.getModel()).render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
 		}
 		GlStateManager.popMatrix();
 	}
@@ -63,13 +63,13 @@ public class RenderItemCryostasisTube extends ItemRenderer
 			GlStateManager.disable(GL11.GL_CULL_FACE);
 			GlStateManager.scale(glScale, glScale, glScale);
 			RenderUtil.bindTexture(resourceLocation);
-			((ModelCryostasisTtube) this.getModel()).render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
+			((ModelCryostasisTube) this.getModel()).render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
 			
 			GlStateManager.pushMatrix();
 			{
 				GlStateManager.disableLightMapping();
 				RenderUtil.bindTexture(resourceLocationMask);
-				((ModelCryostasisTtube) this.getModel()).render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
+				((ModelCryostasisTube) this.getModel()).render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
 			}
 			GlStateManager.popMatrix();
 		}
@@ -88,13 +88,13 @@ public class RenderItemCryostasisTube extends ItemRenderer
 		GlStateManager.enable(GL11.GL_BLEND);
 		GlStateManager.blendClear();
 		RenderUtil.bindTexture(resourceLocation);
-		((ModelCryostasisTtube) this.getModel()).render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
+		((ModelCryostasisTube) this.getModel()).render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
 
 		GlStateManager.pushMatrix();
 		{
 			GlStateManager.blendClear();
 			RenderUtil.bindTexture(resourceLocationMask);
-			((ModelCryostasisTtube) this.getModel()).render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
+			((ModelCryostasisTube) this.getModel()).render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
 		}
 		GlStateManager.popMatrix();
 	}

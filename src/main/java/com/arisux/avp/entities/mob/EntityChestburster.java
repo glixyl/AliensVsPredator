@@ -2,12 +2,20 @@ package com.arisux.avp.entities.mob;
 
 import java.util.ArrayList;
 
+import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.WorldUtil;
 import com.arisux.airi.lib.WorldUtil.Entities;
 import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.entities.tile.TileEntityCryostasisTube;
+import com.arisux.avp.entities.tile.render.RenderCryostasisTube;
+import com.arisux.avp.entities.tile.render.RenderCryostasisTube.CryostasisTubeRenderer;
+import com.arisux.avp.entities.tile.render.RenderCryostasisTube.ICustomCryostasisRenderer;
 import com.arisux.avp.util.HostParasiteTypes;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.item.EntityItem;
@@ -20,7 +28,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityChestburster extends EntitySpeciesAlien implements IMob
+public class EntityChestburster extends EntitySpeciesAlien implements IMob, ICustomCryostasisRenderer
 {
 	protected Minecraft mc;
 	private int parasiteType;
@@ -216,5 +224,44 @@ public class EntityChestburster extends EntitySpeciesAlien implements IMob
 	public int getMaxParasiteAge()
 	{
 		return 18000;
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public CryostasisTubeRenderer getCustomCryostasisRenderer()
+	{
+		return new CryostasisTubeRenderer() {
+			@Override
+			public void renderChassis(RenderCryostasisTube renderer, TileEntityCryostasisTube tile, double posX, double posY, double posZ)
+			{
+				super.renderChassis(renderer, tile, posX, posY, posZ);
+			}
+			
+			@Override
+			public void renderEntity(RenderCryostasisTube renderer, TileEntityCryostasisTube tile, double posX, double posY, double posZ) 
+			{
+				if (tile.stasisEntity != null)
+				{
+					GlStateManager.pushMatrix();
+					{
+						if (tile.getVoltage() > 0)
+						{
+							GlStateManager.disableLight();
+						}
+						
+						GlStateManager.translate(0F, -0.5F, 0F);
+						GlStateManager.rotate(90F, 1F, 0F, 0F);
+						RenderManager.instance.renderEntityWithPosYaw(tile.stasisEntity, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
+					}
+					GlStateManager.popMatrix();
+				}
+			}
+			
+			@Override
+			public void renderTube(RenderCryostasisTube renderer, TileEntityCryostasisTube tile, double posX, double posY, double posZ)
+			{
+				super.renderTube(renderer, tile, posX, posY, posZ);
+			}
+		};
 	}
 }
