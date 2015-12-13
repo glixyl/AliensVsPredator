@@ -27,7 +27,7 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
     public EntityXenomorph(World world)
     {
         super(world);
-        this.hitRange = 3;
+        this.hitRange = 1;
         this.jumpMovementFactor = 0.02F;
         this.canClimb = true;
         this.isDependant = true;
