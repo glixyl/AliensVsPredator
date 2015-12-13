@@ -22,8 +22,8 @@ Do read through it if you do plan on contributing.
 ## Clone ##
 The following steps will ensure your project is cloned properly
 
-1. `git clone git@github.com:hsyyid/EssentialCmds.git`
-2. `cd Foundations`
+1. `git clone git@github.com:Ri5ux/AliensVsPredator.git`
+2. `cd AliensVsPredator`
 
 ## Development Environment ##
 __Note:__ If you do not have [Gradle] installed then use ./gradlew for Unix systems or Git Bash and gradlew.bat for
@@ -39,7 +39,8 @@ above, follow the given steps for your ide:
 
 #### [Eclipse]
 
-2. `gradle eclipse --refresh-dependencies`
+1. `gradle setupDecompWorkspace --refresh-dependencies`
+2. `gradle eclipse`
 
 ## Updating your Clone ##
 __Note:__ If you do not have [Gradle] installed then use ./gradlew for Unix systems or Git Bash and gradlew.bat for
@@ -54,10 +55,10 @@ The following steps will update your clone with the official repo.
 __Note:__ If you do not have [Gradle] installed then use ./gradlew for Unix systems or Git Bash and gradlew.bat for
 Windows systems in place of any 'gradle' command.
 
-We use [Gradle] for EssentialCmds.
+We use [Gradle] for AliensVsPredator.
 
-In order to build EssentialCmds you simply need to run the `gradle` command.
-You can find the compiled JAR file in `./build/libs` labeled similarly to 'EssentialCmds-x.x.jar'.
+In order to build AliensVsPredator you simply need to run the `gradle` command.
+You can find the compiled JAR file in `./build/libs` labeled similarly to 'AliensVsPredator-x.x.jar'.
 
 [Source]: https://github.com/Ri5ux/AliensVsPredator
 [Wiki]: https://github.com/Ri5ux/AliensVsPredator/wiki
