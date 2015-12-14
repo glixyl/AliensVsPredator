@@ -16,6 +16,7 @@ import com.arisux.avp.entities.tile.model.ModelCryostasisTube;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
@@ -88,19 +89,24 @@ public class RenderCryostasisTube extends TileEntitySpecialRenderer
 
 		GlStateManager.pushMatrix();
 		{
-			CryostasisTubeRenderer renderer = null;
+			CryostasisTubeRenderer tubeRenderer = null;
 			
-			if (tile != null && tile.stasisEntity != null && tile.stasisEntity instanceof ICustomCryostasisRenderer)
+			if (tile != null && tile.stasisEntity != null)
 			{
-				ICustomCryostasisRenderer customRenderer = (ICustomCryostasisRenderer) tile.stasisEntity;
-				renderer = customRenderer.getCustomCryostasisRenderer();
+				Render entityRenderer = RenderManager.instance.getEntityRenderObject(tile.stasisEntity);
+				
+				if (entityRenderer != null && entityRenderer instanceof ICustomCryostasisRenderer)
+				{
+					ICustomCryostasisRenderer customRenderer = (ICustomCryostasisRenderer) entityRenderer;
+					tubeRenderer = customRenderer.getCustomCryostasisRenderer();
+				}
 			}
 			
-			renderer = renderer == null ? cryostasisRenderer : renderer;
+			tubeRenderer = tubeRenderer == null ? cryostasisRenderer : tubeRenderer;
 
-			renderer.renderChassis(this, tile, posX, posY, posZ);
-			renderer.renderEntity(this, tile, posX, posY, posZ);
-			renderer.renderTube(this, tile, posX, posY, posZ);
+			tubeRenderer.renderChassis(this, tile, posX, posY, posZ);
+			tubeRenderer.renderEntity(this, tile, posX, posY, posZ);
+			tubeRenderer.renderTube(this, tile, posX, posY, posZ);
 			
 			GlStateManager.disable(GL_BLEND);
 			GlStateManager.enableLight();
