@@ -141,6 +141,8 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockEngineerShipRock1 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
 		blockEngineerShipRock2 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
 		blockEngineerShipRock3 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
+		blockEngineerShipColumn1 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
+		blockEngineerShipColumn2 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
 		blockEngineerShipMaterial1 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
 		blockEngineerShipMaterial2 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
 		blockEngineerShipMaterial0 = (new HookedBlock(Material.iron).setHardness(1.5F).setResistance(10.0F)),
@@ -307,6 +309,8 @@ public class BlockHandler extends IBHandler implements IInitializable
 		registerShapedBlockSet(blockEngineerShipRock1, "engineershiprock1");
 		registerShapedBlockSet(blockEngineerShipRock2, "engineershiprock2");
 		registerShapedBlockSet(blockEngineerShipRock3, "engineershiprock3");
+		registerShapedBlockSet(blockEngineerShipColumn1, "engineershipcolumn1");
+		registerShapedBlockSet(blockEngineerShipColumn2, "engineershipcolumn2");
 		registerShapedBlockSet(blockEngineerShipMaterial0, "engineershipmaterial0");
 		registerShapedBlockSet(blockEngineerShipMaterial1, "engineershipmaterial1");
 		registerShapedBlockSet(blockEngineerShipMaterial2, "engineershipmaterial2");
