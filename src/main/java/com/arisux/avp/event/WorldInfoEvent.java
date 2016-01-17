@@ -10,12 +10,12 @@ public class WorldInfoEvent
 	@SubscribeEvent
 	public void onWorldSave(WorldEvent.Save event)
 	{
-		AliensVsPredator.worldgen().getSaveHandler().saveData(event.world);
+		//AliensVsPredator.worldgen().getSaveHandler().saveData(event.world);
 	}
 	
 	@SubscribeEvent
 	public void onWorldLoad(WorldEvent.Load event)
 	{
-		AliensVsPredator.worldgen().getSaveHandler().loadData(event.world);
+		//AliensVsPredator.worldgen().getSaveHandler().loadData(event.world);
 	}
 }
