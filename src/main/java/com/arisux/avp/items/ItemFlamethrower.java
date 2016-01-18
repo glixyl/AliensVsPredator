@@ -13,12 +13,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemFlamethrower extends HookedItem
+public abstract class ItemFlamethrower extends HookedItem
 {
 	public ItemFlamethrower()
 	{
 		super();
-		this.setMaxDamage(100);
 		this.maxStackSize = 1;
 	}
 
@@ -30,7 +29,6 @@ public class ItemFlamethrower extends HookedItem
 			EntityFlame entity = new EntityFlame(worldObj, entityPlayer);
 			entity.setLocationAndAngles(entity.posX, entity.posY - 0.35, entity.posZ, entity.rotationYaw, entity.rotationPitch);
 			worldObj.spawnEntityInWorld(entity);
-			itemstack.damageItem(1, entityPlayer);
 			worldObj.playSoundEffect(entityPlayer.posX, entityPlayer.posY, entityPlayer.posZ, AliensVsPredator.properties().SOUND_WEAPON_FLAMETHROWER, 0.5F, 0.5F);
 		}
 		
@@ -39,7 +37,7 @@ public class ItemFlamethrower extends HookedItem
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings("all")
 	public void addInformation(ItemStack itemstack, EntityPlayer entityPlayer, List tooltipList, boolean par4)
 	{
 		super.addInformation(itemstack, entityPlayer, tooltipList, par4);

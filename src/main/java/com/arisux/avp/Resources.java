@@ -15,6 +15,7 @@ public class Resources implements IInitializablePre
 	public static final Resources instance = new Resources();
 
 	public final ResourceLocation _88MOD4 = new ResourceLocation(AliensVsPredator.ID, "textures/items/models/88mod4.png");
+	public final ResourceLocation FLAMETHROWER_NOSTROMO = new ResourceLocation(AliensVsPredator.ID, "textures/items/models/flamethrower.nostromo.png");
 	public final ResourceLocation ENGINEER = new ResourceLocation(AliensVsPredator.ID, "textures/mob/engineer_bio.png");
 	public final ResourceLocation YAUTJA_BERSERKER = new ResourceLocation(AliensVsPredator.ID, "textures/mob/yautja_berserker.png");
 	public final ResourceLocation LOCKER = new ResourceLocation(AliensVsPredator.ID, "textures/tile/locker.png");

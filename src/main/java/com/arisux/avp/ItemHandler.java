@@ -40,6 +40,8 @@ import com.arisux.avp.items.ItemFlamethrower;
 import com.arisux.avp.items.ItemGrenade;
 import com.arisux.avp.items.ItemIngotLithium;
 import com.arisux.avp.items.ItemLaserMine;
+import com.arisux.avp.items.ItemM240IncineratorUnit;
+import com.arisux.avp.items.ItemNostromoFlamethrower;
 import com.arisux.avp.items.ItemPlasmaCaster;
 import com.arisux.avp.items.ItemShuriken;
 import com.arisux.avp.items.ItemSpear;
@@ -105,7 +107,9 @@ public class ItemHandler extends IBHandler implements IInitializable
 		itemAmmoAC = ((HookedItem) (new ItemAmmo(2.5F))).setDescription("A magazine classified for use with assault carbines."),
 		itemAmmoSMG = ((HookedItem) (new ItemAmmo(4.5F))).setDescription("A magazine classified for use with sub machine-guns."),
 		itemAmmoSniper = ((HookedItem) (new ItemAmmo(18.0F))).setDescription("A magazine classified for use with sniper rifles."),
-		itemM240ICU = (new ItemFlamethrower()).setDescription("M240 Incinerator Unit"),
+		itemAmmoFlamethrower = (new HookedItem()).setDescription("Pressurized fuel tank."),
+		itemM240ICU = (new ItemM240IncineratorUnit()).setDescription("M240 Incinerator Unit"),
+		itemNostromoFlamethrower = (new ItemNostromoFlamethrower()).setDescription("Flame Thrower (Nostromo)"),
 		itemPistol = (new ItemFirearm(12, 2.0F, 15, 120, (ItemAmmo) itemAmmoPistol, AliensVsPredator.properties().SOUND_WEAPON_GUNSHOT)),
 		itemM4 = (new ItemFirearm(24, 0.5F, 3, 120, (ItemAmmo) itemAmmoAR, AliensVsPredator.properties().SOUND_WEAPON_GUNSHOT).setSoundLength(0.75D).disableIcon()).setFull3D(),
 		itemM4Stock = (new HookedItem()).setDescription("An M4 stock for use in assembling M4's.").setMaxStackSize(64),
@@ -231,6 +235,7 @@ public class ItemHandler extends IBHandler implements IInitializable
 		registerItem(legsTitanium, "legwear.celtic");
 		registerItem(bootsTitanium, "boots.celtic");
 		registerItem(itemM240ICU, "gun.m240icu");
+		registerItem(itemNostromoFlamethrower, "gun.flamethrower.nostromo");
 		registerItem(itemPistol, "gun.pistol");
 		registerItem(itemM4, "gun.m4");
 		registerItem(itemSniper, "gun.sniper");
@@ -243,6 +248,7 @@ public class ItemHandler extends IBHandler implements IInitializable
 		registerItem(itemAmmoPistol, "ammo.pistol");
 		registerItem(itemAmmoSMG, "ammo.smg");
 		registerItem(itemAmmoSniper, "ammo.sniper");
+		registerItem(itemAmmoFlamethrower, "ammo.flamethrower");
 		registerItem(itemGrenade, "grenade.m40");
 		registerItem(itemIncendiaryGrenade, "grenade.incindiary");
 		registerItem(itemWristBlade, "wristblade");

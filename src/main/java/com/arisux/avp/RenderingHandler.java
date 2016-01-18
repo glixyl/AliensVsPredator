@@ -150,6 +150,7 @@ import com.arisux.avp.items.render.RenderItemM40;
 import com.arisux.avp.items.render.RenderItemM41A;
 import com.arisux.avp.items.render.RenderItemM56SG;
 import com.arisux.avp.items.render.RenderItemMotionTracker;
+import com.arisux.avp.items.render.RenderItemNostromoFlamethrower;
 import com.arisux.avp.items.render.RenderItemPowercell;
 import com.arisux.avp.items.render.RenderItemPowerline;
 import com.arisux.avp.items.render.RenderItemRepulsionGenerator;
@@ -271,6 +272,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		registerItemRenderer(items.itemWristbracerBlades, new RenderItemWristbracerBlades());
 		registerItemRenderer(items.itemSpear, new RenderItemSpear());
 		registerItemRenderer(items.itemM240ICU, new RenderItemM240ICU());
+		registerItemRenderer(items.itemNostromoFlamethrower, new RenderItemNostromoFlamethrower());
 		registerItemRenderer(items.itemM41A, new RenderItemM41A());
 		registerItemRenderer(items.itemM56SG, new RenderItemM56SG());
 		registerItemRenderer(items.itemAK47, new RenderItemAK47());
