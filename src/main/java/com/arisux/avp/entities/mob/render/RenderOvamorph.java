@@ -27,7 +27,7 @@ public class RenderOvamorph extends RenderLiving implements ICustomCryostasisRen
 	protected void preRenderCallback(EntityLivingBase entityLiving, float partialTicks)
 	{
 		super.preRenderCallback(entityLiving, partialTicks);
-		GlStateManager.scale(1.25F, 1.25F, 1.25F);
+		GlStateManager.scale(1.75F, 1.75F, 1.75F);
 	}
 
 	@Override
