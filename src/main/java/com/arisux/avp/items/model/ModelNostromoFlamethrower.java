@@ -1,8 +1,12 @@
 package com.arisux.avp.items.model;
 
 import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.avp.items.ItemFlamethrower;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 public class ModelNostromoFlamethrower extends ModelBaseExtension
 {
@@ -83,7 +87,7 @@ public class ModelNostromoFlamethrower extends ModelBaseExtension
 		this.stockBack.addBox(-1.0F, 1.9F, 18.2F, 2, 8, 3, 0.0F);
 		this.setRotation(stockBack, -0.12217304763960307F, 0.0F, 0.0F);
 	}
-	
+
 	@Override
 	public void render(float boxTranslation)
 	{
@@ -97,12 +101,25 @@ public class ModelNostromoFlamethrower extends ModelBaseExtension
 		this.ignitionWire.render(boxTranslation);
 		this.barrel.render(boxTranslation);
 		this.butt2.render(boxTranslation);
-		this.fuelCanister1.render(boxTranslation);
 		this.body2.render(boxTranslation);
-		this.fuelCanister2.render(boxTranslation);
 		this.stockFront.render(boxTranslation);
 		this.body1.render(boxTranslation);
 		this.buttSlope.render(boxTranslation);
 		this.stockBack.render(boxTranslation);
+
+		Minecraft minecraft = Minecraft.getMinecraft();
+		ItemStack currentItemStack = minecraft.thePlayer.inventory.getCurrentItem();
+
+		if (currentItemStack != null && currentItemStack.getItem() instanceof ItemFlamethrower)
+		{
+			ItemFlamethrower currentFlamethrower = (ItemFlamethrower) currentItemStack.getItem();
+			Item fuel = currentFlamethrower.getAmmo();
+
+			if (minecraft.thePlayer.inventory.hasItem(fuel))
+			{
+				this.fuelCanister1.render(boxTranslation);
+				this.fuelCanister2.render(boxTranslation);
+			}
+		}
 	}
 }

@@ -86,4 +86,9 @@ public abstract class ItemFlamethrower extends HookedItem
 		}
 		return false;
 	}
+	
+	public Item getAmmo()
+	{
+		return ammo;
+	}
 }
