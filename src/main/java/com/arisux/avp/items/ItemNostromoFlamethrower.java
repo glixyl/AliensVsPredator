@@ -1,9 +1,11 @@
 package com.arisux.avp.items;
 
+import net.minecraft.item.Item;
+
 public class ItemNostromoFlamethrower extends ItemFlamethrower
 {
-	public ItemNostromoFlamethrower()
+	public ItemNostromoFlamethrower(Item ammo)
 	{
-		super();
+		super(ammo);
 	}
 }

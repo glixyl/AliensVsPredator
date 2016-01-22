@@ -36,7 +36,6 @@ import com.arisux.avp.items.ItemDisc;
 import com.arisux.avp.items.ItemEntitySummoner;
 import com.arisux.avp.items.ItemFirearm;
 import com.arisux.avp.items.ItemFirearm.ItemAmmo;
-import com.arisux.avp.items.ItemFlamethrower;
 import com.arisux.avp.items.ItemGrenade;
 import com.arisux.avp.items.ItemIngotLithium;
 import com.arisux.avp.items.ItemLaserMine;
@@ -107,9 +106,9 @@ public class ItemHandler extends IBHandler implements IInitializable
 		itemAmmoAC = ((HookedItem) (new ItemAmmo(2.5F))).setDescription("A magazine classified for use with assault carbines."),
 		itemAmmoSMG = ((HookedItem) (new ItemAmmo(4.5F))).setDescription("A magazine classified for use with sub machine-guns."),
 		itemAmmoSniper = ((HookedItem) (new ItemAmmo(18.0F))).setDescription("A magazine classified for use with sniper rifles."),
-		itemAmmoFlamethrower = (new HookedItem()).setDescription("Pressurized fuel tank."),
-		itemM240ICU = (new ItemM240IncineratorUnit()).setDescription("M240 Incinerator Unit"),
-		itemNostromoFlamethrower = (new ItemNostromoFlamethrower()).setDescription("Flame Thrower (Nostromo)"),
+		itemFuelTank = (new HookedItem()).setDescription("Pressurized fuel tank.").setMaxStackSize(1).setMaxDamage(64),
+		itemM240ICU = (new ItemM240IncineratorUnit(itemFuelTank)).setDescription("M240 Incinerator Unit"),
+		itemNostromoFlamethrower = (new ItemNostromoFlamethrower(itemFuelTank)).setDescription("Flame Thrower (Nostromo)"),
 		itemPistol = (new ItemFirearm(12, 2.0F, 15, 120, (ItemAmmo) itemAmmoPistol, AliensVsPredator.properties().SOUND_WEAPON_GUNSHOT)),
 		itemM4 = (new ItemFirearm(24, 0.5F, 3, 120, (ItemAmmo) itemAmmoAR, AliensVsPredator.properties().SOUND_WEAPON_GUNSHOT).setSoundLength(0.75D).disableIcon()).setFull3D(),
 		itemM4Stock = (new HookedItem()).setDescription("An M4 stock for use in assembling M4's.").setMaxStackSize(64),
@@ -248,7 +247,7 @@ public class ItemHandler extends IBHandler implements IInitializable
 		registerItem(itemAmmoPistol, "ammo.pistol");
 		registerItem(itemAmmoSMG, "ammo.smg");
 		registerItem(itemAmmoSniper, "ammo.sniper");
-		registerItem(itemAmmoFlamethrower, "ammo.flamethrower");
+		registerItem(itemFuelTank, "ammo.flamethrower");
 		registerItem(itemGrenade, "grenade.m40");
 		registerItem(itemIncendiaryGrenade, "grenade.incindiary");
 		registerItem(itemWristBlade, "wristblade");
