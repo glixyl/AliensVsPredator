@@ -174,7 +174,8 @@ public class EntityHandler implements IInitializable
 				BiomeGenBase.roofedForest,
 				BiomeGenBase.swampland,
 				BiomeGenBase.taiga,
-				BiomeGenBase.taigaHills
+				BiomeGenBase.taigaHills,
+				BiomeLVBase.acheron
 		};
 		
 		BiomeGenBase[] predatorBiomes = new BiomeGenBase[] 
@@ -195,32 +196,41 @@ public class EntityHandler implements IInitializable
 				BiomeGenBase.jungleEdge,
 				BiomeGenBase.jungleHills,
 				BiomeGenBase.taiga,
-				BiomeGenBase.taigaHills
+				BiomeGenBase.taigaHills,
+				BiomeLVBase.varda
+		};
+		
+		BiomeGenBase[] engineerBiomes = new BiomeGenBase[] 
+		{
+				BiomeLVBase.varda,
+				BiomeLVBase.acheron
 		};
 
-		EntityRegistry.addSpawn(EntityDrone.class, 56, 1, 3, EnumCreatureType.monster, xenomorphBiomes);
-		EntityRegistry.addSpawn(EntityWarrior.class, 38, 1, 3, EnumCreatureType.monster, xenomorphBiomes);
-		EntityRegistry.addSpawn(EntityPraetorian.class, 14, 1, 3, EnumCreatureType.monster, xenomorphBiomes);
-		EntityRegistry.addSpawn(EntityFacehugger.class, 24, 1, 3, EnumCreatureType.monster, xenomorphBiomes);
-		EntityRegistry.addSpawn(EntityChestburster.class, 12, 1, 3, EnumCreatureType.monster, xenomorphBiomes);
-		EntityRegistry.addSpawn(EntityYautja.class, 19, 1, 3, EnumCreatureType.monster, predatorBiomes);
-		EntityRegistry.addSpawn(EntityYautjaBerserker.class, 6, 1, 3, EnumCreatureType.monster, predatorBiomes);
-		EntityRegistry.addSpawn(EntityMarine.class, 16, 1, 2, EnumCreatureType.creature, new BiomeGenBase[] { 
+		EntityRegistry.addSpawn(EntityDrone.class, 50, 1, 3, EnumCreatureType.monster, xenomorphBiomes);
+		EntityRegistry.addSpawn(EntityWarrior.class, 25, 1, 3, EnumCreatureType.monster, xenomorphBiomes);
+		EntityRegistry.addSpawn(EntityPraetorian.class, 10, 1, 2, EnumCreatureType.monster, xenomorphBiomes);
+		EntityRegistry.addSpawn(EntityFacehugger.class, 5, 1, 2, EnumCreatureType.monster, xenomorphBiomes);
+		EntityRegistry.addSpawn(EntityChestburster.class, 10, 1, 3, EnumCreatureType.monster, xenomorphBiomes);
+		EntityRegistry.addSpawn(EntityYautja.class, 2, 1, 1, EnumCreatureType.monster, predatorBiomes);
+		EntityRegistry.addSpawn(EntityYautjaBerserker.class, 1, 1, 1, EnumCreatureType.monster, predatorBiomes);
+		EntityRegistry.addSpawn(EntityMarine.class, 2, 1, 1, EnumCreatureType.creature, new BiomeGenBase[] { 
 			BiomeGenBase.swampland, 
 			BiomeGenBase.forest, 
 			BiomeGenBase.forestHills, 
 			BiomeGenBase.taiga, 
 			BiomeGenBase.taigaHills, 
-			BiomeGenBase.plains 
+			BiomeGenBase.plains
 		});
-		EntityRegistry.addSpawn(EntityProtomorph.class, 4, 1, 1, EnumCreatureType.monster, new BiomeGenBase[] { 
+		EntityRegistry.addSpawn(EntityProtomorph.class, 25, 1, 2, EnumCreatureType.monster, new BiomeGenBase[] { 
 			BiomeLVBase.varda
 		});
-		EntityRegistry.addSpawn(EntityHammerpede.class, 6, 1, 2, EnumCreatureType.monster, new BiomeGenBase[] { 
+		EntityRegistry.addSpawn(EntityHammerpede.class, 50, 1, 3, EnumCreatureType.monster, new BiomeGenBase[] { 
 			BiomeLVBase.varda
 		});
-		EntityRegistry.addSpawn(EntityTrilobite.class, 6, 1, 2, EnumCreatureType.monster, new BiomeGenBase[] { 
+		EntityRegistry.addSpawn(EntityTrilobite.class, 1, 1, 1, EnumCreatureType.monster, new BiomeGenBase[] { 
 			BiomeLVBase.varda
 		});
+		EntityRegistry.addSpawn(EntityEngineer.class, 2, 1, 1, EnumCreatureType.monster, engineerBiomes);
+		EntityRegistry.addSpawn(EntitySpaceJockey.class, 1, 1, 1, EnumCreatureType.monster, engineerBiomes);
 	}
 }

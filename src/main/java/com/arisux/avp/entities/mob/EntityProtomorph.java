@@ -15,6 +15,8 @@ public class EntityProtomorph extends EntityXenomorph
 		this.jumpMovementFactor = 0.02F;
 		this.experienceValue = 100;
 		this.setSize(0.8F, 1.8F);
+		this.getNavigator().setCanSwim(true);
+		this.getNavigator().setAvoidsWater(true);
 		this.canClimb = false;
 		this.isDependant = false;
 	}
