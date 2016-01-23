@@ -13,6 +13,8 @@ public class EntityAqua extends EntityXenomorph
 		this.jumpMovementFactor = 0.2F;
 		this.experienceValue = 100;
 		this.setSize(1F, 3F);
+		this.getNavigator().setCanSwim(true);
+		this.getNavigator().setAvoidsWater(false);
 	}
 
 	@Override
@@ -40,6 +42,12 @@ public class EntityAqua extends EntityXenomorph
 	protected String getLivingSound()
 	{
 		return AliensVsPredator.properties().SOUND_ALIEN_LIVING;
+	}
+	
+	@Override
+	public boolean canBreatheUnderwater()
+	{
+		return true;
 	}
 
 	@Override
