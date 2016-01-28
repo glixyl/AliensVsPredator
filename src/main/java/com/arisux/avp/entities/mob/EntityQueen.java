@@ -90,7 +90,7 @@ public class EntityQueen extends EntityXenomorph implements IHiveSignature
 		if (this.isInStasis)
 		{
 			if (this.getOvipositorSize() < 1.3F)
-				this.setOvipositorSize(this.getOvipositorSize() + 0001F);
+				this.setOvipositorSize(this.getOvipositorSize() + 0.0001F);
 			else
 				this.setOvipositorSize(1.3F);
 		}
