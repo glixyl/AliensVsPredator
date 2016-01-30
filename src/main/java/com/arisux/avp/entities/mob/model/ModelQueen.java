@@ -2,6 +2,8 @@ package com.arisux.avp.entities.mob.model;
 
 import org.lwjgl.opengl.GL11;
 
+import javax.swing.plaf.synth.SynthSplitPaneUI;
+
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ModelBaseExtension;
@@ -553,7 +555,7 @@ public class ModelQueen extends ModelBaseExtension
 			EntityQueen queen = (EntityQueen) entity;
 
 			if (queen != null)
-			{
+			{		
 				if (queen.isInStasis)
 				{
 					ModelOvamorph ovamorph = new ModelOvamorph();

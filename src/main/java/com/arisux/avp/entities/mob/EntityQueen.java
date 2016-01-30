@@ -1,21 +1,19 @@
 package com.arisux.avp.entities.mob;
 
-import java.util.ArrayList;
-
 import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
 import com.arisux.airi.lib.WorldUtil.Entities;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.interfaces.IHiveSignature;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
+
 public class EntityQueen extends EntityXenomorph implements IHiveSignature
 {
 	public boolean isInStasis;
-	private float ovipositorSize;
 
 	public EntityQueen(World world)
 	{
@@ -26,9 +24,14 @@ public class EntityQueen extends EntityXenomorph implements IHiveSignature
 		this.jumpMovementFactor = 0.4F;
 		this.hurtResistantTime = 0;
 		this.ignoreFrustumCheck = true;
-		this.ovipositorSize = 0F;
 		this.setHiveSignature(this.getUniqueID());
-		this.dataWatcher.addObject(14, this.ovipositorSize);
+	}
+
+	@Override
+	protected void entityInit()
+	{
+		super.entityInit();
+		this.dataWatcher.addObject(14, 0F);
 	}
 
 	@Override
@@ -45,7 +48,7 @@ public class EntityQueen extends EntityXenomorph implements IHiveSignature
 	{
 		double prevMotionY = this.motionY;
 		super.onUpdate();
-		
+
 		if (this.motionY < prevMotionY)
 			this.motionY += -0.08F;
 
@@ -56,7 +59,7 @@ public class EntityQueen extends EntityXenomorph implements IHiveSignature
 
 			for (EntitySpeciesAlien alien : aliens)
 			{
-				if (alien != null && alien.getHiveSignature() != null &&  !(alien instanceof EntityQueen) && alien.getHiveSignature().equals(this.getHiveSignature()))
+				if (alien != null && alien.getHiveSignature() != null && !(alien instanceof EntityQueen) && alien.getHiveSignature().equals(this.getHiveSignature()))
 				{
 					if (this.rand.nextInt(6) == 0)
 					{
@@ -86,8 +89,10 @@ public class EntityQueen extends EntityXenomorph implements IHiveSignature
 
 		if (this.isInStasis)
 		{
-			this.ovipositorSize = this.ovipositorSize < 1.3F ? this.ovipositorSize += 0.0001F : 1.3F;
-			this.setOvipositorSize(this.ovipositorSize);
+			if (this.getOvipositorSize() < 1.3F)
+				this.setOvipositorSize(this.getOvipositorSize() + 0.0001F);
+			else
+				this.setOvipositorSize(1.3F);
 		}
 
 		if (this.worldObj.getWorldTime() % 10 == 0)
