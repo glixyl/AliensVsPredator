@@ -10,9 +10,16 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAILeapAtTarget;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
@@ -31,6 +38,18 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 		this.isFertile = true;
 		this.setSize(0.9F, 0.9F);
 		this.experienceValue = 10;
+		this.getNavigator().setCanSwim(true);
+		this.getNavigator().setAvoidsWater(true);
+		this.tasks.addTask(0, new EntityAISwimming(this));
+		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 0.800000011920929D, true));
+		this.tasks.addTask(1, new EntityAIWander(this, 0.800000011920929D));
+		this.targetTasks.addTask(1, new EntityAILeapAtTarget(this, 0.8F));
+		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntitySpeciesYautja.class, 0, true));
+		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntitySpeciesEngineer.class, 0, true));
+		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityMarine.class, 0, true));
+		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, 0, true));
+		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityAnimal.class, 0, true));
 	}
 
 	@Override
@@ -108,7 +127,7 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 		return this.motionY > 1.0099999997764826D;
 	}
 
-	public void jumpAtEntity(EntityLivingBase leaper, EntityLivingBase leapTarget, double leapMotionY)
+	/* public void jumpAtEntity(EntityLivingBase leaper, EntityLivingBase leapTarget, double leapMotionY)
 	{
 		double rX = leapTarget.posX - leaper.posX;
 		double rZ = leapTarget.posZ - leaper.posZ;
@@ -116,7 +135,7 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 		leaper.motionX += rX / sq * 0.5D * 0.800000011920929D + leaper.motionX * 0.20000000298023224D;
 		leaper.motionZ += rZ / sq * 0.5D * 0.800000011920929D + leaper.motionZ * 0.20000000298023224D;
 		leaper.motionY = leapMotionY;
-	}
+	} */
 
 	@Override
 	public void collideWithEntity(Entity entity)
