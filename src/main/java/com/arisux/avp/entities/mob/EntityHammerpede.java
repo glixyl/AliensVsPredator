@@ -14,6 +14,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.monster.IMob;
 import com.arisux.avp.entities.EntityAcidPool;
 import net.minecraft.entity.player.EntityPlayer;
@@ -41,9 +42,10 @@ public class EntityHammerpede extends EntitySpeciesAlien implements IMob
 		this.experienceValue = 16;
 		this.getNavigator().setCanSwim(true);
 		this.getNavigator().setAvoidsWater(false);
+		this.tasks.addTask(0, new EntityAISwimming(this));
+		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 0.8D, true));
 		this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
 		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, Entity.class, 10 /** targetChance **/, false /** checkSight **/, false /** nearbyOnly **/, entitySelector));
-		this.tasks.addTask(0, new EntityAIAttackOnCollide(this, 0.8D, true));
 	}
 
 	@Override

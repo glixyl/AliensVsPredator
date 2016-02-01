@@ -10,6 +10,12 @@ import com.arisux.avp.util.HostParasiteTypes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAILeapAtTarget;
+import net.minecraft.entity.ai.EntityAIAvoidEntity;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,8 +35,19 @@ public class EntityChestburster extends EntitySpeciesAlien implements IMob
 	{
 		super(par1World);
 
-		this.setSize(1.0F, 0.2F);
+		this.setSize(1.0F, 0.4F);
 		this.experienceValue = 16;
+		this.getNavigator().setCanSwim(true);
+		this.getNavigator().setAvoidsWater(true);
+		this.tasks.addTask(0, new EntityAISwimming(this));
+		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 0.800000011920929D, true));
+		this.tasks.addTask(1, new EntityAIWander(this, 0.800000011920929D));
+		this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityPlayer.class, 16.0F, 0.23F, 0.4F));
+		this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityYautja.class, 16.0F, 0.23F, 0.4F));
+		this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityEngineer.class, 16.0F, 0.23F, 0.4F));
+		this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityMarine.class, 16.0F, 0.23F, 0.4F));
+		this.targetTasks.addTask(1, new EntityAILeapAtTarget(this, 0.8F));
+		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
 	}
 
 	@Override
@@ -55,6 +72,12 @@ public class EntityChestburster extends EntitySpeciesAlien implements IMob
 	 */
 	@Override
 	protected boolean isAIEnabled()
+	{
+		return true;
+	}
+	
+	@Override
+	public boolean canBreatheUnderwater()
 	{
 		return true;
 	}
