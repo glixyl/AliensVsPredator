@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.arisux.airi.lib.WorldUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.extended.ExtendedEntityLivingBase;
+import com.arisux.avp.entities.ai.alien.EntitySelectorXenomorph;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,12 +18,7 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.monster.EntityWitch;
-import net.minecraft.entity.monster.EntitySpider;
-import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
@@ -39,7 +35,7 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 	{
 		super(world);
 		this.isFertile = true;
-		this.setSize(0.9F, 0.9F);
+		this.setSize(0.8F, 0.8F);
 		this.experienceValue = 10;
 		this.getNavigator().setCanSwim(true);
 		this.getNavigator().setAvoidsWater(true);
@@ -47,15 +43,7 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 0.800000011920929D, true));
 		this.tasks.addTask(1, new EntityAIWander(this, 0.800000011920929D));
 		this.targetTasks.addTask(1, new EntityAILeapAtTarget(this, 0.8F));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntitySpeciesYautja.class, 0, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntitySpeciesEngineer.class, 0, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityMarine.class, 0, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, 0, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityAnimal.class, 0, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityCreeper.class, 0, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityWitch.class, 0, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntitySpider.class, 0, true));
+		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, Entity.class, /** targetChance **/0, /** shouldCheckSight **/false, /** nearbyOnly **/false, EntitySelectorXenomorph.instance));
 	}
 
 	@Override
@@ -66,13 +54,15 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(14.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5999999761581421D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(0.50D);
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(48.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
 	}
 
 	@Override
 	public void onUpdate()
 	{
 		super.onUpdate();
+		
+		this.fallDistance = 0F;
 		
 		if (this.isCollidedHorizontally)
 		{

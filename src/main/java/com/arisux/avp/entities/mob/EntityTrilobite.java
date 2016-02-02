@@ -1,6 +1,7 @@
 package com.arisux.avp.entities.mob;
 
 import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.entities.ai.alien.EntitySelectorXenomorph;
 
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
@@ -10,13 +11,8 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.monster.EntityWitch;
-import net.minecraft.entity.monster.EntitySpider;
-import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -36,16 +32,8 @@ public class EntityTrilobite extends EntitySpeciesAlien implements IMob
 		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 0.800000011920929D, true));
 		this.tasks.addTask(1, new EntityAIWander(this, 0.800000011920929D));
 		this.targetTasks.addTask(1, new EntityAILeapAtTarget(this, 0.8F));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntitySpeciesYautja.class, 0, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntitySpeciesEngineer.class, 0, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityMarine.class, 0, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, 0, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityAnimal.class, 0, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityCreeper.class, 0, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityWitch.class, 0, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntitySpider.class, 0, true));
-		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
+		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, Entity.class, /** targetChance **/0, /** shouldCheckSight **/false, /** nearbyOnly **/false, EntitySelectorXenomorph.instance));
+		this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, true));
 	}
 
 	@Override
@@ -75,6 +63,8 @@ public class EntityTrilobite extends EntitySpeciesAlien implements IMob
 	public void onUpdate()
 	{
 		super.onUpdate();
+		
+		this.fallDistance = 0F;
 	}
 
 	/* protected Entity findPlayerToAttack(EntityPlayer entityplayer)

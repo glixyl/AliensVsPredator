@@ -81,6 +81,8 @@ public class EntityHammerpede extends EntitySpeciesAlien implements IMob
 	{
 		super.onUpdate();
 		
+		this.fallDistance = 0F;
+		
 		this.lurkInBlackGoo();
 		
 		if (this.getAttackTarget() == null && this.worldObj.getWorldTime() % 60 == 0 && this.rand.nextInt(3) == 0)

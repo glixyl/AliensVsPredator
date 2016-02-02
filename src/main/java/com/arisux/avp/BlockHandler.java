@@ -44,7 +44,7 @@ import net.minecraft.creativetab.CreativeTabs;
 
 public class BlockHandler extends IBHandler implements IInitializable
 {
-	public Block terrainHiveResin = (new BlockHiveResin(Material.wood)).setHardness(0.1F).setLightOpacity(255),
+	public Block terrainHiveResin = (new BlockHiveResin(Material.wood)).setHardness(5F).setResistance(10.0F).setLightOpacity(255),
 		blockOvamorph = (new HookedBlock(Material.rock)),
 		blockShipMetal1 = (new HookedBlock(Material.iron).setHardness(5F).setResistance(30.0F).setLightOpacity(255)),
 		blockShipMetal2 = (new HookedBlock(Material.iron).setHardness(5F).setResistance(30.0F).setLightOpacity(255)),
@@ -58,7 +58,7 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockShipDecor6 = (new HookedBlock(Material.iron).setHardness(5F).setResistance(30.0F).setLightOpacity(255)),
 		blockSacrificialSpawner = (new BlockTempleSpawner(Material.rock, false)),
 		blockSpawnerCreative = (new BlockTempleSpawner(Material.rock, true)),
-		blockHiveNode = (new BlockHiveNode(Material.rock).setHardness(5F).setResistance(30.0F).setLightOpacity(255)),
+		blockHiveNode = (new BlockHiveNode(Material.rock).setHardness(5F).setResistance(10.0F).setLightOpacity(255)),
 		blockRelicTile = (new HookedBlock(Material.rock).setHardness(5F).setResistance(30.0F).setLightOpacity(255)),
 		blockTempleBrick = (new HookedBlock(Material.rock).setHardness(5F).setResistance(30.0F).setLightOpacity(255)),
 		blockTempleTile = (new HookedBlock(Material.rock).setHardness(5F).setResistance(30.0F).setLightOpacity(255)),
@@ -117,10 +117,10 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockNegativeTransformer = (new BlockNegativeTransformer(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockSupplies = (new BlockSupplies(Material.iron)),
 		blockSolarPanel = (new BlockSolarPanel(Material.iron)).setHardness(3.2F).setResistance(2.6F),
-		oreSilicon = (new HookedBlock(Material.rock)).setHardness(2.2F).setResistance(1.4F),
-		oreLithium = (new HookedBlock(Material.iron)).setHardness(4.2F).setResistance(5.4F),
-		oreCopper = (new HookedBlock(Material.iron)).setHardness(3.2F).setResistance(2.6F),
-		oreBauxite = (new HookedBlock(Material.iron)).setHardness(3.2F).setResistance(2.6F),
+		oreSilicon = (new HookedBlock(Material.rock)).setHardness(2.2F).setResistance(1.4F).setLightOpacity(255),
+		oreLithium = (new HookedBlock(Material.iron)).setHardness(4.2F).setResistance(5.4F).setLightOpacity(255),
+		oreCopper = (new HookedBlock(Material.iron)).setHardness(3.2F).setResistance(2.6F).setLightOpacity(255),
+		oreBauxite = (new HookedBlock(Material.iron)).setHardness(3.2F).setResistance(2.6F).setLightOpacity(255),
 		mainframePanelShimmer = (new HookedBlock(Material.iron).setIconSet(new IconSet("avp:mainframe_shimmer")).setHardness(3F).setResistance(1F).setLightLevel(0.5F)),
 		mainframePanelFlicker = (new HookedBlock(Material.iron).setIconSet(new IconSet("avp:mainframe_flicker")).setHardness(3F).setResistance(1F).setLightLevel(0.5F)),
 		blockVent0 = (new HookedBlock(Material.iron)).setOpaque(false).setHardness(5F).setResistance(30.0F).setLightOpacity(0),

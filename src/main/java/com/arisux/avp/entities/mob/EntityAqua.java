@@ -11,12 +11,6 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.monster.EntityWitch;
-import net.minecraft.entity.monster.EntitySpider;
-import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.world.World;
 
 public class EntityAqua extends EntityXenomorph
@@ -32,16 +26,8 @@ public class EntityAqua extends EntityXenomorph
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 0.800000011920929D, true));
 		this.tasks.addTask(1, new EntityAIWander(this, 0.800000011920929D));
-		this.targetTasks.addTask(1, new EntityAILeapAtTarget(this, 0.8F));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntitySpeciesYautja.class, 0, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntitySpeciesEngineer.class, 0, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityMarine.class, 0, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, 0, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityAnimal.class, 0, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityWitch.class, 0, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntitySpider.class, 0, true));
-		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
+		this.targetTasks.addTask(1, new EntityAILeapAtTarget(this, 0.4F));
+		this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, true));
 	}
 
 	@Override
