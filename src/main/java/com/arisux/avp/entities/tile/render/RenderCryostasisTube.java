@@ -52,6 +52,7 @@ public class RenderCryostasisTube extends TileEntitySpecialRenderer
 		
 		public void renderTube(RenderCryostasisTube renderer, TileEntityCryostasisTube tile, double posX, double posY, double posZ)
 		{
+			GlStateManager.disableDepthTest();
 			if (tile.getVoltage() > 0)
 			{
 				GlStateManager.disableLightMapping();
@@ -62,6 +63,7 @@ public class RenderCryostasisTube extends TileEntitySpecialRenderer
 			renderer.model.render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
 			GlStateManager.enableLightMapping();
 			GlStateManager.enableLight();
+			GlStateManager.enableDepthTest();
 		}
 		
 		public void renderEntity(RenderCryostasisTube renderer, TileEntityCryostasisTube tile, double posX, double posY, double posZ)
