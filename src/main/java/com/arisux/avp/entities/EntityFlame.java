@@ -11,6 +11,8 @@ import com.arisux.avp.items.ItemFlamethrower;
 import com.arisux.avp.items.ItemM240IncineratorUnit;
 import com.arisux.avp.items.ItemNostromoFlamethrower;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFlameFX;
@@ -76,8 +78,6 @@ public class EntityFlame extends EntityThrowable
 	@Override
 	public void onUpdate()
 	{
-		double flameGravity = 0.04;
-
 		this.moveEntity(this.motionX, this.motionY, this.motionZ);
 		MovingObjectPosition movingObjectPosition = this.worldObj.rayTraceBlocks(Vec3.createVectorHelper(this.posX, this.posY, this.posZ), Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ));
 
@@ -117,9 +117,15 @@ public class EntityFlame extends EntityThrowable
 					flameZ = flameZ + (this.rand.nextDouble() / (flameLife - this.ticksExisted));
 				}
 
-				Minecraft.getMinecraft().effectRenderer.addEffect(new EntityFlameFX(this.worldObj, this.posX - (flameX / 2), this.posY - (flameY / 2), this.posZ - (flameZ / 2), this.rand.nextGaussian() * flameTailWidth, -this.motionY * (flameGravity * this.ticksExisted) - this.rand.nextGaussian() * flameTailWidth, this.rand.nextGaussian() * flameTailWidth));
+				this.spawnFlameParticle(flameX, flameY, flameZ, 0.04F);
 			}
 		}
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public void spawnFlameParticle(double flameX, double flameY, double flameZ, float flameGravity)
+	{
+		Minecraft.getMinecraft().effectRenderer.addEffect(new EntityFlameFX(this.worldObj, this.posX - (flameX / 2), this.posY - (flameY / 2), this.posZ - (flameZ / 2), this.rand.nextGaussian() * flameTailWidth, -this.motionY * (flameGravity * this.ticksExisted) - this.rand.nextGaussian() * flameTailWidth, this.rand.nextGaussian() * flameTailWidth));
 	}
 
 	@Override
