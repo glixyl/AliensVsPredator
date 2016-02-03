@@ -1,6 +1,7 @@
 package com.arisux.avp.entities.ai.alien;
 
 import com.arisux.avp.entities.mob.EntitySpeciesAlien;
+import com.arisux.avp.entities.EntityAcidPool;
 
 import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
@@ -12,6 +13,6 @@ public class EntitySelectorXenomorph implements IEntitySelector
     @Override
     public boolean isEntityApplicable(Entity entity)
     {
-        return !(entity instanceof EntitySpeciesAlien);
+        return !(entity instanceof EntitySpeciesAlien) && !(entity instanceof EntityAcidPool);
     }
 }

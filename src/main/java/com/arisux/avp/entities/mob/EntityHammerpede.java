@@ -14,7 +14,9 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.monster.IMob;
+import com.arisux.avp.entities.EntityAcidPool;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
@@ -28,7 +30,7 @@ public class EntityHammerpede extends EntitySpeciesAlien implements IMob
 		@Override
 		public boolean isEntityApplicable(Entity entity)
 		{
-			return !(entity instanceof EntitySpeciesAlien) && !(entity instanceof EntityHammerpede);
+			return !(entity instanceof EntitySpeciesAlien) && !(entity instanceof EntityHammerpede) && !(entity instanceof EntityAcidPool);
 		}
 	};
 	
@@ -36,13 +38,14 @@ public class EntityHammerpede extends EntitySpeciesAlien implements IMob
 	{
 		super(par1World);
 
-		this.setSize(1.0F, 0.2F);
+		this.setSize(0.5F, 0.5F);
 		this.experienceValue = 16;
 		this.getNavigator().setCanSwim(true);
 		this.getNavigator().setAvoidsWater(false);
+		this.tasks.addTask(0, new EntityAISwimming(this));
+		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 0.8D, true));
 		this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
 		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, Entity.class, 10 /** targetChance **/, false /** checkSight **/, false /** nearbyOnly **/, entitySelector));
-		this.tasks.addTask(0, new EntityAIAttackOnCollide(this, 0.8D, true));
 	}
 
 	@Override
@@ -77,6 +80,8 @@ public class EntityHammerpede extends EntitySpeciesAlien implements IMob
 	public void onUpdate()
 	{
 		super.onUpdate();
+		
+		this.fallDistance = 0F;
 		
 		this.lurkInBlackGoo();
 		

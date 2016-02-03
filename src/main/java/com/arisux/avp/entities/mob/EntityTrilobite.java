@@ -1,15 +1,21 @@
 package com.arisux.avp.entities.mob;
 
 import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.entities.ai.alien.EntitySelectorXenomorph;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAILeapAtTarget;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityTrilobite extends EntitySpeciesAlien implements IMob
@@ -18,8 +24,16 @@ public class EntityTrilobite extends EntitySpeciesAlien implements IMob
 	{
 		super(world);
 
-		this.setSize(1.0F, 0.2F);
-		this.experienceValue = 16;
+		this.setSize(1.5F, 1.5F);
+		this.experienceValue = 32;
+		this.getNavigator().setCanSwim(true);
+		this.getNavigator().setAvoidsWater(true);
+		this.tasks.addTask(0, new EntityAISwimming(this));
+		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 0.800000011920929D, true));
+		this.tasks.addTask(1, new EntityAIWander(this, 0.800000011920929D));
+		this.targetTasks.addTask(1, new EntityAILeapAtTarget(this, 0.8F));
+		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, Entity.class, /** targetChance **/0, /** shouldCheckSight **/false, /** nearbyOnly **/false, EntitySelectorXenomorph.instance));
+		this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, true));
 	}
 
 	@Override
@@ -27,17 +41,17 @@ public class EntityTrilobite extends EntitySpeciesAlien implements IMob
 	{
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(44.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.6499999761581421D);
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(0.5D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5499999761581421D);
+		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(2.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
 	}
 
-	@Override
+	/* @Override
 	protected void entityInit()
 	{
 		super.entityInit();
 		this.dataWatcher.addObject(16, new Byte((byte) 0));
-	}
+	} */
 
 	@Override
 	protected boolean isAIEnabled()
@@ -49,9 +63,11 @@ public class EntityTrilobite extends EntitySpeciesAlien implements IMob
 	public void onUpdate()
 	{
 		super.onUpdate();
+		
+		this.fallDistance = 0F;
 	}
 
-	protected Entity findPlayerToAttack(EntityPlayer entityplayer)
+	/* protected Entity findPlayerToAttack(EntityPlayer entityplayer)
 	{
 		float brightness = this.getBrightness(1.0F);
 
@@ -63,7 +79,7 @@ public class EntityTrilobite extends EntitySpeciesAlien implements IMob
 		{
 			return null;
 		}
-	}
+	} */
 
 	@Override
 	protected String getDeathSound()
@@ -94,7 +110,7 @@ public class EntityTrilobite extends EntitySpeciesAlien implements IMob
 		return this.isOnLadder() && this.motionY > 1.0099999997764826D;
 	}
 
-	@Override
+	/* @Override
 	protected void attackEntity(Entity entity, float f)
 	{
 		if (f > 2.0F && f < 6.0F && this.rand.nextInt(50) == 0)
@@ -112,7 +128,7 @@ public class EntityTrilobite extends EntitySpeciesAlien implements IMob
 		{
 			super.attackEntity(entity, f);
 		}
-	}
+	} */
 
 	@Override
 	public boolean isPotionApplicable(PotionEffect potionEffect)

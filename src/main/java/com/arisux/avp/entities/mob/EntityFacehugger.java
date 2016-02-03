@@ -5,11 +5,17 @@ import java.util.ArrayList;
 import com.arisux.airi.lib.WorldUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.extended.ExtendedEntityLivingBase;
+import com.arisux.avp.entities.ai.alien.EntitySelectorXenomorph;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAILeapAtTarget;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,8 +35,15 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 	{
 		super(world);
 		this.isFertile = true;
-		this.setSize(0.9F, 0.9F);
+		this.setSize(0.8F, 0.8F);
 		this.experienceValue = 10;
+		this.getNavigator().setCanSwim(true);
+		this.getNavigator().setAvoidsWater(true);
+		this.tasks.addTask(0, new EntityAISwimming(this));
+		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 0.800000011920929D, true));
+		this.tasks.addTask(1, new EntityAIWander(this, 0.800000011920929D));
+		this.targetTasks.addTask(1, new EntityAILeapAtTarget(this, 0.8F));
+		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, Entity.class, /** targetChance **/0, /** shouldCheckSight **/false, /** nearbyOnly **/false, EntitySelectorXenomorph.instance));
 	}
 
 	@Override
@@ -41,13 +54,15 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(14.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5999999761581421D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(0.50D);
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(48.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
 	}
 
 	@Override
 	public void onUpdate()
 	{
 		super.onUpdate();
+		
+		this.fallDistance = 0F;
 		
 		if (this.isCollidedHorizontally)
 		{
@@ -108,7 +123,7 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 		return this.motionY > 1.0099999997764826D;
 	}
 
-	public void jumpAtEntity(EntityLivingBase leaper, EntityLivingBase leapTarget, double leapMotionY)
+	/* public void jumpAtEntity(EntityLivingBase leaper, EntityLivingBase leapTarget, double leapMotionY)
 	{
 		double rX = leapTarget.posX - leaper.posX;
 		double rZ = leapTarget.posZ - leaper.posZ;
@@ -116,7 +131,7 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 		leaper.motionX += rX / sq * 0.5D * 0.800000011920929D + leaper.motionX * 0.20000000298023224D;
 		leaper.motionZ += rZ / sq * 0.5D * 0.800000011920929D + leaper.motionZ * 0.20000000298023224D;
 		leaper.motionY = leapMotionY;
-	}
+	} */
 
 	@Override
 	public void collideWithEntity(Entity entity)
