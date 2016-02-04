@@ -32,6 +32,7 @@ import com.arisux.avp.items.ItemArmorPressureSuit;
 import com.arisux.avp.items.ItemArmorTitanium;
 import com.arisux.avp.items.ItemArmorXeno;
 import com.arisux.avp.items.ItemBlackGooBucket;
+import com.arisux.avp.items.ItemMaintenanceJack;
 import com.arisux.avp.items.ItemDisc;
 import com.arisux.avp.items.ItemEntitySummoner;
 import com.arisux.avp.items.ItemFirearm;
@@ -164,7 +165,8 @@ public class ItemHandler extends IBHandler implements IInitializable
 		itemRoyalJelly = (new HookedItem()).setDescription("Royal Jelly (A potent, transformative substance produced by a Xenomorph Queen)"),
 		itemBlackGoo = (new HookedItem()).setDescription("Black Goo (A0-3959X.91 – 15)"),
 		itemPhial = (new HookedItem()).setDescription(""),
-		itemPhialEmpty = (new HookedItem()).setDescription("");
+		itemPhialEmpty = (new HookedItem()).setDescription(""),
+		itemMaintenanceJack = (new ItemMaintenanceJack());
 
 	public ItemEntitySummoner itemSummonerDrone = (new ItemEntitySummoner(this.getMod().domain(), EntityDrone.class)),
 		itemSummonerAqua = (new ItemEntitySummoner(this.getMod().domain(), EntityAqua.class)),
@@ -315,5 +317,6 @@ public class ItemHandler extends IBHandler implements IInitializable
 		registerItem(itemBlackGoo, "blackgoo.item");
 		registerItem(itemPhial, "phial.goo");
 		registerItem(itemPhialEmpty, "phial.empty");
+		registerItem(itemMaintenanceJack, "tool.maintenancejack");
 	}
 }

@@ -2,6 +2,7 @@ package com.arisux.avp.block;
 
 import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.avp.entities.tile.TileEntityBlastdoor;
+import com.arisux.avp.items.ItemMaintenanceJack;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -37,21 +38,58 @@ public class BlockBlastdoor extends HookedBlock
 		{
 			TileEntityBlastdoor blastdoor = (TileEntityBlastdoor) tile;
 
-			if (blastdoor.isChild() && blastdoor.getParent() != null && blastdoor.getParent().isOperational())
+			if (blastdoor.isChild() && blastdoor.getParent() != null && canOpen(blastdoor.getParent(), player))
 			{
-				blastdoor.getParent().setDoorOpen(!blastdoor.getParent().isDoorOpen());
-
-				if (world.isRemote)
-				{
-					Minecraft.getMinecraft().thePlayer.addChatComponentMessage(new ChatComponentText("\u00A77 Blast door \u00A7a" + (blastdoor.getParent().isDoorOpen() ? "opened" : "closed") + "."));
-				}
+				this.onOpen(blastdoor.getParent(), world, player);
 			}
-			else if (blastdoor.isParent() && blastdoor.isOperational())
+			else if (blastdoor.isParent() && canOpen(blastdoor, player))
 			{
-				blastdoor.setDoorOpen(!blastdoor.isDoorOpen());
+				this.onOpen(blastdoor, world, player);
 			}
 		}
 		return true;
+	}
+
+	private void onOpen(TileEntityBlastdoor blastdoor, World world, EntityPlayer player)
+	{
+		if (isOpenedByJack(blastdoor, player))
+		{
+			blastdoor.setBeingPryedOpen(true);
+			blastdoor.setDoorProgress(blastdoor.getDoorProgress() + 0.05F);
+			int percentOpen = (int) (((blastdoor.getDoorProgress() >= blastdoor.getMaxDoorPryProgress() ? blastdoor.getMaxDoorPryProgress() : blastdoor.getDoorProgress()) * 100) / blastdoor.getMaxDoorPryProgress());
+
+			ItemMaintenanceJack jack = (ItemMaintenanceJack) player.getCurrentEquippedItem().getItem();
+			jack.onPryBlastDoor(player, player.getCurrentEquippedItem());
+
+			if (percentOpen >= 100)
+			{
+				jack.onOpenBlastDoor(player, player.getCurrentEquippedItem());
+			}
+
+			if (world.isRemote)
+			{
+				Minecraft.getMinecraft().thePlayer.addChatComponentMessage(new ChatComponentText("\u00A77 Blast door \u00A7a" + percentOpen + "% open."));
+			}
+		}
+		else
+		{
+			blastdoor.setDoorOpen(!blastdoor.isDoorOpen());
+
+			if (world.isRemote)
+			{
+				Minecraft.getMinecraft().thePlayer.addChatComponentMessage(new ChatComponentText("\u00A77 Blast door \u00A7a" + (blastdoor.isDoorOpen() ? "opened" : "closed") + "."));
+			}
+		}
+	}
+
+	private boolean isOpenedByJack(TileEntityBlastdoor blastdoor, EntityPlayer player)
+	{
+		return player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof ItemMaintenanceJack && !blastdoor.isOperational() && !blastdoor.isDoorOpen();
+	}
+
+	private boolean canOpen(TileEntityBlastdoor blastdoor, EntityPlayer player)
+	{
+		return blastdoor.isOperational() || isOpenedByJack(blastdoor, player);
 	}
 
 	@Override

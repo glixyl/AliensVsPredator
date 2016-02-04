@@ -1,6 +1,7 @@
 package com.arisux.avp.entities.tile;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.interfaces.energy.IEnergyReceiver;
@@ -26,11 +27,16 @@ public class TileEntityBlastdoor extends TileEntityElectrical implements IEnergy
 	private TileEntityBlastdoor parent;
 	private ArrayList<TileEntityBlastdoor> children;
 	private int ticksExisted;
+	private String identifier;
+	private String password;
+	private long timeOfLastPry;
 
 	public TileEntityBlastdoor()
 	{
 		super(false);
 		this.children = new ArrayList<TileEntityBlastdoor>();
+		this.identifier = "BD" + (1000 + new Random().nextInt(8999));
+		this.password = "";
 	}
 
 	public void addToParent(TileEntityBlastdoor parent)
@@ -74,7 +80,14 @@ public class TileEntityBlastdoor extends TileEntityElectrical implements IEnergy
 
 		nbt.setFloat("DoorProgress", this.doorProgress);
 		nbt.setBoolean("DoorOpen", this.isDoorOpen());
+		nbt.setLong("TimeOfLastPry", this.getTimeOfLastPry());
 		nbt.setBoolean("Parent", this.isParent);
+		
+		if (!identifier.isEmpty())
+		nbt.setString("Identifier", this.identifier);
+		
+		if (!password.isEmpty())
+		nbt.setString("Password", this.password);
 	}
 
 	@Override
@@ -90,6 +103,9 @@ public class TileEntityBlastdoor extends TileEntityElectrical implements IEnergy
 		this.doorProgress = nbt.getFloat("DoorProgress");
 		this.isParent = nbt.getBoolean("Parent");
 		this.setDoorOpen(nbt.getBoolean("DoorOpen"));
+		this.timeOfLastPry = nbt.getLong("TimeOfLastPry");
+		this.identifier = nbt.getString("Identifier");
+		this.password = nbt.getString("Password");
 	}
 
 	@Override
@@ -104,20 +120,49 @@ public class TileEntityBlastdoor extends TileEntityElectrical implements IEnergy
 			this.setup(false);
 		}
 
-		if (!this.isDoorOpen())
+		if (this.isParent())
 		{
-			this.doorProgress = this.doorProgress > 0.0F ? this.doorProgress - 0.02F : this.doorProgress;
-		}
+			if (this.isDoorOpen())
+			{
+				this.doorProgress = this.doorProgress < getMaxDoorProgress() ? this.doorProgress + 0.02F : this.doorProgress;
+			}
 
-		if (this.isDoorOpen())
-		{
-			this.doorProgress = this.doorProgress < 1.0F ? this.doorProgress + 0.02F : this.doorProgress;
-		}
+			if (!this.isDoorOpen() && !isBeingPryedOpen())
+			{
+				this.doorProgress = this.doorProgress > 0.0F ? this.doorProgress - 0.02F : this.doorProgress;
+			}
 
-		if (!this.isDoorOpen())
-		{
-			this.doorProgress = this.doorProgress > 0.0F ? this.doorProgress - 0.02F : this.doorProgress;
+			long timeSinceLastPry = (System.currentTimeMillis() - this.getTimeOfLastPry());
+
+			if (this.timeOfLastPry != 0 && timeSinceLastPry > getDoorResealTime())
+			{
+				this.timeOfLastPry = 0;
+			}
+
+			if (isBeingPryedOpen() && this.doorProgress >= getMaxDoorPryProgress())
+			{
+				this.timeOfLastPry = 0;
+				this.setDoorOpen(true);
+			}
 		}
+	}
+
+	public boolean isBeingPryedOpen()
+	{
+		return this.timeOfLastPry != 0;
+	}
+
+	public void setBeingPryedOpen(boolean beingPryedOpen)
+	{
+		if (beingPryedOpen)
+		{
+			this.timeOfLastPry = System.currentTimeMillis();
+		}
+	}
+
+	public long getTimeOfLastPry()
+	{
+		return timeOfLastPry;
 	}
 
 	@Override
@@ -182,7 +227,7 @@ public class TileEntityBlastdoor extends TileEntityElectrical implements IEnergy
 	public boolean setChildTile(int posX, int posY, int posZ)
 	{
 		Block block = worldObj.getBlock(posX, posY, posZ);
-		
+
 		if (block != Blocks.air && block != AliensVsPredator.blocks().blockBlastdoor)
 		{
 			if (this.worldObj.isRemote)
@@ -270,5 +315,45 @@ public class TileEntityBlastdoor extends TileEntityElectrical implements IEnergy
 	public void setDirection(ForgeDirection direction)
 	{
 		this.direction = direction;
+	}
+
+	public String getIdentifier()
+	{
+		return identifier;
+	}
+
+	public void setIdentifier(String identifier)
+	{
+		this.identifier = identifier;
+	}
+
+	public String getPassword()
+	{
+		return password;
+	}
+
+	public void setPassword(String password)
+	{
+		this.password = password;
+	}
+
+	public void setDoorProgress(float doorProgress)
+	{
+		this.doorProgress = doorProgress;
+	}
+
+	public float getMaxDoorPryProgress()
+	{
+		return 0.4F;
+	}
+
+	public float getMaxDoorProgress()
+	{
+		return 1.0F;
+	}
+	
+	public int getDoorResealTime()
+	{
+		return 600;
 	}
 }
