@@ -7,6 +7,7 @@ import com.arisux.airi.lib.WorldUtil.Entities.Players.Inventories;
 import com.arisux.airi.lib.interfaces.IInitializable;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.ItemHandler;
+import com.arisux.avp.BlockHandler;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import net.minecraft.entity.player.EntityPlayer;
@@ -111,6 +112,7 @@ public class AssemblerAPI implements IInitializable
 	public void initialize(FMLInitializationEvent event)
 	{
 		ItemHandler avp = AliensVsPredator.items();
+		BlockHandler avpBlock = AliensVsPredator.blocks();
 
 		this.registerSchematic(new AssemblerSchematic("pulserifle", Inventories.newStack(avp.itemM41A, 1),
 				Inventories.newStack(avp.itemPolycarbonate, 16),
@@ -122,35 +124,45 @@ public class AssemblerAPI implements IInitializable
 				Inventories.newStack(Item.getItemFromBlock(Blocks.lever), 2),
 				Inventories.newStack(avp.itemLedDisplay, 1)
 				));
-		this.registerSchematic(new AssemblerSchematic("grenade", Inventories.newStack(avp.itemGrenade, 1),
-				Inventories.newStack(Items.iron_ingot, 7),
-				Inventories.newStack(Blocks.stone_button, 1),
-				Inventories.newStack(Items.gunpowder, 1)
+		this.registerSchematic(new AssemblerSchematic("grenade", Inventories.newStack(avp.itemGrenade, 2),
+				Inventories.newStack(Items.iron_ingot, 2),
+				Inventories.newStack(avp.itemIngotAluminum, 1),
+				Inventories.newStack(Items.gunpowder, 1),
+				Inventories.newStack(avp.itemIngotCopper, 1)
 				));
-		this.registerSchematic(new AssemblerSchematic("fire_grenade", Inventories.newStack(avp.itemIncendiaryGrenade, 1),
-				Inventories.newStack(Items.iron_ingot, 7),
-				Inventories.newStack(Blocks.stone_button, 1),
-				Inventories.newStack(Items.blaze_powder, 1)
+		this.registerSchematic(new AssemblerSchematic("fire_grenade", Inventories.newStack(avp.itemIncendiaryGrenade, 2),
+				Inventories.newStack(Items.iron_ingot, 2),
+				Inventories.newStack(avp.itemIngotAluminum, 1),
+				Inventories.newStack(Items.blaze_powder, 1),
+				Inventories.newStack(avp.itemIngotCopper, 1)
 				));
 		this.registerSchematic(new AssemblerSchematic("marineHelm", Inventories.newStack(avp.helmMarine, 1),
-				Inventories.newStack(Blocks.wool, 5)
+				Inventories.newStack(Blocks.wool, 3),
+				Inventories.newStack(avp.itemIngotAluminum, 2),
+				Inventories.newStack(avp.itemLedDisplay, 2),
+				Inventories.newStack(avp.itemPolycarbonate, 2),
+				Inventories.newStack(avp.itemPowerSupply, 1)
 				));
 		this.registerSchematic(new AssemblerSchematic("marinePlate", Inventories.newStack(avp.plateMarine, 1),
-				Inventories.newStack(Blocks.wool, 8)
+				Inventories.newStack(Blocks.wool, 3),
+				Inventories.newStack(avp.itemIngotAluminum, 2)
 				));
 		this.registerSchematic(new AssemblerSchematic("marineLeggings", Inventories.newStack(avp.legsMarine, 1),
-				Inventories.newStack(Blocks.wool, 7)
+				Inventories.newStack(Blocks.wool, 3),
+				Inventories.newStack(avp.itemIngotAluminum, 2)
 				));
 		this.registerSchematic(new AssemblerSchematic("marineBoots", Inventories.newStack(avp.bootsMarine, 1),
-				Inventories.newStack(Blocks.wool, 4)
+				Inventories.newStack(Blocks.wool, 1),
+				Inventories.newStack(avp.itemIngotAluminum, 1)
 				));
 		this.registerSchematic(new AssemblerSchematic("sniperMagazine", Inventories.newStack(avp.itemAmmoSniper, 1),
 				Inventories.newStack(avp.itemIngotAluminum, 5),
 				Inventories.newStack(Items.gunpowder, 1)
 				));
-		this.registerSchematic(new AssemblerSchematic("pistolMagazine", Inventories.newStack(avp.itemAmmoPistol, 1),
-				Inventories.newStack(avp.itemIngotAluminum, 6),
-				Inventories.newStack(Items.gunpowder, 1)
+		this.registerSchematic(new AssemblerSchematic("pistolMagazine", Inventories.newStack(avp.itemAmmoPistol, 3),
+				Inventories.newStack(avp.itemIngotAluminum, 4),
+				Inventories.newStack(Items.gunpowder, 2),
+				Inventories.newStack(avp.itemIngotCopper, 1)
 				));
 		this.registerSchematic(new AssemblerSchematic("ARAmmo", Inventories.newStack(avp.itemAmmoAR, 1),
 				Inventories.newStack(avp.itemIngotAluminum, 5),
@@ -200,36 +212,7 @@ public class AssemblerAPI implements IInitializable
 				));
 		this.registerSchematic(new AssemblerSchematic("doritosCoolRanch", Inventories.newStack(avp.itemDoritosCoolRanch, 4),
 				Inventories.newStack(avp.itemDoritos, 4),
-				Inventories.newStack(Items.wheat, 4)
-				));
-		this.registerSchematic(new AssemblerSchematic("ic", Inventories.newStack(avp.itemIntegratedCircuit, 4),
-				Inventories.newStack(avp.itemPolycarbonate, 1),
-				Inventories.newStack(avp.itemIngotAluminum, 1),
-				Inventories.newStack(avp.itemIngotCopper, 1),
-				Inventories.newStack(avp.itemSilicon, 1),
-				Inventories.newStack(Items.iron_ingot, 1)
-				));
-		this.registerSchematic(new AssemblerSchematic("led", Inventories.newStack(avp.itemLed, 4),
-				Inventories.newStack(avp.itemPolycarbonate, 2),
-				Inventories.newStack(avp.itemIngotCopper, 1),
-				Inventories.newStack(avp.itemSilicon, 1)
-				));
-		this.registerSchematic(new AssemblerSchematic("ledDisplay", Inventories.newStack(avp.itemLedDisplay, 2),
-				Inventories.newStack(avp.itemPolycarbonate, 8),
-				Inventories.newStack(avp.itemLed, 24),
-				Inventories.newStack(avp.itemIngotAluminum, 2),
-				Inventories.newStack(avp.itemIngotCopper, 4),
-				Inventories.newStack(avp.itemSilicon, 2),
-				Inventories.newStack(avp.itemIntegratedCircuit, 2),
-				Inventories.newStack(Items.iron_ingot, 2)
-				));
-		this.registerSchematic(new AssemblerSchematic("processor", Inventories.newStack(avp.itemProcessor, 1),
-				Inventories.newStack(avp.itemPolycarbonate, 8),
-				Inventories.newStack(avp.itemIngotAluminum, 1),
-				Inventories.newStack(avp.itemIngotCopper, 1),
-				Inventories.newStack(avp.itemSilicon, 1),
-				Inventories.newStack(avp.itemIntegratedCircuit, 16),
-				Inventories.newStack(Items.iron_ingot, 1)
+				Inventories.newStack(Items.wheat, 3)
 				));
 		this.registerSchematic(new AssemblerSchematic("motionTracker", Inventories.newStack(avp.itemMotionTracker, 1),
 				Inventories.newStack(avp.itemPolycarbonate, 12),
@@ -250,14 +233,13 @@ public class AssemblerAPI implements IInitializable
 				Inventories.newStack(Items.blaze_rod, 1),
 				Inventories.newStack(Items.iron_ingot, 12)
 				));
-		this.registerSchematic(new AssemblerSchematic("nbtDrive", Inventories.newStack(avp.itemFlashDrive, 4),
-				Inventories.newStack(avp.itemPolycarbonate, 8),
-				Inventories.newStack(avp.itemIngotAluminum, 1),
-				Inventories.newStack(avp.itemSilicon, 1),
-				Inventories.newStack(avp.itemIngotCopper, 1),
-				Inventories.newStack(avp.itemProcessor, 1),
-				Inventories.newStack(avp.itemLed, 1),
-				Inventories.newStack(avp.itemIntegratedCircuit, 4)
+		
+		// assuming that NBT is a play on NBT tags, so this is a component of the assembler
+				
+		this.registerSchematic(new AssemblerSchematic("nbtDrive", Inventories.newStack(avp.itemFlashDrive, 1),
+				Inventories.newStack(avp.itemPolycarbonate, 1),
+				Inventories.newStack(avp.itemRAM, 4),
+				Inventories.newStack(avp.itemIngotLithium, 1)
 				));
 		this.registerSchematic(new AssemblerSchematic("artifactTech", Inventories.newStack(avp.itemArtifactTech, 4),
 				Inventories.newStack(Items.redstone, 8),
@@ -265,6 +247,97 @@ public class AssemblerAPI implements IInitializable
 				Inventories.newStack(avp.itemSilicon, 4),
 				Inventories.newStack(avp.itemIngotCopper, 4)
 				));
+				
+		// for tier 1 level items, the assembler doubles output or reduces input cost
+		
+		this.registerSchematic(new AssemblerSchematic("polycarbonate", Inventories.newStack(avp.itemPolycarbonate, 4),
+				Inventories.newStack(avp.itemCarbon, 6),
+				Inventories.newStack(avp.itemSilicon, 3)
+				));					
+		this.registerSchematic(new AssemblerSchematic("carbon", Inventories.newStack(avp.itemCarbon, 2),
+				Inventories.newStack(Items.coal, 4)
+				));				
+		this.registerSchematic(new AssemblerSchematic("resistor", Inventories.newStack(avp.itemResistor, 2),
+				Inventories.newStack(avp.itemIngotCopper, 2),
+				Inventories.newStack(avp.itemCarbon, 1)
+				));				
+		this.registerSchematic(new AssemblerSchematic("capacitor", Inventories.newStack(avp.itemCapacitor, 2),
+				Inventories.newStack(avp.itemIngotCopper, 2),
+				Inventories.newStack(avp.itemIngotLithium, 1)
+				));				
+		this.registerSchematic(new AssemblerSchematic("diode", Inventories.newStack(avp.itemDiode, 2),
+				Inventories.newStack(avp.itemIngotCopper, 1),
+				Inventories.newStack(avp.itemCarbon, 1),
+				Inventories.newStack(avp.itemSilicon, 1)
+				));
+		this.registerSchematic(new AssemblerSchematic("led", Inventories.newStack(avp.itemLed, 2),
+				Inventories.newStack(avp.itemPolycarbonate, 1),
+				Inventories.newStack(avp.itemDiode, 1),
+				Inventories.newStack(Items.redstone, 1)
+				));				
+		this.registerSchematic(new AssemblerSchematic("regulator", Inventories.newStack(avp.itemVoltageRegulator, 2),
+				Inventories.newStack(avp.itemDiode, 1),
+				Inventories.newStack(avp.itemIngotCopper, 1),
+				Inventories.newStack(avp.itemResistor, 1)
+				));				
+		this.registerSchematic(new AssemblerSchematic("transistor", Inventories.newStack(avp.itemTransistor, 2),
+				Inventories.newStack(avp.itemIngotAluminum, 2),
+				Inventories.newStack(avp.itemSilicon, 1),
+				Inventories.newStack(Item.getItemFromBlock(Blocks.lever), 1)
+				));				
+		this.registerSchematic(new AssemblerSchematic("ic", Inventories.newStack(avp.itemIntegratedCircuit, 2),
+				Inventories.newStack(avp.itemPolycarbonate, 1),
+				Inventories.newStack(avp.itemIngotAluminum, 2),
+				Inventories.newStack(avp.itemIngotCopper, 2),
+				Inventories.newStack(avp.itemSilicon, 1),
+				Inventories.newStack(avp.itemTransistor, 1),
+				Inventories.newStack(avp.itemResistor, 1),
+				Inventories.newStack(avp.itemVoltageRegulator, 1),
+				Inventories.newStack(avp.itemDiode, 1)
+				));
+		this.registerSchematic(new AssemblerSchematic("processor", Inventories.newStack(avp.itemProcessor, 1),
+				Inventories.newStack(avp.itemPolycarbonate, 1),
+				Inventories.newStack(avp.itemIntegratedCircuit, 5),
+				Inventories.newStack(avp.itemIngotLithium, 1)
+				));
+		this.registerSchematic(new AssemblerSchematic("motherboard", Inventories.newStack(avp.itemMotherboard, 1),
+				Inventories.newStack(avp.itemPolycarbonate, 1),
+				Inventories.newStack(avp.itemIntegratedCircuit, 1),
+				Inventories.newStack(avp.itemSilicon, 1),
+				Inventories.newStack(avp.itemTransistor, 1),
+				Inventories.newStack(avp.itemVoltageRegulator, 1),
+				Inventories.newStack(avp.itemDiode, 1)
+				));								
+		this.registerSchematic(new AssemblerSchematic("powerline", Inventories.newStack(avpBlock.blockPowerline, 4),
+				Inventories.newStack(avp.itemPolycarbonate, 4),
+				Inventories.newStack(avp.itemIngotCopper, 1)
+				));
+		this.registerSchematic(new AssemblerSchematic("powersupply", Inventories.newStack(avp.itemPowerSupply, 1),
+				Inventories.newStack(avp.itemDiode, 1),
+				Inventories.newStack(avp.itemVoltageRegulator, 1),
+				Inventories.newStack(avp.itemIngotAluminum, 2),
+				Inventories.newStack(avpBlock.blockTransformer, 1)
+				));					
+		this.registerSchematic(new AssemblerSchematic("ledDisplay", Inventories.newStack(avp.itemLedDisplay, 2),
+				Inventories.newStack(avp.itemPolycarbonate, 1),
+				Inventories.newStack(avp.itemLed, 6),
+				Inventories.newStack(avp.itemIntegratedCircuit, 1),
+				Inventories.newStack(avp.itemIngotLithium, 1)
+				));				
+		this.registerSchematic(new AssemblerSchematic("ram", Inventories.newStack(avp.itemRAM, 2),
+				Inventories.newStack(avp.itemIntegratedCircuit, 3),
+				Inventories.newStack(avp.itemVoltageRegulator, 1),
+				Inventories.newStack(avp.itemIngotCopper, 2),
+				Inventories.newStack(avp.itemSilicon, 2),
+				Inventories.newStack(avp.itemPolycarbonate, 1)
+				));
+		this.registerSchematic(new AssemblerSchematic("solidstatedrive", Inventories.newStack(avp.itemSolidStateDrive, 1),
+				Inventories.newStack(avp.itemRAM, 2),
+				Inventories.newStack(avp.itemVoltageRegulator, 1),
+				Inventories.newStack(avp.itemIntegratedCircuit, 1),
+				Inventories.newStack(avp.itemIngotLithium, 1),
+				Inventories.newStack(avp.itemPolycarbonate, 1)
+				));		
 	}
 
 	public boolean isSchematicComplete(AssemblerSchematic schematic, EntityPlayer player)
