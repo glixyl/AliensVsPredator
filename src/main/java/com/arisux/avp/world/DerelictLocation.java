@@ -2,10 +2,12 @@ package com.arisux.avp.world;
 
 import java.util.Random;
 
+import com.arisux.airi.AIRI;
 import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
 import com.arisux.avp.AliensVsPredator;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 
 public class DerelictLocation
@@ -97,7 +99,7 @@ public class DerelictLocation
 	
 	public void generate(World world, int addX, int addY, int addZ)
 	{
+		AIRI.instance().events.getStructuresInQueue().add(new StructureDerelict(MinecraftServer.getServer().worldServerForDimension(0), this.getCoord().add(addX, addY, addZ)));
 		this.setGenerated(true);
-		AliensVsPredator.schematics().derelict.generate(world, this.getCoord().add(addX, addY, addZ));
 	}
 }
