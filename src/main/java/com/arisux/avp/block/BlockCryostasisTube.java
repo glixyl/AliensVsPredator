@@ -7,6 +7,8 @@ import com.arisux.airi.lib.WorldUtil;
 import com.arisux.avp.entities.tile.TileEntityCryostasisTube;
 import com.arisux.avp.items.ItemEntitySummoner;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -99,5 +101,17 @@ public class BlockCryostasisTube extends HookedBlock
 	public int getRenderType()
 	{
 		return -1;
+	}
+	
+    @SideOnly(Side.CLIENT)
+    public int getRenderBlockPass()
+    {
+        return 0;
+    }
+	
+	@Override
+	public boolean canRenderInPass(int pass)
+	{
+		return super.canRenderInPass(pass);
 	}
 }

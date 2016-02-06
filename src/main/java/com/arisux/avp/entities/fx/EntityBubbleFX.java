@@ -3,6 +3,7 @@ package com.arisux.avp.entities.fx;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.particle.EntityFX;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.World;
 
 @SideOnly(Side.CLIENT)
@@ -39,5 +40,17 @@ public class EntityBubbleFX extends EntityFX
         {
             this.setDead();
         }
+    }
+    
+    @Override
+    public void renderParticle(Tessellator tessellator, float partialTickTime, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ)
+    {
+    	super.renderParticle(tessellator, partialTickTime, rotationX, rotationZ, rotationYZ, rotationXY, rotationXZ);
+    }
+    
+    @Override
+    public int getFXLayer()
+    {
+    	return 0;
     }
 }

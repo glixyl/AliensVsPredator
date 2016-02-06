@@ -52,13 +52,12 @@ public class RenderCryostasisTube extends TileEntitySpecialRenderer
 		
 		public void renderTube(RenderCryostasisTube renderer, TileEntityCryostasisTube tile, double posX, double posY, double posZ)
 		{
-			GlStateManager.disableDepthTest();
 			if (tile.getVoltage() > 0)
 			{
 				GlStateManager.disableLightMapping();
 				GlStateManager.disableLight();
 			}
-
+			
 			renderer.bindTexture(tile.isShattered() ? AliensVsPredator.resources().CRYOSTASIS_TUBE_MASK_SHATTERED : tile.isCracked() ? AliensVsPredator.resources().CRYOSTASIS_TUBE_MASK_CRACKED : AliensVsPredator.resources().CRYOSTASIS_TUBE_MASK);
 			renderer.model.render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
 			GlStateManager.enableLightMapping();
