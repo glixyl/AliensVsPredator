@@ -248,13 +248,13 @@ public class AssemblerAPI implements IInitializable
 				Inventories.newStack(avp.itemIngotCopper, 4)
 				));
 				
-		// for tier 1 level items, the assembler doubles output or reduces input cost
+		// for tier 1 level items, the assembler increases output or reduces input cost
 		
 		this.registerSchematic(new AssemblerSchematic("polycarbonate", Inventories.newStack(avp.itemPolycarbonate, 4),
 				Inventories.newStack(avp.itemCarbon, 6),
 				Inventories.newStack(avp.itemSilicon, 3)
 				));					
-		this.registerSchematic(new AssemblerSchematic("carbon", Inventories.newStack(avp.itemCarbon, 2),
+		this.registerSchematic(new AssemblerSchematic("carbon", Inventories.newStack(avp.itemCarbon, 3),
 				Inventories.newStack(Items.coal, 4)
 				));				
 		this.registerSchematic(new AssemblerSchematic("resistor", Inventories.newStack(avp.itemResistor, 2),

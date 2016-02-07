@@ -42,7 +42,7 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
         this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, Entity.class, /** targetChance **/0, /** shouldCheckSight **/false, /** nearbyOnly **/false, EntitySelectorXenomorph.instance));
         this.targetTasks.addTask(1, new EntityAIAttackOnCollide(this, 0.8D, true));
-		this.targetTasks.addTask(2, new EntityAILeapAtTarget(this, 0.3F));
+		this.targetTasks.addTask(1, new EntityAILeapAtTarget(this, 0.4F));
     }
 
     @Override

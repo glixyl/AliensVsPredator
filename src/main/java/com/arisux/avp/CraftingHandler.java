@@ -26,13 +26,13 @@ public class CraftingHandler implements IInitializable
 		// Tier 1 components required to craft assembler, armor and guns.  Assembler doubles output and allows Tier 2+
 		
 		GameRegistry.addRecipe(
-		    new ItemStack(AliensVsPredator.items().itemCarbon, 1),
+		    new ItemStack(AliensVsPredator.items().itemCarbon, 2),
 			"aa",
 			"aa",
 			'a', Items.coal
 		);		
 		GameRegistry.addRecipe(
-		    new ItemStack(AliensVsPredator.items().itemCarbon, 1),
+		    new ItemStack(AliensVsPredator.items().itemCarbon, 2),
 			"aa",
 			"aa",
 			'a', new ItemStack(Items.coal, 1, 1)
@@ -430,7 +430,7 @@ public class CraftingHandler implements IInitializable
 			'b', AliensVsPredator.items().itemIngotAluminum,
 			'c', Blocks.lever,
 			'd', AliensVsPredator.items().itemSilicon,
-			'e', AliensVsPredator.items().itemProcessor,
+			'e', Items.iron_ingot,
 			'f', Items.flint_and_steel
 		);	
 		GameRegistry.addRecipe(
@@ -440,7 +440,7 @@ public class CraftingHandler implements IInitializable
 			"bbb",
 			'a', Items.slime_ball,
 			'b', AliensVsPredator.items().itemIngotAluminum,
-			'c', Items.lava_bucket,
+			'c', Items.blaze_powder,
 			'd', AliensVsPredator.items().itemPolycarbonate
 		);	
         // construction blocks and materials		
@@ -461,7 +461,7 @@ public class CraftingHandler implements IInitializable
 			'b', Blocks.stone
 		);
 		GameRegistry.addRecipe(
-		    new ItemStack(AliensVsPredator.blocks().blockWallStairs, 8),
+		    new ItemStack(AliensVsPredator.blocks().blockWallStairs, 12),
 			"b  ",
 			"aa ",
 			"bbb",
@@ -477,7 +477,7 @@ public class CraftingHandler implements IInitializable
 			'b', Blocks.glass
 		);	
 		GameRegistry.addRecipe(
-		    new ItemStack(AliensVsPredator.blocks().blockIndustrialGlassStairs, 8),
+		    new ItemStack(AliensVsPredator.blocks().blockIndustrialGlassStairs, 12),
 			"b  ",
 			"aa ",
 			"bbb",
@@ -493,7 +493,7 @@ public class CraftingHandler implements IInitializable
 			'b', Items.brick
 		);	
 		GameRegistry.addRecipe(
-		    new ItemStack(AliensVsPredator.blocks().blockIronBricksStairs, 8),
+		    new ItemStack(AliensVsPredator.blocks().blockIronBricksStairs, 12),
 			"b  ",
 			"aa ",
 			"bbb",
