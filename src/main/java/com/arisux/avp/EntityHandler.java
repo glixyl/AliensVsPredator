@@ -227,7 +227,7 @@ public class EntityHandler implements IInitializable
 		EntityRegistry.addSpawn(EntityHammerpede.class, 50, 1, 3, EnumCreatureType.monster, new BiomeGenBase[] { 
 			BiomeLVBase.varda
 		});
-		EntityRegistry.addSpawn(EntityTrilobite.class, 1, 1, 1, EnumCreatureType.monster, new BiomeGenBase[] { 
+		EntityRegistry.addSpawn(EntityTrilobite.class, 5, 1, 2, EnumCreatureType.monster, new BiomeGenBase[] { 
 			BiomeLVBase.varda
 		});
 		EntityRegistry.addSpawn(EntityEngineer.class, 2, 1, 1, EnumCreatureType.monster, engineerBiomes);

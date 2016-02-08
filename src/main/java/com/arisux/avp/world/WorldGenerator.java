@@ -20,12 +20,37 @@ public class WorldGenerator implements IWorldGenerator
 	}
 
 	private void generateSurface(World world, Random rand, int chunkX, int chunkZ)
-	{
+	{		
 		CoordData chunkCoords = new CoordData(chunkX, 0, chunkZ);
-		
-		WorldUtil.generateBlockInChunk(world, AliensVsPredator.blocks().oreCopper, rand, 70, 6, 16, 64, chunkCoords, new BiomeGenBase[] { BiomeGenBase.desert, BiomeGenBase.desertHills });
-		WorldUtil.generateBlockInChunk(world, AliensVsPredator.blocks().oreSilicon, rand, 30, 3, 0, 32, chunkCoords);
-		WorldUtil.generateBlockInChunk(world, AliensVsPredator.blocks().oreLithium, rand, 50, 1, 0, 128, chunkCoords, new BiomeGenBase[] { BiomeGenBase.ocean, BiomeGenBase.beach, BiomeGenBase.deepOcean });
-		WorldUtil.generateBlockInChunk(world, AliensVsPredator.blocks().oreBauxite, rand, 50, 8, 16, 128, chunkCoords);
+		BiomeGenBase[] overworldBiomes = new BiomeGenBase[] {
+				BiomeGenBase.birchForest,
+				BiomeGenBase.birchForestHills,
+				BiomeGenBase.coldBeach,
+				BiomeGenBase.coldTaiga,
+				BiomeGenBase.coldTaigaHills,
+				BiomeGenBase.desert,
+				BiomeGenBase.desertHills,
+				BiomeGenBase.extremeHills,
+				BiomeGenBase.extremeHillsEdge,
+				BiomeGenBase.extremeHillsPlus,
+				BiomeGenBase.forest,
+				BiomeGenBase.forestHills,
+				BiomeGenBase.iceMountains,
+				BiomeGenBase.icePlains,
+				BiomeGenBase.jungle,
+				BiomeGenBase.jungleEdge,
+				BiomeGenBase.jungleHills,
+				BiomeGenBase.plains,
+				BiomeGenBase.roofedForest,
+				BiomeGenBase.swampland,
+				BiomeGenBase.taiga,
+				BiomeGenBase.taigaHills,
+				BiomeGenBase.ocean,
+				BiomeGenBase.deepOcean
+		};
+		WorldUtil.generateBlockInChunk(world, AliensVsPredator.blocks().oreCopper, rand, 50, 4, 16, 96, chunkCoords, overworldBiomes);
+		WorldUtil.generateBlockInChunk(world, AliensVsPredator.blocks().oreSilicon, rand, 40, 3, 5, 48, chunkCoords, overworldBiomes);
+		WorldUtil.generateBlockInChunk(world, AliensVsPredator.blocks().oreLithium, rand, 40, 3, 5, 48, chunkCoords, overworldBiomes);
+		WorldUtil.generateBlockInChunk(world, AliensVsPredator.blocks().oreBauxite, rand, 50, 4, 16, 128, chunkCoords, overworldBiomes);
 	}
 }
