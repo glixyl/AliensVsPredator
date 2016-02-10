@@ -20,7 +20,7 @@ public class EntityGrenade extends EntityThrowable
 {
 	public double velocity = 0.9800000190734863D;
 	public double velocityGround = 0.699999988079071D;
-	public boolean isFlaming, explodeOnImpact;
+	public boolean explodeOnImpact;
 	private int fuse;
 
 	public EntityGrenade(World world)
@@ -30,7 +30,29 @@ public class EntityGrenade extends EntityThrowable
 		this.yOffset = this.height / 2.0F;
 		this.fuse = 0;
 	}
-	
+
+	@Override
+	protected void entityInit()
+	{
+		this.dataWatcher.addObject(17, new Integer(0));
+	}
+
+	public void setFlaming(boolean value)
+	{
+		if (value)
+			this.dataWatcher.updateObject(17, 1);
+		else
+			this.dataWatcher.updateObject(17, 0);
+	}
+
+	public boolean isFlaming()
+	{
+		if (this.dataWatcher.getWatchableObjectInt(17) == 1)
+			return true;
+		else
+			return false;
+	}
+
 	public EntityGrenade(World world, EntityLivingBase shooter)
 	{
 		super(world, shooter);
@@ -75,7 +97,7 @@ public class EntityGrenade extends EntityThrowable
 	{
 		if (!this.worldObj.isRemote)
 		{
-			Explosion explosion = WorldUtil.createExplosion(null, worldObj, new Blocks.CoordData(this), 2F, isFlaming, true, AliensVsPredator.settings().areExplosionsEnabled());
+			Explosion explosion = WorldUtil.createExplosion(null, worldObj, new Blocks.CoordData(this), 2F, isFlaming(), true, AliensVsPredator.settings().areExplosionsEnabled());
 
 			List<Entity> list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(4, 4, 4));
 

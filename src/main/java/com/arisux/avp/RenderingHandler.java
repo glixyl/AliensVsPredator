@@ -84,7 +84,7 @@ import com.arisux.avp.entities.render.RenderBullet;
 import com.arisux.avp.entities.render.RenderDisc;
 import com.arisux.avp.entities.render.RenderFlame;
 import com.arisux.avp.entities.render.RenderLaserMine;
-import com.arisux.avp.entities.render.RenderM40;
+import com.arisux.avp.entities.render.RenderGrenade;
 import com.arisux.avp.entities.render.RenderMechanism;
 import com.arisux.avp.entities.render.RenderNuke;
 import com.arisux.avp.entities.render.RenderPlasmaBlast;
@@ -238,7 +238,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		registerEntityRenderingHandler(EntityOvamorph.class, new RenderOvamorph(new ModelOvamorph(), 0.5F));
 		registerEntityRenderingHandler(EntitySpear.class, new RenderSpear());
 		registerEntityRenderingHandler(EntityLaserMine.class, new RenderLaserMine());
-		registerEntityRenderingHandler(EntityGrenade.class, new RenderM40());
+		registerEntityRenderingHandler(EntityGrenade.class, new RenderGrenade());
 		registerEntityRenderingHandler(EntityFlame.class, new RenderFlame());
 		registerEntityRenderingHandler(EntityAcidPool.class, new RenderAcidPool());
 		registerEntityRenderingHandler(EntityPlasma.class, new RenderPlasmaBlast());

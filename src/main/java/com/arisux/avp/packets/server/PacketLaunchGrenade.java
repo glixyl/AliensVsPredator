@@ -40,7 +40,7 @@ public class PacketLaunchGrenade implements IMessage, IMessageHandler<PacketLaun
 			{
 				EntityGrenade grenade = new EntityGrenade(ctx.getServerHandler().playerEntity.worldObj, ctx.getServerHandler().playerEntity);
 				grenade.explodeOnImpact = true;
-				grenade.isFlaming = hasIncendiary;
+				grenade.setFlaming(hasIncendiary);
 				ctx.getServerHandler().playerEntity.worldObj.spawnEntityInWorld(grenade);
 				Inventories.consumeItem(ctx.getServerHandler().playerEntity, !hasIncendiary ? AliensVsPredator.items().itemGrenade : AliensVsPredator.items().itemIncendiaryGrenade);
 			}

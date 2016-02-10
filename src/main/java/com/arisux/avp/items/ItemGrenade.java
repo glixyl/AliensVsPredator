@@ -1,26 +1,25 @@
 package com.arisux.avp.items;
 
-import java.util.List;
-
 import com.arisux.airi.lib.ItemTypes.HookedItem;
 import com.arisux.airi.lib.WorldUtil;
 import com.arisux.avp.entities.EntityGrenade;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class ItemGrenade extends HookedItem
 {
 	private boolean isFlaming;
 
-	public ItemGrenade()
+	public ItemGrenade(boolean isFlaming)
 	{
 		super();
 		this.maxStackSize = 16;
+		this.isFlaming = isFlaming;
 	}
 
 	@Override
@@ -29,18 +28,12 @@ public class ItemGrenade extends HookedItem
 		if (!worldObj.isRemote)
 		{
 			EntityGrenade grenade = new EntityGrenade(worldObj, entityplayer);
-			grenade.isFlaming = isFlaming;
+			grenade.setFlaming(this.isFlaming);
 			worldObj.spawnEntityInWorld(grenade);
 			WorldUtil.Entities.Players.Inventories.consumeItem(entityplayer, this);
 		}
 		
 		return itemstack;
-	}
-
-	public Item setFlaming(boolean isFlaming)
-	{
-		this.isFlaming = isFlaming;
-		return this;
 	}
 
 	@Override
