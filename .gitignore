@@ -1,0 +1,10 @@
+*
+!src/
+!.gitignore
+!gradlew*
+!gradle/
+!LICENSE.txt
+!README.md
+!Contributors.md
+!COPYING.lesser
+!build.gradle
