@@ -115,13 +115,12 @@ public class AssemblerAPI implements IInitializable
 		BlockHandler avpBlock = AliensVsPredator.blocks();
 
 		this.registerSchematic(new AssemblerSchematic("pulserifle", Inventories.newStack(avp.itemM41A, 1),
-				Inventories.newStack(avp.itemPolycarbonate, 16),
-				Inventories.newStack(Items.iron_ingot, 12),
+				Inventories.newStack(avp.itemPolycarbonate, 8),
+				Inventories.newStack(Items.iron_ingot, 8),
 				Inventories.newStack(avp.itemIngotAluminum, 6),
 				Inventories.newStack(avp.itemIngotCopper, 6),
 				Inventories.newStack(Items.gold_ingot, 4),
-				Inventories.newStack(avp.itemIntegratedCircuit, 1),
-				Inventories.newStack(Item.getItemFromBlock(Blocks.lever), 2),
+				Inventories.newStack(avp.itemIntegratedCircuit, 2),
 				Inventories.newStack(avp.itemLedDisplay, 1)
 				));
 		this.registerSchematic(new AssemblerSchematic("grenade", Inventories.newStack(avp.itemGrenade, 2),
@@ -141,7 +140,7 @@ public class AssemblerAPI implements IInitializable
 				Inventories.newStack(avp.itemIngotAluminum, 2),
 				Inventories.newStack(avp.itemLedDisplay, 2),
 				Inventories.newStack(avp.itemPolycarbonate, 2),
-				Inventories.newStack(avp.itemPowerSupply, 1)
+				Inventories.newStack(avp.itemProcessor, 1)
 				));
 		this.registerSchematic(new AssemblerSchematic("marinePlate", Inventories.newStack(avp.plateMarine, 1),
 				Inventories.newStack(Blocks.wool, 3),
@@ -215,23 +214,20 @@ public class AssemblerAPI implements IInitializable
 				Inventories.newStack(Items.wheat, 3)
 				));
 		this.registerSchematic(new AssemblerSchematic("motionTracker", Inventories.newStack(avp.itemMotionTracker, 1),
-				Inventories.newStack(avp.itemPolycarbonate, 12),
+				Inventories.newStack(avp.itemPolycarbonate, 6),
 				Inventories.newStack(avp.itemIngotAluminum, 8),
 				Inventories.newStack(avp.itemIngotCopper, 6),
-				Inventories.newStack(avp.itemLedDisplay, 1),
-				Inventories.newStack(avp.itemLed, 4),
-				Inventories.newStack(avp.itemIntegratedCircuit, 8),
-				Inventories.newStack(avp.itemProcessor, 1),
+				Inventories.newStack(avp.itemLedDisplay, 2),
+				Inventories.newStack(avp.itemProcessor, 2),
 				Inventories.newStack(Items.diamond, 1),
 				Inventories.newStack(Items.iron_ingot, 8)
 				));
 		this.registerSchematic(new AssemblerSchematic("flamethrower", Inventories.newStack(avp.itemM240ICU, 1),
 				Inventories.newStack(avp.itemPolycarbonate, 4),
-				Inventories.newStack(avp.itemIngotAluminum, 8),
-				Inventories.newStack(avp.itemIngotCopper, 6),
-				Inventories.newStack(Item.getItemFromBlock(Blocks.lever), 1),
+				Inventories.newStack(avp.itemIngotAluminum, 4),
+				Inventories.newStack(avp.itemIngotCopper, 3),
 				Inventories.newStack(Items.blaze_rod, 1),
-				Inventories.newStack(Items.iron_ingot, 12)
+				Inventories.newStack(Items.iron_ingot, 6)
 				));
 		
 		// assuming that NBT is a play on NBT tags, so this is a component of the assembler
@@ -241,13 +237,108 @@ public class AssemblerAPI implements IInitializable
 				Inventories.newStack(avp.itemRAM, 4),
 				Inventories.newStack(avp.itemIngotLithium, 1)
 				));
+		// the Yautja artifact is now dropped rarely by Yautja and is an ingredient in Celtic technology recipes
+		/* 
 		this.registerSchematic(new AssemblerSchematic("artifactTech", Inventories.newStack(avp.itemArtifactTech, 4),
 				Inventories.newStack(Items.redstone, 8),
 				Inventories.newStack(avp.itemIngotAluminum, 4),
 				Inventories.newStack(avp.itemSilicon, 4),
 				Inventories.newStack(avp.itemIngotCopper, 4)
 				));
-				
+		*/
+		this.registerSchematic(new AssemblerSchematic("celticBiomask", Inventories.newStack(avp.helmTitanium, 1),
+				Inventories.newStack(avp.itemArtifactTech, 2),
+				Inventories.newStack(Items.diamond_helmet, 1),
+				Inventories.newStack(avp.itemIngotAluminum, 2),
+				Inventories.newStack(avp.itemLedDisplay, 2),
+				Inventories.newStack(avp.itemPolycarbonate, 2),
+				Inventories.newStack(avp.itemProcessor, 1)
+				));
+		this.registerSchematic(new AssemblerSchematic("celticPlate", Inventories.newStack(avp.plateTitanium, 1),
+				Inventories.newStack(avp.itemArtifactTech, 1),
+				Inventories.newStack(Items.diamond_chestplate, 1),
+				Inventories.newStack(avp.itemIngotAluminum, 3),
+				Inventories.newStack(avp.itemPolycarbonate, 3)
+				));	
+		this.registerSchematic(new AssemblerSchematic("celticLegs", Inventories.newStack(avp.legsTitanium, 1),
+				Inventories.newStack(avp.itemArtifactTech, 1),
+				Inventories.newStack(Items.diamond_leggings, 1),
+				Inventories.newStack(avp.itemIngotAluminum, 2),
+				Inventories.newStack(avp.itemPolycarbonate, 2)
+				));	
+		this.registerSchematic(new AssemblerSchematic("celticBoots", Inventories.newStack(avp.bootsTitanium, 1),
+				Inventories.newStack(avp.itemArtifactTech, 1),
+				Inventories.newStack(Items.diamond_boots, 1),
+				Inventories.newStack(avp.itemIngotAluminum, 1),
+				Inventories.newStack(avp.itemPolycarbonate, 1)
+				));
+		this.registerSchematic(new AssemblerSchematic("celticAxe", Inventories.newStack(avp.axeTitanium, 1),
+				Inventories.newStack(avp.itemArtifactTech, 1),
+				Inventories.newStack(Items.diamond_axe, 1),
+				Inventories.newStack(avp.itemIngotAluminum, 1),
+				Inventories.newStack(avp.itemPolycarbonate, 1)
+				));	
+		this.registerSchematic(new AssemblerSchematic("celticPickaxe", Inventories.newStack(avp.pickaxeTitanium, 1),
+				Inventories.newStack(avp.itemArtifactTech, 1),
+				Inventories.newStack(Items.diamond_pickaxe, 1),
+				Inventories.newStack(avp.itemIngotAluminum, 1),
+				Inventories.newStack(avp.itemPolycarbonate, 1)
+				));	
+		this.registerSchematic(new AssemblerSchematic("celticHoe", Inventories.newStack(avp.hoeTitanium, 1),
+				Inventories.newStack(avp.itemArtifactTech, 1),
+				Inventories.newStack(Items.diamond_hoe, 1),
+				Inventories.newStack(avp.itemIngotAluminum, 1),
+				Inventories.newStack(avp.itemPolycarbonate, 1)
+				));	
+		this.registerSchematic(new AssemblerSchematic("celticShovel", Inventories.newStack(avp.shovelTitanium, 1),
+				Inventories.newStack(avp.itemArtifactTech, 1),
+				Inventories.newStack(Items.diamond_shovel, 1),
+				Inventories.newStack(avp.itemIngotAluminum, 1),
+				Inventories.newStack(avp.itemPolycarbonate, 1)
+				));
+		this.registerSchematic(new AssemblerSchematic("celticSword", Inventories.newStack(avp.swordTitanium, 1),
+				Inventories.newStack(avp.itemArtifactTech, 1),
+				Inventories.newStack(Items.diamond_sword, 1),
+				Inventories.newStack(avp.itemIngotAluminum, 1),
+				Inventories.newStack(avp.itemPolycarbonate, 1)
+				));
+		this.registerSchematic(new AssemblerSchematic("wristBlade", Inventories.newStack(avp.itemWristBlade, 1),
+				Inventories.newStack(avp.itemArtifactTech, 2),
+				Inventories.newStack(Items.diamond, 4),
+				Inventories.newStack(avp.itemLedDisplay, 2),
+				Inventories.newStack(avp.itemIngotAluminum, 2),
+				Inventories.newStack(avp.itemPolycarbonate, 2)
+				));
+		this.registerSchematic(new AssemblerSchematic("wristbracerBlades", Inventories.newStack(avp.itemWristbracerBlades, 1),
+				Inventories.newStack(avp.itemArtifactTech, 2),
+				Inventories.newStack(Items.shears, 1),
+				Inventories.newStack(Items.diamond, 2),
+				Inventories.newStack(avp.itemIngotAluminum, 2),
+				Inventories.newStack(avp.itemPolycarbonate, 2)
+				));
+		this.registerSchematic(new AssemblerSchematic("proximityMine", Inventories.newStack(avp.itemProximityMine, 3),
+				Inventories.newStack(avp.itemArtifactTech, 1),
+				Inventories.newStack(Blocks.tnt, 2),
+				Inventories.newStack(avp.itemIngotAluminum, 1),
+				Inventories.newStack(avp.itemPolycarbonate, 1)
+				));
+		this.registerSchematic(new AssemblerSchematic("celticDisc", Inventories.newStack(avp.itemDisc, 1),
+				Inventories.newStack(avp.itemArtifactTech, 1),
+				Inventories.newStack(avp.itemIngotAluminum, 1),
+				Inventories.newStack(Items.diamond, 1),
+				Inventories.newStack(avp.itemPolycarbonate, 2)
+				));
+		this.registerSchematic(new AssemblerSchematic("celticShuriken", Inventories.newStack(avp.itemShuriken, 2),
+				Inventories.newStack(avp.itemArtifactTech, 1),
+				Inventories.newStack(avp.itemIngotAluminum, 2),
+				Inventories.newStack(avp.itemPolycarbonate, 2)
+				));	
+		this.registerSchematic(new AssemblerSchematic("celticSpear", Inventories.newStack(avp.itemSpear, 1),
+				Inventories.newStack(avp.itemArtifactTech, 1),
+				Inventories.newStack(avp.itemIngotAluminum, 1),
+				Inventories.newStack(avp.itemPolycarbonate, 2),
+				Inventories.newStack(Items.diamond, 1)
+				));					
 		// for tier 1 level items, the assembler increases output or reduces input cost
 		
 		this.registerSchematic(new AssemblerSchematic("polycarbonate", Inventories.newStack(avp.itemPolycarbonate, 4),

@@ -23,6 +23,7 @@ public class WorldGenerator implements IWorldGenerator
 	{		
 		CoordData chunkCoords = new CoordData(chunkX, 0, chunkZ);
 		BiomeGenBase[] overworldBiomes = new BiomeGenBase[] {
+				BiomeGenBase.beach,
 				BiomeGenBase.birchForest,
 				BiomeGenBase.birchForestHills,
 				BiomeGenBase.coldBeach,
@@ -35,12 +36,15 @@ public class WorldGenerator implements IWorldGenerator
 				BiomeGenBase.extremeHillsPlus,
 				BiomeGenBase.forest,
 				BiomeGenBase.forestHills,
+				BiomeGenBase.frozenOcean,
+				BiomeGenBase.frozenRiver,
 				BiomeGenBase.iceMountains,
 				BiomeGenBase.icePlains,
 				BiomeGenBase.jungle,
 				BiomeGenBase.jungleEdge,
 				BiomeGenBase.jungleHills,
 				BiomeGenBase.plains,
+				BiomeGenBase.river,
 				BiomeGenBase.roofedForest,
 				BiomeGenBase.swampland,
 				BiomeGenBase.taiga,
