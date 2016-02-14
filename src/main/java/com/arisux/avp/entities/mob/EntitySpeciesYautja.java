@@ -3,6 +3,7 @@ package com.arisux.avp.entities.mob;
 import java.util.Random;
 
 import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.entities.ai.yautja.EntitySelectorYautja;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -13,11 +14,12 @@ import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIPanic;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
@@ -34,14 +36,13 @@ public abstract class EntitySpeciesYautja extends EntityMob
 		this.setSize(1.0F, 2.5F);
 		this.getNavigator().setCanSwim(true);
 		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(2, new EntityAIAttackOnCollide(this, 0.800000011920929D, true));
+		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 0.800000011920929D, true));
+		this.tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		this.tasks.addTask(3, new EntityAIWander(this, 0.800000011920929D));
-		this.tasks.addTask(7, new EntityAILookIdle(this));
-		this.tasks.addTask(8, new EntityAIPanic(this, 0.800000011920929D));
+		this.tasks.addTask(8, new EntityAILookIdle(this));
 		this.targetTasks.addTask(1, new EntityAILeapAtTarget(this, 0.4F));
-		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntitySpeciesAlien.class, 0, true));
-		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityMarine.class, 0, true));
-		this.targetTasks.addTask(4, new EntityAIHurtByTarget(this, true));
+		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, Entity.class, /** targetChance **/0, /** shouldCheckSight **/false, /** nearbyOnly **/false, EntitySelectorYautja.instance));
+		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
 	}
 
 	@Override
@@ -155,25 +156,37 @@ public abstract class EntitySpeciesYautja extends EntityMob
 	}
 
 	@Override
+	public void onDeath(DamageSource damagesource)
+	{
+		super.onDeath(damagesource);
+			
+		if (this.rand.nextInt(4) == 0)
+		{       
+				this.entityDropItem(new ItemStack(AliensVsPredator.items().itemArtifactTech), 0.0F);
+		}
+	}
+	
+	// the predator items are now craftable in the assembler using the Yautja artifact
+	/*@Override
 	protected void dropFewItems(boolean flag, int i)
 	{
 		if ((new Random()).nextInt(6) == 1)
 		{
-			this.entityDropItem(new ItemStack(AliensVsPredator.items().itemSpear), 1);
+			this.entityDropItem(new ItemStack(AliensVsPredator.items().itemSpear), 0.0F);  // 0.0F is the proper way to get 1 item
 		}
-	}
+	}*/
 
-	@Override
+	/* @Override
 	protected void dropRareDrop(int par1)
 	{
-		this.entityDropItem(new ItemStack(AliensVsPredator.items().helmTitanium), 1);
-		this.entityDropItem(new ItemStack(AliensVsPredator.items().plateTitanium), 1);
-		this.entityDropItem(new ItemStack(AliensVsPredator.items().legsTitanium), 1);
-		this.entityDropItem(new ItemStack(AliensVsPredator.items().bootsTitanium), 1);
-		this.entityDropItem(new ItemStack(AliensVsPredator.items().itemWristBlade), 1);
-		this.entityDropItem(new ItemStack(AliensVsPredator.items().itemPlasmaCaster), 1);
-	}
-
+		this.entityDropItem(new ItemStack(AliensVsPredator.items().helmTitanium), 0.0F);
+		this.entityDropItem(new ItemStack(AliensVsPredator.items().plateTitanium), 0.0F);
+		this.entityDropItem(new ItemStack(AliensVsPredator.items().legsTitanium), 0.0F);
+		this.entityDropItem(new ItemStack(AliensVsPredator.items().bootsTitanium), 0.0F);
+		this.entityDropItem(new ItemStack(AliensVsPredator.items().itemWristBlade), 0.0F);
+		this.entityDropItem(new ItemStack(AliensVsPredator.items().itemPlasmaCaster), 0.0F);
+	} */
+	
 	@Override
 	public boolean canDespawn()
 	{
