@@ -1,10 +1,15 @@
 package com.arisux.avp.entities.mob;
 
+import com.arisux.avp.AliensVsPredator;
+
 import com.arisux.avp.entities.EntityAcidPool;
 import com.arisux.avp.entities.ai.alien.EntityAIClimb;
 import com.arisux.avp.entities.ai.alien.EntityAIQueenIdentificationTask;
 import com.arisux.avp.entities.ai.alien.EntitySelectorXenomorph;
 
+import java.util.Random;
+
+import net.minecraft.util.DamageSource;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,6 +22,7 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
@@ -83,12 +89,11 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
         
 		this.fallDistance = 0F;
 		
-        /* temporary (sort of) fix for xenomorph climbing until EntityAIClimb can be re-worked, which currently launches non-horizontally collided mobs into the sky */
-        if (this.isCollidedHorizontally)
+        // temp fix for EntityAIClimb
+		if (this.isCollidedHorizontally)
 		{
-			this.motionY += 0.2F;
+			this.motionY += 0.1F;
 		}
-		/* end fix - will try to fix EntityAIClimb - glixyl */
 		
 		if(this.getAttackTarget() != null && this.getAttackTarget().isDead)
         {
@@ -105,6 +110,20 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
             }
         }
     }
+	
+	@Override
+	public void onDeath(DamageSource damagesource)
+	{
+		super.onDeath(damagesource);
+		if (new Random().nextInt(75) == 0)  // 1 in 75 chance of dropping
+			this.entityDropItem(new ItemStack(AliensVsPredator.items().helmXeno), 0.0F);
+		if (new Random().nextInt(66) == 0)
+			this.entityDropItem(new ItemStack(AliensVsPredator.items().plateXeno), 0.0F);
+		if (new Random().nextInt(55) == 0)
+			this.entityDropItem(new ItemStack(AliensVsPredator.items().legsXeno), 0.0F);
+		if (new Random().nextInt(50) == 0)
+			this.entityDropItem(new ItemStack(AliensVsPredator.items().bootsXeno), 0.0F);
+	}
 
     @Override
     protected void attackEntity(Entity entity, float damage)

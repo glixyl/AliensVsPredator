@@ -195,7 +195,9 @@ public class CraftingHandler implements IInitializable
 			'g', AliensVsPredator.items().itemPolycarbonate,
 			'h', AliensVsPredator.items().itemCapacitor
 		);
-		GameRegistry.addRecipe(
+		// SpeciesEngineer now drop NBT flash drive 5% of the time on death and cant be crafted
+		// creation theme and play on NBT idea
+		/* GameRegistry.addRecipe(
 		    new ItemStack(AliensVsPredator.items().itemFlashDrive, 1),
 			"aca",
 			"aba",
@@ -203,7 +205,7 @@ public class CraftingHandler implements IInitializable
 			'a', AliensVsPredator.items().itemRAM,
 			'b', AliensVsPredator.items().itemPolycarbonate,
 			'c', AliensVsPredator.items().itemIngotLithium
-		);			
+		); */			
 		GameRegistry.addRecipe(
 		    new ItemStack(AliensVsPredator.blocks().blockAssembler, 1),
 			"aba",
@@ -261,14 +263,24 @@ public class CraftingHandler implements IInitializable
 			"a a",
 			'a', AliensVsPredator.items().itemIngotAluminum,
 			'b', Blocks.wool
-		);		
+		);
+		GameRegistry.addRecipe(
+		    new ItemStack(AliensVsPredator.items().pressureMask, 1),
+			"aaa",
+			"b b",
+			"dcd",
+			'a', AliensVsPredator.items().itemIngotAluminum,
+			'b', AliensVsPredator.blocks().blockIndustrialGlass,
+			'c', AliensVsPredator.items().itemCarbon,
+			'd', AliensVsPredator.items().itemSilicon
+		);			
 		GameRegistry.addRecipe(
 		    new ItemStack(AliensVsPredator.items().pressureChest, 1),
 			"b b",
 			"aba",
 			"bab",
 			'a', AliensVsPredator.items().itemIngotAluminum,
-			'b', Blocks.glass
+			'b', AliensVsPredator.blocks().blockIndustrialGlass
 		);		
 		GameRegistry.addRecipe(
 		    new ItemStack(AliensVsPredator.items().pressurePants, 1),
@@ -276,14 +288,14 @@ public class CraftingHandler implements IInitializable
 			"b b",
 			"a a",
 			'a', AliensVsPredator.items().itemIngotAluminum,
-			'b', Blocks.glass
+			'b', AliensVsPredator.blocks().blockIndustrialGlass
 		);		
 		GameRegistry.addRecipe(
 		    new ItemStack(AliensVsPredator.items().pressureBoots, 1),
 			"b b",
 			"a a",
 			'a', AliensVsPredator.items().itemIngotAluminum,
-			'b', Blocks.glass
+			'b', AliensVsPredator.blocks().blockIndustrialGlass
 		);		
 		// guns and ammo		
 		GameRegistry.addRecipe(

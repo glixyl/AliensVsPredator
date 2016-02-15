@@ -230,13 +230,15 @@ public class AssemblerAPI implements IInitializable
 				Inventories.newStack(Items.iron_ingot, 6)
 				));
 		
-		// assuming that NBT is a play on NBT tags, so this is a component of the assembler
-				
+		// assuming that NBT is a play on NBT tags and creation theme.  NBT drive now drops from Engineer species as well as the black goo phials
+		/*		
 		this.registerSchematic(new AssemblerSchematic("nbtDrive", Inventories.newStack(avp.itemFlashDrive, 1),
 				Inventories.newStack(avp.itemPolycarbonate, 1),
 				Inventories.newStack(avp.itemRAM, 4),
 				Inventories.newStack(avp.itemIngotLithium, 1)
 				));
+		*/
+
 		// the Yautja artifact is now dropped rarely by Yautja and is an ingredient in Celtic technology recipes
 		/* 
 		this.registerSchematic(new AssemblerSchematic("artifactTech", Inventories.newStack(avp.itemArtifactTech, 4),

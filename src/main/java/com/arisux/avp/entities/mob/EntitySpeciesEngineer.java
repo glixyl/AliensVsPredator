@@ -1,5 +1,9 @@
 package com.arisux.avp.entities.mob;
 
+import com.arisux.avp.AliensVsPredator;
+
+import java.util.Random;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -19,6 +23,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public abstract class EntitySpeciesEngineer extends EntityMob
@@ -41,6 +46,18 @@ public abstract class EntitySpeciesEngineer extends EntityMob
 		this.targetTasks.addTask(4, new EntityAIHurtByTarget(this, true));
 	}
 
+	@Override
+	public void onDeath(DamageSource damagesource)
+	{
+		super.onDeath(damagesource);
+		if (new Random().nextInt(20) == 0)  // 5% chance of dropping NBT drive, a crafting ingredient of the assembler (creation theme - play on NBT..)
+			this.entityDropItem(new ItemStack(AliensVsPredator.items().itemFlashDrive), 0.0F);
+		if (new Random().nextInt(20) == 0)  // thematic drop, allowing the player to understand the source of the black goo
+			this.entityDropItem(new ItemStack(AliensVsPredator.items().itemPhial), 0.0F);
+		if (new Random().nextInt(20) == 0)
+			this.entityDropItem(new ItemStack(AliensVsPredator.items().itemPhialEmpty), 0.0F);
+	}
+	
 	@Override
 	protected void entityInit()
 	{

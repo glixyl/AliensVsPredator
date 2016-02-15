@@ -12,6 +12,9 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.world.World;
 
 public class ItemArmorXeno extends ItemArmor
 {
@@ -55,5 +58,28 @@ public class ItemArmorXeno extends ItemArmor
 		}
 
 		return false;
+	}
+	
+	@Override
+	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack)
+	{
+			// if you are wearing the set, you get a speed bonus and fall damage is negated
+			if (player.inventory.armorItemInSlot(3) != null && player.inventory.armorItemInSlot(3).getItem() == AliensVsPredator.items().helmXeno
+				&& player.inventory.armorItemInSlot(2) != null && player.inventory.armorItemInSlot(2).getItem() == AliensVsPredator.items().plateXeno
+				&& player.inventory.armorItemInSlot(1) != null && player.inventory.armorItemInSlot(1).getItem() == AliensVsPredator.items().legsXeno
+				&& player.inventory.armorItemInSlot(0) != null && player.inventory.armorItemInSlot(0).getItem() == AliensVsPredator.items().bootsXeno)
+			{
+				player.fallDistance = 0.0F;
+				player.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), 1, 1));
+				// if you also have empty hands, you can climb up vertical surfaces
+				if (player.inventory.getCurrentItem() == null)
+				{
+					if (player.isCollidedHorizontally)
+					{
+						player.motionY += 0.03F;
+					}
+				}
+
+			}
 	}
 }
