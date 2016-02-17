@@ -22,10 +22,9 @@ public class EntitySelectorYautja implements IEntitySelector
 		{
 			EntityPlayer player = (EntityPlayer) entity;
 			ItemStack currentItem = player.getCurrentEquippedItem();
-			if (currentItem != null) // the problem with both vanilla and modded minecraft
-			{                        // is that even blocks can be dangerous, i.e. a lever with TNT, lava bucket
-				return true;  // if you have anything in your hands, you will be attacked- which should simplify understanding for players
-				              // tried to come up with a safe list array, but it got out of hand quickly and didn't cover mods
+			if (currentItem != null) // this check works well and is compatible with the Xenomorph item set bonus, which requires empty hands to climb
+			{
+				return true;
 			}
 		}			
 		return (entity instanceof EntitySpeciesAlien) || (entity instanceof EntitySpeciesEngineer) || (entity instanceof EntityMarine);

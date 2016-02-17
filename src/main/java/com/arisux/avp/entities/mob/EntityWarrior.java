@@ -1,12 +1,12 @@
 package com.arisux.avp.entities.mob;
 
-import java.util.Random;
+//import java.util.Random;
 
 import com.arisux.avp.AliensVsPredator;
 
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.IMob;
-import net.minecraft.item.ItemStack;
+//import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class EntityWarrior extends EntityXenomorph implements IMob
@@ -28,7 +28,7 @@ public class EntityWarrior extends EntityXenomorph implements IMob
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
 	}
 
-	@Override
+	/*@Override  // moved equipment drops to Xenomorph OnDeath method
 	protected void dropRareDrop(int par1)
 	{
 		if (new Random().nextInt(4) == 1)
@@ -41,7 +41,7 @@ public class EntityWarrior extends EntityXenomorph implements IMob
 			this.entityDropItem(new ItemStack(AliensVsPredator.items().bootsXeno), 1);
 
 		super.dropRareDrop(par1);
-	}
+	}*/
 
 	@Override
 	protected boolean isAIEnabled()

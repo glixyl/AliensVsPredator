@@ -4,8 +4,12 @@ import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.world.World;
 
 public class ItemArmorMarine extends ItemArmor
 {
@@ -30,5 +34,19 @@ public class ItemArmorMarine extends ItemArmor
 			default:
 				return RenderUtil.getResourcePath(AliensVsPredator.resources().MARINE1);
 		}
+	}
+	
+	@Override
+	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack)
+	{
+			// if you are wearing the set, you will receive resistance and damageBoost
+			if (player.inventory.armorItemInSlot(3) != null && player.inventory.armorItemInSlot(3).getItem() == AliensVsPredator.items().helmMarine
+				&& player.inventory.armorItemInSlot(2) != null && player.inventory.armorItemInSlot(2).getItem() == AliensVsPredator.items().plateMarine
+				&& player.inventory.armorItemInSlot(1) != null && player.inventory.armorItemInSlot(1).getItem() == AliensVsPredator.items().legsMarine
+				&& player.inventory.armorItemInSlot(0) != null && player.inventory.armorItemInSlot(0).getItem() == AliensVsPredator.items().bootsMarine)
+			{
+				player.addPotionEffect(new PotionEffect(Potion.resistance.getId(), 1, 1));
+				player.addPotionEffect(new PotionEffect(Potion.damageBoost.getId(), 1, 1));
+			}
 	}
 }

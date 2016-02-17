@@ -28,6 +28,7 @@ public class EntityPredalien extends EntityXenomorph implements IMob
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(200.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5500000238418579D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(5.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(1F);
 	}
 
 	@Override

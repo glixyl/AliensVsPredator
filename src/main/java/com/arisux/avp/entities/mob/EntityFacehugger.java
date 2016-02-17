@@ -66,7 +66,7 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 		
 		if (this.isCollidedHorizontally)
 		{
-			this.motionY += 0.2F;
+			this.motionY += 0.15F;
 		}
 
 		if (this.isRiding())

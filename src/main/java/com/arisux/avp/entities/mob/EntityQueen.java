@@ -41,6 +41,7 @@ public class EntityQueen extends EntityXenomorph implements IHiveSignature
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(300.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.400000238418579D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(8.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(1F);
 	}
 
 	@Override
