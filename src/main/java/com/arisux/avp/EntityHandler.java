@@ -203,21 +203,13 @@ public class EntityHandler implements IInitializable
 		BiomeGenBase[] engineerBiomes = new BiomeGenBase[] 
 		{
 				BiomeGenBase.iceMountains, // need to get the NBT flash drive as a 5% engineer drop OnDeath to craft the assembler
-				BiomeGenBase.coldTaigaHills, // found at snowy elevations according to the NBT item tip, like a Yeti or Cave Bear!
+				BiomeGenBase.coldTaigaHills, // found at snowy elevations according to the NBT item tip
 				BiomeGenBase.coldTaiga,
 				BiomeGenBase.extremeHills,
 				BiomeLVBase.varda,
 				BiomeLVBase.acheron
 		};
 		
-		BiomeGenBase[] aquaXenomorphBiomes = new BiomeGenBase[] 
-		{
-				BiomeGenBase.beach,  // xenomorphs did not formerly spawn at beaches or rivers
-				BiomeGenBase.river,
-				BiomeLVBase.varda
-		};
-
-		EntityRegistry.addSpawn(EntityAqua.class, 5, 1, 2, EnumCreatureType.monster, aquaXenomorphBiomes);
 		EntityRegistry.addSpawn(EntityDrone.class, 50, 1, 3, EnumCreatureType.monster, xenomorphBiomes);
 		EntityRegistry.addSpawn(EntityWarrior.class, 20, 1, 3, EnumCreatureType.monster, xenomorphBiomes);
 		EntityRegistry.addSpawn(EntityPraetorian.class, 5, 1, 2, EnumCreatureType.monster, xenomorphBiomes);

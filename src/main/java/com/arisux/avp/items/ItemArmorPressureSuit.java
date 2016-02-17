@@ -45,8 +45,8 @@ public class ItemArmorPressureSuit extends ItemArmor
 				&& player.inventory.armorItemInSlot(1) != null && player.inventory.armorItemInSlot(1).getItem() == AliensVsPredator.items().pressurePants
 				&& player.inventory.armorItemInSlot(0) != null && player.inventory.armorItemInSlot(0).getItem() == AliensVsPredator.items().pressureBoots)
 			{
-				player.addPotionEffect(new PotionEffect(Potion.waterBreathing.getId(), 1, 1));
-				player.addPotionEffect(new PotionEffect(Potion.nightVision.getId(), 1, 1));
+				player.addPotionEffect(new PotionEffect(Potion.waterBreathing.getId(), 1, 0));
+				player.addPotionEffect(new PotionEffect(Potion.nightVision.getId(), 1, 0));
 			}
 	}
 }

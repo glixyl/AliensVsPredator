@@ -45,7 +45,7 @@ public class ItemArmorMarine extends ItemArmor
 				&& player.inventory.armorItemInSlot(1) != null && player.inventory.armorItemInSlot(1).getItem() == AliensVsPredator.items().legsMarine
 				&& player.inventory.armorItemInSlot(0) != null && player.inventory.armorItemInSlot(0).getItem() == AliensVsPredator.items().bootsMarine)
 			{
-				player.addPotionEffect(new PotionEffect(Potion.resistance.getId(), 2, 1));
+				player.addPotionEffect(new PotionEffect(Potion.resistance.getId(), 1, 1));
 				player.addPotionEffect(new PotionEffect(Potion.damageBoost.getId(), 1, 1));
 			}
 	}

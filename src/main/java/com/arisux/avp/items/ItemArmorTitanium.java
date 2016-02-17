@@ -46,7 +46,7 @@ public class ItemArmorTitanium extends ItemArmor
 				&& player.inventory.armorItemInSlot(0) != null && player.inventory.armorItemInSlot(0).getItem() == AliensVsPredator.items().bootsTitanium)
 			{
 				player.fallDistance = 0.0F;
-				player.addPotionEffect(new PotionEffect(Potion.jump.getId(), 2, 1));
+				player.addPotionEffect(new PotionEffect(Potion.jump.getId(), 1, 1));
 				if (player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() == AliensVsPredator.items().itemWristBlade)
 				{
 					player.addPotionEffect(new PotionEffect(Potion.invisibility.getId(), 1, 1));

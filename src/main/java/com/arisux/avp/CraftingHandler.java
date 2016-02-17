@@ -240,7 +240,6 @@ public class CraftingHandler implements IInitializable
 			'c', AliensVsPredator.items().itemIngotCopper,
 			'd', AliensVsPredator.items().itemIngotLithium
 		);
-		// armor - Tier 1 only, no powered armor or smart helmets		
 		GameRegistry.addRecipe(
 		    new ItemStack(AliensVsPredator.items().plateMarine, 1),
 			"b b",
