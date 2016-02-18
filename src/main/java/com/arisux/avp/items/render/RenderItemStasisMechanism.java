@@ -32,7 +32,6 @@ public class RenderItemStasisMechanism extends ItemRenderer
 	public void renderInWorld(ItemStack item, Object... data)
 	{
 		super.renderInWorld(item, data);
-		GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
 		GlStateManager.translate(-0.1F, 0.3F, 0F);
 		GlStateManager.scale(1F, -1F, 1F);
 		GlStateManager.disable(GL11.GL_CULL_FACE);
@@ -78,7 +77,6 @@ public class RenderItemStasisMechanism extends ItemRenderer
 		float glScale = 13F;
 		GlStateManager.translate(8F, 9F, 0F);
 		GlStateManager.rotate(90, -1F, 2F, 0F);
-		GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
 		GlStateManager.translate(0F, 0F, 0F);
 		GlStateManager.rotate(-180F, 0.0F, 1.0F, 0.0F);
 		GlStateManager.disable(GL11.GL_CULL_FACE);

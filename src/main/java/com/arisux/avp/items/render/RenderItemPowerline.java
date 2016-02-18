@@ -14,7 +14,6 @@ import net.minecraft.item.ItemStack;
 public class RenderItemPowerline extends ItemRenderer
 {
 	public static final ModelBaseExtension model = new ModelCable();
-	private float rotation;
 	
 	public RenderItemPowerline()
 	{
@@ -24,7 +23,6 @@ public class RenderItemPowerline extends ItemRenderer
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data)
 	{
-		this.rotation = rotation > 360F ? rotation = 0F : (rotation = rotation + 0.6F);
 		super.renderItem(type, item, data);
 	}
 
@@ -54,7 +52,6 @@ public class RenderItemPowerline extends ItemRenderer
 			GlStateManager.scale(glScale, glScale, glScale);
 			GlStateManager.translate(1.1, -0.1, 0);
 			GlStateManager.rotate(45, 1, 0, 1);
-			GlStateManager.rotate(Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 360 * 8, 0, 1, 0);
 			GlStateManager.color4i(0xFF222222);
 			GlStateManager.enableLight();
 			model.render(0.0625F);

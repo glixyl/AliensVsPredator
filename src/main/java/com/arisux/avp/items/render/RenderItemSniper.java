@@ -47,7 +47,6 @@ public class RenderItemSniper extends ItemRenderer
 	public void renderInWorld(ItemStack item, Object... data)
 	{
 		super.renderInWorld(item, data);
-		GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
 		GlStateManager.translate(-0.1F, 0.5F, 0F);
 		GlStateManager.scale(1F, -1F, 1F);
 		GlStateManager.disable(GL11.GL_CULL_FACE);

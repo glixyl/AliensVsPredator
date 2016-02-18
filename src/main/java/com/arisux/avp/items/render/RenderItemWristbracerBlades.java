@@ -20,7 +20,6 @@ public class RenderItemWristbracerBlades implements IItemRenderer
 {
 	protected ModelWristBlade model = new ModelWristBlade();
 	protected static final ResourceLocation resourceLocation = AliensVsPredator.resources().WRISTBLADES;
-	private float rotation;
 
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type)
@@ -50,8 +49,6 @@ public class RenderItemWristbracerBlades implements IItemRenderer
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data)
 	{
-		this.rotation = rotation > 360F ? rotation = 0F : (rotation = rotation + 0.6F);
-
 		switch (type)
 		{
 			case EQUIPPED:
@@ -94,7 +91,6 @@ public class RenderItemWristbracerBlades implements IItemRenderer
 				GlStateManager.disable(GL11.GL_CULL_FACE);
 				GlStateManager.enable(GL11.GL_BLEND);
 				GlStateManager.translate(8.5F, 0F, 0F);
-				GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
 				GlStateManager.translate(-16F, 6F, -3F);
 				GlStateManager.scale(33F, 33F, 33F);
 				RenderUtil.bindTexture(resourceLocation);

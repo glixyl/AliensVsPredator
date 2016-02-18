@@ -65,7 +65,6 @@ public class RenderItemLightPanel extends ItemRenderer
 		GlStateManager.blendClear();
 		GlStateManager.translate(8F, 5F, 0F);
 		GlStateManager.rotate(-45, 1.0F, 0.0F, 0.0F);
-		GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
 		GlStateManager.translate(0F, -6F, 0F);
 		GlStateManager.rotate(-180F, 0.0F, 1.0F, 0.0F);
 		GlStateManager.disable(GL11.GL_CULL_FACE);

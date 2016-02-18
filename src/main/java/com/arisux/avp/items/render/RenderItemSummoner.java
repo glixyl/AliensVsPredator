@@ -85,7 +85,6 @@ public class RenderItemSummoner extends ItemRenderer
 	{
 		scale = 7.5F;
 		GlStateManager.translate(8F + x, -1.77F + y, -4F);
-		GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
 		GlStateManager.rotate(0F, 1.0F, 0.0F, 0.0F);
 		GlStateManager.scale(7.5F, 7.5F, 7.5F);
 		GlStateManager.enable(GL11.GL_DEPTH_TEST);

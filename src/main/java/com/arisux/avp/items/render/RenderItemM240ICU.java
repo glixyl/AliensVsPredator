@@ -42,7 +42,6 @@ public class RenderItemM240ICU extends ItemRenderer
 	public void renderInWorld(ItemStack item, Object... data)
 	{
 		super.renderInWorld(item, data);
-		GlStateManager.rotate(this.rotation, 0.0F, 1.0F, 0.0F);
 		GlStateManager.translate(0F, 0.5F, 0F);
 		GlStateManager.scale(1F, -1F, 1F);
 		GlStateManager.disable(GL11.GL_CULL_FACE);
@@ -115,7 +114,6 @@ public class RenderItemM240ICU extends ItemRenderer
 	public void renderInInventory(ItemStack item, Object... data)
 	{
 		GlStateManager.translate(8F, 1F, 0F);
-		GlStateManager.rotate(this.rotation, 0.0F, 1.0F, 0.0F);
 		GlStateManager.translate(0F, 5F, 0F);
 		GlStateManager.scale(10F, 10F, 10F);
 		GlStateManager.disable(GL11.GL_CULL_FACE);

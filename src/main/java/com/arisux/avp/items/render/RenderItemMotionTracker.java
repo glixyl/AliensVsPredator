@@ -68,7 +68,6 @@ public class RenderItemMotionTracker extends ItemRenderer
 	{
 		float glScale = 20F;
 		GlStateManager.translate(8F, 8F, 0F);
-		GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
 		GlStateManager.translate(0F, 0F, -5F);
 		GlStateManager.scale(glScale, glScale, glScale);
 		GlStateManager.disable(GL11.GL_CULL_FACE);

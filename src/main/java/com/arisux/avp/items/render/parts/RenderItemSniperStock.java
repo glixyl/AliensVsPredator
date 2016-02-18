@@ -23,7 +23,7 @@ public class RenderItemSniperStock extends RenderItemFirearmPart
 		{
 			float glScale = 32F;
 			GlStateManager.translate(8F, 8F, 0F);
-			GlStateManager.rotate(this.getRotation(), 0F, 1F, 0F);
+
 			GlStateManager.scale(glScale, glScale, glScale);
 			GlStateManager.translate(-0.05F, -0.1F, 0.52F);
 			this.renderPart();

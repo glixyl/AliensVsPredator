@@ -78,7 +78,6 @@ public class RenderItemPowercell extends ItemRenderer
 			GlStateManager.scale(glScale, -glScale, glScale);
 			GlStateManager.translate(0.65F, -1.55F, 0F);
 			GlStateManager.rotate(30, 1.0F, 0.0F, 0.0F);
-			GlStateManager.rotate(Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 360 * 6, 0.0F, 1.0F, 0.0F);
 			GlStateManager.translate(0F, 0F, 0F);
 			GlStateManager.disable(GL11.GL_CULL_FACE);
 			RenderUtil.bindTexture(resourceLocation);

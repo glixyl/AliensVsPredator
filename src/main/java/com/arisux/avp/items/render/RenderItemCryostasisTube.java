@@ -80,7 +80,6 @@ public class RenderItemCryostasisTube extends ItemRenderer
 	{
 		float glScale = 7F;
 		GlStateManager.translate(8F, 5F, 0F);
-		GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
 		GlStateManager.translate(0F, 0F, 0F);
 		GlStateManager.rotate(-180F, 0.0F, 1.0F, 0.0F);
 		GlStateManager.disable(GL11.GL_CULL_FACE);

@@ -23,7 +23,7 @@ public class RenderItemM41AAction extends RenderItemFirearmPart
 		{
 			float glScale = 22F;
 			GlStateManager.translate(8F, 8F, 0F);
-			GlStateManager.rotate(this.getRotation(), 0F, 1F, 0F);
+			
 			GlStateManager.scale(glScale, glScale, glScale);
 			GlStateManager.translate(0.25F, -0.6F, -0.2F);
 			this.renderPart();

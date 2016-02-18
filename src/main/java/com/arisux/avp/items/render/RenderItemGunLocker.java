@@ -60,7 +60,6 @@ public class RenderItemGunLocker extends ItemRenderer
 			GlStateManager.disable(GL11.GL_CULL_FACE);
 			GlStateManager.translate(8F, 4F, 0F);
 			GlStateManager.rotate(0F, 1.0F, 0.0F, 0.0F);
-			GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
 			GlStateManager.scale(glScale, glScale, glScale);
 			GlStateManager.enableLight();
 			this.getModel().render();

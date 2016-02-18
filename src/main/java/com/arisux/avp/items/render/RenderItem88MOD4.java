@@ -42,7 +42,6 @@ public class RenderItem88MOD4 extends ItemRenderer
 	public void renderInWorld(ItemStack item, Object... data)
 	{
 		super.renderInWorld(item, data);
-		GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
 		GlStateManager.translate(0.3F, 1F, 0F);
 		GlStateManager.scale(1F, -1F, 1F);
 		GlStateManager.disable(GL11.GL_CULL_FACE);
@@ -97,7 +96,6 @@ public class RenderItem88MOD4 extends ItemRenderer
 		GlStateManager.disable(GL11.GL_CULL_FACE);
 		GlStateManager.scale(20F, 20F, 20F);
 		GlStateManager.translate(0.4F, 0.3F, 0F);
-		GlStateManager.rotate(Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 360 * 6, 0.0F, 1.0F, 0.0F);
 		GlStateManager.translate(0F, 0F, -0.2F);
 		bindTexture(getResourceLocation());
 		this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);

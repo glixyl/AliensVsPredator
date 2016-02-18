@@ -15,7 +15,6 @@ public class RenderItemTurret extends ItemRenderer
 {
 	public static final ResourceLocation resourceLocation = AliensVsPredator.resources().TURRET;
 	public static final ModelTurret model = new ModelTurret();
-	private float rotation;
 	
 	public RenderItemTurret()
 	{
@@ -25,7 +24,6 @@ public class RenderItemTurret extends ItemRenderer
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data)
 	{
-		this.rotation = rotation > 360F ? rotation = 0F : (rotation = rotation + 0.6F);
 		super.renderItem(type, item, data);
 	}
 
@@ -57,7 +55,6 @@ public class RenderItemTurret extends ItemRenderer
 			GlStateManager.disable(GL11.GL_CULL_FACE);
 			GlStateManager.translate(8F, -7.5F, 0F);
 			GlStateManager.rotate(0F, 1.0F, 0.0F, 0.0F);
-			GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
 			GlStateManager.scale(glScale, glScale, glScale);
 			GlStateManager.enableLight();
 			((ModelTurret) this.getModel()).render(null, 0.0625F);

@@ -17,6 +17,7 @@ import com.arisux.avp.block.BlockHiveNode;
 import com.arisux.avp.block.BlockHiveResin;
 import com.arisux.avp.block.BlockLightPanel;
 import com.arisux.avp.block.BlockLocker;
+import com.arisux.avp.block.BlockMist;
 import com.arisux.avp.block.BlockNegativeTransformer;
 import com.arisux.avp.block.BlockP2RConvertor;
 import com.arisux.avp.block.BlockPortal;
@@ -113,6 +114,7 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockR2PConvertor = (new BlockR2PConvertor(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockP2RConvertor = (new BlockP2RConvertor(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockBlackGoo = (new BlockBlackGoo(AliensVsPredator.fluids().fluidBlackGoo, Material.water)),
+		blockMist = (new BlockMist(AliensVsPredator.fluids().fluidMist, Material.air)),
 		blockTransformer = (new BlockTransformer(Material.iron)).setHardness(5.0F).setResistance(10.0F),
 		blockNegativeTransformer = (new BlockNegativeTransformer(Material.iron)).setHardness(5.0F).setResistance(10.0F),
 		blockSupplies = (new BlockSupplies(Material.iron)),
@@ -286,6 +288,7 @@ public class BlockHandler extends IBHandler implements IInitializable
 		registerBlock(blockBlastdoor, "blastdoor", true);
 		registerBlock(blockSupplies, "supplychuteblock", false);
 		registerBlock(blockBlackGoo, "blackgoo", false);
+		registerBlock(blockMist, "mist", false);
 		registerBlock(blockCryostasisTube, "cryostasistube", true);
 		registerShapedBlockSet(blockPlastic, "plasticblock");
 		registerShapedBlockSet(blockPlasticTile, "plastictile");

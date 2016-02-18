@@ -21,7 +21,6 @@ public class RenderItemSpear implements IItemRenderer
 {
 	protected ModelSpear model = new ModelSpear();
 	protected static final ResourceLocation resourceLocation = AliensVsPredator.resources().SPEAR;
-	private float rotation;
 
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type)
@@ -51,8 +50,6 @@ public class RenderItemSpear implements IItemRenderer
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data)
 	{
-		this.rotation = rotation > 360F ? rotation = 0F : (rotation = rotation + 0.3F);
-
 		switch (type)
 		{
 			case EQUIPPED:
@@ -95,7 +92,6 @@ public class RenderItemSpear implements IItemRenderer
 				GlStateManager.disable(GL11.GL_CULL_FACE);
 				GlStateManager.enable(GL11.GL_BLEND);
 				GlStateManager.translate(8.5F, 0F, 0F);
-				GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
 				GlStateManager.rotate(-45, 0.0F, 0.0F, 1.0F);
 				GlStateManager.translate(-6F, 5F, 0F);
 				GlStateManager.scale(7F, 7F, 7F);

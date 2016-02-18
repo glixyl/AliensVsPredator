@@ -45,8 +45,7 @@ public class Settings
 	@EventHandler
 	public void preInitialize(FMLPreInitializationEvent evt)
 	{
-		AIRI.remappingApi().registerRemappedMod("AIRI", "avp", "com.arisux.avp.AliensVsPredator");
-		AIRI.remappingApi().registerRemappedMod("AliensVsPredator", "avp", "com.arisux.avp.AliensVsPredator");
+		AIRI.remappingApi().registerRemappedMod("AliensVsPredator", AliensVsPredator.ID, "com.arisux.avp.AliensVsPredator");
 		
 		File configFile = new File(evt.getModConfigurationDirectory(), "AliensVsPredator.cfg");
 		Configuration config = new Configuration(configFile);

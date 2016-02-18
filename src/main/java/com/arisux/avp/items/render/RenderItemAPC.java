@@ -71,7 +71,6 @@ public class RenderItemAPC extends ItemRenderer
 			GlStateManager.enableLight();
 			GlStateManager.scale(scale, -scale, scale);
 			GlStateManager.translate(1.5F, -3.5F, 0F);
-			GlStateManager.rotate(rotation, 0F, 1F, 0F);
 			
 			for (Part p : AliensVsPredator.resources().M577_APC.nameToPartHash.values())
 			{

@@ -68,7 +68,6 @@ public class RenderItemTransformer extends ItemRenderer
 			GlStateManager.scale(glScale, glScale, glScale);
 			GlStateManager.translate(0.72F, -0.15F, 0F);
 			GlStateManager.rotate(-30, 1.0F, 0.0F, 0.0F);
-			GlStateManager.rotate(Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 360 * 6, 0.0F, 1.0F, 0.0F);
 			GlStateManager.translate(0F, 0F, 0F);
 			GlStateManager.disable(GL11.GL_CULL_FACE);
 			GlStateManager.enable(GL11.GL_BLEND);
