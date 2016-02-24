@@ -1,28 +1,26 @@
 package com.arisux.avp.entities.mob;
 
-import com.arisux.avp.AliensVsPredator;
+import java.util.Random;
 
+import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.EntityAcidPool;
-import com.arisux.avp.entities.ai.alien.EntityAIClimb;
 import com.arisux.avp.entities.ai.alien.EntityAIQueenIdentificationTask;
 import com.arisux.avp.entities.ai.alien.EntitySelectorXenomorph;
 
-import java.util.Random;
-
-import net.minecraft.util.DamageSource;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
-import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob

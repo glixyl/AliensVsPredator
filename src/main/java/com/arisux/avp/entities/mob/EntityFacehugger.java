@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import com.arisux.airi.lib.WorldUtil;
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.entities.extended.ExtendedEntityLivingBase;
 import com.arisux.avp.entities.ai.alien.EntitySelectorXenomorph;
+import com.arisux.avp.entities.extended.ExtendedEntityLivingBase;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -24,7 +24,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityFacehugger extends EntitySpeciesAlien implements IMob

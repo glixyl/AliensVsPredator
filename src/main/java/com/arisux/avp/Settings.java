@@ -15,11 +15,11 @@ public class Settings
 {
 	public static final Settings instance = new Settings();
 	public HashMap<String, Integer> entityList = new HashMap<String, Integer>();
-    private final String CATEGORY_OTHER = "ETC";
+	private final String CATEGORY_OTHER = "ETC";
 	private final String CATEGORY_IDS = "IDS";
 	private final String CATEGORY_URLS = "URLS";
-    private final String CATEGORY_DIM = "DIMENSIONS";
-    private final String CATEGORY_BIOMES = "BIOMES";
+	private final String CATEGORY_DIM = "DIMENSIONS";
+	private final String CATEGORY_BIOMES = "BIOMES";
 	private String mainDomain;
 	private String devDomain;
 	private String urlUpdater;
@@ -46,7 +46,7 @@ public class Settings
 	public void preInitialize(FMLPreInitializationEvent evt)
 	{
 		AIRI.remappingApi().registerRemappedMod("AliensVsPredator", AliensVsPredator.ID, "com.arisux.avp.AliensVsPredator");
-		
+
 		File configFile = new File(evt.getModConfigurationDirectory(), "AliensVsPredator.cfg");
 		Configuration config = new Configuration(configFile);
 		verifyConfigVersion(evt, configFile, config);
@@ -55,16 +55,16 @@ public class Settings
 		{
 			config.addCustomCategoryComment(CATEGORY_IDS, "Configuration for the mod's entity IDs");
 			config.addCustomCategoryComment(CATEGORY_IDS, "WARNING: ONLY MODIFY THESE IF YOU KNOW WHAT YOU ARE DOING, YOU CAN BREAK WORLD SAVES AND/OR SERVERS.");
-            config.addCustomCategoryComment(CATEGORY_DIM, "WARNING: ONLY MODIFY THESE IF YOU KNOW WHAT YOU ARE DOING, YOU CAN BREAK WORLD SAVES AND/OR SERVERS.");
-            config.addCustomCategoryComment(CATEGORY_BIOMES, "WARNING: ONLY MODIFY THESE IF YOU KNOW WHAT YOU ARE DOING, YOU CAN BREAK WORLD SAVES AND/OR SERVERS.");
+			config.addCustomCategoryComment(CATEGORY_DIM, "WARNING: ONLY MODIFY THESE IF YOU KNOW WHAT YOU ARE DOING, YOU CAN BREAK WORLD SAVES AND/OR SERVERS.");
+			config.addCustomCategoryComment(CATEGORY_BIOMES, "WARNING: ONLY MODIFY THESE IF YOU KNOW WHAT YOU ARE DOING, YOU CAN BREAK WORLD SAVES AND/OR SERVERS.");
 			config.addCustomCategoryComment(CATEGORY_OTHER, "Other configuration options");
 			config.load();
 
-            dimVarda = config.get(CATEGORY_DIM, "VARDA", 223).getInt();
-            dimAcheron = config.get(CATEGORY_DIM, "ACHERON", 426).getInt();
+			dimVarda = config.get(CATEGORY_DIM, "VARDA", 223).getInt();
+			dimAcheron = config.get(CATEGORY_DIM, "ACHERON", 426).getInt();
 
-            biomeVarda = config.get(CATEGORY_BIOMES, "VARDA", 223).getInt();
-            biomeAcheron = config.get(CATEGORY_BIOMES, "ACHERON", 224).getInt();
+			biomeVarda = config.get(CATEGORY_BIOMES, "VARDA", 223).getInt();
+			biomeAcheron = config.get(CATEGORY_BIOMES, "ACHERON", 224).getInt();
 
 			mainDomain = config.get(CATEGORY_URLS, "DOMAIN_MAIN", "http://aliensvspredator.org", "").getString();
 			devDomain = config.get(CATEGORY_URLS, "DOMAIN_DEV", "http://aliensvspredator.org", "").getString();
@@ -85,7 +85,9 @@ public class Settings
 			debugToolsEnabled = config.get(CATEGORY_OTHER, "DEBUG_TOOLS", false, "Toggle the debugging tools.").getBoolean(false);
 
 			entityList.put("DRONE", config.get(CATEGORY_IDS, "DRONE", idStart++).getInt());
+			entityList.put("RUNNER_DRONE", config.get(CATEGORY_IDS, "RUNNER_DRONE", idStart++).getInt());
 			entityList.put("WARRIOR", config.get(CATEGORY_IDS, "WARRIOR", idStart++).getInt());
+			entityList.put("RUNNER_WARRIOR", config.get(CATEGORY_IDS, "RUNNER_WARRIOR", idStart++).getInt());
 			entityList.put("SPITTER", config.get(CATEGORY_IDS, "SPITTER", idStart++).getInt());
 			entityList.put("CRUSHER", config.get(CATEGORY_IDS, "CRUSHER", idStart++).getInt());
 			entityList.put("PRAETORIAN", config.get(CATEGORY_IDS, "PRAETORIAN", idStart++).getInt());
@@ -101,9 +103,9 @@ public class Settings
 			entityList.put("COMBAT_SYNTHETIC", config.get(CATEGORY_IDS, "COMBAT_SYNTHETIC", idStart++).getInt());
 			entityList.put("PROTOMORPH", config.get(CATEGORY_IDS, "PROTOMORPH", idStart++).getInt());
 			entityList.put("HAMMERPEDE", config.get(CATEGORY_IDS, "HAMMERPEDE", idStart++).getInt());
+			idStart = 121;
 			entityList.put("TRILOBITE", config.get(CATEGORY_IDS, "TRILOBITE", idStart++).getInt());
 			entityList.put("SPACEJOCKEY", config.get(CATEGORY_IDS, "SPACEJOCKEY", idStart++).getInt());
-			idStart = 121;
 			entityList.put("YAUTJA_BERSERKER", config.get(CATEGORY_IDS, "YAUTJA_BERSERKER", idStart++).getInt());
 			entityList.put("ENGINEER", config.get(CATEGORY_IDS, "ENGINEER", idStart++).getInt());
 
@@ -117,19 +119,20 @@ public class Settings
 			entityList.put("DISC", config.get(CATEGORY_IDS, "DISC", 1519).getInt());
 			entityList.put("SHURIKEN", config.get(CATEGORY_IDS, "SHURIKEN", 1520).getInt());
 			entityList.put("TURRETENTITY", config.get(CATEGORY_IDS, "TURRETENTITY", 1521).getInt());
-            entityList.put("WRISTBRACERNUKE", config.get(CATEGORY_IDS, "WRISTBRACERNUKE", 1522).getInt());
-            entityList.put("APC", config.get(CATEGORY_IDS, "APC", 1523).getInt());
-            entityList.put("MECHANISM", config.get(CATEGORY_IDS, "MECHANISM", 1524).getInt());
-		} finally
+			entityList.put("WRISTBRACERNUKE", config.get(CATEGORY_IDS, "WRISTBRACERNUKE", 1522).getInt());
+			entityList.put("APC", config.get(CATEGORY_IDS, "APC", 1523).getInt());
+			entityList.put("MECHANISM", config.get(CATEGORY_IDS, "MECHANISM", 1524).getInt());
+		}
+		finally
 		{
 			config.save();
 		}
 	}
-	
+
 	private void verifyConfigVersion(FMLPreInitializationEvent evt, File configFile, Configuration config)
 	{
 		Property versionProperty = config.get(CATEGORY_OTHER, "VERSION", AliensVsPredator.instance().container().getVersion());
-		
+
 		if (versionProperty != null && !versionProperty.getString().equalsIgnoreCase(AliensVsPredator.instance().container().getVersion()))
 		{
 			if (configFile.exists())
@@ -138,7 +141,7 @@ public class Settings
 				System.out.println("[ALIENSVSPREDATOR/CONFIG] Renaming " + configFile + " to " + renamedConfig);
 				configFile.renameTo(renamedConfig);
 				configFile.delete();
-				
+
 				this.preInitialize(evt);
 			}
 		}
@@ -153,86 +156,86 @@ public class Settings
 	{
 		return this.updaterEnabled;
 	}
-	
+
 	public boolean areDebugToolsEnabled()
 	{
 		return this.debugToolsEnabled;
 	}
-	
+
 	public String getUpdateStringUrl()
 	{
 		return this.urlUpdater;
 	}
-	
+
 	public String getServer()
 	{
 		return ModUtil.isDevEnvironment() ? this.devDomain : this.mainDomain;
 	}
-	
+
 	public String getUrlUpdater()
 	{
 		return getServer() + urlUpdater;
 	}
-	
+
 	public String getUrlChangelog()
 	{
 		return getServer() + urlChangelog;
 	}
-	
+
 	public String getUrlFeedbackSubmit()
 	{
 		return getServer() + urlFeedbackSubmit;
 	}
-	
+
 	public String getUrlFeedbackValidation()
 	{
 		return getServer() + urlFeedbackValidation;
 	}
-	
+
 	public String getUrlSkinAk47()
 	{
 		return getServer() + urlSkins + urlSkinAk47;
 	}
-	
+
 	public String getUrlSkinM4()
 	{
 		return getServer() + urlSkins + urlSkinM4;
 	}
-	
+
 	public String getUrlSkinM41a()
 	{
 		return getServer() + urlSkins + urlSkinM41a;
 	}
-	
+
 	public String getUrlSkinM56sg()
 	{
 		return getServer() + urlSkins + urlSkinM56sg;
 	}
-	
+
 	public String getUrlSkinSniper()
 	{
 		return getServer() + urlSkins + urlSkinSniper;
 	}
-	
-	public int dimensionIdVarda() 
+
+	public int dimensionIdVarda()
 	{
-        return this.dimVarda;
-    }
-	
-	public int dimensionIdAcheron() 
+		return this.dimVarda;
+	}
+
+	public int dimensionIdAcheron()
 	{
-        return this.dimAcheron;
-    }
-    
-    public int biomeIdVarda()
-    {
-        return this.biomeVarda;
-    }
-	
+		return this.dimAcheron;
+	}
+
+	public int biomeIdVarda()
+	{
+		return this.biomeVarda;
+	}
+
 	public int biomeIdAcheron()
 	{
-        return this.biomeAcheron;
-    }
+		return this.biomeAcheron;
+	}
 
 	public boolean areNukesEnabled()
 	{

@@ -32,6 +32,8 @@ import com.arisux.avp.entities.mob.EntityPredalien;
 import com.arisux.avp.entities.mob.EntityProtomorph;
 import com.arisux.avp.entities.mob.EntityQueen;
 import com.arisux.avp.entities.mob.EntityRoyalFacehugger;
+import com.arisux.avp.entities.mob.EntityRunnerDrone;
+import com.arisux.avp.entities.mob.EntityRunnerWarrior;
 import com.arisux.avp.entities.mob.EntitySpaceJockey;
 import com.arisux.avp.entities.mob.EntitySpitter;
 import com.arisux.avp.entities.mob.EntityTrilobite;
@@ -109,7 +111,9 @@ public class EntityHandler implements IInitializable
 		HashMap<String, Integer> entityIDs = AliensVsPredator.settings().entityList;
 
 		EntityRegistry.registerGlobalEntityID(EntityDrone.class, "Drone", entityIDs.get("DRONE"), 0x333333, 0xFF0000);
+		EntityRegistry.registerGlobalEntityID(EntityRunnerDrone.class, "RunnerDrone", entityIDs.get("RUNNER_DRONE"), 0x333333, 0xFF0000);
 		EntityRegistry.registerGlobalEntityID(EntityWarrior.class, "Warrior", entityIDs.get("WARRIOR"), 0x333333, 0xFF0000);
+		EntityRegistry.registerGlobalEntityID(EntityRunnerWarrior.class, "RunnerWarrior", entityIDs.get("RUNNER_WARRIOR"), 0x333333, 0xFF0000);
 		EntityRegistry.registerGlobalEntityID(EntitySpitter.class, "Spitter", entityIDs.get("SPITTER"), 0x333333, 0xFF0000);
 		EntityRegistry.registerGlobalEntityID(EntityCrusher.class, "Crusher", entityIDs.get("CRUSHER"), 0x333333, 0xFF0000);
 		EntityRegistry.registerGlobalEntityID(EntityPraetorian.class, "Praetorian", entityIDs.get("PRAETORIAN"), 0x333333, 0xFF0000);

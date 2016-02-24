@@ -34,6 +34,7 @@ public class Resources implements IInitializablePre
 	public final ResourceLocation SKY_CALPAMOS = new ResourceLocation(AliensVsPredator.ID, "textures/misc/calpamos.png");
 	public final ResourceLocation DRONE_BASIC = new ResourceLocation(AliensVsPredator.ID, "textures/mob/drone_basic.png");
 	public final ResourceLocation DRONE_ADVANCED = new ResourceLocation(AliensVsPredator.ID, "textures/mob/drone_advanced.png");
+	public final ResourceLocation RUNNER_DRONE = new ResourceLocation(AliensVsPredator.ID, "textures/mob/runner_drone.png");
 	public final ResourceLocation TITANIUM1 = new ResourceLocation(AliensVsPredator.ID, "textures/armor/titanium_1.png");
 	public final ResourceLocation TITANIUM2 = new ResourceLocation(AliensVsPredator.ID, "textures/armor/titanium_2.png");
 	public final ResourceLocation PRESSURESUIT1 = new ResourceLocation(AliensVsPredator.ID, "textures/armor/suit_1.png");
@@ -90,6 +91,7 @@ public class Resources implements IInitializablePre
 	public final ResourceLocation PRAETORIAN = new ResourceLocation(AliensVsPredator.ID, "textures/mob/praetorian.png");
 	public final ResourceLocation WARRIOR = new ResourceLocation(AliensVsPredator.ID, "textures/mob/warrior.png");
 	public final ResourceLocation WARRIOR_BLOOD = new ResourceLocation(AliensVsPredator.ID, "textures/mob/warrior_blood.png");
+	public final ResourceLocation RUNNER_WARRIOR = new ResourceLocation(AliensVsPredator.ID, "textures/mob/runner_warrior.png");
 	public final ResourceLocation DRONE_BASIC_BLOOD = new ResourceLocation(AliensVsPredator.ID, "textures/mob/drone_basic_blood.png");
 	public final ResourceLocation DRONE_ADVANCED_BLOOD = new ResourceLocation(AliensVsPredator.ID, "textures/mob/drone_advanced_blood.png");
 	public final ResourceLocation HAMMERPEDE = new ResourceLocation(AliensVsPredator.ID, "textures/mob/hammerpede.png");
