@@ -39,9 +39,9 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
         this.jumpMovementFactor = 0.02F;
         this.canClimb = false; // until EntityAIClimb can be re-worked, using isCollidedHorizontally code below for all Xenos
         this.isDependant = true;
-        this.getNavigator().setCanSwim(true);
-		this.getNavigator().setAvoidsWater(true);
-		this.tasks.addTask(0, new EntityAISwimming(this));
+        //this.getNavigator().setCanSwim(true);
+		//this.getNavigator().setAvoidsWater(true);
+		//this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIQueenIdentificationTask(this));
         //this.tasks.addTask(1, new EntityAIClimb(this, 0.03F));
         this.tasks.addTask(1, new EntityAIWander(this, 0.8D));

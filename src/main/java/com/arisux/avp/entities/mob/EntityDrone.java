@@ -12,6 +12,7 @@ import com.arisux.avp.entities.tile.TileEntityHiveResin;
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -33,6 +34,9 @@ public class EntityDrone extends EntityXenomorph
 		this.setSize(0.8F, 1.8F);
 		this.mobType = this.rand.nextInt(2);
 		this.setEvolveTo(EntityWarrior.class, 12);
+		this.getNavigator().setCanSwim(true);
+		this.getNavigator().setAvoidsWater(true);
+		this.tasks.addTask(0, new EntityAISwimming(this));
 	}
 
 	@Override

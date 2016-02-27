@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.arisux.airi.lib.WorldUtil;
 import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
 import com.arisux.airi.lib.WorldUtil.Entities;
+import com.arisux.avp.entities.EntityAcidPool;
 import com.arisux.avp.AliensVsPredator;
 
 import net.minecraft.command.IEntitySelector;
@@ -16,7 +17,6 @@ import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.monster.IMob;
-import com.arisux.avp.entities.EntityAcidPool;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
