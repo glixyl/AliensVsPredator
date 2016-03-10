@@ -101,7 +101,7 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockStasisMechanism = (new BlockStasisMechanism(Material.iron)).setHardness(5.0F).setResistance(10.0F),
 		blockRepulsionGenerator = (new BlockGenerator(Material.iron)).setHardness(5.0F).setResistance(10.0F),
 		blockPowerline = (new BlockPowerline(Material.iron)).setHardness(3.2F).setResistance(2.6F),
-		blockBlastdoor = (new BlockBlastdoor(Material.iron)).setHardness(10F).setResistance(30.0F).setLightOpacity(255),
+		blockBlastdoor = (new BlockBlastdoor(Material.iron)).setHardness(10F).setResistance(30.0F).setLightOpacity(0),
 		blockCryostasisTube = (new BlockCryostasisTube(Material.iron)).setHardness(10F).setResistance(30.0F).setLightOpacity(4),
 		blockPlastic = (new HookedBlock(Material.clay)).setHardness(10F).setResistance(30.0F).setLightOpacity(0),
 		blockPlasticTri = (new HookedBlock(Material.clay)).setHardness(10F).setResistance(30.0F).setLightOpacity(0),
