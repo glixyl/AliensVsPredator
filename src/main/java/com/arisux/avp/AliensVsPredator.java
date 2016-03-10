@@ -168,7 +168,7 @@ public class AliensVsPredator implements IMod
 	@Mod.EventHandler
 	public void preInitialize(FMLPreInitializationEvent event)
 	{
-		AIRI.logger.info("[AliensVsPredator] Copyright(C) 2012-2015 Arisux");
+		AIRI.logger.info("[AliensVsPredator] Copyright(C) 2012-2016 Arisux Technology Group");
 		AIRI.logger.info("[AliensVsPredator] Pre-Initialization");
 
 		settings().preInitialize(event);
