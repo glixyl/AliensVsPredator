@@ -122,12 +122,20 @@ public class EntityHammerpede extends EntitySpeciesAlien implements IMob
 		}
 	}
 
+	// temporary sound override until ender23 has new sounds.  the ticking is annoying
 	@Override
 	protected String getDeathSound()
 	{
-		return AliensVsPredator.properties().SOUND_CHESTBURSTER_DEATH;
+		return AliensVsPredator.properties().SOUND_CHESTBURSTER_ATTACK;
 	}
 
+	// temporary sound override until ender23 has new sounds.  the ticking is annoying
+	@Override
+	protected String getHurtSound()
+	{
+		return AliensVsPredator.properties().SOUND_CHESTBURSTER_HURT;
+	}
+	
 	@Override
 	protected boolean canTriggerWalking()
 	{

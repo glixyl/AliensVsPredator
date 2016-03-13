@@ -56,7 +56,7 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
     {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(1F);
-        //this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.4700000238418579D);
     }
 

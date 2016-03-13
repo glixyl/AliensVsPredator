@@ -210,11 +210,19 @@ public class EntityHandler implements IInitializable
 				BiomeLVBase.acheron
 		};
 		
+		BiomeGenBase[] aquaXenomorphBiomes = new BiomeGenBase[] 
+		{
+				BiomeGenBase.river,
+				BiomeGenBase.beach,
+				BiomeGenBase.stoneBeach
+		};
+		
+		EntityRegistry.addSpawn(EntityAqua.class, 5, 1, 2, EnumCreatureType.monster, aquaXenomorphBiomes);
 		EntityRegistry.addSpawn(EntityDrone.class, 50, 1, 3, EnumCreatureType.monster, xenomorphBiomes);
 		EntityRegistry.addSpawn(EntityWarrior.class, 20, 1, 3, EnumCreatureType.monster, xenomorphBiomes);
 		EntityRegistry.addSpawn(EntityPraetorian.class, 5, 1, 2, EnumCreatureType.monster, xenomorphBiomes);
 		EntityRegistry.addSpawn(EntityFacehugger.class, 5, 1, 2, EnumCreatureType.monster, xenomorphBiomes);
-		EntityRegistry.addSpawn(EntityChestburster.class, 10, 1, 3, EnumCreatureType.monster, xenomorphBiomes);
+		EntityRegistry.addSpawn(EntityChestburster.class, 5, 1, 3, EnumCreatureType.monster, xenomorphBiomes);
 		EntityRegistry.addSpawn(EntityYautja.class, 2, 1, 1, EnumCreatureType.monster, predatorBiomes);
 		EntityRegistry.addSpawn(EntityYautjaBerserker.class, 1, 1, 1, EnumCreatureType.monster, predatorBiomes);
 		EntityRegistry.addSpawn(EntityMarine.class, 2, 1, 1, EnumCreatureType.creature, new BiomeGenBase[] { 
@@ -225,13 +233,13 @@ public class EntityHandler implements IInitializable
 			BiomeGenBase.taigaHills, 
 			BiomeGenBase.plains
 		});
-		EntityRegistry.addSpawn(EntityProtomorph.class, 25, 1, 2, EnumCreatureType.monster, new BiomeGenBase[] { 
+		EntityRegistry.addSpawn(EntityProtomorph.class, 30, 1, 3, EnumCreatureType.monster, new BiomeGenBase[] { 
 			BiomeLVBase.varda
 		});
-		EntityRegistry.addSpawn(EntityHammerpede.class, 50, 1, 3, EnumCreatureType.monster, new BiomeGenBase[] { 
+		EntityRegistry.addSpawn(EntityHammerpede.class, 30, 1, 3, EnumCreatureType.monster, new BiomeGenBase[] { 
 			BiomeLVBase.varda
 		});
-		EntityRegistry.addSpawn(EntityTrilobite.class, 5, 1, 2, EnumCreatureType.monster, new BiomeGenBase[] { 
+		EntityRegistry.addSpawn(EntityTrilobite.class, 30, 1, 3, EnumCreatureType.monster, new BiomeGenBase[] { 
 			BiomeLVBase.varda
 		});
 		EntityRegistry.addSpawn(EntityEngineer.class, 2, 1, 1, EnumCreatureType.monster, engineerBiomes);

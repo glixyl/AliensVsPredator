@@ -143,7 +143,7 @@ public class ItemHandler extends IBHandler implements IInitializable
 		itemRAM = (new HookedItem()).setMaxStackSize(64),
 		itemResistor = (new HookedItem()).setDescription("An electrical component that reduces current flow.").setMaxStackSize(64),
 		itemArtifactTech = (new HookedItem()).setDescription("An unknown piece of technology acquired from the Yautja species.").setMaxStackSize(64),
-		itemProcessor = ((new HookedItem())),
+		itemProcessor = ((new HookedItem())).setDescription("CPU"),
 		itemSolidStateDrive = ((new HookedItem())),
 		itemDiode = (new HookedItem()).setDescription("An electrical component that conducts in one direction.").setMaxStackSize(64),
 		itemMotherboard = ((new HookedItem())),
@@ -163,10 +163,10 @@ public class ItemHandler extends IBHandler implements IInitializable
 		itemMotionTracker = ((HookedItem) (new HookedItem()).disableIcon()).setDescription("Tracks movement by detecting changes in air density."),
 		itemPolycarbonate = (new HookedItem()).setDescription("Polycarbonate (A hard plastic used in the crafting of many items/blocks)"),
 		itemRoyalJelly = (new HookedItem()).setDescription("Royal Jelly (A potent, transformative substance produced by a Xenomorph Queen)").setMaxStackSize(64),
-		itemBlackGoo = (new HookedItem()).setDescription("Black Goo (A0-3959X.91 – 15)"),
-		itemPhial = (new HookedItem()).setDescription(""),
-		itemPhialEmpty = (new HookedItem()).setDescription(""),
-		itemMaintenanceJack = (new ItemMaintenanceJack()),
+		itemBlackGoo = (new HookedItem()).setDescription("Black Goo (A0-3959X.91 ? 15)"),
+		itemPhial = (new HookedItem()).setDescription("A mysterious substance fills this phial"),
+		itemPhialEmpty = (new HookedItem()).setDescription("An empty glass container of unknown origin"),
+		itemMaintenanceJack = (new ItemMaintenanceJack()).setDescription("Used to manually pry open blast doors."),
 		blackGooBucket = (new ItemBucket(AliensVsPredator.blocks().blockBlackGoo)),
 		mistBucket = (new ItemBucket(AliensVsPredator.blocks().blockMist));
 
