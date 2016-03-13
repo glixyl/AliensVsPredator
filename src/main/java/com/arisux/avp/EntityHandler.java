@@ -233,13 +233,13 @@ public class EntityHandler implements IInitializable
 			BiomeGenBase.taigaHills, 
 			BiomeGenBase.plains
 		});
-		EntityRegistry.addSpawn(EntityProtomorph.class, 30, 1, 3, EnumCreatureType.monster, new BiomeGenBase[] { 
+		EntityRegistry.addSpawn(EntityProtomorph.class, 30, 1, 2, EnumCreatureType.monster, new BiomeGenBase[] { 
 			BiomeLVBase.varda
 		});
-		EntityRegistry.addSpawn(EntityHammerpede.class, 30, 1, 3, EnumCreatureType.monster, new BiomeGenBase[] { 
+		EntityRegistry.addSpawn(EntityHammerpede.class, 30, 1, 4, EnumCreatureType.monster, new BiomeGenBase[] { 
 			BiomeLVBase.varda
 		});
-		EntityRegistry.addSpawn(EntityTrilobite.class, 30, 1, 3, EnumCreatureType.monster, new BiomeGenBase[] { 
+		EntityRegistry.addSpawn(EntityTrilobite.class, 30, 1, 2, EnumCreatureType.monster, new BiomeGenBase[] { 
 			BiomeLVBase.varda
 		});
 		EntityRegistry.addSpawn(EntityEngineer.class, 1, 1, 1, EnumCreatureType.monster, engineerBiomes);

@@ -40,10 +40,10 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 		this.getNavigator().setCanSwim(true);
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 0.800000011920929D, true));
-		this.tasks.addTask(1, new EntityAIWander(this, 0.800000011920929D));
-		this.targetTasks.addTask(1, new EntityAILeapAtTarget(this, 0.8F));
-		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, Entity.class, /** targetChance **/0, /** shouldCheckSight **/false, /** nearbyOnly **/false, EntitySelectorXenomorph.instance));
+		this.tasks.addTask(3, new EntityAIAttackOnCollide(this, 0.800000011920929D, true));
+		this.tasks.addTask(8, new EntityAIWander(this, 0.800000011920929D));
+		this.targetTasks.addTask(2, new EntityAILeapAtTarget(this, 0.8F));
+		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, Entity.class, /** targetChance **/0, /** shouldCheckSight **/false, /** nearbyOnly **/false, EntitySelectorXenomorph.instance));
 	}
 
 	@Override

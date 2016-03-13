@@ -31,8 +31,8 @@ public class EntityAqua extends EntityXenomorph
 		this.setSize(1F, 3F);
 		this.getNavigator().setCanSwim(true);
 		this.getNavigator().setAvoidsWater(false);
-		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 0.800000011920929D, true));
-		this.targetTasks.addTask(1, new EntityAILeapAtTarget(this, 0.9F));
+		this.tasks.addTask(2, new EntityAILeapAtTarget(this, 0.9F));
+		this.tasks.addTask(3, new EntityAIAttackOnCollide(this, 0.800000011920929D, true));
 	}
 
 	public static IEntitySelector entitySelector = new IEntitySelector()
