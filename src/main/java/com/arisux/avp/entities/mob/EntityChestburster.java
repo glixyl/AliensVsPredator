@@ -150,6 +150,12 @@ public class EntityChestburster extends EntitySpeciesAlien implements IMob
 	{
 		return AliensVsPredator.properties().SOUND_CHESTBURSTER_DEATH;
 	}
+	
+	@Override
+	protected String getHurtSound()
+	{
+		return AliensVsPredator.properties().SOUND_CHESTBURSTER_HURT;
+	}
 
 	@Override
 	protected boolean canTriggerWalking()
