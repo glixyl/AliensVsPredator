@@ -29,11 +29,11 @@ public class EntityTrilobite extends EntitySpeciesAlien implements IMob
 		this.getNavigator().setCanSwim(true);
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(2, new EntityAILeapAtTarget(this, 1.0F));
 		this.tasks.addTask(3, new EntityAIAttackOnCollide(this, 0.800000011920929D, true));
 		this.tasks.addTask(8, new EntityAIWander(this, 0.800000011920929D));
 		this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, Entity.class, /** targetChance **/0, /** shouldCheckSight **/false, /** nearbyOnly **/false, EntitySelectorXenomorph.instance));
+		this.targetTasks.addTask(1, new EntityAILeapAtTarget(this, 1.0F));
+		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, Entity.class, /** targetChance **/0, /** shouldCheckSight **/false, /** nearbyOnly **/false, EntitySelectorXenomorph.instance));
 	}
 
 	@Override
