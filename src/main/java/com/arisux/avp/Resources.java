@@ -32,6 +32,8 @@ public class Resources implements IInitializablePre
 	public final ResourceLocation SKY_SILICA = new ResourceLocation(AliensVsPredator.ID, "textures/misc/silica.png");
 	public final ResourceLocation SKY_SUN = new ResourceLocation("textures/environment/sun.png");
 	public final ResourceLocation SKY_CALPAMOS = new ResourceLocation(AliensVsPredator.ID, "textures/misc/calpamos.png");
+	public final ResourceLocation SKY_VARDA = new ResourceLocation(AliensVsPredator.ID, "textures/misc/varda.png");
+	public final ResourceLocation SKY_ACHERON = new ResourceLocation(AliensVsPredator.ID, "textures/misc/acheron.png");
 	public final ResourceLocation DRONE_BASIC = new ResourceLocation(AliensVsPredator.ID, "textures/mob/drone_basic.png");
 	public final ResourceLocation DRONE_ADVANCED = new ResourceLocation(AliensVsPredator.ID, "textures/mob/drone_advanced.png");
 	public final ResourceLocation TITANIUM1 = new ResourceLocation(AliensVsPredator.ID, "textures/armor/titanium_1.png");
