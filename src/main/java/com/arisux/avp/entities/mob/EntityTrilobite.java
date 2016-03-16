@@ -20,14 +20,15 @@ import net.minecraft.world.World;
 
 public class EntityTrilobite extends EntitySpeciesAlien implements IMob
 {
+	// it took down an Engineer in the movie Prometheus, welcome to the new Trilobite!
 	public EntityTrilobite(World world)
 	{
 		super(world);
 
-		this.setSize(1.5F, 1.5F);
+		this.setSize(1.3F, 1.3F);
 		this.experienceValue = 32;
 		this.getNavigator().setCanSwim(true);
-		this.getNavigator().setAvoidsWater(true);
+		this.getNavigator().setAvoidsWater(false);
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(3, new EntityAIAttackOnCollide(this, 0.800000011920929D, true));
 		this.tasks.addTask(8, new EntityAIWander(this, 0.800000011920929D));
@@ -42,8 +43,9 @@ public class EntityTrilobite extends EntitySpeciesAlien implements IMob
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(44.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5499999761581421D);
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(2.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(1F);
 	}
 
 	@Override
@@ -56,6 +58,12 @@ public class EntityTrilobite extends EntitySpeciesAlien implements IMob
 	public void onUpdate()
 	{
 		super.onUpdate();
+		
+		// temp fix for EntityAIClimb
+		if (this.isCollidedHorizontally)
+		{
+			this.motionY += 0.25F;
+		}
 		
 		this.fallDistance = 0F;
 	}
