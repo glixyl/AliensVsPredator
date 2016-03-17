@@ -114,6 +114,32 @@ public class AssemblerAPI implements IInitializable
 		ItemHandler avp = AliensVsPredator.items();
 		BlockHandler avpBlock = AliensVsPredator.blocks();
 
+		this.registerSchematic(new AssemblerSchematic("turret", Inventories.newStack(avpBlock.blockTurret, 1),
+				Inventories.newStack(avp.itemM41A, 1),
+				Inventories.newStack(avp.itemPolycarbonate, 4),
+				Inventories.newStack(avp.itemIngotAluminum, 4),
+				Inventories.newStack(avp.itemIngotCopper, 4),
+				Inventories.newStack(avp.itemLedDisplay, 1)
+				));
+		this.registerSchematic(new AssemblerSchematic("repulsionGenerator", Inventories.newStack(avpBlock.blockRepulsionGenerator, 1),
+				Inventories.newStack(avpBlock.blockTransformer, 4),
+				Inventories.newStack(avpBlock.blockNegativeTransformer, 4),
+				Inventories.newStack(avp.itemPolycarbonate, 4),
+				Inventories.newStack(avp.itemIngotAluminum, 4),
+				Inventories.newStack(Items.diamond, 4)
+				));
+		this.registerSchematic(new AssemblerSchematic("cryostasisTube", Inventories.newStack(avpBlock.blockCryostasisTube, 1),
+				Inventories.newStack(avp.itemPolycarbonate, 4),
+				Inventories.newStack(avp.itemIngotAluminum, 4),
+				Inventories.newStack(avpBlock.blockIndustrialGlass, 4),
+				Inventories.newStack(avpBlock.blockLightPanel, 1)
+				));
+		this.registerSchematic(new AssemblerSchematic("lightPanel", Inventories.newStack(avpBlock.blockLightPanel, 1),
+				Inventories.newStack(avp.itemPolycarbonate, 2),
+				Inventories.newStack(avp.itemIngotAluminum, 2),
+				Inventories.newStack(avpBlock.blockIndustrialGlass, 2),
+				Inventories.newStack(Items.glowstone_dust, 2)
+				));
 		this.registerSchematic(new AssemblerSchematic("pulserifle", Inventories.newStack(avp.itemM41A, 1),
 				Inventories.newStack(avp.itemPolycarbonate, 8),
 				Inventories.newStack(Items.iron_ingot, 8),
