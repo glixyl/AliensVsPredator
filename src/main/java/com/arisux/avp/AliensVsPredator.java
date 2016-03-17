@@ -27,9 +27,10 @@ public class AliensVsPredator implements IMod
 	@Mod.Instance(AliensVsPredator.ID)
 	private static AliensVsPredator instance;
 	private ModContainer container;
-	public ItemHandler items;
-	public BlockHandler blocks;
-	public FluidHandler fluids;
+	private ItemHandler items;
+	private BlockHandler blocks;
+	private FluidHandler fluids;
+	private OreHandler ores;
 	public Updater updater;
 
 	public static AliensVsPredator instance()
@@ -45,6 +46,11 @@ public class AliensVsPredator implements IMod
 	public static BlockHandler blocks()
 	{
 		return instance().blocks == null ? instance().blocks = new BlockHandler() : instance().blocks;
+	}
+
+	public static OreHandler ores()
+	{
+		return instance().ores == null ? instance().ores = new OreHandler() : instance().ores;
 	}
 	
 	public static FluidHandler fluids()
@@ -190,6 +196,7 @@ public class AliensVsPredator implements IMod
 		network().initialize(event);
 		items().initialize(event);
 		blocks().initialize(event);
+		ores().initialize(event);
 		dimensions().initialize(event);
 		worldgen().initialize(event);
 		crafting().initialize(event);

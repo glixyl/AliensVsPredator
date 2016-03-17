@@ -166,7 +166,7 @@ public class EntityFlame extends EntityThrowable
 
 		if (rand.nextInt(10) == 0)
 		{
-			ArrayList<CoordData> list = WorldUtil.Blocks.getCoordDataInRangeForBlocks(movingObjectPosition.blockX, movingObjectPosition.blockY, movingObjectPosition.blockZ, 1, this.worldObj, AliensVsPredator.instance().blocks.blockCryostasisTube);
+			ArrayList<CoordData> list = WorldUtil.Blocks.getCoordDataInRangeForBlocks(movingObjectPosition.blockX, movingObjectPosition.blockY, movingObjectPosition.blockZ, 1, this.worldObj, AliensVsPredator.blocks().blockCryostasisTube);
 
 			for (CoordData coord : list)
 			{

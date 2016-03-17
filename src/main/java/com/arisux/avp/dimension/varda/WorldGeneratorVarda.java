@@ -3,9 +3,6 @@ package com.arisux.avp.dimension.varda;
 import java.util.Random;
 
 import com.arisux.avp.dimension.BiomeLVBase;
-import com.arisux.avp.dimension.acheron.worldgen.TerrainFormation;
-import com.arisux.avp.dimension.acheron.worldgen.TerrainFormation1;
-import com.arisux.avp.dimension.acheron.worldgen.TerrainFormation2;
 import com.arisux.avp.dimension.varda.worldgen.VardaGenSpike1;
 import com.arisux.avp.dimension.varda.worldgen.VardaGenSpike2;
 
@@ -39,33 +36,6 @@ public class WorldGeneratorVarda implements IWorldGenerator
 				int randPosY2 = random.nextInt(128);
 				int randPosZ2 = chunkZ + random.nextInt(16);
 				new VardaGenSpike2().generate(world, random, randPosX2, randPosY2, randPosZ2);
-			}
-		}
-		
-		if (world.provider.getBiomeGenForCoords(chunkX, chunkZ) == BiomeLVBase.acheron)
-		{
-			for (int i = 0; i < 18; i++)
-			{
-				int randPosX1 = chunkX + random.nextInt(16);
-				int randPosY1 = random.nextInt(128);
-				int randPosZ1 = chunkZ + random.nextInt(16);
-				new TerrainFormation().generate(world, random, randPosX1, randPosY1, randPosZ1);
-			}
-			
-			for (int i = 0; i < 18; i++)
-			{
-				int randPosX1 = chunkX + random.nextInt(16);
-				int randPosY1 = random.nextInt(128);
-				int randPosZ1 = chunkZ + random.nextInt(16);
-				new TerrainFormation1().generate(world, random, randPosX1, randPosY1, randPosZ1);
-			}
-			
-			for (int i = 0; i < 18; i++)
-			{
-				int randPosX1 = chunkX + random.nextInt(16);
-				int randPosY1 = random.nextInt(128);
-				int randPosZ1 = chunkZ + random.nextInt(16);
-				new TerrainFormation2().generate(world, random, randPosX1, randPosY1, randPosZ1);
 			}
 		}
 	}
