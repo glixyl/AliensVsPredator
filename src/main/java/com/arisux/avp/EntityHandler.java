@@ -19,6 +19,7 @@ import com.arisux.avp.entities.mob.EntityAqua;
 import com.arisux.avp.entities.mob.EntityChestburster;
 import com.arisux.avp.entities.mob.EntityCombatSynthetic;
 import com.arisux.avp.entities.mob.EntityCrusher;
+import com.arisux.avp.entities.mob.EntityDeaconShark;
 import com.arisux.avp.entities.mob.EntityDrone;
 import com.arisux.avp.entities.mob.EntityEngineer;
 import com.arisux.avp.entities.mob.EntityFacehugger;
@@ -104,27 +105,28 @@ public class EntityHandler implements IInitializable
 
 	private void registerLivingEntities()
 	{
-		EntityRegistry.registerGlobalEntityID(EntityDrone.class, "Drone", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0xFF0000);
-		EntityRegistry.registerGlobalEntityID(EntityWarrior.class, "Warrior", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0xFF0000);
-		EntityRegistry.registerGlobalEntityID(EntitySpitter.class, "Spitter", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0xFF0000);
-		EntityRegistry.registerGlobalEntityID(EntityCrusher.class, "Crusher", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0xFF0000);
-		EntityRegistry.registerGlobalEntityID(EntityPraetorian.class, "Praetorian", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0xFF0000);
-		EntityRegistry.registerGlobalEntityID(EntityMarine.class, "Marine", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0xFF0000);
-		EntityRegistry.registerGlobalEntityID(EntityYautja.class, "Yautja", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0xFF0000);
-		EntityRegistry.registerGlobalEntityID(EntityQueen.class, "Queen", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0xFF0000);
-		EntityRegistry.registerGlobalEntityID(EntityFacehugger.class, "Facehugger", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0xFF0000);
-		EntityRegistry.registerGlobalEntityID(EntityChestburster.class, "Chestbuster", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0xFF0000);
-		EntityRegistry.registerGlobalEntityID(EntityOvamorph.class, "Ovamorph", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0xFF0000);
-		EntityRegistry.registerGlobalEntityID(EntityRoyalFacehugger.class, "RoyalFacehugger", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0xFF0000);
+		EntityRegistry.registerGlobalEntityID(EntityDrone.class, "Drone", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x00EEFF);
+		EntityRegistry.registerGlobalEntityID(EntityWarrior.class, "Warrior", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x00EEFF);
+		EntityRegistry.registerGlobalEntityID(EntitySpitter.class, "Spitter", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x00EEFF);
+		EntityRegistry.registerGlobalEntityID(EntityCrusher.class, "Crusher", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x00EEFF);
+		EntityRegistry.registerGlobalEntityID(EntityPraetorian.class, "Praetorian", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x00EEFF);
+		EntityRegistry.registerGlobalEntityID(EntityMarine.class, "Marine", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x00EEFF);
+		EntityRegistry.registerGlobalEntityID(EntityYautja.class, "Yautja", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x00EEFF);
+		EntityRegistry.registerGlobalEntityID(EntityQueen.class, "Queen", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x00EEFF);
+		EntityRegistry.registerGlobalEntityID(EntityFacehugger.class, "Facehugger", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x00EEFF);
+		EntityRegistry.registerGlobalEntityID(EntityChestburster.class, "Chestbuster", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x00EEFF);
+		EntityRegistry.registerGlobalEntityID(EntityOvamorph.class, "Ovamorph", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x00EEFF);
+		EntityRegistry.registerGlobalEntityID(EntityRoyalFacehugger.class, "RoyalFacehugger", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x00EEFF);
 		EntityRegistry.registerGlobalEntityID(EntityAqua.class, "AquaAlien", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerGlobalEntityID(EntityPredalien.class, "Predalien", EntityRegistry.findGlobalUniqueEntityId());
-		EntityRegistry.registerGlobalEntityID(EntityCombatSynthetic.class, "CombatSynthetic", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0xFF0000);
-		EntityRegistry.registerGlobalEntityID(EntityProtomorph.class, "Protomorph", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0xFF0000);
-		EntityRegistry.registerGlobalEntityID(EntityHammerpede.class, "Hammerpede", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0xFF0000);
-		EntityRegistry.registerGlobalEntityID(EntityTrilobite.class, "Trilobite", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0xFF0000);
-		EntityRegistry.registerGlobalEntityID(EntitySpaceJockey.class, "SpaceJockey", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0xFF0000);
-		EntityRegistry.registerGlobalEntityID(EntityEngineer.class, "Engineer", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0xFF0000);
-		EntityRegistry.registerGlobalEntityID(EntityYautjaBerserker.class, "YautjaBerserker", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0xFF0000);
+		EntityRegistry.registerGlobalEntityID(EntityCombatSynthetic.class, "CombatSynthetic", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x00EEFF);
+		EntityRegistry.registerGlobalEntityID(EntityProtomorph.class, "Protomorph", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x00EEFF);
+		EntityRegistry.registerGlobalEntityID(EntityHammerpede.class, "Hammerpede", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x00EEFF);
+		EntityRegistry.registerGlobalEntityID(EntityTrilobite.class, "Trilobite", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x00EEFF);
+		EntityRegistry.registerGlobalEntityID(EntitySpaceJockey.class, "SpaceJockey", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x00EEFF);
+		EntityRegistry.registerGlobalEntityID(EntityEngineer.class, "Engineer", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x00EEFF);
+		EntityRegistry.registerGlobalEntityID(EntityYautjaBerserker.class, "YautjaBerserker", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x00EEFF);
+		EntityRegistry.registerGlobalEntityID(EntityDeaconShark.class, "DeaconShark", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x00EEFF);
 	}
 
 	private void registerEntities()

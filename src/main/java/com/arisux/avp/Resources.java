@@ -96,6 +96,7 @@ public class Resources implements IInitializablePre
 	public final ResourceLocation DRONE_ADVANCED_BLOOD = new ResourceLocation(AliensVsPredator.ID, "textures/mob/drone_advanced_blood.png");
 	public final ResourceLocation HAMMERPEDE = new ResourceLocation(AliensVsPredator.ID, "textures/mob/hammerpede.png");
 	public final ResourceLocation TRILOBITE = new ResourceLocation(AliensVsPredator.ID, "textures/mob/trilobite.png");
+	public final ResourceLocation DEACON_SHARK = new ResourceLocation(AliensVsPredator.ID, "textures/mob/deacon_shark.png");
 	public final ResourceLocation PROTOMORPH = new ResourceLocation(AliensVsPredator.ID, "textures/mob/deacon.png");
 	public final ResourceLocation AQUA_XENOMORPH = new ResourceLocation(AliensVsPredator.ID, "textures/mob/aqua.png");
 	public final ResourceLocation AQUA_XENOMORPH_MASK = new ResourceLocation(AliensVsPredator.ID, "textures/mob/aqua_glow.png");

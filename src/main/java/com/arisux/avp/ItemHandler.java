@@ -10,6 +10,7 @@ import com.arisux.avp.entities.mob.EntityAqua;
 import com.arisux.avp.entities.mob.EntityChestburster;
 import com.arisux.avp.entities.mob.EntityCombatSynthetic;
 import com.arisux.avp.entities.mob.EntityCrusher;
+import com.arisux.avp.entities.mob.EntityDeaconShark;
 import com.arisux.avp.entities.mob.EntityDrone;
 import com.arisux.avp.entities.mob.EntityEngineer;
 import com.arisux.avp.entities.mob.EntityFacehugger;
@@ -190,7 +191,8 @@ public class ItemHandler extends IBHandler implements IInitializable
 		itemSummonerTrilobite = (new ItemEntitySummoner(this.getMod().domain(), EntityTrilobite.class)),
 		itemSummonerYautjaBerserker = (new ItemEntitySummoner(this.getMod().domain(), EntityYautjaBerserker.class)),
 		itemSummonerSpaceJockey = (new ItemEntitySummoner(this.getMod().domain(), EntitySpaceJockey.class)),
-		itemSummonerEngineer = (new ItemEntitySummoner(this.getMod().domain(), EntityEngineer.class));
+		itemSummonerEngineer = (new ItemEntitySummoner(this.getMod().domain(), EntityEngineer.class)),
+		itemSummonerDeaconShark = (new ItemEntitySummoner(this.getMod().domain(), EntityDeaconShark.class));
 
 	public ItemHandler()
 	{
@@ -215,6 +217,7 @@ public class ItemHandler extends IBHandler implements IInitializable
 		registerItem(itemSummonerQueen, "summon.queen");
 		registerItem(itemSummonerPredalien, "summon.predalien");
 		registerItem(itemSummonerProtomorph, "summon.protomorph");
+		registerItem(itemSummonerDeaconShark, "summon.deaconshark");
 		registerItem(itemSummonerHammerpede, "summon.hammerpede");
 		registerItem(itemSummonerTrilobite, "summon.trilobite");
 		registerItem(itemSummonerEngineer, "summon.engineer");
