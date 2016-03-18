@@ -140,13 +140,14 @@ public class EntityDeaconShark extends EntitySpeciesAlien
     @Override
     public boolean getCanSpawnHere()
     {
-        return (this.rand.nextInt(20) == 0 || !this.worldObj.canBlockSeeTheSky((int)this.posX, (int)this.posY, (int)this.posZ)) && super.getCanSpawnHere();
+       // return(this.rand.nextInt(20) == 0 || !this.worldObj.canBlockSeeTheSky((int)this.posX, (int)this.posY, (int)this.posZ)) && super.getCanSpawnHere();
+	   return(!this.worldObj.canBlockSeeTheSky((int)this.posX, (int)this.posY, (int)this.posZ)) && this.rand.nextInt(11111) == 0;
     }
 
     @Override
     protected boolean canDespawn()
     {
-    	return false;
+    	return true;
     }
 
 	@Override

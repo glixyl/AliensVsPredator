@@ -148,7 +148,7 @@ public class ProviderVarda extends WorldProvider
 
 	public boolean isSilicaStormActive()
 	{
-		return (this.worldObj.getWorldTime() % 24000L) / 1000L > 2L && (this.worldObj.getWorldTime() % 24000L) / 1000L < 6L;
+		return (this.worldObj.getWorldTime() % 24000L) / 1000L > 2L && (this.worldObj.getWorldTime() % 24000L) / 1000L < 4L;
 	}
 
 	@Override

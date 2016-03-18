@@ -242,5 +242,6 @@ public class EntityHandler implements IInitializable
 		});
 		EntityRegistry.addSpawn(EntityEngineer.class, 1, 1, 1, EnumCreatureType.monster, engineerBiomes);
 		EntityRegistry.addSpawn(EntitySpaceJockey.class, 1, 0, 1, EnumCreatureType.monster, engineerBiomes);
+		EntityRegistry.addSpawn(EntityDeaconShark.class, 1, 0, 1, EnumCreatureType.waterCreature, new BiomeGenBase[] { BiomeLVBase.varda });
 	}
 }
