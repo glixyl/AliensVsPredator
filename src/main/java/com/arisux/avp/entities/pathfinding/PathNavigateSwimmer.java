@@ -33,8 +33,6 @@ public class PathNavigateSwimmer extends PathNavigate
     @Override
     protected void pathFollow()
     {
-    	System.out.println("PathNavigateSwimmer.pathFollow");
-    	
         Vec3 entityPos = this.getEntityPosition();
         float widthSquared = this.theEntity.width * this.theEntity.width;
 

@@ -7,7 +7,6 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class OreHandler implements IInitializable
 {
-	@Override
 	public void initialize(FMLInitializationEvent event)
 	{
 		OreDictionary.registerOre("oreCopper", AliensVsPredator.blocks().oreCopper);
@@ -22,5 +21,6 @@ public class OreHandler implements IInitializable
 		OreDictionary.registerOre("silicon", AliensVsPredator.items().itemSilicon);
 		OreDictionary.registerOre("polycarbonate", AliensVsPredator.items().itemPolycarbonate);
 		OreDictionary.registerOre("plastic", AliensVsPredator.items().itemPolycarbonate);
+		OreDictionary.registerOre("logWood", AliensVsPredator.blocks().terrainUniTreeLog);
 	}
 }
