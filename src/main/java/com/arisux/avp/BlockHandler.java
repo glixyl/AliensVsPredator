@@ -123,15 +123,40 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockPortalVarda = (new BlockPortal(AliensVsPredator.settings().dimensionIdVarda()).setHardness(-1.0F).setLightLevel(2.0F)),
 		blockPortalAcheron = (new BlockPortal(AliensVsPredator.settings().dimensionIdAcheron()).setHardness(-1.0F).setLightLevel(2.0F)),
 		blockAssembler = (new BlockAssembler(Material.iron).setHardness(1.5F).setResistance(10.0F)),
-		blockFloorGrillSlab = (new BlockCustomSlab(Material.iron)).setHardness(5F).setResistance(30.0F).setLightOpacity(4),
+		blockFloorGrillSlab = (new BlockCustomSlab(Material.iron){
+			public void registerBlockIcons(IIconRegister register) 
+			{
+				this.blockIcon = register.registerIcon("avp:floorgrill");
+			};
+		}).setHardness(5F).setResistance(30.0F).setLightOpacity(4),
 		blockFloorGrillStairs = (new BlockCustomStairs(blockFloorGrill)).setHardness(5F).setResistance(30.0F).setLightOpacity(4),
 		blockCeilingGrillStairs = (new BlockCustomStairs(blockCeilingGrill)).setHardness(5F).setResistance(30.0F).setLightOpacity(4),
-		blockCeilingGrillSlab = (new BlockCustomSlab(Material.iron)).setHardness(5F).setResistance(30.0F).setLightOpacity(4),
+		blockCeilingGrillSlab = (new BlockCustomSlab(Material.iron){
+			public void registerBlockIcons(IIconRegister register) 
+			{
+				this.blockIcon = register.registerIcon("avp:ceilinggrill");
+			};
+		}).setHardness(5F).setResistance(30.0F).setLightOpacity(4),
 		blockIronBricksStairs = (new BlockCustomStairs(blockIronBricks)).setHardness(5F).setResistance(30.0F).setLightOpacity(255),
 		blockWallStairs = (new BlockCustomStairs(blockWall)).setHardness(5F).setResistance(30.0F).setLightOpacity(255),
-		blockWallSlab = (new BlockCustomSlab(Material.iron)).setHardness(5F).setResistance(30.0F).setLightOpacity(255),
-		blockIronBricksSlab = (new BlockCustomSlab(Material.iron)).setHardness(5F).setResistance(30.0F).setLightOpacity(255),
-		blockIndustrialGlassSlab = (new BlockCustomSlab(Material.iron)).setHardness(5F).setResistance(30.0F).setLightOpacity(0),
+		blockWallSlab = (new BlockCustomSlab(Material.iron){
+			public void registerBlockIcons(IIconRegister register) 
+			{
+				this.blockIcon = register.registerIcon("avp:wall_top");
+			};
+		}).setHardness(5F).setResistance(30.0F).setLightOpacity(255),
+		blockIronBricksSlab = (new BlockCustomSlab(Material.iron){
+			public void registerBlockIcons(IIconRegister register) 
+			{
+				this.blockIcon = register.registerIcon("avp:industrialbricks");
+			};
+		}).setHardness(5F).setResistance(30.0F).setLightOpacity(255),
+		blockIndustrialGlassSlab = (new BlockCustomSlab(Material.iron){
+			public void registerBlockIcons(IIconRegister register) 
+			{
+				this.blockIcon = register.registerIcon("avp:industrialglass");
+			};
+		}).setHardness(5F).setResistance(30.0F).setLightOpacity(0),
 		blockIndustrialGlassStairs = (new BlockCustomStairs(blockIndustrialGlass)).setHardness(5F).setResistance(30.0F).setLightOpacity(0),
 		terrainUniDirt = (new BlockUnidentifiedDirt()).setHardness(0.5F).setResistance(2.0F).setLightOpacity(255),
 		terrainStalagmite = (new BlockStalagmite(Material.plants)).setHardness(0.0F).setLightOpacity(0),
@@ -193,31 +218,31 @@ public class BlockHandler extends IBHandler implements IInitializable
 		registerBlock(blockTransformer, "transformer");
 		registerBlock(blockNegativeTransformer, "transformernegative");
 		ShapedBlockUtil.registerBlock(this, blockCeilingGrill, "ceilinggrill");
-		registerBlock(blockCeilingGrillStairs, "ceilinggrillstairs");
-		registerBlock(blockCeilingGrillSlab, "ceilinggrillslab");
+		registerBlock(blockCeilingGrillStairs, "ceilinggrillstairs", AliensVsPredator.instance().tabBlocks());
+		registerBlock(blockCeilingGrillSlab, "ceilinggrillslab", AliensVsPredator.instance().tabBlocks());
 		ShapedBlockUtil.registerBlock(this, blockFloorGrill, "floorgrill");
-		registerBlock(blockFloorGrillStairs, "floorgrillstairs");
-		registerBlock(blockFloorGrillSlab, "floorgrillslab");
+		registerBlock(blockFloorGrillStairs, "floorgrillstairs", AliensVsPredator.instance().tabBlocks());
+		registerBlock(blockFloorGrillSlab, "floorgrillslab", AliensVsPredator.instance().tabBlocks());
 		ShapedBlockUtil.registerBlock(this, blockWall, "industrialwall");
 		ShapedBlockUtil.registerBlock(this, blockWallW, "industrialwall2");
 		registerBlock(blockR2PConvertor, "r2pconverter");
 		registerBlock(blockP2RConvertor, "p2rconverter");
-		registerBlock(blockWallStairs, "industrialwallstairs");
-		registerBlock(blockWallSlab, "industrialslab");
+		registerBlock(blockWallStairs, "industrialwallstairs", AliensVsPredator.instance().tabBlocks());
+		registerBlock(blockWallSlab, "industrialslab", AliensVsPredator.instance().tabBlocks());
 		ShapedBlockUtil.registerBlock(this, blockVent0, "industrialvent");
 		ShapedBlockUtil.registerBlock(this, blockVent1, "vent.wall");
 		ShapedBlockUtil.registerBlock(this, blockVent2, "vent.ceiling");
 		ShapedBlockUtil.registerBlock(this, blockIronBricks, "industrialbricks");
-		registerBlock(blockIronBricksStairs, "industrialbrickstairs");
-		registerBlock(blockIronBricksSlab, "industrialbrickslab");
+		registerBlock(blockIronBricksStairs, "industrialbrickstairs", AliensVsPredator.instance().tabBlocks());
+		registerBlock(blockIronBricksSlab, "industrialbrickslab", AliensVsPredator.instance().tabBlocks());
 		ShapedBlockUtil.registerBlock(this, blockIndustrialGlass, "industrialglass");
-		registerBlock(blockIndustrialGlassStairs, "industrialglassstairs");
-		registerBlock(blockIndustrialGlassSlab, "industrialglassslab");
+		registerBlock(blockIndustrialGlassStairs, "industrialglassstairs", AliensVsPredator.instance().tabBlocks());
+		registerBlock(blockIndustrialGlassSlab, "industrialglassslab", AliensVsPredator.instance().tabBlocks());
 		ShapedBlockUtil.registerBlock(this, blockVerticalMetal, "metalpanel1");
 		ShapedBlockUtil.registerBlock(this, blockColumnMetal1, "metalpanel2");
 		ShapedBlockUtil.registerBlock(this, blockColumnMetal2, "metalpanel3");
 		ShapedBlockUtil.registerBlock(this, terrainHiveResin, "hiveresin");
-		registerBlock(blockHiveNode, "hivenode");
+		registerBlock(blockHiveNode, "hivenode", null);
 		ShapedBlockUtil.registerBlock(this, blockShipMetal1, "shippanel");
 		ShapedBlockUtil.registerBlock(this, blockShipMetal2, "shippannelyautja");
 		ShapedBlockUtil.registerBlock(this, blockOvamorph, "tileovamorphdesign");
@@ -231,7 +256,7 @@ public class BlockHandler extends IBHandler implements IInitializable
 		ShapedBlockUtil.registerBlock(this, blockShipDecor4, "shipbrick");
 		registerBlock(blockSacrificialSpawner, "spawner");
 		registerBlock(blockSpawnerCreative, "spawnerc");
-		ShapedBlockUtil.registerShapedBlockSet(this, blockRelicTile, "templebricksingle", 0, blockSacrificialSpawner);
+		ShapedBlockUtil.registerBlock(this, blockRelicTile, "templebricksingle", 0, blockSacrificialSpawner);
 		ShapedBlockUtil.registerBlock(this, blockTempleBrick, "templebrick");
 		ShapedBlockUtil.registerBlock(this, blockTempleTile, "templetile");
 		ShapedBlockUtil.registerBlock(this, blockTempleWall1, "templewallbase");
@@ -246,7 +271,7 @@ public class BlockHandler extends IBHandler implements IInitializable
 		registerBlock(blockRepulsionGenerator, "generator");
 		registerBlock(blockPowerline, "powerline");
 		registerBlock(blockBlastdoor, "blastdoor");
-		registerBlock(blockSupplies, "supplychuteblock");
+		registerBlock(blockSupplies, "supplychuteblock", null);
 		registerBlock(blockBlackGoo, "blackgoo");
 		registerBlock(blockMist, "mist");
 		registerBlock(blockCryostasisTube, "cryostasistube");

@@ -11,15 +11,15 @@ public class ShapedBlockUtil
 {
 	public static void registerBlock(IBHandler ibHandler, Block block, String identifier)
 	{
-		registerShapedBlockSet(ibHandler, block, identifier, 0);
+		registerBlock(ibHandler, block, identifier, 0);
 	}
 	
-	public static void registerShapedBlockSet(IBHandler ibHandler, Block block, String identifier, int textureSide)
+	public static void registerBlock(IBHandler ibHandler, Block block, String identifier, int textureSide)
 	{
-		registerShapedBlockSet(ibHandler, block, identifier, 0, block);
+		registerBlock(ibHandler, block, identifier, 0, block);
 	}
 
-	public static void registerShapedBlockSet(IBHandler ibHandler, Block blockParent, String identifier, int textureSide, Block textureBlock)
+	public static void registerBlock(IBHandler ibHandler, Block blockParent, String identifier, int textureSide, Block textureBlock)
 	{
 		ibHandler.registerBlock(blockParent, identifier, AliensVsPredator.instance().tabBlocks());
 
