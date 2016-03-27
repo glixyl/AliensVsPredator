@@ -33,6 +33,8 @@ import com.arisux.avp.block.BlockTransformer;
 import com.arisux.avp.block.BlockTurret;
 import com.arisux.avp.block.BlockUnidentifiedDirt;
 import com.arisux.avp.block.BlockUnidentifiedLog;
+import com.arisux.avp.block.BlockUnidentifiedTreeLeaves;
+import com.arisux.avp.block.BlockUnidentifiedTreeSapling;
 import com.arisux.avp.block.BlockUnidentifiedTreeTendon;
 import com.arisux.avp.block.BlockWall;
 import com.arisux.avp.block.BlockWorkstation;
@@ -135,6 +137,8 @@ public class BlockHandler extends IBHandler implements IInitializable
 		terrainStalagmite = (new BlockStalagmite(Material.plants)).setHardness(0.0F).setLightOpacity(0),
 		terrainUniTreeLog = (new BlockUnidentifiedLog()).setHardness(0.0F).setLightOpacity(0),
 		terrainUniTreeTendon = (new BlockUnidentifiedTreeTendon()).setHardness(0.0F).setLightOpacity(0),
+		terrainUniTreeLeaves = (new BlockUnidentifiedTreeLeaves()).setHardness(0.0F).setLightOpacity(0),
+		terrainUniTreeSapling = (new BlockUnidentifiedTreeSapling()).setHardness(0.0F).setLightOpacity(0),
 		blockTurret = (new BlockTurret(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockWorkstation = (new BlockWorkstation(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockStasisMechanism = (new BlockStasisMechanism(Material.iron)).setHardness(5.0F).setResistance(10.0F),
@@ -172,6 +176,8 @@ public class BlockHandler extends IBHandler implements IInitializable
 		ShapedBlockUtil.registerBlock(this, terrainUniGravel, "unigravel");
 		registerBlock(terrainUniTreeLog, "unitree.wood");
 		registerBlock(terrainUniTreeTendon, "unitree.tendons");
+		registerBlock(terrainUniTreeLeaves, "unitree.leaves");
+		registerBlock(terrainUniTreeSapling, "unitree.sapling");
 		registerBlock(terrainStalagmite, "stalagmite");
 		registerBlock(oreSilicon, "oresilicon");
 		registerBlock(oreCopper, "orecopper");
