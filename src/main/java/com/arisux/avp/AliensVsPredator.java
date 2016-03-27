@@ -177,6 +177,9 @@ public class AliensVsPredator implements IMod
 		AIRI.logger.info("[AliensVsPredator] Copyright(C) 2012-2016 Arisux Technology Group");
 		AIRI.logger.info("[AliensVsPredator] Pre-Initialization");
 
+		AIRI.remappingApi().registerMappingInfo("lv426portal", "portal.acheron", "avp");
+		AIRI.remappingApi().registerMappingInfo("lv223portal", "portal.varda", "avp");
+
 		settings().preInitialize(event);
 
 		if (FMLCommonHandler.instance().getSide() == Side.CLIENT)

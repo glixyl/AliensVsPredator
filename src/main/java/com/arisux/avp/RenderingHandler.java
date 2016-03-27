@@ -192,6 +192,7 @@ import com.arisux.avp.items.render.parts.RenderItemSniperScope;
 import com.arisux.avp.items.render.parts.RenderItemSniperStock;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraft.client.model.ModelBiped;
@@ -200,7 +201,7 @@ import net.minecraft.item.Item;
 public class RenderingHandler implements IInitializablePre, IInitializablePost
 {
 	public static final RenderingHandler instance = new RenderingHandler();
-	public ISimpleBlockRenderingHandler renderTypeAngled;
+	public ISimpleBlockRenderingHandler renderTypeShape;
 
 	@Override
 	public void preInitialize(FMLPreInitializationEvent event)
@@ -376,6 +377,6 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 
 	public void registerSimpleBlockRenderingHandlers()
 	{
-		registerBlockHandler(this.renderTypeAngled = new RenderShape());
+		registerBlockHandler(this.renderTypeShape = new RenderShape(RenderingRegistry.getNextAvailableRenderId()));
 	}
 }

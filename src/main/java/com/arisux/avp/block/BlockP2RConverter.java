@@ -1,47 +1,45 @@
 package com.arisux.avp.block;
 
-import com.arisux.airi.lib.BlockTypes.HookedBlock;
-import com.arisux.avp.entities.tile.TileEntityR2PConverter;
+import com.arisux.avp.entities.tile.TileEntityP2RConverter;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockR2PConvertor extends HookedBlock
+public class BlockP2RConverter extends Block
 {
-	public BlockR2PConvertor(Material material)
+	public BlockP2RConverter(Material material)
 	{
 		super(material);
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 		this.setTickRandomly(true);
-		this.setRenderNormal(false);
-		this.setOpaque(false);
 	}
-
+	
 	@Override
-	public void registerBlockIcons(IIconRegister reg)
+	public void registerBlockIcons(IIconRegister register)
 	{
-		;
+		return;
 	}
-
+	
 	@Override
-	public void onNeighborChange(IBlockAccess world, int x, int y, int z, int tileX, int tileY, int tileZ)
+	public boolean renderAsNormalBlock()
 	{
-		TileEntityR2PConverter tile = (TileEntityR2PConverter) world.getTileEntity(x, y, z);
-
-		if (world.getBlock(tileX, tileY, tileZ) == null)
-		{
-			tile.isActiveRedstoneWireAttached = false;
-		}
+		return false;
+	}
+	
+	@Override
+	public boolean isOpaqueCube()
+	{
+		return false;
 	}
 
 	@Override
 	public boolean onBlockActivated(World worldObj, int xCoord, int yCoord, int zCoord, EntityPlayer player, int side, float subX, float subY, float subZ)
 	{
-		return true;
+		return super.onBlockActivated(worldObj, xCoord, yCoord, zCoord, player, side, subX, subY, subZ);
 	}
 
 	@Override
@@ -53,7 +51,7 @@ public class BlockR2PConvertor extends HookedBlock
 	@Override
 	public TileEntity createTileEntity(World world, int meta)
 	{
-		return new TileEntityR2PConverter();
+		return new TileEntityP2RConverter();
 	}
 	
 	@Override

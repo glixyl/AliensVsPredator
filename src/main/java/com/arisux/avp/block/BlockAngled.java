@@ -1,11 +1,11 @@
 package com.arisux.avp.block;
 
-import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.avp.AliensVsPredator;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
-public class BlockAngled extends HookedBlock
+public class BlockAngled extends Block
 {
 	public BlockAngled(Material material)
 	{
@@ -15,6 +15,6 @@ public class BlockAngled extends HookedBlock
 	@Override
 	public int getRenderType()
 	{
-		return AliensVsPredator.renderer().renderTypeAngled.getRenderId();
+		return AliensVsPredator.renderer().renderTypeShape.getRenderId();
 	}
 }

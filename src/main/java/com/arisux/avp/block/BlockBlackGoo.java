@@ -1,5 +1,6 @@
 package com.arisux.avp.block;
 
+import com.arisux.airi.lib.client.render.IconSet;
 import com.arisux.avp.AliensVsPredator;
 
 import cpw.mods.fml.relauncher.Side;
@@ -15,28 +16,34 @@ import net.minecraftforge.fluids.Fluid;
 public class BlockBlackGoo extends BlockFluidClassic
 {
 	@SideOnly(Side.CLIENT)
-	protected IIcon stillIcon;
-	@SideOnly(Side.CLIENT)
-	protected IIcon flowingIcon;
-
+	private final IconSet iconSet = AliensVsPredator.resources().ICONSET_BLACK_GOO;
+	
 	public BlockBlackGoo(Fluid fluid, Material material)
 	{
 		super(fluid, material);
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
-		return (side == 0 || side == 1) ? stillIcon : flowingIcon;
+		switch (side)
+		{
+			case 0:
+				return iconSet.still;
+			case 1:
+				return iconSet.still;
+			default:
+				return iconSet.flowing;
+		}
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register)
 	{
-		stillIcon = register.registerIcon("avp:blackgoo.still");
-		flowingIcon = register.registerIcon("avp:blackgoo.flowing");
-		AliensVsPredator.fluids().fluidBlackGoo.setIcons(stillIcon, flowingIcon);
+		iconSet.registerIcons(register);
+		AliensVsPredator.fluids().fluidBlackGoo.setIcons(iconSet.still, iconSet.flowing);
 	}
 
 	@Override

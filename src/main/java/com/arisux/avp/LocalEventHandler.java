@@ -7,6 +7,7 @@ import com.arisux.avp.event.BucketHandlingEvent;
 import com.arisux.avp.event.EmbryoTickEvent;
 import com.arisux.avp.event.EntityTrackingEvent;
 import com.arisux.avp.event.ExtendedPropertiesEvents;
+import com.arisux.avp.event.FarmlandRegistry;
 import com.arisux.avp.event.StormUpdateEvent;
 import com.arisux.avp.event.WorldInfoEvent;
 import com.arisux.avp.event.client.AlienArmorEvents;
@@ -74,6 +75,7 @@ public class LocalEventHandler implements IInitializable
 		this.registerEvent(new StormUpdateEvent());
 		this.registerEvent(new ExtendedPropertiesEvents());
 		this.registerEvent(new WorldInfoEvent());
+		this.registerEvent(FarmlandRegistry.INSTANCE);
 		this.registerEvent(BucketHandlingEvent.INSTANCE);
 	}
 

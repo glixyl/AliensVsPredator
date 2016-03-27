@@ -2,13 +2,12 @@ package com.arisux.avp.block;
 
 import java.util.Random;
 
-import com.arisux.airi.lib.BlockTypes.HookedBlock;
-
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 
-public class BlockUnidentifiedTreeTendon extends HookedBlock
+public class BlockUnidentifiedTreeTendon extends Block
 {
 	public BlockUnidentifiedTreeTendon()
 	{

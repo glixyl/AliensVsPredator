@@ -6,8 +6,8 @@ import com.arisux.airi.AIRI;
 import com.arisux.airi.lib.WorldUtil.Entities.Players.Inventories;
 import com.arisux.airi.lib.interfaces.IInitializable;
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.ItemHandler;
 import com.arisux.avp.BlockHandler;
+import com.arisux.avp.ItemHandler;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import net.minecraft.entity.player.EntityPlayer;

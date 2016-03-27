@@ -1,24 +1,39 @@
 package com.arisux.avp.block;
 
-import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.avp.entities.tile.TileEntityLightPanel;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
-public class BlockLightPanel extends HookedBlock
+public class BlockLightPanel extends Block
 {
 	public BlockLightPanel(Material material, boolean isLightOn)
 	{
 		super(material);
 		this.setLightOpacity(2);
 		this.setLightLevel(isLightOn ? 1 : 0);
-		this.disableIcon();
-		this.setRenderNormal(false);
-		this.setOpaque(false);
+	}
+	
+	@Override
+	public void registerBlockIcons(IIconRegister register)
+	{
+		return;
+	}
+	
+	@Override
+	public boolean renderAsNormalBlock()
+	{
+		return false;
+	}
+	
+	@Override
+	public boolean isOpaqueCube()
+	{
+		return false;
 	}
 	
 	@Override
@@ -27,6 +42,7 @@ public class BlockLightPanel extends HookedBlock
 		this.setLightLevel(0);
 		world.setLightValue(EnumSkyBlock.Block, posX, posY, posZ, 7);
 		world.func_147479_m(posX, posY, posZ);
+		
 		return super.onBlockPlaced(world, posX, posY, posZ, side, subX, subY, subZ, meta);
 	}
 
@@ -41,13 +57,7 @@ public class BlockLightPanel extends HookedBlock
 	{
 		return true;
 	}
-	
-	@Override
-	public void registerBlockIcons(IIconRegister iconRegister)
-	{
-		super.registerBlockIcons(iconRegister);
-	}
-	
+
 	@Override
 	public int getRenderType()
 	{
