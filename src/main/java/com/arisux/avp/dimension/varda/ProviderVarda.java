@@ -3,7 +3,7 @@ package com.arisux.avp.dimension.varda;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.dimension.BiomeLVBase;
 import com.arisux.avp.dimension.acheron.ChunkProviderAcheron;
-import com.arisux.avp.dimension.acheron.SkyProviderAcheron;
+import com.arisux.avp.event.VardaStormHandler;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -14,7 +14,6 @@ import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.client.IRenderHandler;
-import net.minecraftforge.common.DimensionManager;
 
 public class ProviderVarda extends WorldProvider
 {
@@ -147,10 +146,10 @@ public class ProviderVarda extends WorldProvider
 		brightness = (float) (brightness * (1.0D - this.worldObj.getWeightedThunderStrength(angle) * 5.0F / 16.0D));
 		return brightness * 0.45F;
 	}
-
-	public boolean isSilicaStormActive()
+	
+	public VardaStormHandler getStormHandler()
 	{
-		return (this.worldObj.getWorldTime() % 24000L) / 1000L > 2L && (this.worldObj.getWorldTime() % 24000L) / 1000L < 4L;
+		return VardaStormHandler.INSTANCE;
 	}
 
 	@Override

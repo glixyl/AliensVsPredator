@@ -794,6 +794,7 @@ death.attack.acidshot=%1$s was vaporized in acid by %2$s.
 death.attack.acid=%1$s vaporized in acid.
 death.attack.spear=%1$s was speared by %2$s.
 death.attack.chestburster=A chestburster ripped through the chest of %1$s!
+death.attack.silicaStorm=%1$s was beat across the surface of Varda by a silica storm.
 
 gui.avp.beta.feedback.info.submit.title=Submit Feedback
 gui.avp.beta.feedback.info.submit.button=Submit Feedback

@@ -10,7 +10,7 @@ import com.arisux.airi.lib.client.render.Color;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.dimension.BiomeLVBase;
 import com.arisux.avp.dimension.DimensionUtil;
-import com.arisux.avp.event.StormUpdateEvent;
+import com.arisux.avp.event.VardaStormHandler;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
@@ -26,9 +26,8 @@ public class SkyProviderVarda extends IRenderHandler
 {
 	private Tessellator tessellator = Tessellator.instance;
 	private Minecraft mc = Minecraft.getMinecraft();
-	private StormUpdateEvent event;
 	private Color skyColor = new Color(0.11F, 0.225F, 0.265F, 1F);
-	protected Color cloudColor = new Color(0.03F, 0.03F, 0.05F, 0.8F);
+	protected Color cloudColor = new Color(0.075F, 0.1F, 0.15F, 0.75F);
 	private float[] stormXCoords = null;
 	private float[] stormZCoords = null;
 
@@ -37,8 +36,6 @@ public class SkyProviderVarda extends IRenderHandler
 
 	public SkyProviderVarda()
 	{
-		this.event = (StormUpdateEvent) AliensVsPredator.events().getEvent(StormUpdateEvent.class);
-
 		GL11.glNewList(this.starGLCallList, GL11.GL_COMPILE);
 		DimensionUtil.renderStars(new Random(10842L), 6000, 100);
 		GL11.glEndList();
@@ -70,13 +67,8 @@ public class SkyProviderVarda extends IRenderHandler
 	public void render(float renderPartialTicks, WorldClient world, Minecraft mc)
 	{
 		ProviderVarda provider = (ProviderVarda) world.provider;
-		
-		this.cloudColor.r = 0.075F;
-		this.cloudColor.g = 0.1F;
-		this.cloudColor.b = 0.15F;
-		this.cloudColor.a = 0.75F;
 
-		if (provider.isSilicaStormActive())
+		if (provider.getStormHandler().isStormActive(world))
 		{
 			 this.renderStorm(renderPartialTicks);
 		}
@@ -292,22 +284,21 @@ public class SkyProviderVarda extends IRenderHandler
 
 	public void renderStorm(float renderPartialTicks)
 	{
-		float gustSize = 4F;
-		float intensity = 2F;
+		float size = 1F;
 		float windSpeed = 1F;
-		int maxStormSize = 32;
+		int stormSize = 32;
 		mc.entityRenderer.enableLightmap(renderPartialTicks);
 
 		stormXCoords = null;
 
 		if (stormXCoords == null || stormZCoords == null)
 		{
-			stormXCoords = new float[maxStormSize * maxStormSize];
-			stormZCoords = new float[maxStormSize * maxStormSize];
+			stormXCoords = new float[stormSize * stormSize];
+			stormZCoords = new float[stormSize * stormSize];
 
-			for (int zCoord = 0; zCoord < maxStormSize; ++zCoord)
+			for (int zCoord = 0; zCoord < stormSize; ++zCoord)
 			{
-				for (int xCoord = 0; xCoord < maxStormSize; ++xCoord)
+				for (int xCoord = 0; xCoord < stormSize; ++xCoord)
 				{
 					float x = xCoord - 16;
 					float z = zCoord - 16;
@@ -327,7 +318,7 @@ public class SkyProviderVarda extends IRenderHandler
 		double renderPartialY = renderViewEntity.lastTickPosY + (renderViewEntity.posY - renderViewEntity.lastTickPosY) * renderPartialTicks;
 		double renderPartialZ = renderViewEntity.lastTickPosZ + (renderViewEntity.posZ - renderViewEntity.lastTickPosZ) * renderPartialTicks;
 		int renderYFloor = MathHelper.floor_double(renderPartialY);
-		byte layers = (byte) (mc.gameSettings.fancyGraphics ? (maxStormSize / 2) - 1 : (maxStormSize / 4));
+		byte layers = (byte) (mc.gameSettings.fancyGraphics ? (stormSize / 2) - 1 : (stormSize / 4));
 
 		GlStateManager.disable(GL11.GL_CULL_FACE);
 		GL11.glNormal3f(0.0F, 1.0F, 0.0F);
@@ -377,17 +368,16 @@ public class SkyProviderVarda extends IRenderHandler
 					if (minY != maxY)
 					{
 						float movement = 0F;
-
-						movement = ((event.getStormUpdateCount() + vX * vX * 3121 + vX * 45238971 + vZ * vZ * 418711 + vZ * 13761 & 31) + renderPartialTicks) / 16.0F * intensity;
+						movement = ((VardaStormHandler.INSTANCE.getStormUpdateCount() + vX * vX * 3121 + vX * 45238971 + vZ * vZ * 418711 + vZ * 13761 & 31) + renderPartialTicks) / 16.0F;
 						movement = movement * windSpeed;
 						tessellator.startDrawingQuads();
 						tessellator.setBrightness(worldclient.getLightBrightnessForSkyBlocks(vX, vY, vZ, 0));
 						tessellator.setColorRGBA_F(0.3F, 0.3F, 0.3F, 1F);
 						tessellator.setTranslation(-renderPartialX * 1.0D, -renderPartialY * 1.0D, -renderPartialZ * 1.0D);
-						tessellator.addVertexWithUV(vX - rotationX + 0.5D, minY, vZ - rotationZ + 0.5D + movement * gustSize, 0.0F * gustSize, minY * gustSize / 4.0F + movement * gustSize);
-						tessellator.addVertexWithUV(vX + rotationX + 0.5D, minY, vZ + rotationZ + 0.5D + movement * gustSize, 1.0F * gustSize, minY * gustSize / 4.0F + movement * gustSize);
-						tessellator.addVertexWithUV(vX + rotationX + 0.5D, maxY, vZ + rotationZ + 0.5D + movement * gustSize, 1.0F * gustSize, maxY * gustSize / 4.0F + movement * gustSize);
-						tessellator.addVertexWithUV(vX - rotationX + 0.5D, maxY, vZ - rotationZ + 0.5D + movement * gustSize, 0.0F * gustSize, maxY * gustSize / 4.0F + movement * gustSize);
+						tessellator.addVertexWithUV(vX - rotationX + 0.5D, minY, vZ - rotationZ + 0.5D + movement * size, 0.0F * size, minY * size / 4.0F + movement * size);
+						tessellator.addVertexWithUV(vX + rotationX + 0.5D, minY, vZ + rotationZ + 0.5D + movement * size, 1.0F * size, minY * size / 4.0F + movement * size);
+						tessellator.addVertexWithUV(vX + rotationX + 0.5D, maxY, vZ + rotationZ + 0.5D + movement * size, 1.0F * size, maxY * size / 4.0F + movement * size);
+						tessellator.addVertexWithUV(vX - rotationX + 0.5D, maxY, vZ - rotationZ + 0.5D + movement * size, 0.0F * size, maxY * size / 4.0F + movement * size);
 						tessellator.setTranslation(0.0D, 0.0D, 0.0D);
 						tessellator.draw();
 					}

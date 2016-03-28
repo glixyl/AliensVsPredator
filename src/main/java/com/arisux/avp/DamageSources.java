@@ -18,11 +18,17 @@ public class DamageSources extends DamageSource
     public static DamageSource plasmacaster = (new DamageSource("plasmacaster")).setProjectile().setMagicDamage().setDamageBypassesArmor();
     public static DamageSource flamethrower = (new DamageSource("flamethrower")).setProjectile();
     public static DamageSource laserMine = (new DamageSource("laserMine")).setProjectile().setExplosion();
+    public static DamageSource silicaStorm = (new DamageSource("silicaStorm")).setDifficultyScaled().setDamageBypassesArmor().setDamageIsAbsolute();
 
 	public DamageSources(String source)
 	{
 		super(source);
 	}
+	
+    public static DamageSource causeSilicaStormDamage(Entity entity)
+    {
+        return (new EntityDamageSource("silicaStorm", entity)).setDifficultyScaled().setDamageBypassesArmor().setDamageIsAbsolute();
+    }
 	
     public static DamageSource causeLaserMineDamage(Entity entityLaserMine, Entity entity)
     {
