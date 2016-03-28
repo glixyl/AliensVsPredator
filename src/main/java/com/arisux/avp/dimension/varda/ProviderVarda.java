@@ -3,6 +3,7 @@ package com.arisux.avp.dimension.varda;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.dimension.BiomeLVBase;
 import com.arisux.avp.dimension.acheron.ChunkProviderAcheron;
+import com.arisux.avp.dimension.acheron.SkyProviderAcheron;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -33,14 +34,15 @@ public class ProviderVarda extends WorldProvider
 		this.isHellWorld = false;
 	}
 
-	public static WorldProvider getProviderForDimension(int var0)
-	{
-		return DimensionManager.createProviderFor(7);
-	}
-
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IRenderHandler getSkyRenderer()
+	{
+		return skyProvider == null ? skyProvider = new SkyProviderVarda() : skyProvider;
+	}
+	
+	@Override
+	public IRenderHandler getCloudRenderer()
 	{
 		return skyProvider == null ? skyProvider = new SkyProviderVarda() : skyProvider;
 	}
@@ -121,7 +123,7 @@ public class ProviderVarda extends WorldProvider
 	@Override
 	public Vec3 drawClouds(float partialTicks)
 	{
-		return Vec3.createVectorHelper(0.07F, 0.07F, 0.09F);
+		return Vec3.createVectorHelper(0.0F, 0.0F, 0.0F);
 	}
 
 	@Override
