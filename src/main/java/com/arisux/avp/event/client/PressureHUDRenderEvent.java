@@ -27,6 +27,7 @@ import com.arisux.avp.entities.mob.EntityXenomorph;
 import com.arisux.avp.entities.tile.TileEntityPowerline;
 import com.arisux.avp.entities.tile.TileEntityStasisMechanism;
 
+import cpw.mods.fml.common.ModContainer;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.RenderTickEvent;
 import net.minecraft.block.Block;
@@ -348,7 +349,10 @@ public class PressureHUDRenderEvent
 
 						subMenuStartY = subMenuStartY + 10;
 
-						fontrenderer.drawString("From " + ModUtil.getModContainerForId(Blocks.getDomain(block).replace(":", "")).getName(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0x666666);
+						String blockDomain = Blocks.getDomain(block);
+						ModContainer modContainer = ModUtil.getModContainerForId(blockDomain.replace(":", ""));
+						String mod = modContainer != null ? modContainer.getName() : "???";
+						fontrenderer.drawString("From " + mod, subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0x666666);
 						fontrenderer.drawString("Looking at " + ForgeDirection.getOrientation(side.getId()) + " face", subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0x666666);
 
 						if (tile instanceof TileEntity)
