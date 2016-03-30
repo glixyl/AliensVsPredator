@@ -55,7 +55,27 @@ public class VardaStormHandler
 
 	public boolean isStormActive(World worldObj)
 	{
-		return (worldObj.getWorldTime() % 24000L) / 1000L > 2L && (worldObj.getWorldTime() % 24000L) / 1000L < 4L;
+		return isStormActive(worldObj.getWorldTime());
+	}
+	
+	public boolean isStormActive(long atTime)
+	{
+		return toHours(atTime) >= getStormStartTime() && toHours(atTime) <= getStormEndTime();
+	}
+	
+	public long toHours(long time)
+	{
+		return (time % 24000L) / 1000L;
+	}
+	
+	public long getStormStartTime()
+	{
+		return 3L;
+	}
+	
+	public long getStormEndTime()
+	{
+		return 4L;
 	}
 
 	public void updateStorm()

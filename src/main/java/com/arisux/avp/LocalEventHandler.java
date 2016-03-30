@@ -20,6 +20,7 @@ import com.arisux.avp.event.client.FacehuggerRenderEvent;
 import com.arisux.avp.event.client.FireAPCEvent;
 import com.arisux.avp.event.client.LightmapUpdateEvent;
 import com.arisux.avp.event.client.PlayerModeRenderEvent;
+import com.arisux.avp.event.client.PressureHUDRenderEvent;
 import com.arisux.avp.event.client.PulseRifleEvents;
 import com.arisux.avp.event.client.RenderPlayerAPCEvent;
 import com.arisux.avp.event.client.RenderPlayerHotbarAPCEvent;
@@ -54,6 +55,7 @@ public class LocalEventHandler implements IInitializable
 			this.registerEvent(new AmmoIndicatorRenderEvent());
 			this.registerEvent(new DebugToolsRenderEvent());
 			this.registerEvent(new TacticalHUDRenderEvent());
+			this.registerEvent(new PressureHUDRenderEvent());
 			this.registerEvent(new FacehuggerRenderEvent());
 			this.registerEvent(new VisionModeRenderEvent());
 			this.registerEvent(new RenderMotionTrackerScreen());
