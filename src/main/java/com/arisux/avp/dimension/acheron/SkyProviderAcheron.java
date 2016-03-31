@@ -173,7 +173,7 @@ public class SkyProviderAcheron extends IRenderHandler
 			float offsetU = MathHelper.floor_double(viewX) * scaleUV;
 			float offsetV = MathHelper.floor_double(viewZ) * scaleUV;
 			byte dist = (byte) (mc.gameSettings.renderDistanceChunks);
-			byte cloudSections = 16;
+			byte cloudSections = 2;
 			
 			GlStateManager.disableCullFace();
 			RenderUtil.bindTexture(AliensVsPredator.resources().SKY_VARDA_CLOUDS);

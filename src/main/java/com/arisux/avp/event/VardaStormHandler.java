@@ -30,6 +30,14 @@ public class VardaStormHandler
 
 		if (isStormActive(event.world))
 		{
+			if (event.world.isRemote)
+			{
+				Minecraft.getMinecraft().thePlayer.motionZ += 0.04F;
+				Minecraft.getMinecraft().thePlayer.motionY += MathHelper.sin(event.world.getWorldTime() * 0.4F) * 0.1F;
+				Minecraft.getMinecraft().thePlayer.fallDistance = 0F;
+				AliensVsPredator.network().sendToAll(new PacketVardaStormMoveEntity(Integer.valueOf(Minecraft.getMinecraft().thePlayer.getEntityId())));
+			}
+
 			Object[] entities = event.world.loadedEntityList.toArray();
 
 			for (Object o : entities)
@@ -57,22 +65,22 @@ public class VardaStormHandler
 	{
 		return isStormActive(worldObj.getWorldTime());
 	}
-	
+
 	public boolean isStormActive(long atTime)
 	{
 		return toHours(atTime) >= getStormStartTime() && toHours(atTime) <= getStormEndTime();
 	}
-	
+
 	public long toHours(long time)
 	{
 		return (time % 24000L) / 1000L;
 	}
-	
+
 	public long getStormStartTime()
 	{
 		return 3L;
 	}
-	
+
 	public long getStormEndTime()
 	{
 		return 4L;

@@ -46,7 +46,7 @@ public class SkyProviderVarda extends IRenderHandler
 			int levels = 64;
 			int size = 256 / levels + 2;
 			float skylineHeight = 60.0F;
-	
+
 			for (int x = -levels * size; x <= levels * size; x += levels)
 			{
 				for (int z = -levels * size; z <= levels * size; z += levels)
@@ -70,7 +70,7 @@ public class SkyProviderVarda extends IRenderHandler
 
 		if (provider.getStormHandler().isStormActive(world))
 		{
-			 this.renderStorm(renderPartialTicks);
+			this.renderStorm(renderPartialTicks);
 		}
 
 		GlStateManager.disable(GL11.GL_TEXTURE_2D);
@@ -78,7 +78,7 @@ public class SkyProviderVarda extends IRenderHandler
 		GL11.glDepthMask(false);
 		GlStateManager.enable(GL11.GL_FOG);
 		GL11.glColor3f(skyColor.r, skyColor.g, skyColor.b);
-		
+
 		/** Render Sky **/
 		GL11.glCallList(this.glSkyList);
 		GlStateManager.disable(GL11.GL_FOG);
@@ -86,7 +86,7 @@ public class SkyProviderVarda extends IRenderHandler
 		GlStateManager.enable(GL11.GL_BLEND);
 		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GlStateManager.color(1.0F, 1.0F, 1.0F, provider.getStarBrightness(renderPartialTicks) * 2);
-		
+
 		/** Render Stars **/
 		GL11.glCallList(this.starGLCallList);
 		GlStateManager.enable(GL11.GL_TEXTURE_2D);
@@ -130,7 +130,7 @@ public class SkyProviderVarda extends IRenderHandler
 		GlStateManager.enable(GL11.GL_ALPHA_TEST);
 		GlStateManager.enable(GL11.GL_TEXTURE_2D);
 		GL11.glDepthMask(true);
-		
+
 		if (mc.gameSettings.shouldRenderClouds())
 		{
 			GlStateManager.pushMatrix();
@@ -146,7 +146,7 @@ public class SkyProviderVarda extends IRenderHandler
 			GlStateManager.popMatrix();
 		}
 	}
-	
+
 	public void renderClouds(float renderPartialTicks)
 	{
 		for (int cloudPass = 1; cloudPass > 0; cloudPass--)
@@ -165,14 +165,14 @@ public class SkyProviderVarda extends IRenderHandler
 			float offsetU = MathHelper.floor_double(viewX) * scaleUV;
 			float offsetV = MathHelper.floor_double(viewZ) * scaleUV;
 			byte dist = (byte) (mc.gameSettings.renderDistanceChunks);
-			byte cloudSections = 16;
-			
+			byte cloudSections = 2;
+
 			GlStateManager.disableCullFace();
 			RenderUtil.bindTexture(AliensVsPredator.resources().SKY_VARDA_CLOUDS);
 			GlStateManager.enableBlend();
 			OpenGlHelper.glBlendFunc(GL11.GL_ONE_MINUS_DST_COLOR, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
 			GlStateManager.scale(cloudSpan, 1.0F, cloudSpan);
-	
+
 			for (int pass = 0; pass < 2; pass++)
 			{
 				if (pass == 0)
@@ -183,7 +183,7 @@ public class SkyProviderVarda extends IRenderHandler
 				{
 					GL11.glColorMask(true, true, true, true);
 				}
-	
+
 				for (int x = -cloudSections + 1; x <= cloudSections; ++x)
 				{
 					for (int z = -cloudSections + 1; z <= cloudSections; ++z)
@@ -194,7 +194,7 @@ public class SkyProviderVarda extends IRenderHandler
 						float cloudZ = cloudV - ((float) (viewZ - MathHelper.floor_double(viewZ)));
 
 						tessellator.startDrawingQuads();
-	
+
 						if (cloudY > -cloudHeight - 1.0F)
 						{
 							tessellator.setColorRGBA_F(cloudColor.r * 0.7F, cloudColor.g * 0.7F, cloudColor.b * 0.7F, cloudColor.a + 0.1F);
@@ -204,7 +204,7 @@ public class SkyProviderVarda extends IRenderHandler
 							tessellator.addVertexWithUV(cloudX + dist, cloudY + 0.0F, cloudZ + 0.0F, (cloudU + dist) * scaleUV + offsetU, (cloudV + 0.0F) * scaleUV + offsetV);
 							tessellator.addVertexWithUV(cloudX + 0.0F, cloudY + 0.0F, cloudZ + 0.0F, (cloudU + 0.0F) * scaleUV + offsetU, (cloudV + 0.0F) * scaleUV + offsetV);
 						}
-	
+
 						if (cloudY <= cloudHeight + 1.0F)
 						{
 							tessellator.setColorRGBA_F(cloudColor.r, cloudColor.g, cloudColor.b, cloudColor.a + 0.15F);
@@ -214,13 +214,13 @@ public class SkyProviderVarda extends IRenderHandler
 							tessellator.addVertexWithUV(cloudX + dist, cloudY + cloudHeight, cloudZ + 0.0F, (cloudU + dist) * scaleUV + offsetU, (cloudV + 0.0F) * scaleUV + offsetV);
 							tessellator.addVertexWithUV(cloudX + 0.0F, cloudY + cloudHeight, cloudZ + 0.0F, (cloudU + 0.0F) * scaleUV + offsetU, (cloudV + 0.0F) * scaleUV + offsetV);
 						}
-	
+
 						tessellator.setColorRGBA_F(cloudColor.r * 0.9F, cloudColor.g * 0.9F, cloudColor.b * 0.9F, cloudColor.a);
-	
+
 						if (x > -1)
 						{
 							tessellator.setNormal(-1.0F, 0.0F, 0.0F);
-	
+
 							for (int size = 0; size < dist; ++size)
 							{
 								tessellator.addVertexWithUV(cloudX + size + 0.0F, cloudY + 0.0F, cloudZ + dist, (cloudU + size + 0.5F) * scaleUV + offsetU, (cloudV + dist) * scaleUV + offsetV);
@@ -229,11 +229,11 @@ public class SkyProviderVarda extends IRenderHandler
 								tessellator.addVertexWithUV(cloudX + size + 0.0F, cloudY + 0.0F, cloudZ + 0.0F, (cloudU + size + 0.5F) * scaleUV + offsetU, (cloudV + 0.0F) * scaleUV + offsetV);
 							}
 						}
-	
+
 						if (x <= 1)
 						{
 							tessellator.setNormal(1.0F, 0.0F, 0.0F);
-	
+
 							for (int size = 0; size < dist; ++size)
 							{
 								tessellator.addVertexWithUV(cloudX + size + 1.0F, cloudY + 0.0F, cloudZ + dist, (cloudU + size + 0.5F) * scaleUV + offsetU, (cloudV + dist) * scaleUV + offsetV);
@@ -242,13 +242,13 @@ public class SkyProviderVarda extends IRenderHandler
 								tessellator.addVertexWithUV(cloudX + size + 1.0F, cloudY + 0.0F, cloudZ + 0.0F, (cloudU + size + 0.5F) * scaleUV + offsetU, (cloudV + 0.0F) * scaleUV + offsetV);
 							}
 						}
-	
+
 						tessellator.setColorRGBA_F(cloudColor.r * 0.8F, cloudColor.g * 0.8F, cloudColor.b * 0.8F, 0.8F);
-	
+
 						if (z > -1)
 						{
 							tessellator.setNormal(0.0F, 0.0F, -1.0F);
-	
+
 							for (int size = 0; size < dist; ++size)
 							{
 								tessellator.addVertexWithUV(cloudX + 0.0F, cloudY + cloudHeight, cloudZ + size + 0.0F, (cloudU + 0.0F) * scaleUV + offsetU, (cloudV + size + 0.5F) * scaleUV + offsetV);
@@ -257,11 +257,11 @@ public class SkyProviderVarda extends IRenderHandler
 								tessellator.addVertexWithUV(cloudX + 0.0F, cloudY + 0.0F, cloudZ + size + 0.0F, (cloudU + 0.0F) * scaleUV + offsetU, (cloudV + size + 0.5F) * scaleUV + offsetV);
 							}
 						}
-	
+
 						if (z <= 1)
 						{
 							tessellator.setNormal(0.0F, 0.0F, 1.0F);
-	
+
 							for (int size = 0; size < dist; ++size)
 							{
 								tessellator.addVertexWithUV(cloudX + 0.0F, cloudY + cloudHeight, cloudZ + size + 1.0F, (cloudU + 0.0F) * scaleUV + offsetU, (cloudV + size + 0.5F) * scaleUV + offsetV);
@@ -270,12 +270,12 @@ public class SkyProviderVarda extends IRenderHandler
 								tessellator.addVertexWithUV(cloudX + 0.0F, cloudY + 0.0F, cloudZ + size + 1.0F, (cloudU + 0.0F) * scaleUV + offsetU, (cloudV + size + 0.5F) * scaleUV + offsetV);
 							}
 						}
-	
+
 						tessellator.draw();
 					}
 				}
 			}
-	
+
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 			GlStateManager.disable(GL11.GL_BLEND);
 			GlStateManager.enable(GL11.GL_CULL_FACE);
