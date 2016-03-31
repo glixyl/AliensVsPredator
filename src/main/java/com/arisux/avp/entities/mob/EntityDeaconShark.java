@@ -59,7 +59,7 @@ public class EntityDeaconShark extends EntitySpeciesAlien
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(6.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(5.0D);
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
         this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30.0D);
@@ -140,14 +140,13 @@ public class EntityDeaconShark extends EntitySpeciesAlien
     @Override
     public boolean getCanSpawnHere()
     {
-       // return(this.rand.nextInt(20) == 0 || !this.worldObj.canBlockSeeTheSky((int)this.posX, (int)this.posY, (int)this.posZ)) && super.getCanSpawnHere();
-	   return(!this.worldObj.canBlockSeeTheSky((int)this.posX, (int)this.posY, (int)this.posZ)) && this.rand.nextInt(11111) == 0;
+	   return (!this.worldObj.canBlockSeeTheSky((int)this.posX, (int)this.posY, (int)this.posZ)) && this.rand.nextInt(11111) == 0;
     }
 
     @Override
     protected boolean canDespawn()
     {
-    	return true;
+    	return false;
     }
 
 	@Override
@@ -226,7 +225,7 @@ public class EntityDeaconShark extends EntitySpeciesAlien
 
     class DeaconSharkMoveHelper extends EntityMoveHelper
     {
-        private EntityDeaconShark entityGuardian = EntityDeaconShark.this;
+        private EntityDeaconShark shark = EntityDeaconShark.this;
 
         public DeaconSharkMoveHelper()
         {
@@ -255,43 +254,43 @@ public class EntityDeaconShark extends EntitySpeciesAlien
         {
             if (this.isUpdating())
             {
-                double posX = AccessWrapper.getMoveHelperPosX(this) - this.entityGuardian.posX;
-                double posY = AccessWrapper.getMoveHelperPosY(this) - this.entityGuardian.posY;
-                double posZ = AccessWrapper.getMoveHelperPosZ(this) - this.entityGuardian.posZ;
+                double posX = AccessWrapper.getMoveHelperPosX(this) - this.shark.posX;
+                double posY = AccessWrapper.getMoveHelperPosY(this) - this.shark.posY;
+                double posZ = AccessWrapper.getMoveHelperPosZ(this) - this.shark.posZ;
                 double velocity = posX * posX + posY * posY + posZ * posZ;
                 velocity = (double)MathHelper.sqrt_double(velocity);
                 posY /= velocity;
-                this.entityGuardian.rotationYaw = this.limitAngle(this.entityGuardian.rotationYaw, (float)(Math.atan2(posZ, posX) * 180.0D / Math.PI) - 90.0F, 5.0F);
-                this.entityGuardian.renderYawOffset = this.entityGuardian.rotationYaw;
-                float speed = (float)(AccessWrapper.getMoveHelperSpeed(this) * this.entityGuardian.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue());
-                this.entityGuardian.setAIMoveSpeed(this.entityGuardian.getAIMoveSpeed() + (speed - this.entityGuardian.getAIMoveSpeed()) * 0.125F);
-                double waveX = Math.sin((double)(this.entityGuardian.ticksExisted + this.entityGuardian.getEntityId()) * 0.5D) * 0.05D;
-                double waveY = Math.cos((double)(this.entityGuardian.rotationYaw * (float)Math.PI / 180.0F));
-                double waveZ = Math.sin((double)(this.entityGuardian.rotationYaw * (float)Math.PI / 180.0F));
-                this.entityGuardian.motionX += waveX * waveY;
-                this.entityGuardian.motionZ += waveX * waveZ;
-                waveX = Math.sin((double)(this.entityGuardian.ticksExisted + this.entityGuardian.getEntityId()) * 0.75D) * 0.05D;
-                this.entityGuardian.motionY += waveX * (waveZ + waveY) * 0.25D;
-                this.entityGuardian.motionY += (double)this.entityGuardian.getAIMoveSpeed() * posY * 0.1D;
-                double offsetX = this.entityGuardian.posX + posX / velocity * 2.0D;
-                double offsetY = (double)this.entityGuardian.getEyeHeight() + this.entityGuardian.posY + posY / velocity * 1.0D;
-                double offsetZ = this.entityGuardian.posZ + posZ / velocity * 2.0D;
-                double lookX = AccessWrapper.getLookHelperPosX(this.entityGuardian.getLookHelper());
-                double lookY = AccessWrapper.getLookHelperPosY(this.entityGuardian.getLookHelper());
-                double lookZ = AccessWrapper.getLookHelperPosZ(this.entityGuardian.getLookHelper());
+                this.shark.rotationYaw = this.limitAngle(this.shark.rotationYaw, (float)(Math.atan2(posZ, posX) * 180.0D / Math.PI) - 90.0F, 5.0F);
+                this.shark.renderYawOffset = this.shark.rotationYaw;
+                float speed = (float)(AccessWrapper.getMoveHelperSpeed(this) * this.shark.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue());
+                this.shark.setAIMoveSpeed(this.shark.getAIMoveSpeed() + (speed - this.shark.getAIMoveSpeed()) * 0.125F);
+                double waveX = Math.sin((double)(this.shark.ticksExisted + this.shark.getEntityId()) * 0.5D) * 0.05D;
+                double waveY = Math.cos((double)(this.shark.rotationYaw * (float)Math.PI / 180.0F));
+                double waveZ = Math.sin((double)(this.shark.rotationYaw * (float)Math.PI / 180.0F));
+                this.shark.motionX += waveX * waveY;
+                this.shark.motionZ += waveX * waveZ;
+                waveX = Math.sin((double)(this.shark.ticksExisted + this.shark.getEntityId()) * 0.75D) * 0.05D;
+                this.shark.motionY += waveX * (waveZ + waveY) * 0.25D;
+                this.shark.motionY += (double)this.shark.getAIMoveSpeed() * posY * 0.1D;
+                double offsetX = this.shark.posX + posX / velocity * 2.0D;
+                double offsetY = (double)this.shark.getEyeHeight() + this.shark.posY + posY / velocity * 1.0D;
+                double offsetZ = this.shark.posZ + posZ / velocity * 2.0D;
+                double lookX = AccessWrapper.getLookHelperPosX(this.shark.getLookHelper());
+                double lookY = AccessWrapper.getLookHelperPosY(this.shark.getLookHelper());
+                double lookZ = AccessWrapper.getLookHelperPosZ(this.shark.getLookHelper());
 
-                if (!AccessWrapper.getLookHelperIsLooking(this.entityGuardian.getLookHelper()))
+                if (!AccessWrapper.getLookHelperIsLooking(this.shark.getLookHelper()))
                 {
                     lookX = offsetX;
                     lookY = offsetY;
                     lookZ = offsetZ;
                 }
 
-                this.entityGuardian.getLookHelper().setLookPosition(lookX + (offsetX - lookX) * 0.125D, lookY + (offsetY - lookY) * 0.125D, lookZ + (offsetZ - lookZ) * 0.125D, 10.0F, 40.0F);
+                this.shark.getLookHelper().setLookPosition(lookX + (offsetX - lookX) * 0.125D, lookY + (offsetY - lookY) * 0.125D, lookZ + (offsetZ - lookZ) * 0.125D, 10.0F, 40.0F);
             }
             else
             {
-                this.entityGuardian.setAIMoveSpeed(0.0F);
+                this.shark.setAIMoveSpeed(0.0F);
             }
         }
     }
