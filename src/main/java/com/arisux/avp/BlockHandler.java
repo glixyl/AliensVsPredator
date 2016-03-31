@@ -111,7 +111,10 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockEngineerShipColumn2 = (new BlockMaterial(Material.iron).setHardness(10F).setResistance(30.0F).setLightOpacity(255)),
 		blockEngineerShipMaterial1 = (new BlockMaterial(Material.iron).setHardness(10F).setResistance(30.0F).setLightOpacity(255)),
 		blockEngineerShipMaterial2 = (new BlockMaterial(Material.iron).setHardness(10F).setResistance(30.0F).setLightOpacity(255)),
-		blockIndustrialGlass = (new BlockMaterial(Material.iron)).setHardness(5F).setResistance(30.0F).setLightOpacity(0),
+		blockIndustrialGlass = (new BlockMaterial(Material.iron){
+			@Override public boolean renderAsNormalBlock() 	{ return false; }
+			@Override public boolean isOpaqueCube() 		{ return false; }
+		}).setHardness(5F).setResistance(30.0F).setLightOpacity(0),
 		terrainUniStone = (new BlockMaterial(Material.rock)).setHardness(1.3F).setResistance(2.0F).setLightOpacity(255),
 		terrainUniSand = (new BlockMaterial(Material.sand)).setHardness(3.5F).setResistance(2.0F).setLightOpacity(255),
 		terrainUniGravel = (new BlockMaterial(Material.sand)).setHardness(3.0F).setLightOpacity(255),
