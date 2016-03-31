@@ -8,6 +8,7 @@ import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
 import com.arisux.avp.entities.ai.helpers.EntityExtendedLookHelper;
 import com.arisux.avp.entities.pathfinding.PathNavigateSwimmer;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -186,7 +187,7 @@ public class EntityDeaconShark extends EntitySpeciesAlien
 	@Override
 	public boolean getCanSpawnHere()
 	{
-		return WorldUtil.canSeeSky(new CoordData(this), this.worldObj);
+		return isInsideOfMaterial(Material.water);
 	}
 
 	@Override
