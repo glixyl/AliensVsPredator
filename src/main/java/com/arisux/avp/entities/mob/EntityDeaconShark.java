@@ -187,7 +187,9 @@ public class EntityDeaconShark extends EntitySpeciesAlien
 	@Override
 	public boolean getCanSpawnHere()
 	{
-		return isInsideOfMaterial(Material.water);
+		List<? extends Entity> otherSharks = WorldUtil.Entities.getEntitiesInCoordsRange(this.worldObj, EntityDeaconShark.class, new CoordData(this), (int) this.getEntityAttribute(SharedMonsterAttributes.followRange).getAttributeValue());
+		
+		return isInsideOfMaterial(Material.water) && otherSharks.size() <= 1;
 	}
 
 	@Override
