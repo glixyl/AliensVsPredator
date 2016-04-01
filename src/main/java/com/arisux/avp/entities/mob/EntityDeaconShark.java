@@ -26,6 +26,7 @@ import net.minecraft.entity.ai.EntityLookHelper;
 import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -188,8 +189,9 @@ public class EntityDeaconShark extends EntitySpeciesAlien
 	public boolean getCanSpawnHere()
 	{
 		List<? extends Entity> otherSharks = WorldUtil.Entities.getEntitiesInCoordsRange(this.worldObj, EntityDeaconShark.class, new CoordData(this), (int) this.getEntityAttribute(SharedMonsterAttributes.followRange).getAttributeValue());
+		CoordData coordData = new CoordData(this);
 		
-		return isInsideOfMaterial(Material.water) && otherSharks.size() <= 1;
+		return coordData.getBlock(this.worldObj) == Blocks.water && otherSharks.size() <= 1;
 	}
 
 	@Override
