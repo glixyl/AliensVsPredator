@@ -1,24 +1,61 @@
 package com.arisux.avp.block;
 
-import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.airi.lib.client.render.IconSet;
+import com.arisux.airi.lib.enums.IconSides;
+import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntityOvamorph;
 import com.arisux.avp.entities.mob.EntityQueen;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class BlockTempleSpawner extends HookedBlock
+public class BlockTempleSpawner extends Block
 {
 	public boolean creativeOnly;
 
-	public BlockTempleSpawner(Material par2, boolean creativeOnly)
+	public BlockTempleSpawner(Material material, boolean creativeOnly)
 	{
-		super(par2);
-		this.setIconSet(new IconSet("avp:spawner_side", "avp:spawner_top", "avp:spawner_bottom", "avp:spawner_side", "avp:spawner_side", "avp:spawner_side", "avp:spawner_side"));
+		super(material);
 		this.creativeOnly = creativeOnly;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int side, int meta)
+	{
+		IconSet iconSet = AliensVsPredator.resources().ICONSET_SPAWNER;
+		IconSides iconSide = IconSides.getSideFor(side);
+
+		switch (iconSide)
+		{
+			case BOTTOM:
+				return iconSet.bottom;
+			case TOP:
+				return iconSet.top;
+			case BACK:
+				return iconSet.back;
+			case FRONT:
+				return iconSet.front;
+			case LEFT:
+				return iconSet.left;
+			case RIGHT:
+				return iconSet.right;
+			default:
+				return iconSet.bottom;
+		}
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerBlockIcons(IIconRegister register)
+	{
+		AliensVsPredator.resources().ICONSET_SPAWNER.registerIcons(register);
 	}
 
 	@Override

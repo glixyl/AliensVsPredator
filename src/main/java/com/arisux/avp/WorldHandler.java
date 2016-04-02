@@ -1,6 +1,7 @@
 package com.arisux.avp;
 
 import com.arisux.airi.lib.interfaces.IInitializable;
+import com.arisux.avp.dimension.acheron.WorldGeneratorAcheron;
 import com.arisux.avp.dimension.varda.WorldGeneratorVarda;
 import com.arisux.avp.world.WorldGenerator;
 import com.arisux.avp.world.WorldGeneratorDerelict;
@@ -14,6 +15,7 @@ public class WorldHandler implements IInitializable
 	public static final WorldHandler instance = new WorldHandler();
 	private SaveHandler saveHandler;
 	private IWorldGenerator worldGeneratorVarda;
+	private IWorldGenerator worldGeneratorAcheron;
 	private IWorldGenerator worldGeneratorDerelict;
 	
 	public WorldHandler()
@@ -26,6 +28,7 @@ public class WorldHandler implements IInitializable
 	{
 		GameRegistry.registerWorldGenerator(new WorldGenerator(), 1);
 		GameRegistry.registerWorldGenerator(this.worldGeneratorVarda = new WorldGeneratorVarda(), 1);
+		GameRegistry.registerWorldGenerator(this.setWorldGeneratorAcheron(new WorldGeneratorAcheron()), 1);
 		GameRegistry.registerWorldGenerator(this.worldGeneratorDerelict = new WorldGeneratorDerelict(), 1);
 	}
 	
@@ -42,5 +45,16 @@ public class WorldHandler implements IInitializable
 	public SaveHandler getSaveHandler()
 	{
 		return saveHandler;
+	}
+
+	public IWorldGenerator getWorldGeneratorAcheron()
+	{
+		return worldGeneratorAcheron;
+	}
+
+	public IWorldGenerator setWorldGeneratorAcheron(IWorldGenerator worldGeneratorAcheron)
+	{
+		this.worldGeneratorAcheron = worldGeneratorAcheron;
+		return worldGeneratorAcheron;
 	}
 }

@@ -2,7 +2,6 @@ package com.arisux.avp.block;
 
 import java.util.Random;
 
-import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.avp.entities.tile.TileEntityHiveResin;
 
 import net.minecraft.block.Block;
@@ -10,12 +9,17 @@ import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class BlockHiveResin extends HookedBlock
+public class BlockHiveResin extends Block
 {
 	public BlockHiveResin(Material material)
 	{
 		super(material);
-		this.renderNormal = true;
+	}
+	
+	@Override
+	public boolean renderAsNormalBlock()
+	{
+		return true;
 	}
 
 	@Override

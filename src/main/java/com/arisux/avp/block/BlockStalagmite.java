@@ -2,62 +2,60 @@ package com.arisux.avp.block;
 
 import java.util.Random;
 
-import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.avp.AliensVsPredator;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
-public class BlockStalagmite extends HookedBlock
+public class BlockStalagmite extends Block
 {
-	public BlockStalagmite(Material var3)
+	public BlockStalagmite(Material material)
 	{
-		super(var3);
+		super(material);
 		this.setTickRandomly(true);
-		float var4 = 0.2F;
-		this.setBlockBounds(0.5F - var4, 0.0F, 0.5F - var4, 0.5F + var4, var4 * 3.0F, 0.5F + var4);
+		float size = 0.2F;
+		this.setBlockBounds(0.5F - size, 0.0F, 0.5F - size, 0.5F + size, size * 3.0F, 0.5F + size);
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World var1, int var2, int var3, int var4)
+	public boolean canPlaceBlockAt(World world, int posX, int posY, int posZ)
 	{
-		return super.canPlaceBlockAt(var1, var2, var3, var4) && this.canThisPlantGrowOnThisBlockID(var1.getBlock(var2, var3 - 1, var4));
+		return super.canPlaceBlockAt(world, posX, posY, posZ) && this.canThisPlantGrowOn(world.getBlock(posX, posY - 1, posZ));
 	}
 
-	protected boolean canThisPlantGrowOnThisBlockID(Block var1)
+	protected boolean canThisPlantGrowOn(Block block)
 	{
-		return var1 == AliensVsPredator.blocks().terrainUniDirt || var1 == AliensVsPredator.blocks().terrainUniStone || var1 == Blocks.nether_brick || var1 == Blocks.netherrack || var1 == Blocks.farmland;
-	}
-
-	@Override
-	public void onNeighborBlockChange(World var1, int var2, int var3, int var4, Block var5)
-	{
-		super.onNeighborBlockChange(var1, var2, var3, var4, var5);
-		this.checkFlowerChange(var1, var2, var3, var4);
+		return block == AliensVsPredator.blocks().terrainUniDirt || block == AliensVsPredator.blocks().terrainUniStone || block.getMaterial() == Material.ground || block.getMaterial() == Material.rock;
 	}
 
 	@Override
-	public void updateTick(World var1, int var2, int var3, int var4, Random var5)
+	public void onNeighborBlockChange(World world, int posX, int posY, int posZ, Block block)
 	{
-		this.checkFlowerChange(var1, var2, var3, var4);
+		super.onNeighborBlockChange(world, posX, posY, posZ, block);
+		this.checkFlowerChange(world, posX, posY, posZ);
 	}
 
-	protected final void checkFlowerChange(World var1, int var2, int var3, int var4)
+	@Override
+	public void updateTick(World world, int posX, int posY, int posZ, Random rand)
 	{
-		if (!this.canBlockStay(var1, var2, var3, var4))
+		this.checkFlowerChange(world, posX, posY, posZ);
+	}
+
+	protected final void checkFlowerChange(World world, int posX, int posY, int posZ)
+	{
+		if (!this.canBlockStay(world, posX, posY, posZ))
 		{
-			this.dropBlockAsItem(var1, var2, var3, var4, var1.getBlockMetadata(var2, var3, var4), 0);
-			var1.setBlockToAir(var2, var3, var4);
+			this.dropBlockAsItem(world, posX, posY, posZ, world.getBlockMetadata(posX, posY, posZ), 0);
+			world.setBlockToAir(posX, posY, posZ);
 		}
 	}
 
 	@Override
-	public boolean canBlockStay(World var1, int var2, int var3, int var4)
+	public boolean canBlockStay(World world, int posX, int posY, int posZ)
 	{
-		return (var1.getFullBlockLightValue(var2, var3, var4) >= 8 || var1.canBlockSeeTheSky(var2, var3, var4)) && this.canThisPlantGrowOnThisBlockID(var1.getBlock(var2, var3 - 1, var4));
+		return this.canThisPlantGrowOn(world.getBlock(posX, posY - 1, posZ));
 	}
 
 	@Override

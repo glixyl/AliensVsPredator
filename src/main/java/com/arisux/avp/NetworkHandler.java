@@ -10,6 +10,7 @@ import com.arisux.avp.packets.client.PacketRotateTransformer;
 import com.arisux.avp.packets.client.PacketSyncEEPC;
 import com.arisux.avp.packets.client.PacketSyncEEPPC;
 import com.arisux.avp.packets.client.PacketTurretInit;
+import com.arisux.avp.packets.client.PacketVardaStormMoveEntity;
 import com.arisux.avp.packets.server.PacketAddTuretTarget;
 import com.arisux.avp.packets.server.PacketAssembleCurrentSchematic;
 import com.arisux.avp.packets.server.PacketDamageEntity;
@@ -61,6 +62,7 @@ public class NetworkHandler extends SimpleNetworkWrapper implements IInitializab
 		this.registerMessage(Side.SERVER, PacketTurretTargetUpdate.class);
 		this.registerMessage(Side.SERVER, PacketWriteToDataDevice.class);
 		this.registerMessage(Side.CLIENT, PacketKillCountUpdate.class);
+		this.registerMessage(Side.CLIENT, PacketVardaStormMoveEntity.class);
 		this.registerMessage(Side.CLIENT, PacketAmmoUpdate.class);
 		this.registerMessage(Side.CLIENT, PacketOpenBlastdoor.class);
 		this.registerMessage(Side.CLIENT, PacketOpenLocker.class);

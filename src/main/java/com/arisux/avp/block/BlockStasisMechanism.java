@@ -2,11 +2,11 @@ package com.arisux.avp.block;
 
 import java.util.Random;
 
-import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.airi.lib.WorldUtil;
 import com.arisux.avp.entities.tile.TileEntityStasisMechanism;
 import com.arisux.avp.items.ItemEntitySummoner;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -18,27 +18,37 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class BlockStasisMechanism extends HookedBlock
+public class BlockStasisMechanism extends Block
 {
 	public BlockStasisMechanism(Material material)
 	{
 		super(material);
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 		this.setTickRandomly(true);
-		this.setRenderNormal(false);
-		this.setOpaque(false);
+	}
+	
+	@Override
+	public void registerBlockIcons(IIconRegister register)
+	{
+		return;
+	}
+	
+	@Override
+	public boolean renderAsNormalBlock()
+	{
+		return false;
+	}
+	
+	@Override
+	public boolean isOpaqueCube()
+	{
+		return false;
 	}
 
 	@Override
 	public void updateTick(World worldObj, int xCoord, int yCoord, int zCoord, Random par5Random)
 	{
 		super.updateTick(worldObj, xCoord, yCoord, zCoord, par5Random);
-	}
-
-	@Override
-	public void registerBlockIcons(IIconRegister reg)
-	{
-		;
 	}
 
 	@Override

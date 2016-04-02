@@ -4,8 +4,10 @@ import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
 import com.arisux.airi.lib.WorldUtil.Entities;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.interfaces.IHiveSignature;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
@@ -25,6 +27,9 @@ public class EntityQueen extends EntityXenomorph implements IHiveSignature
 		this.hurtResistantTime = 0;
 		this.ignoreFrustumCheck = true;
 		this.setHiveSignature(this.getUniqueID());
+		this.getNavigator().setCanSwim(true);
+		this.getNavigator().setAvoidsWater(true);
+		this.tasks.addTask(0, new EntityAISwimming(this));
 	}
 
 	@Override

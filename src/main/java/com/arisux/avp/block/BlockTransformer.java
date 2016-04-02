@@ -3,7 +3,6 @@ package com.arisux.avp.block;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.TileEntityTransformer;
 import com.arisux.avp.packets.client.PacketRotateTransformer;
@@ -16,27 +15,37 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockTransformer extends HookedBlock
+public class BlockTransformer extends Block
 {
 	public BlockTransformer(Material material)
 	{
 		super(material);
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 		this.setTickRandomly(true);
-		this.setRenderNormal(false);
-		this.setOpaque(false);
+	}
+	
+	@Override
+	public void registerBlockIcons(IIconRegister register)
+	{
+		return;
+	}
+	
+	@Override
+	public boolean renderAsNormalBlock()
+	{
+		return false;
+	}
+	
+	@Override
+	public boolean isOpaqueCube()
+	{
+		return false;
 	}
 
 	@Override
 	public void updateTick(World world, int posX, int posY, int posZ, Random rand)
 	{
 		super.updateTick(world, posX, posY, posZ, rand);
-	}
-
-	@Override
-	public void registerBlockIcons(IIconRegister reg)
-	{
-		;
 	}
 
 	@Override

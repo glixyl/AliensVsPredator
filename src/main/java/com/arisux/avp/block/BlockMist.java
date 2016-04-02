@@ -1,13 +1,12 @@
 package com.arisux.avp.block;
 
+import com.arisux.airi.lib.client.render.IconSet;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.Materials;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialLiquid;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
@@ -17,29 +16,32 @@ import net.minecraftforge.fluids.Fluid;
 
 public class BlockMist extends BlockFluidClassic
 {
-	@SideOnly(Side.CLIENT)
-	protected IIcon stillIcon;
-	@SideOnly(Side.CLIENT)
-	protected IIcon flowingIcon;
-
 	public BlockMist(Fluid fluid, Material material)
 	{
 		super(fluid, Materials.mist);
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
-		return (side == 0 || side == 1) ? stillIcon : flowingIcon;
+		switch (side)
+		{
+			case 0:
+				return AliensVsPredator.resources().ICONSET_MIST.still;
+			case 1:
+				return AliensVsPredator.resources().ICONSET_MIST.still;
+			default:
+				return AliensVsPredator.resources().ICONSET_MIST.flowing;
+		}
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register)
 	{
-		stillIcon = register.registerIcon("avp:mist.still");
-		flowingIcon = register.registerIcon("avp:mist.flowing");
-		AliensVsPredator.fluids().fluidMist.setIcons(stillIcon, flowingIcon);
+		AliensVsPredator.resources().ICONSET_MIST.registerIcons(register);
+		AliensVsPredator.fluids().fluidMist.setIcons(AliensVsPredator.resources().ICONSET_MIST.still, AliensVsPredator.resources().ICONSET_MIST.flowing);
 	}
 
 	@Override

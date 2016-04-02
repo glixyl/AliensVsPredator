@@ -2,10 +2,11 @@ package com.arisux.avp.block;
 
 import java.util.Random;
 
-import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.avp.entities.tile.TileEntityAmpule;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
@@ -16,17 +17,32 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockAmpule extends HookedBlock
+public class BlockAmpule extends Block
 {
 	public BlockAmpule()
 	{
 		super(Material.iron);
-		this.disableIcon();
 		this.setLightOpacity(2);
-		this.setRenderNormal(false);
-		this.setOpaque(false);
 		float size = 0.3F;
 		this.setBlockBounds(size, 0.0F, size, 1.0F - size, 1F, 1.0F - size);
+	}
+	
+	@Override
+	public void registerBlockIcons(IIconRegister register)
+	{
+		return;
+	}
+	
+	@Override
+	public boolean renderAsNormalBlock()
+	{
+		return false;
+	}
+	
+	@Override
+	public boolean isOpaqueCube()
+	{
+		return false;
 	}
 
 	@Override
