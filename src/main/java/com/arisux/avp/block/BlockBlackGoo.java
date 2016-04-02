@@ -15,9 +15,6 @@ import net.minecraftforge.fluids.Fluid;
 
 public class BlockBlackGoo extends BlockFluidClassic
 {
-	@SideOnly(Side.CLIENT)
-	private final IconSet iconSet = AliensVsPredator.resources().ICONSET_BLACK_GOO;
-	
 	public BlockBlackGoo(Fluid fluid, Material material)
 	{
 		super(fluid, material);
@@ -30,11 +27,11 @@ public class BlockBlackGoo extends BlockFluidClassic
 		switch (side)
 		{
 			case 0:
-				return iconSet.still;
+				return AliensVsPredator.resources().ICONSET_BLACK_GOO.still;
 			case 1:
-				return iconSet.still;
+				return AliensVsPredator.resources().ICONSET_BLACK_GOO.still;
 			default:
-				return iconSet.flowing;
+				return AliensVsPredator.resources().ICONSET_BLACK_GOO.flowing;
 		}
 	}
 
@@ -42,8 +39,8 @@ public class BlockBlackGoo extends BlockFluidClassic
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register)
 	{
-		iconSet.registerIcons(register);
-		AliensVsPredator.fluids().fluidBlackGoo.setIcons(iconSet.still, iconSet.flowing);
+		AliensVsPredator.resources().ICONSET_BLACK_GOO.registerIcons(register);
+		AliensVsPredator.fluids().fluidBlackGoo.setIcons(AliensVsPredator.resources().ICONSET_BLACK_GOO.still, AliensVsPredator.resources().ICONSET_BLACK_GOO.flowing);
 	}
 
 	@Override

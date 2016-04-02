@@ -16,9 +16,6 @@ import net.minecraftforge.fluids.Fluid;
 
 public class BlockMist extends BlockFluidClassic
 {
-	@SideOnly(Side.CLIENT)
-	private final IconSet iconSet = AliensVsPredator.resources().ICONSET_MIST;
-
 	public BlockMist(Fluid fluid, Material material)
 	{
 		super(fluid, Materials.mist);
@@ -31,11 +28,11 @@ public class BlockMist extends BlockFluidClassic
 		switch (side)
 		{
 			case 0:
-				return iconSet.still;
+				return AliensVsPredator.resources().ICONSET_MIST.still;
 			case 1:
-				return iconSet.still;
+				return AliensVsPredator.resources().ICONSET_MIST.still;
 			default:
-				return iconSet.flowing;
+				return AliensVsPredator.resources().ICONSET_MIST.flowing;
 		}
 	}
 
@@ -43,8 +40,8 @@ public class BlockMist extends BlockFluidClassic
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register)
 	{
-		iconSet.registerIcons(register);
-		AliensVsPredator.fluids().fluidMist.setIcons(iconSet.still, iconSet.flowing);
+		AliensVsPredator.resources().ICONSET_MIST.registerIcons(register);
+		AliensVsPredator.fluids().fluidMist.setIcons(AliensVsPredator.resources().ICONSET_MIST.still, AliensVsPredator.resources().ICONSET_MIST.flowing);
 	}
 
 	@Override
