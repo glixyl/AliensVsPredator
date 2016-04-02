@@ -107,8 +107,8 @@ public class EntityHandler implements IInitializable
 
 	private void registerLivingEntities()
 	{
-		EntityRegistry.registerGlobalEntityID(EntityRunnerDrone.class, "RunnerDrone", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0xFF0000);
-		EntityRegistry.registerGlobalEntityID(EntityRunnerWarrior.class, "RunnerWarrior", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0xFF0000);
+		EntityRegistry.registerGlobalEntityID(EntityRunnerDrone.class, "RunnerDrone", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x00EEFF);
+		EntityRegistry.registerGlobalEntityID(EntityRunnerWarrior.class, "RunnerWarrior", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x00EEFF);
 		EntityRegistry.registerGlobalEntityID(EntityDrone.class, "Drone", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x00EEFF);
 		EntityRegistry.registerGlobalEntityID(EntityWarrior.class, "Warrior", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x00EEFF);
 		EntityRegistry.registerGlobalEntityID(EntitySpitter.class, "Spitter", EntityRegistry.findGlobalUniqueEntityId(), 0x333333, 0x00EEFF);
