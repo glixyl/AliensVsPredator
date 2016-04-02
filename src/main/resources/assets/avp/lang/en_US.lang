@@ -812,5 +812,4 @@ gui.avp.beta.feedback.charsleft.title=Submit Feedback - %s characters left
 gui.avp.beta.feedback.info.invalidbetatester.title=Sorry!
 gui.avp.beta.feedback.info.invalidbetatester=We couldn't validate you as a valid beta tester, as a result you will be unable to submit your feedback. Sorry!
 gui.avp.wristbracer.warning.itemslost=WARNING: Once initiated, this wristbracer and its contents will be lost.
->>>>>>> master
 gui.avp.wristbracer.notify.detmode=Detonation mode enabled. Increment display 6 to initiate.
