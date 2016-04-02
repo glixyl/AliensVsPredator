@@ -7,8 +7,7 @@ import com.arisux.avp.event.BucketHandlingEvent;
 import com.arisux.avp.event.EmbryoTickEvent;
 import com.arisux.avp.event.EntityTrackingEvent;
 import com.arisux.avp.event.ExtendedPropertiesEvents;
-import com.arisux.avp.event.FarmlandRegistry;
-import com.arisux.avp.event.VardaStormHandler;
+import com.arisux.avp.event.StormUpdateEvent;
 import com.arisux.avp.event.WorldInfoEvent;
 import com.arisux.avp.event.client.AlienArmorEvents;
 import com.arisux.avp.event.client.AmmoIndicatorRenderEvent;
@@ -20,7 +19,6 @@ import com.arisux.avp.event.client.FacehuggerRenderEvent;
 import com.arisux.avp.event.client.FireAPCEvent;
 import com.arisux.avp.event.client.LightmapUpdateEvent;
 import com.arisux.avp.event.client.PlayerModeRenderEvent;
-import com.arisux.avp.event.client.PressureHUDRenderEvent;
 import com.arisux.avp.event.client.PulseRifleEvents;
 import com.arisux.avp.event.client.RenderPlayerAPCEvent;
 import com.arisux.avp.event.client.RenderPlayerHotbarAPCEvent;
@@ -55,7 +53,6 @@ public class LocalEventHandler implements IInitializable
 			this.registerEvent(new AmmoIndicatorRenderEvent());
 			this.registerEvent(new DebugToolsRenderEvent());
 			this.registerEvent(new TacticalHUDRenderEvent());
-			this.registerEvent(new PressureHUDRenderEvent());
 			this.registerEvent(new FacehuggerRenderEvent());
 			this.registerEvent(new VisionModeRenderEvent());
 			this.registerEvent(new RenderMotionTrackerScreen());
@@ -74,10 +71,9 @@ public class LocalEventHandler implements IInitializable
 
 		this.registerEvent(new EntityTrackingEvent());
 		this.registerEvent(new EmbryoTickEvent());
+		this.registerEvent(new StormUpdateEvent());
 		this.registerEvent(new ExtendedPropertiesEvents());
 		this.registerEvent(new WorldInfoEvent());
-		this.registerEvent(VardaStormHandler.INSTANCE);
-		this.registerEvent(FarmlandRegistry.INSTANCE);
 		this.registerEvent(BucketHandlingEvent.INSTANCE);
 	}
 

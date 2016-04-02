@@ -1,12 +1,12 @@
 package com.arisux.avp.block;
 
+import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.avp.entities.tile.TileEntityBlastdoor;
 import com.arisux.avp.items.ItemMaintenanceJack;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,30 +19,14 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockBlastdoor extends Block
+public class BlockBlastdoor extends HookedBlock
 {
 	public BlockBlastdoor(Material material)
 	{
 		super(material);
 		setTickRandomly(true);
-	}
-	
-	@Override
-	public void registerBlockIcons(IIconRegister register)
-	{
-		return;
-	}
-	
-	@Override
-	public boolean renderAsNormalBlock()
-	{
-		return false;
-	}
-	
-	@Override
-	public boolean isOpaqueCube()
-	{
-		return false;
+		this.setRenderNormal(false);
+		this.setOpaque(false);
 	}
 
 	@Override

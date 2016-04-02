@@ -1,12 +1,14 @@
 package com.arisux.avp.block;
 
+import java.util.Random;
+
+import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.airi.lib.WorldUtil;
 import com.arisux.avp.entities.tile.TileEntityCryostasisTube;
 import com.arisux.avp.items.ItemEntitySummoner;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -16,31 +18,27 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class BlockCryostasisTube extends Block
+public class BlockCryostasisTube extends HookedBlock
 {
 	public BlockCryostasisTube(Material material)
 	{
 		super(material);
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 2F, 1.0F);
 		this.setTickRandomly(true);
+		this.setRenderNormal(false);
+		this.setOpaque(false);
 	}
-	
+
 	@Override
-	public void registerBlockIcons(IIconRegister register)
+	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
 	{
-		return;
+		super.updateTick(par1World, par2, par3, par4, par5Random);
 	}
-	
+
 	@Override
-	public boolean renderAsNormalBlock()
+	public void registerBlockIcons(IIconRegister reg)
 	{
-		return false;
-	}
-	
-	@Override
-	public boolean isOpaqueCube()
-	{
-		return false;
+		;
 	}
 
 	@Override

@@ -40,12 +40,7 @@ public class Properties
 	public final String SOUND_CRUSHER_LIVING = DOMAIN + "praetorian.living";
 	public final String SOUND_CRUSHER_DEATH = DOMAIN + "xeno.death";
 	public final String SOUND_CHESTBURSTER_DEATH = DOMAIN + "chestburster.death";
-	public final String SOUND_CHESTBURSTER_HURT = DOMAIN + "chestburster.hurt";
-	public final String SOUND_CHESTBURSTER_ATTACK = DOMAIN + "chestburster.attack";
-	public final String SOUND_CHESTBURSTER_BURST = DOMAIN + "chestburster.burst";
 	public final String SOUND_FACEHUGGER_DEATH = DOMAIN + "facehugger.death";
-	public final String SOUND_FACEHUGGER_HURT = DOMAIN + "facehugger.hurt";
-	public final String SOUND_FACEHUGGER_LIVING = DOMAIN + "facehugger.living";
 	public final String SOUND_MARINE_HURT = DOMAIN + "marine.hurt";
 	public final String SOUND_MARINE_DEATH = DOMAIN + "marine.death";
 	public final String SOUND_YAUTJA_LIVING = DOMAIN + "predator.living";
@@ -60,5 +55,4 @@ public class Properties
 	public final String SOUND_WEAPON_M56SG = DOMAIN + "weapon.m56sg";
 	public final String SOUND_MOTIONTRACKER_PING = DOMAIN + "motiontracker.ping";
 	public final String SOUND_MOTIONTRACKER_PONG = DOMAIN + "motiontracker.pong";
-	public final String SOUND_BLASTDOOR_OPEN = DOMAIN + "blocks.blastdoor.open";
 }

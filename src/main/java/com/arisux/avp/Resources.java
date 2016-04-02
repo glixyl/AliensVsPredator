@@ -2,7 +2,6 @@ package com.arisux.avp;
 
 import com.arisux.airi.AIRI;
 import com.arisux.airi.api.wavefrontapi.WavefrontModel;
-import com.arisux.airi.lib.client.render.IconSet;
 import com.arisux.airi.lib.interfaces.IInitializablePre;
 
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -15,8 +14,6 @@ public class Resources implements IInitializablePre
 {
 	public static final Resources instance = new Resources();
 
-	public final ResourceLocation RUNNER_DRONE = new ResourceLocation(AliensVsPredator.ID, "textures/mob/runner_drone.png");
-	public final ResourceLocation RUNNER_WARRIOR = new ResourceLocation(AliensVsPredator.ID, "textures/mob/runner_warrior.png");
 	public final ResourceLocation _88MOD4 = new ResourceLocation(AliensVsPredator.ID, "textures/items/models/88mod4.png");
 	public final ResourceLocation FLAMETHROWER_NOSTROMO = new ResourceLocation(AliensVsPredator.ID, "textures/items/models/flamethrower.nostromo.png");
 	public final ResourceLocation ENGINEER = new ResourceLocation(AliensVsPredator.ID, "textures/mob/engineer_bio.png");
@@ -35,10 +32,9 @@ public class Resources implements IInitializablePre
 	public final ResourceLocation SKY_SILICA = new ResourceLocation(AliensVsPredator.ID, "textures/misc/silica.png");
 	public final ResourceLocation SKY_SUN = new ResourceLocation("textures/environment/sun.png");
 	public final ResourceLocation SKY_CALPAMOS = new ResourceLocation(AliensVsPredator.ID, "textures/misc/calpamos.png");
-	public final ResourceLocation SKY_VARDA = new ResourceLocation(AliensVsPredator.ID, "textures/misc/varda.png");
-	public final ResourceLocation SKY_ACHERON = new ResourceLocation(AliensVsPredator.ID, "textures/misc/acheron.png");
 	public final ResourceLocation DRONE_BASIC = new ResourceLocation(AliensVsPredator.ID, "textures/mob/drone_basic.png");
 	public final ResourceLocation DRONE_ADVANCED = new ResourceLocation(AliensVsPredator.ID, "textures/mob/drone_advanced.png");
+	public final ResourceLocation RUNNER_DRONE = new ResourceLocation(AliensVsPredator.ID, "textures/mob/runner_drone.png");
 	public final ResourceLocation TITANIUM1 = new ResourceLocation(AliensVsPredator.ID, "textures/armor/titanium_1.png");
 	public final ResourceLocation TITANIUM2 = new ResourceLocation(AliensVsPredator.ID, "textures/armor/titanium_2.png");
 	public final ResourceLocation PRESSURESUIT1 = new ResourceLocation(AliensVsPredator.ID, "textures/armor/suit_1.png");
@@ -95,11 +91,11 @@ public class Resources implements IInitializablePre
 	public final ResourceLocation PRAETORIAN = new ResourceLocation(AliensVsPredator.ID, "textures/mob/praetorian.png");
 	public final ResourceLocation WARRIOR = new ResourceLocation(AliensVsPredator.ID, "textures/mob/warrior.png");
 	public final ResourceLocation WARRIOR_BLOOD = new ResourceLocation(AliensVsPredator.ID, "textures/mob/warrior_blood.png");
+	public final ResourceLocation RUNNER_WARRIOR = new ResourceLocation(AliensVsPredator.ID, "textures/mob/runner_warrior.png");
 	public final ResourceLocation DRONE_BASIC_BLOOD = new ResourceLocation(AliensVsPredator.ID, "textures/mob/drone_basic_blood.png");
 	public final ResourceLocation DRONE_ADVANCED_BLOOD = new ResourceLocation(AliensVsPredator.ID, "textures/mob/drone_advanced_blood.png");
 	public final ResourceLocation HAMMERPEDE = new ResourceLocation(AliensVsPredator.ID, "textures/mob/hammerpede.png");
 	public final ResourceLocation TRILOBITE = new ResourceLocation(AliensVsPredator.ID, "textures/mob/trilobite.png");
-	public final ResourceLocation DEACON_SHARK = new ResourceLocation(AliensVsPredator.ID, "textures/mob/deacon_shark.png");
 	public final ResourceLocation PROTOMORPH = new ResourceLocation(AliensVsPredator.ID, "textures/mob/deacon.png");
 	public final ResourceLocation AQUA_XENOMORPH = new ResourceLocation(AliensVsPredator.ID, "textures/mob/aqua.png");
 	public final ResourceLocation AQUA_XENOMORPH_MASK = new ResourceLocation(AliensVsPredator.ID, "textures/mob/aqua_glow.png");
@@ -126,13 +122,7 @@ public class Resources implements IInitializablePre
 	public final ResourceLocation MOTIONTRACKER_S5 = new ResourceLocation(AliensVsPredator.ID, "textures/misc/motiontracker/sweep5.png");
 	public final ResourceLocation MOTIONTRACKER_S6 = new ResourceLocation(AliensVsPredator.ID, "textures/misc/motiontracker/sweep6.png");
 	public final ResourceLocation QUEEN_BOSS_BAR = new ResourceLocation(AliensVsPredator.ID, "textures/misc/queenbossbar.png");
-	
-	public final IconSet ICONSET_WALLW = new IconSet("avp:wall_top", "avp:wall_top", "avp:wall_top", "avp:wall_side", "avp:wall_side", "avp:wall_side", "avp:wall_side");
-	public final IconSet ICONSET_SPAWNER = new IconSet("avp:spawner_side", "avp:spawner_top", "avp:spawner_bottom", "avp:spawner_side", "avp:spawner_side", "avp:spawner_side", "avp:spawner_side");
-	public final IconSet ICONSET_ASSEMBLER = new IconSet("avp:assembler.top", "avp:assembler.top", "avp:assembler.top", "avp:assembler.side", "avp:assembler.side", "avp:assembler.side", "avp:assembler.side");
-	public final IconSet ICONSET_BLACK_GOO = new IconSet("avp:blackgoo.still", "avp:blackgoo.flowing", "avp:blackgoo.still");
-	public final IconSet ICONSET_MIST = new IconSet("avp:blackgoo.still", "avp:blackgoo.flowing", "avp:blackgoo.still");
-	
+
 	public WavefrontModel M577_APC;
 	
 	@Override

@@ -9,7 +9,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -21,9 +20,6 @@ public class EntitySpitter extends EntityXenomorph implements IRangedAttackMob
 		this.hitRange = 8;
 		this.experienceValue = 275;
 		this.setSize(1.0F, 3.0F);
-		this.getNavigator().setCanSwim(true);
-		this.getNavigator().setAvoidsWater(true);
-		this.tasks.addTask(0, new EntityAISwimming(this));
 	}
 
 	@Override

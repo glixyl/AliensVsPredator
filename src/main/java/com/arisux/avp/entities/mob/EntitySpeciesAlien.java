@@ -113,12 +113,12 @@ public abstract class EntitySpeciesAlien extends EntityMob implements IMob, IHiv
 			if (this instanceof EntityQueen)
 			{
 				int randomJelly = this.rand.nextInt(196);
-				this.dropItem(AliensVsPredator.items().itemRoyalJelly, 32 +(randomJelly / 2 + randomJelly));
+				this.dropItem(AliensVsPredator.instance().items.itemRoyalJelly, 32 +(randomJelly / 2 + randomJelly));
 			}
 			
 			if (this.rand.nextInt(4) == 0)
 			{
-				this.dropItem(AliensVsPredator.items().itemRoyalJelly, 1 + this.rand.nextInt(5));
+				this.dropItem(AliensVsPredator.instance().items.itemRoyalJelly, 1 + this.rand.nextInt(5));
 			}
 		}
 	}
@@ -126,7 +126,7 @@ public abstract class EntitySpeciesAlien extends EntityMob implements IMob, IHiv
 	@Override
 	protected void dropRareDrop(int rate)
 	{
-		this.dropItem(AliensVsPredator.items().itemRoyalJelly, 4);
+		this.dropItem(AliensVsPredator.instance().items.itemRoyalJelly, 4);
 	}
 
 	@Override

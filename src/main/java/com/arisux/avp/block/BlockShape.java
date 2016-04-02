@@ -2,25 +2,21 @@ package com.arisux.avp.block;
 
 import java.util.List;
 
+import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.airi.lib.client.render.Matrix3;
 import com.arisux.airi.lib.client.render.Vertex;
-import com.arisux.avp.AliensVsPredator;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockShape extends Block
+public class BlockShape extends HookedBlock
 {
 	public static enum ShapeTypes
 	{
@@ -66,65 +62,28 @@ public class BlockShape extends Block
 			return id;
 		}
 	}
-
+	
 	private ShapeTypes shape;
-	private Material material;
 	private int textureSide;
-	private Block textureBlock;
-
-	public BlockShape(ShapeTypes shape)
-	{
-		super(Material.air);
-		this.shape = shape;
-		this.material = Material.ground;
-		this.textureSide = 0;
-	}
 
 	public BlockShape(Material material, ShapeTypes shape)
 	{
 		super(material);
 		this.shape = shape;
-		this.material = material;
+		this.setRenderNormal(false);
+		this.setOpaque(false);
+		this.textureSide = 2;
 	}
-
-	public void setIconsFromBlock(Block block)
+	
+	public BlockShape setTextureSide(int textureSide)
 	{
-		this.textureBlock = block;
+		this.textureSide = textureSide;
+		return this;
 	}
-
-	public Block getTextureBlock()
+	
+	public int getTextureSide()
 	{
-		return textureBlock;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta)
-	{
-		if (this.textureBlock != null)
-		{
-			return textureBlock.getBlockTextureFromSide(side);
-		}
-
-		return super.getIcon(side, meta);
-	}
-
-	@Override
-	public int getRenderType()
-	{
-		return AliensVsPredator.renderer().renderTypeShape.getRenderId();
-	}
-
-	@Override
-	public boolean renderAsNormalBlock()
-	{
-		return false;
-	}
-
-	@Override
-	public boolean isOpaqueCube()
-	{
-		return false;
+		return this.textureSide;
 	}
 
 	@Override
@@ -140,9 +99,9 @@ public class BlockShape extends Block
 		int data = world.getBlockMetadata(x, y, z);
 		Matrix3 rot = Matrix3.rotations[data >> 2];
 		Vertex org = new Vertex(x + 0.5, y + 0.5, z + 0.5);
-
+		
 		this.addBox(-0.5, 0.5, -0.5, 0.0, -0.5, 0.5, rot, org, clip, list);
-
+		
 		if (shape.getId() == 0 || shape.getId() == 2)
 		{
 			this.addBox(-0.5, 0.5, 0.0, 0.5, 0.0, 0.5, rot, org, clip, list);
@@ -162,7 +121,7 @@ public class BlockShape extends Block
 	{
 		Vertex p0 = rot.mul(x0, y0, z0).add(org);
 		Vertex p1 = rot.mul(x1, y1, z1).add(org);
-
+		
 		if (p0.x < p1.x)
 		{
 			x0 = p0.x;
@@ -242,28 +201,5 @@ public class BlockShape extends Block
 	public ShapeTypes getShape()
 	{
 		return this.shape;
-	}
-
-	public BlockShape setMaterial(Material material)
-	{
-		this.material = material;
-		return this;
-	}
-
-	@Override
-	public Material getMaterial()
-	{
-		return material;
-	}
-
-	public int getTextureSide()
-	{
-		return this.textureSide;
-	}
-
-	public BlockShape setTextureSide(int textureSide)
-	{
-		this.textureSide = textureSide;
-		return this;
 	}
 }

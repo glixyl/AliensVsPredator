@@ -1,4 +1,4 @@
-/** AliensVsPredator Minecraft Mod - Copyright (C) 2012-2016 Arisux Technology Group **/
+/** AliensVsPredator Minecraft Mod - Copyright (C) 2012-2015 Arisux (Ri5ux/Dustin Christensen) **/
 package com.arisux.avp;
 
 import com.arisux.airi.AIRI;
@@ -27,10 +27,9 @@ public class AliensVsPredator implements IMod
 	@Mod.Instance(AliensVsPredator.ID)
 	private static AliensVsPredator instance;
 	private ModContainer container;
-	private ItemHandler items;
-	private BlockHandler blocks;
-	private FluidHandler fluids;
-	private OreHandler ores;
+	public ItemHandler items;
+	public BlockHandler blocks;
+	public FluidHandler fluids;
 	public Updater updater;
 
 	public static AliensVsPredator instance()
@@ -46,11 +45,6 @@ public class AliensVsPredator implements IMod
 	public static BlockHandler blocks()
 	{
 		return instance().blocks == null ? instance().blocks = new BlockHandler() : instance().blocks;
-	}
-
-	public static OreHandler ores()
-	{
-		return instance().ores == null ? instance().ores = new OreHandler() : instance().ores;
 	}
 	
 	public static FluidHandler fluids()
@@ -174,11 +168,8 @@ public class AliensVsPredator implements IMod
 	@Mod.EventHandler
 	public void preInitialize(FMLPreInitializationEvent event)
 	{
-		AIRI.logger.info("[AliensVsPredator] Copyright(C) 2012-2016 Arisux Technology Group");
+		AIRI.logger.info("[AliensVsPredator] Copyright(C) 2012-2015 Arisux");
 		AIRI.logger.info("[AliensVsPredator] Pre-Initialization");
-
-		AIRI.remappingApi().registerMappingInfo("lv426portal", "portal.acheron", "avp");
-		AIRI.remappingApi().registerMappingInfo("lv223portal", "portal.varda", "avp");
 
 		settings().preInitialize(event);
 
@@ -199,7 +190,6 @@ public class AliensVsPredator implements IMod
 		network().initialize(event);
 		items().initialize(event);
 		blocks().initialize(event);
-		ores().initialize(event);
 		dimensions().initialize(event);
 		worldgen().initialize(event);
 		crafting().initialize(event);

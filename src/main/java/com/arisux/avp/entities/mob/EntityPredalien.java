@@ -5,7 +5,6 @@ import com.arisux.avp.entities.EntityAcidPool;
 
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
@@ -20,9 +19,6 @@ public class EntityPredalien extends EntityXenomorph implements IMob
 		this.ignoreFrustumCheck = true;
 		this.getNavigator().setAvoidsWater(true);
 		this.getNavigator().setBreakDoors(true);
-		this.getNavigator().setCanSwim(true);
-		this.getNavigator().setAvoidsWater(true);
-		this.tasks.addTask(0, new EntityAISwimming(this));
 	}
 
 	@Override

@@ -1,5 +1,8 @@
 package com.arisux.avp;
 
+import java.util.Random;
+
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
@@ -22,6 +25,6 @@ public class CreativeTab extends CreativeTabs
 	@Override
 	public Item getTabIconItem()
 	{
-		return AliensVsPredator.items().helmTitanium;
+		return (new Random()).nextInt(2) == 1 ? Item.getItemFromBlock((Block) AliensVsPredator.blocks().getHandledObjects().get(new Random().nextInt(AliensVsPredator.blocks().getHandledObjects().size()))) : (Item) AliensVsPredator.items().getHandledObjects().get(new Random().nextInt(AliensVsPredator.items().getHandledObjects().size()));
 	}
 }

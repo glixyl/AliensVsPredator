@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import com.arisux.airi.lib.WorldUtil;
 import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
 import com.arisux.airi.lib.WorldUtil.Entities;
-import com.arisux.avp.entities.EntityAcidPool;
 import com.arisux.avp.AliensVsPredator;
 
 import net.minecraft.command.IEntitySelector;
@@ -17,6 +16,7 @@ import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.monster.IMob;
+import com.arisux.avp.entities.EntityAcidPool;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
@@ -43,9 +43,9 @@ public class EntityHammerpede extends EntitySpeciesAlien implements IMob
 		this.getNavigator().setCanSwim(true);
 		this.getNavigator().setAvoidsWater(false);
 		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(2, new EntityAIAttackOnCollide(this, 0.8D, true));
+		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 0.8D, true));
 		this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
-		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, Entity.class, 10 /** targetChance **/, false /** checkSight **/, false /** nearbyOnly **/, entitySelector));
+		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, Entity.class, 10 /** targetChance **/, false /** checkSight **/, false /** nearbyOnly **/, entitySelector));
 	}
 
 	@Override
@@ -122,20 +122,12 @@ public class EntityHammerpede extends EntitySpeciesAlien implements IMob
 		}
 	}
 
-	// temporary sound override until ender23 has new sounds.  the ticking is annoying
 	@Override
 	protected String getDeathSound()
 	{
-		return AliensVsPredator.properties().SOUND_CHESTBURSTER_ATTACK;
+		return AliensVsPredator.properties().SOUND_CHESTBURSTER_DEATH;
 	}
 
-	// temporary sound override until ender23 has new sounds.  the ticking is annoying
-	@Override
-	protected String getHurtSound()
-	{
-		return AliensVsPredator.properties().SOUND_CHESTBURSTER_HURT;
-	}
-	
 	@Override
 	protected boolean canTriggerWalking()
 	{

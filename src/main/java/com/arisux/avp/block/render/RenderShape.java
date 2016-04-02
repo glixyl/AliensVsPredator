@@ -22,6 +22,7 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 	private Block baseBlock;
 	private IBlockAccess blockAccess;
 	private Matrix3 rotation;
+	private int renderId;
 	private double posX, posY, posZ;
 	private double vertexPosX, vertexPosY, vertexPosZ;
 	private double texU, texV;
@@ -32,12 +33,11 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 	private int blockBrightness;
 	private int faceBrightness;
 	private Vertex faceU, faceV, faceN;
-	private int renderId;
 
-	public RenderShape(int renderId)
+	public RenderShape()
 	{
-		this.renderId = renderId;
 		this.tessellator = Tessellator.instance;
+		this.renderId = RenderingRegistry.getNextAvailableRenderId();
 	}
 
 	@Override
@@ -68,11 +68,6 @@ public class RenderShape implements ISimpleBlockRenderingHandler
 
 	public boolean render(IBlockAccess world, BlockShape block, int metadata, int x, int y, int z, IIcon icon)
 	{
-		if (icon == null)
-		{
-			return false;
-		}
-		
 		baseBlock = block;
 		blockAccess = world;
 		posX = x + 0.5;

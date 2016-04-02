@@ -4,22 +4,14 @@ import com.arisux.airi.lib.interfaces.IInitializable;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.item.ItemStack;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 
 public class CraftingHandler implements IInitializable
 {
 	public static final CraftingHandler instance = new CraftingHandler();
-	private ItemStack jungleWood = new ItemStack(Blocks.planks, 4);
-	private ItemStack charcoal = new ItemStack(Items.coal, 1);
 
-	public CraftingHandler()
-	{
-		jungleWood.setItemDamage(3);
-		charcoal.setItemDamage(1);
-	}
-	
 	@Override
 	public void initialize(FMLInitializationEvent event)
 	{
@@ -31,9 +23,8 @@ public class CraftingHandler implements IInitializable
 	{
 		// GameRegistry.addRecipe(new ItemStack(AliensVsPredator.blocks().blockAssembler, 1), new Object[]{"YXY", "YXY", "YXY", Character.valueOf('X'), AliensVsPredator.items().itemIngotAluminum, Character.valueOf('Y'), AliensVsPredator.items().itemIngotCopper});
 		
-		GameRegistry.addShapelessRecipe(jungleWood, AliensVsPredator.blocks().terrainUniTreeLog);
-
 		// Tier 1 components required to craft assembler, armor and guns.  Assembler doubles output and allows Tier 2+
+		
 		GameRegistry.addRecipe(
 		    new ItemStack(AliensVsPredator.items().itemCarbon, 2),
 			"aa",
@@ -598,6 +589,5 @@ public class CraftingHandler implements IInitializable
 		GameRegistry.addSmelting(AliensVsPredator.blocks().oreLithium, new ItemStack(AliensVsPredator.items().itemIngotLithium), 1.0F);
 		GameRegistry.addSmelting(AliensVsPredator.blocks().oreBauxite, new ItemStack(AliensVsPredator.items().itemIngotAluminum), 1.0F);
 		GameRegistry.addSmelting(AliensVsPredator.blocks().oreSilicon, new ItemStack(AliensVsPredator.items().itemSilicon), 1.0F);
-		GameRegistry.addSmelting(AliensVsPredator.blocks().terrainUniTreeLog, charcoal, 1.0F);
 	}
 }

@@ -2,9 +2,9 @@ package com.arisux.avp.block;
 
 import java.util.Random;
 
+import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.avp.entities.tile.TileEntityWorkstation;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -14,31 +14,15 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class BlockWorkstation extends Block
+public class BlockWorkstation extends HookedBlock
 {
 	public BlockWorkstation(Material material)
 	{
 		super(material);
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 		this.setTickRandomly(true);
-	}
-	
-	@Override
-	public void registerBlockIcons(IIconRegister register)
-	{
-		return;
-	}
-	
-	@Override
-	public boolean renderAsNormalBlock()
-	{
-		return false;
-	}
-	
-	@Override
-	public boolean isOpaqueCube()
-	{
-		return false;
+		this.setRenderNormal(false);
+		this.setOpaque(false);
 	}
 
 	@Override
@@ -47,6 +31,12 @@ public class BlockWorkstation extends Block
 		super.updateTick(world, posX, posY, posZ, rand);
 	}
 	
+	@Override
+	public void registerBlockIcons(IIconRegister reg)
+	{
+		;
+	}
+
 	@Override
 	public TileEntity createTileEntity(World world, int meta)
 	{

@@ -14,7 +14,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 public class TerrainFormation2 extends WorldGenerator implements IWorldGenerator
 {
 	Block[] validBlocks = new Block[] {
-		AliensVsPredator.blocks().terrainUniDirt
+		AliensVsPredator.instance().blocks.terrainUniDirt
 	};
 
 	public boolean locationIsValidSpawn(World world, int x, int y, int z)
@@ -82,7 +82,7 @@ public class TerrainFormation2 extends WorldGenerator implements IWorldGenerator
 			return false;
 		}
 
-		Block block = AliensVsPredator.blocks().blockEngineerShipRock0;
+		Block block = AliensVsPredator.instance().blocks.blockEngineerShipRock0;
 
 		this.setBlock(world, x + 0, y + 4, z + 1, block, 0);
 		this.setBlock(world, x + 1, y + 3, z + 1, block, 0);

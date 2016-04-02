@@ -6,8 +6,8 @@ import com.arisux.airi.AIRI;
 import com.arisux.airi.lib.WorldUtil.Entities.Players.Inventories;
 import com.arisux.airi.lib.interfaces.IInitializable;
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.BlockHandler;
 import com.arisux.avp.ItemHandler;
+import com.arisux.avp.BlockHandler;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import net.minecraft.entity.player.EntityPlayer;
@@ -114,32 +114,6 @@ public class AssemblerAPI implements IInitializable
 		ItemHandler avp = AliensVsPredator.items();
 		BlockHandler avpBlock = AliensVsPredator.blocks();
 
-		this.registerSchematic(new AssemblerSchematic("turret", Inventories.newStack(avpBlock.blockTurret, 1),
-				Inventories.newStack(avp.itemM41A, 1),
-				Inventories.newStack(avp.itemPolycarbonate, 4),
-				Inventories.newStack(avp.itemIngotAluminum, 4),
-				Inventories.newStack(avp.itemIngotCopper, 4),
-				Inventories.newStack(avp.itemLedDisplay, 1)
-				));
-		this.registerSchematic(new AssemblerSchematic("repulsionGenerator", Inventories.newStack(avpBlock.blockRepulsionGenerator, 1),
-				Inventories.newStack(avpBlock.blockTransformer, 4),
-				Inventories.newStack(avpBlock.blockNegativeTransformer, 4),
-				Inventories.newStack(avp.itemPolycarbonate, 4),
-				Inventories.newStack(avp.itemIngotAluminum, 4),
-				Inventories.newStack(Items.diamond, 4)
-				));
-		this.registerSchematic(new AssemblerSchematic("cryostasisTube", Inventories.newStack(avpBlock.blockCryostasisTube, 1),
-				Inventories.newStack(avp.itemPolycarbonate, 4),
-				Inventories.newStack(avp.itemIngotAluminum, 4),
-				Inventories.newStack(avpBlock.blockIndustrialGlass, 4),
-				Inventories.newStack(avpBlock.blockLightPanel, 1)
-				));
-		this.registerSchematic(new AssemblerSchematic("lightPanel", Inventories.newStack(avpBlock.blockLightPanel, 1),
-				Inventories.newStack(avp.itemPolycarbonate, 2),
-				Inventories.newStack(avp.itemIngotAluminum, 2),
-				Inventories.newStack(avpBlock.blockIndustrialGlass, 2),
-				Inventories.newStack(Items.glowstone_dust, 2)
-				));
 		this.registerSchematic(new AssemblerSchematic("pulserifle", Inventories.newStack(avp.itemM41A, 1),
 				Inventories.newStack(avp.itemPolycarbonate, 8),
 				Inventories.newStack(Items.iron_ingot, 8),

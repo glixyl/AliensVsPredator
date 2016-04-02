@@ -1,10 +1,9 @@
 package com.arisux.avp.block;
 
+import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.avp.entities.tile.TileEntityLocker;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,31 +15,15 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockLocker extends Block
+public class BlockLocker extends HookedBlock
 {
 	public BlockLocker(Material material)
 	{
 		super(material);
 		setTickRandomly(true);
+		this.setRenderNormal(false);
+		this.setOpaque(false);
 		this.setBlockBounds(0, 0, 0, 1, 2, 1);
-	}
-	
-	@Override
-	public void registerBlockIcons(IIconRegister register)
-	{
-		return;
-	}
-	
-	@Override
-	public boolean renderAsNormalBlock()
-	{
-		return false;
-	}
-	
-	@Override
-	public boolean isOpaqueCube()
-	{
-		return false;
 	}
 
 	@Override

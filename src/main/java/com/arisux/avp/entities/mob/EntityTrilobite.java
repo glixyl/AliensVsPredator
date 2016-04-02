@@ -19,21 +19,20 @@ import net.minecraft.world.World;
 
 public class EntityTrilobite extends EntitySpeciesAlien implements IMob
 {
-	// it took down an Engineer in the movie Prometheus, welcome to the new Trilobite!
 	public EntityTrilobite(World world)
 	{
 		super(world);
 
-		this.setSize(1.3F, 1.3F);
+		this.setSize(1.5F, 1.5F);
 		this.experienceValue = 32;
 		this.getNavigator().setCanSwim(true);
-		this.getNavigator().setAvoidsWater(false);
+		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(3, new EntityAIAttackOnCollide(this, 0.800000011920929D, true));
-		this.tasks.addTask(8, new EntityAIWander(this, 0.800000011920929D));
-		this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
-		this.targetTasks.addTask(2, new EntityAILeapAtTarget(this, 1.0F));
-		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, Entity.class, /** targetChance **/0, /** shouldCheckSight **/false, /** nearbyOnly **/false, EntitySelectorXenomorph.instance));
+		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 0.800000011920929D, true));
+		this.tasks.addTask(1, new EntityAIWander(this, 0.800000011920929D));
+		this.targetTasks.addTask(1, new EntityAILeapAtTarget(this, 0.8F));
+		this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, Entity.class, /** targetChance **/0, /** shouldCheckSight **/false, /** nearbyOnly **/false, EntitySelectorXenomorph.instance));
+		this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, true));
 	}
 
 	@Override
@@ -42,10 +41,16 @@ public class EntityTrilobite extends EntitySpeciesAlien implements IMob
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(44.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5499999761581421D);
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(2.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(1F);
 	}
+
+	/* @Override
+	protected void entityInit()
+	{
+		super.entityInit();
+		this.dataWatcher.addObject(16, new Byte((byte) 0));
+	} */
 
 	@Override
 	protected boolean isAIEnabled()
@@ -58,33 +63,27 @@ public class EntityTrilobite extends EntitySpeciesAlien implements IMob
 	{
 		super.onUpdate();
 		
-		// temp fix for EntityAIClimb
-		if (this.isCollidedHorizontally)
-		{
-			this.motionY += 0.25F;
-		}
-		
 		this.fallDistance = 0F;
 	}
 
-	// temporary sound override until ender23 has new sounds.  the ticking is annoying
-	@Override
-	protected String getHurtSound()
+	/* protected Entity findPlayerToAttack(EntityPlayer entityplayer)
 	{
-		return AliensVsPredator.properties().SOUND_FACEHUGGER_HURT;
-	}	
-	
-	// temporary sound override until ender23 has new sounds.  the ticking is annoying
+		float brightness = this.getBrightness(1.0F);
+
+		if (brightness < 0.5F)
+		{
+			double range = 40.0D;
+			return this.worldObj.getClosestVulnerablePlayerToEntity(this, range);
+		} else
+		{
+			return null;
+		}
+	} */
+
 	@Override
 	protected String getDeathSound()
 	{
-		return AliensVsPredator.properties().SOUND_CHESTBURSTER_BURST;
-	}
-	
-	@Override
-	protected String getLivingSound()
-	{
-		return AliensVsPredator.properties().SOUND_FACEHUGGER_LIVING;
+		return AliensVsPredator.properties().SOUND_FACEHUGGER_DEATH;
 	}
 
 	@Override
@@ -109,6 +108,26 @@ public class EntityTrilobite extends EntitySpeciesAlien implements IMob
 	{
 		return this.isOnLadder() && this.motionY > 1.0099999997764826D;
 	}
+
+	/* @Override
+	protected void attackEntity(Entity entity, float f)
+	{
+		if (f > 2.0F && f < 6.0F && this.rand.nextInt(50) == 0)
+		{
+			if (this.onGround)
+			{
+				double var4 = entity.posX - this.posX;
+				double var6 = entity.posZ - this.posZ;
+				float var8 = MathHelper.sqrt_double(var4 * var4 + var6 * var6);
+				this.motionX = var4 / var8 * 0.5D * 0.800000011920929D + this.motionX * 0.20000000298023224D;
+				this.motionZ = var6 / var8 * 0.5D * 0.800000011920929D + this.motionZ * 0.20000000298023224D;
+				this.motionY = 0.4000000059604645D;
+			}
+		} else
+		{
+			super.attackEntity(entity, f);
+		}
+	} */
 
 	@Override
 	public boolean isPotionApplicable(PotionEffect potionEffect)

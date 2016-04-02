@@ -3,7 +3,6 @@ package com.arisux.avp.dimension.varda;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.dimension.BiomeLVBase;
 import com.arisux.avp.dimension.acheron.ChunkProviderAcheron;
-import com.arisux.avp.event.VardaStormHandler;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -14,6 +13,7 @@ import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.client.IRenderHandler;
+import net.minecraftforge.common.DimensionManager;
 
 public class ProviderVarda extends WorldProvider
 {
@@ -33,15 +33,14 @@ public class ProviderVarda extends WorldProvider
 		this.isHellWorld = false;
 	}
 
+	public static WorldProvider getProviderForDimension(int var0)
+	{
+		return DimensionManager.createProviderFor(7);
+	}
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IRenderHandler getSkyRenderer()
-	{
-		return skyProvider == null ? skyProvider = new SkyProviderVarda() : skyProvider;
-	}
-	
-	@Override
-	public IRenderHandler getCloudRenderer()
 	{
 		return skyProvider == null ? skyProvider = new SkyProviderVarda() : skyProvider;
 	}
@@ -122,7 +121,7 @@ public class ProviderVarda extends WorldProvider
 	@Override
 	public Vec3 drawClouds(float partialTicks)
 	{
-		return Vec3.createVectorHelper(0.0F, 0.0F, 0.0F);
+		return Vec3.createVectorHelper(0.07F, 0.07F, 0.09F);
 	}
 
 	@Override
@@ -146,10 +145,10 @@ public class ProviderVarda extends WorldProvider
 		brightness = (float) (brightness * (1.0D - this.worldObj.getWeightedThunderStrength(angle) * 5.0F / 16.0D));
 		return brightness * 0.45F;
 	}
-	
-	public VardaStormHandler getStormHandler()
+
+	public boolean isSilicaStormActive()
 	{
-		return VardaStormHandler.INSTANCE;
+		return (this.worldObj.getWorldTime() % 24000L) / 1000L < 7L;
 	}
 
 	@Override

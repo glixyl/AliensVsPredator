@@ -10,6 +10,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
@@ -33,12 +34,13 @@ public abstract class EntitySpeciesYautja extends EntityMob
 		this.setSize(1.0F, 2.5F);
 		this.getNavigator().setCanSwim(true);
 		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(2, new EntityAIAttackOnCollide(this, 0.800000011920929D, true));
-		this.tasks.addTask(8, new EntityAIWander(this, 0.800000011920929D));
-		this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
-		this.targetTasks.addTask(2, new EntityAILeapAtTarget(this, 0.4F));
-		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, Entity.class, /** targetChance **/0, /** shouldCheckSight **/false, /** nearbyOnly **/false, EntitySelectorYautja.instance));
+		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 0.800000011920929D, true));
+		this.tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+		this.tasks.addTask(3, new EntityAIWander(this, 0.800000011920929D));
+		this.tasks.addTask(8, new EntityAILookIdle(this));
+		this.targetTasks.addTask(1, new EntityAILeapAtTarget(this, 0.4F));
+		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, Entity.class, /** targetChance **/0, /** shouldCheckSight **/false, /** nearbyOnly **/false, EntitySelectorYautja.instance));
+		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
 	}
 
 	@Override

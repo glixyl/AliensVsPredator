@@ -120,8 +120,8 @@ public class TacticalHUDRenderEvent
 										GlStateManager.rotate(180F, 0F, 1F, 0F);
 										GlStateManager.scale(textScale, -textScale, textScale);
 
-										//RenderUtil.drawString(livingProperties.getEntityLivingBase().getCommandSenderName(), textX, textY += textMultiplier, color, false);
-										RenderUtil.drawString(((int) livingProperties.getEntityLivingBase().getDistanceToEntity(mc.thePlayer)) + "m", textX, textY += textMultiplier, color, false);
+										RenderUtil.drawString(livingProperties.getEntityLivingBase().getCommandSenderName(), textX, textY += textMultiplier, color, false);
+										RenderUtil.drawString(((int) livingProperties.getEntityLivingBase().getDistanceToEntity(mc.thePlayer)) + " meters", textX, textY += textMultiplier, color, false);
 
 										if (livingProperties.doesEntityContainEmbryo())
 										{
@@ -243,15 +243,10 @@ public class TacticalHUDRenderEvent
 		ScaledResolution res = RenderUtil.scaledDisplayResolution();
 		int guiScale = Minecraft.getMinecraft().gameSettings.guiScale;
 		float scale = guiScale == 0 ? res.getScaleFactor() * 0.25F : (guiScale == 1 ? res.getScaleFactor() * 1F : res.getScaleFactor() * 0.5F);
-		int batteryPercent = (int) 95; //(Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 100 + 10) / 10 * 10;
+		int batteryPercent = (int) (Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 100 + 10) / 10 * 10;
 		int barPadding = 90;
-		
-		int hourOfMinecraftDay = (int) (Math.floor(Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() / 1000 + 8) % 24);
-		int minuteOfMinecraftDay = (int) (60 * Math.floor(Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 1000) / 1000);
-		
-		String timeString = String.format("%02dH%02dM", hourOfMinecraftDay, minuteOfMinecraftDay);
 		String fpsString = mc.debug.substring(0, mc.debug.indexOf(" fps")) + " FPS";
-		String barString = timeString + " [" + fpsString + "]";
+		String barString = new SimpleDateFormat("[MM/dd/yyyy] [HH:mm:ss]").format(new Date()).toString() + " [" + fpsString + "]";
 
 		GlStateManager.pushMatrix();
 		{
