@@ -2,13 +2,13 @@ package com.arisux.avp.block;
 
 import java.util.Random;
 
-import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.airi.lib.WorldUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.TileEntityTurret;
 import com.arisux.avp.packets.server.PacketAddTuretTarget;
 
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityList;
@@ -21,27 +21,37 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
-public class BlockTurret extends HookedBlock
+public class BlockTurret extends Block
 {
 	public BlockTurret(Material material)
 	{
 		super(material);
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 2F, 1.0F);
 		this.setTickRandomly(true);
-		this.setRenderNormal(false);
-		this.setOpaque(false);
+	}
+	
+	@Override
+	public void registerBlockIcons(IIconRegister register)
+	{
+		return;
+	}
+	
+	@Override
+	public boolean renderAsNormalBlock()
+	{
+		return false;
+	}
+	
+	@Override
+	public boolean isOpaqueCube()
+	{
+		return false;
 	}
 
 	@Override
 	public int getRenderType()
 	{
 		return -1;
-	}
-
-	@Override
-	public void registerBlockIcons(IIconRegister iconRegister)
-	{
-		;
 	}
 
 	@Override

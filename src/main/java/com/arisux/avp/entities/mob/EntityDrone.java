@@ -12,6 +12,7 @@ import com.arisux.avp.entities.tile.TileEntityHiveResin;
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -33,6 +34,9 @@ public class EntityDrone extends EntityXenomorph
 		this.setSize(0.8F, 1.8F);
 		this.mobType = this.rand.nextInt(2);
 		this.setEvolveTo(EntityWarrior.class, 12);
+		this.getNavigator().setCanSwim(true);
+		this.getNavigator().setAvoidsWater(true);
+		this.tasks.addTask(0, new EntityAISwimming(this));
 	}
 
 	@Override
@@ -92,15 +96,15 @@ public class EntityDrone extends EntityXenomorph
 	public void onUpdate()
 	{
 		super.onUpdate();
+		
+		this.tickResinLevelAI();
+		this.tickHiveBuildingAI();
 	}
 
 	@SuppressWarnings("unchecked")
 	public void tickResinLevelAI()
 	{
-		if (this.rand.nextInt(4) == 0)
-		{
-			this.resinLevel += 1;
-		}
+		this.resinLevel += 1;
 
 		ArrayList<EntityItem> entityItemList = (ArrayList<EntityItem>) WorldUtil.Entities.getEntitiesInCoordsRange(worldObj, EntityItem.class, new CoordData(this), 8);
 
@@ -143,7 +147,7 @@ public class EntityDrone extends EntityXenomorph
 						{
 							Block block = coord.getBlock(this.worldObj);
 
-							if (coord.isAnySurfaceVisible(this.worldObj) && Entities.canCoordBeSeenBy(this, coord))
+							if (Entities.canCoordBeSeenBy(this, coord) && block.isOpaqueCube())
 							{
 								this.getNavigator().setPath(this.worldObj.getEntityPathToXYZ(this, coord.posX, coord.posY, coord.posZ, 128, true, true, true, true), 0.8D);
 								this.worldObj.setBlock(coord.posX, coord.posY, coord.posZ, AliensVsPredator.blocks().terrainHiveResin);

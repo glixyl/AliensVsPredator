@@ -767,11 +767,12 @@ tile.avp:powerline.name=Powerline
 tile.avp:server.name=Network Beacon
 tile.avp:terminal.name=Terminal
 
-entity.Drone.name=Xenomorph Drone
 entity.RunnerDrone.name=Xenomorph Runner Drone
+entity.RunnerWarrior.name=Xenomorph Runner Warrior
+entity.DeaconShark.name=Deacon Shark
+entity.Drone.name=Xenomorph Drone
 entity.Trilobite.name=Trilobite
 entity.Warrior.name=Xenomorph Warrior
-entity.RunnerWarrior.name=Xenomorph Runner Warrior
 entity.Spitter.name=Xenomorph Spitter
 entity.Crusher.name=Xenomorph Crusher
 entity.Praetorian.name=Xenomorph Praetorian
@@ -796,6 +797,7 @@ death.attack.acidshot=%1$s was vaporized in acid by %2$s.
 death.attack.acid=%1$s vaporized in acid.
 death.attack.spear=%1$s was speared by %2$s.
 death.attack.chestburster=A chestburster ripped through the chest of %1$s!
+death.attack.silicaStorm=%1$s was beat across the surface of Varda by a silica storm.
 
 gui.avp.beta.feedback.info.submit.title=Submit Feedback
 gui.avp.beta.feedback.info.submit.button=Submit Feedback

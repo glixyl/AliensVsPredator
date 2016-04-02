@@ -2,26 +2,60 @@ package com.arisux.avp.block;
 
 import java.util.Random;
 
-import com.arisux.airi.lib.BlockTypes.HookedBlock;
+import com.arisux.airi.lib.WorldUtil.Entities.Players.Inventories;
 import com.arisux.airi.lib.client.render.IconSet;
+import com.arisux.airi.lib.enums.IconSides;
+import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.TileEntityAssembler;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class BlockAssembler extends HookedBlock
+public class BlockAssembler extends Block
 {
 	public BlockAssembler(Material material)
 	{
 		super(material);
-		this.setIconSet(new IconSet("avp:assembler.top", "avp:assembler.top", "avp:assembler.top", "avp:assembler.side", "avp:assembler.side", "avp:assembler.side", "avp:assembler.side"));
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int side, int meta)
+	{
+		IconSet iconSet = AliensVsPredator.resources().ICONSET_ASSEMBLER;
+		IconSides iconSide = IconSides.getSideFor(side);
+
+		switch (iconSide)
+		{
+			case BOTTOM:
+				return iconSet.bottom;
+			case TOP:
+				return iconSet.top;
+			case BACK:
+				return iconSet.back;
+			case FRONT:
+				return iconSet.front;
+			case LEFT:
+				return iconSet.left;
+			case RIGHT:
+				return iconSet.right;
+			default:
+				return iconSet.bottom;
+		}
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerBlockIcons(IIconRegister register)
+	{
+		AliensVsPredator.resources().ICONSET_ASSEMBLER.registerIcons(register);
 	}
 
 	@Override
@@ -50,30 +84,8 @@ public class BlockAssembler extends HookedBlock
 	@Override
 	public void breakBlock(World world, int xCoord, int yCoord, int zCoord, Block block, int metadata)
 	{
-		TileEntityAssembler tile = (TileEntityAssembler) world.getTileEntity(xCoord, yCoord, zCoord);
-
-		if (tile != null)
-		{
-			IInventory inv = tile;
-
-			for (byte i = 0; i < inv.getSizeInventory(); i++)
-			{
-				ItemStack stack = inv.getStackInSlotOnClosing(i);
-
-				if (stack != null)
-				{
-					EntityItem entity = new EntityItem(world, xCoord + world.rand.nextFloat(), yCoord + world.rand.nextFloat(), zCoord + world.rand.nextFloat(), stack);
-
-					float mult = 0.05F;
-					entity.motionX = (-0.5F + world.rand.nextFloat()) * mult;
-					entity.motionY = (4F + world.rand.nextFloat()) * mult;
-					entity.motionZ = (-0.5F + world.rand.nextFloat()) * mult;
-
-					world.spawnEntityInWorld(entity);
-				}
-			}
-		}
-
+		Inventories.dropItemsInAt((TileEntityAssembler) world.getTileEntity(xCoord, yCoord, zCoord), world, xCoord, yCoord, zCoord);
+		
 		super.breakBlock(world, xCoord, yCoord, zCoord, block, metadata);
 	}
 
@@ -82,16 +94,10 @@ public class BlockAssembler extends HookedBlock
 	{
 		return new TileEntityAssembler();
 	}
-	
+
 	@Override
 	public boolean hasTileEntity(int metadata)
 	{
 		return true;
-	}
-	
-	@Override
-	public void registerBlockIcons(IIconRegister iconRegister)
-	{
-		super.registerBlockIcons(iconRegister);
 	}
 }

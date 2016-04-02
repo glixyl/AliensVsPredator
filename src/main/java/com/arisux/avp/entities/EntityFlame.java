@@ -58,20 +58,23 @@ public class EntityFlame extends EntityThrowable
 		
 		if (this.getThrower() != null && this.getThrower().getHeldItem() != null)
 		{
-			ItemFlamethrower flamethrower = (ItemFlamethrower) this.getThrower().getHeldItem().getItem();
-
-			if (flamethrower instanceof ItemM240IncineratorUnit)
+			if (this.getThrower().getHeldItem().getItem() == AliensVsPredator.items().itemM240ICU || this.getThrower().getHeldItem().getItem() == AliensVsPredator.items().itemNostromoFlamethrower)
 			{
-				this.flameLife = 30;
-				this.flameSpread = 1;
-			}
+				ItemFlamethrower flamethrower = (ItemFlamethrower) this.getThrower().getHeldItem().getItem();
 
-			if (flamethrower instanceof ItemNostromoFlamethrower)
-			{
-				this.flameLife = 12;
-				this.flameSpread = 2;
-				this.flameTailWidth = 0.6;
-			}
+				if (flamethrower instanceof ItemM240IncineratorUnit)
+				{
+					this.flameLife = 30;
+					this.flameSpread = 1;
+				}
+
+				if (flamethrower instanceof ItemNostromoFlamethrower)
+				{
+					this.flameLife = 12;
+					this.flameSpread = 2;
+					this.flameTailWidth = 0.6;
+				}
+			}			
 		}
 	}
 
@@ -166,7 +169,7 @@ public class EntityFlame extends EntityThrowable
 
 		if (rand.nextInt(10) == 0)
 		{
-			ArrayList<CoordData> list = WorldUtil.Blocks.getCoordDataInRangeForBlocks(movingObjectPosition.blockX, movingObjectPosition.blockY, movingObjectPosition.blockZ, 1, this.worldObj, AliensVsPredator.instance().blocks.blockCryostasisTube);
+			ArrayList<CoordData> list = WorldUtil.Blocks.getCoordDataInRangeForBlocks(movingObjectPosition.blockX, movingObjectPosition.blockY, movingObjectPosition.blockZ, 1, this.worldObj, AliensVsPredator.blocks().blockCryostasisTube);
 
 			for (CoordData coord : list)
 			{
@@ -187,20 +190,23 @@ public class EntityFlame extends EntityThrowable
 		
 		if (this.getThrower() != null && this.getThrower().getHeldItem() != null)
 		{
-			ItemFlamethrower flamethrower = (ItemFlamethrower) this.getThrower().getHeldItem().getItem();
-
-			if (flamethrower instanceof ItemM240IncineratorUnit)
+			if (this.getThrower().getHeldItem().getItem() == AliensVsPredator.items().itemM240ICU || this.getThrower().getHeldItem().getItem() == AliensVsPredator.items().itemNostromoFlamethrower)
 			{
-				this.setFire(posX, posY, posZ);
-			}
+				ItemFlamethrower flamethrower = (ItemFlamethrower) this.getThrower().getHeldItem().getItem();
 
-			if (flamethrower instanceof ItemNostromoFlamethrower)
-			{
-				this.setFire(posX, posY, posZ);
-				this.setFire(posX + 1, posY, posZ);
-				this.setFire(posX - 1, posY, posZ);
-				this.setFire(posX, posY, posZ + 1);
-				this.setFire(posX, posY, posZ - 1);
+				if (flamethrower instanceof ItemM240IncineratorUnit)
+				{
+					this.setFire(posX, posY, posZ);
+				}
+
+				if (flamethrower instanceof ItemNostromoFlamethrower)
+				{
+					this.setFire(posX, posY, posZ);
+					this.setFire(posX + 1, posY, posZ);
+					this.setFire(posX - 1, posY, posZ);
+					this.setFire(posX, posY, posZ + 1);
+					this.setFire(posX, posY, posZ - 1);
+				}
 			}
 		}
 

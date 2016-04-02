@@ -5,6 +5,7 @@ import java.util.Random;
 import com.arisux.avp.AliensVsPredator;
 
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -16,6 +17,10 @@ public class EntityCrusher extends EntityXenomorph
 		this.jumpMovementFactor = 0.2F;
 		this.experienceValue = 300;
 		this.setSize(1.0F, 3.0F);
+		this.getNavigator().setCanSwim(true);
+		this.getNavigator().setAvoidsWater(true);
+		this.getNavigator().setBreakDoors(true);
+		this.tasks.addTask(0, new EntityAISwimming(this));
 	}
 
 	@Override

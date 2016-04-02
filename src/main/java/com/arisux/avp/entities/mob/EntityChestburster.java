@@ -40,14 +40,14 @@ public class EntityChestburster extends EntitySpeciesAlien implements IMob
 		this.getNavigator().setCanSwim(true);
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 0.800000011920929D, true));
-		this.tasks.addTask(1, new EntityAIWander(this, 0.800000011920929D));
 		this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityPlayer.class, 16.0F, 0.23F, 0.4F));
 		this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityYautja.class, 16.0F, 0.23F, 0.4F));
 		this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityEngineer.class, 16.0F, 0.23F, 0.4F));
 		this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityMarine.class, 16.0F, 0.23F, 0.4F));
-		this.targetTasks.addTask(1, new EntityAILeapAtTarget(this, 0.8F));
-		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
+		this.tasks.addTask(3, new EntityAIAttackOnCollide(this, 0.800000011920929D, true));
+		this.tasks.addTask(8, new EntityAIWander(this, 0.800000011920929D));
+		this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
+		this.targetTasks.addTask(2, new EntityAILeapAtTarget(this, 0.8F));
 	}
 
 	@Override
@@ -149,6 +149,12 @@ public class EntityChestburster extends EntitySpeciesAlien implements IMob
 	protected String getDeathSound()
 	{
 		return AliensVsPredator.properties().SOUND_CHESTBURSTER_DEATH;
+	}
+	
+	@Override
+	protected String getHurtSound()
+	{
+		return AliensVsPredator.properties().SOUND_CHESTBURSTER_HURT;
 	}
 
 	@Override

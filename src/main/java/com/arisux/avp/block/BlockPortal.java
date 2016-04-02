@@ -2,18 +2,18 @@ package com.arisux.avp.block;
 
 import java.util.Random;
 
-import com.arisux.airi.lib.BlockTypes.HookedBlock;
 import com.arisux.avp.DimensionHandler;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
-public class BlockPortal extends HookedBlock
+public class BlockPortal extends Block
 {
 	private int dimensionId;
 

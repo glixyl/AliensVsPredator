@@ -37,7 +37,13 @@ public class ProviderAcheron extends WorldProvider
 	{
 		return skyProvider == null ? skyProvider = new SkyProviderAcheron() : skyProvider;
 	}
-
+	
+	@Override
+	public IRenderHandler getCloudRenderer()
+	{
+		return skyProvider == null ? skyProvider = new SkyProviderAcheron() : skyProvider;
+	}
+	
 	@Override
 	public String getSaveFolder()
 	{
@@ -108,13 +114,13 @@ public class ProviderAcheron extends WorldProvider
 	@SideOnly(Side.CLIENT)
 	public Vec3 getFogColor(float var1, float var2)
 	{
-		return Vec3.createVectorHelper(0.0F, 0.01F, 0.05F);
+		return Vec3.createVectorHelper(0.0F, 0.0F, 0.0F);
 	}
 
 	@Override
 	public Vec3 drawClouds(float partialTicks)
 	{
-		return Vec3.createVectorHelper(0.01F, 0.00F, 0.02F);
+		return Vec3.createVectorHelper(0.0F, 0.0F, 0.0F);
 	}
 
 	@Override

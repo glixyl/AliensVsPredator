@@ -13,7 +13,6 @@ import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.monster.EntityMob;
@@ -36,14 +35,13 @@ public abstract class EntitySpeciesEngineer extends EntityMob
 		this.getNavigator().setCanSwim(true);
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(2, new EntityAIAttackOnCollide(this, 0.800000011920929D, true));
-		this.tasks.addTask(3, new EntityAIWander(this, 0.800000011920929D));
-		this.tasks.addTask(7, new EntityAILookIdle(this));
-		this.tasks.addTask(8, new EntityAIPanic(this, 0.800000011920929D));
-		this.targetTasks.addTask(1, new EntityAILeapAtTarget(this, 0.4F));
+		this.tasks.addTask(8, new EntityAIWander(this, 0.800000011920929D));
+		this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
+		this.targetTasks.addTask(2, new EntityAILeapAtTarget(this, 0.4F));
 		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntitySpeciesAlien.class, 0, true));
+		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntitySpeciesYautja.class, 0, true));
 		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityMarine.class, 0, true));
 		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
-		this.targetTasks.addTask(4, new EntityAIHurtByTarget(this, true));
 	}
 
 	@Override

@@ -27,6 +27,7 @@ import com.arisux.avp.entities.mob.EntityAqua;
 import com.arisux.avp.entities.mob.EntityChestburster;
 import com.arisux.avp.entities.mob.EntityCombatSynthetic;
 import com.arisux.avp.entities.mob.EntityCrusher;
+import com.arisux.avp.entities.mob.EntityDeaconShark;
 import com.arisux.avp.entities.mob.EntityDrone;
 import com.arisux.avp.entities.mob.EntityEngineer;
 import com.arisux.avp.entities.mob.EntityFacehugger;
@@ -49,6 +50,7 @@ import com.arisux.avp.entities.mob.EntityYautjaBerserker;
 import com.arisux.avp.entities.mob.model.ModelAqua;
 import com.arisux.avp.entities.mob.model.ModelChestburster;
 import com.arisux.avp.entities.mob.model.ModelCrusher;
+import com.arisux.avp.entities.mob.model.ModelDeaconShark;
 import com.arisux.avp.entities.mob.model.ModelDrone;
 import com.arisux.avp.entities.mob.model.ModelEngineer;
 import com.arisux.avp.entities.mob.model.ModelFacehugger;
@@ -68,6 +70,7 @@ import com.arisux.avp.entities.mob.model.ModelYautjaBerserker;
 import com.arisux.avp.entities.mob.render.RenderAqua;
 import com.arisux.avp.entities.mob.render.RenderChestburster;
 import com.arisux.avp.entities.mob.render.RenderCombatSynthetic;
+import com.arisux.avp.entities.mob.render.RenderDeaconShark;
 import com.arisux.avp.entities.mob.render.RenderEngineer;
 import com.arisux.avp.entities.mob.render.RenderFacehugger;
 import com.arisux.avp.entities.mob.render.RenderHammerpede;
@@ -193,6 +196,7 @@ import com.arisux.avp.items.render.parts.RenderItemSniperScope;
 import com.arisux.avp.items.render.parts.RenderItemSniperStock;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraft.client.model.ModelBiped;
@@ -201,7 +205,7 @@ import net.minecraft.item.Item;
 public class RenderingHandler implements IInitializablePre, IInitializablePost
 {
 	public static final RenderingHandler instance = new RenderingHandler();
-	public ISimpleBlockRenderingHandler renderTypeAngled;
+	public ISimpleBlockRenderingHandler renderTypeShape;
 
 	@Override
 	public void preInitialize(FMLPreInitializationEvent event)
@@ -226,9 +230,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		registerEntityRenderingHandler(EntityHammerpede.class, new RenderHammerpede(new ModelHammerpede(), 0.5F));
 		registerEntityRenderingHandler(EntityProtomorph.class, new RenderXenomorph(new ModelTexMap(new ModelProtomorph(), AliensVsPredator.resources().PROTOMORPH), 0.5F).setScale(1.4F));
 		registerEntityRenderingHandler(EntityDrone.class, new RenderXenomorph(new ModelTexMap(new ModelDrone(), AliensVsPredator.resources().DRONE_BASIC), 0.5F));
-		registerEntityRenderingHandler(EntityRunnerDrone.class, new RenderXenomorph(new ModelTexMap(new ModelRunnerDrone(), AliensVsPredator.resources().RUNNER_DRONE), 0.5F));
 		registerEntityRenderingHandler(EntityWarrior.class, new RenderXenomorph(new ModelTexMap(new ModelWarrior(), AliensVsPredator.resources().WARRIOR), 0.5F));
-		registerEntityRenderingHandler(EntityRunnerWarrior.class, new RenderXenomorph(new ModelTexMap(new ModelRunnerWarrior(), AliensVsPredator.resources().RUNNER_WARRIOR), 0.5F));
 		registerEntityRenderingHandler(EntityPraetorian.class, new RenderXenomorph(new ModelTexMap(new ModelPraetorian(), AliensVsPredator.resources().PRAETORIAN), 0.85F, 1.4F));
 		registerEntityRenderingHandler(EntityCrusher.class, new RenderXenomorph(new ModelTexMap(new ModelCrusher(), AliensVsPredator.resources().CRUSHER), 0.5F));
 		registerEntityRenderingHandler(EntityAqua.class, new RenderAqua(new ModelAqua(), 0.5F));
@@ -242,6 +244,10 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		registerEntityRenderingHandler(EntityRoyalFacehugger.class, new RenderRoyalFacehugger(new ModelFacehugger(), 0.5F));
 		registerEntityRenderingHandler(EntityChestburster.class, new RenderChestburster(new ModelChestburster(), 0.5F));
 		registerEntityRenderingHandler(EntityOvamorph.class, new RenderOvamorph(new ModelOvamorph(), 0.5F));
+		registerEntityRenderingHandler(EntityDeaconShark.class, new RenderDeaconShark(new ModelDeaconShark(), 0.5F));
+		registerEntityRenderingHandler(EntityRunnerDrone.class, new RenderXenomorph(new ModelTexMap(new ModelRunnerDrone(), AliensVsPredator.resources().RUNNER_DRONE), 0.5F));
+		registerEntityRenderingHandler(EntityRunnerWarrior.class, new RenderXenomorph(new ModelTexMap(new ModelRunnerWarrior(), AliensVsPredator.resources().RUNNER_WARRIOR), 0.5F));
+		
 		registerEntityRenderingHandler(EntitySpear.class, new RenderSpear());
 		registerEntityRenderingHandler(EntityLaserMine.class, new RenderLaserMine());
 		registerEntityRenderingHandler(EntityGrenade.class, new RenderGrenade());
@@ -310,6 +316,7 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		registerItemRenderer(items.itemSummonerSpaceJockey, (new RenderItemSummoner(EntitySpaceJockey.class, ModelEngineer.class, AliensVsPredator.resources().SPACE_JOCKEY)).setScale(27.5F).setY(8F));
 		registerItemRenderer(items.itemSummonerEngineer, (new RenderItemSummoner(EntityEngineer.class, ModelEngineer.class, AliensVsPredator.resources().ENGINEER)).setScale(27.5F).setY(8F));
 		registerItemRenderer(items.itemSummonerYautjaBerserker, (new RenderItemSummoner(EntityYautjaBerserker.class, ModelYautjaBerserker.class, AliensVsPredator.resources().YAUTJA_BERSERKER)).setScale(7.5F).setY(8F));
+		registerItemRenderer(items.itemSummonerDeaconShark, (new RenderItemSummoner(EntityDeaconShark.class, ModelDeaconShark.class, AliensVsPredator.resources().DEACON_SHARK)).setScale(7.5F).setY(8F));
 		
 		Model88MOD4 _88mod4 = new Model88MOD4();
 		registerItemRenderer(items.itemPistolBarrel, new RenderItem88Mod4Barrel(AliensVsPredator.resources()._88MOD4, _88mod4.barrelLeft, _88mod4.barrelRight, _88mod4.barrelNose, _88mod4.barrelSupport));
@@ -376,6 +383,6 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 
 	public void registerSimpleBlockRenderingHandlers()
 	{
-		registerBlockHandler(this.renderTypeAngled = new RenderShape());
+		registerBlockHandler(this.renderTypeShape = new RenderShape(RenderingRegistry.getNextAvailableRenderId()));
 	}
 }

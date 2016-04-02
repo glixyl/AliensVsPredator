@@ -9,9 +9,9 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class BlockSupplies extends BlockFalling
+public class BlockSupplyCrate extends BlockFalling
 {
-	public BlockSupplies(Material material)
+	public BlockSupplyCrate(Material material)
 	{
 		super(material);
 	}
