@@ -131,7 +131,7 @@ public class Resources implements IInitializablePre
 	public final IconSet ICONSET_SPAWNER = new IconSet("avp:spawner_side", "avp:spawner_top", "avp:spawner_bottom", "avp:spawner_side", "avp:spawner_side", "avp:spawner_side", "avp:spawner_side");
 	public final IconSet ICONSET_ASSEMBLER = new IconSet("avp:assembler.top", "avp:assembler.top", "avp:assembler.top", "avp:assembler.side", "avp:assembler.side", "avp:assembler.side", "avp:assembler.side");
 	public final IconSet ICONSET_BLACK_GOO = new IconSet("avp:blackgoo.still", "avp:blackgoo.flowing", "avp:blackgoo.still");
-	public final IconSet ICONSET_MIST = new IconSet("avp:blackgoo.still", "avp:blackgoo.flowing", "avp:blackgoo.still");
+	public final IconSet ICONSET_MIST = new IconSet("avp:mist.still", "avp:mist.flowing", "avp:mist.still");
 	
 	public WavefrontModel M577_APC;
 	

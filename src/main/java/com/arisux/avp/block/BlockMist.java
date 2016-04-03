@@ -1,6 +1,5 @@
 package com.arisux.avp.block;
 
-import com.arisux.airi.lib.client.render.IconSet;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.Materials;
 
