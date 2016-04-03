@@ -5,7 +5,7 @@ import com.arisux.avp.DamageSources;
 import com.arisux.avp.entities.mob.EntityChestburster;
 import com.arisux.avp.packets.client.PacketSyncEEPC;
 import com.arisux.avp.packets.server.PacketSyncEEPS;
-import com.arisux.avp.util.HostParasiteTypes;
+import com.arisux.avp.util.HostType;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -111,7 +111,7 @@ public class ExtendedEntityLivingBase implements IExtendedEntityProperties
 	public EntityChestburster getParasite()
 	{
 		EntityChestburster chestburster = new EntityChestburster(this.entityLiving.worldObj);
-		chestburster.setHostParasiteType(HostParasiteTypes.getTypeForHost(this.entityLiving.getClass()));
+		chestburster.setHostParasiteType(HostType.getMappingFromHost(this.entityLiving.getClass()));
 		
 		return chestburster;
 	}
@@ -129,8 +129,8 @@ public class ExtendedEntityLivingBase implements IExtendedEntityProperties
 		this.containsEmbryo = containsEmbryo;
 	}
 	
-	public HostParasiteTypes getHostParasiteType()
+	public HostType getHostParasiteType()
 	{
-		return HostParasiteTypes.getTypeForHost(this.entityLiving.getClass());
+		return HostType.getMappingFromHost(this.entityLiving.getClass());
 	}
 }

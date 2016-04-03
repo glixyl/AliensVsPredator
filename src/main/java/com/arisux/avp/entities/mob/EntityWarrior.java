@@ -14,7 +14,6 @@ public class EntityWarrior extends EntityXenomorph implements IMob
 		super(world);
 		this.experienceValue = 175;
 		this.setSize(1.0F, 2.5F);
-		this.setEvolveTo(EntityPraetorian.class, 32);
 		this.getNavigator().setCanSwim(true);
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(0, new EntityAISwimming(this));

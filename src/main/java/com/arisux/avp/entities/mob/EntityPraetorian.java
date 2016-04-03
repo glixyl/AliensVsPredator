@@ -16,7 +16,6 @@ public class EntityPraetorian extends EntityXenomorph
 		super(world);
 		this.experienceValue = 300;
 		this.setSize(1.0F, 3.0F);
-		this.setEvolveTo(EntityQueen.class, 100);
 		this.getNavigator().setCanSwim(true);
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(0, new EntityAISwimming(this));

@@ -277,12 +277,14 @@ public class PressureHUDRenderEvent
 								ExtendedEntityLivingBase extendedLiving = (ExtendedEntityLivingBase) entityLiving.getExtendedProperties(ExtendedEntityLivingBase.IDENTIFIER);
 
 								fontrenderer.drawString("Age: " + entityLiving.getAge(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0x666666);
-								fontrenderer.drawString("Host Type: " + extendedLiving.getHostParasiteType().getParasiteType().getSimpleName(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0x666666);
+								
+								if (!(entity instanceof EntitySpeciesAlien))
+								fontrenderer.drawString("Parasite Type: " + extendedLiving.getHostParasiteType().getResult().getSimpleName(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0x666666);
 							}
 
 							if (entity instanceof EntitySpeciesAlien)
 							{
-								fontrenderer.drawString("Kills: " + ((EntitySpeciesAlien) entity).getKilledEntities(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0x666666);
+								fontrenderer.drawString("Jelly Level: " + ((EntitySpeciesAlien) entity).getJellyLevel(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0x666666);
 								fontrenderer.drawString("Hive Signature: " + ((EntitySpeciesAlien) entity).getHiveSignature(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0x666666);
 							}
 
@@ -293,7 +295,7 @@ public class PressureHUDRenderEvent
 
 							if (entity instanceof EntityDrone)
 							{
-								fontrenderer.drawString("ResinLevel: " + ((EntityDrone) entity).getResinLevel(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0x666666);
+								fontrenderer.drawString("Resin Level: " + ((EntityDrone) entity).getResinLevel(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0x666666);
 							}
 
 							if (entity instanceof EntityChestburster)

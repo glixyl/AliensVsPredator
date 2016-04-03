@@ -72,6 +72,13 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 		{
 			this.rotationYaw = 0F;
 			this.rotationYawHead = 0F;
+			
+			if (this.ridingEntity instanceof EntityLivingBase)
+			{
+				EntityLivingBase ridingEntity = (EntityLivingBase) this.ridingEntity;
+				ridingEntity.rotationYaw = 0F;
+				ridingEntity.rotationYawHead = 0F;
+			}
 		}
 
 		if (!this.isFertile && !this.isRiding())

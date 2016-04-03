@@ -33,7 +33,6 @@ public class EntityDrone extends EntityXenomorph
 		this.experienceValue = 100;
 		this.setSize(0.8F, 1.8F);
 		this.mobType = this.rand.nextInt(2);
-		this.setEvolveTo(EntityWarrior.class, 12);
 		this.getNavigator().setCanSwim(true);
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(0, new EntityAISwimming(this));

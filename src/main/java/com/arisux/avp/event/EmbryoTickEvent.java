@@ -3,7 +3,7 @@ package com.arisux.avp.event;
 import com.arisux.avp.DamageSources;
 import com.arisux.avp.entities.extended.ExtendedEntityLivingBase;
 import com.arisux.avp.entities.mob.EntityChestburster;
-import com.arisux.avp.util.HostParasiteTypes;
+import com.arisux.avp.util.HostType;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
@@ -49,7 +49,7 @@ public class EmbryoTickEvent
 						if (livingProperties.getEmbryoAge() >= livingProperties.getMaxEmbryoAge())
 						{
 							EntityChestburster chestburster = new EntityChestburster(event.world);
-							chestburster.setHostParasiteType(HostParasiteTypes.getTypeForHost(living.getClass()));
+							chestburster.setHostParasiteType(HostType.getMappingFromHost(living.getClass()));
 							chestburster.setLocationAndAngles(living.posX, living.posY, living.posZ, 0.0F, 0.0F);
 							event.world.spawnEntityInWorld(chestburster);
 							entity.attackEntityFrom(DamageSources.causeChestbursterDamage(chestburster, entity), 200F);
