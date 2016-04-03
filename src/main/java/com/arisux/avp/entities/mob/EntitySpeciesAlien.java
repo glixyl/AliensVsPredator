@@ -134,24 +134,31 @@ public abstract class EntitySpeciesAlien extends EntityMob implements IMob, IHiv
 	@SuppressWarnings("unchecked")
 	protected void tickJellyPickupAI()
 	{
-		ArrayList<EntityItem> entityItemList = (ArrayList<EntityItem>) WorldUtil.Entities.getEntitiesInCoordsRange(worldObj, EntityItem.class, new com.arisux.airi.lib.WorldUtil.Blocks.CoordData(this), 8);
-
-		for (EntityItem entityItem : entityItemList)
+		if (!this.worldObj.isRemote)
 		{
-			if (entityItem.delayBeforeCanPickup <= 0)
+			ArrayList<EntityItem> entityItemList = (ArrayList<EntityItem>) WorldUtil.Entities.getEntitiesInCoordsRange(worldObj, EntityItem.class, new com.arisux.airi.lib.WorldUtil.Blocks.CoordData(this), 8);
+	
+			for (EntityItem entityItem : entityItemList)
 			{
-				ItemStack stack = entityItem.getDataWatcher().getWatchableObjectItemStack(10);
-
-				if (stack.getItem() == AliensVsPredator.items().itemRoyalJelly)
+				if (entityItem.delayBeforeCanPickup <= 0)
 				{
-					this.getNavigator().setPath(this.getNavigator().getPathToEntityLiving(entityItem), 1);
-
-					if (this.getDistanceToEntity(entityItem) < 1)
+					ItemStack stack = entityItem.getDataWatcher().getWatchableObjectItemStack(10);
+	
+					if (stack.getItem() == AliensVsPredator.items().itemRoyalJelly)
 					{
-						this.setJellyLevel(this.getJellyLevel() + 1);
-						entityItem.setDead();
+						this.getNavigator().setPath(this.getNavigator().getPathToEntityLiving(entityItem), 1);
+	
+						if (this.getDistanceToEntity(entityItem) < 1)
+						{
+							for (int i = entityItem.getEntityItem().stackSize; i > 0; i--)
+							{
+								this.setJellyLevel(this.getJellyLevel() + 1);
+							}
+							
+							entityItem.setDead();
+						}
+						break;
 					}
-					break;
 				}
 			}
 		}
