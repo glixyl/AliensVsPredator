@@ -22,7 +22,6 @@ import net.minecraft.entity.passive.EntityWolf;
 public enum HostType
 {
 	NORMAL(0, EntityLiving.class, EntityDrone.class),
-	CRUSHER(1, EntityHorse.class, EntityCrusher.class),
 	SPITTER(2, EntityCreeper.class, EntitySpitter.class),
 	AQUA(3, EntitySquid.class, EntityAqua.class),
 	PREDALIEN(4, EntityYautja.class, EntityPredalien.class),

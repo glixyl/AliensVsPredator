@@ -31,7 +31,8 @@ public enum EvolutionType
 	WARRIOR(2, 32, EntityWarrior.class, EntityPraetorian.class),
 	PRAETORIAN(3, 100, EntityPraetorian.class, EntityQueen.class),
 	RUNNER_DRONE(4, 12, EntityRunnerDrone.class, EntityRunnerWarrior.class),
-	RUNNER_WARRIOR(5, 32, EntityRunnerWarrior.class, EntityPraetorian.class);
+	RUNNER_WARRIOR(5, 32, EntityRunnerWarrior.class, EntityCrusher.class),
+	CRUSHER(5, 32, EntityCrusher.class, EntityQueen.class);
 	
 	public int id;
 	private int level;
