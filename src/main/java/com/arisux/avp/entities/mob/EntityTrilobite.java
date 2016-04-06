@@ -3,14 +3,15 @@ package com.arisux.avp.entities.mob;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.ai.alien.EntitySelectorXenomorph;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
@@ -24,7 +25,7 @@ public class EntityTrilobite extends EntitySpeciesAlien implements IMob
 	{
 		super(world);
 
-		this.setSize(1.3F, 1.3F);
+		this.setSize(1.5F, 1.5F);
 		this.experienceValue = 32;
 		this.getNavigator().setCanSwim(true);
 		this.getNavigator().setAvoidsWater(false);
@@ -58,11 +59,11 @@ public class EntityTrilobite extends EntitySpeciesAlien implements IMob
 	{
 		super.onUpdate();
 		
-		// temp fix for EntityAIClimb
-		if (this.isCollidedHorizontally)
+		// disabled as they are sliding off of surfaces instead of climbing
+		/*if (this.isCollidedHorizontally)
 		{
 			this.motionY += 0.25F;
-		}
+		}*/
 		
 		this.fallDistance = 0F;
 	}

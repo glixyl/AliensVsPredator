@@ -1,6 +1,7 @@
 package com.arisux.avp.entities.mob;
 
 import java.util.List;
+import java.util.Random;
 
 import com.arisux.airi.lib.AccessWrapper;
 import com.arisux.airi.lib.WorldUtil;
@@ -188,10 +189,10 @@ public class EntityDeaconShark extends EntitySpeciesAlien
 	@Override
 	public boolean getCanSpawnHere()
 	{
-		List<? extends Entity> otherSharks = WorldUtil.Entities.getEntitiesInCoordsRange(this.worldObj, EntityDeaconShark.class, new CoordData(this), (int) this.getEntityAttribute(SharedMonsterAttributes.followRange).getAttributeValue());
+		List<? extends Entity> otherSharks = WorldUtil.Entities.getEntitiesInCoordsRange(this.worldObj, EntityDeaconShark.class, new CoordData(this), (int) 64);
 		CoordData coordData = new CoordData(this);
 		
-		return coordData.getBlock(this.worldObj) == Blocks.water && otherSharks.size() <= 1;
+		return coordData.getBlock(this.worldObj) == Blocks.water && otherSharks.size() == 0 && !(WorldUtil.canSeeSky(coordData, this.worldObj));
 	}
 
 	@Override
