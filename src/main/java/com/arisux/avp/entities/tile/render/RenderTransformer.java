@@ -30,9 +30,24 @@ public class RenderTransformer extends TileEntitySpecialRenderer
 				GlStateManager.scale(1F, -1F, 1F);
 				GlStateManager.translate(0.5F, -1.5F, 0.5F);
 				
-				if (transformer.getDirection() == ForgeDirection.EAST || transformer.getDirection() == ForgeDirection.WEST)
+				if (transformer.getDirection() == ForgeDirection.EAST)
 				{
 					GlStateManager.rotate(90F, 0F, 1F, 0F);
+				}
+				
+				if ( transformer.getDirection() == ForgeDirection.WEST)
+				{
+					GlStateManager.rotate(-90F, 0F, 1F, 0F);
+				}
+				
+				if ( transformer.getDirection() == ForgeDirection.NORTH)
+				{
+					GlStateManager.rotate(180F, 0F, 1F, 0F);
+				}
+				
+				if ( transformer.getDirection() == ForgeDirection.SOUTH)
+				{
+					GlStateManager.rotate(0F, 0F, 1F, 0F);
 				}
 				
 				RenderUtil.bindTexture(AliensVsPredator.resources().TRANSFORMER);
