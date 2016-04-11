@@ -74,7 +74,7 @@ public class BlockShape extends Block
 
 	public BlockShape(ShapeTypes shape)
 	{
-		super(Material.air);
+		super(Material.ground);
 		this.shape = shape;
 		this.material = Material.ground;
 		this.textureSide = 0;
@@ -127,6 +127,18 @@ public class BlockShape extends Block
 	{
 		return false;
 	}
+	
+	@Override
+	public boolean canPlaceBlockAt(World world, int x, int y, int z)
+	{
+		return true;
+	}
+	
+	@Override
+	public boolean canPlaceBlockOnSide(World world, int x, int y, int z, int side)
+	{
+		return true;
+	}
 
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack stack)
@@ -138,6 +150,7 @@ public class BlockShape extends Block
 	@SuppressWarnings("rawtypes")
 	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB clip, List list, Entity entity)
 	{
+		super.addCollisionBoxesToList(world, x, y, z, clip, list, entity);
 		int data = world.getBlockMetadata(x, y, z);
 		Matrix3 rot = Matrix3.rotations[data >> 2];
 		Vertex org = new Vertex(x + 0.5, y + 0.5, z + 0.5);
@@ -205,24 +218,26 @@ public class BlockShape extends Block
 	@Override
 	public boolean canHarvestBlock(EntityPlayer player, int meta)
 	{
-		return false;
+		return super.canHarvestBlock(player, meta);
 	}
 
 	@Override
 	public void onBlockHarvested(World world, int x, int y, int z, int data, EntityPlayer player)
 	{
-		;
+		super.onBlockHarvested(world, x, y, z, data, player);
 	}
 
 	@Override
 	public float getPlayerRelativeBlockHardness(EntityPlayer player, World world, int x, int y, int z)
 	{
-		return 0.0F;
+		return super.getPlayerRelativeBlockHardness(player, world, x, y, z);
 	}
 
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z)
 	{
+		super.setBlockBoundsBasedOnState(world, x, y, z);
+
 		if (shape.getId() <= 2)
 		{
 			this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
