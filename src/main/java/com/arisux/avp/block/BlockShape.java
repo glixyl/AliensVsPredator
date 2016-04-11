@@ -78,6 +78,7 @@ public class BlockShape extends Block
 		this.shape = shape;
 		this.material = Material.ground;
 		this.textureSide = 0;
+		this.setLightOpacity(1);
 	}
 
 	public BlockShape(Material material, ShapeTypes shape)
@@ -112,7 +113,7 @@ public class BlockShape extends Block
 	@Override
 	public int getRenderType()
 	{
-		return AliensVsPredator.renderer().renderTypeShape.getRenderId();
+		return AliensVsPredator.renderTypes().RENDER_TYPE_SHAPED;
 	}
 
 	@Override

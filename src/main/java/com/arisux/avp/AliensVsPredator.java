@@ -82,13 +82,18 @@ public class AliensVsPredator implements IMod
 	{
 		return EntityHandler.instance;
 	}
-
-	@SideOnly(Side.CLIENT)
-	public static RenderingHandler renderer()
+	
+	public static RenderTypes renderTypes()
 	{
-		return RenderingHandler.instance;
+		return RenderTypes.instance;
 	}
-
+	
+	@SideOnly(Side.CLIENT)
+	public static Renderers renderers()
+	{
+		return Renderers.instance;
+	}
+	
 	@SideOnly(Side.CLIENT)
 	public static KeybindHandler keybinds()
 	{
@@ -181,11 +186,11 @@ public class AliensVsPredator implements IMod
 		AIRI.remappingApi().registerMappingInfo("lv223portal", "portal.varda", "avp");
 
 		settings().preInitialize(event);
+		renderTypes().preInitialize(event);
 
 		if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
 		{		
 			resources().preInitialize(event);
-			renderer().preInitialize(event);
 		}
 	}
 
@@ -225,7 +230,7 @@ public class AliensVsPredator implements IMod
 
 		if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
 		{
-			renderer().postInitialize(event);
+			renderers().postInitialize(event);
 			keybinds().postInitialize(event);
 
 			if (settings().isUpdaterEnabled())

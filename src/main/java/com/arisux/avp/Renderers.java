@@ -8,7 +8,6 @@ import static net.minecraftforge.client.MinecraftForgeClient.registerItemRendere
 import com.arisux.airi.lib.client.ModelBipedExtension;
 import com.arisux.airi.lib.client.ModelTexMap;
 import com.arisux.airi.lib.interfaces.IInitializablePost;
-import com.arisux.airi.lib.interfaces.IInitializablePre;
 import com.arisux.avp.block.render.RenderShape;
 import com.arisux.avp.entities.EntityAPC;
 import com.arisux.avp.entities.EntityAcidPool;
@@ -195,32 +194,26 @@ import com.arisux.avp.items.render.parts.RenderItemSniperPeripherals;
 import com.arisux.avp.items.render.parts.RenderItemSniperScope;
 import com.arisux.avp.items.render.parts.RenderItemSniperStock;
 
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.item.Item;
 
-public class RenderingHandler implements IInitializablePre, IInitializablePost
+@SideOnly(Side.CLIENT)
+public class Renderers implements IInitializablePost
 {
-	public static final RenderingHandler instance = new RenderingHandler();
-	public ISimpleBlockRenderingHandler renderTypeShape;
-
-	@Override
-	public void preInitialize(FMLPreInitializationEvent event)
-	{
-		registerSimpleBlockRenderingHandlers();
-	}
-
+	public static Renderers instance = new Renderers();
+	
 	@Override
 	public void postInitialize(FMLPostInitializationEvent event)
 	{
+		registerSimpleBlockRenderingHandlers();
 		registerTileEntitySpecialRenderers();
 		registerItemRenderers(AliensVsPredator.items());
 		registerEntityRenderers();
 	}
-
+	
 	public void registerEntityRenderers()
 	{
 		registerEntityRenderingHandler(EntityEngineer.class, new RenderEngineer(new ModelEngineer(), AliensVsPredator.resources().ENGINEER));
@@ -352,9 +345,6 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 		registerItemRenderer(items.itemSniperScope, new RenderItemSniperScope(AliensVsPredator.resources().SNIPER, sniper.scope, sniper.scopeSupport));
 		registerItemRenderer(items.itemSniperStock, new RenderItemSniperStock(AliensVsPredator.resources().SNIPER, sniper.stock1, sniper.stock2, sniper.stockEnd));
 		registerItemRenderer(items.itemSniperPeripherals, new RenderItemSniperPeripherals(AliensVsPredator.resources().SNIPER, sniper.barrelSupport));
-		
-		// registerItemRenderer(items.itemAK47Barrel, new RenderItemMotionTracker());
-		// registerItemRenderer(items.itemAK47Stock, new RenderItemMotionTracker());
 	}
 
 	public void registerTileEntitySpecialRenderers()
@@ -383,6 +373,6 @@ public class RenderingHandler implements IInitializablePre, IInitializablePost
 
 	public void registerSimpleBlockRenderingHandlers()
 	{
-		registerBlockHandler(this.renderTypeShape = new RenderShape(RenderingRegistry.getNextAvailableRenderId()));
+		registerBlockHandler(new RenderShape(AliensVsPredator.renderTypes().RENDER_TYPE_SHAPED));
 	}
 }
