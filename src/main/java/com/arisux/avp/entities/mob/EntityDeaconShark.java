@@ -1,7 +1,6 @@
 package com.arisux.avp.entities.mob;
 
 import java.util.List;
-import java.util.Random;
 
 import com.arisux.airi.lib.AccessWrapper;
 import com.arisux.airi.lib.WorldUtil;
@@ -9,7 +8,6 @@ import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
 import com.arisux.avp.entities.ai.helpers.EntityExtendedLookHelper;
 import com.arisux.avp.entities.pathfinding.PathNavigateSwimmer;
 
-import net.minecraft.block.material.Material;
 import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -27,7 +25,6 @@ import net.minecraft.entity.ai.EntityLookHelper;
 import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -189,16 +186,14 @@ public class EntityDeaconShark extends EntitySpeciesAlien
 	@Override
 	public boolean getCanSpawnHere()
 	{
-		List<? extends Entity> otherSharks = WorldUtil.Entities.getEntitiesInCoordsRange(this.worldObj, EntityDeaconShark.class, new CoordData(this), (int) 64);
-		CoordData coordData = new CoordData(this);
-		
-		return coordData.getBlock(this.worldObj) == Blocks.water && otherSharks.size() == 0 && !(WorldUtil.canSeeSky(coordData, this.worldObj));
+		return false;
 	}
 
 	@Override
 	protected boolean canDespawn()
 	{
-		return false;
+		List<? extends Entity> otherSharks = WorldUtil.Entities.getEntitiesInCoordsRange(this.worldObj, EntityDeaconShark.class, new CoordData(this), (int) 64);
+		return otherSharks != null && otherSharks.size() > 0 && !this.hasCustomNameTag();
 	}
 
 	@Override
