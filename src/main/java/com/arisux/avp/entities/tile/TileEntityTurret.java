@@ -19,7 +19,7 @@ import com.arisux.avp.entities.mob.EntityQueen;
 import com.arisux.avp.entities.mob.EntitySpitter;
 import com.arisux.avp.entities.mob.EntityWarrior;
 import com.arisux.avp.interfaces.IDataDevice;
-import com.arisux.avp.interfaces.energy.IEnergyReceiver;
+import com.arisux.avp.interfaces.energy.IVoltageReceiver;
 import com.arisux.avp.inventory.container.ContainerTurret;
 import com.arisux.avp.packets.client.PacketTurretInit;
 import com.arisux.avp.packets.server.PacketTurretTargetUpdate;
@@ -46,15 +46,33 @@ import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityTurret extends TileEntityElectrical implements IDataDevice, IEnergyReceiver
+public class TileEntityTurret extends TileEntityElectrical implements IDataDevice, IVoltageReceiver
 {
 	private long fireRate;
-	private boolean ammoDisplayEnabled, isFiring;
-	private int range, defaultRunCycles, runCycles, curAmmo, maxAmmo, curRounds, maxRounds, direction, firingTimeout, maxFiringTimeout;
-	private float deltaLookYaw, deltaLookPitch, focusPitch, focusYaw, rotationYaw, rotationPitch;
+	private boolean ammoDisplayEnabled;
+	private boolean isFiring;
+	private int range;
+	private int defaultRunCycles;
+	private int runCycles;
+	private int curAmmo;
+	private int maxAmmo;
+	private int curRounds;
+	private int maxRounds;
+	private int direction;
+	private int firingTimeout;
+	private int maxFiringTimeout;
+	private float deltaLookYaw;
+	private float deltaLookPitch;
+	private float focusPitch;
+	private float focusYaw;
+	private float rotationYaw;
+	private float rotationPitch;
 	private ArrayList<Class<? extends Entity>> dangerousTargets = new ArrayList<Class<? extends Entity>>();
-	public InventoryBasic inventoryAmmo, inventoryExpansion, inventoryDrive;
-	private Entity targetEntity, turretEnitty;
+	public InventoryBasic inventoryAmmo;
+	public InventoryBasic inventoryExpansion;
+	public InventoryBasic inventoryDrive;
+	private Entity targetEntity;
+	private Entity turretEnitty;
 	private ContainerTurret container;
 	private CoordData focusPoint;
 	private Item itemAmmo;
@@ -92,6 +110,8 @@ public class TileEntityTurret extends TileEntityElectrical implements IDataDevic
 	public void updateEntity()
 	{
 		super.updateEntity();
+		
+		super.updateEnergyAsReceiver();
 
 		this.isFiring = false;
 
@@ -782,26 +802,26 @@ public class TileEntityTurret extends TileEntityElectrical implements IDataDevic
 	}
 
 	@Override
-	public boolean canConnectEnergy(ForgeDirection from)
+	public boolean canConnectPower(ForgeDirection from)
 	{
 		return true;
 	}
-
+	
 	@Override
-	public double receiveEnergy(ForgeDirection from, double maxReceive, boolean simulate)
+	public double receiveVoltage(ForgeDirection from, double maxReceive, boolean simulate)
 	{
-		return super.receiveEnergy(from, maxReceive, simulate);
+		return super.receiveVoltage(from, maxReceive, simulate);
 	}
 
 	@Override
-	public double getEnergyStored(ForgeDirection from)
+	public double getCurrentVoltage(ForgeDirection from)
 	{
-		return this.voltage;
+		return this.getVoltage();
 	}
 
 	@Override
-	public double getMaxEnergyStored(ForgeDirection from)
+	public double getMaxVoltage(ForgeDirection from)
 	{
-		return 10000;
+		return 220;
 	}
 }

@@ -1,7 +1,7 @@
 package com.arisux.avp.entities.tile;
 
-import com.arisux.avp.interfaces.energy.IEnergyProvider;
-import com.arisux.avp.interfaces.energy.IEnergyReceiver;
+import com.arisux.avp.interfaces.energy.IVoltageProvider;
+import com.arisux.avp.interfaces.energy.IVoltageReceiver;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -10,7 +10,7 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityTransformer extends TileEntityElectrical implements IEnergyProvider, IEnergyReceiver
+public class TileEntityTransformer extends TileEntityElectrical implements IVoltageProvider, IVoltageReceiver
 {
 	private ForgeDirection direction = ForgeDirection.SOUTH;
 
@@ -67,7 +67,7 @@ public class TileEntityTransformer extends TileEntityElectrical implements IEner
 			{
 				TileEntityElectrical electrical = (TileEntityElectrical) tile;
 
-				if (electrical instanceof IEnergyProvider)
+				if (electrical instanceof IVoltageProvider)
 				{
 					if (electrical.getVoltage() == 0)
 					{
@@ -89,19 +89,19 @@ public class TileEntityTransformer extends TileEntityElectrical implements IEner
 	}
 
 	@Override
-	public boolean canConnectEnergy(ForgeDirection from)
+	public boolean canConnectPower(ForgeDirection from)
 	{
 		return from == direction;
 	}
 
 	@Override
-	public double getEnergyStored(ForgeDirection from)
+	public double getCurrentVoltage(ForgeDirection from)
 	{
 		return this.voltage;
 	}
 
 	@Override
-	public double extractEnergy(ForgeDirection from, double maxExtract, boolean simulate)
+	public double extractVoltage(ForgeDirection from, double maxExtract, boolean simulate)
 	{
 		TileEntity tile = this.worldObj.getTileEntity(this.xCoord + from.offsetX, this.yCoord + from.offsetY, this.zCoord + from.offsetZ);
 
@@ -120,7 +120,7 @@ public class TileEntityTransformer extends TileEntityElectrical implements IEner
 	}
 
 	@Override
-	public double getMaxEnergyStored(ForgeDirection from)
+	public double getMaxVoltage(ForgeDirection from)
 	{
 		return 10000;
 	}

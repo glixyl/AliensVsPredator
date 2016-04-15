@@ -4,6 +4,7 @@ import com.arisux.airi.lib.interfaces.IInitializable;
 import com.arisux.avp.command.CommandPlayerMode;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
@@ -18,6 +19,7 @@ public class CommandHandler implements IInitializable
 		FMLCommonHandler.instance().bus().register(this);
 	}
 
+	@Mod.EventHandler
 	public void onServerStarting(FMLServerStartingEvent event)
 	{
 		event.registerServerCommand(this.commandPlayerMode = new CommandPlayerMode());

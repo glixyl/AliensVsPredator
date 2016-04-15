@@ -1,6 +1,6 @@
 package com.arisux.avp.entities.tile;
 
-import com.arisux.avp.interfaces.energy.IEnergyProvider;
+import com.arisux.avp.interfaces.energy.IVoltageProvider;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -216,13 +216,13 @@ public abstract class TileEntityElectrical extends TileEntity
 			{
 				TileEntityElectrical electrical = (TileEntityElectrical) tile;
 
-				if (electrical instanceof IEnergyProvider)
+				if (electrical instanceof IVoltageProvider)
 				{
-					IEnergyProvider provider = (IEnergyProvider) electrical;
+					IVoltageProvider provider = (IVoltageProvider) electrical;
 
-					if (electrical.canProvideEnergyToReceiver(direction) && provider.canConnectEnergy(direction) && electrical.getVoltage() > this.getVoltage())
+					if (electrical.canProvideEnergyToReceiver(direction) && provider.canConnectPower(direction) && electrical.getVoltage() > this.getVoltage())
 					{
-						this.receiveEnergy(direction.getOpposite(), provider.extractEnergy(direction.getOpposite(), electrical.getVoltage() - this.getVoltage(), false), false);
+						this.receiveVoltage(direction.getOpposite(), provider.extractVoltage(direction.getOpposite(), electrical.getVoltage() - this.getVoltage(), false), false);
 					}
 				}
 			}
@@ -238,7 +238,7 @@ public abstract class TileEntityElectrical extends TileEntity
 			{
 				TileEntityElectrical tee = (TileEntityElectrical) tile;
 
-				if (tee.getBoost() == 0 && tee.getVoltage() > this.getVoltage() && tile instanceof IEnergyProvider)
+				if (tee.getBoost() == 0 && tee.getVoltage() > this.getVoltage() && tile instanceof IVoltageProvider)
 				{
 					surroundingTile = tile;
 				}
@@ -263,7 +263,7 @@ public abstract class TileEntityElectrical extends TileEntity
 	 * @param simulate - If true, this request will only be simulated.
 	 * @return - The amount of energy to be extracted.
 	 */
-	public double extractEnergy(ForgeDirection from, double maxExtract, boolean simulate)
+	public double extractVoltage(ForgeDirection from, double maxExtract, boolean simulate)
 	{
 		TileEntity tile = this.worldObj.getTileEntity(this.xCoord + from.offsetX, this.yCoord + from.offsetY, this.zCoord + from.offsetZ);
 
@@ -285,7 +285,7 @@ public abstract class TileEntityElectrical extends TileEntity
 	 * @return The amount of energy this component will contain after adding 
 	 * the specified amount of energy.
 	 */
-	public double receiveEnergy(ForgeDirection from, double maxReceive, boolean simulate)
+	public double receiveVoltage(ForgeDirection from, double maxReceive, boolean simulate)
 	{
 		double result = this.getVoltage() + maxReceive;
 

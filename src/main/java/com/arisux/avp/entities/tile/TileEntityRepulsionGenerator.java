@@ -1,10 +1,10 @@
 package com.arisux.avp.entities.tile;
 
-import com.arisux.avp.interfaces.energy.IEnergyProvider;
+import com.arisux.avp.interfaces.energy.IVoltageProvider;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityRepulsionGenerator extends TileEntityElectrical implements IEnergyProvider
+public class TileEntityRepulsionGenerator extends TileEntityElectrical implements IVoltageProvider
 {
 	public TileEntityRepulsionGenerator()
 	{
@@ -28,25 +28,25 @@ public class TileEntityRepulsionGenerator extends TileEntityElectrical implement
 	}
 
 	@Override
-	public boolean canConnectEnergy(ForgeDirection from)
+	public boolean canConnectPower(ForgeDirection from)
 	{
 		return true;
 	}
 
 	@Override
-	public double extractEnergy(ForgeDirection from, double maxExtract, boolean simulate)
+	public double extractVoltage(ForgeDirection from, double maxExtract, boolean simulate)
 	{
-		return super.extractEnergy(from, maxExtract, simulate);
+		return super.extractVoltage(from, maxExtract, simulate);
 	}
 
 	@Override
-	public double getEnergyStored(ForgeDirection from)
+	public double getCurrentVoltage(ForgeDirection from)
 	{
 		return this.voltage;
 	}
 
 	@Override
-	public double getMaxEnergyStored(ForgeDirection from)
+	public double getMaxVoltage(ForgeDirection from)
 	{
 		return 10000;
 	}

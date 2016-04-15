@@ -1,7 +1,7 @@
 package com.arisux.avp.entities.tile;
 
 import com.arisux.avp.interfaces.INetworkDevice;
-import com.arisux.avp.interfaces.energy.IEnergyReceiver;
+import com.arisux.avp.interfaces.energy.IVoltageReceiver;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -9,7 +9,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityWorkstation extends TileEntityElectrical implements INetworkDevice, IEnergyReceiver
+public class TileEntityWorkstation extends TileEntityElectrical implements INetworkDevice, IVoltageReceiver
 {
 	public int rotation;
 
@@ -84,19 +84,19 @@ public class TileEntityWorkstation extends TileEntityElectrical implements INetw
 	}
 
 	@Override
-	public boolean canConnectEnergy(ForgeDirection from)
+	public boolean canConnectPower(ForgeDirection from)
 	{
 		return true;
 	}
 
 	@Override
-	public double getEnergyStored(ForgeDirection from)
+	public double getCurrentVoltage(ForgeDirection from)
 	{
 		return this.voltage;
 	}
 
 	@Override
-	public double getMaxEnergyStored(ForgeDirection from)
+	public double getMaxVoltage(ForgeDirection from)
 	{
 		return 120;
 	}

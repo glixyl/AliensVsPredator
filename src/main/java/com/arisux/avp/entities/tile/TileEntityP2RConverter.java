@@ -1,12 +1,12 @@
 package com.arisux.avp.entities.tile;
 
-import com.arisux.avp.interfaces.energy.IEnergyReceiver;
+import com.arisux.avp.interfaces.energy.IVoltageReceiver;
 
 import net.minecraft.block.BlockRedstoneWire;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityP2RConverter extends TileEntityElectrical implements IEnergyReceiver
+public class TileEntityP2RConverter extends TileEntityElectrical implements IVoltageReceiver
 {
 	public TileEntityP2RConverter()
 	{
@@ -105,19 +105,19 @@ public class TileEntityP2RConverter extends TileEntityElectrical implements IEne
 	}
 
 	@Override
-	public boolean canConnectEnergy(ForgeDirection from)
+	public boolean canConnectPower(ForgeDirection from)
 	{
 		return false;
 	}
 
 	@Override
-	public double getEnergyStored(ForgeDirection from)
+	public double getCurrentVoltage(ForgeDirection from)
 	{
 		return this.voltage;
 	}
 
 	@Override
-	public double getMaxEnergyStored(ForgeDirection from)
+	public double getMaxVoltage(ForgeDirection from)
 	{
 		return 10000;
 	}

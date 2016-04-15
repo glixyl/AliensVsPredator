@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.interfaces.energy.IEnergyReceiver;
+import com.arisux.avp.interfaces.energy.IVoltageReceiver;
 import com.arisux.avp.packets.client.PacketOpenBlastdoor;
 
 import net.minecraft.block.Block;
@@ -17,7 +17,7 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityBlastdoor extends TileEntityElectrical implements IEnergyReceiver
+public class TileEntityBlastdoor extends TileEntityElectrical implements IVoltageReceiver
 {
 	private ForgeDirection direction;
 	private float doorProgress;
@@ -166,19 +166,19 @@ public class TileEntityBlastdoor extends TileEntityElectrical implements IEnergy
 	}
 
 	@Override
-	public boolean canConnectEnergy(ForgeDirection from)
+	public boolean canConnectPower(ForgeDirection from)
 	{
 		return true;
 	}
 
 	@Override
-	public double getEnergyStored(ForgeDirection from)
+	public double getCurrentVoltage(ForgeDirection from)
 	{
 		return this.getVoltage();
 	}
 
 	@Override
-	public double getMaxEnergyStored(ForgeDirection from)
+	public double getMaxVoltage(ForgeDirection from)
 	{
 		return 220;
 	}

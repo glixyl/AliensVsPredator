@@ -31,7 +31,7 @@ public class RenderTurret extends TileEntitySpecialRenderer
 			GlStateManager.scale(2F, -2F, 2F);
 			this.model.render(tile, RenderUtil.DEFAULT_BOX_TRANSLATION);
 
-			if (tile.getVoltage() > 0)
+			if (tile.getVoltage() > 0)//this stuff is not syncing to the client (maybe)
 			{
 				GlStateManager.rotate(tile.getDirection() * 90F, 0F, 1F, 0F);
 				this.renderAmmoDisplay(tile);

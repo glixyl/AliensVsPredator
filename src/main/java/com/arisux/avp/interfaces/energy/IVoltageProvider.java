@@ -2,7 +2,7 @@ package com.arisux.avp.interfaces.energy;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
-public interface IEnergyProvider extends IEnergyConnection 
+public interface IVoltageProvider extends IPowerConnection 
 {
 
 	/**
@@ -16,15 +16,15 @@ public interface IEnergyProvider extends IEnergyConnection
 	 *            If TRUE, the extraction will only be simulated.
 	 * @return Amount of energy that was (or would have been, if simulated) extracted.
 	 */
-	double extractEnergy(ForgeDirection from, double maxExtract, boolean simulate);
+	double extractVoltage(ForgeDirection from, double maxExtract, boolean simulate);
 
 	/**
 	 * Returns the amount of energy currently stored.
 	 */
-	double getEnergyStored(ForgeDirection from);
+	double getCurrentVoltage(ForgeDirection from);
 
 	/**
 	 * Returns the maximum amount of energy that can be stored.
 	 */
-	double getMaxEnergyStored(ForgeDirection from);
+	double getMaxVoltage(ForgeDirection from);
 }

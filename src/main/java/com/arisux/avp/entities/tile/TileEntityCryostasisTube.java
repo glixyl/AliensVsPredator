@@ -3,7 +3,7 @@ package com.arisux.avp.entities.tile;
 import java.util.Random;
 
 import com.arisux.avp.entities.fx.EntityBubbleFX;
-import com.arisux.avp.interfaces.energy.IEnergyReceiver;
+import com.arisux.avp.interfaces.energy.IVoltageReceiver;
 import com.arisux.avp.items.ItemEntitySummoner;
 
 import cpw.mods.fml.relauncher.Side;
@@ -19,7 +19,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityCryostasisTube extends TileEntityElectrical implements IEnergyReceiver
+public class TileEntityCryostasisTube extends TileEntityElectrical implements IVoltageReceiver
 {
 	public TileEntityCryostasisTube()
 	{
@@ -198,19 +198,19 @@ public class TileEntityCryostasisTube extends TileEntityElectrical implements IE
 	}
 
 	@Override
-	public boolean canConnectEnergy(ForgeDirection from)
+	public boolean canConnectPower(ForgeDirection from)
 	{
 		return true;
 	}
 
 	@Override
-	public double getEnergyStored(ForgeDirection from)
+	public double getCurrentVoltage(ForgeDirection from)
 	{
 		return this.getVoltage();
 	}
 
 	@Override
-	public double getMaxEnergyStored(ForgeDirection from)
+	public double getMaxVoltage(ForgeDirection from)
 	{
 		return 120;
 	}

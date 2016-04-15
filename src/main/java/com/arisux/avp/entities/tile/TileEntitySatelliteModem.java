@@ -1,10 +1,10 @@
 package com.arisux.avp.entities.tile;
 
-import com.arisux.avp.interfaces.energy.IEnergyReceiver;
+import com.arisux.avp.interfaces.energy.IVoltageReceiver;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntitySatelliteModem extends TileEntityElectrical implements IEnergyReceiver
+public class TileEntitySatelliteModem extends TileEntityElectrical implements IVoltageReceiver
 {
 	public TileEntitySatelliteModem()
 	{
@@ -14,25 +14,25 @@ public class TileEntitySatelliteModem extends TileEntityElectrical implements IE
 	public int voltage;
 
 	@Override
-	public boolean canConnectEnergy(ForgeDirection from)
+	public boolean canConnectPower(ForgeDirection from)
 	{
 		return false;
 	}
 
 	@Override
-	public double receiveEnergy(ForgeDirection from, double maxReceive, boolean simulate)
+	public double receiveVoltage(ForgeDirection from, double maxReceive, boolean simulate)
 	{
 		return maxReceive;
 	}
 
 	@Override
-	public double getEnergyStored(ForgeDirection from)
+	public double getCurrentVoltage(ForgeDirection from)
 	{
 		return this.voltage;
 	}
 
 	@Override
-	public double getMaxEnergyStored(ForgeDirection from)
+	public double getMaxVoltage(ForgeDirection from)
 	{
 		return 10000;
 	}

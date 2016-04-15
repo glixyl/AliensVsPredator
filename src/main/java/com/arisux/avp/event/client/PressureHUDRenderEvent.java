@@ -24,8 +24,9 @@ import com.arisux.avp.entities.mob.EntityDrone;
 import com.arisux.avp.entities.mob.EntityMarine;
 import com.arisux.avp.entities.mob.EntitySpeciesAlien;
 import com.arisux.avp.entities.mob.EntityXenomorph;
-import com.arisux.avp.entities.tile.TileEntityPowerline;
+import com.arisux.avp.entities.tile.TileEntityPowercell;
 import com.arisux.avp.entities.tile.TileEntityStasisMechanism;
+import com.arisux.avp.interfaces.energy.IVoltageReceiver;
 
 import cpw.mods.fml.common.ModContainer;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -362,10 +363,17 @@ public class PressureHUDRenderEvent
 							fontrenderer.drawString("Tile Entity: " + true, subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFAA00);
 						}
 
-						if (tile instanceof TileEntityPowerline)
+						if (tile instanceof IVoltageReceiver)
 						{
-							TileEntityPowerline poweredTile = (TileEntityPowerline) tile;
-							fontrenderer.drawString("Voltage: " + ((float) poweredTile.getVoltage()) + "V", subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFAA00);
+							IVoltageReceiver poweredTile = (IVoltageReceiver) tile;
+							fontrenderer.drawString("Voltage: " + ((float) poweredTile.getCurrentVoltage(ForgeDirection.SOUTH)) + "V", subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFAA00);
+						}
+
+						if (tile instanceof TileEntityPowercell)
+						{
+							TileEntityPowercell powercell = (TileEntityPowercell) tile;
+							double percent = (powercell.getEnergyStored() * 100) / powercell.getMaxEnergyStored();
+							fontrenderer.drawString("Charge: " + percent + "% (" + powercell.getEnergyStored() + "/" + powercell.getMaxEnergyStored() + ")", subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0xFFAA00);
 						}
 
 						if (tile instanceof TileEntityStasisMechanism)

@@ -1,11 +1,11 @@
 package com.arisux.avp.entities.tile;
 
-import com.arisux.avp.interfaces.energy.IEnergyProvider;
-import com.arisux.avp.interfaces.energy.IEnergyReceiver;
+import com.arisux.avp.interfaces.energy.IVoltageProvider;
+import com.arisux.avp.interfaces.energy.IVoltageReceiver;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityPowerline extends TileEntityElectrical implements IEnergyProvider, IEnergyReceiver
+public class TileEntityPowerline extends TileEntityElectrical implements IVoltageProvider, IVoltageReceiver
 {
 	public TileEntityPowerline()
 	{
@@ -19,19 +19,19 @@ public class TileEntityPowerline extends TileEntityElectrical implements IEnergy
 	}
 
 	@Override
-	public boolean canConnectEnergy(ForgeDirection from)
+	public boolean canConnectPower(ForgeDirection from)
 	{
 		return true;
 	}
 
 	@Override
-	public double getEnergyStored(ForgeDirection from)
+	public double getCurrentVoltage(ForgeDirection from)
 	{
 		return this.voltage;
 	}
 
 	@Override
-	public double getMaxEnergyStored(ForgeDirection from)
+	public double getMaxVoltage(ForgeDirection from)
 	{
 		return 10000;
 	}
