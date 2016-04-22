@@ -98,7 +98,6 @@ public class EntityChestburster extends EntitySpeciesAlien implements IMob
 					{
 						if (this.getJellyLevel() >= evolution.getLevel() && this.ticksExisted < this.getMaxParasiteAge())
 						{
-							System.out.println("evolved using jelly");
 							this.setJellyLevel(this.getJellyLevel() - evolution.getLevel());
 						}
 						
