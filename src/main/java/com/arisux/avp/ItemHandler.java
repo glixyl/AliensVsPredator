@@ -52,48 +52,40 @@ import com.arisux.avp.items.ItemWristbracer;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import net.minecraft.item.Item;
-import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemSword;
-import net.minecraftforge.common.util.EnumHelper;
 
 public class ItemHandler extends IBHandler implements IInitializable
 {
-	public static final ArmorMaterial YAUTJA = EnumHelper.addArmorMaterial("YAUTJA", 32, new int[] { 4, 7, 5, 3 }, 9);
-	public static final ArmorMaterial XENO = EnumHelper.addArmorMaterial("XENO", 30, new int[] { 2, 7, 5, 3 }, 7);
-	public static final ArmorMaterial TACTICAL = EnumHelper.addArmorMaterial("TACTICAL", 25, new int[] { 2, 6, 3, 2 }, 5);
-	public static final ArmorMaterial PRESSURESUIT = EnumHelper.addArmorMaterial("PRESSURESUIT", 24, new int[] { 2, 4, 3, 2 }, 6);
-	public static final ToolMaterial YAUTJA_TOOLS = EnumHelper.addToolMaterial("CELTIC", 12, 1430, 9.0F, 8.0F, 9);
-	public static final ToolMaterial XENO_TOOLS = EnumHelper.addToolMaterial("XENO", 7, 730, 10.0F, 7.0F, 14);
+	public static ItemHandler instance = new ItemHandler();
 
-	public Item helmXeno = (new ItemArmorXeno(XENO, 4, 0)),
-		plateXeno = (new ItemArmorXeno(XENO, 4, 1)),
-		legsXeno = (new ItemArmorXeno(XENO, 4, 2)),
-		bootsXeno = (new ItemArmorXeno(XENO, 4, 3)),
-		pressureMask = new ItemArmorPressureSuit(PRESSURESUIT, 4, 0),
-		pressureChest = new ItemArmorPressureSuit(PRESSURESUIT, 4, 1),
-		pressurePants = new ItemArmorPressureSuit(PRESSURESUIT, 4, 2),
-		pressureBoots = new ItemArmorPressureSuit(PRESSURESUIT, 4, 3),
-		helmMarine = (new ItemArmorMarine(TACTICAL, 4, 0)),
-		plateMarine = (new ItemArmorMarine(TACTICAL, 4, 1)),
-		legsMarine = (new ItemArmorMarine(TACTICAL, 4, 2)),
-		bootsMarine = (new ItemArmorMarine(TACTICAL, 4, 3)),
-		helmTitanium = (new ItemArmorTitanium(YAUTJA, 4, 0)),
-		legsTitanium = (new ItemArmorTitanium(YAUTJA, 4, 2)),
-		plateTitanium = (new ItemArmorTitanium(YAUTJA, 4, 1)),
-		bootsTitanium = (new ItemArmorTitanium(YAUTJA, 4, 3)),
-		shovelTitanium = (new ItemSpade(YAUTJA_TOOLS)),
-		pickaxeTitanium = (new HookedItemPickaxe(YAUTJA_TOOLS)),
-		axeTitanium = (new HookedItemAxe(YAUTJA_TOOLS)),
-		swordTitanium = (new ItemSword(YAUTJA_TOOLS)),
-		hoeTitanium = (new ItemHoe(YAUTJA_TOOLS)),
-		itemSpear = (new ItemSpear(YAUTJA_TOOLS)),
+	public Item helmXeno = (new ItemArmorXeno(AliensVsPredator.materials().armors().chitin, 4, 0)),
+		plateXeno = (new ItemArmorXeno(AliensVsPredator.materials().armors().chitin, 4, 1)),
+		legsXeno = (new ItemArmorXeno(AliensVsPredator.materials().armors().chitin, 4, 2)),
+		bootsXeno = (new ItemArmorXeno(AliensVsPredator.materials().armors().chitin, 4, 3)),
+		pressureMask = new ItemArmorPressureSuit(AliensVsPredator.materials().armors().pressuresuit, 4, 0),
+		pressureChest = new ItemArmorPressureSuit(AliensVsPredator.materials().armors().pressuresuit, 4, 1),
+		pressurePants = new ItemArmorPressureSuit(AliensVsPredator.materials().armors().pressuresuit, 4, 2),
+		pressureBoots = new ItemArmorPressureSuit(AliensVsPredator.materials().armors().pressuresuit, 4, 3),
+		helmMarine = (new ItemArmorMarine(AliensVsPredator.materials().armors().kevlar, 4, 0)),
+		plateMarine = (new ItemArmorMarine(AliensVsPredator.materials().armors().kevlar, 4, 1)),
+		legsMarine = (new ItemArmorMarine(AliensVsPredator.materials().armors().kevlar, 4, 2)),
+		bootsMarine = (new ItemArmorMarine(AliensVsPredator.materials().armors().kevlar, 4, 3)),
+		helmTitanium = (new ItemArmorTitanium(AliensVsPredator.materials().armors().celtic, 4, 0)),
+		legsTitanium = (new ItemArmorTitanium(AliensVsPredator.materials().armors().celtic, 4, 2)),
+		plateTitanium = (new ItemArmorTitanium(AliensVsPredator.materials().armors().celtic, 4, 1)),
+		bootsTitanium = (new ItemArmorTitanium(AliensVsPredator.materials().armors().celtic, 4, 3)),
+		shovelTitanium = (new ItemSpade(AliensVsPredator.materials().tools().celtic)),
+		pickaxeTitanium = (new HookedItemPickaxe(AliensVsPredator.materials().tools().celtic)),
+		axeTitanium = (new HookedItemAxe(AliensVsPredator.materials().tools().celtic)),
+		swordTitanium = (new ItemSword(AliensVsPredator.materials().tools().celtic)),
+		hoeTitanium = (new ItemHoe(AliensVsPredator.materials().tools().celtic)),
+		itemSpear = (new ItemSpear(AliensVsPredator.materials().tools().celtic)),
 		itemWristBlade = (new ItemWristbracer()).setDescription("Applies " + ItemWristbracer.getDamageToApply() + " damage to any entity, regardless of their armor, while blades are inserted.").setMaxStackSize(1),
-		itemWristbracerBlades = (new HookedItem()).setDescription("Place these in the first slot of your wristbracer").setMaxStackSize(1).setMaxDamage(YAUTJA_TOOLS.getMaxUses()),
+		itemWristbracerBlades = (new HookedItem()).setDescription("Place these in the first slot of your wristbracer").setMaxStackSize(1).setMaxDamage(AliensVsPredator.materials().tools().celtic.getMaxUses()),
 		itemPlasmaCaster = (new ItemPlasmaCaster()).setFull3D(),
 		itemProximityMine = (new ItemLaserMine()),
 		itemDisc = (new ItemDisc()),

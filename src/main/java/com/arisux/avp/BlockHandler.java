@@ -46,6 +46,8 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 
 public class BlockHandler extends IBHandler implements IInitializable
 {
+	public static BlockHandler instance = new BlockHandler();
+	
 	public Block terrainHiveResin = (new BlockHiveResin(Material.wood)).setHardness(5F).setResistance(10.0F).setLightOpacity(255),
 		blockOvamorph = (new BlockMaterial(Material.rock)),
 		blockShipMetal1 = (new BlockMaterial(Material.iron).setHardness(5F).setResistance(30.0F).setLightOpacity(255)),
@@ -179,8 +181,8 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockPowercell = (new BlockPowercell(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockR2PConvertor = (new BlockR2PConverter(Material.iron)).setHardness(3.2F).setResistance(2.6F),
 		blockP2RConvertor = (new BlockP2RConverter(Material.iron)).setHardness(3.2F).setResistance(2.6F),
-		blockBlackGoo = (new BlockBlackGoo(AliensVsPredator.fluids().fluidBlackGoo, Material.water)),
-		blockMist = (new BlockMist(AliensVsPredator.fluids().fluidMist, Material.air)),
+		blockBlackGoo = (new BlockBlackGoo(AliensVsPredator.fluids().fluidBlackGoo, AliensVsPredator.materials().blackgoo)),
+		blockMist = (new BlockMist(AliensVsPredator.fluids().fluidMist, AliensVsPredator.materials().mist)),
 		blockTransformer = (new BlockTransformer(Material.iron)).setHardness(5.0F).setResistance(10.0F),
 		blockNegativeTransformer = (new BlockNegativeTransformer(Material.iron)).setHardness(5.0F).setResistance(10.0F),
 		blockSupplies = (new BlockSupplyCrate(Material.iron)),

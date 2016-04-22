@@ -2,7 +2,6 @@ package com.arisux.avp.items;
 
 import com.arisux.airi.lib.ItemTypes.HookedItem;
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.ItemHandler;
 import com.arisux.avp.inventory.container.ContainerWristbracer;
 
 import net.minecraft.entity.Entity;
@@ -63,7 +62,7 @@ public class ItemWristbracer extends HookedItem
 	
 	public static float getDamageToApply()
 	{
-		return ItemHandler.YAUTJA_TOOLS.getDamageVsEntity() * 1.5F;
+		return AliensVsPredator.materials().tools().celtic.getDamageVsEntity() * 1.5F;
 	}
 
 	public static ItemStack getBladesStack(ItemStack itemstack)

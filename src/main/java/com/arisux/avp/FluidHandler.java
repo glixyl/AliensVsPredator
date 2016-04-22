@@ -12,6 +12,8 @@ import net.minecraftforge.fluids.FluidRegistry;
 
 public class FluidHandler implements IInitializable
 {
+	public static FluidHandler instance = new FluidHandler();
+	
 	public Fluid fluidBlackGoo = new Fluid("blackGoo").setUnlocalizedName("blackGoo");
 	public Fluid fluidMist = new Fluid("mist").setUnlocalizedName("mist");
 

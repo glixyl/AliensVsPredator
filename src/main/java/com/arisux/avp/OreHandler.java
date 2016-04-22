@@ -7,6 +7,8 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class OreHandler implements IInitializable
 {
+	public static OreHandler instance = new OreHandler();
+
 	public void initialize(FMLInitializationEvent event)
 	{
 		OreDictionary.registerOre("oreCopper", AliensVsPredator.blocks().oreCopper);
