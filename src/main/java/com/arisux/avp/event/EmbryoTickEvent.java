@@ -52,7 +52,7 @@ public class EmbryoTickEvent
 							chestburster.setHostParasiteType(HostType.getMappingFromHost(living.getClass()));
 							chestburster.setLocationAndAngles(living.posX, living.posY, living.posZ, 0.0F, 0.0F);
 							event.world.spawnEntityInWorld(chestburster);
-							entity.attackEntityFrom(DamageSources.causeChestbursterDamage(chestburster, entity), 200F);
+							entity.attackEntityFrom(DamageSources.causeChestbursterDamage(chestburster, entity), 10000F);
 							livingProperties.setEmbryoAge(livingProperties.getMaxEmbryoAge());
 							living.getActivePotionEffects().clear();
 							livingProperties.setContainsEmbryo(false);
