@@ -114,7 +114,7 @@ public abstract class EntitySpeciesAlien extends EntityMob implements IMob, IHiv
 	{
 		this.dropItem(AliensVsPredator.items().itemRoyalJelly, 4);
 	}
-
+	
 	protected void tickEvolution()
 	{
 		if (this.worldObj.getWorldTime() % 40 == 0)

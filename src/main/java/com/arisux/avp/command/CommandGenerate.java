@@ -21,7 +21,7 @@ public class CommandGenerate extends CommandBase
 	@Override
 	public String getCommandName()
 	{
-		return "genschematic";
+		return "generate";
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class CommandGenerate extends CommandBase
 	@Override
 	public List getCommandAliases()
 	{
-		return Arrays.asList(new String[] { "generate", "gensc", "gs"});
+		return Arrays.asList(new String[] { "generateschematic", "gensc"});
 	}
 
 	@Override
