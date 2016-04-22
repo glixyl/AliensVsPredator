@@ -4,7 +4,7 @@ import com.arisux.avp.AliensVsPredator;
 
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityOvamorph extends EntitySpeciesAlien implements IMob
@@ -67,18 +67,23 @@ public class EntityOvamorph extends EntitySpeciesAlien implements IMob
 	public void onUpdate()
 	{
 		super.onUpdate();
+		
+        int x = MathHelper.floor_double(this.posX);
+        int y = MathHelper.floor_double(this.posY);
+        int z = MathHelper.floor_double(this.posZ);
 
-		EntityPlayer player = this.worldObj.getClosestPlayerToEntity(this, 15.0D);
-
-		if (player != null || this.hasHatched)
+		if (this.worldObj.getBlock(x, y, z).getMaterial() != AliensVsPredator.materials().mist)
 		{
-			if (!this.worldObj.isRemote && this.hatchingTime-- <= 1 || this.hasHatched)
+			if (this.worldObj.getClosestPlayerToEntity(this, 15.0D) != null || this.hasHatched)
 			{
-				EntityFacehugger facehugger = new EntityFacehugger(this.worldObj);
-				facehugger.setLocationAndAngles(posX, posY, posZ, 0F, 0F);
-				worldObj.spawnEntityInWorld(facehugger);
-
-				this.setDead();
+				if (!this.worldObj.isRemote && this.hatchingTime-- <= 1 || this.hasHatched)
+				{
+					EntityFacehugger facehugger = new EntityFacehugger(this.worldObj);
+					facehugger.setLocationAndAngles(posX, posY, posZ, 0F, 0F);
+					worldObj.spawnEntityInWorld(facehugger);
+	
+					this.setDead();
+				}
 			}
 		}
 	}

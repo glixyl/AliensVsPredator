@@ -1,23 +1,20 @@
 package com.arisux.avp.block;
 
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.Materials;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidClassic;
-import net.minecraftforge.fluids.Fluid;
 
 public class BlockMist extends BlockFluidClassic
 {
-	public BlockMist(Fluid fluid, Material material)
+	public BlockMist()
 	{
-		super(fluid, Materials.mist);
+		super(AliensVsPredator.fluids().fluidMist, AliensVsPredator.materials().mist);
 	}
 
 	@Override
