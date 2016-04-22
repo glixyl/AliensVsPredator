@@ -1,7 +1,5 @@
 package com.arisux.avp.command;
 
-import java.util.List;
-
 import com.arisux.airi.AIRI;
 import com.arisux.airi.lib.ChatUtil;
 import com.arisux.airi.lib.WorldUtil;
@@ -14,26 +12,19 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.WorldServer;
-import scala.actors.threadpool.Arrays;
 
 public class CommandGenerate extends CommandBase
 {
 	@Override
 	public String getCommandName()
 	{
-		return "generate";
+		return "genschematic";
 	}
 
 	@Override
 	public String getCommandUsage(ICommandSender commandSender)
 	{
 		return "Generates a schematic that is currently loaded.";
-	}
-	
-	@Override
-	public List getCommandAliases()
-	{
-		return Arrays.asList(new String[] { "generateschematic", "gensc"});
 	}
 
 	@Override
