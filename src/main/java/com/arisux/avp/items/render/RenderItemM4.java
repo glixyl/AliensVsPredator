@@ -13,6 +13,7 @@ import com.arisux.airi.lib.client.ItemRenderer;
 import com.arisux.airi.lib.client.ModelBaseExtension;
 import com.arisux.airi.lib.client.PlayerResource;
 import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.URLs;
 import com.arisux.avp.items.model.ModelM4;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -56,11 +57,11 @@ public class RenderItemM4 extends ItemRenderer
 	public void renderThirdPerson(ItemStack item, Object... data)
 	{
 		PlayerResource player = resourceManager.createPlayerResource(((EntityPlayer) data[1]).getCommandSenderName());
-		this.resource = RenderUtil.downloadResource(String.format(AliensVsPredator.settings().getUrlSkinM4(), player.getUUID()), resourceLocation);
+		this.resource = RenderUtil.downloadResource(String.format(URLs.urlSkinM4, player.getUUID()), resourceLocation);
 
 		if (player != null)
 		{
-			bindTexture(downloadResource(String.format(AliensVsPredator.settings().getUrlSkinM4(), player.getUUID()), resourceLocation, false));
+			bindTexture(downloadResource(String.format(URLs.urlSkinM4, player.getUUID()), resourceLocation, false));
 			GlStateManager.translate(0.2F, 1.15F, 0.25F);
 			GlStateManager.rotate(97.0F, 1.0F, 0.0F, 0.0F);
 			GlStateManager.rotate(130.0F, 0.0F, 1.0F, 0.0F);
@@ -74,7 +75,7 @@ public class RenderItemM4 extends ItemRenderer
 	@Override
 	public void renderFirstPerson(ItemStack item, Object... data)
 	{
-		this.resource = downloadResource(String.format(AliensVsPredator.settings().getUrlSkinM4(), AccessWrapper.getSession().getPlayerID()), resourceLocation);
+		this.resource = downloadResource(String.format(URLs.urlSkinM4, AccessWrapper.getSession().getPlayerID()), resourceLocation);
 
 		if (firstPersonRenderCheck(data[1]))
 		{
@@ -104,7 +105,7 @@ public class RenderItemM4 extends ItemRenderer
 	@Override
 	public void renderInInventory(ItemStack item, Object... data)
 	{
-		this.resource = downloadResource(String.format(AliensVsPredator.settings().getUrlSkinM4(), AccessWrapper.getSession().getPlayerID()), resourceLocation);
+		this.resource = downloadResource(String.format(URLs.urlSkinM4, AccessWrapper.getSession().getPlayerID()), resourceLocation);
 		GlStateManager.disable(GL11.GL_CULL_FACE);
 		GlStateManager.rotate(0F, 1.0F, 0.0F, 0.0F);
 		GlStateManager.rotate(-40F, 0.0F, 1.0F, 0.0F);

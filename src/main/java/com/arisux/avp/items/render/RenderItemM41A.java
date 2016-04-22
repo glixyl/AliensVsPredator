@@ -13,6 +13,7 @@ import com.arisux.airi.lib.client.ItemRenderer;
 import com.arisux.airi.lib.client.ModelBaseExtension;
 import com.arisux.airi.lib.client.PlayerResource;
 import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.URLs;
 import com.arisux.avp.items.ItemFirearm;
 import com.arisux.avp.items.model.ModelM41A;
 
@@ -58,7 +59,7 @@ public class RenderItemM41A extends ItemRenderer
 	public void renderThirdPerson(ItemStack item, Object... data)
 	{
 		PlayerResource player = resourceManager.createPlayerResource(((EntityPlayer) data[1]).getCommandSenderName());
-		this.resource = downloadResource(String.format(AliensVsPredator.settings().getUrlSkinM41a(), player.getUUID()), resourceLocation);
+		this.resource = downloadResource(String.format(URLs.urlSkinM41a, player.getUUID()), resourceLocation);
 
 		if (player != null)
 		{
@@ -81,7 +82,7 @@ public class RenderItemM41A extends ItemRenderer
 
 		if (firstPersonRenderCheck(data[1]))
 		{
-			this.resource = downloadResource(String.format(AliensVsPredator.settings().getUrlSkinM41a(), AccessWrapper.getSession().getPlayerID()), resourceLocation);
+			this.resource = downloadResource(String.format(URLs.urlSkinM41a, AccessWrapper.getSession().getPlayerID()), resourceLocation);
 
 			if (Mouse.isButtonDown(0) && mc.inGameHasFocus)
 			{
@@ -133,7 +134,7 @@ public class RenderItemM41A extends ItemRenderer
 	@Override
 	public void renderInInventory(ItemStack item, Object... data)
 	{
-		this.resource = downloadResource(String.format(AliensVsPredator.settings().getUrlSkinM41a(), AccessWrapper.getSession().getPlayerID()), resourceLocation);
+		this.resource = downloadResource(String.format(URLs.urlSkinM41a, AccessWrapper.getSession().getPlayerID()), resourceLocation);
 		GlStateManager.rotate(0F, 1.0F, 0.0F, 0.0F);
 		GlStateManager.rotate(-40F, 0.0F, 1.0F, 0.0F);
 		GlStateManager.rotate(0F, 0.0F, 0.0F, 1.0F);

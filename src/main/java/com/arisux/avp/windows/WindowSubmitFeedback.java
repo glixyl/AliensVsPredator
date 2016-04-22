@@ -12,7 +12,7 @@ import com.arisux.airi.lib.ModUtil;
 import com.arisux.airi.lib.NetworkUtil;
 import com.arisux.airi.lib.WorldUtil.Entities.Players;
 import com.arisux.airi.lib.interfaces.IActionPerformed;
-import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.URLs;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;
@@ -73,7 +73,7 @@ public class WindowSubmitFeedback extends Window implements IWindow
 						{
 							if (!textbox.getText().equals("") && textbox.getText().length() > 12)
 							{
-								String request = String.format(AliensVsPredator.settings().getUrlFeedbackSubmit(), AccessWrapper.getSession().getUsername(), AccessWrapper.getSession().getPlayerID(), URLEncoder.encode(textbox.getText(), "UTF-8"));
+								String request = String.format(URLs.urlSubmitFeedback, AccessWrapper.getSession().getUsername(), AccessWrapper.getSession().getPlayerID(), URLEncoder.encode(textbox.getText(), "UTF-8"));
 								feedback = NetworkUtil.getURLContents(request);
 								AIRI.logger.info("Submitted feedback: %s", feedback);
 							}
@@ -137,7 +137,7 @@ public class WindowSubmitFeedback extends Window implements IWindow
 
 	public static boolean isValidatedBetaTeseterUUID(String uuid)
 	{
-		return Boolean.parseBoolean(NetworkUtil.getURLContents(String.format(AliensVsPredator.settings().getUrlFeedbackValidation(), uuid)));
+		return Boolean.parseBoolean(NetworkUtil.getURLContents(String.format(URLs.urlFeedbackValidation, uuid)));
 	}
 
 	@Override

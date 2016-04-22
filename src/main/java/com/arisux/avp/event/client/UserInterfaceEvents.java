@@ -1,7 +1,7 @@
 package com.arisux.avp.event.client;
 
 import com.arisux.airi.AIRI;
-import com.arisux.airi.api.window.gui.DesktopWindowManager;
+import com.arisux.airi.api.window.gui.OverlayWindowManager;
 import com.arisux.airi.lib.GuiElements.GuiCustomButton;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.interfaces.IActionPerformed;
@@ -25,7 +25,7 @@ public class UserInterfaceEvents
 		if (AliensVsPredator.instance().isDevCopy())
 		{
 			buttonFeedback.xPosition = RenderUtil.scaledDisplayResolution().getScaledWidth() - buttonFeedback.width;
-			buttonFeedback.yPosition = mc.currentScreen instanceof GuiMainMenu || mc.currentScreen instanceof DesktopWindowManager ? 0 : RenderUtil.scaledDisplayResolution().getScaledHeight() - buttonFeedback.height;
+			buttonFeedback.yPosition = mc.currentScreen instanceof GuiMainMenu || mc.currentScreen instanceof OverlayWindowManager ? 0 : RenderUtil.scaledDisplayResolution().getScaledHeight() - buttonFeedback.height;
 			buttonFeedback.baseColor = 0xAA000000;
 			buttonFeedback.width = 80;
 			buttonFeedback.displayString = "New Feedback";

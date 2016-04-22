@@ -2,7 +2,6 @@
 package com.arisux.avp;
 
 import com.arisux.airi.AIRI;
-import com.arisux.airi.api.updater.Updater;
 import com.arisux.airi.lib.ModUtil;
 import com.arisux.airi.lib.interfaces.IMod;
 import com.arisux.avp.api.AssemblerAPI;
@@ -27,7 +26,6 @@ public class AliensVsPredator implements IMod
 	@Mod.Instance(AliensVsPredator.ID)
 	private static AliensVsPredator instance;
 	private ModContainer container;
-	public Updater updater;
 
 	public static AliensVsPredator instance()
 	{
@@ -183,6 +181,7 @@ public class AliensVsPredator implements IMod
 		AIRI.logger.info("[AliensVsPredator] Copyright(C) 2012-2016 Arisux Technology Group");
 		AIRI.logger.info("[AliensVsPredator] Pre-Initialization");
 
+		AIRI.remappingApi().registerRemappedMod("AliensVsPredator", AliensVsPredator.ID, "com.arisux.avp.AliensVsPredator");
 		AIRI.remappingApi().registerMappingInfo("lv426portal", "portal.acheron", "avp");
 		AIRI.remappingApi().registerMappingInfo("lv223portal", "portal.varda", "avp");
 
@@ -237,7 +236,7 @@ public class AliensVsPredator implements IMod
 
 			if (settings().isUpdaterEnabled())
 			{
-				(updater = AIRI.updaterApi().createNewUpdater("AliensVsPredator", container().getVersion(), settings().getUrlUpdater(), settings().getServer(), settings().getUrlChangelog())).postInitialize(event);
+				UpdateHandler.instance.postInitialize(event);
 			}
 		}
 	}

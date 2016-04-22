@@ -11,6 +11,7 @@ import com.arisux.airi.lib.client.ItemRenderer;
 import com.arisux.airi.lib.client.ModelBaseExtension;
 import com.arisux.airi.lib.client.PlayerResource;
 import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.URLs;
 import com.arisux.avp.items.model.ModelM56SG;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -53,7 +54,7 @@ public class RenderItemM56SG extends ItemRenderer
 	@Override
 	public void renderFirstPerson(ItemStack item, Object... data)
 	{
-		this.resource = RenderUtil.downloadResource(String.format(AliensVsPredator.settings().getUrlSkinM56sg(), AccessWrapper.getSession().getPlayerID()), resourceLocation);
+		this.resource = RenderUtil.downloadResource(String.format(URLs.urlSkinM56sg, AccessWrapper.getSession().getPlayerID()), resourceLocation);
 		mc.renderEngine.bindTexture(getResourceLocation());
 
 		if (firstPersonRenderCheck(data[1]))
@@ -72,7 +73,7 @@ public class RenderItemM56SG extends ItemRenderer
 	public void renderThirdPerson(ItemStack item, Object... data)
 	{
 		PlayerResource player = resourceManager.createPlayerResource(((EntityPlayer) data[1]).getCommandSenderName());
-		this.resource = RenderUtil.downloadResource(String.format(AliensVsPredator.settings().getUrlSkinM56sg(), player.getUUID()), resourceLocation);
+		this.resource = RenderUtil.downloadResource(String.format(URLs.urlSkinM56sg, player.getUUID()), resourceLocation);
 
 		if (player != null)
 		{
@@ -81,7 +82,7 @@ public class RenderItemM56SG extends ItemRenderer
 			GlStateManager.rotate(45.0F, 0.0F, 1.0F, 0.0F);
 			GlStateManager.rotate(-93.0F, 0.0F, 0.0F, 1.0F);
 			GlStateManager.scale(1.3F, 1.3F, 1.3F);
-			mc.renderEngine.bindTexture(RenderUtil.downloadResource(String.format(AliensVsPredator.settings().getUrlSkinM56sg(), player.getUUID()), resourceLocation, false));
+			mc.renderEngine.bindTexture(RenderUtil.downloadResource(String.format(URLs.urlSkinM56sg, player.getUUID()), resourceLocation, false));
 			this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
 		}
 	}
@@ -89,7 +90,7 @@ public class RenderItemM56SG extends ItemRenderer
 	@Override
 	public void renderInInventory(ItemStack item, Object... data)
 	{
-		this.resource = RenderUtil.downloadResource(String.format(AliensVsPredator.settings().getUrlSkinM56sg(), AccessWrapper.getSession().getPlayerID()), resourceLocation);
+		this.resource = RenderUtil.downloadResource(String.format(URLs.urlSkinM56sg, AccessWrapper.getSession().getPlayerID()), resourceLocation);
 		GlStateManager.disable(GL11.GL_CULL_FACE);
 		GlStateManager.rotate(0F, 1.0F, 0.0F, 0.0F);
 		GlStateManager.rotate(-40F, 0.0F, 1.0F, 0.0F);

@@ -12,6 +12,7 @@ import com.arisux.airi.lib.client.ItemRenderer;
 import com.arisux.airi.lib.client.ModelBaseExtension;
 import com.arisux.airi.lib.client.PlayerResource;
 import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.URLs;
 import com.arisux.avp.items.model.ModelSniper;
 
 import net.minecraft.client.settings.GameSettings;
@@ -81,11 +82,11 @@ public class RenderItemSniper extends ItemRenderer
 	public void renderThirdPerson(ItemStack item, Object... data)
 	{
 		PlayerResource player = resourceManager.createPlayerResource(((EntityPlayer) data[1]).getCommandSenderName());
-		this.resource = RenderUtil.downloadResource(String.format(AliensVsPredator.settings().getUrlSkinSniper(), player.getUUID()), resourceLocation);
+		this.resource = RenderUtil.downloadResource(String.format(URLs.urlSkinSniper, player.getUUID()), resourceLocation);
 
 		if (player != null)
 		{
-			mc.renderEngine.bindTexture(RenderUtil.downloadResource(String.format(AliensVsPredator.settings().getUrlSkinSniper(), player.getUUID()), resourceLocation, false));
+			mc.renderEngine.bindTexture(RenderUtil.downloadResource(String.format(URLs.urlSkinSniper, player.getUUID()), resourceLocation, false));
 			GlStateManager.translate(0.2F, 0.3F, -0.17F);
 			GlStateManager.rotate(180.0F, 1.0F, 0.0F, 0.0F);
 			GlStateManager.rotate(90.0F, 0.0F, 1.0F, 0.0F);
@@ -101,7 +102,7 @@ public class RenderItemSniper extends ItemRenderer
 	@Override
 	public void renderFirstPerson(ItemStack item, Object... data)
 	{
-		this.resource = RenderUtil.downloadResource(String.format(AliensVsPredator.settings().getUrlSkinSniper(), AccessWrapper.getSession().getPlayerID()), resourceLocation);
+		this.resource = RenderUtil.downloadResource(String.format(URLs.urlSkinSniper, AccessWrapper.getSession().getPlayerID()), resourceLocation);
 
 		if (firstPersonRenderCheck(data[1]))
 		{
@@ -132,7 +133,7 @@ public class RenderItemSniper extends ItemRenderer
 	@Override
 	public void renderInInventory(ItemStack item, Object... data)
 	{
-		this.resource = RenderUtil.downloadResource(String.format(AliensVsPredator.settings().getUrlSkinSniper(), AccessWrapper.getSession().getPlayerID()), resourceLocation);
+		this.resource = RenderUtil.downloadResource(String.format(URLs.urlSkinSniper, AccessWrapper.getSession().getPlayerID()), resourceLocation);
 		mc.renderEngine.bindTexture(getResourceLocation());
 		GlStateManager.disable(GL11.GL_CULL_FACE);
 		GlStateManager.rotate(0F, 1.0F, 0.0F, 0.0F);
