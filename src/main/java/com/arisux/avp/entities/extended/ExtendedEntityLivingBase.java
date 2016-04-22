@@ -105,7 +105,7 @@ public class ExtendedEntityLivingBase implements IExtendedEntityProperties
 
 	public int getMaxEmbryoAge()
 	{
-		return 12000;
+		return 6000;
 	}
 	
 	public EntityChestburster getParasite()
