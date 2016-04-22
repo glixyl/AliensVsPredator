@@ -1,5 +1,8 @@
 package com.arisux.avp.entities.mob;
 
+import com.arisux.airi.lib.WorldUtil;
+import com.arisux.airi.lib.WorldUtil.Entities;
+import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
 import com.arisux.avp.AliensVsPredator;
 
 import net.minecraft.entity.Entity;
@@ -111,7 +114,10 @@ public class EntityOvamorph extends EntitySpeciesAlien implements IMob
 	private void hatch()
 	{
 		EntityFacehugger facehugger = new EntityFacehugger(this.worldObj);
-		facehugger.setLocationAndAngles(posX, posY, posZ, 0F, 0F);
+		CoordData pos0 = new CoordData(this);
+		CoordData pos1 = WorldUtil.getNextSafePositionAbove(pos0, this.worldObj);
+		
+		facehugger.setLocationAndAngles(pos1.posX, pos1.posY, pos1.posZ, 0F, 0F);
 		worldObj.spawnEntityInWorld(facehugger);
 
 		this.setDead();
