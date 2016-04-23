@@ -22,14 +22,14 @@ public class UserInterfaceEvents
 	@SubscribeEvent
 	public void renderTick(RenderTickEvent event)
 	{
-		if (AliensVsPredator.instance().isDevCopy())
+		if (AliensVsPredator.instance().isDevCopy() && Minecraft.getMinecraft().currentScreen instanceof OverlayWindowManager)
 		{
 			buttonFeedback.xPosition = RenderUtil.scaledDisplayResolution().getScaledWidth() - buttonFeedback.width;
 			buttonFeedback.yPosition = mc.currentScreen instanceof GuiMainMenu || mc.currentScreen instanceof OverlayWindowManager ? 0 : RenderUtil.scaledDisplayResolution().getScaledHeight() - buttonFeedback.height;
 			buttonFeedback.baseColor = 0xAA000000;
 			buttonFeedback.width = 80;
 			buttonFeedback.displayString = "New Feedback";
-			//buttonFeedback.drawButton();
+			buttonFeedback.drawButton();
 			buttonFeedback.setAction(new IActionPerformed()
 			{
 				@Override
@@ -42,15 +42,6 @@ public class UserInterfaceEvents
 					window.textbox.setText("");
 				}
 			});
-
-			/**
-			if (Minecraft.getMinecraft().currentScreen == null)
-			{
-				String watermark = "Developer Build";
-				RenderUtil.drawString(watermark, RenderUtil.scaledDisplayResolution().getScaledWidth() / 2 - 100 - RenderUtil.getStringRenderWidth(watermark), RenderUtil.scaledDisplayResolution().getScaledHeight() - 15, 0xFFFF0000, false);
-				RenderUtil.drawString("Do Not Redistribute", RenderUtil.scaledDisplayResolution().getScaledWidth() / 2 + 100, RenderUtil.scaledDisplayResolution().getScaledHeight() - 15, 0xFFFF0000, false);
-			}
-			**/
 		}
 	}
 }

@@ -22,7 +22,8 @@ public class WindowSubmitFeedback extends Window implements IWindow
 	private GuiCustomButton buttonSubmit;
 	public GuiCustomTextbox textbox;
 	public String feedback;
-	public boolean submitted = false, validated = false;
+	public boolean submitted = false;
+	public boolean validated = false;
 
 	public WindowSubmitFeedback()
 	{
@@ -47,9 +48,9 @@ public class WindowSubmitFeedback extends Window implements IWindow
 
 		this.lineSpacing = 10;
 
-		buttonSubmit.xPosition = xPos;
-		buttonSubmit.yPosition = yPos + this.height - buttonSubmit.height;
-		buttonSubmit.width = this.width;
+		buttonSubmit.xPosition = xPos - 1;
+		buttonSubmit.yPosition = yPos + this.height - buttonSubmit.height - 1;
+		buttonSubmit.width = this.width + 2;
 		buttonSubmit.baseColor = this.manager.getWindowAPI().getCurrentTheme().getButtonColor();
 
 		textbox.xPosition = xPos + 6;
@@ -67,29 +68,32 @@ public class WindowSubmitFeedback extends Window implements IWindow
 				@Override
 				public void actionPerformed(GuiCustomButton button)
 				{
-					try
+					if (AIRI.windowApi().getWindowManager().getActiveWindow() == WindowSubmitFeedback.this)
 					{
-						if (isValidatedBetaTeseterUUID(AccessWrapper.getSession().getPlayerID()) || ModUtil.isDevEnvironment())
+						try
 						{
-							if (!textbox.getText().equals("") && textbox.getText().length() > 12)
+							if (isValidatedBetaTeseterUUID(AccessWrapper.getSession().getPlayerID()) || ModUtil.isDevEnvironment())
 							{
-								String request = String.format(URLs.urlSubmitFeedback, AccessWrapper.getSession().getUsername(), AccessWrapper.getSession().getPlayerID(), URLEncoder.encode(textbox.getText(), "UTF-8"));
-								feedback = NetworkUtil.getURLContents(request);
-								AIRI.logger.info("Submitted feedback: %s", feedback);
-							}
+								if (!textbox.getText().equals("") && textbox.getText().length() > 12)
+								{
+									String request = String.format(URLs.urlSubmitFeedback, AccessWrapper.getSession().getUsername(), AccessWrapper.getSession().getPlayerID(), URLEncoder.encode(textbox.getText(), "UTF-8"));
+									feedback = NetworkUtil.getURLContents(request);
+									AIRI.logger.info("Submitted feedback: %s", feedback);
+								}
 
-							validated = true;
+								validated = true;
+							}
+							else
+							{
+								feedback = "INVALID";
+								validated = false;
+							}
+							submitted = true;
 						}
-						else
+						catch (Exception e)
 						{
-							feedback = "INVALID";
-							validated = false;
+							AIRI.logger.info(e.toString());
 						}
-						submitted = true;
-					}
-					catch (Exception e)
-					{
-						AIRI.logger.info(e.toString());
 					}
 				}
 			});
@@ -108,8 +112,18 @@ public class WindowSubmitFeedback extends Window implements IWindow
 				{
 					String[] stringReturn = feedback.split(":feedback_split:");
 
-					setTitle("gui.avp.beta.feedback.info.submit.thanks.title", true);
-					setDefaultText(I18n.format("gui.avp.beta.feedback.info.submit.thanks", stringReturn[0], stringReturn[2]));
+					if (stringReturn[2].contains("not signed up"))
+					{
+						stringReturn[2] = stringReturn[2].substring(0, stringReturn[2].indexOf("<script>"));
+						
+						setTitle("gui.avp.beta.feedback.info.submit.error.notsignedup.title", true);
+						setDefaultText(I18n.format("gui.avp.beta.feedback.info.submit.error.notsignedup", stringReturn[2]));
+					}
+					else
+					{
+						setTitle("gui.avp.beta.feedback.info.submit.thanks.title", true);
+						setDefaultText(I18n.format("gui.avp.beta.feedback.info.submit.thanks", stringReturn[0], stringReturn[2]));
+					}
 				}
 				else
 				{
