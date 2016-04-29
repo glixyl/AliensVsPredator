@@ -4,7 +4,6 @@ import java.util.Random;
 
 import com.arisux.airi.AIRI;
 import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
-import com.arisux.avp.AliensVsPredator;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
@@ -60,9 +59,9 @@ public class DerelictLocation
 	{
 		NBTTagCompound tagLocation = new NBTTagCompound();
 		tagLocation.setBoolean("Generated", this.generated);					
-		tagLocation.setInteger("PosX", this.getCoord().posX);
-		tagLocation.setInteger("PosY", this.getCoord().posY);
-		tagLocation.setInteger("PosZ", this.getCoord().posZ);
+		tagLocation.setInteger("PosX", (int) this.getCoord().posX);
+		tagLocation.setInteger("PosY", (int) this.getCoord().posY);
+		tagLocation.setInteger("PosZ", (int) this.getCoord().posZ);
 		tag.setTag("Location" + this.getIndex(), tagLocation);
 	}
 	

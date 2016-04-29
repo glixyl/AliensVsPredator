@@ -40,15 +40,16 @@ public class RenderOvamorph extends RenderLiving implements ICustomCryostasisRen
 	@Override
 	public CryostasisTubeRenderer getCustomCryostasisRenderer()
 	{
-		return new CryostasisTubeRenderer() {
+		return new CryostasisTubeRenderer()
+		{
 			@Override
 			public void renderChassis(RenderCryostasisTube renderer, TileEntityCryostasisTube tile, double posX, double posY, double posZ)
 			{
 				super.renderChassis(renderer, tile, posX, posY, posZ);
 			}
-			
+
 			@Override
-			public void renderEntity(RenderCryostasisTube renderer, TileEntityCryostasisTube tile, double posX, double posY, double posZ) 
+			public void renderEntity(RenderCryostasisTube renderer, TileEntityCryostasisTube tile, double posX, double posY, double posZ)
 			{
 				if (tile.stasisEntity != null)
 				{
@@ -58,7 +59,7 @@ public class RenderOvamorph extends RenderLiving implements ICustomCryostasisRen
 						{
 							GlStateManager.disableLight();
 						}
-						
+
 						GlStateManager.translate(0F, 0.5F, 0F);
 						GlStateManager.rotate(180F, 1F, 0F, 0F);
 						RenderManager.instance.renderEntityWithPosYaw(tile.stasisEntity, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
@@ -66,7 +67,7 @@ public class RenderOvamorph extends RenderLiving implements ICustomCryostasisRen
 					GlStateManager.popMatrix();
 				}
 			}
-			
+
 			@Override
 			public void renderTube(RenderCryostasisTube renderer, TileEntityCryostasisTube tile, double posX, double posY, double posZ)
 			{

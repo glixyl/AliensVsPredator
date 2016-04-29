@@ -68,7 +68,7 @@ public abstract class PathNavigate extends net.minecraft.pathfinding.PathNavigat
             int i = (int)(searchRange + 8.0F);
             CoordData subCoord = coord.subtract(i, i, i);
             CoordData addCoord = coord.add(i, i, i);
-            ChunkCache chunkcache = new ChunkCache(this.worldObj, subCoord.posX, subCoord.posY, subCoord.posZ, addCoord.posX, addCoord.posY, addCoord.posZ, 0);
+            ChunkCache chunkcache = new ChunkCache(this.worldObj, (int) subCoord.posX, (int) subCoord.posY, (int) subCoord.posZ, (int) addCoord.posX, (int) addCoord.posY, (int) addCoord.posZ, 0);
             PathEntity pathentity = this.pathFinder.createEntityPathTo(chunkcache, this.theEntity, coord, searchRange);
             this.worldObj.theProfiler.endSection();
             return pathentity;
@@ -102,7 +102,7 @@ public abstract class PathNavigate extends net.minecraft.pathfinding.PathNavigat
             int i = (int)(searchRange + 16.0F);
             CoordData subCoord = coord.subtract(i, i, i);
             CoordData addCoord = coord.add(i, i, i);
-            ChunkCache chunkcache = new ChunkCache(this.worldObj, subCoord.posX, subCoord.posY, subCoord.posZ, addCoord.posX, addCoord.posY, addCoord.posZ, 0);
+            ChunkCache chunkcache = new ChunkCache(this.worldObj, (int) subCoord.posX, (int) subCoord.posY, (int) subCoord.posZ, (int) addCoord.posX, (int) addCoord.posY, (int) addCoord.posZ, 0);
             PathEntity pathentity = this.pathFinder.createEntityPathTo(chunkcache, this.theEntity, entityLiving, searchRange);
             this.worldObj.theProfiler.endSection();
             return pathentity;

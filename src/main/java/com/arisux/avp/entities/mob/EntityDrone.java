@@ -148,8 +148,8 @@ public class EntityDrone extends EntityXenomorph
 
 							if (Entities.canCoordBeSeenBy(this, coord) && block.isOpaqueCube())
 							{
-								this.getNavigator().setPath(this.worldObj.getEntityPathToXYZ(this, coord.posX, coord.posY, coord.posZ, 128, true, true, true, true), 0.8D);
-								this.worldObj.setBlock(coord.posX, coord.posY, coord.posZ, AliensVsPredator.blocks().terrainHiveResin);
+								this.getNavigator().setPath(this.worldObj.getEntityPathToXYZ(this, (int) coord.posX, (int) coord.posY, (int) coord.posZ, 128, true, true, true, true), 0.8D);
+								this.worldObj.setBlock((int) coord.posX, (int) coord.posY, (int) coord.posZ, AliensVsPredator.blocks().terrainHiveResin);
 
 								TileEntity tileEntity = coord.getTileEntity(this.worldObj);
 

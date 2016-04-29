@@ -134,7 +134,7 @@ public abstract class EntitySpeciesAlien extends EntityMob implements IMob, IHiv
 	@SuppressWarnings("unchecked")
 	protected void tickJellyPickupAI()
 	{
-		if (!this.worldObj.isRemote)
+		if (!this.worldObj.isRemote && !(this instanceof EntityOvamorph))
 		{
 			ArrayList<EntityItem> entityItemList = (ArrayList<EntityItem>) WorldUtil.Entities.getEntitiesInCoordsRange(worldObj, EntityItem.class, new com.arisux.airi.lib.WorldUtil.Blocks.CoordData(this), 8);
 	

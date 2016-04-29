@@ -336,7 +336,7 @@ public class PressureHUDRenderEvent
 					{
 						/** Block Information **/
 						Blocks.CoordData coord = new Blocks.CoordData(mc.objectMouseOver.blockX, mc.objectMouseOver.blockY, mc.objectMouseOver.blockZ);
-						Block block = mc.theWorld.getBlock(coord.posX, coord.posY, coord.posZ);
+						Block block = mc.theWorld.getBlock((int) coord.x(), (int) coord.y(), (int) coord.z());
 						BlockSides side = BlockSides.getSide(mc.objectMouseOver.sideHit);
 						TileEntity tile = coord.getTileEntity(Minecraft.getMinecraft().thePlayer.worldObj);
 
