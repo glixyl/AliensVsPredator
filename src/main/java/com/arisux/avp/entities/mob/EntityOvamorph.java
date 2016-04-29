@@ -2,6 +2,7 @@ package com.arisux.avp.entities.mob;
 
 import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
 import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.packets.client.PacketOvamorphContainsFacehugger;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -21,16 +22,18 @@ public class EntityOvamorph extends EntitySpeciesAlien implements IMob
 	private int hatchWaitTimer;
 	private final int maxOpenProgress = 21;
 	private boolean containsFacehugger;
+	private boolean sendUpdates;
 
 	public EntityOvamorph(World par1World)
 	{
 		super(par1World);
 		this.setSize(0.5F, 0.5F);
-		this.hatchingTime = 600;
+		this.hatchingTime = 20 * 30;
 		this.experienceValue = 10;
 		this.openProgress = -maxOpenProgress;
 		this.hatchWaitTimer = 20 * 10;
 		this.containsFacehugger = true;
+		this.sendUpdates = true;
 	}
 
 	@Override
@@ -98,6 +101,12 @@ public class EntityOvamorph extends EntitySpeciesAlien implements IMob
 	public void onUpdate()
 	{
 		super.onUpdate();
+		
+		if (!this.worldObj.isRemote && this.ticksExisted >= 20 && this.sendUpdates)
+		{
+			AliensVsPredator.network().sendToAll(new PacketOvamorphContainsFacehugger(this.containsFacehugger, this.getEntityId()));
+			this.sendUpdates = false;
+		}
 
 		if (this.getHealth() < this.getMaxHealth())
 		{
