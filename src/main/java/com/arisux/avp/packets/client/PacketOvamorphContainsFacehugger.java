@@ -46,13 +46,10 @@ public class PacketOvamorphContainsFacehugger implements IMessage, IMessageHandl
 		World world = Minecraft.getMinecraft().thePlayer.worldObj;
 		Entity entity = world.getEntityByID(packet.entityId);
 		
-		System.out.println(entity + " " + packet.entityId);
-
 		if (world != null && entity != null && entity instanceof EntityOvamorph)
 		{
 			EntityOvamorph ovamorph = (EntityOvamorph) entity;
 			ovamorph.setContainsFacehugger(packet.containsFacehugger);
-			System.out.println("set ovamorph: " + packet.entityId + " " + packet.containsFacehugger);
 		}
 
 		return null;
