@@ -177,7 +177,7 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 
 	public float facehuggerScaleAmount()
 	{
-		return 0.7F;
+		return 0.9F;
 	}
 
 	@Override
