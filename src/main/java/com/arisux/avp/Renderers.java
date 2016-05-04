@@ -59,6 +59,7 @@ import com.arisux.avp.entities.mob.model.ModelPraetorian;
 import com.arisux.avp.entities.mob.model.ModelPredalien;
 import com.arisux.avp.entities.mob.model.ModelProtomorph;
 import com.arisux.avp.entities.mob.model.ModelQueen;
+import com.arisux.avp.entities.mob.model.ModelRoyalFacehugger;
 import com.arisux.avp.entities.mob.model.ModelRunnerDrone;
 import com.arisux.avp.entities.mob.model.ModelRunnerWarrior;
 import com.arisux.avp.entities.mob.model.ModelSpitter;
@@ -234,7 +235,7 @@ public class Renderers implements IInitializablePost
 		registerEntityRenderingHandler(EntityYautja.class, new RenderYautja(new ModelYautja(), 0.5F));
 		registerEntityRenderingHandler(EntityQueen.class, new RenderQueen(new ModelQueen(), 0.5F));
 		registerEntityRenderingHandler(EntityFacehugger.class, new RenderFacehugger(new ModelFacehugger(), 0.5F));
-		registerEntityRenderingHandler(EntityRoyalFacehugger.class, new RenderRoyalFacehugger(new ModelFacehugger(), 0.5F));
+		registerEntityRenderingHandler(EntityRoyalFacehugger.class, new RenderRoyalFacehugger(new ModelRoyalFacehugger(), 0.5F));
 		registerEntityRenderingHandler(EntityChestburster.class, new RenderChestburster(new ModelChestburster(), 0.5F));
 		registerEntityRenderingHandler(EntityOvamorph.class, new RenderOvamorph(new ModelOvamorph(), 0.5F));
 		registerEntityRenderingHandler(EntityDeaconShark.class, new RenderDeaconShark(new ModelDeaconShark(), 0.5F));
