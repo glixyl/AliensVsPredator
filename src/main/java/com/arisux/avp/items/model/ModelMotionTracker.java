@@ -1,10 +1,10 @@
 package com.arisux.avp.items.model;
 
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelMotionTracker extends ModelBaseExtension
+public class ModelMotionTracker extends ModelBaseWrapper
 {
 	ModelRenderer handleBottom;
 	ModelRenderer handle;

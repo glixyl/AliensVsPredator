@@ -1,10 +1,10 @@
 package com.arisux.avp.items.model;
 
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelAK47 extends ModelBaseExtension
+public class ModelAK47 extends ModelBaseWrapper
 {
 	public ModelRenderer handle;
 	public ModelRenderer clip;

@@ -4,7 +4,7 @@ import com.arisux.airi.lib.interfaces.IInitializable;
 import com.arisux.avp.packets.client.PacketAmmoUpdate;
 import com.arisux.avp.packets.client.PacketJellyLevelUpdate;
 import com.arisux.avp.packets.client.PacketOpenBlastdoor;
-import com.arisux.avp.packets.client.PacketOpenLocker;
+import com.arisux.avp.packets.client.PacketOpenable;
 import com.arisux.avp.packets.client.PacketOvamorphContainsFacehugger;
 import com.arisux.avp.packets.client.PacketPlayerModeUpdate;
 import com.arisux.avp.packets.client.PacketRotateTransformer;
@@ -67,7 +67,7 @@ public class NetworkHandler extends SimpleNetworkWrapper implements IInitializab
 		this.registerMessage(Side.CLIENT, PacketVardaStormMoveEntity.class);
 		this.registerMessage(Side.CLIENT, PacketAmmoUpdate.class);
 		this.registerMessage(Side.CLIENT, PacketOpenBlastdoor.class);
-		this.registerMessage(Side.CLIENT, PacketOpenLocker.class);
+		this.registerMessage(Side.CLIENT, PacketOpenable.class);
 		this.registerMessage(Side.CLIENT, PacketPlayerModeUpdate.class);
 		this.registerMessage(Side.CLIENT, PacketTurretInit.class);
 		this.registerMessage(Side.CLIENT, PacketSyncEEPC.class);

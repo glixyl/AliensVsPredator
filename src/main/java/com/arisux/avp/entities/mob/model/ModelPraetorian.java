@@ -1,12 +1,12 @@
 package com.arisux.avp.entities.mob.model;
 
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
-public class ModelPraetorian extends ModelBaseExtension
+public class ModelPraetorian extends ModelBaseWrapper
 {
 	public ModelRenderer torso, stomache, rThigh, lThigh, lShin, rShin, lShin1, rShin1, lFoot, rFoot, lArm, rArm, lClaw, rArm2, neck, headBase, face1, jaw1, jaw2, head2, lArm2, rClaw, lClaw2, rClaw2, vertibrae1, vertibrae2, tailspines1, tail2, tail3, stabber, tail4, tail5, face2, tailspines5, tailspikes5, tailspikes4, tailspines4, tailspines3, tailspikes3, tailspines2, tailspikes2, tail1, tailspikes1, backStabber1, backStabber2, backStabber3, backStabber4, headSide1, headSide2, backStabber5, backStabber6;
 	private float wingspeed = 0.0F;

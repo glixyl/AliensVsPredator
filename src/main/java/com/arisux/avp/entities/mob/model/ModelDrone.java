@@ -1,12 +1,12 @@
 package com.arisux.avp.entities.mob.model;
 
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
-public class ModelDrone extends ModelBaseExtension
+public class ModelDrone extends ModelBaseWrapper
 {
 	ModelRenderer body1, body2, rightleg1, leftleg1, leftleg2, rightleg2, leftleg3, rightleg3, leftleg4, rightleg4, leftarm1, rightarm1, leftarm2, rightarm2, neck, head1, head2, head3, head4, head5, leftarm3, rightarm3, leftarm4, rightarm4, back1, back2, tail2, tail3, stabber, tail4, tail5, head6, tailSpikes5, tailSpikes4, tailSpikes3, tailSpikes2, tail1, tailSpikes1, backhorn1, backhorn2, backhorn3, backhorn4;
 

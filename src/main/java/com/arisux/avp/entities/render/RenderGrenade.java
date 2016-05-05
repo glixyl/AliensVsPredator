@@ -4,7 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.EntityGrenade;
 import com.arisux.avp.items.model.ModelM40;
@@ -15,7 +15,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderGrenade extends Render
 {
-	private ModelBaseExtension model = new ModelM40();
+	private ModelBaseWrapper model = new ModelM40();
 
 	@Override
 	public void doRender(Entity entity, double posX, double posY, double posZ, float yaw, float renderPartialTicks)

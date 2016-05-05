@@ -1,11 +1,11 @@
 package com.arisux.avp.entities.tile.model;
 
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.avp.entities.tile.TileEntityBlastdoor;
 
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelBlastdoor extends ModelBaseExtension
+public class ModelBlastdoor extends ModelBaseWrapper
 {
 	ModelRenderer doorLeftCorner1;
 	ModelRenderer doorLeftCorner2;

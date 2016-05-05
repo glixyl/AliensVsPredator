@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL11;
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.items.model.Model88MOD4;
 
@@ -19,7 +19,7 @@ import net.minecraft.util.ResourceLocation;
 public class RenderItem88MOD4 extends ItemRenderer
 {
 	public static final ResourceLocation resourceLocation = AliensVsPredator.resources()._88MOD4;
-	public static final ModelBaseExtension model = new Model88MOD4();
+	public static final ModelBaseWrapper model = new Model88MOD4();
 
 	public RenderItem88MOD4()
 	{
@@ -27,9 +27,9 @@ public class RenderItem88MOD4 extends ItemRenderer
 	}
 
 	@Override
-	public ModelBaseExtension getModel()
+	public ModelBaseWrapper getModel()
 	{
-		return (ModelBaseExtension) super.getModel();
+		return (ModelBaseWrapper) super.getModel();
 	}
 
 	@Override

@@ -5,7 +5,7 @@ import org.lwjgl.opengl.GL11;
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.avp.entities.mob.EntityChestburster;
 import com.arisux.avp.entities.mob.EntityMarine;
 import com.arisux.avp.entities.mob.EntityXenomorph;
@@ -21,9 +21,9 @@ public class RenderItemSummoner extends ItemRenderer
 	private Class<?> entityClass;
 	private float scale, x, y, rotation;
 
-	public RenderItemSummoner(Class<? extends Entity> entityClass, Class<? extends ModelBaseExtension> modelClass, ResourceLocation resourceLocation)
+	public RenderItemSummoner(Class<? extends Entity> entityClass, Class<? extends ModelBaseWrapper> modelClass, ResourceLocation resourceLocation)
 	{
-		super(ModelBaseExtension.createExtendedModelBase(modelClass), resourceLocation);
+		super(ModelBaseWrapper.createExtendedModelBase(modelClass), resourceLocation);
 		this.resourceLocation = resourceLocation;
 		this.entityClass = entityClass;
 	}

@@ -1,13 +1,13 @@
 package com.arisux.avp.entities.mob.model;
 
 import com.arisux.airi.lib.GlStateManager;
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
-public class ModelTrilobite extends ModelBaseExtension
+public class ModelTrilobite extends ModelBaseWrapper
 {
 	public ModelRenderer bodyFront;
 	public ModelRenderer LFrontTentacle2;

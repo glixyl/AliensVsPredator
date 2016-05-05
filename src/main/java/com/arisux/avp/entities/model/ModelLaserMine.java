@@ -1,10 +1,10 @@
 package com.arisux.avp.entities.model;
 
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelLaserMine extends ModelBaseExtension
+public class ModelLaserMine extends ModelBaseWrapper
 {
 	ModelRenderer lSupport;
 	ModelRenderer rSupport;

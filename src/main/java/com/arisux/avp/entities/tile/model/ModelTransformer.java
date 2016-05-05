@@ -1,10 +1,10 @@
 package com.arisux.avp.entities.tile.model;
 
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelTransformer extends ModelBaseExtension
+public class ModelTransformer extends ModelBaseWrapper
 {
 	public ModelRenderer powerOutput;
 	public ModelRenderer rightSupport;

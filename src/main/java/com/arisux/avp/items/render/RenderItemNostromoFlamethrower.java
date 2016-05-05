@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL11;
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.items.ItemFirearm;
 import com.arisux.avp.items.model.ModelNostromoFlamethrower;
@@ -19,7 +19,7 @@ import net.minecraft.util.ResourceLocation;
 public class RenderItemNostromoFlamethrower extends ItemRenderer
 {
 	public static final ResourceLocation resourceLocation = AliensVsPredator.resources().FLAMETHROWER_NOSTROMO;
-	public static final ModelBaseExtension model = new ModelNostromoFlamethrower();
+	public static final ModelBaseWrapper model = new ModelNostromoFlamethrower();
 
 	public RenderItemNostromoFlamethrower()
 	{

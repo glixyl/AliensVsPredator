@@ -1,12 +1,12 @@
 package com.arisux.avp.entities.mob.model;
 
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
-public class ModelRoyalFacehugger extends ModelBaseExtension
+public class ModelRoyalFacehugger extends ModelBaseWrapper
 {
 	public ModelRenderer spine;
 	public ModelRenderer spine2;
@@ -500,7 +500,7 @@ public class ModelRoyalFacehugger extends ModelBaseExtension
 
 		if (entity != null)
 		{
-			float tailSpeed = 0.5F;
+			float tailSpeed = 0.15F;
 			float distMulti = 0.075F;
 			float distAdd = 0.05F;
 			float progress = idleProgress + swingProgress;

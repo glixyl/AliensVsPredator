@@ -1,14 +1,14 @@
 package com.arisux.avp.entities.mob.model;
 
 import com.arisux.airi.lib.GlStateManager;
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.avp.entities.mob.EntitySpeciesYautja;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
-public class ModelYautjaBerserker extends ModelBaseExtension
+public class ModelYautjaBerserker extends ModelBaseWrapper
 {
 	public ModelRenderer head;
 	public ModelRenderer head1Biomask;

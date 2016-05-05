@@ -1,11 +1,11 @@
 package com.arisux.avp.entities.mob.model;
 
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelAqua extends ModelBaseExtension
+public class ModelAqua extends ModelBaseWrapper
 {
 	public ModelRenderer chest, abdomen, rThigh, lThigh, lShinSpike, rShinSpike, lShin2, rShin2, lFootFlipper, rFootFlipper, lArm1, rArm1, lClaw1, rArm2, neck, headBase, headSideHorns, jaw, jaw2, headTopSpikesL, lArm2, rClaw1, lClaw2, rClaw2, spine1, spine2, spine3, tail1, tail2, tail3, tail4, lHead, spine4, tailFin, spine6, spine7, spine8, spine9, spine10, spine11, tail5, spine12, part1, part2, part3, part4, spine5, rHead, rShin1, lShin1, lFoot, rFoot, headTop, headTopSpikes, headTopSpikesR;
 

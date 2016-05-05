@@ -21,18 +21,18 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityCryostasisTube extends TileEntityElectrical implements IVoltageReceiver
 {
-	public TileEntityCryostasisTube()
-	{
-		super(false);
-		this.setThresholdVoltage(90);
-	}
-
 	public int rotation;
 	public Entity stasisEntity;
 	public ItemStack stasisItemstack;
 	private boolean cracked;
 	private boolean shattered;
 	private int ticksExisted;
+
+	public TileEntityCryostasisTube()
+	{
+		super(false);
+		this.setThresholdVoltage(90);
+	}
 
 	@Override
 	public void updateEntity()
@@ -86,38 +86,38 @@ public class TileEntityCryostasisTube extends TileEntityElectrical implements IV
 		{
 			stasisEntity.onUpdate();
 		}
-		
-//		int bubbleLife = 20;
-//		
-//		if (this.worldObj.isRemote)
-//		{
-//			for (int x = 1; x > 0; --x)
-//			{
-//				Random rand = new Random();
-//				
-//				double bubbleX = 0;
-//				double bubbleY = 0;
-//				double bubbleZ = 0;
-//
-//				for (int r = 3; r > 0; r--)
-//				{
-//					bubbleX = bubbleX + (rand.nextDouble() / (bubbleLife - this.ticksExisted));
-//					bubbleY = bubbleY + (rand.nextDouble() / (bubbleLife - this.ticksExisted));
-//					bubbleZ = bubbleZ + (rand.nextDouble() / (bubbleLife - this.ticksExisted));
-//				}
-//
-//				this.spawnBubbleParticle(bubbleX, bubbleY, bubbleZ, 0.04F, 0.02D, rand);
-//			}
-//		}
-		
+
+		// int bubbleLife = 20;
+		//
+		// if (this.worldObj.isRemote)
+		// {
+		// for (int x = 1; x > 0; --x)
+		// {
+		// Random rand = new Random();
+		//
+		// double bubbleX = 0;
+		// double bubbleY = 0;
+		// double bubbleZ = 0;
+		//
+		// for (int r = 3; r > 0; r--)
+		// {
+		// bubbleX = bubbleX + (rand.nextDouble() / (bubbleLife - this.ticksExisted));
+		// bubbleY = bubbleY + (rand.nextDouble() / (bubbleLife - this.ticksExisted));
+		// bubbleZ = bubbleZ + (rand.nextDouble() / (bubbleLife - this.ticksExisted));
+		// }
+		//
+		// this.spawnBubbleParticle(bubbleX, bubbleY, bubbleZ, 0.04F, 0.02D, rand);
+		// }
+		// }
+
 		Random rand = new Random();
-		
+
 		if (this.worldObj.isRemote && !this.isCracked() && rand.nextInt(8) == 0)
 		{
 			this.spawnBubbleParticle(this.xCoord + 0.5, this.yCoord + 0.5, this.zCoord + 0.55, 0, 0.75, 0, rand);
 		}
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	public void spawnBubbleParticle(double bubbleX, double bubbleY, double bubbleZ, double motionX, double motionY, double motionZ, Random rand)
 	{
@@ -219,7 +219,7 @@ public class TileEntityCryostasisTube extends TileEntityElectrical implements IV
 	{
 		this.rotation = direction;
 	}
-	
+
 	public int getTicksExisted()
 	{
 		return ticksExisted;

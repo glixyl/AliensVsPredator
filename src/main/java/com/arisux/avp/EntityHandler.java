@@ -48,6 +48,7 @@ import com.arisux.avp.entities.tile.TileEntityHiveNode;
 import com.arisux.avp.entities.tile.TileEntityHiveResin;
 import com.arisux.avp.entities.tile.TileEntityLightPanel;
 import com.arisux.avp.entities.tile.TileEntityLocker;
+import com.arisux.avp.entities.tile.TileEntityMedpod;
 import com.arisux.avp.entities.tile.TileEntityNegativeTransformer;
 import com.arisux.avp.entities.tile.TileEntityP2RConverter;
 import com.arisux.avp.entities.tile.TileEntityPowercell;
@@ -103,6 +104,7 @@ public class EntityHandler implements IInitializable
 		GameRegistry.registerTileEntity(TileEntityAmpule.class, "tileEntityAmpule");
 		GameRegistry.registerTileEntity(TileEntityLocker.class, "tileEntityLocker");
 		GameRegistry.registerTileEntity(TileEntityGunLocker.class, "tileEntityGunLocker");
+		GameRegistry.registerTileEntity(TileEntityMedpod.class, "tileEntityMedpod");
 	}
 
 	private void registerLivingEntities()

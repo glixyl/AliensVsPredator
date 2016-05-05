@@ -1,11 +1,11 @@
 package com.arisux.avp.entities.tile.model;
 
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.tileentity.TileEntity;
 
-public class ModelLocker extends ModelBaseExtension
+public class ModelLocker extends ModelBaseWrapper
 {
 	public ModelRenderer wallLeft;
 	public ModelRenderer wallRight;

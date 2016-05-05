@@ -5,7 +5,7 @@ import org.lwjgl.opengl.GL11;
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.avp.entities.tile.model.ModelCable;
 
 import net.minecraft.client.Minecraft;
@@ -13,7 +13,7 @@ import net.minecraft.item.ItemStack;
 
 public class RenderItemPowerline extends ItemRenderer
 {
-	public static final ModelBaseExtension model = new ModelCable();
+	public static final ModelBaseWrapper model = new ModelCable();
 	
 	public RenderItemPowerline()
 	{

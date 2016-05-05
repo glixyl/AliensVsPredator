@@ -5,7 +5,7 @@ import org.lwjgl.opengl.GL11;
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.model.ModelLocker;
 
@@ -13,7 +13,7 @@ import net.minecraft.item.ItemStack;
 
 public class RenderItemLocker extends ItemRenderer
 {
-	public static final ModelBaseExtension model = new ModelLocker();
+	public static final ModelBaseWrapper model = new ModelLocker();
 	
 	public RenderItemLocker()
 	{

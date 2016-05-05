@@ -1,13 +1,13 @@
 package com.arisux.avp.entities.mob.model;
 
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.avp.entities.mob.EntitySpeciesEngineer;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
-public class ModelEngineer extends ModelBaseExtension
+public class ModelEngineer extends ModelBaseWrapper
 {
 	public ModelRenderer chest;
 	public ModelRenderer stomach;

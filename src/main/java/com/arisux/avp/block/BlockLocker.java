@@ -1,6 +1,7 @@
 package com.arisux.avp.block;
 
 import com.arisux.avp.entities.tile.TileEntityLocker;
+import com.arisux.avp.interfaces.IRotatable;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -76,10 +77,10 @@ public class BlockLocker extends Block
 	{
 		TileEntity tile = world.getTileEntity(posX, posY, posZ);
 
-		if (tile != null && tile instanceof TileEntityLocker && placer != null)
+		if (tile != null && tile instanceof IRotatable && placer != null)
 		{
-			TileEntityLocker locker = (TileEntityLocker) tile;
-			locker.setDirection(getFacing(placer));
+			IRotatable rotatable = (IRotatable) tile;
+			rotatable.setDirection(getFacing(placer));
 		}
 	}
 

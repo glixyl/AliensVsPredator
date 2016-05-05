@@ -89,18 +89,18 @@ public class BlockBlastdoor extends Block
 		}
 		else
 		{
-			blastdoor.setDoorOpen(!blastdoor.isDoorOpen());
+			blastdoor.setOpen(!blastdoor.isOpen());
 
 			if (world.isRemote)
 			{
-				Minecraft.getMinecraft().thePlayer.addChatComponentMessage(new ChatComponentText("\u00A77 Blast door \u00A7a" + (blastdoor.isDoorOpen() ? "opened" : "closed") + "."));
+				Minecraft.getMinecraft().thePlayer.addChatComponentMessage(new ChatComponentText("\u00A77 Blast door \u00A7a" + (blastdoor.isOpen() ? "opened" : "closed") + "."));
 			}
 		}
 	}
 
 	private boolean isOpenedByJack(TileEntityBlastdoor blastdoor, EntityPlayer player)
 	{
-		return player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof ItemMaintenanceJack && !blastdoor.isOperational() && !blastdoor.isDoorOpen();
+		return player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof ItemMaintenanceJack && !blastdoor.isOperational() && !blastdoor.isOpen();
 	}
 
 	private boolean canOpen(TileEntityBlastdoor blastdoor, EntityPlayer player)
@@ -169,7 +169,7 @@ public class BlockBlastdoor extends Block
 		{
 			TileEntityBlastdoor tile = (TileEntityBlastdoor) tileEntity;
 
-			if (tile.isDoorOpen())
+			if (tile.isOpen())
 			{
 				return null;
 			}

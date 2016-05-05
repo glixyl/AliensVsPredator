@@ -1,11 +1,11 @@
 package com.arisux.avp.entities.tile.model;
 
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.avp.entities.tile.TileEntityTurret;
 
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelTurret extends ModelBaseExtension
+public class ModelTurret extends ModelBaseWrapper
 {
 	private ModelRenderer barrel,
 		supportLeft,

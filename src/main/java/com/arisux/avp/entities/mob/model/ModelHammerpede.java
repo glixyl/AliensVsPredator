@@ -1,14 +1,14 @@
 package com.arisux.avp.entities.mob.model;
 
 import com.arisux.airi.lib.GlStateManager;
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.avp.entities.mob.EntityHammerpede;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
-public class ModelHammerpede extends ModelBaseExtension
+public class ModelHammerpede extends ModelBaseWrapper
 {
 	ModelRenderer body2;
 	ModelRenderer body1;

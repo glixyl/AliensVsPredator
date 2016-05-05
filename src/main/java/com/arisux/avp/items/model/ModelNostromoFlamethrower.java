@@ -1,6 +1,6 @@
 package com.arisux.avp.items.model;
 
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.avp.items.ItemFlamethrower;
 
 import net.minecraft.client.Minecraft;
@@ -8,7 +8,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class ModelNostromoFlamethrower extends ModelBaseExtension
+public class ModelNostromoFlamethrower extends ModelBaseWrapper
 {
 	public ModelRenderer barrel;
 	public ModelRenderer barrelRod;

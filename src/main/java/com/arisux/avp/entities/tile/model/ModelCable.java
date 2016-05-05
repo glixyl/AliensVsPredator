@@ -1,6 +1,6 @@
 package com.arisux.avp.entities.tile.model;
 
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.avp.entities.tile.TileEntityElectrical;
 import com.arisux.avp.entities.tile.TileEntityPowerline;
 
@@ -8,7 +8,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class ModelCable extends ModelBaseExtension
+public class ModelCable extends ModelBaseWrapper
 {
 	ModelRenderer node, down, up, front, back, left, right;
 

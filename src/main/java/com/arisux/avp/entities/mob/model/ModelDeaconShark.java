@@ -1,13 +1,13 @@
 package com.arisux.avp.entities.mob.model;
 
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
-public class ModelDeaconShark extends ModelBaseExtension
+public class ModelDeaconShark extends ModelBaseWrapper
 {
 	public ModelRenderer body1;
 	public ModelRenderer body2;

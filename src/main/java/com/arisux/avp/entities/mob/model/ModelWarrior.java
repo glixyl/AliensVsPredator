@@ -1,13 +1,13 @@
 package com.arisux.avp.entities.mob.model;
 
 import com.arisux.airi.lib.GlStateManager;
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
-public class ModelWarrior extends ModelBaseExtension
+public class ModelWarrior extends ModelBaseWrapper
 {
 	public ModelRenderer chest, abdomen, rThigh, lThigh, lShin1, rShin1, lShin2, rShin2, lFoot, rFoot, lArm1, rArm1, lClaw1, rArm2, neck, headSpine1, rHead, jaw, jaw2, headSpine2, lArm2, rClaw1, lClaw2, rClaw2, back1, back2, tail1, tail2, stabber, tail3, tail4, lHead, tailSpikes5, tailSpikes4, tailSpikes3, tailSpikes2, tail5, tailSpikes1, part1, part2, part3, part4, headBase, headTop;
 

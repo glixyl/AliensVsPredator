@@ -9,7 +9,7 @@ import com.arisux.airi.lib.AccessWrapper;
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.airi.lib.client.PlayerResource;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.URLs;
@@ -23,7 +23,7 @@ import net.minecraft.util.ResourceLocation;
 public class RenderItemSniper extends ItemRenderer
 {
 	public static final ResourceLocation resourceLocation = AliensVsPredator.resources().SNIPER;
-	public static final ModelBaseExtension model = new ModelSniper();
+	public static final ModelBaseWrapper model = new ModelSniper();
 	private float defaultFOV = mc.gameSettings.getOptionFloatValue(GameSettings.Options.FOV);
 
 	public RenderItemSniper()

@@ -16,6 +16,7 @@ import com.arisux.avp.block.BlockHiveNode;
 import com.arisux.avp.block.BlockHiveResin;
 import com.arisux.avp.block.BlockLightPanel;
 import com.arisux.avp.block.BlockLocker;
+import com.arisux.avp.block.BlockMedpod;
 import com.arisux.avp.block.BlockMist;
 import com.arisux.avp.block.BlockNegativeTransformer;
 import com.arisux.avp.block.BlockP2RConverter;
@@ -188,6 +189,7 @@ public class BlockHandler extends IBHandler implements IInitializable
 		blockSupplies = (new BlockSupplyCrate(Material.iron)),
 		blockSolarPanel = (new BlockSolarPanel(Material.iron)).setHardness(5.0F).setResistance(10.0F),
 		blockLocker = (new BlockLocker(Material.iron).setHardness(1.5F).setResistance(10.0F)),
+		blockMedpod = (new BlockMedpod(Material.iron).setHardness(1.5F).setResistance(10.0F)),
 		blockGunLocker = (new BlockGunLocker(Material.iron).setHardness(1.5F).setResistance(10.0F)),
 		blockAmpule = (new BlockAmpule().setHardness(5.0F).setResistance(10.0F)),
 		blockWallW = (new BlockWall(Material.iron).setHardness(5F).setResistance(30.0F).setLightOpacity(255));
@@ -310,5 +312,6 @@ public class BlockHandler extends IBHandler implements IInitializable
 		registerBlock(blockAmpule, "engineership.ampule");
 		registerBlock(blockLocker, "locker");
 		registerBlock(blockGunLocker, "gunlocker");
+		registerBlock(blockMedpod, "medpod");
 	}
 }

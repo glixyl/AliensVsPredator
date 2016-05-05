@@ -80,6 +80,8 @@ public class Resources implements IInitializablePre
 	public final ResourceLocation CRYOSTASIS_TUBE_MASK_SHATTERED = new ResourceLocation(AliensVsPredator.ID, "textures/tile/cryostasistube-shattered-mask.png");
 	public final ResourceLocation STASIS_MECHANISM = new ResourceLocation(AliensVsPredator.ID, "textures/tile/stasis-mechanism.png");
 	public final ResourceLocation STASIS_MECHANISM_MASK = new ResourceLocation(AliensVsPredator.ID, "textures/tile/stasis-mechanism-mask.png");
+	public final ResourceLocation MEDPOD = new ResourceLocation(AliensVsPredator.ID, "textures/tile/medpod.png");
+	public final ResourceLocation MEDPOD_MASK = new ResourceLocation(AliensVsPredator.ID, "textures/tile/medpod-on.png");
 	public final ResourceLocation REPULSION_GENERATOR = new ResourceLocation(AliensVsPredator.ID, "textures/tile/generator.png");
 	public final ResourceLocation CABLE = new ResourceLocation(AliensVsPredator.ID, "textures/tile/cable.png");
 	public final ResourceLocation NETWORKLIGHT = new ResourceLocation(AliensVsPredator.ID, "textures/tile/networklight.png");

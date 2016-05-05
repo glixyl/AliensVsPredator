@@ -1,13 +1,13 @@
 package com.arisux.avp.entities.mob.model;
 
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.avp.entities.mob.EntityOvamorph;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
-public class ModelOvamorph extends ModelBaseExtension
+public class ModelOvamorph extends ModelBaseWrapper
 {
 	public ModelRenderer base;
 	public ModelRenderer center;

@@ -1,10 +1,10 @@
 package com.arisux.avp.entities.tile.model;
 
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelAmpule extends ModelBaseExtension
+public class ModelAmpule extends ModelBaseWrapper
 {
 	public ModelRenderer canisterBase2;
 	public ModelRenderer canisterMiddle1;

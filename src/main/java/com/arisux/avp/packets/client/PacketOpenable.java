@@ -1,6 +1,6 @@
 package com.arisux.avp.packets.client;
 
-import com.arisux.avp.entities.tile.TileEntityLocker;
+import com.arisux.avp.interfaces.IOpenable;
 
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
@@ -10,19 +10,19 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class PacketOpenLocker implements IMessage, IMessageHandler<PacketOpenLocker, PacketOpenLocker>
+public class PacketOpenable implements IMessage, IMessageHandler<PacketOpenable, PacketOpenable>
 {
 	private boolean open;
 	private int x;
 	private int y;
 	private int z;
 
-	public PacketOpenLocker()
+	public PacketOpenable()
 	{
 		;
 	}
 
-	public PacketOpenLocker(boolean open, int x, int y, int z)
+	public PacketOpenable(boolean open, int x, int y, int z)
 	{
 		this.open = open;
 		this.x = x;
@@ -49,18 +49,18 @@ public class PacketOpenLocker implements IMessage, IMessageHandler<PacketOpenLoc
 	}
 
 	@Override
-	public PacketOpenLocker onMessage(PacketOpenLocker packet, MessageContext ctx)
+	public PacketOpenable onMessage(PacketOpenable packet, MessageContext ctx)
 	{
 		World world = Minecraft.getMinecraft().thePlayer.worldObj;
 		TileEntity tile = world.getTileEntity(packet.x, packet.y, packet.z);
 
-		if (world != null && tile != null && tile instanceof TileEntityLocker)
+		if (world != null && tile != null && tile instanceof IOpenable)
 		{
-			TileEntityLocker locker = (TileEntityLocker) tile;
+			IOpenable openable = (IOpenable) tile;
 
-			if (locker != null)
+			if (openable != null)
 			{
-				locker.setOpen(packet.open);
+				openable.setOpen(packet.open);
 			}
 		}
 

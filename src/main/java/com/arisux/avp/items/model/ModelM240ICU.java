@@ -1,11 +1,11 @@
 package com.arisux.avp.items.model;
 
 import com.arisux.airi.lib.GlStateManager;
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelM240ICU extends ModelBaseExtension
+public class ModelM240ICU extends ModelBaseWrapper
 {
 	ModelRenderer canister;
 	ModelRenderer canisterSealTop;

@@ -1,10 +1,10 @@
 package com.arisux.avp.entities.tile.model;
 
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelPowercell extends ModelBaseExtension
+public class ModelPowercell extends ModelBaseWrapper
 {
 	private ModelRenderer cell;
 	private ModelRenderer connector1;

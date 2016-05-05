@@ -1,8 +1,5 @@
 package com.arisux.avp.entities.mob;
 
-import java.util.ArrayList;
-
-import com.arisux.airi.lib.WorldUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.ai.alien.EntitySelectorXenomorph;
 import com.arisux.avp.entities.extended.ExtendedEntityLivingBase;
@@ -19,7 +16,6 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -39,8 +35,8 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 		this.getNavigator().setCanSwim(true);
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(3, new EntityAIAttackOnCollide(this, 0.800000011920929D, true));
-		this.tasks.addTask(8, new EntityAIWander(this, 0.800000011920929D));
+		this.tasks.addTask(3, new EntityAIAttackOnCollide(this, 0.55D, true));
+		this.tasks.addTask(8, new EntityAIWander(this, 0.55D));
 		this.targetTasks.addTask(2, new EntityAILeapAtTarget(this, 0.8F));
 		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, Entity.class, /** targetChance **/0, /** shouldCheckSight **/false, /** nearbyOnly **/false, EntitySelectorXenomorph.instance));
 	}
@@ -51,7 +47,7 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 		super.applyEntityAttributes();
 
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(14.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5999999761581421D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.55D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(0.50D);
 		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
 	}
@@ -80,47 +76,13 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 				ridingEntity.rotationYawHead = 0F;
 			}
 		}
-
-		if (!this.isFertile && !this.isRiding())
-		{
-			if (!this.worldObj.isRemote)
-			{
-				EntityItem entityItem = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, WorldUtil.Entities.Players.Inventories.newStack(AliensVsPredator.items().itemSummonerFacehugger));
-				entityItem.setLocationAndAngles(this.posX, this.posY, this.posZ, 0, 0);
-				this.worldObj.spawnEntityInWorld(entityItem);
-			}
-
-			this.setDead();
-		}
-		
-		@SuppressWarnings("unchecked")
-		ArrayList<EntityItem> entityItemList = (ArrayList<EntityItem>) WorldUtil.Entities.getEntitiesInCoordsRange(worldObj, EntityItem.class, new com.arisux.airi.lib.WorldUtil.Blocks.CoordData(this), 8);
-
-		for (EntityItem entityItem : entityItemList)
-		{
-			if (entityItem.delayBeforeCanPickup <= 0)
-			{
-				ItemStack stack = entityItem.getDataWatcher().getWatchableObjectItemStack(10);
-
-				if (stack != null && stack.getItem() == AliensVsPredator.items().itemRoyalJelly)
-				{
-					this.getNavigator().setPath(this.getNavigator().getPathToEntityLiving(entityItem), 1);
-
-					if (this.getDistanceToEntity(entityItem) < 1)
-					{
-						this.isFertile = true;
-						entityItem.setDead();
-					}
-					break;
-				}
-			}
-		}
 	}
 
 	@Override
-	public void onCollideWithPlayer(EntityPlayer p_70100_1_)
+	protected void onPickupJelly(EntityItem entityItem)
 	{
-		super.onCollideWithPlayer(p_70100_1_);
+		super.onPickupJelly(entityItem);
+		this.isFertile = true;
 	}
 
 	@Override
@@ -129,27 +91,24 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 		return this.motionY > 1.0099999997764826D;
 	}
 
-	/* public void jumpAtEntity(EntityLivingBase leaper, EntityLivingBase leapTarget, double leapMotionY)
-	{
-		double rX = leapTarget.posX - leaper.posX;
-		double rZ = leapTarget.posZ - leaper.posZ;
-		float sq = MathHelper.sqrt_double(rX * rX + rZ * rZ);
-		leaper.motionX += rX / sq * 0.5D * 0.800000011920929D + leaper.motionX * 0.20000000298023224D;
-		leaper.motionZ += rZ / sq * 0.5D * 0.800000011920929D + leaper.motionZ * 0.20000000298023224D;
-		leaper.motionY = leapMotionY;
-	} */
-
 	@Override
 	public void collideWithEntity(Entity entity)
 	{
+		this.latchOnEntity(entity);
+	}
+	
+	protected void latchOnEntity(Entity entity)
+	{
 		if (this.isFertile && entity instanceof EntityLivingBase && !(entity instanceof EntitySpeciesAlien))
 		{
-			EntityLivingBase entityLiving = (EntityLivingBase) entity;
-			ExtendedEntityLivingBase extendedLiving = (ExtendedEntityLivingBase) entityLiving.getExtendedProperties(ExtendedEntityLivingBase.IDENTIFIER);
+			EntityLivingBase living = (EntityLivingBase) entity;
+			ExtendedEntityLivingBase extendedLiving = (ExtendedEntityLivingBase) living.getExtendedProperties(ExtendedEntityLivingBase.IDENTIFIER);
 
-			if (!(entityLiving instanceof EntityPlayer) || entityLiving instanceof EntityPlayer && !((EntityPlayer) entityLiving).capabilities.isCreativeMode)
+			if (!(living instanceof EntityPlayer) || living instanceof EntityPlayer && !((EntityPlayer) living).capabilities.isCreativeMode)
 			{
-				this.mountEntity(entityLiving);
+				this.mountEntity(living);
+				
+				//TODO: Replace this with a method that sets the parasite type that is implanted into this host. This will allow for mob-specific facehuggers.
 				extendedLiving.setContainsEmbryo(true);
 				extendedLiving.syncClients();
 				this.isFertile = false;
@@ -175,11 +134,6 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 		super.onDeath(damagesource);
 	}
 
-	public float facehuggerScaleAmount()
-	{
-		return 0.9F;
-	}
-
 	@Override
 	protected boolean isAIEnabled()
 	{
@@ -189,11 +143,6 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 	@Override
 	public double getYOffset()
 	{
-		if (this.ridingEntity instanceof EntityPlayer || this.ridingEntity instanceof EntityMarine)
-		{
-			return 0.2D;
-		}
-
 		return 0.3D;
 	}
 

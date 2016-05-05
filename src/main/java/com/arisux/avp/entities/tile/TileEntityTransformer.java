@@ -1,5 +1,6 @@
 package com.arisux.avp.entities.tile;
 
+import com.arisux.avp.interfaces.IRotatable;
 import com.arisux.avp.interfaces.energy.IVoltageProvider;
 import com.arisux.avp.interfaces.energy.IVoltageReceiver;
 
@@ -10,14 +11,15 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityTransformer extends TileEntityElectrical implements IVoltageProvider, IVoltageReceiver
+public class TileEntityTransformer extends TileEntityElectrical implements IVoltageProvider, IVoltageReceiver, IRotatable
 {
-	private ForgeDirection direction = ForgeDirection.SOUTH;
+	private ForgeDirection direction;
 
 	public TileEntityTransformer()
 	{
 		super(false);
 		this.boost = 24;
+		this.direction = ForgeDirection.SOUTH;
 	}
 
 	@Override
@@ -125,11 +127,13 @@ public class TileEntityTransformer extends TileEntityElectrical implements IVolt
 		return 10000;
 	}
 
+	@Override
 	public ForgeDirection getDirection()
 	{
 		return direction;
 	}
 
+	@Override
 	public void setDirection(ForgeDirection direction)
 	{
 		this.direction = direction;

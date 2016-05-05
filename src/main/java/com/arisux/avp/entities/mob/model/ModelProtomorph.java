@@ -1,14 +1,14 @@
 package com.arisux.avp.entities.mob.model;
 
 import com.arisux.airi.lib.GlStateManager;
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
-public class ModelProtomorph extends ModelBaseExtension
+public class ModelProtomorph extends ModelBaseWrapper
 {
 	ModelRenderer torso;
 	ModelRenderer abdomen;

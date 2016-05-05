@@ -150,18 +150,19 @@ public abstract class EntitySpeciesAlien extends EntityMob implements IMob, IHiv
 	
 						if (this.getDistanceToEntity(entityItem) < 1)
 						{
-							for (int i = entityItem.getEntityItem().stackSize; i > 0; i--)
-							{
-								this.setJellyLevel(this.getJellyLevel() + 1);
-							}
-							
-							entityItem.setDead();
+							this.onPickupJelly(entityItem);
 						}
 						break;
 					}
 				}
 			}
 		}
+	}
+	
+	protected void onPickupJelly(EntityItem entityItem)
+	{
+		this.setJellyLevel(this.getJellyLevel() + entityItem.getEntityItem().stackSize);
+		entityItem.setDead();
 	}
 
 	@Override

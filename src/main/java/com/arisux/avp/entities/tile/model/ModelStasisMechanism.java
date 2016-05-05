@@ -1,11 +1,11 @@
 package com.arisux.avp.entities.tile.model;
 
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.avp.entities.tile.TileEntityStasisMechanism;
 
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelStasisMechanism extends ModelBaseExtension
+public class ModelStasisMechanism extends ModelBaseWrapper
 {
 	ModelRenderer core, west, north, northwest, northeast, east, southeast, southwest, south;
 

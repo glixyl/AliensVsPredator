@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.interfaces.IOpenable;
+import com.arisux.avp.interfaces.IRotatable;
 import com.arisux.avp.interfaces.energy.IVoltageReceiver;
 import com.arisux.avp.packets.client.PacketOpenBlastdoor;
 
@@ -17,7 +19,7 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityBlastdoor extends TileEntityElectrical implements IVoltageReceiver
+public class TileEntityBlastdoor extends TileEntityElectrical implements IVoltageReceiver, IRotatable, IOpenable
 {
 	private ForgeDirection direction;
 	private float doorProgress;
@@ -79,7 +81,7 @@ public class TileEntityBlastdoor extends TileEntityElectrical implements IVoltag
 		}
 
 		nbt.setFloat("DoorProgress", this.doorProgress);
-		nbt.setBoolean("DoorOpen", this.isDoorOpen());
+		nbt.setBoolean("DoorOpen", this.isOpen());
 		nbt.setLong("TimeOfLastPry", this.getTimeOfLastPry());
 		nbt.setBoolean("Parent", this.isParent);
 		
@@ -102,7 +104,7 @@ public class TileEntityBlastdoor extends TileEntityElectrical implements IVoltag
 
 		this.doorProgress = nbt.getFloat("DoorProgress");
 		this.isParent = nbt.getBoolean("Parent");
-		this.setDoorOpen(nbt.getBoolean("DoorOpen"));
+		this.setOpen(nbt.getBoolean("DoorOpen"));
 		this.timeOfLastPry = nbt.getLong("TimeOfLastPry");
 		this.identifier = nbt.getString("Identifier");
 		this.password = nbt.getString("Password");
@@ -122,12 +124,12 @@ public class TileEntityBlastdoor extends TileEntityElectrical implements IVoltag
 
 		if (this.isParent())
 		{
-			if (this.isDoorOpen())
+			if (this.isOpen())
 			{
 				this.doorProgress = this.doorProgress < getMaxDoorProgress() ? this.doorProgress + 0.02F : this.doorProgress;
 			}
 
-			if (!this.isDoorOpen() && !isBeingPryedOpen())
+			if (!this.isOpen() && !isBeingPryedOpen())
 			{
 				this.doorProgress = this.doorProgress > 0.0F ? this.doorProgress - 0.02F : this.doorProgress;
 			}
@@ -142,7 +144,7 @@ public class TileEntityBlastdoor extends TileEntityElectrical implements IVoltag
 			if (isBeingPryedOpen() && this.doorProgress >= getMaxDoorPryProgress())
 			{
 				this.timeOfLastPry = 0;
-				this.setDoorOpen(true);
+				this.setOpen(true);
 			}
 		}
 	}
@@ -183,23 +185,25 @@ public class TileEntityBlastdoor extends TileEntityElectrical implements IVoltag
 		return 220;
 	}
 
-	public boolean isDoorOpen()
+	@Override
+	public boolean isOpen()
 	{
-		return this.isChild() ? (this.getParent() != null ? this.getParent().isDoorOpen() : false) : doorOpen;
+		return this.isChild() ? (this.getParent() != null ? this.getParent().isOpen() : false) : doorOpen;
 	}
 
-	public void setDoorOpen(boolean doorOpen)
+	@Override
+	public void setOpen(boolean doorOpen)
 	{
-		this.setDoorOpen(doorOpen, true);
+		this.setOpen(doorOpen, true);
 	}
 
-	public void setDoorOpen(boolean doorOpen, boolean sendPacket)
+	public void setOpen(boolean doorOpen, boolean sendPacket)
 	{
 		if (this.isChild())
 		{
 			if (this.getParent() != null)
 			{
-				this.getParent().setDoorOpen(doorOpen);
+				this.getParent().setOpen(doorOpen);
 			}
 		}
 		else if (this.isParent())
@@ -307,11 +311,13 @@ public class TileEntityBlastdoor extends TileEntityElectrical implements IVoltag
 		return false;
 	}
 
+	@Override
 	public ForgeDirection getDirection()
 	{
 		return direction;
 	}
 
+	@Override
 	public void setDirection(ForgeDirection direction)
 	{
 		this.direction = direction;

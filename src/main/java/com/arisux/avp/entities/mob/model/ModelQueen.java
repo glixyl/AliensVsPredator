@@ -4,7 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntityQueen;
 
@@ -12,7 +12,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
-public class ModelQueen extends ModelBaseExtension
+public class ModelQueen extends ModelBaseWrapper
 {
 	public ModelRenderer torso0, torso1, rThigh, lThigh, lShin0, lShin1, lFoot, rShin0, rShin1, rFoot, lArm0, lArm1, lHand, lClaw, rArm0, rArm1, rHand, rClaw, tail0, tail1, tail2, tail3, tail4, tailStabber, bStabber0, bStabber1, bStabber2, bStabber3, bStabber4, bStabber5, bSpines0, bSpines1, bSpines2, bSpines3, bSpines4, bSpines5, bSpines6, lArmMini0, lArmMini1, rArmMini0, rArmMini1, lHandMini, rHandMini, lClawMini, rClawMini, neck, Jaw1, head0, head1, headBase0, headFinL0, headFinL1, headFinL2, headFinR0, headFinR1, headFinR2, headWebL, headSpinesL, headSpinesM, headSpinesR, headWebR, rHip, lHip, lShinSpike, rShinSpike, sack0, sack7, sack1, sack2, sack3, sack4, sack5, sack6;
 

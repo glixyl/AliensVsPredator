@@ -1,10 +1,14 @@
 package com.arisux.avp.entities.mob;
 
+import java.util.ArrayList;
+
+import com.arisux.airi.lib.WorldUtil;
 import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.packets.client.PacketOvamorphContainsFacehugger;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -128,8 +132,17 @@ public class EntityOvamorph extends EntitySpeciesAlien implements IMob
 			{
 				int hatchAcceleration = this.acceleratedHatching ? 8 : 1;
 				EntityPlayer closestPlayer = this.worldObj.getClosestPlayerToEntity(this, 15.0D);	
+				ArrayList<Entity> entities = (ArrayList<Entity>) WorldUtil.Entities.getEntitiesInCoordsRange(this.worldObj, EntityLiving.class, new CoordData(this), 15);
+				
+				for (Entity entity : new ArrayList<Entity>(entities))
+				{
+				    if (entity instanceof EntitySpeciesAlien)
+				    {
+				        entities.remove(entity);
+				    }
+				}
 
-				if (closestPlayer != null && !closestPlayer.capabilities.isCreativeMode || this.hasHatched)
+				if (closestPlayer != null && !closestPlayer.capabilities.isCreativeMode || this.hasHatched || entities.size() > 0)
 				{
 					if (this.acceleratedHatching || this.hatchingTime <= 0)
 					{

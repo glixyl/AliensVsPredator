@@ -1,9 +1,11 @@
 package com.arisux.avp.entities.tile;
 
 import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.interfaces.IOpenable;
+import com.arisux.avp.interfaces.IRotatable;
 import com.arisux.avp.inventory.container.ContainerLocker;
 import com.arisux.avp.items.ItemFirearm;
-import com.arisux.avp.packets.client.PacketOpenLocker;
+import com.arisux.avp.packets.client.PacketOpenable;
 
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,7 +22,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityLocker extends TileEntity
+public class TileEntityLocker extends TileEntity implements IOpenable, IRotatable
 {
 	public IInventory inventory;
 	private ForgeDirection direction;
@@ -141,26 +143,30 @@ public class TileEntityLocker extends TileEntity
 		super.updateEntity();
 	}
 
+	@Override
 	public ForgeDirection getDirection()
 	{
 		return direction;
 	}
 
+	@Override
 	public void setDirection(ForgeDirection direction)
 	{
 		this.direction = direction;
 	}
 
+	@Override
 	public void setOpen(boolean isOpen)
 	{
 		this.isOpen = isOpen;
 		
 		if (!this.worldObj.isRemote)
 		{
-			AliensVsPredator.network().sendToAll(new PacketOpenLocker(isOpen, this.xCoord, this.yCoord, this.zCoord));
+			AliensVsPredator.network().sendToAll(new PacketOpenable(isOpen, this.xCoord, this.yCoord, this.zCoord));
 		}
 	}
 	
+	@Override
 	public boolean isOpen()
 	{
 		return isOpen;

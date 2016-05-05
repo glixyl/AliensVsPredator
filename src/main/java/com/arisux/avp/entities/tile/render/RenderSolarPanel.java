@@ -4,7 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.model.ModelSolarPanel;
 
@@ -13,7 +13,7 @@ import net.minecraft.tileentity.TileEntity;
 
 public class RenderSolarPanel extends TileEntitySpecialRenderer
 {
-	public static ModelBaseExtension model = new ModelSolarPanel();
+	public static ModelBaseWrapper model = new ModelSolarPanel();
 
 	@Override
 	public void renderTileEntityAt(TileEntity tileEntity, double posX, double posY, double posZ, float renderPartialTicks)

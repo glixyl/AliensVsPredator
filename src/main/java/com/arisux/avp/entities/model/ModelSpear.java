@@ -4,9 +4,9 @@ import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 
-public class ModelSpear extends ModelBaseExtension
+public class ModelSpear extends ModelBaseWrapper
 {
 	private static final float scale = 0.08F;
 	

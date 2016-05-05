@@ -10,7 +10,7 @@ import com.arisux.airi.lib.AccessWrapper;
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
-import com.arisux.airi.lib.client.ModelBaseExtension;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.airi.lib.client.PlayerResource;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.URLs;
@@ -23,7 +23,7 @@ import net.minecraft.util.ResourceLocation;
 public class RenderItemAK47 extends ItemRenderer
 {
 	public static final ResourceLocation resourceLocation = AliensVsPredator.resources().AK47;
-	public static final ModelBaseExtension model = new ModelAK47();
+	public static final ModelBaseWrapper model = new ModelAK47();
 
 	public RenderItemAK47()
 	{
