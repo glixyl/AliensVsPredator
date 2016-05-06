@@ -3,7 +3,7 @@ package com.arisux.avp.entities.mob;
 import com.arisux.airi.lib.WorldUtil.Entities;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.util.EvolutionType;
-import com.arisux.avp.util.HostType;
+import com.arisux.avp.util.EmbryoType;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -179,15 +179,15 @@ public class EntityChestburster extends EntitySpeciesAlien implements IMob
         return par1PotionEffect.getPotionID() == Potion.poison.id ? false : super.isPotionApplicable(par1PotionEffect);
     }
 
-    public void setHostParasiteType(HostType hostParasiteType)
+    public void setHostParasiteType(EmbryoType embryoType)
     {
-        this.parasiteType = hostParasiteType.id;
+        this.parasiteType = embryoType.getTypeId();
     }
 
     public Class<? extends EntityXenomorph> getGrownParasiteType()
     {
-        HostType hostParasiteType = HostType.get(this.parasiteType);
-        return hostParasiteType == null ? HostType.NORMAL.getResult() : hostParasiteType.getResult();
+        EmbryoType hostParasiteType = EmbryoType.get(this.parasiteType);
+        return hostParasiteType == null ? EmbryoType.NORMAL.getResult() : hostParasiteType.getResult();
     }
 
     @Override

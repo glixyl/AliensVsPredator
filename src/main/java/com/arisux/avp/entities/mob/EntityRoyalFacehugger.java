@@ -1,8 +1,11 @@
 package com.arisux.avp.entities.mob;
 
+import com.arisux.avp.entities.extended.ExtendedEntityLivingBase;
+import com.arisux.avp.util.Embryo;
+import com.arisux.avp.util.EmbryoType;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
 public class EntityRoyalFacehugger extends EntityFacehugger
@@ -36,24 +39,6 @@ public class EntityRoyalFacehugger extends EntityFacehugger
     }
 
     @Override
-    public void onLivingUpdate()
-    {
-        super.onLivingUpdate();
-    }
-
-    @Override
-    public void collideWithEntity(Entity entity)
-    {
-        super.collideWithEntity(entity);
-    }
-
-    @Override
-    public void onCollideWithPlayer(EntityPlayer player)
-    {
-        super.onCollideWithPlayer(player);
-    }
-
-    @Override
     public int getTotalArmorValue()
     {
         return 4;
@@ -75,5 +60,13 @@ public class EntityRoyalFacehugger extends EntityFacehugger
     protected void attackEntity(Entity entity, float damage)
     {
         ;
+    }
+    
+    @Override
+    protected void implantEmbryo(ExtendedEntityLivingBase extendedLiving)
+    {
+        extendedLiving.setEmbryo(new Embryo(EmbryoType.QUEEN){});
+        extendedLiving.syncClients();
+        this.isFertile = false;
     }
 }

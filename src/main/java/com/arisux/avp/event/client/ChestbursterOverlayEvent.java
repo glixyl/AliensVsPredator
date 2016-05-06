@@ -24,7 +24,7 @@ public class ChestbursterOverlayEvent
 
                 if (livingBaseProperties.doesEntityContainEmbryo())
                 {
-                    if (livingBaseProperties.doesEntityContainEmbryo() && Minecraft.getMinecraft().thePlayer.isDead && livingBaseProperties.getEmbryoAge() >= livingBaseProperties.getMaxEmbryoAge() - 80)
+                    if (livingBaseProperties.doesEntityContainEmbryo() && Minecraft.getMinecraft().thePlayer.isDead && livingBaseProperties.getEmbryo().getTicksExisted() >= livingBaseProperties.getEmbryo().getGestationPeriod() - 80)
                     {
                         RenderUtil.renderOverlay(AliensVsPredator.resources().BLUR_CHESTBURSTER_EMERGE, 1F, 0F, 0F, 1F);
                     }

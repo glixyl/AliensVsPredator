@@ -3,7 +3,6 @@ package com.arisux.avp.event;
 import com.arisux.avp.DamageSources;
 import com.arisux.avp.entities.extended.ExtendedEntityLivingBase;
 import com.arisux.avp.entities.mob.EntityChestburster;
-import com.arisux.avp.util.HostType;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
@@ -31,7 +30,7 @@ public class EmbryoTickEvent
                 {
                     if (living instanceof EntityPlayer && !((EntityPlayer) living).capabilities.isCreativeMode || !(living instanceof EntityPlayer))
                     {
-                        livingProperties.tickEmbryoGrowth();
+                        livingProperties.tickEmbryo();
                     }
 
                     living.moveEntity(0, 0, 0);
@@ -44,23 +43,22 @@ public class EmbryoTickEvent
                         livingProperties.syncClients();
                     }
 
-                    if (!entity.isDead)
+                    if (!entity.isDead && livingProperties.getEmbryo() != null)
                     {
-                        if (livingProperties.getEmbryoAge() >= livingProperties.getMaxEmbryoAge())
+                        if (livingProperties.getEmbryo().getTicksExisted() >= livingProperties.getEmbryo().getGestationPeriod())
                         {
                             EntityChestburster chestburster = new EntityChestburster(event.world);
-                            chestburster.setHostParasiteType(HostType.getMappingFromHost(living.getClass()));
+                            chestburster.setHostParasiteType(livingProperties.getEmbryo().getType());
                             chestburster.setLocationAndAngles(living.posX, living.posY, living.posZ, 0.0F, 0.0F);
                             event.world.spawnEntityInWorld(chestburster);
-                            entity.attackEntityFrom(DamageSources.causeChestbursterDamage(chestburster, entity), 10000F);
-                            livingProperties.setEmbryoAge(livingProperties.getMaxEmbryoAge());
+                            entity.attackEntityFrom(DamageSources.causeChestbursterDamage(chestburster, entity), 100000F);
                             living.getActivePotionEffects().clear();
-                            livingProperties.setContainsEmbryo(false);
+                            livingProperties.setEmbryo(null);
                         }
 
-                        if (livingProperties.getEmbryoAge() <= livingProperties.getMaxEmbryoAge())
+                        if (livingProperties.getEmbryo() != null && livingProperties.getEmbryo().getTicksExisted() <= livingProperties.getEmbryo().getGestationPeriod())
                         {
-                            living.addPotionEffect(new PotionEffect(Potion.blindness.getId(), livingProperties.getMaxEmbryoAge() / 2));
+                            living.addPotionEffect(new PotionEffect(Potion.blindness.getId(), livingProperties.getEmbryo().getGestationPeriod() / 2));
                         }
                     }
                 }
@@ -73,9 +71,10 @@ public class EmbryoTickEvent
     {
         EntityLivingBase living = (EntityLivingBase) event.player;
         ExtendedEntityLivingBase livingProperties = (ExtendedEntityLivingBase) living.getExtendedProperties(ExtendedEntityLivingBase.IDENTIFIER);
+        
         if (livingProperties.doesEntityContainEmbryo())
         {
-            livingProperties.setContainsEmbryo(false);
+            livingProperties.setEmbryo(null);
         }
     }
 }

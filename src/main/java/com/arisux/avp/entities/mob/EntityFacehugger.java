@@ -3,6 +3,8 @@ package com.arisux.avp.entities.mob;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.ai.alien.EntitySelectorXenomorph;
 import com.arisux.avp.entities.extended.ExtendedEntityLivingBase;
+import com.arisux.avp.util.Embryo;
+import com.arisux.avp.util.EmbryoType;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -24,7 +26,7 @@ import net.minecraft.world.World;
 
 public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 {
-    private boolean isFertile;
+    protected boolean isFertile;
 
     public EntityFacehugger(World world)
     {
@@ -110,13 +112,16 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
             if (!(living instanceof EntityPlayer) || living instanceof EntityPlayer && !((EntityPlayer) living).capabilities.isCreativeMode)
             {
                 this.mountEntity(living);
-
-                // TODO: Replace this with a method that sets the parasite type that is implanted into this host. This will allow for mob-specific facehuggers.
-                extendedLiving.setContainsEmbryo(true);
-                extendedLiving.syncClients();
-                this.isFertile = false;
+                this.implantEmbryo(extendedLiving);
             }
         }
+    }
+    
+    protected void implantEmbryo(ExtendedEntityLivingBase extendedLiving)
+    {
+        extendedLiving.setEmbryo(new Embryo(EmbryoType.getMappingFromHost(extendedLiving.getEntityLivingBase().getClass())){});
+        extendedLiving.syncClients();
+        this.isFertile = false;
     }
 
     @Override

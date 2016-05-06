@@ -47,13 +47,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class PressureHUDRenderEvent
 {
     private Minecraft mc = Minecraft.getMinecraft();
-    private ExtendedEntityPlayer clientPlayerProperties;
     private boolean gammaRestored = true;
-
-    public PressureHUDRenderEvent()
-    {
-        this.clientPlayerProperties = getProperties();
-    }
 
     @SubscribeEvent
     public void renderWorldLastEvent(RenderWorldLastEvent event)
@@ -92,7 +86,7 @@ public class PressureHUDRenderEvent
                     GlStateManager.disable(GL_BLEND);
 
                     this.drawInfoBar();
-                    this.drawImpregnationIndicator(clientPlayerProperties = getProperties());
+                    this.drawImpregnationIndicator(getProperties());
                 }
                 else if (!gammaRestored)
                 {
@@ -122,7 +116,7 @@ public class PressureHUDRenderEvent
 
     public ExtendedEntityPlayer getProperties()
     {
-        return this.mc != null ? this.mc.thePlayer != null ? this.clientPlayerProperties = ExtendedEntityPlayer.get(Minecraft.getMinecraft().thePlayer) : null : null;
+        return this.mc != null ? this.mc.thePlayer != null ? ExtendedEntityPlayer.get(Minecraft.getMinecraft().thePlayer) : null : null;
     }
 
     public void drawInfoBar()
@@ -280,7 +274,7 @@ public class PressureHUDRenderEvent
                                 fontrenderer.drawString("Age: " + entityLiving.getAge(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0x666666);
 
                                 if (!(entity instanceof EntitySpeciesAlien))
-                                    fontrenderer.drawString("Parasite Type: " + extendedLiving.getHostParasiteType().getResult().getSimpleName(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0x666666);
+                                    fontrenderer.drawString("Parasite Type: " + extendedLiving.getEmbryo().getType().getResult().getSimpleName(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0x666666);
                             }
 
                             if (entity instanceof EntitySpeciesAlien)
@@ -408,7 +402,7 @@ public class PressureHUDRenderEvent
             if (livingProperties.doesEntityContainEmbryo() && livingProperties.getEntityLivingBase().worldObj.getWorldTime() % 20 <= 10)
             {
                 ScaledResolution res = RenderUtil.scaledDisplayResolution();
-                int lifeTimeTicks = livingProperties.getMaxEmbryoAge() - livingProperties.getEmbryoAge();
+                int lifeTimeTicks = livingProperties.getEmbryo().getGestationPeriod() - livingProperties.getEmbryo().getTicksExisted();
                 int lifeTimeSeconds = lifeTimeTicks / 20;
                 int iconSize = 64;
 

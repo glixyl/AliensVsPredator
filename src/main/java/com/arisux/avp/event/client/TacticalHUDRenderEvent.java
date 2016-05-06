@@ -7,9 +7,7 @@ import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_CONSTANT_ALPHA;
 import static org.lwjgl.opengl.GL11.GL_SRC_ALPHA;
 import static org.lwjgl.opengl.GL11.glDepthMask;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import org.lwjgl.opengl.GL11;
 
@@ -76,74 +74,78 @@ public class TacticalHUDRenderEvent
                             if (entity != null && (WorldUtil.Entities.canEntityBeSeenBy(entity, Minecraft.getMinecraft().thePlayer) || !clientPlayerProperties.isEntityCullingEnabled()) && entity instanceof EntityLivingBase)
                             {
                                 ExtendedEntityLivingBase livingProperties = ExtendedEntityLivingBase.get((EntityLivingBase) entity);
-                                int lifeTimeTicks = livingProperties.getMaxEmbryoAge() - livingProperties.getEmbryoAge();
-                                int lifeTimeSeconds = lifeTimeTicks / 20;
 
-                                Vec3 t = Vec3.createVectorHelper(entity.posX, entity.posY, entity.posZ).addVector(0, entity.getEyeHeight() / 2, 0);
-                                t = t.subtract(Minecraft.getMinecraft().thePlayer.getPosition(AccessWrapper.getRenderPartialTicks()));
-                                Vec3 tmp = p.addVector(t.xCoord, t.yCoord, t.zCoord).normalize();
-                                Vec3 res = p.addVector(tmp.xCoord, tmp.yCoord, tmp.zCoord);
-
-                                GlStateManager.pushMatrix();
+                                if (livingProperties.getEmbryo() != null)
                                 {
-                                    GlStateManager.disable(GL11.GL_ALPHA_TEST);
-                                    GlStateManager.enable(GL_DEPTH_TEST);
-                                    GL11.glDepthFunc(GL11.GL_ALWAYS);
-                                    GlStateManager.blendClear();
-                                    GlStateManager.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
-                                    GlStateManager.disableLight();
-                                    GlStateManager.disableLightMapping();
-                                    GlStateManager.translate(p.xCoord, p.yCoord, p.zCoord);
-                                    GlStateManager.translate(-res.xCoord, -res.yCoord, -res.zCoord);
-                                    GlStateManager.rotate(-Minecraft.getMinecraft().thePlayer.rotationYaw - 180, 0, 1, 0);
-                                    GlStateManager.rotate(-Minecraft.getMinecraft().thePlayer.rotationPitch, 1, 0, 0);
+                                    int lifeTimeTicks = livingProperties.getEmbryo().getGestationPeriod() - livingProperties.getEmbryo().getTicksExisted();
+                                    int lifeTimeSeconds = lifeTimeTicks / 20;
+
+                                    Vec3 t = Vec3.createVectorHelper(entity.posX, entity.posY, entity.posZ).addVector(0, entity.getEyeHeight() / 2, 0);
+                                    t = t.subtract(Minecraft.getMinecraft().thePlayer.getPosition(AccessWrapper.getRenderPartialTicks()));
+                                    Vec3 tmp = p.addVector(t.xCoord, t.yCoord, t.zCoord).normalize();
+                                    Vec3 res = p.addVector(tmp.xCoord, tmp.yCoord, tmp.zCoord);
 
                                     GlStateManager.pushMatrix();
                                     {
-                                        GlStateManager.rotate(Minecraft.getMinecraft().thePlayer.rotationYaw - 180, 0, 1, 0);
-                                        float indicatorScale = 0.05F;
+                                        GlStateManager.disable(GL11.GL_ALPHA_TEST);
+                                        GlStateManager.enable(GL_DEPTH_TEST);
+                                        GL11.glDepthFunc(GL11.GL_ALWAYS);
                                         GlStateManager.blendClear();
                                         GlStateManager.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
-                                        GlStateManager.scale(indicatorScale, indicatorScale, indicatorScale);
-                                        GlStateManager.rotate(-Minecraft.getMinecraft().thePlayer.rotationYaw, 0, 1, 0);
+                                        GlStateManager.disableLight();
+                                        GlStateManager.disableLightMapping();
+                                        GlStateManager.translate(p.xCoord, p.yCoord, p.zCoord);
+                                        GlStateManager.translate(-res.xCoord, -res.yCoord, -res.zCoord);
+                                        GlStateManager.rotate(-Minecraft.getMinecraft().thePlayer.rotationYaw - 180, 0, 1, 0);
+                                        GlStateManager.rotate(-Minecraft.getMinecraft().thePlayer.rotationPitch, 1, 0, 0);
 
-                                        if (livingProperties.doesEntityContainEmbryo())
+                                        GlStateManager.pushMatrix();
                                         {
-                                            GlStateManager.color4i(0xFFFF0000);
-                                            RenderUtil.drawResourceCentered(AliensVsPredator.resources().INFECTION_INDICATOR, 0, -1, 2, 2, 255, 0, 0, 255);
-                                        }
+                                            GlStateManager.rotate(Minecraft.getMinecraft().thePlayer.rotationYaw - 180, 0, 1, 0);
+                                            float indicatorScale = 0.05F;
+                                            GlStateManager.blendClear();
+                                            GlStateManager.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
+                                            GlStateManager.scale(indicatorScale, indicatorScale, indicatorScale);
+                                            GlStateManager.rotate(-Minecraft.getMinecraft().thePlayer.rotationYaw, 0, 1, 0);
 
-                                        int color = livingProperties.doesEntityContainEmbryo() || livingProperties.getEntityLivingBase() instanceof IMob ? 0xFFFF0000 : 0xFF00AAFF;
-                                        int textMultiplier = 10;
-                                        int textX = 15;
-                                        int textY = -28 + textMultiplier;
-                                        float textScale = 0.0625F;
-                                        GlStateManager.rotate(180F, 0F, 1F, 0F);
-                                        GlStateManager.scale(textScale, -textScale, textScale);
+                                            if (livingProperties.doesEntityContainEmbryo())
+                                            {
+                                                GlStateManager.color4i(0xFFFF0000);
+                                                RenderUtil.drawResourceCentered(AliensVsPredator.resources().INFECTION_INDICATOR, 0, -1, 2, 2, 255, 0, 0, 255);
+                                            }
 
-                                        // RenderUtil.drawString(livingProperties.getEntityLivingBase().getCommandSenderName(), textX, textY += textMultiplier, color, false);
-                                        RenderUtil.drawString(((int) livingProperties.getEntityLivingBase().getDistanceToEntity(mc.thePlayer)) + "m", textX, textY += textMultiplier, color, false);
+                                            int color = livingProperties.doesEntityContainEmbryo() || livingProperties.getEntityLivingBase() instanceof IMob ? 0xFFFF0000 : 0xFF00AAFF;
+                                            int textMultiplier = 10;
+                                            int textX = 15;
+                                            int textY = -28 + textMultiplier;
+                                            float textScale = 0.0625F;
+                                            GlStateManager.rotate(180F, 0F, 1F, 0F);
+                                            GlStateManager.scale(textScale, -textScale, textScale);
 
-                                        if (livingProperties.doesEntityContainEmbryo())
-                                        {
-                                            RenderUtil.drawString("Analysis: 1 Foreign Organism(s) Detected", textX, textY += textMultiplier, 0xFFFF0000, false);
-                                            RenderUtil.drawString(lifeTimeSeconds / 60 + "." + lifeTimeSeconds % 60 + " Minute(s) Estimated Life Time", textX, textY += textMultiplier, 0xFFFF0000, false);
+                                            // RenderUtil.drawString(livingProperties.getEntityLivingBase().getCommandSenderName(), textX, textY += textMultiplier, color, false);
+                                            RenderUtil.drawString(((int) livingProperties.getEntityLivingBase().getDistanceToEntity(mc.thePlayer)) + "m", textX, textY += textMultiplier, color, false);
+
+                                            if (livingProperties.doesEntityContainEmbryo())
+                                            {
+                                                RenderUtil.drawString("Analysis: 1 Foreign Organism(s) Detected", textX, textY += textMultiplier, 0xFFFF0000, false);
+                                                RenderUtil.drawString(lifeTimeSeconds / 60 + "." + lifeTimeSeconds % 60 + " Minute(s) Estimated Life Time", textX, textY += textMultiplier, 0xFFFF0000, false);
+                                            }
+                                            else
+                                            {
+                                                RenderUtil.drawCenteredRectWithOutline(0, 0, 16, 16, 1, 0x00000000, color);
+                                            }
                                         }
-                                        else
-                                        {
-                                            RenderUtil.drawCenteredRectWithOutline(0, 0, 16, 16, 1, 0x00000000, color);
-                                        }
+                                        GlStateManager.popMatrix();
+
+                                        GlStateManager.enableLightMapping();
+                                        GlStateManager.enableLight();
+                                        GlStateManager.enable(GL11.GL_DEPTH_TEST);
+                                        GL11.glDepthFunc(GL11.GL_LEQUAL);
+                                        GlStateManager.enable(GL11.GL_ALPHA_TEST);
+                                        GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
                                     }
                                     GlStateManager.popMatrix();
-
-                                    GlStateManager.enableLightMapping();
-                                    GlStateManager.enableLight();
-                                    GlStateManager.enable(GL11.GL_DEPTH_TEST);
-                                    GL11.glDepthFunc(GL11.GL_LEQUAL);
-                                    GlStateManager.enable(GL11.GL_ALPHA_TEST);
-                                    GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
                                 }
-                                GlStateManager.popMatrix();
                             }
                         }
                     }
@@ -295,30 +297,34 @@ public class TacticalHUDRenderEvent
         if (livingProperties.doesEntityContainEmbryo() && livingProperties.getEntityLivingBase().worldObj.getWorldTime() % 20 <= 10)
         {
             ScaledResolution res = RenderUtil.scaledDisplayResolution();
-            int lifeTimeTicks = livingProperties.getMaxEmbryoAge() - livingProperties.getEmbryoAge();
-            int lifeTimeSeconds = lifeTimeTicks / 20;
-            int iconSize = 80;
 
-            GlStateManager.enable(GL_BLEND);
-            GlStateManager.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
-            GlStateManager.pushMatrix();
+            if (livingProperties.getEmbryo() != null)
             {
-                float scale = 1.5F;
-                GlStateManager.scale(scale, scale, scale);
-                RenderUtil.drawStringAlignRight("Analysis Complete:", (int) ((res.getScaledWidth() / scale) - (iconSize / scale)), (int) (30 / scale), 0xFFFF0000);
-            }
-            GlStateManager.popMatrix();
-            RenderUtil.drawStringAlignRight("Foreign Organism(s) Detected (1)", res.getScaledWidth() - iconSize, 45, 0xFFFF0000);
-            RenderUtil.drawStringAlignRight("Xenomorphic Embryo Class A", res.getScaledWidth() - iconSize, 55, 0xFFFF0000);
+                int lifeTimeTicks = livingProperties.getEmbryo().getGestationPeriod() - livingProperties.getEmbryo().getTicksExisted();
+                int lifeTimeSeconds = lifeTimeTicks / 20;
+                int iconSize = 80;
 
-            if (!playerProperties.getPlayer().capabilities.isCreativeMode)
-            {
-                RenderUtil.drawStringAlignRight(lifeTimeSeconds / 60 + " Minute(s) Estimated Until Death", res.getScaledWidth() - iconSize, 65, 0xFFFFFFFF);
-            }
+                GlStateManager.enable(GL_BLEND);
+                GlStateManager.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
+                GlStateManager.pushMatrix();
+                {
+                    float scale = 1.5F;
+                    GlStateManager.scale(scale, scale, scale);
+                    RenderUtil.drawStringAlignRight("Analysis Complete:", (int) ((res.getScaledWidth() / scale) - (iconSize / scale)), (int) (30 / scale), 0xFFFF0000);
+                }
+                GlStateManager.popMatrix();
+                RenderUtil.drawStringAlignRight("Foreign Organism(s) Detected (1)", res.getScaledWidth() - iconSize, 45, 0xFFFF0000);
+                RenderUtil.drawStringAlignRight("Xenomorphic Embryo Class A", res.getScaledWidth() - iconSize, 55, 0xFFFF0000);
 
-            GlStateManager.color4i(0xFFFF0000);
-            RenderUtil.bindTexture(AliensVsPredator.resources().INFECTION_INDICATOR);
-            RenderUtil.drawQuad(res.getScaledWidth() - iconSize, 0, iconSize, iconSize);
+                if (!playerProperties.getPlayer().capabilities.isCreativeMode)
+                {
+                    RenderUtil.drawStringAlignRight(lifeTimeSeconds / 60 + " Minute(s) Estimated Until Death", res.getScaledWidth() - iconSize, 65, 0xFFFFFFFF);
+                }
+
+                GlStateManager.color4i(0xFFFF0000);
+                RenderUtil.bindTexture(AliensVsPredator.resources().INFECTION_INDICATOR);
+                RenderUtil.drawQuad(res.getScaledWidth() - iconSize, 0, iconSize, iconSize);
+            }
         }
     }
 
