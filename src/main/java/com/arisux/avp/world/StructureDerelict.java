@@ -8,26 +8,26 @@ import net.minecraft.world.WorldServer;
 
 public class StructureDerelict extends Structure
 {
-	@Override
-	public String getName()
-	{
-		return "Derelict";
-	}
-	
-	public StructureDerelict(WorldServer world, CoordData data)
-	{
-		super(AliensVsPredator.schematics().derelict, world, data);
-	}
+    @Override
+    public String getName()
+    {
+        return "Derelict";
+    }
 
-	@Override
-	public void onProcessing()
-	{
-		;
-	}
+    public StructureDerelict(WorldServer world, CoordData data)
+    {
+        super(AliensVsPredator.schematics().derelict, world, data);
+    }
 
-	@Override
-	public void onProcessingComplete()
-	{
-		;
-	}
+    @Override
+    public void onProcessing()
+    {
+        ;
+    }
+
+    @Override
+    public void onProcessingComplete()
+    {
+        ;
+    }
 }

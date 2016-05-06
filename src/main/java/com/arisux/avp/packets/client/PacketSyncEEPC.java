@@ -13,46 +13,49 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class PacketSyncEEPC implements IMessage, IMessageHandler<PacketSyncEEPC, PacketSyncEEPC>
 {
-	public NBTTagCompound tag;
-	private int entityId;
+    public NBTTagCompound tag;
+    private int entityId;
 
-	public PacketSyncEEPC()
-	{
-		;
-	}
+    public PacketSyncEEPC()
+    {
+        ;
+    }
 
-	public PacketSyncEEPC(int entityId, NBTTagCompound tag)
-	{
-		this.entityId = entityId;
-		this.tag = tag;
-	}
+    public PacketSyncEEPC(int entityId, NBTTagCompound tag)
+    {
+        this.entityId = entityId;
+        this.tag = tag;
+    }
 
-	@Override public void fromBytes(ByteBuf buf)
-	{
-		this.entityId = buf.readInt();
-		this.tag = ByteBufUtils.readTag(buf);
-	}
+    @Override
+    public void fromBytes(ByteBuf buf)
+    {
+        this.entityId = buf.readInt();
+        this.tag = ByteBufUtils.readTag(buf);
+    }
 
-	@Override public void toBytes(ByteBuf buf)
-	{
-		buf.writeInt(this.entityId);
-		ByteBufUtils.writeTag(buf, tag);
-	}
+    @Override
+    public void toBytes(ByteBuf buf)
+    {
+        buf.writeInt(this.entityId);
+        ByteBufUtils.writeTag(buf, tag);
+    }
 
-	@Override public PacketSyncEEPC onMessage(PacketSyncEEPC packet, MessageContext ctx)
-	{
-		Entity entity = Minecraft.getMinecraft().thePlayer.worldObj.getEntityByID(packet.entityId);
+    @Override
+    public PacketSyncEEPC onMessage(PacketSyncEEPC packet, MessageContext ctx)
+    {
+        Entity entity = Minecraft.getMinecraft().thePlayer.worldObj.getEntityByID(packet.entityId);
 
-		if (entity != null)
-		{
-			ExtendedEntityLivingBase extendedLiving = (ExtendedEntityLivingBase) entity.getExtendedProperties(ExtendedEntityLivingBase.IDENTIFIER);
+        if (entity != null)
+        {
+            ExtendedEntityLivingBase extendedLiving = (ExtendedEntityLivingBase) entity.getExtendedProperties(ExtendedEntityLivingBase.IDENTIFIER);
 
-			if (extendedLiving != null)
-			{
-				extendedLiving.loadNBTData(packet.tag);
-			}
-		}
+            if (extendedLiving != null)
+            {
+                extendedLiving.loadNBTData(packet.tag);
+            }
+        }
 
-		return null;
-	}
+        return null;
+    }
 }

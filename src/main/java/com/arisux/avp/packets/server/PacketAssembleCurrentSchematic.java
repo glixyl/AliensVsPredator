@@ -12,37 +12,40 @@ import net.minecraft.entity.player.EntityPlayer;
 
 public class PacketAssembleCurrentSchematic implements IMessage, IMessageHandler<PacketAssembleCurrentSchematic, PacketAssembleCurrentSchematic>
 {
-	public String schematicId;
+    public String schematicId;
 
-	public PacketAssembleCurrentSchematic()
-	{
-		;
-	}
+    public PacketAssembleCurrentSchematic()
+    {
+        ;
+    }
 
-	public PacketAssembleCurrentSchematic(String schematicId)
-	{
-		this.schematicId = schematicId;
-	}
+    public PacketAssembleCurrentSchematic(String schematicId)
+    {
+        this.schematicId = schematicId;
+    }
 
-	@Override public void fromBytes(ByteBuf buf)
-	{
-		this.schematicId = ByteBufUtils.readUTF8String(buf);
-	}
+    @Override
+    public void fromBytes(ByteBuf buf)
+    {
+        this.schematicId = ByteBufUtils.readUTF8String(buf);
+    }
 
-	@Override public void toBytes(ByteBuf buf)
-	{
-		ByteBufUtils.writeUTF8String(buf, this.schematicId);
-	}
+    @Override
+    public void toBytes(ByteBuf buf)
+    {
+        ByteBufUtils.writeUTF8String(buf, this.schematicId);
+    }
 
-	@Override public PacketAssembleCurrentSchematic onMessage(PacketAssembleCurrentSchematic packet, MessageContext ctx)
-	{
-		EntityPlayer player = ctx.getServerHandler().playerEntity;
+    @Override
+    public PacketAssembleCurrentSchematic onMessage(PacketAssembleCurrentSchematic packet, MessageContext ctx)
+    {
+        EntityPlayer player = ctx.getServerHandler().playerEntity;
 
-		if (player != null)
-		{
-			AssemblerAPI.instance.assembleSchematicAsPlayer(AliensVsPredator.assembler().getSchematicForId(packet.schematicId), player);
-		}
-		
-		return null;
-	}
+        if (player != null)
+        {
+            AssemblerAPI.instance.assembleSchematicAsPlayer(AliensVsPredator.assembler().getSchematicForId(packet.schematicId), player);
+        }
+
+        return null;
+    }
 }

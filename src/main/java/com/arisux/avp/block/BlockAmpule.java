@@ -19,71 +19,71 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockAmpule extends Block
 {
-	public BlockAmpule()
-	{
-		super(Material.iron);
-		this.setLightOpacity(2);
-		float size = 0.3F;
-		this.setBlockBounds(size, 0.0F, size, 1.0F - size, 1F, 1.0F - size);
-	}
-	
-	@Override
-	public void registerBlockIcons(IIconRegister register)
-	{
-		return;
-	}
-	
-	@Override
-	public boolean renderAsNormalBlock()
-	{
-		return false;
-	}
-	
-	@Override
-	public boolean isOpaqueCube()
-	{
-		return false;
-	}
+    public BlockAmpule()
+    {
+        super(Material.iron);
+        this.setLightOpacity(2);
+        float size = 0.3F;
+        this.setBlockBounds(size, 0.0F, size, 1.0F - size, 1F, 1.0F - size);
+    }
 
-	@Override
-	public void updateTick(World world, int posX, int posY, int posZ, Random random)
-	{
-		super.updateTick(world, posX, posY, posZ, random);
-	}
+    @Override
+    public void registerBlockIcons(IIconRegister register)
+    {
+        return;
+    }
 
-	@Override
-	public TileEntity createTileEntity(World world, int metadata)
-	{
-		return new TileEntityAmpule();
-	}
-	
-	@Override
-	public void onBlockPlacedBy(World world, int posX, int posY, int posZ, EntityLivingBase placer, ItemStack itemstack)
-	{
-		TileEntity tile = world.getTileEntity(posX, posY, posZ);
+    @Override
+    public boolean renderAsNormalBlock()
+    {
+        return false;
+    }
 
-		if (tile != null && tile instanceof TileEntityAmpule && placer != null)
-		{
-			TileEntityAmpule ampule = (TileEntityAmpule) tile;
-			ampule.setDirection(getFacing(placer));
-		}
-	}
-	
-	@Override
-	public boolean hasTileEntity(int metadata)
-	{
-		return true;
-	}
-	
-	@Override
-	public boolean shouldSideBeRendered(IBlockAccess blockaccess, int posX, int posY, int posZ, int side)
-	{
-		return false;
-	}
-	
-	public static ForgeDirection getFacing(Entity entity)
-	{
-		int dir = MathHelper.floor_double((entity.rotationYaw / 90) + 0.5) & 3;
-		return ForgeDirection.VALID_DIRECTIONS[Direction.directionToFacing[dir]];
-	}
+    @Override
+    public boolean isOpaqueCube()
+    {
+        return false;
+    }
+
+    @Override
+    public void updateTick(World world, int posX, int posY, int posZ, Random random)
+    {
+        super.updateTick(world, posX, posY, posZ, random);
+    }
+
+    @Override
+    public TileEntity createTileEntity(World world, int metadata)
+    {
+        return new TileEntityAmpule();
+    }
+
+    @Override
+    public void onBlockPlacedBy(World world, int posX, int posY, int posZ, EntityLivingBase placer, ItemStack itemstack)
+    {
+        TileEntity tile = world.getTileEntity(posX, posY, posZ);
+
+        if (tile != null && tile instanceof TileEntityAmpule && placer != null)
+        {
+            TileEntityAmpule ampule = (TileEntityAmpule) tile;
+            ampule.setDirection(getFacing(placer));
+        }
+    }
+
+    @Override
+    public boolean hasTileEntity(int metadata)
+    {
+        return true;
+    }
+
+    @Override
+    public boolean shouldSideBeRendered(IBlockAccess blockaccess, int posX, int posY, int posZ, int side)
+    {
+        return false;
+    }
+
+    public static ForgeDirection getFacing(Entity entity)
+    {
+        int dir = MathHelper.floor_double((entity.rotationYaw / 90) + 0.5) & 3;
+        return ForgeDirection.VALID_DIRECTIONS[Direction.directionToFacing[dir]];
+    }
 }

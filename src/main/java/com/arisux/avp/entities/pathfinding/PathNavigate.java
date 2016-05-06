@@ -28,7 +28,7 @@ public abstract class PathNavigate extends net.minecraft.pathfinding.PathNavigat
 
     public PathNavigate(EntityLiving entityLiving, World worldIn)
     {
-    	super(entityLiving, worldIn);
+        super(entityLiving, worldIn);
         this.theEntity = entityLiving;
         this.worldObj = worldIn;
         this.pathSearchRange = entityLiving.getEntityAttribute(SharedMonsterAttributes.followRange);
@@ -46,13 +46,13 @@ public abstract class PathNavigate extends net.minecraft.pathfinding.PathNavigat
     @Override
     public float getPathSearchRange()
     {
-        return (float)this.pathSearchRange.getAttributeValue();
+        return (float) this.pathSearchRange.getAttributeValue();
     }
 
     @Override
     public final PathEntity getPathToXYZ(double posX, double posY, double posZ)
     {
-        return this.getPathToCoord(new CoordData(MathHelper.floor_double(posX), (int)posY, MathHelper.floor_double(posZ)));
+        return this.getPathToCoord(new CoordData(MathHelper.floor_double(posX), (int) posY, MathHelper.floor_double(posZ)));
     }
 
     public PathEntity getPathToCoord(CoordData coord)
@@ -65,7 +65,7 @@ public abstract class PathNavigate extends net.minecraft.pathfinding.PathNavigat
         {
             float searchRange = this.getPathSearchRange();
             this.worldObj.theProfiler.startSection("pathfind");
-            int i = (int)(searchRange + 8.0F);
+            int i = (int) (searchRange + 8.0F);
             CoordData subCoord = coord.subtract(i, i, i);
             CoordData addCoord = coord.add(i, i, i);
             ChunkCache chunkcache = new ChunkCache(this.worldObj, (int) subCoord.posX, (int) subCoord.posY, (int) subCoord.posZ, (int) addCoord.posX, (int) addCoord.posY, (int) addCoord.posZ, 0);
@@ -78,7 +78,7 @@ public abstract class PathNavigate extends net.minecraft.pathfinding.PathNavigat
     @Override
     public boolean tryMoveToXYZ(double x, double y, double z, double speedIn)
     {
-        PathEntity pathentity = this.getPathToXYZ((double)MathHelper.floor_double(x), (double)((int)y), (double)MathHelper.floor_double(z));
+        PathEntity pathentity = this.getPathToXYZ((double) MathHelper.floor_double(x), (double) ((int) y), (double) MathHelper.floor_double(z));
         return this.setPath(pathentity, speedIn);
     }
 
@@ -99,7 +99,7 @@ public abstract class PathNavigate extends net.minecraft.pathfinding.PathNavigat
             float searchRange = this.getPathSearchRange();
             this.worldObj.theProfiler.startSection("pathfind");
             CoordData coord = (new CoordData(this.theEntity)).add(0, 1, 0);
-            int i = (int)(searchRange + 16.0F);
+            int i = (int) (searchRange + 16.0F);
             CoordData subCoord = coord.subtract(i, i, i);
             CoordData addCoord = coord.add(i, i, i);
             ChunkCache chunkcache = new ChunkCache(this.worldObj, (int) subCoord.posX, (int) subCoord.posY, (int) subCoord.posZ, (int) addCoord.posX, (int) addCoord.posY, (int) addCoord.posZ, 0);
@@ -118,7 +118,7 @@ public abstract class PathNavigate extends net.minecraft.pathfinding.PathNavigat
 
     @Override
     public boolean setPath(PathEntity pathEntityIn, double speedIn)
-    { 
+    {
         if (pathEntityIn == null)
         {
             this.currentPath = null;
@@ -189,7 +189,7 @@ public abstract class PathNavigate extends net.minecraft.pathfinding.PathNavigat
             }
         }
     }
-    
+
     protected void pathFollow()
     {
         Vec3 vec3 = this.getEntityPosition();
@@ -197,7 +197,7 @@ public abstract class PathNavigate extends net.minecraft.pathfinding.PathNavigat
 
         for (int j = this.currentPath.getCurrentPathIndex(); j < this.currentPath.getCurrentPathLength(); ++j)
         {
-            if (this.currentPath.getPathPointFromIndex(j).yCoord != (int)vec3.yCoord)
+            if (this.currentPath.getPathPointFromIndex(j).yCoord != (int) vec3.yCoord)
             {
                 i = j;
                 break;
@@ -211,14 +211,14 @@ public abstract class PathNavigate extends net.minecraft.pathfinding.PathNavigat
         {
             Vec3 vec31 = this.currentPath.getVectorFromIndex(this.theEntity, k);
 
-            if (vec3.squareDistanceTo(vec31) < (double)f)
+            if (vec3.squareDistanceTo(vec31) < (double) f)
             {
                 this.currentPath.setCurrentPathIndex(k + 1);
             }
         }
 
         k = MathHelper.ceiling_float_int(this.theEntity.width);
-        int j1 = (int)this.theEntity.height + 1;
+        int j1 = (int) this.theEntity.height + 1;
         int l = k;
 
         for (int i1 = i - 1; i1 >= this.currentPath.getCurrentPathIndex(); --i1)
@@ -268,7 +268,9 @@ public abstract class PathNavigate extends net.minecraft.pathfinding.PathNavigat
         return Entities.isInWater(this.theEntity) || Entities.isInLava(this.theEntity);
     }
 
-    protected void removeSunnyPath() {}
+    protected void removeSunnyPath()
+    {
+    }
 
     protected abstract boolean isDirectPathBetweenPoints(Vec3 posVec31, Vec3 posVec32, int sizeX, int sizeY, int sizeZ);
 }

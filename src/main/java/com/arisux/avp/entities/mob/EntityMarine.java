@@ -185,25 +185,25 @@ public class EntityMarine extends EntityCreature implements IMob, IRangedAttackM
         if (this.getAttackTarget() == null)
         {
             // TODO: This is bad. Lots of lag is induced by this. This needs to be redone.
-//            @SuppressWarnings("all")
-//            ArrayList<EntityLivingBase> possibleTargets = (ArrayList<EntityLivingBase>) Entities.getEntitiesInCoordsRange(this.worldObj, EntityLivingBase.class, new CoordData(this), 16);
-//            EntityLivingBase target = null;
-//
-//            for (EntityLivingBase possibleTarget : possibleTargets)
-//            {
-//                if (possibleTarget != null && isAcceptableTarget(possibleTarget) && this.getNavigator().tryMoveToEntityLiving(possibleTarget, 0.65D))
-//                {
-//                    if (this.getEntitySenses().canSee(possibleTarget))
-//                    {
-//                        target = possibleTarget;
-//                    }
-//                }
-//            }
-//
-//            if (target != null)
-//            {
-//                this.setAttackTarget(target);
-//            }
+            // @SuppressWarnings("all")
+            // ArrayList<EntityLivingBase> possibleTargets = (ArrayList<EntityLivingBase>) Entities.getEntitiesInCoordsRange(this.worldObj, EntityLivingBase.class, new CoordData(this), 16);
+            // EntityLivingBase target = null;
+            //
+            // for (EntityLivingBase possibleTarget : possibleTargets)
+            // {
+            // if (possibleTarget != null && isAcceptableTarget(possibleTarget) && this.getNavigator().tryMoveToEntityLiving(possibleTarget, 0.65D))
+            // {
+            // if (this.getEntitySenses().canSee(possibleTarget))
+            // {
+            // target = possibleTarget;
+            // }
+            // }
+            // }
+            //
+            // if (target != null)
+            // {
+            // this.setAttackTarget(target);
+            // }
         }
     }
 

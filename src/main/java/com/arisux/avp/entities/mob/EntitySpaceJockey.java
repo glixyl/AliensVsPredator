@@ -5,67 +5,67 @@ import net.minecraft.world.World;
 
 public class EntitySpaceJockey extends EntitySpeciesEngineer
 {
-	public EntitySpaceJockey(World world)
-	{
-		super(world);
-		this.experienceValue = 250;
-	}
+    public EntitySpaceJockey(World world)
+    {
+        super(world);
+        this.experienceValue = 250;
+    }
 
-	@Override
-	protected void applyEntityAttributes()
-	{
-		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(160.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5199999761581421D);
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(8.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(1F);
-	}
+    @Override
+    protected void applyEntityAttributes()
+    {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(160.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5199999761581421D);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(8.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(1F);
+    }
 
-	@Override
-	public int getTotalArmorValue()
-	{
-		return 7;
-	}
+    @Override
+    public int getTotalArmorValue()
+    {
+        return 7;
+    }
 
-	@Override
-	protected String getLivingSound()
-	{
-		return null;
-	}
+    @Override
+    protected String getLivingSound()
+    {
+        return null;
+    }
 
-	@Override
-	protected String getHurtSound()
-	{
-		return null;
-	}
+    @Override
+    protected String getHurtSound()
+    {
+        return null;
+    }
 
-	@Override
-	protected String getDeathSound()
-	{
-		return null;
-	}
+    @Override
+    protected String getDeathSound()
+    {
+        return null;
+    }
 
-	@Override
-	protected void dropFewItems(boolean flag, int i)
-	{
-		;
-	}
+    @Override
+    protected void dropFewItems(boolean flag, int i)
+    {
+        ;
+    }
 
-	@Override
-	protected void dropRareDrop(int par1)
-	{
-		;
-	}
+    @Override
+    protected void dropRareDrop(int par1)
+    {
+        ;
+    }
 
-	@Override
-	public boolean canDespawn()
-	{
-		return false;
-	}
-	
-	@Override
-	public boolean isWearingMask()
-	{
-		return true;
-	}
+    @Override
+    public boolean canDespawn()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean isWearingMask()
+    {
+        return true;
+    }
 }

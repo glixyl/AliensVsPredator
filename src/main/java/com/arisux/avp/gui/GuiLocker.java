@@ -10,19 +10,19 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiLocker extends GuiContainer
 {
-	private static final ResourceLocation texture = AliensVsPredator.resources().GUI_LOCKER;
-	
-	public GuiLocker(EntityPlayer player, TileEntityLocker locker)
-	{
-		super(locker.getNewContainer(player));
-		this.xSize = 176;
-		this.ySize = 201;
-	}
+    private static final ResourceLocation texture = AliensVsPredator.resources().GUI_LOCKER;
 
-	@Override
-	protected void drawGuiContainerBackgroundLayer(float f, int x, int y)
-	{
-		RenderUtil.bindTexture(texture);
-		drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
-	}
+    public GuiLocker(EntityPlayer player, TileEntityLocker locker)
+    {
+        super(locker.getNewContainer(player));
+        this.xSize = 176;
+        this.ySize = 201;
+    }
+
+    @Override
+    protected void drawGuiContainerBackgroundLayer(float f, int x, int y)
+    {
+        RenderUtil.bindTexture(texture);
+        drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
+    }
 }

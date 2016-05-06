@@ -28,198 +28,198 @@ import net.minecraft.world.World;
 
 public class EntityFlame extends EntityThrowable
 {
-	protected int flameLife;
-	protected int flameIntensity;
-	protected int flameSpread;
-	protected double flameTailWidth;
+    protected int flameLife;
+    protected int flameIntensity;
+    protected int flameSpread;
+    protected double flameTailWidth;
 
-	public EntityFlame(World world, EntityLivingBase entityLivingBase)
-	{
-		super(world, entityLivingBase);
-		this.flameLife = 25;
-		this.flameSpread = 1;
-		this.flameIntensity = 60;
-		this.flameTailWidth = 0.02;
-	}
+    public EntityFlame(World world, EntityLivingBase entityLivingBase)
+    {
+        super(world, entityLivingBase);
+        this.flameLife = 25;
+        this.flameSpread = 1;
+        this.flameIntensity = 60;
+        this.flameTailWidth = 0.02;
+    }
 
-	public EntityFlame(World world)
-	{
-		super(world);
-		this.flameLife = 25;
-		this.flameSpread = 1;
-		this.flameIntensity = 60;
-		this.flameTailWidth = 0.02;
-	}
-	
-	@Override
-	protected void entityInit()
-	{
-		super.entityInit();
-		
-		if (this.getThrower() != null && this.getThrower().getHeldItem() != null)
-		{
-			if (this.getThrower().getHeldItem().getItem() == AliensVsPredator.items().itemM240ICU || this.getThrower().getHeldItem().getItem() == AliensVsPredator.items().itemNostromoFlamethrower)
-			{
-				ItemFlamethrower flamethrower = (ItemFlamethrower) this.getThrower().getHeldItem().getItem();
+    public EntityFlame(World world)
+    {
+        super(world);
+        this.flameLife = 25;
+        this.flameSpread = 1;
+        this.flameIntensity = 60;
+        this.flameTailWidth = 0.02;
+    }
 
-				if (flamethrower instanceof ItemM240IncineratorUnit)
-				{
-					this.flameLife = 30;
-					this.flameSpread = 1;
-				}
+    @Override
+    protected void entityInit()
+    {
+        super.entityInit();
 
-				if (flamethrower instanceof ItemNostromoFlamethrower)
-				{
-					this.flameLife = 12;
-					this.flameSpread = 2;
-					this.flameTailWidth = 0.6;
-				}
-			}			
-		}
-	}
+        if (this.getThrower() != null && this.getThrower().getHeldItem() != null)
+        {
+            if (this.getThrower().getHeldItem().getItem() == AliensVsPredator.items().itemM240ICU || this.getThrower().getHeldItem().getItem() == AliensVsPredator.items().itemNostromoFlamethrower)
+            {
+                ItemFlamethrower flamethrower = (ItemFlamethrower) this.getThrower().getHeldItem().getItem();
 
-	@Override
-	public void onUpdate()
-	{
-		this.moveEntity(this.motionX, this.motionY, this.motionZ);
-		MovingObjectPosition movingObjectPosition = this.worldObj.rayTraceBlocks(Vec3.createVectorHelper(this.posX, this.posY, this.posZ), Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ));
+                if (flamethrower instanceof ItemM240IncineratorUnit)
+                {
+                    this.flameLife = 30;
+                    this.flameSpread = 1;
+                }
 
-		if (!this.worldObj.isRemote)
-		{
-			Entity entityHit = WorldUtil.Entities.getEntityInCoordsRange(worldObj, EntityLiving.class, new CoordData(this), flameSpread, flameSpread);
+                if (flamethrower instanceof ItemNostromoFlamethrower)
+                {
+                    this.flameLife = 12;
+                    this.flameSpread = 2;
+                    this.flameTailWidth = 0.6;
+                }
+            }
+        }
+    }
 
-			if (entityHit != null && !entityHit.isImmuneToFire())
-			{
-				entityHit.setFire(10);
-				entityHit.attackEntityFrom(DamageSources.causeFlamethrowerDamage(this, entityHit), 4F);
-			}
-		}
+    @Override
+    public void onUpdate()
+    {
+        this.moveEntity(this.motionX, this.motionY, this.motionZ);
+        MovingObjectPosition movingObjectPosition = this.worldObj.rayTraceBlocks(Vec3.createVectorHelper(this.posX, this.posY, this.posZ), Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ));
 
-		if (movingObjectPosition != null)
-		{
-			this.onImpact(movingObjectPosition);
-		}
+        if (!this.worldObj.isRemote)
+        {
+            Entity entityHit = WorldUtil.Entities.getEntityInCoordsRange(worldObj, EntityLiving.class, new CoordData(this), flameSpread, flameSpread);
 
-		if (this.ticksExisted >= flameLife)
-		{
-			this.setDead();
-		}
+            if (entityHit != null && !entityHit.isImmuneToFire())
+            {
+                entityHit.setFire(10);
+                entityHit.attackEntityFrom(DamageSources.causeFlamethrowerDamage(this, entityHit), 4F);
+            }
+        }
 
-		if (this.worldObj.isRemote)
-		{
-			for (int x = flameIntensity; x > 0; --x)
-			{
-				double flameX = 0;
-				double flameY = 0;
-				double flameZ = 0;
+        if (movingObjectPosition != null)
+        {
+            this.onImpact(movingObjectPosition);
+        }
 
-				for (int r = 3; r > 0; r--)
-				{
-					flameX = flameX + (this.rand.nextDouble() / (flameLife - this.ticksExisted));
-					flameY = flameY + (this.rand.nextDouble() / (flameLife - this.ticksExisted));
-					flameZ = flameZ + (this.rand.nextDouble() / (flameLife - this.ticksExisted));
-				}
+        if (this.ticksExisted >= flameLife)
+        {
+            this.setDead();
+        }
 
-				this.spawnFlameParticle(flameX, flameY, flameZ, 0.04F);
-			}
-		}
-	}
-	
-	@SideOnly(Side.CLIENT)
-	public void spawnFlameParticle(double flameX, double flameY, double flameZ, float flameGravity)
-	{
-		Minecraft.getMinecraft().effectRenderer.addEffect(new EntityFlameFX(this.worldObj, this.posX - (flameX / 2), this.posY - (flameY / 2), this.posZ - (flameZ / 2), this.rand.nextGaussian() * flameTailWidth, -this.motionY * (flameGravity * this.ticksExisted) - this.rand.nextGaussian() * flameTailWidth, this.rand.nextGaussian() * flameTailWidth));
-	}
+        if (this.worldObj.isRemote)
+        {
+            for (int x = flameIntensity; x > 0; --x)
+            {
+                double flameX = 0;
+                double flameY = 0;
+                double flameZ = 0;
 
-	@Override
-	protected void onImpact(MovingObjectPosition movingObjectPosition)
-	{
-		int posX = movingObjectPosition.blockX;
-		int posY = movingObjectPosition.blockY;
-		int posZ = movingObjectPosition.blockZ;
+                for (int r = 3; r > 0; r--)
+                {
+                    flameX = flameX + (this.rand.nextDouble() / (flameLife - this.ticksExisted));
+                    flameY = flameY + (this.rand.nextDouble() / (flameLife - this.ticksExisted));
+                    flameZ = flameZ + (this.rand.nextDouble() / (flameLife - this.ticksExisted));
+                }
 
-		if (!this.worldObj.isRemote)
-		{
-			switch (movingObjectPosition.sideHit)
-			{
-				case 0:
-					--posY;
-					break;
+                this.spawnFlameParticle(flameX, flameY, flameZ, 0.04F);
+            }
+        }
+    }
 
-				case 1:
-					++posY;
-					break;
+    @SideOnly(Side.CLIENT)
+    public void spawnFlameParticle(double flameX, double flameY, double flameZ, float flameGravity)
+    {
+        Minecraft.getMinecraft().effectRenderer.addEffect(new EntityFlameFX(this.worldObj, this.posX - (flameX / 2), this.posY - (flameY / 2), this.posZ - (flameZ / 2), this.rand.nextGaussian() * flameTailWidth, -this.motionY * (flameGravity * this.ticksExisted) - this.rand.nextGaussian() * flameTailWidth, this.rand.nextGaussian() * flameTailWidth));
+    }
 
-				case 2:
-					--posZ;
-					break;
+    @Override
+    protected void onImpact(MovingObjectPosition movingObjectPosition)
+    {
+        int posX = movingObjectPosition.blockX;
+        int posY = movingObjectPosition.blockY;
+        int posZ = movingObjectPosition.blockZ;
 
-				case 3:
-					++posZ;
-					break;
+        if (!this.worldObj.isRemote)
+        {
+            switch (movingObjectPosition.sideHit)
+            {
+                case 0:
+                    --posY;
+                    break;
 
-				case 4:
-					--posX;
-					break;
+                case 1:
+                    ++posY;
+                    break;
 
-				case 5:
-					++posX;
-			}
-		}
+                case 2:
+                    --posZ;
+                    break;
 
-		if (rand.nextInt(10) == 0)
-		{
-			ArrayList<CoordData> list = WorldUtil.Blocks.getCoordDataInRangeForBlocks(movingObjectPosition.blockX, movingObjectPosition.blockY, movingObjectPosition.blockZ, 1, this.worldObj, AliensVsPredator.blocks().blockCryostasisTube);
+                case 3:
+                    ++posZ;
+                    break;
 
-			for (CoordData coord : list)
-			{
-				TileEntity tile = coord.getTileEntity(this.worldObj);
+                case 4:
+                    --posX;
+                    break;
 
-				if (tile instanceof TileEntityCryostasisTube)
-				{
-					TileEntityCryostasisTube tube = (TileEntityCryostasisTube) tile;
-					tube.setCracked(true);
+                case 5:
+                    ++posX;
+            }
+        }
 
-					if (tube.isCracked())
-					{
-						tube.setShattered(true);
-					}
-				}
-			}
-		}
-		
-		if (this.getThrower() != null && this.getThrower().getHeldItem() != null)
-		{
-			if (this.getThrower().getHeldItem().getItem() == AliensVsPredator.items().itemM240ICU || this.getThrower().getHeldItem().getItem() == AliensVsPredator.items().itemNostromoFlamethrower)
-			{
-				ItemFlamethrower flamethrower = (ItemFlamethrower) this.getThrower().getHeldItem().getItem();
+        if (rand.nextInt(10) == 0)
+        {
+            ArrayList<CoordData> list = WorldUtil.Blocks.getCoordDataInRangeForBlocks(movingObjectPosition.blockX, movingObjectPosition.blockY, movingObjectPosition.blockZ, 1, this.worldObj, AliensVsPredator.blocks().blockCryostasisTube);
 
-				if (flamethrower instanceof ItemM240IncineratorUnit)
-				{
-					this.setFire(posX, posY, posZ);
-				}
+            for (CoordData coord : list)
+            {
+                TileEntity tile = coord.getTileEntity(this.worldObj);
 
-				if (flamethrower instanceof ItemNostromoFlamethrower)
-				{
-					this.setFire(posX, posY, posZ);
-					this.setFire(posX + 1, posY, posZ);
-					this.setFire(posX - 1, posY, posZ);
-					this.setFire(posX, posY, posZ + 1);
-					this.setFire(posX, posY, posZ - 1);
-				}
-			}
-		}
+                if (tile instanceof TileEntityCryostasisTube)
+                {
+                    TileEntityCryostasisTube tube = (TileEntityCryostasisTube) tile;
+                    tube.setCracked(true);
 
-		this.setDead();
-	}
-	
-	public void setFire(int posX, int posY, int posZ)
-	{
-		Block block = this.worldObj.getBlock(posX, posY, posZ);
-		
-		if (block == Blocks.air)
-		{
-			this.worldObj.setBlock(posX, posY, posZ, Blocks.fire);
-		}
-	}
+                    if (tube.isCracked())
+                    {
+                        tube.setShattered(true);
+                    }
+                }
+            }
+        }
+
+        if (this.getThrower() != null && this.getThrower().getHeldItem() != null)
+        {
+            if (this.getThrower().getHeldItem().getItem() == AliensVsPredator.items().itemM240ICU || this.getThrower().getHeldItem().getItem() == AliensVsPredator.items().itemNostromoFlamethrower)
+            {
+                ItemFlamethrower flamethrower = (ItemFlamethrower) this.getThrower().getHeldItem().getItem();
+
+                if (flamethrower instanceof ItemM240IncineratorUnit)
+                {
+                    this.setFire(posX, posY, posZ);
+                }
+
+                if (flamethrower instanceof ItemNostromoFlamethrower)
+                {
+                    this.setFire(posX, posY, posZ);
+                    this.setFire(posX + 1, posY, posZ);
+                    this.setFire(posX - 1, posY, posZ);
+                    this.setFire(posX, posY, posZ + 1);
+                    this.setFire(posX, posY, posZ - 1);
+                }
+            }
+        }
+
+        this.setDead();
+    }
+
+    public void setFire(int posX, int posY, int posZ)
+    {
+        Block block = this.worldObj.getBlock(posX, posY, posZ);
+
+        if (block == Blocks.air)
+        {
+            this.worldObj.setBlock(posX, posY, posZ, Blocks.fire);
+        }
+    }
 }

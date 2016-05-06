@@ -4,8 +4,8 @@ import net.minecraftforge.fluids.Fluid;
 
 public class FluidBlackGoo extends Fluid
 {
-	public FluidBlackGoo()
-	{
-		super("blackGoo");
-	}
+    public FluidBlackGoo()
+    {
+        super("blackGoo");
+    }
 }

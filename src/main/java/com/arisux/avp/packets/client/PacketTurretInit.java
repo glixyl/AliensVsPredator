@@ -12,60 +12,60 @@ import net.minecraft.entity.EntityList;
 
 public class PacketTurretInit implements IMessage, IMessageHandler<PacketTurretInit, PacketTurretInit>
 {
-	public int x, y, z;
-	public String idListString;
+    public int x, y, z;
+    public String idListString;
 
-	public PacketTurretInit()
-	{
-		;
-	}
+    public PacketTurretInit()
+    {
+        ;
+    }
 
-	public PacketTurretInit(int x, int y, int z, String idListString)
-	{
-		this.x = x;
-		this.y = y;
-		this.z = z;
-		this.idListString = idListString;
-	}
+    public PacketTurretInit(int x, int y, int z, String idListString)
+    {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.idListString = idListString;
+    }
 
-	@Override
-	public void fromBytes(ByteBuf buf)
-	{
-		this.x = buf.readInt();
-		this.y = buf.readInt();
-		this.z = buf.readInt();
-		this.idListString = ByteBufUtils.readUTF8String(buf);
-	}
+    @Override
+    public void fromBytes(ByteBuf buf)
+    {
+        this.x = buf.readInt();
+        this.y = buf.readInt();
+        this.z = buf.readInt();
+        this.idListString = ByteBufUtils.readUTF8String(buf);
+    }
 
-	@Override
-	public void toBytes(ByteBuf buf)
-	{
-		buf.writeInt(x);
-		buf.writeInt(y);
-		buf.writeInt(z);
-		ByteBufUtils.writeUTF8String(buf, this.idListString);
-	}
+    @Override
+    public void toBytes(ByteBuf buf)
+    {
+        buf.writeInt(x);
+        buf.writeInt(y);
+        buf.writeInt(z);
+        ByteBufUtils.writeUTF8String(buf, this.idListString);
+    }
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public PacketTurretInit onMessage(PacketTurretInit packet, MessageContext ctx)
-	{
-		TileEntityTurret tile = (TileEntityTurret) Minecraft.getMinecraft().theWorld.getTileEntity(packet.x, packet.y, packet.z);
+    @SuppressWarnings("unchecked")
+    @Override
+    public PacketTurretInit onMessage(PacketTurretInit packet, MessageContext ctx)
+    {
+        TileEntityTurret tile = (TileEntityTurret) Minecraft.getMinecraft().theWorld.getTileEntity(packet.x, packet.y, packet.z);
 
-		if (tile != null)
-		{
-			tile.applyUpgrades();
+        if (tile != null)
+        {
+            tile.applyUpgrades();
 
-			String[] ids = packet.idListString.split("-");
+            String[] ids = packet.idListString.split("-");
 
-			for (String id : ids)
-			{
-				if (!id.equals(""))
-				{
-					tile.setDangerous(EntityList.getClassFromID(Integer.valueOf(id)));
-				}
-			}
-		}
-		return null;
-	}
+            for (String id : ids)
+            {
+                if (!id.equals(""))
+                {
+                    tile.setDangerous(EntityList.getClassFromID(Integer.valueOf(id)));
+                }
+            }
+        }
+        return null;
+    }
 }

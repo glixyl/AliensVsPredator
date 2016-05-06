@@ -10,40 +10,43 @@ import net.minecraft.client.Minecraft;
 
 public class PacketJellyLevelUpdate implements IMessage, IMessageHandler<PacketJellyLevelUpdate, PacketJellyLevelUpdate>
 {
-	public int uuid, jellyLevel;
+    public int uuid, jellyLevel;
 
-	public PacketJellyLevelUpdate()
-	{
-		;
-	}
+    public PacketJellyLevelUpdate()
+    {
+        ;
+    }
 
-	public PacketJellyLevelUpdate(int jellyLevel, int uuid)
-	{
-		this.jellyLevel = jellyLevel;
-		this.uuid = uuid;
-	}
-	
-	@Override public void fromBytes(ByteBuf buf)
-	{
-		this.jellyLevel = buf.readInt();
-		this.uuid = buf.readInt();
-	}
+    public PacketJellyLevelUpdate(int jellyLevel, int uuid)
+    {
+        this.jellyLevel = jellyLevel;
+        this.uuid = uuid;
+    }
 
-	@Override public void toBytes(ByteBuf buf)
-	{
-		buf.writeInt(this.jellyLevel);
-		buf.writeInt(this.uuid);
-	}
+    @Override
+    public void fromBytes(ByteBuf buf)
+    {
+        this.jellyLevel = buf.readInt();
+        this.uuid = buf.readInt();
+    }
 
-	@Override public PacketJellyLevelUpdate onMessage(PacketJellyLevelUpdate packet, MessageContext ctx)
-	{
-		EntitySpeciesAlien alien = ((EntitySpeciesAlien) Minecraft.getMinecraft().thePlayer.worldObj.getEntityByID(packet.uuid));
+    @Override
+    public void toBytes(ByteBuf buf)
+    {
+        buf.writeInt(this.jellyLevel);
+        buf.writeInt(this.uuid);
+    }
 
-		if (alien != null)
-		{
-			alien.setJellyLevel(packet.jellyLevel);
-		}
-		
-		return null;
-	}
+    @Override
+    public PacketJellyLevelUpdate onMessage(PacketJellyLevelUpdate packet, MessageContext ctx)
+    {
+        EntitySpeciesAlien alien = ((EntitySpeciesAlien) Minecraft.getMinecraft().thePlayer.worldObj.getEntityByID(packet.uuid));
+
+        if (alien != null)
+        {
+            alien.setJellyLevel(packet.jellyLevel);
+        }
+
+        return null;
+    }
 }

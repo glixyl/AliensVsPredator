@@ -31,124 +31,124 @@ import net.minecraftforge.event.entity.player.PlayerPickupXpEvent;
 
 public class PlayerModeHandler implements IInitializable
 {
-	public static final PlayerModeHandler instance = new PlayerModeHandler();
-	
-	@Override
-	public void initialize(FMLInitializationEvent event)
-	{
-		FMLCommonHandler.instance().bus().register(this);
-		MinecraftForge.EVENT_BUS.register(this);
+    public static final PlayerModeHandler instance = new PlayerModeHandler();
 
-		if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
-		{
-			this.assignLevelModelMaps();
-		}
-	}
+    @Override
+    public void initialize(FMLInitializationEvent event)
+    {
+        FMLCommonHandler.instance().bus().register(this);
+        MinecraftForge.EVENT_BUS.register(this);
 
-	@SideOnly(Side.CLIENT)
-	public void assignLevelModelMaps()
-	{
-		ModelBiped modelBiped = new ModelBiped();
-		modelBiped.isChild = false;
-		
-		PlayerMode.NORMAL.getLevelMappingForLevel(0).setModelTexMap(new ModelTexMap(modelBiped, AbstractClientPlayer.locationStevePng));
-		PlayerMode.MARINE.getLevelMappingForLevel(0).setModelTexMap(new ModelTexMap(modelBiped, AliensVsPredator.resources().MARINE));
-		PlayerMode.PREDATOR.getLevelMappingForLevel(0).setModelTexMap(new ModelTexMap(new ModelYautja(), AliensVsPredator.resources().YAUTJA));
-		PlayerMode.XENOMORPH.getLevelMappingForLevel(0).setModelTexMap(new ModelTexMap(new ModelOvamorph(), AliensVsPredator.resources().OVAMORPH));
-		PlayerMode.XENOMORPH.getLevelMappingForLevel(1).setModelTexMap(new ModelTexMap(new ModelFacehugger(), AliensVsPredator.resources().FACEHUGGER));
-		PlayerMode.XENOMORPH.getLevelMappingForLevel(10).setModelTexMap(new ModelTexMap(new ModelChestburster(), AliensVsPredator.resources().CHESTBUSTER));
-		PlayerMode.XENOMORPH.getLevelMappingForLevel(20).setModelTexMap(new ModelTexMap(new ModelDrone(), AliensVsPredator.resources().DRONE_ADVANCED_BLOOD));
-		PlayerMode.XENOMORPH.getLevelMappingForLevel(45).setModelTexMap(new ModelTexMap(new ModelWarrior(), AliensVsPredator.resources().WARRIOR_BLOOD));
-		PlayerMode.XENOMORPH.getLevelMappingForLevel(65).setModelTexMap(new ModelTexMap(new ModelPraetorian(), AliensVsPredator.resources().PRAETORIAN));
-		PlayerMode.XENOMORPH.getLevelMappingForLevel(90).setModelTexMap(new ModelTexMap(new ModelQueen(), AliensVsPredator.resources().XENOQUEEN));
-	}
+        if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
+        {
+            this.assignLevelModelMaps();
+        }
+    }
 
-	@SubscribeEvent
-	public void onEntityJoinWorldEvent(EntityJoinWorldEvent event)
-	{
-		if (event.entity instanceof EntityPlayer)
-		{
-			EntityPlayer player = (EntityPlayer) event.entity;
-			ExtendedEntityPlayer playerExtension = (ExtendedEntityPlayer) player.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER);
+    @SideOnly(Side.CLIENT)
+    public void assignLevelModelMaps()
+    {
+        ModelBiped modelBiped = new ModelBiped();
+        modelBiped.isChild = false;
 
-			playerExtension.setPlayerMode(PlayerMode.NORMAL);
-			{
-				// Query the player to choose their PlayerMode type.
-			}
-		}
-	}
+        PlayerMode.NORMAL.getLevelMappingForLevel(0).setModelTexMap(new ModelTexMap(modelBiped, AbstractClientPlayer.locationStevePng));
+        PlayerMode.MARINE.getLevelMappingForLevel(0).setModelTexMap(new ModelTexMap(modelBiped, AliensVsPredator.resources().MARINE));
+        PlayerMode.PREDATOR.getLevelMappingForLevel(0).setModelTexMap(new ModelTexMap(new ModelYautja(), AliensVsPredator.resources().YAUTJA));
+        PlayerMode.XENOMORPH.getLevelMappingForLevel(0).setModelTexMap(new ModelTexMap(new ModelOvamorph(), AliensVsPredator.resources().OVAMORPH));
+        PlayerMode.XENOMORPH.getLevelMappingForLevel(1).setModelTexMap(new ModelTexMap(new ModelFacehugger(), AliensVsPredator.resources().FACEHUGGER));
+        PlayerMode.XENOMORPH.getLevelMappingForLevel(10).setModelTexMap(new ModelTexMap(new ModelChestburster(), AliensVsPredator.resources().CHESTBUSTER));
+        PlayerMode.XENOMORPH.getLevelMappingForLevel(20).setModelTexMap(new ModelTexMap(new ModelDrone(), AliensVsPredator.resources().DRONE_ADVANCED_BLOOD));
+        PlayerMode.XENOMORPH.getLevelMappingForLevel(45).setModelTexMap(new ModelTexMap(new ModelWarrior(), AliensVsPredator.resources().WARRIOR_BLOOD));
+        PlayerMode.XENOMORPH.getLevelMappingForLevel(65).setModelTexMap(new ModelTexMap(new ModelPraetorian(), AliensVsPredator.resources().PRAETORIAN));
+        PlayerMode.XENOMORPH.getLevelMappingForLevel(90).setModelTexMap(new ModelTexMap(new ModelQueen(), AliensVsPredator.resources().XENOQUEEN));
+    }
 
-	@SubscribeEvent
-	public void onPlayerPickupXP(PlayerPickupXpEvent event)
-	{
-		EntityPlayer player = event.entityPlayer;
+    @SubscribeEvent
+    public void onEntityJoinWorldEvent(EntityJoinWorldEvent event)
+    {
+        if (event.entity instanceof EntityPlayer)
+        {
+            EntityPlayer player = (EntityPlayer) event.entity;
+            ExtendedEntityPlayer playerExtension = (ExtendedEntityPlayer) player.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER);
 
-		if (Players.getXPCurrentLevel(player) + event.orb.getXpValue() >= Players.getXPCurrentLevelMax(player))
-		{
-			this.onPlayerLevelUp(player, (int) Players.getXPLevel(player) + 1);
-		}
-	}
+            playerExtension.setPlayerMode(PlayerMode.NORMAL);
+            {
+                // Query the player to choose their PlayerMode type.
+            }
+        }
+    }
 
-	public void onPlayerLevelUp(EntityPlayer player, int newLevel)
-	{
-		;
-	}
+    @SubscribeEvent
+    public void onPlayerPickupXP(PlayerPickupXpEvent event)
+    {
+        EntityPlayer player = event.entityPlayer;
 
-	public static final PlayerModeHandler instance()
-	{
-		return AliensVsPredator.playermodehandler();
-	}
+        if (Players.getXPCurrentLevel(player) + event.orb.getXpValue() >= Players.getXPCurrentLevelMax(player))
+        {
+            this.onPlayerLevelUp(player, (int) Players.getXPLevel(player) + 1);
+        }
+    }
 
-	public static boolean isPlayerInMode(EntityPlayer player, PlayerMode playerMode)
-	{
-		return ((ExtendedEntityPlayer) player.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER)).getPlayerMode() == playerMode;
-	}
+    public void onPlayerLevelUp(EntityPlayer player, int newLevel)
+    {
+        ;
+    }
 
-	public static boolean isNormal(EntityPlayer player)
-	{
-		return isPlayerInMode(player, PlayerMode.NORMAL);
-	}
+    public static final PlayerModeHandler instance()
+    {
+        return AliensVsPredator.playermodehandler();
+    }
 
-	public static boolean isMarine(EntityPlayer player)
-	{
-		return isPlayerInMode(player, PlayerMode.MARINE);
-	}
+    public static boolean isPlayerInMode(EntityPlayer player, PlayerMode playerMode)
+    {
+        return ((ExtendedEntityPlayer) player.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER)).getPlayerMode() == playerMode;
+    }
 
-	public static boolean isPredator(EntityPlayer player)
-	{
-		return isPlayerInMode(player, PlayerMode.PREDATOR);
-	}
+    public static boolean isNormal(EntityPlayer player)
+    {
+        return isPlayerInMode(player, PlayerMode.NORMAL);
+    }
 
-	public static boolean isXenomorph(EntityPlayer player)
-	{
-		return isPlayerInMode(player, PlayerMode.XENOMORPH);
-	}
+    public static boolean isMarine(EntityPlayer player)
+    {
+        return isPlayerInMode(player, PlayerMode.MARINE);
+    }
 
-	public PlayerMode getPlayerModeForPlayer(EntityPlayer player)
-	{
-		return ((ExtendedEntityPlayer) player.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER)).getPlayerMode();
-	}
+    public static boolean isPredator(EntityPlayer player)
+    {
+        return isPlayerInMode(player, PlayerMode.PREDATOR);
+    }
 
-	public LevelData getLevelMappingForPlayer(EntityPlayer player)
-	{
-		return getPlayerModeForPlayer(player).getLevelMappingForLevel((int) Players.getXPLevel(player));
-	}
+    public static boolean isXenomorph(EntityPlayer player)
+    {
+        return isPlayerInMode(player, PlayerMode.XENOMORPH);
+    }
 
-	@SideOnly(Side.CLIENT)
-	public ModelTexMap getModelTexMapForPlayer(EntityPlayer player)
-	{
-		return getLevelMappingForPlayer(player).getModelTexMap();
-	}
+    public PlayerMode getPlayerModeForPlayer(EntityPlayer player)
+    {
+        return ((ExtendedEntityPlayer) player.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER)).getPlayerMode();
+    }
 
-	@SideOnly(Side.CLIENT)
-	public ModelBase getModelForPlayer(EntityPlayer player)
-	{
-		return getModelTexMapForPlayer(player).asModelBase();
-	}
+    public LevelData getLevelMappingForPlayer(EntityPlayer player)
+    {
+        return getPlayerModeForPlayer(player).getLevelMappingForLevel((int) Players.getXPLevel(player));
+    }
 
-	@SideOnly(Side.CLIENT)
-	public ResourceLocation getResourceForPlayer(EntityPlayer player)
-	{
-		return getModelTexMapForPlayer(player).asResourceLocation();
-	}
+    @SideOnly(Side.CLIENT)
+    public ModelTexMap getModelTexMapForPlayer(EntityPlayer player)
+    {
+        return getLevelMappingForPlayer(player).getModelTexMap();
+    }
+
+    @SideOnly(Side.CLIENT)
+    public ModelBase getModelForPlayer(EntityPlayer player)
+    {
+        return getModelTexMapForPlayer(player).asModelBase();
+    }
+
+    @SideOnly(Side.CLIENT)
+    public ResourceLocation getResourceForPlayer(EntityPlayer player)
+    {
+        return getModelTexMapForPlayer(player).asResourceLocation();
+    }
 }

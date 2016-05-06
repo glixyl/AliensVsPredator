@@ -7,13 +7,13 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 public class RenderTypes implements IInitializablePre
 {
-	public static RenderTypes instance = new RenderTypes();
-	
-	public int RENDER_TYPE_SHAPED;
-	
-	@Override
-	public void preInitialize(FMLPreInitializationEvent event)
-	{
-		RENDER_TYPE_SHAPED = RenderingRegistry.getNextAvailableRenderId();
-	}
+    public static RenderTypes instance = new RenderTypes();
+
+    public int RENDER_TYPE_SHAPED;
+
+    @Override
+    public void preInitialize(FMLPreInitializationEvent event)
+    {
+        RENDER_TYPE_SHAPED = RenderingRegistry.getNextAvailableRenderId();
+    }
 }

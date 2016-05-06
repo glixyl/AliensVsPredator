@@ -9,25 +9,25 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderItemAK47Barrel extends RenderItemFirearmPart
 {
-	public RenderItemAK47Barrel(ResourceLocation resourceLocation, ModelRenderer... modelRenderers)
-	{
-		super(resourceLocation, modelRenderers);
-	}
+    public RenderItemAK47Barrel(ResourceLocation resourceLocation, ModelRenderer... modelRenderers)
+    {
+        super(resourceLocation, modelRenderers);
+    }
 
-	@Override
-	public void renderInInventory(ItemStack item, Object... data)
-	{
-		super.renderInInventory(item, data);
+    @Override
+    public void renderInInventory(ItemStack item, Object... data)
+    {
+        super.renderInInventory(item, data);
 
-		GlStateManager.pushMatrix();
-		{
-			float glScale = 32F;
-			GlStateManager.translate(8F, 8F, 0F);
-			
-			GlStateManager.scale(glScale, glScale, glScale);
-			GlStateManager.translate(-0.1F, -0.05F, -0.75F);
-			this.renderPart();
-		}
-		GlStateManager.popMatrix();
-	}
+        GlStateManager.pushMatrix();
+        {
+            float glScale = 32F;
+            GlStateManager.translate(8F, 8F, 0F);
+
+            GlStateManager.scale(glScale, glScale, glScale);
+            GlStateManager.translate(-0.1F, -0.05F, -0.75F);
+            this.renderPart();
+        }
+        GlStateManager.popMatrix();
+    }
 }

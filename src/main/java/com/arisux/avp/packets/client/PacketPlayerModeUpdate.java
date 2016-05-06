@@ -11,33 +11,36 @@ import net.minecraft.client.Minecraft;
 
 public class PacketPlayerModeUpdate implements IMessage, IMessageHandler<PacketPlayerModeUpdate, PacketPlayerModeUpdate>
 {
-	public int mode;
+    public int mode;
 
-	public PacketPlayerModeUpdate()
-	{
-		;
-	}
+    public PacketPlayerModeUpdate()
+    {
+        ;
+    }
 
-	public PacketPlayerModeUpdate(int mode)
-	{
-		this.mode = mode;
-	}
-	
-	@Override public void fromBytes(ByteBuf buf)
-	{
-		this.mode = buf.readInt();
-	}
+    public PacketPlayerModeUpdate(int mode)
+    {
+        this.mode = mode;
+    }
 
-	@Override public void toBytes(ByteBuf buf)
-	{
-		buf.writeInt(this.mode);
-	}
+    @Override
+    public void fromBytes(ByteBuf buf)
+    {
+        this.mode = buf.readInt();
+    }
 
-	@Override public PacketPlayerModeUpdate onMessage(PacketPlayerModeUpdate packet, MessageContext ctx)
-	{
-		ExtendedEntityPlayer playerExtension = (ExtendedEntityPlayer) Minecraft.getMinecraft().thePlayer.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER);
-		playerExtension.setPlayerMode(PlayerMode.get(packet.mode));
+    @Override
+    public void toBytes(ByteBuf buf)
+    {
+        buf.writeInt(this.mode);
+    }
 
-		return null;
-	}
+    @Override
+    public PacketPlayerModeUpdate onMessage(PacketPlayerModeUpdate packet, MessageContext ctx)
+    {
+        ExtendedEntityPlayer playerExtension = (ExtendedEntityPlayer) Minecraft.getMinecraft().thePlayer.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER);
+        playerExtension.setPlayerMode(PlayerMode.get(packet.mode));
+
+        return null;
+    }
 }

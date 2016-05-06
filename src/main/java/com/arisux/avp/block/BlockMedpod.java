@@ -20,99 +20,99 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockMedpod extends Block
 {
-	public BlockMedpod(Material material)
-	{
-		super(material);
-		setTickRandomly(true);
-		this.setBlockBounds(0, 0, 0, 1, 1, 1);
-	}
+    public BlockMedpod(Material material)
+    {
+        super(material);
+        setTickRandomly(true);
+        this.setBlockBounds(0, 0, 0, 1, 1, 1);
+    }
 
-	@Override
-	public void registerBlockIcons(IIconRegister register)
-	{
-		return;
-	}
+    @Override
+    public void registerBlockIcons(IIconRegister register)
+    {
+        return;
+    }
 
-	@Override
-	public boolean renderAsNormalBlock()
-	{
-		return false;
-	}
+    @Override
+    public boolean renderAsNormalBlock()
+    {
+        return false;
+    }
 
-	@Override
-	public boolean isOpaqueCube()
-	{
-		return false;
-	}
+    @Override
+    public boolean isOpaqueCube()
+    {
+        return false;
+    }
 
-	@Override
-	public boolean canPlaceBlockAt(World world, int posX, int posY, int posZ)
-	{
-		return super.canPlaceBlockAt(world, posX, posY, posZ);
-	}
+    @Override
+    public boolean canPlaceBlockAt(World world, int posX, int posY, int posZ)
+    {
+        return super.canPlaceBlockAt(world, posX, posY, posZ);
+    }
 
-	@Override
-	public boolean onBlockActivated(World world, int posX, int posY, int posZ, EntityPlayer player, int side, float blockX, float blockY, float blockZ)
-	{
-		TileEntity tileEntity = world.getTileEntity(posX, posY, posZ);
+    @Override
+    public boolean onBlockActivated(World world, int posX, int posY, int posZ, EntityPlayer player, int side, float blockX, float blockY, float blockZ)
+    {
+        TileEntity tileEntity = world.getTileEntity(posX, posY, posZ);
 
-		if (tileEntity != null && tileEntity instanceof IOpenable)
-		{
-			IOpenable openable = (IOpenable) tileEntity;
+        if (tileEntity != null && tileEntity instanceof IOpenable)
+        {
+            IOpenable openable = (IOpenable) tileEntity;
 
-			openable.setOpen(!openable.isOpen());
-		}
+            openable.setOpen(!openable.isOpen());
+        }
 
-		return true;
-	}
+        return true;
+    }
 
-	@Override
-	public void onBlockPlacedBy(World world, int posX, int posY, int posZ, EntityLivingBase placer, ItemStack itemstack)
-	{
-		TileEntity tile = world.getTileEntity(posX, posY, posZ);
+    @Override
+    public void onBlockPlacedBy(World world, int posX, int posY, int posZ, EntityLivingBase placer, ItemStack itemstack)
+    {
+        TileEntity tile = world.getTileEntity(posX, posY, posZ);
 
-		if (tile != null && tile instanceof IRotatable && placer != null)
-		{
-			IRotatable rotatable = (IRotatable) tile;
-			rotatable.setDirection(getFacing(placer));
-		}
-	}
+        if (tile != null && tile instanceof IRotatable && placer != null)
+        {
+            IRotatable rotatable = (IRotatable) tile;
+            rotatable.setDirection(getFacing(placer));
+        }
+    }
 
-	@Override
-	public TileEntity createTileEntity(World world, int metadata)
-	{
-		return new TileEntityMedpod();
-	}
+    @Override
+    public TileEntity createTileEntity(World world, int metadata)
+    {
+        return new TileEntityMedpod();
+    }
 
-	@Override
-	public boolean hasTileEntity(int metadata)
-	{
-		return true;
-	}
+    @Override
+    public boolean hasTileEntity(int metadata)
+    {
+        return true;
+    }
 
-	@Override
-	public int getRenderType()
-	{
-		return -1;
-	}
+    @Override
+    public int getRenderType()
+    {
+        return -1;
+    }
 
-	public static ForgeDirection getFacing(Entity entity)
-	{
-		int dir = MathHelper.floor_double((entity.rotationYaw / 90) + 0.5) & 3;
-		return ForgeDirection.VALID_DIRECTIONS[Direction.directionToFacing[dir]];
-	}
+    public static ForgeDirection getFacing(Entity entity)
+    {
+        int dir = MathHelper.floor_double((entity.rotationYaw / 90) + 0.5) & 3;
+        return ForgeDirection.VALID_DIRECTIONS[Direction.directionToFacing[dir]];
+    }
 
-	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int posX, int posY, int posZ)
-	{
-		TileEntity tile = world.getTileEntity(posX, posY, posZ);
+    @Override
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int posX, int posY, int posZ)
+    {
+        TileEntity tile = world.getTileEntity(posX, posY, posZ);
 
-		if (tile != null)
-		{
-			TileEntityMedpod medpod = (TileEntityMedpod) tile;
-			return medpod.isOpen() ? null : super.getCollisionBoundingBoxFromPool(world, posX, posY, posZ);
-		}
+        if (tile != null)
+        {
+            TileEntityMedpod medpod = (TileEntityMedpod) tile;
+            return medpod.isOpen() ? null : super.getCollisionBoundingBoxFromPool(world, posX, posY, posZ);
+        }
 
-		return super.getCollisionBoundingBoxFromPool(world, posX, posY, posZ);
-	}
+        return super.getCollisionBoundingBoxFromPool(world, posX, posY, posZ);
+    }
 }

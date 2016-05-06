@@ -11,28 +11,28 @@ import net.minecraft.item.ItemStack;
 
 public class ItemMaintenanceJack extends HookedItem
 {
-	public ItemMaintenanceJack()
-	{
-		super();
-		this.maxStackSize = 1;
-		this.setMaxDamage(100);
-	}
-	
-	public void onPryBlastDoor(EntityPlayer player, ItemStack currentEquippedItem)
-	{
-		currentEquippedItem.damageItem(1, player);
-	}
+    public ItemMaintenanceJack()
+    {
+        super();
+        this.maxStackSize = 1;
+        this.setMaxDamage(100);
+    }
 
-	public void onOpenBlastDoor(EntityPlayer player, ItemStack currentEquippedItem)
-	{
-		;
-	}
+    public void onPryBlastDoor(EntityPlayer player, ItemStack currentEquippedItem)
+    {
+        currentEquippedItem.damageItem(1, player);
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	@SuppressWarnings("all")
-	public void addInformation(ItemStack itemstack, EntityPlayer player, List list, boolean par4)
-	{
-		list.add("Use this to forcefully open blast doors.");
-	}
+    public void onOpenBlastDoor(EntityPlayer player, ItemStack currentEquippedItem)
+    {
+        ;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    @SuppressWarnings("all")
+    public void addInformation(ItemStack itemstack, EntityPlayer player, List list, boolean par4)
+    {
+        list.add("Use this to forcefully open blast doors.");
+    }
 }

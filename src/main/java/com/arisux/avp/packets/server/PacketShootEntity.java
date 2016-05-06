@@ -12,63 +12,63 @@ import net.minecraft.util.DamageSource;
 
 public class PacketShootEntity implements IMessage, IMessageHandler<PacketShootEntity, PacketShootEntity>
 {
-	public int entityId;
-	public String sound;
-	public double damage;
+    public int entityId;
+    public String sound;
+    public double damage;
 
-	public PacketShootEntity()
-	{
-		;
-	}
+    public PacketShootEntity()
+    {
+        ;
+    }
 
-	public PacketShootEntity(Entity entity, ItemFirearm itemFirearm)
-	{
-		this.entityId = entity != null ? entity.getEntityId() : -1;
-		this.damage = itemFirearm.getAmmoType().getInflictionDamage();
-		this.sound = itemFirearm.getFireSound();
-	}
+    public PacketShootEntity(Entity entity, ItemFirearm itemFirearm)
+    {
+        this.entityId = entity != null ? entity.getEntityId() : -1;
+        this.damage = itemFirearm.getAmmoType().getInflictionDamage();
+        this.sound = itemFirearm.getFireSound();
+    }
 
-	@Override
-	public void fromBytes(ByteBuf buf)
-	{
-		this.entityId = buf.readInt();
-		this.damage = buf.readDouble();
-		this.sound = ByteBufUtils.readUTF8String(buf);
-	}
+    @Override
+    public void fromBytes(ByteBuf buf)
+    {
+        this.entityId = buf.readInt();
+        this.damage = buf.readDouble();
+        this.sound = ByteBufUtils.readUTF8String(buf);
+    }
 
-	@Override
-	public void toBytes(ByteBuf buf)
-	{
-		buf.writeInt(this.entityId);
-		buf.writeDouble(this.damage);
-		ByteBufUtils.writeUTF8String(buf, this.sound);
-	}
+    @Override
+    public void toBytes(ByteBuf buf)
+    {
+        buf.writeInt(this.entityId);
+        buf.writeDouble(this.damage);
+        ByteBufUtils.writeUTF8String(buf, this.sound);
+    }
 
-	@Override
-	public PacketShootEntity onMessage(PacketShootEntity packet, MessageContext ctx)
-	{
-		if (ctx.getServerHandler().playerEntity.getCurrentEquippedItem() != null)
-		{
-			ItemFirearm itemFirearm = (ItemFirearm) ctx.getServerHandler().playerEntity.getCurrentEquippedItem().getItem();
+    @Override
+    public PacketShootEntity onMessage(PacketShootEntity packet, MessageContext ctx)
+    {
+        if (ctx.getServerHandler().playerEntity.getCurrentEquippedItem() != null)
+        {
+            ItemFirearm itemFirearm = (ItemFirearm) ctx.getServerHandler().playerEntity.getCurrentEquippedItem().getItem();
 
-			if (itemFirearm != null && itemFirearm.canSoundPlay())
-			{
-				ctx.getServerHandler().playerEntity.worldObj.playSoundAtEntity(ctx.getServerHandler().playerEntity, packet.sound, 1F, 1F);
-				itemFirearm.setLastSoundPlayed(System.currentTimeMillis());
-			}
+            if (itemFirearm != null && itemFirearm.canSoundPlay())
+            {
+                ctx.getServerHandler().playerEntity.worldObj.playSoundAtEntity(ctx.getServerHandler().playerEntity, packet.sound, 1F, 1F);
+                itemFirearm.setLastSoundPlayed(System.currentTimeMillis());
+            }
 
-			if (packet.entityId != -1)
-			{
-				Entity entity = ctx.getServerHandler().playerEntity.worldObj.getEntityByID(packet.entityId);
+            if (packet.entityId != -1)
+            {
+                Entity entity = ctx.getServerHandler().playerEntity.worldObj.getEntityByID(packet.entityId);
 
-				if (entity != null)
-				{
-					entity.hurtResistantTime = 0;
-					entity.attackEntityFrom(DamageSource.generic, (float) packet.damage);
-				}
-			}
-		}
+                if (entity != null)
+                {
+                    entity.hurtResistantTime = 0;
+                    entity.attackEntityFrom(DamageSource.generic, (float) packet.damage);
+                }
+            }
+        }
 
-		return null;
-	}
+        return null;
+    }
 }

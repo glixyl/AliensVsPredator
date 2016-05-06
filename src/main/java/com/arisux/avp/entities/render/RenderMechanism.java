@@ -6,15 +6,15 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderMechanism extends Render
 {
-	@Override
-	public void doRender(Entity entity, double posX, double posY, double posZ, float yaw, float renderPartialTicks)
-	{
-		;
-	}
+    @Override
+    public void doRender(Entity entity, double posX, double posY, double posZ, float yaw, float renderPartialTicks)
+    {
+        ;
+    }
 
-	@Override
-	protected ResourceLocation getEntityTexture(Entity entity)
-	{
-		return null;
-	}
+    @Override
+    protected ResourceLocation getEntityTexture(Entity entity)
+    {
+        return null;
+    }
 }

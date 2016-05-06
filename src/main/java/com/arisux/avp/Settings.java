@@ -8,96 +8,97 @@ import net.minecraftforge.common.config.Configuration;
 
 public class Settings
 {
-	public static final Settings instance = new Settings();
-	private File configFile;
-	private Configuration config;
-	
+    public static final Settings instance = new Settings();
+    private File configFile;
+    private Configuration config;
+
     private final String CATEGORY_OTHER = "ETC";
-	private final String CATEGORY_DIM = "DIMENSIONS";
-	private final String CATEGORY_BIOMES = "BIOMES";
-	
-	private boolean explosionsEnabled;
-	private boolean updaterEnabled;
-	private boolean debugToolsEnabled;
-	private boolean nukesEnabled;
-	private int dimVarda;
-	private int dimAcheron;
-	private int biomeVarda;
-	private int biomeAcheron;
+    private final String CATEGORY_DIM = "DIMENSIONS";
+    private final String CATEGORY_BIOMES = "BIOMES";
 
-	@EventHandler
-	public void preInitialize(FMLPreInitializationEvent evt)
-	{
-		configFile = new File(evt.getModConfigurationDirectory(), "AliensVsPredator.cfg");
-		config = new Configuration(configFile);
+    private boolean explosionsEnabled;
+    private boolean updaterEnabled;
+    private boolean debugToolsEnabled;
+    private boolean nukesEnabled;
+    private int dimVarda;
+    private int dimAcheron;
+    private int biomeVarda;
+    private int biomeAcheron;
 
-		try
-		{
-			config.load();
+    @EventHandler
+    public void preInitialize(FMLPreInitializationEvent evt)
+    {
+        configFile = new File(evt.getModConfigurationDirectory(), "AliensVsPredator.cfg");
+        config = new Configuration(configFile);
 
-			dimVarda = config.get(CATEGORY_DIM, "VARDA", 223).getInt();
-			dimAcheron = config.get(CATEGORY_DIM, "ACHERON", 426).getInt();
+        try
+        {
+            config.load();
 
-			biomeVarda = config.get(CATEGORY_BIOMES, "VARDA", 223).getInt();
-			biomeAcheron = config.get(CATEGORY_BIOMES, "ACHERON", 224).getInt();
+            dimVarda = config.get(CATEGORY_DIM, "VARDA", 223).getInt();
+            dimAcheron = config.get(CATEGORY_DIM, "ACHERON", 426).getInt();
 
-			explosionsEnabled = config.get(CATEGORY_OTHER, "EXPLOSION_BLOCK_DAMAGE", true).getBoolean(true);
-			nukesEnabled = config.get(CATEGORY_OTHER, "NUKES_ENABLED", true).getBoolean(true);
-			updaterEnabled = config.get(CATEGORY_OTHER, "UPDATER_ENABLED", true, "Toggle the mod's updater.").getBoolean(true);
-			debugToolsEnabled = config.get(CATEGORY_OTHER, "DEBUG_TOOLS", false, "Toggle the debugging tools.").getBoolean(false);
-		} finally
-		{
-			config.save();
-		}
-	}
-	
-	public File getConfigFile()
-	{
-		return configFile;
-	}
-	
-	public Configuration getConfig()
-	{
-		return config;
-	}
+            biomeVarda = config.get(CATEGORY_BIOMES, "VARDA", 223).getInt();
+            biomeAcheron = config.get(CATEGORY_BIOMES, "ACHERON", 224).getInt();
 
-	public boolean areExplosionsEnabled()
-	{
-		return this.explosionsEnabled;
-	}
+            explosionsEnabled = config.get(CATEGORY_OTHER, "EXPLOSION_BLOCK_DAMAGE", true).getBoolean(true);
+            nukesEnabled = config.get(CATEGORY_OTHER, "NUKES_ENABLED", true).getBoolean(true);
+            updaterEnabled = config.get(CATEGORY_OTHER, "UPDATER_ENABLED", true, "Toggle the mod's updater.").getBoolean(true);
+            debugToolsEnabled = config.get(CATEGORY_OTHER, "DEBUG_TOOLS", false, "Toggle the debugging tools.").getBoolean(false);
+        }
+        finally
+        {
+            config.save();
+        }
+    }
 
-	public boolean isUpdaterEnabled()
-	{
-		return this.updaterEnabled;
-	}
+    public File getConfigFile()
+    {
+        return configFile;
+    }
 
-	public boolean areDebugToolsEnabled()
-	{
-		return this.debugToolsEnabled;
-	}
+    public Configuration getConfig()
+    {
+        return config;
+    }
 
-	public int dimensionIdVarda()
-	{
-		return this.dimVarda;
-	}
+    public boolean areExplosionsEnabled()
+    {
+        return this.explosionsEnabled;
+    }
 
-	public int dimensionIdAcheron()
-	{
-		return this.dimAcheron;
-	}
+    public boolean isUpdaterEnabled()
+    {
+        return this.updaterEnabled;
+    }
 
-	public int biomeIdVarda()
-	{
-		return this.biomeVarda;
-	}
+    public boolean areDebugToolsEnabled()
+    {
+        return this.debugToolsEnabled;
+    }
 
-	public int biomeIdAcheron()
-	{
-		return this.biomeAcheron;
-	}
+    public int dimensionIdVarda()
+    {
+        return this.dimVarda;
+    }
 
-	public boolean areNukesEnabled()
-	{
-		return this.nukesEnabled;
-	}
+    public int dimensionIdAcheron()
+    {
+        return this.dimAcheron;
+    }
+
+    public int biomeIdVarda()
+    {
+        return this.biomeVarda;
+    }
+
+    public int biomeIdAcheron()
+    {
+        return this.biomeAcheron;
+    }
+
+    public boolean areNukesEnabled()
+    {
+        return this.nukesEnabled;
+    }
 }

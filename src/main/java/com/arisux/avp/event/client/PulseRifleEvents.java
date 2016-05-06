@@ -10,22 +10,22 @@ import net.minecraft.client.Minecraft;
 
 public class PulseRifleEvents
 {
-	private Minecraft mc = Minecraft.getMinecraft();
+    private Minecraft mc = Minecraft.getMinecraft();
 
-	@SubscribeEvent
-	public void onItemUse(ClientTickEvent event)
-	{
-		if (mc.thePlayer != null)
-		{
-			if (mc.thePlayer.getCurrentEquippedItem() != null && mc.thePlayer.getCurrentEquippedItem().getItem() == AliensVsPredator.items().itemM41A)
-			{
-				if (AliensVsPredator.keybinds().KEYBIND_ITEM_ACTION.isPressed())
-				{
-					//((ItemFirearm) mc.thePlayer.getCurrentEquippedItem().getItem()).cancelRightClick = true;
-					AccessWrapper.setRightClickDelayTimer(20);
-					AliensVsPredator.network().sendToServer(new PacketLaunchGrenade());
-				}
-			}
-		}
-	}
+    @SubscribeEvent
+    public void onItemUse(ClientTickEvent event)
+    {
+        if (mc.thePlayer != null)
+        {
+            if (mc.thePlayer.getCurrentEquippedItem() != null && mc.thePlayer.getCurrentEquippedItem().getItem() == AliensVsPredator.items().itemM41A)
+            {
+                if (AliensVsPredator.keybinds().KEYBIND_ITEM_ACTION.isPressed())
+                {
+                    // ((ItemFirearm) mc.thePlayer.getCurrentEquippedItem().getItem()).cancelRightClick = true;
+                    AccessWrapper.setRightClickDelayTimer(20);
+                    AliensVsPredator.network().sendToServer(new PacketLaunchGrenade());
+                }
+            }
+        }
+    }
 }

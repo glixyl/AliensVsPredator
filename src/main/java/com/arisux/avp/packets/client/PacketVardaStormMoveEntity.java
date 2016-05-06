@@ -11,41 +11,44 @@ import net.minecraft.util.MathHelper;
 
 public class PacketVardaStormMoveEntity implements IMessage, IMessageHandler<PacketVardaStormMoveEntity, PacketVardaStormMoveEntity>
 {
-	public int uuid;
+    public int uuid;
 
-	public PacketVardaStormMoveEntity()
-	{
-		;
-	}
+    public PacketVardaStormMoveEntity()
+    {
+        ;
+    }
 
-	public PacketVardaStormMoveEntity(int uuid)
-	{
-		this.uuid = uuid;
-	}
-	
-	@Override public void fromBytes(ByteBuf buf)
-	{
-		this.uuid = buf.readInt();
-	}
+    public PacketVardaStormMoveEntity(int uuid)
+    {
+        this.uuid = uuid;
+    }
 
-	@Override public void toBytes(ByteBuf buf)
-	{
-		buf.writeInt(this.uuid);
-	}
+    @Override
+    public void fromBytes(ByteBuf buf)
+    {
+        this.uuid = buf.readInt();
+    }
 
-	@Override public PacketVardaStormMoveEntity onMessage(PacketVardaStormMoveEntity packet, MessageContext ctx)
-	{
-		Entity entity = (Minecraft.getMinecraft().thePlayer.worldObj.getEntityByID(packet.uuid));
+    @Override
+    public void toBytes(ByteBuf buf)
+    {
+        buf.writeInt(this.uuid);
+    }
 
-		if (entity != null)
-		{
-			if (entity instanceof EntityPlayer && !((EntityPlayer)entity).capabilities.isCreativeMode || !(entity instanceof EntityPlayer))
-			{
-				entity.motionZ += 0.04F;
-				entity.motionY += MathHelper.sin(entity.worldObj.getWorldTime() * 0.4F) * 0.1F;
-			}
-		}
-		
-		return null;
-	}
+    @Override
+    public PacketVardaStormMoveEntity onMessage(PacketVardaStormMoveEntity packet, MessageContext ctx)
+    {
+        Entity entity = (Minecraft.getMinecraft().thePlayer.worldObj.getEntityByID(packet.uuid));
+
+        if (entity != null)
+        {
+            if (entity instanceof EntityPlayer && !((EntityPlayer) entity).capabilities.isCreativeMode || !(entity instanceof EntityPlayer))
+            {
+                entity.motionZ += 0.04F;
+                entity.motionY += MathHelper.sin(entity.worldObj.getWorldTime() * 0.4F) * 0.1F;
+            }
+        }
+
+        return null;
+    }
 }

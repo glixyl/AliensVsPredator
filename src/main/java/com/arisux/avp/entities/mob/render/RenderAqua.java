@@ -16,69 +16,72 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderAqua extends RenderLiving
 {
-	public RenderAqua(ModelBase mainModel, float shadowSize)
-	{
-		super(mainModel, shadowSize);
-		this.setRenderPassModel(new ModelAqua());
-	}
-	
-	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float partialTicks)
-	{
-		GlStateManager.scale(0.8F, 0.8F, 0.8F);
-	}
+    public RenderAqua(ModelBase mainModel, float shadowSize)
+    {
+        super(mainModel, shadowSize);
+        this.setRenderPassModel(new ModelAqua());
+    }
 
-	@Override
-	protected int shouldRenderPass(EntityLivingBase par1EntityLivingBase, int par2, float par3)
-	{
-		return this.setRenderPassModelBrightness((EntityAqua) par1EntityLivingBase, par2);
-	}
+    @Override
+    protected void preRenderCallback(EntityLivingBase entityliving, float partialTicks)
+    {
+        GlStateManager.scale(0.8F, 0.8F, 0.8F);
+    }
 
-	@Override
-	public ResourceLocation getEntityTexture(Entity par1Entity)
-	{
-		return AliensVsPredator.resources().AQUA_XENOMORPH;
-	}
-	
-	protected int setRenderPassModelBrightness(EntityAqua par1EntityAqua, int par2)
-	{
-		if (par2 != 0)
-		{
-			return -1;
-		} else
-		{
-			this.bindTexture(AliensVsPredator.resources().AQUA_XENOMORPH_MASK);
-			float f1;
+    @Override
+    protected int shouldRenderPass(EntityLivingBase par1EntityLivingBase, int par2, float par3)
+    {
+        return this.setRenderPassModelBrightness((EntityAqua) par1EntityLivingBase, par2);
+    }
 
-			boolean isDay = (par1EntityAqua.worldObj.getWorldTime() % 24000L) / 1000L < 14L;
+    @Override
+    public ResourceLocation getEntityTexture(Entity par1Entity)
+    {
+        return AliensVsPredator.resources().AQUA_XENOMORPH;
+    }
 
-			if (!isDay)
-			{
-				f1 = 1.0F;
-			} else
-			{
-				f1 = 0.0F;
-			}
+    protected int setRenderPassModelBrightness(EntityAqua par1EntityAqua, int par2)
+    {
+        if (par2 != 0)
+        {
+            return -1;
+        }
+        else
+        {
+            this.bindTexture(AliensVsPredator.resources().AQUA_XENOMORPH_MASK);
+            float f1;
 
-			GlStateManager.enable(GL11.GL_BLEND);
-			GlStateManager.blendFunc(GL11.GL_ONE, GL11.GL_ONE);
+            boolean isDay = (par1EntityAqua.worldObj.getWorldTime() % 24000L) / 1000L < 14L;
 
-			if (par1EntityAqua.isInvisible())
-			{
-				GL11.glDepthMask(false);
-			} else
-			{
-				GL11.glDepthMask(true);
-			}
+            if (!isDay)
+            {
+                f1 = 1.0F;
+            }
+            else
+            {
+                f1 = 0.0F;
+            }
 
-			char c0 = 61680;
-			int j = c0 % 65536;
-			int k = c0 / 65536;
-			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, j / 1.0F, k / 1.0F);
-			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-			GlStateManager.color(1.0F, 1.0F, 1.0F, f1);
+            GlStateManager.enable(GL11.GL_BLEND);
+            GlStateManager.blendFunc(GL11.GL_ONE, GL11.GL_ONE);
 
-			return 1;
-		}
-	}
+            if (par1EntityAqua.isInvisible())
+            {
+                GL11.glDepthMask(false);
+            }
+            else
+            {
+                GL11.glDepthMask(true);
+            }
+
+            char c0 = 61680;
+            int j = c0 % 65536;
+            int k = c0 / 65536;
+            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, j / 1.0F, k / 1.0F);
+            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            GlStateManager.color(1.0F, 1.0F, 1.0F, f1);
+
+            return 1;
+        }
+    }
 }

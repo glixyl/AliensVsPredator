@@ -8,45 +8,45 @@ import net.minecraft.world.World;
 
 public class EntityTurret extends EntityLiving
 {
-	private TileEntityTurret tile;
+    private TileEntityTurret tile;
 
-	public EntityTurret(TileEntityTurret tile, World worldObj)
-	{
-		super(worldObj);
-		this.setSize(1.0F, 1.0F);
-		this.tile = tile;
+    public EntityTurret(TileEntityTurret tile, World worldObj)
+    {
+        super(worldObj);
+        this.setSize(1.0F, 1.0F);
+        this.tile = tile;
 
-		tile.applyUpgrades();
-	}
+        tile.applyUpgrades();
+    }
 
-	@Override
-	protected void entityInit()
-	{
-		super.entityInit();
-	}
+    @Override
+    protected void entityInit()
+    {
+        super.entityInit();
+    }
 
-	@Override
-	protected boolean isAIEnabled()
-	{
-		return true;
-	}
+    @Override
+    protected boolean isAIEnabled()
+    {
+        return true;
+    }
 
-	@Override
-	public void onUpdate()
-	{
-		super.onUpdate();
-	}
+    @Override
+    public void onUpdate()
+    {
+        super.onUpdate();
+    }
 
-	@Override
-	protected void applyEntityAttributes()
-	{
-		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.0D);
-	}
+    @Override
+    protected void applyEntityAttributes()
+    {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.0D);
+    }
 
-	public TileEntityTurret getTileEntity()
-	{
-		return tile;
-	}
+    public TileEntityTurret getTileEntity()
+    {
+        return tile;
+    }
 }

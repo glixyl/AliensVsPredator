@@ -11,20 +11,20 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderPredalien extends RenderLiving
 {
-	public RenderPredalien(ModelPredalien mainModel, float shadowSize)
-	{
-		super(mainModel, shadowSize);
-	}
+    public RenderPredalien(ModelPredalien mainModel, float shadowSize)
+    {
+        super(mainModel, shadowSize);
+    }
 
-	@Override
-	protected void preRenderCallback(EntityLivingBase par1EntityLiving, float par2)
-	{
-		GlStateManager.scale(0.75F, 0.75F, 0.75F);
-	}
+    @Override
+    protected void preRenderCallback(EntityLivingBase par1EntityLiving, float par2)
+    {
+        GlStateManager.scale(0.75F, 0.75F, 0.75F);
+    }
 
-	@Override
-	protected ResourceLocation getEntityTexture(Entity entity)
-	{
-		return AliensVsPredator.resources().PREDALIEN;
-	}
+    @Override
+    protected ResourceLocation getEntityTexture(Entity entity)
+    {
+        return AliensVsPredator.resources().PREDALIEN;
+    }
 }

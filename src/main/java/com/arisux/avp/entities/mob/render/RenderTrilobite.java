@@ -11,23 +11,23 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderTrilobite extends RenderLiving
 {
-	public RenderTrilobite(ModelBase modelbase, float shadowSize)
-	{
-		super(modelbase, shadowSize);
-	}
+    public RenderTrilobite(ModelBase modelbase, float shadowSize)
+    {
+        super(modelbase, shadowSize);
+    }
 
-	@Override
-	protected void preRenderCallback(EntityLivingBase entitylivingBase, float partialTicks)
-	{
-		super.preRenderCallback(entitylivingBase, shadowSize);
-		float scale = 1.7F;
-		GlStateManager.scale(scale, scale, scale);
-		GlStateManager.translate(-0.2F, 0F, 0F);
-	}
+    @Override
+    protected void preRenderCallback(EntityLivingBase entitylivingBase, float partialTicks)
+    {
+        super.preRenderCallback(entitylivingBase, shadowSize);
+        float scale = 1.7F;
+        GlStateManager.scale(scale, scale, scale);
+        GlStateManager.translate(-0.2F, 0F, 0F);
+    }
 
-	@Override
-	public ResourceLocation getEntityTexture(Entity entity)
-	{
-		return AliensVsPredator.resources().TRILOBITE;
-	}
+    @Override
+    public ResourceLocation getEntityTexture(Entity entity)
+    {
+        return AliensVsPredator.resources().TRILOBITE;
+    }
 }

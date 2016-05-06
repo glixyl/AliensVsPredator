@@ -28,7 +28,7 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
     protected boolean canClimb;
     protected boolean isDependant;
     public int hitRange;
-    
+
     public EntityXenomorph(World world)
     {
         super(world);
@@ -36,16 +36,19 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
         this.jumpMovementFactor = 0.015F;
         this.canClimb = false; // until EntityAIClimb can be re-worked, using isCollidedHorizontally code below for all Xenos
         this.isDependant = true;
-        //this.getNavigator().setCanSwim(true);
-		//this.getNavigator().setAvoidsWater(true);
-		//this.tasks.addTask(0, new EntityAISwimming(this));
+        // this.getNavigator().setCanSwim(true);
+        // this.getNavigator().setAvoidsWater(true);
+        // this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIQueenIdentificationTask(this));
-        //this.tasks.addTask(1, new EntityAIClimb(this, 0.03F));
+        // this.tasks.addTask(1, new EntityAIClimb(this, 0.03F));
         this.tasks.addTask(8, new EntityAIWander(this, 0.8D));
- 		this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
-		this.targetTasks.addTask(2, new EntityAILeapAtTarget(this, 0.6F));
-		this.targetTasks.addTask(3, new EntityAIAttackOnCollide(this, 0.8D, true));
-		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, Entity.class, /** targetChance **/0, /** shouldCheckSight **/false, /** nearbyOnly **/false, EntitySelectorXenomorph.instance));
+        this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
+        this.targetTasks.addTask(2, new EntityAILeapAtTarget(this, 0.6F));
+        this.targetTasks.addTask(3, new EntityAIAttackOnCollide(this, 0.8D, true));
+        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, Entity.class, /** targetChance **/
+            0, /** shouldCheckSight **/
+            false, /** nearbyOnly **/
+            false, EntitySelectorXenomorph.instance));
     }
 
     @Override
@@ -54,7 +57,7 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(1F);
         this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.4700000238418579D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.4700000238418579D);
     }
 
     @Override
@@ -84,44 +87,44 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
     public void onUpdate()
     {
         super.onUpdate();
-        
-		this.fallDistance = 0F;
-		
+
+        this.fallDistance = 0F;
+
         // temp fix for EntityAIClimb
-		if (this.isCollidedHorizontally)
-		{
-			this.motionY += 0.25F;
-		}
-		
-		if(this.getAttackTarget() != null && this.getAttackTarget().isDead)
+        if (this.isCollidedHorizontally)
+        {
+            this.motionY += 0.25F;
+        }
+
+        if (this.getAttackTarget() != null && this.getAttackTarget().isDead)
         {
             this.setAttackTarget(null);
         }
-        
+
         this.attackAI();
-        
-        if(this.getAttackTarget() != null)
-        {   
-            if(this.getDistanceToEntity(this.getAttackTarget()) <= hitRange)
+
+        if (this.getAttackTarget() != null)
+        {
+            if (this.getDistanceToEntity(this.getAttackTarget()) <= hitRange)
             {
                 this.attackEntityAsMob(this.getAttackTarget());
             }
         }
     }
-	
-	@Override
-	public void onDeath(DamageSource damagesource)
-	{
-		super.onDeath(damagesource);
-		if (new Random().nextInt(75) == 0)  // 1 in 75 chance of dropping
-			this.entityDropItem(new ItemStack(AliensVsPredator.items().helmXeno), 0.0F);
-		if (new Random().nextInt(66) == 0)
-			this.entityDropItem(new ItemStack(AliensVsPredator.items().plateXeno), 0.0F);
-		if (new Random().nextInt(55) == 0)
-			this.entityDropItem(new ItemStack(AliensVsPredator.items().legsXeno), 0.0F);
-		if (new Random().nextInt(50) == 0)
-			this.entityDropItem(new ItemStack(AliensVsPredator.items().bootsXeno), 0.0F);
-	}
+
+    @Override
+    public void onDeath(DamageSource damagesource)
+    {
+        super.onDeath(damagesource);
+        if (new Random().nextInt(75) == 0) // 1 in 75 chance of dropping
+            this.entityDropItem(new ItemStack(AliensVsPredator.items().helmXeno), 0.0F);
+        if (new Random().nextInt(66) == 0)
+            this.entityDropItem(new ItemStack(AliensVsPredator.items().plateXeno), 0.0F);
+        if (new Random().nextInt(55) == 0)
+            this.entityDropItem(new ItemStack(AliensVsPredator.items().legsXeno), 0.0F);
+        if (new Random().nextInt(50) == 0)
+            this.entityDropItem(new ItemStack(AliensVsPredator.items().bootsXeno), 0.0F);
+    }
 
     @Override
     protected void attackEntity(Entity entity, float damage)
@@ -137,17 +140,17 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 
     public void attackAI()
     {
-        if(this.getAttackTarget() != null)
+        if (this.getAttackTarget() != null)
         {
             Entity targetEntity = this.getAttackTarget();
-            
+
             if (targetEntity != null && !(targetEntity instanceof EntityAcidPool) && !(targetEntity instanceof EntitySpeciesAlien))
             {
-                if(targetEntity instanceof EntityPlayer)
+                if (targetEntity instanceof EntityPlayer)
                 {
                     EntityPlayer player = (EntityPlayer) targetEntity;
-                    
-                    if(!(player.capabilities.isCreativeMode))
+
+                    if (!(player.capabilities.isCreativeMode))
                     {
                         this.setAttackTarget(player);
                         this.getNavigator().tryMoveToEntityLiving(targetEntity, this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue() * 2.5D);

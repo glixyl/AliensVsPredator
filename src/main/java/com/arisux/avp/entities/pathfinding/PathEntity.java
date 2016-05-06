@@ -14,7 +14,7 @@ public class PathEntity extends net.minecraft.pathfinding.PathEntity
 
     public PathEntity(PathPoint[] pathpoints)
     {
-    	super(pathpoints);
+        super(pathpoints);
         this.points = pathpoints;
         this.pathLength = pathpoints.length;
     }
@@ -76,9 +76,9 @@ public class PathEntity extends net.minecraft.pathfinding.PathEntity
      */
     public Vec3 getVectorFromIndex(Entity entityIn, int index)
     {
-        double posX = (double)this.points[index].xCoord + (double)((int)(entityIn.width + 1.0F)) * 0.5D;
-        double posY = (double)this.points[index].yCoord;
-        double posZ = (double)this.points[index].zCoord + (double)((int)(entityIn.width + 1.0F)) * 0.5D;
+        double posX = (double) this.points[index].xCoord + (double) ((int) (entityIn.width + 1.0F)) * 0.5D;
+        double posY = (double) this.points[index].yCoord;
+        double posZ = (double) this.points[index].zCoord + (double) ((int) (entityIn.width + 1.0F)) * 0.5D;
         return Vec3.createVectorHelper(posX, posY, posZ);
     }
 
@@ -123,6 +123,6 @@ public class PathEntity extends net.minecraft.pathfinding.PathEntity
     public boolean isDestinationSame(Vec3 vec)
     {
         PathPoint pathpoint = this.getFinalPathPoint();
-        return pathpoint == null ? false : pathpoint.xCoord == (int)vec.xCoord && pathpoint.zCoord == (int)vec.zCoord;
+        return pathpoint == null ? false : pathpoint.xCoord == (int) vec.xCoord && pathpoint.zCoord == (int) vec.zCoord;
     }
 }

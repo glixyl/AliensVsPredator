@@ -21,192 +21,192 @@ import net.minecraft.world.World;
 
 public class EntityDrone extends EntityXenomorph
 {
-	public int mobType;
-	private int resinMultiplier;
-	private int resinLevel;
+    public int mobType;
+    private int resinMultiplier;
+    private int resinLevel;
 
-	public EntityDrone(World world)
-	{
-		super(world);
+    public EntityDrone(World world)
+    {
+        super(world);
 
-		this.resinMultiplier = 3;
-		this.experienceValue = 100;
-		this.setSize(0.8F, 1.8F);
-		this.mobType = this.rand.nextInt(2);
-		this.getNavigator().setCanSwim(true);
-		this.getNavigator().setAvoidsWater(true);
-		this.tasks.addTask(0, new EntityAISwimming(this));
-	}
+        this.resinMultiplier = 3;
+        this.experienceValue = 100;
+        this.setSize(0.8F, 1.8F);
+        this.mobType = this.rand.nextInt(2);
+        this.getNavigator().setCanSwim(true);
+        this.getNavigator().setAvoidsWater(true);
+        this.tasks.addTask(0, new EntityAISwimming(this));
+    }
 
-	@Override
-	protected void applyEntityAttributes()
-	{
-		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.53D);
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(2.0D);
-	}
+    @Override
+    protected void applyEntityAttributes()
+    {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.53D);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(2.0D);
+    }
 
-	@Override
-	protected void dropRareDrop(int par1)
-	{
-		if (new Random().nextInt(4) == 1)
-		{
-			this.entityDropItem(new ItemStack(AliensVsPredator.items().helmXeno), 1);
-		}
+    @Override
+    protected void dropRareDrop(int par1)
+    {
+        if (new Random().nextInt(4) == 1)
+        {
+            this.entityDropItem(new ItemStack(AliensVsPredator.items().helmXeno), 1);
+        }
 
-		if (new Random().nextInt(4) == 1)
-		{
-			this.entityDropItem(new ItemStack(AliensVsPredator.items().plateXeno), 1);
-		}
+        if (new Random().nextInt(4) == 1)
+        {
+            this.entityDropItem(new ItemStack(AliensVsPredator.items().plateXeno), 1);
+        }
 
-		if (new Random().nextInt(4) == 1)
-		{
-			this.entityDropItem(new ItemStack(AliensVsPredator.items().legsXeno), 1);
-		}
+        if (new Random().nextInt(4) == 1)
+        {
+            this.entityDropItem(new ItemStack(AliensVsPredator.items().legsXeno), 1);
+        }
 
-		if (new Random().nextInt(4) == 1)
-		{
-			this.entityDropItem(new ItemStack(AliensVsPredator.items().bootsXeno), 1);
-		}
+        if (new Random().nextInt(4) == 1)
+        {
+            this.entityDropItem(new ItemStack(AliensVsPredator.items().bootsXeno), 1);
+        }
 
-		super.dropRareDrop(par1);
-	}
+        super.dropRareDrop(par1);
+    }
 
-	@Override
-	protected String getHurtSound()
-	{
-		return AliensVsPredator.properties().SOUND_ALIEN_HURT;
-	}
+    @Override
+    protected String getHurtSound()
+    {
+        return AliensVsPredator.properties().SOUND_ALIEN_HURT;
+    }
 
-	@Override
-	protected String getLivingSound()
-	{
-		return AliensVsPredator.properties().SOUND_ALIEN_LIVING;
-	}
+    @Override
+    protected String getLivingSound()
+    {
+        return AliensVsPredator.properties().SOUND_ALIEN_LIVING;
+    }
 
-	@Override
-	protected String getDeathSound()
-	{
-		return AliensVsPredator.properties().SOUND_ALIEN_DEATH;
-	}
+    @Override
+    protected String getDeathSound()
+    {
+        return AliensVsPredator.properties().SOUND_ALIEN_DEATH;
+    }
 
-	@Override
-	public void onUpdate()
-	{
-		super.onUpdate();
-		
-		this.tickResinLevelAI();
-		this.tickHiveBuildingAI();
-	}
+    @Override
+    public void onUpdate()
+    {
+        super.onUpdate();
 
-	@SuppressWarnings("unchecked")
-	public void tickResinLevelAI()
-	{
-		this.resinLevel += 1;
+        this.tickResinLevelAI();
+        this.tickHiveBuildingAI();
+    }
 
-		ArrayList<EntityItem> entityItemList = (ArrayList<EntityItem>) WorldUtil.Entities.getEntitiesInCoordsRange(worldObj, EntityItem.class, new CoordData(this), 8);
+    @SuppressWarnings("unchecked")
+    public void tickResinLevelAI()
+    {
+        this.resinLevel += 1;
 
-		for (EntityItem entityItem : entityItemList)
-		{
-			if (entityItem.delayBeforeCanPickup <= 0)
-			{
-				ItemStack stack = entityItem.getDataWatcher().getWatchableObjectItemStack(10);
+        ArrayList<EntityItem> entityItemList = (ArrayList<EntityItem>) WorldUtil.Entities.getEntitiesInCoordsRange(worldObj, EntityItem.class, new CoordData(this), 8);
 
-				if (stack != null && stack.getItem() == AliensVsPredator.items().itemRoyalJelly)
-				{
-					this.getNavigator().setPath(this.getNavigator().getPathToEntityLiving(entityItem), this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue());
+        for (EntityItem entityItem : entityItemList)
+        {
+            if (entityItem.delayBeforeCanPickup <= 0)
+            {
+                ItemStack stack = entityItem.getDataWatcher().getWatchableObjectItemStack(10);
 
-					if (this.getDistanceToEntity(entityItem) < 1)
-					{
-						this.resinLevel += 1000;
-						entityItem.setDead();
-					}
-					break;
-				}
-			}
-		}
-	}
+                if (stack != null && stack.getItem() == AliensVsPredator.items().itemRoyalJelly)
+                {
+                    this.getNavigator().setPath(this.getNavigator().getPathToEntityLiving(entityItem), this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue());
 
-	public void tickHiveBuildingAI()
-	{
-		if (this.getAttackTarget() == null)
-		{
-			if (this.getHiveSignature() != null && this.worldObj.getWorldTime() % 40 == 0)
-			{
-				if (this.resinLevel >= 128)
-				{
-					ArrayList<CoordData> data = WorldUtil.Blocks.getCoordDataInRangeForBlocksExcluding((int) posX, (int) posY, (int) posZ, this.resinMultiplier, this.worldObj, AliensVsPredator.blocks().terrainHiveResin, Blocks.air);
+                    if (this.getDistanceToEntity(entityItem) < 1)
+                    {
+                        this.resinLevel += 1000;
+                        entityItem.setDead();
+                    }
+                    break;
+                }
+            }
+        }
+    }
 
-					if (data.size() > 0)
-					{
-						CoordData coord = data.get(this.rand.nextInt(data.size()));
+    public void tickHiveBuildingAI()
+    {
+        if (this.getAttackTarget() == null)
+        {
+            if (this.getHiveSignature() != null && this.worldObj.getWorldTime() % 40 == 0)
+            {
+                if (this.resinLevel >= 128)
+                {
+                    ArrayList<CoordData> data = WorldUtil.Blocks.getCoordDataInRangeForBlocksExcluding((int) posX, (int) posY, (int) posZ, this.resinMultiplier, this.worldObj, AliensVsPredator.blocks().terrainHiveResin, Blocks.air);
 
-						if (coord != null)
-						{
-							Block block = coord.getBlock(this.worldObj);
+                    if (data.size() > 0)
+                    {
+                        CoordData coord = data.get(this.rand.nextInt(data.size()));
 
-							if (Entities.canCoordBeSeenBy(this, coord) && block.isOpaqueCube())
-							{
-								this.getNavigator().setPath(this.worldObj.getEntityPathToXYZ(this, (int) coord.posX, (int) coord.posY, (int) coord.posZ, 128, true, true, true, true), 0.8D);
-								this.worldObj.setBlock((int) coord.posX, (int) coord.posY, (int) coord.posZ, AliensVsPredator.blocks().terrainHiveResin);
+                        if (coord != null)
+                        {
+                            Block block = coord.getBlock(this.worldObj);
 
-								TileEntity tileEntity = coord.getTileEntity(this.worldObj);
+                            if (Entities.canCoordBeSeenBy(this, coord) && block.isOpaqueCube())
+                            {
+                                this.getNavigator().setPath(this.worldObj.getEntityPathToXYZ(this, (int) coord.posX, (int) coord.posY, (int) coord.posZ, 128, true, true, true, true), 0.8D);
+                                this.worldObj.setBlock((int) coord.posX, (int) coord.posY, (int) coord.posZ, AliensVsPredator.blocks().terrainHiveResin);
 
-								if (tileEntity != null && tileEntity instanceof TileEntityHiveResin)
-								{
-									TileEntityHiveResin resin = (TileEntityHiveResin) tileEntity;
-									resin.setHiveSignature(this.getHiveSignature());
-									resin.setBlockCovering(block);
-								}
+                                TileEntity tileEntity = coord.getTileEntity(this.worldObj);
 
-								this.resinLevel -= 250;
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+                                if (tileEntity != null && tileEntity instanceof TileEntityHiveResin)
+                                {
+                                    TileEntityHiveResin resin = (TileEntityHiveResin) tileEntity;
+                                    resin.setHiveSignature(this.getHiveSignature());
+                                    resin.setBlockCovering(block);
+                                }
 
-	public CoordData findValidResinLocation(int attempt)
-	{
-		attempt++;
-		CoordData coord = new CoordData(this).add(-this.resinMultiplier + this.rand.nextInt(this.resinMultiplier * 2), -this.resinMultiplier + this.rand.nextInt(this.resinMultiplier * 2), -this.resinMultiplier + this.rand.nextInt(this.resinMultiplier * 2));
-		Block coordBlock = coord.getBlock(this.worldObj);
+                                this.resinLevel -= 250;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
-		if (coordBlock != AliensVsPredator.blocks().terrainHiveResin && coordBlock != Blocks.air && coord.isAnySurfaceVisible(this.worldObj))
-		{
-			return coord;
-		}
+    public CoordData findValidResinLocation(int attempt)
+    {
+        attempt++;
+        CoordData coord = new CoordData(this).add(-this.resinMultiplier + this.rand.nextInt(this.resinMultiplier * 2), -this.resinMultiplier + this.rand.nextInt(this.resinMultiplier * 2), -this.resinMultiplier + this.rand.nextInt(this.resinMultiplier * 2));
+        Block coordBlock = coord.getBlock(this.worldObj);
 
-		if (attempt > 5)
-		{
-			this.resinMultiplier += 3;
-			return null;
-		}
+        if (coordBlock != AliensVsPredator.blocks().terrainHiveResin && coordBlock != Blocks.air && coord.isAnySurfaceVisible(this.worldObj))
+        {
+            return coord;
+        }
 
-		return this.findValidResinLocation(attempt);
-	}
+        if (attempt > 5)
+        {
+            this.resinMultiplier += 3;
+            return null;
+        }
 
-	@Override
-	public void readEntityFromNBT(NBTTagCompound nbt)
-	{
-		super.readEntityFromNBT(nbt);
+        return this.findValidResinLocation(attempt);
+    }
 
-		this.resinLevel = nbt.getInteger("resinLevel");
-	}
+    @Override
+    public void readEntityFromNBT(NBTTagCompound nbt)
+    {
+        super.readEntityFromNBT(nbt);
 
-	@Override
-	public void writeEntityToNBT(NBTTagCompound nbt)
-	{
-		super.writeEntityToNBT(nbt);
+        this.resinLevel = nbt.getInteger("resinLevel");
+    }
 
-		nbt.setInteger("resinLevel", this.resinLevel);
-	}
+    @Override
+    public void writeEntityToNBT(NBTTagCompound nbt)
+    {
+        super.writeEntityToNBT(nbt);
 
-	public int getResinLevel()
-	{
-		return resinLevel;
-	}
+        nbt.setInteger("resinLevel", this.resinLevel);
+    }
+
+    public int getResinLevel()
+    {
+        return resinLevel;
+    }
 }

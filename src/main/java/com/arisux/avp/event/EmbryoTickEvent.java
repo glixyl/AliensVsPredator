@@ -15,67 +15,67 @@ import net.minecraft.potion.PotionEffect;
 
 public class EmbryoTickEvent
 {
-	@SubscribeEvent
-	public void tick(TickEvent.WorldTickEvent event)
-	{
-		for (int i = 0; i < event.world.loadedEntityList.size(); ++i)
+    @SubscribeEvent
+    public void tick(TickEvent.WorldTickEvent event)
+    {
+        for (int i = 0; i < event.world.loadedEntityList.size(); ++i)
         {
             Entity entity = (Entity) event.world.loadedEntityList.get(i);
-			
-			if (entity != null && entity instanceof EntityLivingBase)
-			{
-				EntityLivingBase living = (EntityLivingBase) entity;
-				ExtendedEntityLivingBase livingProperties = (ExtendedEntityLivingBase) living.getExtendedProperties(ExtendedEntityLivingBase.IDENTIFIER);
 
-				if (livingProperties.doesEntityContainEmbryo())
-				{
-					if (living instanceof  EntityPlayer && !((EntityPlayer) living).capabilities.isCreativeMode || !(living instanceof EntityPlayer))
-					{
-						livingProperties.tickEmbryoGrowth();
-					}
+            if (entity != null && entity instanceof EntityLivingBase)
+            {
+                EntityLivingBase living = (EntityLivingBase) entity;
+                ExtendedEntityLivingBase livingProperties = (ExtendedEntityLivingBase) living.getExtendedProperties(ExtendedEntityLivingBase.IDENTIFIER);
 
-					living.moveEntity(0, 0, 0);
-					living.rotationPitch = 0;
-					living.rotationYaw = 0;
-					living.rotationYawHead = 0;
+                if (livingProperties.doesEntityContainEmbryo())
+                {
+                    if (living instanceof EntityPlayer && !((EntityPlayer) living).capabilities.isCreativeMode || !(living instanceof EntityPlayer))
+                    {
+                        livingProperties.tickEmbryoGrowth();
+                    }
 
-					if (event.world.getWorldTime() % 60 == 0)
-					{
-						livingProperties.syncClients();
-					}
+                    living.moveEntity(0, 0, 0);
+                    living.rotationPitch = 0;
+                    living.rotationYaw = 0;
+                    living.rotationYawHead = 0;
 
-					if (!entity.isDead)
-					{
-						if (livingProperties.getEmbryoAge() >= livingProperties.getMaxEmbryoAge())
-						{
-							EntityChestburster chestburster = new EntityChestburster(event.world);
-							chestburster.setHostParasiteType(HostType.getMappingFromHost(living.getClass()));
-							chestburster.setLocationAndAngles(living.posX, living.posY, living.posZ, 0.0F, 0.0F);
-							event.world.spawnEntityInWorld(chestburster);
-							entity.attackEntityFrom(DamageSources.causeChestbursterDamage(chestburster, entity), 10000F);
-							livingProperties.setEmbryoAge(livingProperties.getMaxEmbryoAge());
-							living.getActivePotionEffects().clear();
-							livingProperties.setContainsEmbryo(false);
-						}
+                    if (event.world.getWorldTime() % 60 == 0)
+                    {
+                        livingProperties.syncClients();
+                    }
 
-						if (livingProperties.getEmbryoAge() <= livingProperties.getMaxEmbryoAge())
-						{
-							living.addPotionEffect(new PotionEffect(Potion.blindness.getId(), livingProperties.getMaxEmbryoAge() / 2));
-						}
-					}
-				}
-			}
-		}
-	}
-	
-	@SubscribeEvent
-	public void respawnEvent(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent event)
-	{
-		EntityLivingBase living = (EntityLivingBase) event.player;
-		ExtendedEntityLivingBase livingProperties = (ExtendedEntityLivingBase) living.getExtendedProperties(ExtendedEntityLivingBase.IDENTIFIER);
-		if(livingProperties.doesEntityContainEmbryo())
-		{
-			livingProperties.setContainsEmbryo(false);
-		}
-	}
+                    if (!entity.isDead)
+                    {
+                        if (livingProperties.getEmbryoAge() >= livingProperties.getMaxEmbryoAge())
+                        {
+                            EntityChestburster chestburster = new EntityChestburster(event.world);
+                            chestburster.setHostParasiteType(HostType.getMappingFromHost(living.getClass()));
+                            chestburster.setLocationAndAngles(living.posX, living.posY, living.posZ, 0.0F, 0.0F);
+                            event.world.spawnEntityInWorld(chestburster);
+                            entity.attackEntityFrom(DamageSources.causeChestbursterDamage(chestburster, entity), 10000F);
+                            livingProperties.setEmbryoAge(livingProperties.getMaxEmbryoAge());
+                            living.getActivePotionEffects().clear();
+                            livingProperties.setContainsEmbryo(false);
+                        }
+
+                        if (livingProperties.getEmbryoAge() <= livingProperties.getMaxEmbryoAge())
+                        {
+                            living.addPotionEffect(new PotionEffect(Potion.blindness.getId(), livingProperties.getMaxEmbryoAge() / 2));
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void respawnEvent(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent event)
+    {
+        EntityLivingBase living = (EntityLivingBase) event.player;
+        ExtendedEntityLivingBase livingProperties = (ExtendedEntityLivingBase) living.getExtendedProperties(ExtendedEntityLivingBase.IDENTIFIER);
+        if (livingProperties.doesEntityContainEmbryo())
+        {
+            livingProperties.setContainsEmbryo(false);
+        }
+    }
 }

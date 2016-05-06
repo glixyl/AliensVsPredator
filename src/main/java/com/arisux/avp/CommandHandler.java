@@ -11,20 +11,20 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
 public class CommandHandler implements IInitializable
 {
-	public static final CommandHandler instance = new CommandHandler();
-	public CommandPlayerMode commandPlayerMode;
-	public CommandGenerate commandGenerate;
-	
-	@Override
-	public void initialize(FMLInitializationEvent event)
-	{
-		FMLCommonHandler.instance().bus().register(this);
-	}
+    public static final CommandHandler instance = new CommandHandler();
+    public CommandPlayerMode commandPlayerMode;
+    public CommandGenerate commandGenerate;
 
-	@Mod.EventHandler
-	public void onServerStarting(FMLServerStartingEvent event)
-	{
-		event.registerServerCommand(this.commandPlayerMode = new CommandPlayerMode());
-		event.registerServerCommand(this.commandGenerate = new CommandGenerate());
-	}
+    @Override
+    public void initialize(FMLInitializationEvent event)
+    {
+        FMLCommonHandler.instance().bus().register(this);
+    }
+
+    @Mod.EventHandler
+    public void onServerStarting(FMLServerStartingEvent event)
+    {
+        event.registerServerCommand(this.commandPlayerMode = new CommandPlayerMode());
+        event.registerServerCommand(this.commandGenerate = new CommandGenerate());
+    }
 }

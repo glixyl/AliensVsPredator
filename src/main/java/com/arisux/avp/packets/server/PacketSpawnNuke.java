@@ -13,36 +13,37 @@ import net.minecraft.entity.player.EntityPlayer;
 
 public class PacketSpawnNuke implements IMessage, IMessageHandler<PacketSpawnNuke, PacketSpawnNuke>
 {
-	public PacketSpawnNuke()
-	{
-		;
-	}
+    public PacketSpawnNuke()
+    {
+        ;
+    }
 
-	@Override
-	public void toBytes(ByteBuf buffer)
-	{
-		;
-	}
+    @Override
+    public void toBytes(ByteBuf buffer)
+    {
+        ;
+    }
 
-	@Override
-	public void fromBytes(ByteBuf buffer)
-	{
-		;
-	}
+    @Override
+    public void fromBytes(ByteBuf buffer)
+    {
+        ;
+    }
 
-	@Override public PacketSpawnNuke onMessage(PacketSpawnNuke packet, MessageContext ctx)
-	{
-		EntityPlayer player = ctx.getServerHandler().playerEntity;
-		
-		if (player != null && AliensVsPredator.settings().areNukesEnabled())
-		{
-			AIRI.logger.info("Player %s has just initiated a nuclear explosion at %s, %s, %s", player.getCommandSenderName(), player.posX, player.posY, player.posZ);
-			EntityNuke nuke = new EntityNuke(ctx.getServerHandler().playerEntity.worldObj);
-			nuke.setLocationAndAngles(ctx.getServerHandler().playerEntity.posX, ctx.getServerHandler().playerEntity.posY, ctx.getServerHandler().playerEntity.posZ, 0F, 0F);
-			ctx.getServerHandler().playerEntity.worldObj.spawnEntityInWorld(nuke);
-			Inventories.consumeItem(ctx.getServerHandler().playerEntity, ctx.getServerHandler().playerEntity.getCurrentEquippedItem().getItem());
-		}
-		
-		return null;
-	}
+    @Override
+    public PacketSpawnNuke onMessage(PacketSpawnNuke packet, MessageContext ctx)
+    {
+        EntityPlayer player = ctx.getServerHandler().playerEntity;
+
+        if (player != null && AliensVsPredator.settings().areNukesEnabled())
+        {
+            AIRI.logger.info("Player %s has just initiated a nuclear explosion at %s, %s, %s", player.getCommandSenderName(), player.posX, player.posY, player.posZ);
+            EntityNuke nuke = new EntityNuke(ctx.getServerHandler().playerEntity.worldObj);
+            nuke.setLocationAndAngles(ctx.getServerHandler().playerEntity.posX, ctx.getServerHandler().playerEntity.posY, ctx.getServerHandler().playerEntity.posZ, 0F, 0F);
+            ctx.getServerHandler().playerEntity.worldObj.spawnEntityInWorld(nuke);
+            Inventories.consumeItem(ctx.getServerHandler().playerEntity, ctx.getServerHandler().playerEntity.getCurrentEquippedItem().getItem());
+        }
+
+        return null;
+    }
 }

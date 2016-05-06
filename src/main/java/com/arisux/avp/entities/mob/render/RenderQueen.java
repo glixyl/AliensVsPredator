@@ -11,26 +11,26 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderQueen extends RenderLiving
 {
-	public RenderQueen(ModelQueen modelxenoqueen, float shadowSize)
-	{
-		super(new ModelQueen(), shadowSize);
-	}
+    public RenderQueen(ModelQueen modelxenoqueen, float shadowSize)
+    {
+        super(new ModelQueen(), shadowSize);
+    }
 
-	@Override
-	public void doRender(Entity entity, double posX, double posY, double posZ, float yaw, float renderPartialTicks)
-	{
-		super.doRender(entity, posX, posY, posZ, yaw, renderPartialTicks);
-	}
+    @Override
+    public void doRender(Entity entity, double posX, double posY, double posZ, float yaw, float renderPartialTicks)
+    {
+        super.doRender(entity, posX, posY, posZ, yaw, renderPartialTicks);
+    }
 
-	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float f)
-	{
-		GlStateManager.scale(1.75F, 1.75F, 1.75F);
-	}
+    @Override
+    protected void preRenderCallback(EntityLivingBase entityliving, float f)
+    {
+        GlStateManager.scale(1.75F, 1.75F, 1.75F);
+    }
 
-	@Override
-	public ResourceLocation getEntityTexture(Entity entity)
-	{
-		return AliensVsPredator.resources().XENOQUEEN;
-	}
+    @Override
+    public ResourceLocation getEntityTexture(Entity entity)
+    {
+        return AliensVsPredator.resources().XENOQUEEN;
+    }
 }

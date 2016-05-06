@@ -13,58 +13,58 @@ import net.minecraft.item.ItemStack;
 
 public class RenderItemGunLocker extends ItemRenderer
 {
-	public static final ModelBaseWrapper model = new ModelLocker();
-	
-	public RenderItemGunLocker()
-	{
-		super(model, AliensVsPredator.resources().GUN_LOCKER);
-	}
+    public static final ModelBaseWrapper model = new ModelLocker();
 
-	@Override
-	public void renderThirdPerson(ItemStack item, Object... data)
-	{
-		GlStateManager.pushMatrix();
-		{			
-			GlStateManager.scale(-1F, 1F, 1F);
-			GlStateManager.rotate(90F, 0F, 0F, 1F);
-			GlStateManager.rotate(-45F, 0F, 1F, 0F);
-			GlStateManager.rotate(90F, 1F, 0F, 0F);
-			GlStateManager.translate(0F, -0.5F, -0.9F);
-			GlStateManager.disable(GL11.GL_CULL_FACE);
-			RenderUtil.bindTexture(getResourceLocation());
-			GlStateManager.disable(GL11.GL_CULL_FACE);
-			this.getModel().render();
-		}
-		GlStateManager.popMatrix();
-	}
+    public RenderItemGunLocker()
+    {
+        super(model, AliensVsPredator.resources().GUN_LOCKER);
+    }
 
-	@Override
-	public void renderFirstPerson(ItemStack item, Object... data)
-	{
-		GlStateManager.pushMatrix();
-		{
-			RenderUtil.bindTexture(getResourceLocation());
-			GlStateManager.disable(GL11.GL_CULL_FACE);
-			this.getModel().render();
-		}
-		GlStateManager.popMatrix();
-	}
+    @Override
+    public void renderThirdPerson(ItemStack item, Object... data)
+    {
+        GlStateManager.pushMatrix();
+        {
+            GlStateManager.scale(-1F, 1F, 1F);
+            GlStateManager.rotate(90F, 0F, 0F, 1F);
+            GlStateManager.rotate(-45F, 0F, 1F, 0F);
+            GlStateManager.rotate(90F, 1F, 0F, 0F);
+            GlStateManager.translate(0F, -0.5F, -0.9F);
+            GlStateManager.disable(GL11.GL_CULL_FACE);
+            RenderUtil.bindTexture(getResourceLocation());
+            GlStateManager.disable(GL11.GL_CULL_FACE);
+            this.getModel().render();
+        }
+        GlStateManager.popMatrix();
+    }
 
-	@Override
-	public void renderInInventory(ItemStack item, Object... data)
-	{
-		GlStateManager.pushMatrix();
-		{
-			float glScale = 8F;
-			RenderUtil.bindTexture(getResourceLocation());
-			GlStateManager.disable(GL11.GL_CULL_FACE);
-			GlStateManager.translate(8F, 4F, 0F);
-			GlStateManager.rotate(0F, 1.0F, 0.0F, 0.0F);
-			GlStateManager.scale(glScale, glScale, glScale);
-			GlStateManager.enableLight();
-			this.getModel().render();
-			GlStateManager.disableLight();
-		}
-		GlStateManager.popMatrix();
-	}
+    @Override
+    public void renderFirstPerson(ItemStack item, Object... data)
+    {
+        GlStateManager.pushMatrix();
+        {
+            RenderUtil.bindTexture(getResourceLocation());
+            GlStateManager.disable(GL11.GL_CULL_FACE);
+            this.getModel().render();
+        }
+        GlStateManager.popMatrix();
+    }
+
+    @Override
+    public void renderInInventory(ItemStack item, Object... data)
+    {
+        GlStateManager.pushMatrix();
+        {
+            float glScale = 8F;
+            RenderUtil.bindTexture(getResourceLocation());
+            GlStateManager.disable(GL11.GL_CULL_FACE);
+            GlStateManager.translate(8F, 4F, 0F);
+            GlStateManager.rotate(0F, 1.0F, 0.0F, 0.0F);
+            GlStateManager.scale(glScale, glScale, glScale);
+            GlStateManager.enableLight();
+            this.getModel().render();
+            GlStateManager.disableLight();
+        }
+        GlStateManager.popMatrix();
+    }
 }

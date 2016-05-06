@@ -25,161 +25,164 @@ import net.minecraft.world.World;
 
 public class EntityHammerpede extends EntitySpeciesAlien implements IMob
 {
-	public static IEntitySelector entitySelector = new IEntitySelector()
-	{
-		@Override
-		public boolean isEntityApplicable(Entity entity)
-		{
-			return !(entity instanceof EntitySpeciesAlien) && !(entity instanceof EntityHammerpede) && !(entity instanceof EntityAcidPool);
-		}
-	};
-	
-	public EntityHammerpede(World par1World)
-	{
-		super(par1World);
+    public static IEntitySelector entitySelector = new IEntitySelector()
+    {
+        @Override
+        public boolean isEntityApplicable(Entity entity)
+        {
+            return !(entity instanceof EntitySpeciesAlien) && !(entity instanceof EntityHammerpede) && !(entity instanceof EntityAcidPool);
+        }
+    };
 
-		this.setSize(0.5F, 0.5F);
-		this.experienceValue = 16;
-		this.getNavigator().setCanSwim(true);
-		this.getNavigator().setAvoidsWater(false);
-		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(2, new EntityAIAttackOnCollide(this, 0.8D, true));
-		this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
-		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, Entity.class, 10 /** targetChance **/, false /** checkSight **/, false /** nearbyOnly **/, entitySelector));
-	}
+    public EntityHammerpede(World par1World)
+    {
+        super(par1World);
 
-	@Override
-	public boolean canBreatheUnderwater()
-	{
-		return true;
-	}
+        this.setSize(0.5F, 0.5F);
+        this.experienceValue = 16;
+        this.getNavigator().setCanSwim(true);
+        this.getNavigator().setAvoidsWater(false);
+        this.tasks.addTask(0, new EntityAISwimming(this));
+        this.tasks.addTask(2, new EntityAIAttackOnCollide(this, 0.8D, true));
+        this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
+        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, Entity.class, 10 /** targetChance **/
+            , false /** checkSight **/
+            , false /** nearbyOnly **/
+            , entitySelector));
+    }
 
-	@Override
-	protected void applyEntityAttributes()
-	{
-		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(14.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5499999761581421D);
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(0.5D);
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
-	}
+    @Override
+    public boolean canBreatheUnderwater()
+    {
+        return true;
+    }
 
-	@Override
-	protected void entityInit()
-	{
-		super.entityInit();
-	}
+    @Override
+    protected void applyEntityAttributes()
+    {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(14.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5499999761581421D);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(0.5D);
+        this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
+    }
 
-	@Override
-	protected boolean isAIEnabled()
-	{
-		return true;
-	}
+    @Override
+    protected void entityInit()
+    {
+        super.entityInit();
+    }
 
-	@Override
-	public void onUpdate()
-	{
-		super.onUpdate();
-		
-		this.fallDistance = 0F;
-		
-		this.lurkInBlackGoo();
-		
-		if (this.getAttackTarget() == null && this.worldObj.getWorldTime() % 60 == 0 && this.rand.nextInt(3) == 0)
-		{
-			ArrayList<EntityLivingBase> entities = (ArrayList<EntityLivingBase>) WorldUtil.Entities.getEntitiesInCoordsRange(worldObj, EntityLivingBase.class, new CoordData(this), (int)this.getEntityAttribute(SharedMonsterAttributes.followRange).getAttributeValue() / 2);
-		
-			for (EntityLivingBase entity : entities)
-			{
-				if (entitySelector.isEntityApplicable(entity) && Entities.canEntityBeSeenBy(entity, this) && (!entitySelector.isEntityApplicable(entity.getLastAttacker()) && (entity.ticksExisted - entity.getLastAttackerTime() > 150) ))
-				{
-					if (entity instanceof EntityPlayer && !((EntityPlayer) entity).capabilities.isCreativeMode)
-					
-					this.setAttackTarget(entity);
-				}
-			}
-		}
-	}
+    @Override
+    protected boolean isAIEnabled()
+    {
+        return true;
+    }
 
-	public void lurkInBlackGoo()
-	{
-		if (this.getAttackTarget() == null)
-		{
-			if (this.worldObj.getWorldTime() % 40 == 0 && this.rand.nextInt(4) == 0)
-			{
-				if (this.worldObj.getBlock((int) this.posX, (int) this.posY, (int) this.posZ) != AliensVsPredator.blocks().blockBlackGoo)
-				{
-					double range = this.getEntityAttribute(SharedMonsterAttributes.followRange).getAttributeValue() / 2;
-					ArrayList<CoordData> coordData = WorldUtil.Blocks.getCoordDataInRangeForBlocks((int) this.posX, (int) this.posY, (int) this.posZ, (int) range, this.worldObj, AliensVsPredator.blocks().blockBlackGoo);
+    @Override
+    public void onUpdate()
+    {
+        super.onUpdate();
 
-					if (coordData.size() > 0)
-					{
-						CoordData selectedCoord = coordData.get(this.rand.nextInt(coordData.size()));
-						this.getNavigator().tryMoveToXYZ((double) selectedCoord.posX, (double) selectedCoord.posY, (double) selectedCoord.posZ, this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue());
-					}
-				}
-			}
-		}
-	}
+        this.fallDistance = 0F;
 
-	// temporary sound override until ender23 has new sounds.  the ticking is annoying
-	@Override
-	protected String getDeathSound()
-	{
-		return AliensVsPredator.properties().SOUND_CHESTBURSTER_ATTACK;
-	}
+        this.lurkInBlackGoo();
 
-	// temporary sound override until ender23 has new sounds.  the ticking is annoying
-	@Override
-	protected String getHurtSound()
-	{
-		return AliensVsPredator.properties().SOUND_CHESTBURSTER_HURT;
-	}
-	
-	@Override
-	protected boolean canTriggerWalking()
-	{
-		return false;
-	}
+        if (this.getAttackTarget() == null && this.worldObj.getWorldTime() % 60 == 0 && this.rand.nextInt(3) == 0)
+        {
+            ArrayList<EntityLivingBase> entities = (ArrayList<EntityLivingBase>) WorldUtil.Entities.getEntitiesInCoordsRange(worldObj, EntityLivingBase.class, new CoordData(this), (int) this.getEntityAttribute(SharedMonsterAttributes.followRange).getAttributeValue() / 2);
 
-	@Override
-	protected boolean canDespawn()
-	{
-		return false;
-	}
+            for (EntityLivingBase entity : entities)
+            {
+                if (entitySelector.isEntityApplicable(entity) && Entities.canEntityBeSeenBy(entity, this) && (!entitySelector.isEntityApplicable(entity.getLastAttacker()) && (entity.ticksExisted - entity.getLastAttackerTime() > 150)))
+                {
+                    if (entity instanceof EntityPlayer && !((EntityPlayer) entity).capabilities.isCreativeMode)
 
-	@Override
-	public boolean isOnLadder()
-	{
-		return this.isCollidedHorizontally;
-	}
+                        this.setAttackTarget(entity);
+                }
+            }
+        }
+    }
 
-	public boolean isClimbing()
-	{
-		return this.isOnLadder() && this.motionY > 1.0099999997764826D;
-	}
+    public void lurkInBlackGoo()
+    {
+        if (this.getAttackTarget() == null)
+        {
+            if (this.worldObj.getWorldTime() % 40 == 0 && this.rand.nextInt(4) == 0)
+            {
+                if (this.worldObj.getBlock((int) this.posX, (int) this.posY, (int) this.posZ) != AliensVsPredator.blocks().blockBlackGoo)
+                {
+                    double range = this.getEntityAttribute(SharedMonsterAttributes.followRange).getAttributeValue() / 2;
+                    ArrayList<CoordData> coordData = WorldUtil.Blocks.getCoordDataInRangeForBlocks((int) this.posX, (int) this.posY, (int) this.posZ, (int) range, this.worldObj, AliensVsPredator.blocks().blockBlackGoo);
 
-	@Override
-	protected void attackEntity(Entity entity, float damage)
-	{
-		super.attackEntity(entity, damage);
-	}
+                    if (coordData.size() > 0)
+                    {
+                        CoordData selectedCoord = coordData.get(this.rand.nextInt(coordData.size()));
+                        this.getNavigator().tryMoveToXYZ((double) selectedCoord.posX, (double) selectedCoord.posY, (double) selectedCoord.posZ, this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue());
+                    }
+                }
+            }
+        }
+    }
 
-	@Override
-	public boolean isPotionApplicable(PotionEffect potionEffect)
-	{
-		return potionEffect.getPotionID() == Potion.poison.id ? false : super.isPotionApplicable(potionEffect);
-	}
+    // temporary sound override until ender23 has new sounds. the ticking is annoying
+    @Override
+    protected String getDeathSound()
+    {
+        return AliensVsPredator.properties().SOUND_CHESTBURSTER_ATTACK;
+    }
 
-	@Override
-	public void readEntityFromNBT(NBTTagCompound nbt)
-	{
-		super.readEntityFromNBT(nbt);
-	}
+    // temporary sound override until ender23 has new sounds. the ticking is annoying
+    @Override
+    protected String getHurtSound()
+    {
+        return AliensVsPredator.properties().SOUND_CHESTBURSTER_HURT;
+    }
 
-	@Override
-	public void writeEntityToNBT(NBTTagCompound nbt)
-	{
-		super.writeEntityToNBT(nbt);
-	}
+    @Override
+    protected boolean canTriggerWalking()
+    {
+        return false;
+    }
+
+    @Override
+    protected boolean canDespawn()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean isOnLadder()
+    {
+        return this.isCollidedHorizontally;
+    }
+
+    public boolean isClimbing()
+    {
+        return this.isOnLadder() && this.motionY > 1.0099999997764826D;
+    }
+
+    @Override
+    protected void attackEntity(Entity entity, float damage)
+    {
+        super.attackEntity(entity, damage);
+    }
+
+    @Override
+    public boolean isPotionApplicable(PotionEffect potionEffect)
+    {
+        return potionEffect.getPotionID() == Potion.poison.id ? false : super.isPotionApplicable(potionEffect);
+    }
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound nbt)
+    {
+        super.readEntityFromNBT(nbt);
+    }
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound nbt)
+    {
+        super.writeEntityToNBT(nbt);
+    }
 }

@@ -22,12 +22,14 @@ public abstract class NodeProcessor
         this.entitySizeZ = MathHelper.floor_float(entity.width + 1.0F);
     }
 
-    public void postProcess() {}
+    public void postProcess()
+    {
+    }
 
     protected PathPoint openPoint(int x, int y, int z)
     {
         int l = PathPoint.makeHash(x, y, z);
-        PathPoint pathpoint = (PathPoint)this.pointMap.lookup(l);
+        PathPoint pathpoint = (PathPoint) this.pointMap.lookup(l);
 
         if (pathpoint == null)
         {

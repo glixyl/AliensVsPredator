@@ -12,58 +12,58 @@ import net.minecraft.world.World;
 
 public class PacketOpenBlastdoor implements IMessage, IMessageHandler<PacketOpenBlastdoor, PacketOpenBlastdoor>
 {
-	private boolean open;
-	private int x;
-	private int y;
-	private int z;
+    private boolean open;
+    private int x;
+    private int y;
+    private int z;
 
-	public PacketOpenBlastdoor()
-	{
-		;
-	}
+    public PacketOpenBlastdoor()
+    {
+        ;
+    }
 
-	public PacketOpenBlastdoor(boolean open, int x, int y, int z)
-	{
-		this.open = open;
-		this.x = x;
-		this.y = y;
-		this.z = z;
-	}
+    public PacketOpenBlastdoor(boolean open, int x, int y, int z)
+    {
+        this.open = open;
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
 
-	@Override
-	public void fromBytes(ByteBuf buf)
-	{
-		this.open = buf.readBoolean();
-		this.x = buf.readInt();
-		this.y = buf.readInt();
-		this.z = buf.readInt();
-	}
+    @Override
+    public void fromBytes(ByteBuf buf)
+    {
+        this.open = buf.readBoolean();
+        this.x = buf.readInt();
+        this.y = buf.readInt();
+        this.z = buf.readInt();
+    }
 
-	@Override
-	public void toBytes(ByteBuf buf)
-	{
-		buf.writeBoolean(open);
-		buf.writeInt(x);
-		buf.writeInt(y);
-		buf.writeInt(z);
-	}
+    @Override
+    public void toBytes(ByteBuf buf)
+    {
+        buf.writeBoolean(open);
+        buf.writeInt(x);
+        buf.writeInt(y);
+        buf.writeInt(z);
+    }
 
-	@Override
-	public PacketOpenBlastdoor onMessage(PacketOpenBlastdoor packet, MessageContext ctx)
-	{
-		World world = Minecraft.getMinecraft().thePlayer.worldObj;
-		TileEntity tile = world.getTileEntity(packet.x, packet.y, packet.z);
+    @Override
+    public PacketOpenBlastdoor onMessage(PacketOpenBlastdoor packet, MessageContext ctx)
+    {
+        World world = Minecraft.getMinecraft().thePlayer.worldObj;
+        TileEntity tile = world.getTileEntity(packet.x, packet.y, packet.z);
 
-		if (world != null && tile != null && tile instanceof TileEntityBlastdoor)
-		{
-			TileEntityBlastdoor blastdoor = (TileEntityBlastdoor) tile;
+        if (world != null && tile != null && tile instanceof TileEntityBlastdoor)
+        {
+            TileEntityBlastdoor blastdoor = (TileEntityBlastdoor) tile;
 
-			if (blastdoor != null)
-			{
-				blastdoor.setOpen(packet.open, false);
-			}
-		}
+            if (blastdoor != null)
+            {
+                blastdoor.setOpen(packet.open, false);
+            }
+        }
 
-		return null;
-	}
+        return null;
+    }
 }

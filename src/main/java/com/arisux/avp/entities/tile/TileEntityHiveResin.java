@@ -9,34 +9,34 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityHiveResin extends TileEntity implements IHiveSignature
 {
-	private UUID signature;
-	private Block blockCovering;
-	
-	@Override
-	public void updateEntity()
-	{
-		;
-	}
+    private UUID signature;
+    private Block blockCovering;
 
-	@Override
-	public UUID getHiveSignature()
-	{
-		return this.signature;
-	}
+    @Override
+    public void updateEntity()
+    {
+        ;
+    }
 
-	@Override
-	public void setHiveSignature(UUID signature)
-	{
-		this.signature = signature;
-	}
-	
-	public void setBlockCovering(Block blockCovering)
-	{
-		this.blockCovering = blockCovering;
-	}
-	
-	public Block getBlockCovering()
-	{
-		return this.blockCovering;
-	}
+    @Override
+    public UUID getHiveSignature()
+    {
+        return this.signature;
+    }
+
+    @Override
+    public void setHiveSignature(UUID signature)
+    {
+        this.signature = signature;
+    }
+
+    public void setBlockCovering(Block blockCovering)
+    {
+        this.blockCovering = blockCovering;
+    }
+
+    public Block getBlockCovering()
+    {
+        return this.blockCovering;
+    }
 }

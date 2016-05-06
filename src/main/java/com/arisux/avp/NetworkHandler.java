@@ -37,49 +37,49 @@ import cpw.mods.fml.relauncher.Side;
 
 public class NetworkHandler extends SimpleNetworkWrapper implements IInitializable
 {
-	public static final NetworkHandler instance = new NetworkHandler();
-	private int descriminator = 0;
+    public static final NetworkHandler instance = new NetworkHandler();
+    private int descriminator = 0;
 
-	public NetworkHandler()
-	{
-		super(AliensVsPredator.ID.toUpperCase());
-	}
+    public NetworkHandler()
+    {
+        super(AliensVsPredator.ID.toUpperCase());
+    }
 
-	@Override
-	public void initialize(FMLInitializationEvent event)
-	{
-		this.registerMessage(Side.SERVER, PacketAssembleCurrentSchematic.class);
-		this.registerMessage(Side.SERVER, PacketOpenWristbracerContainer.class);
-		this.registerMessage(Side.SERVER, PacketReloadFirearm.class);
-		this.registerMessage(Side.SERVER, PacketLaunchGrenade.class);
-		this.registerMessage(Side.SERVER, PacketFireAPC.class);
-		this.registerMessage(Side.SERVER, PacketDamageEntity.class);
-		this.registerMessage(Side.SERVER, PacketRemoveTurretTarget.class);
-		this.registerMessage(Side.SERVER, PacketShootEntity.class);
-		this.registerMessage(Side.SERVER, PacketSpawnEntity.class);
-		this.registerMessage(Side.SERVER, PacketSpawnNuke.class);
-		this.registerMessage(Side.SERVER, PacketAddTuretTarget.class);
-		this.registerMessage(Side.SERVER, PacketReadFromDataDevice.class);
-		this.registerMessage(Side.SERVER, PacketTurretTargetUpdate.class);
-		this.registerMessage(Side.SERVER, PacketWriteToDataDevice.class);
-		this.registerMessage(Side.CLIENT, PacketJellyLevelUpdate.class);
-		this.registerMessage(Side.CLIENT, PacketOvamorphContainsFacehugger.class);
-		this.registerMessage(Side.CLIENT, PacketVardaStormMoveEntity.class);
-		this.registerMessage(Side.CLIENT, PacketAmmoUpdate.class);
-		this.registerMessage(Side.CLIENT, PacketOpenBlastdoor.class);
-		this.registerMessage(Side.CLIENT, PacketOpenable.class);
-		this.registerMessage(Side.CLIENT, PacketPlayerModeUpdate.class);
-		this.registerMessage(Side.CLIENT, PacketTurretInit.class);
-		this.registerMessage(Side.CLIENT, PacketSyncEEPC.class);
-		this.registerMessage(Side.CLIENT, PacketSyncEEPPC.class);
-		this.registerMessage(Side.SERVER, PacketSyncEEPS.class);
-		this.registerMessage(Side.SERVER, PacketSyncEEPPS.class);
-		this.registerMessage(Side.CLIENT, PacketRotateTransformer.class);
-	}
+    @Override
+    public void initialize(FMLInitializationEvent event)
+    {
+        this.registerMessage(Side.SERVER, PacketAssembleCurrentSchematic.class);
+        this.registerMessage(Side.SERVER, PacketOpenWristbracerContainer.class);
+        this.registerMessage(Side.SERVER, PacketReloadFirearm.class);
+        this.registerMessage(Side.SERVER, PacketLaunchGrenade.class);
+        this.registerMessage(Side.SERVER, PacketFireAPC.class);
+        this.registerMessage(Side.SERVER, PacketDamageEntity.class);
+        this.registerMessage(Side.SERVER, PacketRemoveTurretTarget.class);
+        this.registerMessage(Side.SERVER, PacketShootEntity.class);
+        this.registerMessage(Side.SERVER, PacketSpawnEntity.class);
+        this.registerMessage(Side.SERVER, PacketSpawnNuke.class);
+        this.registerMessage(Side.SERVER, PacketAddTuretTarget.class);
+        this.registerMessage(Side.SERVER, PacketReadFromDataDevice.class);
+        this.registerMessage(Side.SERVER, PacketTurretTargetUpdate.class);
+        this.registerMessage(Side.SERVER, PacketWriteToDataDevice.class);
+        this.registerMessage(Side.CLIENT, PacketJellyLevelUpdate.class);
+        this.registerMessage(Side.CLIENT, PacketOvamorphContainsFacehugger.class);
+        this.registerMessage(Side.CLIENT, PacketVardaStormMoveEntity.class);
+        this.registerMessage(Side.CLIENT, PacketAmmoUpdate.class);
+        this.registerMessage(Side.CLIENT, PacketOpenBlastdoor.class);
+        this.registerMessage(Side.CLIENT, PacketOpenable.class);
+        this.registerMessage(Side.CLIENT, PacketPlayerModeUpdate.class);
+        this.registerMessage(Side.CLIENT, PacketTurretInit.class);
+        this.registerMessage(Side.CLIENT, PacketSyncEEPC.class);
+        this.registerMessage(Side.CLIENT, PacketSyncEEPPC.class);
+        this.registerMessage(Side.SERVER, PacketSyncEEPS.class);
+        this.registerMessage(Side.SERVER, PacketSyncEEPPS.class);
+        this.registerMessage(Side.CLIENT, PacketRotateTransformer.class);
+    }
 
-	@SuppressWarnings("unchecked")
-	private <REQ extends IMessage, REPLY extends IMessage> void registerMessage(Side side, Class<?> packet)
-	{
-		this.registerMessage((Class<? extends IMessageHandler<REQ, REPLY>>) packet, (Class <REQ>) packet, descriminator++, side);
-	}
+    @SuppressWarnings("unchecked")
+    private <REQ extends IMessage, REPLY extends IMessage> void registerMessage(Side side, Class<?> packet)
+    {
+        this.registerMessage((Class<? extends IMessageHandler<REQ, REPLY>>) packet, (Class<REQ>) packet, descriminator++, side);
+    }
 }

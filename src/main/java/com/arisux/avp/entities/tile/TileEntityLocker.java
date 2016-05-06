@@ -24,151 +24,151 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityLocker extends TileEntity implements IOpenable, IRotatable
 {
-	public IInventory inventory;
-	private ForgeDirection direction;
-	public Container container;
-	private boolean isOpen;
+    public IInventory inventory;
+    private ForgeDirection direction;
+    public Container container;
+    private boolean isOpen;
 
-	public TileEntityLocker()
-	{
-		super();
-		this.isOpen = false;
-		final TileEntityLocker locker = this;
-		this.inventory = new InventoryBasic("container.locker.slots", true, 64)
-		{
-			@Override
-			public boolean isItemValidForSlot(int slot, ItemStack stack)
-			{
-				return locker instanceof TileEntityGunLocker ? (stack.getItem() instanceof ItemFirearm) : (true);
-			}
-		};
-	}
+    public TileEntityLocker()
+    {
+        super();
+        this.isOpen = false;
+        final TileEntityLocker locker = this;
+        this.inventory = new InventoryBasic("container.locker.slots", true, 64)
+        {
+            @Override
+            public boolean isItemValidForSlot(int slot, ItemStack stack)
+            {
+                return locker instanceof TileEntityGunLocker ? (stack.getItem() instanceof ItemFirearm) : (true);
+            }
+        };
+    }
 
-	@Override
-	public Packet getDescriptionPacket()
-	{
-		NBTTagCompound nbtTag = new NBTTagCompound();
-		this.writeToNBT(nbtTag);
-		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
-	}
+    @Override
+    public Packet getDescriptionPacket()
+    {
+        NBTTagCompound nbtTag = new NBTTagCompound();
+        this.writeToNBT(nbtTag);
+        return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
+    }
 
-	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
-	{
-		readFromNBT(packet.func_148857_g());
-	}
+    @Override
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
+    {
+        readFromNBT(packet.func_148857_g());
+    }
 
-	public Container getNewContainer(EntityPlayer player)
-	{
-		return (container = new ContainerLocker(player, this));
-	}
+    public Container getNewContainer(EntityPlayer player)
+    {
+        return (container = new ContainerLocker(player, this));
+    }
 
-	@Override
-	public void writeToNBT(NBTTagCompound nbt)
-	{
-		super.writeToNBT(nbt);
+    @Override
+    public void writeToNBT(NBTTagCompound nbt)
+    {
+        super.writeToNBT(nbt);
 
-		if (this.direction != null)
-		{
-			nbt.setInteger("Direction", this.direction.ordinal());
-		}
+        if (this.direction != null)
+        {
+            nbt.setInteger("Direction", this.direction.ordinal());
+        }
 
-		if(this.inventory != null)
-		{
-			this.saveInventoryToNBT(nbt, inventory);
-		}
-	}
-	
-	private void saveInventoryToNBT(NBTTagCompound nbt, IInventory inventory)
-	{
-		NBTTagList items = new NBTTagList();
+        if (this.inventory != null)
+        {
+            this.saveInventoryToNBT(nbt, inventory);
+        }
+    }
 
-		for (byte x = 0; x < inventory.getSizeInventory(); x++)
-		{
-			ItemStack stack = inventory.getStackInSlot(x);
+    private void saveInventoryToNBT(NBTTagCompound nbt, IInventory inventory)
+    {
+        NBTTagList items = new NBTTagList();
 
-			if (stack != null)
-			{
-				NBTTagCompound item = new NBTTagCompound();
-				item.setByte("Slot", x);
-				stack.writeToNBT(item);
-				items.appendTag(item);
-			}
-		}
+        for (byte x = 0; x < inventory.getSizeInventory(); x++)
+        {
+            ItemStack stack = inventory.getStackInSlot(x);
 
-		nbt.setTag(inventory.getInventoryName(), items);
-	}
-	
-	@Override
-	public void readFromNBT(NBTTagCompound nbt)
-	{
-		super.readFromNBT(nbt);
+            if (stack != null)
+            {
+                NBTTagCompound item = new NBTTagCompound();
+                item.setByte("Slot", x);
+                stack.writeToNBT(item);
+                items.appendTag(item);
+            }
+        }
 
-		if (ForgeDirection.getOrientation(nbt.getInteger("Direction")) != null)
-		{
-			this.direction = ForgeDirection.getOrientation(nbt.getInteger("Direction"));
-		}
-		
-		this.readInventoryFromNBT(nbt, this.inventory);
-	}
-	
-	private void readInventoryFromNBT(NBTTagCompound nbt, IInventory inventory)
-	{
-		NBTTagList items = nbt.getTagList(inventory.getInventoryName(), Constants.NBT.TAG_COMPOUND);
+        nbt.setTag(inventory.getInventoryName(), items);
+    }
 
-		for (byte x = 0; x < items.tagCount(); x++)
-		{
-			NBTTagCompound item = items.getCompoundTagAt(x);
+    @Override
+    public void readFromNBT(NBTTagCompound nbt)
+    {
+        super.readFromNBT(nbt);
 
-			byte slot = item.getByte("Slot");
+        if (ForgeDirection.getOrientation(nbt.getInteger("Direction")) != null)
+        {
+            this.direction = ForgeDirection.getOrientation(nbt.getInteger("Direction"));
+        }
 
-			if (slot >= 0 && slot <= inventory.getSizeInventory())
-			{
-				inventory.setInventorySlotContents(slot, ItemStack.loadItemStackFromNBT(item));
-			}
-		}
-	}
-	
-	public void openGui(EntityPlayer player)
-	{
-		if (!player.worldObj.isRemote)
-		{
-			FMLNetworkHandler.openGui(player, AliensVsPredator.instance(), AliensVsPredator.properties().GUI_LOCKER, player.worldObj, xCoord, yCoord, zCoord);
-		}
-	}
+        this.readInventoryFromNBT(nbt, this.inventory);
+    }
 
-	@Override
-	public void updateEntity()
-	{
-		super.updateEntity();
-	}
+    private void readInventoryFromNBT(NBTTagCompound nbt, IInventory inventory)
+    {
+        NBTTagList items = nbt.getTagList(inventory.getInventoryName(), Constants.NBT.TAG_COMPOUND);
 
-	@Override
-	public ForgeDirection getDirection()
-	{
-		return direction;
-	}
+        for (byte x = 0; x < items.tagCount(); x++)
+        {
+            NBTTagCompound item = items.getCompoundTagAt(x);
 
-	@Override
-	public void setDirection(ForgeDirection direction)
-	{
-		this.direction = direction;
-	}
+            byte slot = item.getByte("Slot");
 
-	@Override
-	public void setOpen(boolean isOpen)
-	{
-		this.isOpen = isOpen;
-		
-		if (!this.worldObj.isRemote)
-		{
-			AliensVsPredator.network().sendToAll(new PacketOpenable(isOpen, this.xCoord, this.yCoord, this.zCoord));
-		}
-	}
-	
-	@Override
-	public boolean isOpen()
-	{
-		return isOpen;
-	}
+            if (slot >= 0 && slot <= inventory.getSizeInventory())
+            {
+                inventory.setInventorySlotContents(slot, ItemStack.loadItemStackFromNBT(item));
+            }
+        }
+    }
+
+    public void openGui(EntityPlayer player)
+    {
+        if (!player.worldObj.isRemote)
+        {
+            FMLNetworkHandler.openGui(player, AliensVsPredator.instance(), AliensVsPredator.properties().GUI_LOCKER, player.worldObj, xCoord, yCoord, zCoord);
+        }
+    }
+
+    @Override
+    public void updateEntity()
+    {
+        super.updateEntity();
+    }
+
+    @Override
+    public ForgeDirection getDirection()
+    {
+        return direction;
+    }
+
+    @Override
+    public void setDirection(ForgeDirection direction)
+    {
+        this.direction = direction;
+    }
+
+    @Override
+    public void setOpen(boolean isOpen)
+    {
+        this.isOpen = isOpen;
+
+        if (!this.worldObj.isRemote)
+        {
+            AliensVsPredator.network().sendToAll(new PacketOpenable(isOpen, this.xCoord, this.yCoord, this.zCoord));
+        }
+    }
+
+    @Override
+    public boolean isOpen()
+    {
+        return isOpen;
+    }
 }

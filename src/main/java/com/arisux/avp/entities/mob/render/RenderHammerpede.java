@@ -11,21 +11,21 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderHammerpede extends RenderLiving
 {
-	public RenderHammerpede(ModelBase modelbase, float shadowSize)
-	{
-		super(modelbase, shadowSize);
-	}
+    public RenderHammerpede(ModelBase modelbase, float shadowSize)
+    {
+        super(modelbase, shadowSize);
+    }
 
-	@Override
-	protected void preRenderCallback(EntityLivingBase entitylivingBase, float partialTicks)
-	{
-		super.preRenderCallback(entitylivingBase, shadowSize);
-		GlStateManager.scale(0.65F, 0.65F, 0.65F);
-	}
+    @Override
+    protected void preRenderCallback(EntityLivingBase entitylivingBase, float partialTicks)
+    {
+        super.preRenderCallback(entitylivingBase, shadowSize);
+        GlStateManager.scale(0.65F, 0.65F, 0.65F);
+    }
 
-	@Override
-	public ResourceLocation getEntityTexture(Entity entity)
-	{
-		return AliensVsPredator.resources().HAMMERPEDE;
-	}
+    @Override
+    public ResourceLocation getEntityTexture(Entity entity)
+    {
+        return AliensVsPredator.resources().HAMMERPEDE;
+    }
 }

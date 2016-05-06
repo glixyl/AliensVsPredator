@@ -16,53 +16,55 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderSpitter extends RenderLiving
 {
-	public RenderSpitter(ModelBase modelbase, float shadowSize)
-	{
-		super(modelbase, shadowSize);
-		this.setRenderPassModel(new ModelSpitter());
-	}
-	
-	@Override
-	protected void preRenderCallback(EntityLivingBase entityLivingBase, float shadowSize)
-	{
-		super.preRenderCallback(entityLivingBase, shadowSize);
-	}
+    public RenderSpitter(ModelBase modelbase, float shadowSize)
+    {
+        super(modelbase, shadowSize);
+        this.setRenderPassModel(new ModelSpitter());
+    }
 
-	@Override
-	protected int shouldRenderPass(EntityLivingBase entityLivingBase, int par2, float par3)
-	{
-		return this.setRenderPassModelBrightness((EntitySpitter) entityLivingBase, par2);
-	}
+    @Override
+    protected void preRenderCallback(EntityLivingBase entityLivingBase, float shadowSize)
+    {
+        super.preRenderCallback(entityLivingBase, shadowSize);
+    }
 
-	@Override
-	public ResourceLocation getEntityTexture(Entity entity)
-	{
-		return AliensVsPredator.resources().SPITTER;
-	}
+    @Override
+    protected int shouldRenderPass(EntityLivingBase entityLivingBase, int par2, float par3)
+    {
+        return this.setRenderPassModelBrightness((EntitySpitter) entityLivingBase, par2);
+    }
 
-	protected int setRenderPassModelBrightness(EntitySpitter entity, int brightness)
-	{
-		if (brightness != 0)
-		{
-			return -1;
-		} else
-		{
-			this.bindTexture(AliensVsPredator.resources().SPITTER_MASK);
-			GlStateManager.enable(GL11.GL_BLEND);
-			GlStateManager.blendFunc(GL11.GL_ONE, GL11.GL_ONE);
+    @Override
+    public ResourceLocation getEntityTexture(Entity entity)
+    {
+        return AliensVsPredator.resources().SPITTER;
+    }
 
-			if (entity.isInvisible())
-			{
-				GL11.glDepthMask(false);
-			} else
-			{
-				GL11.glDepthMask(true);
-			}
+    protected int setRenderPassModelBrightness(EntitySpitter entity, int brightness)
+    {
+        if (brightness != 0)
+        {
+            return -1;
+        }
+        else
+        {
+            this.bindTexture(AliensVsPredator.resources().SPITTER_MASK);
+            GlStateManager.enable(GL11.GL_BLEND);
+            GlStateManager.blendFunc(GL11.GL_ONE, GL11.GL_ONE);
 
-			char light = 61680;
-			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (light % 65536) / 1.0F, (light / 65536) / 1.0F);
-			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-			return 1;
-		}
-	}
+            if (entity.isInvisible())
+            {
+                GL11.glDepthMask(false);
+            }
+            else
+            {
+                GL11.glDepthMask(true);
+            }
+
+            char light = 61680;
+            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (light % 65536) / 1.0F, (light / 65536) / 1.0F);
+            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            return 1;
+        }
+    }
 }

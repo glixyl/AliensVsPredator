@@ -12,53 +12,53 @@ import net.minecraftforge.fluids.BlockFluidClassic;
 
 public class BlockBlackGoo extends BlockFluidClassic
 {
-	public BlockBlackGoo()
-	{
-		super(AliensVsPredator.fluids().fluidBlackGoo, AliensVsPredator.materials().blackgoo);
-	}
+    public BlockBlackGoo()
+    {
+        super(AliensVsPredator.fluids().fluidBlackGoo, AliensVsPredator.materials().blackgoo);
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta)
-	{
-		switch (side)
-		{
-			case 0:
-				return AliensVsPredator.resources().ICONSET_BLACK_GOO.still;
-			case 1:
-				return AliensVsPredator.resources().ICONSET_BLACK_GOO.still;
-			default:
-				return AliensVsPredator.resources().ICONSET_BLACK_GOO.flowing;
-		}
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public IIcon getIcon(int side, int meta)
+    {
+        switch (side)
+        {
+            case 0:
+                return AliensVsPredator.resources().ICONSET_BLACK_GOO.still;
+            case 1:
+                return AliensVsPredator.resources().ICONSET_BLACK_GOO.still;
+            default:
+                return AliensVsPredator.resources().ICONSET_BLACK_GOO.flowing;
+        }
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister register)
-	{
-		AliensVsPredator.resources().ICONSET_BLACK_GOO.registerIcons(register);
-		AliensVsPredator.fluids().fluidBlackGoo.setIcons(AliensVsPredator.resources().ICONSET_BLACK_GOO.still, AliensVsPredator.resources().ICONSET_BLACK_GOO.flowing);
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerBlockIcons(IIconRegister register)
+    {
+        AliensVsPredator.resources().ICONSET_BLACK_GOO.registerIcons(register);
+        AliensVsPredator.fluids().fluidBlackGoo.setIcons(AliensVsPredator.resources().ICONSET_BLACK_GOO.still, AliensVsPredator.resources().ICONSET_BLACK_GOO.flowing);
+    }
 
-	@Override
-	public boolean canDisplace(IBlockAccess world, int x, int y, int z)
-	{
-		if (world.getBlock(x, y, z).getMaterial().isLiquid())
-		{
-			return false;
-		}
-		
-		return super.canDisplace(world, x, y, z);
-	}
+    @Override
+    public boolean canDisplace(IBlockAccess world, int x, int y, int z)
+    {
+        if (world.getBlock(x, y, z).getMaterial().isLiquid())
+        {
+            return false;
+        }
 
-	@Override
-	public boolean displaceIfPossible(World world, int x, int y, int z)
-	{
-		if (world.getBlock(x, y, z).getMaterial().isLiquid())
-		{
-			return false;
-		}
-		
-		return super.displaceIfPossible(world, x, y, z);
-	}
+        return super.canDisplace(world, x, y, z);
+    }
+
+    @Override
+    public boolean displaceIfPossible(World world, int x, int y, int z)
+    {
+        if (world.getBlock(x, y, z).getMaterial().isLiquid())
+        {
+            return false;
+        }
+
+        return super.displaceIfPossible(world, x, y, z);
+    }
 }

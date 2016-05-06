@@ -12,46 +12,46 @@ import net.minecraft.world.World;
 
 public class PacketOvamorphContainsFacehugger implements IMessage, IMessageHandler<PacketOvamorphContainsFacehugger, PacketOvamorphContainsFacehugger>
 {
-	private boolean containsFacehugger;
-	private int entityId;
+    private boolean containsFacehugger;
+    private int entityId;
 
-	public PacketOvamorphContainsFacehugger()
-	{
-		;
-	}
+    public PacketOvamorphContainsFacehugger()
+    {
+        ;
+    }
 
-	public PacketOvamorphContainsFacehugger(boolean containsFacehugger, int entityId)
-	{
-		this.containsFacehugger = containsFacehugger;
-		this.entityId = entityId;
-	}
+    public PacketOvamorphContainsFacehugger(boolean containsFacehugger, int entityId)
+    {
+        this.containsFacehugger = containsFacehugger;
+        this.entityId = entityId;
+    }
 
-	@Override
-	public void fromBytes(ByteBuf buf)
-	{
-		this.containsFacehugger = buf.readBoolean();
-		this.entityId = buf.readInt();
-	}
+    @Override
+    public void fromBytes(ByteBuf buf)
+    {
+        this.containsFacehugger = buf.readBoolean();
+        this.entityId = buf.readInt();
+    }
 
-	@Override
-	public void toBytes(ByteBuf buf)
-	{
-		buf.writeBoolean(containsFacehugger);
-		buf.writeInt(entityId);
-	}
+    @Override
+    public void toBytes(ByteBuf buf)
+    {
+        buf.writeBoolean(containsFacehugger);
+        buf.writeInt(entityId);
+    }
 
-	@Override
-	public PacketOvamorphContainsFacehugger onMessage(PacketOvamorphContainsFacehugger packet, MessageContext ctx)
-	{
-		World world = Minecraft.getMinecraft().thePlayer.worldObj;
-		Entity entity = world.getEntityByID(packet.entityId);
-		
-		if (world != null && entity != null && entity instanceof EntityOvamorph)
-		{
-			EntityOvamorph ovamorph = (EntityOvamorph) entity;
-			ovamorph.setContainsFacehugger(packet.containsFacehugger);
-		}
+    @Override
+    public PacketOvamorphContainsFacehugger onMessage(PacketOvamorphContainsFacehugger packet, MessageContext ctx)
+    {
+        World world = Minecraft.getMinecraft().thePlayer.worldObj;
+        Entity entity = world.getEntityByID(packet.entityId);
 
-		return null;
-	}
+        if (world != null && entity != null && entity instanceof EntityOvamorph)
+        {
+            EntityOvamorph ovamorph = (EntityOvamorph) entity;
+            ovamorph.setContainsFacehugger(packet.containsFacehugger);
+        }
+
+        return null;
+    }
 }

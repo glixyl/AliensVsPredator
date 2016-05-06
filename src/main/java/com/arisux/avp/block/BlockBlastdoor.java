@@ -21,188 +21,188 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockBlastdoor extends Block
 {
-	public BlockBlastdoor(Material material)
-	{
-		super(material);
-		setTickRandomly(true);
-	}
-	
-	@Override
-	public void registerBlockIcons(IIconRegister register)
-	{
-		return;
-	}
-	
-	@Override
-	public boolean renderAsNormalBlock()
-	{
-		return false;
-	}
-	
-	@Override
-	public boolean isOpaqueCube()
-	{
-		return false;
-	}
+    public BlockBlastdoor(Material material)
+    {
+        super(material);
+        setTickRandomly(true);
+    }
 
-	@Override
-	public boolean onBlockActivated(World world, int posX, int posY, int posZ, EntityPlayer player, int side, float subX, float subY, float subZ)
-	{
-		TileEntity tile = world.getTileEntity(posX, posY, posZ);
+    @Override
+    public void registerBlockIcons(IIconRegister register)
+    {
+        return;
+    }
 
-		if (tile != null && tile instanceof TileEntityBlastdoor)
-		{
-			TileEntityBlastdoor blastdoor = (TileEntityBlastdoor) tile;
+    @Override
+    public boolean renderAsNormalBlock()
+    {
+        return false;
+    }
 
-			if (blastdoor.isChild() && blastdoor.getParent() != null && canOpen(blastdoor.getParent(), player))
-			{
-				this.onOpen(blastdoor.getParent(), world, player);
-			}
-			else if (blastdoor.isParent() && canOpen(blastdoor, player))
-			{
-				this.onOpen(blastdoor, world, player);
-			}
-		}
-		return true;
-	}
+    @Override
+    public boolean isOpaqueCube()
+    {
+        return false;
+    }
 
-	private void onOpen(TileEntityBlastdoor blastdoor, World world, EntityPlayer player)
-	{
-		if (isOpenedByJack(blastdoor, player))
-		{
-			blastdoor.setBeingPryedOpen(true);
-			blastdoor.setDoorProgress(blastdoor.getDoorProgress() + 0.05F);
-			int percentOpen = (int) (((blastdoor.getDoorProgress() >= blastdoor.getMaxDoorPryProgress() ? blastdoor.getMaxDoorPryProgress() : blastdoor.getDoorProgress()) * 100) / blastdoor.getMaxDoorPryProgress());
+    @Override
+    public boolean onBlockActivated(World world, int posX, int posY, int posZ, EntityPlayer player, int side, float subX, float subY, float subZ)
+    {
+        TileEntity tile = world.getTileEntity(posX, posY, posZ);
 
-			ItemMaintenanceJack jack = (ItemMaintenanceJack) player.getCurrentEquippedItem().getItem();
-			jack.onPryBlastDoor(player, player.getCurrentEquippedItem());
+        if (tile != null && tile instanceof TileEntityBlastdoor)
+        {
+            TileEntityBlastdoor blastdoor = (TileEntityBlastdoor) tile;
 
-			if (percentOpen >= 100)
-			{
-				jack.onOpenBlastDoor(player, player.getCurrentEquippedItem());
-			}
+            if (blastdoor.isChild() && blastdoor.getParent() != null && canOpen(blastdoor.getParent(), player))
+            {
+                this.onOpen(blastdoor.getParent(), world, player);
+            }
+            else if (blastdoor.isParent() && canOpen(blastdoor, player))
+            {
+                this.onOpen(blastdoor, world, player);
+            }
+        }
+        return true;
+    }
 
-			if (world.isRemote)
-			{
-				Minecraft.getMinecraft().thePlayer.addChatComponentMessage(new ChatComponentText("\u00A77 Blast door \u00A7a" + percentOpen + "% open."));
-			}
-		}
-		else
-		{
-			blastdoor.setOpen(!blastdoor.isOpen());
+    private void onOpen(TileEntityBlastdoor blastdoor, World world, EntityPlayer player)
+    {
+        if (isOpenedByJack(blastdoor, player))
+        {
+            blastdoor.setBeingPryedOpen(true);
+            blastdoor.setDoorProgress(blastdoor.getDoorProgress() + 0.05F);
+            int percentOpen = (int) (((blastdoor.getDoorProgress() >= blastdoor.getMaxDoorPryProgress() ? blastdoor.getMaxDoorPryProgress() : blastdoor.getDoorProgress()) * 100) / blastdoor.getMaxDoorPryProgress());
 
-			if (world.isRemote)
-			{
-				Minecraft.getMinecraft().thePlayer.addChatComponentMessage(new ChatComponentText("\u00A77 Blast door \u00A7a" + (blastdoor.isOpen() ? "opened" : "closed") + "."));
-			}
-		}
-	}
+            ItemMaintenanceJack jack = (ItemMaintenanceJack) player.getCurrentEquippedItem().getItem();
+            jack.onPryBlastDoor(player, player.getCurrentEquippedItem());
 
-	private boolean isOpenedByJack(TileEntityBlastdoor blastdoor, EntityPlayer player)
-	{
-		return player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof ItemMaintenanceJack && !blastdoor.isOperational() && !blastdoor.isOpen();
-	}
+            if (percentOpen >= 100)
+            {
+                jack.onOpenBlastDoor(player, player.getCurrentEquippedItem());
+            }
 
-	private boolean canOpen(TileEntityBlastdoor blastdoor, EntityPlayer player)
-	{
-		return blastdoor.isOperational() || isOpenedByJack(blastdoor, player);
-	}
+            if (world.isRemote)
+            {
+                Minecraft.getMinecraft().thePlayer.addChatComponentMessage(new ChatComponentText("\u00A77 Blast door \u00A7a" + percentOpen + "% open."));
+            }
+        }
+        else
+        {
+            blastdoor.setOpen(!blastdoor.isOpen());
 
-	@Override
-	public boolean canPlaceBlockAt(World world, int posX, int posY, int posZ)
-	{
-		return super.canPlaceBlockAt(world, posX, posY, posZ);
-	}
+            if (world.isRemote)
+            {
+                Minecraft.getMinecraft().thePlayer.addChatComponentMessage(new ChatComponentText("\u00A77 Blast door \u00A7a" + (blastdoor.isOpen() ? "opened" : "closed") + "."));
+            }
+        }
+    }
 
-	@Override
-	public void onBlockPlacedBy(World world, int posX, int posY, int posZ, EntityLivingBase placer, ItemStack itemstack)
-	{
-		TileEntity tile = world.getTileEntity(posX, posY, posZ);
+    private boolean isOpenedByJack(TileEntityBlastdoor blastdoor, EntityPlayer player)
+    {
+        return player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof ItemMaintenanceJack && !blastdoor.isOperational() && !blastdoor.isOpen();
+    }
 
-		if (tile != null && tile instanceof TileEntityBlastdoor && placer != null)
-		{
-			TileEntityBlastdoor blastdoor = (TileEntityBlastdoor) tile;
+    private boolean canOpen(TileEntityBlastdoor blastdoor, EntityPlayer player)
+    {
+        return blastdoor.isOperational() || isOpenedByJack(blastdoor, player);
+    }
 
-			blastdoor.setDirection(getFacing(placer));
+    @Override
+    public boolean canPlaceBlockAt(World world, int posX, int posY, int posZ)
+    {
+        return super.canPlaceBlockAt(world, posX, posY, posZ);
+    }
 
-			if (!blastdoor.setup(true))
-			{
-				world.setBlockToAir(posX, posY, posZ);
-			}
-		}
-	}
+    @Override
+    public void onBlockPlacedBy(World world, int posX, int posY, int posZ, EntityLivingBase placer, ItemStack itemstack)
+    {
+        TileEntity tile = world.getTileEntity(posX, posY, posZ);
 
-	@Override
-	public void breakBlock(World world, int posX, int posY, int posZ, Block blockBroken, int meta)
-	{
-		TileEntity tile = world.getTileEntity(posX, posY, posZ);
+        if (tile != null && tile instanceof TileEntityBlastdoor && placer != null)
+        {
+            TileEntityBlastdoor blastdoor = (TileEntityBlastdoor) tile;
 
-		if (tile != null && tile instanceof TileEntityBlastdoor)
-		{
-			TileEntityBlastdoor blastdoor = (TileEntityBlastdoor) tile;
+            blastdoor.setDirection(getFacing(placer));
 
-			if (blastdoor.isChild())
-			{
-				if (blastdoor.getParent() != null)
-				{
-					world.setBlockToAir(blastdoor.getParent().xCoord, blastdoor.getParent().yCoord, blastdoor.getParent().zCoord);
-					blastdoor.getParent().breakChildren();
-				}
-			}
-			else
-			{
-				blastdoor.breakChildren();
-			}
-		}
+            if (!blastdoor.setup(true))
+            {
+                world.setBlockToAir(posX, posY, posZ);
+            }
+        }
+    }
 
-		world.removeTileEntity(posX, posY, posZ);
+    @Override
+    public void breakBlock(World world, int posX, int posY, int posZ, Block blockBroken, int meta)
+    {
+        TileEntity tile = world.getTileEntity(posX, posY, posZ);
 
-		super.breakBlock(world, posX, posY, posZ, blockBroken, meta);
-	}
+        if (tile != null && tile instanceof TileEntityBlastdoor)
+        {
+            TileEntityBlastdoor blastdoor = (TileEntityBlastdoor) tile;
 
-	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int posX, int posY, int posZ)
-	{
-		TileEntity tileEntity = world.getTileEntity(posX, posY, posZ);
+            if (blastdoor.isChild())
+            {
+                if (blastdoor.getParent() != null)
+                {
+                    world.setBlockToAir(blastdoor.getParent().xCoord, blastdoor.getParent().yCoord, blastdoor.getParent().zCoord);
+                    blastdoor.getParent().breakChildren();
+                }
+            }
+            else
+            {
+                blastdoor.breakChildren();
+            }
+        }
 
-		if (tileEntity != null && tileEntity instanceof TileEntityBlastdoor)
-		{
-			TileEntityBlastdoor tile = (TileEntityBlastdoor) tileEntity;
+        world.removeTileEntity(posX, posY, posZ);
 
-			if (tile.isOpen())
-			{
-				return null;
-			}
-			else
-			{
-				return AxisAlignedBB.getBoundingBox((double) posX + this.minX, (double) posY + this.minY, (double) posZ + this.minZ, (double) posX + this.maxX, (double) posY + this.maxY, (double) posZ + this.maxZ);
-			}
-		}
+        super.breakBlock(world, posX, posY, posZ, blockBroken, meta);
+    }
 
-		return AxisAlignedBB.getBoundingBox((double) posX + this.minX, (double) posY + this.minY, (double) posZ + this.minZ, (double) posX + this.maxX, (double) posY + this.maxY, (double) posZ + this.maxZ);
-	}
+    @Override
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int posX, int posY, int posZ)
+    {
+        TileEntity tileEntity = world.getTileEntity(posX, posY, posZ);
 
-	@Override
-	public TileEntity createTileEntity(World world, int metadata)
-	{
-		return new TileEntityBlastdoor();
-	}
+        if (tileEntity != null && tileEntity instanceof TileEntityBlastdoor)
+        {
+            TileEntityBlastdoor tile = (TileEntityBlastdoor) tileEntity;
 
-	@Override
-	public boolean hasTileEntity(int metadata)
-	{
-		return true;
-	}
+            if (tile.isOpen())
+            {
+                return null;
+            }
+            else
+            {
+                return AxisAlignedBB.getBoundingBox((double) posX + this.minX, (double) posY + this.minY, (double) posZ + this.minZ, (double) posX + this.maxX, (double) posY + this.maxY, (double) posZ + this.maxZ);
+            }
+        }
 
-	@Override
-	public int getRenderType()
-	{
-		return -1;
-	}
+        return AxisAlignedBB.getBoundingBox((double) posX + this.minX, (double) posY + this.minY, (double) posZ + this.minZ, (double) posX + this.maxX, (double) posY + this.maxY, (double) posZ + this.maxZ);
+    }
 
-	public static ForgeDirection getFacing(Entity entity)
-	{
-		int dir = MathHelper.floor_double((entity.rotationYaw / 90) + 0.5) & 3;
-		return ForgeDirection.VALID_DIRECTIONS[Direction.directionToFacing[dir]];
-	}
+    @Override
+    public TileEntity createTileEntity(World world, int metadata)
+    {
+        return new TileEntityBlastdoor();
+    }
+
+    @Override
+    public boolean hasTileEntity(int metadata)
+    {
+        return true;
+    }
+
+    @Override
+    public int getRenderType()
+    {
+        return -1;
+    }
+
+    public static ForgeDirection getFacing(Entity entity)
+    {
+        int dir = MathHelper.floor_double((entity.rotationYaw / 90) + 0.5) & 3;
+        return ForgeDirection.VALID_DIRECTIONS[Direction.directionToFacing[dir]];
+    }
 }

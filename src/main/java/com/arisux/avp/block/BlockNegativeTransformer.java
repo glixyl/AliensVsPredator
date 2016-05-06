@@ -8,14 +8,14 @@ import net.minecraft.world.World;
 
 public class BlockNegativeTransformer extends BlockTransformer
 {
-	public BlockNegativeTransformer(Material material)
-	{
-		super(material);
-	}
-	
-	@Override
-	public TileEntity createTileEntity(World world, int meta)
-	{
-		return new TileEntityNegativeTransformer();
-	}
+    public BlockNegativeTransformer(Material material)
+    {
+        super(material);
+    }
+
+    @Override
+    public TileEntity createTileEntity(World world, int meta)
+    {
+        return new TileEntityNegativeTransformer();
+    }
 }

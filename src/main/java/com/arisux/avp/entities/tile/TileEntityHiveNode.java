@@ -8,23 +8,23 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityHiveNode extends TileEntity implements IHiveSignature
 {
-	private UUID signature;
-	
-	@Override
-	public void updateEntity()
-	{
-		;
-	}
+    private UUID signature;
 
-	@Override
-	public UUID getHiveSignature()
-	{
-		return this.signature;
-	}
+    @Override
+    public void updateEntity()
+    {
+        ;
+    }
 
-	@Override
-	public void setHiveSignature(UUID signature)
-	{
-		this.signature = signature;
-	}
+    @Override
+    public UUID getHiveSignature()
+    {
+        return this.signature;
+    }
+
+    @Override
+    public void setHiveSignature(UUID signature)
+    {
+        this.signature = signature;
+    }
 }

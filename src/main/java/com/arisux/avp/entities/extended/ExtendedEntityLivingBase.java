@@ -15,122 +15,122 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 
 public class ExtendedEntityLivingBase implements IExtendedEntityProperties
 {
-	public static final String IDENTIFIER = "ExtendedEntityLivingBase";
-	public static final String ID_INT_EMBRYO_AGE = "embryoAge";
-	public static final String ID_BOOL_CONTAINS_EMBRYO = "containsEmbryo";
-	private EntityLivingBase entityLiving;
+    public static final String IDENTIFIER = "ExtendedEntityLivingBase";
+    public static final String ID_INT_EMBRYO_AGE = "embryoAge";
+    public static final String ID_BOOL_CONTAINS_EMBRYO = "containsEmbryo";
+    private EntityLivingBase entityLiving;
 
-	/** Fields that need syncing **/
-	private boolean containsEmbryo;
-	private int embryoAge;
+    /** Fields that need syncing **/
+    private boolean containsEmbryo;
+    private int embryoAge;
 
-	public ExtendedEntityLivingBase(EntityLivingBase entityLiving)
-	{
-		super();
-		this.entityLiving = entityLiving;
-	}
+    public ExtendedEntityLivingBase(EntityLivingBase entityLiving)
+    {
+        super();
+        this.entityLiving = entityLiving;
+    }
 
-	public static final ExtendedEntityLivingBase get(EntityLivingBase livingBase)
-	{
-		return (ExtendedEntityLivingBase) livingBase.getExtendedProperties(IDENTIFIER);
-	}
+    public static final ExtendedEntityLivingBase get(EntityLivingBase livingBase)
+    {
+        return (ExtendedEntityLivingBase) livingBase.getExtendedProperties(IDENTIFIER);
+    }
 
-	@Override
-	public void init(Entity entity, World world)
-	{
-		this.embryoAge = 0;
-	}
+    @Override
+    public void init(Entity entity, World world)
+    {
+        this.embryoAge = 0;
+    }
 
-	@Override
-	public void saveNBTData(NBTTagCompound nbt)
-	{
-		nbt.setInteger(ID_INT_EMBRYO_AGE, this.embryoAge);
-		nbt.setBoolean(ID_BOOL_CONTAINS_EMBRYO, this.containsEmbryo);
-	}
+    @Override
+    public void saveNBTData(NBTTagCompound nbt)
+    {
+        nbt.setInteger(ID_INT_EMBRYO_AGE, this.embryoAge);
+        nbt.setBoolean(ID_BOOL_CONTAINS_EMBRYO, this.containsEmbryo);
+    }
 
-	@Override
-	public void loadNBTData(NBTTagCompound nbt)
-	{
-		this.embryoAge = nbt.getInteger(ID_INT_EMBRYO_AGE);
-		this.containsEmbryo = nbt.getBoolean(ID_BOOL_CONTAINS_EMBRYO);
-	}
+    @Override
+    public void loadNBTData(NBTTagCompound nbt)
+    {
+        this.embryoAge = nbt.getInteger(ID_INT_EMBRYO_AGE);
+        this.containsEmbryo = nbt.getBoolean(ID_BOOL_CONTAINS_EMBRYO);
+    }
 
-	public NBTTagCompound asNBTTagCompound()
-	{
-		NBTTagCompound tag = new NBTTagCompound();
-		this.saveNBTData(tag);
+    public NBTTagCompound asNBTTagCompound()
+    {
+        NBTTagCompound tag = new NBTTagCompound();
+        this.saveNBTData(tag);
 
-		return tag;
-	}
+        return tag;
+    }
 
-	public void syncClients()
-	{
-		AliensVsPredator.network().sendToAll(new PacketSyncEEPC(this.getEntityLivingBase().getEntityId(), this.asNBTTagCompound()));
-	}
+    public void syncClients()
+    {
+        AliensVsPredator.network().sendToAll(new PacketSyncEEPC(this.getEntityLivingBase().getEntityId(), this.asNBTTagCompound()));
+    }
 
-	public void syncServer()
-	{
-		AliensVsPredator.network().sendToServer(new PacketSyncEEPS(this.getEntityLivingBase().getEntityId(), this.asNBTTagCompound()));
-	}
-	
-	public EntityLivingBase getEntityLivingBase()
-	{
-		return entityLiving;
-	}
+    public void syncServer()
+    {
+        AliensVsPredator.network().sendToServer(new PacketSyncEEPS(this.getEntityLivingBase().getEntityId(), this.asNBTTagCompound()));
+    }
 
-	public int getEmbryoAge()
-	{
-		return this.embryoAge;
-	}
+    public EntityLivingBase getEntityLivingBase()
+    {
+        return entityLiving;
+    }
 
-	public boolean doesEntityContainEmbryo()
-	{
-		return this.containsEmbryo;
-	}
+    public int getEmbryoAge()
+    {
+        return this.embryoAge;
+    }
 
-	public void setEmbryoAge(int embryoAge)
-	{
-		this.embryoAge = embryoAge;
-	}
-	
-	public boolean isEmbryoPremature()
-	{
-		return this.getEmbryoAge() < this.getMaxEmbryoAge() - this.getMaxEmbryoAge() / 8;
-	}
-	
-	public void tickEmbryoGrowth()
-	{
-		this.embryoAge++;
-	}
+    public boolean doesEntityContainEmbryo()
+    {
+        return this.containsEmbryo;
+    }
 
-	public int getMaxEmbryoAge()
-	{
-		return 6000;
-	}
-	
-	public EntityChestburster getParasite()
-	{
-		EntityChestburster chestburster = new EntityChestburster(this.entityLiving.worldObj);
-		chestburster.setHostParasiteType(HostType.getMappingFromHost(this.entityLiving.getClass()));
-		
-		return chestburster;
-	}
-	
-	public void burstParasite(World world, Entity entity)
-	{
-		EntityChestburster chestburster = this.getParasite();
-		chestburster.setLocationAndAngles(entity.posX, entity.posY, entity.posZ, 0.0F, 0.0F);
-		world.spawnEntityInWorld(chestburster);
-		entity.attackEntityFrom(DamageSources.causeChestbursterDamage(chestburster, entity), 200F);
-	}
+    public void setEmbryoAge(int embryoAge)
+    {
+        this.embryoAge = embryoAge;
+    }
 
-	public void setContainsEmbryo(boolean containsEmbryo)
-	{
-		this.containsEmbryo = containsEmbryo;
-	}
-	
-	public HostType getHostParasiteType()
-	{
-		return HostType.getMappingFromHost(this.entityLiving.getClass());
-	}
+    public boolean isEmbryoPremature()
+    {
+        return this.getEmbryoAge() < this.getMaxEmbryoAge() - this.getMaxEmbryoAge() / 8;
+    }
+
+    public void tickEmbryoGrowth()
+    {
+        this.embryoAge++;
+    }
+
+    public int getMaxEmbryoAge()
+    {
+        return 6000;
+    }
+
+    public EntityChestburster getParasite()
+    {
+        EntityChestburster chestburster = new EntityChestburster(this.entityLiving.worldObj);
+        chestburster.setHostParasiteType(HostType.getMappingFromHost(this.entityLiving.getClass()));
+
+        return chestburster;
+    }
+
+    public void burstParasite(World world, Entity entity)
+    {
+        EntityChestburster chestburster = this.getParasite();
+        chestburster.setLocationAndAngles(entity.posX, entity.posY, entity.posZ, 0.0F, 0.0F);
+        world.spawnEntityInWorld(chestburster);
+        entity.attackEntityFrom(DamageSources.causeChestbursterDamage(chestburster, entity), 200F);
+    }
+
+    public void setContainsEmbryo(boolean containsEmbryo)
+    {
+        this.containsEmbryo = containsEmbryo;
+    }
+
+    public HostType getHostParasiteType()
+    {
+        return HostType.getMappingFromHost(this.entityLiving.getClass());
+    }
 }

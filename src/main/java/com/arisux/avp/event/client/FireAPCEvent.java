@@ -10,20 +10,20 @@ import net.minecraft.client.Minecraft;
 
 public class FireAPCEvent
 {
-	private Minecraft mc = Minecraft.getMinecraft();
+    private Minecraft mc = Minecraft.getMinecraft();
 
-	@SubscribeEvent
-	public void tick(TickEvent.ClientTickEvent event)
-	{
-		if (mc.thePlayer != null)
-		{
-			if (mc.thePlayer.isRiding() && mc.thePlayer.ridingEntity instanceof EntityAPC)
-			{
-				if (AliensVsPredator.keybinds().KEYBIND_FIRE_APC.isPressed())
-				{
-					AliensVsPredator.network().sendToServer(new PacketFireAPC());
-				}
-			}
-		}
-	}
+    @SubscribeEvent
+    public void tick(TickEvent.ClientTickEvent event)
+    {
+        if (mc.thePlayer != null)
+        {
+            if (mc.thePlayer.isRiding() && mc.thePlayer.ridingEntity instanceof EntityAPC)
+            {
+                if (AliensVsPredator.keybinds().KEYBIND_FIRE_APC.isPressed())
+                {
+                    AliensVsPredator.network().sendToServer(new PacketFireAPC());
+                }
+            }
+        }
+    }
 }

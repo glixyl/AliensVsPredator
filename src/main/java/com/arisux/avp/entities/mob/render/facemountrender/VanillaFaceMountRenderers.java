@@ -57,11 +57,11 @@ public class VanillaFaceMountRenderers
                 GlStateManager.rotate(90.0F, 0.0F, 1.0F, 0.0F);
                 GlStateManager.rotate(90.0F, 0.0F, 0.0F, 1.0F);
                 GlStateManager.translate(0F, -0.2F, 0F);
-                
+
                 if (facehugger.ridingEntity instanceof EntityZombie)
                 {
                     EntityZombie zombie = (EntityZombie) facehugger.ridingEntity;
-                    
+
                     if (zombie.isChild())
                     {
                         GlStateManager.translate(0F, 0F, 0.85F);

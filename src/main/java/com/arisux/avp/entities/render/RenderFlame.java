@@ -8,19 +8,19 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderFlame extends Render
 {
-	@Override
-	public void doRender(Entity entity, double posX, double posY, double posZ, float yaw, float renderPartialTicks)
-	{
-		GlStateManager.pushMatrix();
-		{
-			GlStateManager.translate((float) posX, (float) posY, (float) posZ);
-		}
-		GlStateManager.popMatrix();
-	}
+    @Override
+    public void doRender(Entity entity, double posX, double posY, double posZ, float yaw, float renderPartialTicks)
+    {
+        GlStateManager.pushMatrix();
+        {
+            GlStateManager.translate((float) posX, (float) posY, (float) posZ);
+        }
+        GlStateManager.popMatrix();
+    }
 
-	@Override
-	protected ResourceLocation getEntityTexture(Entity entity)
-	{
-		return null;
-	}
+    @Override
+    protected ResourceLocation getEntityTexture(Entity entity)
+    {
+        return null;
+    }
 }

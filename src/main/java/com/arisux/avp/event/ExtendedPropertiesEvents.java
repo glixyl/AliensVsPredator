@@ -16,86 +16,86 @@ import net.minecraftforge.event.world.WorldEvent;
 
 public class ExtendedPropertiesEvents
 {
-	@SubscribeEvent
-	public void onEntityTrackEvent(PlayerEvent.StartTracking event)
-	{
-		this.syncEntity(event.target);
-	}
+    @SubscribeEvent
+    public void onEntityTrackEvent(PlayerEvent.StartTracking event)
+    {
+        this.syncEntity(event.target);
+    }
 
-	@SubscribeEvent
-	public void onEntityConstructing(EntityConstructing event)
-	{
-		if (event.entity instanceof EntityPlayer)
-		{
-			EntityPlayer thePlayer = (EntityPlayer) event.entity;
+    @SubscribeEvent
+    public void onEntityConstructing(EntityConstructing event)
+    {
+        if (event.entity instanceof EntityPlayer)
+        {
+            EntityPlayer thePlayer = (EntityPlayer) event.entity;
 
-			if (thePlayer != null)
-			{
-				ExtendedEntityPlayer extendedPlayer = new ExtendedEntityPlayer(thePlayer);
-				thePlayer.registerExtendedProperties(ExtendedEntityPlayer.IDENTIFIER, extendedPlayer);
-			}
-		}
+            if (thePlayer != null)
+            {
+                ExtendedEntityPlayer extendedPlayer = new ExtendedEntityPlayer(thePlayer);
+                thePlayer.registerExtendedProperties(ExtendedEntityPlayer.IDENTIFIER, extendedPlayer);
+            }
+        }
 
-		if (event.entity instanceof EntityLivingBase)
-		{
-			EntityLivingBase entityLiving = (EntityLivingBase) event.entity;
+        if (event.entity instanceof EntityLivingBase)
+        {
+            EntityLivingBase entityLiving = (EntityLivingBase) event.entity;
 
-			if (entityLiving != null)
-			{
-				ExtendedEntityLivingBase extendedLiving = new ExtendedEntityLivingBase(entityLiving);
-				entityLiving.registerExtendedProperties(ExtendedEntityLivingBase.IDENTIFIER, extendedLiving);
-			}
-		}
-	}
+            if (entityLiving != null)
+            {
+                ExtendedEntityLivingBase extendedLiving = new ExtendedEntityLivingBase(entityLiving);
+                entityLiving.registerExtendedProperties(ExtendedEntityLivingBase.IDENTIFIER, extendedLiving);
+            }
+        }
+    }
 
-	@SubscribeEvent
-	public void onEntitySpawnInWorld(EntityJoinWorldEvent event)
-	{
-		if (event.entity != null && !event.entity.worldObj.isRemote)
-		{
-			this.syncEntity(event.entity);
-		}
-	}
+    @SubscribeEvent
+    public void onEntitySpawnInWorld(EntityJoinWorldEvent event)
+    {
+        if (event.entity != null && !event.entity.worldObj.isRemote)
+        {
+            this.syncEntity(event.entity);
+        }
+    }
 
-	@SubscribeEvent
-	public void onWorldSave(WorldEvent.Save event)
-	{
-		;
-	}
+    @SubscribeEvent
+    public void onWorldSave(WorldEvent.Save event)
+    {
+        ;
+    }
 
-	public void syncEntity(Entity target)
-	{
-		WorldServer worldServer = (WorldServer) target.worldObj;
+    public void syncEntity(Entity target)
+    {
+        WorldServer worldServer = (WorldServer) target.worldObj;
 
-		if (worldServer != null)
-		{
-			EntityTracker tracker = worldServer.getEntityTracker();
+        if (worldServer != null)
+        {
+            EntityTracker tracker = worldServer.getEntityTracker();
 
-			if (tracker != null && target != null)
-			{
-				if (target instanceof EntityLivingBase)
-				{
-					ExtendedEntityLivingBase extendedLiving = (ExtendedEntityLivingBase) target.getExtendedProperties(ExtendedEntityLivingBase.IDENTIFIER);
+            if (tracker != null && target != null)
+            {
+                if (target instanceof EntityLivingBase)
+                {
+                    ExtendedEntityLivingBase extendedLiving = (ExtendedEntityLivingBase) target.getExtendedProperties(ExtendedEntityLivingBase.IDENTIFIER);
 
-					if (extendedLiving != null)
-					{
-						if (target instanceof EntityPlayer)
-						{
-							extendedLiving.syncClients();
-						}
-					}
-				}
+                    if (extendedLiving != null)
+                    {
+                        if (target instanceof EntityPlayer)
+                        {
+                            extendedLiving.syncClients();
+                        }
+                    }
+                }
 
-				if (target instanceof EntityPlayer)
-				{
-					ExtendedEntityPlayer extendedPlayer = (ExtendedEntityPlayer) target.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER);
+                if (target instanceof EntityPlayer)
+                {
+                    ExtendedEntityPlayer extendedPlayer = (ExtendedEntityPlayer) target.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER);
 
-					if (extendedPlayer != null)
-					{
-						extendedPlayer.syncClients();
-					}
-				}
-			}
-		}
-	}
+                    if (extendedPlayer != null)
+                    {
+                        extendedPlayer.syncClients();
+                    }
+                }
+            }
+        }
+    }
 }

@@ -8,14 +8,14 @@ import net.minecraftforge.client.event.RenderPlayerEvent;
 
 public class RenderPlayerAPCEvent
 {
-	private Minecraft mc = Minecraft.getMinecraft();
+    private Minecraft mc = Minecraft.getMinecraft();
 
-	@SubscribeEvent
-	public void onRenderPlayerEvent(RenderPlayerEvent.Pre event)
-	{
-		if (event.entityPlayer.isRiding() && event.entityPlayer.ridingEntity instanceof EntityAPC)
-		{
-			event.setCanceled(true);
-		}
-	}
+    @SubscribeEvent
+    public void onRenderPlayerEvent(RenderPlayerEvent.Pre event)
+    {
+        if (event.entityPlayer.isRiding() && event.entityPlayer.ridingEntity instanceof EntityAPC)
+        {
+            event.setCanceled(true);
+        }
+    }
 }

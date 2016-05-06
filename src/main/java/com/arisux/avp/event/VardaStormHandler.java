@@ -18,98 +18,98 @@ import net.minecraft.world.World;
 
 public class VardaStormHandler
 {
-	public static VardaStormHandler INSTANCE = new VardaStormHandler();
-	private int stormUpdateCount = 0;
-	private int cloudTickCounter = 0;
+    public static VardaStormHandler INSTANCE = new VardaStormHandler();
+    private int stormUpdateCount = 0;
+    private int cloudTickCounter = 0;
 
-	@SubscribeEvent
-	public void onWorldTick(TickEvent.WorldTickEvent event)
-	{
-		this.updateStorm();
-		this.updateClouds(event.world);
+    @SubscribeEvent
+    public void onWorldTick(TickEvent.WorldTickEvent event)
+    {
+        this.updateStorm();
+        this.updateClouds(event.world);
 
-		if (isStormActive(event.world))
-		{
-			if (event.world.isRemote)
-			{
-				Minecraft.getMinecraft().thePlayer.motionZ += 0.04F;
-				Minecraft.getMinecraft().thePlayer.motionY += MathHelper.sin(event.world.getWorldTime() * 0.4F) * 0.1F;
-				Minecraft.getMinecraft().thePlayer.fallDistance = 0F;
-				AliensVsPredator.network().sendToAll(new PacketVardaStormMoveEntity(Integer.valueOf(Minecraft.getMinecraft().thePlayer.getEntityId())));
-			}
+        if (isStormActive(event.world))
+        {
+            if (event.world.isRemote)
+            {
+                Minecraft.getMinecraft().thePlayer.motionZ += 0.04F;
+                Minecraft.getMinecraft().thePlayer.motionY += MathHelper.sin(event.world.getWorldTime() * 0.4F) * 0.1F;
+                Minecraft.getMinecraft().thePlayer.fallDistance = 0F;
+                AliensVsPredator.network().sendToAll(new PacketVardaStormMoveEntity(Integer.valueOf(Minecraft.getMinecraft().thePlayer.getEntityId())));
+            }
 
-			Object[] entities = event.world.loadedEntityList.toArray();
+            Object[] entities = event.world.loadedEntityList.toArray();
 
-			for (Object o : entities)
-			{
-				if (o instanceof Entity)
-				{
-					Entity entity = (Entity) o;
+            for (Object o : entities)
+            {
+                if (o instanceof Entity)
+                {
+                    Entity entity = (Entity) o;
 
-					if (event.world != null && entity.worldObj.provider instanceof ProviderVarda && WorldUtil.canSeeSky(new CoordData(entity), event.world))
-					{
-						entity.motionZ += 0.04F;
-						entity.motionY += MathHelper.sin(entity.worldObj.getWorldTime() * 0.4F) * 0.1F;
-						entity.fallDistance = 0F;
+                    if (event.world != null && entity.worldObj.provider instanceof ProviderVarda && WorldUtil.canSeeSky(new CoordData(entity), event.world))
+                    {
+                        entity.motionZ += 0.04F;
+                        entity.motionY += MathHelper.sin(entity.worldObj.getWorldTime() * 0.4F) * 0.1F;
+                        entity.fallDistance = 0F;
 
-						AliensVsPredator.network().sendToAll(new PacketVardaStormMoveEntity(Integer.valueOf(entity.getEntityId())));
+                        AliensVsPredator.network().sendToAll(new PacketVardaStormMoveEntity(Integer.valueOf(entity.getEntityId())));
 
-						entity.attackEntityFrom(DamageSources.causeSilicaStormDamage(entity), 0.5F);
-					}
-				}
-			}
-		}
-	}
+                        entity.attackEntityFrom(DamageSources.causeSilicaStormDamage(entity), 0.5F);
+                    }
+                }
+            }
+        }
+    }
 
-	public boolean isStormActive(World worldObj)
-	{
-		return isStormActive(worldObj.getWorldTime());
-	}
+    public boolean isStormActive(World worldObj)
+    {
+        return isStormActive(worldObj.getWorldTime());
+    }
 
-	public boolean isStormActive(long atTime)
-	{
-		return toHours(atTime) >= getStormStartTime() && toHours(atTime) <= getStormEndTime();
-	}
+    public boolean isStormActive(long atTime)
+    {
+        return toHours(atTime) >= getStormStartTime() && toHours(atTime) <= getStormEndTime();
+    }
 
-	public long toHours(long time)
-	{
-		return (time % 24000L) / 1000L;
-	}
+    public long toHours(long time)
+    {
+        return (time % 24000L) / 1000L;
+    }
 
-	public long getStormStartTime()
-	{
-		return 3L;
-	}
+    public long getStormStartTime()
+    {
+        return 3L;
+    }
 
-	public long getStormEndTime()
-	{
-		return 4L;
-	}
+    public long getStormEndTime()
+    {
+        return 4L;
+    }
 
-	public void updateStorm()
-	{
-		this.stormUpdateCount++;
-	}
+    public void updateStorm()
+    {
+        this.stormUpdateCount++;
+    }
 
-	public void updateClouds(World world)
-	{
-		if (world.isRemote)
-		{
-			if (!Minecraft.getMinecraft().isGamePaused())
-			{
-				this.cloudTickCounter++;
-			}
-		}
-	}
+    public void updateClouds(World world)
+    {
+        if (world.isRemote)
+        {
+            if (!Minecraft.getMinecraft().isGamePaused())
+            {
+                this.cloudTickCounter++;
+            }
+        }
+    }
 
-	public int getStormUpdateCount()
-	{
-		return this.stormUpdateCount;
-	}
+    public int getStormUpdateCount()
+    {
+        return this.stormUpdateCount;
+    }
 
-	@SideOnly(Side.CLIENT)
-	public int getCloudTickCounter()
-	{
-		return cloudTickCounter;
-	}
+    @SideOnly(Side.CLIENT)
+    public int getCloudTickCounter()
+    {
+        return cloudTickCounter;
+    }
 }

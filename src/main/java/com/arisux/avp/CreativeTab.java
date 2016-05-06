@@ -5,23 +5,23 @@ import net.minecraft.item.Item;
 
 public class CreativeTab extends CreativeTabs
 {
-	public static CreativeTab tabMain = new CreativeTab();
-	public static CreativeTab tabBlocks = new CreativeTab();
-	
-	public CreativeTab()
-	{
-		super(AliensVsPredator.instance().container().getName());
-	}
+    public static CreativeTab tabMain = new CreativeTab();
+    public static CreativeTab tabBlocks = new CreativeTab();
 
-	@Override
-	public String getTranslatedTabLabel()
-	{
-		return AliensVsPredator.instance().container().getName();
-	}
+    public CreativeTab()
+    {
+        super(AliensVsPredator.instance().container().getName());
+    }
 
-	@Override
-	public Item getTabIconItem()
-	{
-		return AliensVsPredator.items().helmTitanium;
-	}
+    @Override
+    public String getTranslatedTabLabel()
+    {
+        return AliensVsPredator.instance().container().getName();
+    }
+
+    @Override
+    public Item getTabIconItem()
+    {
+        return AliensVsPredator.items().helmTitanium;
+    }
 }

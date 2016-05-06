@@ -21,183 +21,183 @@ import net.minecraft.world.World;
 
 public abstract class EntitySpeciesAlien extends EntityMob implements IMob, IHiveSignature
 {
-	private UUID signature;
-	private int jellyLevel;
+    private UUID signature;
+    private int jellyLevel;
 
-	public EntitySpeciesAlien(World world)
-	{
-		super(world);
-		this.jumpMovementFactor = 0.2F;
-	}
+    public EntitySpeciesAlien(World world)
+    {
+        super(world);
+        this.jumpMovementFactor = 0.2F;
+    }
 
-	@Override
-	protected void entityInit()
-	{
-		super.entityInit();
-	}
+    @Override
+    protected void entityInit()
+    {
+        super.entityInit();
+    }
 
-	@Override
-	public void writeEntityToNBT(NBTTagCompound nbt)
-	{
-		super.writeEntityToNBT(nbt);
+    @Override
+    public void writeEntityToNBT(NBTTagCompound nbt)
+    {
+        super.writeEntityToNBT(nbt);
 
-		nbt.setInteger("jellyLevel", this.jellyLevel);
-		nbt.setString("hiveSignature", signature != null ? this.signature.toString() : "");
-	}
+        nbt.setInteger("jellyLevel", this.jellyLevel);
+        nbt.setString("hiveSignature", signature != null ? this.signature.toString() : "");
+    }
 
-	@Override
-	public void readEntityFromNBT(NBTTagCompound nbt)
-	{
-		super.readEntityFromNBT(nbt);
+    @Override
+    public void readEntityFromNBT(NBTTagCompound nbt)
+    {
+        super.readEntityFromNBT(nbt);
 
-		this.jellyLevel = nbt.getInteger("jellyLevel");
-		this.signature = this.uuidFromNBT(nbt);
-	}
+        this.jellyLevel = nbt.getInteger("jellyLevel");
+        this.signature = this.uuidFromNBT(nbt);
+    }
 
-	private UUID uuidFromNBT(NBTTagCompound nbt)
-	{
-		String signature = nbt.getString("hiveSignature");
+    private UUID uuidFromNBT(NBTTagCompound nbt)
+    {
+        String signature = nbt.getString("hiveSignature");
 
-		if (signature != null && signature.matches("[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[34][0-9a-fA-F]{3}-[89ab][0-9a-fA-F]{3}-[0-9a-fA-F]{12}"))
-		{
-			return UUID.fromString(signature);
-		}
+        if (signature != null && signature.matches("[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[34][0-9a-fA-F]{3}-[89ab][0-9a-fA-F]{3}-[0-9a-fA-F]{12}"))
+        {
+            return UUID.fromString(signature);
+        }
 
-		return null;
-	}
+        return null;
+    }
 
-	@Override
-	public void onKillEntity(EntityLivingBase par1EntityLivingBase)
-	{
-		super.onKillEntity(par1EntityLivingBase);
-		this.setJellyLevel(this.getJellyLevel() + 1);
-	}
+    @Override
+    public void onKillEntity(EntityLivingBase par1EntityLivingBase)
+    {
+        super.onKillEntity(par1EntityLivingBase);
+        this.setJellyLevel(this.getJellyLevel() + 1);
+    }
 
-	@Override
-	protected boolean canDespawn()
-	{
-		return this.getJellyLevel() < 1;
-	}
+    @Override
+    protected boolean canDespawn()
+    {
+        return this.getJellyLevel() < 1;
+    }
 
-	@Override
-	protected boolean isAIEnabled()
-	{
-		return true;
-	}
+    @Override
+    protected boolean isAIEnabled()
+    {
+        return true;
+    }
 
-	@Override
-	public void onDeath(DamageSource damagesource)
-	{
-		super.onDeath(damagesource);
+    @Override
+    public void onDeath(DamageSource damagesource)
+    {
+        super.onDeath(damagesource);
 
-		if (!this.worldObj.isRemote)
-		{
-			EntityAcidPool entity = new EntityAcidPool(this.worldObj);
-			entity.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
-			this.worldObj.spawnEntityInWorld(entity);
+        if (!this.worldObj.isRemote)
+        {
+            EntityAcidPool entity = new EntityAcidPool(this.worldObj);
+            entity.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
+            this.worldObj.spawnEntityInWorld(entity);
 
-			if (this instanceof EntityQueen)
-			{
-				int randomJelly = this.rand.nextInt(196);
-				this.dropItem(AliensVsPredator.items().itemRoyalJelly, 32 + (randomJelly / 2 + randomJelly));
-			}
+            if (this instanceof EntityQueen)
+            {
+                int randomJelly = this.rand.nextInt(196);
+                this.dropItem(AliensVsPredator.items().itemRoyalJelly, 32 + (randomJelly / 2 + randomJelly));
+            }
 
-			if (this.rand.nextInt(4) == 0)
-			{
-				this.dropItem(AliensVsPredator.items().itemRoyalJelly, 1 + this.rand.nextInt(5));
-			}
-		}
-	}
+            if (this.rand.nextInt(4) == 0)
+            {
+                this.dropItem(AliensVsPredator.items().itemRoyalJelly, 1 + this.rand.nextInt(5));
+            }
+        }
+    }
 
-	@Override
-	protected void dropRareDrop(int rate)
-	{
-		this.dropItem(AliensVsPredator.items().itemRoyalJelly, 4);
-	}
-	
-	protected void tickEvolution()
-	{
-		if (this.worldObj.getWorldTime() % 40 == 0)
-		{
-			EvolutionType evolution = EvolutionType.getEvolutionMappingFor(this.getClass());
+    @Override
+    protected void dropRareDrop(int rate)
+    {
+        this.dropItem(AliensVsPredator.items().itemRoyalJelly, 4);
+    }
 
-			if (!this.worldObj.isRemote && evolution != null && evolution.getEvolution() != null && evolution.getLevel() != 0 && this.jellyLevel >= evolution.getLevel())
-			{
-				EntitySpeciesAlien alien = (EntitySpeciesAlien) WorldUtil.Entities.constructEntity(this.worldObj, evolution.getEvolution());
-				alien.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
-				this.worldObj.spawnEntityInWorld(alien);
-				this.setDead();
-			}
-		}
-	}
+    protected void tickEvolution()
+    {
+        if (this.worldObj.getWorldTime() % 40 == 0)
+        {
+            EvolutionType evolution = EvolutionType.getEvolutionMappingFor(this.getClass());
 
-	@SuppressWarnings("unchecked")
-	protected void tickJellyPickupAI()
-	{
-		if (!this.worldObj.isRemote && !(this instanceof EntityOvamorph))
-		{
-			ArrayList<EntityItem> entityItemList = (ArrayList<EntityItem>) WorldUtil.Entities.getEntitiesInCoordsRange(worldObj, EntityItem.class, new com.arisux.airi.lib.WorldUtil.Blocks.CoordData(this), 8);
-	
-			for (EntityItem entityItem : entityItemList)
-			{
-				if (entityItem.delayBeforeCanPickup <= 0)
-				{
-					ItemStack stack = entityItem.getDataWatcher().getWatchableObjectItemStack(10);
-	
-					if (stack.getItem() == AliensVsPredator.items().itemRoyalJelly)
-					{
-						this.getNavigator().setPath(this.getNavigator().getPathToEntityLiving(entityItem), 1);
-	
-						if (this.getDistanceToEntity(entityItem) < 1)
-						{
-							this.onPickupJelly(entityItem);
-						}
-						break;
-					}
-				}
-			}
-		}
-	}
-	
-	protected void onPickupJelly(EntityItem entityItem)
-	{
-		this.setJellyLevel(this.getJellyLevel() + entityItem.getEntityItem().stackSize);
-		entityItem.setDead();
-	}
+            if (!this.worldObj.isRemote && evolution != null && evolution.getEvolution() != null && evolution.getLevel() != 0 && this.jellyLevel >= evolution.getLevel())
+            {
+                EntitySpeciesAlien alien = (EntitySpeciesAlien) WorldUtil.Entities.constructEntity(this.worldObj, evolution.getEvolution());
+                alien.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
+                this.worldObj.spawnEntityInWorld(alien);
+                this.setDead();
+            }
+        }
+    }
 
-	@Override
-	public void onUpdate()
-	{
-		super.onUpdate();
+    @SuppressWarnings("unchecked")
+    protected void tickJellyPickupAI()
+    {
+        if (!this.worldObj.isRemote && !(this instanceof EntityOvamorph))
+        {
+            ArrayList<EntityItem> entityItemList = (ArrayList<EntityItem>) WorldUtil.Entities.getEntitiesInCoordsRange(worldObj, EntityItem.class, new com.arisux.airi.lib.WorldUtil.Blocks.CoordData(this), 8);
 
-		this.tickEvolution();
-		this.tickJellyPickupAI();
-	}
+            for (EntityItem entityItem : entityItemList)
+            {
+                if (entityItem.delayBeforeCanPickup <= 0)
+                {
+                    ItemStack stack = entityItem.getDataWatcher().getWatchableObjectItemStack(10);
 
-	public int getJellyLevel()
-	{
-		return this.jellyLevel;
-	}
+                    if (stack.getItem() == AliensVsPredator.items().itemRoyalJelly)
+                    {
+                        this.getNavigator().setPath(this.getNavigator().getPathToEntityLiving(entityItem), 1);
 
-	public void setJellyLevel(int jellyLevel)
-	{
-		this.jellyLevel = jellyLevel;
+                        if (this.getDistanceToEntity(entityItem) < 1)
+                        {
+                            this.onPickupJelly(entityItem);
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+    }
 
-		if (!this.worldObj.isRemote)
-		{
-			AliensVsPredator.network().sendToAll(new PacketJellyLevelUpdate(jellyLevel, Integer.valueOf(this.getEntityId())));
-		}
-	}
+    protected void onPickupJelly(EntityItem entityItem)
+    {
+        this.setJellyLevel(this.getJellyLevel() + entityItem.getEntityItem().stackSize);
+        entityItem.setDead();
+    }
 
-	@Override
-	public UUID getHiveSignature()
-	{
-		return this.signature;
-	}
+    @Override
+    public void onUpdate()
+    {
+        super.onUpdate();
 
-	@Override
-	public void setHiveSignature(UUID signature)
-	{
-		this.signature = signature;
-	}
+        this.tickEvolution();
+        this.tickJellyPickupAI();
+    }
+
+    public int getJellyLevel()
+    {
+        return this.jellyLevel;
+    }
+
+    public void setJellyLevel(int jellyLevel)
+    {
+        this.jellyLevel = jellyLevel;
+
+        if (!this.worldObj.isRemote)
+        {
+            AliensVsPredator.network().sendToAll(new PacketJellyLevelUpdate(jellyLevel, Integer.valueOf(this.getEntityId())));
+        }
+    }
+
+    @Override
+    public UUID getHiveSignature()
+    {
+        return this.signature;
+    }
+
+    @Override
+    public void setHiveSignature(UUID signature)
+    {
+        this.signature = signature;
+    }
 }

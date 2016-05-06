@@ -24,193 +24,196 @@ import net.minecraft.world.World;
 
 public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 {
-	private boolean isFertile;
-	
-	public EntityFacehugger(World world)
-	{
-		super(world);
-		this.isFertile = true;
-		this.setSize(0.8F, 0.8F);
-		this.experienceValue = 10;
-		this.getNavigator().setCanSwim(true);
-		this.getNavigator().setAvoidsWater(true);
-		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(3, new EntityAIAttackOnCollide(this, 0.55D, true));
-		this.tasks.addTask(8, new EntityAIWander(this, 0.55D));
-		this.targetTasks.addTask(2, new EntityAILeapAtTarget(this, 0.8F));
-		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, Entity.class, /** targetChance **/0, /** shouldCheckSight **/false, /** nearbyOnly **/false, EntitySelectorXenomorph.instance));
-	}
+    private boolean isFertile;
 
-	@Override
-	protected void applyEntityAttributes()
-	{
-		super.applyEntityAttributes();
+    public EntityFacehugger(World world)
+    {
+        super(world);
+        this.isFertile = true;
+        this.setSize(0.8F, 0.8F);
+        this.experienceValue = 10;
+        this.getNavigator().setCanSwim(true);
+        this.getNavigator().setAvoidsWater(true);
+        this.tasks.addTask(0, new EntityAISwimming(this));
+        this.tasks.addTask(3, new EntityAIAttackOnCollide(this, 0.55D, true));
+        this.tasks.addTask(8, new EntityAIWander(this, 0.55D));
+        this.targetTasks.addTask(2, new EntityAILeapAtTarget(this, 0.8F));
+        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, Entity.class, /** targetChance **/
+            0, /** shouldCheckSight **/
+            false, /** nearbyOnly **/
+            false, EntitySelectorXenomorph.instance));
+    }
 
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(14.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.55D);
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(0.50D);
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
-	}
+    @Override
+    protected void applyEntityAttributes()
+    {
+        super.applyEntityAttributes();
 
-	@Override
-	public void onUpdate()
-	{
-		super.onUpdate();
-		
-		this.fallDistance = 0F;
-		
-		if (this.isCollidedHorizontally)
-		{
-			this.motionY += 0.15F;
-		}
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(14.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.55D);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(0.50D);
+        this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
+    }
 
-		if (this.isRiding())
-		{
-			this.rotationYaw = 0F;
-			this.rotationYawHead = 0F;
-			
-			if (this.ridingEntity instanceof EntityLivingBase)
-			{
-				EntityLivingBase ridingEntity = (EntityLivingBase) this.ridingEntity;
-				ridingEntity.rotationYaw = 0F;
-				ridingEntity.rotationYawHead = 0F;
-			}
-		}
-	}
+    @Override
+    public void onUpdate()
+    {
+        super.onUpdate();
 
-	@Override
-	protected void onPickupJelly(EntityItem entityItem)
-	{
-		super.onPickupJelly(entityItem);
-		this.isFertile = true;
-	}
+        this.fallDistance = 0F;
 
-	@Override
-	public boolean isOnLadder()
-	{
-		return this.motionY > 1.0099999997764826D;
-	}
+        if (this.isCollidedHorizontally)
+        {
+            this.motionY += 0.15F;
+        }
 
-	@Override
-	public void collideWithEntity(Entity entity)
-	{
-		this.latchOnEntity(entity);
-	}
-	
-	protected void latchOnEntity(Entity entity)
-	{
-		if (this.isFertile && entity instanceof EntityLivingBase && !(entity instanceof EntitySpeciesAlien))
-		{
-			EntityLivingBase living = (EntityLivingBase) entity;
-			ExtendedEntityLivingBase extendedLiving = (ExtendedEntityLivingBase) living.getExtendedProperties(ExtendedEntityLivingBase.IDENTIFIER);
+        if (this.isRiding())
+        {
+            this.rotationYaw = 0F;
+            this.rotationYawHead = 0F;
 
-			if (!(living instanceof EntityPlayer) || living instanceof EntityPlayer && !((EntityPlayer) living).capabilities.isCreativeMode)
-			{
-				this.mountEntity(living);
-				
-				//TODO: Replace this with a method that sets the parasite type that is implanted into this host. This will allow for mob-specific facehuggers.
-				extendedLiving.setContainsEmbryo(true);
-				extendedLiving.syncClients();
-				this.isFertile = false;
-			}
-		}
-	}
-	
-	@Override
-	public boolean attackEntityAsMob(Entity entity)
-	{
-		return false;
-	}
-	
-	@Override
-	public boolean attackEntityFrom(DamageSource damagesource, float damage)
-	{
-		return super.attackEntityFrom(damagesource, damage);
-	}
+            if (this.ridingEntity instanceof EntityLivingBase)
+            {
+                EntityLivingBase ridingEntity = (EntityLivingBase) this.ridingEntity;
+                ridingEntity.rotationYaw = 0F;
+                ridingEntity.rotationYawHead = 0F;
+            }
+        }
+    }
 
-	@Override
-	public void onDeath(DamageSource damagesource)
-	{
-		super.onDeath(damagesource);
-	}
+    @Override
+    protected void onPickupJelly(EntityItem entityItem)
+    {
+        super.onPickupJelly(entityItem);
+        this.isFertile = true;
+    }
 
-	@Override
-	protected boolean isAIEnabled()
-	{
-		return true;
-	}
+    @Override
+    public boolean isOnLadder()
+    {
+        return this.motionY > 1.0099999997764826D;
+    }
 
-	@Override
-	public double getYOffset()
-	{
-		return 0.3D;
-	}
+    @Override
+    public void collideWithEntity(Entity entity)
+    {
+        this.latchOnEntity(entity);
+    }
 
-	@Override
-	protected boolean canTriggerWalking()
-	{
-		return false;
-	}
+    protected void latchOnEntity(Entity entity)
+    {
+        if (this.isFertile && entity instanceof EntityLivingBase && !(entity instanceof EntitySpeciesAlien))
+        {
+            EntityLivingBase living = (EntityLivingBase) entity;
+            ExtendedEntityLivingBase extendedLiving = (ExtendedEntityLivingBase) living.getExtendedProperties(ExtendedEntityLivingBase.IDENTIFIER);
 
-	@Override
-	protected String getDeathSound()
-	{
-		return AliensVsPredator.properties().SOUND_FACEHUGGER_DEATH;
-	}
+            if (!(living instanceof EntityPlayer) || living instanceof EntityPlayer && !((EntityPlayer) living).capabilities.isCreativeMode)
+            {
+                this.mountEntity(living);
 
-	@Override
-	protected boolean canDespawn()
-	{
-		return false;
-	}
+                // TODO: Replace this with a method that sets the parasite type that is implanted into this host. This will allow for mob-specific facehuggers.
+                extendedLiving.setContainsEmbryo(true);
+                extendedLiving.syncClients();
+                this.isFertile = false;
+            }
+        }
+    }
 
-	@Override
-	protected void attackEntity(Entity entity, float attackStrength)
-	{
-		;
-	}
+    @Override
+    public boolean attackEntityAsMob(Entity entity)
+    {
+        return false;
+    }
 
-	@Override
-	public void writeEntityToNBT(NBTTagCompound nbt)
-	{
-		super.writeEntityToNBT(nbt);
-	}
+    @Override
+    public boolean attackEntityFrom(DamageSource damagesource, float damage)
+    {
+        return super.attackEntityFrom(damagesource, damage);
+    }
 
-	@Override
-	public void readEntityFromNBT(NBTTagCompound nbt)
-	{
-		super.readEntityFromNBT(nbt);
-	}
+    @Override
+    public void onDeath(DamageSource damagesource)
+    {
+        super.onDeath(damagesource);
+    }
 
-	@Override
-	public EnumCreatureAttribute getCreatureAttribute()
-	{
-		return EnumCreatureAttribute.ARTHROPOD;
-	}
+    @Override
+    protected boolean isAIEnabled()
+    {
+        return true;
+    }
 
-	@Override
-	public boolean isPotionApplicable(PotionEffect effect)
-	{
-		return effect.getPotionID() == Potion.poison.id ? false : super.isPotionApplicable(effect);
-	}
+    @Override
+    public double getYOffset()
+    {
+        return 0.3D;
+    }
 
-	@Override
-	public void onKillEntity(EntityLivingBase host)
-	{
-		super.onKillEntity(host);
-	}
-	
-	@Override
-	public void readFromNBT(NBTTagCompound nbt)
-	{
-		super.readFromNBT(nbt);
-		this.isFertile = nbt.getBoolean("fertile");
-	}
-	
-	@Override
-	public void writeToNBT(NBTTagCompound nbt)
-	{
-		super.writeToNBT(nbt);
-		nbt.setBoolean("fertile", this.isFertile);
-	}
+    @Override
+    protected boolean canTriggerWalking()
+    {
+        return false;
+    }
+
+    @Override
+    protected String getDeathSound()
+    {
+        return AliensVsPredator.properties().SOUND_FACEHUGGER_DEATH;
+    }
+
+    @Override
+    protected boolean canDespawn()
+    {
+        return false;
+    }
+
+    @Override
+    protected void attackEntity(Entity entity, float attackStrength)
+    {
+        ;
+    }
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound nbt)
+    {
+        super.writeEntityToNBT(nbt);
+    }
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound nbt)
+    {
+        super.readEntityFromNBT(nbt);
+    }
+
+    @Override
+    public EnumCreatureAttribute getCreatureAttribute()
+    {
+        return EnumCreatureAttribute.ARTHROPOD;
+    }
+
+    @Override
+    public boolean isPotionApplicable(PotionEffect effect)
+    {
+        return effect.getPotionID() == Potion.poison.id ? false : super.isPotionApplicable(effect);
+    }
+
+    @Override
+    public void onKillEntity(EntityLivingBase host)
+    {
+        super.onKillEntity(host);
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound nbt)
+    {
+        super.readFromNBT(nbt);
+        this.isFertile = nbt.getBoolean("fertile");
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound nbt)
+    {
+        super.writeToNBT(nbt);
+        nbt.setBoolean("fertile", this.isFertile);
+    }
 }

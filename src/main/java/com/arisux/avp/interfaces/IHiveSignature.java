@@ -4,7 +4,7 @@ import java.util.UUID;
 
 public interface IHiveSignature
 {
-	public UUID getHiveSignature();
-	
-	public void setHiveSignature(UUID signature);
+    public UUID getHiveSignature();
+
+    public void setHiveSignature(UUID signature);
 }

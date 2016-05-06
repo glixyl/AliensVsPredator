@@ -27,7 +27,7 @@ public class PathPoint extends net.minecraft.pathfinding.PathPoint
 
     public PathPoint(int x, int y, int z)
     {
-    	super(x, y, z);
+        super(x, y, z);
         this.xCoord = x;
         this.yCoord = y;
         this.zCoord = z;
@@ -44,9 +44,9 @@ public class PathPoint extends net.minecraft.pathfinding.PathPoint
      */
     public float distanceTo(PathPoint pathPointIn)
     {
-        float x = (float)(pathPointIn.xCoord - this.xCoord);
-        float y = (float)(pathPointIn.yCoord - this.yCoord);
-        float z = (float)(pathPointIn.zCoord - this.zCoord);
+        float x = (float) (pathPointIn.xCoord - this.xCoord);
+        float y = (float) (pathPointIn.yCoord - this.yCoord);
+        float z = (float) (pathPointIn.zCoord - this.zCoord);
         return MathHelper.sqrt_float(x * x + y * y + z * z);
     }
 
@@ -55,9 +55,9 @@ public class PathPoint extends net.minecraft.pathfinding.PathPoint
      */
     public float distanceToSquared(PathPoint pathPointIn)
     {
-        float x = (float)(pathPointIn.xCoord - this.xCoord);
-        float y = (float)(pathPointIn.yCoord - this.yCoord);
-        float z = (float)(pathPointIn.zCoord - this.zCoord);
+        float x = (float) (pathPointIn.xCoord - this.xCoord);
+        float y = (float) (pathPointIn.yCoord - this.yCoord);
+        float z = (float) (pathPointIn.zCoord - this.zCoord);
         return x * x + y * y + z * z;
     }
 
@@ -69,7 +69,7 @@ public class PathPoint extends net.minecraft.pathfinding.PathPoint
         }
         else
         {
-            PathPoint pathpoint = (PathPoint)pathPoint;
+            PathPoint pathpoint = (PathPoint) pathPoint;
             return this.hash == pathpoint.hash && this.xCoord == pathpoint.xCoord && this.yCoord == pathpoint.yCoord && this.zCoord == pathpoint.zCoord;
         }
     }

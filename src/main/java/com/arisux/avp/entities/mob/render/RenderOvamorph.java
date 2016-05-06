@@ -18,61 +18,61 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderOvamorph extends RenderLiving implements ICustomCryostasisRenderer
 {
-	public RenderOvamorph(ModelBase mainModel, float shadowSize)
-	{
-		super(mainModel, shadowSize);
-	}
+    public RenderOvamorph(ModelBase mainModel, float shadowSize)
+    {
+        super(mainModel, shadowSize);
+    }
 
-	@Override
-	protected void preRenderCallback(EntityLivingBase entityLiving, float partialTicks)
-	{
-		super.preRenderCallback(entityLiving, partialTicks);
-		GlStateManager.scale(1.75F, 1.75F, 1.75F);
-	}
+    @Override
+    protected void preRenderCallback(EntityLivingBase entityLiving, float partialTicks)
+    {
+        super.preRenderCallback(entityLiving, partialTicks);
+        GlStateManager.scale(1.75F, 1.75F, 1.75F);
+    }
 
-	@Override
-	public ResourceLocation getEntityTexture(Entity entity)
-	{
-		return AliensVsPredator.resources().OVAMORPH;
-	}
+    @Override
+    public ResourceLocation getEntityTexture(Entity entity)
+    {
+        return AliensVsPredator.resources().OVAMORPH;
+    }
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public CryostasisTubeRenderer getCustomCryostasisRenderer()
-	{
-		return new CryostasisTubeRenderer()
-		{
-			@Override
-			public void renderChassis(RenderCryostasisTube renderer, TileEntityCryostasisTube tile, double posX, double posY, double posZ)
-			{
-				super.renderChassis(renderer, tile, posX, posY, posZ);
-			}
+    @SideOnly(Side.CLIENT)
+    @Override
+    public CryostasisTubeRenderer getCustomCryostasisRenderer()
+    {
+        return new CryostasisTubeRenderer()
+        {
+            @Override
+            public void renderChassis(RenderCryostasisTube renderer, TileEntityCryostasisTube tile, double posX, double posY, double posZ)
+            {
+                super.renderChassis(renderer, tile, posX, posY, posZ);
+            }
 
-			@Override
-			public void renderEntity(RenderCryostasisTube renderer, TileEntityCryostasisTube tile, double posX, double posY, double posZ)
-			{
-				if (tile.stasisEntity != null)
-				{
-					GlStateManager.pushMatrix();
-					{
-						if (tile.getVoltage() > 0)
-						{
-							GlStateManager.disableLight();
-						}
+            @Override
+            public void renderEntity(RenderCryostasisTube renderer, TileEntityCryostasisTube tile, double posX, double posY, double posZ)
+            {
+                if (tile.stasisEntity != null)
+                {
+                    GlStateManager.pushMatrix();
+                    {
+                        if (tile.getVoltage() > 0)
+                        {
+                            GlStateManager.disableLight();
+                        }
 
-						GlStateManager.translate(0F, 0.5F, 0F);
-						GlStateManager.rotate(180F, 1F, 0F, 0F);
-						RenderManager.instance.renderEntityWithPosYaw(tile.stasisEntity, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
-					}
-					GlStateManager.popMatrix();
-				}
-			}
+                        GlStateManager.translate(0F, 0.5F, 0F);
+                        GlStateManager.rotate(180F, 1F, 0F, 0F);
+                        RenderManager.instance.renderEntityWithPosYaw(tile.stasisEntity, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
+                    }
+                    GlStateManager.popMatrix();
+                }
+            }
 
-			@Override
-			public void renderTube(RenderCryostasisTube renderer, TileEntityCryostasisTube tile, double posX, double posY, double posZ)
-			{
-				super.renderTube(renderer, tile, posX, posY, posZ);
-			}
-		};
-	}
+            @Override
+            public void renderTube(RenderCryostasisTube renderer, TileEntityCryostasisTube tile, double posX, double posY, double posZ)
+            {
+                super.renderTube(renderer, tile, posX, posY, posZ);
+            }
+        };
+    }
 }

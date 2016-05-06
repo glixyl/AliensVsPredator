@@ -14,34 +14,34 @@ import net.minecraftforge.fluids.FluidRegistry;
 
 public class FluidHandler implements IInitializable
 {
-	public static FluidHandler instance = new FluidHandler();
-	
-	public Fluid fluidBlackGoo = new FluidBlackGoo().setUnlocalizedName("blackGoo");
-	public Fluid fluidMist = new FluidMist().setUnlocalizedName("mist");
+    public static FluidHandler instance = new FluidHandler();
 
-	@Override
-	public void initialize(FMLInitializationEvent event)
-	{
-		this.registerFluids(event);
-		this.registerFluidContainers(event);
-		this.registerBucketEvents(event);
-	}
-	
-	private void registerFluids(FMLInitializationEvent event)
-	{
-		FluidRegistry.registerFluid(fluidBlackGoo);
-		FluidRegistry.registerFluid(fluidMist);
-	}
-	
-	private void registerFluidContainers(FMLInitializationEvent event)
-	{
-		FluidContainerRegistry.registerFluidContainer(fluidBlackGoo, new ItemStack(AliensVsPredator.items().blackGooBucket), new ItemStack(Items.bucket));
-		FluidContainerRegistry.registerFluidContainer(fluidMist, new ItemStack(AliensVsPredator.items().mistBucket), new ItemStack(Items.bucket));
-	}
-	
-	private void registerBucketEvents(FMLInitializationEvent event)
-	{
-		BucketHandlingEvent.INSTANCE.buckets.put(AliensVsPredator.blocks().blockBlackGoo, AliensVsPredator.items().blackGooBucket);
-		BucketHandlingEvent.INSTANCE.buckets.put(AliensVsPredator.blocks().blockMist, AliensVsPredator.items().mistBucket);
-	}
+    public Fluid fluidBlackGoo = new FluidBlackGoo().setUnlocalizedName("blackGoo");
+    public Fluid fluidMist = new FluidMist().setUnlocalizedName("mist");
+
+    @Override
+    public void initialize(FMLInitializationEvent event)
+    {
+        this.registerFluids(event);
+        this.registerFluidContainers(event);
+        this.registerBucketEvents(event);
+    }
+
+    private void registerFluids(FMLInitializationEvent event)
+    {
+        FluidRegistry.registerFluid(fluidBlackGoo);
+        FluidRegistry.registerFluid(fluidMist);
+    }
+
+    private void registerFluidContainers(FMLInitializationEvent event)
+    {
+        FluidContainerRegistry.registerFluidContainer(fluidBlackGoo, new ItemStack(AliensVsPredator.items().blackGooBucket), new ItemStack(Items.bucket));
+        FluidContainerRegistry.registerFluidContainer(fluidMist, new ItemStack(AliensVsPredator.items().mistBucket), new ItemStack(Items.bucket));
+    }
+
+    private void registerBucketEvents(FMLInitializationEvent event)
+    {
+        BucketHandlingEvent.INSTANCE.buckets.put(AliensVsPredator.blocks().blockBlackGoo, AliensVsPredator.items().blackGooBucket);
+        BucketHandlingEvent.INSTANCE.buckets.put(AliensVsPredator.blocks().blockMist, AliensVsPredator.items().mistBucket);
+    }
 }

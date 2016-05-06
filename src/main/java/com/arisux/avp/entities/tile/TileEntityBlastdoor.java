@@ -21,345 +21,345 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityBlastdoor extends TileEntityElectrical implements IVoltageReceiver, IRotatable, IOpenable
 {
-	private ForgeDirection direction;
-	private float doorProgress;
-	private boolean doorOpen;
-	private boolean isParent;
-	private boolean placedByPlayer;
-	private TileEntityBlastdoor parent;
-	private ArrayList<TileEntityBlastdoor> children;
-	private int ticksExisted;
-	private String identifier;
-	private String password;
-	private long timeOfLastPry;
+    private ForgeDirection direction;
+    private float doorProgress;
+    private boolean doorOpen;
+    private boolean isParent;
+    private boolean placedByPlayer;
+    private TileEntityBlastdoor parent;
+    private ArrayList<TileEntityBlastdoor> children;
+    private int ticksExisted;
+    private String identifier;
+    private String password;
+    private long timeOfLastPry;
 
-	public TileEntityBlastdoor()
-	{
-		super(false);
-		this.children = new ArrayList<TileEntityBlastdoor>();
-		this.identifier = "BD" + (1000 + new Random().nextInt(8999));
-		this.password = "";
-	}
+    public TileEntityBlastdoor()
+    {
+        super(false);
+        this.children = new ArrayList<TileEntityBlastdoor>();
+        this.identifier = "BD" + (1000 + new Random().nextInt(8999));
+        this.password = "";
+    }
 
-	public void addToParent(TileEntityBlastdoor parent)
-	{
-		if (!parent.getChildren().contains(this))
-		{
-			parent.getChildren().add(this);
-		}
+    public void addToParent(TileEntityBlastdoor parent)
+    {
+        if (!parent.getChildren().contains(this))
+        {
+            parent.getChildren().add(this);
+        }
 
-		this.setParent(parent);
-	}
+        this.setParent(parent);
+    }
 
-	public ArrayList<TileEntityBlastdoor> getChildren()
-	{
-		return this.children;
-	}
+    public ArrayList<TileEntityBlastdoor> getChildren()
+    {
+        return this.children;
+    }
 
-	@Override
-	public Packet getDescriptionPacket()
-	{
-		NBTTagCompound nbtTag = new NBTTagCompound();
-		this.writeToNBT(nbtTag);
-		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
-	}
+    @Override
+    public Packet getDescriptionPacket()
+    {
+        NBTTagCompound nbtTag = new NBTTagCompound();
+        this.writeToNBT(nbtTag);
+        return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
+    }
 
-	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
-	{
-		readFromNBT(packet.func_148857_g());
-	}
+    @Override
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
+    {
+        readFromNBT(packet.func_148857_g());
+    }
 
-	@Override
-	public void writeToNBT(NBTTagCompound nbt)
-	{
-		super.writeToNBT(nbt);
+    @Override
+    public void writeToNBT(NBTTagCompound nbt)
+    {
+        super.writeToNBT(nbt);
 
-		if (this.direction != null)
-		{
-			nbt.setInteger("Direction", this.direction.ordinal());
-		}
+        if (this.direction != null)
+        {
+            nbt.setInteger("Direction", this.direction.ordinal());
+        }
 
-		nbt.setFloat("DoorProgress", this.doorProgress);
-		nbt.setBoolean("DoorOpen", this.isOpen());
-		nbt.setLong("TimeOfLastPry", this.getTimeOfLastPry());
-		nbt.setBoolean("Parent", this.isParent);
-		
-		if (!identifier.isEmpty())
-		nbt.setString("Identifier", this.identifier);
-		
-		if (!password.isEmpty())
-		nbt.setString("Password", this.password);
-	}
+        nbt.setFloat("DoorProgress", this.doorProgress);
+        nbt.setBoolean("DoorOpen", this.isOpen());
+        nbt.setLong("TimeOfLastPry", this.getTimeOfLastPry());
+        nbt.setBoolean("Parent", this.isParent);
 
-	@Override
-	public void readFromNBT(NBTTagCompound nbt)
-	{
-		super.readFromNBT(nbt);
+        if (!identifier.isEmpty())
+            nbt.setString("Identifier", this.identifier);
 
-		if (ForgeDirection.getOrientation(nbt.getInteger("Direction")) != null)
-		{
-			this.direction = ForgeDirection.getOrientation(nbt.getInteger("Direction"));
-		}
+        if (!password.isEmpty())
+            nbt.setString("Password", this.password);
+    }
 
-		this.doorProgress = nbt.getFloat("DoorProgress");
-		this.isParent = nbt.getBoolean("Parent");
-		this.setOpen(nbt.getBoolean("DoorOpen"));
-		this.timeOfLastPry = nbt.getLong("TimeOfLastPry");
-		this.identifier = nbt.getString("Identifier");
-		this.password = nbt.getString("Password");
-	}
+    @Override
+    public void readFromNBT(NBTTagCompound nbt)
+    {
+        super.readFromNBT(nbt);
 
-	@Override
-	public void updateEntity()
-	{
-		super.updateEntity();
-		this.updateEnergyAsReceiver();
-		this.ticksExisted++;
+        if (ForgeDirection.getOrientation(nbt.getInteger("Direction")) != null)
+        {
+            this.direction = ForgeDirection.getOrientation(nbt.getInteger("Direction"));
+        }
 
-		if (this.isParent && this.ticksExisted > 1 && !placedByPlayer)
-		{
-			this.setup(false);
-		}
+        this.doorProgress = nbt.getFloat("DoorProgress");
+        this.isParent = nbt.getBoolean("Parent");
+        this.setOpen(nbt.getBoolean("DoorOpen"));
+        this.timeOfLastPry = nbt.getLong("TimeOfLastPry");
+        this.identifier = nbt.getString("Identifier");
+        this.password = nbt.getString("Password");
+    }
 
-		if (this.isParent())
-		{
-			if (this.isOpen())
-			{
-				this.doorProgress = this.doorProgress < getMaxDoorProgress() ? this.doorProgress + 0.02F : this.doorProgress;
-			}
+    @Override
+    public void updateEntity()
+    {
+        super.updateEntity();
+        this.updateEnergyAsReceiver();
+        this.ticksExisted++;
 
-			if (!this.isOpen() && !isBeingPryedOpen())
-			{
-				this.doorProgress = this.doorProgress > 0.0F ? this.doorProgress - 0.02F : this.doorProgress;
-			}
+        if (this.isParent && this.ticksExisted > 1 && !placedByPlayer)
+        {
+            this.setup(false);
+        }
 
-			long timeSinceLastPry = (System.currentTimeMillis() - this.getTimeOfLastPry());
+        if (this.isParent())
+        {
+            if (this.isOpen())
+            {
+                this.doorProgress = this.doorProgress < getMaxDoorProgress() ? this.doorProgress + 0.02F : this.doorProgress;
+            }
 
-			if (this.timeOfLastPry != 0 && timeSinceLastPry > getDoorResealTime())
-			{
-				this.timeOfLastPry = 0;
-			}
+            if (!this.isOpen() && !isBeingPryedOpen())
+            {
+                this.doorProgress = this.doorProgress > 0.0F ? this.doorProgress - 0.02F : this.doorProgress;
+            }
 
-			if (isBeingPryedOpen() && this.doorProgress >= getMaxDoorPryProgress())
-			{
-				this.timeOfLastPry = 0;
-				this.setOpen(true);
-			}
-		}
-	}
+            long timeSinceLastPry = (System.currentTimeMillis() - this.getTimeOfLastPry());
 
-	public boolean isBeingPryedOpen()
-	{
-		return this.timeOfLastPry != 0;
-	}
+            if (this.timeOfLastPry != 0 && timeSinceLastPry > getDoorResealTime())
+            {
+                this.timeOfLastPry = 0;
+            }
 
-	public void setBeingPryedOpen(boolean beingPryedOpen)
-	{
-		if (beingPryedOpen)
-		{
-			this.timeOfLastPry = System.currentTimeMillis();
-		}
-	}
+            if (isBeingPryedOpen() && this.doorProgress >= getMaxDoorPryProgress())
+            {
+                this.timeOfLastPry = 0;
+                this.setOpen(true);
+            }
+        }
+    }
 
-	public long getTimeOfLastPry()
-	{
-		return timeOfLastPry;
-	}
+    public boolean isBeingPryedOpen()
+    {
+        return this.timeOfLastPry != 0;
+    }
 
-	@Override
-	public boolean canConnectPower(ForgeDirection from)
-	{
-		return true;
-	}
+    public void setBeingPryedOpen(boolean beingPryedOpen)
+    {
+        if (beingPryedOpen)
+        {
+            this.timeOfLastPry = System.currentTimeMillis();
+        }
+    }
 
-	@Override
-	public double getCurrentVoltage(ForgeDirection from)
-	{
-		return this.getVoltage();
-	}
+    public long getTimeOfLastPry()
+    {
+        return timeOfLastPry;
+    }
 
-	@Override
-	public double getMaxVoltage(ForgeDirection from)
-	{
-		return 220;
-	}
+    @Override
+    public boolean canConnectPower(ForgeDirection from)
+    {
+        return true;
+    }
 
-	@Override
-	public boolean isOpen()
-	{
-		return this.isChild() ? (this.getParent() != null ? this.getParent().isOpen() : false) : doorOpen;
-	}
+    @Override
+    public double getCurrentVoltage(ForgeDirection from)
+    {
+        return this.getVoltage();
+    }
 
-	@Override
-	public void setOpen(boolean doorOpen)
-	{
-		this.setOpen(doorOpen, true);
-	}
+    @Override
+    public double getMaxVoltage(ForgeDirection from)
+    {
+        return 220;
+    }
 
-	public void setOpen(boolean doorOpen, boolean sendPacket)
-	{
-		if (this.isChild())
-		{
-			if (this.getParent() != null)
-			{
-				this.getParent().setOpen(doorOpen);
-			}
-		}
-		else if (this.isParent())
-		{
-			this.doorOpen = doorOpen;
+    @Override
+    public boolean isOpen()
+    {
+        return this.isChild() ? (this.getParent() != null ? this.getParent().isOpen() : false) : doorOpen;
+    }
 
-			if (this.worldObj != null && !this.worldObj.isRemote && sendPacket)
-			{
-				AliensVsPredator.network().sendToAll(new PacketOpenBlastdoor(doorOpen, this.xCoord, this.yCoord, this.zCoord));
-			}
-		}
-	}
+    @Override
+    public void setOpen(boolean doorOpen)
+    {
+        this.setOpen(doorOpen, true);
+    }
 
-	@Override
-	public Block getBlockType()
-	{
-		return Blocks.beacon;
-	}
+    public void setOpen(boolean doorOpen, boolean sendPacket)
+    {
+        if (this.isChild())
+        {
+            if (this.getParent() != null)
+            {
+                this.getParent().setOpen(doorOpen);
+            }
+        }
+        else if (this.isParent())
+        {
+            this.doorOpen = doorOpen;
 
-	public float getDoorProgress()
-	{
-		return this.doorProgress;
-	}
+            if (this.worldObj != null && !this.worldObj.isRemote && sendPacket)
+            {
+                AliensVsPredator.network().sendToAll(new PacketOpenBlastdoor(doorOpen, this.xCoord, this.yCoord, this.zCoord));
+            }
+        }
+    }
 
-	public boolean setChildTile(int posX, int posY, int posZ)
-	{
-		Block block = worldObj.getBlock(posX, posY, posZ);
+    @Override
+    public Block getBlockType()
+    {
+        return Blocks.beacon;
+    }
 
-		if (block != Blocks.air && block != AliensVsPredator.blocks().blockBlastdoor)
-		{
-			if (this.worldObj.isRemote)
-			{
-				Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("Unable to place a blastdoor here. Blocks are in the way."));
-			}
+    public float getDoorProgress()
+    {
+        return this.doorProgress;
+    }
 
-			return false;
-		}
+    public boolean setChildTile(int posX, int posY, int posZ)
+    {
+        Block block = worldObj.getBlock(posX, posY, posZ);
 
-		worldObj.setBlock(posX, posY, posZ, AliensVsPredator.blocks().blockBlastdoor);
-		TileEntityBlastdoor blastdoor = (TileEntityBlastdoor) worldObj.getTileEntity(posX, posY, posZ);
+        if (block != Blocks.air && block != AliensVsPredator.blocks().blockBlastdoor)
+        {
+            if (this.worldObj.isRemote)
+            {
+                Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("Unable to place a blastdoor here. Blocks are in the way."));
+            }
 
-		if (blastdoor == null)
-		{
-			System.out.println("Blastdoor was null");
-			return false;
-		}
+            return false;
+        }
 
-		if (blastdoor != null)
-		{
-			blastdoor.addToParent(this);
-			blastdoor.setParent(this);
-		}
+        worldObj.setBlock(posX, posY, posZ, AliensVsPredator.blocks().blockBlastdoor);
+        TileEntityBlastdoor blastdoor = (TileEntityBlastdoor) worldObj.getTileEntity(posX, posY, posZ);
 
-		return true;
-	}
+        if (blastdoor == null)
+        {
+            System.out.println("Blastdoor was null");
+            return false;
+        }
 
-	public void breakChildren()
-	{
-		for (TileEntityBlastdoor child : this.getChildren())
-		{
-			worldObj.setBlockToAir(child.xCoord, child.yCoord, child.zCoord);
-		}
-	}
+        if (blastdoor != null)
+        {
+            blastdoor.addToParent(this);
+            blastdoor.setParent(this);
+        }
 
-	public boolean isChild()
-	{
-		return !this.isParent();
-	}
+        return true;
+    }
 
-	public boolean isParent()
-	{
-		return this.isParent;
-	}
+    public void breakChildren()
+    {
+        for (TileEntityBlastdoor child : this.getChildren())
+        {
+            worldObj.setBlockToAir(child.xCoord, child.yCoord, child.zCoord);
+        }
+    }
 
-	public TileEntityBlastdoor getParent()
-	{
-		return parent;
-	}
+    public boolean isChild()
+    {
+        return !this.isParent();
+    }
 
-	public void setParent(TileEntityBlastdoor parent)
-	{
-		this.parent = parent;
-	}
+    public boolean isParent()
+    {
+        return this.isParent;
+    }
 
-	public boolean setup(boolean placedByPlayer)
-	{
-		ForgeDirection direction = this.direction;
+    public TileEntityBlastdoor getParent()
+    {
+        return parent;
+    }
 
-		this.isParent = true;
-		this.placedByPlayer = true;
+    public void setParent(TileEntityBlastdoor parent)
+    {
+        this.parent = parent;
+    }
 
-		if (direction != null)
-		{
-			if (direction == ForgeDirection.NORTH || direction == ForgeDirection.SOUTH)
-			{
-				return this.setChildTile(this.xCoord + 1, this.yCoord, this.zCoord) && this.setChildTile(this.xCoord + 2, this.yCoord, this.zCoord) && this.setChildTile(this.xCoord + 3, this.yCoord, this.zCoord) && this.setChildTile(this.xCoord, this.yCoord + 1, this.zCoord) && this.setChildTile(this.xCoord, this.yCoord + 2, this.zCoord) && this.setChildTile(this.xCoord + 1, this.yCoord + 2, this.zCoord) && this.setChildTile(this.xCoord + 1, this.yCoord + 1, this.zCoord) && this.setChildTile(this.xCoord + 2, this.yCoord + 2, this.zCoord) && this.setChildTile(this.xCoord + 2, this.yCoord + 1, this.zCoord) && this.setChildTile(this.xCoord + 3, this.yCoord + 2, this.zCoord) && this.setChildTile(this.xCoord + 3, this.yCoord + 1, this.zCoord);
-			}
+    public boolean setup(boolean placedByPlayer)
+    {
+        ForgeDirection direction = this.direction;
 
-			if (direction == ForgeDirection.WEST || direction == ForgeDirection.EAST)
-			{
-				return this.setChildTile(this.xCoord, this.yCoord, this.zCoord - 1) && this.setChildTile(this.xCoord, this.yCoord, this.zCoord - 2) && this.setChildTile(this.xCoord, this.yCoord, this.zCoord - 3) && this.setChildTile(this.xCoord, this.yCoord + 1, this.zCoord) && this.setChildTile(this.xCoord, this.yCoord + 2, this.zCoord) && this.setChildTile(this.xCoord, this.yCoord + 2, this.zCoord - 1) && this.setChildTile(this.xCoord, this.yCoord + 1, this.zCoord - 1) && this.setChildTile(this.xCoord, this.yCoord + 2, this.zCoord - 2) && this.setChildTile(this.xCoord, this.yCoord + 1, this.zCoord - 2) && this.setChildTile(this.xCoord, this.yCoord + 2, this.zCoord - 3) && this.setChildTile(this.xCoord, this.yCoord + 1, this.zCoord - 3);
-			}
-		}
+        this.isParent = true;
+        this.placedByPlayer = true;
 
-		return false;
-	}
+        if (direction != null)
+        {
+            if (direction == ForgeDirection.NORTH || direction == ForgeDirection.SOUTH)
+            {
+                return this.setChildTile(this.xCoord + 1, this.yCoord, this.zCoord) && this.setChildTile(this.xCoord + 2, this.yCoord, this.zCoord) && this.setChildTile(this.xCoord + 3, this.yCoord, this.zCoord) && this.setChildTile(this.xCoord, this.yCoord + 1, this.zCoord) && this.setChildTile(this.xCoord, this.yCoord + 2, this.zCoord) && this.setChildTile(this.xCoord + 1, this.yCoord + 2, this.zCoord) && this.setChildTile(this.xCoord + 1, this.yCoord + 1, this.zCoord) && this.setChildTile(this.xCoord + 2, this.yCoord + 2, this.zCoord) && this.setChildTile(this.xCoord + 2, this.yCoord + 1, this.zCoord) && this.setChildTile(this.xCoord + 3, this.yCoord + 2, this.zCoord) && this.setChildTile(this.xCoord + 3, this.yCoord + 1, this.zCoord);
+            }
 
-	@Override
-	public ForgeDirection getDirection()
-	{
-		return direction;
-	}
+            if (direction == ForgeDirection.WEST || direction == ForgeDirection.EAST)
+            {
+                return this.setChildTile(this.xCoord, this.yCoord, this.zCoord - 1) && this.setChildTile(this.xCoord, this.yCoord, this.zCoord - 2) && this.setChildTile(this.xCoord, this.yCoord, this.zCoord - 3) && this.setChildTile(this.xCoord, this.yCoord + 1, this.zCoord) && this.setChildTile(this.xCoord, this.yCoord + 2, this.zCoord) && this.setChildTile(this.xCoord, this.yCoord + 2, this.zCoord - 1) && this.setChildTile(this.xCoord, this.yCoord + 1, this.zCoord - 1) && this.setChildTile(this.xCoord, this.yCoord + 2, this.zCoord - 2) && this.setChildTile(this.xCoord, this.yCoord + 1, this.zCoord - 2) && this.setChildTile(this.xCoord, this.yCoord + 2, this.zCoord - 3) && this.setChildTile(this.xCoord, this.yCoord + 1, this.zCoord - 3);
+            }
+        }
 
-	@Override
-	public void setDirection(ForgeDirection direction)
-	{
-		this.direction = direction;
-	}
+        return false;
+    }
 
-	public String getIdentifier()
-	{
-		return identifier;
-	}
+    @Override
+    public ForgeDirection getDirection()
+    {
+        return direction;
+    }
 
-	public void setIdentifier(String identifier)
-	{
-		this.identifier = identifier;
-	}
+    @Override
+    public void setDirection(ForgeDirection direction)
+    {
+        this.direction = direction;
+    }
 
-	public String getPassword()
-	{
-		return password;
-	}
+    public String getIdentifier()
+    {
+        return identifier;
+    }
 
-	public void setPassword(String password)
-	{
-		this.password = password;
-	}
+    public void setIdentifier(String identifier)
+    {
+        this.identifier = identifier;
+    }
 
-	public void setDoorProgress(float doorProgress)
-	{
-		this.doorProgress = doorProgress;
-	}
+    public String getPassword()
+    {
+        return password;
+    }
 
-	public float getMaxDoorPryProgress()
-	{
-		return 0.4F;
-	}
+    public void setPassword(String password)
+    {
+        this.password = password;
+    }
 
-	public float getMaxDoorProgress()
-	{
-		return 1.0F;
-	}
-	
-	public int getDoorResealTime()
-	{
-		return 600;
-	}
+    public void setDoorProgress(float doorProgress)
+    {
+        this.doorProgress = doorProgress;
+    }
+
+    public float getMaxDoorPryProgress()
+    {
+        return 0.4F;
+    }
+
+    public float getMaxDoorProgress()
+    {
+        return 1.0F;
+    }
+
+    public int getDoorResealTime()
+    {
+        return 600;
+    }
 }

@@ -24,71 +24,71 @@ import net.minecraftforge.client.event.RenderPlayerEvent;
 
 public class PlayerModeRenderEvent
 {
-	private RenderPlayer renderLiving = new RenderPlayer(0.0F);
+    private RenderPlayer renderLiving = new RenderPlayer(0.0F);
 
-	private class RenderPlayer extends RendererLivingEntity
-	{
-		public RenderPlayer(float scale)
-		{
-			super(new ModelBiped(), scale);
-			this.renderManager = RenderManager.instance;
-		}
+    private class RenderPlayer extends RendererLivingEntity
+    {
+        public RenderPlayer(float scale)
+        {
+            super(new ModelBiped(), scale);
+            this.renderManager = RenderManager.instance;
+        }
 
-		@Override
-		public void doRender(Entity entity, double posX, double posY, double posZ, float yaw, float renderPartialTicks)
-		{
-			super.doRender(entity, posX, posY, posZ, yaw, renderPartialTicks);
+        @Override
+        public void doRender(Entity entity, double posX, double posY, double posZ, float yaw, float renderPartialTicks)
+        {
+            super.doRender(entity, posX, posY, posZ, yaw, renderPartialTicks);
 
-			EntityLivingBase entityLiving = (EntityLivingBase) entity;
+            EntityLivingBase entityLiving = (EntityLivingBase) entity;
 
-			float boxTranslationMultiplier = 0.0625F;
-			float yawOffset = RenderUtil.interpolateRotation(entityLiving.prevRenderYawOffset, entityLiving.renderYawOffset, renderPartialTicks);
-			float yawHead = RenderUtil.interpolateRotation(entityLiving.prevRotationYawHead, entityLiving.rotationYawHead, renderPartialTicks);
-			float swingProgress = (entityLiving.limbSwing - entityLiving.limbSwingAmount * (1.0F - renderPartialTicks));
-			float swingProgressPrevious = (entityLiving.prevLimbSwingAmount + (entityLiving.limbSwingAmount - entityLiving.prevLimbSwingAmount) * renderPartialTicks);
-			float idleProgress = (entityLiving.ticksExisted + renderPartialTicks);
-			float headRotateAngleY = (yawHead - yawOffset);
-			float headRotationPitch = (entityLiving.prevRotationPitch + (entityLiving.rotationPitch - entityLiving.prevRotationPitch) * renderPartialTicks);
+            float boxTranslationMultiplier = 0.0625F;
+            float yawOffset = RenderUtil.interpolateRotation(entityLiving.prevRenderYawOffset, entityLiving.renderYawOffset, renderPartialTicks);
+            float yawHead = RenderUtil.interpolateRotation(entityLiving.prevRotationYawHead, entityLiving.rotationYawHead, renderPartialTicks);
+            float swingProgress = (entityLiving.limbSwing - entityLiving.limbSwingAmount * (1.0F - renderPartialTicks));
+            float swingProgressPrevious = (entityLiving.prevLimbSwingAmount + (entityLiving.limbSwingAmount - entityLiving.prevLimbSwingAmount) * renderPartialTicks);
+            float idleProgress = (entityLiving.ticksExisted + renderPartialTicks);
+            float headRotateAngleY = (yawHead - yawOffset);
+            float headRotationPitch = (entityLiving.prevRotationPitch + (entityLiving.rotationPitch - entityLiving.prevRotationPitch) * renderPartialTicks);
 
-			GlStateManager.pushMatrix();
-			{
-				GlStateManager.rotate(-yaw, 0F, 1F, 0F);
-				GlStateManager.rotate(180F, 1F, 0F, 0F);
-				GlStateManager.disable(GL11.GL_CULL_FACE);
+            GlStateManager.pushMatrix();
+            {
+                GlStateManager.rotate(-yaw, 0F, 1F, 0F);
+                GlStateManager.rotate(180F, 1F, 0F, 0F);
+                GlStateManager.disable(GL11.GL_CULL_FACE);
 
-				ModelBase model = PlayerModeHandler.instance().getModelForPlayer((EntityPlayer) entity);
-				this.bindTexture(this.getEntityTexture(entity));
-				model.render(entity, swingProgress, swingProgressPrevious, idleProgress, headRotateAngleY, headRotationPitch, boxTranslationMultiplier);
-			}
-			GlStateManager.popMatrix();
-		}
+                ModelBase model = PlayerModeHandler.instance().getModelForPlayer((EntityPlayer) entity);
+                this.bindTexture(this.getEntityTexture(entity));
+                model.render(entity, swingProgress, swingProgressPrevious, idleProgress, headRotateAngleY, headRotationPitch, boxTranslationMultiplier);
+            }
+            GlStateManager.popMatrix();
+        }
 
-		@Override
-		protected ResourceLocation getEntityTexture(Entity entity)
-		{
-			return PlayerModeHandler.instance().getResourceForPlayer((EntityPlayer) entity);
-		}
-	};
+        @Override
+        protected ResourceLocation getEntityTexture(Entity entity)
+        {
+            return PlayerModeHandler.instance().getResourceForPlayer((EntityPlayer) entity);
+        }
+    };
 
-	@SubscribeEvent
-	public void renderEntityTick(RenderPlayerEvent.Pre event)
-	{
-		ExtendedEntityPlayer extendedPlayer = (ExtendedEntityPlayer) event.entityPlayer.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER);
-		ItemStack itemstack = event.entityPlayer.inventory.getCurrentItem();
+    @SubscribeEvent
+    public void renderEntityTick(RenderPlayerEvent.Pre event)
+    {
+        ExtendedEntityPlayer extendedPlayer = (ExtendedEntityPlayer) event.entityPlayer.getExtendedProperties(ExtendedEntityPlayer.IDENTIFIER);
+        ItemStack itemstack = event.entityPlayer.inventory.getCurrentItem();
 
-		if (itemstack != null && (itemstack.getItem() instanceof ItemFirearm || itemstack.getItem() instanceof ItemFlamethrower))
-		{
-			event.renderer.modelArmor.aimedBow = event.renderer.modelArmorChestplate.aimedBow = event.renderer.modelBipedMain.aimedBow = true;
-		}
-		else
-		{
-			event.renderer.modelArmor.aimedBow = event.renderer.modelArmorChestplate.aimedBow = event.renderer.modelBipedMain.aimedBow = false;
-		}
+        if (itemstack != null && (itemstack.getItem() instanceof ItemFirearm || itemstack.getItem() instanceof ItemFlamethrower))
+        {
+            event.renderer.modelArmor.aimedBow = event.renderer.modelArmorChestplate.aimedBow = event.renderer.modelBipedMain.aimedBow = true;
+        }
+        else
+        {
+            event.renderer.modelArmor.aimedBow = event.renderer.modelArmorChestplate.aimedBow = event.renderer.modelBipedMain.aimedBow = false;
+        }
 
-		if (event.entity != null && extendedPlayer.getPlayerMode() != PlayerMode.NORMAL)
-		{
-			renderLiving.doRender(event.entity, event.entity.posX, event.entity.posY, event.entity.posZ, event.entity.rotationYaw, event.partialRenderTick);
-			event.setCanceled(true);
-		}
-	}
+        if (event.entity != null && extendedPlayer.getPlayerMode() != PlayerMode.NORMAL)
+        {
+            renderLiving.doRender(event.entity, event.entity.posX, event.entity.posY, event.entity.posZ, event.entity.rotationYaw, event.partialRenderTick);
+            event.setCanceled(true);
+        }
+    }
 }

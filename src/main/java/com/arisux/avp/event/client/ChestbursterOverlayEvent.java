@@ -11,25 +11,25 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent.Pre;
 
 public class ChestbursterOverlayEvent
 {
-	private Minecraft mc = Minecraft.getMinecraft();
-	
-	@SubscribeEvent
-	public void renderTickOverlay(Pre event)
-	{
-		if (mc.thePlayer != null)
-		{
-			if (event.type == RenderGameOverlayEvent.ElementType.HOTBAR)
-			{
-				ExtendedEntityLivingBase livingBaseProperties = (ExtendedEntityLivingBase) mc.thePlayer.getExtendedProperties(ExtendedEntityLivingBase.IDENTIFIER);
+    private Minecraft mc = Minecraft.getMinecraft();
 
-				if (livingBaseProperties.doesEntityContainEmbryo())
-				{
-					if (livingBaseProperties.doesEntityContainEmbryo() && Minecraft.getMinecraft().thePlayer.isDead && livingBaseProperties.getEmbryoAge() >= livingBaseProperties.getMaxEmbryoAge() - 80)
-					{
-						RenderUtil.renderOverlay(AliensVsPredator.resources().BLUR_CHESTBURSTER_EMERGE, 1F, 0F, 0F, 1F);
-					}
-				}
-			}
-		}
-	}
+    @SubscribeEvent
+    public void renderTickOverlay(Pre event)
+    {
+        if (mc.thePlayer != null)
+        {
+            if (event.type == RenderGameOverlayEvent.ElementType.HOTBAR)
+            {
+                ExtendedEntityLivingBase livingBaseProperties = (ExtendedEntityLivingBase) mc.thePlayer.getExtendedProperties(ExtendedEntityLivingBase.IDENTIFIER);
+
+                if (livingBaseProperties.doesEntityContainEmbryo())
+                {
+                    if (livingBaseProperties.doesEntityContainEmbryo() && Minecraft.getMinecraft().thePlayer.isDead && livingBaseProperties.getEmbryoAge() >= livingBaseProperties.getMaxEmbryoAge() - 80)
+                    {
+                        RenderUtil.renderOverlay(AliensVsPredator.resources().BLUR_CHESTBURSTER_EMERGE, 1F, 0F, 0F, 1F);
+                    }
+                }
+            }
+        }
+    }
 }
