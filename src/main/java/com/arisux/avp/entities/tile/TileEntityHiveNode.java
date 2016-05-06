@@ -2,7 +2,7 @@ package com.arisux.avp.entities.tile;
 
 import java.util.UUID;
 
-import com.arisux.avp.interfaces.IHiveSignature;
+import com.arisux.avp.util.IHiveSignature;
 
 import net.minecraft.tileentity.TileEntity;
 

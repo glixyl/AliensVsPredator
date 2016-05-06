@@ -1,7 +1,7 @@
 package com.arisux.avp.packets.server;
 
 import com.arisux.avp.entities.tile.TileEntityTurret;
-import com.arisux.avp.interfaces.IDataDevice;
+import com.arisux.avp.util.IDataDevice;
 
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;

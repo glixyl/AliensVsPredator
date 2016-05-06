@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.interfaces.IOpenable;
-import com.arisux.avp.interfaces.IRotatable;
-import com.arisux.avp.interfaces.energy.IVoltageReceiver;
 import com.arisux.avp.packets.client.PacketOpenBlastdoor;
+import com.arisux.avp.util.IOpenable;
+import com.arisux.avp.util.IRotatable;
+import com.arisux.avp.util.IVoltageReceiver;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;

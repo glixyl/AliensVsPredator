@@ -6,9 +6,9 @@ import java.util.UUID;
 import com.arisux.airi.lib.WorldUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.EntityAcidPool;
-import com.arisux.avp.interfaces.IHiveSignature;
 import com.arisux.avp.packets.client.PacketJellyLevelUpdate;
 import com.arisux.avp.util.EvolutionType;
+import com.arisux.avp.util.IHiveSignature;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;

@@ -1,6 +1,6 @@
 package com.arisux.avp.entities.tile;
 
-import com.arisux.avp.interfaces.energy.IVoltageProvider;
+import com.arisux.avp.util.IVoltageProvider;
 
 import net.minecraft.block.BlockRedstoneWire;
 import net.minecraft.world.World;

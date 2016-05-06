@@ -26,7 +26,7 @@ import com.arisux.avp.entities.mob.EntitySpeciesAlien;
 import com.arisux.avp.entities.mob.EntityXenomorph;
 import com.arisux.avp.entities.tile.TileEntityPowercell;
 import com.arisux.avp.entities.tile.TileEntityStasisMechanism;
-import com.arisux.avp.interfaces.energy.IVoltageReceiver;
+import com.arisux.avp.util.IVoltageReceiver;
 
 import cpw.mods.fml.common.ModContainer;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;

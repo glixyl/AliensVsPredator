@@ -1,7 +1,7 @@
 package com.arisux.avp.entities.tile;
 
-import com.arisux.avp.interfaces.energy.IVoltageProvider;
-import com.arisux.avp.interfaces.energy.IVoltageReceiver;
+import com.arisux.avp.util.IVoltageProvider;
+import com.arisux.avp.util.IVoltageReceiver;
 
 import net.minecraftforge.common.util.ForgeDirection;
 

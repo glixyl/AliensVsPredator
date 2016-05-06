@@ -1,10 +1,10 @@
 package com.arisux.avp.entities.tile;
 
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.interfaces.IOpenable;
-import com.arisux.avp.interfaces.IRotatable;
-import com.arisux.avp.interfaces.energy.IVoltageReceiver;
 import com.arisux.avp.packets.client.PacketOpenable;
+import com.arisux.avp.util.IOpenable;
+import com.arisux.avp.util.IRotatable;
+import com.arisux.avp.util.IVoltageReceiver;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;

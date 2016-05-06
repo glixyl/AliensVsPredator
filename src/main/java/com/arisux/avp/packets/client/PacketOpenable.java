@@ -1,6 +1,6 @@
 package com.arisux.avp.packets.client;
 
-import com.arisux.avp.interfaces.IOpenable;
+import com.arisux.avp.util.IOpenable;
 
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;

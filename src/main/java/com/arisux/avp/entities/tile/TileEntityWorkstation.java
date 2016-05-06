@@ -1,7 +1,7 @@
 package com.arisux.avp.entities.tile;
 
-import com.arisux.avp.interfaces.INetworkDevice;
-import com.arisux.avp.interfaces.energy.IVoltageReceiver;
+import com.arisux.avp.util.INetworkDevice;
+import com.arisux.avp.util.IVoltageReceiver;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;

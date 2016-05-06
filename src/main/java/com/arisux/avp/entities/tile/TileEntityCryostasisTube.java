@@ -3,8 +3,8 @@ package com.arisux.avp.entities.tile;
 import java.util.Random;
 
 import com.arisux.avp.entities.fx.EntityBubbleFX;
-import com.arisux.avp.interfaces.energy.IVoltageReceiver;
 import com.arisux.avp.items.ItemEntitySummoner;
+import com.arisux.avp.util.IVoltageReceiver;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

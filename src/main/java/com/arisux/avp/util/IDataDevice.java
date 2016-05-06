@@ -1,4 +1,4 @@
-package com.arisux.avp.interfaces;
+package com.arisux.avp.util;
 
 public interface IDataDevice
 {

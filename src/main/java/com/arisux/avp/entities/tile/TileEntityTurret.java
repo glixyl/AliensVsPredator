@@ -18,11 +18,11 @@ import com.arisux.avp.entities.mob.EntityPredalien;
 import com.arisux.avp.entities.mob.EntityQueen;
 import com.arisux.avp.entities.mob.EntitySpitter;
 import com.arisux.avp.entities.mob.EntityWarrior;
-import com.arisux.avp.interfaces.IDataDevice;
-import com.arisux.avp.interfaces.energy.IVoltageReceiver;
 import com.arisux.avp.inventory.container.ContainerTurret;
 import com.arisux.avp.packets.client.PacketTurretInit;
 import com.arisux.avp.packets.server.PacketTurretTargetUpdate;
+import com.arisux.avp.util.IDataDevice;
+import com.arisux.avp.util.IVoltageReceiver;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;

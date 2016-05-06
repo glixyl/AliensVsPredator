@@ -3,7 +3,7 @@ package com.arisux.avp.entities.mob;
 import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
 import com.arisux.airi.lib.WorldUtil.Entities;
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.interfaces.IHiveSignature;
+import com.arisux.avp.util.IHiveSignature;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
