@@ -27,7 +27,7 @@ public class RenderFacehugger extends RenderLiving implements ICustomCryostasisR
     public static ArrayList<FaceMountRenderer> mountRenderers = new ArrayList<FaceMountRenderer>();
 
     @SideOnly(Side.CLIENT)
-    public static interface IFaceMountRenderer
+    public static interface IFaceMountable
     {
         @SideOnly(Side.CLIENT)
         public FaceMountRenderer getFaceMountRenderer();
@@ -83,9 +83,9 @@ public class RenderFacehugger extends RenderLiving implements ICustomCryostasisR
         {
             Render render = (Render) RenderManager.instance.getEntityRenderObject(entityFacehugger.ridingEntity);
 
-            if (render instanceof IFaceMountRenderer)
+            if (render instanceof IFaceMountable)
             {
-                IFaceMountRenderer fmr = (IFaceMountRenderer) render;
+                IFaceMountable fmr = (IFaceMountable) render;
                 fmr.getFaceMountRenderer().render(entityFacehugger, partialTicks);
             }
             else

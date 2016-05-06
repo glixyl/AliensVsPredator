@@ -5,7 +5,7 @@ import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntityFacehugger;
 import com.arisux.avp.entities.mob.EntityMarine;
 import com.arisux.avp.entities.mob.render.RenderFacehugger.FaceMountRenderer;
-import com.arisux.avp.entities.mob.render.RenderFacehugger.IFaceMountRenderer;
+import com.arisux.avp.entities.mob.render.RenderFacehugger.IFaceMountable;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -13,7 +13,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderYautja extends RenderLiving implements IFaceMountRenderer
+public class RenderYautja extends RenderLiving implements IFaceMountable
 {
     public RenderYautja(ModelBase mainModel, float shadowSize)
     {

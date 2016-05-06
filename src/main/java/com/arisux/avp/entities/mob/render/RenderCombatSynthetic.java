@@ -8,7 +8,7 @@ import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntityFacehugger;
 import com.arisux.avp.entities.mob.EntityMarine;
 import com.arisux.avp.entities.mob.render.RenderFacehugger.FaceMountRenderer;
-import com.arisux.avp.entities.mob.render.RenderFacehugger.IFaceMountRenderer;
+import com.arisux.avp.entities.mob.render.RenderFacehugger.IFaceMountable;
 import com.arisux.avp.items.model.ModelM41A;
 import com.arisux.avp.items.render.RenderItemM41A;
 
@@ -19,7 +19,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderCombatSynthetic extends RenderLiving implements IFaceMountRenderer
+public class RenderCombatSynthetic extends RenderLiving implements IFaceMountable
 {
     private ModelM41A modelM41a = new ModelM41A();
 
