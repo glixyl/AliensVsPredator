@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntityFacehugger;
-import com.arisux.avp.entities.mob.render.facemountrender.AliensVsPredatorFaceMountRenderers;
 import com.arisux.avp.entities.mob.render.facemountrender.VanillaFaceMountRenderers;
 import com.arisux.avp.entities.tile.TileEntityCryostasisTube;
 import com.arisux.avp.entities.tile.render.RenderCryostasisTube;
@@ -15,6 +14,7 @@ import com.arisux.avp.entities.tile.render.RenderCryostasisTube.ICustomCryostasi
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
@@ -27,29 +27,35 @@ public class RenderFacehugger extends RenderLiving implements ICustomCryostasisR
     public static ArrayList<FaceMountRenderer> mountRenderers = new ArrayList<FaceMountRenderer>();
 
     @SideOnly(Side.CLIENT)
+    public static interface IFaceMountRenderer
+    {
+        @SideOnly(Side.CLIENT)
+        public FaceMountRenderer getFaceMountRenderer();
+    }
+
+    @SideOnly(Side.CLIENT)
     public static abstract class FaceMountRenderer
     {
         private Class<?>[] handledHosts;
-        
-        public FaceMountRenderer(Class<?> ... handledHosts)
+
+        public FaceMountRenderer(Class<?>... handledHosts)
         {
             this.handledHosts = handledHosts;
         }
-        
+
         public Class<?>[] getHandledHosts()
         {
             return this.handledHosts;
         }
-        
+
         public abstract void render(EntityFacehugger facehugger, float renderPartialTicks);
     }
 
     public RenderFacehugger(ModelBase modelbase, float shadowSize)
     {
         super(modelbase, shadowSize);
-        
+
         new VanillaFaceMountRenderers();
-        new AliensVsPredatorFaceMountRenderers();
     }
 
     @Override
@@ -62,7 +68,7 @@ public class RenderFacehugger extends RenderLiving implements ICustomCryostasisR
     protected void preRenderCallback(EntityLivingBase entityliving, float partialTicks)
     {
         EntityFacehugger entityFacehugger = (EntityFacehugger) entityliving;
-        
+
         this.scale(0.9F);
 
         if (entityFacehugger != null && entityFacehugger.ridingEntity == null)
@@ -75,20 +81,30 @@ public class RenderFacehugger extends RenderLiving implements ICustomCryostasisR
 
         if (entityFacehugger.ridingEntity != null)
         {
-            for (FaceMountRenderer mountRenderer : mountRenderers)
+            Render render = (Render) RenderManager.instance.getEntityRenderObject(entityFacehugger.ridingEntity);
+
+            if (render instanceof IFaceMountRenderer)
             {
-                @SuppressWarnings("all")
-                ArrayList<?> hosts = new ArrayList(Arrays.asList(mountRenderer.getHandledHosts()));
-                
-                if (hosts.contains(entityFacehugger.ridingEntity.getClass()))
+                IFaceMountRenderer fmr = (IFaceMountRenderer) render;
+                fmr.getFaceMountRenderer().render(entityFacehugger, partialTicks);
+            }
+            else
+            {
+                for (FaceMountRenderer mountRenderer : mountRenderers)
                 {
-                    mountRenderer.render(entityFacehugger, partialTicks);
-                    break;
+                    @SuppressWarnings("all")
+                    ArrayList<?> hosts = new ArrayList(Arrays.asList(mountRenderer.getHandledHosts()));
+
+                    if (hosts.contains(entityFacehugger.ridingEntity.getClass()))
+                    {
+                        mountRenderer.render(entityFacehugger, partialTicks);
+                        break;
+                    }
                 }
             }
         }
     }
-    
+
     protected void scale(float glScale)
     {
         GlStateManager.scale(glScale, glScale, glScale);

@@ -11,23 +11,23 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderDeaconShark extends RenderLiving
 {
-	public RenderDeaconShark(ModelBase modelbase, float shadowSize)
-	{
-		super(modelbase, shadowSize);
-	}
+    public RenderDeaconShark(ModelBase modelbase, float shadowSize)
+    {
+        super(modelbase, shadowSize);
+    }
 
-	@Override
-	protected void preRenderCallback(EntityLivingBase entitylivingBase, float partialTicks)
-	{
-		super.preRenderCallback(entitylivingBase, shadowSize);
-		float scale = 1.7F;
-		GlStateManager.scale(scale, scale, scale);
-		GlStateManager.translate(0, 1, 0);
-	}
+    @Override
+    protected void preRenderCallback(EntityLivingBase entitylivingBase, float partialTicks)
+    {
+        super.preRenderCallback(entitylivingBase, shadowSize);
+        float scale = 1.7F;
+        GlStateManager.scale(scale, scale, scale);
+        GlStateManager.translate(0, 1, 0);
+    }
 
-	@Override
-	public ResourceLocation getEntityTexture(Entity entity)
-	{
-		return AliensVsPredator.resources().DEACON_SHARK;
-	}
+    @Override
+    public ResourceLocation getEntityTexture(Entity entity)
+    {
+        return AliensVsPredator.resources().DEACON_SHARK;
+    }
 }

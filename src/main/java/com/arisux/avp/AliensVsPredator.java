@@ -6,6 +6,7 @@ import com.arisux.airi.lib.ModUtil;
 import com.arisux.airi.lib.interfaces.IMod;
 import com.arisux.avp.api.AssemblerAPI;
 import com.arisux.avp.api.WristbracerAPI;
+import com.arisux.avp.entities.mob.render.RenderFacehugger;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
