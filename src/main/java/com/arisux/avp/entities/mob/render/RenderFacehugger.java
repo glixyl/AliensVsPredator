@@ -1,6 +1,7 @@
 package com.arisux.avp.entities.mob.render;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.avp.AliensVsPredator;
@@ -20,7 +21,6 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
-import scala.actors.threadpool.Arrays;
 
 public class RenderFacehugger extends RenderLiving implements ICustomCryostasisRenderer
 {
