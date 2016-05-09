@@ -107,7 +107,7 @@ public class RenderFacehugger extends RenderLiving implements ICustomCryostasisR
 
     protected void scale(EntityFacehugger facehugger, float glScale)
     {
-        if (!facehugger.isFertile() && facehugger.ridingEntity == null)
+        if (facehugger != null && !facehugger.isFertile() && facehugger.ridingEntity == null)
         {
             GlStateManager.scale(1F, -1F, 1F);
             GlStateManager.translate(0F, 0.25F, 0F);
