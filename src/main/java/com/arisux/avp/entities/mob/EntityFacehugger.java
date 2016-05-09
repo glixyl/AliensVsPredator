@@ -1,5 +1,8 @@
 package com.arisux.avp.entities.mob;
 
+import java.util.Collections;
+import java.util.List;
+
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.ai.alien.EntitySelectorXenomorph;
 import com.arisux.avp.entities.extended.ExtendedEntityLivingBase;
@@ -13,8 +16,10 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget.Sorter;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,12 +31,11 @@ import net.minecraft.world.World;
 
 public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 {
-    protected boolean isFertile;
+    private Sorter facehugTargetSorter;
 
     public EntityFacehugger(World world)
     {
         super(world);
-        this.isFertile = true;
         this.setSize(0.8F, 0.8F);
         this.experienceValue = 10;
         this.getNavigator().setCanSwim(true);
@@ -40,10 +44,15 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
         this.tasks.addTask(3, new EntityAIAttackOnCollide(this, 0.55D, true));
         this.tasks.addTask(8, new EntityAIWander(this, 0.55D));
         this.targetTasks.addTask(2, new EntityAILeapAtTarget(this, 0.8F));
-        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, Entity.class, /** targetChance **/
-            0, /** shouldCheckSight **/
-            false, /** nearbyOnly **/
-            false, EntitySelectorXenomorph.instance));
+        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, Entity.class, 0, false, false, EntitySelectorXenomorph.instance));
+        this.facehugTargetSorter = new EntityAINearestAttackableTarget.Sorter(this);
+    }
+
+    @Override
+    protected void entityInit()
+    {
+        super.entityInit();
+        this.dataWatcher.addObject(30, 1);
     }
 
     @Override
@@ -61,6 +70,27 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
     public void onUpdate()
     {
         super.onUpdate();
+
+        if (this.getAttackTarget() != null && this.getAttackTarget().riddenByEntity instanceof EntityFacehugger)
+        {
+            IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.followRange);
+            double targetDistance = iattributeinstance == null ? 16.0D : iattributeinstance.getAttributeValue();
+
+            List list = this.worldObj.selectEntitiesWithinAABB(EntityLivingBase.class, this.boundingBox.expand(targetDistance, 4.0D, targetDistance), EntitySelectorXenomorph.instance);
+            list.remove(this.getAttackTarget());
+            Collections.sort(list, this.facehugTargetSorter);
+
+            if (!list.isEmpty() && list.get(0) != null)
+            {
+                this.setAttackTarget((EntityLivingBase) list.get(0));
+            }
+        }
+
+        if (!this.isFertile())
+        {
+            this.tasks.taskEntries.clear();
+            this.targetTasks.taskEntries.clear();
+        }
 
         this.fallDistance = 0F;
 
@@ -84,10 +114,16 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
     }
 
     @Override
+    public boolean canMoveToJelly()
+    {
+        return super.canMoveToJelly() && this.isFertile();
+    }
+
+    @Override
     protected void onPickupJelly(EntityItem entityItem)
     {
         super.onPickupJelly(entityItem);
-        this.isFertile = true;
+        this.setFertile(1);
     }
 
     @Override
@@ -104,7 +140,7 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 
     protected void latchOnEntity(Entity entity)
     {
-        if (this.isFertile && entity instanceof EntityLivingBase && !(entity instanceof EntitySpeciesAlien))
+        if (this.isFertile() && entity.riddenByEntity == null && entity instanceof EntityLivingBase && !(entity instanceof EntitySpeciesAlien))
         {
             EntityLivingBase living = (EntityLivingBase) entity;
             ExtendedEntityLivingBase extendedLiving = (ExtendedEntityLivingBase) living.getExtendedProperties(ExtendedEntityLivingBase.IDENTIFIER);
@@ -116,12 +152,14 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
             }
         }
     }
-    
+
     protected void implantEmbryo(ExtendedEntityLivingBase extendedLiving)
     {
-        extendedLiving.setEmbryo(new Embryo(EmbryoType.getMappingFromHost(extendedLiving.getEntityLivingBase().getClass())){});
+        extendedLiving.setEmbryo(new Embryo(EmbryoType.getMappingFromHost(extendedLiving.getEntityLivingBase().getClass()))
+        {
+        });
         extendedLiving.syncClients();
-        this.isFertile = false;
+        this.setFertile(0);
     }
 
     @Override
@@ -172,6 +210,7 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
         return false;
     }
 
+    @SuppressWarnings("all")
     @Override
     protected void attackEntity(Entity entity, float attackStrength)
     {
@@ -212,13 +251,28 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
     public void readFromNBT(NBTTagCompound nbt)
     {
         super.readFromNBT(nbt);
-        this.isFertile = nbt.getBoolean("fertile");
+        this.setFertile(nbt.getInteger("Fertile"));
     }
 
     @Override
     public void writeToNBT(NBTTagCompound nbt)
     {
         super.writeToNBT(nbt);
-        nbt.setBoolean("fertile", this.isFertile);
+        nbt.setInteger("Fertile", this.isFertileDatawatcher());
+    }
+
+    public boolean isFertile()
+    {
+        return this.isFertileDatawatcher() == 1;
+    }
+
+    public int isFertileDatawatcher()
+    {
+        return this.dataWatcher.getWatchableObjectInt(30);
+    }
+
+    public void setFertile(int isFertile)
+    {
+        this.dataWatcher.updateObject(30, isFertile);
     }
 }

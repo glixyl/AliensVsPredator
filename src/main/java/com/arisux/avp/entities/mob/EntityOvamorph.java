@@ -35,7 +35,7 @@ public class EntityOvamorph extends EntitySpeciesAlien implements IMob
         this.hatchingTime = 20 * 30;
         this.experienceValue = 10;
         this.openProgress = -maxOpenProgress;
-        this.hatchWaitTimer = 20 * 10;
+        this.hatchWaitTimer = 20 * 5;
         this.containsFacehugger = true;
         this.sendUpdates = true;
     }

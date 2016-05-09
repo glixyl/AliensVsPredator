@@ -67,6 +67,6 @@ public class EntityRoyalFacehugger extends EntityFacehugger
     {
         extendedLiving.setEmbryo(new Embryo(EmbryoType.QUEEN){});
         extendedLiving.syncClients();
-        this.isFertile = false;
+        this.setFertile(0);
     }
 }

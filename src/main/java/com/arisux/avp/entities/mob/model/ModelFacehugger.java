@@ -1,6 +1,7 @@
 package com.arisux.avp.entities.mob.model;
 
 import com.arisux.airi.lib.client.ModelBaseWrapper;
+import com.arisux.avp.entities.mob.EntityFacehugger;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -344,25 +345,30 @@ public class ModelFacehugger extends ModelBaseWrapper
 
         if (entity != null)
         {
-            float tailSpeed = entity.isSprinting() ? 0.75F : 0.15F;
-            float distMulti = 0.075F;
-            float distAdd = 0.05F;
-            float progress = getIdleProgress(entity, partialTickTime) + swingProgress;
-            this.tail01.rotateAngleY += MathHelper.sin(progress * tailSpeed) * distMulti + distAdd;
-            this.tail02.rotateAngleY += MathHelper.sin(progress * tailSpeed) * distMulti + distAdd;
-            this.tail03.rotateAngleY += MathHelper.sin(progress * tailSpeed) * distMulti + distAdd;
-            this.tail04.rotateAngleY += MathHelper.sin(progress * tailSpeed) * distMulti + distAdd;
-            this.tail05.rotateAngleY += MathHelper.sin(progress * tailSpeed) * distMulti + distAdd;
-            this.tail06.rotateAngleY += MathHelper.sin(progress * tailSpeed) * distMulti + distAdd;
-            this.tail07.rotateAngleY += MathHelper.sin(progress * tailSpeed) * distMulti + distAdd;
-            this.tail08.rotateAngleY += MathHelper.sin(progress * tailSpeed) * distMulti + distAdd;
-            this.tail09.rotateAngleY += MathHelper.cos(progress * tailSpeed) * distMulti + distAdd;
-            this.tail10.rotateAngleY += MathHelper.cos(progress * tailSpeed) * distMulti + distAdd;
-            this.tail11.rotateAngleY += MathHelper.cos(progress * tailSpeed) * distMulti + distAdd;
-            this.tail12.rotateAngleY += MathHelper.cos(progress * tailSpeed) * distMulti + distAdd;
-            this.tail13.rotateAngleY += MathHelper.cos(progress * tailSpeed) * distMulti + distAdd;
-            this.tail14.rotateAngleY += MathHelper.cos(progress * tailSpeed) * distMulti + distAdd;
-            this.tail15.rotateAngleY += MathHelper.cos(progress * tailSpeed) * distMulti + distAdd;
+            EntityFacehugger facehugger = (EntityFacehugger) entity;
+
+            if (facehugger.isFertile())
+            {
+                float tailSpeed = entity.isSprinting() ? 0.75F : 0.15F;
+                float distMulti = 0.075F;
+                float distAdd = 0.05F;
+                float progress = getIdleProgress(entity, partialTickTime) + swingProgress;
+                this.tail01.rotateAngleY += MathHelper.sin(progress * tailSpeed) * distMulti + distAdd;
+                this.tail02.rotateAngleY += MathHelper.sin(progress * tailSpeed) * distMulti + distAdd;
+                this.tail03.rotateAngleY += MathHelper.sin(progress * tailSpeed) * distMulti + distAdd;
+                this.tail04.rotateAngleY += MathHelper.sin(progress * tailSpeed) * distMulti + distAdd;
+                this.tail05.rotateAngleY += MathHelper.sin(progress * tailSpeed) * distMulti + distAdd;
+                this.tail06.rotateAngleY += MathHelper.sin(progress * tailSpeed) * distMulti + distAdd;
+                this.tail07.rotateAngleY += MathHelper.sin(progress * tailSpeed) * distMulti + distAdd;
+                this.tail08.rotateAngleY += MathHelper.sin(progress * tailSpeed) * distMulti + distAdd;
+                this.tail09.rotateAngleY += MathHelper.cos(progress * tailSpeed) * distMulti + distAdd;
+                this.tail10.rotateAngleY += MathHelper.cos(progress * tailSpeed) * distMulti + distAdd;
+                this.tail11.rotateAngleY += MathHelper.cos(progress * tailSpeed) * distMulti + distAdd;
+                this.tail12.rotateAngleY += MathHelper.cos(progress * tailSpeed) * distMulti + distAdd;
+                this.tail13.rotateAngleY += MathHelper.cos(progress * tailSpeed) * distMulti + distAdd;
+                this.tail14.rotateAngleY += MathHelper.cos(progress * tailSpeed) * distMulti + distAdd;
+                this.tail15.rotateAngleY += MathHelper.cos(progress * tailSpeed) * distMulti + distAdd;
+            }
 
             float angle1 = MathHelper.sin(swingProgress * 1.1662F + (float) Math.PI) * 30F;
             float angle2 = MathHelper.cos(swingProgress * 1.1662F + (float) Math.PI) * 30F;

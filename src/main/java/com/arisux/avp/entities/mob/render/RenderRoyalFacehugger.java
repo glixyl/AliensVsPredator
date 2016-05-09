@@ -2,6 +2,7 @@ package com.arisux.avp.entities.mob.render;
 
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.entities.mob.EntityFacehugger;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.Entity;
@@ -25,9 +26,9 @@ public class RenderRoyalFacehugger extends RenderFacehugger
     }
 
     @Override
-    protected void scale(float glScale)
+    protected void scale(EntityFacehugger facehugger, float glScale)
     {
-        super.scale(glScale);
+        super.scale(facehugger, glScale);
     }
 
     @Override

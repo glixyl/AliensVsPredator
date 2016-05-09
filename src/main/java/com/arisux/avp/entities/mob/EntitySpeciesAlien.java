@@ -146,7 +146,10 @@ public abstract class EntitySpeciesAlien extends EntityMob implements IMob, IHiv
 
                     if (stack.getItem() == AliensVsPredator.items().itemRoyalJelly)
                     {
-                        this.getNavigator().setPath(this.getNavigator().getPathToEntityLiving(entityItem), 1);
+                        if (this.canMoveToJelly())
+                        {
+                            this.getNavigator().setPath(this.getNavigator().getPathToEntityLiving(entityItem), 1);
+                        }
 
                         if (this.getDistanceToEntity(entityItem) < 1)
                         {
@@ -157,6 +160,11 @@ public abstract class EntitySpeciesAlien extends EntityMob implements IMob, IHiv
                 }
             }
         }
+    }
+    
+    public boolean canMoveToJelly()
+    {
+        return true;
     }
 
     protected void onPickupJelly(EntityItem entityItem)

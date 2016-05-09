@@ -67,26 +67,26 @@ public class RenderFacehugger extends RenderLiving implements ICustomCryostasisR
     @Override
     protected void preRenderCallback(EntityLivingBase entityliving, float partialTicks)
     {
-        EntityFacehugger entityFacehugger = (EntityFacehugger) entityliving;
+        EntityFacehugger facehugger = (EntityFacehugger) entityliving;
 
-        this.scale(0.9F);
+        this.scale(facehugger, 0.9F);
 
-        if (entityFacehugger != null && entityFacehugger.ridingEntity == null)
+        if (facehugger != null && facehugger.ridingEntity == null)
         {
-            if (entityFacehugger.motionY > 0 || entityFacehugger.motionY < -0.1)
+            if (facehugger.motionY > 0 || facehugger.motionY < -0.1)
             {
                 GlStateManager.rotate(-45F, 1, 0, 0);
             }
         }
 
-        if (entityFacehugger.ridingEntity != null)
+        if (facehugger.ridingEntity != null)
         {
-            Render render = (Render) RenderManager.instance.getEntityRenderObject(entityFacehugger.ridingEntity);
+            Render render = (Render) RenderManager.instance.getEntityRenderObject(facehugger.ridingEntity);
 
             if (render instanceof IFaceMountable)
             {
                 IFaceMountable fmr = (IFaceMountable) render;
-                fmr.getFaceMountRenderer().render(entityFacehugger, partialTicks);
+                fmr.getFaceMountRenderer().render(facehugger, partialTicks);
             }
             else
             {
@@ -95,9 +95,9 @@ public class RenderFacehugger extends RenderLiving implements ICustomCryostasisR
                     @SuppressWarnings("all")
                     ArrayList<?> hosts = new ArrayList(Arrays.asList(mountRenderer.getHandledHosts()));
 
-                    if (hosts.contains(entityFacehugger.ridingEntity.getClass()))
+                    if (hosts.contains(facehugger.ridingEntity.getClass()))
                     {
-                        mountRenderer.render(entityFacehugger, partialTicks);
+                        mountRenderer.render(facehugger, partialTicks);
                         break;
                     }
                 }
@@ -105,8 +105,14 @@ public class RenderFacehugger extends RenderLiving implements ICustomCryostasisR
         }
     }
 
-    protected void scale(float glScale)
+    protected void scale(EntityFacehugger facehugger, float glScale)
     {
+        if (!facehugger.isFertile() && facehugger.ridingEntity == null)
+        {
+            GlStateManager.scale(1F, -1F, 1F);
+            GlStateManager.translate(0F, 0.25F, 0F);
+        }
+        
         GlStateManager.scale(glScale, glScale, glScale);
     }
 
