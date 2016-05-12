@@ -82,7 +82,7 @@ public class RenderItemM41A extends ItemRenderer
 
         if (firstPersonRenderCheck(data[1]))
         {
-            this.resource = downloadResource(String.format(URLs.urlSkinM41a, AccessWrapper.getSession().getPlayerID()), resourceLocation);
+//            this.resource = downloadResource(String.format(URLs.urlSkinM41a, AccessWrapper.getSession().getPlayerID()), resourceLocation);
 
             if (Mouse.isButtonDown(0) && mc.inGameHasFocus)
             {
