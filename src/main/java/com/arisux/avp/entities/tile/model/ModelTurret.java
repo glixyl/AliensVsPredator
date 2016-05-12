@@ -141,31 +141,12 @@ public class ModelTurret extends ModelBaseWrapper
         setRotation(centerLeg, 0.4712389F, 0F, 0F);
     }
 
-    public void render(TileEntityTurret tile, float boxTranslation)
+    @Override
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
-        this.setRotationAngles(tile);
-        barrel.render(boxTranslation);
-        supportLeft.render(boxTranslation);
-        headBase2.render(boxTranslation);
-        neckBase.render(boxTranslation);
-        headBase3.render(boxTranslation);
-        headBase.render(boxTranslation);
-        barrelGuard.render(boxTranslation);
-        sightBase3.render(boxTranslation);
-        rightFoot.render(boxTranslation);
-        supportRight.render(boxTranslation);
-        supportCenter.render(boxTranslation);
-        centerFoot.render(boxTranslation);
-        legHub.render(boxTranslation);
-        LeftFoot.render(boxTranslation);
-        neck.render(boxTranslation);
-        leftLeg.render(boxTranslation);
-        rightLeg.render(boxTranslation);
-        centerLeg.render(boxTranslation);
-    }
-
-    public void setRotationAngles(TileEntityTurret tile)
-    {
+        RenderObject tileRenderObject = (RenderObject) renderObject;
+        TileEntityTurret tile = (TileEntityTurret) tileRenderObject.getTileEntity();
+        
         if (tile != null && tile.getEntity() != null)
         {
             float rotationYaw = (-tile.getRotationYaw() + (tile.getDirection() * 90)) / (180F / (float) Math.PI);
@@ -184,5 +165,24 @@ public class ModelTurret extends ModelBaseWrapper
             headBase2.rotateAngleY = rotationYaw;
             headBase2.rotateAngleX = rotationPitch;
         }
+
+        barrel.render(boxTranslation);
+        supportLeft.render(boxTranslation);
+        headBase2.render(boxTranslation);
+        neckBase.render(boxTranslation);
+        headBase3.render(boxTranslation);
+        headBase.render(boxTranslation);
+        barrelGuard.render(boxTranslation);
+        sightBase3.render(boxTranslation);
+        rightFoot.render(boxTranslation);
+        supportRight.render(boxTranslation);
+        supportCenter.render(boxTranslation);
+        centerFoot.render(boxTranslation);
+        legHub.render(boxTranslation);
+        LeftFoot.render(boxTranslation);
+        neck.render(boxTranslation);
+        leftLeg.render(boxTranslation);
+        rightLeg.render(boxTranslation);
+        centerLeg.render(boxTranslation);
     }
 }

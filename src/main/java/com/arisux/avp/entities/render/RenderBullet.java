@@ -27,7 +27,7 @@ public class RenderBullet extends Render
             RenderUtil.lightingHelper(entity, 2.0F);
             RenderUtil.bindTexture(AliensVsPredator.resources().DRONE_ADVANCED);
             GlStateManager.rotate(90F, 1, 0, 0);
-            model.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+            model.render();
             GL11.glColor3f(1.0F, 1.0F, 1.0F);
         }
         GlStateManager.popMatrix();

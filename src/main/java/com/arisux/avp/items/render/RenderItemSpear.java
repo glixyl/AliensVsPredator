@@ -64,7 +64,7 @@ public class RenderItemSpear implements IItemRenderer
                     GlStateManager.rotate(90.0F, 0.0F, 0.0F, 1.0F);
                     GlStateManager.translate(0.25F, -0.2F, 0F);
                 }
-                this.model.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+                this.model.render();
                 break;
 
             case EQUIPPED_FIRST_PERSON:
@@ -85,7 +85,7 @@ public class RenderItemSpear implements IItemRenderer
 
                 GlStateManager.scale(1.6F, 1.6F, 1.6F);
                 RenderUtil.bindTexture(resourceLocation);
-                this.model.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+                this.model.render();
                 break;
 
             case INVENTORY:
@@ -96,7 +96,7 @@ public class RenderItemSpear implements IItemRenderer
                 GlStateManager.translate(-6F, 5F, 0F);
                 GlStateManager.scale(7F, 7F, 7F);
                 RenderUtil.bindTexture(resourceLocation);
-                this.model.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+                this.model.render();
                 break;
 
             default:

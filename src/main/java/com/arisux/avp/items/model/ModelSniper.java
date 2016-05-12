@@ -134,8 +134,13 @@ public class ModelSniper extends ModelBaseWrapper
         this.setRotation(this.scopeFirstPerson, 0.0F, 0.0F, 0.0F);
     }
 
+    public void setFirstPerson(boolean firstPerson)
+    {
+        this.firstPerson = firstPerson;
+    }
+
     @Override
-    public void render(float boxTranslation)
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
         this.barrel.render(boxTranslation);
         this.clipHolder1.render(boxTranslation);
@@ -161,10 +166,5 @@ public class ModelSniper extends ModelBaseWrapper
         {
             this.scope.render(boxTranslation);
         }
-    }
-
-    public void setFirstPerson(boolean firstPerson)
-    {
-        this.firstPerson = firstPerson;
     }
 }

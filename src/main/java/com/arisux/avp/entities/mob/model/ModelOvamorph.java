@@ -4,7 +4,6 @@ import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.avp.entities.mob.EntityOvamorph;
 
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
 public class ModelOvamorph extends ModelBaseWrapper
@@ -61,15 +60,15 @@ public class ModelOvamorph extends ModelBaseWrapper
     }
 
     @Override
-    public void render(Entity entity, float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation)
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
-        super.render(entity, swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation);
+        RenderObject o = (RenderObject) renderObject;
 
-        if (entity != null)
+        if (o.getEntity() != null)
         {
-            if (entity instanceof EntityOvamorph)
+            if (o.getEntity() instanceof EntityOvamorph)
             {
-                EntityOvamorph ovamorph = (EntityOvamorph) entity;
+                EntityOvamorph ovamorph = (EntityOvamorph) o.getEntity();
 
                 float openAngle = 25;
                 float openSpeed = 0.075F;

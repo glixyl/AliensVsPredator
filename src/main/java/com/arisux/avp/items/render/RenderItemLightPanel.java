@@ -37,7 +37,7 @@ public class RenderItemLightPanel extends ItemRenderer
         GlStateManager.disable(GL11.GL_CULL_FACE);
         GlStateManager.scale(glScale, -glScale, glScale);
         RenderUtil.bindTexture(resourceLocation);
-        ((ModelLightPanel) this.getModel()).render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+        ((ModelLightPanel) this.getModel()).render();
     }
 
     @Override
@@ -54,7 +54,7 @@ public class RenderItemLightPanel extends ItemRenderer
             GlStateManager.disable(GL11.GL_CULL_FACE);
             GlStateManager.scale(glScale, glScale, glScale);
             RenderUtil.bindTexture(resourceLocation);
-            ((ModelLightPanel) this.getModel()).render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+            ((ModelLightPanel) this.getModel()).render();
         }
     }
 
@@ -71,6 +71,6 @@ public class RenderItemLightPanel extends ItemRenderer
         GlStateManager.scale(glScale, glScale, glScale);
         RenderUtil.bindTexture(resourceLocation);
         GlStateManager.enableLight();
-        ((ModelLightPanel) this.getModel()).render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+        ((ModelLightPanel) this.getModel()).render();
     }
 }

@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import com.arisux.airi.lib.WorldUtil;
 import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
 import com.arisux.airi.lib.WorldUtil.Entities;
-import com.arisux.avp.entities.EntityAcidPool;
 import com.arisux.avp.AliensVsPredator;
+import com.arisux.avp.entities.EntityAcidPool;
 
 import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;

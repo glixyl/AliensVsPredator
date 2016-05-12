@@ -169,7 +169,7 @@ public class ModelM240ICU extends ModelBaseWrapper
     }
 
     @Override
-    public void render(float boxTranslation)
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
         GlStateManager.rotate(180F, 0, 1, 0);
         canister.render(boxTranslation);
@@ -193,6 +193,6 @@ public class ModelM240ICU extends ModelBaseWrapper
         barrelArch.render(boxTranslation);
         underGrip.render(boxTranslation);
         underGripArchBack.render(boxTranslation);
-        underGripArchFront.render(boxTranslation);
+        underGripArchFront.render(boxTranslation);        
     }
 }

@@ -42,7 +42,7 @@ public class ModelTransformer extends ModelBaseWrapper
     }
 
     @Override
-    public void render(float boxTranslation)
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
         this.core.render(boxTranslation);
         this.base.render(boxTranslation);

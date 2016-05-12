@@ -99,9 +99,8 @@ public class ModelLightPanel extends ModelBaseWrapper
     }
 
     @Override
-    public void render(float boxTranslation)
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
-        super.render(boxTranslation);
         side0.render(boxTranslation);
         side1.render(boxTranslation);
         side2.render(boxTranslation);

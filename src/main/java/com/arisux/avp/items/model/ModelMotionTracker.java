@@ -70,7 +70,7 @@ public class ModelMotionTracker extends ModelBaseWrapper
     }
 
     @Override
-    public void render(float boxTranslation)
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
         handleBottom.render(boxTranslation);
         handle.render(boxTranslation);
@@ -79,6 +79,6 @@ public class ModelMotionTracker extends ModelBaseWrapper
         handleTop.render(boxTranslation);
         base.render(boxTranslation);
         sensorSupport.render(boxTranslation);
-        sensor.render(boxTranslation);
+        sensor.render(boxTranslation);        
     }
 }

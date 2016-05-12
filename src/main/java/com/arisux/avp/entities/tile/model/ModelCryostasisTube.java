@@ -3,7 +3,6 @@ package com.arisux.avp.entities.tile.model;
 import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 
 public class ModelCryostasisTube extends ModelBaseWrapper
 {
@@ -184,10 +183,8 @@ public class ModelCryostasisTube extends ModelBaseWrapper
     }
 
     @Override
-    public void render(Entity entity, float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation)
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
-        super.render(entity, swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation);
-        this.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
         cap.render(boxTranslation);
         capN.render(boxTranslation);
         glassN.render(boxTranslation);
@@ -212,11 +209,5 @@ public class ModelCryostasisTube extends ModelBaseWrapper
         baseNE.render(boxTranslation);
         baseE.render(boxTranslation);
         baseSE.render(boxTranslation);
-    }
-
-    @Override
-    public void setRotationAngles(float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation, Entity entity)
-    {
-        super.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
     }
 }

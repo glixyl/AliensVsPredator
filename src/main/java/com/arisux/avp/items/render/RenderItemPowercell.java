@@ -39,10 +39,10 @@ public class RenderItemPowercell extends ItemRenderer
             GlStateManager.translate(0F, -1.3F, 0.4F);
             GlStateManager.disable(GL11.GL_CULL_FACE);
             RenderUtil.bindTexture(resourceLocation);
-            this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+            this.getModel().render();
             GlStateManager.disableLight();
             RenderUtil.bindTexture(resourceLocationMask);
-            this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+            this.getModel().render();
         }
         GlStateManager.popMatrix();
     }
@@ -60,10 +60,10 @@ public class RenderItemPowercell extends ItemRenderer
                 GlStateManager.rotate(45.0F, 0.0F, 0.0F, 1.0F);
                 GlStateManager.disable(GL11.GL_CULL_FACE);
                 RenderUtil.bindTexture(resourceLocation);
-                this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+                this.getModel().render();
                 GlStateManager.disableLight();
                 RenderUtil.bindTexture(resourceLocationMask);
-                this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+                this.getModel().render();
             }
         }
         GlStateManager.popMatrix();
@@ -81,10 +81,10 @@ public class RenderItemPowercell extends ItemRenderer
             GlStateManager.translate(0F, 0F, 0F);
             GlStateManager.disable(GL11.GL_CULL_FACE);
             RenderUtil.bindTexture(resourceLocation);
-            this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+            this.getModel().render();
             GlStateManager.disableLight();
             RenderUtil.bindTexture(resourceLocationMask);
-            this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+            this.getModel().render();
             GlStateManager.enableLight();
         }
         GlStateManager.popMatrix();
@@ -99,10 +99,10 @@ public class RenderItemPowercell extends ItemRenderer
             GlStateManager.rotate(Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 360 * 6, 0.0F, 1.0F, 0.0F);
             GlStateManager.disable(GL11.GL_CULL_FACE);
             RenderUtil.bindTexture(resourceLocation);
-            this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+            this.getModel().render();
             GlStateManager.disableLight();
             RenderUtil.bindTexture(resourceLocationMask);
-            this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+            this.getModel().render();
             GlStateManager.enableLight();
         }
         GlStateManager.popMatrix();

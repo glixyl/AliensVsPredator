@@ -22,9 +22,8 @@ public class ModelSolarPanel extends ModelBaseWrapper
     }
 
     @Override
-    public void render(float boxTranslation)
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
-        super.render(boxTranslation);
         this.panel.render(boxTranslation);
     }
 }

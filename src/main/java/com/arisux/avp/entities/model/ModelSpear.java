@@ -8,10 +8,10 @@ import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 public class ModelSpear extends ModelBaseWrapper
 {
-    private static final float scale = 0.08F;
+    private final float scale = 0.08F;
 
     @Override
-    public void render(float boxTranslation)
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
         GlStateManager.scale(scale + 0.02F, scale, scale);
 

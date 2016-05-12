@@ -1,6 +1,5 @@
 package com.arisux.avp.util;
 
-import com.arisux.avp.entities.extended.ExtendedEntityLivingBase;
 import com.arisux.avp.entities.mob.EntityAqua;
 import com.arisux.avp.entities.mob.EntityDrone;
 import com.arisux.avp.entities.mob.EntityPredalien;
@@ -17,7 +16,6 @@ import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.entity.passive.EntityWolf;
-import net.minecraft.nbt.NBTTagCompound;
 
 @SuppressWarnings("all")
 public enum EmbryoType

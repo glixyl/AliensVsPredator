@@ -1,8 +1,8 @@
 package com.arisux.avp.entities.mob;
 
-import com.arisux.avp.AliensVsPredator;
-
 import java.util.Random;
+
+import com.arisux.avp.AliensVsPredator;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -11,18 +11,17 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public abstract class EntitySpeciesEngineer extends EntityMob

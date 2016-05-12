@@ -4,8 +4,8 @@ import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.EntityAcidPool;
 
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 

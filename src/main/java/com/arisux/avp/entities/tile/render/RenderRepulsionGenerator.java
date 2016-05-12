@@ -9,7 +9,6 @@ import static org.lwjgl.opengl.GL11.GL_SRC_ALPHA;
 import org.lwjgl.opengl.GL12;
 
 import com.arisux.airi.lib.GlStateManager;
-import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.TileEntityRepulsionGenerator;
 import com.arisux.avp.entities.tile.model.ModelRepulsionGenerator;
@@ -37,7 +36,7 @@ public class RenderRepulsionGenerator extends TileEntitySpecialRenderer
             GlStateManager.enable(GL12.GL_RESCALE_NORMAL);
             GlStateManager.scale(1.0F, -1.0F, 1.0F);
             GlStateManager.enable(GL_ALPHA_TEST);
-            this.model.render(tile, RenderUtil.DEFAULT_BOX_TRANSLATION);
+            this.model.render(tile);
         }
         GlStateManager.popMatrix();
     }

@@ -3,9 +3,9 @@ package com.arisux.avp.entities.tile.model;
 import com.arisux.airi.lib.AccessWrapper;
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.client.ModelBaseWrapper;
-import com.arisux.avp.entities.tile.TileEntityRepulsionGenerator;
 
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.tileentity.TileEntity;
 
 public class ModelRepulsionGenerator extends ModelBaseWrapper
 {
@@ -94,10 +94,12 @@ public class ModelRepulsionGenerator extends ModelBaseWrapper
         setRotation(dualMagnet, 0F, 0F, 0F);
     }
 
-    public void render(TileEntityRepulsionGenerator tileEntity, float boxTranslation)
+    @Override
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
-        super.render(boxTranslation);
-
+        RenderObject tileRenderObject = (RenderObject) renderObject;
+        TileEntity tile = tileRenderObject.getTileEntity();
+        
         base.render(boxTranslation);
         motor.render(boxTranslation);
         topSupport2.render(boxTranslation);
@@ -109,11 +111,11 @@ public class ModelRepulsionGenerator extends ModelBaseWrapper
         support2.render(boxTranslation);
         support3.render(boxTranslation);
 
-        if (tileEntity != null)
+        if (tile != null)
         {
             GlStateManager.pushMatrix();
             {
-                GlStateManager.rotate(tileEntity.getWorldObj().getWorldTime() % 360 * 48 * AccessWrapper.getRenderPartialTicks(), 0F, 1F, 0F);
+                GlStateManager.rotate(tile.getWorldObj().getWorldTime() % 360 * 48 * AccessWrapper.getRenderPartialTicks(), 0F, 1F, 0F);
                 dualMagnet.render(boxTranslation);
             }
             GlStateManager.popMatrix();

@@ -41,7 +41,7 @@ public class RenderWorkstation extends TileEntitySpecialRenderer
             GlStateManager.enable(GL12.GL_RESCALE_NORMAL);
             GlStateManager.scale(1.0F, -1.0F, 1.0F);
             GlStateManager.enable(GL_ALPHA_TEST);
-            this.model.render(tile, 0.0625F);
+            this.model.render(tile);
 
             if (tile.isOperational())
             {
@@ -50,7 +50,7 @@ public class RenderWorkstation extends TileEntitySpecialRenderer
                 GlStateManager.enable(GL_BLEND);
                 GlStateManager.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
                 this.bindTexture(AliensVsPredator.resources().WORKSTATION_MASK);
-                this.model.render(tile, 0.0625F);
+                this.model.render(tile);
 
                 this.renderDisplay(tile);
 

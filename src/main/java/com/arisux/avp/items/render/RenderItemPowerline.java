@@ -3,7 +3,6 @@ package com.arisux.avp.items.render;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
-import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
 import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.avp.entities.tile.model.ModelCable;
@@ -54,7 +53,7 @@ public class RenderItemPowerline extends ItemRenderer
             GlStateManager.rotate(45, 1, 0, 1);
             GlStateManager.color4i(0xFF222222);
             GlStateManager.enableLight();
-            model.render(0.0625F);
+            this.getModel().render();
             GlStateManager.disableLight();
             GlStateManager.enable(GL11.GL_TEXTURE_2D);
         }
@@ -70,7 +69,7 @@ public class RenderItemPowerline extends ItemRenderer
         GlStateManager.disable(GL11.GL_CULL_FACE);
         GlStateManager.enableLight();
         GlStateManager.color4i(0xFF222222);
-        this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+        this.getModel().render();
         GlStateManager.enable(GL11.GL_TEXTURE_2D);
     }
 }

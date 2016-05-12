@@ -55,7 +55,7 @@ public class RenderLocker extends TileEntitySpecialRenderer
             }
 
             this.mainModel.door.rotateAngleY = !tile.isOpen() ? 0 : -1.5F;
-            this.mainModel.render(tile, RenderUtil.DEFAULT_BOX_TRANSLATION);
+            this.mainModel.render(tile);
 
             if (tile != null)
             {

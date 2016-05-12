@@ -4,7 +4,6 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import com.arisux.airi.lib.GlStateManager;
-import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.TileEntityAmpule;
 import com.arisux.avp.entities.tile.model.ModelAmpule;
@@ -51,7 +50,7 @@ public class RenderAmpule extends TileEntitySpecialRenderer
                 }
             }
 
-            this.mainModel.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+            this.mainModel.render();
         }
         GlStateManager.popMatrix();
     }

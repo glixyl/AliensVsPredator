@@ -102,8 +102,12 @@ public class ModelWorkstation extends ModelBaseWrapper
         setRotation(screenRight, 0.111544F, 0.3346145F, 0F);
     }
 
-    public void render(TileEntityWorkstation tile, float boxTranslation)
+    @Override
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
+        RenderObject tileRenderObject = (RenderObject) renderObject;
+        TileEntityWorkstation tile = (TileEntityWorkstation) tileRenderObject.getTileEntity();
+        
         stand.render(boxTranslation);
         standBase.render(boxTranslation);
         desk.render(boxTranslation);
@@ -175,6 +179,6 @@ public class ModelWorkstation extends ModelBaseWrapper
             screenLeft.render(boxTranslation);
             rightArm.render(boxTranslation);
             screenRight.render(boxTranslation);
-        }
+        }        
     }
 }

@@ -1,27 +1,16 @@
 package com.arisux.avp.util;
 
-import com.arisux.avp.entities.mob.EntityAqua;
 import com.arisux.avp.entities.mob.EntityChestburster;
 import com.arisux.avp.entities.mob.EntityCrusher;
 import com.arisux.avp.entities.mob.EntityDrone;
 import com.arisux.avp.entities.mob.EntityPraetorian;
-import com.arisux.avp.entities.mob.EntityPredalien;
 import com.arisux.avp.entities.mob.EntityQueen;
 import com.arisux.avp.entities.mob.EntityRunnerDrone;
 import com.arisux.avp.entities.mob.EntityRunnerWarrior;
-import com.arisux.avp.entities.mob.EntitySpitter;
 import com.arisux.avp.entities.mob.EntityWarrior;
 import com.arisux.avp.entities.mob.EntityXenomorph;
-import com.arisux.avp.entities.mob.EntityYautja;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.entity.passive.EntityCow;
-import net.minecraft.entity.passive.EntityHorse;
-import net.minecraft.entity.passive.EntitySquid;
-import net.minecraft.entity.passive.EntityWolf;
 
 @SuppressWarnings("all")
 public enum EvolutionType

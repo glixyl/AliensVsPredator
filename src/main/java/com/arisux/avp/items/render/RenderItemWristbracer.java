@@ -61,12 +61,12 @@ public class RenderItemWristbracer implements IItemRenderer
                 GlStateManager.translate(-0.25F, -0.15F, 0.3F);
                 GlStateManager.scale(2F, 2F, 2F);
                 RenderUtil.bindTexture(resourceLocation);
-                this.model.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+                this.model.render();
 
                 if (playerToRender != null && ItemWristbracer.playersWristbracerContainsBlades(playerToRender))
                 {
-                    this.model.b6.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
-                    this.model.bladeLeft.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+                    this.model.draw(this.model.b6);
+                    this.model.draw(this.model.bladeLeft);
                 }
                 break;
 
@@ -91,12 +91,12 @@ public class RenderItemWristbracer implements IItemRenderer
 
                 GlStateManager.scale(1.6F, 1.6F, 1.6F);
                 RenderUtil.bindTexture(resourceLocation);
-                this.model.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+                this.model.render();
 
                 if (playerToRender != null && ItemWristbracer.playersWristbracerContainsBlades(playerToRender))
                 {
-                    this.model.b6.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
-                    this.model.bladeLeft.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+                    this.model.draw(this.model.b6);
+                    this.model.draw(this.model.bladeLeft);
                 }
 
                 break;
@@ -108,9 +108,9 @@ public class RenderItemWristbracer implements IItemRenderer
                 GlStateManager.translate(-10F, 6F, -3F);
                 GlStateManager.scale(33F, 33F, 33F);
                 RenderUtil.bindTexture(resourceLocation);
-                this.model.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
-                this.model.b6.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
-                this.model.bladeLeft.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+                this.model.render();
+                this.model.draw(this.model.b6);
+                this.model.draw(this.model.bladeLeft);
                 break;
 
             default:

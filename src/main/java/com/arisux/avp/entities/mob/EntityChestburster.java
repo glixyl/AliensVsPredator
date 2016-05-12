@@ -2,8 +2,8 @@ package com.arisux.avp.entities.mob;
 
 import com.arisux.airi.lib.WorldUtil.Entities;
 import com.arisux.avp.AliensVsPredator;
-import com.arisux.avp.util.EvolutionType;
 import com.arisux.avp.util.EmbryoType;
+import com.arisux.avp.util.EvolutionType;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;

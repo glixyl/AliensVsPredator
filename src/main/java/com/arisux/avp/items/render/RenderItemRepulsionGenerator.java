@@ -37,7 +37,7 @@ public class RenderItemRepulsionGenerator extends ItemRenderer
         GlStateManager.disable(GL11.GL_CULL_FACE);
         GlStateManager.scale(glScale, -glScale, glScale);
         RenderUtil.bindTexture(resourceLocation);
-        ((ModelRepulsionGenerator) this.getModel()).render(null, RenderUtil.DEFAULT_BOX_TRANSLATION);
+        this.getModel().render();
     }
 
     @Override
@@ -54,7 +54,7 @@ public class RenderItemRepulsionGenerator extends ItemRenderer
             GlStateManager.disable(GL11.GL_CULL_FACE);
             GlStateManager.scale(glScale, glScale, glScale);
             RenderUtil.bindTexture(resourceLocation);
-            ((ModelRepulsionGenerator) this.getModel()).render(null, RenderUtil.DEFAULT_BOX_TRANSLATION);
+            this.getModel().render();
         }
     }
 
@@ -69,7 +69,7 @@ public class RenderItemRepulsionGenerator extends ItemRenderer
         GlStateManager.scale(glScale, glScale, glScale);
         RenderUtil.bindTexture(resourceLocation);
         GlStateManager.enableLight();
-        ((ModelRepulsionGenerator) this.getModel()).render(null, RenderUtil.DEFAULT_BOX_TRANSLATION);
+        this.getModel().render();
         GlStateManager.disableLight();
     }
 }

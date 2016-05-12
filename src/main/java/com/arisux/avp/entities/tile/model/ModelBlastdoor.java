@@ -120,9 +120,27 @@ public class ModelBlastdoor extends ModelBaseWrapper
         setRotation(bar4, 0F, 0F, 2.414419F);
     }
 
-    public void render(TileEntityBlastdoor tile, float boxTranslation)
+    @Override
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
-        this.setRotationAngles(tile);
+        RenderObject tileRenderObject = (RenderObject) renderObject;
+        TileEntityBlastdoor tile = (TileEntityBlastdoor) tileRenderObject.getTileEntity();
+        
+        if (tile != null)
+        {
+            float doorProgress = tile.getDoorProgress() * 2;
+            float doorRight = doorProgress;
+            float doorLeft = -doorProgress;
+
+            doorRightMain.offsetX = doorRight;
+            doorRightArrow.offsetX = doorRight;
+
+            doorLeftMain.offsetX = doorLeft;
+            doorLeftCorner1.offsetX = doorLeft;
+            doorLeftCorner2.offsetX = doorLeft;
+            doorLeftDiagonal1.offsetX = doorLeft;
+            doorLeftDiagonal2.offsetX = doorLeft;
+        }
 
         doorLeftCorner1.render(boxTranslation);
         doorLeftCorner2.render(boxTranslation);
@@ -139,24 +157,6 @@ public class ModelBlastdoor extends ModelBaseWrapper
         frameRight.render(boxTranslation);
         bar1.render(boxTranslation);
         bar4.render(boxTranslation);
-    }
-
-    public void setRotationAngles(TileEntityBlastdoor tile)
-    {
-        if (tile != null)
-        {
-            float doorProgress = tile.getDoorProgress() * 2;
-            float doorRight = doorProgress;
-            float doorLeft = -doorProgress;
-
-            doorRightMain.offsetX = doorRight;
-            doorRightArrow.offsetX = doorRight;
-
-            doorLeftMain.offsetX = doorLeft;
-            doorLeftCorner1.offsetX = doorLeft;
-            doorLeftCorner2.offsetX = doorLeft;
-            doorLeftDiagonal1.offsetX = doorLeft;
-            doorLeftDiagonal2.offsetX = doorLeft;
-        }
+        
     }
 }

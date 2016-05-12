@@ -3,8 +3,8 @@ package com.arisux.avp.entities.mob;
 import com.arisux.avp.AliensVsPredator;
 
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.world.World;
 
 public class EntityWarrior extends EntityXenomorph implements IMob

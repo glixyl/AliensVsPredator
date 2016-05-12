@@ -3,7 +3,6 @@ package com.arisux.avp.entities.tile.render;
 import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
 
 import com.arisux.airi.lib.GlStateManager;
-import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.TileEntityStasisMechanism;
 import com.arisux.avp.entities.tile.model.ModelStasisMechanism;
@@ -29,13 +28,13 @@ public class RenderStasisMechanism extends TileEntitySpecialRenderer
             GlStateManager.scale(1.0F, -1.0F, 1.0F);
 
             bindTexture(AliensVsPredator.resources().STASIS_MECHANISM);
-            this.model.render(tile, RenderUtil.DEFAULT_BOX_TRANSLATION);
+            this.model.render(tile);
 
             if (Minecraft.getMinecraft().gameSettings.fancyGraphics)
             {
                 GlStateManager.disableLight();
                 bindTexture(AliensVsPredator.resources().STASIS_MECHANISM_MASK);
-                this.model.render(tile, RenderUtil.DEFAULT_BOX_TRANSLATION);
+                this.model.render(tile);
                 GlStateManager.enableLight();
             }
         }

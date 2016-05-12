@@ -34,7 +34,7 @@ public class RenderItemBlastDoor extends ItemRenderer
         GlStateManager.disable(GL11.GL_CULL_FACE);
         GlStateManager.scale(glScale, -glScale, glScale);
         RenderUtil.bindTexture(this.getResourceLocation());
-        ((ModelBlastdoor) this.getModel()).render(null, RenderUtil.DEFAULT_BOX_TRANSLATION);
+        this.getModel().render();
 
     }
 
@@ -52,7 +52,7 @@ public class RenderItemBlastDoor extends ItemRenderer
             GlStateManager.disable(GL11.GL_CULL_FACE);
             GlStateManager.scale(glScale, glScale, glScale);
             RenderUtil.bindTexture(this.getResourceLocation());
-            ((ModelBlastdoor) this.getModel()).render(null, RenderUtil.DEFAULT_BOX_TRANSLATION);
+            this.getModel().render();
         }
     }
 
@@ -71,7 +71,7 @@ public class RenderItemBlastDoor extends ItemRenderer
             GlStateManager.blendClear();
             RenderUtil.bindTexture(this.getResourceLocation());
             GlStateManager.enableLight();
-            ((ModelBlastdoor) this.getModel()).render(null, RenderUtil.DEFAULT_BOX_TRANSLATION);
+            this.getModel().render();
             GlStateManager.disableLight();
         }
         GlStateManager.popMatrix();

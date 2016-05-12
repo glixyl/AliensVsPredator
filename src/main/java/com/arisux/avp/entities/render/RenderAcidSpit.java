@@ -1,6 +1,7 @@
 package com.arisux.avp.entities.render;
 
 import com.arisux.airi.lib.GlStateManager;
+import com.arisux.airi.lib.client.render.Color;
 import com.arisux.avp.entities.model.ModelPlasma;
 
 import net.minecraft.client.renderer.entity.Render;
@@ -9,7 +10,12 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderAcidSpit extends Render
 {
-    ModelPlasma model = new ModelPlasma();
+    private ModelPlasma model = new ModelPlasma();
+    
+    public RenderAcidSpit()
+    {
+        this.model.setColor(new Color(0.2F, 1.0F, 0.0F, 0.7F));
+    }
 
     @Override
     public void doRender(Entity entity, double posX, double posY, double posZ, float yaw, float renderPartialTicks)
@@ -26,27 +32,32 @@ public class RenderAcidSpit extends Render
             GlStateManager.pushMatrix();
             {
                 GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
-                this.model.render(0.6F, 0.2F, 1.0F, 0.0F, 0.7F);
+                this.model.setScale(0.6F);
+                this.model.render();
 
                 GlStateManager.pushMatrix();
                 {
                     GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
-                    this.model.render(0.7F, 0.2F, 1.0F, 0.0F, 0.7F);
+                    this.model.setScale(0.7F);
+                    this.model.render();
 
                     GlStateManager.pushMatrix();
                     {
                         GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
-                        this.model.render(0.8F, 0.2F, 1.0F, 0.0F, 0.7F);
+                        this.model.setScale(0.8F);
+                        this.model.render();
 
                         GlStateManager.pushMatrix();
                         {
                             GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
-                            this.model.render(0.9F, 0.2F, 1.0F, 0.0F, 0.7F);
+                            this.model.setScale(0.9F);
+                            this.model.render();
 
                             GlStateManager.pushMatrix();
                             {
                                 GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
-                                this.model.render(1.0F, 0.2F, 1.0F, 0.0F, 0.7F);
+                                this.model.setScale(1.0F);
+                                this.model.render();
                             }
                             GlStateManager.popMatrix();
                         }

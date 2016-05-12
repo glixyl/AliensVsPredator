@@ -6,7 +6,6 @@ import com.arisux.avp.block.BlockShape;
 import com.arisux.avp.block.BlockShape.ShapeTypes;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;

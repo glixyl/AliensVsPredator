@@ -1,25 +1,20 @@
 package com.arisux.avp.entities.mob.model;
 
 import com.arisux.airi.lib.GlStateManager;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 
-public class ModelMarine extends ModelBase
+public class ModelMarine extends ModelBaseWrapper
 {
     public ModelRenderer bipedHead, bipedHeadwear, bipedBody, bipedRightArm, bipedLeftArm, bipedRightLeg, bipedLeftLeg, bipedEars, bipedCloak;
-    public int heldItemLeft, heldItemRight;
-    public boolean isSneak, aimedBow;
+    public int heldItemLeft;
+    public int heldItemRight;
+    public boolean isSneak;
+    public boolean aimedBow;
 
     public ModelMarine()
-    {
-        this(0.0F);
-    }
-
-    public ModelMarine(float scale)
     {
         this.heldItemLeft = 0;
         this.heldItemRight = 0;
@@ -28,84 +23,49 @@ public class ModelMarine extends ModelBase
         this.textureWidth = 64;
         this.textureHeight = 43;
         this.bipedCloak = new ModelRenderer(this, 0, 0);
-        this.bipedCloak.addBox(-5.0F, 0.0F, -1.0F, 10, 16, 1, scale);
+        this.bipedCloak.addBox(-5.0F, 0.0F, -1.0F, 10, 16, 1, 0F);
         this.bipedEars = new ModelRenderer(this, 24, 0);
-        this.bipedEars.addBox(-3.0F, -6.0F, -1.0F, 6, 6, 1, scale);
+        this.bipedEars.addBox(-3.0F, -6.0F, -1.0F, 6, 6, 1, 0F);
         this.bipedHead = new ModelRenderer(this, 0, 0);
-        this.bipedHead.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, scale);
+        this.bipedHead.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, 0F);
         this.bipedHead.setRotationPoint(0.0F, 0.0F, 0.0F);
         this.bipedHeadwear = new ModelRenderer(this, 32, 0);
-        this.bipedHeadwear.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, scale + 0.5F);
+        this.bipedHeadwear.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, 0F + 0.5F);
         this.bipedHeadwear.setRotationPoint(0.0F, 0.0F, 0.0F);
         this.bipedBody = new ModelRenderer(this, 16, 16);
-        this.bipedBody.addBox(-4.0F, 0.0F, -2.0F, 8, 12, 4, scale);
+        this.bipedBody.addBox(-4.0F, 0.0F, -2.0F, 8, 12, 4, 0F);
         this.bipedBody.setRotationPoint(0.0F, 0.0F, 0.0F);
         this.bipedRightArm = new ModelRenderer(this, 40, 16);
-        this.bipedRightArm.addBox(-3.0F, -2.0F, -2.0F, 4, 12, 4, scale);
+        this.bipedRightArm.addBox(-3.0F, -2.0F, -2.0F, 4, 12, 4, 0F);
         this.bipedRightArm.setRotationPoint(-5.0F, 2.0F, 0.0F);
         this.bipedLeftArm = new ModelRenderer(this, 40, 16);
         this.bipedLeftArm.mirror = true;
-        this.bipedLeftArm.addBox(-1.0F, -2.0F, -2.0F, 4, 12, 4, scale);
+        this.bipedLeftArm.addBox(-1.0F, -2.0F, -2.0F, 4, 12, 4, 0F);
         this.bipedLeftArm.setRotationPoint(5.0F, 2.0F, 0.0F);
         this.bipedRightLeg = new ModelRenderer(this, 0, 16);
-        this.bipedRightLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 12, 4, scale);
+        this.bipedRightLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 12, 4, 0F);
         this.bipedRightLeg.setRotationPoint(-1.9F, 12.0F, 0.0F);
         this.bipedLeftLeg = new ModelRenderer(this, 0, 16);
         this.bipedLeftLeg.mirror = true;
-        this.bipedLeftLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 12, 4, scale);
+        this.bipedLeftLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 12, 4, 0F);
         this.bipedLeftLeg.setRotationPoint(1.9F, 12.0F, 0.0F);
     }
 
     @Override
-    public void render(Entity entity, float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation)
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
-        super.render(entity, swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation);
-        this.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
-
-        if (this.isChild)
-        {
-            float scale = 2.0F;
-            GlStateManager.pushMatrix();
-            GlStateManager.scale(1.5F / scale, 1.5F / scale, 1.5F / scale);
-            GlStateManager.translate(0.0F, 16.0F * boxTranslation, 0.0F);
-            this.bipedHead.render(boxTranslation);
-            GlStateManager.popMatrix();
-            GlStateManager.pushMatrix();
-            GlStateManager.scale(1.0F / scale, 1.0F / scale, 1.0F / scale);
-            GlStateManager.translate(0.0F, 24.0F * boxTranslation, 0.0F);
-            this.bipedBody.render(boxTranslation);
-            this.bipedRightArm.render(boxTranslation);
-            this.bipedLeftArm.render(boxTranslation);
-            this.bipedRightLeg.render(boxTranslation);
-            this.bipedLeftLeg.render(boxTranslation);
-            this.bipedHeadwear.render(boxTranslation);
-            GlStateManager.popMatrix();
-        }
-        else
-        {
-            this.bipedHead.render(boxTranslation);
-            this.bipedBody.render(boxTranslation);
-            this.bipedRightArm.render(boxTranslation);
-            this.bipedLeftArm.render(boxTranslation);
-            this.bipedRightLeg.render(boxTranslation);
-            this.bipedLeftLeg.render(boxTranslation);
-            this.bipedHeadwear.render(boxTranslation);
-        }
-    }
-
-    @Override
-    public void setRotationAngles(float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation, Entity entity)
-    {
-        this.bipedHead.rotateAngleY = headYaw / (180F / (float) Math.PI);
-        this.bipedHead.rotateAngleX = headPitch / (180F / (float) Math.PI);
+        RenderObject o = (RenderObject) renderObject;
+        
+        this.bipedHead.rotateAngleY = o.headYaw / (180F / (float) Math.PI);
+        this.bipedHead.rotateAngleX = o.headPitch / (180F / (float) Math.PI);
         this.bipedHeadwear.rotateAngleY = this.bipedHead.rotateAngleY;
         this.bipedHeadwear.rotateAngleX = this.bipedHead.rotateAngleX;
-        this.bipedRightArm.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 2.0F * swingProgressPrev * 0.5F;
-        this.bipedLeftArm.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 2.0F * swingProgressPrev * 0.5F;
+        this.bipedRightArm.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 2.0F * o.swingProgressPrev * 0.5F;
+        this.bipedLeftArm.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 2.0F * o.swingProgressPrev * 0.5F;
         this.bipedRightArm.rotateAngleZ = 0.0F;
         this.bipedLeftArm.rotateAngleZ = 0.0F;
-        this.bipedRightLeg.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev;
-        this.bipedLeftLeg.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev;
+        this.bipedRightLeg.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 1.4F * o.swingProgressPrev;
+        this.bipedLeftLeg.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 1.4F * o.swingProgressPrev;
         this.bipedRightLeg.rotateAngleY = 0.0F;
         this.bipedLeftLeg.rotateAngleY = 0.0F;
 
@@ -179,10 +139,10 @@ public class ModelMarine extends ModelBase
             this.bipedHeadwear.rotationPointY = 0.0F;
         }
 
-        this.bipedRightArm.rotateAngleZ += MathHelper.cos(idleProgress * 0.09F) * 0.05F + 0.05F;
-        this.bipedLeftArm.rotateAngleZ -= MathHelper.cos(idleProgress * 0.09F) * 0.05F + 0.05F;
-        this.bipedRightArm.rotateAngleX += MathHelper.sin(idleProgress * 0.067F) * 0.05F;
-        this.bipedLeftArm.rotateAngleX -= MathHelper.sin(idleProgress * 0.067F) * 0.05F;
+        this.bipedRightArm.rotateAngleZ += MathHelper.cos(o.idleProgress * 0.09F) * 0.05F + 0.05F;
+        this.bipedLeftArm.rotateAngleZ -= MathHelper.cos(o.idleProgress * 0.09F) * 0.05F + 0.05F;
+        this.bipedRightArm.rotateAngleX += MathHelper.sin(o.idleProgress * 0.067F) * 0.05F;
+        this.bipedLeftArm.rotateAngleX -= MathHelper.sin(o.idleProgress * 0.067F) * 0.05F;
 
         if (null == null)
         {
@@ -196,16 +156,42 @@ public class ModelMarine extends ModelBase
             this.bipedLeftArm.rotateAngleX = -((float) Math.PI / 2F) + this.bipedHead.rotateAngleX;
             this.bipedRightArm.rotateAngleX -= var8 * 1.2F - var9 * 0.4F;
             this.bipedLeftArm.rotateAngleX -= var8 * 1.2F - var9 * 0.4F;
-            this.bipedRightArm.rotateAngleZ += MathHelper.cos(idleProgress * 0.09F) * 0.05F + 0.05F;
-            this.bipedLeftArm.rotateAngleZ -= MathHelper.cos(idleProgress * 0.09F) * 0.05F + 0.05F;
-            this.bipedRightArm.rotateAngleX += MathHelper.sin(idleProgress * 0.067F) * 0.05F;
-            this.bipedLeftArm.rotateAngleX -= MathHelper.sin(idleProgress * 0.067F) * 0.05F;
+            this.bipedRightArm.rotateAngleZ += MathHelper.cos(o.idleProgress * 0.09F) * 0.05F + 0.05F;
+            this.bipedLeftArm.rotateAngleZ -= MathHelper.cos(o.idleProgress * 0.09F) * 0.05F + 0.05F;
+            this.bipedRightArm.rotateAngleX += MathHelper.sin(o.idleProgress * 0.067F) * 0.05F;
+            this.bipedLeftArm.rotateAngleX -= MathHelper.sin(o.idleProgress * 0.067F) * 0.05F;
         }
-    }
-
-    @Override
-    public void setLivingAnimations(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4)
-    {
-        super.setLivingAnimations(par1EntityLivingBase, par2, par3, par4);
+        
+        //TODO: Check if this is in the right order
+        
+        if (this.isChild)
+        {
+            float scale = 2.0F;
+            GlStateManager.pushMatrix();
+            GlStateManager.scale(1.5F / scale, 1.5F / scale, 1.5F / scale);
+            GlStateManager.translate(0.0F, 16.0F * boxTranslation, 0.0F);
+            this.bipedHead.render(boxTranslation);
+            GlStateManager.popMatrix();
+            GlStateManager.pushMatrix();
+            GlStateManager.scale(1.0F / scale, 1.0F / scale, 1.0F / scale);
+            GlStateManager.translate(0.0F, 24.0F * boxTranslation, 0.0F);
+            this.bipedBody.render(boxTranslation);
+            this.bipedRightArm.render(boxTranslation);
+            this.bipedLeftArm.render(boxTranslation);
+            this.bipedRightLeg.render(boxTranslation);
+            this.bipedLeftLeg.render(boxTranslation);
+            this.bipedHeadwear.render(boxTranslation);
+            GlStateManager.popMatrix();
+        }
+        else
+        {
+            this.bipedHead.render(boxTranslation);
+            this.bipedBody.render(boxTranslation);
+            this.bipedRightArm.render(boxTranslation);
+            this.bipedLeftArm.render(boxTranslation);
+            this.bipedRightLeg.render(boxTranslation);
+            this.bipedLeftLeg.render(boxTranslation);
+            this.bipedHeadwear.render(boxTranslation);
+        }        
     }
 }

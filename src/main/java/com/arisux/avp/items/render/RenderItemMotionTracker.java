@@ -39,7 +39,7 @@ public class RenderItemMotionTracker extends ItemRenderer
         GlStateManager.disable(GL11.GL_CULL_FACE);
         GlStateManager.scale(glScale, -glScale, glScale);
         RenderUtil.bindTexture(resourceLocation);
-        this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+        this.getModel().render();
         this.drawDisplay();
     }
 
@@ -58,7 +58,7 @@ public class RenderItemMotionTracker extends ItemRenderer
             GlStateManager.disable(GL11.GL_CULL_FACE);
             GlStateManager.scale(glScale, glScale, glScale);
             RenderUtil.bindTexture(resourceLocation);
-            this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+            this.getModel().render();
             this.drawDisplay();
         }
     }
@@ -72,7 +72,7 @@ public class RenderItemMotionTracker extends ItemRenderer
         GlStateManager.scale(glScale, glScale, glScale);
         GlStateManager.disable(GL11.GL_CULL_FACE);
         RenderUtil.bindTexture(resourceLocation);
-        this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+        this.getModel().render();
     }
 
     private void drawDisplay()
@@ -96,6 +96,6 @@ public class RenderItemMotionTracker extends ItemRenderer
         GlStateManager.rotate(Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 360 * 6, 0.0F, 1.0F, 0.0F);
         GlStateManager.disable(GL11.GL_CULL_FACE);
         RenderUtil.bindTexture(resourceLocation);
-        this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+        this.getModel().render();
     }
 }

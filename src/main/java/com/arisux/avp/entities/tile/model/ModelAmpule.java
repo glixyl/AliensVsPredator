@@ -98,7 +98,7 @@ public class ModelAmpule extends ModelBaseWrapper
     }
 
     @Override
-    public void render(float boxTranslation)
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
         this.phialStem3.render(boxTranslation);
         this.phialTip4.render(boxTranslation);

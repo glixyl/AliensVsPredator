@@ -6,7 +6,6 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
-import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
 import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.avp.AliensVsPredator;
@@ -46,7 +45,7 @@ public class RenderItemNostromoFlamethrower extends ItemRenderer
         GlStateManager.scale(1F, -1F, 1F);
         GlStateManager.disable(GL11.GL_CULL_FACE);
         bindTexture(getResourceLocation());
-        this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+        this.getModel().render();
     }
 
     @Override
@@ -59,7 +58,7 @@ public class RenderItemNostromoFlamethrower extends ItemRenderer
         float glScale = 1.0F;
         GlStateManager.scale(glScale, glScale, -glScale);
         bindTexture(getResourceLocation());
-        this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+        this.getModel().render();
     }
 
     @Override
@@ -91,7 +90,7 @@ public class RenderItemNostromoFlamethrower extends ItemRenderer
             GlStateManager.disable(GL11.GL_CULL_FACE);
             GlStateManager.scale(glScale, glScale, -glScale);
             bindTexture(getResourceLocation());
-            this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+            this.getModel().render();
         }
     }
 
@@ -103,7 +102,7 @@ public class RenderItemNostromoFlamethrower extends ItemRenderer
         GlStateManager.scale(7F, 7F, 7F);
         GlStateManager.disable(GL11.GL_CULL_FACE);
         bindTexture(getResourceLocation());
-        this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+        this.getModel().render();
     }
 
     public String getAmmoCountDisplayString()

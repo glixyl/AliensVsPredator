@@ -1,14 +1,12 @@
 package com.arisux.avp.entities.ai.yautja;
 
-import com.arisux.avp.entities.mob.EntitySpeciesYautja;
-import com.arisux.avp.entities.mob.EntitySpeciesEngineer;
-import com.arisux.avp.entities.mob.EntitySpeciesAlien;
 import com.arisux.avp.entities.mob.EntityMarine;
+import com.arisux.avp.entities.mob.EntitySpeciesAlien;
+import com.arisux.avp.entities.mob.EntitySpeciesEngineer;
 
 import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 
 public class EntitySelectorYautja implements IEntitySelector

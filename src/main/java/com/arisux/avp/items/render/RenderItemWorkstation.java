@@ -37,7 +37,7 @@ public class RenderItemWorkstation extends ItemRenderer
         GlStateManager.disable(GL11.GL_CULL_FACE);
         GlStateManager.scale(glScale, -glScale, glScale);
         RenderUtil.bindTexture(resourceLocation);
-        ((ModelWorkstation) this.getModel()).render(null, RenderUtil.DEFAULT_BOX_TRANSLATION);
+        this.getModel().render();
     }
 
     @Override
@@ -54,7 +54,7 @@ public class RenderItemWorkstation extends ItemRenderer
             GlStateManager.disable(GL11.GL_CULL_FACE);
             GlStateManager.scale(glScale, glScale, glScale);
             RenderUtil.bindTexture(resourceLocation);
-            ((ModelWorkstation) this.getModel()).render(null, RenderUtil.DEFAULT_BOX_TRANSLATION);
+            this.getModel().render();
         }
     }
 
@@ -71,7 +71,7 @@ public class RenderItemWorkstation extends ItemRenderer
             GlStateManager.scale(glScale, glScale, glScale);
             GlStateManager.enableLight();
             RenderUtil.bindTexture(resourceLocation);
-            ((ModelWorkstation) this.getModel()).render(null, RenderUtil.DEFAULT_BOX_TRANSLATION);
+            this.getModel().render();
             GlStateManager.disableLight();
         }
         GlStateManager.popMatrix();

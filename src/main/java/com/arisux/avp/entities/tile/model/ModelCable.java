@@ -2,7 +2,6 @@ package com.arisux.avp.entities.tile.model;
 
 import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.avp.entities.tile.TileEntityElectrical;
-import com.arisux.avp.entities.tile.TileEntityPowerline;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.tileentity.TileEntity;
@@ -62,14 +61,10 @@ public class ModelCable extends ModelBaseWrapper
     }
 
     @Override
-    public void render(float boxTranslation)
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
-        super.render(boxTranslation);
-        this.render(null, boxTranslation);
-    }
+        TileEntity tile = (TileEntity) renderObject.getObject();
 
-    public void render(TileEntityPowerline tile, float boxTranslation)
-    {
         node.render(boxTranslation);
 
         if (tile != null)

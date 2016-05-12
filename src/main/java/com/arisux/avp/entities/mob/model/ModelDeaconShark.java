@@ -2,9 +2,7 @@ package com.arisux.avp.entities.mob.model;
 
 import com.arisux.airi.lib.client.ModelBaseWrapper;
 
-import net.minecraft.block.material.Material;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
 public class ModelDeaconShark extends ModelBaseWrapper
@@ -176,38 +174,38 @@ public class ModelDeaconShark extends ModelBaseWrapper
     }
 
     @Override
-    public void render(Entity entity, float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation)
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
-        super.render(entity, swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation);
-
+        RenderObject o = (RenderObject) renderObject;
+        
         this.body1.render(boxTranslation);
-        this.body2.rotateAngleY = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * swingProgressPrev * 0.25F;
+        this.body2.rotateAngleY = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * o.swingProgressPrev * 0.25F;
         this.body3.rotateAngleY = -0.085F;
         this.tail1.rotateAngleY = -0.085F;
         this.tail2.rotateAngleY = -0.085F;
         this.tail3.rotateAngleY = -0.085F;
         this.tail4.rotateAngleY = -0.085F;
 
-        float tailSpeed = entity != null ? (0.5F) : 0F;
-        this.body2.rotateAngleY += MathHelper.sin(idleProgress * tailSpeed) * 0.1F + 0.06;
-        this.body3.rotateAngleY += MathHelper.sin(idleProgress * tailSpeed) * 0.1F + 0.06;
-        this.tail1.rotateAngleY += MathHelper.sin(idleProgress * tailSpeed) * 0.1F + 0.06;
-        this.tail2.rotateAngleY += MathHelper.sin(idleProgress * tailSpeed) * 0.1F + 0.06;
-        this.tail3.rotateAngleY += MathHelper.sin(idleProgress * tailSpeed) * 0.1F + 0.06;
-        this.tail4.rotateAngleY += MathHelper.sin(idleProgress * tailSpeed) * 0.1F + 0.06;
+        float tailSpeed = o.getEntity() != null ? (0.5F) : 0F;
+        this.body2.rotateAngleY += MathHelper.sin(o.idleProgress * tailSpeed) * 0.1F + 0.06;
+        this.body3.rotateAngleY += MathHelper.sin(o.idleProgress * tailSpeed) * 0.1F + 0.06;
+        this.tail1.rotateAngleY += MathHelper.sin(o.idleProgress * tailSpeed) * 0.1F + 0.06;
+        this.tail2.rotateAngleY += MathHelper.sin(o.idleProgress * tailSpeed) * 0.1F + 0.06;
+        this.tail3.rotateAngleY += MathHelper.sin(o.idleProgress * tailSpeed) * 0.1F + 0.06;
+        this.tail4.rotateAngleY += MathHelper.sin(o.idleProgress * tailSpeed) * 0.1F + 0.06;
 
-        this.jawLower2.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * swingProgressPrev * 0.25F;
-        this.jawLower2.rotateAngleX += MathHelper.sin(idleProgress * 0.05F) * 0.1F + 0.06;
+        this.jawLower2.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * o.swingProgressPrev * 0.25F;
+        this.jawLower2.rotateAngleX += MathHelper.sin(o.idleProgress * 0.05F) * 0.1F + 0.06;
 
-        this.jawUpper2.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * swingProgressPrev * 0.25F;
-        this.jawUpper2.rotateAngleX -= MathHelper.sin(idleProgress * 0.05F) * 0.04F + 0.06;
+        this.jawUpper2.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * o.swingProgressPrev * 0.25F;
+        this.jawUpper2.rotateAngleX -= MathHelper.sin(o.idleProgress * 0.05F) * 0.04F + 0.06;
 
-        this.jawInnerLower.offsetZ = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * swingProgressPrev * 0.25F;
-        this.jawInnerLower.offsetZ -= MathHelper.sin(idleProgress * 0.05F) * 0.5F + 0.06;
-        this.jawInnerLower.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * swingProgressPrev * 0.25F;
-        this.jawInnerLower.rotateAngleX += MathHelper.sin(idleProgress * 0.05F) * 0.05F + 0.06;
+        this.jawInnerLower.offsetZ = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * o.swingProgressPrev * 0.25F;
+        this.jawInnerLower.offsetZ -= MathHelper.sin(o.idleProgress * 0.05F) * 0.5F + 0.06;
+        this.jawInnerLower.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * o.swingProgressPrev * 0.25F;
+        this.jawInnerLower.rotateAngleX += MathHelper.sin(o.idleProgress * 0.05F) * 0.05F + 0.06;
 
-        this.jawInnerUpper.offsetZ = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * swingProgressPrev * 0.25F;
-        this.jawInnerUpper.offsetZ -= MathHelper.sin(idleProgress * 0.05F) * 0.5F + 0.06;
+        this.jawInnerUpper.offsetZ = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * o.swingProgressPrev * 0.25F;
+        this.jawInnerUpper.offsetZ -= MathHelper.sin(o.idleProgress * 0.05F) * 0.5F + 0.06;
     }
 }

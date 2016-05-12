@@ -48,7 +48,7 @@ public class RenderBlastdoor extends TileEntitySpecialRenderer
                         GlStateManager.rotate(90F, 0F, 1F, 0F);
                     }
                 }
-                this.model.render(tile, 0.0625F);
+                this.model.render(tile);
             }
             GlStateManager.popMatrix();
         }

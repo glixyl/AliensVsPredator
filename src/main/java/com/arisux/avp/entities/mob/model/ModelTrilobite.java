@@ -4,7 +4,6 @@ import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
 public class ModelTrilobite extends ModelBaseWrapper
@@ -344,13 +343,13 @@ public class ModelTrilobite extends ModelBaseWrapper
         this.RMiddleTentacle3.addChild(this.RMiddleTentacle4);
     }
 
-    public void render(Entity entity, float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation)
+    @Override
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
-        super.render(entity, swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation);
-        this.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
-
-        float legMovementLeft = (MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1F * swingProgressPrev * 0.25F) * 90;
-        float legMovementRight = -(MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1F * swingProgressPrev * 0.25F) * 90;
+        RenderObject o = (RenderObject) renderObject;
+        float legMovementLeft = (MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 1F * o.swingProgressPrev * 0.25F) * 90;
+        float legMovementRight = -(MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 1F * o.swingProgressPrev * 0.25F) * 90;
+        
         GlStateManager.translate(0, 0.45F + this.RMiddleTentacle1.rotateAngleZ, 0F);
 
         /** Inner Tentacles **/
@@ -367,7 +366,7 @@ public class ModelTrilobite extends ModelBaseWrapper
         {
             GlStateManager.translate(0, 0, 0.4F);
             GlStateManager.rotate(90, 0, 1, 0);
-            GlStateManager.rotate((MathHelper.sin(idleProgress * 0.1F) * 0.4F) * 20 + legMovementLeft, 0, 1, 0);
+            GlStateManager.rotate((MathHelper.sin(o.idleProgress * 0.1F) * 0.4F) * 20 + legMovementLeft, 0, 1, 0);
             this.RMiddleTentacle1.render(boxTranslation);
         }
         GlStateManager.popMatrix();
@@ -375,7 +374,7 @@ public class ModelTrilobite extends ModelBaseWrapper
         {
             GlStateManager.translate(0, 0, 0F);
             GlStateManager.rotate(0, 0, 1, 0);
-            GlStateManager.rotate((MathHelper.sin(idleProgress * 0.1F) * 0.4F) * 20 + legMovementLeft, 0, 1, 0);
+            GlStateManager.rotate((MathHelper.sin(o.idleProgress * 0.1F) * 0.4F) * 20 + legMovementLeft, 0, 1, 0);
             this.RMiddleTentacle1.render(boxTranslation);
         }
         GlStateManager.popMatrix();
@@ -383,7 +382,7 @@ public class ModelTrilobite extends ModelBaseWrapper
         {
             GlStateManager.translate(0, 0, 0.2F);
             GlStateManager.rotate(35, 0, 1, 0);
-            GlStateManager.rotate((MathHelper.sin(idleProgress * 0.1F) * 0.4F) * 20 + legMovementRight, 0, 1, 0);
+            GlStateManager.rotate((MathHelper.sin(o.idleProgress * 0.1F) * 0.4F) * 20 + legMovementRight, 0, 1, 0);
             this.RMiddleTentacle1.render(boxTranslation);
         }
         GlStateManager.popMatrix();
@@ -391,7 +390,7 @@ public class ModelTrilobite extends ModelBaseWrapper
         {
             GlStateManager.translate(0.2, 0, -0.1F);
             GlStateManager.rotate(-45, 0, 1, 0);
-            GlStateManager.rotate((MathHelper.sin(idleProgress * 0.1F) * 0.4F) * 20 + legMovementRight, 0, 1, 0);
+            GlStateManager.rotate((MathHelper.sin(o.idleProgress * 0.1F) * 0.4F) * 20 + legMovementRight, 0, 1, 0);
             this.RMiddleTentacle1.render(boxTranslation);
         }
         GlStateManager.popMatrix();
@@ -400,7 +399,7 @@ public class ModelTrilobite extends ModelBaseWrapper
             GlStateManager.scale(-1, 1, 1);
             GlStateManager.translate(-0.4, 0, 0F);
             GlStateManager.rotate(0, 0, 1, 0);
-            GlStateManager.rotate((MathHelper.sin(idleProgress * 0.1F) * 0.4F) * 20 + legMovementLeft, 0, 1, 0);
+            GlStateManager.rotate((MathHelper.sin(o.idleProgress * 0.1F) * 0.4F) * 20 + legMovementLeft, 0, 1, 0);
             this.RMiddleTentacle1.render(boxTranslation);
         }
         GlStateManager.popMatrix();
@@ -409,7 +408,7 @@ public class ModelTrilobite extends ModelBaseWrapper
             GlStateManager.scale(-1, 1, 1);
             GlStateManager.translate(-0.4, 0, 0.2F);
             GlStateManager.rotate(35, 0, 1, 0);
-            GlStateManager.rotate((MathHelper.sin(idleProgress * 0.1F) * 0.4F) * 20 + legMovementRight, 0, 1, 0);
+            GlStateManager.rotate((MathHelper.sin(o.idleProgress * 0.1F) * 0.4F) * 20 + legMovementRight, 0, 1, 0);
             this.RMiddleTentacle1.render(boxTranslation);
         }
         GlStateManager.popMatrix();
@@ -418,22 +417,22 @@ public class ModelTrilobite extends ModelBaseWrapper
             GlStateManager.scale(-1, 1, 1);
             GlStateManager.translate(-0.2, 0, -0.1F);
             GlStateManager.rotate(-45, 0, 1, 0);
-            GlStateManager.rotate((MathHelper.sin(idleProgress * 0.1F) * 0.4F) * 20 + legMovementRight, 0, 1, 0);
+            GlStateManager.rotate((MathHelper.sin(o.idleProgress * 0.1F) * 0.4F) * 20 + legMovementRight, 0, 1, 0);
             this.RMiddleTentacle1.render(boxTranslation);
         }
         GlStateManager.popMatrix();
 
-        this.RMiddleTentacle1.rotateAngleZ = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1F * swingProgressPrev * 0.25F;
+        this.RMiddleTentacle1.rotateAngleZ = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 1F * o.swingProgressPrev * 0.25F;
         this.RMiddleTentacle2.rotateAngleZ = -0.1F;
         this.RMiddleTentacle3.rotateAngleZ = -0.1F;
         this.RMiddleTentacle4.rotateAngleZ = -0.1F;
         this.RMiddleTentacle5.rotateAngleZ = -0.1F;
 
-        this.RMiddleTentacle1.rotateAngleZ += MathHelper.sin(idleProgress * 0.1F) * 0.4F;
-        this.RMiddleTentacle2.rotateAngleZ += MathHelper.sin(idleProgress * 0.1F) * 0.4F;
-        this.RMiddleTentacle3.rotateAngleZ -= MathHelper.sin(idleProgress * 0.1F) * 0.4F;
-        this.RMiddleTentacle4.rotateAngleZ -= MathHelper.sin(idleProgress * 0.1F) * 0.4F;
-        this.RMiddleTentacle5.rotateAngleZ -= MathHelper.sin(idleProgress * 0.1F) * 0.4F;
+        this.RMiddleTentacle1.rotateAngleZ += MathHelper.sin(o.idleProgress * 0.1F) * 0.4F;
+        this.RMiddleTentacle2.rotateAngleZ += MathHelper.sin(o.idleProgress * 0.1F) * 0.4F;
+        this.RMiddleTentacle3.rotateAngleZ -= MathHelper.sin(o.idleProgress * 0.1F) * 0.4F;
+        this.RMiddleTentacle4.rotateAngleZ -= MathHelper.sin(o.idleProgress * 0.1F) * 0.4F;
+        this.RMiddleTentacle5.rotateAngleZ -= MathHelper.sin(o.idleProgress * 0.1F) * 0.4F;
         this.RMiddleClaw.rotateAngleZ = (float) Math.toRadians(80);
 
         /** Petals **/
@@ -452,6 +451,6 @@ public class ModelTrilobite extends ModelBaseWrapper
         this.bodyBack.render(boxTranslation);
         this.LJaw.render(boxTranslation);
         this.RJaw.render(boxTranslation);
-        this.bodyFront.render(boxTranslation);
+        this.bodyFront.render(boxTranslation);        
     }
 }

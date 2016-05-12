@@ -3,7 +3,6 @@ package com.arisux.avp.entities.mob.model;
 import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
 public class ModelYautja extends ModelBaseWrapper
@@ -442,11 +441,42 @@ public class ModelYautja extends ModelBaseWrapper
         this.setRotation(this.rightarm3, 0.0F, 0.0F, 0.2792527F);
     }
 
+
     @Override
-    public void render(Entity entity, float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation)
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
-        super.render(entity, swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation);
-        this.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
+        RenderObject o = (RenderObject) renderObject;
+        
+        this.rightarm.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 2.0F * o.swingProgressPrev * 0.5F;
+        this.rightarm.rotateAngleZ = 0.0F;
+        this.rightarm2.rotateAngleX = this.rightarm.rotateAngleX;
+        this.rightarm2.rotateAngleZ = this.rightarm.rotateAngleZ;
+        this.rightarm3.rotateAngleX = this.rightarm.rotateAngleX;
+        this.rightarm3.rotateAngleZ = this.rightarm.rotateAngleZ;
+        this.blade1.rotateAngleX = this.rightarm.rotateAngleX;
+        this.blade1.rotateAngleZ = this.rightarm.rotateAngleZ;
+        this.blade2.rotateAngleX = this.rightarm.rotateAngleX;
+        this.blade2.rotateAngleZ = this.rightarm.rotateAngleZ;
+        this.leftarm.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 2.0F * o.swingProgressPrev * 0.5F;
+        this.leftarm.rotateAngleZ = 0.0F;
+        this.leftarm2.rotateAngleX = this.leftarm.rotateAngleX;
+        this.leftarm2.rotateAngleZ = this.leftarm.rotateAngleZ;
+        this.leftarm3.rotateAngleX = this.leftarm.rotateAngleX;
+        this.leftarm3.rotateAngleZ = this.leftarm.rotateAngleZ;
+        this.rightleg.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 1.4F * o.swingProgressPrev;
+        this.rightleg.rotateAngleY = 0.0F;
+        this.rightleg.rotateAngleX = this.rightleg.rotateAngleX;
+        this.rightleg2.rotateAngleX = this.rightleg.rotateAngleX;
+        this.rightleg2.rotateAngleZ = this.rightleg.rotateAngleZ;
+        this.rightleg3.rotateAngleX = this.rightleg.rotateAngleX;
+        this.rightleg3.rotateAngleZ = this.rightleg.rotateAngleZ;
+        this.leftleg.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 1.4F * o.swingProgressPrev;
+        this.leftleg.rotateAngleY = 0.0F;
+        this.leftleg2.rotateAngleX = this.leftleg.rotateAngleX;
+        this.leftleg2.rotateAngleZ = this.leftleg.rotateAngleZ;
+        this.leftleg3.rotateAngleX = this.leftleg.rotateAngleX;
+        this.leftleg3.rotateAngleZ = this.leftleg.rotateAngleZ;
+        
         this.head.render(boxTranslation);
         this.head55.render(boxTranslation);
         this.body.render(boxTranslation);
@@ -518,40 +548,5 @@ public class ModelYautja extends ModelBaseWrapper
         this.rightleg3.render(boxTranslation);
         this.leftarm3.render(boxTranslation);
         this.rightarm3.render(boxTranslation);
-    }
-
-    @Override
-    public void setRotationAngles(float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation, Entity entity)
-    {
-        super.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
-        this.rightarm.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 2.0F * swingProgressPrev * 0.5F;
-        this.rightarm.rotateAngleZ = 0.0F;
-        this.rightarm2.rotateAngleX = this.rightarm.rotateAngleX;
-        this.rightarm2.rotateAngleZ = this.rightarm.rotateAngleZ;
-        this.rightarm3.rotateAngleX = this.rightarm.rotateAngleX;
-        this.rightarm3.rotateAngleZ = this.rightarm.rotateAngleZ;
-        this.blade1.rotateAngleX = this.rightarm.rotateAngleX;
-        this.blade1.rotateAngleZ = this.rightarm.rotateAngleZ;
-        this.blade2.rotateAngleX = this.rightarm.rotateAngleX;
-        this.blade2.rotateAngleZ = this.rightarm.rotateAngleZ;
-        this.leftarm.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 2.0F * swingProgressPrev * 0.5F;
-        this.leftarm.rotateAngleZ = 0.0F;
-        this.leftarm2.rotateAngleX = this.leftarm.rotateAngleX;
-        this.leftarm2.rotateAngleZ = this.leftarm.rotateAngleZ;
-        this.leftarm3.rotateAngleX = this.leftarm.rotateAngleX;
-        this.leftarm3.rotateAngleZ = this.leftarm.rotateAngleZ;
-        this.rightleg.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev;
-        this.rightleg.rotateAngleY = 0.0F;
-        this.rightleg.rotateAngleX = this.rightleg.rotateAngleX;
-        this.rightleg2.rotateAngleX = this.rightleg.rotateAngleX;
-        this.rightleg2.rotateAngleZ = this.rightleg.rotateAngleZ;
-        this.rightleg3.rotateAngleX = this.rightleg.rotateAngleX;
-        this.rightleg3.rotateAngleZ = this.rightleg.rotateAngleZ;
-        this.leftleg.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev;
-        this.leftleg.rotateAngleY = 0.0F;
-        this.leftleg2.rotateAngleX = this.leftleg.rotateAngleX;
-        this.leftleg2.rotateAngleZ = this.leftleg.rotateAngleZ;
-        this.leftleg3.rotateAngleX = this.leftleg.rotateAngleX;
-        this.leftleg3.rotateAngleZ = this.leftleg.rotateAngleZ;
     }
 }

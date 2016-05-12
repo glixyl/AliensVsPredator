@@ -126,7 +126,7 @@ public class ModelM4 extends ModelBaseWrapper
     }
 
     @Override
-    public void render(float boxTranslation)
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
         this.barrel.render(boxTranslation);
         this.clip.render(boxTranslation);
@@ -143,6 +143,6 @@ public class ModelM4 extends ModelBaseWrapper
         this.sightBase2.render(boxTranslation);
         this.sightBase3.render(boxTranslation);
         this.sight1.render(boxTranslation);
-        this.sight2.render(boxTranslation);
+        this.sight2.render(boxTranslation);        
     }
 }

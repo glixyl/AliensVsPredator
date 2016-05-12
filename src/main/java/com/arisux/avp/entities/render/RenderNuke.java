@@ -12,7 +12,11 @@ import net.minecraft.util.ResourceLocation;
 public class RenderNuke extends Render
 {
     private ModelPlasma model = new ModelPlasma();
-    private Color color = new Color(0.3F, 0.6F, 1F, 0.7F);
+    
+    public RenderNuke()
+    {
+        this.model.setColor(new Color(0.3F, 0.6F, 1F, 0.7F));
+    }
 
     @Override
     public void doRender(Entity entity, double posX, double posY, double posZ, float yaw, float renderPartialTicks)
@@ -36,22 +40,26 @@ public class RenderNuke extends Render
             GlStateManager.pushMatrix();
             {
                 GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
-                this.model.render(0.1F, color);
+                this.model.setScale(0.1F);
+                this.model.render();
 
                 GlStateManager.pushMatrix();
                 {
                     GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
-                    this.model.render(0.2F, color);
+                    this.model.setScale(0.2F);
+                    this.model.render();
 
                     GlStateManager.pushMatrix();
                     {
                         GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
-                        this.model.render(0.3F, color);
+                        this.model.setScale(0.3F);
+                        this.model.render();
 
                         GlStateManager.pushMatrix();
                         {
                             GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
-                            this.model.render(0.35F, color);
+                            this.model.setScale(0.35F);
+                            this.model.render();
                         }
                         GlStateManager.popMatrix();
                     }

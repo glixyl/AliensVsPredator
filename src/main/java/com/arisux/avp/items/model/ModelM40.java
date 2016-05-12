@@ -57,14 +57,13 @@ public class ModelM40 extends ModelBaseWrapper
     }
 
     @Override
-    public void render(float boxTranslation)
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
-        super.render(boxTranslation);
         cap.render(boxTranslation);
         core.render(boxTranslation);
         ridge1.render(boxTranslation);
         ridge2.render(boxTranslation);
         grip.render(boxTranslation);
-        bottom.render(boxTranslation);
+        bottom.render(boxTranslation);        
     }
 }

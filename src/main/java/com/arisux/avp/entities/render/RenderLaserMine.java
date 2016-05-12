@@ -31,7 +31,7 @@ public class RenderLaserMine extends Render
             GlStateManager.rotate(180.0F, 0.0F, 0.0F, 1.0F);
             GL11.glScaled(0.5F, 0.5F, 0.5F);
             RenderUtil.bindTexture(resource);
-            model.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+            model.render();
             GlStateManager.disable(GL11.GL_CULL_FACE);
             GlStateManager.scale(2F, -2F, 2F);
             GlStateManager.translate(0.004F, -0.74F, 0.06F);

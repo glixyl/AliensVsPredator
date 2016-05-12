@@ -76,7 +76,7 @@ public class RenderMarine extends RenderLiving implements IFaceMountable
             }
 
             bindTexture(map.asResourceLocation());
-            map.asModelWrapper().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+            map.asModelWrapper().render();
         }
         GlStateManager.popMatrix();
     }

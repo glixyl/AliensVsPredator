@@ -40,7 +40,7 @@ public class RenderItemTurret extends ItemRenderer
         {
             RenderUtil.bindTexture(getResourceLocation());
             GlStateManager.disable(GL11.GL_CULL_FACE);
-            ((ModelTurret) this.getModel()).render(null, 0.0625F);
+            this.getModel().render();
         }
         GlStateManager.popMatrix();
     }
@@ -57,7 +57,7 @@ public class RenderItemTurret extends ItemRenderer
             GlStateManager.rotate(0F, 1.0F, 0.0F, 0.0F);
             GlStateManager.scale(glScale, glScale, glScale);
             GlStateManager.enableLight();
-            ((ModelTurret) this.getModel()).render(null, 0.0625F);
+            this.getModel().render();
         }
         GlStateManager.popMatrix();
     }

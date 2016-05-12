@@ -52,7 +52,7 @@ public class RenderItemM41A extends ItemRenderer
         GlStateManager.scale(1F, -1F, 1F);
         GlStateManager.disable(GL11.GL_CULL_FACE);
         bindTexture(getResourceLocation());
-        this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+        this.getModel().render();
     }
 
     @Override
@@ -70,7 +70,7 @@ public class RenderItemM41A extends ItemRenderer
             float glScale = 1.3F;
             GlStateManager.scale(glScale, glScale, glScale);
             bindTexture(getResourceLocation());
-            this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+            this.getModel().render();
         }
     }
 
@@ -103,7 +103,7 @@ public class RenderItemM41A extends ItemRenderer
             GlStateManager.disable(GL11.GL_CULL_FACE);
             GlStateManager.scale(glScale, glScale, glScale);
             bindTexture(getResourceLocation());
-            this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+            this.getModel().render();
 
             if (mc.thePlayer.getCurrentEquippedItem() != null && mc.thePlayer.getCurrentEquippedItem().getItem() instanceof ItemFirearm)
             {
@@ -142,7 +142,7 @@ public class RenderItemM41A extends ItemRenderer
         GlStateManager.scale(20F, 20F, 20F);
         GlStateManager.disable(GL11.GL_CULL_FACE);
         bindTexture(getResourceLocation());
-        this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+        this.getModel().render();
     }
 
     public String getAmmoCountDisplayString()

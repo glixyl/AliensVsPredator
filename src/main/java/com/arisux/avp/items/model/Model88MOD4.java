@@ -59,9 +59,8 @@ public class Model88MOD4 extends ModelBaseWrapper
     }
 
     @Override
-    public void render(float boxTranslation)
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
-        super.render(boxTranslation);
         this.barrelNose.render(boxTranslation);
         this.butt1.render(boxTranslation);
         this.barrelLeft.render(boxTranslation);
@@ -71,6 +70,6 @@ public class Model88MOD4 extends ModelBaseWrapper
         this.underGrip.render(boxTranslation);
         this.trigger.render(boxTranslation);
         this.barrelRight.render(boxTranslation);
-        this.handleGrip.render(boxTranslation);
+        this.handleGrip.render(boxTranslation);        
     }
 }

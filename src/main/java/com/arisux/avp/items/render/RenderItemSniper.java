@@ -52,7 +52,7 @@ public class RenderItemSniper extends ItemRenderer
         GlStateManager.scale(1F, -1F, 1F);
         GlStateManager.disable(GL11.GL_CULL_FACE);
         bindTexture(getResourceLocation());
-        this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+        this.getModel().render();
     }
 
     public void renderZoom()
@@ -95,7 +95,7 @@ public class RenderItemSniper extends ItemRenderer
             GlStateManager.translate(0.1F, -0.0F, 0.8F);
             float glScale = 1.2F;
             GlStateManager.scale(glScale, glScale, glScale);
-            this.getModel().render(0.0625F);
+            this.getModel().render();
         }
     }
 
@@ -126,7 +126,7 @@ public class RenderItemSniper extends ItemRenderer
             }
             GlStateManager.disable(GL11.GL_CULL_FACE);
             mc.renderEngine.bindTexture(getResourceLocation());
-            this.getModel().render(0.0625F);
+            this.getModel().render();
         }
     }
 
@@ -142,6 +142,6 @@ public class RenderItemSniper extends ItemRenderer
         GlStateManager.translate(0F, 5.77F, -10.85F);
         float glScale = 20F;
         GlStateManager.scale(glScale, glScale, glScale);
-        this.getModel().render(0.0625F);
+        this.getModel().render();
     }
 }

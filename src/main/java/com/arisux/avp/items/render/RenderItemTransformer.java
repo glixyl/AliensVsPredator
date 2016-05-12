@@ -35,7 +35,7 @@ public class RenderItemTransformer extends ItemRenderer
             GlStateManager.translate(0F, -1.3F, 0.4F);
             GlStateManager.disable(GL11.GL_CULL_FACE);
             RenderUtil.bindTexture(this.getResourceLocation());
-            this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+            this.getModel().render();
         }
         GlStateManager.popMatrix();
     }
@@ -53,7 +53,7 @@ public class RenderItemTransformer extends ItemRenderer
                 GlStateManager.rotate(-45.0F, 0.0F, 0.0F, 1.0F);
                 GlStateManager.disable(GL11.GL_CULL_FACE);
                 RenderUtil.bindTexture(this.getResourceLocation());
-                this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+                this.getModel().render();
             }
         }
         GlStateManager.popMatrix();
@@ -72,7 +72,7 @@ public class RenderItemTransformer extends ItemRenderer
             GlStateManager.disable(GL11.GL_CULL_FACE);
             GlStateManager.enable(GL11.GL_BLEND);
             RenderUtil.bindTexture(this.getResourceLocation());
-            this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+            this.getModel().render();
         }
         GlStateManager.popMatrix();
     }
@@ -86,7 +86,7 @@ public class RenderItemTransformer extends ItemRenderer
             GlStateManager.rotate(Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 360 * 6, 0.0F, 1.0F, 0.0F);
             GlStateManager.disable(GL11.GL_CULL_FACE);
             RenderUtil.bindTexture(this.getResourceLocation());
-            this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+            this.getModel().render();
             GlStateManager.enableLight();
         }
         GlStateManager.popMatrix();

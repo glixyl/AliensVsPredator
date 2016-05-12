@@ -3,7 +3,6 @@ package com.arisux.avp.entities.mob.model;
 import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 
 public class ModelChestburster extends ModelBaseWrapper
 {
@@ -160,11 +159,8 @@ public class ModelChestburster extends ModelBaseWrapper
     }
 
     @Override
-    public void render(Entity entity, float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation)
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
-        super.render(entity, swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation);
-        this.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
-
         this.body1.render(boxTranslation);
         this.body2.render(boxTranslation);
         this.body3.render(boxTranslation);
@@ -188,12 +184,6 @@ public class ModelChestburster extends ModelBaseWrapper
         this.tail5.render(boxTranslation);
         this.tail6.render(boxTranslation);
         this.tail7.render(boxTranslation);
-        this.body17.render(boxTranslation);
-    }
-
-    @Override
-    public void setRotationAngles(float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation, Entity entity)
-    {
-        super.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
+        this.body17.render(boxTranslation);        
     }
 }

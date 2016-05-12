@@ -1,12 +1,12 @@
 package com.arisux.avp.items.model;
 
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.avp.AliensVsPredator;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelWristBlade extends ModelBase
+public class ModelWristBlade extends ModelBaseWrapper
 {
     public ModelRenderer bBase;
     public ModelRenderer b1;
@@ -113,7 +113,7 @@ public class ModelWristBlade extends ModelBase
         this.setRotation(this.bladeRight, 0.0F, -((float) Math.PI / 4F), 0.0F);
     }
 
-    public void render(float boxTranslation)
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
         this.bBase.render(boxTranslation);
         this.b1.render(boxTranslation);
@@ -132,13 +132,6 @@ public class ModelWristBlade extends ModelBase
         {
             this.b6.render(boxTranslation);
             this.bladeLeft.render(boxTranslation);
-        }
-    }
-
-    private void setRotation(ModelRenderer model, float x, float y, float z)
-    {
-        model.rotateAngleX = x;
-        model.rotateAngleY = y;
-        model.rotateAngleZ = z;
+        }        
     }
 }

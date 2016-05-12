@@ -4,7 +4,6 @@ import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.avp.entities.mob.EntityFacehugger;
 
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
 public class ModelRoyalFacehugger extends ModelBaseWrapper
@@ -475,15 +474,14 @@ public class ModelRoyalFacehugger extends ModelBaseWrapper
         this.lLeg1a.addChild(this.lLeg1c);
         this.tail11.addChild(this.tail12);
     }
-
+    
     @Override
-    public void render(Entity entity, float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation)
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
-        super.render(entity, swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation);
-
+        RenderObject o = (RenderObject) renderObject;
         float yRot = -0.0585F;
 
-        this.tail01.rotateAngleY = (MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * swingProgressPrev * 0.25F);
+        this.tail01.rotateAngleY = (MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * o.swingProgressPrev * 0.25F);
         this.tail02.rotateAngleY = yRot;
         this.tail03.rotateAngleY = yRot;
         this.tail04.rotateAngleY = yRot;
@@ -499,16 +497,16 @@ public class ModelRoyalFacehugger extends ModelBaseWrapper
         this.tail14.rotateAngleY = yRot;
         this.tail15.rotateAngleY = yRot;
 
-        if (entity != null)
+        if (o.getEntity() != null)
         {
-            EntityFacehugger facehugger = (EntityFacehugger) entity;
+            EntityFacehugger facehugger = (EntityFacehugger) o.getEntity();
 
             if (facehugger.isFertile())
             {
                 float tailSpeed = 0.15F;
                 float distMulti = 0.075F;
                 float distAdd = 0.05F;
-                float progress = idleProgress + swingProgress;
+                float progress = o.idleProgress + o.swingProgress;
                 this.tail01.rotateAngleY += MathHelper.sin(progress * tailSpeed) * distMulti + distAdd;
                 this.tail02.rotateAngleY += MathHelper.sin(progress * tailSpeed) * distMulti + distAdd;
                 this.tail03.rotateAngleY += MathHelper.sin(progress * tailSpeed) * distMulti + distAdd;
@@ -526,8 +524,8 @@ public class ModelRoyalFacehugger extends ModelBaseWrapper
                 this.tail15.rotateAngleY += MathHelper.cos(progress * tailSpeed) * distMulti + distAdd;
             }
 
-            float angle1 = MathHelper.sin(swingProgress * 1.1662F + (float) Math.PI) * 30F;
-            float angle2 = MathHelper.cos(swingProgress * 1.1662F + (float) Math.PI) * 30F;
+            float angle1 = MathHelper.sin(o.swingProgress * 1.1662F + (float) Math.PI) * 30F;
+            float angle2 = MathHelper.cos(o.swingProgress * 1.1662F + (float) Math.PI) * 30F;
 
             float lLegMovement1 = (float) Math.toRadians(angle1);
             float lLegMovement2 = (float) Math.toRadians(-angle2);
@@ -573,6 +571,6 @@ public class ModelRoyalFacehugger extends ModelBaseWrapper
         this.vertebrae02.render(boxTranslation);
         this.lLeg3a.render(boxTranslation);
         this.rLeg2a.render(boxTranslation);
-        this.spine2.render(boxTranslation);
+        this.spine2.render(boxTranslation);        
     }
 }

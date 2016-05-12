@@ -3,7 +3,6 @@ package com.arisux.avp.entities.mob.model;
 import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
 public class ModelCrusher extends ModelBaseWrapper
@@ -277,10 +276,41 @@ public class ModelCrusher extends ModelBaseWrapper
     }
 
     @Override
-    public void render(Entity entity, float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation)
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
-        super.render(entity, swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation);
-        this.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
+        RenderObject o = (RenderObject) renderObject;
+        
+        this.sSpike3.rotateAngleX = 0.52F + Math.abs(0.0F);
+        this.sSpike4.rotateAngleX = -0.8F - Math.abs(0.0F);
+        this.sSpike2.rotateAngleX = 0.35F + Math.abs(0.2F);
+        this.sSpike5.rotateAngleX = -1.3F - Math.abs(0.0F);
+        this.sJaw1.rotateAngleY = (float) Math.toRadians(o.headYaw) * 0.75F;
+        this.sHead.rotateAngleY = (float) Math.toRadians(o.headYaw) * 0.75F;
+        this.sHead2.rotateAngleY = (float) Math.toRadians(o.headYaw) * 0.75F;
+        this.sHead2.rotateAngleY = (float) Math.toRadians(o.headYaw) * 0.75F;
+        this.sHead4.rotateAngleY = (float) Math.toRadians(o.headYaw) * 0.75F;
+        this.crest5.rotateAngleY = (float) Math.toRadians(o.headYaw) * 0.75F;
+        this.crest0.rotateAngleY = (float) Math.toRadians(o.headYaw) * 0.75F;
+        this.crest1.rotateAngleY = (float) Math.toRadians(o.headYaw) * 0.75F;
+        this.crest2.rotateAngleY = (float) Math.toRadians(o.headYaw) * 0.75F;
+        this.crest3.rotateAngleY = (float) Math.toRadians(o.headYaw) * 0.75F;
+        this.crest4.rotateAngleY = (float) Math.toRadians(o.headYaw) * 0.75F;
+        this.sLeftThigh.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 1.4F * o.swingProgressPrev - 0.8028515F;
+        this.sLeftShin.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 1.4F * o.swingProgressPrev - 0.4014257F;
+        this.sLeftShin2.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 1.4F * o.swingProgressPrev - 0.8028515F;
+        this.sLeftFoot.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 1.4F * o.swingProgressPrev;
+        this.sRightThigh.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 1.4F * o.swingProgressPrev - 0.8028515F;
+        this.sRightShin.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 1.4F * o.swingProgressPrev - 0.4014257F;
+        this.sRightShin2.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 1.4F * o.swingProgressPrev - 0.8028515F;
+        this.sRightFoot.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 1.4F * o.swingProgressPrev;
+        this.sRightArm.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 1.4F * o.swingProgressPrev + 0.3665191F;
+        this.sRightArm2.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 1.4F * o.swingProgressPrev + 0.3665191F;
+        this.sRightClaw.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 1.4F * o.swingProgressPrev + 0.3665191F;
+        this.sRightClaw2.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 1.4F * o.swingProgressPrev + 0.3665191F;
+        this.sLeftArm.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 1.4F * o.swingProgressPrev + 0.3665191F;
+        this.sLeftArm2.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 1.4F * o.swingProgressPrev + 0.3665191F;
+        this.sLeftClaw.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 1.4F * o.swingProgressPrev + 0.3665191F;
+        this.sLeftClaw2.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 1.4F * o.swingProgressPrev + 0.3665191F;   
 
         this.sTorso.render(boxTranslation);
         this.sTorso2.render(boxTranslation);
@@ -324,43 +354,6 @@ public class ModelCrusher extends ModelBaseWrapper
         this.crest4.render(boxTranslation);
         this.crest5.render(boxTranslation);
         this.sArmCrusher1.render(boxTranslation);
-        this.sArmCrusher.render(boxTranslation);
-    }
-
-    @Override
-    public void setRotationAngles(float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation, Entity entity)
-    {
-        super.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
-        this.sSpike3.rotateAngleX = 0.52F + Math.abs(0.0F);
-        this.sSpike4.rotateAngleX = -0.8F - Math.abs(0.0F);
-        this.sSpike2.rotateAngleX = 0.35F + Math.abs(0.2F);
-        this.sSpike5.rotateAngleX = -1.3F - Math.abs(0.0F);
-        this.sJaw1.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
-        this.sHead.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
-        this.sHead2.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
-        this.sHead2.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
-        this.sHead4.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
-        this.crest5.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
-        this.crest0.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
-        this.crest1.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
-        this.crest2.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
-        this.crest3.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
-        this.crest4.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
-        this.sLeftThigh.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev - 0.8028515F;
-        this.sLeftShin.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev - 0.4014257F;
-        this.sLeftShin2.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev - 0.8028515F;
-        this.sLeftFoot.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev;
-        this.sRightThigh.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev - 0.8028515F;
-        this.sRightShin.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev - 0.4014257F;
-        this.sRightShin2.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev - 0.8028515F;
-        this.sRightFoot.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev;
-        this.sRightArm.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev + 0.3665191F;
-        this.sRightArm2.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev + 0.3665191F;
-        this.sRightClaw.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev + 0.3665191F;
-        this.sRightClaw2.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev + 0.3665191F;
-        this.sLeftArm.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev + 0.3665191F;
-        this.sLeftArm2.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev + 0.3665191F;
-        this.sLeftClaw.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev + 0.3665191F;
-        this.sLeftClaw2.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev + 0.3665191F;
+        this.sArmCrusher.render(boxTranslation);     
     }
 }

@@ -4,7 +4,6 @@ import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.avp.entities.mob.EntityFacehugger;
 
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 
@@ -300,31 +299,8 @@ public class ModelFacehugger extends ModelBaseWrapper
     }
 
     @Override
-    public void render(Entity entity, float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation)
-    {
-        super.render(entity, swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation);
-
-        this.bodyMain.render(boxTranslation);
-        this.lAirSac.render(boxTranslation);
-        this.rAirSac.render(boxTranslation);
-        this.lLeg1a.render(boxTranslation);
-        this.rLeg3a.render(boxTranslation);
-        this.lLeg4a.render(boxTranslation);
-        this.spine.render(boxTranslation);
-        this.rLeg1a.render(boxTranslation);
-        this.lLeg2a.render(boxTranslation);
-        this.rLeg2a.render(boxTranslation);
-        this.lLeg3a.render(boxTranslation);
-        this.rLeg4a.render(boxTranslation);
-        this.spine2.render(boxTranslation);
-        this.tail01.render(boxTranslation);
-    }
-
-    @Override
     public void setLivingAnimations(EntityLivingBase entity, float swingProgress, float swingProgressPrev, float partialTickTime)
     {
-        super.setLivingAnimations(entity, swingProgress, swingProgressPrev, partialTickTime);
-
         float yRot = -0.0585F;
 
         this.tail01.rotateAngleY = (MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * swingProgressPrev * 0.25F);
@@ -400,5 +376,24 @@ public class ModelFacehugger extends ModelBaseWrapper
             this.rLeg3a.rotateAngleX = -rLegMovement2;
             this.rLeg4a.rotateAngleX = -rLegMovement1;
         }
+    }
+
+    @Override
+    protected void render(IRenderObject renderObject, float boxTranslation)
+    {
+        this.bodyMain.render(boxTranslation);
+        this.lAirSac.render(boxTranslation);
+        this.rAirSac.render(boxTranslation);
+        this.lLeg1a.render(boxTranslation);
+        this.rLeg3a.render(boxTranslation);
+        this.lLeg4a.render(boxTranslation);
+        this.spine.render(boxTranslation);
+        this.rLeg1a.render(boxTranslation);
+        this.lLeg2a.render(boxTranslation);
+        this.rLeg2a.render(boxTranslation);
+        this.lLeg3a.render(boxTranslation);
+        this.rLeg4a.render(boxTranslation);
+        this.spine2.render(boxTranslation);
+        this.tail01.render(boxTranslation);
     }
 }

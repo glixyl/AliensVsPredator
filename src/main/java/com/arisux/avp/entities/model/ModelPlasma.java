@@ -3,16 +3,17 @@ package com.arisux.avp.entities.model;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.airi.lib.client.render.Color;
 import com.arisux.airi.lib.client.render.Vertex;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.Tessellator;
 
-public class ModelPlasma extends ModelBase
+public class ModelPlasma extends ModelBaseWrapper
 {
     private Tessellator tessellator = Tessellator.instance;
     private Color color;
+    private float scale;
     public boolean drawInternalVertices = true;
 
     private Vertex t1 = new Vertex(1.0F, 0.0F, 0.0F).smooth(),
@@ -31,16 +32,26 @@ public class ModelPlasma extends ModelBase
         t14 = new Vertex(0.25F, 0.25F, 0.5F).smooth(),
         t15 = new Vertex(0.0F, 0.25F, 0.75F).smooth();
 
-    public void render(float scale, Color color)
+    private void addTri(Vertex vertex1, Vertex vertex2, Vertex vertex3)
     {
-        this.color = color;
-        this.render(scale, color.r, color.g, color.b, color.a);
+        tessellator.startDrawing(6);
+        tessellator.setColorRGBA_F(this.color.r, this.color.g, this.color.b, this.color.a);
+        tessellator.addVertex(vertex1.x, vertex1.y, vertex1.z);
+        tessellator.addVertex(vertex2.x, vertex2.y, vertex2.z);
+        tessellator.addVertex(vertex3.x, vertex3.y, vertex3.z);
+
+        if (drawInternalVertices)
+        {
+            tessellator.addVertex(vertex3.x, vertex3.y, vertex3.z);
+            tessellator.addVertex(vertex2.x, vertex2.y, vertex2.z);
+            tessellator.addVertex(vertex1.x, vertex1.y, vertex1.z);
+        }
+        tessellator.draw();
     }
 
-    public void render(float scale, float r, float g, float b, float a)
+    @Override
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
-        this.color = new Color(r, g, b, a);
-
         GlStateManager.pushMatrix();
         {
             GlStateManager.scale(scale, scale, scale);
@@ -86,21 +97,14 @@ public class ModelPlasma extends ModelBase
         }
         GlStateManager.popMatrix();
     }
-
-    private void addTri(Vertex vertex1, Vertex vertex2, Vertex vertex3)
+    
+    public void setColor(Color color)
     {
-        tessellator.startDrawing(6);
-        tessellator.setColorRGBA_F(this.color.r, this.color.g, this.color.b, this.color.a);
-        tessellator.addVertex(vertex1.x, vertex1.y, vertex1.z);
-        tessellator.addVertex(vertex2.x, vertex2.y, vertex2.z);
-        tessellator.addVertex(vertex3.x, vertex3.y, vertex3.z);
-
-        if (drawInternalVertices)
-        {
-            tessellator.addVertex(vertex3.x, vertex3.y, vertex3.z);
-            tessellator.addVertex(vertex2.x, vertex2.y, vertex2.z);
-            tessellator.addVertex(vertex1.x, vertex1.y, vertex1.z);
-        }
-        tessellator.draw();
+        this.color = color;
+    }
+    
+    public void setScale(float scale)
+    {
+        this.scale = scale;
     }
 }

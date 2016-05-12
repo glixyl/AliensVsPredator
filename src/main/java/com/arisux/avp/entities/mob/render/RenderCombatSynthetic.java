@@ -3,7 +3,6 @@ package com.arisux.avp.entities.mob.render;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
-import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntityFacehugger;
 import com.arisux.avp.entities.mob.EntityMarine;
@@ -57,7 +56,7 @@ public class RenderCombatSynthetic extends RenderLiving implements IFaceMountabl
 
                 model.aimedBow = true;
                 Minecraft.getMinecraft().renderEngine.bindTexture(RenderItemM41A.resourceLocation);
-                modelM41a.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+                modelM41a.render();
             }
             GlStateManager.popMatrix();
         }

@@ -3,7 +3,6 @@ package com.arisux.avp.entities.mob.model;
 import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 
 public class ModelAqua extends ModelBaseWrapper
 {
@@ -346,11 +345,8 @@ public class ModelAqua extends ModelBaseWrapper
     }
 
     @Override
-    public void render(Entity entity, float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation)
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
-        super.render(entity, swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation);
-        this.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
-
         chest.render(boxTranslation);
         abdomen.render(boxTranslation);
         rThigh.render(boxTranslation);
@@ -405,12 +401,6 @@ public class ModelAqua extends ModelBaseWrapper
         lFoot.render(boxTranslation);
         rFoot.render(boxTranslation);
         headTopSpikes.render(boxTranslation);
-        headTopSpikesR.render(boxTranslation);
-    }
-
-    @Override
-    public void setRotationAngles(float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation, Entity entity)
-    {
-        super.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
+        headTopSpikesR.render(boxTranslation);        
     }
 }

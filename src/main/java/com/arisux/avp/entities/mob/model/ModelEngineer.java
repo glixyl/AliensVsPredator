@@ -4,7 +4,6 @@ import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.avp.entities.mob.EntitySpeciesEngineer;
 
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
 public class ModelEngineer extends ModelBaseWrapper
@@ -137,23 +136,23 @@ public class ModelEngineer extends ModelBaseWrapper
     }
 
     @Override
-    public void render(Entity entity, float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation)
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
-        super.render(entity, swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation);
+        RenderObject o = (RenderObject) renderObject;
+        
+        this.lShin.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 1.0F * o.swingProgressPrev;
+        this.lThigh.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 1.0F * o.swingProgressPrev - 0.2014257F;
+        this.lFoot.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 1.0F * o.swingProgressPrev;
 
-        this.lShin.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.0F * swingProgressPrev;
-        this.lThigh.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.0F * swingProgressPrev - 0.2014257F;
-        this.lFoot.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.0F * swingProgressPrev;
+        this.rShin.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 1.0F * o.swingProgressPrev;
+        this.rThigh.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 1.0F * o.swingProgressPrev - 0.2014257F;
+        this.rFoot.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 1.0F * o.swingProgressPrev;
 
-        this.rShin.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.0F * swingProgressPrev;
-        this.rThigh.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.0F * swingProgressPrev - 0.2014257F;
-        this.rFoot.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.0F * swingProgressPrev;
+        this.rArmUpper.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 1.4F * o.swingProgressPrev - 0.13F;
+        this.lArmLower_1.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 1.4F * o.swingProgressPrev - 0.3F;
 
-        this.rArmUpper.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev - 0.13F;
-        this.lArmLower_1.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev - 0.3F;
-
-        this.lArmUpper.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.1F * swingProgressPrev - 0.13F;
-        this.lArmLower.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.1F * swingProgressPrev - 0.3F;
+        this.lArmUpper.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 1.1F * o.swingProgressPrev - 0.13F;
+        this.lArmLower.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 1.1F * o.swingProgressPrev - 0.3F;
 
         this.rShin.render(boxTranslation);
         this.lArmUpper.render(boxTranslation);
@@ -169,7 +168,7 @@ public class ModelEngineer extends ModelBaseWrapper
         this.lArmLower_1.render(boxTranslation);
         this.neck.render(boxTranslation);
 
-        EntitySpeciesEngineer engineer = (EntitySpeciesEngineer) entity;
+        EntitySpeciesEngineer engineer = (EntitySpeciesEngineer) o.getEntity();
 
         if (engineer != null && engineer.isWearingMask() || engineer == null)
         {
@@ -188,6 +187,6 @@ public class ModelEngineer extends ModelBaseWrapper
         else
         {
             this.sexyFace.render(boxTranslation);
-        }
+        }       
     }
 }

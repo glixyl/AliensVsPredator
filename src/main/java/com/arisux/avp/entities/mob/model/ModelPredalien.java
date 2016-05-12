@@ -3,7 +3,6 @@ package com.arisux.avp.entities.mob.model;
 import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 
 public class ModelPredalien extends ModelBaseWrapper
 {
@@ -447,12 +446,10 @@ public class ModelPredalien extends ModelBaseWrapper
         topTeeth.mirror = true;
         setRotation(topTeeth, -0.1570796F, 0F, 0F);
     }
-
+    
     @Override
-    public void render(Entity entity, float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation)
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
-        super.render(entity, swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation);
-        this.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
         leftFootToe2.render(boxTranslation);
         leftFootBackToe.render(boxTranslation);
         LeftThigh.render(boxTranslation);
@@ -525,11 +522,5 @@ public class ModelPredalien extends ModelBaseWrapper
         midJaw.render(boxTranslation);
         rightUpperMandible.render(boxTranslation);
         topTeeth.render(boxTranslation);
-    }
-
-    @Override
-    public void setRotationAngles(float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation, Entity entity)
-    {
-        super.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
     }
 }

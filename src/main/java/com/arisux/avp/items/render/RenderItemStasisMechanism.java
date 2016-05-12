@@ -36,7 +36,7 @@ public class RenderItemStasisMechanism extends ItemRenderer
         GlStateManager.scale(1F, -1F, 1F);
         GlStateManager.disable(GL11.GL_CULL_FACE);
         bindTexture(getResourceLocation());
-        ((ModelStasisMechanism) this.getModel()).render(null, RenderUtil.DEFAULT_BOX_TRANSLATION);
+        this.getModel().render();
     }
 
     @Override
@@ -50,7 +50,7 @@ public class RenderItemStasisMechanism extends ItemRenderer
         GlStateManager.disable(GL11.GL_CULL_FACE);
         GlStateManager.scale(glScale, -glScale, glScale);
         RenderUtil.bindTexture(resourceLocation);
-        ((ModelStasisMechanism) this.getModel()).render(null, RenderUtil.DEFAULT_BOX_TRANSLATION);
+        this.getModel().render();
     }
 
     @Override
@@ -67,7 +67,7 @@ public class RenderItemStasisMechanism extends ItemRenderer
             GlStateManager.disable(GL11.GL_CULL_FACE);
             GlStateManager.scale(glScale, glScale, glScale);
             RenderUtil.bindTexture(resourceLocation);
-            ((ModelStasisMechanism) this.getModel()).render(null, RenderUtil.DEFAULT_BOX_TRANSLATION);
+            this.getModel().render();
         }
     }
 
@@ -82,6 +82,6 @@ public class RenderItemStasisMechanism extends ItemRenderer
         GlStateManager.disable(GL11.GL_CULL_FACE);
         GlStateManager.scale(glScale, glScale, glScale);
         RenderUtil.bindTexture(resourceLocation);
-        ((ModelStasisMechanism) this.getModel()).render(null, RenderUtil.DEFAULT_BOX_TRANSLATION);
+        this.getModel().render();
     }
 }

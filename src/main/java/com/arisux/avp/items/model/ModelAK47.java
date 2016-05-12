@@ -131,9 +131,9 @@ public class ModelAK47 extends ModelBaseWrapper
         this.stockBase.mirror = true;
         this.setRotation(this.stockBase, 0.0F, 0.0F, 0.0F);
     }
-
+    
     @Override
-    public void render(float boxTranslation)
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
         this.handle.render(boxTranslation);
         this.clip.render(boxTranslation);
@@ -151,6 +151,6 @@ public class ModelAK47 extends ModelBaseWrapper
         // this.triggerGuard.render(boxTranslation);
         // this.sightBase1.render(boxTranslation);
         this.sight2.render(boxTranslation);
-        this.stockBase.render(boxTranslation);
+        this.stockBase.render(boxTranslation);        
     }
 }

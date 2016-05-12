@@ -3,7 +3,6 @@ package com.arisux.avp.entities.tile.model;
 import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.tileentity.TileEntity;
 
 public class ModelLocker extends ModelBaseWrapper
 {
@@ -39,18 +38,13 @@ public class ModelLocker extends ModelBaseWrapper
     }
 
     @Override
-    public void render(float boxTranslation)
-    {
-        this.render(null, boxTranslation);
-    }
-
-    public void render(TileEntity tile, float boxTranslation)
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
         this.top.render(boxTranslation);
         this.back.render(boxTranslation);
         this.floor.render(boxTranslation);
         this.wallLeft.render(boxTranslation);
         this.wallRight.render(boxTranslation);
-        this.door.render(boxTranslation);
+        this.door.render(boxTranslation);        
     }
 }

@@ -126,7 +126,7 @@ public class ModelM41A extends ModelBaseWrapper
     }
 
     @Override
-    public void render(float boxTranslation)
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
         this.stockEnd.render(boxTranslation);
         this.stock1.render(boxTranslation);
@@ -143,6 +143,6 @@ public class ModelM41A extends ModelBaseWrapper
         this.grip.render(boxTranslation);
         this.grip2.render(boxTranslation);
         this.handle.render(boxTranslation);
-        this.gunFrame.render(boxTranslation);
+        this.gunFrame.render(boxTranslation);        
     }
 }

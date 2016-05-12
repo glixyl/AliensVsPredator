@@ -9,7 +9,6 @@ import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.mob.EntityQueen;
 
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
 public class ModelQueen extends ModelBaseWrapper
@@ -462,10 +461,41 @@ public class ModelQueen extends ModelBaseWrapper
     }
 
     @Override
-    public void render(Entity entity, float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation)
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
-        super.render(entity, swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation);
-        this.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
+        RenderObject o = (RenderObject) renderObject;
+
+        this.lThigh.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 0.8F * o.swingProgressPrev - 0.6028515F;
+        this.lShin0.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 0.8F * o.swingProgressPrev - 0.6028515F;
+        this.lShin1.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 0.8F * o.swingProgressPrev - 0.8028515F;
+        this.lShinSpike.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 0.8F * o.swingProgressPrev + 0.8028515F;
+        this.lFoot.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 0.8F * o.swingProgressPrev;
+
+        this.rThigh.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 0.8F * o.swingProgressPrev - 0.6028515F;
+        this.rShin0.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 0.8F * o.swingProgressPrev - 0.6028515F;
+        this.rShin1.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 0.8F * o.swingProgressPrev - 0.8028515F;
+        this.rShinSpike.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 0.8F * o.swingProgressPrev + 0.8028515F;
+        this.rFoot.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 0.8F * o.swingProgressPrev;
+
+        this.lArm0.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 1.4F * o.swingProgressPrev + 0.3665191F;
+        this.lArm1.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 1.4F * o.swingProgressPrev + 0.3665191F;
+        this.lHand.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 1.4F * o.swingProgressPrev + 0.3665191F;
+        this.lClaw.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 1.4F * o.swingProgressPrev + 0.3665191F;
+
+        this.rArm0.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 1.4F * o.swingProgressPrev + 0.3665191F;
+        this.rArm1.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 1.4F * o.swingProgressPrev + 0.3665191F;
+        this.rHand.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 1.4F * o.swingProgressPrev + 0.3665191F;
+        this.rClaw.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 1.4F * o.swingProgressPrev + 0.3665191F;
+
+        this.rArmMini0.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 1.4F * o.swingProgressPrev + 0.0665191F;
+        this.rHandMini.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 1.4F * o.swingProgressPrev + 0.3665191F;
+        this.rArmMini1.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 1.4F * o.swingProgressPrev - 0.6065191F;
+        this.rClawMini.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 1.4F * o.swingProgressPrev + 0.3665191F;
+
+        this.lArmMini0.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 1.4F * o.swingProgressPrev + 0.0665191F;
+        this.lHandMini.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 1.4F * o.swingProgressPrev + 0.3665191F;
+        this.lArmMini1.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 1.4F * o.swingProgressPrev - 0.6065191F;
+        this.lClawMini.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 1.4F * o.swingProgressPrev + 0.3665191F;
 
         GlStateManager.enableCullFace();
         this.torso0.render(boxTranslation);
@@ -524,7 +554,7 @@ public class ModelQueen extends ModelBaseWrapper
 
         GlStateManager.pushMatrix();
         {
-            GlStateManager.rotate(((float) Math.toRadians(headYaw) + swingProgressPrev) * 30F, 0, 1, 0);
+            GlStateManager.rotate(((float) Math.toRadians(o.headYaw) + o.swingProgressPrev) * 30F, 0, 1, 0);
             this.Jaw1.render(boxTranslation);
             this.head0.render(boxTranslation);
             this.head1.render(boxTranslation);
@@ -548,79 +578,39 @@ public class ModelQueen extends ModelBaseWrapper
         this.lShinSpike.render(boxTranslation);
         this.rShinSpike.render(boxTranslation);
 
-        if (entity instanceof EntityQueen)
+
+        if (o.getEntity() != null)
         {
-            EntityQueen queen = (EntityQueen) entity;
+            EntityQueen queen = (EntityQueen) o.getEntity();
 
-            if (queen != null)
+            if (queen.isInStasis)
             {
-                if (queen.isInStasis)
+                ModelOvamorph ovamorph = new ModelOvamorph();
+
+                RenderUtil.bindTexture(AliensVsPredator.resources().OVAMORPH);
+                ovamorph.render();
+
+                GlStateManager.pushMatrix();
                 {
-                    ModelOvamorph ovamorph = new ModelOvamorph();
-
-                    RenderUtil.bindTexture(AliensVsPredator.resources().OVAMORPH);
-                    ovamorph.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
-
-                    GlStateManager.pushMatrix();
-                    {
-                        GlStateManager.translate(0, -0.05F, 1F - queen.getOvipositorSize());
-                        GlStateManager.scale(queen.getOvipositorSize(), queen.getOvipositorSize(), queen.getOvipositorSize());
-                        GlStateManager.enableBlend();
-                        GlStateManager.disableCullFace();
-                        GlStateManager.blendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_DST_COLOR);
-                        RenderUtil.bindTexture(AliensVsPredator.resources().XENOQUEEN_MASK);
-                        sack0.render(boxTranslation);
-                        sack7.render(boxTranslation);
-                        sack1.render(boxTranslation);
-                        sack2.render(boxTranslation);
-                        sack3.render(boxTranslation);
-                        sack4.render(boxTranslation);
-                        sack5.render(boxTranslation);
-                        sack6.render(boxTranslation);
-                        GlStateManager.enableCullFace();
-                        GlStateManager.blendClear();
-                    }
-                    GlStateManager.popMatrix();
+                    GlStateManager.translate(0, -0.05F, 1F - queen.getOvipositorSize());
+                    GlStateManager.scale(queen.getOvipositorSize(), queen.getOvipositorSize(), queen.getOvipositorSize());
+                    GlStateManager.enableBlend();
+                    GlStateManager.disableCullFace();
+                    GlStateManager.blendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_DST_COLOR);
+                    RenderUtil.bindTexture(AliensVsPredator.resources().XENOQUEEN_MASK);
+                    sack0.render(boxTranslation);
+                    sack7.render(boxTranslation);
+                    sack1.render(boxTranslation);
+                    sack2.render(boxTranslation);
+                    sack3.render(boxTranslation);
+                    sack4.render(boxTranslation);
+                    sack5.render(boxTranslation);
+                    sack6.render(boxTranslation);
+                    GlStateManager.enableCullFace();
+                    GlStateManager.blendClear();
                 }
+                GlStateManager.popMatrix();
             }
         }
-    }
-
-    @Override
-    public void setRotationAngles(float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation, Entity entity)
-    {
-        super.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
-
-        this.lThigh.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 0.8F * swingProgressPrev - 0.6028515F;
-        this.lShin0.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 0.8F * swingProgressPrev - 0.6028515F;
-        this.lShin1.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 0.8F * swingProgressPrev - 0.8028515F;
-        this.lShinSpike.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 0.8F * swingProgressPrev + 0.8028515F;
-        this.lFoot.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 0.8F * swingProgressPrev;
-
-        this.rThigh.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 0.8F * swingProgressPrev - 0.6028515F;
-        this.rShin0.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 0.8F * swingProgressPrev - 0.6028515F;
-        this.rShin1.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 0.8F * swingProgressPrev - 0.8028515F;
-        this.rShinSpike.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 0.8F * swingProgressPrev + 0.8028515F;
-        this.rFoot.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 0.8F * swingProgressPrev;
-
-        this.lArm0.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev + 0.3665191F;
-        this.lArm1.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev + 0.3665191F;
-        this.lHand.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev + 0.3665191F;
-        this.lClaw.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev + 0.3665191F;
-
-        this.rArm0.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev + 0.3665191F;
-        this.rArm1.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev + 0.3665191F;
-        this.rHand.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev + 0.3665191F;
-        this.rClaw.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev + 0.3665191F;
-
-        this.rArmMini0.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev + 0.0665191F;
-        this.rHandMini.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev + 0.3665191F;
-        this.rArmMini1.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev - 0.6065191F;
-        this.rClawMini.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev + 0.3665191F;
-
-        this.lArmMini0.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev + 0.0665191F;
-        this.lHandMini.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev + 0.3665191F;
-        this.lArmMini1.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev - 0.6065191F;
-        this.lClawMini.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev + 0.3665191F;
     }
 }

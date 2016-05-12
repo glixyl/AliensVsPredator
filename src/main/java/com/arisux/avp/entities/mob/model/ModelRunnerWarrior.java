@@ -3,7 +3,6 @@ package com.arisux.avp.entities.mob.model;
 import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 
 public class ModelRunnerWarrior extends ModelBaseWrapper
 {
@@ -251,9 +250,8 @@ public class ModelRunnerWarrior extends ModelBaseWrapper
     }
 
     @Override
-    public void render(Entity entity, float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation)
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
-        super.render(entity, swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation);
         this.lShin1.render(boxTranslation);
         this.lBackClaw1.render(boxTranslation);
         this.spine5.render(boxTranslation);
@@ -303,6 +301,6 @@ public class ModelRunnerWarrior extends ModelBaseWrapper
         this.spine11.render(boxTranslation);
         this.tail5.render(boxTranslation);
         this.lArm1.render(boxTranslation);
-        this.lShin2.render(boxTranslation);
+        this.lShin2.render(boxTranslation);        
     }
 }

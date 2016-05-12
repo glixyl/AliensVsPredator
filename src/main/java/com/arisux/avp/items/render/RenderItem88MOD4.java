@@ -6,13 +6,11 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
-import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
 import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.items.model.Model88MOD4;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -46,7 +44,7 @@ public class RenderItem88MOD4 extends ItemRenderer
         GlStateManager.scale(1F, -1F, 1F);
         GlStateManager.disable(GL11.GL_CULL_FACE);
         bindTexture(getResourceLocation());
-        this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+        this.getModel().render();
     }
 
     @Override
@@ -59,7 +57,7 @@ public class RenderItem88MOD4 extends ItemRenderer
         GlStateManager.rotate(15, 0F, 1F, 0F);
         GlStateManager.disable(GL11.GL_CULL_FACE);
         GlStateManager.scale(1.2F, -1.2F, -1.2F);
-        this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+        this.getModel().render();
     }
 
     @Override
@@ -86,7 +84,7 @@ public class RenderItem88MOD4 extends ItemRenderer
             GlStateManager.disable(GL11.GL_CULL_FACE);
             GlStateManager.scale(2.0F, 2.0F, -2.0F);
             bindTexture(getResourceLocation());
-            this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+            this.getModel().render();
         }
     }
 
@@ -98,6 +96,6 @@ public class RenderItem88MOD4 extends ItemRenderer
         GlStateManager.translate(0.4F, 0.3F, 0F);
         GlStateManager.translate(0F, 0F, -0.2F);
         bindTexture(getResourceLocation());
-        this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+        this.getModel().render();
     }
 }

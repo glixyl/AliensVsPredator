@@ -1,7 +1,6 @@
 package com.arisux.avp.entities.tile.model;
 
 import com.arisux.airi.lib.client.ModelBaseWrapper;
-import com.arisux.avp.entities.tile.TileEntityStasisMechanism;
 
 import net.minecraft.client.model.ModelRenderer;
 
@@ -70,7 +69,8 @@ public class ModelStasisMechanism extends ModelBaseWrapper
         setRotation(south, 0.7853982F, 3.141593F, 0F);
     }
 
-    public void render(TileEntityStasisMechanism tile, float boxTranslation)
+    @Override
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
         west.render(boxTranslation);
         north.render(boxTranslation);
@@ -79,6 +79,6 @@ public class ModelStasisMechanism extends ModelBaseWrapper
         east.render(boxTranslation);
         southeast.render(boxTranslation);
         southwest.render(boxTranslation);
-        south.render(boxTranslation);
+        south.render(boxTranslation);        
     }
 }

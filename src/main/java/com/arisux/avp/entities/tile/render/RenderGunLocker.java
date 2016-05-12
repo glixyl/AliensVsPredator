@@ -3,7 +3,6 @@ package com.arisux.avp.entities.tile.render;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
-import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.TileEntityLocker;
 import com.arisux.avp.entities.tile.model.ModelLocker;
@@ -55,7 +54,7 @@ public class RenderGunLocker extends TileEntitySpecialRenderer
             }
 
             this.mainModel.door.rotateAngleY = !tile.isOpen() ? 0 : -1.5F;
-            this.mainModel.render(tile, RenderUtil.DEFAULT_BOX_TRANSLATION);
+            this.mainModel.render(tile);
 
             if (tile != null)
             {

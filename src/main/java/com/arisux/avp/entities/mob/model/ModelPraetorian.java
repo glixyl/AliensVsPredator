@@ -3,7 +3,6 @@ package com.arisux.avp.entities.mob.model;
 import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
 public class ModelPraetorian extends ModelBaseWrapper
@@ -325,10 +324,45 @@ public class ModelPraetorian extends ModelBaseWrapper
     }
 
     @Override
-    public void render(Entity entity, float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation)
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
-        super.render(entity, swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation);
-        this.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
+        RenderObject o = (RenderObject) renderObject;
+        
+        float newangle = MathHelper.cos(o.idleProgress * 4.0F * this.wingspeed) * (float) Math.PI * 0.5F * o.swingProgressPrev;
+        this.doTail(newangle);
+        this.lThigh.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 1.4F * o.swingProgressPrev - 0.8028515F;
+        this.lShin.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 1.4F * o.swingProgressPrev - 0.4014257F;
+        this.lShin1.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 1.4F * o.swingProgressPrev - 0.8028515F;
+        this.lFoot.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 1.4F * o.swingProgressPrev;
+        this.rThigh.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 1.4F * o.swingProgressPrev - 0.8028515F;
+        this.rShin.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 1.4F * o.swingProgressPrev - 0.4014257F;
+        this.rShin1.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 1.4F * o.swingProgressPrev - 0.8028515F;
+        this.rFoot.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 1.4F * o.swingProgressPrev;
+        this.rArm.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 1.4F * o.swingProgressPrev + 0.3665191F;
+        this.rClaw.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 1.4F * o.swingProgressPrev + 0.3665191F;
+        this.rArm2.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 1.4F * o.swingProgressPrev + 0.3665191F;
+        this.rClaw2.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F) * 1.4F * o.swingProgressPrev + 0.3665191F;
+        this.lArm.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 1.4F * o.swingProgressPrev + 0.3665191F;
+        this.lClaw.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 1.4F * o.swingProgressPrev + 0.3665191F;
+        this.lArm2.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 1.4F * o.swingProgressPrev + 0.3665191F;
+        this.lClaw2.rotateAngleX = MathHelper.cos(o.swingProgress * 0.6662F + (float) Math.PI) * 1.4F * o.swingProgressPrev + 0.3665191F;
+        this.headSide1.rotateAngleY = 0.36F + (float) Math.toRadians(o.headYaw) * 0.75F;
+        this.headSide2.rotateAngleY = -0.36F + (float) Math.toRadians(o.headYaw) * 0.75F;
+        this.head2.rotateAngleY = (float) Math.toRadians(o.headYaw) * 0.75F;
+        this.headBase.rotateAngleY = (float) Math.toRadians(o.headYaw) * 0.75F;
+        this.jaw1.rotateAngleY = (float) Math.toRadians(o.headYaw) * 0.75F;
+        this.face1.rotateAngleY = (float) Math.toRadians(o.headYaw) * 0.75F;
+        this.face2.rotateAngleY = (float) Math.toRadians(o.headYaw) * 0.75F;
+        this.jaw2.rotateAngleY = (float) Math.toRadians(o.headYaw) * 0.75F;
+        this.jaw2.rotateAngleX = 0.122F + Math.abs(newangle);
+        this.backStabber2.rotateAngleX = 0.69F + Math.abs(newangle);
+        this.backStabber5.rotateAngleX = -0.69F - Math.abs(newangle);
+        this.backStabber4.rotateAngleX = 0.52F + Math.abs(newangle * 0.75F);
+        this.backStabber1.rotateAngleX = -1.1F - Math.abs(newangle * 0.75F);
+        this.backStabber6.rotateAngleX = 0.35F + Math.abs(newangle * 0.5F);
+        this.backStabber3.rotateAngleX = -1.5F - Math.abs(newangle * 0.5F);
+        newangle = MathHelper.cos(o.idleProgress * 3.5F * this.wingspeed) * (float) Math.PI * 0.4F;
+
         this.torso.render(boxTranslation);
         this.stomache.render(boxTranslation);
         this.rThigh.render(boxTranslation);
@@ -379,48 +413,7 @@ public class ModelPraetorian extends ModelBaseWrapper
         this.headSide1.render(boxTranslation);
         this.headSide2.render(boxTranslation);
         this.backStabber5.render(boxTranslation);
-        this.backStabber6.render(boxTranslation);
-    }
-
-    @Override
-    public void setRotationAngles(float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation, Entity entity)
-    {
-        super.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
-
-        float newangle = MathHelper.cos(idleProgress * 4.0F * this.wingspeed) * (float) Math.PI * 0.5F * swingProgressPrev;
-        this.doTail(newangle);
-        this.lThigh.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev - 0.8028515F;
-        this.lShin.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev - 0.4014257F;
-        this.lShin1.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev - 0.8028515F;
-        this.lFoot.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev;
-        this.rThigh.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev - 0.8028515F;
-        this.rShin.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev - 0.4014257F;
-        this.rShin1.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev - 0.8028515F;
-        this.rFoot.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev;
-        this.rArm.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev + 0.3665191F;
-        this.rClaw.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev + 0.3665191F;
-        this.rArm2.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev + 0.3665191F;
-        this.rClaw2.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F) * 1.4F * swingProgressPrev + 0.3665191F;
-        this.lArm.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev + 0.3665191F;
-        this.lClaw.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev + 0.3665191F;
-        this.lArm2.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev + 0.3665191F;
-        this.lClaw2.rotateAngleX = MathHelper.cos(swingProgress * 0.6662F + (float) Math.PI) * 1.4F * swingProgressPrev + 0.3665191F;
-        this.headSide1.rotateAngleY = 0.36F + (float) Math.toRadians(headYaw) * 0.75F;
-        this.headSide2.rotateAngleY = -0.36F + (float) Math.toRadians(headYaw) * 0.75F;
-        this.head2.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
-        this.headBase.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
-        this.jaw1.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
-        this.face1.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
-        this.face2.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
-        this.jaw2.rotateAngleY = (float) Math.toRadians(headYaw) * 0.75F;
-        this.jaw2.rotateAngleX = 0.122F + Math.abs(newangle);
-        this.backStabber2.rotateAngleX = 0.69F + Math.abs(newangle);
-        this.backStabber5.rotateAngleX = -0.69F - Math.abs(newangle);
-        this.backStabber4.rotateAngleX = 0.52F + Math.abs(newangle * 0.75F);
-        this.backStabber1.rotateAngleX = -1.1F - Math.abs(newangle * 0.75F);
-        this.backStabber6.rotateAngleX = 0.35F + Math.abs(newangle * 0.5F);
-        this.backStabber3.rotateAngleX = -1.5F - Math.abs(newangle * 0.5F);
-        newangle = MathHelper.cos(idleProgress * 3.5F * this.wingspeed) * (float) Math.PI * 0.4F;
+        this.backStabber6.render(boxTranslation);        
     }
 
     private void doTail(float angle)

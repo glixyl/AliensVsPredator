@@ -64,15 +64,14 @@ public class ModelLaserMine extends ModelBaseWrapper
     }
 
     @Override
-    public void render(float boxTranslation)
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
-        super.render(boxTranslation);
         lSupport.render(boxTranslation);
         rSupport.render(boxTranslation);
         bSupport.render(boxTranslation);
         core.render(boxTranslation);
         tPlate.render(boxTranslation);
         rPlate.render(boxTranslation);
-        lPlate.render(boxTranslation);
+        lPlate.render(boxTranslation);        
     }
 }

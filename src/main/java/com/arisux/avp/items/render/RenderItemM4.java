@@ -50,7 +50,7 @@ public class RenderItemM4 extends ItemRenderer
         GlStateManager.scale(1F, -1F, 1F);
         GlStateManager.disable(GL11.GL_CULL_FACE);
         bindTexture(getResourceLocation());
-        this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+        this.getModel().render();
     }
 
     @Override
@@ -68,7 +68,7 @@ public class RenderItemM4 extends ItemRenderer
             GlStateManager.rotate(80.0F, 0.0F, 0.0F, 1.0F);
             GlStateManager.disable(GL11.GL_CULL_FACE);
             GlStateManager.scale(1.2F, 1.2F, 1.2F);
-            this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+            this.getModel().render();
         }
     }
 
@@ -98,7 +98,7 @@ public class RenderItemM4 extends ItemRenderer
             GlStateManager.disable(GL11.GL_CULL_FACE);
             GlStateManager.scale(2.0F, 2.0F, 2.0F);
             bindTexture(getResourceLocation());
-            this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+            this.getModel().render();
         }
     }
 
@@ -113,6 +113,6 @@ public class RenderItemM4 extends ItemRenderer
         GlStateManager.translate(0F, -5.77F, -20.85F);
         GlStateManager.scale(20F, 20F, 20F);
         bindTexture(getResourceLocation());
-        this.getModel().render(RenderUtil.DEFAULT_BOX_TRANSLATION);
+        this.getModel().render();
     }
 }

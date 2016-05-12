@@ -50,14 +50,12 @@ public class ModelPowercell extends ModelBaseWrapper
     }
 
     @Override
-    public void render(float boxTranslation)
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
-        super.render(boxTranslation);
-
         cell.render(boxTranslation);
         connector1.render(boxTranslation);
         connector2.render(boxTranslation);
         connector3.render(boxTranslation);
-        connector4.render(boxTranslation);
+        connector4.render(boxTranslation);        
     }
 }

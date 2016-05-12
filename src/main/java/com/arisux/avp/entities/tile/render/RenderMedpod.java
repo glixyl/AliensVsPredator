@@ -3,7 +3,6 @@ package com.arisux.avp.entities.tile.render;
 import static org.lwjgl.opengl.GL11.GL_BLEND;
 
 import com.arisux.airi.lib.GlStateManager;
-import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.TileEntityMedpod;
 import com.arisux.avp.entities.tile.model.ModelMedpod;
@@ -50,7 +49,7 @@ public class RenderMedpod extends TileEntitySpecialRenderer
                 }
             }
             this.bindTexture(AliensVsPredator.resources().MEDPOD);
-            this.mainModel.render(null, 0F, 0F, 0F, 0F, 0F, RenderUtil.DEFAULT_BOX_TRANSLATION);
+            this.mainModel.render(tileEntity);
 
             if (tile.getVoltage() > 0)
             {
@@ -60,7 +59,7 @@ public class RenderMedpod extends TileEntitySpecialRenderer
 
             GlStateManager.enableBlend();
             this.bindTexture(AliensVsPredator.resources().MEDPOD_MASK);
-            this.mainModel.render(null, 0F, 0F, 0F, 0F, 0F, RenderUtil.DEFAULT_BOX_TRANSLATION);
+            this.mainModel.render(tileEntity);
             GlStateManager.disable(GL_BLEND);
             GlStateManager.enableLight();
             GlStateManager.enableLightMapping();

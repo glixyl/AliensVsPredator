@@ -147,7 +147,7 @@ public class ModelM56SG extends ModelBaseWrapper
     }
 
     @Override
-    public void render(float boxTranslation)
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
         this.handleBase.render(boxTranslation);
         this.base.render(boxTranslation);
@@ -167,6 +167,6 @@ public class ModelM56SG extends ModelBaseWrapper
         this.base3.render(boxTranslation);
         this.baseUnder2.render(boxTranslation);
         this.handleTop.render(boxTranslation);
-        this.topHandleBase2.render(boxTranslation);
+        this.topHandleBase2.render(boxTranslation);        
     }
 }

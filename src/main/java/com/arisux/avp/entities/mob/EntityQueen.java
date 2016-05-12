@@ -1,5 +1,7 @@
 package com.arisux.avp.entities.mob;
 
+import java.util.ArrayList;
+
 import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
 import com.arisux.airi.lib.WorldUtil.Entities;
 import com.arisux.avp.AliensVsPredator;
@@ -10,8 +12,6 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-
-import java.util.ArrayList;
 
 public class EntityQueen extends EntityXenomorph implements IHiveSignature
 {
