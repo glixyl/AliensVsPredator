@@ -116,7 +116,7 @@ public class VanillaFaceMountRenderers
             {
                 GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
                 GlStateManager.rotate(-150.0F, 1.0F, 0.0F, 0.0F);
-                GlStateManager.translate(0F, -0.5F, -2.15F);
+                GlStateManager.translate(0F, -0.6F, -1.0F);
             }
         });
 

@@ -1,7 +1,7 @@
 package com.arisux.avp.entities.mob;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.ai.alien.EntitySelectorXenomorph;
@@ -35,6 +35,9 @@ import net.minecraft.world.World;
 public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 {
     private Sorter facehugTargetSorter;
+    private int ticksOnHost;
+    private ArrayList<EntityLivingBase> targets = null;
+    private ArrayList<Class<?>> ignoreTargets = new ArrayList<Class<?>>();
 
     public EntityFacehugger(World world)
     {
@@ -43,12 +46,19 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
         this.experienceValue = 10;
         this.getNavigator().setCanSwim(true);
         this.getNavigator().setAvoidsWater(true);
+        this.facehugTargetSorter = new EntityAINearestAttackableTarget.Sorter(this);
+        this.addTasks();
+        this.ignoreTargets.add(EntitySnowman.class);
+        this.ignoreTargets.add(EntityIronGolem.class);
+    }
+
+    private void addTasks()
+    {
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(3, new EntityAIAttackOnCollide(this, 0.55D, true));
         this.tasks.addTask(8, new EntityAIWander(this, 0.55D));
         this.targetTasks.addTask(2, new EntityAILeapAtTarget(this, 0.8F));
         this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, Entity.class, 0, false, false, EntitySelectorXenomorph.instance));
-        this.facehugTargetSorter = new EntityAINearestAttackableTarget.Sorter(this);
     }
 
     @Override
@@ -69,51 +79,107 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
         this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
     }
 
+    private void findTargets()
+    {
+        if (this.isFertile())
+        {
+            IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.followRange);
+            double targetDistance = iattributeinstance == null ? 16.0D : iattributeinstance.getAttributeValue();
+
+            ArrayList<EntityLivingBase> list = (ArrayList<EntityLivingBase>) this.worldObj.selectEntitiesWithinAABB(EntityLivingBase.class, this.boundingBox.expand(targetDistance, 4.0D, targetDistance), EntitySelectorXenomorph.instance);
+
+            for (EntityLivingBase entity : new ArrayList<EntityLivingBase>(list))
+            {
+                EntityLivingBase living = (EntityLivingBase) entity;
+                ExtendedEntityLivingBase extendedLiving = (ExtendedEntityLivingBase) living.getExtendedProperties(ExtendedEntityLivingBase.IDENTIFIER);
+                IFacehugSelector facehuggable = null;
+
+                if (living instanceof IFacehugSelector)
+                {
+                    facehuggable = (IFacehugSelector) living;
+                }
+
+                if (extendedLiving.doesEntityContainEmbryo() || facehuggable != null && !facehuggable.canFacehuggerAttach() || living == this.getAttackTarget() || living instanceof EntityPlayer && ((EntityPlayer) living).capabilities.isCreativeMode || this.ignoreTargets.contains(living.getClass()) || living.isChild())
+                {
+                    list.remove(living);
+                }
+            }
+
+            Collections.sort(list, this.facehugTargetSorter);
+
+            if (!list.isEmpty() && list.get(0) != null)
+            {
+                EntityLivingBase living = (EntityLivingBase) list.get(0);
+                this.setAttackTarget(living);
+            }
+
+            if (!list.contains(this.getAttackTarget()))
+            {
+                this.setAttackTarget(null);
+            }
+
+            this.targets = new ArrayList<EntityLivingBase>(list);
+        }
+    }
+
+    public ArrayList<EntityLivingBase> getTargets()
+    {
+        return targets;
+    }
+
+    private void negateFallDamage()
+    {
+        this.fallDistance = 0F;
+    }
+
+    private void climbOnHorizontalCollision()
+    {
+        if (this.isCollidedHorizontally && this.isFertile())
+        {
+            this.motionY += 0.15F;
+        }
+    }
+
+    private void fallOffHostAfter(int ticks)
+    {
+        if (this.ticksOnHost > ticks)
+        {
+            this.mountEntity(null);
+        }
+    }
+
+    private void controlHost()
+    {
+        this.rotationYaw = 0F;
+        this.rotationYawHead = 0F;
+
+        if (this.ridingEntity instanceof EntityLivingBase)
+        {
+            EntityLivingBase ridingEntity = (EntityLivingBase) this.ridingEntity;
+            ridingEntity.rotationYaw = 0F;
+            ridingEntity.rotationYawHead = 0F;
+        }
+    }
+
+    private void tickOnHost()
+    {
+        if (this.isRiding())
+        {
+            this.ticksOnHost++;
+            this.controlHost();
+        }
+    }
+
     @Override
     public void onUpdate()
     {
         super.onUpdate();
 
-        if (this.getAttackTarget() != null && this.getAttackTarget().riddenByEntity instanceof EntityFacehugger)
-        {
-            IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.followRange);
-            double targetDistance = iattributeinstance == null ? 16.0D : iattributeinstance.getAttributeValue();
-
-            List list = this.worldObj.selectEntitiesWithinAABB(EntityLivingBase.class, this.boundingBox.expand(targetDistance, 4.0D, targetDistance), EntitySelectorXenomorph.instance);
-            list.remove(this.getAttackTarget());
-            Collections.sort(list, this.facehugTargetSorter);
-
-            if (!list.isEmpty() && list.get(0) != null)
-            {
-                this.setAttackTarget((EntityLivingBase) list.get(0));
-            }
-        }
-
-        if (!this.isFertile())
-        {
-            this.tasks.taskEntries.clear();
-            this.targetTasks.taskEntries.clear();
-        }
-
-        this.fallDistance = 0F;
-
-        if (this.isCollidedHorizontally)
-        {
-            this.motionY += 0.15F;
-        }
-
-        if (this.isRiding())
-        {
-            this.rotationYaw = 0F;
-            this.rotationYawHead = 0F;
-
-            if (this.ridingEntity instanceof EntityLivingBase)
-            {
-                EntityLivingBase ridingEntity = (EntityLivingBase) this.ridingEntity;
-                ridingEntity.rotationYaw = 0F;
-                ridingEntity.rotationYawHead = 0F;
-            }
-        }
+        this.findTargets();
+        this.negateFallDamage();
+        this.climbOnHorizontalCollision();
+        this.tickOnHost();
+        this.fallOffHostAfter(2 * 60 * 20);
     }
 
     @Override
@@ -145,38 +211,29 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
     {
         if (this.isFertile() && entity.riddenByEntity == null && entity instanceof EntityLivingBase && !(entity instanceof EntitySpeciesAlien))
         {
-            EntityLivingBase living = (EntityLivingBase) entity;
-            ExtendedEntityLivingBase extendedLiving = (ExtendedEntityLivingBase) living.getExtendedProperties(ExtendedEntityLivingBase.IDENTIFIER);
-
-            if (!(living instanceof EntityPlayer) || living instanceof EntityPlayer && !((EntityPlayer) living).capabilities.isCreativeMode)
+            if (this.getTargets() != null && this.getTargets().contains(entity))
             {
-                if (!(living instanceof EntityIronGolem) && !(living instanceof EntitySnowman))
-                {
-                    IFacehugSelector facehuggable = null;
+                EntityLivingBase living = (EntityLivingBase) entity;
+                ExtendedEntityLivingBase extendedLiving = (ExtendedEntityLivingBase) living.getExtendedProperties(ExtendedEntityLivingBase.IDENTIFIER);
 
-                    if (entity instanceof IFacehugSelector)
-                    {
-                        facehuggable = (IFacehugSelector) entity;
-                    }
-
-                    if (facehuggable != null && facehuggable.canFacehuggerAttach() || facehuggable == null)
-                    {
-                        this.mountEntity(living);
-                        this.implantEmbryo(extendedLiving);
-                    }
-                }
+                this.mountEntity(living);
+                this.implantEmbryo(extendedLiving);
             }
-
         }
     }
 
     protected void implantEmbryo(ExtendedEntityLivingBase extendedLiving)
     {
-        extendedLiving.setEmbryo(new Embryo(EmbryoType.getMappingFromHost(extendedLiving.getEntityLivingBase().getClass()))
-        {
-        });
+        extendedLiving.setEmbryo(this.createNewEmbryo(extendedLiving.getEntityLivingBase().getClass()));
         extendedLiving.syncClients();
         this.setFertile(0);
+    }
+
+    protected Embryo createNewEmbryo(Class<? extends EntityLivingBase> host)
+    {
+        return new Embryo(EmbryoType.getMappingFromHost(host))
+        {
+        };
     }
 
     @Override
@@ -291,5 +348,16 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
     public void setFertile(int isFertile)
     {
         this.dataWatcher.updateObject(30, isFertile);
+
+        if (isFertile == 0)
+        {
+            this.tasks.taskEntries.clear();
+            this.targetTasks.taskEntries.clear();
+        }
+
+        if (isFertile == 1)
+        {
+            this.addTasks();
+        }
     }
 }

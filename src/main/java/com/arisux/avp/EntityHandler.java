@@ -9,6 +9,7 @@ import com.arisux.avp.entities.EntityFlame;
 import com.arisux.avp.entities.EntityGrenade;
 import com.arisux.avp.entities.EntityLaserMine;
 import com.arisux.avp.entities.EntityMechanism;
+import com.arisux.avp.entities.EntityMedpod;
 import com.arisux.avp.entities.EntityNuke;
 import com.arisux.avp.entities.EntityPlasma;
 import com.arisux.avp.entities.EntityShuriken;
@@ -152,6 +153,7 @@ public class EntityHandler implements IInitializable
         EntityRegistry.registerModEntity(EntityNuke.class, "Nuke", entityId++, AliensVsPredator.instance(), 250, 5, true);
         EntityRegistry.registerModEntity(EntityAPC.class, "APC", entityId++, AliensVsPredator.instance(), 250, 15, true);
         EntityRegistry.registerModEntity(EntityMechanism.class, "MECHANISM", entityId++, AliensVsPredator.instance(), 250, 15, true);
+        EntityRegistry.registerModEntity(EntityMedpod.class, "Medpod", entityId++, AliensVsPredator.instance(), 250, 5, true);
     }
 
     private void registerSpawns()

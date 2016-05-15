@@ -1,10 +1,10 @@
 package com.arisux.avp.entities.mob;
 
-import com.arisux.avp.entities.extended.ExtendedEntityLivingBase;
 import com.arisux.avp.util.Embryo;
 import com.arisux.avp.util.EmbryoType;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.world.World;
 
@@ -63,10 +63,8 @@ public class EntityRoyalFacehugger extends EntityFacehugger
     }
     
     @Override
-    protected void implantEmbryo(ExtendedEntityLivingBase extendedLiving)
+    protected Embryo createNewEmbryo(Class<? extends EntityLivingBase> host)
     {
-        extendedLiving.setEmbryo(new Embryo(EmbryoType.QUEEN){});
-        extendedLiving.syncClients();
-        this.setFertile(0);
+        return new Embryo(EmbryoType.QUEEN){};
     }
 }
