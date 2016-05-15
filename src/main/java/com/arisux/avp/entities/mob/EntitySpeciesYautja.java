@@ -2,6 +2,7 @@ package com.arisux.avp.entities.mob;
 
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.ai.yautja.EntitySelectorYautja;
+import com.arisux.avp.util.IFacehugSelector;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -24,7 +25,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public abstract class EntitySpeciesYautja extends EntityMob
+public abstract class EntitySpeciesYautja extends EntityMob implements IFacehugSelector
 {
     public EntitySpeciesYautja(World world)
     {
@@ -205,5 +206,11 @@ public abstract class EntitySpeciesYautja extends EntityMob
         {
             this.dataWatcher.updateObject(17, String.valueOf(wearingMask));
         }
+    }
+
+    @Override
+    public boolean canFacehuggerAttach()
+    {
+        return !this.isWearingMask();
     }
 }

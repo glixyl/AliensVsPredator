@@ -4,6 +4,7 @@ import com.arisux.airi.lib.WorldUtil.Entities.Players.Inventories;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.ItemHandler;
 import com.arisux.avp.entities.EntityBullet;
+import com.arisux.avp.util.IFacehugSelector;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
@@ -11,7 +12,6 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIArrowAttack;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.item.Item;
@@ -21,10 +21,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityCombatSynthetic extends EntityCreature implements IMob, IRangedAttackMob
+public class EntityCombatSynthetic extends EntityCreature implements IMob, IRangedAttackMob, IFacehugSelector
 {
-    private EntityAIArrowAttack aiArrowAttack = new EntityAIArrowAttack(this, 0.8D, 20, 60, 15.0F);
-
     public EntityCombatSynthetic(World par1World)
     {
         super(par1World);
@@ -212,5 +210,11 @@ public class EntityCombatSynthetic extends EntityCreature implements IMob, IRang
     protected void updateAITick()
     {
         this.dataWatcher.updateObject(18, Integer.valueOf(15));
+    }
+
+    @Override
+    public boolean canFacehuggerAttach()
+    {
+        return false;
     }
 }

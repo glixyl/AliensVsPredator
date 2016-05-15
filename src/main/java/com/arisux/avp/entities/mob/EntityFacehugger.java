@@ -8,6 +8,7 @@ import com.arisux.avp.entities.ai.alien.EntitySelectorXenomorph;
 import com.arisux.avp.entities.extended.ExtendedEntityLivingBase;
 import com.arisux.avp.util.Embryo;
 import com.arisux.avp.util.EmbryoType;
+import com.arisux.avp.util.IFacehugSelector;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -147,9 +148,20 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 
             if (!(living instanceof EntityPlayer) || living instanceof EntityPlayer && !((EntityPlayer) living).capabilities.isCreativeMode)
             {
-                this.mountEntity(living);
-                this.implantEmbryo(extendedLiving);
+                IFacehugSelector facehuggable = null;
+
+                if (entity instanceof IFacehugSelector)
+                {
+                    facehuggable = (IFacehugSelector) entity;
+                }
+
+                if (facehuggable != null && facehuggable.canFacehuggerAttach() || facehuggable == null)
+                {
+                    this.mountEntity(living);
+                    this.implantEmbryo(extendedLiving);
+                }
             }
+
         }
     }
 
