@@ -51,6 +51,8 @@ public class RenderMedpod extends TileEntitySpecialRenderer
             this.bindTexture(AliensVsPredator.resources().MEDPOD);
             this.mainModel.render(tileEntity);
 
+            GlStateManager.blendClear();
+
             if (tile.getVoltage() > 0)
             {
                 GlStateManager.disableLight();
@@ -60,9 +62,9 @@ public class RenderMedpod extends TileEntitySpecialRenderer
             GlStateManager.enableBlend();
             this.bindTexture(AliensVsPredator.resources().MEDPOD_MASK);
             this.mainModel.render(tileEntity);
-            GlStateManager.disable(GL_BLEND);
             GlStateManager.enableLight();
             GlStateManager.enableLightMapping();
+            GlStateManager.disable(GL_BLEND);
         }
         GlStateManager.popMatrix();
     }
