@@ -22,6 +22,8 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.monster.EntityIronGolem;
+import net.minecraft.entity.monster.EntitySnowman;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -148,17 +150,20 @@ public class EntityFacehugger extends EntitySpeciesAlien implements IMob
 
             if (!(living instanceof EntityPlayer) || living instanceof EntityPlayer && !((EntityPlayer) living).capabilities.isCreativeMode)
             {
-                IFacehugSelector facehuggable = null;
-
-                if (entity instanceof IFacehugSelector)
+                if (!(living instanceof EntityIronGolem) && !(living instanceof EntitySnowman))
                 {
-                    facehuggable = (IFacehugSelector) entity;
-                }
+                    IFacehugSelector facehuggable = null;
 
-                if (facehuggable != null && facehuggable.canFacehuggerAttach() || facehuggable == null)
-                {
-                    this.mountEntity(living);
-                    this.implantEmbryo(extendedLiving);
+                    if (entity instanceof IFacehugSelector)
+                    {
+                        facehuggable = (IFacehugSelector) entity;
+                    }
+
+                    if (facehuggable != null && facehuggable.canFacehuggerAttach() || facehuggable == null)
+                    {
+                        this.mountEntity(living);
+                        this.implantEmbryo(extendedLiving);
+                    }
                 }
             }
 
