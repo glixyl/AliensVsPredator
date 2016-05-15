@@ -108,9 +108,10 @@ public class ModelMedpod extends ModelBaseWrapper
 
 //            float doorRotation = (float) Math.toRadians(medpod.getWorldObj().getWorldTime() % 180);
             float doorRotation = medpod.getDoorProgress();
+            float medpodRotation = (float) Math.toRadians(medpod.getDoorProgress() * 45 / medpod.getMaxDoorProgress());
             this.lGlassBack.rotateAngleZ = doorRotation;
             this.rGlassBack.rotateAngleZ = -doorRotation;
-            this.bedBack.rotateAngleX = (float) Math.toRadians(45F);
+            this.bedBack.rotateAngleX = medpodRotation;
 //            this.bedBack.rotateAngleY = (float) Math.toRadians(o.getTileEntity().getWorldObj().getWorldTime() % 360 + AccessWrapper.getRenderPartialTicks());
         }
 

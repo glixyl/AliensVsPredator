@@ -27,6 +27,7 @@ public class TileEntityMedpod extends TileEntityElectrical implements IOpenable,
     {
         super(false);
         this.isOpen = false;
+        this.doorProgress = -0.01F;
     }
 
     public Entity getEntity()
@@ -86,12 +87,12 @@ public class TileEntityMedpod extends TileEntityElectrical implements IOpenable,
         
         if (this.isOpen())
         {
-            this.doorProgress = this.doorProgress < getMaxDoorProgress() ? this.doorProgress + 0.02F : this.doorProgress;
+            this.doorProgress = this.doorProgress < getMaxDoorProgress() ? this.doorProgress + 0.025F : this.doorProgress;
         }
-
+        
         if (!this.isOpen())
         {
-            this.doorProgress = this.doorProgress > 0.0F ? this.doorProgress - 0.02F : this.doorProgress;
+            this.doorProgress = this.doorProgress > 0.0F ? this.doorProgress - 0.025F : this.doorProgress;
         }
     }
 
