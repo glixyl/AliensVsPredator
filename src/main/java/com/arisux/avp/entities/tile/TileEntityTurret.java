@@ -72,7 +72,7 @@ public class TileEntityTurret extends TileEntityElectrical implements IDataDevic
     public InventoryBasic inventoryExpansion;
     public InventoryBasic inventoryDrive;
     private Entity targetEntity;
-    private Entity turretEnitty;
+    private Entity turretEntity;
     private ContainerTurret container;
     private CoordData focusPoint;
     private Item itemAmmo;
@@ -103,7 +103,7 @@ public class TileEntityTurret extends TileEntityElectrical implements IDataDevic
 
     public Entity getEntity()
     {
-        return this.turretEnitty == null ? this.turretEnitty = new EntityTurret(this, this.worldObj) : this.turretEnitty;
+        return this.turretEntity == null ? this.turretEntity = new EntityTurret(this, this.worldObj) : this.turretEntity;
     }
 
     @Override

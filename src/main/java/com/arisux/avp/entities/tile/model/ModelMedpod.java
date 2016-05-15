@@ -1,7 +1,7 @@
 package com.arisux.avp.entities.tile.model;
 
-import com.arisux.airi.lib.AccessWrapper;
 import com.arisux.airi.lib.client.ModelBaseWrapper;
+import com.arisux.avp.entities.tile.TileEntityMedpod;
 
 import net.minecraft.client.model.ModelRenderer;
 
@@ -104,8 +104,14 @@ public class ModelMedpod extends ModelBaseWrapper
         
         if (o.getTileEntity() != null)
         {
+            TileEntityMedpod medpod = (TileEntityMedpod) o.getTileEntity();
+
+//            float doorRotation = (float) Math.toRadians(medpod.getWorldObj().getWorldTime() % 180);
+            float doorRotation = medpod.getDoorProgress();
+            this.lGlassBack.rotateAngleZ = doorRotation;
+            this.rGlassBack.rotateAngleZ = -doorRotation;
             this.bedBack.rotateAngleX = (float) Math.toRadians(45F);
-            this.bedBack.rotateAngleY = (float) Math.toRadians(o.getTileEntity().getWorldObj().getWorldTime() % 360 + AccessWrapper.getRenderPartialTicks());
+//            this.bedBack.rotateAngleY = (float) Math.toRadians(o.getTileEntity().getWorldObj().getWorldTime() % 360 + AccessWrapper.getRenderPartialTicks());
         }
 
         this.baseRod1.render(boxTranslation);
