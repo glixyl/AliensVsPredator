@@ -2,7 +2,6 @@ package com.arisux.avp.entities.tile.render;
 
 import static org.lwjgl.opengl.GL11.GL_BLEND;
 import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
-import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_DST_COLOR;
 import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_SRC_ALPHA;
 import static org.lwjgl.opengl.GL11.GL_SRC_ALPHA;
 
@@ -35,15 +34,15 @@ public class RenderAssembler extends TileEntitySpecialRenderer
                 GlStateManager.disableLight();
                 GlStateManager.color4i(0xFFFF0000);
                 GlStateManager.enable(GL_BLEND);
-                GlStateManager.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_DST_COLOR);
-                RenderUtil.drawItemIcon(((TileEntityAssembler) tile).getRandomItem(), -8, -60, 16, 16);
+                GlStateManager.blendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_SRC_COLOR);
+                RenderUtil.drawItemIcon(((TileEntityAssembler) tile).getRandomItem(), -8, -32, 16, 16);
                 GlStateManager.disable(GL_BLEND);
                 GlStateManager.enableLight();
             }
             GlStateManager.popMatrix();
 
             GlStateManager.rotate(-15, 1, 0, 0);
-            GlStateManager.rotate(10, 0, 0, 1);
+//            GlStateManager.rotate(10, 0, 0, 1);
 
             GlStateManager.pushMatrix();
             {
@@ -52,11 +51,11 @@ public class RenderAssembler extends TileEntitySpecialRenderer
                 GlStateManager.enable(GL11.GL_BLEND);
                 GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_CONSTANT_COLOR);
 
-                for (int x = 64; x > 0; x--)
+                for (int x = 32; x > 0; x--)
                 {
                     GlStateManager.rotate(x * 1, 0, 1, 0);
-                    GlStateManager.rotate(20, 0, 0, 1);
-                    RenderUtil.drawRect(-1, 0, 2, 1 + x / 2, 0xAAFF0000);
+                    GlStateManager.rotate(10, 0, 0, 1);
+                    RenderUtil.drawRect(-1, 0, 2, 1 + x / 2, 0x22FF0000);
                 }
 
                 GlStateManager.enableLight();
