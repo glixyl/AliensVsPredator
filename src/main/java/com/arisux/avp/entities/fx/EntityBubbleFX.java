@@ -1,5 +1,7 @@
 package com.arisux.avp.entities.fx;
 
+import com.arisux.airi.lib.RenderUtil;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.particle.EntityFX;
@@ -46,6 +48,34 @@ public class EntityBubbleFX extends EntityFX
     public void renderParticle(Tessellator tessellator, float partialTickTime, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ)
     {
         super.renderParticle(tessellator, partialTickTime, rotationX, rotationZ, rotationYZ, rotationXY, rotationXZ);
+        RenderUtil.drawParticle(32, 0, 0, 1, 1);
+    }    
+    
+    
+    public void renderParticleNew(Tessellator tessellator, float partialTickTime, float rX, float rZ, float rYZ, float rXY, float rXZ)
+    {
+        float u = (float)this.particleTextureIndexX / 16.0F;
+        float mU = u + 0.0624375F;
+        float v = (float)this.particleTextureIndexY / 16.0F;
+        float mV = v + 0.0624375F;
+        float f10 = 0.1F * this.particleScale;
+
+        if (this.particleIcon != null)
+        {
+            u = this.particleIcon.getMinU();
+            mU = this.particleIcon.getMaxU();
+            v = this.particleIcon.getMinV();
+            mV = this.particleIcon.getMaxV();
+        }
+
+        float f11 = (float)(this.prevPosX + (this.posX - this.prevPosX) * (double)partialTickTime - interpPosX);
+        float f12 = (float)(this.prevPosY + (this.posY - this.prevPosY) * (double)partialTickTime - interpPosY);
+        float f13 = (float)(this.prevPosZ + (this.posZ - this.prevPosZ) * (double)partialTickTime - interpPosZ);
+        tessellator.setColorRGBA_F(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha);
+        tessellator.addVertexWithUV((double)(f11 - rX * f10 - rXY * f10), (double)(f12 - rZ * f10), (double)(f13 - rYZ * f10 - rXZ * f10), (double)mU, (double)mV);
+        tessellator.addVertexWithUV((double)(f11 - rX * f10 + rXY * f10), (double)(f12 + rZ * f10), (double)(f13 - rYZ * f10 + rXZ * f10), (double)mU, (double)v);
+        tessellator.addVertexWithUV((double)(f11 + rX * f10 + rXY * f10), (double)(f12 + rZ * f10), (double)(f13 + rYZ * f10 + rXZ * f10), (double)u, (double)v);
+        tessellator.addVertexWithUV((double)(f11 + rX * f10 - rXY * f10), (double)(f12 - rZ * f10), (double)(f13 + rYZ * f10 - rXZ * f10), (double)u, (double)mV);
     }
 
     @Override

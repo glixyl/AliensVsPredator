@@ -79,7 +79,7 @@ public class RenderXenomorph extends RenderLiving implements ICustomCryostasisRe
                 GlStateManager.enable(GL_BLEND);
                 GlStateManager.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
                 GlStateManager.translate(posX + 0.5F, posY + 1.7F, posZ + 0.5F);
-                GlStateManager.rotate(tile.rotation * (-90F), 0F, 1F, 0F);
+                RenderUtil.rotate(tile);
                 GlStateManager.enable(GL12.GL_RESCALE_NORMAL);
                 GlStateManager.scale(0.75F, -0.75F, 0.75F);
                 GlStateManager.enable(GL_ALPHA_TEST);

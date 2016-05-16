@@ -3,6 +3,7 @@ package com.arisux.avp.entities.tile.render;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
+import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.TileEntityLocker;
 import com.arisux.avp.entities.tile.model.ModelLocker;
@@ -13,7 +14,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.IItemRenderer.ItemRenderType;
 import net.minecraftforge.client.MinecraftForgeClient;
-import net.minecraftforge.common.util.ForgeDirection;
 
 public class RenderGunLocker extends TileEntitySpecialRenderer
 {
@@ -28,32 +28,13 @@ public class RenderGunLocker extends TileEntitySpecialRenderer
         {
             float scale = 0.95F;
             GlStateManager.enable(GL11.GL_CULL_FACE);
-            this.bindTexture(AliensVsPredator.resources().GUN_LOCKER);
             GlStateManager.translate(posX + 0.5F, posY + 1.41F, posZ + 0.5F);
-            GlStateManager.scale(-scale, -scale, scale);
+            GlStateManager.scale(scale, -scale, scale);
             GlStateManager.enable(GL11.GL_ALPHA_TEST);
-
-            if (tile != null && tile.getDirection() != null)
-            {
-                if (tile.getDirection() == ForgeDirection.NORTH)
-                {
-                    GlStateManager.rotate(180F, 0F, 1F, 0F);
-                }
-                if (tile.getDirection() == ForgeDirection.SOUTH)
-                {
-                    GlStateManager.rotate(0F, 0F, 0F, 0F);
-                }
-                if (tile.getDirection() == ForgeDirection.WEST)
-                {
-                    GlStateManager.rotate(90F, 0F, 1F, 0F);
-                }
-                if (tile.getDirection() == ForgeDirection.EAST)
-                {
-                    GlStateManager.rotate(270F, 0F, 1F, 0F);
-                }
-            }
-
+            GlStateManager.disableCullFace();
+            RenderUtil.rotate(tile);
             this.mainModel.door.rotateAngleY = !tile.isOpen() ? 0 : -1.5F;
+            this.bindTexture(AliensVsPredator.resources().GUN_LOCKER);
             this.mainModel.render(tile);
 
             if (tile != null)

@@ -1,11 +1,11 @@
 package com.arisux.avp.entities.tile;
 
+import com.arisux.airi.lib.interfaces.IRotatable;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.inventory.container.ContainerLocker;
 import com.arisux.avp.items.ItemFirearm;
 import com.arisux.avp.packets.client.PacketOpenable;
 import com.arisux.avp.util.IOpenable;
-import com.arisux.avp.util.IRotatable;
 
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraft.entity.player.EntityPlayer;

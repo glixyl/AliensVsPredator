@@ -3,10 +3,10 @@ package com.arisux.avp.entities.tile;
 import java.util.ArrayList;
 import java.util.Random;
 
+import com.arisux.airi.lib.interfaces.IRotatable;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.packets.client.PacketOpenBlastdoor;
 import com.arisux.avp.util.IOpenable;
-import com.arisux.avp.util.IRotatable;
 import com.arisux.avp.util.IVoltageReceiver;
 
 import net.minecraft.block.Block;

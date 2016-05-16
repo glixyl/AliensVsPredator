@@ -1,15 +1,10 @@
 package com.arisux.avp.entities.tile;
 
-import java.util.Random;
-
-import com.arisux.avp.entities.fx.EntityBubbleFX;
+import com.arisux.airi.lib.interfaces.IRotatable;
 import com.arisux.avp.items.ItemEntitySummoner;
 import com.arisux.avp.util.IVoltageReceiver;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -19,9 +14,9 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityCryostasisTube extends TileEntityElectrical implements IVoltageReceiver
+public class TileEntityCryostasisTube extends TileEntityElectrical implements IVoltageReceiver, IRotatable
 {
-    public int rotation;
+    private ForgeDirection direction;
     public Entity stasisEntity;
     public ItemStack stasisItemstack;
     private boolean cracked;
@@ -86,42 +81,6 @@ public class TileEntityCryostasisTube extends TileEntityElectrical implements IV
         {
             stasisEntity.onUpdate();
         }
-
-        // int bubbleLife = 20;
-        //
-        // if (this.worldObj.isRemote)
-        // {
-        // for (int x = 1; x > 0; --x)
-        // {
-        // Random rand = new Random();
-        //
-        // double bubbleX = 0;
-        // double bubbleY = 0;
-        // double bubbleZ = 0;
-        //
-        // for (int r = 3; r > 0; r--)
-        // {
-        // bubbleX = bubbleX + (rand.nextDouble() / (bubbleLife - this.ticksExisted));
-        // bubbleY = bubbleY + (rand.nextDouble() / (bubbleLife - this.ticksExisted));
-        // bubbleZ = bubbleZ + (rand.nextDouble() / (bubbleLife - this.ticksExisted));
-        // }
-        //
-        // this.spawnBubbleParticle(bubbleX, bubbleY, bubbleZ, 0.04F, 0.02D, rand);
-        // }
-        // }
-
-        Random rand = new Random();
-
-        if (this.worldObj.isRemote && !this.isCracked() && rand.nextInt(8) == 0)
-        {
-            this.spawnBubbleParticle(this.xCoord + 0.5, this.yCoord + 0.5, this.zCoord + 0.55, 0, 0.75, 0, rand);
-        }
-    }
-
-    @SideOnly(Side.CLIENT)
-    public void spawnBubbleParticle(double bubbleX, double bubbleY, double bubbleZ, double motionX, double motionY, double motionZ, Random rand)
-    {
-        Minecraft.getMinecraft().effectRenderer.addEffect(new EntityBubbleFX(this.worldObj, bubbleX, bubbleY, bubbleZ, motionX, motionY, motionZ));
     }
 
     @Override
@@ -148,9 +107,13 @@ public class TileEntityCryostasisTube extends TileEntityElectrical implements IV
     public void writeToNBT(NBTTagCompound nbt)
     {
         super.writeToNBT(nbt);
-        nbt.setInteger("Rotation", this.rotation);
         nbt.setBoolean("Cracked", this.cracked);
         nbt.setBoolean("Shattered", this.shattered);
+
+        if (this.direction != null)
+        {
+            nbt.setInteger("Direction", this.direction.ordinal());
+        }
 
         if (this.stasisItemstack != null)
         {
@@ -164,9 +127,13 @@ public class TileEntityCryostasisTube extends TileEntityElectrical implements IV
     public void readFromNBT(NBTTagCompound nbt)
     {
         super.readFromNBT(nbt);
-        this.rotation = nbt.getInteger("Rotation");
         this.cracked = nbt.getBoolean("Cracked");
         this.shattered = nbt.getBoolean("Shattered");
+
+        if (ForgeDirection.getOrientation(nbt.getInteger("Direction")) != null)
+        {
+            this.direction = ForgeDirection.getOrientation(nbt.getInteger("Direction"));
+        }
 
         NBTTagCompound nbtStack = nbt.getCompoundTag("StasisItemstack");
         this.stasisItemstack = ItemStack.loadItemStackFromNBT(nbtStack);
@@ -215,13 +182,20 @@ public class TileEntityCryostasisTube extends TileEntityElectrical implements IV
         return 120;
     }
 
-    public void setDirection(byte direction)
-    {
-        this.rotation = direction;
-    }
-
     public int getTicksExisted()
     {
         return ticksExisted;
+    }
+
+    @Override
+    public ForgeDirection getDirection()
+    {
+        return this.direction;
+    }
+
+    @Override
+    public void setDirection(ForgeDirection facing)
+    {
+        this.direction = facing;
     }
 }

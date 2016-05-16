@@ -1,5 +1,7 @@
 package com.arisux.avp.entities.tile;
 
+import com.arisux.airi.lib.interfaces.IRotatable;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
@@ -7,7 +9,7 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityAmpule extends TileEntity
+public class TileEntityAmpule extends TileEntity implements IRotatable
 {
     private ForgeDirection direction;
 
@@ -53,11 +55,13 @@ public class TileEntityAmpule extends TileEntity
         }
     }
 
+    @Override
     public ForgeDirection getDirection()
     {
         return direction;
     }
 
+    @Override
     public void setDirection(ForgeDirection direction)
     {
         this.direction = direction;

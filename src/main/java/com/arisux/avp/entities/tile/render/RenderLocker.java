@@ -14,7 +14,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.IItemRenderer.ItemRenderType;
 import net.minecraftforge.client.MinecraftForgeClient;
-import net.minecraftforge.common.util.ForgeDirection;
 
 public class RenderLocker extends TileEntitySpecialRenderer
 {
@@ -31,29 +30,10 @@ public class RenderLocker extends TileEntitySpecialRenderer
             GlStateManager.disable(GL11.GL_CULL_FACE);
             this.bindTexture(AliensVsPredator.resources().LOCKER);
             GlStateManager.translate(posX + 0.5F, posY + 1.41F, posZ + 0.5F);
-            GlStateManager.scale(-scale, -scale, scale);
+            GlStateManager.scale(scale, -scale, scale);
             GlStateManager.enable(GL11.GL_ALPHA_TEST);
-
-            if (tile != null && tile.getDirection() != null)
-            {
-                if (tile.getDirection() == ForgeDirection.NORTH)
-                {
-                    GlStateManager.rotate(180F, 0F, 1F, 0F);
-                }
-                if (tile.getDirection() == ForgeDirection.SOUTH)
-                {
-                    GlStateManager.rotate(0F, 0F, 0F, 0F);
-                }
-                if (tile.getDirection() == ForgeDirection.WEST)
-                {
-                    GlStateManager.rotate(90F, 0F, 1F, 0F);
-                }
-                if (tile.getDirection() == ForgeDirection.EAST)
-                {
-                    GlStateManager.rotate(270F, 0F, 1F, 0F);
-                }
-            }
-
+            GlStateManager.disableCullFace();
+            RenderUtil.rotate(tile);
             this.mainModel.door.rotateAngleY = !tile.isOpen() ? 0 : -1.5F;
             this.mainModel.render(tile);
 

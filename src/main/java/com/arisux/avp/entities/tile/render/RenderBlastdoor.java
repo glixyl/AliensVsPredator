@@ -3,13 +3,13 @@ package com.arisux.avp.entities.tile.render;
 import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
 
 import com.arisux.airi.lib.GlStateManager;
+import com.arisux.airi.lib.RenderUtil;
 import com.arisux.avp.AliensVsPredator;
 import com.arisux.avp.entities.tile.TileEntityBlastdoor;
 import com.arisux.avp.entities.tile.model.ModelBlastdoor;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
 
 public class RenderBlastdoor extends TileEntitySpecialRenderer
 {
@@ -28,26 +28,7 @@ public class RenderBlastdoor extends TileEntitySpecialRenderer
                 bindTexture(AliensVsPredator.resources().BLASTDOOR);
                 GlStateManager.translate(posX + 0.5F, posY + 1.5F, posZ + 0.5F);
                 GlStateManager.scale(1.0F, -1.0F, 1.0F);
-
-                if (tile.getDirection() != null)
-                {
-                    if (tile.getDirection() == ForgeDirection.NORTH)
-                    {
-                        GlStateManager.rotate(0F, 0F, 0F, 0F);
-                    }
-                    if (tile.getDirection() == ForgeDirection.SOUTH)
-                    {
-                        GlStateManager.rotate(0F, 0F, 0F, 0F);
-                    }
-                    if (tile.getDirection() == ForgeDirection.WEST)
-                    {
-                        GlStateManager.rotate(90F, 0F, 1F, 0F);
-                    }
-                    if (tile.getDirection() == ForgeDirection.EAST)
-                    {
-                        GlStateManager.rotate(90F, 0F, 1F, 0F);
-                    }
-                }
+                RenderUtil.rotate(tile);
                 this.model.render(tile);
             }
             GlStateManager.popMatrix();

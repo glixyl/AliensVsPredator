@@ -1,6 +1,6 @@
 package com.arisux.avp.entities.tile;
 
-import com.arisux.avp.util.IRotatable;
+import com.arisux.airi.lib.interfaces.IRotatable;
 import com.arisux.avp.util.IVoltageProvider;
 import com.arisux.avp.util.IVoltageReceiver;
 

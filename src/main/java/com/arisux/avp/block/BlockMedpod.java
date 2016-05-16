@@ -1,8 +1,8 @@
 package com.arisux.avp.block;
 
+import com.arisux.airi.lib.interfaces.IRotatable;
 import com.arisux.avp.entities.tile.TileEntityMedpod;
 import com.arisux.avp.util.IOpenable;
-import com.arisux.avp.util.IRotatable;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

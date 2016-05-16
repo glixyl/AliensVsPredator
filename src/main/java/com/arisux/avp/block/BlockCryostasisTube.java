@@ -9,12 +9,15 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Direction;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockCryostasisTube extends Block
 {
@@ -94,9 +97,15 @@ public class BlockCryostasisTube extends Block
 
         if (tile != null)
         {
-            tile.setDirection((byte) (MathHelper.floor_double(((living.rotationYaw * 4F) / 360F) + 0.5D) & 3));
+            tile.setDirection(getFacing(living));
             world.markBlockForUpdate(tile.xCoord, tile.yCoord, tile.zCoord);
         }
+    }
+
+    public static ForgeDirection getFacing(Entity entity)
+    {
+        int dir = MathHelper.floor_double((entity.rotationYaw / 90) + 0.5) & 3;
+        return ForgeDirection.VALID_DIRECTIONS[Direction.directionToFacing[dir]];
     }
 
     @Override
