@@ -19,9 +19,7 @@ public class TileEntityMedpod extends TileEntityElectrical implements IOpenable,
 {
     private ForgeDirection direction;
     private boolean isOpen;
-    private Entity medpodEntity;
-    private float rotationYaw;
-    private float rotationPitch;
+    private EntityMedpod medpodEntity;
     private float doorProgress;
 
     public TileEntityMedpod()
@@ -31,11 +29,15 @@ public class TileEntityMedpod extends TileEntityElectrical implements IOpenable,
         this.doorProgress = -0.01F;
     }
 
-    public Entity getEntity()
+    public EntityMedpod getEntity()
     {
-        return this.medpodEntity == null ? this.medpodEntity = new EntityMedpod(this, this.worldObj) : this.medpodEntity;
+        return this.medpodEntity;
     }
 
+    public void setEntity(Entity entity)
+    {
+        this.medpodEntity = (EntityMedpod) entity;
+    }
 
     @Override
     public Packet getDescriptionPacket()
@@ -61,6 +63,7 @@ public class TileEntityMedpod extends TileEntityElectrical implements IOpenable,
             nbt.setInteger("Direction", this.direction.ordinal());
         }
         nbt.setFloat("DoorProgress", this.doorProgress);
+        nbt.setBoolean("Open", this.isOpen);
     }
 
     @Override
@@ -73,6 +76,7 @@ public class TileEntityMedpod extends TileEntityElectrical implements IOpenable,
             this.direction = ForgeDirection.getOrientation(nbt.getInteger("Direction"));
         }
         this.doorProgress = nbt.getFloat("DoorProgress");
+        this.isOpen = nbt.getBoolean("Open");
     }
 
     @Override
@@ -81,16 +85,38 @@ public class TileEntityMedpod extends TileEntityElectrical implements IOpenable,
         super.updateEntity();
         this.updateEnergyAsReceiver();
 
+        if (this.getEntity() == null && !this.worldObj.isRemote)
+        {
+            this.medpodEntity = new EntityMedpod(worldObj);
+            this.medpodEntity.setTile(this);
+            this.medpodEntity.setLocationAndAngles(this.xCoord, this.yCoord, this.zCoord, 0F, 0F);
+            this.worldObj.spawnEntityInWorld(this.medpodEntity);
+        }
+
         if (this.worldObj != null && this.getEntity() != null)
         {
-            this.getEntity().setLocationAndAngles(this.xCoord + getEntity().width / 2, this.yCoord + 1, this.zCoord + getEntity().width / 2, this.rotationYaw, this.rotationPitch);
+            float rotation = 0F;
+
+            if (this.getDirection() == ForgeDirection.NORTH)
+                rotation = 0F;
+
+            if (this.getDirection() == ForgeDirection.SOUTH)
+                rotation = 180F;
+
+            if (this.getDirection() == ForgeDirection.EAST)
+                rotation = 90F;
+
+            if (this.getDirection() == ForgeDirection.WEST)
+                rotation = -90F;
+
+            this.getEntity().setLocationAndAngles(this.xCoord + getEntity().width / 2, this.yCoord, this.zCoord + getEntity().width / 2, rotation, 0F);
         }
-        
+
         if (this.isOpen())
         {
             this.doorProgress = this.doorProgress < getMaxDoorProgress() ? this.doorProgress + 0.025F : this.doorProgress;
         }
-        
+
         if (!this.isOpen())
         {
             this.doorProgress = this.doorProgress > 0.0F ? this.doorProgress - 0.025F : this.doorProgress;
@@ -112,11 +138,19 @@ public class TileEntityMedpod extends TileEntityElectrical implements IOpenable,
     @Override
     public void setOpen(boolean isOpen)
     {
-        this.isOpen = isOpen;
-
-        if (!this.worldObj.isRemote)
+        if (this.getVoltage() > 0)
         {
-            AliensVsPredator.network().sendToAll(new PacketOpenable(isOpen, this.xCoord, this.yCoord, this.zCoord));
+            this.isOpen = isOpen;
+
+            if (!this.worldObj.isRemote)
+            {
+                AliensVsPredator.network().sendToAll(new PacketOpenable(isOpen, this.xCoord, this.yCoord, this.zCoord));
+            }
+
+            if (isOpen && this.getEntity() != null && this.getEntity().riddenByEntity != null)
+            {
+                this.getEntity().riddenByEntity = null;
+            }
         }
     }
 
@@ -143,12 +177,12 @@ public class TileEntityMedpod extends TileEntityElectrical implements IOpenable,
     {
         return true;
     }
-    
+
     public float getDoorProgress()
     {
         return doorProgress;
     }
-    
+
     public float getMaxDoorProgress()
     {
         return 3.125F;

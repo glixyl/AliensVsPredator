@@ -60,7 +60,6 @@ public class BlockMedpod extends Block
         if (tileEntity != null && tileEntity instanceof IOpenable)
         {
             IOpenable openable = (IOpenable) tileEntity;
-
             openable.setOpen(!openable.isOpen());
         }
 
@@ -106,14 +105,30 @@ public class BlockMedpod extends Block
     @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int posX, int posY, int posZ)
     {
-        TileEntity tile = world.getTileEntity(posX, posY, posZ);
+        return null;
+    }
 
-        if (tile != null)
+    @Override
+    public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
+    {
+        super.onEntityCollidedWithBlock(world, x, y, z, entity);
+    }
+
+    @Override
+    public void onBlockPreDestroy(World world, int x, int y, int z, int meta)
+    {
+        super.onBlockPreDestroy(world, x, y, z, meta);
+
+        TileEntity tile = world.getTileEntity(x, y, z);
+
+        if (tile instanceof TileEntityMedpod)
         {
             TileEntityMedpod medpod = (TileEntityMedpod) tile;
-            return medpod.isOpen() ? null : super.getCollisionBoundingBoxFromPool(world, posX, posY, posZ);
-        }
 
-        return super.getCollisionBoundingBoxFromPool(world, posX, posY, posZ);
+            if (medpod != null && medpod.getEntity() != null)
+            {
+                medpod.getEntity().setDead();
+            }
+        }
     }
 }
