@@ -298,14 +298,24 @@ public class TileEntityBlastdoor extends TileEntityElectrical implements IVoltag
 
         if (direction != null)
         {
-            if (direction == ForgeDirection.NORTH || direction == ForgeDirection.SOUTH)
+            if (direction == ForgeDirection.SOUTH)
             {
                 return this.setChildTile(this.xCoord + 1, this.yCoord, this.zCoord) && this.setChildTile(this.xCoord + 2, this.yCoord, this.zCoord) && this.setChildTile(this.xCoord + 3, this.yCoord, this.zCoord) && this.setChildTile(this.xCoord, this.yCoord + 1, this.zCoord) && this.setChildTile(this.xCoord, this.yCoord + 2, this.zCoord) && this.setChildTile(this.xCoord + 1, this.yCoord + 2, this.zCoord) && this.setChildTile(this.xCoord + 1, this.yCoord + 1, this.zCoord) && this.setChildTile(this.xCoord + 2, this.yCoord + 2, this.zCoord) && this.setChildTile(this.xCoord + 2, this.yCoord + 1, this.zCoord) && this.setChildTile(this.xCoord + 3, this.yCoord + 2, this.zCoord) && this.setChildTile(this.xCoord + 3, this.yCoord + 1, this.zCoord);
             }
 
-            if (direction == ForgeDirection.WEST || direction == ForgeDirection.EAST)
+            if (direction == ForgeDirection.NORTH)
+            {
+                return this.setChildTile(this.xCoord - 1, this.yCoord, this.zCoord) && this.setChildTile(this.xCoord - 2, this.yCoord, this.zCoord) && this.setChildTile(this.xCoord - 3, this.yCoord, this.zCoord) && this.setChildTile(this.xCoord, this.yCoord + 1, this.zCoord) && this.setChildTile(this.xCoord, this.yCoord + 2, this.zCoord) && this.setChildTile(this.xCoord - 1, this.yCoord + 2, this.zCoord) && this.setChildTile(this.xCoord - 1, this.yCoord + 1, this.zCoord) && this.setChildTile(this.xCoord - 2, this.yCoord + 2, this.zCoord) && this.setChildTile(this.xCoord - 2, this.yCoord + 1, this.zCoord) && this.setChildTile(this.xCoord - 3, this.yCoord + 2, this.zCoord) && this.setChildTile(this.xCoord - 3, this.yCoord + 1, this.zCoord);
+            }
+
+            if (direction == ForgeDirection.EAST)
             {
                 return this.setChildTile(this.xCoord, this.yCoord, this.zCoord - 1) && this.setChildTile(this.xCoord, this.yCoord, this.zCoord - 2) && this.setChildTile(this.xCoord, this.yCoord, this.zCoord - 3) && this.setChildTile(this.xCoord, this.yCoord + 1, this.zCoord) && this.setChildTile(this.xCoord, this.yCoord + 2, this.zCoord) && this.setChildTile(this.xCoord, this.yCoord + 2, this.zCoord - 1) && this.setChildTile(this.xCoord, this.yCoord + 1, this.zCoord - 1) && this.setChildTile(this.xCoord, this.yCoord + 2, this.zCoord - 2) && this.setChildTile(this.xCoord, this.yCoord + 1, this.zCoord - 2) && this.setChildTile(this.xCoord, this.yCoord + 2, this.zCoord - 3) && this.setChildTile(this.xCoord, this.yCoord + 1, this.zCoord - 3);
+            }
+
+            if (direction == ForgeDirection.WEST)
+            {
+                return this.setChildTile(this.xCoord, this.yCoord, this.zCoord + 1) && this.setChildTile(this.xCoord, this.yCoord, this.zCoord + 2) && this.setChildTile(this.xCoord, this.yCoord, this.zCoord + 3) && this.setChildTile(this.xCoord, this.yCoord + 1, this.zCoord) && this.setChildTile(this.xCoord, this.yCoord + 2, this.zCoord) && this.setChildTile(this.xCoord, this.yCoord + 2, this.zCoord + 1) && this.setChildTile(this.xCoord, this.yCoord + 1, this.zCoord + 1) && this.setChildTile(this.xCoord, this.yCoord + 2, this.zCoord + 2) && this.setChildTile(this.xCoord, this.yCoord + 1, this.zCoord + 2) && this.setChildTile(this.xCoord, this.yCoord + 2, this.zCoord + 3) && this.setChildTile(this.xCoord, this.yCoord + 1, this.zCoord + 3);
             }
         }
 
