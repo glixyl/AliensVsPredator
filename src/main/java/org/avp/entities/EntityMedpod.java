@@ -61,7 +61,7 @@ public class EntityMedpod extends Entity
             {
                 Entity entity = entities.get(0);
 
-                if (!entity.isRiding() && !entity.isSneaking() && (entity != this.lastRiddenEntity && entity.getEntityId() != this.lastRiddenEntityId))
+                if (!entity.isRiding() && !entity.isSneaking() && (entity != this.lastRiddenEntity && entity.getEntityId() != this.lastRiddenEntityId) && !(entity instanceof EntitySpeciesAlien))
                 {
                     entity.mountEntity(this);
                     lastRiddenEntity = entity;

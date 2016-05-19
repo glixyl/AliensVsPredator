@@ -80,7 +80,7 @@ public class RenderFacehugger extends RenderLiving implements ICustomCryostasisR
             }
         }
 
-        if (facehugger.ridingEntity != null)
+        if (facehugger.ridingEntity != null && facehugger.ridingEntity instanceof EntityLivingBase)
         {
             Render render = (Render) RenderManager.instance.getEntityRenderObject(facehugger.ridingEntity);
 

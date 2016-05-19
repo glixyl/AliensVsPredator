@@ -29,7 +29,7 @@ public class RenderMedpod extends TileEntitySpecialRenderer
             GlStateManager.scale(1F, -1F, 1F);
             GlStateManager.scale(newScale, newScale, newScale);
             GlStateManager.disableCullFace();
-            RenderUtil.rotate(tile);
+            RenderUtil.rotateOpposite(tile);
             this.bindTexture(AliensVsPredator.resources().MEDPOD);
             this.mainModel.render(tileEntity);
 

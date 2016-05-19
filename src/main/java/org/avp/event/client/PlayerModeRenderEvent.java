@@ -41,7 +41,6 @@ public class PlayerModeRenderEvent
 
             EntityLivingBase entityLiving = (EntityLivingBase) entity;
 
-            float boxTranslationMultiplier = 0.0625F;
             float yawOffset = RenderUtil.interpolateRotation(entityLiving.prevRenderYawOffset, entityLiving.renderYawOffset, renderPartialTicks);
             float yawHead = RenderUtil.interpolateRotation(entityLiving.prevRotationYawHead, entityLiving.rotationYawHead, renderPartialTicks);
             float swingProgress = (entityLiving.limbSwing - entityLiving.limbSwingAmount * (1.0F - renderPartialTicks));
@@ -58,7 +57,7 @@ public class PlayerModeRenderEvent
 
                 ModelBase model = PlayerModeHandler.instance().getModelForPlayer((EntityPlayer) entity);
                 this.bindTexture(this.getEntityTexture(entity));
-                model.render(entity, swingProgress, swingProgressPrevious, idleProgress, headRotateAngleY, headRotationPitch, boxTranslationMultiplier);
+                model.render(entity, swingProgress, swingProgressPrevious, idleProgress, headRotateAngleY, headRotationPitch, RenderUtil.DEFAULT_BOX_TRANSLATION);
             }
             GlStateManager.popMatrix();
         }

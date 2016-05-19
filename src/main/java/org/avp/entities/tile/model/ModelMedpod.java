@@ -107,15 +107,12 @@ public class ModelMedpod extends ModelBaseWrapper
         {
             TileEntityMedpod medpod = (TileEntityMedpod) o.getTileEntity();
 
-//            float doorRotation = (float) Math.toRadians(medpod.getWorldObj().getWorldTime() % 180);
-            float doorRotation = medpod.getDoorProgress();
+            float doorRotation = medpod.getDoorProgress() / 2;
             float medpodRotation = (float) Math.toRadians(medpod.getDoorProgress() * 45 / medpod.getMaxDoorProgress());
             this.lGlassBack.rotateAngleZ = doorRotation;
             this.rGlassBack.rotateAngleZ = -doorRotation;
-            this.glassTop.rotateAngleX = doorRotation / 4;
-            this.bedBack.rotateAngleX = medpodRotation;
-            
-//            this.bedBack.rotateAngleY = (float) Math.toRadians(o.getTileEntity().getWorldObj().getWorldTime() % 360 + AccessWrapper.getRenderPartialTicks());
+            this.glassTop.rotateAngleX = doorRotation;
+            this.bedBack.rotateAngleX = -medpodRotation;
         }
 
         this.baseRod1.render(boxTranslation);
