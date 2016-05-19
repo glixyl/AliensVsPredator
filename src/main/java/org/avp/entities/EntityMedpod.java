@@ -84,8 +84,8 @@ public class EntityMedpod extends Entity
 
         if (this.riddenByEntity != null && this.getTileEntity() != null)
         {
-            this.riddenByEntity.rotationYaw = this.rotationYaw;
-            this.riddenByEntity.setRotationYawHead(this.rotationYaw);
+//            this.riddenByEntity.rotationYaw = this.rotationYaw;
+//            this.riddenByEntity.setRotationYawHead(this.rotationYaw);
             
             if (this.getTileEntity().getVoltage() > 0 && !this.getTileEntity().isOpen() && this.riddenByEntity instanceof EntityLivingBase)
             {

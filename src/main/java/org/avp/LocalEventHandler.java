@@ -17,6 +17,7 @@ import org.avp.event.client.CommonFirearmEvents;
 import org.avp.event.client.FacehuggerRenderEvent;
 import org.avp.event.client.FireAPCEvent;
 import org.avp.event.client.LightmapUpdateEvent;
+import org.avp.event.client.PlayerInMedpodRenderEvent;
 import org.avp.event.client.PlayerModeRenderEvent;
 import org.avp.event.client.PressureHUDRenderEvent;
 import org.avp.event.client.PulseRifleEvents;
@@ -64,6 +65,7 @@ public class LocalEventHandler implements IInitializable
             this.registerEvent(new PulseRifleEvents());
             this.registerEvent(new WristBracerEvents());
             this.registerEvent(new BossBarEvent());
+            this.registerEvent(new PlayerInMedpodRenderEvent());
         }
 
         if (FMLCommonHandler.instance().getSide() == Side.SERVER)

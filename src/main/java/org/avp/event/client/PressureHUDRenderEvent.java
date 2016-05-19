@@ -274,7 +274,7 @@ public class PressureHUDRenderEvent
 
                                 fontrenderer.drawString("Age: " + entityLiving.getAge(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0x666666);
 
-                                if (!(entity instanceof EntitySpeciesAlien))
+                                if (!(entity instanceof EntitySpeciesAlien) && extendedLiving.getEmbryo() != null)
                                     fontrenderer.drawString("Parasite Type: " + extendedLiving.getEmbryo().getType().getResult().getSimpleName(), subMenuX + subMenuPadding, subMenuStartY + (curEntry++ * subEntrySpacing), 0x666666);
                             }
 
