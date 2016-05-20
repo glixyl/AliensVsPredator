@@ -4,14 +4,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.avp.AliensVsPredator;
+import org.avp.entities.EntityMedpod;
 import org.avp.entities.mob.EntityFacehugger;
 import org.avp.entities.mob.render.facemountrender.VanillaFaceMountRenderers;
 import org.avp.entities.tile.TileEntityCryostasisTube;
 import org.avp.entities.tile.render.RenderCryostasisTube;
 import org.avp.entities.tile.render.RenderCryostasisTube.CryostasisTubeRenderer;
 import org.avp.entities.tile.render.RenderCryostasisTube.ICustomCryostasisRenderer;
+import org.avp.event.client.RenderEntityInMedpodEvent;
 
 import com.arisux.airi.lib.GlStateManager;
+import com.arisux.airi.lib.RenderUtil;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -21,6 +24,7 @@ import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderFacehugger extends RenderLiving implements ICustomCryostasisRenderer
@@ -79,6 +83,28 @@ public class RenderFacehugger extends RenderLiving implements ICustomCryostasisR
                 GlStateManager.rotate(-45F, 1, 0, 0);
             }
         }
+        
+        if (facehugger != null && facehugger.ridingEntity != null && facehugger.ridingEntity.ridingEntity != null && facehugger.ridingEntity.ridingEntity instanceof EntityMedpod)
+        {
+            Entity entity = facehugger.ridingEntity;
+            EntityMedpod medpod = (EntityMedpod) entity.ridingEntity;
+
+            float medpodRotation = (float) medpod.getTileEntity().getDoorProgress() * 45 / medpod.getTileEntity().getMaxDoorProgress();
+
+            RenderUtil.rotate(medpod.getTileEntity());
+
+            if (entity instanceof EntityPlayer)
+            {
+//                GlStateManager.rotate(-45F, 1F, 0F, 0F);
+//                GlStateManager.translate(0F, 0.8F, 0.8F);
+//                GlStateManager.rotate(45F + medpodRotation, 1F, 0F, 0F);
+//                GlStateManager.translate(0F, -0.5F, -0.4F);
+            }
+            else
+            {
+                RenderEntityInMedpodEvent.transformMedpodEntity(medpod, entity);
+            }
+        }
 
         if (facehugger.ridingEntity != null && facehugger.ridingEntity instanceof EntityLivingBase)
         {
@@ -113,7 +139,7 @@ public class RenderFacehugger extends RenderLiving implements ICustomCryostasisR
             GlStateManager.scale(1F, -1F, 1F);
             GlStateManager.translate(0F, 0.25F, 0F);
         }
-        
+
         GlStateManager.scale(glScale, glScale, glScale);
     }
 
