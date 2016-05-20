@@ -1,11 +1,14 @@
 package org.avp.entities;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.avp.entities.extended.ExtendedEntityLivingBase;
 import org.avp.entities.extended.ExtendedEntityPlayer;
 import org.avp.entities.mob.EntitySpeciesAlien;
 import org.avp.entities.tile.TileEntityMedpod;
+
+import com.arisux.airi.lib.WorldUtil;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -21,7 +24,7 @@ public class EntityMedpod extends Entity
 {
     private TileEntityMedpod tile;
     private Entity lastRiddenEntity;
-    private int lastRiddenEntityId;
+    private UUID lastRiddenEntityUUID;
 
     public EntityMedpod(World worldObj)
     {
@@ -55,7 +58,7 @@ public class EntityMedpod extends Entity
             this.setDead();
         }
 
-        if (this.riddenByEntity == null && this.getTileEntity() != null && this.getTileEntity().isOpen())
+        if (!this.worldObj.isRemote && this.riddenByEntity == null && this.getTileEntity() != null)
         {
             List<Entity> entities = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.addCoord(this.motionX, this.motionY, this.motionZ));
 
@@ -63,30 +66,34 @@ public class EntityMedpod extends Entity
             {
                 Entity entity = entities.get(0);
 
-                if (!entity.isRiding() && !entity.isSneaking() && (entity != this.lastRiddenEntity && entity.getEntityId() != this.lastRiddenEntityId) && !(entity instanceof EntitySpeciesAlien))
+                if (!entity.isRiding() && !entity.isSneaking() && (entity != this.lastRiddenEntity && !entity.getPersistentID().equals(this.lastRiddenEntityUUID)) && !(entity instanceof EntitySpeciesAlien))
                 {
-                    entity.mountEntity(this);
                     lastRiddenEntity = entity;
+                    
+                    if (this.getTileEntity().isOpen())
+                    {
+                        entity.mountEntity(this);
+                    }
                 }
             }
         }
 
         if (lastRiddenEntity != null)
         {
-            lastRiddenEntityId = lastRiddenEntity.getEntityId();
+            lastRiddenEntityUUID = lastRiddenEntity.getPersistentID();
         }
 
         if (this.lastRiddenEntity == null)
         {
-            if (lastRiddenEntityId != 0)
+            if (this.lastRiddenEntityUUID != null)
             {
-                this.lastRiddenEntity = this.worldObj.getEntityByID(lastRiddenEntityId);
+                this.lastRiddenEntity = WorldUtil.getEntityByUUID(this.worldObj, this.lastRiddenEntityUUID);
             }
         }
 
         if (this.riddenByEntity != null && this.getTileEntity() != null)
         {
-            if (this.getTileEntity().getVoltage() > 0 && !this.getTileEntity().isOpen() && this.riddenByEntity instanceof EntityLivingBase)
+            if (this.getTileEntity().getVoltage() > 0 && this.getTileEntity().getDoorProgress() <= 0 && !this.getTileEntity().isOpen() && this.riddenByEntity instanceof EntityLivingBase)
             {
                 EntityLivingBase living = (EntityLivingBase) this.riddenByEntity;
                 ExtendedEntityLivingBase extended = ExtendedEntityLivingBase.get(living);
@@ -146,18 +153,42 @@ public class EntityMedpod extends Entity
     @Override
     protected void readEntityFromNBT(NBTTagCompound nbt)
     {
-        this.lastRiddenEntityId = nbt.getInteger("LastRiddenEntityId");
+        String uuidString = nbt.getString("LastRiddenEntityUUID");
+
+        if (!uuidString.isEmpty())
+        {
+            this.lastRiddenEntityUUID = UUID.fromString(uuidString);
+        }
     }
 
     @Override
     protected void writeEntityToNBT(NBTTagCompound nbt)
     {
-        nbt.setInteger("LastRiddenEntityId", this.lastRiddenEntityId);
+        if (this.lastRiddenEntityUUID != null)
+        {
+            nbt.setString("LastRiddenEntityUUID", this.lastRiddenEntityUUID.toString());
+        }
     }
 
     @Override
     protected void entityInit()
     {
         ;
+    }
+    
+    public Entity getLastRiddenEntity()
+    {
+        return lastRiddenEntity;
+    }
+    
+    public UUID getLastRiddenEntityUUID()
+    {
+        return lastRiddenEntityUUID;
+    }
+    
+    public void clearLastRidden()
+    {
+        this.lastRiddenEntity = null;
+        this.lastRiddenEntityUUID = null;
     }
 }
