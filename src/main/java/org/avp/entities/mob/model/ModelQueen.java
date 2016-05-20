@@ -579,7 +579,7 @@ public class ModelQueen extends ModelBaseWrapper
         this.rShinSpike.render(boxTranslation);
 
 
-        if (o.getEntity() != null)
+        if (o.getEntity() != null && o.getEntity() instanceof EntityQueen)
         {
             EntityQueen queen = (EntityQueen) o.getEntity();
 
