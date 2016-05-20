@@ -20,7 +20,6 @@ import net.minecraft.client.renderer.entity.RendererLivingEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
@@ -74,13 +73,13 @@ public class PlayerInMedpodRenderEvent
         protected ResourceLocation getEntityTexture(Entity entity)
         {
             EntityPlayer player = (EntityPlayer) entity;
-            
+
             if (player instanceof AbstractClientPlayer)
             {
                 AbstractClientPlayer clientPlayer = (AbstractClientPlayer) player;
                 return clientPlayer.getLocationSkin();
             }
-            
+
             return null;
         }
     };
@@ -138,6 +137,7 @@ public class PlayerInMedpodRenderEvent
         public void render(RenderLivingEvent event)
         {
             EntityMedpod medpod = (EntityMedpod) event.entity.ridingEntity;
+            float renderPartialTicks = AccessWrapper.getRenderPartialTicks();
             float medpodRotation = (float) medpod.getTileEntity().getDoorProgress() * 45 / medpod.getTileEntity().getMaxDoorProgress();
 
             if (this.renderer != event.renderer)
@@ -147,93 +147,68 @@ public class PlayerInMedpodRenderEvent
             }
 
             GL11.glPushMatrix();
-            GL11.glDisable(GL11.GL_CULL_FACE);
-            this.mainModel.onGround = this.renderSwingProgress(event.entity, AccessWrapper.getRenderPartialTicks());
-
-            if (this.renderPassModel != null)
             {
-                this.renderPassModel.onGround = this.mainModel.onGround;
-            }
+                this.mainModel.isRiding = false;
+                this.mainModel.onGround = this.renderSwingProgress(event.entity, renderPartialTicks);
+                this.mainModel.isChild = event.entity.isChild();
 
-            this.mainModel.isRiding = false;
-            this.mainModel.isChild = event.entity.isChild();
-
-            if (this.renderPassModel != null)
-            {
-                this.renderPassModel.isChild = this.mainModel.isChild;
-            }
-
-            try
-            {
-                float rotationYaw = RenderUtil.interpolateRotation(event.entity.prevRenderYawOffset, event.entity.renderYawOffset, AccessWrapper.getRenderPartialTicks());
-                float rotationYawHead = RenderUtil.interpolateRotation(event.entity.prevRotationYawHead, event.entity.rotationYawHead, AccessWrapper.getRenderPartialTicks());
-                float rotationPitch = event.entity.prevRotationPitch + (event.entity.rotationPitch - event.entity.prevRotationPitch) * AccessWrapper.getRenderPartialTicks();
-                float swingProgressPrev = event.entity.prevLimbSwingAmount + (event.entity.limbSwingAmount - event.entity.prevLimbSwingAmount) * AccessWrapper.getRenderPartialTicks();
-                float swingProgress = event.entity.limbSwing - event.entity.limbSwingAmount * (1.0F - AccessWrapper.getRenderPartialTicks());
-                float idleProgress;
-
-                if (event.entity.isRiding() && event.entity.ridingEntity instanceof EntityLivingBase)
+                if (this.renderPassModel != null)
                 {
-                    EntityLivingBase livingbase = (EntityLivingBase) event.entity.ridingEntity;
-                    rotationYaw = RenderUtil.interpolateRotation(livingbase.prevRenderYawOffset, livingbase.renderYawOffset, AccessWrapper.getRenderPartialTicks());
-                    idleProgress = MathHelper.wrapAngleTo180_float(rotationYawHead - rotationYaw);
-
-                    if (idleProgress < -85.0F)
-                    {
-                        idleProgress = -85.0F;
-                    }
-
-                    if (idleProgress >= 85.0F)
-                    {
-                        idleProgress = 85.0F;
-                    }
-
-                    rotationYaw = rotationYawHead - idleProgress;
-
-                    if (idleProgress * idleProgress > 2500.0F)
-                    {
-                        rotationYaw += idleProgress * 0.2F;
-                    }
+                    this.renderPassModel.onGround = this.renderPassModel != null ? this.mainModel.onGround : this.renderPassModel.onGround;
                 }
 
-                this.renderLivingAt(event.entity, event.x, event.y, event.z);
-                idleProgress = this.handleRotationFloat(event.entity, AccessWrapper.getRenderPartialTicks());
-
-                RenderUtil.rotate(medpod.getTileEntity());
-                GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-                GL11.glScalef(-1.0F, -1.0F, 1.0F);
-                this.preRenderCallback(event.entity, AccessWrapper.getRenderPartialTicks());
-                GL11.glTranslatef(0.0F, -24.0F * RenderUtil.DEFAULT_BOX_TRANSLATION - 0.0078125F, 0.0F);
-                GlStateManager.translate(0F, 1.5F, -0F);
-                GlStateManager.rotate(medpodRotation, 1F, 0F, 0F);
-                GlStateManager.translate(0F, -1.75F + event.entity.height, 0F);
-                GlStateManager.translate(0F, -0.5F, 0F);
-                GlStateManager.rotate(180F, 0F, 1F, 0);
-
-                if (event.entity.isChild())
+                if (this.renderPassModel != null)
                 {
-                    swingProgress *= 3.0F;
+                    this.renderPassModel.isChild = this.mainModel.isChild;
                 }
 
-                if (swingProgressPrev > 1.0F)
+                GL11.glDisable(GL11.GL_CULL_FACE);
+                try
                 {
-                    swingProgressPrev = 1.0F;
+                    float rotationYaw = RenderUtil.interpolateRotation(event.entity.prevRenderYawOffset, event.entity.renderYawOffset, renderPartialTicks);
+                    float rotationYawHead = RenderUtil.interpolateRotation(event.entity.prevRotationYawHead, event.entity.rotationYawHead, renderPartialTicks);
+                    float rotationPitch = event.entity.prevRotationPitch + (event.entity.rotationPitch - event.entity.prevRotationPitch) * AccessWrapper.getRenderPartialTicks();
+                    float swingProgressPrev = event.entity.prevLimbSwingAmount + (event.entity.limbSwingAmount - event.entity.prevLimbSwingAmount) * AccessWrapper.getRenderPartialTicks();
+                    float swingProgress = event.entity.limbSwing - event.entity.limbSwingAmount * (1.0F - renderPartialTicks);
+                    float idleProgress = (float) Math.toRadians(10F);
+
+                    if (event.entity.isChild())
+                    {
+                        swingProgress *= 3.0F;
+                    }
+
+                    if (swingProgressPrev > 1.0F)
+                    {
+                        swingProgressPrev = 1.0F;
+                    }
+
+                    this.renderLivingAt(event.entity, event.x, event.y, event.z);
+                    RenderUtil.rotate(medpod.getTileEntity());
+                    GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+                    GL11.glScalef(-1.0F, -1.0F, 1.0F);
+                    this.preRenderCallback(event.entity, renderPartialTicks);
+                    GL11.glTranslatef(0.0F, -24.0F * RenderUtil.DEFAULT_BOX_TRANSLATION - 0.0078125F, 0.0F);
+                    GlStateManager.translate(0F, 1.5F, -0F);
+                    GlStateManager.rotate(medpodRotation, 1F, 0F, 0F);
+                    GlStateManager.translate(0F, -1.75F + event.entity.height, 0F);
+                    GlStateManager.translate(0F, -0.5F, 0F);
+                    GlStateManager.rotate(180F, 0F, 1F, 0);
+
+                    GL11.glEnable(GL11.GL_ALPHA_TEST);
+                    this.mainModel.setLivingAnimations(event.entity, swingProgress, swingProgressPrev, renderPartialTicks);
+                    this.renderModel(event.entity, swingProgress, swingProgressPrev, idleProgress, rotationYawHead - rotationYaw, rotationPitch, RenderUtil.DEFAULT_BOX_TRANSLATION);
+                    GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+                }
+                catch (Exception exception)
+                {
+                    FMLLog.getLogger().error("Couldn\'t render entity", exception);
                 }
 
-                GL11.glEnable(GL11.GL_ALPHA_TEST);
-                this.mainModel.setLivingAnimations(event.entity, swingProgress, swingProgressPrev, AccessWrapper.getRenderPartialTicks());
-                this.renderModel(event.entity, swingProgress, swingProgressPrev, idleProgress, rotationYawHead - rotationYaw, rotationPitch, RenderUtil.DEFAULT_BOX_TRANSLATION);
-                GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+                OpenGlHelper.setActiveTexture(OpenGlHelper.lightmapTexUnit);
+                GL11.glEnable(GL11.GL_TEXTURE_2D);
+                OpenGlHelper.setActiveTexture(OpenGlHelper.defaultTexUnit);
+                GL11.glEnable(GL11.GL_CULL_FACE);
             }
-            catch (Exception exception)
-            {
-                FMLLog.getLogger().error("Couldn\'t render entity", exception);
-            }
-
-            OpenGlHelper.setActiveTexture(OpenGlHelper.lightmapTexUnit);
-            GL11.glEnable(GL11.GL_TEXTURE_2D);
-            OpenGlHelper.setActiveTexture(OpenGlHelper.defaultTexUnit);
-            GL11.glEnable(GL11.GL_CULL_FACE);
             GL11.glPopMatrix();
             this.passSpecialRender(event.entity, event.x, event.y, event.z);
         }
