@@ -1,6 +1,5 @@
 package org.avp.event.client;
 
-import org.avp.PlayerModeHandler;
 import org.avp.entities.EntityMedpod;
 import org.avp.entities.extended.ExtendedEntityPlayer;
 import org.lwjgl.opengl.GL11;
@@ -13,6 +12,7 @@ import com.arisux.airi.lib.RenderUtil;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -73,7 +73,15 @@ public class PlayerInMedpodRenderEvent
         @Override
         protected ResourceLocation getEntityTexture(Entity entity)
         {
-            return PlayerModeHandler.instance().getResourceForPlayer((EntityPlayer) entity);
+            EntityPlayer player = (EntityPlayer) entity;
+            
+            if (player instanceof AbstractClientPlayer)
+            {
+                AbstractClientPlayer clientPlayer = (AbstractClientPlayer) player;
+                return clientPlayer.getLocationSkin();
+            }
+            
+            return null;
         }
     };
 
