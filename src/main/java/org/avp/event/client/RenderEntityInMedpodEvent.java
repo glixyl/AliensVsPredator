@@ -93,12 +93,35 @@ public class RenderEntityInMedpodEvent
 
     public static void transformMedpodEntity(EntityMedpod medpod, Entity entity)
     {
+        if (entity instanceof EntityOtherPlayerMP || entity instanceof EntityPlayerSP)
+        {
+            GlStateManager.rotate(180F, 1F, 0F, 0F);
+            GlStateManager.translate(0F, -2.5F, 0F);
+
+            if (entity instanceof EntityPlayerSP)
+            {
+                GlStateManager.translate(0F, -1.45F, 0F);
+            }
+        }
+        
         float medpodRotation = (float) medpod.getTileEntity().getDoorProgress() * 45 / medpod.getTileEntity().getMaxDoorProgress();
         GlStateManager.translate(0F, 1.5F, -0F);
         GlStateManager.rotate(medpodRotation, 1F, 0F, 0F);
         GlStateManager.translate(0F, -1.75F + entity.height, 0F);
         GlStateManager.translate(0F, -0.5F, 0F);
         GlStateManager.rotate(180F, 0F, 1F, 0);
+
+        if (entity instanceof EntityOtherPlayerMP || entity instanceof EntityPlayerSP)
+        {
+            GlStateManager.rotate(90F, 1F, 0F, 0F);
+            GlStateManager.rotate(180F, 0F, 0F, 1F);
+            GlStateManager.translate(0F, -0.6F, -0.85F);
+
+            if (entity instanceof EntityPlayerSP)
+            {
+                GlStateManager.translate(0F, 0F, 0.15F);
+            }
+        }
     }
 
     public class RenderLiving extends RendererLivingEntity
@@ -168,32 +191,9 @@ public class RenderEntityInMedpodEvent
                     GL11.glEnable(GL12.GL_RESCALE_NORMAL);
                     GL11.glScalef(-1.0F, -1.0F, 1.0F);
 
-                    if (entity instanceof EntityOtherPlayerMP || entity instanceof EntityPlayerSP)
-                    {
-                        GlStateManager.rotate(180F, 1F, 0F, 0F);
-                        GlStateManager.translate(0F, 0.5F, 0F);
-
-                        if (entity instanceof EntityPlayerSP)
-                        {
-                            GlStateManager.translate(0F, -1.45F, 0F);
-                        }
-                    }
-
                     this.preRenderCallback(entity, renderPartialTicks);
                     GL11.glTranslatef(0.0F, -24.0F * RenderUtil.DEFAULT_BOX_TRANSLATION - 0.0078125F, 0.0F);
                     transformMedpodEntity(medpod, entity);
-
-                    if (entity instanceof EntityOtherPlayerMP || entity instanceof EntityPlayerSP)
-                    {
-                        GlStateManager.rotate(90F, 1F, 0F, 0F);
-                        GlStateManager.rotate(180F, 0F, 0F, 1F);
-                        GlStateManager.translate(0F, -0.6F, -0.85F);
-
-                        if (entity instanceof EntityPlayerSP)
-                        {
-                            GlStateManager.translate(0F, 0F, 0.15F);
-                        }
-                    }
 
                     GL11.glEnable(GL11.GL_ALPHA_TEST);
                     this.mainModel.setLivingAnimations(entity, swingProgress, swingProgressPrev, renderPartialTicks);

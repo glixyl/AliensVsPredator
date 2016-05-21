@@ -4,9 +4,9 @@ import org.avp.util.IVoltageReceiver;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntitySatelliteModem extends TileEntityElectrical implements IVoltageReceiver
+public class TileEntitySatelliteDish extends TileEntityElectrical implements IVoltageReceiver
 {
-    public TileEntitySatelliteModem()
+    public TileEntitySatelliteDish()
     {
         super(false);
     }
@@ -14,7 +14,7 @@ public class TileEntitySatelliteModem extends TileEntityElectrical implements IV
     @Override
     public boolean canConnectPower(ForgeDirection from)
     {
-        return false;
+        return true;
     }
 
     @Override

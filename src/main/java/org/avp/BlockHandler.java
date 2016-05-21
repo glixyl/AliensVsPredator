@@ -21,6 +21,7 @@ import org.avp.block.BlockPortal;
 import org.avp.block.BlockPowercell;
 import org.avp.block.BlockPowerline;
 import org.avp.block.BlockR2PConverter;
+import org.avp.block.BlockSatelliteDish;
 import org.avp.block.BlockSatelliteModem;
 import org.avp.block.BlockSolarPanel;
 import org.avp.block.BlockStalagmite;
@@ -133,7 +134,7 @@ public class BlockHandler extends IBHandler implements IInitializable
         terrainUniStone = (new BlockMaterial(Material.rock)).setHardness(1.3F).setResistance(2.0F).setLightOpacity(255),
         terrainUniSand = (new BlockMaterial(Material.sand)).setHardness(3.5F).setResistance(2.0F).setLightOpacity(255),
         terrainUniGravel = (new BlockMaterial(Material.sand)).setHardness(3.0F).setLightOpacity(255),
-        blockSatelliteDish = (new BlockMaterial(Material.iron)).setHardness(3.2F).setResistance(2.6F),
+        blockSatelliteDish = (new BlockSatelliteDish()).setHardness(3.2F).setResistance(2.6F),
         blockEngineerShipMaterial0 = (new BlockMaterial(Material.iron).setHardness(10F).setResistance(30.0F).setLightOpacity(255)),
         blockSacrificialSpawner = (new BlockTempleSpawner(Material.rock, false)),
         blockSpawnerCreative = (new BlockTempleSpawner(Material.rock, true)),

@@ -55,6 +55,7 @@ import org.avp.entities.tile.TileEntityPowercell;
 import org.avp.entities.tile.TileEntityPowerline;
 import org.avp.entities.tile.TileEntityR2PConverter;
 import org.avp.entities.tile.TileEntityRepulsionGenerator;
+import org.avp.entities.tile.TileEntitySatelliteDish;
 import org.avp.entities.tile.TileEntitySatelliteModem;
 import org.avp.entities.tile.TileEntitySolarPanel;
 import org.avp.entities.tile.TileEntityStasisMechanism;
@@ -97,6 +98,7 @@ public class EntityHandler implements IInitializable
         GameRegistry.registerTileEntity(TileEntityCryostasisTube.class, "tileEntityCryostasisTube");
         GameRegistry.registerTileEntity(TileEntityLightPanel.class, "tileEntityLightPanel");
         GameRegistry.registerTileEntity(TileEntitySatelliteModem.class, "tileEntitySatelliteModem");
+        GameRegistry.registerTileEntity(TileEntitySatelliteDish.class, "tileEntitySatelliteDish");
         GameRegistry.registerTileEntity(TileEntitySolarPanel.class, "tileEntitySolarPanel");
         GameRegistry.registerTileEntity(TileEntityTransformer.class, "tileEntityTransformer");
         GameRegistry.registerTileEntity(TileEntityNegativeTransformer.class, "tileEntityNegativeTransformer");

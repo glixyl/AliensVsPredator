@@ -24,7 +24,6 @@ import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderFacehugger extends RenderLiving implements ICustomCryostasisRenderer
@@ -83,27 +82,14 @@ public class RenderFacehugger extends RenderLiving implements ICustomCryostasisR
                 GlStateManager.rotate(-45F, 1, 0, 0);
             }
         }
-        
+
         if (facehugger != null && facehugger.ridingEntity != null && facehugger.ridingEntity.ridingEntity != null && facehugger.ridingEntity.ridingEntity instanceof EntityMedpod)
         {
             Entity entity = facehugger.ridingEntity;
             EntityMedpod medpod = (EntityMedpod) entity.ridingEntity;
 
-            float medpodRotation = (float) medpod.getTileEntity().getDoorProgress() * 45 / medpod.getTileEntity().getMaxDoorProgress();
-
             RenderUtil.rotate(medpod.getTileEntity());
-
-            if (entity instanceof EntityPlayer)
-            {
-//                GlStateManager.rotate(-45F, 1F, 0F, 0F);
-//                GlStateManager.translate(0F, 0.8F, 0.8F);
-//                GlStateManager.rotate(45F + medpodRotation, 1F, 0F, 0F);
-//                GlStateManager.translate(0F, -0.5F, -0.4F);
-            }
-            else
-            {
-                RenderEntityInMedpodEvent.transformMedpodEntity(medpod, entity);
-            }
+            RenderEntityInMedpodEvent.transformMedpodEntity(medpod, entity);
         }
 
         if (facehugger.ridingEntity != null && facehugger.ridingEntity instanceof EntityLivingBase)

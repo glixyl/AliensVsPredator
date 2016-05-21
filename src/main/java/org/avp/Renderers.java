@@ -111,6 +111,7 @@ import org.avp.entities.tile.TileEntityPowercell;
 import org.avp.entities.tile.TileEntityPowerline;
 import org.avp.entities.tile.TileEntityR2PConverter;
 import org.avp.entities.tile.TileEntityRepulsionGenerator;
+import org.avp.entities.tile.TileEntitySatelliteDish;
 import org.avp.entities.tile.TileEntitySatelliteModem;
 import org.avp.entities.tile.TileEntitySolarPanel;
 import org.avp.entities.tile.TileEntityStasisMechanism;
@@ -131,6 +132,7 @@ import org.avp.entities.tile.render.RenderPowercell;
 import org.avp.entities.tile.render.RenderPowerline;
 import org.avp.entities.tile.render.RenderR2PConverter;
 import org.avp.entities.tile.render.RenderRepulsionGenerator;
+import org.avp.entities.tile.render.RenderSatelliteDish;
 import org.avp.entities.tile.render.RenderSatelliteModem;
 import org.avp.entities.tile.render.RenderSolarPanel;
 import org.avp.entities.tile.render.RenderStasisMechanism;
@@ -157,11 +159,13 @@ import org.avp.items.render.RenderItemM4;
 import org.avp.items.render.RenderItemM40;
 import org.avp.items.render.RenderItemM41A;
 import org.avp.items.render.RenderItemM56SG;
+import org.avp.items.render.RenderItemMedpod;
 import org.avp.items.render.RenderItemMotionTracker;
 import org.avp.items.render.RenderItemNostromoFlamethrower;
 import org.avp.items.render.RenderItemPowercell;
 import org.avp.items.render.RenderItemPowerline;
 import org.avp.items.render.RenderItemRepulsionGenerator;
+import org.avp.items.render.RenderItemSatelliteDish;
 import org.avp.items.render.RenderItemSniper;
 import org.avp.items.render.RenderItemSolarPanel;
 import org.avp.items.render.RenderItemSpear;
@@ -280,6 +284,8 @@ public class Renderers implements IInitializablePost
         registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.blocks().blockAmpule), new RenderItemAmpule());
         registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.blocks().blockLocker), new RenderItemLocker());
         registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.blocks().blockGunLocker), new RenderItemGunLocker());
+        registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.blocks().blockMedpod), new RenderItemMedpod());
+        registerItemRenderer(Item.getItemFromBlock(AliensVsPredator.blocks().blockSatelliteDish), new RenderItemSatelliteDish());
         registerItemRenderer(items.itemWristBlade, new RenderItemWristbracer());
         registerItemRenderer(items.itemWristbracerBlades, new RenderItemWristbracerBlades());
         registerItemRenderer(items.itemSpear, new RenderItemSpear());
@@ -377,6 +383,7 @@ public class Renderers implements IInitializablePost
         bindTileEntitySpecialRenderer(TileEntityLocker.class, new RenderLocker());
         bindTileEntitySpecialRenderer(TileEntityGunLocker.class, new RenderGunLocker());
         bindTileEntitySpecialRenderer(TileEntityMedpod.class, new RenderMedpod());
+        bindTileEntitySpecialRenderer(TileEntitySatelliteDish.class, new RenderSatelliteDish());
     }
 
     public void registerSimpleBlockRenderingHandlers()
