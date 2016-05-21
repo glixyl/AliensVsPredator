@@ -12,10 +12,8 @@ import com.arisux.airi.lib.RenderUtil;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.AbstractClientPlayer;
-import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.entity.EntityOtherPlayerMP;
-import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RendererLivingEntity;
@@ -28,69 +26,7 @@ import net.minecraftforge.client.event.RenderPlayerEvent;
 
 public class RenderEntityInMedpodEvent
 {
-    private RenderPlayer renderPlayer = new RenderPlayer();
     private RenderLiving renderLiving = new RenderLiving();
-
-    private static class RenderPlayer extends RendererLivingEntity
-    {
-        public static final ModelBiped mainModel = new ModelBiped();
-
-        public RenderPlayer()
-        {
-            super(mainModel, 0F);
-            this.renderManager = RenderManager.instance;
-        }
-
-        @Override
-        public void doRender(Entity entity, double posX, double posY, double posZ, float yaw, float renderPartialTicks)
-        {
-            EntityLivingBase entityLiving = (EntityLivingBase) entity;
-            EntityMedpod medpod = (EntityMedpod) entity.ridingEntity;
-
-            float swingProgress = (entityLiving.limbSwing - entityLiving.limbSwingAmount * (1.0F - renderPartialTicks));
-            float swingProgressPrevious = (entityLiving.prevLimbSwingAmount + (entityLiving.limbSwingAmount - entityLiving.prevLimbSwingAmount) * renderPartialTicks);
-            float idleProgress = (entityLiving.ticksExisted + renderPartialTicks);
-
-            GlStateManager.pushMatrix();
-            {
-                float medpodRotation = (float) medpod.getTileEntity().getDoorProgress() * 45 / medpod.getTileEntity().getMaxDoorProgress();
-
-                // this.renderLivingAt((EntityLivingBase) entity, posX, posY, posZ);
-
-                if (entity instanceof EntityClientPlayerMP)
-                {
-                    RenderUtil.rotate(medpod.getTileEntity());
-                    GlStateManager.rotate(180F, 0F, 1F, 0F);
-                    GlStateManager.rotate(180F, 1F, 0F, 0F);
-                    GlStateManager.disable(GL11.GL_CULL_FACE);
-                    GlStateManager.rotate(-45F, 1F, 0F, 0F);
-                    GlStateManager.translate(0F, 0.8F, 0.8F);
-                    GlStateManager.rotate(-45 + medpodRotation, 1F, 0F, 0F);
-                    GlStateManager.translate(0F, -0.5F, -0.4F);
-
-                    this.bindTexture(this.getEntityTexture(entity));
-                    mainModel.isRiding = false;
-                    mainModel.isChild = false;
-                    mainModel.render(entity, swingProgress, swingProgressPrevious, idleProgress, 0F, 0F, RenderUtil.DEFAULT_BOX_TRANSLATION);
-                }
-            }
-            GlStateManager.popMatrix();
-        }
-
-        @Override
-        protected ResourceLocation getEntityTexture(Entity entity)
-        {
-            EntityPlayer player = (EntityPlayer) entity;
-
-            if (player instanceof AbstractClientPlayer)
-            {
-                AbstractClientPlayer clientPlayer = (AbstractClientPlayer) player;
-                return clientPlayer.getLocationSkin();
-            }
-
-            return null;
-        }
-    };
 
     @SubscribeEvent
     public void renderPlayerTickPre(RenderPlayerEvent.Pre event)
@@ -103,28 +39,21 @@ public class RenderEntityInMedpodEvent
             {
                 event.setCanceled(true);
 
-                if (event.entity instanceof EntityOtherPlayerMP)
-                {
-                    EntityPlayer client = Minecraft.getMinecraft().thePlayer;
+                EntityPlayer client = Minecraft.getMinecraft().thePlayer;
 
-                    double renderX = event.entity.lastTickPosX + (event.entity.posX - event.entity.lastTickPosX) * (double) event.partialRenderTick;
-                    double renderY = event.entity.lastTickPosY + (event.entity.posY - event.entity.lastTickPosY) * (double) event.partialRenderTick;
-                    double renderZ = event.entity.lastTickPosZ + (event.entity.posZ - event.entity.lastTickPosZ) * (double) event.partialRenderTick;
+                double renderX = event.entity.lastTickPosX + (event.entity.posX - event.entity.lastTickPosX) * (double) event.partialRenderTick;
+                double renderY = event.entity.lastTickPosY + (event.entity.posY - event.entity.lastTickPosY) * (double) event.partialRenderTick;
+                double renderZ = event.entity.lastTickPosZ + (event.entity.posZ - event.entity.lastTickPosZ) * (double) event.partialRenderTick;
 
-                    double clientX = client.lastTickPosX + (client.posX - client.lastTickPosX) * (double) event.partialRenderTick;
-                    double clientY = client.lastTickPosY + (client.posY - client.lastTickPosY) * (double) event.partialRenderTick;
-                    double clientZ = client.lastTickPosZ + (client.posZ - client.lastTickPosZ) * (double) event.partialRenderTick;
+                double clientX = client.lastTickPosX + (client.posX - client.lastTickPosX) * (double) event.partialRenderTick;
+                double clientY = client.lastTickPosY + (client.posY - client.lastTickPosY) * (double) event.partialRenderTick;
+                double clientZ = client.lastTickPosZ + (client.posZ - client.lastTickPosZ) * (double) event.partialRenderTick;
 
-                    renderX = renderX - clientX;
-                    renderY = renderY - clientY;
-                    renderZ = renderZ - clientZ;
+                renderX = renderX - clientX;
+                renderY = renderY - clientY;
+                renderZ = renderZ - clientZ;
 
-                    renderLiving.render((EntityLivingBase) event.entity, event.renderer, renderX, renderY, renderZ, AccessWrapper.getRenderPartialTicks());
-                }
-                else
-                {
-                    renderPlayer.doRender(event.entity, event.entity.posX, event.entity.posY, event.entity.posZ, 0F, event.partialRenderTick);
-                }
+                renderLiving.render((EntityLivingBase) event.entity, event.renderer, renderX, renderY, renderZ, AccessWrapper.getRenderPartialTicks());
             }
         }
     }
@@ -239,21 +168,31 @@ public class RenderEntityInMedpodEvent
                     GL11.glEnable(GL12.GL_RESCALE_NORMAL);
                     GL11.glScalef(-1.0F, -1.0F, 1.0F);
 
-                    if (entity instanceof EntityOtherPlayerMP)
+                    if (entity instanceof EntityOtherPlayerMP || entity instanceof EntityPlayerSP)
                     {
                         GlStateManager.rotate(180F, 1F, 0F, 0F);
-                         GlStateManager.translate(0F, 0.5F, 0F);
+                        GlStateManager.translate(0F, 0.5F, 0F);
+
+                        if (entity instanceof EntityPlayerSP)
+                        {
+                            GlStateManager.translate(0F, -1.45F, 0F);
+                        }
                     }
 
                     this.preRenderCallback(entity, renderPartialTicks);
                     GL11.glTranslatef(0.0F, -24.0F * RenderUtil.DEFAULT_BOX_TRANSLATION - 0.0078125F, 0.0F);
                     transformMedpodEntity(medpod, entity);
 
-                    if (entity instanceof EntityOtherPlayerMP)
+                    if (entity instanceof EntityOtherPlayerMP || entity instanceof EntityPlayerSP)
                     {
                         GlStateManager.rotate(90F, 1F, 0F, 0F);
                         GlStateManager.rotate(180F, 0F, 0F, 1F);
                         GlStateManager.translate(0F, -0.6F, -0.85F);
+
+                        if (entity instanceof EntityPlayerSP)
+                        {
+                            GlStateManager.translate(0F, 0F, 0.15F);
+                        }
                     }
 
                     GL11.glEnable(GL11.GL_ALPHA_TEST);
