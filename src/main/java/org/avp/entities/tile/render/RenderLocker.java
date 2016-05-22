@@ -17,8 +17,6 @@ import net.minecraftforge.client.MinecraftForgeClient;
 
 public class RenderLocker extends TileEntitySpecialRenderer
 {
-    private ModelLocker mainModel = new ModelLocker();
-
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double posX, double posY, double posZ, float renderPartialTicks)
     {
@@ -28,14 +26,13 @@ public class RenderLocker extends TileEntitySpecialRenderer
         {
             float scale = 0.95F;
             GlStateManager.disable(GL11.GL_CULL_FACE);
-            this.bindTexture(AliensVsPredator.resources().LOCKER);
             GlStateManager.translate(posX + 0.5F, posY + 1.41F, posZ + 0.5F);
             GlStateManager.scale(scale, -scale, scale);
             GlStateManager.enable(GL11.GL_ALPHA_TEST);
             GlStateManager.disableCullFace();
             RenderUtil.rotate(tile);
-            this.mainModel.door.rotateAngleY = !tile.isOpen() ? 0 : -1.5F;
-            this.mainModel.render(tile);
+            ((ModelLocker) AliensVsPredator.resources().models().LOCKER.getModel()).door.rotateAngleY = !tile.isOpen() ? 0 : -1.5F;
+            AliensVsPredator.resources().models().LOCKER.draw(tile);
 
             if (tile != null)
             {

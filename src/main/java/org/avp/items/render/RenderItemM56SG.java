@@ -1,37 +1,26 @@
 package org.avp.items.render;
 
-import static com.arisux.airi.lib.RenderUtil.bindTexture;
+import static com.arisux.airi.lib.RenderUtil.downloadResource;
 
 import org.avp.AliensVsPredator;
 import org.avp.URLs;
-import org.avp.items.model.ModelM56SG;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.AccessWrapper;
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
-import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.airi.lib.client.PlayerResource;
+import com.arisux.airi.lib.client.Texture;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 
 public class RenderItemM56SG extends ItemRenderer
 {
-    public static final ResourceLocation resourceLocation = AliensVsPredator.resources().M56SG;
-    public static final ModelBaseWrapper model = new ModelM56SG();
-
     public RenderItemM56SG()
     {
-        super(model, resourceLocation);
-    }
-
-    @Override
-    public ModelM56SG getModel()
-    {
-        return (ModelM56SG) super.getModel();
+        super(AliensVsPredator.resources().models().M56SG);
     }
 
     @Override
@@ -47,16 +36,12 @@ public class RenderItemM56SG extends ItemRenderer
         GlStateManager.translate(-0.1F, 0.5F, -0.5F);
         GlStateManager.scale(1F, -1F, 1F);
         GlStateManager.disable(GL11.GL_CULL_FACE);
-        bindTexture(getResourceLocation());
-        this.getModel().render();
+        this.getModelTexMap().draw();
     }
 
     @Override
     public void renderFirstPerson(ItemStack item, Object... data)
     {
-        this.resource = RenderUtil.downloadResource(String.format(URLs.urlSkinM56sg, AccessWrapper.getSession().getPlayerID()), resourceLocation);
-        mc.renderEngine.bindTexture(getResourceLocation());
-
         if (firstPersonRenderCheck(data[1]))
         {
             GlStateManager.translate(0.1F, 0.15F, 0.2F);
@@ -65,7 +50,8 @@ public class RenderItemM56SG extends ItemRenderer
             GlStateManager.rotate(80.0F, 0.0F, 0.0F, 1.0F);
             GlStateManager.disable(GL11.GL_CULL_FACE);
             GlStateManager.scale(2.0F, 2.0F, 2.0F);
-            this.getModel().render();
+            new Texture(downloadResource(String.format(URLs.urlSkinM56sg, AccessWrapper.getSession().getPlayerID()), this.getModelTexMap().getTexture())).bindTexture();
+            this.getModelTexMap().getModel().render();
         }
     }
 
@@ -73,7 +59,6 @@ public class RenderItemM56SG extends ItemRenderer
     public void renderThirdPerson(ItemStack item, Object... data)
     {
         PlayerResource player = resourceManager.createPlayerResource(((EntityPlayer) data[1]).getCommandSenderName());
-        this.resource = RenderUtil.downloadResource(String.format(URLs.urlSkinM56sg, player.getUUID()), resourceLocation);
 
         if (player != null)
         {
@@ -82,22 +67,21 @@ public class RenderItemM56SG extends ItemRenderer
             GlStateManager.rotate(45.0F, 0.0F, 1.0F, 0.0F);
             GlStateManager.rotate(-93.0F, 0.0F, 0.0F, 1.0F);
             GlStateManager.scale(1.3F, 1.3F, 1.3F);
-            mc.renderEngine.bindTexture(RenderUtil.downloadResource(String.format(URLs.urlSkinM56sg, player.getUUID()), resourceLocation, false));
-            this.getModel().render();
+            new Texture (RenderUtil.downloadResource(String.format(URLs.urlSkinM56sg, player.getUUID()), this.getModelTexMap().getTexture())).bindTexture();;
+            this.getModelTexMap().getModel().render();
         }
     }
 
     @Override
     public void renderInInventory(ItemStack item, Object... data)
     {
-        this.resource = RenderUtil.downloadResource(String.format(URLs.urlSkinM56sg, AccessWrapper.getSession().getPlayerID()), resourceLocation);
         GlStateManager.disable(GL11.GL_CULL_FACE);
         GlStateManager.rotate(0F, 1.0F, 0.0F, 0.0F);
         GlStateManager.rotate(-40F, 0.0F, 1.0F, 0.0F);
         GlStateManager.rotate(0F, 0.0F, 0.0F, 1.0F);
         GlStateManager.translate(0F, 5.77F, -20.85F);
         GlStateManager.scale(20F, 20F, 20F);
-        mc.renderEngine.bindTexture(getResourceLocation());
-        this.getModel().render();
+        new Texture(downloadResource(String.format(URLs.urlSkinM56sg, AccessWrapper.getSession().getPlayerID()), this.getModelTexMap().getTexture())).bindTexture();
+        this.getModelTexMap().getModel().render();
     }
 }

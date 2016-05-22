@@ -2,11 +2,6 @@ package org.avp.util;
 
 import org.avp.AliensVsPredator;
 import org.avp.items.ItemFirearm;
-import org.avp.items.render.RenderItemAK47;
-import org.avp.items.render.RenderItemM4;
-import org.avp.items.render.RenderItemM41A;
-import org.avp.items.render.RenderItemM56SG;
-import org.avp.items.render.RenderItemSniper;
 
 import com.arisux.airi.lib.client.ModelTexMap;
 
@@ -60,15 +55,15 @@ public enum MarineTypes
         switch (this)
         {
             case M4:
-                return new ModelTexMap(RenderItemM4.model, RenderItemM4.resourceLocation);
+                return AliensVsPredator.resources().models().M4;
             case AK47:
-                return new ModelTexMap(RenderItemAK47.model, RenderItemAK47.resourceLocation);
+                return AliensVsPredator.resources().models().AK47;
             case M41A:
-                return new ModelTexMap(RenderItemM41A.model, RenderItemM41A.resourceLocation);
+                return AliensVsPredator.resources().models().M41A;
             case SNIPER:
-                return new ModelTexMap(RenderItemSniper.model, RenderItemSniper.resourceLocation);
+                return AliensVsPredator.resources().models().SNIPER;
             case M56SG:
-                return new ModelTexMap(RenderItemM56SG.model, RenderItemM56SG.resourceLocation);
+                return AliensVsPredator.resources().models().M56SG;
         }
 
         return null;

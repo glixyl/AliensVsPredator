@@ -1,12 +1,10 @@
 package org.avp.items.render;
 
 import org.avp.AliensVsPredator;
-import org.avp.entities.model.ModelSpear;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
-import com.arisux.airi.lib.RenderUtil;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
@@ -14,14 +12,10 @@ import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 
 public class RenderItemSpear implements IItemRenderer
 {
-    protected ModelSpear model = new ModelSpear();
-    protected static final ResourceLocation resourceLocation = AliensVsPredator.resources().SPEAR;
-
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type)
     {
@@ -58,13 +52,12 @@ public class RenderItemSpear implements IItemRenderer
                 GlStateManager.translate(-0.25F, 0.75F, 0.065F);
                 GlStateManager.scale(1F, 1F, 1F);
                 GlStateManager.enable(GL11.GL_CULL_FACE);
-                RenderUtil.bindTexture(resourceLocation);
                 if (Mouse.isButtonDown(1))
                 {
                     GlStateManager.rotate(90.0F, 0.0F, 0.0F, 1.0F);
                     GlStateManager.translate(0.25F, -0.2F, 0F);
                 }
-                this.model.render();
+                AliensVsPredator.resources().models().SPEAR.draw();
                 break;
 
             case EQUIPPED_FIRST_PERSON:
@@ -84,8 +77,7 @@ public class RenderItemSpear implements IItemRenderer
                 }
 
                 GlStateManager.scale(1.6F, 1.6F, 1.6F);
-                RenderUtil.bindTexture(resourceLocation);
-                this.model.render();
+                AliensVsPredator.resources().models().SPEAR.draw();
                 break;
 
             case INVENTORY:
@@ -95,8 +87,7 @@ public class RenderItemSpear implements IItemRenderer
                 GlStateManager.rotate(-45, 0.0F, 0.0F, 1.0F);
                 GlStateManager.translate(-6F, 5F, 0F);
                 GlStateManager.scale(7F, 7F, 7F);
-                RenderUtil.bindTexture(resourceLocation);
-                this.model.render();
+                AliensVsPredator.resources().models().SPEAR.draw();
                 break;
 
             default:

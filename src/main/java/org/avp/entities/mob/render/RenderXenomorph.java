@@ -19,18 +19,17 @@ import org.lwjgl.opengl.GL12;
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ModelTexMap;
+import com.arisux.airi.lib.client.RenderLivingWrapper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderXenomorph extends RenderLiving implements ICustomCryostasisRenderer
+public class RenderXenomorph extends RenderLivingWrapper implements ICustomCryostasisRenderer
 {
-    private ModelTexMap modelTexMap;
     private float renderScale;
 
     public RenderXenomorph(ModelTexMap modelTexMap)
@@ -40,14 +39,14 @@ public class RenderXenomorph extends RenderLiving implements ICustomCryostasisRe
 
     public RenderXenomorph(ModelTexMap modelTexMap, float renderScale)
     {
-        super(modelTexMap.getModel(), 0F);
-        this.modelTexMap = modelTexMap;
+        super(modelTexMap);
         this.renderScale = renderScale;
     }
 
     @Override
     protected void preRenderCallback(EntityLivingBase entity, float renderPartialTicks)
     {
+        this.renderScale = 1F;
         GlStateManager.scale(this.renderScale, this.renderScale, this.renderScale);
         super.preRenderCallback(entity, renderPartialTicks);
     }
@@ -55,7 +54,7 @@ public class RenderXenomorph extends RenderLiving implements ICustomCryostasisRe
     @Override
     public ResourceLocation getEntityTexture(Entity entity)
     {
-        return modelTexMap.getTexture();
+        return model.getTexture();
     }
 
     public RenderXenomorph setScale(float renderScale)
@@ -85,8 +84,7 @@ public class RenderXenomorph extends RenderLiving implements ICustomCryostasisRe
                 {
                     GlStateManager.scale(4, 3, 4);
                     GlStateManager.translate(0F, -0.75F, 0F);
-                    RenderUtil.bindTexture(AliensVsPredator.resources().CRYOSTASIS_TUBE);
-                    renderer.model.render();
+                    AliensVsPredator.resources().models().CRYOSTASIS_TUBE.draw();
                 }
                 GlStateManager.popMatrix();
             }
@@ -137,8 +135,20 @@ public class RenderXenomorph extends RenderLiving implements ICustomCryostasisRe
                 GlStateManager.disableCullFace();
                 GlStateManager.scale(4, 3, 4);
                 GlStateManager.translate(0F, -0.75F, 0F);
-                RenderUtil.bindTexture(tile.isShattered() ? AliensVsPredator.resources().CRYOSTASIS_TUBE_MASK_SHATTERED : tile.isCracked() ? AliensVsPredator.resources().CRYOSTASIS_TUBE_MASK_CRACKED : AliensVsPredator.resources().CRYOSTASIS_TUBE_MASK);
-                renderer.model.render();
+                
+                if (tile.isShattered())
+                {
+                    AliensVsPredator.resources().models().CRYOSTASIS_TUBE_MASK_SHATTERED.draw();
+                }
+                else if (tile.isCracked())
+                {
+                    AliensVsPredator.resources().models().CRYOSTASIS_TUBE_MASK_CRACKED.draw();
+                }
+                else
+                {
+                    AliensVsPredator.resources().models().CRYOSTASIS_TUBE_MASK.draw();
+                }
+                
                 GlStateManager.scale(0.5, 0.5, 0.5);
                 GlStateManager.enableLightMapping();
                 GlStateManager.enableLight();

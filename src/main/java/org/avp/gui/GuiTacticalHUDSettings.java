@@ -1,14 +1,13 @@
 package org.avp.gui;
 
-import com.arisux.airi.lib.GuiElements.GuiCustomButton;
-import com.arisux.airi.lib.GuiElements.GuiCustomScreen;
-import com.arisux.airi.lib.GuiElements.GuiCustomSlider;
-import com.arisux.airi.lib.GuiElements.GuiCustomTextbox;
-
 import org.avp.AliensVsPredator;
 import org.avp.entities.extended.ExtendedEntityPlayer;
 import org.avp.event.client.TacticalHUDRenderEvent;
 
+import com.arisux.airi.lib.GuiElements.GuiCustomButton;
+import com.arisux.airi.lib.GuiElements.GuiCustomScreen;
+import com.arisux.airi.lib.GuiElements.GuiCustomSlider;
+import com.arisux.airi.lib.GuiElements.GuiCustomTextbox;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ScaledResolution;
 import com.arisux.airi.lib.interfaces.IActionPerformed;

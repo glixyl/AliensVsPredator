@@ -1,7 +1,6 @@
 package org.avp.items.render;
 
 import org.avp.AliensVsPredator;
-import org.avp.entities.tile.model.ModelMedpod;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
@@ -13,7 +12,7 @@ public class RenderItemMedpod extends ItemRenderer
 {
     public RenderItemMedpod()
     {
-        super(new ModelMedpod(), AliensVsPredator.resources().MEDPOD);
+        super(AliensVsPredator.resources().models().MEDPOD);
     }
 
     @Override
@@ -30,16 +29,14 @@ public class RenderItemMedpod extends ItemRenderer
         GlStateManager.translate(0.4F, 1.75F, 0F);
         GlStateManager.disable(GL11.GL_CULL_FACE);
         GlStateManager.scale(glScale, -glScale, glScale);
-        this.getTexture().bindTexture();
-        this.getModel().render();
+        this.getModelTexMap().draw();
         
         GlStateManager.pushMatrix();
         {
             GlStateManager.enableAlphaTest();
             GlStateManager.disableLight();
             GlStateManager.disableLightMapping();
-            AliensVsPredator.resources().MEDPOD_MASK.bindTexture();
-            this.getModel().render();
+            AliensVsPredator.resources().models().MEDPOD_MASK.draw();
             GlStateManager.enableLight();
             GlStateManager.enableLightMapping();
         }
@@ -59,16 +56,14 @@ public class RenderItemMedpod extends ItemRenderer
             GlStateManager.rotate(79.0F, 0.0F, 0.0F, 1.0F);
             GlStateManager.disable(GL11.GL_CULL_FACE);
             GlStateManager.scale(glScale, glScale, glScale);
-            this.getTexture().bindTexture();
-            this.getModel().render();
+            this.getModelTexMap().draw();            
             
             GlStateManager.pushMatrix();
             {
                 GlStateManager.enableAlphaTest();
                 GlStateManager.disableLight();
                 GlStateManager.disableLightMapping();
-                AliensVsPredator.resources().MEDPOD_MASK.bindTexture();
-                this.getModel().render();
+                AliensVsPredator.resources().models().MEDPOD_MASK.draw();
                 GlStateManager.enableLight();
                 GlStateManager.enableLightMapping();
             }
@@ -87,16 +82,14 @@ public class RenderItemMedpod extends ItemRenderer
         GlStateManager.scale(glScale, glScale, glScale);
         GlStateManager.enable(GL11.GL_BLEND);
         GlStateManager.blendClear();
-        this.getTexture().bindTexture();
-        this.getModel().render();
+        this.getModelTexMap().draw();
         
         GlStateManager.pushMatrix();
         {
             GlStateManager.enableAlphaTest();
             GlStateManager.disableLight();
             GlStateManager.disableLightMapping();
-            AliensVsPredator.resources().MEDPOD_MASK.bindTexture();
-            this.getModel().render();
+            AliensVsPredator.resources().models().MEDPOD_MASK.draw();
             GlStateManager.enableLight();
             GlStateManager.enableLightMapping();
         }

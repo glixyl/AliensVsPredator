@@ -17,8 +17,6 @@ import net.minecraftforge.client.MinecraftForgeClient;
 
 public class RenderGunLocker extends TileEntitySpecialRenderer
 {
-    private ModelLocker mainModel = new ModelLocker();
-
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double posX, double posY, double posZ, float renderPartialTicks)
     {
@@ -33,9 +31,10 @@ public class RenderGunLocker extends TileEntitySpecialRenderer
             GlStateManager.enable(GL11.GL_ALPHA_TEST);
             GlStateManager.disableCullFace();
             RenderUtil.rotate(tile);
-            this.mainModel.door.rotateAngleY = !tile.isOpen() ? 0 : -1.5F;
-            this.bindTexture(AliensVsPredator.resources().GUN_LOCKER);
-            this.mainModel.render(tile);
+            
+            //TODO: Convert to K Generics
+            ((ModelLocker) AliensVsPredator.resources().models().GUN_LOCKER.getModel()).door.rotateAngleY = !tile.isOpen() ? 0 : -1.5F;
+            AliensVsPredator.resources().models().GUN_LOCKER.draw(tile);
 
             if (tile != null)
             {

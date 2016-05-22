@@ -3,16 +3,16 @@ package org.avp.items.render.parts;
 import org.avp.items.render.RenderItemFirearmPart;
 
 import com.arisux.airi.lib.GlStateManager;
+import com.arisux.airi.lib.client.ModelTexMap;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 
 public class RenderItemSniperStock extends RenderItemFirearmPart
 {
-    public RenderItemSniperStock(ResourceLocation resourceLocation, ModelRenderer... modelRenderers)
+    public RenderItemSniperStock(ModelTexMap model, ModelRenderer... modelRenderers)
     {
-        super(resourceLocation, modelRenderers);
+        super(model, modelRenderers);
     }
 
     @Override

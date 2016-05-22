@@ -1,21 +1,19 @@
 package org.avp.items.render;
 
-import org.avp.items.model.ModelM40;
+import org.avp.AliensVsPredator;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
-import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 
 public class RenderItemM40 extends ItemRenderer
 {
-    public RenderItemM40(ResourceLocation resourceLocation)
+    public RenderItemM40()
     {
-        super(new ModelM40(), resourceLocation);
+        super(AliensVsPredator.resources().models().M40GRENADE);
     }
 
     @Override
@@ -34,8 +32,7 @@ public class RenderItemM40 extends ItemRenderer
         GlStateManager.translate(0.4F, 0.1F, 0.2F);
         GlStateManager.disable(GL11.GL_CULL_FACE);
         GlStateManager.scale(glScale, -glScale, glScale);
-        RenderUtil.bindTexture(this.getResourceLocation());
-        ((ModelM40) this.getModel()).render();
+        this.getModelTexMap().draw();
     }
 
     @Override
@@ -51,8 +48,7 @@ public class RenderItemM40 extends ItemRenderer
             GlStateManager.rotate(79.0F, 0.0F, 0.0F, 1.0F);
             GlStateManager.disable(GL11.GL_CULL_FACE);
             GlStateManager.scale(glScale, glScale, glScale);
-            RenderUtil.bindTexture(this.getResourceLocation());
-            ((ModelM40) this.getModel()).render();
+            this.getModelTexMap().draw();
         }
     }
 
@@ -65,8 +61,7 @@ public class RenderItemM40 extends ItemRenderer
         GlStateManager.rotate(-180F, 0.0F, 1.0F, 0.0F);
         GlStateManager.disable(GL11.GL_CULL_FACE);
         GlStateManager.scale(glScale, glScale, glScale);
-        RenderUtil.bindTexture(this.getResourceLocation());
-        ((ModelM40) this.getModel()).render();
+        this.getModelTexMap().draw();
     }
 
     @Override
@@ -77,7 +72,6 @@ public class RenderItemM40 extends ItemRenderer
         GlStateManager.translate(0F, -0.5F, 0F);
         GlStateManager.rotate(Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 360 * 6, 0.0F, 1.0F, 0.0F);
         GlStateManager.disable(GL11.GL_CULL_FACE);
-        RenderUtil.bindTexture(this.getResourceLocation());
-        this.getModel().render();
+        this.getModelTexMap().draw();
     }
 }

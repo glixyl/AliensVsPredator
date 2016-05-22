@@ -587,7 +587,7 @@ public class ModelQueen extends ModelBaseWrapper
             {
                 ModelOvamorph ovamorph = new ModelOvamorph();
 
-                RenderUtil.bindTexture(AliensVsPredator.resources().OVAMORPH);
+                RenderUtil.bindTexture(AliensVsPredator.resources().models().OVAMORPH.getTexture());
                 ovamorph.render();
 
                 GlStateManager.pushMatrix();
@@ -597,15 +597,15 @@ public class ModelQueen extends ModelBaseWrapper
                     GlStateManager.enableBlend();
                     GlStateManager.disableCullFace();
                     GlStateManager.blendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_DST_COLOR);
-                    RenderUtil.bindTexture(AliensVsPredator.resources().XENOQUEEN_MASK);
-                    sack0.render(boxTranslation);
-                    sack7.render(boxTranslation);
-                    sack1.render(boxTranslation);
-                    sack2.render(boxTranslation);
-                    sack3.render(boxTranslation);
-                    sack4.render(boxTranslation);
-                    sack5.render(boxTranslation);
-                    sack6.render(boxTranslation);
+                    AliensVsPredator.resources().models().XENOQUEEN_MASK.getTexture().bindTexture();
+                    draw(sack0);
+                    draw(sack1);
+                    draw(sack2);
+                    draw(sack3);
+                    draw(sack4);
+                    draw(sack5);
+                    draw(sack6);
+                    draw(sack7);
                     GlStateManager.enableCullFace();
                     GlStateManager.blendClear();
                 }

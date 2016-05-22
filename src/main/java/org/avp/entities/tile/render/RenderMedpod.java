@@ -4,7 +4,6 @@ import static org.lwjgl.opengl.GL11.GL_BLEND;
 
 import org.avp.AliensVsPredator;
 import org.avp.entities.tile.TileEntityMedpod;
-import org.avp.entities.tile.model.ModelMedpod;
 
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
@@ -14,8 +13,6 @@ import net.minecraft.tileentity.TileEntity;
 
 public class RenderMedpod extends TileEntitySpecialRenderer
 {
-    private ModelMedpod mainModel = new ModelMedpod();
-
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double posX, double posY, double posZ, float renderPartialTicks)
     {
@@ -30,8 +27,7 @@ public class RenderMedpod extends TileEntitySpecialRenderer
             GlStateManager.scale(newScale, newScale, newScale);
             GlStateManager.disableCullFace();
             RenderUtil.rotateOpposite(tile);
-            this.bindTexture(AliensVsPredator.resources().MEDPOD);
-            this.mainModel.render(tileEntity);
+            AliensVsPredator.resources().models().MEDPOD.draw(tileEntity);
 
             GlStateManager.blendClear();
 
@@ -42,8 +38,7 @@ public class RenderMedpod extends TileEntitySpecialRenderer
             }
 
             GlStateManager.enableBlend();
-            this.bindTexture(AliensVsPredator.resources().MEDPOD_MASK);
-            this.mainModel.render(tileEntity);
+            AliensVsPredator.resources().models().MEDPOD_MASK.draw(tileEntity);
             GlStateManager.enableLight();
             GlStateManager.enableLightMapping();
             GlStateManager.disable(GL_BLEND);

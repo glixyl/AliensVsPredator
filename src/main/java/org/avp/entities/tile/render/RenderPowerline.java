@@ -5,7 +5,6 @@ import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
 
 import org.avp.AliensVsPredator;
 import org.avp.entities.tile.TileEntityPowerline;
-import org.avp.entities.tile.model.ModelCable;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
@@ -17,17 +16,14 @@ import net.minecraft.tileentity.TileEntity;
 
 public class RenderPowerline extends TileEntitySpecialRenderer
 {
-    private ModelCable model = new ModelCable();
-
     @Override
-    public void renderTileEntityAt(TileEntity var1, double posX, double posY, double posZ, float var8)
+    public void renderTileEntityAt(TileEntity te, double posX, double posY, double posZ, float renderPartialTicks)
     {
-        TileEntityPowerline tile = (TileEntityPowerline) var1;
+        TileEntityPowerline tile = (TileEntityPowerline) te;
 
         GlStateManager.pushMatrix();
         {
             GlStateManager.disable(GL_CULL_FACE);
-            this.bindTexture(AliensVsPredator.resources().CABLE);
             GlStateManager.disable(GL11.GL_TEXTURE_2D);
 
             GlStateManager.pushMatrix();
@@ -36,7 +32,7 @@ public class RenderPowerline extends TileEntitySpecialRenderer
                 GlStateManager.scale(1.0F, -1.0F, 1.0F);
                 GlStateManager.enable(GL_ALPHA_TEST);
                 GlStateManager.color4i(0xFF222222);
-                this.model.render(tile);
+                AliensVsPredator.resources().models().CABLE.draw(tile);
             }
             GlStateManager.popMatrix();
 

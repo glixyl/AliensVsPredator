@@ -1,12 +1,10 @@
 package org.avp.items.render;
 
-import static com.arisux.airi.lib.RenderUtil.bindTexture;
 import static com.arisux.airi.lib.RenderUtil.downloadResource;
 
 import org.avp.AliensVsPredator;
 import org.avp.URLs;
 import org.avp.items.ItemFirearm;
-import org.avp.items.model.ModelM41A;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
@@ -14,29 +12,21 @@ import com.arisux.airi.lib.AccessWrapper;
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
-import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.airi.lib.client.PlayerResource;
+import com.arisux.airi.lib.client.Texture;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 
 public class RenderItemM41A extends ItemRenderer
 {
-    public static final ResourceLocation resourceLocation = AliensVsPredator.resources().M41A;
-    public static final ModelBaseWrapper model = new ModelM41A();
     private RenderMotionTrackerScreen motionTracker = new RenderMotionTrackerScreen();
 
     public RenderItemM41A()
     {
-        super(model, resourceLocation);
+        super(AliensVsPredator.resources().models().M41A);
     }
 
-    @Override
-    public ModelM41A getModel()
-    {
-        return (ModelM41A) super.getModel();
-    }
 
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data)
@@ -51,15 +41,14 @@ public class RenderItemM41A extends ItemRenderer
         GlStateManager.translate(0.3F, 1F, 0F);
         GlStateManager.scale(1F, -1F, 1F);
         GlStateManager.disable(GL11.GL_CULL_FACE);
-        bindTexture(getResourceLocation());
-        this.getModel().render();
+        this.getModelTexMap().draw();
     }
 
     @Override
     public void renderThirdPerson(ItemStack item, Object... data)
     {
         PlayerResource player = resourceManager.createPlayerResource(((EntityPlayer) data[1]).getCommandSenderName());
-        this.resource = downloadResource(String.format(URLs.urlSkinM41a, player.getUUID()), resourceLocation);
+        float glScale = 1.3F;
 
         if (player != null)
         {
@@ -67,10 +56,9 @@ public class RenderItemM41A extends ItemRenderer
             GlStateManager.rotate(130.0F, 0.0F, 1.0F, 0.0F);
             GlStateManager.rotate(90.0F, 0.0F, 0.0F, 1.0F);
             GlStateManager.translate(0.28F, -0.77F, 0.85F);
-            float glScale = 1.3F;
             GlStateManager.scale(glScale, glScale, glScale);
-            bindTexture(getResourceLocation());
-            this.getModel().render();
+            new Texture(downloadResource(String.format(URLs.urlSkinM41a, player.getUUID()), this.getModelTexMap().getTexture())).bindTexture();
+            this.getModelTexMap().getModel().render();
         }
     }
 
@@ -82,8 +70,6 @@ public class RenderItemM41A extends ItemRenderer
 
         if (firstPersonRenderCheck(data[1]))
         {
-//            this.resource = downloadResource(String.format(URLs.urlSkinM41a, AccessWrapper.getSession().getPlayerID()), resourceLocation);
-
             if (Mouse.isButtonDown(0) && mc.inGameHasFocus)
             {
                 GlStateManager.translate(-0.1F, 1.44F, -0.595F);
@@ -102,8 +88,8 @@ public class RenderItemM41A extends ItemRenderer
 
             GlStateManager.disable(GL11.GL_CULL_FACE);
             GlStateManager.scale(glScale, glScale, glScale);
-            bindTexture(getResourceLocation());
-            this.getModel().render();
+            new Texture(downloadResource(String.format(URLs.urlSkinM41a, AccessWrapper.getSession().getPlayerID()), this.getModelTexMap().getTexture())).bindTexture();
+            this.getModelTexMap().getModel().render();
 
             if (mc.thePlayer.getCurrentEquippedItem() != null && mc.thePlayer.getCurrentEquippedItem().getItem() instanceof ItemFirearm)
             {
@@ -134,15 +120,14 @@ public class RenderItemM41A extends ItemRenderer
     @Override
     public void renderInInventory(ItemStack item, Object... data)
     {
-        this.resource = downloadResource(String.format(URLs.urlSkinM41a, AccessWrapper.getSession().getPlayerID()), resourceLocation);
         GlStateManager.rotate(0F, 1.0F, 0.0F, 0.0F);
         GlStateManager.rotate(-40F, 0.0F, 1.0F, 0.0F);
         GlStateManager.rotate(0F, 0.0F, 0.0F, 1.0F);
         GlStateManager.translate(0F, -5.77F, -20.85F);
         GlStateManager.scale(20F, 20F, 20F);
         GlStateManager.disable(GL11.GL_CULL_FACE);
-        bindTexture(getResourceLocation());
-        this.getModel().render();
+        new Texture(downloadResource(String.format(URLs.urlSkinM41a, AccessWrapper.getSession().getPlayerID()), this.getModelTexMap().getTexture())).bindTexture();
+        this.getModelTexMap().getModel().render();
     }
 
     public String getAmmoCountDisplayString()

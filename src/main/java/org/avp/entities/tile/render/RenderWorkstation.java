@@ -35,13 +35,12 @@ public class RenderWorkstation extends TileEntitySpecialRenderer
             GlStateManager.disable(GL_CULL_FACE);
             GlStateManager.enable(GL_BLEND);
             GlStateManager.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-            this.bindTexture(AliensVsPredator.resources().WORKSTATION);
             GlStateManager.translate(posX + 0.5F, posY + 1.5F, posZ + 0.5F);
             GlStateManager.rotate(tile.rotation * (-90F), 0F, 1F, 0F);
             GlStateManager.enable(GL12.GL_RESCALE_NORMAL);
             GlStateManager.scale(1.0F, -1.0F, 1.0F);
             GlStateManager.enable(GL_ALPHA_TEST);
-            this.model.render(tile);
+            AliensVsPredator.resources().models().WORKSTATION.draw(tile);
 
             if (tile.isOperational())
             {
@@ -49,14 +48,9 @@ public class RenderWorkstation extends TileEntitySpecialRenderer
                 GlStateManager.disableLight();
                 GlStateManager.enable(GL_BLEND);
                 GlStateManager.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-                this.bindTexture(AliensVsPredator.resources().WORKSTATION_MASK);
-                this.model.render(tile);
+                AliensVsPredator.resources().models().WORKSTATION_MASK.draw(tile);
 
                 this.renderDisplay(tile);
-
-                // GlStateManager.rotate(19.15F, 0F, 1F, 0F);
-                // GlStateManager.translate(0.88F, 0F, 0.149F);
-                // this.renderDisplay();
 
                 GlStateManager.disable(GL_BLEND);
                 GlStateManager.enableLight();
@@ -80,8 +74,8 @@ public class RenderWorkstation extends TileEntitySpecialRenderer
                 try
                 {
                     int linestart = 0;
-                    displayText[linestart++] = "OS: \u00A77" + SystemUtil.osName() + " (" + SystemUtil.osVersion() + ") " + SystemUtil.osArchitecture();
-                    displayText[linestart++] = "User:  \u00A77" + SystemUtils.USER_NAME;
+                    displayText[linestart++] = "OS: \u00A77 Cake OS 9001";
+                    displayText[linestart++] = "User:  \u00A77 Ri5ux was here.";
                     displayText[linestart++] = "Country:  \u00A77" + SystemUtils.USER_COUNTRY;
                     displayText[linestart++] = "Language:  \u00A77" + SystemUtils.USER_LANGUAGE;
                     displayText[linestart++] = "Java:  \u00A77" + SystemUtil.javaVersion();

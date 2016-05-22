@@ -1,25 +1,19 @@
 package org.avp.items.render;
 
 import org.avp.AliensVsPredator;
-import org.avp.entities.tile.model.ModelPowercell;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
-import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 
 public class RenderItemPowercell extends ItemRenderer
 {
-    public static final ResourceLocation resourceLocation = AliensVsPredator.resources().POWERCELL;
-    public static final ResourceLocation resourceLocationMask = AliensVsPredator.resources().POWERCELL_LIQUID;
-
     public RenderItemPowercell()
     {
-        super(new ModelPowercell(), resourceLocation);
+        super(AliensVsPredator.resources().models().POWERCELL);
     }
 
     @Override
@@ -38,11 +32,10 @@ public class RenderItemPowercell extends ItemRenderer
             GlStateManager.rotate(90F, 0F, 0F, 1F);
             GlStateManager.translate(0F, -1.3F, 0.4F);
             GlStateManager.disable(GL11.GL_CULL_FACE);
-            RenderUtil.bindTexture(resourceLocation);
-            this.getModel().render();
+            this.getModelTexMap().draw();
             GlStateManager.disableLight();
-            RenderUtil.bindTexture(resourceLocationMask);
-            this.getModel().render();
+            AliensVsPredator.resources().models().POWERCELL_LIQUID.draw();
+            
         }
         GlStateManager.popMatrix();
     }
@@ -59,11 +52,9 @@ public class RenderItemPowercell extends ItemRenderer
                 GlStateManager.translate(1.5F, -0.3F, 0.2F);
                 GlStateManager.rotate(45.0F, 0.0F, 0.0F, 1.0F);
                 GlStateManager.disable(GL11.GL_CULL_FACE);
-                RenderUtil.bindTexture(resourceLocation);
-                this.getModel().render();
+                this.getModelTexMap().draw();
                 GlStateManager.disableLight();
-                RenderUtil.bindTexture(resourceLocationMask);
-                this.getModel().render();
+                AliensVsPredator.resources().models().POWERCELL_LIQUID.draw();
             }
         }
         GlStateManager.popMatrix();
@@ -80,11 +71,9 @@ public class RenderItemPowercell extends ItemRenderer
             GlStateManager.rotate(30, 1.0F, 0.0F, 0.0F);
             GlStateManager.translate(0F, 0F, 0F);
             GlStateManager.disable(GL11.GL_CULL_FACE);
-            RenderUtil.bindTexture(resourceLocation);
-            this.getModel().render();
+            this.getModelTexMap().draw();
             GlStateManager.disableLight();
-            RenderUtil.bindTexture(resourceLocationMask);
-            this.getModel().render();
+            AliensVsPredator.resources().models().POWERCELL_LIQUID.draw();
             GlStateManager.enableLight();
         }
         GlStateManager.popMatrix();
@@ -98,11 +87,9 @@ public class RenderItemPowercell extends ItemRenderer
         {
             GlStateManager.rotate(Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 360 * 6, 0.0F, 1.0F, 0.0F);
             GlStateManager.disable(GL11.GL_CULL_FACE);
-            RenderUtil.bindTexture(resourceLocation);
-            this.getModel().render();
+            this.getModelTexMap().draw();
             GlStateManager.disableLight();
-            RenderUtil.bindTexture(resourceLocationMask);
-            this.getModel().render();
+            AliensVsPredator.resources().models().POWERCELL_LIQUID.draw();
             GlStateManager.enableLight();
         }
         GlStateManager.popMatrix();

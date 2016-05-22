@@ -1,11 +1,10 @@
 package org.avp;
 
-import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
-
 import org.avp.dimension.TeleporterLV;
 import org.avp.dimension.acheron.ProviderAcheron;
 import org.avp.dimension.varda.ProviderVarda;
 
+import com.arisux.airi.lib.WorldUtil.Blocks.CoordData;
 import com.arisux.airi.lib.WorldUtil.Entities;
 import com.arisux.airi.lib.interfaces.IInitializable;
 

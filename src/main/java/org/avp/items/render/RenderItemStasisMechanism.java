@@ -1,25 +1,18 @@
 package org.avp.items.render;
 
-import static com.arisux.airi.lib.RenderUtil.bindTexture;
-
 import org.avp.AliensVsPredator;
-import org.avp.entities.tile.model.ModelStasisMechanism;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
-import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 
 public class RenderItemStasisMechanism extends ItemRenderer
 {
-    public static final ResourceLocation resourceLocation = AliensVsPredator.resources().STASIS_MECHANISM;
-
     public RenderItemStasisMechanism()
     {
-        super(new ModelStasisMechanism(), resourceLocation);
+        super(AliensVsPredator.resources().models().STASIS_MECHANISM);
     }
 
     @Override
@@ -35,8 +28,7 @@ public class RenderItemStasisMechanism extends ItemRenderer
         GlStateManager.translate(-0.1F, 0.3F, 0F);
         GlStateManager.scale(1F, -1F, 1F);
         GlStateManager.disable(GL11.GL_CULL_FACE);
-        bindTexture(getResourceLocation());
-        this.getModel().render();
+        this.getModelTexMap().draw();
     }
 
     @Override
@@ -49,8 +41,7 @@ public class RenderItemStasisMechanism extends ItemRenderer
         GlStateManager.translate(0.4F, -0.5F, 0.7F);
         GlStateManager.disable(GL11.GL_CULL_FACE);
         GlStateManager.scale(glScale, -glScale, glScale);
-        RenderUtil.bindTexture(resourceLocation);
-        this.getModel().render();
+        this.getModelTexMap().draw();
     }
 
     @Override
@@ -66,8 +57,7 @@ public class RenderItemStasisMechanism extends ItemRenderer
             GlStateManager.rotate(79.0F, 0.0F, 0.0F, 1.0F);
             GlStateManager.disable(GL11.GL_CULL_FACE);
             GlStateManager.scale(glScale, glScale, glScale);
-            RenderUtil.bindTexture(resourceLocation);
-            this.getModel().render();
+            this.getModelTexMap().draw();
         }
     }
 
@@ -81,7 +71,6 @@ public class RenderItemStasisMechanism extends ItemRenderer
         GlStateManager.rotate(-180F, 0.0F, 1.0F, 0.0F);
         GlStateManager.disable(GL11.GL_CULL_FACE);
         GlStateManager.scale(glScale, glScale, glScale);
-        RenderUtil.bindTexture(resourceLocation);
-        this.getModel().render();
+        this.getModelTexMap().draw();
     }
 }

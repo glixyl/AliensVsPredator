@@ -2,22 +2,16 @@ package org.avp.entities.render;
 
 import org.avp.AliensVsPredator;
 import org.avp.entities.EntityGrenade;
-import org.avp.items.model.ModelM40;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
-import com.arisux.airi.lib.RenderUtil;
-import com.arisux.airi.lib.client.ModelBaseWrapper;
 
-import cpw.mods.fml.common.FMLLog;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderGrenade extends Render
 {
-    private ModelBaseWrapper model = new ModelM40();
-
     @Override
     public void doRender(Entity entity, double posX, double posY, double posZ, float yaw, float renderPartialTicks)
     {
@@ -29,13 +23,16 @@ public class RenderGrenade extends Render
         GlStateManager.rotate(180.0F, 1.0F, 0.0F, 0.0F);
         GlStateManager.translate(0.25F, 0.5F, 0.0F);
         GlStateManager.scale(0.75F, 0.75F, 0.75F);
-        FMLLog.getLogger().info(grenade.isFlaming());
+        
         if (!grenade.isFlaming())
-            RenderUtil.bindTexture(AliensVsPredator.resources().M40GRENADE);
+        {
+            AliensVsPredator.resources().models().M40GRENADE.draw();
+        }
         else
-            RenderUtil.bindTexture(AliensVsPredator.resources().M40GRENADE_INCENDIARY);
+        {
+            AliensVsPredator.resources().models().M40GRENADE_INCENDIARY.draw();
+        }
 
-        model.render();
         GL11.glColor3f(1.0F, 1.0F, 1.0F);
         GlStateManager.popMatrix();
     }

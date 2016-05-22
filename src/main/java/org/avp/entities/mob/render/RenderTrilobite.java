@@ -3,18 +3,15 @@ package org.avp.entities.mob.render;
 import org.avp.AliensVsPredator;
 
 import com.arisux.airi.lib.GlStateManager;
+import com.arisux.airi.lib.client.RenderLivingWrapper;
 
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.ResourceLocation;
 
-public class RenderTrilobite extends RenderLiving
+public class RenderTrilobite extends RenderLivingWrapper
 {
-    public RenderTrilobite(ModelBase modelbase, float shadowSize)
+    public RenderTrilobite()
     {
-        super(modelbase, shadowSize);
+        super(AliensVsPredator.resources().models().TRILOBITE);
     }
 
     @Override
@@ -24,11 +21,5 @@ public class RenderTrilobite extends RenderLiving
         float scale = 1.7F;
         GlStateManager.scale(scale, scale, scale);
         GlStateManager.translate(-0.2F, 0F, 0F);
-    }
-
-    @Override
-    public ResourceLocation getEntityTexture(Entity entity)
-    {
-        return AliensVsPredator.resources().TRILOBITE;
     }
 }

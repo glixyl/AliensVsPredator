@@ -216,7 +216,7 @@ public class RenderEntityInMedpodEvent
 
         protected void renderModel(EntityLivingBase living, float swingProgress, float swingProgressPrev, float idleProgress, float rotationYawHead, float rotationPitch, float boxTranslation)
         {
-            AccessWrapper.bindEntityTexture(this.renderer, living);
+            RenderUtil.bindTexture(AccessWrapper.getEntityTexture(this.renderer, living));
 
             if (!living.isInvisible())
             {

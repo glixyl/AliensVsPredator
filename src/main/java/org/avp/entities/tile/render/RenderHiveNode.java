@@ -1,31 +1,26 @@
 package org.avp.entities.tile.render;
 
 import org.avp.AliensVsPredator;
-import org.avp.entities.tile.model.ModelHiveNode;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import com.arisux.airi.lib.GlStateManager;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 
 public class RenderHiveNode extends TileEntitySpecialRenderer
 {
-    private ModelHiveNode mainModel = new ModelHiveNode();
-
     public void doRender(float posX, float posY, float posZ, float renderPartialTicks)
     {
         GlStateManager.pushMatrix();
         {
             GlStateManager.disable(GL11.GL_CULL_FACE);
-            this.bindTexture(AliensVsPredator.resources().HIVE_NODE);
             GlStateManager.translate(posX + 0.0F, posY + 1.2F, posZ + 0.0F);
             GlStateManager.enable(GL12.GL_RESCALE_NORMAL);
             GlStateManager.scale(-1.0F, -1.0F, 1.0F);
             GlStateManager.enable(GL11.GL_ALPHA_TEST);
-            this.mainModel.render((Entity) null, 0.0F, 0.0F, 0.0F, renderPartialTicks, 0.0F, 0.0625F);
+            AliensVsPredator.resources().models().HIVE_NODE.draw();
         }
         GlStateManager.popMatrix();
     }

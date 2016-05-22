@@ -2,24 +2,20 @@ package org.avp.entities.mob.render;
 
 import org.avp.AliensVsPredator;
 import org.avp.entities.mob.EntitySpitter;
-import org.avp.entities.mob.model.ModelSpitter;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
+import com.arisux.airi.lib.client.RenderLivingWrapper;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.ResourceLocation;
 
-public class RenderSpitter extends RenderLiving
+public class RenderSpitter extends RenderLivingWrapper
 {
-    public RenderSpitter(ModelBase modelbase, float shadowSize)
+    public RenderSpitter()
     {
-        super(modelbase, shadowSize);
-        this.setRenderPassModel(new ModelSpitter());
+        super(AliensVsPredator.resources().models().SPITTER);
+        this.setRenderPassModel(this.getModelTexMap().getModel());
     }
 
     @Override
@@ -34,12 +30,6 @@ public class RenderSpitter extends RenderLiving
         return this.setRenderPassModelBrightness((EntitySpitter) entityLivingBase, par2);
     }
 
-    @Override
-    public ResourceLocation getEntityTexture(Entity entity)
-    {
-        return AliensVsPredator.resources().SPITTER;
-    }
-
     protected int setRenderPassModelBrightness(EntitySpitter entity, int brightness)
     {
         if (brightness != 0)
@@ -48,7 +38,7 @@ public class RenderSpitter extends RenderLiving
         }
         else
         {
-            this.bindTexture(AliensVsPredator.resources().SPITTER_MASK);
+            AliensVsPredator.resources().models().SPITTER.getTexture().bindTexture();
             GlStateManager.enable(GL11.GL_BLEND);
             GlStateManager.blendFunc(GL11.GL_ONE, GL11.GL_ONE);
 

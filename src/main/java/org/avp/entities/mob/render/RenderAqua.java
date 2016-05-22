@@ -2,24 +2,20 @@ package org.avp.entities.mob.render;
 
 import org.avp.AliensVsPredator;
 import org.avp.entities.mob.EntityAqua;
-import org.avp.entities.mob.model.ModelAqua;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
+import com.arisux.airi.lib.client.RenderLivingWrapper;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.ResourceLocation;
 
-public class RenderAqua extends RenderLiving
+public class RenderAqua extends RenderLivingWrapper
 {
-    public RenderAqua(ModelBase mainModel, float shadowSize)
+    public RenderAqua()
     {
-        super(mainModel, shadowSize);
-        this.setRenderPassModel(new ModelAqua());
+        super(AliensVsPredator.resources().models().AQUA_XENOMORPH);
+        this.setRenderPassModel(this.getModelTexMap().getModel());
     }
 
     @Override
@@ -29,29 +25,23 @@ public class RenderAqua extends RenderLiving
     }
 
     @Override
-    protected int shouldRenderPass(EntityLivingBase par1EntityLivingBase, int par2, float par3)
+    protected int shouldRenderPass(EntityLivingBase living, int brightness, float partialTicks)
     {
-        return this.setRenderPassModelBrightness((EntityAqua) par1EntityLivingBase, par2);
+        return this.setRenderPassModelBrightness((EntityAqua) living, brightness);
     }
 
-    @Override
-    public ResourceLocation getEntityTexture(Entity par1Entity)
+    protected int setRenderPassModelBrightness(EntityAqua entity, int brightness)
     {
-        return AliensVsPredator.resources().AQUA_XENOMORPH;
-    }
-
-    protected int setRenderPassModelBrightness(EntityAqua par1EntityAqua, int par2)
-    {
-        if (par2 != 0)
+        if (brightness != 0)
         {
             return -1;
         }
         else
         {
-            this.bindTexture(AliensVsPredator.resources().AQUA_XENOMORPH_MASK);
+            AliensVsPredator.resources().models().AQUA_XENOMORPH_MASK.getTexture().bindTexture();
             float f1;
 
-            boolean isDay = (par1EntityAqua.worldObj.getWorldTime() % 24000L) / 1000L < 14L;
+            boolean isDay = (entity.worldObj.getWorldTime() % 24000L) / 1000L < 14L;
 
             if (!isDay)
             {
@@ -65,7 +55,7 @@ public class RenderAqua extends RenderLiving
             GlStateManager.enable(GL11.GL_BLEND);
             GlStateManager.blendFunc(GL11.GL_ONE, GL11.GL_ONE);
 
-            if (par1EntityAqua.isInvisible())
+            if (entity.isInvisible())
             {
                 GL11.glDepthMask(false);
             }

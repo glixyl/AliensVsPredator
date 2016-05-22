@@ -1,30 +1,23 @@
 package org.avp.items.render;
 
-import org.avp.items.model.ModelAK47;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
+import com.arisux.airi.lib.client.ModelTexMap;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 
 public abstract class RenderItemFirearmPart extends ItemRenderer
 {
     private ModelRenderer[] modelRenderers;
 
-    public RenderItemFirearmPart(ResourceLocation resourceLocation, ModelRenderer... modelRenderers)
+    public RenderItemFirearmPart(ModelTexMap model, ModelRenderer... modelRenderers)
     {
-        super(null, resourceLocation);
+        super(model);
         this.modelRenderers = modelRenderers;
-    }
-
-    @Override
-    public ModelAK47 getModel()
-    {
-        return null;
     }
 
     @Override
@@ -62,7 +55,7 @@ public abstract class RenderItemFirearmPart extends ItemRenderer
         GlStateManager.blendClear();
         GlStateManager.enable(GL11.GL_BLEND);
         GlStateManager.disable(GL11.GL_CULL_FACE);
-        RenderUtil.bindTexture(this.getResourceLocation());
+        this.getModelTexMap().getTexture().bindTexture();
 
         for (ModelRenderer renderer : modelRenderers)
         {

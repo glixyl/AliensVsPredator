@@ -15,18 +15,17 @@ import org.avp.event.client.RenderEntityInMedpodEvent;
 
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
+import com.arisux.airi.lib.client.ModelTexMap;
+import com.arisux.airi.lib.client.RenderLivingWrapper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.ResourceLocation;
 
-public class RenderFacehugger extends RenderLiving implements ICustomCryostasisRenderer
+public class RenderFacehugger extends RenderLivingWrapper implements ICustomCryostasisRenderer
 {
     public static ArrayList<FaceMountRenderer> mountRenderers = new ArrayList<FaceMountRenderer>();
 
@@ -55,11 +54,15 @@ public class RenderFacehugger extends RenderLiving implements ICustomCryostasisR
         public abstract void render(EntityFacehugger facehugger, float renderPartialTicks);
     }
 
-    public RenderFacehugger(ModelBase modelbase, float shadowSize)
+    public RenderFacehugger(ModelTexMap model)
     {
-        super(modelbase, shadowSize);
-
+        super(model);
         new VanillaFaceMountRenderers();
+    }
+
+    public RenderFacehugger()
+    {
+        this(AliensVsPredator.resources().models().FACEHUGGER);
     }
 
     @Override
@@ -127,12 +130,6 @@ public class RenderFacehugger extends RenderLiving implements ICustomCryostasisR
         }
 
         GlStateManager.scale(glScale, glScale, glScale);
-    }
-
-    @Override
-    public ResourceLocation getEntityTexture(Entity entity)
-    {
-        return AliensVsPredator.resources().FACEHUGGER;
     }
 
     @SideOnly(Side.CLIENT)

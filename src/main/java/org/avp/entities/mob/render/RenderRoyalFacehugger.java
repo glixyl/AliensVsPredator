@@ -5,16 +5,13 @@ import org.avp.entities.mob.EntityFacehugger;
 
 import com.arisux.airi.lib.GlStateManager;
 
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.ResourceLocation;
 
 public class RenderRoyalFacehugger extends RenderFacehugger
 {
-    public RenderRoyalFacehugger(ModelBase mainModel, float shadowSize)
+    public RenderRoyalFacehugger()
     {
-        super(mainModel, shadowSize);
+        super(AliensVsPredator.resources().models().ROYALFACEHUGGER);
     }
 
     @Override
@@ -30,11 +27,5 @@ public class RenderRoyalFacehugger extends RenderFacehugger
     protected void scale(EntityFacehugger facehugger, float glScale)
     {
         super.scale(facehugger, glScale);
-    }
-
-    @Override
-    public ResourceLocation getEntityTexture(Entity entity)
-    {
-        return AliensVsPredator.resources().ROYALFACEHUGGER;
     }
 }

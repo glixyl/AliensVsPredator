@@ -1,7 +1,6 @@
 package org.avp.items.render;
 
 import org.avp.AliensVsPredator;
-import org.avp.entities.tile.model.ModelSatelliteDish;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
@@ -13,7 +12,7 @@ public class RenderItemSatelliteDish extends ItemRenderer
 {
     public RenderItemSatelliteDish()
     {
-        super(new ModelSatelliteDish(), AliensVsPredator.resources().SATELLITE_DISH);
+        super(AliensVsPredator.resources().models().SATELLITE_DISH);
     }
 
     @Override
@@ -32,8 +31,7 @@ public class RenderItemSatelliteDish extends ItemRenderer
         GlStateManager.translate(0.4F, -0.1F, 0F);
         GlStateManager.disable(GL11.GL_CULL_FACE);
         GlStateManager.scale(glScale, -glScale, glScale);
-        this.getTexture().bindTexture();
-        this.getModel().render();
+        this.getModelTexMap().draw();
     }
 
     @Override
@@ -49,8 +47,7 @@ public class RenderItemSatelliteDish extends ItemRenderer
             GlStateManager.rotate(79.0F, 0.0F, 0.0F, 1.0F);
             GlStateManager.disable(GL11.GL_CULL_FACE);
             GlStateManager.scale(glScale, glScale, glScale);
-            this.getTexture().bindTexture();
-            this.getModel().render();
+            this.getModelTexMap().draw();
         }
     }
 
@@ -65,7 +62,6 @@ public class RenderItemSatelliteDish extends ItemRenderer
         GlStateManager.scale(glScale, glScale, glScale);
         GlStateManager.enable(GL11.GL_BLEND);
         GlStateManager.blendClear();
-        this.getTexture().bindTexture();
-        this.getModel().render();
+        this.getModelTexMap().draw();
     }
 }

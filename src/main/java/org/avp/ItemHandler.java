@@ -30,6 +30,7 @@ import org.avp.items.ItemArmorXeno;
 import org.avp.items.ItemDisc;
 import org.avp.items.ItemEntitySummoner;
 import org.avp.items.ItemFirearm;
+import org.avp.items.ItemFirearm.ItemAmmo;
 import org.avp.items.ItemGrenade;
 import org.avp.items.ItemIngotLithium;
 import org.avp.items.ItemLaserMine;
@@ -42,7 +43,6 @@ import org.avp.items.ItemSpear;
 import org.avp.items.ItemStorageDevice;
 import org.avp.items.ItemSupplyChute;
 import org.avp.items.ItemWristbracer;
-import org.avp.items.ItemFirearm.ItemAmmo;
 
 import com.arisux.airi.AIRI;
 import com.arisux.airi.lib.ItemTypes.HookedItem;

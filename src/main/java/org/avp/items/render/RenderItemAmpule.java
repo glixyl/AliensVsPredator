@@ -1,23 +1,18 @@
 package org.avp.items.render;
 
 import org.avp.AliensVsPredator;
-import org.avp.entities.tile.model.ModelAmpule;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
-import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
-import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 import net.minecraft.item.ItemStack;
 
 public class RenderItemAmpule extends ItemRenderer
 {
-    public static final ModelBaseWrapper model = new ModelAmpule();
-
     public RenderItemAmpule()
     {
-        super(model, AliensVsPredator.resources().AMPULE);
+        super(AliensVsPredator.resources().models().AMPULE);
     }
 
     @Override
@@ -31,9 +26,7 @@ public class RenderItemAmpule extends ItemRenderer
             GlStateManager.rotate(90F, 1F, 0F, 0F);
             GlStateManager.translate(0F, -0.5F, -0.9F);
             GlStateManager.disable(GL11.GL_CULL_FACE);
-            RenderUtil.bindTexture(getResourceLocation());
-            GlStateManager.disable(GL11.GL_CULL_FACE);
-            this.getModel().render();
+            this.getModelTexMap().draw();
         }
         GlStateManager.popMatrix();
     }
@@ -43,9 +36,8 @@ public class RenderItemAmpule extends ItemRenderer
     {
         GlStateManager.pushMatrix();
         {
-            RenderUtil.bindTexture(getResourceLocation());
             GlStateManager.disable(GL11.GL_CULL_FACE);
-            this.getModel().render();
+            this.getModelTexMap().draw();
         }
         GlStateManager.popMatrix();
     }
@@ -56,13 +48,12 @@ public class RenderItemAmpule extends ItemRenderer
         GlStateManager.pushMatrix();
         {
             float glScale = 10F;
-            RenderUtil.bindTexture(getResourceLocation());
             GlStateManager.disable(GL11.GL_CULL_FACE);
             GlStateManager.translate(8F, 1F, 0F);
             GlStateManager.rotate(0F, 1.0F, 0.0F, 0.0F);
             GlStateManager.scale(glScale, glScale, glScale);
             GlStateManager.enableLight();
-            this.getModel().render();
+            this.getModelTexMap().draw();
             GlStateManager.disableLight();
         }
         GlStateManager.popMatrix();

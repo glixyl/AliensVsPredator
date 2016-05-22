@@ -1,7 +1,6 @@
 package org.avp.entities.render;
 
 import org.avp.AliensVsPredator;
-import org.avp.entities.model.ModelSpear;
 import org.lwjgl.opengl.GL12;
 
 import com.arisux.airi.lib.GlStateManager;
@@ -12,8 +11,6 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderSpear extends Render
 {
-    private static final ModelSpear model = new ModelSpear();
-
     @Override
     public void doRender(Entity entity, double posX, double posY, double posZ, float rotationYaw, float renderPartialTicks)
     {
@@ -22,9 +19,7 @@ public class RenderSpear extends Render
             GlStateManager.translate((float) posX, (float) posY, (float) posZ);
             GlStateManager.rotate(entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * renderPartialTicks - 90.0F, 0.0F, 1.0F, 0.0F);
             GlStateManager.rotate(entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * renderPartialTicks, 0.0F, 0.0F, 1.0F);
-            this.bindTexture(this.getEntityTexture(entity));
-            model.render();
-
+            AliensVsPredator.resources().models().SPEAR.draw();
             GlStateManager.disable(GL12.GL_RESCALE_NORMAL);
         }
         GlStateManager.popMatrix();
@@ -33,6 +28,6 @@ public class RenderSpear extends Render
     @Override
     protected ResourceLocation getEntityTexture(Entity entity)
     {
-        return AliensVsPredator.resources().SPEAR;
+        return null;
     }
 }

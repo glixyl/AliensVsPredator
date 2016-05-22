@@ -45,8 +45,7 @@ public class RenderCryostasisTube extends TileEntitySpecialRenderer
             GlStateManager.scale(0.75F, -0.75F, 0.75F);
             GlStateManager.enable(GL_ALPHA_TEST);
             GlStateManager.disableCullFace();
-            renderer.bindTexture(AliensVsPredator.resources().CRYOSTASIS_TUBE);
-            renderer.model.render();
+            AliensVsPredator.resources().models().CRYOSTASIS_TUBE.draw();
             GlStateManager.enableCullFace();
         }
 
@@ -59,8 +58,20 @@ public class RenderCryostasisTube extends TileEntitySpecialRenderer
             }
 
             GlStateManager.enableCullFace();
-            renderer.bindTexture(tile.isShattered() ? AliensVsPredator.resources().CRYOSTASIS_TUBE_MASK_SHATTERED : tile.isCracked() ? AliensVsPredator.resources().CRYOSTASIS_TUBE_MASK_CRACKED : AliensVsPredator.resources().CRYOSTASIS_TUBE_MASK);
-            renderer.model.render();
+            
+            if (tile.isShattered())
+            {
+                AliensVsPredator.resources().models().CRYOSTASIS_TUBE_MASK_SHATTERED.draw();
+            }
+            else if (tile.isCracked())
+            {
+                AliensVsPredator.resources().models().CRYOSTASIS_TUBE_MASK_CRACKED.draw();
+            }
+            else
+            {
+                AliensVsPredator.resources().models().CRYOSTASIS_TUBE_MASK.draw();
+            }
+            
             GlStateManager.enableLightMapping();
             GlStateManager.enableLight();
             GlStateManager.enableDepthTest();

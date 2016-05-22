@@ -188,12 +188,7 @@ public class RenderMotionTrackerScreen
     {
         return (int) (this.mc.thePlayer.posZ < 0.0D ? this.mc.thePlayer.posZ - 1.0D : this.mc.thePlayer.posZ);
     }
-
-    private int yCoord()
-    {
-        return (int) this.mc.thePlayer.posY;
-    }
-
+    
     public boolean isMoving(Entity entity)
     {
         return entity.lastTickPosX != entity.posX || entity.lastTickPosY != entity.posY || entity.lastTickPosZ != entity.posZ;

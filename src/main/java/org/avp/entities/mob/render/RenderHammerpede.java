@@ -3,18 +3,15 @@ package org.avp.entities.mob.render;
 import org.avp.AliensVsPredator;
 
 import com.arisux.airi.lib.GlStateManager;
+import com.arisux.airi.lib.client.RenderLivingWrapper;
 
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.ResourceLocation;
 
-public class RenderHammerpede extends RenderLiving
+public class RenderHammerpede extends RenderLivingWrapper
 {
-    public RenderHammerpede(ModelBase modelbase, float shadowSize)
+    public RenderHammerpede()
     {
-        super(modelbase, shadowSize);
+        super(AliensVsPredator.resources().models().HAMMERPEDE);
     }
 
     @Override
@@ -22,11 +19,5 @@ public class RenderHammerpede extends RenderLiving
     {
         super.preRenderCallback(entitylivingBase, shadowSize);
         GlStateManager.scale(0.65F, 0.65F, 0.65F);
-    }
-
-    @Override
-    public ResourceLocation getEntityTexture(Entity entity)
-    {
-        return AliensVsPredator.resources().HAMMERPEDE;
     }
 }

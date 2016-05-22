@@ -1,20 +1,18 @@
 package org.avp.entities.mob.render;
 
 import org.avp.AliensVsPredator;
-import org.avp.entities.mob.model.ModelQueen;
 
 import com.arisux.airi.lib.GlStateManager;
+import com.arisux.airi.lib.client.RenderLivingWrapper;
 
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.ResourceLocation;
 
-public class RenderQueen extends RenderLiving
+public class RenderQueen extends RenderLivingWrapper
 {
-    public RenderQueen(ModelQueen modelxenoqueen, float shadowSize)
+    public RenderQueen()
     {
-        super(new ModelQueen(), shadowSize);
+        super(AliensVsPredator.resources().models().XENOQUEEN);
     }
 
     @Override
@@ -24,14 +22,8 @@ public class RenderQueen extends RenderLiving
     }
 
     @Override
-    protected void preRenderCallback(EntityLivingBase entityliving, float f)
+    protected void preRenderCallback(EntityLivingBase entityliving, float partialTicks)
     {
         GlStateManager.scale(1.75F, 1.75F, 1.75F);
-    }
-
-    @Override
-    public ResourceLocation getEntityTexture(Entity entity)
-    {
-        return AliensVsPredator.resources().XENOQUEEN;
     }
 }

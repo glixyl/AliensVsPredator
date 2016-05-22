@@ -2,11 +2,9 @@ package org.avp.entities.tile.render;
 
 import org.avp.AliensVsPredator;
 import org.avp.entities.tile.TileEntityTransformer;
-import org.avp.entities.tile.model.ModelTransformer;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
-import com.arisux.airi.lib.RenderUtil;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
@@ -14,8 +12,6 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class RenderTransformer extends TileEntitySpecialRenderer
 {
-    public static ModelTransformer model = new ModelTransformer();
-
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double posX, double posY, double posZ, float renderPartialTicks)
     {
@@ -50,8 +46,7 @@ public class RenderTransformer extends TileEntitySpecialRenderer
                     GlStateManager.rotate(0F, 0F, 1F, 0F);
                 }
 
-                RenderUtil.bindTexture(AliensVsPredator.resources().TRANSFORMER);
-                model.render();
+                AliensVsPredator.resources().models().TRANSFORMER.draw();
             }
             GlStateManager.popMatrix();
         }

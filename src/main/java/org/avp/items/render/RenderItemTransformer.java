@@ -1,11 +1,9 @@
 package org.avp.items.render;
 
 import org.avp.AliensVsPredator;
-import org.avp.entities.tile.model.ModelTransformer;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
-import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
 
 import net.minecraft.client.Minecraft;
@@ -15,7 +13,7 @@ public class RenderItemTransformer extends ItemRenderer
 {
     public RenderItemTransformer()
     {
-        super(new ModelTransformer(), AliensVsPredator.resources().TRANSFORMER);
+        super(AliensVsPredator.resources().models().TRANSFORMER);
     }
 
     @Override
@@ -34,8 +32,7 @@ public class RenderItemTransformer extends ItemRenderer
             GlStateManager.rotate(90F, 0F, 0F, 1F);
             GlStateManager.translate(0F, -1.3F, 0.4F);
             GlStateManager.disable(GL11.GL_CULL_FACE);
-            RenderUtil.bindTexture(this.getResourceLocation());
-            this.getModel().render();
+            this.getModelTexMap().draw();
         }
         GlStateManager.popMatrix();
     }
@@ -52,8 +49,7 @@ public class RenderItemTransformer extends ItemRenderer
                 GlStateManager.translate(0F, -1.6F, 0.2F);
                 GlStateManager.rotate(-45.0F, 0.0F, 0.0F, 1.0F);
                 GlStateManager.disable(GL11.GL_CULL_FACE);
-                RenderUtil.bindTexture(this.getResourceLocation());
-                this.getModel().render();
+                this.getModelTexMap().draw();
             }
         }
         GlStateManager.popMatrix();
@@ -71,8 +67,7 @@ public class RenderItemTransformer extends ItemRenderer
             GlStateManager.translate(0F, 0F, 0F);
             GlStateManager.disable(GL11.GL_CULL_FACE);
             GlStateManager.enable(GL11.GL_BLEND);
-            RenderUtil.bindTexture(this.getResourceLocation());
-            this.getModel().render();
+            this.getModelTexMap().draw();
         }
         GlStateManager.popMatrix();
     }
@@ -85,8 +80,7 @@ public class RenderItemTransformer extends ItemRenderer
         {
             GlStateManager.rotate(Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 360 * 6, 0.0F, 1.0F, 0.0F);
             GlStateManager.disable(GL11.GL_CULL_FACE);
-            RenderUtil.bindTexture(this.getResourceLocation());
-            this.getModel().render();
+            this.getModelTexMap().draw();
             GlStateManager.enableLight();
         }
         GlStateManager.popMatrix();

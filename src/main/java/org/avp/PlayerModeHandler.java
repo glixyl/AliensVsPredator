@@ -1,14 +1,6 @@
 package org.avp;
 
 import org.avp.entities.extended.ExtendedEntityPlayer;
-import org.avp.entities.mob.model.ModelChestburster;
-import org.avp.entities.mob.model.ModelDrone;
-import org.avp.entities.mob.model.ModelFacehugger;
-import org.avp.entities.mob.model.ModelOvamorph;
-import org.avp.entities.mob.model.ModelPraetorian;
-import org.avp.entities.mob.model.ModelQueen;
-import org.avp.entities.mob.model.ModelWarrior;
-import org.avp.entities.mob.model.ModelYautja;
 import org.avp.util.LevelData;
 import org.avp.util.PlayerMode;
 
@@ -53,15 +45,15 @@ public class PlayerModeHandler implements IInitializable
         modelBiped.isChild = false;
 
         PlayerMode.NORMAL.getLevelMappingForLevel(0).setModelTexMap(new ModelTexMap(modelBiped, AbstractClientPlayer.locationStevePng));
-        PlayerMode.MARINE.getLevelMappingForLevel(0).setModelTexMap(new ModelTexMap(modelBiped, AliensVsPredator.resources().MARINE));
-        PlayerMode.PREDATOR.getLevelMappingForLevel(0).setModelTexMap(new ModelTexMap(new ModelYautja(), AliensVsPredator.resources().YAUTJA));
-        PlayerMode.XENOMORPH.getLevelMappingForLevel(0).setModelTexMap(new ModelTexMap(new ModelOvamorph(), AliensVsPredator.resources().OVAMORPH));
-        PlayerMode.XENOMORPH.getLevelMappingForLevel(1).setModelTexMap(new ModelTexMap(new ModelFacehugger(), AliensVsPredator.resources().FACEHUGGER));
-        PlayerMode.XENOMORPH.getLevelMappingForLevel(10).setModelTexMap(new ModelTexMap(new ModelChestburster(), AliensVsPredator.resources().CHESTBUSTER));
-        PlayerMode.XENOMORPH.getLevelMappingForLevel(20).setModelTexMap(new ModelTexMap(new ModelDrone(), AliensVsPredator.resources().DRONE_ADVANCED_BLOOD));
-        PlayerMode.XENOMORPH.getLevelMappingForLevel(45).setModelTexMap(new ModelTexMap(new ModelWarrior(), AliensVsPredator.resources().WARRIOR_BLOOD));
-        PlayerMode.XENOMORPH.getLevelMappingForLevel(65).setModelTexMap(new ModelTexMap(new ModelPraetorian(), AliensVsPredator.resources().PRAETORIAN));
-        PlayerMode.XENOMORPH.getLevelMappingForLevel(90).setModelTexMap(new ModelTexMap(new ModelQueen(), AliensVsPredator.resources().XENOQUEEN));
+        PlayerMode.MARINE.getLevelMappingForLevel(0).setModelTexMap(AliensVsPredator.resources().models().MARINE);
+        PlayerMode.PREDATOR.getLevelMappingForLevel(0).setModelTexMap(AliensVsPredator.resources().models().YAUTJA);
+        PlayerMode.XENOMORPH.getLevelMappingForLevel(0).setModelTexMap(AliensVsPredator.resources().models().OVAMORPH);
+        PlayerMode.XENOMORPH.getLevelMappingForLevel(1).setModelTexMap(AliensVsPredator.resources().models().FACEHUGGER);
+        PlayerMode.XENOMORPH.getLevelMappingForLevel(10).setModelTexMap(AliensVsPredator.resources().models().CHESTBUSTER);
+        PlayerMode.XENOMORPH.getLevelMappingForLevel(20).setModelTexMap(AliensVsPredator.resources().models().DRONE_ADVANCED_BLOOD);
+        PlayerMode.XENOMORPH.getLevelMappingForLevel(45).setModelTexMap(AliensVsPredator.resources().models().WARRIOR_BLOOD);
+        PlayerMode.XENOMORPH.getLevelMappingForLevel(65).setModelTexMap(AliensVsPredator.resources().models().PRAETORIAN);
+        PlayerMode.XENOMORPH.getLevelMappingForLevel(90).setModelTexMap(AliensVsPredator.resources().models().XENOQUEEN);
     }
 
     @SubscribeEvent

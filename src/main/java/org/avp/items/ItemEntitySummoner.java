@@ -1,10 +1,9 @@
 package org.avp.items;
 
-import com.arisux.airi.lib.ItemTypes.HookedItem;
-
 import org.avp.AliensVsPredator;
 import org.avp.packets.server.PacketSpawnEntity;
 
+import com.arisux.airi.lib.ItemTypes.HookedItem;
 import com.arisux.airi.lib.WorldUtil;
 
 import net.minecraft.client.renderer.texture.IIconRegister;

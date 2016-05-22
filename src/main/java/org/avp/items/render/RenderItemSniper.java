@@ -1,7 +1,5 @@
 package org.avp.items.render;
 
-import static com.arisux.airi.lib.RenderUtil.bindTexture;
-
 import org.avp.AliensVsPredator;
 import org.avp.URLs;
 import org.avp.items.model.ModelSniper;
@@ -12,29 +10,26 @@ import com.arisux.airi.lib.AccessWrapper;
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
-import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.airi.lib.client.PlayerResource;
+import com.arisux.airi.lib.client.Texture;
 
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 
 public class RenderItemSniper extends ItemRenderer
 {
-    public static final ResourceLocation resourceLocation = AliensVsPredator.resources().SNIPER;
-    public static final ModelBaseWrapper model = new ModelSniper();
     private float defaultFOV = mc.gameSettings.getOptionFloatValue(GameSettings.Options.FOV);
 
     public RenderItemSniper()
     {
-        super(model, resourceLocation);
+        super(AliensVsPredator.resources().models().SNIPER);
     }
-
+    
     @Override
     public ModelSniper getModel()
     {
-        return (ModelSniper) super.getModel();
+        return (ModelSniper) this.getModelTexMap().getModel();
     }
 
     @Override
@@ -51,8 +46,7 @@ public class RenderItemSniper extends ItemRenderer
         GlStateManager.translate(-0.1F, 0.5F, 0F);
         GlStateManager.scale(1F, -1F, 1F);
         GlStateManager.disable(GL11.GL_CULL_FACE);
-        bindTexture(getResourceLocation());
-        this.getModel().render();
+        this.getModelTexMap().draw();
     }
 
     public void renderZoom()
@@ -82,11 +76,9 @@ public class RenderItemSniper extends ItemRenderer
     public void renderThirdPerson(ItemStack item, Object... data)
     {
         PlayerResource player = resourceManager.createPlayerResource(((EntityPlayer) data[1]).getCommandSenderName());
-        this.resource = RenderUtil.downloadResource(String.format(URLs.urlSkinSniper, player.getUUID()), resourceLocation);
 
         if (player != null)
         {
-            mc.renderEngine.bindTexture(RenderUtil.downloadResource(String.format(URLs.urlSkinSniper, player.getUUID()), resourceLocation, false));
             GlStateManager.translate(0.2F, 0.3F, -0.17F);
             GlStateManager.rotate(180.0F, 1.0F, 0.0F, 0.0F);
             GlStateManager.rotate(90.0F, 0.0F, 1.0F, 0.0F);
@@ -95,15 +87,14 @@ public class RenderItemSniper extends ItemRenderer
             GlStateManager.translate(0.1F, -0.0F, 0.8F);
             float glScale = 1.2F;
             GlStateManager.scale(glScale, glScale, glScale);
-            this.getModel().render();
+            new Texture(RenderUtil.downloadResource(String.format(URLs.urlSkinSniper, player.getUUID()), this.getModelTexMap().getTexture())).bindTexture();
+            this.getModelTexMap().getModel().render();
         }
     }
 
     @Override
     public void renderFirstPerson(ItemStack item, Object... data)
     {
-        this.resource = RenderUtil.downloadResource(String.format(URLs.urlSkinSniper, AccessWrapper.getSession().getPlayerID()), resourceLocation);
-
         if (firstPersonRenderCheck(data[1]))
         {
             if (Mouse.isButtonDown(0) && mc.inGameHasFocus)
@@ -125,7 +116,7 @@ public class RenderItemSniper extends ItemRenderer
                 GlStateManager.scale(2.2F, 2.2F, 2.2F);
             }
             GlStateManager.disable(GL11.GL_CULL_FACE);
-            mc.renderEngine.bindTexture(getResourceLocation());
+            new Texture(RenderUtil.downloadResource(String.format(URLs.urlSkinSniper, AccessWrapper.getSession().getPlayerID()), this.getModelTexMap().getTexture())).bindTexture();;
             this.getModel().render();
         }
     }
@@ -133,8 +124,6 @@ public class RenderItemSniper extends ItemRenderer
     @Override
     public void renderInInventory(ItemStack item, Object... data)
     {
-        this.resource = RenderUtil.downloadResource(String.format(URLs.urlSkinSniper, AccessWrapper.getSession().getPlayerID()), resourceLocation);
-        mc.renderEngine.bindTexture(getResourceLocation());
         GlStateManager.disable(GL11.GL_CULL_FACE);
         GlStateManager.rotate(0F, 1.0F, 0.0F, 0.0F);
         GlStateManager.rotate(-40F, 0.0F, 1.0F, 0.0F);
@@ -142,6 +131,7 @@ public class RenderItemSniper extends ItemRenderer
         GlStateManager.translate(0F, 5.77F, -10.85F);
         float glScale = 20F;
         GlStateManager.scale(glScale, glScale, glScale);
+        new Texture(RenderUtil.downloadResource(String.format(URLs.urlSkinSniper, AccessWrapper.getSession().getPlayerID()), this.getModelTexMap().getTexture())).bindTexture();;
         this.getModel().render();
     }
 }

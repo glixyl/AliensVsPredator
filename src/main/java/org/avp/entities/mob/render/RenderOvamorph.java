@@ -7,21 +7,18 @@ import org.avp.entities.tile.render.RenderCryostasisTube.CryostasisTubeRenderer;
 import org.avp.entities.tile.render.RenderCryostasisTube.ICustomCryostasisRenderer;
 
 import com.arisux.airi.lib.GlStateManager;
+import com.arisux.airi.lib.client.RenderLivingWrapper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.ResourceLocation;
 
-public class RenderOvamorph extends RenderLiving implements ICustomCryostasisRenderer
+public class RenderOvamorph extends RenderLivingWrapper implements ICustomCryostasisRenderer
 {
-    public RenderOvamorph(ModelBase mainModel, float shadowSize)
+    public RenderOvamorph()
     {
-        super(mainModel, shadowSize);
+        super(AliensVsPredator.resources().models().OVAMORPH);
     }
 
     @Override
@@ -29,12 +26,6 @@ public class RenderOvamorph extends RenderLiving implements ICustomCryostasisRen
     {
         super.preRenderCallback(entityLiving, partialTicks);
         GlStateManager.scale(1.75F, 1.75F, 1.75F);
-    }
-
-    @Override
-    public ResourceLocation getEntityTexture(Entity entity)
-    {
-        return AliensVsPredator.resources().OVAMORPH;
     }
 
     @SideOnly(Side.CLIENT)

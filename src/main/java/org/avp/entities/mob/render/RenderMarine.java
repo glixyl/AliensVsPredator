@@ -3,6 +3,7 @@ package org.avp.entities.mob.render;
 import org.avp.AliensVsPredator;
 import org.avp.entities.mob.EntityFacehugger;
 import org.avp.entities.mob.EntityMarine;
+import org.avp.entities.mob.model.ModelMarine;
 import org.avp.entities.mob.render.RenderFacehugger.FaceMountRenderer;
 import org.avp.entities.mob.render.RenderFacehugger.IFaceMountable;
 import org.lwjgl.opengl.GL11;
@@ -10,27 +11,26 @@ import org.lwjgl.opengl.GL11;
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ModelTexMap;
+import com.arisux.airi.lib.client.RenderLivingWrapper;
 
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.ResourceLocation;
 
-public class RenderMarine extends RenderLiving implements IFaceMountable
+public class RenderMarine extends RenderLivingWrapper implements IFaceMountable
 {
-    protected ModelBiped model;
-
-    public RenderMarine(ModelBiped mainModel, float shadowSize)
+    public RenderMarine()
     {
-        super(mainModel, shadowSize);
-        this.model = mainModel;
+        super(AliensVsPredator.resources().models().MARINE);
     }
 
     @Override
     protected void preRenderCallback(EntityLivingBase living, float partialTicks)
     {
         super.preRenderCallback(living, partialTicks);
+    }
+    
+    public ModelMarine getModel()
+    {
+        return (ModelMarine) this.getModelTexMap().getModel();
     }
 
     @Override
@@ -43,14 +43,14 @@ public class RenderMarine extends RenderLiving implements IFaceMountable
 
         GlStateManager.pushMatrix();
         {
-            this.model.bipedRightArm.postRender(RenderUtil.DEFAULT_BOX_TRANSLATION);
+            this.getModel().bipedRightArm.postRender(RenderUtil.DEFAULT_BOX_TRANSLATION);
             if (marine.isFiring())
             {
-                this.model.aimedBow = true;
+                this.getModel().aimedBow = true;
             }
             else
             {
-                this.model.aimedBow = false;
+                this.getModel().aimedBow = false;
             }
             GlStateManager.translate(-0.35F, 0.8F, -0.85F);
             GlStateManager.rotate(270.0F, 1.0F, 0.0F, 0.0F);
@@ -69,7 +69,7 @@ public class RenderMarine extends RenderLiving implements IFaceMountable
                     break;
                 case M56SG:
                     GlStateManager.translate(-0.15F, 0.7F, -0.73F);
-                    this.model.aimedBow = false;
+                    this.getModel().aimedBow = false;
                     break;
                 default:
                     break;
@@ -79,13 +79,7 @@ public class RenderMarine extends RenderLiving implements IFaceMountable
         }
         GlStateManager.popMatrix();
     }
-
-    @Override
-    protected ResourceLocation getEntityTexture(Entity entity)
-    {
-        return AliensVsPredator.resources().MARINE;
-    }
-
+    
     @Override
     public FaceMountRenderer getFaceMountRenderer()
     {

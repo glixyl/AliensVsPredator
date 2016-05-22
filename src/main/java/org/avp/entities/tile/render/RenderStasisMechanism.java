@@ -4,7 +4,6 @@ import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
 
 import org.avp.AliensVsPredator;
 import org.avp.entities.tile.TileEntityStasisMechanism;
-import org.avp.entities.tile.model.ModelStasisMechanism;
 
 import com.arisux.airi.lib.GlStateManager;
 
@@ -14,8 +13,6 @@ import net.minecraft.tileentity.TileEntity;
 
 public class RenderStasisMechanism extends TileEntitySpecialRenderer
 {
-    private ModelStasisMechanism model = new ModelStasisMechanism();
-
     @Override
     public void renderTileEntityAt(TileEntity te, double posX, double posY, double posZ, float renderPartialTicks)
     {
@@ -28,14 +25,12 @@ public class RenderStasisMechanism extends TileEntitySpecialRenderer
             GlStateManager.rotate(tile.getDirection() * (-90F), 0F, 1F, 0F);
             GlStateManager.scale(1.0F, -1.0F, 1.0F);
 
-            bindTexture(AliensVsPredator.resources().STASIS_MECHANISM);
-            this.model.render(tile);
+            AliensVsPredator.resources().models().STASIS_MECHANISM.draw(tile);
 
             if (Minecraft.getMinecraft().gameSettings.fancyGraphics)
             {
                 GlStateManager.disableLight();
-                bindTexture(AliensVsPredator.resources().STASIS_MECHANISM_MASK);
-                this.model.render(tile);
+                AliensVsPredator.resources().models().STASIS_MECHANISM_MASK.draw(tile);
                 GlStateManager.enableLight();
             }
         }

@@ -1,20 +1,15 @@
 package org.avp.entities.tile.render;
 
 import org.avp.AliensVsPredator;
-import org.avp.entities.tile.model.ModelSolarPanel;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
-import com.arisux.airi.lib.RenderUtil;
-import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 
 public class RenderSolarPanel extends TileEntitySpecialRenderer
 {
-    public static ModelBaseWrapper model = new ModelSolarPanel();
-
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double posX, double posY, double posZ, float renderPartialTicks)
     {
@@ -30,8 +25,7 @@ public class RenderSolarPanel extends TileEntitySpecialRenderer
                 GlStateManager.translate(0F, -1.4F, 0F);
             }
 
-            RenderUtil.bindTexture(AliensVsPredator.resources().SOLAR_PANEL);
-            model.render();
+            AliensVsPredator.resources().models().SOLAR_PANEL.draw();
         }
         GlStateManager.popMatrix();
     }

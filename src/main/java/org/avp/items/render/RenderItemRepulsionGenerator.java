@@ -1,23 +1,18 @@
 package org.avp.items.render;
 
 import org.avp.AliensVsPredator;
-import org.avp.entities.tile.model.ModelRepulsionGenerator;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
-import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 
 public class RenderItemRepulsionGenerator extends ItemRenderer
 {
-    public static final ResourceLocation resourceLocation = AliensVsPredator.resources().REPULSION_GENERATOR;
-
     public RenderItemRepulsionGenerator()
     {
-        super(new ModelRepulsionGenerator(), resourceLocation);
+        super(AliensVsPredator.resources().models().REPULSION_GENERATOR);
     }
 
     @Override
@@ -36,8 +31,7 @@ public class RenderItemRepulsionGenerator extends ItemRenderer
         GlStateManager.translate(0.4F, -0.1F, 0F);
         GlStateManager.disable(GL11.GL_CULL_FACE);
         GlStateManager.scale(glScale, -glScale, glScale);
-        RenderUtil.bindTexture(resourceLocation);
-        this.getModel().render();
+        this.getModelTexMap().draw();
     }
 
     @Override
@@ -53,8 +47,7 @@ public class RenderItemRepulsionGenerator extends ItemRenderer
             GlStateManager.rotate(79.0F, 0.0F, 0.0F, 1.0F);
             GlStateManager.disable(GL11.GL_CULL_FACE);
             GlStateManager.scale(glScale, glScale, glScale);
-            RenderUtil.bindTexture(resourceLocation);
-            this.getModel().render();
+            this.getModelTexMap().draw();
         }
     }
 
@@ -67,9 +60,8 @@ public class RenderItemRepulsionGenerator extends ItemRenderer
         GlStateManager.rotate(-180F, 0.0F, 1.0F, 0.0F);
         GlStateManager.disable(GL11.GL_CULL_FACE);
         GlStateManager.scale(glScale, glScale, glScale);
-        RenderUtil.bindTexture(resourceLocation);
         GlStateManager.enableLight();
-        this.getModel().render();
+        this.getModelTexMap().draw();
         GlStateManager.disableLight();
     }
 }

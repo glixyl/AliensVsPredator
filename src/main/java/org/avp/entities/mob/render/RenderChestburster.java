@@ -7,21 +7,18 @@ import org.avp.entities.tile.render.RenderCryostasisTube.CryostasisTubeRenderer;
 import org.avp.entities.tile.render.RenderCryostasisTube.ICustomCryostasisRenderer;
 
 import com.arisux.airi.lib.GlStateManager;
+import com.arisux.airi.lib.client.RenderLivingWrapper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.ResourceLocation;
 
-public class RenderChestburster extends RenderLiving implements ICustomCryostasisRenderer
+public class RenderChestburster extends RenderLivingWrapper implements ICustomCryostasisRenderer
 {
-    public RenderChestburster(ModelBase modelbase, float shadowSize)
+    public RenderChestburster()
     {
-        super(modelbase, shadowSize);
+        super(AliensVsPredator.resources().models().CHESTBUSTER);
     }
 
     @Override
@@ -29,12 +26,6 @@ public class RenderChestburster extends RenderLiving implements ICustomCryostasi
     {
         super.preRenderCallback(entitylivingBase, shadowSize);
         GlStateManager.scale(0.55F, 0.55F, 0.55F);
-    }
-
-    @Override
-    public ResourceLocation getEntityTexture(Entity entity)
-    {
-        return AliensVsPredator.resources().CHESTBUSTER;
     }
 
     @SideOnly(Side.CLIENT)

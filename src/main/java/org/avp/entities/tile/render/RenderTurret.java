@@ -2,7 +2,6 @@ package org.avp.entities.tile.render;
 
 import org.avp.AliensVsPredator;
 import org.avp.entities.tile.TileEntityTurret;
-import org.avp.entities.tile.model.ModelTurret;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
@@ -14,8 +13,6 @@ import net.minecraft.tileentity.TileEntity;
 
 public class RenderTurret extends TileEntitySpecialRenderer
 {
-    private ModelTurret model = new ModelTurret();
-
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double posX, double posY, double posZ, float renderPartialTicks)
     {
@@ -24,12 +21,11 @@ public class RenderTurret extends TileEntitySpecialRenderer
         GlStateManager.pushMatrix();
         {
             GlStateManager.disable(GL11.GL_CULL_FACE);
-            this.bindTexture(AliensVsPredator.resources().TURRET);
             GlStateManager.translate(posX + 0.5F, posY + 3.0F, posZ - 0.0F);
             GlStateManager.rotate(tile.getDirection() * (-90F), 0F, 1F, 0F);
 
             GlStateManager.scale(2F, -2F, 2F);
-            this.model.render(tile);
+            AliensVsPredator.resources().models().TURRET.draw(tile);
 
             if (tile.getVoltage() > 0)
             {

@@ -7,30 +7,27 @@ import org.avp.entities.mob.render.RenderFacehugger.FaceMountRenderer;
 import org.avp.entities.mob.render.RenderFacehugger.IFaceMountable;
 
 import com.arisux.airi.lib.GlStateManager;
+import com.arisux.airi.lib.client.ModelTexMap;
+import com.arisux.airi.lib.client.RenderLivingWrapper;
 
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.ResourceLocation;
 
-public class RenderYautja extends RenderLiving implements IFaceMountable
+public class RenderYautja extends RenderLivingWrapper implements IFaceMountable
 {
-    public RenderYautja(ModelBase mainModel, float shadowSize)
+    public RenderYautja(ModelTexMap model)
     {
-        super(mainModel, shadowSize);
+        super(model);
+    }
+    
+    public RenderYautja()
+    {
+        super(AliensVsPredator.resources().models().YAUTJA);
     }
 
     @Override
     protected void preRenderCallback(EntityLivingBase entityliving, float renderPartialTicks)
     {
         GlStateManager.scale(0.85F, 0.85F, 0.85F);
-    }
-
-    @Override
-    protected ResourceLocation getEntityTexture(Entity entity)
-    {
-        return AliensVsPredator.resources().YAUTJA;
     }
 
     @Override

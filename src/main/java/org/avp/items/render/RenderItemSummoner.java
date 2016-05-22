@@ -6,25 +6,35 @@ import org.avp.entities.mob.EntityXenomorph;
 import org.avp.entities.mob.EntityYautja;
 import org.lwjgl.opengl.GL11;
 
+import com.arisux.airi.lib.AccessWrapper;
 import com.arisux.airi.lib.GlStateManager;
-import com.arisux.airi.lib.RenderUtil;
+import com.arisux.airi.lib.WorldUtil.Entities;
 import com.arisux.airi.lib.client.ItemRenderer;
 import com.arisux.airi.lib.client.ModelBaseWrapper;
+import com.arisux.airi.lib.client.Texture;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.RendererLivingEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 
 public class RenderItemSummoner extends ItemRenderer
 {
-    private ResourceLocation resourceLocation;
-    private Class<?> entityClass;
-    private float scale, x, y, rotation;
+    private Class<? extends Entity> entityClass;
+    private float scale;
+    private float x;
+    private float y;
+    private float rotation;
+    private ModelBaseWrapper modelCache;
+    private Texture textureCache;
+    private Entity entityCache;
+    private Render renderCache;
 
-    public RenderItemSummoner(Class<? extends Entity> entityClass, Class<? extends ModelBaseWrapper> modelClass, ResourceLocation resourceLocation)
+    public RenderItemSummoner(Class<? extends Entity> entityClass)
     {
-        super(ModelBaseWrapper.createExtendedModelBase(modelClass), resourceLocation);
-        this.resourceLocation = resourceLocation;
+        super(null);
         this.entityClass = entityClass;
     }
 
@@ -54,6 +64,43 @@ public class RenderItemSummoner extends ItemRenderer
         GlStateManager.disable(GL11.GL_CULL_FACE);
         super.renderItem(type, item, data);
     }
+    
+    public void renderCachedModel()
+    {
+        if (entityCache == null)
+        {
+            entityCache = Entities.constructEntity(Minecraft.getMinecraft().theWorld, this.entityClass);
+        }
+        
+        if (renderCache == null)
+        {
+            renderCache = RenderManager.instance.getEntityRenderObject(entityCache);
+        }
+
+        if (renderCache instanceof RendererLivingEntity)
+        {
+            if (modelCache == null)
+            {
+                modelCache = new ModelBaseWrapper(AccessWrapper.getMainModel((RendererLivingEntity) renderCache));
+            }
+            
+            if (textureCache == null)
+            {
+                textureCache = new Texture(AccessWrapper.getEntityTexture(renderCache, entityCache));
+            }
+
+            GlStateManager.pushMatrix();
+            GlStateManager.enableLighting();
+            GlStateManager.scale(1F, -1F, 1F);
+            GlStateManager.translate(0F, -1F, 0F);
+            GlStateManager.rotate(180F, 0F, 1F, 0F);
+            GlStateManager.rotate(-45F, 0F, 1F, 0F);
+            renderCache.doRender(entityCache, 0F, 0F, 0F, 0F, 0F);
+            GlStateManager.disableLight();
+            GlStateManager.disableLighting();
+            GlStateManager.popMatrix();
+        }
+    }
 
     @Override
     public void renderThirdPerson(ItemStack item, Object... data)
@@ -64,8 +111,7 @@ public class RenderItemSummoner extends ItemRenderer
         GlStateManager.rotate(30F, 0.0F, 0.0F, 1.0F);
         GlStateManager.translate(-0.5F, 0F, 0F);
         GlStateManager.scale(scale, scale, scale);
-        RenderUtil.bindTexture(resourceLocation);
-        this.model.render();
+        this.renderCachedModel();
     }
 
     @Override
@@ -76,8 +122,7 @@ public class RenderItemSummoner extends ItemRenderer
         GlStateManager.rotate(30F, 0.0F, 0.0F, 1.0F);
         GlStateManager.translate(-25F, 0F + y, 20.85F);
         GlStateManager.scale(scale, scale, scale);
-        RenderUtil.bindTexture(resourceLocation);
-        this.model.render();
+        this.renderCachedModel();
     }
 
     @Override
@@ -91,8 +136,7 @@ public class RenderItemSummoner extends ItemRenderer
         GlStateManager.enable(GL11.GL_ALPHA_TEST);
         GlStateManager.enable(GL11.GL_BLEND);
         GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        RenderUtil.bindTexture(resourceLocation);
-        this.model.render();
+        this.renderCachedModel();
     }
 
     @Override
@@ -117,7 +161,6 @@ public class RenderItemSummoner extends ItemRenderer
             GlStateManager.translate(0F, -1.25F, 0F);
         }
 
-        RenderUtil.bindTexture(resourceLocation);
-        this.model.render();
+        this.renderCachedModel();
     }
 }

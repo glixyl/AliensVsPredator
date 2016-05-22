@@ -1,25 +1,21 @@
 package org.avp.items.render;
 
 import org.avp.AliensVsPredator;
-import org.avp.items.model.ModelMotionTracker;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
-import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 
 public class RenderItemMotionTracker extends ItemRenderer
 {
-    public static final ResourceLocation resourceLocation = AliensVsPredator.resources().MOTIONTRACKER;
     public RenderMotionTrackerScreen motionTracker = new RenderMotionTrackerScreen();
 
     public RenderItemMotionTracker()
     {
-        super(new ModelMotionTracker(), resourceLocation);
+        super(AliensVsPredator.resources().models().MOTIONTRACKER);
     }
 
     @Override
@@ -38,8 +34,7 @@ public class RenderItemMotionTracker extends ItemRenderer
         GlStateManager.translate(0.4F, -0.1F, 0F);
         GlStateManager.disable(GL11.GL_CULL_FACE);
         GlStateManager.scale(glScale, -glScale, glScale);
-        RenderUtil.bindTexture(resourceLocation);
-        this.getModel().render();
+        this.getModelTexMap().draw();
         this.drawDisplay();
     }
 
@@ -57,8 +52,7 @@ public class RenderItemMotionTracker extends ItemRenderer
             GlStateManager.translate(0.027F, 0F, 0F);
             GlStateManager.disable(GL11.GL_CULL_FACE);
             GlStateManager.scale(glScale, glScale, glScale);
-            RenderUtil.bindTexture(resourceLocation);
-            this.getModel().render();
+            this.getModelTexMap().draw();
             this.drawDisplay();
         }
     }
@@ -71,8 +65,7 @@ public class RenderItemMotionTracker extends ItemRenderer
         GlStateManager.translate(0F, 0F, -5F);
         GlStateManager.scale(glScale, glScale, glScale);
         GlStateManager.disable(GL11.GL_CULL_FACE);
-        RenderUtil.bindTexture(resourceLocation);
-        this.getModel().render();
+        this.getModelTexMap().draw();
     }
 
     private void drawDisplay()
@@ -95,7 +88,6 @@ public class RenderItemMotionTracker extends ItemRenderer
         super.renderInWorld(item, data);
         GlStateManager.rotate(Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % 360 * 6, 0.0F, 1.0F, 0.0F);
         GlStateManager.disable(GL11.GL_CULL_FACE);
-        RenderUtil.bindTexture(resourceLocation);
-        this.getModel().render();
+        this.getModelTexMap().draw();
     }
 }

@@ -1,24 +1,18 @@
 package org.avp.items.render;
 
 import org.avp.AliensVsPredator;
-import org.avp.entities.tile.model.ModelCryostasisTube;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
-import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 
 public class RenderItemCryostasisTube extends ItemRenderer
 {
-    public static final ResourceLocation resourceLocation = AliensVsPredator.resources().CRYOSTASIS_TUBE;
-    public static final ResourceLocation resourceLocationMask = AliensVsPredator.resources().CRYOSTASIS_TUBE_MASK;
-
     public RenderItemCryostasisTube()
     {
-        super(new ModelCryostasisTube(), resourceLocation);
+        super(AliensVsPredator.resources().models().CRYOSTASIS_TUBE);
     }
 
     @Override
@@ -37,14 +31,12 @@ public class RenderItemCryostasisTube extends ItemRenderer
         GlStateManager.translate(0.4F, -0.1F, 0F);
         GlStateManager.disable(GL11.GL_CULL_FACE);
         GlStateManager.scale(glScale, -glScale, glScale);
-        RenderUtil.bindTexture(resourceLocation);
-        ((ModelCryostasisTube) this.getModel()).render();
+        this.getModelTexMap().draw();
 
         GlStateManager.pushMatrix();
         {
             GlStateManager.disableLightMapping();
-            RenderUtil.bindTexture(resourceLocationMask);
-            ((ModelCryostasisTube) this.getModel()).render();
+            AliensVsPredator.resources().models().CRYOSTASIS_TUBE_MASK.draw();
         }
         GlStateManager.popMatrix();
     }
@@ -62,14 +54,12 @@ public class RenderItemCryostasisTube extends ItemRenderer
             GlStateManager.rotate(79.0F, 0.0F, 0.0F, 1.0F);
             GlStateManager.disable(GL11.GL_CULL_FACE);
             GlStateManager.scale(glScale, glScale, glScale);
-            RenderUtil.bindTexture(resourceLocation);
-            ((ModelCryostasisTube) this.getModel()).render();
+            this.getModelTexMap().draw();
 
             GlStateManager.pushMatrix();
             {
                 GlStateManager.disableLightMapping();
-                RenderUtil.bindTexture(resourceLocationMask);
-                ((ModelCryostasisTube) this.getModel()).render();
+                AliensVsPredator.resources().models().CRYOSTASIS_TUBE_MASK.draw();
             }
             GlStateManager.popMatrix();
         }
@@ -86,14 +76,12 @@ public class RenderItemCryostasisTube extends ItemRenderer
         GlStateManager.scale(glScale, glScale, glScale);
         GlStateManager.enable(GL11.GL_BLEND);
         GlStateManager.blendClear();
-        RenderUtil.bindTexture(resourceLocation);
-        ((ModelCryostasisTube) this.getModel()).render();
+        this.getModelTexMap().draw();
 
         GlStateManager.pushMatrix();
         {
             GlStateManager.blendClear();
-            RenderUtil.bindTexture(resourceLocationMask);
-            ((ModelCryostasisTube) this.getModel()).render();
+            AliensVsPredator.resources().models().CRYOSTASIS_TUBE_MASK.draw();
         }
         GlStateManager.popMatrix();
     }

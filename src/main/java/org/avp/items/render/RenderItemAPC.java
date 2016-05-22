@@ -14,7 +14,7 @@ public class RenderItemAPC extends ItemRenderer
 {
     public RenderItemAPC()
     {
-        super(null, null);
+        super(null);
     }
 
     @Override
