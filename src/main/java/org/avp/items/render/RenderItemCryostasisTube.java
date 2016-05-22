@@ -38,13 +38,13 @@ public class RenderItemCryostasisTube extends ItemRenderer
         GlStateManager.disable(GL11.GL_CULL_FACE);
         GlStateManager.scale(glScale, -glScale, glScale);
         RenderUtil.bindTexture(resourceLocation);
-        ((ModelCryostasisTube) this.getModel()).render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
+        ((ModelCryostasisTube) this.getModel()).render();
 
         GlStateManager.pushMatrix();
         {
             GlStateManager.disableLightMapping();
             RenderUtil.bindTexture(resourceLocationMask);
-            ((ModelCryostasisTube) this.getModel()).render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
+            ((ModelCryostasisTube) this.getModel()).render();
         }
         GlStateManager.popMatrix();
     }
@@ -63,13 +63,13 @@ public class RenderItemCryostasisTube extends ItemRenderer
             GlStateManager.disable(GL11.GL_CULL_FACE);
             GlStateManager.scale(glScale, glScale, glScale);
             RenderUtil.bindTexture(resourceLocation);
-            ((ModelCryostasisTube) this.getModel()).render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
+            ((ModelCryostasisTube) this.getModel()).render();
 
             GlStateManager.pushMatrix();
             {
                 GlStateManager.disableLightMapping();
                 RenderUtil.bindTexture(resourceLocationMask);
-                ((ModelCryostasisTube) this.getModel()).render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
+                ((ModelCryostasisTube) this.getModel()).render();
             }
             GlStateManager.popMatrix();
         }
@@ -87,13 +87,13 @@ public class RenderItemCryostasisTube extends ItemRenderer
         GlStateManager.enable(GL11.GL_BLEND);
         GlStateManager.blendClear();
         RenderUtil.bindTexture(resourceLocation);
-        ((ModelCryostasisTube) this.getModel()).render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
+        ((ModelCryostasisTube) this.getModel()).render();
 
         GlStateManager.pushMatrix();
         {
             GlStateManager.blendClear();
             RenderUtil.bindTexture(resourceLocationMask);
-            ((ModelCryostasisTube) this.getModel()).render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
+            ((ModelCryostasisTube) this.getModel()).render();
         }
         GlStateManager.popMatrix();
     }

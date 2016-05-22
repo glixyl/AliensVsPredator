@@ -65,7 +65,7 @@ public class RenderItemSummoner extends ItemRenderer
         GlStateManager.translate(-0.5F, 0F, 0F);
         GlStateManager.scale(scale, scale, scale);
         RenderUtil.bindTexture(resourceLocation);
-        this.model.render(null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, RenderUtil.DEFAULT_BOX_TRANSLATION);
+        this.model.render();
     }
 
     @Override
@@ -77,7 +77,7 @@ public class RenderItemSummoner extends ItemRenderer
         GlStateManager.translate(-25F, 0F + y, 20.85F);
         GlStateManager.scale(scale, scale, scale);
         RenderUtil.bindTexture(resourceLocation);
-        this.model.render(null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, RenderUtil.DEFAULT_BOX_TRANSLATION);
+        this.model.render();
     }
 
     @Override
@@ -92,7 +92,7 @@ public class RenderItemSummoner extends ItemRenderer
         GlStateManager.enable(GL11.GL_BLEND);
         GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         RenderUtil.bindTexture(resourceLocation);
-        this.model.render(null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, RenderUtil.DEFAULT_BOX_TRANSLATION);
+        this.model.render();
     }
 
     @Override
@@ -118,6 +118,6 @@ public class RenderItemSummoner extends ItemRenderer
         }
 
         RenderUtil.bindTexture(resourceLocation);
-        this.model.render(null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, RenderUtil.DEFAULT_BOX_TRANSLATION);
+        this.model.render();
     }
 }

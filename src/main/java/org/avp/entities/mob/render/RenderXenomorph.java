@@ -88,7 +88,7 @@ public class RenderXenomorph extends RenderLiving implements ICustomCryostasisRe
                     GlStateManager.scale(4, 3, 4);
                     GlStateManager.translate(0F, -0.75F, 0F);
                     RenderUtil.bindTexture(AliensVsPredator.resources().CRYOSTASIS_TUBE);
-                    renderer.model.render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
+                    renderer.model.render();
                 }
                 GlStateManager.popMatrix();
             }
@@ -140,7 +140,7 @@ public class RenderXenomorph extends RenderLiving implements ICustomCryostasisRe
                 GlStateManager.scale(4, 3, 4);
                 GlStateManager.translate(0F, -0.75F, 0F);
                 RenderUtil.bindTexture(tile.isShattered() ? AliensVsPredator.resources().CRYOSTASIS_TUBE_MASK_SHATTERED : tile.isCracked() ? AliensVsPredator.resources().CRYOSTASIS_TUBE_MASK_CRACKED : AliensVsPredator.resources().CRYOSTASIS_TUBE_MASK);
-                renderer.model.render(null, 0, 0, 0, 0, 0, RenderUtil.DEFAULT_BOX_TRANSLATION);
+                renderer.model.render();
                 GlStateManager.scale(0.5, 0.5, 0.5);
                 GlStateManager.enableLightMapping();
                 GlStateManager.enableLight();
