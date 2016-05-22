@@ -39,7 +39,7 @@ public class RenderMarine extends RenderLiving implements IFaceMountable
         super.renderEquippedItems(living, partialTicks);
 
         EntityMarine marine = (EntityMarine) living;
-        ModelTexMap map = marine.getMarineType().getFirearmModelTexMap();
+        ModelTexMap model = marine.getMarineType().getFirearmModelTexMap();
 
         GlStateManager.pushMatrix();
         {
@@ -75,8 +75,7 @@ public class RenderMarine extends RenderLiving implements IFaceMountable
                     break;
             }
 
-            bindTexture(map.asResourceLocation());
-            map.asModelWrapper().render();
+            model.draw();
         }
         GlStateManager.popMatrix();
     }

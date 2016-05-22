@@ -136,11 +136,11 @@ public class Resources implements IInitializablePre
     public final IconSet ICONSET_BLACK_GOO = new IconSet("avp:blackgoo.still", "avp:blackgoo.flowing", "avp:blackgoo.still");
     public final IconSet ICONSET_MIST = new IconSet("avp:mist.still", "avp:mist.flowing", "avp:mist.still");
 
-    public WavefrontModel M577_APC;
+    public WavefrontModel M577_APC = AIRI.wavefrontAPI().loadModel(AliensVsPredator.class, AliensVsPredator.ID, "m577apc", "/assets/avp/models/m577apc");
 
     @Override
     public void preInitialize(FMLPreInitializationEvent event)
     {
-        M577_APC = AIRI.wavefrontAPI().loadModel(AliensVsPredator.class, AliensVsPredator.ID, "m577apc", "/assets/avp/models/m577apc");
+//        M577_APC = ;
     }
 }

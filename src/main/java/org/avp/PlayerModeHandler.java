@@ -144,12 +144,12 @@ public class PlayerModeHandler implements IInitializable
     @SideOnly(Side.CLIENT)
     public ModelBase getModelForPlayer(EntityPlayer player)
     {
-        return getModelTexMapForPlayer(player).asModelBase();
+        return getModelTexMapForPlayer(player).getModel();
     }
 
     @SideOnly(Side.CLIENT)
     public ResourceLocation getResourceForPlayer(EntityPlayer player)
     {
-        return getModelTexMapForPlayer(player).asResourceLocation();
+        return getModelTexMapForPlayer(player).getTexture();
     }
 }

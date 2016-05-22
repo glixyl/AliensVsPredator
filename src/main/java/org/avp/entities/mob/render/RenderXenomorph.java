@@ -33,16 +33,14 @@ public class RenderXenomorph extends RenderLiving implements ICustomCryostasisRe
     private ModelTexMap modelTexMap;
     private float renderScale;
 
-    public RenderXenomorph(ModelTexMap modelTexMap, float shadowSize)
+    public RenderXenomorph(ModelTexMap modelTexMap)
     {
-        super(modelTexMap.asModelBase(), shadowSize);
-        this.modelTexMap = modelTexMap;
-        this.renderScale = 1F;
+        this(modelTexMap, 1F);
     }
 
-    public RenderXenomorph(ModelTexMap modelTexMap, float shadowSize, float renderScale)
+    public RenderXenomorph(ModelTexMap modelTexMap, float renderScale)
     {
-        super(modelTexMap.asModelBase(), shadowSize);
+        super(modelTexMap.getModel(), 0F);
         this.modelTexMap = modelTexMap;
         this.renderScale = renderScale;
     }
@@ -53,11 +51,11 @@ public class RenderXenomorph extends RenderLiving implements ICustomCryostasisRe
         GlStateManager.scale(this.renderScale, this.renderScale, this.renderScale);
         super.preRenderCallback(entity, renderPartialTicks);
     }
-
+    
     @Override
     public ResourceLocation getEntityTexture(Entity entity)
     {
-        return modelTexMap.asResourceLocation();
+        return modelTexMap.getTexture();
     }
 
     public RenderXenomorph setScale(float renderScale)
