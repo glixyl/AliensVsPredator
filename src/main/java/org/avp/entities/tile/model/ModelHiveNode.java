@@ -1,10 +1,10 @@
 package org.avp.entities.tile.model;
 
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 
-public class ModelHiveNode extends ModelBase
+import net.minecraft.client.model.ModelRenderer;
+
+public class ModelHiveNode extends ModelBaseWrapper
 {
     ModelRenderer node;
     ModelRenderer base0;
@@ -40,28 +40,14 @@ public class ModelHiveNode extends ModelBase
         this.base2.mirror = true;
         this.setRotation(this.base2, 0.0F, 0.0F, 0.0F);
     }
-
+    
     @Override
-    public void render(Entity entity, float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation)
+    protected void render(IRenderObject renderObject, float boxTranslation)
     {
-        super.render(entity, swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation);
-        this.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
+        super.render(renderObject, boxTranslation);
         this.node.render(boxTranslation);
         this.base0.render(boxTranslation);
         this.base1.render(boxTranslation);
         this.base2.render(boxTranslation);
-    }
-
-    private void setRotation(ModelRenderer model, float x, float y, float z)
-    {
-        model.rotateAngleX = x;
-        model.rotateAngleY = y;
-        model.rotateAngleZ = z;
-    }
-
-    @Override
-    public void setRotationAngles(float swingProgress, float swingProgressPrev, float idleProgress, float headYaw, float headPitch, float boxTranslation, Entity entity)
-    {
-        super.setRotationAngles(swingProgress, swingProgressPrev, idleProgress, headYaw, headPitch, boxTranslation, entity);
     }
 }

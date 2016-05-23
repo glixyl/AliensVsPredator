@@ -5,6 +5,7 @@ import org.avp.util.LevelData;
 import org.avp.util.PlayerMode;
 
 import com.arisux.airi.lib.WorldUtil.Entities.Players;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.airi.lib.client.ModelTexMap;
 import com.arisux.airi.lib.interfaces.IInitializable;
 
@@ -13,7 +14,6 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.player.EntityPlayer;
@@ -44,7 +44,7 @@ public class PlayerModeHandler implements IInitializable
         ModelBiped modelBiped = new ModelBiped();
         modelBiped.isChild = false;
 
-        PlayerMode.NORMAL.getLevelMappingForLevel(0).setModelTexMap(new ModelTexMap(modelBiped, AbstractClientPlayer.locationStevePng));
+        PlayerMode.NORMAL.getLevelMappingForLevel(0).setModelTexMap(AliensVsPredator.resources().models().BIPED);
         PlayerMode.MARINE.getLevelMappingForLevel(0).setModelTexMap(AliensVsPredator.resources().models().MARINE);
         PlayerMode.PREDATOR.getLevelMappingForLevel(0).setModelTexMap(AliensVsPredator.resources().models().YAUTJA);
         PlayerMode.XENOMORPH.getLevelMappingForLevel(0).setModelTexMap(AliensVsPredator.resources().models().OVAMORPH);
@@ -128,7 +128,7 @@ public class PlayerModeHandler implements IInitializable
     }
 
     @SideOnly(Side.CLIENT)
-    public ModelTexMap getModelTexMapForPlayer(EntityPlayer player)
+    public ModelTexMap<? extends ModelBaseWrapper> getModelTexMapForPlayer(EntityPlayer player)
     {
         return getLevelMappingForPlayer(player).getModelTexMap();
     }

@@ -1,5 +1,6 @@
 package org.avp.util;
 
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.airi.lib.client.ModelTexMap;
 
 import cpw.mods.fml.relauncher.Side;
@@ -13,7 +14,7 @@ public class LevelData
     private Achievement achievement;
 
     @SideOnly(Side.CLIENT)
-    private ModelTexMap modelTexMap;
+    private ModelTexMap<? extends ModelBaseWrapper> modelTexMap;
 
     public LevelData(int level)
     {
@@ -41,7 +42,7 @@ public class LevelData
         return level;
     }
 
-    public ModelTexMap getModelTexMap()
+    public ModelTexMap<? extends ModelBaseWrapper> getModelTexMap()
     {
         return modelTexMap;
     }
@@ -52,7 +53,7 @@ public class LevelData
     }
 
     @SideOnly(Side.CLIENT)
-    public LevelData setModelTexMap(ModelTexMap modelTexMap)
+    public LevelData setModelTexMap(ModelTexMap<? extends ModelBaseWrapper> modelTexMap)
     {
         this.modelTexMap = modelTexMap;
         return this;

@@ -18,6 +18,7 @@ public class RenderSupplyCrate extends TileEntitySpecialRenderer
     public void renderTileEntityAt(TileEntity tileEntity, double posX, double posY, double posZ, float renderPartialTicks)
     {
         TileEntitySupplyCrate tile = (TileEntitySupplyCrate) tileEntity;
+        
         GlStateManager.pushMatrix();
         {
             float scale = 1F;
@@ -28,7 +29,7 @@ public class RenderSupplyCrate extends TileEntitySpecialRenderer
             GlStateManager.enable(GL11.GL_ALPHA_TEST);
             GlStateManager.disableCullFace();
             RenderUtil.rotate(tile);
-            ModelSupplyChute chute = ((ModelSupplyChute) AliensVsPredator.resources().models().SUPPLY_CHUTE.getModel());
+            ModelSupplyChute chute = AliensVsPredator.resources().models().SUPPLY_CHUTE.getModel();
             AliensVsPredator.resources().models().SUPPLY_CHUTE.bindTexture();
             chute.draw(chute.casing);
             chute.draw(chute.lHinge);
