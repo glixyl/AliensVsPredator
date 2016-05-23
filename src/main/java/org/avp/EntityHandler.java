@@ -14,6 +14,7 @@ import org.avp.entities.EntityPlasma;
 import org.avp.entities.EntityShuriken;
 import org.avp.entities.EntitySmartDisc;
 import org.avp.entities.EntitySpear;
+import org.avp.entities.EntitySupplyChute;
 import org.avp.entities.EntityTurret;
 import org.avp.entities.mob.EntityAqua;
 import org.avp.entities.mob.EntityChestburster;
@@ -143,20 +144,21 @@ public class EntityHandler implements IInitializable
     {
         int entityId = 0;
 
-        EntityRegistry.registerModEntity(EntitySpear.class, "Spear", entityId++, AliensVsPredator.instance(), 250, 15, true);
-        EntityRegistry.registerModEntity(EntityLaserMine.class, "ProximityMine", entityId++, AliensVsPredator.instance(), 250, 5, true);
-        EntityRegistry.registerModEntity(EntityPlasma.class, "Plasma", entityId++, AliensVsPredator.instance(), 250, 15, true);
-        EntityRegistry.registerModEntity(EntityGrenade.class, "Grenade", entityId++, AliensVsPredator.instance(), 250, 15, true);
-        EntityRegistry.registerModEntity(EntityFlame.class, "Flamethrower", entityId++, AliensVsPredator.instance(), 250, 15, true);
-        EntityRegistry.registerModEntity(EntityAcidPool.class, "AcidPool", entityId++, AliensVsPredator.instance(), 250, 5, true);
-        EntityRegistry.registerModEntity(EntityAcidProjectile.class, "AcidSpit", entityId++, AliensVsPredator.instance(), 250, 5, true);
-        EntityRegistry.registerModEntity(EntitySmartDisc.class, "EntityDisc", entityId++, AliensVsPredator.instance(), 250, 15, true);
-        EntityRegistry.registerModEntity(EntityShuriken.class, "EntityShuriken", entityId++, AliensVsPredator.instance(), 250, 15, true);
-        EntityRegistry.registerModEntity(EntityTurret.class, "EntityTurret", entityId++, AliensVsPredator.instance(), 250, 5, true);
-        EntityRegistry.registerModEntity(EntityNuke.class, "Nuke", entityId++, AliensVsPredator.instance(), 250, 5, true);
-        EntityRegistry.registerModEntity(EntityAPC.class, "APC", entityId++, AliensVsPredator.instance(), 250, 15, true);
-        EntityRegistry.registerModEntity(EntityMechanism.class, "MECHANISM", entityId++, AliensVsPredator.instance(), 250, 15, true);
-        EntityRegistry.registerModEntity(EntityMedpod.class, "Medpod", entityId++, AliensVsPredator.instance(), 250, 5, true);
+        EntityRegistry.registerModEntity(EntitySpear.class, "Spear", entityId++, AliensVsPredator.instance(), 250, 4, true);
+        EntityRegistry.registerModEntity(EntityLaserMine.class, "ProximityMine", entityId++, AliensVsPredator.instance(), 250, 8, true);
+        EntityRegistry.registerModEntity(EntityPlasma.class, "Plasma", entityId++, AliensVsPredator.instance(), 250, 4, true);
+        EntityRegistry.registerModEntity(EntityGrenade.class, "Grenade", entityId++, AliensVsPredator.instance(), 250, 4, true);
+        EntityRegistry.registerModEntity(EntityFlame.class, "Flamethrower", entityId++, AliensVsPredator.instance(), 250, 4, true);
+        EntityRegistry.registerModEntity(EntityAcidPool.class, "AcidPool", entityId++, AliensVsPredator.instance(), 250, 16, true);
+        EntityRegistry.registerModEntity(EntityAcidProjectile.class, "AcidSpit", entityId++, AliensVsPredator.instance(), 250, 4, true);
+        EntityRegistry.registerModEntity(EntitySmartDisc.class, "EntityDisc", entityId++, AliensVsPredator.instance(), 250, 4, true);
+        EntityRegistry.registerModEntity(EntityShuriken.class, "EntityShuriken", entityId++, AliensVsPredator.instance(), 250, 4, true);
+        EntityRegistry.registerModEntity(EntityTurret.class, "EntityTurret", entityId++, AliensVsPredator.instance(), 250, 8, true);
+        EntityRegistry.registerModEntity(EntityNuke.class, "Nuke", entityId++, AliensVsPredator.instance(), 250, 4, true);
+        EntityRegistry.registerModEntity(EntityAPC.class, "APC", entityId++, AliensVsPredator.instance(), 250, 1, true);
+        EntityRegistry.registerModEntity(EntityMechanism.class, "MECHANISM", entityId++, AliensVsPredator.instance(), 250, 16, true);
+        EntityRegistry.registerModEntity(EntityMedpod.class, "Medpod", entityId++, AliensVsPredator.instance(), 250, 16, true);
+        EntityRegistry.registerModEntity(EntitySupplyChute.class, "SupplyChute", entityId++, AliensVsPredator.instance(), 250, 1, true);
     }
 
     private void registerSpawns()

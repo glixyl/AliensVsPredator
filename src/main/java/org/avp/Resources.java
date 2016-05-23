@@ -24,6 +24,7 @@ import org.avp.entities.mob.model.ModelYautja;
 import org.avp.entities.mob.model.ModelYautjaBerserker;
 import org.avp.entities.model.ModelBullet;
 import org.avp.entities.model.ModelSpear;
+import org.avp.entities.model.ModelSupplyChute;
 import org.avp.entities.tile.model.ModelAmpule;
 import org.avp.entities.tile.model.ModelBlastdoor;
 import org.avp.entities.tile.model.ModelCable;
@@ -147,6 +148,7 @@ public class Resources implements IInitializablePre
         public final ModelTexMap CRUSHER = new ModelTexMap(new ModelCrusher(), new Texture(AliensVsPredator.ID, "textures/mob/crusher.png"));
         public final ModelTexMap COMBAT_SYNTHETIC = new ModelTexMap(new ModelBiped(), new Texture(AliensVsPredator.ID, "textures/mob/combat_synthetic.png"));
         public final ModelTexMap HIVE_NODE = new ModelTexMap(new ModelHiveNode(), new Texture(AliensVsPredator.ID, "textures/tile/node.png"));
+        public final ModelTexMap SUPPLY_CHUTE = new ModelTexMap(new ModelSupplyChute(), new Texture(AliensVsPredator.ID, "textures/misc/supplychute.png"));
     }
     
     public final Texture SKY_RAIN = new Texture("textures/environment/rain.png");

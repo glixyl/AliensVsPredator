@@ -17,6 +17,7 @@ public class RenderSatelliteDish extends TileEntitySpecialRenderer
             GlStateManager.translate(posX, posY, posZ);
             GlStateManager.scale(1F, -1F, 1F);
             GlStateManager.translate(0.5F, -1.525F, 0.5F);
+            GlStateManager.disableCullFace();
             AliensVsPredator.resources().models().SATELLITE_DISH.draw(tileEntity);
         }
         GlStateManager.popMatrix();

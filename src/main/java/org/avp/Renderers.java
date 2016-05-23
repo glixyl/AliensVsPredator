@@ -20,6 +20,7 @@ import org.avp.entities.EntityPlasma;
 import org.avp.entities.EntityShuriken;
 import org.avp.entities.EntitySmartDisc;
 import org.avp.entities.EntitySpear;
+import org.avp.entities.EntitySupplyChute;
 import org.avp.entities.mob.EntityAqua;
 import org.avp.entities.mob.EntityChestburster;
 import org.avp.entities.mob.EntityCombatSynthetic;
@@ -75,6 +76,7 @@ import org.avp.entities.render.RenderNuke;
 import org.avp.entities.render.RenderPlasmaBlast;
 import org.avp.entities.render.RenderShuriken;
 import org.avp.entities.render.RenderSpear;
+import org.avp.entities.render.RenderSupplyChute;
 import org.avp.entities.tile.TileEntityAmpule;
 import org.avp.entities.tile.TileEntityAssembler;
 import org.avp.entities.tile.TileEntityBlastdoor;
@@ -244,6 +246,7 @@ public class Renderers implements IInitializablePost
         registerEntityRenderingHandler(EntityAPC.class, new RenderAPC());
         registerEntityRenderingHandler(EntityMechanism.class, new RenderMechanism());
         registerEntityRenderingHandler(EntityMedpod.class, new RenderMedpodEntity());
+        registerEntityRenderingHandler(EntitySupplyChute.class, new RenderSupplyChute());
     }
 
     public void registerItemRenderers(ItemHandler items)

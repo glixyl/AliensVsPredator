@@ -204,7 +204,7 @@ public class BlockHandler extends IBHandler implements IInitializable
         blockMist = (new BlockMist()),
         blockTransformer = (new BlockTransformer(Material.iron)).setHardness(5.0F).setResistance(10.0F),
         blockNegativeTransformer = (new BlockNegativeTransformer(Material.iron)).setHardness(5.0F).setResistance(10.0F),
-        blockSupplies = (new BlockSupplyCrate(Material.iron)),
+        blockSupplies = (new BlockSupplyCrate()),
         blockSolarPanel = (new BlockSolarPanel(Material.iron)).setHardness(5.0F).setResistance(10.0F),
         blockLocker = (new BlockLocker(Material.iron).setHardness(1.5F).setResistance(10.0F)),
         blockMedpod = (new BlockMedpod(Material.iron).setHardness(1.5F).setResistance(10.0F)),

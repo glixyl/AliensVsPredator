@@ -1,6 +1,9 @@
 package org.avp.block;
 
+import java.util.Random;
+
 import org.avp.AliensVsPredator;
+import org.avp.entities.EntitySupplyChute;
 
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
@@ -11,11 +14,12 @@ import net.minecraft.world.World;
 
 public class BlockSupplyCrate extends BlockFalling
 {
-    public BlockSupplyCrate(Material material)
+    public BlockSupplyCrate()
     {
-        super(material);
+        super(Material.iron);
     }
 
+    @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer playerIn, int side, float subX, float subY, float subZ)
     {
         InventoryPlayer inv = playerIn.inventory;
@@ -28,5 +32,44 @@ public class BlockSupplyCrate extends BlockFalling
         world.setBlockToAir(x, y, z);
 
         return true;
+    }
+    
+    @Override
+    public int tickRate(World world)
+    {
+        return 2;
+    }
+
+    @Override
+    public void updateTick(World world, int posX, int posY, int posZ, Random random)
+    {
+        if (!world.isRemote)
+        {
+            if (func_149831_e(world, posX, posY - 1, posZ) && posY >= 0)
+            {
+                byte b0 = 32;
+
+                if (!fallInstantly && world.checkChunksExist(posX - b0, posY - b0, posZ - b0, posX + b0, posY + b0, posZ + b0))
+                {
+                    EntitySupplyChute crate = new EntitySupplyChute(world, (double) ((float) posX + 0.5F), (double) ((float) posY + 0.5F), (double) ((float) posZ + 0.5F), this, world.getBlockMetadata(posX, posY, posZ));
+                    this.func_149829_a(crate);
+                    world.spawnEntityInWorld(crate);
+                }
+                else
+                {
+                    world.setBlockToAir(posX, posY, posZ);
+
+                    while (func_149831_e(world, posX, posY - 1, posZ) && posY > 0)
+                    {
+                        --posY;
+                    }
+
+                    if (posY > 0)
+                    {
+                        world.setBlock(posX, posY, posZ, this);
+                    }
+                }
+            }
+        }
     }
 }
