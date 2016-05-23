@@ -38,7 +38,7 @@ public class RenderSpitter extends RenderLivingWrapper
         }
         else
         {
-            AliensVsPredator.resources().models().SPITTER.getTexture().bindTexture();
+            AliensVsPredator.resources().models().SPITTER.getTexture().bind();
             GlStateManager.enable(GL11.GL_BLEND);
             GlStateManager.blendFunc(GL11.GL_ONE, GL11.GL_ONE);
 

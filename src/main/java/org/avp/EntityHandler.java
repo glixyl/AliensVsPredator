@@ -60,6 +60,7 @@ import org.avp.entities.tile.TileEntitySatelliteDish;
 import org.avp.entities.tile.TileEntitySatelliteModem;
 import org.avp.entities.tile.TileEntitySolarPanel;
 import org.avp.entities.tile.TileEntityStasisMechanism;
+import org.avp.entities.tile.TileEntitySupplyCrate;
 import org.avp.entities.tile.TileEntityTransformer;
 import org.avp.entities.tile.TileEntityTurret;
 import org.avp.entities.tile.TileEntityWorkstation;
@@ -110,6 +111,7 @@ public class EntityHandler implements IInitializable
         GameRegistry.registerTileEntity(TileEntityLocker.class, "tileEntityLocker");
         GameRegistry.registerTileEntity(TileEntityGunLocker.class, "tileEntityGunLocker");
         GameRegistry.registerTileEntity(TileEntityMedpod.class, "tileEntityMedpod");
+        GameRegistry.registerTileEntity(TileEntitySupplyCrate.class, "tileEntitySupplyCrate");
     }
 
     private void registerLivingEntities()

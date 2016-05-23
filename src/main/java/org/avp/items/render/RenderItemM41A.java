@@ -57,7 +57,7 @@ public class RenderItemM41A extends ItemRenderer
             GlStateManager.rotate(90.0F, 0.0F, 0.0F, 1.0F);
             GlStateManager.translate(0.28F, -0.77F, 0.85F);
             GlStateManager.scale(glScale, glScale, glScale);
-            new Texture(downloadResource(String.format(URLs.urlSkinM41a, player.getUUID()), this.getModelTexMap().getTexture())).bindTexture();
+            new Texture(downloadResource(String.format(URLs.urlSkinM41a, player.getUUID()), this.getModelTexMap().getTexture())).bind();
             this.getModelTexMap().getModel().render();
         }
     }
@@ -88,7 +88,7 @@ public class RenderItemM41A extends ItemRenderer
 
             GlStateManager.disable(GL11.GL_CULL_FACE);
             GlStateManager.scale(glScale, glScale, glScale);
-            new Texture(downloadResource(String.format(URLs.urlSkinM41a, AccessWrapper.getSession().getPlayerID()), this.getModelTexMap().getTexture())).bindTexture();
+            new Texture(downloadResource(String.format(URLs.urlSkinM41a, AccessWrapper.getSession().getPlayerID()), this.getModelTexMap().getTexture())).bind();
             this.getModelTexMap().getModel().render();
 
             if (mc.thePlayer.getCurrentEquippedItem() != null && mc.thePlayer.getCurrentEquippedItem().getItem() instanceof ItemFirearm)
@@ -126,7 +126,7 @@ public class RenderItemM41A extends ItemRenderer
         GlStateManager.translate(0F, -5.77F, -20.85F);
         GlStateManager.scale(20F, 20F, 20F);
         GlStateManager.disable(GL11.GL_CULL_FACE);
-        new Texture(downloadResource(String.format(URLs.urlSkinM41a, AccessWrapper.getSession().getPlayerID()), this.getModelTexMap().getTexture())).bindTexture();
+        new Texture(downloadResource(String.format(URLs.urlSkinM41a, AccessWrapper.getSession().getPlayerID()), this.getModelTexMap().getTexture())).bind();
         this.getModelTexMap().getModel().render();
     }
 

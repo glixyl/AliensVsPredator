@@ -4,12 +4,14 @@ import java.util.Random;
 
 import org.avp.AliensVsPredator;
 import org.avp.entities.EntitySupplyChute;
+import org.avp.entities.tile.TileEntitySupplyCrate;
 
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public class BlockSupplyCrate extends BlockFalling
@@ -17,6 +19,36 @@ public class BlockSupplyCrate extends BlockFalling
     public BlockSupplyCrate()
     {
         super(Material.iron);
+    }
+
+    @Override
+    public TileEntity createTileEntity(World world, int metadata)
+    {
+        return new TileEntitySupplyCrate();
+    }
+
+    @Override
+    public boolean hasTileEntity(int metadata)
+    {
+        return true;
+    }
+    
+    @Override
+    public int getRenderType()
+    {
+        return -1;
+    }
+    
+    @Override
+    public boolean isOpaqueCube()
+    {
+        return false;
+    }
+    
+    @Override
+    public boolean renderAsNormalBlock()
+    {
+        return false;
     }
 
     @Override

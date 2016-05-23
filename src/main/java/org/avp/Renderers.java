@@ -96,6 +96,7 @@ import org.avp.entities.tile.TileEntitySatelliteDish;
 import org.avp.entities.tile.TileEntitySatelliteModem;
 import org.avp.entities.tile.TileEntitySolarPanel;
 import org.avp.entities.tile.TileEntityStasisMechanism;
+import org.avp.entities.tile.TileEntitySupplyCrate;
 import org.avp.entities.tile.TileEntityTransformer;
 import org.avp.entities.tile.TileEntityTurret;
 import org.avp.entities.tile.TileEntityWorkstation;
@@ -117,6 +118,7 @@ import org.avp.entities.tile.render.RenderSatelliteDish;
 import org.avp.entities.tile.render.RenderSatelliteModem;
 import org.avp.entities.tile.render.RenderSolarPanel;
 import org.avp.entities.tile.render.RenderStasisMechanism;
+import org.avp.entities.tile.render.RenderSupplyCrate;
 import org.avp.entities.tile.render.RenderTransformer;
 import org.avp.entities.tile.render.RenderTurret;
 import org.avp.entities.tile.render.RenderWorkstation;
@@ -372,6 +374,7 @@ public class Renderers implements IInitializablePost
         bindTileEntitySpecialRenderer(TileEntityGunLocker.class, new RenderGunLocker());
         bindTileEntitySpecialRenderer(TileEntityMedpod.class, new RenderMedpod());
         bindTileEntitySpecialRenderer(TileEntitySatelliteDish.class, new RenderSatelliteDish());
+        bindTileEntitySpecialRenderer(TileEntitySupplyCrate.class, new RenderSupplyCrate());
     }
 
     public void registerSimpleBlockRenderingHandlers()

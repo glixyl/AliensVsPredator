@@ -50,7 +50,7 @@ public class RenderItemM56SG extends ItemRenderer
             GlStateManager.rotate(80.0F, 0.0F, 0.0F, 1.0F);
             GlStateManager.disable(GL11.GL_CULL_FACE);
             GlStateManager.scale(2.0F, 2.0F, 2.0F);
-            new Texture(downloadResource(String.format(URLs.urlSkinM56sg, AccessWrapper.getSession().getPlayerID()), this.getModelTexMap().getTexture())).bindTexture();
+            new Texture(downloadResource(String.format(URLs.urlSkinM56sg, AccessWrapper.getSession().getPlayerID()), this.getModelTexMap().getTexture())).bind();
             this.getModelTexMap().getModel().render();
         }
     }
@@ -67,7 +67,7 @@ public class RenderItemM56SG extends ItemRenderer
             GlStateManager.rotate(45.0F, 0.0F, 1.0F, 0.0F);
             GlStateManager.rotate(-93.0F, 0.0F, 0.0F, 1.0F);
             GlStateManager.scale(1.3F, 1.3F, 1.3F);
-            new Texture (RenderUtil.downloadResource(String.format(URLs.urlSkinM56sg, player.getUUID()), this.getModelTexMap().getTexture())).bindTexture();;
+            new Texture (RenderUtil.downloadResource(String.format(URLs.urlSkinM56sg, player.getUUID()), this.getModelTexMap().getTexture())).bind();;
             this.getModelTexMap().getModel().render();
         }
     }
@@ -81,7 +81,7 @@ public class RenderItemM56SG extends ItemRenderer
         GlStateManager.rotate(0F, 0.0F, 0.0F, 1.0F);
         GlStateManager.translate(0F, 5.77F, -20.85F);
         GlStateManager.scale(20F, 20F, 20F);
-        new Texture(downloadResource(String.format(URLs.urlSkinM56sg, AccessWrapper.getSession().getPlayerID()), this.getModelTexMap().getTexture())).bindTexture();
+        new Texture(downloadResource(String.format(URLs.urlSkinM56sg, AccessWrapper.getSession().getPlayerID()), this.getModelTexMap().getTexture())).bind();
         this.getModelTexMap().getModel().render();
     }
 }

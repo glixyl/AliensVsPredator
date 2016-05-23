@@ -38,7 +38,7 @@ public class RenderAqua extends RenderLivingWrapper
         }
         else
         {
-            AliensVsPredator.resources().models().AQUA_XENOMORPH_MASK.getTexture().bindTexture();
+            AliensVsPredator.resources().models().AQUA_XENOMORPH_MASK.getTexture().bind();
             float f1;
 
             boolean isDay = (entity.worldObj.getWorldTime() % 24000L) / 1000L < 14L;

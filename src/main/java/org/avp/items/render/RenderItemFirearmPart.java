@@ -55,7 +55,7 @@ public abstract class RenderItemFirearmPart extends ItemRenderer
         GlStateManager.blendClear();
         GlStateManager.enable(GL11.GL_BLEND);
         GlStateManager.disable(GL11.GL_CULL_FACE);
-        this.getModelTexMap().getTexture().bindTexture();
+        this.getModelTexMap().getTexture().bind();
 
         for (ModelRenderer renderer : modelRenderers)
         {

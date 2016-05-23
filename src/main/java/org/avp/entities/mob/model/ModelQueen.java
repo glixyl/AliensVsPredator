@@ -597,7 +597,7 @@ public class ModelQueen extends ModelBaseWrapper
                     GlStateManager.enableBlend();
                     GlStateManager.disableCullFace();
                     GlStateManager.blendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_DST_COLOR);
-                    AliensVsPredator.resources().models().XENOQUEEN_MASK.getTexture().bindTexture();
+                    AliensVsPredator.resources().models().XENOQUEEN_MASK.getTexture().bind();
                     draw(sack0);
                     draw(sack1);
                     draw(sack2);

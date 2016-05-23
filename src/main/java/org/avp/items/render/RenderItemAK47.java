@@ -52,7 +52,7 @@ public class RenderItemAK47 extends ItemRenderer
             GlStateManager.rotate(80.0F, 0.0F, 0.0F, 1.0F);
             GlStateManager.disable(GL11.GL_CULL_FACE);
             GlStateManager.scale(1.3F, 1.3F, 1.3F);
-            new Texture(downloadResource(String.format(URLs.urlSkinAk47, player.getUUID()), this.getModelTexMap().getTexture())).bindTexture();
+            new Texture(downloadResource(String.format(URLs.urlSkinAk47, player.getUUID()), this.getModelTexMap().getTexture())).bind();
             this.getModelTexMap().getModel().render();
         }
     }
@@ -81,7 +81,7 @@ public class RenderItemAK47 extends ItemRenderer
 
             float glScale = 2.0F;
             GlStateManager.scale(glScale, glScale, glScale);
-            new Texture(downloadResource(String.format(URLs.urlSkinAk47, AccessWrapper.getSession().getPlayerID()), this.getModelTexMap().getTexture())).bindTexture();
+            new Texture(downloadResource(String.format(URLs.urlSkinAk47, AccessWrapper.getSession().getPlayerID()), this.getModelTexMap().getTexture())).bind();
             this.getModelTexMap().getModel().render();
         }
     }
@@ -96,7 +96,7 @@ public class RenderItemAK47 extends ItemRenderer
         GlStateManager.translate(0F, 5.77F, -20.85F);
         float glScale = 20F;
         GlStateManager.scale(glScale, glScale, glScale);
-        new Texture(downloadResource(String.format(URLs.urlSkinAk47, AccessWrapper.getSession().getPlayerID()), this.getModelTexMap().getTexture())).bindTexture();
+        new Texture(downloadResource(String.format(URLs.urlSkinAk47, AccessWrapper.getSession().getPlayerID()), this.getModelTexMap().getTexture())).bind();
         this.getModelTexMap().getModel().render();
     }
 }

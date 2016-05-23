@@ -87,7 +87,7 @@ public class RenderItemSniper extends ItemRenderer
             GlStateManager.translate(0.1F, -0.0F, 0.8F);
             float glScale = 1.2F;
             GlStateManager.scale(glScale, glScale, glScale);
-            new Texture(RenderUtil.downloadResource(String.format(URLs.urlSkinSniper, player.getUUID()), this.getModelTexMap().getTexture())).bindTexture();
+            new Texture(RenderUtil.downloadResource(String.format(URLs.urlSkinSniper, player.getUUID()), this.getModelTexMap().getTexture())).bind();
             this.getModelTexMap().getModel().render();
         }
     }
@@ -116,7 +116,7 @@ public class RenderItemSniper extends ItemRenderer
                 GlStateManager.scale(2.2F, 2.2F, 2.2F);
             }
             GlStateManager.disable(GL11.GL_CULL_FACE);
-            new Texture(RenderUtil.downloadResource(String.format(URLs.urlSkinSniper, AccessWrapper.getSession().getPlayerID()), this.getModelTexMap().getTexture())).bindTexture();;
+            new Texture(RenderUtil.downloadResource(String.format(URLs.urlSkinSniper, AccessWrapper.getSession().getPlayerID()), this.getModelTexMap().getTexture())).bind();;
             this.getModel().render();
         }
     }
@@ -131,7 +131,7 @@ public class RenderItemSniper extends ItemRenderer
         GlStateManager.translate(0F, 5.77F, -10.85F);
         float glScale = 20F;
         GlStateManager.scale(glScale, glScale, glScale);
-        new Texture(RenderUtil.downloadResource(String.format(URLs.urlSkinSniper, AccessWrapper.getSession().getPlayerID()), this.getModelTexMap().getTexture())).bindTexture();;
+        new Texture(RenderUtil.downloadResource(String.format(URLs.urlSkinSniper, AccessWrapper.getSession().getPlayerID()), this.getModelTexMap().getTexture())).bind();;
         this.getModel().render();
     }
 }

@@ -53,7 +53,7 @@ public class RenderItemM4 extends ItemRenderer
             GlStateManager.rotate(80.0F, 0.0F, 0.0F, 1.0F);
             GlStateManager.disable(GL11.GL_CULL_FACE);
             GlStateManager.scale(1.2F, 1.2F, 1.2F);
-            new Texture(RenderUtil.downloadResource(String.format(URLs.urlSkinM4, player.getUUID()), this.getModelTexMap().getTexture())).bindTexture();;
+            new Texture(RenderUtil.downloadResource(String.format(URLs.urlSkinM4, player.getUUID()), this.getModelTexMap().getTexture())).bind();;
             this.getModelTexMap().getModel().render();
         }
     }
@@ -81,7 +81,7 @@ public class RenderItemM4 extends ItemRenderer
 
             GlStateManager.disable(GL11.GL_CULL_FACE);
             GlStateManager.scale(2.0F, 2.0F, 2.0F);
-            new Texture(downloadResource(String.format(URLs.urlSkinM4, AccessWrapper.getSession().getPlayerID()), this.getModelTexMap().getTexture())).bindTexture();
+            new Texture(downloadResource(String.format(URLs.urlSkinM4, AccessWrapper.getSession().getPlayerID()), this.getModelTexMap().getTexture())).bind();
             this.getModelTexMap().getModel().render();
         }
     }
@@ -95,7 +95,7 @@ public class RenderItemM4 extends ItemRenderer
         GlStateManager.rotate(0F, 0.0F, 0.0F, 1.0F);
         GlStateManager.translate(0F, -5.77F, -20.85F);
         GlStateManager.scale(20F, 20F, 20F);
-        new Texture(downloadResource(String.format(URLs.urlSkinM4, AccessWrapper.getSession().getPlayerID()), this.getModelTexMap().getTexture())).bindTexture();
+        new Texture(downloadResource(String.format(URLs.urlSkinM4, AccessWrapper.getSession().getPlayerID()), this.getModelTexMap().getTexture())).bind();
         this.getModelTexMap().getModel().render();
     }
 }

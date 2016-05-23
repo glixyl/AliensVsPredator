@@ -38,7 +38,7 @@ public class RenderItemWristbracerBlades extends ItemRenderer
         GlStateManager.rotate(13.0F, 0.0F, 0.0F, 1.0F);
         GlStateManager.translate(-0.25F, -0.15F, 0.3F);
         GlStateManager.scale(2F, 2F, 2F);
-        this.getModelTexMap().getTexture().bindTexture();
+        this.getModelTexMap().getTexture().bind();
         this.getModel().b6.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
         this.getModel().bladeLeft.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
     }
@@ -66,7 +66,7 @@ public class RenderItemWristbracerBlades extends ItemRenderer
         }
 
         GlStateManager.scale(1.6F, 1.6F, 1.6F);
-        this.getModelTexMap().getTexture().bindTexture();
+        this.getModelTexMap().getTexture().bind();
         this.getModel().b6.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
         this.getModel().bladeLeft.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
     }
@@ -81,7 +81,7 @@ public class RenderItemWristbracerBlades extends ItemRenderer
         GlStateManager.translate(8.5F, 0F, 0F);
         GlStateManager.translate(-16F, 6F, -3F);
         GlStateManager.scale(33F, 33F, 33F);
-        this.getModelTexMap().getTexture().bindTexture();
+        this.getModelTexMap().getTexture().bind();
         this.getModel().b6.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
         this.getModel().bladeLeft.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
     }
