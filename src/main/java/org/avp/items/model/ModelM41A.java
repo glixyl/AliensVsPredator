@@ -1,10 +1,12 @@
 package org.avp.items.model;
 
+import org.avp.util.IFirearmModel;
+
 import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelM41A extends ModelBaseWrapper
+public class ModelM41A extends ModelBaseWrapper implements IFirearmModel
 {
     public ModelRenderer stockEnd;
     public ModelRenderer stock1;
@@ -144,5 +146,41 @@ public class ModelM41A extends ModelBaseWrapper
         this.grip2.render(boxTranslation);
         this.handle.render(boxTranslation);
         this.gunFrame.render(boxTranslation);        
+    }
+
+    @Override
+    public ModelRenderer[] getBarrel()
+    {
+        return group(barrel, mechanism);
+    }
+
+    @Override
+    public ModelRenderer[] getAction()
+    {
+        return group(gunBase1, gunBase2, gunBase3, gunFrame, underrail, underrail2);
+    }
+
+    @Override
+    public ModelRenderer[] getStock()
+    {
+        return group(handle, stock1, stockEnd);
+    }
+
+    @Override
+    public ModelRenderer[] getScope()
+    {
+        return group();
+    }
+
+    @Override
+    public ModelRenderer[] getPeripherals()
+    {
+        return group(sight1, sight2, sight3, grip, grip2);
+    }
+
+    @Override
+    public ModelRenderer[] getAccessories()
+    {
+        return group();
     }
 }

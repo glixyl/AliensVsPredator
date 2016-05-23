@@ -4,7 +4,6 @@ import org.avp.AliensVsPredator;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
-import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
 
 import net.minecraft.item.ItemStack;
@@ -37,7 +36,6 @@ public class RenderItemLocker extends ItemRenderer
     {
         GlStateManager.pushMatrix();
         {
-            RenderUtil.bindTexture(getResourceLocation());
             GlStateManager.disable(GL11.GL_CULL_FACE);
             this.getModelTexMap().draw();
         }

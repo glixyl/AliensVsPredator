@@ -1,6 +1,6 @@
 package org.avp.items.render.parts;
 
-import org.avp.items.render.RenderItemFirearmPart;
+import org.avp.items.render.ItemRendererGroup;
 
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.client.ModelTexMap;
@@ -8,7 +8,7 @@ import com.arisux.airi.lib.client.ModelTexMap;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.item.ItemStack;
 
-public class RenderItemSniperPeripherals extends RenderItemFirearmPart
+public class RenderItemSniperPeripherals extends ItemRendererGroup
 {
     public RenderItemSniperPeripherals(ModelTexMap model, ModelRenderer... modelRenderers)
     {

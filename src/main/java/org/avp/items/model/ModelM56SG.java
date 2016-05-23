@@ -1,10 +1,12 @@
 package org.avp.items.model;
 
+import org.avp.util.IFirearmModel;
+
 import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelM56SG extends ModelBaseWrapper
+public class ModelM56SG extends ModelBaseWrapper implements IFirearmModel
 {
     public ModelRenderer handleBase;
     public ModelRenderer base;
@@ -168,5 +170,41 @@ public class ModelM56SG extends ModelBaseWrapper
         this.baseUnder2.render(boxTranslation);
         this.handleTop.render(boxTranslation);
         this.topHandleBase2.render(boxTranslation);        
+    }
+
+    @Override
+    public ModelRenderer[] getBarrel()
+    {
+        return group(barrel, barrelHolderBase);
+    }
+
+    @Override
+    public ModelRenderer[] getAction()
+    {
+        return group(base, base2, base3, baseUnder, baseUnder2, ammoHolder, topHandle, topHandleBase, topHandleBase2);
+    }
+
+    @Override
+    public ModelRenderer[] getStock()
+    {
+        return group(handle, handleBase, handleTop, handleWire);
+    }
+
+    @Override
+    public ModelRenderer[] getScope()
+    {
+        return group();
+    }
+
+    @Override
+    public ModelRenderer[] getPeripherals()
+    {
+        return group(barrelSupportLeft, barrelSupportRight);
+    }
+
+    @Override
+    public ModelRenderer[] getAccessories()
+    {
+        return group(autoTargetControl, autoTargetEye);
     }
 }

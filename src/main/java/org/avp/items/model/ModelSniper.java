@@ -1,10 +1,12 @@
 package org.avp.items.model;
 
+import org.avp.util.IFirearmModel;
+
 import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelSniper extends ModelBaseWrapper
+public class ModelSniper extends ModelBaseWrapper implements IFirearmModel
 {
     private boolean firstPerson;
 
@@ -166,5 +168,41 @@ public class ModelSniper extends ModelBaseWrapper
         {
             this.scope.render(boxTranslation);
         }
+    }
+
+    @Override
+    public ModelRenderer[] getBarrel()
+    {
+        return group(barrel);
+    }
+
+    @Override
+    public ModelRenderer[] getAction()
+    {
+        return group(base1, base2, clipHolder1, clipHolder2, trigger, triggerGuard, scopeBase);
+    }
+
+    @Override
+    public ModelRenderer[] getStock()
+    {
+        return group(stock1, stock2, stockEnd);
+    }
+
+    @Override
+    public ModelRenderer[] getScope()
+    {
+        return group(scope, scopeSupport);
+    }
+
+    @Override
+    public ModelRenderer[] getPeripherals()
+    {
+        return group(barrelSupport);
+    }
+
+    @Override
+    public ModelRenderer[] getAccessories()
+    {
+        return group();
     }
 }

@@ -5,19 +5,25 @@ import org.lwjgl.opengl.GL11;
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ItemRenderer;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.airi.lib.client.ModelTexMap;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.item.ItemStack;
 
-public abstract class RenderItemFirearmPart extends ItemRenderer
+public class ItemRendererGroup extends ItemRenderer
 {
     private ModelRenderer[] modelRenderers;
 
-    public RenderItemFirearmPart(ModelTexMap model, ModelRenderer... modelRenderers)
+    public ItemRendererGroup(ModelTexMap<? extends ModelBaseWrapper> model, ModelRenderer... modelRenderers)
     {
         super(model);
         this.modelRenderers = modelRenderers;
+    }
+    
+    private ItemRendererGroup(ModelTexMap<? extends ModelBaseWrapper> model)
+    {
+        super(model);
     }
 
     @Override
@@ -56,11 +62,7 @@ public abstract class RenderItemFirearmPart extends ItemRenderer
         GlStateManager.enable(GL11.GL_BLEND);
         GlStateManager.disable(GL11.GL_CULL_FACE);
         this.getModelTexMap().getTexture().bind();
-
-        for (ModelRenderer renderer : modelRenderers)
-        {
-            renderer.render(RenderUtil.DEFAULT_BOX_TRANSLATION);
-        }
+        ModelBaseWrapper.draw(this.modelRenderers);
     }
 
     public static void drawMarker(int size)

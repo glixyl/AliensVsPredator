@@ -1,10 +1,12 @@
 package org.avp.items.model;
 
+import org.avp.util.IFirearmModel;
+
 import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 import net.minecraft.client.model.ModelRenderer;
 
-public class Model88MOD4 extends ModelBaseWrapper
+public class Model88MOD4 extends ModelBaseWrapper implements IFirearmModel
 {
     public ModelRenderer barrelRight;
     public ModelRenderer underGrip;
@@ -71,5 +73,41 @@ public class Model88MOD4 extends ModelBaseWrapper
         this.trigger.render(boxTranslation);
         this.barrelRight.render(boxTranslation);
         this.handleGrip.render(boxTranslation);        
+    }
+
+    @Override
+    public ModelRenderer[] getBarrel()
+    {
+        return group(barrelLeft, barrelRight, barrelNose, barrelSupport);
+    }
+
+    @Override
+    public ModelRenderer[] getAction()
+    {
+        return group(rack, underGrip, trigger, gripSupport, trigger);
+    }
+
+    @Override
+    public ModelRenderer[] getStock()
+    {
+        return group(handleGrip, butt1, gripSupport);
+    }
+
+    @Override
+    public ModelRenderer[] getScope()
+    {
+        return group();
+    }
+
+    @Override
+    public ModelRenderer[] getPeripherals()
+    {
+        return group();
+    }
+
+    @Override
+    public ModelRenderer[] getAccessories()
+    {
+        return group();
     }
 }

@@ -1,16 +1,17 @@
 package org.avp.items.render.parts;
 
-import org.avp.items.render.RenderItemFirearmPart;
+import org.avp.items.render.ItemRendererGroup;
 
 import com.arisux.airi.lib.GlStateManager;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.airi.lib.client.ModelTexMap;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.item.ItemStack;
 
-public class RenderItemM56SGSupportFrame extends RenderItemFirearmPart
+public class RenderItemM56SGSupportFrame extends ItemRendererGroup
 {
-    public RenderItemM56SGSupportFrame(ModelTexMap model, ModelRenderer... modelRenderers)
+    public RenderItemM56SGSupportFrame(ModelTexMap<? extends ModelBaseWrapper> model, ModelRenderer... modelRenderers)
     {
         super(model, modelRenderers);
     }
