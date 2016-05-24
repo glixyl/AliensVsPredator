@@ -30,6 +30,7 @@ import org.avp.entities.tile.model.ModelAmpule;
 import org.avp.entities.tile.model.ModelBlastdoor;
 import org.avp.entities.tile.model.ModelCable;
 import org.avp.entities.tile.model.ModelCryostasisTube;
+import org.avp.entities.tile.model.ModelDNASynthesizer;
 import org.avp.entities.tile.model.ModelHiveNode;
 import org.avp.entities.tile.model.ModelLightPanel;
 import org.avp.entities.tile.model.ModelLocker;
@@ -129,7 +130,7 @@ public class Resources implements IInitializablePre
         public final ModelTexMap<ModelChestburster>         CHESTBUSTER                    = new ModelTexMap(new ModelChestburster(), new Texture(AliensVsPredator.ID, "textures/mob/chestbuster.png"));
         public final ModelTexMap<ModelFacehugger>           FACEHUGGER                     = new ModelTexMap(new ModelFacehugger(), new Texture(AliensVsPredator.ID, "textures/mob/facehugger.png"));
         public final ModelTexMap<ModelRoyalFacehugger>      ROYALFACEHUGGER                = new ModelTexMap(new ModelRoyalFacehugger(), new Texture(AliensVsPredator.ID, "textures/mob/royalfacehugger.png"));
-        public final ModelTexMap<ModelMarine>               MARINE                         = new ModelTexMap(new ModelMarine(), new Texture(AliensVsPredator.ID, "textures/mob/marine.png"));
+        public final ModelTexMap<ModelMarine>               MARINE                         = new ModelTexMap(new ModelBipedWrapper(), new Texture(AliensVsPredator.ID, "textures/mob/marine.png"));
         public final ModelTexMap<ModelOvamorph>             OVAMORPH                       = new ModelTexMap(new ModelOvamorph(), new Texture(AliensVsPredator.ID, "textures/mob/alienegg.png"));
         public final ModelTexMap<ModelPredalien>            PREDALIEN                      = new ModelTexMap(new ModelPredalien(), new Texture(AliensVsPredator.ID, "textures/mob/predalien.png"));
         public final ModelTexMap<ModelPraetorian>           PRAETORIAN                     = new ModelTexMap(new ModelPraetorian(), new Texture(AliensVsPredator.ID, "textures/mob/praetorian.png"));
@@ -153,7 +154,8 @@ public class Resources implements IInitializablePre
         public final ModelTexMap<ModelHiveNode>             HIVE_NODE                      = new ModelTexMap(new ModelHiveNode(), new Texture(AliensVsPredator.ID, "textures/tile/node.png"));
         public final ModelTexMap<ModelSupplyChute>          SUPPLY_CHUTE                   = new ModelTexMap(new ModelSupplyChute(), new Texture(AliensVsPredator.ID, "textures/misc/supplychute.png"));
         public final ModelTexMap<ModelBipedWrapper>         BIPED                          = new ModelTexMap(new ModelBipedWrapper(), new Texture(AbstractClientPlayer.locationStevePng));
-        public final ModelTexMap<ModelLaserMine>            LASER_MINE                     = new ModelTexMap<ModelLaserMine>(new ModelLaserMine(), new Texture(AliensVsPredator.ID, "textures/misc/proximity-mine.png"));
+        public final ModelTexMap<ModelLaserMine>            LASER_MINE                     = new ModelTexMap(new ModelLaserMine(), new Texture(AliensVsPredator.ID, "textures/misc/proximity-mine.png"));
+        public final ModelTexMap<ModelDNASynthesizer>       DNA_SYNTHESIZER                = new ModelTexMap(new ModelDNASynthesizer(), new Texture(AliensVsPredator.ID, "textures/tile/dna-synthesizer.png"));
     }
 
     public final Texture  SKY_SUN                  = new Texture("textures/environment/sun.png");

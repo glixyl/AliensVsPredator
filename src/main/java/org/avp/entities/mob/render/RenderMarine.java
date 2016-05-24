@@ -3,7 +3,6 @@ package org.avp.entities.mob.render;
 import org.avp.AliensVsPredator;
 import org.avp.entities.mob.EntityFacehugger;
 import org.avp.entities.mob.EntityMarine;
-import org.avp.entities.mob.model.ModelMarine;
 import org.avp.entities.mob.render.RenderFacehugger.FaceMountRenderer;
 import org.avp.entities.mob.render.RenderFacehugger.IFaceMountable;
 import org.lwjgl.opengl.GL11;
@@ -11,6 +10,7 @@ import org.lwjgl.opengl.GL11;
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ModelBaseWrapper;
+import com.arisux.airi.lib.client.ModelBipedWrapper;
 import com.arisux.airi.lib.client.ModelTexMap;
 import com.arisux.airi.lib.client.RenderLivingWrapper;
 
@@ -29,9 +29,9 @@ public class RenderMarine extends RenderLivingWrapper implements IFaceMountable
         super.preRenderCallback(living, partialTicks);
     }
     
-    public ModelMarine getModel()
+    public ModelBipedWrapper getModel()
     {
-        return (ModelMarine) this.getModelTexMap().getModel();
+        return (ModelBipedWrapper) this.getModelTexMap().getModel();
     }
 
     @Override

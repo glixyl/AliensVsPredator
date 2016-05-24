@@ -8,6 +8,8 @@ import org.avp.util.PlayerMode;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
+import com.arisux.airi.lib.RenderUtil;
+import com.arisux.airi.lib.client.ModelBaseWrapper.RenderObject;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.client.model.ModelBiped;
@@ -35,9 +37,15 @@ public class PlayerModeRenderEvent
         @Override
         public void doRender(Entity entity, double posX, double posY, double posZ, float yaw, float renderPartialTicks)
         {
-            super.doRender(entity, posX, posY, posZ, yaw, renderPartialTicks);
-
             EntityLivingBase entityLiving = (EntityLivingBase) entity;
+            float yawOffset = RenderUtil.interpolateRotation(entityLiving.prevRenderYawOffset, entityLiving.renderYawOffset, renderPartialTicks);
+            float yawHead = RenderUtil.interpolateRotation(entityLiving.prevRotationYawHead, entityLiving.rotationYawHead, renderPartialTicks);
+            float swingProgress = (entityLiving.limbSwing - entityLiving.limbSwingAmount * (1.0F - renderPartialTicks));
+            float swingProgressPrevious = (entityLiving.prevLimbSwingAmount + (entityLiving.limbSwingAmount - entityLiving.prevLimbSwingAmount) * renderPartialTicks);
+            float idleProgress = (entityLiving.ticksExisted + renderPartialTicks);
+            float headRotateAngleY = (yawHead - yaw);
+            float headRotationPitch = (entityLiving.prevRotationPitch + (entityLiving.rotationPitch - entityLiving.prevRotationPitch) * renderPartialTicks);
+            
 
             GlStateManager.pushMatrix();
             {
@@ -46,7 +54,7 @@ public class PlayerModeRenderEvent
                 GlStateManager.disable(GL11.GL_CULL_FACE);
 
                 PlayerModeHandler.instance().getTextureForPlayer((EntityPlayer) entityLiving).bind();
-                PlayerModeHandler.instance().getModelForPlayer((EntityPlayer) entityLiving).render(entityLiving);
+                PlayerModeHandler.instance().getModelForPlayer((EntityPlayer) entityLiving).render(new RenderObject(new Object[] { entity, swingProgress, swingProgressPrevious, idleProgress, headRotateAngleY, headRotationPitch }));
             }
             GlStateManager.popMatrix();
         }
