@@ -24,10 +24,10 @@ import net.minecraft.world.World;
 
 public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
 {
-    public int targetQueenId;
+    public int        targetQueenId;
     protected boolean canClimb;
     protected boolean isDependant;
-    public int hitRange;
+    public int        hitRange;
 
     public EntityXenomorph(World world)
     {
@@ -116,14 +116,18 @@ public abstract class EntityXenomorph extends EntitySpeciesAlien implements IMob
     public void onDeath(DamageSource damagesource)
     {
         super.onDeath(damagesource);
-        if (new Random().nextInt(75) == 0) // 1 in 75 chance of dropping
-            this.entityDropItem(new ItemStack(AliensVsPredator.items().helmXeno), 0.0F);
-        if (new Random().nextInt(66) == 0)
-            this.entityDropItem(new ItemStack(AliensVsPredator.items().plateXeno), 0.0F);
-        if (new Random().nextInt(55) == 0)
-            this.entityDropItem(new ItemStack(AliensVsPredator.items().legsXeno), 0.0F);
-        if (new Random().nextInt(50) == 0)
-            this.entityDropItem(new ItemStack(AliensVsPredator.items().bootsXeno), 0.0F);
+
+        if (!this.worldObj.isRemote)
+        {
+            if (new Random().nextInt(75) == 0) // 1 in 75 chance of dropping
+                this.entityDropItem(new ItemStack(AliensVsPredator.items().helmXeno), 0.0F);
+            if (new Random().nextInt(66) == 0)
+                this.entityDropItem(new ItemStack(AliensVsPredator.items().plateXeno), 0.0F);
+            if (new Random().nextInt(55) == 0)
+                this.entityDropItem(new ItemStack(AliensVsPredator.items().legsXeno), 0.0F);
+            if (new Random().nextInt(50) == 0)
+                this.entityDropItem(new ItemStack(AliensVsPredator.items().bootsXeno), 0.0F);
+        }
     }
 
     @Override
