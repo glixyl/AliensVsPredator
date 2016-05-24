@@ -1,6 +1,5 @@
 package org.avp.gui;
 
-import static com.arisux.airi.lib.RenderUtil.bindTexture;
 import static com.arisux.airi.lib.RenderUtil.drawQuad;
 
 import java.util.ArrayList;
@@ -69,7 +68,7 @@ public class GuiWristbracer extends GuiContainer
     {
         this.guiLeft = this.width / 2 - xSize / 2;
         this.guiTop = this.height / 2 - ySize / 2;
-        bindTexture(AliensVsPredator.resources().GUI_WRISTBRACER);
+        AliensVsPredator.resources().GUI_WRISTBRACER.bind();
         drawQuad(guiLeft, guiTop, xSize, ySize - 30, 0, 0, 0);
 
         RenderUtil.drawRect(guiLeft + 31, guiTop + 16, 16, 16, 0x33FF0000);
@@ -142,7 +141,7 @@ public class GuiWristbracer extends GuiContainer
             if (x == number)
             {
                 GlStateManager.enable(GL11.GL_BLEND);
-                bindTexture(AliensVsPredator.resources().GUI_WRISTBRACER);
+                AliensVsPredator.resources().GUI_WRISTBRACER.bind();
                 drawQuad(xPos, yPos, 28, 50, 0, (27 * (x - 1)), 126);
             }
         }

@@ -178,7 +178,7 @@ public class TacticalHUDRenderEvent
                     glDepthMask(false);
                     GlStateManager.color(1F, 1F, 1F, 1F);
                     GlStateManager.disable(GL_ALPHA_TEST);
-                    RenderUtil.bindTexture(AliensVsPredator.resources().BLUR_TACTICAL_HUD);
+                    AliensVsPredator.resources().BLUR_TACTICAL_HUD.bind();
                     RenderUtil.drawQuad(0, 0, RenderUtil.scaledDisplayResolution().getScaledWidth(), RenderUtil.scaledDisplayResolution().getScaledHeight());
                     glDepthMask(true);
                     GlStateManager.enable(GL_DEPTH_TEST);
@@ -281,7 +281,7 @@ public class TacticalHUDRenderEvent
                 int btHeight = 64;
                 int batteryWidth = btWidth / 2 * (batteryPercent + hOffset) / 100;
                 float maxU = (batteryPercent + hOffset) / 100F / 2F;
-                RenderUtil.bindTexture(AliensVsPredator.resources().BATTERY_INDICATOR);
+                AliensVsPredator.resources().BATTERY_INDICATOR.bind();
                 RenderUtil.drawQuad(btX, btY, btWidth, btHeight, 0F, 1F, 0F, 0.5F);
                 RenderUtil.drawQuad(btX, btY, batteryWidth, btHeight, 0F, maxU, 0.5F, 1F);
             }
@@ -322,7 +322,7 @@ public class TacticalHUDRenderEvent
                 }
 
                 GlStateManager.color4i(0xFFFF0000);
-                RenderUtil.bindTexture(AliensVsPredator.resources().INFECTION_INDICATOR);
+                AliensVsPredator.resources().INFECTION_INDICATOR.bind();
                 RenderUtil.drawQuad(res.getScaledWidth() - iconSize, 0, iconSize, iconSize);
             }
         }
@@ -368,7 +368,7 @@ public class TacticalHUDRenderEvent
                 if (mc.thePlayer.getDistanceToEntity(player) <= this.clientPlayerProperties.getBroadcastRadius() && signal <= maxSignal / 1.3)
                 {
                     GlStateManager.color(1F, 1F, 1F, 1F);
-                    Minecraft.getMinecraft().renderEngine.bindTexture(Gui.icons);
+                    RenderUtil.bindTexture(Gui.icons);
                     RenderUtil.drawQuad(RenderUtil.scaledDisplayResolution().getScaledWidth() - 135, 36 + barSpace * x, 10, 8, 0, (176 + pxMultiplier * 8));
 
                     RenderUtil.drawProgressBar(player.getCommandSenderName(), (int) player.getMaxHealth(), (int) player.getHealth(), RenderUtil.scaledDisplayResolution().getScaledWidth() - 105, 40 + barSpace * x, 100, 1, 0, 0xFF00AAFF, false);

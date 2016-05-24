@@ -10,6 +10,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.airi.lib.client.ModelTexMap;
 import com.arisux.airi.lib.client.RenderLivingWrapper;
 
@@ -39,7 +40,7 @@ public class RenderMarine extends RenderLivingWrapper implements IFaceMountable
         super.renderEquippedItems(living, partialTicks);
 
         EntityMarine marine = (EntityMarine) living;
-        ModelTexMap model = marine.getMarineType().getFirearmModelTexMap();
+        ModelTexMap<? extends ModelBaseWrapper> model = marine.getMarineType().getFirearmModelTexMap();
 
         GlStateManager.pushMatrix();
         {

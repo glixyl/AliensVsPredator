@@ -1,16 +1,16 @@
 package org.avp.gui;
 
 import org.avp.AliensVsPredator;
-import org.avp.entities.tile.TileEntityLocker;
+import org.avp.entities.tile.TileEntitySupplyCrate;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 
-public class GuiLocker extends GuiContainer
+public class GuiSupplyCrate extends GuiContainer
 {
-    public GuiLocker(EntityPlayer player, TileEntityLocker locker)
+    public GuiSupplyCrate(EntityPlayer player, TileEntitySupplyCrate tile)
     {
-        super(locker.getNewContainer(player));
+        super(tile.getNewContainer(player));
         this.xSize = 176;
         this.ySize = 201;
     }
@@ -18,7 +18,7 @@ public class GuiLocker extends GuiContainer
     @Override
     protected void drawGuiContainerBackgroundLayer(float f, int x, int y)
     {
-        AliensVsPredator.resources().GUI_LOCKER.bind();
+        AliensVsPredator.resources().GUI_SUPPLYCRATE.bind();
         drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
     }
 }

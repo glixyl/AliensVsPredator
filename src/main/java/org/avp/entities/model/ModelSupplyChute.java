@@ -71,4 +71,12 @@ public class ModelSupplyChute extends ModelBaseWrapper
         this.wire3.render(boxTranslation);
         this.chuteTop.render(boxTranslation);
     }
+
+    public void drawCrate()
+    {
+        draw(casing);
+        draw(lHinge);
+        draw(rHinge);
+        draw(lid);        
+    }
 }

@@ -42,7 +42,6 @@ public class PacketSyncEEPPS implements IMessage, IMessageHandler<PacketSyncEEPP
         ByteBufUtils.writeTag(buf, tag);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public PacketSyncEEPPS onMessage(PacketSyncEEPPS packet, MessageContext ctx)
     {

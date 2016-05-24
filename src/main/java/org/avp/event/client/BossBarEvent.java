@@ -108,7 +108,7 @@ public class BossBarEvent
             GlStateManager.enable(GL11.GL_BLEND);
             GlStateManager.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
             GlStateManager.color4i(0xFFFFFFFF);
-            RenderUtil.bindTexture(AliensVsPredator.resources().QUEEN_BOSS_BAR);
+            AliensVsPredator.resources().QUEEN_BOSS_BAR.bind();
             posX = posX + (index * (tW));
             GlStateManager.color4i(color);
             RenderUtil.drawQuad(posX + (offset / 2), posY, (tW - offset) * health / 100, tH, 0, 0.15F, 0.85F, 0F, 0.5F);

@@ -22,13 +22,11 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 public class GuiAssembler extends GuiContainer
 {
-    private static final ResourceLocation texture = new ResourceLocation("avp", "textures/gui/assembler.png");
     private ArrayList<AssemblerSchematic> schematics;
     private GuiCustomButton buttonScrollUp;
     private GuiCustomButton buttonScrollDown;
@@ -135,7 +133,7 @@ public class GuiAssembler extends GuiContainer
     @Override
     protected void drawGuiContainerBackgroundLayer(float f, int x, int y)
     {
-        RenderUtil.bindTexture(texture);
+        AliensVsPredator.resources().GUI_ASSEMBLER.bind();
         drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
     }
 

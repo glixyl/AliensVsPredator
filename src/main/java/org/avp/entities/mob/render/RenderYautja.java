@@ -7,6 +7,7 @@ import org.avp.entities.mob.render.RenderFacehugger.FaceMountRenderer;
 import org.avp.entities.mob.render.RenderFacehugger.IFaceMountable;
 
 import com.arisux.airi.lib.GlStateManager;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.airi.lib.client.ModelTexMap;
 import com.arisux.airi.lib.client.RenderLivingWrapper;
 
@@ -14,7 +15,7 @@ import net.minecraft.entity.EntityLivingBase;
 
 public class RenderYautja extends RenderLivingWrapper implements IFaceMountable
 {
-    public RenderYautja(ModelTexMap model)
+    public RenderYautja(ModelTexMap<? extends ModelBaseWrapper> model)
     {
         super(model);
     }

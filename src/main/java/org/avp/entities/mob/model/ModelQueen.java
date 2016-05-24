@@ -5,7 +5,6 @@ import org.avp.entities.mob.EntityQueen;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
-import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 import net.minecraft.client.model.ModelRenderer;
@@ -587,7 +586,7 @@ public class ModelQueen extends ModelBaseWrapper
             {
                 ModelOvamorph ovamorph = new ModelOvamorph();
 
-                RenderUtil.bindTexture(AliensVsPredator.resources().models().OVAMORPH.getTexture());
+                AliensVsPredator.resources().models().OVAMORPH.bindTexture();
                 ovamorph.render();
 
                 GlStateManager.pushMatrix();

@@ -29,13 +29,11 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 @SideOnly(Side.CLIENT)
 public class GuiTurret extends GuiContainer
 {
-    private final ResourceLocation texture = new ResourceLocation("avp:textures/gui/turret.png");
     private TileEntityTurret tile;
     private GuiCustomButton buttonScrollUp;
     private GuiCustomButton buttonScrollDown;
@@ -117,7 +115,7 @@ public class GuiTurret extends GuiContainer
     @SideOnly(Side.CLIENT)
     protected void drawGuiContainerBackgroundLayer(float f, int mouseX, int mouseY)
     {
-        RenderUtil.bindTexture(this.texture);
+        AliensVsPredator.resources().GUI_TURRET.bind();
         drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
 
         int stacksTotal = this.tile.getContainer(this.mc.thePlayer).getAmmoBay().getSizeInventory() * this.tile.getContainer(this.mc.thePlayer).getAmmoBay().getInventoryStackLimit();

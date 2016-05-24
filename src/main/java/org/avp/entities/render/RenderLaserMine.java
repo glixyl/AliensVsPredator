@@ -2,11 +2,9 @@ package org.avp.entities.render;
 
 import org.avp.AliensVsPredator;
 import org.avp.entities.EntityLaserMine;
-import org.avp.entities.model.ModelLaserMine;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
-import com.arisux.airi.lib.RenderUtil;
 
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
@@ -15,9 +13,6 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderLaserMine extends Render
 {
-    public static ResourceLocation resource = AliensVsPredator.resources().PROXIMITY_MINE;
-    public static ModelLaserMine model = new ModelLaserMine();
-
     @Override
     public void doRender(Entity entity, double posX, double posY, double posZ, float yaw, float renderPartialTicks)
     {
@@ -30,8 +25,7 @@ public class RenderLaserMine extends Render
             GlStateManager.rotate(yaw, 0.0F, 1.0F, 0.0F);
             GlStateManager.rotate(180.0F, 0.0F, 0.0F, 1.0F);
             GL11.glScaled(0.5F, 0.5F, 0.5F);
-            RenderUtil.bindTexture(resource);
-            model.render();
+            AliensVsPredator.resources().models().LASER_MINE.draw();
             GlStateManager.disable(GL11.GL_CULL_FACE);
             GlStateManager.scale(2F, -2F, 2F);
             GlStateManager.translate(0.004F, -0.74F, 0.06F);
@@ -46,7 +40,7 @@ public class RenderLaserMine extends Render
     @Override
     protected ResourceLocation getEntityTexture(Entity entity)
     {
-        return resource;
+        return null;
     }
 
     public void renderBeam(int x, int y, double w, int h, int zLevel, int scale, int color1, int color2, float rotationYaw, float rotationPitch, int l)

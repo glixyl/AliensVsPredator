@@ -7,6 +7,7 @@ import org.avp.entities.mob.render.RenderFacehugger.FaceMountRenderer;
 import org.avp.entities.mob.render.RenderFacehugger.IFaceMountable;
 
 import com.arisux.airi.lib.GlStateManager;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.airi.lib.client.ModelTexMap;
 import com.arisux.airi.lib.client.RenderLivingWrapper;
 
@@ -20,7 +21,7 @@ public class RenderEngineer extends RenderLivingWrapper implements IFaceMountabl
         super(AliensVsPredator.resources().models().ENGINEER);
     }
     
-    public RenderEngineer(ModelTexMap model)
+    public RenderEngineer(ModelTexMap<? extends ModelBaseWrapper> model)
     {
         super(model);
     }

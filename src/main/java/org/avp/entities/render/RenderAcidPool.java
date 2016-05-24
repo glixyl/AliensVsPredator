@@ -27,7 +27,7 @@ public class RenderAcidPool extends Render
             GlStateManager.enable(GL11.GL_BLEND);
             GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
             GlStateManager.disableLightMapping();
-            bindTexture(AliensVsPredator.resources().ACID_POOL);
+            AliensVsPredator.resources().ACID_POOL.bind();
             float offset = 1.4F;
             double renderX = entity.lastTickPosX + (entity.posX - entity.lastTickPosX) * renderPartialTicks;
             double renderY = entity.lastTickPosY + (entity.posY - entity.lastTickPosY) * renderPartialTicks + entity.getShadowSize();

@@ -15,7 +15,6 @@ public class RenderShuriken extends Render
     @Override
     public void doRender(Entity entity, double posX, double posY, double posZ, float yaw, float renderPartialTicks)
     {
-        this.bindTexture(this.getEntityTexture(entity));
         GlStateManager.pushMatrix();
         {
             GlStateManager.translate(posX, posY, posZ);
@@ -24,6 +23,7 @@ public class RenderShuriken extends Render
             GlStateManager.disable(GL11.GL_CULL_FACE);
             GlStateManager.translate(-0.5F, 0.0F, -0.5F);
             GL11.glNormal3f(0.0F, 1.0F, 0.0F);
+            AliensVsPredator.resources().SHURIKEN.bind();
             RenderUtil.drawQuad(0, 0, 1, 1, 0, 0.5F, 0F, 0F, 0.5F);
             GlStateManager.enable(GL11.GL_CULL_FACE);
         }
@@ -33,6 +33,6 @@ public class RenderShuriken extends Render
     @Override
     protected ResourceLocation getEntityTexture(Entity entity)
     {
-        return AliensVsPredator.resources().SHURIKEN;
+        return null;
     }
 }

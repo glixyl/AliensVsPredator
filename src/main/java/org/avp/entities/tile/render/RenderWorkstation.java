@@ -9,7 +9,6 @@ import static org.lwjgl.opengl.GL11.GL_SRC_ALPHA;
 import org.apache.commons.lang3.SystemUtils;
 import org.avp.AliensVsPredator;
 import org.avp.entities.tile.TileEntityWorkstation;
-import org.avp.entities.tile.model.ModelWorkstation;
 import org.lwjgl.opengl.GL12;
 
 import com.arisux.airi.lib.GlStateManager;
@@ -21,7 +20,6 @@ import net.minecraft.tileentity.TileEntity;
 
 public class RenderWorkstation extends TileEntitySpecialRenderer
 {
-    private ModelWorkstation model = new ModelWorkstation();
     private int lines = 12;
     private String[] displayText = new String[lines];
 

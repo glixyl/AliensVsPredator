@@ -425,7 +425,7 @@ public class PressureHUDRenderEvent
                 }
 
                 GlStateManager.color4i(0xFFFFAA00);
-                RenderUtil.bindTexture(AliensVsPredator.resources().INFECTION_INDICATOR);
+                AliensVsPredator.resources().INFECTION_INDICATOR.bind();
                 RenderUtil.drawQuad(res.getScaledWidth() - iconSize, 0, iconSize, iconSize);
             }
         }

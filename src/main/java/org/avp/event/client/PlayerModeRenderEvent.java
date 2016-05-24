@@ -8,10 +8,8 @@ import org.avp.util.PlayerMode;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
-import com.arisux.airi.lib.RenderUtil;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RendererLivingEntity;
@@ -24,13 +22,13 @@ import net.minecraftforge.client.event.RenderPlayerEvent;
 
 public class PlayerModeRenderEvent
 {
-    private RenderPlayer renderLiving = new RenderPlayer(0.0F);
+    private RenderPlayer renderLiving = new RenderPlayer();
 
     private class RenderPlayer extends RendererLivingEntity
     {
-        public RenderPlayer(float scale)
+        public RenderPlayer()
         {
-            super(new ModelBiped(), scale);
+            super(new ModelBiped(), 0F);
             this.renderManager = RenderManager.instance;
         }
 
@@ -41,23 +39,14 @@ public class PlayerModeRenderEvent
 
             EntityLivingBase entityLiving = (EntityLivingBase) entity;
 
-            float yawOffset = RenderUtil.interpolateRotation(entityLiving.prevRenderYawOffset, entityLiving.renderYawOffset, renderPartialTicks);
-            float yawHead = RenderUtil.interpolateRotation(entityLiving.prevRotationYawHead, entityLiving.rotationYawHead, renderPartialTicks);
-            float swingProgress = (entityLiving.limbSwing - entityLiving.limbSwingAmount * (1.0F - renderPartialTicks));
-            float swingProgressPrevious = (entityLiving.prevLimbSwingAmount + (entityLiving.limbSwingAmount - entityLiving.prevLimbSwingAmount) * renderPartialTicks);
-            float idleProgress = (entityLiving.ticksExisted + renderPartialTicks);
-            float headRotateAngleY = (yawHead - yawOffset);
-            float headRotationPitch = (entityLiving.prevRotationPitch + (entityLiving.rotationPitch - entityLiving.prevRotationPitch) * renderPartialTicks);
-
             GlStateManager.pushMatrix();
             {
                 GlStateManager.rotate(-yaw, 0F, 1F, 0F);
                 GlStateManager.rotate(180F, 1F, 0F, 0F);
                 GlStateManager.disable(GL11.GL_CULL_FACE);
 
-                ModelBase model = PlayerModeHandler.instance().getModelForPlayer((EntityPlayer) entity);
-                this.bindTexture(this.getEntityTexture(entity));
-                model.render(entity, swingProgress, swingProgressPrevious, idleProgress, headRotateAngleY, headRotationPitch, RenderUtil.DEFAULT_BOX_TRANSLATION);
+                PlayerModeHandler.instance().getTextureForPlayer((EntityPlayer) entityLiving).bind();
+                PlayerModeHandler.instance().getModelForPlayer((EntityPlayer) entityLiving).render(entityLiving);
             }
             GlStateManager.popMatrix();
         }
@@ -65,7 +54,7 @@ public class PlayerModeRenderEvent
         @Override
         protected ResourceLocation getEntityTexture(Entity entity)
         {
-            return PlayerModeHandler.instance().getResourceForPlayer((EntityPlayer) entity);
+            return null;
         }
     };
 

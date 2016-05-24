@@ -7,6 +7,7 @@ import org.avp.util.PlayerMode;
 import com.arisux.airi.lib.WorldUtil.Entities.Players;
 import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.airi.lib.client.ModelTexMap;
+import com.arisux.airi.lib.client.Texture;
 import com.arisux.airi.lib.interfaces.IInitializable;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -14,10 +15,8 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerPickupXpEvent;
@@ -134,13 +133,13 @@ public class PlayerModeHandler implements IInitializable
     }
 
     @SideOnly(Side.CLIENT)
-    public ModelBase getModelForPlayer(EntityPlayer player)
+    public ModelBaseWrapper getModelForPlayer(EntityPlayer player)
     {
         return getModelTexMapForPlayer(player).getModel();
     }
 
     @SideOnly(Side.CLIENT)
-    public ResourceLocation getResourceForPlayer(EntityPlayer player)
+    public Texture getTextureForPlayer(EntityPlayer player)
     {
         return getModelTexMapForPlayer(player).getTexture();
     }

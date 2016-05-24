@@ -23,6 +23,7 @@ import org.avp.entities.mob.model.ModelWarrior;
 import org.avp.entities.mob.model.ModelYautja;
 import org.avp.entities.mob.model.ModelYautjaBerserker;
 import org.avp.entities.model.ModelBullet;
+import org.avp.entities.model.ModelLaserMine;
 import org.avp.entities.model.ModelSpear;
 import org.avp.entities.model.ModelSupplyChute;
 import org.avp.entities.tile.model.ModelAmpule;
@@ -152,6 +153,7 @@ public class Resources implements IInitializablePre
         public final ModelTexMap<ModelHiveNode>             HIVE_NODE                      = new ModelTexMap(new ModelHiveNode(), new Texture(AliensVsPredator.ID, "textures/tile/node.png"));
         public final ModelTexMap<ModelSupplyChute>          SUPPLY_CHUTE                   = new ModelTexMap(new ModelSupplyChute(), new Texture(AliensVsPredator.ID, "textures/misc/supplychute.png"));
         public final ModelTexMap<ModelBipedWrapper>         BIPED                          = new ModelTexMap(new ModelBipedWrapper(), new Texture(AbstractClientPlayer.locationStevePng));
+        public final ModelTexMap<ModelLaserMine>            LASER_MINE                     = new ModelTexMap<ModelLaserMine>(new ModelLaserMine(), new Texture(AliensVsPredator.ID, "textures/misc/proximity-mine.png"));
     }
 
     public final Texture  SKY_SUN                  = new Texture("textures/environment/sun.png");
@@ -180,11 +182,11 @@ public class Resources implements IInitializablePre
     public final Texture  BATTERY_INDICATOR        = new Texture(AliensVsPredator.ID, "textures/misc/battery-indicator.png");
     public final Texture  INFECTION_INDICATOR      = new Texture(AliensVsPredator.ID, "textures/misc/infection-indicator.png");
     public final Texture  BLUR_GUNSCOPE            = new Texture(AliensVsPredator.ID, "textures/misc/scope.png");
-    public final Texture  PROXIMITY_MINE           = new Texture(AliensVsPredator.ID, "textures/misc/proximity-mine.png");
     public final Texture  GUI_BASIC                = new Texture(AliensVsPredator.ID, "textures/gui/background.png");
     public final Texture  GUI_TURRET               = new Texture(AliensVsPredator.ID, "textures/gui/turret.png");
     public final Texture  GUI_WRISTBRACER          = new Texture(AliensVsPredator.ID, "textures/gui/wristbracer.png");
     public final Texture  GUI_LOCKER               = new Texture(AliensVsPredator.ID, "textures/gui/locker.png");
+    public final Texture  GUI_ASSEMBLER            = new Texture(AliensVsPredator.ID, "textures/gui/assembler.png");
     public final Texture  GUI_SUPPLYCRATE          = new Texture(AliensVsPredator.ID, "textures/gui/supplycrate.png");
     public final Texture  ICON_AMMO                = new Texture(AliensVsPredator.ID, "textures/misc/icon-ammo.png");
     public final Texture  MOTIONTRACKER_BG         = new Texture(AliensVsPredator.ID, "textures/misc/motiontracker/background.png");

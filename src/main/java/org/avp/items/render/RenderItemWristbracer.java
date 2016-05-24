@@ -7,6 +7,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.client.ItemRenderer;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
@@ -57,8 +58,8 @@ public class RenderItemWristbracer extends ItemRenderer
 
         if (playerToRender != null && ItemWristbracer.playersWristbracerContainsBlades(playerToRender))
         {
-            this.getModel().draw(this.getModel().b6);
-            this.getModel().draw(this.getModel().bladeLeft);
+            ModelBaseWrapper.draw(this.getModel().b6);
+            ModelBaseWrapper.draw(this.getModel().bladeLeft);
         }
     }
     
@@ -79,8 +80,8 @@ public class RenderItemWristbracer extends ItemRenderer
 
         if (playerToRender != null && ItemWristbracer.playersWristbracerContainsBlades(playerToRender))
         {
-            this.getModel().draw(this.getModel().b6);
-            this.getModel().draw(this.getModel().bladeLeft);
+            ModelBaseWrapper.draw(this.getModel().b6);
+            ModelBaseWrapper.draw(this.getModel().bladeLeft);
         }
     }
     
@@ -96,7 +97,7 @@ public class RenderItemWristbracer extends ItemRenderer
         GlStateManager.scale(33F, 33F, 33F);
         this.getModelTexMap().getTexture().bind();
         this.getModel().render();
-        this.getModel().draw(this.getModel().b6);
-        this.getModel().draw(this.getModel().bladeLeft);
+        ModelBaseWrapper.draw(this.getModel().b6);
+        ModelBaseWrapper.draw(this.getModel().bladeLeft);
     }
 }

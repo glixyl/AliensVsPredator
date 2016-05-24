@@ -15,6 +15,7 @@ import org.avp.event.client.RenderEntityInMedpodEvent;
 
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.airi.lib.client.ModelTexMap;
 import com.arisux.airi.lib.client.RenderLivingWrapper;
 
@@ -54,7 +55,7 @@ public class RenderFacehugger extends RenderLivingWrapper implements ICustomCryo
         public abstract void render(EntityFacehugger facehugger, float renderPartialTicks);
     }
 
-    public RenderFacehugger(ModelTexMap model)
+    public RenderFacehugger(ModelTexMap<? extends ModelBaseWrapper> model)
     {
         super(model);
         new VanillaFaceMountRenderers();

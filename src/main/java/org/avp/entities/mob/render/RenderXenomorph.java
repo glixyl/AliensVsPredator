@@ -18,6 +18,7 @@ import org.lwjgl.opengl.GL12;
 
 import com.arisux.airi.lib.GlStateManager;
 import com.arisux.airi.lib.RenderUtil;
+import com.arisux.airi.lib.client.ModelBaseWrapper;
 import com.arisux.airi.lib.client.ModelTexMap;
 import com.arisux.airi.lib.client.RenderLivingWrapper;
 
@@ -32,12 +33,12 @@ public class RenderXenomorph extends RenderLivingWrapper implements ICustomCryos
 {
     private float renderScale;
 
-    public RenderXenomorph(ModelTexMap modelTexMap)
+    public RenderXenomorph(ModelTexMap<? extends ModelBaseWrapper> modelTexMap)
     {
         this(modelTexMap, 1F);
     }
 
-    public RenderXenomorph(ModelTexMap modelTexMap, float renderScale)
+    public RenderXenomorph(ModelTexMap<? extends ModelBaseWrapper> modelTexMap, float renderScale)
     {
         super(modelTexMap);
         this.renderScale = renderScale;

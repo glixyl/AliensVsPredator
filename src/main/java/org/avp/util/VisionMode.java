@@ -1,6 +1,5 @@
 package org.avp.util;
 
-import static com.arisux.airi.lib.RenderUtil.bindTexture;
 import static com.arisux.airi.lib.RenderUtil.drawQuad;
 import static com.arisux.airi.lib.RenderUtil.renderOverlay;
 import static com.arisux.airi.lib.RenderUtil.scaledDisplayResolution;
@@ -57,7 +56,7 @@ public enum VisionMode
                 GlStateManager.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
                 GlStateManager.blendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
                 GlStateManager.disable(GL_ALPHA_TEST);
-                bindTexture(AliensVsPredator.resources().BLUR_CELTIC_HUD);
+                AliensVsPredator.resources().BLUR_CELTIC_HUD.bind();
                 GlStateManager.color(0F, 1F, 0.1F, 0F);
                 drawQuad(0, 0, scaledDisplayResolution().getScaledWidth(), scaledDisplayResolution().getScaledHeight(), 0, 0, 0, 0);
                 GlStateManager.color(0F, 1F, 0F, 1F);
@@ -119,7 +118,7 @@ public enum VisionMode
                 GlStateManager.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
                 GlStateManager.blendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
                 GlStateManager.disable(GL_ALPHA_TEST);
-                bindTexture(AliensVsPredator.resources().BLUR_CELTIC_HUD);
+                AliensVsPredator.resources().BLUR_CELTIC_HUD.bind();
                 GlStateManager.color(1F, 1F, 0F, 0F);
                 drawQuad(0, 0, scaledDisplayResolution().getScaledWidth(), scaledDisplayResolution().getScaledHeight(), 0, 0, 0, 0);
                 GlStateManager.color(1F, 1F, 0.45F, 0F);

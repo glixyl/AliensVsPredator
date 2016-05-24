@@ -1,7 +1,6 @@
 package org.avp.entities.tile.render;
 
 import org.avp.AliensVsPredator;
-import org.avp.entities.model.ModelSupplyChute;
 import org.avp.entities.tile.TileEntitySupplyCrate;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -29,12 +28,8 @@ public class RenderSupplyCrate extends TileEntitySpecialRenderer
             GlStateManager.enable(GL11.GL_ALPHA_TEST);
             GlStateManager.disableCullFace();
             RenderUtil.rotate(tile);
-            ModelSupplyChute chute = AliensVsPredator.resources().models().SUPPLY_CHUTE.getModel();
             AliensVsPredator.resources().models().SUPPLY_CHUTE.bindTexture();
-            chute.draw(chute.casing);
-            chute.draw(chute.lHinge);
-            chute.draw(chute.rHinge);
-            chute.draw(chute.lid);
+            AliensVsPredator.resources().models().SUPPLY_CHUTE.getModel().drawCrate();
         }
         GlStateManager.popMatrix();
     }
