@@ -34,7 +34,7 @@ public class BlockMist extends BlockFluidClassic
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister register)
+    public void registerIcons(IIconRegister register)
     {
         AliensVsPredator.resources().ICONSET_MIST.registerIcons(register);
         AliensVsPredator.fluids().fluidMist.setIcons(AliensVsPredator.resources().ICONSET_MIST.still, AliensVsPredator.resources().ICONSET_MIST.flowing);

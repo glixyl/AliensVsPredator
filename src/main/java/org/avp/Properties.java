@@ -14,6 +14,7 @@ public class Properties
     public final int GUI_TURRET = 1;
     public final int GUI_WRISTBRACER = 2;
     public final int GUI_LOCKER = 3;
+    public final int GUI_SUPPLYCRATE = 4;
 
     public final String DIMENSION_NAME_ACHERON = "LV-426 (Acheron)";
     public final String DIMENSION_ID_ACHERON = "DIM_LV426";

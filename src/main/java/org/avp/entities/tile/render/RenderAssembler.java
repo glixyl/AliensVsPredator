@@ -26,7 +26,7 @@ public class RenderAssembler extends TileEntitySpecialRenderer
             GlStateManager.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
             GlStateManager.translate(posX + 0.5F, posY + 0.95F, posZ + 0.5F);
 
-            GlStateManager.rotate(tile.getWorldObj().getWorldTime() % 360 * 12, 0, 1, 0);
+            GlStateManager.rotate(tile.getWorld().getWorldTime() % 360 * 12, 0, 1, 0);
 
             GlStateManager.pushMatrix();
             {

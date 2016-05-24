@@ -16,7 +16,7 @@ public class BlockGunLocker extends BlockLocker
     }
 
     @Override
-    public void registerBlockIcons(IIconRegister register)
+    public void registerIcons(IIconRegister register)
     {
         return;
     }

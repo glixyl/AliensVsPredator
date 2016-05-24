@@ -69,7 +69,7 @@ public class RenderWorkstation extends TileEntitySpecialRenderer
             GlStateManager.rotate(6.5F, 1F, 0F, 0F);
             GlStateManager.scale(-textscale, textscale, textscale);
 
-            if (tile.getWorldObj().getWorldTime() % 40 == 0)
+            if (tile.getWorld().getWorldTime() % 40 == 0)
             {
                 try
                 {

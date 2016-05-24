@@ -115,7 +115,7 @@ public class ModelRepulsionGenerator extends ModelBaseWrapper
         {
             GlStateManager.pushMatrix();
             {
-                GlStateManager.rotate(tile.getWorldObj().getWorldTime() % 360 * 48 * AccessWrapper.getRenderPartialTicks(), 0F, 1F, 0F);
+                GlStateManager.rotate(tile.getWorld().getWorldTime() % 360 * 48 * AccessWrapper.getRenderPartialTicks(), 0F, 1F, 0F);
                 dualMagnet.render(boxTranslation);
             }
             GlStateManager.popMatrix();

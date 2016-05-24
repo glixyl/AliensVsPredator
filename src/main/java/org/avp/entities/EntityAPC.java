@@ -122,7 +122,7 @@ public class EntityAPC extends Entity
 
                 if (!flag)
                 {
-                    this.func_145778_a(AliensVsPredator.items().itemAPC, 1, 0.0F);
+                    this.dropItemWithOffset(AliensVsPredator.items().itemAPC, 1, 0.0F);
                 }
 
                 this.setDead();
@@ -325,7 +325,7 @@ public class EntityAPC extends Entity
                     }
                     else if (block == Blocks.waterlily)
                     {
-                        this.worldObj.func_147480_a(blockX, blockY, blockZ, true);
+                        this.worldObj.breakBlock(blockX, blockY, blockZ, true);
                         this.isCollidedHorizontally = false;
                     }
                 }

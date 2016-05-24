@@ -26,7 +26,7 @@ public class TileEntityP2RConverter extends TileEntityElectrical implements IVol
         super.updateEntity();
         this.updateEnergyAsReceiver();
 
-        World world = this.getWorldObj();
+        World world = this.getWorld();
         int x = this.xCoord;
         int y = this.yCoord;
         int z = this.zCoord;

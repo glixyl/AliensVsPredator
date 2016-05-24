@@ -293,7 +293,7 @@ public class EntityBullet extends Entity
             ++this.ticksInAir;
             Vec3 var17 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
             Vec3 vec3d1 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
-            MovingObjectPosition movingobjectposition = this.worldObj.func_147447_a(var17, vec3d1, false, true, false);
+            MovingObjectPosition movingobjectposition = this.worldObj.rayTraceBlocks(var17, vec3d1, false, true, false);
             var17 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
             vec3d1 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 

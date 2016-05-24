@@ -34,7 +34,7 @@ public class BlockBlackGoo extends BlockFluidClassic
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister register)
+    public void registerIcons(IIconRegister register)
     {
         AliensVsPredator.resources().ICONSET_BLACK_GOO.registerIcons(register);
         AliensVsPredator.fluids().fluidBlackGoo.setIcons(AliensVsPredator.resources().ICONSET_BLACK_GOO.still, AliensVsPredator.resources().ICONSET_BLACK_GOO.flowing);

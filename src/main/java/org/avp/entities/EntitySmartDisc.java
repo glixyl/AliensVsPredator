@@ -136,7 +136,7 @@ public class EntitySmartDisc extends EntityProjectile
                 {
                     this.playHitSound();
 
-                    if (this.thrownItem.getMaxDamage() + 1 <= this.thrownItem.getMaxDamage())
+                    if (this.thrownItem.getMaxDurability() + 1 <= this.thrownItem.getMaxDurability())
                     {
                         this.setVelocity(0.2D * this.rand.nextDouble() - 0.1D, 0.2D * this.rand.nextDouble() - 0.1D, 0.2D * this.rand.nextDouble() - 0.1D);
                     }

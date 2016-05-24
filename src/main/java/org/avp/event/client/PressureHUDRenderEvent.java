@@ -136,7 +136,7 @@ public class PressureHUDRenderEvent
 
         GlStateManager.pushMatrix();
         {
-            FontRenderer fontrenderer = mc.fontRenderer;
+            FontRenderer fontrenderer = mc.fontRendererObj;
             GlStateManager.scale(scale, scale, scale);
             GlStateManager.enable(GL_BLEND);
             GlStateManager.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);

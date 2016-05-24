@@ -2,9 +2,11 @@ package org.avp;
 
 import org.avp.entities.tile.TileEntityAssembler;
 import org.avp.entities.tile.TileEntityLocker;
+import org.avp.entities.tile.TileEntitySupplyCrate;
 import org.avp.entities.tile.TileEntityTurret;
 import org.avp.gui.GuiAssembler;
 import org.avp.gui.GuiLocker;
+import org.avp.gui.GuiSupplyCrate;
 import org.avp.gui.GuiTurret;
 import org.avp.gui.GuiWristbracer;
 import org.avp.inventory.container.ContainerWristbracer;
@@ -53,6 +55,12 @@ public class GuiHandler implements IGuiHandler, IInitializable
             TileEntityLocker locker = (TileEntityLocker) (world.getTileEntity(x, y, z));
             return locker.getNewContainer(player);
         }
+        
+        if (ID == AliensVsPredator.properties().GUI_SUPPLYCRATE)
+        {
+        	TileEntitySupplyCrate supplyCrate = (TileEntitySupplyCrate) (world.getTileEntity(x, y, z));
+            return supplyCrate.getNewContainer(player);
+        }
 
         return null;
     }
@@ -79,6 +87,11 @@ public class GuiHandler implements IGuiHandler, IInitializable
         if (ID == AliensVsPredator.properties().GUI_LOCKER)
         {
             return new GuiLocker(player, (TileEntityLocker) (world.getTileEntity(x, y, z)));
+        }
+        
+        if (ID == AliensVsPredator.properties().GUI_SUPPLYCRATE)
+        {
+            return new GuiSupplyCrate(player, (TileEntitySupplyCrate) (world.getTileEntity(x, y, z)));
         }
 
         return null;

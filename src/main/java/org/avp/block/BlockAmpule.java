@@ -26,11 +26,11 @@ public class BlockAmpule extends Block
         float size = 0.3F;
         this.setBlockBounds(size, 0.0F, size, 1.0F - size, 1F, 1.0F - size);
     }
-
+    
     @Override
-    public void registerBlockIcons(IIconRegister register)
+    public void registerIcons(IIconRegister reg)
     {
-        return;
+    	return;
     }
 
     @Override

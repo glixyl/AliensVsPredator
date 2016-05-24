@@ -109,7 +109,7 @@ public class GuiTurret extends GuiContainer
 
         for (Class<? extends Entity> c : this.tile.getDangerousTargets())
         {
-            AliensVsPredator.network().sendToServer(new PacketAddTuretTarget(this.tile.xCoord, this.tile.yCoord, this.tile.zCoord, EntityList.getEntityID(WorldUtil.Entities.constructEntity(this.tile.getWorldObj(), c))));
+            AliensVsPredator.network().sendToServer(new PacketAddTuretTarget(this.tile.xCoord, this.tile.yCoord, this.tile.zCoord, EntityList.getEntityID(WorldUtil.Entities.constructEntity(this.tile.getWorld(), c))));
         }
     }
 

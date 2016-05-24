@@ -29,7 +29,7 @@ public class BlockMedpod extends Block
     }
 
     @Override
-    public void registerBlockIcons(IIconRegister register)
+    public void registerIcons(IIconRegister register)
     {
         return;
     }

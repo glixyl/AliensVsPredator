@@ -121,38 +121,38 @@ public class ModelWorkstation extends ModelBaseWrapper
 
         if (tile != null)
         {
-            Block block = tile.getWorldObj().getBlock(tile.xCoord, tile.yCoord, tile.zCoord);
+            Block block = tile.getWorld().getBlock(tile.xCoord, tile.yCoord, tile.zCoord);
             Block left, leftUp, right, rightUp;
 
             switch (tile.rotation)
             {
                 case 3:
                     /* Left is plus z, right is minus z */
-                    leftUp = tile.getWorldObj().getBlock(tile.xCoord, tile.yCoord + 1, tile.zCoord + 1);
-                    rightUp = tile.getWorldObj().getBlock(tile.xCoord, tile.yCoord + 1, tile.zCoord - 1);
-                    left = tile.getWorldObj().getBlock(tile.xCoord, tile.yCoord, tile.zCoord + 1);
-                    right = tile.getWorldObj().getBlock(tile.xCoord, tile.yCoord, tile.zCoord - 1);
+                    leftUp = tile.getWorld().getBlock(tile.xCoord, tile.yCoord + 1, tile.zCoord + 1);
+                    rightUp = tile.getWorld().getBlock(tile.xCoord, tile.yCoord + 1, tile.zCoord - 1);
+                    left = tile.getWorld().getBlock(tile.xCoord, tile.yCoord, tile.zCoord + 1);
+                    right = tile.getWorld().getBlock(tile.xCoord, tile.yCoord, tile.zCoord - 1);
                     break;
                 case 2:
                     /* Left is minus x, right is plus x */
-                    leftUp = tile.getWorldObj().getBlock(tile.xCoord + 1, tile.yCoord + 1, tile.zCoord);
-                    rightUp = tile.getWorldObj().getBlock(tile.xCoord - 1, tile.yCoord + 1, tile.zCoord);
-                    left = tile.getWorldObj().getBlock(tile.xCoord + 1, tile.yCoord, tile.zCoord);
-                    right = tile.getWorldObj().getBlock(tile.xCoord - 1, tile.yCoord, tile.zCoord);
+                    leftUp = tile.getWorld().getBlock(tile.xCoord + 1, tile.yCoord + 1, tile.zCoord);
+                    rightUp = tile.getWorld().getBlock(tile.xCoord - 1, tile.yCoord + 1, tile.zCoord);
+                    left = tile.getWorld().getBlock(tile.xCoord + 1, tile.yCoord, tile.zCoord);
+                    right = tile.getWorld().getBlock(tile.xCoord - 1, tile.yCoord, tile.zCoord);
                     break;
                 case 1:
                     /* Left is minus z, right is plus z */
-                    leftUp = tile.getWorldObj().getBlock(tile.xCoord, tile.yCoord + 1, tile.zCoord - 1);
-                    rightUp = tile.getWorldObj().getBlock(tile.xCoord, tile.yCoord + 1, tile.zCoord + 1);
-                    left = tile.getWorldObj().getBlock(tile.xCoord, tile.yCoord, tile.zCoord - 1);
-                    right = tile.getWorldObj().getBlock(tile.xCoord, tile.yCoord, tile.zCoord + 1);
+                    leftUp = tile.getWorld().getBlock(tile.xCoord, tile.yCoord + 1, tile.zCoord - 1);
+                    rightUp = tile.getWorld().getBlock(tile.xCoord, tile.yCoord + 1, tile.zCoord + 1);
+                    left = tile.getWorld().getBlock(tile.xCoord, tile.yCoord, tile.zCoord - 1);
+                    right = tile.getWorld().getBlock(tile.xCoord, tile.yCoord, tile.zCoord + 1);
                     break;
                 case 0:
                     /* Left is plus x, right is minus x, case 4 */
-                    leftUp = tile.getWorldObj().getBlock(tile.xCoord - 1, tile.yCoord + 1, tile.zCoord);
-                    rightUp = tile.getWorldObj().getBlock(tile.xCoord + 1, tile.yCoord + 1, tile.zCoord);
-                    left = tile.getWorldObj().getBlock(tile.xCoord - 1, tile.yCoord, tile.zCoord);
-                    right = tile.getWorldObj().getBlock(tile.xCoord + 1, tile.yCoord, tile.zCoord);
+                    leftUp = tile.getWorld().getBlock(tile.xCoord - 1, tile.yCoord + 1, tile.zCoord);
+                    rightUp = tile.getWorld().getBlock(tile.xCoord + 1, tile.yCoord + 1, tile.zCoord);
+                    left = tile.getWorld().getBlock(tile.xCoord - 1, tile.yCoord, tile.zCoord);
+                    right = tile.getWorld().getBlock(tile.xCoord + 1, tile.yCoord, tile.zCoord);
                     break;
                 default:
                     left = block;

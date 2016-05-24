@@ -29,8 +29,8 @@ public class BlockUnidentifiedDirt extends BlockDirt
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister register)
+    public void registerIcons(IIconRegister register)
     {
-        super.registerBlockIcons(register);
+        super.registerIcons(register);
     }
 }

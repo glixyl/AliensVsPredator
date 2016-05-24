@@ -21,8 +21,8 @@ public class CraftingHandler implements IInitializable
 
     public CraftingHandler()
     {
-        jungleWood.setItemDamage(3);
-        charcoal.setItemDamage(1);
+        jungleWood.setMetadata(3);
+        charcoal.setMetadata(1);
     }
 
     @Override

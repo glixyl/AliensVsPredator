@@ -73,7 +73,7 @@ public abstract class ItemFlamethrower extends HookedItem
 
             if (ammoStack != null && ammoStack.getItem() != null)
             {
-                if (ammoStack.getItemDamage() < ammoStack.getMaxDamage())
+                if (ammoStack.getCurrentDurability() < ammoStack.getMaxDurability())
                 {
                     ammoStack.damageItem(1, playerIn);
                 }

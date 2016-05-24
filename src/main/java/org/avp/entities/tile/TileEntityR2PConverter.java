@@ -20,7 +20,7 @@ public class TileEntityR2PConverter extends TileEntityElectrical implements IVol
     {
         if (this.canOutputPower())
         {
-            if (this.getWorldObj().getWorldTime() % (1000 / this.getSourceHertz()) == 0)
+            if (this.getWorld().getWorldTime() % (1000 / this.getSourceHertz()) == 0)
             {
                 this.setVoltage(120);
             }
@@ -57,7 +57,7 @@ public class TileEntityR2PConverter extends TileEntityElectrical implements IVol
 
     public boolean canOutputPower()
     {
-        World world = this.getWorldObj();
+        World world = this.getWorld();
         int x = this.xCoord;
         int y = this.yCoord;
         int z = this.zCoord;

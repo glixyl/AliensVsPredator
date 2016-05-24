@@ -8,7 +8,7 @@ public class BlockCustomSlab extends BlockSlab
     public BlockCustomSlab(Material material)
     {
         super(false, material);
-        this.setBlockName(getLocalizedName() + "Slab");
+        this.setUnlocalizedName(getLocalizedName() + "Slab");
     }
 
     @Override
@@ -29,12 +29,8 @@ public class BlockCustomSlab extends BlockSlab
         return false;
     }
 
-    /**
-     * OBF: func_150002_b
-     * DEOBF: getFullSlabName
-     */
     @Override
-    public String func_150002_b(int type)
+    public String getFullSlabName(int type)
     {
         return getUnlocalizedName() + "-slab";
     }

@@ -234,7 +234,7 @@ public class EntityAcidProjectile extends Entity implements IProjectile
             ++this.ticksInAir;
             Vec3 var18 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
             Vec3 var19 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
-            MovingObjectPosition movingobjectposition = this.worldObj.func_147447_a(var18, var19, false, true, true);
+            MovingObjectPosition movingobjectposition = this.worldObj.rayTraceBlocks(var18, var19, false, true, true);
             var18 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
             var19 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 

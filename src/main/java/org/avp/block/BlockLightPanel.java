@@ -19,7 +19,7 @@ public class BlockLightPanel extends Block
     }
 
     @Override
-    public void registerBlockIcons(IIconRegister register)
+    public void registerIcons(IIconRegister register)
     {
         return;
     }
@@ -41,7 +41,7 @@ public class BlockLightPanel extends Block
     {
         this.setLightLevel(0);
         world.setLightValue(EnumSkyBlock.Block, posX, posY, posZ, 7);
-        world.func_147479_m(posX, posY, posZ);
+        world.markBlockForRenderUpdate(posX, posY, posZ);
 
         return super.onBlockPlaced(world, posX, posY, posZ, side, subX, subY, subZ, meta);
     }

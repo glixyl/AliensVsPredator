@@ -153,12 +153,12 @@ public class RenderEntityInMedpodEvent
             GL11.glPushMatrix();
             {
                 this.mainModel.isRiding = false;
-                this.mainModel.onGround = this.renderSwingProgress(entity, renderPartialTicks);
+                this.mainModel.swingProgress = this.handleRotationFloat(entity, renderPartialTicks);
                 this.mainModel.isChild = entity.isChild();
 
                 if (this.renderPassModel != null)
                 {
-                    this.renderPassModel.onGround = this.renderPassModel != null ? this.mainModel.onGround : this.renderPassModel.onGround;
+                    this.renderPassModel.swingProgress = this.renderPassModel != null ? this.mainModel.swingProgress : this.renderPassModel.swingProgress;
                 }
 
                 if (this.renderPassModel != null)

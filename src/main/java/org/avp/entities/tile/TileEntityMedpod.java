@@ -50,7 +50,7 @@ public class TileEntityMedpod extends TileEntityElectrical implements IOpenable,
     @Override
     public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
     {
-        readFromNBT(packet.func_148857_g());
+        readFromNBT(packet.getNbtCompound());
     }
 
     @Override

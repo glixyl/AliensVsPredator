@@ -30,7 +30,7 @@ public class BlockUnidentifiedTreeSapling extends BlockSapling
     }
 
     @Override
-    public void registerBlockIcons(IIconRegister register)
+    public void registerIcons(IIconRegister register)
     {
         this.blockIcon = register.registerIcon(this.getTextureName());
     }

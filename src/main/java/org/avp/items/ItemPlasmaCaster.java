@@ -16,7 +16,7 @@ public class ItemPlasmaCaster extends Item
     {
         super();
         this.maxStackSize = 1;
-        this.setMaxDamage(50);
+        this.setMaxDurability(50);
     }
 
     @Override

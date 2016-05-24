@@ -30,7 +30,7 @@ public class EntitySupplyChute extends EntityFallingBlock
     @Override
     public void onUpdate()
     {
-        if (this.func_145805_f() != null)
+        if (this.getBlock() != null)
         {
             super.onUpdate();
         }

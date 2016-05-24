@@ -16,7 +16,7 @@ public class ItemSpear extends ItemSword
     public ItemSpear(ToolMaterial material)
     {
         super(material);
-        this.setMaxDamage(120);
+        this.setMaxDurability(120);
         this.maxStackSize = 1;
     }
 

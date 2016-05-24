@@ -56,7 +56,7 @@ public class TileEntityLocker extends TileEntity implements IOpenable, IRotatabl
     @Override
     public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
     {
-        readFromNBT(packet.func_148857_g());
+        readFromNBT(packet.getNbtCompound());
     }
 
     public Container getNewContainer(EntityPlayer player)

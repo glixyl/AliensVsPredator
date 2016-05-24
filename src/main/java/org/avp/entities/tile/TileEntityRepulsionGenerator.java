@@ -16,7 +16,7 @@ public class TileEntityRepulsionGenerator extends TileEntityElectrical implement
     @Override
     public void updateEntity()
     {
-        if (this.getWorldObj().getWorldTime() % (1000 / this.getSourceHertz()) == 0)
+        if (this.getWorld().getWorldTime() % (1000 / this.getSourceHertz()) == 0)
         {
             this.setVoltage(220);
         }

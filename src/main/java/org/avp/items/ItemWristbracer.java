@@ -40,7 +40,7 @@ public class ItemWristbracer extends HookedItem
                         {
                             items.removeTag(slot);
                             bladesStack.writeToNBT(tag);
-                            tag.setShort("Damage", (short) (bladesStack.getItemDamage() + 1));
+                            tag.setShort("Damage", (short) (bladesStack.getCurrentDurability() + 1));
                             tag.setByte("Slot", (byte) slot);
                             items.appendTag(tag);
                         }

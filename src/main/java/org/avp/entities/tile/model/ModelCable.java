@@ -77,7 +77,7 @@ public class ModelCable extends ModelBaseWrapper
             left.setRotationPoint(1F, 15F, 1F);
             right.setRotationPoint(-1F, 15F, -1F);
 
-            TileEntity leftTile = tile.getWorldObj().getTileEntity(tile.xCoord + 1, tile.yCoord, tile.zCoord);
+            TileEntity leftTile = tile.getWorld().getTileEntity(tile.xCoord + 1, tile.yCoord, tile.zCoord);
 
             if (leftTile instanceof TileEntityElectrical)
             {
@@ -87,7 +87,7 @@ public class ModelCable extends ModelBaseWrapper
                     left.render(boxTranslation);
             }
 
-            TileEntity rightTile = tile.getWorldObj().getTileEntity(tile.xCoord - 1, tile.yCoord, tile.zCoord);
+            TileEntity rightTile = tile.getWorld().getTileEntity(tile.xCoord - 1, tile.yCoord, tile.zCoord);
 
             if (rightTile instanceof TileEntityElectrical)
             {
@@ -97,7 +97,7 @@ public class ModelCable extends ModelBaseWrapper
                     right.render(boxTranslation);
             }
 
-            TileEntity topTile = tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord + 1, tile.zCoord);
+            TileEntity topTile = tile.getWorld().getTileEntity(tile.xCoord, tile.yCoord + 1, tile.zCoord);
 
             if (topTile instanceof TileEntityElectrical)
             {
@@ -107,7 +107,7 @@ public class ModelCable extends ModelBaseWrapper
                     up.render(boxTranslation);
             }
 
-            TileEntity bottomTile = tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord - 1, tile.zCoord);
+            TileEntity bottomTile = tile.getWorld().getTileEntity(tile.xCoord, tile.yCoord - 1, tile.zCoord);
 
             if (bottomTile instanceof TileEntityElectrical)
             {
@@ -117,7 +117,7 @@ public class ModelCable extends ModelBaseWrapper
                     down.render(boxTranslation);
             }
 
-            TileEntity backTile = tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord, tile.zCoord + 1);
+            TileEntity backTile = tile.getWorld().getTileEntity(tile.xCoord, tile.yCoord, tile.zCoord + 1);
 
             if (backTile instanceof TileEntityElectrical)
             {
@@ -127,7 +127,7 @@ public class ModelCable extends ModelBaseWrapper
                     back.render(boxTranslation);
             }
 
-            TileEntity frontTile = tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord, tile.zCoord - 1);
+            TileEntity frontTile = tile.getWorld().getTileEntity(tile.xCoord, tile.yCoord, tile.zCoord - 1);
 
             if (frontTile instanceof TileEntityElectrical)
             {

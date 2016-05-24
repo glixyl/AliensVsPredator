@@ -185,6 +185,7 @@ public class Resources implements IInitializablePre
     public final Texture  GUI_TURRET               = new Texture(AliensVsPredator.ID, "textures/gui/turret.png");
     public final Texture  GUI_WRISTBRACER          = new Texture(AliensVsPredator.ID, "textures/gui/wristbracer.png");
     public final Texture  GUI_LOCKER               = new Texture(AliensVsPredator.ID, "textures/gui/locker.png");
+    public final Texture  GUI_SUPPLYCRATE          = new Texture(AliensVsPredator.ID, "textures/gui/supplycrate.png");
     public final Texture  ICON_AMMO                = new Texture(AliensVsPredator.ID, "textures/misc/icon-ammo.png");
     public final Texture  MOTIONTRACKER_BG         = new Texture(AliensVsPredator.ID, "textures/misc/motiontracker/background.png");
     public final Texture  MOTIONTRACKER_FG         = new Texture(AliensVsPredator.ID, "textures/misc/motiontracker/foreground.png");

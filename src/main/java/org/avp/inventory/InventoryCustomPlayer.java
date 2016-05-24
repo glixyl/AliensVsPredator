@@ -157,25 +157,13 @@ public class InventoryCustomPlayer implements IInventory
     }
 
     @Override
-    public boolean hasCustomInventoryName()
+    public boolean isCustomInventoryName()
     {
         return false;
     }
 
     @Override
     public void markDirty()
-    {
-        ;
-    }
-
-    @Override
-    public void openInventory()
-    {
-        ;
-    }
-
-    @Override
-    public void closeInventory()
     {
         ;
     }

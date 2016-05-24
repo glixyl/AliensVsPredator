@@ -176,7 +176,7 @@ public abstract class EntityProjectile extends EntityArrow implements IThrowable
 
         Vec3 vecPos = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
         Vec3 vecPosNext = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
-        MovingObjectPosition hit = worldObj.func_147447_a(vecPos, vecPosNext, false, true, false);
+        MovingObjectPosition hit = worldObj.rayTraceBlocks(vecPos, vecPosNext, false, true, false);
 
         if (hit != null)
         {
@@ -452,7 +452,7 @@ public abstract class EntityProjectile extends EntityArrow implements IThrowable
             {
                 if (!this.worldObj.isRemote)
                 {
-                    ItemStack item = new ItemStack(this.getItemstack().getItem(), 1, this.getItemstack().getItemDamage() + 1);
+                    ItemStack item = new ItemStack(this.getItemstack().getItem(), 1, this.getItemstack().getCurrentDurability() + 1);
 
                     if (item != null && entityplayer.inventory.addItemStackToInventory(item))
                     {

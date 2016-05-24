@@ -47,7 +47,7 @@ public class BlockWall extends Block
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister register)
+    public void registerIcons(IIconRegister register)
     {
         AliensVsPredator.resources().ICONSET_WALLW.registerIcons(register);
     }

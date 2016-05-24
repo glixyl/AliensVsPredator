@@ -18,7 +18,7 @@ public class BlockUnidentifiedLog extends BlockLog
     }
 
     @Override
-    public void registerBlockIcons(IIconRegister register)
+    public void registerIcons(IIconRegister register)
     {
         this.blockIcon = (register.registerIcon("avp:unitree.wood"));
         this.top = (register.registerIcon("avp:unitree.wood.top"));

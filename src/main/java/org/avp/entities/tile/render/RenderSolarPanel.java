@@ -20,7 +20,7 @@ public class RenderSolarPanel extends TileEntitySpecialRenderer
 
             if (tileEntity != null)
             {
-                float angle = tileEntity.getWorldObj().getCelestialAngle(renderPartialTicks) * 360;
+                float angle = tileEntity.getWorld().getCelestialAngle(renderPartialTicks) * 360;
                 GlStateManager.rotate(angle > 90 && angle < 270 ? 90 : angle, 0, 0, 1);
                 GlStateManager.translate(0F, -1.4F, 0F);
             }

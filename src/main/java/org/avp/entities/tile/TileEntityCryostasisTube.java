@@ -101,7 +101,7 @@ public class TileEntityCryostasisTube extends TileEntityElectrical implements IV
     @Override
     public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
     {
-        readFromNBT(packet.func_148857_g());
+        readFromNBT(packet.getNbtCompound());
     }
 
     @Override

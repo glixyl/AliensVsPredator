@@ -30,7 +30,7 @@ public class FarmlandRegistry
         if (event.world.getBlock(event.x, event.y + 1, event.z).isAir(event.world, event.x, event.y + 1, event.z) && (farmlandRegistry.contains(block)))
         {
             Block farmland = Blocks.farmland;
-            event.world.playSoundEffect((double) ((float) event.x + 0.5F), (double) ((float) event.y + 0.5F), (double) ((float) event.z + 0.5F), farmland.stepSound.getStepResourcePath(), (farmland.stepSound.getVolume() + 1.0F) / 2.0F, farmland.stepSound.getPitch() * 0.8F);
+            event.world.playSoundEffect((double) ((float) event.x + 0.5F), (double) ((float) event.y + 0.5F), (double) ((float) event.z + 0.5F), farmland.stepSound.getStepSound(), (farmland.stepSound.getVolume() + 1.0F) / 2.0F, farmland.stepSound.getFrequency() * 0.8F);
 
             if (event.world.isRemote)
             {

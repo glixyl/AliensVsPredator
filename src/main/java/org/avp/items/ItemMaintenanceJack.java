@@ -15,7 +15,7 @@ public class ItemMaintenanceJack extends HookedItem
     {
         super();
         this.maxStackSize = 1;
-        this.setMaxDamage(100);
+        this.setMaxDurability(100);
     }
 
     public void onPryBlastDoor(EntityPlayer player, ItemStack currentEquippedItem)
