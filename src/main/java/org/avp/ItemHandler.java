@@ -16,6 +16,8 @@ import org.avp.entities.mob.EntityPredalien;
 import org.avp.entities.mob.EntityProtomorph;
 import org.avp.entities.mob.EntityQueen;
 import org.avp.entities.mob.EntityRoyalFacehugger;
+import org.avp.entities.mob.EntityRunnerDrone;
+import org.avp.entities.mob.EntityRunnerWarrior;
 import org.avp.entities.mob.EntitySpaceJockey;
 import org.avp.entities.mob.EntitySpitter;
 import org.avp.entities.mob.EntityTrilobite;
@@ -61,9 +63,9 @@ import net.minecraft.item.ItemSword;
 
 public class ItemHandler extends IBHandler implements IInitializable
 {
-    public static ItemHandler instance = new ItemHandler();
+    public static ItemHandler instance          = new ItemHandler();
 
-    public Item helmXeno = (new ItemArmorXeno(AliensVsPredator.materials().armors().chitin, 4, 0)),
+    public Item               helmXeno          = (new ItemArmorXeno(AliensVsPredator.materials().armors().chitin, 4, 0)),
         plateXeno = (new ItemArmorXeno(AliensVsPredator.materials().armors().chitin, 4, 1)),
         legsXeno = (new ItemArmorXeno(AliensVsPredator.materials().armors().chitin, 4, 2)),
         bootsXeno = (new ItemArmorXeno(AliensVsPredator.materials().armors().chitin, 4, 3)),
@@ -185,7 +187,9 @@ public class ItemHandler extends IBHandler implements IInitializable
         itemSummonerYautjaBerserker = (new ItemEntitySummoner(this.getMod().domain(), EntityYautjaBerserker.class)),
         itemSummonerSpaceJockey = (new ItemEntitySummoner(this.getMod().domain(), EntitySpaceJockey.class)),
         itemSummonerEngineer = (new ItemEntitySummoner(this.getMod().domain(), EntityEngineer.class)),
-        itemSummonerDeaconShark = (new ItemEntitySummoner(this.getMod().domain(), EntityDeaconShark.class));
+        itemSummonerDeaconShark = (new ItemEntitySummoner(this.getMod().domain(), EntityDeaconShark.class)),
+        itemSummonerRunnerDrone = (new ItemEntitySummoner(this.getMod().domain(), EntityRunnerDrone.class)),
+        itemSummonerRunnerWarrior = (new ItemEntitySummoner(this.getMod().domain(), EntityRunnerWarrior.class));
 
     public ItemHandler()
     {
@@ -204,6 +208,8 @@ public class ItemHandler extends IBHandler implements IInitializable
 
         registerItem(itemSummonerDrone, "summon.drone");
         registerItem(itemSummonerWarrior, "summon.warrior");
+        registerItem(itemSummonerRunnerDrone, "summon.runner.drone");
+        registerItem(itemSummonerRunnerWarrior, "summon.runner.warrior");
         registerItem(itemSummonerCrusher, "summon.crusher");
         registerItem(itemSummonerSpitter, "summon.spitter");
         registerItem(itemSummonerPraetorian, "summon.praetorian");

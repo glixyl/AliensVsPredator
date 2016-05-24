@@ -290,6 +290,8 @@ public class Renderers implements IInitializablePost
         registerItemRenderer(items.itemSummonerDrone, (new RenderItemSummoner(EntityDrone.class)).setScale(7.5F).setY(6F));
         registerItemRenderer(items.itemSummonerProtomorph, (new RenderItemSummoner(EntityProtomorph.class)).setScale(7.5F).setY(6F));
         registerItemRenderer(items.itemSummonerWarrior, (new RenderItemSummoner(EntityWarrior.class)).setScale(7.5F).setY(9F));
+        registerItemRenderer(items.itemSummonerRunnerDrone, (new RenderItemSummoner(EntityRunnerDrone.class)).setScale(7.5F).setY(6F));
+        registerItemRenderer(items.itemSummonerRunnerWarrior, (new RenderItemSummoner(EntityRunnerWarrior.class)).setScale(7.5F).setY(9F));
         registerItemRenderer(items.itemSummonerPraetorian, (new RenderItemSummoner(EntityPraetorian.class)).setScale(7.5F).setY(7.5F));
         registerItemRenderer(items.itemSummonerSpitter, (new RenderItemSummoner(EntitySpitter.class)).setScale(2.5F).setY(9F));
         registerItemRenderer(items.itemSummonerCrusher, (new RenderItemSummoner(EntityCrusher.class)).setScale(7.5F).setY(9.5F));
