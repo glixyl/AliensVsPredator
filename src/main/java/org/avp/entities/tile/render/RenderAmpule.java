@@ -27,7 +27,7 @@ public class RenderAmpule extends TileEntitySpecialRenderer
             GlStateManager.enable(GL11.GL_ALPHA_TEST);
             GlStateManager.disableCullFace();
             RenderUtil.rotate(tile);
-            AliensVsPredator.resources().models().AMPULE.draw();
+            AliensVsPredator.resources().models().AMPULE.draw(tile);
         }
         GlStateManager.popMatrix();
     }

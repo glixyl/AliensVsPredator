@@ -45,7 +45,7 @@ public class RenderCryostasisTube extends TileEntitySpecialRenderer
             GlStateManager.scale(0.75F, -0.75F, 0.75F);
             GlStateManager.enable(GL_ALPHA_TEST);
             GlStateManager.disableCullFace();
-            AliensVsPredator.resources().models().CRYOSTASIS_TUBE.draw();
+            AliensVsPredator.resources().models().CRYOSTASIS_TUBE.draw(tile);
             GlStateManager.enableCullFace();
         }
 

@@ -17,9 +17,9 @@ public class RenderPowercell extends TileEntitySpecialRenderer
         {
             GlStateManager.disable(GL11.GL_CULL_FACE);
             GlStateManager.translate(posX + 0.5, posY - 0.5, posZ + 0.5);
-            AliensVsPredator.resources().models().POWERCELL.draw();
+            AliensVsPredator.resources().models().POWERCELL.draw(tileEntity);
             GlStateManager.disableLight();
-            AliensVsPredator.resources().models().POWERCELL_LIQUID.draw();
+            AliensVsPredator.resources().models().POWERCELL_LIQUID.draw(tileEntity);
             GlStateManager.enableLight();
         }
         GlStateManager.popMatrix();

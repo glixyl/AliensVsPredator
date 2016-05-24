@@ -46,7 +46,7 @@ public class RenderTransformer extends TileEntitySpecialRenderer
                     GlStateManager.rotate(0F, 0F, 1F, 0F);
                 }
 
-                AliensVsPredator.resources().models().TRANSFORMER.draw();
+                AliensVsPredator.resources().models().TRANSFORMER.draw(transformer);
             }
             GlStateManager.popMatrix();
         }

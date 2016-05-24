@@ -25,7 +25,7 @@ public class RenderSolarPanel extends TileEntitySpecialRenderer
                 GlStateManager.translate(0F, -1.4F, 0F);
             }
 
-            AliensVsPredator.resources().models().SOLAR_PANEL.draw();
+            AliensVsPredator.resources().models().SOLAR_PANEL.draw(tileEntity);
         }
         GlStateManager.popMatrix();
     }

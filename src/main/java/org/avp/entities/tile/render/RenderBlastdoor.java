@@ -26,7 +26,7 @@ public class RenderBlastdoor extends TileEntitySpecialRenderer
                 GlStateManager.translate(posX + 0.5F, posY + 1.5F, posZ + 0.5F);
                 GlStateManager.scale(1.0F, -1.0F, 1.0F);
                 RenderUtil.rotate(tile);
-                AliensVsPredator.resources().models().BLASTDOOR.draw();
+                AliensVsPredator.resources().models().BLASTDOOR.draw(tile);
             }
             GlStateManager.popMatrix();
         }

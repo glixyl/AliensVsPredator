@@ -27,7 +27,7 @@ public class RenderMedpod extends TileEntitySpecialRenderer
             GlStateManager.scale(newScale, newScale, newScale);
             GlStateManager.disableCullFace();
             RenderUtil.rotateOpposite(tile);
-            AliensVsPredator.resources().models().MEDPOD.draw(tileEntity);
+            AliensVsPredator.resources().models().MEDPOD.draw(tile);
 
             GlStateManager.blendClear();
 
@@ -38,7 +38,7 @@ public class RenderMedpod extends TileEntitySpecialRenderer
             }
 
             GlStateManager.enableBlend();
-            AliensVsPredator.resources().models().MEDPOD_MASK.draw(tileEntity);
+            AliensVsPredator.resources().models().MEDPOD_MASK.draw(tile);
             GlStateManager.enableLight();
             GlStateManager.enableLightMapping();
             GlStateManager.disable(GL_BLEND);

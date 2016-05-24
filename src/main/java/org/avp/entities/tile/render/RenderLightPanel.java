@@ -20,7 +20,7 @@ public class RenderLightPanel extends TileEntitySpecialRenderer
             GlStateManager.translate(posX + 0.5F, posY - 0.5, posZ + 0.5F);
             GlStateManager.rotate(0F, 0F, 1F, 0F);
             GlStateManager.scale(1.0F, 1.0F, 1.0F);
-            AliensVsPredator.resources().models().LIGHT_PANEL.draw();
+            AliensVsPredator.resources().models().LIGHT_PANEL.draw(tileEntity);
         }
         GlStateManager.popMatrix();
     }

@@ -2,7 +2,6 @@ package org.avp.entities.tile.render;
 
 import org.avp.AliensVsPredator;
 import org.avp.entities.tile.TileEntityLocker;
-import org.avp.entities.tile.model.ModelLocker;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.GlStateManager;
@@ -32,8 +31,7 @@ public class RenderGunLocker extends TileEntitySpecialRenderer
             GlStateManager.disableCullFace();
             RenderUtil.rotate(tile);
             
-            //TODO: Convert to K Generics
-            ((ModelLocker) AliensVsPredator.resources().models().GUN_LOCKER.getModel()).door.rotateAngleY = !tile.isOpen() ? 0 : -1.5F;
+            AliensVsPredator.resources().models().GUN_LOCKER.getModel().door.rotateAngleY = !tile.isOpen() ? 0 : -1.5F;
             AliensVsPredator.resources().models().GUN_LOCKER.draw(tile);
 
             if (tile != null)
