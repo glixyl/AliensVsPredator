@@ -8,6 +8,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.lib.AccessWrapper;
 import com.arisux.airi.lib.GlStateManager;
+import com.arisux.airi.lib.RenderUtil;
 import com.arisux.airi.lib.WorldUtil.Entities;
 import com.arisux.airi.lib.client.ItemRenderer;
 import com.arisux.airi.lib.client.ModelBaseWrapper;
@@ -23,14 +24,14 @@ import net.minecraft.item.ItemStack;
 public class RenderItemSummoner extends ItemRenderer
 {
     private Class<? extends Entity> entityClass;
-    private float scale;
-    private float x;
-    private float y;
-    private float rotation;
-    private ModelBaseWrapper modelCache;
-    private Texture textureCache;
-    private Entity entityCache;
-    private Render renderCache;
+    private float                   scale;
+    private float                   x;
+    private float                   y;
+    private float                   rotation;
+    private ModelBaseWrapper        modelCache;
+    private Texture                 textureCache;
+    private Entity                  entityCache;
+    private Render                  renderCache;
 
     public RenderItemSummoner(Class<? extends Entity> entityClass)
     {
@@ -64,40 +65,43 @@ public class RenderItemSummoner extends ItemRenderer
         GlStateManager.disable(GL11.GL_CULL_FACE);
         super.renderItem(type, item, data);
     }
-    
+
     public void renderCachedModel()
     {
-        if (entityCache == null)
-        {
-            entityCache = Entities.constructEntity(Minecraft.getMinecraft().theWorld, this.entityClass);
-        }
-        
+//        if (entityCache == null)
+//        {
+//            entityCache = Entities.constructEntity(Minecraft.getMinecraft().theWorld, this.entityClass);
+//        }
+
         if (renderCache == null)
         {
-            renderCache = RenderManager.instance.getEntityRenderObject(entityCache);
+            renderCache = RenderManager.instance.getEntityClassRenderObject(entityClass);
         }
 
         if (renderCache instanceof RendererLivingEntity)
         {
-            if (modelCache == null)
+//            if (modelCache == null)
             {
                 modelCache = new ModelBaseWrapper(AccessWrapper.getMainModel((RendererLivingEntity) renderCache));
             }
-            
+
             if (textureCache == null)
             {
                 textureCache = new Texture(AccessWrapper.getEntityTexture(renderCache, entityCache));
             }
 
             GlStateManager.pushMatrix();
-            GlStateManager.enableLighting();
-            GlStateManager.scale(1F, -1F, 1F);
-            GlStateManager.translate(0F, -1F, 0F);
-            GlStateManager.rotate(180F, 0F, 1F, 0F);
-            GlStateManager.rotate(-45F, 0F, 1F, 0F);
-            renderCache.doRender(entityCache, 0F, 0F, 0F, 0F, 0F);
-            GlStateManager.disableLight();
-            GlStateManager.disableLighting();
+            {
+                GlStateManager.enableLighting();
+                GlStateManager.scale(1F, -1F, 1F);
+                GlStateManager.translate(0F, -1F, 0F);
+                GlStateManager.rotate(180F, 0F, 0F, 1F);
+                GlStateManager.rotate(-45F, 0F, 1F, 0F);
+                textureCache.bind();
+                modelCache.render();
+                GlStateManager.disableLight();
+                GlStateManager.disableLighting();
+            }
             GlStateManager.popMatrix();
         }
     }
