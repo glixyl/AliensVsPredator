@@ -21,15 +21,7 @@ public class BlockMist extends BlockFluidClassic
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int meta)
     {
-        switch (side)
-        {
-            case 0:
-                return AliensVsPredator.resources().ICONSET_MIST.still;
-            case 1:
-                return AliensVsPredator.resources().ICONSET_MIST.still;
-            default:
-                return AliensVsPredator.resources().ICONSET_MIST.flowing;
-        }
+        return AliensVsPredator.resources().ICONSET_MIST.getIconForSide(side);
     }
 
     @Override
@@ -37,7 +29,7 @@ public class BlockMist extends BlockFluidClassic
     public void registerIcons(IIconRegister register)
     {
         AliensVsPredator.resources().ICONSET_MIST.registerIcons(register);
-        AliensVsPredator.fluids().fluidMist.setIcons(AliensVsPredator.resources().ICONSET_MIST.still, AliensVsPredator.resources().ICONSET_MIST.flowing);
+        AliensVsPredator.fluids().fluidMist.setIcons(AliensVsPredator.resources().ICONSET_MIST.getIconForSide(1), AliensVsPredator.resources().ICONSET_MIST.getIconForSide(2));
     }
 
     @Override

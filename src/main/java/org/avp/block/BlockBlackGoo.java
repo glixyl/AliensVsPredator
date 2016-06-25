@@ -21,15 +21,7 @@ public class BlockBlackGoo extends BlockFluidClassic
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int meta)
     {
-        switch (side)
-        {
-            case 0:
-                return AliensVsPredator.resources().ICONSET_BLACK_GOO.still;
-            case 1:
-                return AliensVsPredator.resources().ICONSET_BLACK_GOO.still;
-            default:
-                return AliensVsPredator.resources().ICONSET_BLACK_GOO.flowing;
-        }
+        return AliensVsPredator.resources().ICONSET_BLACK_GOO.getIconForSide(side);
     }
 
     @Override
@@ -37,7 +29,7 @@ public class BlockBlackGoo extends BlockFluidClassic
     public void registerIcons(IIconRegister register)
     {
         AliensVsPredator.resources().ICONSET_BLACK_GOO.registerIcons(register);
-        AliensVsPredator.fluids().fluidBlackGoo.setIcons(AliensVsPredator.resources().ICONSET_BLACK_GOO.still, AliensVsPredator.resources().ICONSET_BLACK_GOO.flowing);
+        AliensVsPredator.fluids().fluidBlackGoo.setIcons(AliensVsPredator.resources().ICONSET_BLACK_GOO.getIconForSide(1), AliensVsPredator.resources().ICONSET_BLACK_GOO.getIconForSide(2));
     }
 
     @Override

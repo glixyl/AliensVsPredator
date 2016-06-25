@@ -30,26 +30,7 @@ public class BlockTempleSpawner extends Block
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int meta)
     {
-        IconSet iconSet = AliensVsPredator.resources().ICONSET_SPAWNER;
-        IconSides iconSide = IconSides.getSideFor(side);
-
-        switch (iconSide)
-        {
-            case BOTTOM:
-                return iconSet.bottom;
-            case TOP:
-                return iconSet.top;
-            case BACK:
-                return iconSet.back;
-            case FRONT:
-                return iconSet.front;
-            case LEFT:
-                return iconSet.left;
-            case RIGHT:
-                return iconSet.right;
-            default:
-                return iconSet.bottom;
-        }
+        return AliensVsPredator.resources().ICONSET_SPAWNER.getIconForSide(side);
     }
 
     @Override

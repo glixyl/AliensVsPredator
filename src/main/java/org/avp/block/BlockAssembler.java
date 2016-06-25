@@ -6,8 +6,6 @@ import org.avp.AliensVsPredator;
 import org.avp.entities.tile.TileEntityAssembler;
 
 import com.arisux.airi.lib.WorldUtil.Entities.Players.Inventories;
-import com.arisux.airi.lib.client.render.IconSet;
-import com.arisux.airi.lib.enums.IconSides;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -30,26 +28,7 @@ public class BlockAssembler extends Block
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int meta)
     {
-        IconSet iconSet = AliensVsPredator.resources().ICONSET_ASSEMBLER;
-        IconSides iconSide = IconSides.getSideFor(side);
-
-        switch (iconSide)
-        {
-            case BOTTOM:
-                return iconSet.bottom;
-            case TOP:
-                return iconSet.top;
-            case BACK:
-                return iconSet.back;
-            case FRONT:
-                return iconSet.front;
-            case LEFT:
-                return iconSet.left;
-            case RIGHT:
-                return iconSet.right;
-            default:
-                return iconSet.bottom;
-        }
+        return AliensVsPredator.resources().ICONSET_ASSEMBLER.getIconForSide(side);
     }
 
     @Override

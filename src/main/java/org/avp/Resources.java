@@ -60,15 +60,15 @@ import com.arisux.airi.lib.client.ModelBipedWrapper;
 import com.arisux.airi.lib.client.ModelTexMap;
 import com.arisux.airi.lib.client.Texture;
 import com.arisux.airi.lib.client.render.IconSet;
-import com.arisux.airi.lib.interfaces.IInitializablePre;
+import com.arisux.airi.lib.client.render.IconSet.BlockIconSet;
+import com.arisux.airi.lib.client.render.IconSet.LiquidIconSet;
 
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.AbstractClientPlayer;
 
 @SideOnly(Side.CLIENT)
-public class Resources implements IInitializablePre
+public class Resources
 {
     public static final Resources instance = new Resources();
     private static final Models   models   = new Models();
@@ -154,63 +154,56 @@ public class Resources implements IInitializablePre
         public final ModelTexMap<ModelBipedWrapper>         BIPED                          = new ModelTexMap(new ModelBipedWrapper(), new Texture(AbstractClientPlayer.locationStevePng));
         public final ModelTexMap<ModelLaserMine>            LASER_MINE                     = new ModelTexMap(new ModelLaserMine(), new Texture(AliensVsPredator.ID, "textures/misc/proximity-mine.png"));
         public final ModelTexMap<ModelDNASynthesizer>       DNA_SYNTHESIZER                = new ModelTexMap(new ModelDNASynthesizer(), new Texture(AliensVsPredator.ID, "textures/tile/dna-synthesizer.png"));
+        public final WavefrontModel                         M577_APC                       = AIRI.wavefrontAPI().loadModel(AliensVsPredator.class, AliensVsPredator.ID, "m577apc", "/assets/avp/models/m577apc");
     }
 
-    public final Texture  SKY_SUN                  = new Texture("textures/environment/sun.png");
-    public final Texture  SKY_RAIN                 = new Texture("textures/environment/rain.png");
-    public final Texture  SKY_CLOUDS               = new Texture("textures/environment/clouds.png");
-    public final Texture  SKY_VARDA_CLOUDS         = new Texture(AliensVsPredator.ID, "textures/misc/varda-clouds.png");
-    public final Texture  SKY_SILICA               = new Texture(AliensVsPredator.ID, "textures/misc/silica.png");
-    public final Texture  SKY_CALPAMOS             = new Texture(AliensVsPredator.ID, "textures/misc/calpamos.png");
-    public final Texture  SKY_VARDA                = new Texture(AliensVsPredator.ID, "textures/misc/varda.png");
-    public final Texture  SKY_ACHERON              = new Texture(AliensVsPredator.ID, "textures/misc/acheron.png");
-    public final Texture  TITANIUM1                = new Texture(AliensVsPredator.ID, "textures/armor/titanium_1.png");
-    public final Texture  TITANIUM2                = new Texture(AliensVsPredator.ID, "textures/armor/titanium_2.png");
-    public final Texture  PRESSURESUIT1            = new Texture(AliensVsPredator.ID, "textures/armor/suit_1.png");
-    public final Texture  PRESSURESUIT2            = new Texture(AliensVsPredator.ID, "textures/armor/suit_2.png");
-    public final Texture  XENO1                    = new Texture(AliensVsPredator.ID, "textures/armor/xeno_1.png");
-    public final Texture  XENO2                    = new Texture(AliensVsPredator.ID, "textures/armor/xeno_2.png");
-    public final Texture  MARINE1                  = new Texture(AliensVsPredator.ID, "textures/armor/marine_1.png");
-    public final Texture  MARINE2                  = new Texture(AliensVsPredator.ID, "textures/armor/marine_2.png");
-    public final Texture  ACID_POOL                = new Texture(AliensVsPredator.ID, "textures/misc/renderacid.png");
-    public final Texture  DISC                     = new Texture(AliensVsPredator.ID, "textures/misc/disc.png");
-    public final Texture  SHURIKEN                 = new Texture(AliensVsPredator.ID, "textures/misc/shuriken.png");
-    public final Texture  BLUR_CELTIC_HUD          = new Texture(AliensVsPredator.ID, "textures/misc/celtic-helm-overlay.png");
-    public final Texture  BLUR_TACTICAL_HUD        = new Texture(AliensVsPredator.ID, "textures/misc/marine-helm-overlay.png");
-    public final Texture  BLUR_FACEHUGGER          = new Texture(AliensVsPredator.ID, "textures/misc/facehugger.png");
-    public final Texture  BLUR_CHESTBURSTER_EMERGE = new Texture(AliensVsPredator.ID, "textures/misc/chestburster-emerge-overlay.png");
-    public final Texture  BATTERY_INDICATOR        = new Texture(AliensVsPredator.ID, "textures/misc/battery-indicator.png");
-    public final Texture  INFECTION_INDICATOR      = new Texture(AliensVsPredator.ID, "textures/misc/infection-indicator.png");
-    public final Texture  BLUR_GUNSCOPE            = new Texture(AliensVsPredator.ID, "textures/misc/scope.png");
-    public final Texture  GUI_BASIC                = new Texture(AliensVsPredator.ID, "textures/gui/background.png");
-    public final Texture  GUI_TURRET               = new Texture(AliensVsPredator.ID, "textures/gui/turret.png");
-    public final Texture  GUI_WRISTBRACER          = new Texture(AliensVsPredator.ID, "textures/gui/wristbracer.png");
-    public final Texture  GUI_LOCKER               = new Texture(AliensVsPredator.ID, "textures/gui/locker.png");
-    public final Texture  GUI_ASSEMBLER            = new Texture(AliensVsPredator.ID, "textures/gui/assembler.png");
-    public final Texture  GUI_SUPPLYCRATE          = new Texture(AliensVsPredator.ID, "textures/gui/supplycrate.png");
-    public final Texture  ICON_AMMO                = new Texture(AliensVsPredator.ID, "textures/misc/icon-ammo.png");
-    public final Texture  MOTIONTRACKER_BG         = new Texture(AliensVsPredator.ID, "textures/misc/motiontracker/background.png");
-    public final Texture  MOTIONTRACKER_FG         = new Texture(AliensVsPredator.ID, "textures/misc/motiontracker/foreground.png");
-    public final Texture  MOTIONTRACKER_PING       = new Texture(AliensVsPredator.ID, "textures/misc/motiontracker/ping.png");
-    public final Texture  MOTIONTRACKER_S1         = new Texture(AliensVsPredator.ID, "textures/misc/motiontracker/sweep1.png");
-    public final Texture  MOTIONTRACKER_S2         = new Texture(AliensVsPredator.ID, "textures/misc/motiontracker/sweep2.png");
-    public final Texture  MOTIONTRACKER_S3         = new Texture(AliensVsPredator.ID, "textures/misc/motiontracker/sweep3.png");
-    public final Texture  MOTIONTRACKER_S4         = new Texture(AliensVsPredator.ID, "textures/misc/motiontracker/sweep4.png");
-    public final Texture  MOTIONTRACKER_S5         = new Texture(AliensVsPredator.ID, "textures/misc/motiontracker/sweep5.png");
-    public final Texture  MOTIONTRACKER_S6         = new Texture(AliensVsPredator.ID, "textures/misc/motiontracker/sweep6.png");
-    public final Texture  QUEEN_BOSS_BAR           = new Texture(AliensVsPredator.ID, "textures/misc/queenbossbar.png");
+    public final Texture SKY_SUN                  = new Texture("textures/environment/sun.png");
+    public final Texture SKY_RAIN                 = new Texture("textures/environment/rain.png");
+    public final Texture SKY_CLOUDS               = new Texture("textures/environment/clouds.png");
+    public final Texture SKY_VARDA_CLOUDS         = new Texture(AliensVsPredator.ID, "textures/misc/varda-clouds.png");
+    public final Texture SKY_SILICA               = new Texture(AliensVsPredator.ID, "textures/misc/silica.png");
+    public final Texture SKY_CALPAMOS             = new Texture(AliensVsPredator.ID, "textures/misc/calpamos.png");
+    public final Texture SKY_VARDA                = new Texture(AliensVsPredator.ID, "textures/misc/varda.png");
+    public final Texture SKY_ACHERON              = new Texture(AliensVsPredator.ID, "textures/misc/acheron.png");
+    public final Texture TITANIUM1                = new Texture(AliensVsPredator.ID, "textures/armor/titanium_1.png");
+    public final Texture TITANIUM2                = new Texture(AliensVsPredator.ID, "textures/armor/titanium_2.png");
+    public final Texture PRESSURESUIT1            = new Texture(AliensVsPredator.ID, "textures/armor/suit_1.png");
+    public final Texture PRESSURESUIT2            = new Texture(AliensVsPredator.ID, "textures/armor/suit_2.png");
+    public final Texture XENO1                    = new Texture(AliensVsPredator.ID, "textures/armor/xeno_1.png");
+    public final Texture XENO2                    = new Texture(AliensVsPredator.ID, "textures/armor/xeno_2.png");
+    public final Texture MARINE1                  = new Texture(AliensVsPredator.ID, "textures/armor/marine_1.png");
+    public final Texture MARINE2                  = new Texture(AliensVsPredator.ID, "textures/armor/marine_2.png");
+    public final Texture ACID_POOL                = new Texture(AliensVsPredator.ID, "textures/misc/renderacid.png");
+    public final Texture DISC                     = new Texture(AliensVsPredator.ID, "textures/misc/disc.png");
+    public final Texture SHURIKEN                 = new Texture(AliensVsPredator.ID, "textures/misc/shuriken.png");
+    public final Texture BLUR_CELTIC_HUD          = new Texture(AliensVsPredator.ID, "textures/misc/celtic-helm-overlay.png");
+    public final Texture BLUR_TACTICAL_HUD        = new Texture(AliensVsPredator.ID, "textures/misc/marine-helm-overlay.png");
+    public final Texture BLUR_FACEHUGGER          = new Texture(AliensVsPredator.ID, "textures/misc/facehugger.png");
+    public final Texture BLUR_CHESTBURSTER_EMERGE = new Texture(AliensVsPredator.ID, "textures/misc/chestburster-emerge-overlay.png");
+    public final Texture BATTERY_INDICATOR        = new Texture(AliensVsPredator.ID, "textures/misc/battery-indicator.png");
+    public final Texture INFECTION_INDICATOR      = new Texture(AliensVsPredator.ID, "textures/misc/infection-indicator.png");
+    public final Texture BLUR_GUNSCOPE            = new Texture(AliensVsPredator.ID, "textures/misc/scope.png");
+    public final Texture GUI_BASIC                = new Texture(AliensVsPredator.ID, "textures/gui/background.png");
+    public final Texture GUI_TURRET               = new Texture(AliensVsPredator.ID, "textures/gui/turret.png");
+    public final Texture GUI_WRISTBRACER          = new Texture(AliensVsPredator.ID, "textures/gui/wristbracer.png");
+    public final Texture GUI_LOCKER               = new Texture(AliensVsPredator.ID, "textures/gui/locker.png");
+    public final Texture GUI_ASSEMBLER            = new Texture(AliensVsPredator.ID, "textures/gui/assembler.png");
+    public final Texture GUI_SUPPLYCRATE          = new Texture(AliensVsPredator.ID, "textures/gui/supplycrate.png");
+    public final Texture ICON_AMMO                = new Texture(AliensVsPredator.ID, "textures/misc/icon-ammo.png");
+    public final Texture MOTIONTRACKER_BG         = new Texture(AliensVsPredator.ID, "textures/misc/motiontracker/background.png");
+    public final Texture MOTIONTRACKER_FG         = new Texture(AliensVsPredator.ID, "textures/misc/motiontracker/foreground.png");
+    public final Texture MOTIONTRACKER_PING       = new Texture(AliensVsPredator.ID, "textures/misc/motiontracker/ping.png");
+    public final Texture MOTIONTRACKER_S1         = new Texture(AliensVsPredator.ID, "textures/misc/motiontracker/sweep1.png");
+    public final Texture MOTIONTRACKER_S2         = new Texture(AliensVsPredator.ID, "textures/misc/motiontracker/sweep2.png");
+    public final Texture MOTIONTRACKER_S3         = new Texture(AliensVsPredator.ID, "textures/misc/motiontracker/sweep3.png");
+    public final Texture MOTIONTRACKER_S4         = new Texture(AliensVsPredator.ID, "textures/misc/motiontracker/sweep4.png");
+    public final Texture MOTIONTRACKER_S5         = new Texture(AliensVsPredator.ID, "textures/misc/motiontracker/sweep5.png");
+    public final Texture MOTIONTRACKER_S6         = new Texture(AliensVsPredator.ID, "textures/misc/motiontracker/sweep6.png");
+    public final Texture QUEEN_BOSS_BAR           = new Texture(AliensVsPredator.ID, "textures/misc/queenbossbar.png");
 
-    public final IconSet  ICONSET_WALLW            = new IconSet("avp:wall_top", "avp:wall_top", "avp:wall_top", "avp:wall_side", "avp:wall_side", "avp:wall_side", "avp:wall_side");
-    public final IconSet  ICONSET_SPAWNER          = new IconSet("avp:spawner_side", "avp:spawner_top", "avp:spawner_bottom", "avp:spawner_side", "avp:spawner_side", "avp:spawner_side", "avp:spawner_side");
-    public final IconSet  ICONSET_ASSEMBLER        = new IconSet("avp:assembler.top", "avp:assembler.top", "avp:assembler.top", "avp:assembler.side", "avp:assembler.side", "avp:assembler.side", "avp:assembler.side");
-    public final IconSet  ICONSET_BLACK_GOO        = new IconSet("avp:blackgoo.still", "avp:blackgoo.flowing", "avp:blackgoo.still");
-    public final IconSet  ICONSET_MIST             = new IconSet("avp:mist.still", "avp:mist.flowing", "avp:mist.still");
-
-    public WavefrontModel M577_APC                 = AIRI.wavefrontAPI().loadModel(AliensVsPredator.class, AliensVsPredator.ID, "m577apc", "/assets/avp/models/m577apc");
-
-    @Override
-    public void preInitialize(FMLPreInitializationEvent event)
-    {
-        // M577_APC = ;
-    }
+    public final IconSet ICONSET_WALLW            = new BlockIconSet("avp:wall_top", "avp:wall_top", "avp:wall_top", "avp:wall_side", "avp:wall_side", "avp:wall_side", "avp:wall_side");
+    public final IconSet ICONSET_SPAWNER          = new BlockIconSet("avp:spawner_side", "avp:spawner_top", "avp:spawner_bottom", "avp:spawner_side", "avp:spawner_side", "avp:spawner_side", "avp:spawner_side");
+    public final IconSet ICONSET_ASSEMBLER        = new BlockIconSet("avp:assembler.top", "avp:assembler.top", "avp:assembler.top", "avp:assembler.side", "avp:assembler.side", "avp:assembler.side", "avp:assembler.side");
+    public final IconSet ICONSET_BLACK_GOO        = new LiquidIconSet("avp:blackgoo.still", "avp:blackgoo.flowing", "avp:blackgoo.still");
+    public final IconSet ICONSET_MIST             = new LiquidIconSet("avp:mist.still", "avp:mist.flowing", "avp:mist.still");
 }

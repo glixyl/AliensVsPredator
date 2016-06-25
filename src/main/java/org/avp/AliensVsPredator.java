@@ -188,11 +188,6 @@ public class AliensVsPredator implements IMod
 
         settings().preInitialize(event);
         renderTypes().preInitialize(event);
-
-        if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
-        {
-            resources().preInitialize(event);
-        }
     }
 
     @Override

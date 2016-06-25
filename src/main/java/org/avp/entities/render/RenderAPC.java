@@ -5,6 +5,7 @@ import org.avp.entities.EntityAPC;
 import org.lwjgl.opengl.GL11;
 
 import com.arisux.airi.api.wavefrontapi.Part;
+import com.arisux.airi.api.wavefrontapi.WavefrontModel;
 import com.arisux.airi.lib.GlStateManager;
 
 import net.minecraft.client.Minecraft;
@@ -16,83 +17,84 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderAPC extends Render
 {
-    private Part tire0 = AliensVsPredator.resources().M577_APC.getPart("Mesh75_APCTire1_4_Group10_Model"),
-        tire0Rim = AliensVsPredator.resources().M577_APC.getPart("Mesh76_APCWhAmr4_Group10_Model"),
-        tire0Fin0 = AliensVsPredator.resources().M577_APC.getPart("Mesh77_APCWhPlt10_Group10_Model"),
-        tire0Fin1 = AliensVsPredator.resources().M577_APC.getPart("Mesh78_APCWhPlt10_Group10_Model"),
-        tire0Fin2 = AliensVsPredator.resources().M577_APC.getPart("Mesh79_APCWhPlt10_Group10_Model"),
-        tire0Fin3 = AliensVsPredator.resources().M577_APC.getPart("Mesh80_APCWhPlt10_Group10_Model"),
-        tire0Fin4 = AliensVsPredator.resources().M577_APC.getPart("Mesh81_APCWhPlt10_Group10_Model"),
-        tire0Fin5 = AliensVsPredator.resources().M577_APC.getPart("Mesh82_APCWhPlt11_Group10_Model"),
-        tire0Fin6 = AliensVsPredator.resources().M577_APC.getPart("Mesh83_APCWhPlt11_Group10_Model"),
-        tire0Fin7 = AliensVsPredator.resources().M577_APC.getPart("Mesh84_APCWhPlt11_Group10_Model"),
-        tire0Fin8 = AliensVsPredator.resources().M577_APC.getPart("Mesh85_APCWhPlt11_Group10_Model"),
-        tire0Fin9 = AliensVsPredator.resources().M577_APC.getPart("Mesh86_APCWhPlt11_Group10_Model"),
-        tire0Fin10 = AliensVsPredator.resources().M577_APC.getPart("Mesh87_APCWhPlt12_Group10_Model"),
-        tire0Fin11 = AliensVsPredator.resources().M577_APC.getPart("Mesh88_APCWhPlt12_Group10_Model"),
-        tire0Fin12 = AliensVsPredator.resources().M577_APC.getPart("Mesh89_APCWhPlt12_Group10_Model"),
-        tire0Fin13 = AliensVsPredator.resources().M577_APC.getPart("Mesh90_APCWhPlt12_Group10_Model"),
-        tire0Fin14 = AliensVsPredator.resources().M577_APC.getPart("Mesh91_APCWhPlt12_Group10_Model"),
-        tire1 = AliensVsPredator.resources().M577_APC.getPart("Mesh58_APCTire1_3_Group9_Model"),
-        tire1Rim = AliensVsPredator.resources().M577_APC.getPart("Mesh60_APCWhPlt7_Group9_Model"),
-        tire1Fin0 = AliensVsPredator.resources().M577_APC.getPart("Mesh61_APCWhPlt7_Group9_Model"),
-        tire1Fin1 = AliensVsPredator.resources().M577_APC.getPart("Mesh62_APCWhPlt7_Group9_Model"),
-        tire1Fin2 = AliensVsPredator.resources().M577_APC.getPart("Mesh64_APCWhPlt7_Group9_Model"),
-        tire1Fin3 = AliensVsPredator.resources().M577_APC.getPart("Mesh66_APCWhPlt8_Group9_Model"),
-        tire1Fin4 = AliensVsPredator.resources().M577_APC.getPart("Mesh67_APCWhPlt8_Group9_Model"),
-        tire1Fin5 = AliensVsPredator.resources().M577_APC.getPart("Mesh68_APCWhPlt8_Group9_Model"),
-        tire1Fin6 = AliensVsPredator.resources().M577_APC.getPart("Mesh69_APCWhPlt8_Group9_Model"),
-        tire1Fin7 = AliensVsPredator.resources().M577_APC.getPart("Mesh70_APCWhPlt9_Group9_Model"),
-        tire1Fin8 = AliensVsPredator.resources().M577_APC.getPart("Mesh72_APCWhPlt9_Group9_Model"),
-        tire1Fin9 = AliensVsPredator.resources().M577_APC.getPart("Mesh73_APCWhPlt9_Group9_Model"),
-        tire1Fin10 = AliensVsPredator.resources().M577_APC.getPart("Mesh74_APCWhPlt9_Group9_Model"),
-        tire1Fin11 = AliensVsPredator.resources().M577_APC.getPart("Mesh65_APCWhPlt8_Group9_Model"),
-        tire1Fin12 = AliensVsPredator.resources().M577_APC.getPart("Mesh71_APCWhPlt9_Group9_Model"),
-        tire1Fin13 = AliensVsPredator.resources().M577_APC.getPart("Mesh59_APCWhAmr3_Group9_Model"),
-        tire1Fin14 = AliensVsPredator.resources().M577_APC.getPart("Mesh63_APCWhPlt7_Group9_Model"),
-        tire2 = AliensVsPredator.resources().M577_APC.getPart("Mesh41_APCTire1_2_Group8_Model"),
-        tire2Rim = AliensVsPredator.resources().M577_APC.getPart("Mesh42_APCWhAmr2_Group8_Model"),
-        tire2Fin0 = AliensVsPredator.resources().M577_APC.getPart("Mesh43_APCWhPlt4_Group8_Model"),
-        tire2Fin1 = AliensVsPredator.resources().M577_APC.getPart("Mesh44_APCWhPlt4_Group8_Model"),
-        tire2Fin2 = AliensVsPredator.resources().M577_APC.getPart("Mesh45_APCWhPlt4_Group8_Model"),
-        tire2Fin3 = AliensVsPredator.resources().M577_APC.getPart("Mesh46_APCWhPlt4_Group8_Model"),
-        tire2Fin4 = AliensVsPredator.resources().M577_APC.getPart("Mesh47_APCWhPlt4_Group8_Model"),
-        tire2Fin5 = AliensVsPredator.resources().M577_APC.getPart("Mesh48_APCWhPlt5_Group8_Model"),
-        tire2Fin6 = AliensVsPredator.resources().M577_APC.getPart("Mesh49_APCWhPlt5_Group8_Model"),
-        tire2Fin7 = AliensVsPredator.resources().M577_APC.getPart("Mesh50_APCWhPlt5_Group8_Model"),
-        tire2Fin8 = AliensVsPredator.resources().M577_APC.getPart("Mesh51_APCWhPlt5_Group8_Model"),
-        tire2Fin9 = AliensVsPredator.resources().M577_APC.getPart("Mesh52_APCWhPlt5_Group8_Model"),
-        tire2Fin10 = AliensVsPredator.resources().M577_APC.getPart("Mesh53_APCWhPlt6_Group8_Model"),
-        tire2Fin11 = AliensVsPredator.resources().M577_APC.getPart("Mesh54_APCWhPlt6_Group8_Model"),
-        tire2Fin12 = AliensVsPredator.resources().M577_APC.getPart("Mesh55_APCWhPlt6_Group8_Model"),
-        tire2Fin13 = AliensVsPredator.resources().M577_APC.getPart("Mesh56_APCWhPlt6_Group8_Model"),
-        tire2Fin14 = AliensVsPredator.resources().M577_APC.getPart("Mesh57_APCWhPlt6_Group8_Model"),
-        tire3 = AliensVsPredator.resources().M577_APC.getPart("Mesh34_APCTire1_1_Group7_Model"),
-        tire3Rim = AliensVsPredator.resources().M577_APC.getPart("Mesh35_APCWhAmr1_Group7_Model"),
-        tire3Fin0 = AliensVsPredator.resources().M577_APC.getPart("Mesh24_APCWhPlt1_Group7_Model"),
-        tire3Fin1 = AliensVsPredator.resources().M577_APC.getPart("Mesh25_APCWhPlt1_Group7_Model"),
-        tire3Fin2 = AliensVsPredator.resources().M577_APC.getPart("Mesh26_APCWhPlt1_Group7_Model"),
-        tire3Fin3 = AliensVsPredator.resources().M577_APC.getPart("Mesh27_APCWhPlt1_Group7_Model"),
-        tire3Fin4 = AliensVsPredator.resources().M577_APC.getPart("Mesh28_APCWhPlt1_Group7_Model"),
-        tire3Fin5 = AliensVsPredator.resources().M577_APC.getPart("Mesh29_APCWhPlt2_Group7_Model"),
-        tire3Fin6 = AliensVsPredator.resources().M577_APC.getPart("Mesh30_APCWhPlt2_Group7_Model"),
-        tire3Fin7 = AliensVsPredator.resources().M577_APC.getPart("Mesh31_APCWhPlt2_Group7_Model"),
-        tire3Fin8 = AliensVsPredator.resources().M577_APC.getPart("Mesh32_APCWhPlt2_Group7_Model"),
-        tire3Fin9 = AliensVsPredator.resources().M577_APC.getPart("Mesh33_APCWhPlt2_Group7_Model"),
-        tire3Fin10 = AliensVsPredator.resources().M577_APC.getPart("Mesh37_APCWhPlt3_Group7_Model"),
-        tire3Fin11 = AliensVsPredator.resources().M577_APC.getPart("Mesh38_APCWhPlt3_Group7_Model"),
-        tire3Fin12 = AliensVsPredator.resources().M577_APC.getPart("Mesh39_APCWhPlt3_Group7_Model"),
-        tire3Fin13 = AliensVsPredator.resources().M577_APC.getPart("Mesh40_APCWhPlt3_Group7_Model"),
-        tire3Fin14 = AliensVsPredator.resources().M577_APC.getPart("Mesh36_APCWhPlt3_Group7_Model"),
-        turret = AliensVsPredator.resources().M577_APC.getPart("Mesh13_APCMnTrt1_Group5_Model"),
-        turret1 = AliensVsPredator.resources().M577_APC.getPart("Mesh14_APCMnGun1_Group5_Model"),
-        turret2 = AliensVsPredator.resources().M577_APC.getPart("Mesh15_APCMnGun2_Group5_Model"),
-        turret3 = AliensVsPredator.resources().M577_APC.getPart("Mesh16_APCAmHdl1_Group5_Model"),
-        turret4 = AliensVsPredator.resources().M577_APC.getPart("Mesh17_APCAmHdl1_Group5_Model"),
-        turret5 = AliensVsPredator.resources().M577_APC.getPart("Mesh18_APCAmHdl1_Group5_Model"),
-        turret6 = AliensVsPredator.resources().M577_APC.getPart("Mesh19_APCAmHdl2_Group5_Model"),
-        turret7 = AliensVsPredator.resources().M577_APC.getPart("Mesh20_APCAmHdl2_Group5_Model"),
-        turret8 = AliensVsPredator.resources().M577_APC.getPart("Mesh21_APCAmHdl2_Group5_Model");
+    private final WavefrontModel model      = AliensVsPredator.resources().models().M577_APC;
+    private Part                 tire0      = model.getPart("Mesh75_APCTire1_4_Group10_Model");
+    private Part                 tire0Rim   = model.getPart("Mesh76_APCWhAmr4_Group10_Model");
+    private Part                 tire0Fin0  = model.getPart("Mesh77_APCWhPlt10_Group10_Model");
+    private Part                 tire0Fin1  = model.getPart("Mesh78_APCWhPlt10_Group10_Model");
+    private Part                 tire0Fin2  = model.getPart("Mesh79_APCWhPlt10_Group10_Model");
+    private Part                 tire0Fin3  = model.getPart("Mesh80_APCWhPlt10_Group10_Model");
+    private Part                 tire0Fin4  = model.getPart("Mesh81_APCWhPlt10_Group10_Model");
+    private Part                 tire0Fin5  = model.getPart("Mesh82_APCWhPlt11_Group10_Model");
+    private Part                 tire0Fin6  = model.getPart("Mesh83_APCWhPlt11_Group10_Model");
+    private Part                 tire0Fin7  = model.getPart("Mesh84_APCWhPlt11_Group10_Model");
+    private Part                 tire0Fin8  = model.getPart("Mesh85_APCWhPlt11_Group10_Model");
+    private Part                 tire0Fin9  = model.getPart("Mesh86_APCWhPlt11_Group10_Model");
+    private Part                 tire0Fin10 = model.getPart("Mesh87_APCWhPlt12_Group10_Model");
+    private Part                 tire0Fin11 = model.getPart("Mesh88_APCWhPlt12_Group10_Model");
+    private Part                 tire0Fin12 = model.getPart("Mesh89_APCWhPlt12_Group10_Model");
+    private Part                 tire0Fin13 = model.getPart("Mesh90_APCWhPlt12_Group10_Model");
+    private Part                 tire0Fin14 = model.getPart("Mesh91_APCWhPlt12_Group10_Model");
+    private Part                 tire1      = model.getPart("Mesh58_APCTire1_3_Group9_Model");
+    private Part                 tire1Rim   = model.getPart("Mesh60_APCWhPlt7_Group9_Model");
+    private Part                 tire1Fin0  = model.getPart("Mesh61_APCWhPlt7_Group9_Model");
+    private Part                 tire1Fin1  = model.getPart("Mesh62_APCWhPlt7_Group9_Model");
+    private Part                 tire1Fin2  = model.getPart("Mesh64_APCWhPlt7_Group9_Model");
+    private Part                 tire1Fin3  = model.getPart("Mesh66_APCWhPlt8_Group9_Model");
+    private Part                 tire1Fin4  = model.getPart("Mesh67_APCWhPlt8_Group9_Model");
+    private Part                 tire1Fin5  = model.getPart("Mesh68_APCWhPlt8_Group9_Model");
+    private Part                 tire1Fin6  = model.getPart("Mesh69_APCWhPlt8_Group9_Model");
+    private Part                 tire1Fin7  = model.getPart("Mesh70_APCWhPlt9_Group9_Model");
+    private Part                 tire1Fin8  = model.getPart("Mesh72_APCWhPlt9_Group9_Model");
+    private Part                 tire1Fin9  = model.getPart("Mesh73_APCWhPlt9_Group9_Model");
+    private Part                 tire1Fin10 = model.getPart("Mesh74_APCWhPlt9_Group9_Model");
+    private Part                 tire1Fin11 = model.getPart("Mesh65_APCWhPlt8_Group9_Model");
+    private Part                 tire1Fin12 = model.getPart("Mesh71_APCWhPlt9_Group9_Model");
+    private Part                 tire1Fin13 = model.getPart("Mesh59_APCWhAmr3_Group9_Model");
+    private Part                 tire1Fin14 = model.getPart("Mesh63_APCWhPlt7_Group9_Model");
+    private Part                 tire2      = model.getPart("Mesh41_APCTire1_2_Group8_Model");
+    private Part                 tire2Rim   = model.getPart("Mesh42_APCWhAmr2_Group8_Model");
+    private Part                 tire2Fin0  = model.getPart("Mesh43_APCWhPlt4_Group8_Model");
+    private Part                 tire2Fin1  = model.getPart("Mesh44_APCWhPlt4_Group8_Model");
+    private Part                 tire2Fin2  = model.getPart("Mesh45_APCWhPlt4_Group8_Model");
+    private Part                 tire2Fin3  = model.getPart("Mesh46_APCWhPlt4_Group8_Model");
+    private Part                 tire2Fin4  = model.getPart("Mesh47_APCWhPlt4_Group8_Model");
+    private Part                 tire2Fin5  = model.getPart("Mesh48_APCWhPlt5_Group8_Model");
+    private Part                 tire2Fin6  = model.getPart("Mesh49_APCWhPlt5_Group8_Model");
+    private Part                 tire2Fin7  = model.getPart("Mesh50_APCWhPlt5_Group8_Model");
+    private Part                 tire2Fin8  = model.getPart("Mesh51_APCWhPlt5_Group8_Model");
+    private Part                 tire2Fin9  = model.getPart("Mesh52_APCWhPlt5_Group8_Model");
+    private Part                 tire2Fin10 = model.getPart("Mesh53_APCWhPlt6_Group8_Model");
+    private Part                 tire2Fin11 = model.getPart("Mesh54_APCWhPlt6_Group8_Model");
+    private Part                 tire2Fin12 = model.getPart("Mesh55_APCWhPlt6_Group8_Model");
+    private Part                 tire2Fin13 = model.getPart("Mesh56_APCWhPlt6_Group8_Model");
+    private Part                 tire2Fin14 = model.getPart("Mesh57_APCWhPlt6_Group8_Model");
+    private Part                 tire3      = model.getPart("Mesh34_APCTire1_1_Group7_Model");
+    private Part                 tire3Rim   = model.getPart("Mesh35_APCWhAmr1_Group7_Model");
+    private Part                 tire3Fin0  = model.getPart("Mesh24_APCWhPlt1_Group7_Model");
+    private Part                 tire3Fin1  = model.getPart("Mesh25_APCWhPlt1_Group7_Model");
+    private Part                 tire3Fin2  = model.getPart("Mesh26_APCWhPlt1_Group7_Model");
+    private Part                 tire3Fin3  = model.getPart("Mesh27_APCWhPlt1_Group7_Model");
+    private Part                 tire3Fin4  = model.getPart("Mesh28_APCWhPlt1_Group7_Model");
+    private Part                 tire3Fin5  = model.getPart("Mesh29_APCWhPlt2_Group7_Model");
+    private Part                 tire3Fin6  = model.getPart("Mesh30_APCWhPlt2_Group7_Model");
+    private Part                 tire3Fin7  = model.getPart("Mesh31_APCWhPlt2_Group7_Model");
+    private Part                 tire3Fin8  = model.getPart("Mesh32_APCWhPlt2_Group7_Model");
+    private Part                 tire3Fin9  = model.getPart("Mesh33_APCWhPlt2_Group7_Model");
+    private Part                 tire3Fin10 = model.getPart("Mesh37_APCWhPlt3_Group7_Model");
+    private Part                 tire3Fin11 = model.getPart("Mesh38_APCWhPlt3_Group7_Model");
+    private Part                 tire3Fin12 = model.getPart("Mesh39_APCWhPlt3_Group7_Model");
+    private Part                 tire3Fin13 = model.getPart("Mesh40_APCWhPlt3_Group7_Model");
+    private Part                 tire3Fin14 = model.getPart("Mesh36_APCWhPlt3_Group7_Model");
+    private Part                 turret     = model.getPart("Mesh13_APCMnTrt1_Group5_Model");
+    private Part                 turret1    = model.getPart("Mesh14_APCMnGun1_Group5_Model");
+    private Part                 turret2    = model.getPart("Mesh15_APCMnGun2_Group5_Model");
+    private Part                 turret3    = model.getPart("Mesh16_APCAmHdl1_Group5_Model");
+    private Part                 turret4    = model.getPart("Mesh17_APCAmHdl1_Group5_Model");
+    private Part                 turret5    = model.getPart("Mesh18_APCAmHdl1_Group5_Model");
+    private Part                 turret6    = model.getPart("Mesh19_APCAmHdl2_Group5_Model");
+    private Part                 turret7    = model.getPart("Mesh20_APCAmHdl2_Group5_Model");
+    private Part                 turret8    = model.getPart("Mesh21_APCAmHdl2_Group5_Model");
 
     public void doRender(EntityAPC apc, double posX, double posY, double posZ, float yaw, float partialTicks)
     {
@@ -117,7 +119,7 @@ public class RenderAPC extends Render
             GlStateManager.scale(-scale, -scale, scale);
             GlStateManager.rotate(-180f, 0f, 0f, 1f);
 
-            for (Part p : AliensVsPredator.resources().M577_APC.nameToPartHash.values())
+            for (Part p : model.nameToPartHash.values())
             {
                 if (isPartATire(p))
                 {
