@@ -2,12 +2,13 @@ package org.avp.items;
 
 import org.avp.AliensVsPredator;
 
+import com.arisux.airi.lib.ItemTypes.HookedItem;
+
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemSupplyChute extends Item
+public class ItemSupplyChute extends HookedItem
 {
 
     public ItemSupplyChute()
@@ -22,7 +23,7 @@ public class ItemSupplyChute extends Item
         {
             if (!worldIn.isRemote)
             {
-                worldIn.setBlock((int) (playerIn.posX + 1), (int) (playerIn.posY + 80), (int) (playerIn.posZ), AliensVsPredator.blocks().blockSupplies);
+                worldIn.setBlock((int) (playerIn.posX + 1), (int) (playerIn.posY + 80), (int) (playerIn.posZ), AliensVsPredator.blocks().blockSupplyCrate);
             }
             return itemStackIn;
         }

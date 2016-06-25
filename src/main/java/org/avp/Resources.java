@@ -31,7 +31,6 @@ import org.avp.entities.tile.model.ModelBlastdoor;
 import org.avp.entities.tile.model.ModelCable;
 import org.avp.entities.tile.model.ModelCryostasisTube;
 import org.avp.entities.tile.model.ModelDNASynthesizer;
-import org.avp.entities.tile.model.ModelHiveNode;
 import org.avp.entities.tile.model.ModelLightPanel;
 import org.avp.entities.tile.model.ModelLocker;
 import org.avp.entities.tile.model.ModelMedpod;
@@ -151,7 +150,6 @@ public class Resources implements IInitializablePre
         public final ModelTexMap<ModelSpitter>              SPITTER_MASK                   = new ModelTexMap(new ModelSpitter(), new Texture(AliensVsPredator.ID, "textures/mob/spitter_glow.png"));
         public final ModelTexMap<ModelCrusher>              CRUSHER                        = new ModelTexMap(new ModelCrusher(), new Texture(AliensVsPredator.ID, "textures/mob/crusher.png"));
         public final ModelTexMap<ModelBipedWrapper>         COMBAT_SYNTHETIC               = new ModelTexMap(new ModelBipedWrapper(), new Texture(AliensVsPredator.ID, "textures/mob/combat_synthetic.png"));
-        public final ModelTexMap<ModelHiveNode>             HIVE_NODE                      = new ModelTexMap(new ModelHiveNode(), new Texture(AliensVsPredator.ID, "textures/tile/node.png"));
         public final ModelTexMap<ModelSupplyChute>          SUPPLY_CHUTE                   = new ModelTexMap(new ModelSupplyChute(), new Texture(AliensVsPredator.ID, "textures/misc/supplychute.png"));
         public final ModelTexMap<ModelBipedWrapper>         BIPED                          = new ModelTexMap(new ModelBipedWrapper(), new Texture(AbstractClientPlayer.locationStevePng));
         public final ModelTexMap<ModelLaserMine>            LASER_MINE                     = new ModelTexMap(new ModelLaserMine(), new Texture(AliensVsPredator.ID, "textures/misc/proximity-mine.png"));

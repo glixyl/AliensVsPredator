@@ -31,6 +31,6 @@ public class BlockUnidentifiedDirt extends BlockDirt
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister register)
     {
-        super.registerIcons(register);
+        this.blockIcon = register.registerIcon(this.getTextureName());
     }
 }

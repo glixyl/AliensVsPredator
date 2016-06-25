@@ -82,7 +82,6 @@ import org.avp.entities.tile.TileEntityAssembler;
 import org.avp.entities.tile.TileEntityBlastdoor;
 import org.avp.entities.tile.TileEntityCryostasisTube;
 import org.avp.entities.tile.TileEntityGunLocker;
-import org.avp.entities.tile.TileEntityHiveNode;
 import org.avp.entities.tile.TileEntityLightPanel;
 import org.avp.entities.tile.TileEntityLocker;
 import org.avp.entities.tile.TileEntityMedpod;
@@ -105,7 +104,6 @@ import org.avp.entities.tile.render.RenderAssembler;
 import org.avp.entities.tile.render.RenderBlastdoor;
 import org.avp.entities.tile.render.RenderCryostasisTube;
 import org.avp.entities.tile.render.RenderGunLocker;
-import org.avp.entities.tile.render.RenderHiveNode;
 import org.avp.entities.tile.render.RenderLightPanel;
 import org.avp.entities.tile.render.RenderLocker;
 import org.avp.entities.tile.render.RenderMedpod;
@@ -350,7 +348,6 @@ public class Renderers implements IInitializablePost
 
     public void registerTileEntitySpecialRenderers()
     {
-        bindTileEntitySpecialRenderer(TileEntityHiveNode.class, new RenderHiveNode());
         bindTileEntitySpecialRenderer(TileEntityTurret.class, new RenderTurret());
         bindTileEntitySpecialRenderer(TileEntityWorkstation.class, new RenderWorkstation());
         bindTileEntitySpecialRenderer(TileEntityStasisMechanism.class, new RenderStasisMechanism());

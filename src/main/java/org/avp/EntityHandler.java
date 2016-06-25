@@ -45,7 +45,6 @@ import org.avp.entities.tile.TileEntityAssembler;
 import org.avp.entities.tile.TileEntityBlastdoor;
 import org.avp.entities.tile.TileEntityCryostasisTube;
 import org.avp.entities.tile.TileEntityGunLocker;
-import org.avp.entities.tile.TileEntityHiveNode;
 import org.avp.entities.tile.TileEntityHiveResin;
 import org.avp.entities.tile.TileEntityLightPanel;
 import org.avp.entities.tile.TileEntityLocker;
@@ -91,7 +90,6 @@ public class EntityHandler implements IInitializable
         GameRegistry.registerTileEntity(TileEntityTurret.class, "tileEntityTurret");
         GameRegistry.registerTileEntity(TileEntityWorkstation.class, "tileEntityWorkstation");
         GameRegistry.registerTileEntity(TileEntityHiveResin.class, "tileEntityBlockHive");
-        GameRegistry.registerTileEntity(TileEntityHiveNode.class, "tileEntityBlockHiveNode");
         GameRegistry.registerTileEntity(TileEntityAssembler.class, "tileEntityAssembler");
         GameRegistry.registerTileEntity(TileEntityStasisMechanism.class, "tileStasisMechanism");
         GameRegistry.registerTileEntity(TileEntityRepulsionGenerator.class, "tileEntityGenerator");
