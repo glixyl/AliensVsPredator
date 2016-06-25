@@ -50,7 +50,7 @@ public class RenderItemPowerline extends ItemRenderer
             GlStateManager.rotate(45, 1, 0, 1);
             GlStateManager.color4i(0xFF222222);
             GlStateManager.enableLight();
-            this.getModelTexMap().draw();
+            this.getModelTexMap().drawStandaloneModel();
             GlStateManager.disableLight();
             GlStateManager.enable(GL11.GL_TEXTURE_2D);
         }
@@ -66,7 +66,7 @@ public class RenderItemPowerline extends ItemRenderer
         GlStateManager.disable(GL11.GL_CULL_FACE);
         GlStateManager.enableLight();
         GlStateManager.color4i(0xFF222222);
-        this.getModelTexMap().draw();
+        this.getModelTexMap().drawStandaloneModel();
         GlStateManager.enable(GL11.GL_TEXTURE_2D);
     }
 }

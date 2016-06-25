@@ -26,7 +26,6 @@
   "queen.living.constant": 			{ "sounds": [ "mobs/queen/living-constant" ] },
   "weapon.blades": 					{ "sounds": [ "items/weapons/wristbracer/hit" ] },
   "weapon.blades.alarm": 			{ "sounds": [ "items/weapons/wristbracer/alarm" ] },
-  "weapon.gauntlet": 				{ "sounds": [ "items/weapons/gauntlet" ] },
   "weapon.plasmacaster": 			{ "sounds": [ "items/weapons/plasmacaster/shoot0" ] },
   "weapon.flamethrower": 			{ "sounds": [ "items/weapons/flamethrower/shoot0" ] },
   "weapon.cooldown": 				{ "sounds": [ "items/weapons/cooldown" ] },

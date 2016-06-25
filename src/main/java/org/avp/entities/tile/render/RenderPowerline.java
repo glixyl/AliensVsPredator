@@ -32,7 +32,7 @@ public class RenderPowerline extends TileEntitySpecialRenderer
                 GlStateManager.scale(1.0F, -1.0F, 1.0F);
                 GlStateManager.enable(GL_ALPHA_TEST);
                 GlStateManager.color4i(0xFF222222);
-                AliensVsPredator.resources().models().CABLE.draw(tile);
+                AliensVsPredator.resources().models().CABLE.drawStandaloneModel(tile);
             }
             GlStateManager.popMatrix();
 
