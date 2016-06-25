@@ -34,4 +34,10 @@ public class BlockCustomSlab extends BlockSlab
     {
         return getUnlocalizedName() + "-slab";
     }
+    
+    public BlockCustomSlab setTexture(String textureName)
+    {
+        this.setTextureName(textureName);
+        return this;
+    }
 }

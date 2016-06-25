@@ -65,7 +65,8 @@ public class BlockHandler extends IBHandler implements IInitializable
         blockShipDecor6 = (new BlockMaterial(Material.iron).setHardness(5F).setResistance(30.0F).setLightOpacity(255)),
         blockRelicTile = (new BlockMaterial(Material.rock)
         {
-            public void registerBlockIcons(IIconRegister register)
+            @Override
+            public void registerIcons(IIconRegister register)
             {
                 this.blockIcon = register.registerIcon("avp:spawner");
             };
@@ -144,7 +145,8 @@ public class BlockHandler extends IBHandler implements IInitializable
         blockAssembler = (new BlockAssembler(Material.iron).setHardness(1.5F).setResistance(10.0F)),
         blockFloorGrillSlab = (new BlockCustomSlab(Material.iron)
         {
-            public void registerBlockIcons(IIconRegister register)
+            @Override
+            public void registerIcons(IIconRegister register)
             {
                 this.blockIcon = register.registerIcon("avp:floorgrill");
             };
@@ -153,7 +155,8 @@ public class BlockHandler extends IBHandler implements IInitializable
         blockCeilingGrillStairs = (new BlockCustomStairs(blockCeilingGrill)).setHardness(5F).setResistance(30.0F).setLightOpacity(4),
         blockCeilingGrillSlab = (new BlockCustomSlab(Material.iron)
         {
-            public void registerBlockIcons(IIconRegister register)
+            @Override
+            public void registerIcons(IIconRegister register)
             {
                 this.blockIcon = register.registerIcon("avp:ceilinggrill");
             };
@@ -162,21 +165,24 @@ public class BlockHandler extends IBHandler implements IInitializable
         blockWallStairs = (new BlockCustomStairs(blockWall)).setHardness(5F).setResistance(30.0F).setLightOpacity(255),
         blockWallSlab = (new BlockCustomSlab(Material.iron)
         {
-            public void registerBlockIcons(IIconRegister register)
+            @Override
+            public void registerIcons(IIconRegister register)
             {
                 this.blockIcon = register.registerIcon("avp:wall_top");
             };
         }).setHardness(5F).setResistance(30.0F).setLightOpacity(255),
         blockIronBricksSlab = (new BlockCustomSlab(Material.iron)
         {
-            public void registerBlockIcons(IIconRegister register)
+            @Override
+            public void registerIcons(IIconRegister register)
             {
                 this.blockIcon = register.registerIcon("avp:industrialbricks");
             };
         }).setHardness(5F).setResistance(30.0F).setLightOpacity(255),
         blockIndustrialGlassSlab = (new BlockCustomSlab(Material.iron)
         {
-            public void registerBlockIcons(IIconRegister register)
+            @Override
+            public void registerIcons(IIconRegister register)
             {
                 this.blockIcon = register.registerIcon("avp:industrialglass");
             };
