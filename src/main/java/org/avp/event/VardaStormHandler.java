@@ -14,6 +14,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -55,7 +56,10 @@ public class VardaStormHandler
 
                         AliensVsPredator.network().sendToAll(new PacketVardaStormMoveEntity(Integer.valueOf(entity.getEntityId())));
 
-                        entity.attackEntityFrom(DamageSources.causeSilicaStormDamage(entity), 0.5F);
+						if (entity instanceof EntityPlayer)
+						{
+							entity.attackEntityFrom(DamageSources.causeSilicaStormDamage(entity), 0.5F);
+						}
                     }
                 }
             }

@@ -10,6 +10,7 @@ import org.avp.block.BlockCustomStairs;
 import org.avp.block.BlockGenerator;
 import org.avp.block.BlockGunLocker;
 import org.avp.block.BlockHiveResin;
+import org.avp.block.BlockHiveNode;
 import org.avp.block.BlockLightPanel;
 import org.avp.block.BlockLocker;
 import org.avp.block.BlockMedpod;
@@ -51,7 +52,8 @@ public class BlockHandler extends IBHandler implements IInitializable
     public static BlockHandler instance                   = new BlockHandler();
 
     public Block               terrainHiveResin           = (new BlockHiveResin(Material.wood)).setHardness(5F).setResistance(10.0F).setLightOpacity(255);
-    public Block               blockOvamorph              = (new BlockMaterial(Material.rock));
+    public Block			   blockHiveNode 			  = (new BlockHiveNode(Material.rock).setHardness(5F).setResistance(10.0F).setLightOpacity(255));
+	public Block               blockOvamorph              = (new BlockMaterial(Material.rock));
     public Block               blockShipMetal1            = (new BlockMaterial(Material.iron).setHardness(5F).setResistance(30.0F).setLightOpacity(255));
     public Block               blockShipMetal2            = (new BlockMaterial(Material.iron).setHardness(5F).setResistance(30.0F).setLightOpacity(255));
     public Block               blockFacehuggerRelic       = (new BlockMaterial(Material.rock).setHardness(5F).setResistance(30.0F).setLightOpacity(255));
@@ -271,6 +273,7 @@ public class BlockHandler extends IBHandler implements IInitializable
         ShapedBlockUtil.registerBlock(this, blockColumnMetal1, "metalpanel2");
         ShapedBlockUtil.registerBlock(this, blockColumnMetal2, "metalpanel3");
         ShapedBlockUtil.registerBlock(this, terrainHiveResin, "hiveresin");
+		registerBlock(blockHiveNode, "hivenode", null);
         ShapedBlockUtil.registerBlock(this, blockShipMetal1, "shippanel");
         ShapedBlockUtil.registerBlock(this, blockShipMetal2, "shippannelyautja");
         ShapedBlockUtil.registerBlock(this, blockOvamorph, "tileovamorphdesign");

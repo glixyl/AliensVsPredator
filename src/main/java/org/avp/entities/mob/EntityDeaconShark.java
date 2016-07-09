@@ -28,6 +28,7 @@ import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.init.Blocks;
 
 public class EntityDeaconShark extends EntitySpeciesAlien
 {
@@ -184,17 +185,19 @@ public class EntityDeaconShark extends EntitySpeciesAlien
         return true;
     }
 
-    @Override
-    public boolean getCanSpawnHere()
-    {
-        return false;
-    }
+	@Override
+	public boolean getCanSpawnHere()
+	{
+		List<? extends Entity> otherSharks = WorldUtil.Entities.getEntitiesInCoordsRange(this.worldObj, EntityDeaconShark.class, new CoordData(this), (int) 64);
+		CoordData coordData = new CoordData(this);
+		
+		return coordData.getBlock(this.worldObj) == Blocks.water && otherSharks.size() == 0 && !(WorldUtil.canSeeSky(coordData, this.worldObj));
+	}
 
     @Override
     protected boolean canDespawn()
     {
-        List<? extends Entity> otherSharks = WorldUtil.Entities.getEntitiesInCoordsRange(this.worldObj, EntityDeaconShark.class, new CoordData(this), (int) 64);
-        return otherSharks != null && otherSharks.size() > 0 && !this.hasCustomNameTag();
+        return !this.hasCustomNameTag();
     }
 
     @Override
