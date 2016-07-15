@@ -1,12 +1,12 @@
 package org.avp.block;
 
-import java.util.Random;
+//import java.util.Random;
 
-import org.avp.entities.tile.TileEntityHiveResin;
+//import org.avp.entities.tile.TileEntityHiveResin;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.tileentity.TileEntity;
+//import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public class BlockHiveNode extends Block
@@ -24,7 +24,7 @@ public class BlockHiveNode extends Block
     {
         return true;
     }
-
+/*
     @Override
     public void updateTick(World worldObj, int posX, int posY, int posZ, Random rand)
     {
@@ -64,5 +64,5 @@ public class BlockHiveNode extends Block
                 world.setBlock(posX, posY, posZ, block);
             }
         }
-    }
+    } */
 }

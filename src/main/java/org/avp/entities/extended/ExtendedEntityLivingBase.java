@@ -49,9 +49,9 @@ public class ExtendedEntityLivingBase implements IExtendedEntityProperties
     @Override
     public void loadNBTData(NBTTagCompound nbt)
     {
-        int embryoType = nbt.getInteger("EmbryoType");
-
-        if (embryoType != -1)
+		int embryoType = nbt.getInteger("EmbryoType");
+		
+        if (embryoType != -1 && this.getEmbryo() != null)
         {
             this.setEmbryo(new Embryo(EmbryoType.get(embryoType))
             {

@@ -155,7 +155,7 @@ public class ItemHandler extends IBHandler implements IInitializable
     public Item               itemSilicon                 = new HookedItem().setDescription("A few chunks of silicon, for use with electronics.");
     public Item               itemIngotAluminum           = new HookedItem().setDescription("An ingot melted down from bauxite ore, for use with guns.");
     public Item               itemIngotCopper             = new HookedItem().setDescription("An ingot melted down from copper ore, for use with electronics.");
-    public Item               itemIngotLithium            = ((HookedItem) new ItemIngotLithium()).setDescription("An ingot of lithium. Depletes quickly after processing.");
+    public Item               itemIngotLithium            = new HookedItem().setDescription("An ingot of lithium. Depletes quickly after processing.");
     public Item               itemMotionTracker           = ((HookedItem) (new HookedItem()).disableIcon()).setDescription("Tracks movement by detecting changes in air density.");
     public Item               itemPolycarbonate           = (new HookedItem()).setDescription("Polycarbonate (A hard plastic used in the crafting of many items/blocks)");
     public Item               itemRoyalJelly              = (new HookedItem()).setDescription("Royal Jelly (A potent, transformative substance produced by a Xenomorph Queen)").setMaxStackSize(64);

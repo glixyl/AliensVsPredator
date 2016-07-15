@@ -43,7 +43,7 @@ public class Settings
 
             explosionsEnabled = config.get(CATEGORY_OTHER, "EXPLOSION_BLOCK_DAMAGE", true).getBoolean(true);
             nukesEnabled = config.get(CATEGORY_OTHER, "NUKES_ENABLED", true).getBoolean(true);
-            updaterEnabled = config.get(CATEGORY_OTHER, "UPDATER_ENABLED", true, "Toggle the mod's updater.").getBoolean(true);
+            updaterEnabled = config.get(CATEGORY_OTHER, "UPDATER_ENABLED", false, "Toggle the mod's updater.").getBoolean(false);
             debugToolsEnabled = config.get(CATEGORY_OTHER, "DEBUG_TOOLS", false, "Toggle the debugging tools.").getBoolean(false);
         }
         finally

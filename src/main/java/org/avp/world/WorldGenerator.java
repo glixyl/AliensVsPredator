@@ -29,5 +29,6 @@ public class WorldGenerator implements IWorldGenerator
         WorldUtil.generateBlockInChunk(world, AliensVsPredator.blocks().oreSilicon, rand, 40, 3, 5, 48, chunkCoords, overworldBiomes);
         WorldUtil.generateBlockInChunk(world, AliensVsPredator.blocks().oreLithium, rand, 40, 3, 5, 48, chunkCoords, overworldBiomes);
         WorldUtil.generateBlockInChunk(world, AliensVsPredator.blocks().oreBauxite, rand, 50, 4, 16, 128, chunkCoords, overworldBiomes);
+		WorldUtil.generateBlockInChunk(world, AliensVsPredator.blocks().terrainHiveResin, rand, 40, 4, 16, 128, chunkCoords, overworldBiomes);
     }
 }
